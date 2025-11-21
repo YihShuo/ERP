@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+
+<Pane fx:id="superPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"  xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   
+   <children>
+      <VBox fx:id="superVBox" prefHeight="700.0" prefWidth="1100.0">
+        <children>
+        
+            <HBox fx:id="headerHBox" prefHeight="80" prefWidth="${superVBox.width*1}">
+               <children>
+                  <Pane fx:id="headerLeftPane"  style="-fx-background-color:#2C2D30;" prefHeight="71.0" prefWidth="230">
+                      <Pane fx:id="logoPane"  layoutX="17.0"  layoutY="15.0" style="-fx-background-color:#2C2D30;"  prefHeight="61.0" prefWidth="210" >
+                         <Text fx:id="logoImage" layoutX="59.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="柠檬网络科技" /> 
+                      </Pane>
+                      
+                  </Pane>
+                  <Pane fx:id="headerMiddlePane"  style="-fx-background-color:#2C2D30"  prefHeight="71.0" prefWidth="${superVBox.width-230-132}">
+                     <HBox fx:id="headerMiddlePaneHBox" layoutY="15.0"   prefHeight="61" prefWidth="${headerMiddlePane.width*1}">
+                          <Pane fx:id="headerMiddlePaneLeft"   prefHeight="71.0" prefWidth="300">
+                                
+                          
+                          </Pane>
+                          <Pane fx:id="headerMiddlePaneMiddle" prefHeight="71.0" prefWidth="${headerMiddlePane.width*1-300-300}">
+                          </Pane>
+                          <Pane fx:id="headerMiddlePaneRight" prefHeight="71.0" prefWidth="300">
+                                <HBox fx:id="headerMiddlePaneRightHBoxzLeft"  prefHeight="61" prefWidth="165">
+                                   <Pane>
+                                       <children>
+                                          <Circle fx:id="headerMiddlePaneRightHBoxzLeftImage"  layoutX="30.0" layoutY="30.0" radius="23.0"  strokeType="INSIDE" />   
+                                       </children>
+                                   </Pane>
+                                   <Pane fx:id="headerMiddlePaneRightHBoxzLeftUserName" prefHeight="61.0" prefWidth="76">
+                                        <Text fx:id="headerMiddlePaneUserName"  layoutX="10.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GavinLee" /> 
+                                   </Pane>
+                                   
+                                   <Pane fx:id="headerMiddlePaneRightHBoxzLeftDown" prefHeight="61.0" prefWidth="34">
+                                       <children>
+                                          <Text fx:id="headerMiddlePaneUserDown"  layoutX="15.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="tringle" />  
+                                       </children>
+                                   </Pane>
+                                </HBox>
+                                <HBox fx:id="headerMiddlePaneRightHBoxRight" layoutX="180.0" layoutY="14.0" prefHeight="38" prefWidth="145">
+                                   <children>
+	                                   <Pane fx:id="headerMiddlePaneStyle"  layoutX="0.0"  prefWidth="38">
+	                                       <children>
+	                                          <Text fx:id="styleFont"  layoutX="9.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="se" />  
+	                                          	                                      
+	                                       </children>
+	                                   </Pane>
+	                                   <Pane fx:id="headerMiddlePaneMsg"  layoutX="38.0"  prefWidth="38">
+	                                       <children>
+	                                          <Text fx:id="msgFont"  layoutX="9.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ms" />
+	                                          <Text fx:id="msgCircleFont" visible="false" layoutX="17.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ms" /> 
+	                                          <Text fx:id="msgNumberFont"  visible="false"  layoutX="17.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />     
+	                                       </children>
+	                                   </Pane>
+	                                   <Pane fx:id="headerMiddlePaneSetting" layoutX="38.0"  prefWidth="38">
+	                                       <children>
+	                                          <Text fx:id="settingFont"  layoutX="10.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="st" />  
+	                                       </children>
+	                                   </Pane>
+                                  </children>
+                                </HBox>
+                          
+                          </Pane>
+                     </HBox>
+                  
+                  
+                  </Pane>
+                  <Pane fx:id="headerRightPane"  style="-fx-background-color:#2C2D30" prefHeight="71.0" prefWidth="132">
+                    <Pane fx:id="minAndMax"  layoutX="2.0"  layoutY="15.0" style="-fx-background-color:#2C2D30"  prefHeight="61.0" prefWidth="100" >
+                      <children>
+	                       <Pane fx:id="minProcessPane"  layoutX="15.0"  layoutY="15.0"  prefHeight="30.0" prefWidth="30" >
+	                          <Text fx:id="minProcess"  layoutX="4.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min" /> 
+	                       </Pane>	                      
+	                       <Pane fx:id="maxProcessPane"  layoutX="45.0"  layoutY="15.0"   prefHeight="30.0" prefWidth="30" >
+	                           <Text fx:id="maxProcess" layoutX="7.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Max" /> 
+	                       </Pane>	                       
+	                       <Pane fx:id="closeProcessPane"  layoutX="75.0"  layoutY="15.0"  prefHeight="30.0" prefWidth="30" >
+	                            <Text fx:id="closeProcess"  layoutX="6.0"  layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Close" />
+	                       </Pane>                      
+                      </children>
+                    </Pane>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox fx:id="bodyHBox" prefHeight="${superVBox.height-80-40}" prefWidth="${superVBox.width*1}" />
+            <HBox fx:id="footerHBox" prefHeight="40" prefWidth="${superVBox.width*1}">
+              <children>
+                   <Pane fx:id="footerReminder" prefHeight="40.0" prefWidth="500">
+	                   <children>
+	                      <Text fx:id="footerReminderTrumpet"  layoutX="23.0"  layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Close" />
+	                      <Text fx:id="footerReminderText"  layoutX="50.0"  layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="中国今日发射火箭申请，详情尽情关注!" />
+	                   </children>
+                      
+                   </Pane>
+                   <Pane fx:id="footerReminderBlank" prefHeight="40.0" prefWidth="${superVBox.width*1-500-100}">
+                      
+                   </Pane>
+                   <Pane fx:id="footerReminderResize" prefHeight="40.0" prefWidth="100">
+                       <children>
+	                      <Text fx:id="footerReminderResizeFont"  layoutX="68.0"  layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Close" />
+	                   </children>
+                   </Pane>
+              </children>
+            </HBox>
+         </children>
+      </VBox>
+      
+
+
+     <Pane fx:id="styleChoicePane" visible = "false" layoutX="${headerLeftPane.width+headerMiddlePane.width-205}" layoutY="72.0" prefHeight="140.0" prefWidth="220.0">
+         <children>
+			<Text fx:id="dropDownTriangle" layoutX="96.0"  layoutY="7.0" strokeType="OUTSIDE" strokeWidth="0.0" text="trad" />
+	        <VBox fx:id="styleChoiceVBox" prefHeight="140.0" prefWidth="220.0">
+	           <children>
+	                <HBox fx:id="styleChoiceHBoxOne" prefHeight="67" prefWidth="220">
+	                   <children>
+	                       <Pane>
+	                           <Pane fx:id="styleChoiceHBoxOnePaneOne" layoutX="10.0"  layoutY="6.0" prefHeight="60" prefWidth="60">
+	                                <Text fx:id="styleColorOne" layoutX="10.0"  layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="酷炫黑" />
+	                           
+	                           </Pane>
+	                            <Pane fx:id="styleChoiceHBoxOnePaneTwo" layoutX="80.0"  layoutY="6.0"  prefHeight="60" prefWidth="60">
+	                           
+	                                <Text fx:id="styleColorTwo" layoutX="10.0"  layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="翡翠绿" />
+	                           </Pane>
+	                            <Pane fx:id="styleChoiceHBoxOnePaneThree" layoutX="150.0"  layoutY="6.0" prefHeight="60" prefWidth="60">
+	                                <Text fx:id="styleColorThree" layoutX="10.0"  layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="绚丽红" />
+	                           
+	                           </Pane>
+	                       </Pane>
+	                   </children>
+	                  
+	                
+	                </HBox>
+	                 <HBox fx:id="styleChoiceHBoxTwo" prefHeight="6" prefWidth="220">
+	                </HBox>
+	                 <HBox fx:id="styleChoiceHBoxThree"  prefHeight="67" prefWidth="220">
+	                    <children>
+	                       <Pane>
+	                           <Pane fx:id="styleChoiceHBoxThreePaneOne" layoutX="10.0"  layoutY="0.0"   prefHeight="60" prefWidth="60">
+	                                
+	                               <Text fx:id="styleColorOne" layoutX="10.0"  layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="魅惑紫" />
+	                           </Pane>
+	                            <Pane fx:id="styleChoiceHBoxThreePaneTwo" layoutX="80.0"  layoutY="0.0" prefHeight="60" prefWidth="60">
+	                           
+	                               <Text fx:id="styleColorOne" layoutX="10.0"  layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="科技蓝" />
+	                           </Pane>
+	                            <Pane fx:id="styleChoiceHBoxThreePaneThree" layoutX="150.0"  layoutY="0.0" prefHeight="60" prefWidth="60">
+	                           
+	                               <Text fx:id="styleColorOne" layoutX="15.0"  layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="更多" />
+	                           </Pane>
+	                       </Pane>
+	                   </children>
+	                </HBox>
+	           </children>
+	        </VBox>
+	    </children>
+     </Pane>
+
+
+     <Pane fx:id="messagePane" visible = "false" layoutX="${headerLeftPane.width+headerMiddlePane.width-430}" layoutY="72.0" prefHeight="75.0" prefWidth="400.0">
+         <children>
+			<Text fx:id="dropDownTriangle4Message" layoutX="362.0"  layoutY="7.0" strokeType="OUTSIDE" strokeWidth="0.0" text="trad" />
+	        <VBox fx:id="messageVBox" prefHeight="67.0" prefWidth="400.0">
+	           <children>
+	              
+
+	                
+	           </children>
+	        </VBox>
+	    </children>
+     </Pane>
+     
+   </children>
+   
+   
+</Pane>

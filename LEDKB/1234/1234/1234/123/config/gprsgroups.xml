@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<GprsGroups>
+	<ColonyCardInfos>
+	</ColonyCardInfos>
+	<ColonyCardGroupInfos>
+		<ColonyCardGroupInfo>
+			<Id>0</Id>
+			<Name>全部屏幕</Name>
+		</ColonyCardGroupInfo>
+	</ColonyCardGroupInfos>
+</GprsGroups>

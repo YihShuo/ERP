@@ -1,0 +1,167 @@
+2019-06-27 04:51:32,409 - lemonnt
+2019-06-27 04:51:32,784 - false
+2019-06-27 04:51:33,106 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-06-27 04:51:33,120 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-06-27 04:51:33,145 - Obtain the parameters  : [DIGITNUMBER]
+2019-06-27 04:51:33,152 - Obtain the env parameters  : [4]
+2019-06-27 04:51:33,609 - Success to query records [1]
+2019-06-27 04:51:33,622 - [{"connection":false,"date":1561565439496,"desc":"234","gprs":0,"ip":"192.168.142.59","name":"k1","order":"59","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-06-27 04:51:34,007 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-27 04:51:34,014 - Obtain the env parameters  : [蓝通光电]
+2019-06-27 04:51:34,198 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-27 04:51:34,205 - Obtain the env parameters  : [10]
+2019-06-27 04:51:34,212 - Monitor Interval : [10s]
+2019-06-27 04:51:37,211 - Success to query records [1]
+2019-06-27 04:51:37,269 - Success to query records [1]
+2019-06-27 04:51:37,272 - start : 0, end : 1
+2019-06-27 04:51:41,393 - Success to query records [1]
+2019-06-27 04:51:41,434 - Success to query records [1]
+2019-06-27 04:51:41,435 - start : 0, end : 1
+2019-06-27 04:51:47,790 - The name of plugin is [K1]
+2019-06-27 04:51:47,791 - The name of pluginType is [file]
+2019-06-27 04:51:50,578 - Success to query records [1]
+2019-06-27 04:51:50,691 - Success to query records [1]
+2019-06-27 04:51:54,607 - Update by the id [13] ,tableName [plugins]
+2019-06-27 04:51:57,670 - The name of plugin is [K1]
+2019-06-27 04:51:57,671 - The name of pluginType is [file]
+2019-06-27 04:51:57,684 - Success to query records [1]
+2019-06-27 04:51:58,915 - Obtain the parameters  : [SENDDELAY]
+2019-06-27 04:51:58,924 - Obtain the env parameters  : [15]
+2019-06-27 04:51:58,941 - It's going to parsing : D:\234\plugin/config/properties/configuration.properties
+2019-06-27 04:51:58,944 - It has been parsed ,following [D:\234\plugin/config/properties/configuration.properties]
+2019-06-27 04:51:58,946 - It has been loaded ,following : [D:\234\plugin/config/properties/configuration.properties]
+2019-06-27 04:51:58,954 - {"pluginName":"K1","properties":{"monitorPath":"D:/234/test"}}
+2019-06-27 04:51:58,977 - Success to query records [1]
+2019-06-27 04:51:58,989 - Success to query records [1]
+2019-06-27 04:51:59,000 - Success to query records [1]
+2019-06-27 04:51:59,025 - Monitor type : directory
+2019-06-27 04:52:20,087 - Send with UDP
+2019-06-27 04:52:20,092 - Send the content for the msg [9000], and the location ID [0]
+2019-06-27 04:52:20,093 - Send the messages have been format: [KLB00010000005700100000009000KLEAC]
+2019-06-27 04:52:20,468 - Success to send the datums
+2019-06-27 04:52:20,485 - Send the content for the msg [800], and the location ID [1]
+2019-06-27 04:52:20,485 - Send the messages have been format: [KLB0001000000570009010000800KLE84]
+2019-06-27 04:52:20,488 - Success to send the datums
+2019-06-27 04:52:20,505 - Send the content for the msg [8.9], and the location ID [2]
+2019-06-27 04:52:20,505 - Send the messages have been format: [KLB00010000005700090200008.9KLE8C]
+2019-06-27 04:52:20,508 - Success to send the datums
+2019-06-27 04:52:20,524 - Send the content for the msg [50.0], and the location ID [3]
+2019-06-27 04:52:20,525 - Send the messages have been format: [KLB000100000057001003000050.0KLEA9]
+2019-06-27 04:52:20,527 - Success to send the datums
+2019-06-27 04:53:20,090 - Send with UDP
+2019-06-27 04:53:20,090 - Send the content for the msg [1200], and the location ID [0]
+2019-06-27 04:53:20,093 - Send the messages have been format: [KLB00010000005700100000001200KLEA6]
+2019-06-27 04:53:20,094 - Success to send the datums
+2019-06-27 04:53:20,111 - Send the content for the msg [800], and the location ID [1]
+2019-06-27 04:53:20,112 - Send the messages have been format: [KLB0001000000570009010000800KLE84]
+2019-06-27 04:53:20,114 - Success to send the datums
+2019-06-27 04:53:20,131 - Send the content for the msg [66.7], and the location ID [2]
+2019-06-27 04:53:20,132 - Send the messages have been format: [KLB000100000057001002000066.7KLEB6]
+2019-06-27 04:53:20,133 - Success to send the datums
+2019-06-27 04:53:20,150 - Send the content for the msg [50.0], and the location ID [3]
+2019-06-27 04:53:20,150 - Send the messages have been format: [KLB000100000057001003000050.0KLEA9]
+2019-06-27 04:53:20,153 - Success to send the datums
+2019-06-27 04:53:50,091 - Send with UDP
+2019-06-27 04:53:50,092 - Send the content for the msg [1500], and the location ID [0]
+2019-06-27 04:53:50,094 - Send the messages have been format: [KLB00010000005700100000001500KLEA9]
+2019-06-27 04:53:50,095 - Success to send the datums
+2019-06-27 04:53:50,112 - Send the content for the msg [800], and the location ID [1]
+2019-06-27 04:53:50,112 - Send the messages have been format: [KLB0001000000570009010000800KLE84]
+2019-06-27 04:53:50,117 - Success to send the datums
+2019-06-27 04:53:50,132 - Send the content for the msg [53.3], and the location ID [2]
+2019-06-27 04:53:50,134 - Send the messages have been format: [KLB000100000057001002000053.3KLEAE]
+2019-06-27 04:53:50,136 - Success to send the datums
+2019-06-27 04:53:50,153 - Send the content for the msg [50.0], and the location ID [3]
+2019-06-27 04:53:50,154 - Send the messages have been format: [KLB000100000057001003000050.0KLEA9]
+2019-06-27 04:53:50,156 - Success to send the datums
+2019-06-27 04:55:00,095 - Send with UDP
+2019-06-27 04:55:00,095 - Send the content for the msg [1800], and the location ID [0]
+2019-06-27 04:55:00,097 - Send the messages have been format: [KLB00010000005700100000001800KLEAC]
+2019-06-27 04:55:00,100 - Success to send the datums
+2019-06-27 04:55:00,116 - Send the content for the msg [800], and the location ID [1]
+2019-06-27 04:55:00,117 - Send the messages have been format: [KLB0001000000570009010000800KLE84]
+2019-06-27 04:55:00,118 - Success to send the datums
+2019-06-27 04:55:00,135 - Send the content for the msg [44.4], and the location ID [2]
+2019-06-27 04:55:00,136 - Send the messages have been format: [KLB000100000057001002000044.4KLEAF]
+2019-06-27 04:55:00,137 - Success to send the datums
+2019-06-27 04:55:00,153 - Send the content for the msg [50.0], and the location ID [3]
+2019-06-27 04:55:00,153 - Send the messages have been format: [KLB000100000057001003000050.0KLEA9]
+2019-06-27 04:55:00,155 - Success to send the datums
+2019-06-27 04:55:50,098 - Send with UDP
+2019-06-27 04:55:50,099 - Send the content for the msg [2000], and the location ID [0]
+2019-06-27 04:55:50,101 - Send the messages have been format: [KLB00010000005700100000002000KLEA5]
+2019-06-27 04:55:50,102 - Success to send the datums
+2019-06-27 04:55:50,119 - Send the content for the msg [800], and the location ID [1]
+2019-06-27 04:55:50,120 - Send the messages have been format: [KLB0001000000570009010000800KLE84]
+2019-06-27 04:55:50,122 - Success to send the datums
+2019-06-27 04:55:50,139 - Send the content for the msg [40.0], and the location ID [2]
+2019-06-27 04:55:50,140 - Send the messages have been format: [KLB000100000057001002000040.0KLEA7]
+2019-06-27 04:55:50,142 - Success to send the datums
+2019-06-27 04:55:50,158 - Send the content for the msg [50.0], and the location ID [3]
+2019-06-27 04:55:50,159 - Send the messages have been format: [KLB000100000057001003000050.0KLEA9]
+2019-06-27 04:55:50,160 - Success to send the datums
+2019-06-27 04:56:50,102 - Send with UDP
+2019-06-27 04:56:50,103 - Send the content for the msg [1500], and the location ID [0]
+2019-06-27 04:56:50,105 - Send the messages have been format: [KLB00010000005700100000001500KLEA9]
+2019-06-27 04:56:50,106 - Success to send the datums
+2019-06-27 04:56:50,123 - Send the content for the msg [800], and the location ID [1]
+2019-06-27 04:56:50,124 - Send the messages have been format: [KLB0001000000570009010000800KLE84]
+2019-06-27 04:56:50,126 - Success to send the datums
+2019-06-27 04:56:50,143 - Send the content for the msg [53.3], and the location ID [2]
+2019-06-27 04:56:50,144 - Send the messages have been format: [KLB000100000057001002000053.3KLEAE]
+2019-06-27 04:56:50,146 - Success to send the datums
+2019-06-27 04:56:50,162 - Send the content for the msg [50.0], and the location ID [3]
+2019-06-27 04:56:50,163 - Send the messages have been format: [KLB000100000057001003000050.0KLEA9]
+2019-06-27 04:56:50,165 - Success to send the datums
+2019-06-27 04:58:00,106 - Send with UDP
+2019-06-27 04:58:00,107 - Send the content for the msg [1000], and the location ID [0]
+2019-06-27 04:58:00,109 - Send the messages have been format: [KLB00010000005700100000001000KLEA4]
+2019-06-27 04:58:00,110 - Success to send the datums
+2019-06-27 04:58:00,127 - Send the content for the msg [800], and the location ID [1]
+2019-06-27 04:58:00,128 - Send the messages have been format: [KLB0001000000570009010000800KLE84]
+2019-06-27 04:58:00,130 - Success to send the datums
+2019-06-27 04:58:00,147 - Send the content for the msg [80.0], and the location ID [2]
+2019-06-27 04:58:00,148 - Send the messages have been format: [KLB000100000057001002000080.0KLEAB]
+2019-06-27 04:58:00,150 - Success to send the datums
+2019-06-27 04:58:00,167 - Send the content for the msg [50.0], and the location ID [3]
+2019-06-27 04:58:00,168 - Send the messages have been format: [KLB000100000057001003000050.0KLEA9]
+2019-06-27 04:58:00,169 - Success to send the datums
+2019-06-27 04:59:50,112 - Send with UDP
+2019-06-27 04:59:50,112 - Send the content for the msg [800], and the location ID [0]
+2019-06-27 04:59:50,113 - Send the messages have been format: [KLB0001000000570009000000800KLE83]
+2019-06-27 04:59:50,114 - Success to send the datums
+2019-06-27 04:59:50,130 - Send the content for the msg [800], and the location ID [1]
+2019-06-27 04:59:50,130 - Send the messages have been format: [KLB0001000000570009010000800KLE84]
+2019-06-27 04:59:50,131 - Success to send the datums
+2019-06-27 04:59:50,147 - Send the content for the msg [100.0], and the location ID [2]
+2019-06-27 04:59:50,147 - Send the messages have been format: [KLB0001000000570011020000100.0KLED5]
+2019-06-27 04:59:50,148 - Success to send the datums
+2019-06-27 04:59:50,164 - Send the content for the msg [50.0], and the location ID [3]
+2019-06-27 04:59:50,164 - Send the messages have been format: [KLB000100000057001003000050.0KLEA9]
+2019-06-27 04:59:50,165 - Success to send the datums
+2019-06-27 05:00:20,114 - Send with UDP
+2019-06-27 05:00:20,114 - Send the content for the msg [700], and the location ID [0]
+2019-06-27 05:00:20,115 - Send the messages have been format: [KLB0001000000570009000000700KLE82]
+2019-06-27 05:00:20,116 - Success to send the datums
+2019-06-27 05:00:20,132 - Send the content for the msg [800], and the location ID [1]
+2019-06-27 05:00:20,132 - Send the messages have been format: [KLB0001000000570009010000800KLE84]
+2019-06-27 05:00:20,133 - Success to send the datums
+2019-06-27 05:00:20,149 - Send the content for the msg [114.3], and the location ID [2]
+2019-06-27 05:00:20,149 - Send the messages have been format: [KLB0001000000570011020000114.3KLEDD]
+2019-06-27 05:00:20,150 - Success to send the datums
+2019-06-27 05:00:20,166 - Send the content for the msg [50.0], and the location ID [3]
+2019-06-27 05:00:20,166 - Send the messages have been format: [KLB000100000057001003000050.0KLEA9]
+2019-06-27 05:00:20,168 - Success to send the datums
+2019-06-27 05:03:10,123 - Send with UDP
+2019-06-27 05:03:10,123 - Send the content for the msg [1200], and the location ID [0]
+2019-06-27 05:03:10,124 - Send the messages have been format: [KLB00010000005700100000001200KLEA6]
+2019-06-27 05:03:10,125 - Success to send the datums
+2019-06-27 05:03:10,141 - Send the content for the msg [800], and the location ID [1]
+2019-06-27 05:03:10,141 - Send the messages have been format: [KLB0001000000570009010000800KLE84]
+2019-06-27 05:03:10,142 - Success to send the datums
+2019-06-27 05:03:10,158 - Send the content for the msg [66.7], and the location ID [2]
+2019-06-27 05:03:10,158 - Send the messages have been format: [KLB000100000057001002000066.7KLEB6]
+2019-06-27 05:03:10,159 - Success to send the datums
+2019-06-27 05:03:10,175 - Send the content for the msg [50.0], and the location ID [3]
+2019-06-27 05:03:10,175 - Send the messages have been format: [KLB000100000057001003000050.0KLEA9]
+2019-06-27 05:03:10,176 - Success to send the datums

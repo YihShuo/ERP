@@ -1,0 +1,782 @@
+2019-06-26 22:12:33,813 - lemonnt
+2019-06-26 22:12:33,841 - lemonnt
+2019-06-26 22:12:34,430 - false
+2019-06-26 22:12:34,457 - false
+2019-06-26 22:12:34,940 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-06-26 22:12:34,946 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-06-26 22:12:34,964 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-06-26 22:12:34,973 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-06-26 22:12:35,019 - Obtain the parameters  : [DIGITNUMBER]
+2019-06-26 22:12:35,028 - Obtain the parameters  : [DIGITNUMBER]
+2019-06-26 22:12:35,030 - Obtain the env parameters  : [4]
+2019-06-26 22:12:35,045 - Obtain the env parameters  : [4]
+2019-06-26 22:12:36,264 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:12:36,265 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:12:36,272 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:12:36,273 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:12:36,998 - Success to query records [1]
+2019-06-26 22:12:37,054 - Success to query records [1]
+2019-06-26 22:12:37,035 - [{"connection":false,"date":1557194662404,"desc":"1","gprs":0,"ip":"192.168.1.150","name":"卡1","order":"1","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-06-26 22:12:37,517 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-26 22:12:37,717 - Obtain the env parameters  : [10]
+2019-06-26 22:12:37,090 - [{"connection":false,"date":1557194662404,"desc":"1","gprs":0,"ip":"192.168.1.150","name":"卡1","order":"1","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-06-26 22:12:37,284 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-26 22:12:37,732 - Monitor Interval : [10s]
+2019-06-26 22:12:37,738 - Obtain the env parameters  : [10]
+2019-06-26 22:12:37,749 - Monitor Interval : [10s]
+2019-06-26 22:12:38,935 - lemonnt
+2019-06-26 22:12:41,468 - false
+2019-06-26 22:12:42,194 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-06-26 22:12:42,227 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-06-26 22:12:42,239 - Obtain the parameters  : [DIGITNUMBER]
+2019-06-26 22:12:42,251 - Obtain the env parameters  : [4]
+2019-06-26 22:12:42,828 - Success to query records [1]
+2019-06-26 22:12:42,906 - [{"connection":false,"date":1557194662404,"desc":"1","gprs":0,"ip":"192.168.1.150","name":"卡1","order":"1","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-06-26 22:12:43,283 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:12:43,291 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:12:43,524 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-26 22:12:43,532 - Obtain the env parameters  : [10]
+2019-06-26 22:12:43,539 - Monitor Interval : [10s]
+2019-06-26 22:18:01,104 - lemonnt
+2019-06-26 22:18:01,433 - false
+2019-06-26 22:18:01,779 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-06-26 22:18:01,793 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-06-26 22:18:01,819 - Obtain the parameters  : [DIGITNUMBER]
+2019-06-26 22:18:01,827 - Obtain the env parameters  : [4]
+2019-06-26 22:18:02,325 - Success to query records [1]
+2019-06-26 22:18:02,327 - [{"connection":false,"date":1557194662404,"desc":"1","gprs":0,"ip":"192.168.1.150","name":"卡1","order":"1","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-06-26 22:18:02,708 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:18:02,718 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:18:02,949 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-26 22:18:02,957 - Obtain the env parameters  : [10]
+2019-06-26 22:18:02,978 - Monitor Interval : [10s]
+2019-06-26 22:18:24,592 - lemonnt
+2019-06-26 22:18:24,959 - false
+2019-06-26 22:18:25,298 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-06-26 22:18:25,313 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-06-26 22:18:25,314 - Obtain the parameters  : [DIGITNUMBER]
+2019-06-26 22:18:25,322 - Obtain the env parameters  : [4]
+2019-06-26 22:18:25,870 - Success to query records [1]
+2019-06-26 22:18:25,872 - [{"connection":false,"date":1557194662404,"desc":"1","gprs":0,"ip":"192.168.1.150","name":"卡1","order":"1","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-06-26 22:18:26,258 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:18:26,267 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:18:26,497 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-26 22:18:26,506 - Obtain the env parameters  : [10]
+2019-06-26 22:18:26,513 - Monitor Interval : [10s]
+2019-06-26 22:18:29,917 - lemonnt
+2019-06-26 22:18:30,345 - false
+2019-06-26 22:18:30,779 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-06-26 22:18:30,804 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-06-26 22:18:30,805 - Obtain the parameters  : [DIGITNUMBER]
+2019-06-26 22:18:30,815 - Obtain the env parameters  : [4]
+2019-06-26 22:18:31,685 - Success to query records [1]
+2019-06-26 22:18:31,686 - [{"connection":false,"date":1557194662404,"desc":"1","gprs":0,"ip":"192.168.1.150","name":"卡1","order":"1","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-06-26 22:18:32,167 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:18:32,177 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:18:32,456 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-26 22:18:32,468 - Obtain the env parameters  : [10]
+2019-06-26 22:18:32,483 - Monitor Interval : [10s]
+2019-06-26 22:19:29,729 - UI
+2019-06-26 22:19:29,798 - Success to query records [1]
+2019-06-26 22:19:29,819 - Success to query records [1]
+2019-06-26 22:19:53,354 - UI
+2019-06-26 22:19:53,408 - Success to query records [1]
+2019-06-26 22:19:53,432 - Success to query records [1]
+2019-06-26 22:20:07,391 - Success to query records [1]
+2019-06-26 22:20:07,431 - Success to query records [1]
+2019-06-26 22:20:07,472 - start : 0, end : 1
+2019-06-26 22:20:09,625 - Success to query records [1]
+2019-06-26 22:20:09,661 - Success to query records [1]
+2019-06-26 22:20:09,662 - start : 0, end : 1
+2019-06-26 22:20:19,807 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:20:19,817 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:20:23,897 - Success to query records [1]
+2019-06-26 22:20:31,559 - Success to query records [1]
+2019-06-26 22:20:31,572 - Success to query records [1]
+2019-06-26 22:20:31,574 - start : 0, end : 1
+2019-06-26 22:20:35,821 - Success to query records [1]
+2019-06-26 22:20:39,650 - start : 0, end : 0
+2019-06-26 22:20:47,592 - Success to query records [1]
+2019-06-26 22:20:47,605 - Success to query records [1]
+2019-06-26 22:20:47,606 - start : 0, end : 1
+2019-06-26 22:20:50,654 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:20:50,662 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:20:54,443 - delete : {order=1}
+2019-06-26 22:20:54,553 - start : 0, end : 0
+2019-06-26 22:21:19,306 - UI
+2019-06-26 22:21:24,136 - Success to query records [1]
+2019-06-26 22:21:24,178 - Success to query records [1]
+2019-06-26 22:21:24,179 - start : 0, end : 1
+2019-06-26 22:21:27,485 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:21:27,493 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:21:38,684 - UI
+2019-06-26 22:21:38,753 - Success to query records [1]
+2019-06-26 22:21:38,947 - Success to query records [1]
+2019-06-26 22:21:39,006 - Success to query records [1]
+2019-06-26 22:21:39,015 - start : 0, end : 1
+2019-06-26 22:22:39,741 - Success save the system setting
+2019-06-26 22:22:49,006 - Success to query records [1]
+2019-06-26 22:22:49,022 - Success to query records [1]
+2019-06-26 22:22:49,025 - start : 0, end : 1
+2019-06-26 22:22:49,214 - Success to query records [1]
+2019-06-26 22:22:49,239 - Success to query records [1]
+2019-06-26 22:22:49,255 - start : 0, end : 1
+2019-06-26 22:22:55,429 - Success to query records [1]
+2019-06-26 22:22:55,607 - Success to query records [1]
+2019-06-26 22:23:02,825 - Update by the id [9] ,tableName [plugins]
+2019-06-26 22:23:12,062 - The name of plugin is [1]
+2019-06-26 22:23:12,063 - The name of pluginType is [file]
+2019-06-26 22:23:12,075 - Success to query records [1]
+2019-06-26 22:23:13,835 - Obtain the parameters  : [SENDDELAY]
+2019-06-26 22:23:13,844 - Obtain the env parameters  : [20]
+2019-06-26 22:23:13,883 - It's going to parsing : D:\234\plugin/config/properties/configuration.properties
+2019-06-26 22:23:13,886 - It has been parsed ,following [D:\234\plugin/config/properties/configuration.properties]
+2019-06-26 22:23:13,888 - It has been loaded ,following : [D:\234\plugin/config/properties/configuration.properties]
+2019-06-26 22:23:13,889 - {"pluginName":"1","properties":{"monitorPath":"D:/234/test"}}
+2019-06-26 22:23:13,913 - Success to query records [1]
+2019-06-26 22:23:13,924 - Success to query records [1]
+2019-06-26 22:23:13,935 - Success to query records [1]
+2019-06-26 22:23:13,943 - Monitor type : directory
+2019-06-26 22:23:19,366 - Success to query records [1]
+2019-06-26 22:23:29,355 - Success to query records [1]
+2019-06-26 22:23:39,356 - Success to query records [1]
+2019-06-26 22:23:49,363 - Success to query records [1]
+2019-06-26 22:23:59,356 - Success to query records [1]
+2019-06-26 22:24:09,357 - Success to query records [1]
+2019-06-26 22:24:14,974 - Send with UDP
+2019-06-26 22:24:14,979 - Send the content for the msg [3222], and the location ID [0]
+2019-06-26 22:24:14,980 - Send the messages have been format: [KLB00010000005700100000003222KLEAC]
+2019-06-26 22:24:15,203 - Success to send the datums
+2019-06-26 22:24:15,224 - Send the content for the msg [3333], and the location ID [1]
+2019-06-26 22:24:15,225 - Send the messages have been format: [KLB00010000005700100100003333KLEB0]
+2019-06-26 22:24:15,227 - Success to send the datums
+2019-06-26 22:24:15,248 - Send the content for the msg [444.4], and the location ID [2]
+2019-06-26 22:24:15,248 - Send the messages have been format: [KLB0001000000570011020000444.4KLEE4]
+2019-06-26 22:24:15,250 - Success to send the datums
+2019-06-26 22:24:15,270 - Send the content for the msg [555.5], and the location ID [3]
+2019-06-26 22:24:15,271 - Send the messages have been format: [KLB0001000000570011030000555.5KLEE9]
+2019-06-26 22:24:15,272 - Success to send the datums
+2019-06-26 22:24:19,359 - Success to query records [1]
+2019-06-26 22:24:29,361 - Success to query records [1]
+2019-06-26 22:24:39,361 - Success to query records [1]
+2019-06-26 22:24:49,365 - Success to query records [1]
+2019-06-26 22:24:59,363 - Success to query records [1]
+2019-06-26 22:25:09,361 - Success to query records [1]
+2019-06-26 22:25:19,366 - Success to query records [1]
+2019-06-26 22:25:29,389 - Success to query records [1]
+2019-06-26 22:25:39,375 - Success to query records [1]
+2019-06-26 22:25:49,518 - Success to query records [1]
+2019-06-26 22:25:59,365 - Success to query records [1]
+2019-06-26 22:26:09,363 - Success to query records [1]
+2019-06-26 22:26:19,368 - Success to query records [1]
+2019-06-26 22:26:29,362 - Success to query records [1]
+2019-06-26 22:26:34,714 - Success to query records [1]
+2019-06-26 22:26:34,816 - Success to query records [1]
+2019-06-26 22:26:34,909 - start : 0, end : 1
+2019-06-26 22:26:51,607 - Success to query records [1]
+2019-06-26 22:27:05,450 - Success to query records [1]
+2019-06-26 22:27:44,163 - lemonnt
+2019-06-26 22:27:44,495 - false
+2019-06-26 22:27:44,774 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-06-26 22:27:44,786 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-06-26 22:27:44,788 - Obtain the parameters  : [DIGITNUMBER]
+2019-06-26 22:27:44,794 - Obtain the env parameters  : [4]
+2019-06-26 22:27:45,139 - Success to query records [1]
+2019-06-26 22:27:45,154 - [{"connection":false,"date":1561562498684,"desc":"234","gprs":0,"ip":"192.168.142.59","name":"K1","order":"59","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-06-26 22:27:45,516 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:27:45,522 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:27:45,674 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-26 22:27:45,680 - Obtain the env parameters  : [10]
+2019-06-26 22:27:45,686 - Monitor Interval : [10s]
+2019-06-26 22:27:57,229 - lemonnt
+2019-06-26 22:27:57,585 - false
+2019-06-26 22:27:57,881 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-06-26 22:27:57,897 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-06-26 22:27:57,920 - Obtain the parameters  : [DIGITNUMBER]
+2019-06-26 22:27:57,927 - Obtain the env parameters  : [4]
+2019-06-26 22:27:58,329 - Success to query records [1]
+2019-06-26 22:27:58,331 - [{"connection":false,"date":1561562498684,"desc":"234","gprs":0,"ip":"192.168.142.59","name":"K1","order":"59","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-06-26 22:27:58,663 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:27:58,672 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:27:58,843 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-26 22:27:58,850 - Obtain the env parameters  : [10]
+2019-06-26 22:27:58,893 - Monitor Interval : [10s]
+2019-06-26 22:28:02,737 - Success to query records [1]
+2019-06-26 22:28:02,933 - Success to query records [1]
+2019-06-26 22:28:02,955 - start : 0, end : 1
+2019-06-26 22:28:07,888 - Success to query records [1]
+2019-06-26 22:28:11,807 - start : 0, end : 0
+2019-06-26 22:28:19,011 - Success to query records [3]
+2019-06-26 22:28:19,138 - Success to query records [3]
+2019-06-26 22:28:19,141 - start : 0, end : 3
+2019-06-26 22:28:20,243 - Success to query records [1]
+2019-06-26 22:28:20,294 - Success to query records [1]
+2019-06-26 22:28:20,296 - start : 0, end : 1
+2019-06-26 22:28:24,287 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:28:24,302 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:28:27,748 - delete : {order=59}
+2019-06-26 22:28:27,909 - start : 0, end : 0
+2019-06-26 22:28:34,471 - start : 0, end : 0
+2019-06-26 22:29:02,393 - UI
+2019-06-26 22:29:07,796 - Success to query records [1]
+2019-06-26 22:29:07,822 - Success to query records [1]
+2019-06-26 22:29:07,825 - start : 0, end : 1
+2019-06-26 22:29:10,384 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:29:10,394 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:29:13,522 - UI
+2019-06-26 22:29:13,586 - Success to query records [1]
+2019-06-26 22:29:13,773 - Success to query records [1]
+2019-06-26 22:29:13,838 - Success to query records [1]
+2019-06-26 22:29:13,841 - start : 0, end : 1
+2019-06-26 22:29:53,717 - Success save the system setting
+2019-06-26 22:29:57,649 - Success to query records [1]
+2019-06-26 22:29:57,690 - Success to query records [1]
+2019-06-26 22:29:57,691 - start : 0, end : 1
+2019-06-26 22:30:04,578 - Success to query records [1]
+2019-06-26 22:30:04,743 - Success to query records [1]
+2019-06-26 22:30:10,097 - Update by the id [10] ,tableName [plugins]
+2019-06-26 22:30:14,767 - The name of plugin is [k1]
+2019-06-26 22:30:14,769 - The name of pluginType is [file]
+2019-06-26 22:30:14,781 - Success to query records [1]
+2019-06-26 22:30:16,972 - Obtain the parameters  : [SENDDELAY]
+2019-06-26 22:30:16,980 - Obtain the env parameters  : [20]
+2019-06-26 22:30:17,012 - It's going to parsing : D:\234\plugin/config/properties/configuration.properties
+2019-06-26 22:30:17,015 - It has been parsed ,following [D:\234\plugin/config/properties/configuration.properties]
+2019-06-26 22:30:17,018 - It has been loaded ,following : [D:\234\plugin/config/properties/configuration.properties]
+2019-06-26 22:30:17,020 - {"pluginName":"k1","properties":{"monitorPath":"D:/234/test"}}
+2019-06-26 22:30:17,044 - Success to query records [1]
+2019-06-26 22:30:17,055 - Success to query records [1]
+2019-06-26 22:30:17,067 - Success to query records [1]
+2019-06-26 22:30:17,110 - Monitor type : directory
+2019-06-26 22:30:21,083 - Success to query records [1]
+2019-06-26 22:30:31,084 - Success to query records [1]
+2019-06-26 22:30:41,083 - Success to query records [1]
+2019-06-26 22:30:51,086 - Success to query records [1]
+2019-06-26 22:31:01,103 - Success to query records [1]
+2019-06-26 22:31:11,093 - Success to query records [1]
+2019-06-26 22:31:21,090 - Success to query records [1]
+2019-06-26 22:31:31,087 - Success to query records [1]
+2019-06-26 22:31:38,174 - Send with UDP
+2019-06-26 22:31:38,195 - Send the content for the msg [1200], and the location ID [0]
+2019-06-26 22:31:38,196 - Send the messages have been format: [KLB00010000005700100000001200KLEA6]
+2019-06-26 22:31:38,484 - Success to send the datums
+2019-06-26 22:31:38,501 - Success to query records [1]
+2019-06-26 22:31:38,505 - Send the content for the msg [1300], and the location ID [1]
+2019-06-26 22:31:38,506 - Send the messages have been format: [KLB00010000005700100100001300KLEA8]
+2019-06-26 22:31:38,508 - Success to send the datums
+2019-06-26 22:31:38,514 - Success to query records [1]
+2019-06-26 22:31:38,516 - start : 0, end : 1
+2019-06-26 22:31:38,529 - Send the content for the msg [140.0], and the location ID [2]
+2019-06-26 22:31:38,530 - Send the messages have been format: [KLB0001000000570011020000140.0KLED9]
+2019-06-26 22:31:38,533 - Success to send the datums
+2019-06-26 22:31:38,554 - Send the content for the msg [150.0], and the location ID [3]
+2019-06-26 22:31:38,555 - Send the messages have been format: [KLB0001000000570011030000150.0KLEDB]
+2019-06-26 22:31:38,561 - Success to send the datums
+2019-06-26 22:31:41,091 - Success to query records [1]
+2019-06-26 22:31:44,099 - Success to query records [1]
+2019-06-26 22:31:44,138 - Success to query records [1]
+2019-06-26 22:31:44,139 - start : 0, end : 1
+2019-06-26 22:31:47,630 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:31:47,638 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:31:47,664 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-26 22:31:47,672 - Obtain the env parameters  : [10]
+2019-06-26 22:31:47,674 - Obtain the parameters  : [SENDDELAY]
+2019-06-26 22:31:47,684 - Obtain the env parameters  : [20]
+2019-06-26 22:31:52,228 - Success to query records [1]
+2019-06-26 22:31:52,262 - Success to query records [1]
+2019-06-26 22:31:52,264 - start : 0, end : 1
+2019-06-26 22:31:54,935 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:31:54,943 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:31:58,018 - UI
+2019-06-26 22:31:58,078 - Success to query records [1]
+2019-06-26 22:32:05,384 - Success to query records [1]
+2019-06-26 22:32:05,397 - Success to query records [1]
+2019-06-26 22:32:05,399 - start : 0, end : 1
+2019-06-26 22:32:05,705 - Success to query records [1]
+2019-06-26 22:32:05,727 - Success to query records [1]
+2019-06-26 22:32:05,730 - start : 0, end : 1
+2019-06-26 22:32:38,189 - Send with UDP
+2019-06-26 22:32:38,190 - Send the content for the msg [1200], and the location ID [0]
+2019-06-26 22:32:38,190 - Send the messages have been format: [KLB00010000005700100000001200KLEA6]
+2019-06-26 22:32:38,192 - Success to send the datums
+2019-06-26 22:32:38,213 - Send the content for the msg [1300], and the location ID [1]
+2019-06-26 22:32:38,213 - Send the messages have been format: [KLB00010000005700100100001300KLEA8]
+2019-06-26 22:32:38,215 - Success to send the datums
+2019-06-26 22:32:38,235 - Send the content for the msg [140.0], and the location ID [2]
+2019-06-26 22:32:38,235 - Send the messages have been format: [KLB0001000000570011020000140.0KLED9]
+2019-06-26 22:32:38,237 - Success to send the datums
+2019-06-26 22:32:38,259 - Send the content for the msg [150.0], and the location ID [3]
+2019-06-26 22:32:38,260 - Send the messages have been format: [KLB0001000000570011030000150.0KLEDB]
+2019-06-26 22:32:38,261 - Success to send the datums
+2019-06-26 22:33:18,189 - Send with UDP
+2019-06-26 22:33:18,190 - Send the content for the msg [1800], and the location ID [0]
+2019-06-26 22:33:18,190 - Send the messages have been format: [KLB00010000005700100000001800KLEAC]
+2019-06-26 22:33:18,192 - Success to send the datums
+2019-06-26 22:33:18,213 - Send the content for the msg [1300], and the location ID [1]
+2019-06-26 22:33:18,214 - Send the messages have been format: [KLB00010000005700100100001300KLEA8]
+2019-06-26 22:33:18,215 - Success to send the datums
+2019-06-26 22:33:18,236 - Send the content for the msg [140.0], and the location ID [2]
+2019-06-26 22:33:18,236 - Send the messages have been format: [KLB0001000000570011020000140.0KLED9]
+2019-06-26 22:33:18,238 - Success to send the datums
+2019-06-26 22:33:18,258 - Send the content for the msg [150.0], and the location ID [3]
+2019-06-26 22:33:18,260 - Send the messages have been format: [KLB0001000000570011030000150.0KLEDB]
+2019-06-26 22:33:18,261 - Success to send the datums
+2019-06-26 22:33:38,189 - Send with UDP
+2019-06-26 22:33:38,189 - Send the content for the msg [1900], and the location ID [0]
+2019-06-26 22:33:38,190 - Send the messages have been format: [KLB00010000005700100000001900KLEAD]
+2019-06-26 22:33:38,192 - Success to send the datums
+2019-06-26 22:33:38,213 - Send the content for the msg [1300], and the location ID [1]
+2019-06-26 22:33:38,213 - Send the messages have been format: [KLB00010000005700100100001300KLEA8]
+2019-06-26 22:33:38,215 - Success to send the datums
+2019-06-26 22:33:38,236 - Send the content for the msg [140.0], and the location ID [2]
+2019-06-26 22:33:38,236 - Send the messages have been format: [KLB0001000000570011020000140.0KLED9]
+2019-06-26 22:33:38,238 - Success to send the datums
+2019-06-26 22:33:38,259 - Send the content for the msg [150.0], and the location ID [3]
+2019-06-26 22:33:38,261 - Send the messages have been format: [KLB0001000000570011030000150.0KLEDB]
+2019-06-26 22:33:38,266 - Success to send the datums
+2019-06-26 22:33:58,190 - Send with UDP
+2019-06-26 22:33:58,190 - Send the content for the msg [2000], and the location ID [0]
+2019-06-26 22:33:58,191 - Send the messages have been format: [KLB00010000005700100000002000KLEA5]
+2019-06-26 22:33:58,193 - Success to send the datums
+2019-06-26 22:33:58,214 - Send the content for the msg [1300], and the location ID [1]
+2019-06-26 22:33:58,214 - Send the messages have been format: [KLB00010000005700100100001300KLEA8]
+2019-06-26 22:33:58,216 - Success to send the datums
+2019-06-26 22:33:58,237 - Send the content for the msg [140.0], and the location ID [2]
+2019-06-26 22:33:58,239 - Send the messages have been format: [KLB0001000000570011020000140.0KLED9]
+2019-06-26 22:33:58,244 - Success to send the datums
+2019-06-26 22:33:58,267 - Send the content for the msg [150.0], and the location ID [3]
+2019-06-26 22:33:58,268 - Send the messages have been format: [KLB0001000000570011030000150.0KLEDB]
+2019-06-26 22:33:58,270 - Success to send the datums
+2019-06-26 22:34:18,190 - Send with UDP
+2019-06-26 22:34:18,190 - Send the content for the msg [8000], and the location ID [0]
+2019-06-26 22:34:18,191 - Send the messages have been format: [KLB00010000005700100000008000KLEAB]
+2019-06-26 22:34:18,193 - Success to send the datums
+2019-06-26 22:34:18,214 - Send the content for the msg [1300], and the location ID [1]
+2019-06-26 22:34:18,214 - Send the messages have been format: [KLB00010000005700100100001300KLEA8]
+2019-06-26 22:34:18,216 - Success to send the datums
+2019-06-26 22:34:18,237 - Send the content for the msg [140.0], and the location ID [2]
+2019-06-26 22:34:18,237 - Send the messages have been format: [KLB0001000000570011020000140.0KLED9]
+2019-06-26 22:34:18,239 - Success to send the datums
+2019-06-26 22:34:18,260 - Send the content for the msg [150.0], and the location ID [3]
+2019-06-26 22:34:18,261 - Send the messages have been format: [KLB0001000000570011030000150.0KLEDB]
+2019-06-26 22:34:18,262 - Success to send the datums
+2019-06-26 22:34:58,190 - Send with UDP
+2019-06-26 22:34:58,190 - Send the content for the msg [2000], and the location ID [0]
+2019-06-26 22:34:58,191 - Send the messages have been format: [KLB00010000005700100000002000KLEA5]
+2019-06-26 22:34:58,193 - Success to send the datums
+2019-06-26 22:34:58,213 - Send the content for the msg [1300], and the location ID [1]
+2019-06-26 22:34:58,214 - Send the messages have been format: [KLB00010000005700100100001300KLEA8]
+2019-06-26 22:34:58,216 - Success to send the datums
+2019-06-26 22:34:58,237 - Send the content for the msg [140.0], and the location ID [2]
+2019-06-26 22:34:58,237 - Send the messages have been format: [KLB0001000000570011020000140.0KLED9]
+2019-06-26 22:34:58,239 - Success to send the datums
+2019-06-26 22:34:58,260 - Send the content for the msg [150.0], and the location ID [3]
+2019-06-26 22:34:58,261 - Send the messages have been format: [KLB0001000000570011030000150.0KLEDB]
+2019-06-26 22:34:58,263 - Success to send the datums
+2019-06-26 22:35:18,190 - Send with UDP
+2019-06-26 22:35:18,190 - Send the content for the msg [7000], and the location ID [0]
+2019-06-26 22:35:18,191 - Send the messages have been format: [KLB00010000005700100000007000KLEAA]
+2019-06-26 22:35:18,193 - Success to send the datums
+2019-06-26 22:35:18,214 - Send the content for the msg [1300], and the location ID [1]
+2019-06-26 22:35:18,214 - Send the messages have been format: [KLB00010000005700100100001300KLEA8]
+2019-06-26 22:35:18,215 - Success to send the datums
+2019-06-26 22:35:18,236 - Send the content for the msg [140.0], and the location ID [2]
+2019-06-26 22:35:18,236 - Send the messages have been format: [KLB0001000000570011020000140.0KLED9]
+2019-06-26 22:35:18,239 - Success to send the datums
+2019-06-26 22:35:18,259 - Send the content for the msg [150.0], and the location ID [3]
+2019-06-26 22:35:18,259 - Send the messages have been format: [KLB0001000000570011030000150.0KLEDB]
+2019-06-26 22:35:18,261 - Success to send the datums
+2019-06-26 22:35:30,701 - Success to query records [1]
+2019-06-26 22:35:39,437 - Success to query records [1]
+2019-06-26 22:36:04,475 - Success to query records [1]
+2019-06-26 22:36:27,751 - lemonnt
+2019-06-26 22:36:28,104 - false
+2019-06-26 22:36:28,421 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-06-26 22:36:28,436 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-06-26 22:36:28,454 - Obtain the parameters  : [DIGITNUMBER]
+2019-06-26 22:36:28,462 - Obtain the env parameters  : [4]
+2019-06-26 22:36:28,917 - Success to query records [1]
+2019-06-26 22:36:28,931 - [{"connection":false,"date":1561562953525,"desc":"234","gprs":0,"ip":"192.168.142.59","name":"k1","order":"59","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-06-26 22:36:29,316 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:36:29,324 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:36:29,543 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-26 22:36:29,555 - Obtain the env parameters  : [10]
+2019-06-26 22:36:29,566 - Monitor Interval : [10s]
+2019-06-26 22:36:34,585 - Success to query records [1]
+2019-06-26 22:36:34,737 - Success to query records [1]
+2019-06-26 22:36:34,740 - start : 0, end : 1
+2019-06-26 22:36:38,117 - Success to query records [1]
+2019-06-26 22:36:41,793 - start : 0, end : 0
+2019-06-26 22:36:47,146 - Success to query records [1]
+2019-06-26 22:36:47,193 - Success to query records [1]
+2019-06-26 22:36:47,195 - start : 0, end : 1
+2019-06-26 22:36:49,962 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:36:49,974 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:36:53,176 - delete : {order=59}
+2019-06-26 22:36:53,347 - start : 0, end : 0
+2019-06-26 22:37:21,589 - UI
+2019-06-26 22:37:24,869 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:37:24,880 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:37:24,905 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-26 22:37:24,912 - Obtain the env parameters  : [10]
+2019-06-26 22:37:24,914 - Obtain the parameters  : [SENDDELAY]
+2019-06-26 22:37:24,921 - Obtain the env parameters  : [20]
+2019-06-26 22:37:43,868 - Add the env parameters ,type : [SYSTEMNAME],value : [蓝通光电]
+2019-06-26 22:37:43,874 - Delete the env parameters : [SYSTEMNAME]
+2019-06-26 22:37:43,915 - Fail to elete the env parameters : [SYSTEMNAME]
+2019-06-26 22:37:43,954 - Success to add the env parameters ,type : [SYSTEMNAME],value : [蓝通光电]
+2019-06-26 22:37:51,997 - Add the env parameters ,type : [SYSTEMNAME],value : [蓝通光电]
+2019-06-26 22:37:51,999 - Delete the env parameters : [SYSTEMNAME]
+2019-06-26 22:37:52,063 - Fail to elete the env parameters : [SYSTEMNAME]
+2019-06-26 22:37:52,101 - Success to add the env parameters ,type : [SYSTEMNAME],value : [蓝通光电]
+2019-06-26 22:37:56,034 - Add the env parameters ,type : [SYSTEMNAME],value : [蓝通光电]
+2019-06-26 22:37:56,036 - Delete the env parameters : [SYSTEMNAME]
+2019-06-26 22:37:56,089 - Fail to elete the env parameters : [SYSTEMNAME]
+2019-06-26 22:37:56,128 - Success to add the env parameters ,type : [SYSTEMNAME],value : [蓝通光电]
+2019-06-26 22:38:01,613 - Add the env parameters ,type : [SYSTEMNAME],value : [蓝通光电]
+2019-06-26 22:38:01,615 - Delete the env parameters : [SYSTEMNAME]
+2019-06-26 22:38:01,669 - Fail to elete the env parameters : [SYSTEMNAME]
+2019-06-26 22:38:01,707 - Success to add the env parameters ,type : [SYSTEMNAME],value : [蓝通光电]
+2019-06-26 22:38:01,711 - Add the env parameters ,type : [SENDDELAY],value : [15]
+2019-06-26 22:38:01,712 - Delete the env parameters : [SENDDELAY]
+2019-06-26 22:38:01,746 - Fail to elete the env parameters : [SENDDELAY]
+2019-06-26 22:38:01,785 - Success to add the env parameters ,type : [SENDDELAY],value : [15]
+2019-06-26 22:38:01,787 - Add the env parameters ,type : [MONITORINTRVAL],value : [10]
+2019-06-26 22:38:01,789 - Delete the env parameters : [MONITORINTRVAL]
+2019-06-26 22:38:01,824 - Fail to elete the env parameters : [MONITORINTRVAL]
+2019-06-26 22:38:01,874 - Success to add the env parameters ,type : [MONITORINTRVAL],value : [10]
+2019-06-26 22:38:01,877 - Success save the system setting
+2019-06-26 22:38:08,652 - Success to query records [1]
+2019-06-26 22:38:08,666 - Success to query records [1]
+2019-06-26 22:38:08,669 - start : 0, end : 1
+2019-06-26 22:38:10,388 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:38:10,397 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:38:13,745 - UI
+2019-06-26 22:38:13,814 - Success to query records [1]
+2019-06-26 22:38:13,949 - Success to query records [1]
+2019-06-26 22:38:14,009 - Success to query records [1]
+2019-06-26 22:38:14,011 - start : 0, end : 1
+2019-06-26 22:38:16,890 - start : 0, end : 0
+2019-06-26 22:40:30,903 - Success save the system setting
+2019-06-26 22:40:34,024 - Success to query records [1]
+2019-06-26 22:40:34,037 - Success to query records [1]
+2019-06-26 22:40:34,038 - start : 0, end : 1
+2019-06-26 22:40:36,156 - Success to query records [1]
+2019-06-26 22:40:38,568 - Success to query records [1]
+2019-06-26 22:40:38,600 - Update by the id [11] ,tableName [plugins]
+2019-06-26 22:40:38,649 - Success to query records [1]
+2019-06-26 22:40:38,666 - Success to query records [1]
+2019-06-26 22:40:38,668 - start : 0, end : 1
+2019-06-26 22:40:41,917 - The name of plugin is [k1]
+2019-06-26 22:40:41,918 - The name of pluginType is [file]
+2019-06-26 22:40:45,345 - Success to query records [1]
+2019-06-26 22:40:45,395 - Success to query records [1]
+2019-06-26 22:40:51,141 - Update by the id [11] ,tableName [plugins]
+2019-06-26 22:40:54,125 - The name of plugin is [k1]
+2019-06-26 22:40:54,125 - The name of pluginType is [file]
+2019-06-26 22:40:54,136 - Success to query records [1]
+2019-06-26 22:40:56,234 - Obtain the parameters  : [SENDDELAY]
+2019-06-26 22:40:56,242 - Obtain the env parameters  : [15]
+2019-06-26 22:40:56,283 - It's going to parsing : D:\234\plugin/config/properties/configuration.properties
+2019-06-26 22:40:56,285 - It has been parsed ,following [D:\234\plugin/config/properties/configuration.properties]
+2019-06-26 22:40:56,287 - It has been loaded ,following : [D:\234\plugin/config/properties/configuration.properties]
+2019-06-26 22:40:56,288 - {"pluginName":"k1","properties":{"monitorPath":"D:/234/test"}}
+2019-06-26 22:40:56,314 - Success to query records [1]
+2019-06-26 22:40:56,330 - Success to query records [1]
+2019-06-26 22:40:56,339 - Success to query records [1]
+2019-06-26 22:40:56,347 - Monitor type : directory
+2019-06-26 22:41:57,381 - Send with UDP
+2019-06-26 22:41:57,385 - Send the content for the msg [1200], and the location ID [0]
+2019-06-26 22:41:57,386 - Send the messages have been format: [KLB00010000005700100000001200KLEA6]
+2019-06-26 22:41:57,592 - Success to send the datums
+2019-06-26 22:41:57,608 - Send the content for the msg [800], and the location ID [1]
+2019-06-26 22:41:57,608 - Send the messages have been format: [KLB0001000000570009010000800KLE84]
+2019-06-26 22:41:57,609 - Success to send the datums
+2019-06-26 22:41:57,625 - Send the content for the msg [66.7], and the location ID [2]
+2019-06-26 22:41:57,625 - Send the messages have been format: [KLB000100000057001002000066.7KLEB6]
+2019-06-26 22:41:57,627 - Success to send the datums
+2019-06-26 22:41:57,642 - Send the content for the msg [50.0], and the location ID [3]
+2019-06-26 22:41:57,642 - Send the messages have been format: [KLB000100000057001003000050.0KLEA9]
+2019-06-26 22:41:57,643 - Success to send the datums
+2019-06-26 22:42:47,383 - Send with UDP
+2019-06-26 22:42:47,383 - Send the content for the msg [1800], and the location ID [0]
+2019-06-26 22:42:47,384 - Send the messages have been format: [KLB00010000005700100000001800KLEAC]
+2019-06-26 22:42:47,385 - Success to send the datums
+2019-06-26 22:42:47,401 - Send the content for the msg [800], and the location ID [1]
+2019-06-26 22:42:47,401 - Send the messages have been format: [KLB0001000000570009010000800KLE84]
+2019-06-26 22:42:47,403 - Success to send the datums
+2019-06-26 22:42:47,418 - Send the content for the msg [44.4], and the location ID [2]
+2019-06-26 22:42:47,418 - Send the messages have been format: [KLB000100000057001002000044.4KLEAF]
+2019-06-26 22:42:47,420 - Success to send the datums
+2019-06-26 22:42:47,436 - Send the content for the msg [50.0], and the location ID [3]
+2019-06-26 22:42:47,436 - Send the messages have been format: [KLB000100000057001003000050.0KLEA9]
+2019-06-26 22:42:47,437 - Success to send the datums
+2019-06-26 22:59:31,211 - lemonnt
+2019-06-26 22:59:31,872 - false
+2019-06-26 22:59:32,297 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-06-26 22:59:32,316 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-06-26 22:59:32,336 - Obtain the parameters  : [DIGITNUMBER]
+2019-06-26 22:59:32,346 - Obtain the env parameters  : [4]
+2019-06-26 22:59:33,078 - Success to query records [1]
+2019-06-26 22:59:33,101 - [{"connection":false,"date":1561563493744,"desc":"234","gprs":0,"ip":"192.168.142.59","name":"K1","order":"59","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-06-26 22:59:33,305 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 22:59:33,463 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 22:59:33,689 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-26 22:59:33,698 - Obtain the env parameters  : [10]
+2019-06-26 22:59:33,705 - Monitor Interval : [10s]
+2019-06-26 22:59:37,753 - Success to query records [1]
+2019-06-26 22:59:37,823 - Success to query records [1]
+2019-06-26 22:59:37,832 - start : 0, end : 1
+2019-06-26 22:59:42,339 - The name of plugin is [k1]
+2019-06-26 22:59:42,340 - The name of pluginType is [file]
+2019-06-26 22:59:42,372 - Success to query records [1]
+2019-06-26 22:59:43,719 - Obtain the parameters  : [SENDDELAY]
+2019-06-26 22:59:43,732 - Obtain the env parameters  : [15]
+2019-06-26 22:59:43,762 - It's going to parsing : D:\234\plugin/config/properties/configuration.properties
+2019-06-26 22:59:43,765 - It has been parsed ,following [D:\234\plugin/config/properties/configuration.properties]
+2019-06-26 22:59:43,767 - It has been loaded ,following : [D:\234\plugin/config/properties/configuration.properties]
+2019-06-26 22:59:43,791 - {"pluginName":"k1","properties":{"monitorPath":"D:/234/test"}}
+2019-06-26 22:59:43,817 - Success to query records [1]
+2019-06-26 22:59:43,848 - Success to query records [1]
+2019-06-26 22:59:43,875 - Success to query records [1]
+2019-06-26 22:59:43,895 - Monitor type : directory
+2019-06-26 22:59:46,579 - Success to query records [1]
+2019-06-26 22:59:56,575 - Success to query records [1]
+2019-06-26 23:00:04,951 - Send with UDP
+2019-06-26 23:00:04,955 - Send the content for the msg [8000], and the location ID [0]
+2019-06-26 23:00:04,959 - Send the messages have been format: [KLB00010000005700100000008000KLEAB]
+2019-06-26 23:00:05,343 - Success to send the datums
+2019-06-26 23:00:05,361 - Send the content for the msg [800], and the location ID [1]
+2019-06-26 23:00:05,364 - Send the messages have been format: [KLB0001000000570009010000800KLE84]
+2019-06-26 23:00:05,367 - Success to send the datums
+2019-06-26 23:00:05,384 - Send the content for the msg [10.0], and the location ID [2]
+2019-06-26 23:00:05,384 - Send the messages have been format: [KLB000100000057001002000010.0KLEA4]
+2019-06-26 23:00:05,387 - Success to send the datums
+2019-06-26 23:00:05,403 - Send the content for the msg [50.0], and the location ID [3]
+2019-06-26 23:00:05,403 - Send the messages have been format: [KLB000100000057001003000050.0KLEA9]
+2019-06-26 23:00:05,405 - Success to send the datums
+2019-06-26 23:00:06,578 - Success to query records [1]
+2019-06-26 23:00:16,577 - Success to query records [1]
+2019-06-26 23:00:24,951 - Send with UDP
+2019-06-26 23:00:24,951 - Send the content for the msg [9000], and the location ID [0]
+2019-06-26 23:00:24,953 - Send the messages have been format: [KLB00010000005700100000009000KLEAC]
+2019-06-26 23:00:24,956 - Success to send the datums
+2019-06-26 23:00:24,972 - Send the content for the msg [800], and the location ID [1]
+2019-06-26 23:00:24,974 - Send the messages have been format: [KLB0001000000570009010000800KLE84]
+2019-06-26 23:00:24,977 - Success to send the datums
+2019-06-26 23:00:24,993 - Send the content for the msg [8.9], and the location ID [2]
+2019-06-26 23:00:24,993 - Send the messages have been format: [KLB00010000005700090200008.9KLE8C]
+2019-06-26 23:00:24,995 - Success to send the datums
+2019-06-26 23:00:25,011 - Send the content for the msg [50.0], and the location ID [3]
+2019-06-26 23:00:25,011 - Send the messages have been format: [KLB000100000057001003000050.0KLEA9]
+2019-06-26 23:00:25,013 - Success to send the datums
+2019-06-26 23:00:26,599 - Success to query records [1]
+2019-06-26 23:00:36,580 - Success to query records [1]
+2019-06-26 23:00:46,585 - Success to query records [1]
+2019-06-26 23:00:56,583 - Success to query records [1]
+2019-06-26 23:01:04,953 - Send with UDP
+2019-06-26 23:01:04,953 - Send the content for the msg [5000], and the location ID [0]
+2019-06-26 23:01:04,956 - Send the messages have been format: [KLB00010000005700100000005000KLEA8]
+2019-06-26 23:01:04,958 - Success to send the datums
+2019-06-26 23:01:04,974 - Send the content for the msg [800], and the location ID [1]
+2019-06-26 23:01:04,974 - Send the messages have been format: [KLB0001000000570009010000800KLE84]
+2019-06-26 23:01:04,977 - Success to send the datums
+2019-06-26 23:01:04,993 - Send the content for the msg [16.0], and the location ID [2]
+2019-06-26 23:01:04,993 - Send the messages have been format: [KLB000100000057001002000016.0KLEAA]
+2019-06-26 23:01:04,996 - Success to send the datums
+2019-06-26 23:01:05,012 - Send the content for the msg [50.0], and the location ID [3]
+2019-06-26 23:01:05,012 - Send the messages have been format: [KLB000100000057001003000050.0KLEA9]
+2019-06-26 23:01:05,014 - Success to send the datums
+2019-06-26 23:01:06,620 - Success to query records [1]
+2019-06-26 23:01:16,577 - Success to query records [1]
+2019-06-26 23:01:26,580 - Success to query records [1]
+2019-06-26 23:01:36,606 - Success to query records [1]
+2019-06-26 23:01:46,577 - Success to query records [1]
+2019-06-26 23:01:56,587 - Success to query records [1]
+2019-06-26 23:02:20,048 - Success to query records [1]
+2019-06-26 23:02:20,129 - UI
+2019-06-26 23:02:47,136 - [Delete]: D:\234\test\新建文本文档.txt
+2019-06-26 23:03:04,967 - [K1] has no records need to be send !!!
+2019-06-26 23:03:08,695 - UI
+2019-06-26 23:03:08,783 - Success to query records [1]
+2019-06-26 23:03:08,790 - Success to query records [1]
+2019-06-26 23:03:16,541 - UI
+2019-06-26 23:03:16,567 - Success to query records [1]
+2019-06-26 23:03:16,582 - Success to query records [1]
+2019-06-26 23:03:25,740 - UI
+2019-06-26 23:03:25,780 - Success to query records [1]
+2019-06-26 23:03:25,796 - Success to query records [1]
+2019-06-26 23:03:45,212 - UI
+2019-06-26 23:03:45,249 - Success to query records [1]
+2019-06-26 23:03:45,259 - Success to query records [1]
+2019-06-26 23:04:05,965 - lemonnt
+2019-06-26 23:04:06,344 - false
+2019-06-26 23:04:06,686 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-06-26 23:04:06,702 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-06-26 23:04:06,727 - Obtain the parameters  : [DIGITNUMBER]
+2019-06-26 23:04:06,735 - Obtain the env parameters  : [4]
+2019-06-26 23:04:07,165 - Success to query records [2]
+2019-06-26 23:04:07,219 - [{"connection":false,"date":1561564939956,"desc":"456","gprs":0,"ip":"192.168.142.55","name":"K2","order":"2","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1561563493744,"desc":"234","gprs":0,"ip":"192.168.142.59","name":"K1","order":"59","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-06-26 23:04:07,700 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 23:04:07,707 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 23:04:07,896 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-26 23:04:07,904 - Obtain the env parameters  : [10]
+2019-06-26 23:04:07,906 - Monitor Interval : [10s]
+2019-06-26 23:04:16,061 - lemonnt
+2019-06-26 23:04:16,360 - false
+2019-06-26 23:04:16,655 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-06-26 23:04:16,667 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-06-26 23:04:16,698 - Obtain the parameters  : [DIGITNUMBER]
+2019-06-26 23:04:16,705 - Obtain the env parameters  : [4]
+2019-06-26 23:04:17,127 - Success to query records [2]
+2019-06-26 23:04:17,192 - [{"connection":false,"date":1561564939956,"desc":"456","gprs":0,"ip":"192.168.142.55","name":"K2","order":"2","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1561563493744,"desc":"234","gprs":0,"ip":"192.168.142.59","name":"K1","order":"59","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-06-26 23:04:17,359 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 23:04:17,465 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 23:04:17,629 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-26 23:04:17,636 - Obtain the env parameters  : [10]
+2019-06-26 23:04:17,638 - Monitor Interval : [10s]
+2019-06-26 23:04:20,969 - Success to query records [1]
+2019-06-26 23:04:21,030 - Success to query records [1]
+2019-06-26 23:04:21,033 - start : 0, end : 1
+2019-06-26 23:04:21,617 - Success to query records [1]
+2019-06-26 23:04:21,639 - Success to query records [1]
+2019-06-26 23:04:21,641 - start : 0, end : 1
+2019-06-26 23:04:26,806 - Success to query records [1]
+2019-06-26 23:04:26,849 - Success to query records [1]
+2019-06-26 23:04:26,910 - start : 0, end : 1
+2019-06-26 23:04:28,461 - Success to query records [2]
+2019-06-26 23:04:28,478 - Success to query records [2]
+2019-06-26 23:04:28,480 - start : 0, end : 2
+2019-06-26 23:04:32,929 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 23:04:32,939 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 23:04:36,892 - UI
+2019-06-26 23:04:36,936 - Success to query records [1]
+2019-06-26 23:04:36,953 - Success to query records [1]
+2019-06-26 23:04:37,202 - Success to query records [2]
+2019-06-26 23:04:37,220 - Success to query records [2]
+2019-06-26 23:04:37,222 - start : 0, end : 2
+2019-06-26 23:04:45,143 - Success to query records [1]
+2019-06-26 23:04:45,172 - Success to query records [1]
+2019-06-26 23:04:45,174 - start : 0, end : 1
+2019-06-26 23:05:10,112 - Success save the system setting
+2019-06-26 23:05:12,009 - Success to query records [2]
+2019-06-26 23:05:12,038 - Success to query records [2]
+2019-06-26 23:05:12,039 - start : 0, end : 2
+2019-06-26 23:05:16,377 - Success to query records [2]
+2019-06-26 23:05:16,422 - Success to query records [2]
+2019-06-26 23:05:19,475 - Update by the id [12] ,tableName [plugins]
+2019-06-26 23:05:26,987 - The name of plugin is [K2]
+2019-06-26 23:05:26,988 - The name of pluginType is [file]
+2019-06-26 23:05:26,999 - Success to query records [1]
+2019-06-26 23:05:28,294 - Obtain the parameters  : [SENDDELAY]
+2019-06-26 23:05:28,302 - Obtain the env parameters  : [15]
+2019-06-26 23:05:28,317 - It's going to parsing : D:\234\plugin/config/properties/configuration.properties
+2019-06-26 23:05:28,319 - It has been parsed ,following [D:\234\plugin/config/properties/configuration.properties]
+2019-06-26 23:05:28,321 - It has been loaded ,following : [D:\234\plugin/config/properties/configuration.properties]
+2019-06-26 23:05:28,323 - {"pluginName":"K2","properties":{"monitorPath":"D:/234/test"}}
+2019-06-26 23:05:28,346 - Success to query records [1]
+2019-06-26 23:05:28,358 - Success to query records [1]
+2019-06-26 23:05:28,369 - Success to query records [1]
+2019-06-26 23:05:28,377 - Monitor type : directory
+2019-06-26 23:05:30,066 - The name of plugin is [k1]
+2019-06-26 23:05:30,068 - The name of pluginType is [file]
+2019-06-26 23:05:30,074 - Success to query records [1]
+2019-06-26 23:05:30,956 - It's going to parsing : D:\234\plugin/config/properties/configuration.properties
+2019-06-26 23:05:30,957 - It has been parsed ,following [D:\234\plugin/config/properties/configuration.properties]
+2019-06-26 23:05:30,959 - It has been loaded ,following : [D:\234\plugin/config/properties/configuration.properties]
+2019-06-26 23:05:30,960 - {"pluginName":"k1","properties":{"monitorPath":"D:/234/test"}}
+2019-06-26 23:05:30,961 - Monitor type : directory
+2019-06-26 23:05:33,055 - Success to query records [2]
+2019-06-26 23:05:43,037 - Success to query records [2]
+2019-06-26 23:05:51,966 - Send with UDP
+2019-06-26 23:05:51,969 - Send the content for the msg [4500], and the location ID [0]
+2019-06-26 23:05:51,969 - Send the messages have been format: [KLB00010000005700100000004500KLEAC]
+2019-06-26 23:05:52,089 - Success to send the datums
+2019-06-26 23:05:52,105 - Send the content for the msg [1500], and the location ID [1]
+2019-06-26 23:05:52,105 - Send the messages have been format: [KLB00010000005700100100001500KLEAA]
+2019-06-26 23:05:52,108 - Success to send the datums
+2019-06-26 23:05:52,124 - Send the content for the msg [33.3], and the location ID [2]
+2019-06-26 23:05:52,124 - Send the messages have been format: [KLB000100000057001002000033.3KLEAC]
+2019-06-26 23:05:52,127 - Success to send the datums
+2019-06-26 23:05:52,143 - Send the content for the msg [90.0], and the location ID [3]
+2019-06-26 23:05:52,144 - Send the messages have been format: [KLB000100000057001003000090.0KLEAD]
+2019-06-26 23:05:52,147 - Success to send the datums
+2019-06-26 23:05:53,034 - Success to query records [2]
+2019-06-26 23:06:03,029 - Success to query records [2]
+2019-06-26 23:06:13,032 - Success to query records [2]
+2019-06-26 23:06:19,408 - [K2] has no records need to be send !!!
+2019-06-26 23:06:23,034 - Success to query records [2]
+2019-06-26 23:06:31,049 - Success to query records [2]
+2019-06-26 23:06:31,059 - Success to query records [2]
+2019-06-26 23:06:31,060 - start : 0, end : 2
+2019-06-26 23:06:33,034 - Success to query records [2]
+2019-06-26 23:06:36,001 - Success to query records [1]
+2019-06-26 23:06:40,104 - Success to query records [1]
+2019-06-26 23:07:02,742 - Success to query records [2]
+2019-06-26 23:07:02,756 - Success to query records [2]
+2019-06-26 23:07:02,758 - start : 0, end : 2
+2019-06-26 23:07:04,608 - Success to query records [17]
+2019-06-26 23:07:04,739 - Success to query records [17]
+2019-06-26 23:07:04,740 - start : 0, end : 13
+2019-06-26 23:07:09,305 - Success to query records [2]
+2019-06-26 23:07:19,305 - Success to query records [2]
+2019-06-26 23:07:23,301 - Success to query records [2]
+2019-06-26 23:07:23,311 - Success to query records [2]
+2019-06-26 23:07:23,312 - start : 0, end : 2
+2019-06-26 23:07:26,971 - Success to query records [2]
+2019-06-26 23:07:27,012 - Success to query records [2]
+2019-06-26 23:07:27,022 - start : 0, end : 2
+2019-06-26 23:07:30,209 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 23:07:30,220 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 23:07:40,397 - UI
+2019-06-26 23:07:40,435 - Success to query records [2]
+2019-06-26 23:09:22,421 - lemonnt
+2019-06-26 23:09:22,737 - false
+2019-06-26 23:09:23,056 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-06-26 23:09:23,076 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-06-26 23:09:23,105 - Obtain the parameters  : [DIGITNUMBER]
+2019-06-26 23:09:23,116 - Obtain the env parameters  : [4]
+2019-06-26 23:09:23,751 - Success to query records [2]
+2019-06-26 23:09:23,771 - [{"connection":false,"date":1561565076888,"desc":"456","gprs":0,"ip":"192.168.142.55","name":"K2","order":"2","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1561563493744,"desc":"234","gprs":0,"ip":"192.168.142.59","name":"K1","order":"59","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-06-26 23:09:24,267 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 23:09:24,279 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 23:09:24,526 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-26 23:09:24,536 - Obtain the env parameters  : [10]
+2019-06-26 23:09:24,539 - Monitor Interval : [10s]
+2019-06-26 23:09:29,164 - Success to query records [2]
+2019-06-26 23:09:29,222 - Success to query records [2]
+2019-06-26 23:09:29,241 - start : 0, end : 2
+2019-06-26 23:09:36,868 - Success to query records [1]
+2019-06-26 23:09:39,546 - Success to query records [1]
+2019-06-26 23:09:39,567 - Success to query records [1]
+2019-06-26 23:09:39,570 - start : 0, end : 1
+2019-06-26 23:09:42,093 - Success to query records [1]
+2019-06-26 23:09:44,587 - start : 0, end : 0
+2019-06-26 23:09:48,008 - Success to query records [2]
+2019-06-26 23:09:48,025 - Success to query records [2]
+2019-06-26 23:09:48,028 - start : 0, end : 2
+2019-06-26 23:09:49,632 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 23:09:49,641 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 23:09:52,094 - delete : {order=2}
+2019-06-26 23:09:52,154 - Success to query records [1]
+2019-06-26 23:09:52,211 - Success to query records [1]
+2019-06-26 23:09:52,212 - start : 0, end : 1
+2019-06-26 23:09:54,430 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 23:09:54,437 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 23:09:56,406 - delete : {order=59}
+2019-06-26 23:09:56,561 - start : 0, end : 0
+2019-06-26 23:09:58,851 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 23:09:58,860 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 23:09:58,901 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-26 23:09:58,909 - Obtain the env parameters  : [10]
+2019-06-26 23:09:58,911 - Obtain the parameters  : [SENDDELAY]
+2019-06-26 23:09:58,920 - Obtain the env parameters  : [15]
+2019-06-26 23:10:00,547 - Obtain the parameters  : [SYSTEMNAME]
+2019-06-26 23:10:00,580 - Obtain the env parameters  : [蓝通光电]
+2019-06-26 23:10:00,603 - Obtain the parameters  : [MONITORINTRVAL]
+2019-06-26 23:10:00,611 - Obtain the env parameters  : [10]
+2019-06-26 23:10:00,613 - Obtain the parameters  : [SENDDELAY]
+2019-06-26 23:10:00,623 - Obtain the env parameters  : [15]
+2019-06-26 23:10:39,504 - UI
+2019-06-26 23:10:41,943 - start : 0, end : 0
+2019-06-26 23:11:08,927 - Success save the system setting

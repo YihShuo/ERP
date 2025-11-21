@@ -1,0 +1,2206 @@
+﻿<?xml version="1.0"?>
+<Languages>
+<!--修改记录>
+41399
+1. 校时调试，节点<TDlgProtocolSetDateTime>
+增加<btnGetSystemTime>
+2. 通讯参数设置窗口，GPRS页，节点<TDlgNetworkSetting>
+增加<LabelDeviceId>
+3. 定时开关调试，节点<TDlgProtocolOnOff>
+增加<chkAutoOnOff>
+4. 区域显示参数设置，主界面，节点<TMainForm>
+增加<chkContinuousLeft>,<chkContinuousTop>
+41398
+1. 增加表格编辑器语言
+节点：<CGridEditorMainForm>,<CGridEditorInsertCells>,<CGridEditorDeleteCells>
+2. USB导出界面，节点<TDlgUsbForm>
+增加<LabelUsbFreeSize>,<LabelUsbFileSystem>,<LabelDateTimeNoChange>,<LabelLightNoChange>,<LabelOnOffNoChange>
+3. 定时开关调试，节点<TDlgProtocolOnOff>
+增加<MemoHelp>
+4. 亮度调节调试，节点<TDlgProtocolSetLight>
+增加<MemoHelp>
+5. 校时调试，节点<TDlgProtocolSetDateTime>
+增加<MemoHelp>
+6. 屏幕参数设置，节点<TdlgMonitorSetting>
+增加<chkDotFrequencyAuto>,<chkLineBlankingAuto>
+7. 图文区域编辑选项界面，<TFrameOptionPicture>
+增加<ToolButtonNewRtf>,<ToolButtonAddPicture>,<ToolButtonAddGrid>
+<ToolButtonAddWord>,<ToolButtonAddExcel>,<ToolButtonDelete>,
+<ToolButtonUp>,<ToolButtonDown>
+<chkShowPath>
+8. 主界面工具条，<TMainForm>
+增加 <ToolButtonTiming>,<ToolButtonSeDateTime>,<ToolButtonSetLight>
+<ToolButtonOnOff>
+<修改记录-->
+<!--这个文件定义中文简体-->
+<!-- Messages段定义一些信息提示信息-->
+<Messages>
+<!--;通用消息-->
+<Comm>
+<Comm.InitFail>فشلت التهيئة!</Comm.InitFail>
+<!--图文编辑添加文本文件时打开文件对话框的文件扩展名提示-->
+<FileFilterText>ملف نصي (*.txt)</FileFilterText>
+<!--图文编辑添加RTF文件时打开文件对话框的文件扩展名提示-->
+<FileFilterRTF>RTF ملف (*.rtf)</FileFilterRTF>
+<OpenRtfFail>فشل قراءة ملف RTF!</OpenRtfFail>
+<!--图文编辑添加图片文件时打开文件对话框的文件扩展名提示-->
+<FileFilterPicture>ملفات الصور (*.BMP;*.JPG;*.GIF;*.PNG)</FileFilterPicture>
+<OpenPictureFail>لا يمكن قراءة ملف الصورة!</OpenPictureFail>
+<!--图文编辑添加WORD文件时打开文件对话框的文件扩展名提示-->
+<FileFilterWord>مستند Word (*.doc;*.docx)|*.doc;*.docx|WPS(*.wps)|*.wps|</FileFilterWord>
+<OpenWordFail>لا يمكن قراءة وثائق وورد، تأكد من تثبيت الكلمة!</OpenWordFail>
+<!--图文编辑添加EXCEL文件时打开文件对话框的文件扩展名提示-->
+<FileFilterExcel>وثائق اكسل (*.xls;*.xlsx)|WPS(*.et)|*.et|</FileFilterExcel>
+<OpenExcelFail>لا يمكن قراءة وثائق اكسل! %s >></OpenExcelFail>
+<!-- 工程打开保存的提示信息-->
+<SaveProjectFail>فشل في حفظ المشروع!</SaveProjectFail>
+<CreateDirFail>فشل في إنشاء الدليل!</CreateDirFail>
+<OpenProjectFail>فشل في فتح المشروع!</OpenProjectFail>
+<ErrorProjectVersion>إصدار ملف المشروع لا تعترف!</ErrorProjectVersion>
+<ErrorProjectFile>ملف المشروع هو فاسد!</ErrorProjectFile>
+<!--;提示保存工程-->
+<ProjectChangedPrompt>غيرت المشروع أيضا، حفظه؟</ProjectChangedPrompt>
+<!--;默认的新工程-->
+<NewProjectName>(الأشغال جديد)</NewProjectName>
+<!--;工程没有内容-->
+<ProjectNull>أي محتوى يمكن انقاذه!</ProjectNull>
+<Unknown>غير معروف</Unknown>
+<!--通讯时的些操作信息-->
+<ProtocolTestStart>أن يكون متصلا بطاقة التحكم، يرجى الانتظار ...</ProtocolTestStart>
+<ProtocolSuccess>ربط نجاح بطاقة التحكم.</ProtocolSuccess>
+<ProtocolFail>فشل العملية، والتحقق من المنفذ التسلسلي أو الشبكة أمر طبيعي.</ProtocolFail>
+<ErrorComPort>غير صالحة٪ الرقم التسلسلي %s! يرجى التحقق من المعلمات مجموعة الاتصالات!</ErrorComPort>
+<ProtocolReadyFail>الجهاز غير جاهز! يرجى التحقق من المنفذ التسلسلي أو الشبكة أمر طبيعي.</ProtocolReadyFail>
+<ProtocolOnScreenSuccess>الشاشة الافتتاحية!</ProtocolOnScreenSuccess>
+<ProtocolOffScreenSuccess>قبالة الشاشة والنجاح!</ProtocolOffScreenSuccess>
+<ProtocolSetAutoOnOff>تعيين جهاز ضبط الوقت نجاح شاشة التبديل.</ProtocolSetAutoOnOff>
+<ProtocolReadParamsSuccess>المعلمة نجاح readback.</ProtocolReadParamsSuccess>
+<ProgressPrompt>نسبة التقدم:</ProgressPrompt>
+<RemainTimePrompt>الوقت المتبقي:%d ثانية</RemainTimePrompt>
+<MakingMonitorFile>يتم إنشاء ملف المعلمة الشاشة ...</MakingMonitorFile>
+<SendingMonitorFile>يتم إرسال ملف المعلمة الشاشة ...</SendingMonitorFile>
+<MakingDataFile>يتم إنشاء محتوى البيانات ...</MakingDataFile>
+<DataFileOutofCapacity>فشل انتقال، وحجم المحتوى أرسلت خارج البطاقة في القدرة المتبقية.</DataFileOutofCapacity>
+<SendingDataFile>محتوى البيانات جاهزة، البدء في إرسال ...</SendingDataFile>
+<SendDataFileSuccess>أرسلت بنجاح.</SendDataFileSuccess>
+<SendDataFileFail>فشل انتقال، وسبب الخطأ:٪ ق.</SendDataFileFail>
+<ProtocolReadParamsSuccess>المعلمة نجاح readback.</ProtocolReadParamsSuccess>
+<SaveScanSetInfoFail>حفظ فشل إعدادات وضع المسح الضوئي:%s</SaveScanSetInfoFail>
+<ConfDeleteScanSetInfo>تأكيد أنك تريد حذف هذا؟</ConfDeleteScanSetInfo>
+<CreateCommFail>فشلت مكونات خلق التواصل!</CreateCommFail>
+<!--;默认字体-->
+<DefaultFontName>Arial</DefaultFontName>
+<DefaultFontSize>10</DefaultFontSize>
+<!--;颜色列表-->
+<ColorList>
+<Item>أحادية اللون</Item>
+<Item>لون</Item>
+<Item>قوس قزح</Item>
+<Item>كامل اللون</Item>
+</ColorList>
+<!--;单基色颜色列表-->
+<SingleColorList>
+<Item>أحمر</Item>
+</SingleColorList>
+<!--;双基色颜色列表-->
+<DoubleColorList>
+<Item>أحمر</Item>
+<Item>أصفر</Item>
+<Item>أخضر</Item>
+</DoubleColorList>
+<!--;全彩色颜色列表-->
+<SevenColorList>
+<Item>أحمر</Item>
+<Item>أصفر</Item>
+<Item>أخضر</Item>
+</SevenColorList>
+<!--;灰度列表-->
+<ColorGrayList>
+<Item>رمادي</Item>
+<Item>32</Item>
+<Item>256</Item>
+</ColorGrayList>
+<!--;计时区域的显示格式-->
+<TimingDayLabel>يوم</TimingDayLabel>
+<TimingDayFormat>%d%s</TimingDayFormat>
+<TimingHourLabel>وقت</TimingHourLabel>
+<TimingHourFormat>%d%s</TimingHourFormat>
+<TimingMinuteLabel>دقيقة</TimingMinuteLabel>
+<TimingMinuteFormat>%d%s</TimingMinuteFormat>
+<TimingSecondLabel>ثان</TimingSecondLabel>
+<TimingSecondFormat>%d ثانية</TimingSecondFormat>
+<!--集群操作信息-->
+<GprsValidateError>جي بي آر إس التحقق من كلمة المرور حساب غير صحيح!</GprsValidateError>
+<GprsConnectError>لا يمكن الاتصال خادم جي بي آر إس!</GprsConnectError>
+<GprsImeiError>باستخدام اتصال جي بي آر إس، ويجب أن يكون اسم الشاشة DTU 15 عدد IMEI.</GprsImeiError>
+<NoGprsIdFilterFile>عدم وجود ملف مرشح جي بي آر إس!</NoGprsIdFilterFile>
+<UpdateGprsCardsCompleted>الحصول على الانتهاء من قائمة الكتلة على الانترنت</UpdateGprsCardsCompleted>
+<UpdateGprsCardsError>خطأ اتصال، الرجاء إعادة اكتساب كتلة.</UpdateGprsCardsError>
+<ConnectingColonyServer>الملقمات في الكتلة، يرجى الانتظار ...</ConnectingColonyServer>
+<ConnectColonyServerSuccess>نجاح الملقمات في الكتلة.</ConnectColonyServerSuccess>
+<ConnectColonyServerFail>لا يمكن الاتصال إلى ملقم كتلة.</ConnectColonyServerFail>
+<PromptSelectColonyCommandItem>يرجى تحديد الحاجة لتنفيذ إدخال الأوامر.</PromptSelectColonyCommandItem>
+<ColonyCommandOutofCapacity>تنفيذ فشل الأمر، واسم {0} شاشة حجم البيانات المتولدة يتجاوز حجم سعة بطاقة.</ColonyCommandOutofCapacity>
+<PromptColonyCloneOnlyOneRegion>في الشاشة الفرعية التكيف وضع الشاشة الرئيسية، يمكنك فقط إنشاء منطقة الرسم، ويجب أن يكون حجم المساحة المتاحة لحجم الشاشة.</PromptColonyCloneOnlyOneRegion>
+<SendColonyCommandSuccess>تنفيذ الأمر الكتلة بنجاح.</SendColonyCommandSuccess>
+<SendColonyCommandFail>يفشل الأمر العنقودية.</SendColonyCommandFail>
+<PromptColonyVetifyNullIp>عنوان الخادم لا يمكن أن تكون فارغة!</PromptColonyVetifyNullIp>
+<PromptColonyVetifyNullPassword>كلمة السر Server لا يمكن أن تكون فارغة!</PromptColonyVetifyNullPassword>
+<ColonyVetifyInvalidPassword>كلمة المرور غير صحيحة.</ColonyVetifyInvalidPassword>
+<ColonyVetiryServerError>تفشل عمليات الملقم.</ColonyVetiryServerError>
+<GprsColonyOperationReady>استعداد</GprsColonyOperationReady>
+<!--扫描信息的名称描述-->
+<ScanSetName1>01) P10 أحادية اللون واجهة 12</ScanSetName1>
+<!--未知的扫描方式名称-->
+<UnknownScanSetName>مسح غير معروف</UnknownScanSetName>
+<!--协议名称-->
+<ProtocolSerialPort>المنافذ التسلسلية</ProtocolSerialPort>
+<ProtocolNet>منفذ الشبكة</ProtocolNet>
+<ProtocolDirectNet>منفذ شبكة متصلة مباشرة</ProtocolDirectNet>
+<ProtocolGprs>جي بي آر إس</ProtocolGprs>
+<ProtocolUnknown>غير معروف</ProtocolUnknown>
+<!--2013-04-09-->
+<!--通讯测试错误-->
+<UnauthorizedAccessReplyPacket>ليس حزمة استجابة صالحة.</UnauthorizedAccessReplyPacket>
+<OpenPortFail>فتح المنفذ التسلسلي فشل.</OpenPortFail>
+<CancelSending>إلغاء الإرسال.</CancelSending>
+<CreateFail>إنشاء عنصر الاتصال فشل</CreateFail>
+<SocketError>فشل الشبكة</SocketError>
+<ColonyNotExists>لا وجود محطة العنقودية</ColonyNotExists>
+<ColonyOffline>كتلة خط محطة</ColonyOffline>
+<ColonyBusy>خط كتلة مشغول</ColonyBusy>
+</Comm>
+</Messages>
+<!-- 以下是窗口界面的文字信息-->
+<!-- 其中的<Messages>段是一些提示信息, 其他段是界面上控件的文字信息-->
+<!-- 主窗口-->
+<TMainForm>
+<!-- 标题栏-->
+<Caption>X Show البرمجيات</Caption>
+<Messages>
+<LoadSystemConfigFail>تحميل فشل تكوين النظام!</LoadSystemConfigFail>
+<MonitorName>عرض%d</MonitorName>
+<ProgramName>برنامج%d</ProgramName>
+<RegionNamePicture>الرسم%d</RegionNamePicture>
+<RegionNameText>العنوان الفرعي%d</RegionNameText>
+<RegionNameFlashText>حيوية%d</RegionNameFlashText>
+<RegionNameClock>على مدار الساعة%d</RegionNameClock>
+<RegionNameWatch>اطلب%d</RegionNameWatch>
+<RegionNameTiming>توقيت%d</RegionNameTiming>
+<RegionNameDefaul>المنطقة %d</RegionNameDefaul>
+<AskToSelectOneTreeNode>الرجاء تحديد العقدة!</AskToSelectOneTreeNode>
+<WarnOnDeleteOneMonitor>لا يمكن حذف، يجب أن يكون المشروع شاشة واحدة على الأقل!</WarnOnDeleteOneMonitor>
+<ConfDeleteProgramListNode>تأكيد أنك تريد حذف هذا؟</ConfDeleteProgramListNode>
+<!--有重叠区域-->
+<RegionOverlapping>فشلت العملية،٪ ليالي: تحتوي المناطق المتداخلة.</RegionOverlapping>
+<!--导入U盘时如果没有选择屏幕提示-->
+<AskToSelectMonitor>الرجاء تحديد الشاشة!</AskToSelectMonitor>
+<!--显示区域页数信息-->
+<RegionPagesInfo>%d/%d</RegionPagesInfo>
+<!--对象克隆后加的前缀 -->
+<CloneAddText>نسخ</CloneAddText>
+<!--超出节目数提示-->
+<MaxProgramCountInfo>أقصى قدر من الدعم٪ برامج %d!</MaxProgramCountInfo>
+<!--超出区域数提示-->
+<MaxRegionCountInfo>أقصى قدر من الدعم٪ د المناطق%d!</MaxRegionCountInfo>
+<!--超出具体区域数提示-->
+<MaxRegionDetailCountInfo>أكبر دعم %d في المنطقة!</MaxRegionDetailCountInfo>
+<MaxSpeedNote>(أسرع)</MaxSpeedNote>
+<MinSpeedNote>(أبطأ)</MinSpeedNote>
+<!--屏幕名称不允许重复-->
+<ScreeNameRepeat>لا يسمح لتكرار اسم الشاشة!</ScreeNameRepeat>
+<!--检测空区域-->
+<HaveNoRegions>منطقة البرنامج الحالي! غير قادرة على العمل!</HaveNoRegions>
+<AllRegionsIsNull>جميع المناطق للبرنامج هي فارغة! غير قادرة على العمل!</AllRegionsIsNull>
+<ConfHaveNulRegions>عناوين فارغة الكشف، أو منطقة الرسومات على مواصلة العملية؟</ConfHaveNulRegions>
+</Messages>
+<!--另存工程对话框-->
+<dlgSave>
+<Project>
+<Filter>ملف Kalerka المشروع</Filter>
+</Project>
+<SaveProject>
+<Title>حفظ المشروع باسم ...</Title>
+</SaveProject>
+<SaveAsProject>
+<Title>حفظ المشروع كما ...</Title>
+</SaveAsProject>
+</dlgSave>
+<dlgOpen>
+<OpenProject>
+<Title>فتح المشروع ...</Title>
+</OpenProject>
+</dlgOpen>
+<!--节目管理按钮-->
+<btnProgramList>
+<Caption>إدارة البرنامج</Caption>
+</btnProgramList>
+<!--节目管理树右键菜单-->
+<PopupMenuTreeProgramList>
+<Items>
+<Item>تحرك</Item>
+<Item>إلى</Item>
+<Item>-</Item>
+<Item>حذف</Item>
+<Item>نسخ</Item>
+<Item>عصا</Item>
+<Item>-</Item>
+<Item>توسع</Item>
+<Item>انهيار</Item>
+<Item>-</Item>
+<Item>إعادة تسمية</Item>
+<Item>-</Item>
+<Item>شاشة استنساخ</Item>
+</Items>
+</PopupMenuTreeProgramList>
+<!--图片资源库按钮-->
+<btnPictures>
+<Caption>مكتبة الموارد صورة</Caption>
+</btnPictures>
+<!--图片资源库树-->
+<treePictures>
+<Items>
+<Item>
+<Text>صورة</Text>
+<Items>
+<Item>أولمبي</Item>
+<Item>جعل مشاركات</Item>
+<Item>السهام</Item>
+<Item>شعار ثابت</Item>
+<Item>ونجوم وشعارات</Item>
+<Item>أحرف خاصة</Item>
+<Item>رمز</Item>
+<Item>حياة</Item>
+</Items>
+</Item>
+<Item>
+<Text>حيوية</Text>
+<Items>
+<Item>الرسوم المتحركة شعار</Item>
+<Item>التعبير</Item>
+</Items>
+</Item>
+</Items>
+</treePictures>
+<!--主工具条的按钮-->
+<ToolButtonProgram>
+<Caption>برنامج</Caption>
+<Hint>برنامج</Hint>
+</ToolButtonProgram>
+<ToolButtonDynamicBackground>
+<Caption>الخلفية الديناميكية</Caption>
+<Hint>الخلفية الديناميكية</Hint>
+</ToolButtonDynamicBackground>
+<ToolButtonPicture>
+<Caption>بياني</Caption>
+<Hint>بياني</Hint>
+</ToolButtonPicture>
+<ToolButtonText>
+<Caption>عنوان فرعي</Caption>
+<Hint>عنوان فرعي</Hint>
+</ToolButtonText>
+<ToolButtonFlashText>
+<Caption>Xuandong كلمة</Caption>
+<Hint>Xuandong كلمة</Hint>
+</ToolButtonFlashText>
+<ToolButtonClock>
+<Caption>على مدار الساعة</Caption>
+<Hint>على مدار الساعة</Hint>
+</ToolButtonClock>
+<ToolButtonWatch>
+<Caption>طلب</Caption>
+<Hint>طلب</Hint>
+</ToolButtonWatch>
+<ToolButtonDelete>
+<Caption>حذف</Caption>
+<Hint>حذف</Hint>
+</ToolButtonDelete>
+<ToolButtonPreview>
+<Caption>معاينة</Caption>
+<Hint>معاينة</Hint>
+<Caption1>توقف</Caption1>
+<Hint1>توقف</Hint1>
+</ToolButtonPreview>
+<ToolButtonSend>
+<Caption>إرسال</Caption>
+<Hint>إرسال</Hint>
+</ToolButtonSend>
+<ToolButtonUSB>
+<Caption>USB</Caption>
+<Hint>USB</Hint>
+</ToolButtonUSB>
+<ToolButtonSearchCard>
+<Caption>تحقق الشاشة</Caption>
+<Hint>تحقق الشاشة</Hint>
+</ToolButtonSearchCard>
+<!-- 2013.5.4 增加-->
+<ToolButtonTiming>
+<Caption>توقيت</Caption>
+<Hint>توقيت</Hint>
+</ToolButtonTiming>
+<ToolButtonSeDateTime>
+<Caption>توقيت</Caption>
+<Hint>توقيت</Hint>
+</ToolButtonSeDateTime>
+<ToolButtonSetLight>
+<Caption>سطوع</Caption>
+<Hint>سطوع</Hint>
+</ToolButtonSetLight>
+<ToolButtonOnOff>
+<Caption>توقيت التبديل</Caption>
+<Hint>توقيت التبديل</Hint>
+</ToolButtonOnOff>
+<!-- 2013.5.4 增加结束-->
+<!--区域属性操作的工具栏：区域缩放、位置、翻页-->
+<ToolButtonZoomInit>
+<Hint>الحجم الأصلي</Hint>
+</ToolButtonZoomInit>
+<ToolButtonZoomOut>
+<Hint>تكبير</Hint>
+</ToolButtonZoomOut>
+<ToolButtonZoomIn>
+<Hint>ضيق</Hint>
+</ToolButtonZoomIn>
+<ToolButtonRegionLeft>
+<Hint>اليسار الإقليمية</Hint>
+</ToolButtonRegionLeft>
+<ToolButtonRegionRight>
+<Hint>الحق في الإقامة الإقليمية</Hint>
+</ToolButtonRegionRight>
+<ToolButtonRegionTop>
+<Hint>الأعلى الإقليمية</Hint>
+</ToolButtonRegionTop>
+<ToolButtonRegionBottom>
+<Hint>تم تعيين المنطقة في نهاية</Hint>
+</ToolButtonRegionBottom>
+<ToolButtonLastRegionPage>
+<Hint>سابق</Hint>
+</ToolButtonLastRegionPage>
+<ToolButtonNextRegionPage>
+<Hint>التالي</Hint>
+</ToolButtonNextRegionPage>
+<!--主菜单-->
+<ActionManagerMain>
+<ActionBars>
+<ActionBar>
+<Items>
+<Item>
+<Caption>ملف (&amp;F)</Caption>
+<Items>
+<Item>البناء الجديد (&amp;N)</Item>
+<Item>فتح (&amp;O)</Item>
+<Item>-</Item>
+<Item>حفظ (&amp;S)</Item>
+<Item>حفظ ك ...</Item>
+<Item>-</Item>
+<Item>تصدير</Item>
+<Item>استيراد</Item>
+<Item>-</Item>
+<Item>خروج (&amp;E)</Item>
+</Items>
+</Item>
+<Item>
+<Caption>وإدراج (&amp;I)</Caption>
+<Items>
+<Item>شاشة</Item>
+<Item>برنامج</Item>
+<Item>الخلفية الديناميكية</Item>
+<Item>-</Item>
+<Item>عنوان فرعي</Item>
+<Item>بياني</Item>
+<Item>Xuandong كلمة</Item>
+<Item>على مدار الساعة</Item>
+<Item>طلب</Item>
+<Item>توقيت</Item>
+<Item>درجة الحرارة</Item>
+</Items>
+</Item>
+<Item>
+<Caption>مجموعة (&amp;S)</Caption>
+<Items>
+<Item>المعلمات الشاشة</Item>
+<Item>المعلمات الاتصالات</Item>
+<Item>-</Item>
+<Item>تعديل بطاقة IP</Item>
+<Item>-</Item>
+<Item>تكوين مجلس وحدة تلقائيا</Item>
+</Items>
+</Item>
+<Item>
+<Caption>التصحيح (&amp;D)</Caption>
+<Items>
+<Item>توقيت</Item>
+<Item>تعديل السطوع</Item>
+<Item>طلب نموذج</Item>
+<Item>برنامج شاشة التبديل</Item>
+<Item>-</Item>
+<Item>معاينة</Item>
+<Item>إرسال</Item>
+<Item>استيراد يو القرص</Item>
+<Item>-</Item>
+<Item>عرض السجل</Item>
+</Items>
+</Item>
+<Item>
+<Caption V="0">المجموعات (&amp;C)</Caption>
+<Items>
+<Item>تكوين الخادم</Item>
+<Item>إدارة المجموعة</Item>
+</Items>
+</Item>
+<Item>
+<Caption>لغة (&amp;L)</Caption>
+<Items>
+<Item>يختار تلقائيا</Item>
+</Items>
+</Item>
+<Item>
+<Caption>مساعدة(&amp;A)</Caption>
+</Item>
+</Items>
+</ActionBar>
+</ActionBars>
+</ActionManagerMain>
+<!--基本属性-->
+<GroupBoxBaseInfo>
+<Caption>الخصائص الأساسية لل</Caption>
+</GroupBoxBaseInfo>
+<LabelRegionName>
+<Caption>اسم</Caption>
+</LabelRegionName>
+<LabelRegionX>
+<Caption>موقف X</Caption>
+</LabelRegionX>
+<LabelRegionY>
+<Caption>موقف Y</Caption>
+</LabelRegionY>
+<LabelRegionWidth>
+<Caption>عرض</Caption>
+</LabelRegionWidth>
+<LabelRegionHeight>
+<Caption>ارتفاع</Caption>
+</LabelRegionHeight>
+<!--基本属性-->
+<GroupBoxDisplayInfo>
+<Caption>عرض خصائص</Caption>
+</GroupBoxDisplayInfo>
+<LabelDisplayMode>
+<Caption>في وضع الشاشة</Caption>
+</LabelDisplayMode>
+<cmbDisplayMode>
+<Items>
+<Item>عرض بشكل عشوائي</Item>
+<Item>لا يزال</Item>
+<Item>انتقل إلى اليمين</Item>
+<Item>اليسار</Item>
+<Item>إلى</Item>
+<Item>تحرك</Item>
+<Item>التغطية الحق</Item>
+<Item>التغطية اليسار</Item>
+<Item>التغطية التالية</Item>
+<Item>على الغلاف</Item>
+<Item>افتتاح الأفقي</Item>
+<Item>افتتاح العمودي</Item>
+<Item>عبر إغلاق</Item>
+<Item>إغلاق العمودي</Item>
+<Item>الستائر الحق</Item>
+<Item>كوات اليسار</Item>
+<Item>تحت الستائر</Item>
+<Item>على الستائر</Item>
+<Item>بصيص</Item>
+<Item>كلمة حق فرشاة</Item>
+<Item>اليسار كلمة فرشاة</Item>
+<Item>تحت كلمة فرشاة</Item>
+<Item>على الكلمة فرشاة</Item>
+<Item>الصفحة اليسرى</Item>
+<Item>حق الصفحة التالية</Item>
+<Item>تأجيج</Item>
+<Item>مروحة مغلقة</Item>
+<Item>أيمن</Item>
+<Item>L-</Item>
+<Item>مستوى يتخلل</Item>
+<Item>عمودي تتخللها</Item>
+<Item>انتقل لأسفل الستار</Item>
+<Item>مصراع الحق</Item>
+<Item>إطار</Item>
+<Item>امض المضادة للأبيض</Item>
+<Item>توسيع المستطيل</Item>
+<Item>انكماش مستطيلة</Item>
+<Item>توسيع الماس</Item>
+<Item>الماس الانكماش</Item>
+<Item>توسيع الصليب</Item>
+<Item>عبور الانكماش</Item>
+<Item>انخفاض المستطيل اليسار</Item>
+<Item>المستطيل العلوي الأيسر</Item>
+<Item>خفض المستطيل الحق</Item>
+<Item>المستطيل اليمنى العليا</Item>
+<Item>انخفاض مائل اليسار</Item>
+<Item>الخط المائل اليسرى العليا</Item>
+<Item>خفض اليمنى السفلى</Item>
+<Item>المنحدرات إيجابية</Item>
+<Item>Xiasha</Item>
+<Item>إطار</Item>
+<Item>تظهر الآن</Item>
+<Item>إطارات طولية</Item>
+</Items>
+</cmbDisplayMode>
+<LabelClearMode>
+<Caption>مسح الشاشة من قبل</Caption>
+</LabelClearMode>
+<LabelSpeed>
+<Caption>سرعة</Caption>
+</LabelSpeed>
+<cmbSpeed>
+<Items>
+<Item>1 (أسرع)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (أبطأ)</Item>
+</Items>
+</cmbSpeed>
+<LabelDisplayDelay>
+<Caption>مدة</Caption>
+</LabelDisplayDelay>
+<LabelDisplayStyle>
+<Caption>أسلوب</Caption>
+</LabelDisplayStyle>
+<cmbDisplayStyle>
+<Items>
+<Item>نبض القلب</Item>
+<Item>رقصة الفالس</Item>
+<Item>انجراف</Item>
+<Item>الموجات الكهرومغناطيسية</Item>
+<Item>لمبة كهربائية</Item>
+<Item>ربيع</Item>
+<Item>لفة</Item>
+<Item>الدومينو</Item>
+<Item>الانجراف العكسي</Item>
+<Item>دوامات</Item>
+<Item>ضوء النيون</Item>
+<Item>DOUCAI</Item>
+<Item>قوس قزح (أ)</Item>
+<Item>قوس قزح (تحت)</Item>
+<Item>قوس قزح (يسار)</Item>
+<Item>قوس قزح (يمين)</Item>
+</Items>
+</cmbDisplayStyle>
+<!-- 动感边框-->
+<GroupBoxFlashBorder>
+<Caption>حدود ديناميكية</Caption>
+</GroupBoxFlashBorder>
+<chkFlashBorderEnabled>
+<Caption>عرض الحدود الديناميكية</Caption>
+</chkFlashBorderEnabled>
+<optFlashBorderOneColor>
+<Caption>أحادية اللون</Caption>
+</optFlashBorderOneColor>
+<optFlashBorderFlashColor>
+<Caption>هيون اللون</Caption>
+</optFlashBorderFlashColor>
+<LabelFlashBorderSpeed>
+<Caption>المشي سرعة</Caption>
+</LabelFlashBorderSpeed>
+<cmbFlashBorderSpeed>
+<Items>
+<Item>1 (أسرع)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (أبطأ)</Item>
+</Items>
+</cmbFlashBorderSpeed>
+<LabelFlashBorderDirection>
+<Caption>اتجاه المهاجرة</Caption>
+</LabelFlashBorderDirection>
+<cmbFlashBorderDirection>
+<Items>
+<Item>عرض ثابت</Item>
+<Item>دوران عقارب الساعة</Item>
+<Item>دوران عقارب الساعة</Item>
+<Item>بصيص</Item>
+<Item>امض + اتجاه عقارب الساعة</Item>
+<Item>امض + دوران عقارب الساعة</Item>
+</Items>
+</cmbFlashBorderDirection>
+<!--屏幕属性-->
+<LabelCardModel>
+<Caption>بطاقة التحكم في نموذج:</Caption>
+</LabelCardModel>
+<LabelMonitorWidth>
+<Caption>عرض الشاشة:</Caption>
+</LabelMonitorWidth>
+<LabelMonitorHeight>
+<Caption>ارتفاع الشاشة:</Caption>
+</LabelMonitorHeight>
+<LabelMonitorColorMode>
+<Caption>خلية لون اللوحة:</Caption>
+</LabelMonitorColorMode>
+<LabelMonitorConnectMode>
+<Caption>وسائل الاتصال:</Caption>
+</LabelMonitorConnectMode>
+<LabelMonitorConnectPort>
+<Caption>الموانئ:</Caption>
+</LabelMonitorConnectPort>
+<!--2013.5.5 增加-->
+<chkContinuousLeft>
+<Caption>اليسار المستمر</Caption>
+</chkContinuousLeft>
+<chkContinuousTop>
+<Caption>في حركة مستمرة</Caption>
+</chkContinuousTop>
+<!--2013.5.5 增加结束-->
+</TMainForm>
+<!--关于对话框-->
+<TDlgAbout>
+<Caption>حول ...</Caption>
+<LabelAppName>
+<Caption>X Show البرمجيات</Caption>
+</LabelAppName>
+<LabelAppVersion>
+<Caption>الإصدار:%s</Caption>
+</LabelAppVersion>
+<MemoAppNote>
+<Items>
+<Item>تحذير: هذا البرنامج محمي بموجب قوانين حقوق النشر الكمبيوتر والاتفاقيات الدولية محمية من الاستنساخ غير المصرح به أو توزيع هذا البرنامج بعض أو كل من النيابة العامة، قد يؤدي إلى عقوبات مدنية وجنائية صارمة، وتخضع لأقصى حد ممكن يسمح به القانون.</Item>
+</Items>
+</MemoAppNote>
+<btnOK>
+<Caption>موافق (&amp;O)</Caption>
+</btnOK>
+</TDlgAbout>
+<!--网络集群发送-->
+<TDlgColonySend>
+<Caption>إدارة الإرسال العنقودية</Caption>
+<chkSelectAll>
+<Caption>حدد</Caption>
+</chkSelectAll>
+<!--提示信息-->
+<MemoNote>
+<Items>
+<Item>الوصف:</Item>
+<Item></Item>
+<Item>1، والوسيلة الوحيدة للاتصال منفذ الشبكة أو جي بي آر إس، قبل أن يتمكنوا من الانضمام إلى المجموعة.</Item>
+<Item></Item>
+<Item>2 مجموعة استنساخ إرسال: إرسال الشاشة الرئيسية للبيانات المرسلة إلى المجموعة على كافة الشاشات، واستخدام الاستنساخ إرسال طلب مجموعة شاشة حجم الشاشة، والمعلمات هي نفسها. مطلوب قبل إرسال الشاشة الرئيسية.</Item>
+<Item></Item>
+<Item>3، بعث الفريق التقليدية: إسقاط البيانات الشاشة كلمة يتم إرسالها إلى الشاشة المقابلة.</Item>
+</Items>
+</MemoNote>
+<!--设备列表-->
+<ListViewCards>
+<Columns>
+<Column>حالة</Column>
+<Column>اسم</Column>
+<Column>نموذج</Column>
+<Column>عرض الشاشة</Column>
+<Column>ارتفاع الشاشة</Column>
+<Column>خلية نوع لوحة</Column>
+<Column>وسائل الاتصال</Column>
+<Column>سطوع</Column>
+<Column>توقيت التبديل</Column>
+</Columns>
+</ListViewCards>
+<!--操作选择项-->
+<optRegularSend>
+<Caption>أرسلت المجموعة التقليدية</Caption>
+</optRegularSend>
+<optCloneSend>
+<Caption>أرسلت استنساخ المجموعة</Caption>
+</optCloneSend>
+<optOpenScreen>
+<Caption>التمهيد البرمجيات</Caption>
+</optOpenScreen>
+<optCloseScreen>
+<Caption>لينة أوف</Caption>
+</optCloseScreen>
+<optTiming>
+<Caption>توقيت</Caption>
+</optTiming>
+<btnSendProtocol>
+<Caption>تنفيذ الأمر</Caption>
+</btnSendProtocol>
+<!--指定主屏幕-->
+<LabelCloneScreens>
+<Caption>تحديد الشاشة الرئيسية:</Caption>
+</LabelCloneScreens>
+</TDlgColonySend>
+<!--网络集群登录验证窗口-->
+<TDlgColonyVerify>
+<Caption>الدخول مصادقة</Caption>
+<LabelPassword>
+<Caption>كلمة السر</Caption>
+</LabelPassword>
+<LabelServerIp>
+<Caption>الخادم</Caption>
+</LabelServerIp>
+<LabelPort>
+<Caption>ميناء</Caption>
+</LabelPort>
+<btnOK>
+<Caption>حدد</Caption>
+</btnOK>
+<btnCancel>
+<Caption>إلغاء</Caption>
+</btnCancel>
+</TDlgColonyVerify>
+<!--GPRS群组发送窗口-->
+<TDlgGprsColony>
+<Caption>إدارة المجموعة</Caption>
+<Messages>
+<AllScreens>كامل الشاشة</AllScreens>
+<AddGroupCaption>إضافة مجموعة</AddGroupCaption>
+<AddGroupPrompt>الرجاء إدخال اسم المجموعة:</AddGroupPrompt>
+<AddGroupExists>اسم المجموعة موجود مسبقا!</AddGroupExists>
+<AddGroupFail>فشلت إضافة مجموعة!</AddGroupFail>
+<ConfDeleteGroup>لتأكيد أنك تريد حذف المجموعة؟</ConfDeleteGroup>
+<ConfDeleteDevice>تأكيد أنك تريد حذف المحطة المختار؟</ConfDeleteDevice>
+<NoScreen>لا يمكن أن تضيف الشاشة!</NoScreen>
+<DeviceIdExists>محطة ID موجود مسبقا!</DeviceIdExists>
+<NoItemChecked>الرجاء تحديد محطة! (استخدم مربع التحديد للتحديد)</NoItemChecked>
+<NoItemSelected>الرجاء تحديد محطة! (ماوس اختيار الصف نقرة)</NoItemSelected>
+<!--终端在线状态-->
+<StatusOnline>على الانترنت</StatusOnline>
+<StatusOffline>لا على الانترنت</StatusOffline>
+<!--命令发送状态-->
+<SendStatusSending>إرسال</SendStatusSending>
+<SendStatusSuccess>نجاح</SendStatusSuccess>
+<SendStatusScreenParamFail>فشل المعلمات الشاشة</SendStatusScreenParamFail>
+<SendStatusConnectFail>فشل اتصال</SendStatusConnectFail>
+</Messages>
+<chkSelectAll>
+<Caption>حدد</Caption>
+</chkSelectAll>
+<LabelGroups>
+<Caption>مجموعات:</Caption>
+</LabelGroups>
+<btnEditGroup>
+<Caption>تحرير مجموعة</Caption>
+</btnEditGroup>
+<btnAddGroup>
+<Caption>إضافة مجموعة</Caption>
+</btnAddGroup>
+<btnDeleteGroup>
+<Caption>حذف مجموعة</Caption>
+</btnDeleteGroup>
+<btnAddDevice>
+<Caption>أضف محطة</Caption>
+</btnAddDevice>
+<btnEditDevice>
+<Caption>تعديل محطة</Caption>
+</btnEditDevice>
+<btnDeleteDevice>
+<Caption>إزالة المحطة الطرفية</Caption>
+</btnDeleteDevice>
+<btnUpdateColony>
+<Caption>الحصول على الكتلة</Caption>
+</btnUpdateColony>
+<btnSendProtocol>
+<Caption>تنفيذ الأمر</Caption>
+</btnSendProtocol>
+<!--提示信息-->
+<MemoNote>
+<Items>
+<Item>الوصف:</Item>
+<Item></Item>
+<Item>1، تعديل محطة، حذف محطة يرجى النقر على صف قائمة لتحديد محطة.</Item>
+<Item></Item>
+<Item>إرسال الأوامر حدد مربع القائمة لتحديد محطة.</Item>
+</Items>
+</MemoNote>
+<!--设备列表-->
+<ListViewCards>
+<Columns>
+<Column>لا.</Column>
+<Column>على الانترنت</Column>
+<Column>اسم الشاشة</Column>
+<Column>معرف الجهاز</Column>
+<Column>نموذج بطاقة</Column>
+<Column>عرض الشاشة</Column>
+<Column>ارتفاع الشاشة</Column>
+<Column>خلية نوع لوحة</Column>
+<Column>سطوع</Column>
+<Column>توقيت التبديل</Column>
+<Column>التشغيل</Column>
+</Columns>
+</ListViewCards>
+<!--操作选择项-->
+<optRegularSend>
+<Caption>أرسلت المجموعة التقليدية</Caption>
+</optRegularSend>
+<optCloneSend>
+<Caption>أرسلت استنساخ المجموعة</Caption>
+</optCloneSend>
+<optOpenScreen>
+<Caption>التمهيد البرمجيات</Caption>
+</optOpenScreen>
+<optCloseScreen>
+<Caption>لينة أوف</Caption>
+</optCloseScreen>
+<optTiming>
+<Caption>توقيت</Caption>
+</optTiming>
+<optQueryStatus>
+<Caption>التحقق من حالة</Caption>
+</optQueryStatus>
+<!--指定主屏幕-->
+<LabelCloneScreens>
+<Caption>تحديد الشاشة الرئيسية:</Caption>
+</LabelCloneScreens>
+</TDlgGprsColony>
+<!--集群服务器终端编辑窗口-->
+<TDlgColonyAddDevice>
+<Caption>محطة التحرير</Caption>
+<LabelDeviceId>
+<Caption>محطة ID</Caption>
+</LabelDeviceId>
+<LabelScreenName>
+<Caption>شاشة</Caption>
+</LabelScreenName>
+<LabelGroupName>
+<Caption>مجموعات</Caption>
+</LabelGroupName>
+<btnOK>
+<Caption>موافق (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>إلغاء (&amp;C)</Caption>
+</btnCancel>
+</TDlgColonyAddDevice>
+<!--GPRS集群配置 窗口-->
+<TDlgGprsColonySetting>
+<Caption>تكوين ملقم كتلة</Caption>
+<LabelGprsServerIp>
+<Caption>IP الملقم:</Caption>
+</LabelGprsServerIp>
+<LabelGprsServerPort>
+<Caption>الموانئ:</Caption>
+</LabelGprsServerPort>
+<chkEnableAutoFillScreen>
+<Caption>المفتوح شاشة فرعية الشاشة الرئيسية التكيفية</Caption>
+</chkEnableAutoFillScreen>
+<chkEnableAuthen>
+<Caption>إذن مفتوحة للتحقق</Caption>
+</chkEnableAuthen>
+<LabelGprsAccount>
+<Caption>حساب</Caption>
+</LabelGprsAccount>
+<LabelGprsPassword>
+<Caption>كلمة السر</Caption>
+</LabelGprsPassword>
+<btnOK>
+<Caption>موافق (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>إلغاء (&amp;C)</Caption>
+</btnCancel>
+</TDlgGprsColonySetting>
+<!-- GPRS集群组管理 窗口-->
+<TDlgGprsGroup>
+<Caption>جي بي آر إس العنقودية إدارة المجموعة</Caption>
+<LabelGroups>
+<Caption>قائمة المجموعة</Caption>
+</LabelGroups>
+<LabelGroupName>
+<Caption>اسم</Caption>
+</LabelGroupName>
+<btnEditGroup>
+<Caption>عدل</Caption>
+</btnEditGroup>
+<btnAddGroup>
+<Caption>إضافة</Caption>
+</btnAddGroup>
+<btnDeleteGroup>
+<Caption>حذف</Caption>
+</btnDeleteGroup>
+<btnSelectAllCards>
+<Caption>تحديد كافة</Caption>
+</btnSelectAllCards>
+<btnClearCurrentSelectedCards>
+<Caption>مسح التحديد الحالي</Caption>
+</btnClearCurrentSelectedCards>
+<btnClearSelectedAllCards>
+<Caption>مسح كل الاختيارات</Caption>
+</btnClearSelectedAllCards>
+<btnOK>
+<Caption>موافق (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>إلغاء (&amp;C)</Caption>
+</btnCancel>
+<LabelCards>
+<Caption>قائمة العرض</Caption>
+</LabelCards>
+<btnUpdateCards>
+<Caption>تحديث قائمة الخادم</Caption>
+</btnUpdateCards>
+<!--设备卡列表-->
+<ListViewCards>
+<Columns>
+<Column>حالة</Column>
+<Column>اسم</Column>
+</Columns>
+</ListViewCards>
+</TDlgGprsGroup>
+<!--导入Excel 窗口-->
+<TDlgImportExcel>
+<Caption>إلى Excel</Caption>
+<LabelSheetNames>
+<Caption>اسم ورقة العمل</Caption>
+</LabelSheetNames>
+<LabelRowCount>
+<Caption>عدد الصفوف</Caption>
+</LabelRowCount>
+<LabelColumnCount>
+<Caption>عدد الأعمدة</Caption>
+</LabelColumnCount>
+<btnOK>
+<Caption>موافق (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>إلغاء (&amp;C)</Caption>
+</btnCancel>
+</TDlgImportExcel>
+<!-- 屏幕参数 窗口-->
+<TdlgMonitorSetting>
+<Caption>المعلمة الشاشة</Caption>
+<Messages>
+<InvalidMonitorSize>حجم الشاشة غير صالح!</InvalidMonitorSize>
+<InvalidCardModelInfo>المعلمات بطاقة غير صالحة!</InvalidCardModelInfo>
+<InvalidGammaReviseValue>جاما قيمة التصحيح غير صالحة!</InvalidGammaReviseValue>
+</Messages>
+<LabelMonitorWidth>
+<Caption>عرض</Caption>
+</LabelMonitorWidth>
+<LabelMonitorHeight>
+<Caption>ارتفاع</Caption>
+</LabelMonitorHeight>
+<LabelMonitorColor>
+<Caption>اللون</Caption>
+</LabelMonitorColor>
+<LabelMonitorGray>
+<Caption>رمادي</Caption>
+</LabelMonitorGray>
+<LabelCardType>
+<Caption>نموذج بطاقة التحكم</Caption>
+</LabelCardType>
+<LabelCardParams>
+<Caption>أداء المعلمات</Caption>
+</LabelCardParams>
+<LabelBoardType>
+<Caption>خلية نوع لوحة</Caption>
+</LabelBoardType>
+<LabelDEPrompt>
+<Caption>OE قطبية</Caption>
+</LabelDEPrompt>
+<LabelDEPromptNote>
+<Caption>يرجى ضبط الحد الأقصى العبور على بطاقة التحكم</Caption>
+</LabelDEPromptNote>
+<LabelThreshold>
+<Caption>عتبة</Caption>
+</LabelThreshold>
+<LabelDotFrequency>
+<Caption>تردد نقطة</Caption>
+</LabelDotFrequency>
+<LabelLineBlanking>
+<Caption>تقطيع خط</Caption>
+</LabelLineBlanking>
+<LabelInterlaceControl>
+<Caption>تعديل خط</Caption>
+</LabelInterlaceControl>
+<LabelGammaReviseValue>
+<Caption>تصحيح غاما</Caption>
+</LabelGammaReviseValue>
+<LabelAdvanced>
+<Caption>معلمات الأقل تقدما</Caption>
+</LabelAdvanced>
+<btnReadParams>
+<Caption>readback المعلمة</Caption>
+</btnReadParams>
+<btnOK>
+<Caption>موافق (&amp;O)</Caption>
+</btnOK>
+<!--2013.5.4 增加-->
+<chkDotFrequencyAuto>
+<Caption>أوتوماتيكي</Caption>
+</chkDotFrequencyAuto>
+<chkLineBlankingAuto>
+<Caption>أوتوماتيكي</Caption>
+</chkLineBlankingAuto>
+<!--2013.5.4 增加结束-->
+</TdlgMonitorSetting>
+<!--通讯参数 窗口-->
+<TDlgNetworkSetting>
+<Caption>المعلمات الاتصالات</Caption>
+<Messages>
+<AskToSelectComPort>يرجى تحديد الرقم التسلسلي!</AskToSelectComPort>
+<ErrorIp>عنوان IP غير صالح!</ErrorIp>
+<UnknownCard>غير معروف</UnknownCard>
+<LabelTestResult>
+<Success>
+<Caption>اختبار الاتصالات بنجاح!</Caption>
+</Success>
+<Fail>
+<Caption>فشل اختبار الاتصالات!</Caption>
+</Fail>
+</LabelTestResult>
+</Messages>
+<!--选择通讯模式页-->
+<LabelNetworkType>
+<Caption>اختر وضع الاتصال</Caption>
+</LabelNetworkType>
+<optSerialPort>
+<Caption>المنافذ التسلسلية</Caption>
+</optSerialPort>
+<optNet>
+<Caption>منفذ الشبكة</Caption>
+</optNet>
+<optDirectNet>
+<Caption>منفذ شبكة متصلة مباشرة</Caption>
+</optDirectNet>
+<optGprs>
+<Caption>جي بي آر إس أو الإنترنت</Caption>
+</optGprs>
+<!-- 串口参数设置页 -->
+<LabelSerialPortComs>
+<Caption>رقم المنفذ</Caption>
+</LabelSerialPortComs>
+<!-- 网口参数设置页-->
+<LabelNetIp>
+<Caption>عناوين IP</Caption>
+</LabelNetIp>
+<LabelNetPort>
+<Caption>رقم المنفذ</Caption>
+</LabelNetPort>
+<LabelNetGateway>
+<Caption>بوابة</Caption>
+</LabelNetGateway>
+<LabelNetSubnetMask>
+<Caption>قناع الشبكة الفرعية</Caption>
+</LabelNetSubnetMask>
+<LabelEditMACPrompt>
+<Caption>لتعديل عنوان MAC، يرجى تحميل أدوات التصحيح MAC</Caption>
+</LabelEditMACPrompt>
+<!-- GPRS设置页-->
+<LabelGprsIp>
+<Caption>عنوان IP خادم جي بي آر إس</Caption>
+</LabelGprsIp>
+<LabelGprsPort>
+<Caption>رقم المنفذ</Caption>
+</LabelGprsPort>
+<chkGprsEnableAuth>
+<Caption>إذن مفتوحة للتحقق</Caption>
+</chkGprsEnableAuth>
+<LabelGprsAccount>
+<Caption>حساب</Caption>
+</LabelGprsAccount>
+<LabelGprsPassword>
+<Caption>كلمة السر</Caption>
+</LabelGprsPassword>
+<!-- 测试结果页-->
+<LabelTestResultType>
+<Caption>طريقة الاتصال:</Caption>
+</LabelTestResultType>
+<LabelTestResultPort>
+<Caption>رقم المنفذ:</Caption>
+</LabelTestResultPort>
+<LabelTestResultCard>
+<Caption>بطاقة التحكم في نموذج:</Caption>
+</LabelTestResultCard>
+<btnSave>
+<Caption>حفظ والخروج</Caption>
+</btnSave>
+<btnSetMonitor>
+<Caption>تعيين المعلمات الشاشة</Caption>
+</btnSetMonitor>
+<!-- 高级参数 -->
+<GroupBoxAdvanceParams>
+<Caption>المعلمات متقدمة</Caption>
+</GroupBoxAdvanceParams>
+<LabelSerialPortDelay>
+<Caption>تأخير</Caption>
+</LabelSerialPortDelay>
+<LabelSerialPortFrameLength>
+<Caption>طول الإطار</Caption>
+</LabelSerialPortFrameLength>
+<btnTestExit>
+<Caption>عودة</Caption>
+</btnTestExit>
+<btnChooseTypeNextStep>
+<Caption>التالي</Caption>
+</btnChooseTypeNextStep>
+<btnSerialPortLastStep>
+<Caption>سابق</Caption>
+</btnSerialPortLastStep>
+<btnTest>
+<Caption>الاتصالات اختبار</Caption>
+</btnTest>
+<!--2013.5.5 增加-->
+<LabelDeviceId>
+<Caption>معرف الجهاز</Caption>
+</LabelDeviceId>
+<!--2013.5.5 增加结束-->
+</TDlgNetworkSetting>
+<!-- 新建表格 窗口-->
+<TDlgNewTable>
+<Caption>جدول جديد</Caption>
+<LabelRowCount>
+<Caption>صف</Caption>
+</LabelRowCount>
+<LabelColCount>
+<Caption>صف</Caption>
+</LabelColCount>
+<LabelBorderWidth>
+<Caption>إطار</Caption>
+</LabelBorderWidth>
+<LabelBorderColor>
+<Caption>اللون</Caption>
+</LabelBorderColor>
+<chkSetCellWidth>
+<Caption>عرض خلية ثابت</Caption>
+</chkSetCellWidth>
+<btnOK>
+<Caption>موافق (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>إلغاء (&amp;C)</Caption>
+</btnCancel>
+</TDlgNewTable>
+<!-- 软件开关屏 窗口-->
+<TDlgProtocolOnOff>
+<Caption>برنامج شاشة التبديل</Caption>
+<optManual>
+<Caption>التبديل اليدوي</Caption>
+</optManual>
+<btnOn>
+<Caption>الشاشة الافتتاحية</Caption>
+</btnOn>
+<btnOff>
+<Caption>خارج الشاشة</Caption>
+</btnOff>
+<optAuto>
+<Caption>توقيت التبديل</Caption>
+</optAuto>
+<LabelOn>
+<Caption>التمهيد الوقت</Caption>
+</LabelOn>
+<LabelOff>
+<Caption>قبالة الوقت</Caption>
+</LabelOff>
+<btnSave>
+<Caption>يو القرص حفظ&amp;</Caption>
+</btnSave>
+<btnOK>
+<Caption>إرسال (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>إلغاء (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>مثل استخدام يو القرص لضبط سطوع التبديل / المدرسة / توقيت، تعيين المعلمات في تصدير USB</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+<!--2013.5.5 增加-->
+<chkAutoOnOff>
+<Caption>توقيت التبديل</Caption>
+</chkAutoOnOff>
+<!--2013.5.5 增加结束-->
+</TDlgProtocolOnOff>
+<!-- 请求型号 窗口-->
+<TDlgProtocolQueryModel>
+<Caption>طلب نموذج</Caption>
+<LabelCardMode>
+<Caption>بطاقة التحكم في نموذج:</Caption>
+</LabelCardMode>
+<LabelCardVersion>
+<Caption>الأجهزة نسخة من القانون:</Caption>
+</LabelCardVersion>
+<LabelCardGuid>
+<Caption>الرقم التسلسلي فريدة من نوعها:</Caption>
+</LabelCardGuid>
+<btnOK>
+<Caption>موافق (&amp;O)</Caption>
+</btnOK>
+</TDlgProtocolQueryModel>
+<!-- 校时... 窗口-->
+<TDlgProtocolSetDateTime>
+<Caption>المدرسة ...</Caption>
+<LabelDate>
+<Caption>التسجيل:</Caption>
+</LabelDate>
+<LabelTime>
+<Caption>الوقت:</Caption>
+</LabelTime>
+<btnSave>
+<Caption>يو القرص حفظ&amp;</Caption>
+</btnSave>
+<btnOK>
+<Caption>إرسال (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>إلغاء (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>مثل استخدام يو القرص لضبط سطوع التبديل / المدرسة / توقيت، تعيين المعلمات في تصدير USB</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+<!--2013.5.5 增加-->
+<btnGetSystemTime>
+<Caption>وقت النظام</Caption>
+</btnGetSystemTime>
+<!--2013.5.5 增加结束-->
+</TDlgProtocolSetDateTime>
+<!--亮度调节 窗口 -->
+<TDlgProtocolSetLight>
+<Caption>تعديل السطوع</Caption>
+<optAuto>
+<Caption>الاستشعار التلقائي</Caption>
+</optAuto>
+<optManual>
+<Caption>دليل التكيف</Caption>
+</optManual>
+<btnSave>
+<Caption>يو القرص حفظ&amp;</Caption>
+</btnSave>
+<btnOK>
+<Caption>إرسال (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>إلغاء (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>مثل استخدام يو القرص لضبط سطوع التبديل / المدرسة / توقيت، تعيين المعلمات في تصدير USB</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+</TDlgProtocolSetLight>
+<!-- 图文编辑 窗口-->
+<TDlgRtfEditor>
+<Caption>محرر</Caption>
+<Messages>
+<!--RTF编辑对话框 -->
+<!--表格垂直拆分输入框标题-->
+<TableSplitVerticallyCaption>انقسام عمودي</TableSplitVerticallyCaption>
+<!--表格垂直拆分输入框提示信息-->
+<TableSplitVerticallyPrompt>تقسيم عدد الأعمدة:</TableSplitVerticallyPrompt>
+<!--表格水平拆分输入框标题 -->
+<TableSplitHorizontallyCaption>انقسام أفقي</TableSplitHorizontallyCaption>
+<!--表格水平拆分输入框提示信息-->
+<TableSplitHorizontallyPrompt>تقسيم عدد الأسطر:</TableSplitHorizontallyPrompt>
+<!--提示选择一个表格-->
+<InfoSelectOneTable>يرجى تحديد جدول!</InfoSelectOneTable>
+</Messages>
+<ToolButtonLoadFiles>
+<Hint>إضافة ملف</Hint>
+</ToolButtonLoadFiles>
+<!-- 文件操作菜单 -->
+<PopupMenuAddFile>
+<Items>
+<Item>إضافة نص</Item>
+<Item>إضافة ملف RTF</Item>
+<Item>اضف صورة</Item>
+<Item>إضافة DOC</Item>
+<Item>إضافة EXCEL</Item>
+</Items>
+</PopupMenuAddFile>
+<ToolButtonSave>
+<Hint>حفظ</Hint>
+</ToolButtonSave>
+<ToolButtonLeft>
+<Hint>اليسار الأفقية</Hint>
+</ToolButtonLeft>
+<ToolButtonCenter>
+<Hint>تركزت أفقيا</Hint>
+</ToolButtonCenter>
+<ToolButtonRight>
+<Hint>الحق الأفقي للمسكن</Hint>
+</ToolButtonRight>
+<ToolButtonBold>
+<Hint>جريء</Hint>
+</ToolButtonBold>
+<ToolButtonItalic>
+<Hint>مائل</Hint>
+</ToolButtonItalic>
+<ToolButtonUnderline>
+<Hint>تؤكد</Hint>
+</ToolButtonUnderline>
+<ToolButtonTop>
+<Hint>محاذاة على</Hint>
+</ToolButtonTop>
+<ToolButtonVCenter>
+<Hint>تركز عموديا</Hint>
+</ToolButtonVCenter>
+<ToolButtonBottom>
+<Hint>محاذاة إلى الأسفل</Hint>
+</ToolButtonBottom>
+<!-- 表格-->
+<ToolButtonTable>
+<Hint>شكل</Hint>
+</ToolButtonTable>
+<!--表格操作菜单-->
+<PopupMenuTable>
+<Items>
+<Item>جدول جديد</Item>
+<Item>-</Item>
+<Item>لون الحدود</Item>
+<Item>عرض الحدود</Item>
+<Item>-</Item>
+<Item>
+<Caption>إدراج صف</Caption>
+<Items>
+<Item>إدراج أعلاه</Item>
+<Item>إدراج بالأسفل</Item>
+</Items>
+</Item>
+<Item>
+<Caption>إدراج عمود</Caption>
+<Items>
+<Item>إدراجها في اليسار</Item>
+<Item>الجانب الأيمن من</Item>
+</Items>
+</Item>
+<Item>
+<Caption>حذف</Caption>
+<Items>
+<Item>صف</Item>
+<Item>صف</Item>
+</Items>
+</Item>
+<Item>-</Item>
+<Item>دمج الخلايا</Item>
+<Item>
+<Caption>انقسام الخلية</Caption>
+<Items>
+<Item>انقسام عمودي</Item>
+<Item>انقسام أفقي</Item>
+</Items>
+</Item>
+<Item>
+<Caption>استئناف الاندماج</Caption>
+<Items>
+<Item>صف</Item>
+<Item>صف</Item>
+<Item>كامل</Item>
+</Items>
+</Item>
+<Item>-</Item>
+<Item>
+<Caption>المحاذاة العمودية</Caption>
+<Items>
+<Item>محاذاة على</Item>
+<Item>تركز عموديا</Item>
+<Item>محاذاة إلى الأسفل</Item>
+</Items>
+</Item>
+</Items>
+</PopupMenuTable>
+<!-- 编辑菜单 -->
+<PopupMenuEditor>
+<Items>
+<Item>نسخ</Item>
+<Item>عصا</Item>
+<Item>حدد</Item>
+</Items>
+</PopupMenuEditor>
+<LabelWordSpace>
+<Caption>تباعد الكلمات:</Caption>
+</LabelWordSpace>
+<LabelLineSpace>
+<Caption>تباعد الأسطر:</Caption>
+</LabelLineSpace>
+</TDlgRtfEditor>
+<!-- 扫描方式设置 窗口-->
+<TDlgScanSet>
+<Caption>مسح إعدادات وضع</Caption>
+<LabelScanSetName>
+<Caption>اسم التكوين</Caption>
+</LabelScanSetName>
+<LabelScanType>
+<Caption>وضع المسح الضوئي</Caption>
+</LabelScanType>
+<cmbScanType>
+<Items>
+<Item>المسح ثابت</Item>
+<Item>1/2 المسح الضوئي</Item>
+<Item>1/4 المسح الضوئي</Item>
+<Item>1/8 المسح الضوئي</Item>
+<Item>1/16 المسح الضوئي</Item>
+</Items>
+</cmbScanType>
+<LabelWrap>
+<Caption>وضع سطر أضعاف</Caption>
+</LabelWrap>
+<cmbWrap>
+<Items>
+<Item>4 خط أضعاف</Item>
+<Item>8 خط أضعاف</Item>
+<Item>16٪ خارج الخط</Item>
+</Items>
+</cmbWrap>
+<LabelWinding>
+<Caption>يشق طريقه</Caption>
+</LabelWinding>
+<cmbWinding>
+<Items>
+<Item>على اعوج</Item>
+<Item>تحت اعوج</Item>
+</Items>
+</cmbWinding>
+<LabelScanLines>
+<Caption>عدد من خطوط المسح الضوئي</Caption>
+</LabelScanLines>
+<cmbScanLines>
+<Items>
+<Item>1 صف</Item>
+<Item>2 الصفوف</Item>
+<Item>4 صفوف</Item>
+<Item>8 الصفوف</Item>
+<Item>16 خطا لكل منطقة</Item>
+</Items>
+</cmbScanLines>
+<LabelStr>
+<Caption>STR قطبية</Caption>
+</LabelStr>
+<cmbStr>
+<Items>
+<Item>قطبية إيجابية</Item>
+<Item>A القطب السالب</Item>
+</Items>
+</cmbStr>
+<LabelSecondaryWind>
+<Caption>الملف الثانوي</Caption>
+</LabelSecondaryWind>
+<cmbSecondaryWind>
+<Items>
+<Item>لا</Item>
+<Item>كن</Item>
+</Items>
+</cmbSecondaryWind>
+<LabelDecoding>
+<Caption>138 فك</Caption>
+</LabelDecoding>
+<cmbDecoding>
+<Items>
+<Item>138 فك</Item>
+<Item>ارتفاع الحرفي</Item>
+<Item>138 فك</Item>
+<Item>انخفاض الحرفي</Item>
+</Items>
+</cmbDecoding>
+<LabelMirror>
+<Caption>تدفق البيانات</Caption>
+</LabelMirror>
+<cmbMirror>
+<Items>
+<Item>طبيعي</Item>
+<Item>مرآة</Item>
+</Items>
+</cmbMirror>
+<LabelDataPolarity>
+<Caption>قطبية البيانات</Caption>
+</LabelDataPolarity>
+<cmbDataPolarity>
+<Items>
+<Item>قطبية إيجابية</Item>
+<Item>A القطب السالب</Item>
+</Items>
+</cmbDataPolarity>
+<chkJiaoTi>
+<Caption>طبيعي بالتناوب</Caption>
+</chkJiaoTi>
+<btnOK>
+<Caption>موافق (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>إلغاء (&amp;C)</Caption>
+</btnCancel>
+</TDlgScanSet>
+<!-- 查屏 窗口-->
+<TDlgSearchCard>
+<Caption>تحقق الشاشة</Caption>
+<!-- 开始查找页-->
+<LabelFinding>
+<Caption>هل تبحث عن بطاقة التحكم ......</Caption>
+</LabelFinding>
+<MemoPrompt>
+<Items>
+<Item>إذا كنت ترغب في استخدام القرص U لتحديث معلومات بطاقة التحكم، يمكنك إلغاء هذه الخطوة لا تحتاج إلى العثور على بطاقة التحكم!</Item>
+</Items>
+</MemoPrompt>
+<btnCancel>
+<Caption>إلغاء (&amp;C)</Caption>
+</btnCancel>
+<!-- 查找成功页-->
+<LabelSearchSuccess>
+<Caption>العثور على النجاح!</Caption>
+</LabelSearchSuccess>
+<LabelType>
+<Caption>طريقة الاتصال:</Caption>
+</LabelType>
+<LabelPort>
+<Caption>رقم المنفذ:</Caption>
+</LabelPort>
+<LabelCardType>
+<Caption>بطاقة التحكم في نموذج:</Caption>
+</LabelCardType>
+<!-- 查找失败页-->
+<LabelSearchFail>
+<Caption>البحث فشلت!</Caption>
+</LabelSearchFail>
+<btnSearchAgain>
+<Caption>بحث جديد</Caption>
+</btnSearchAgain>
+<MemoIncDelayRetry>
+<Items>
+<Item>سيتم تلقائيا نظام الزيادة، تأخر مرة أخرى في محاولة لمسح جميع الموانئ</Item>
+</Items>
+</MemoIncDelayRetry>
+<btnManualSetting>
+<Caption>عرف</Caption>
+</btnManualSetting>
+<MemoManualSetInfo>
+<Items>
+<Item>تعيين معلمات الاتصال يدويا</Item>
+</Items>
+</MemoManualSetInfo>
+</TDlgSearchCard>
+<!-- 数据发送 窗口-->
+<TDlgSend>
+<Caption>نقل البيانات</Caption>
+</TDlgSend>
+<!--资源选择窗口 窗口 -->
+<TDlgSystemResources>
+<Caption>نافذة اختيار الموارد</Caption>
+<Messages>
+<PromptNoSelected>لم يتم تحديد الصورة، من فضلك انقر على اختيار صورة، أو سحب وإسقاط لتحديدات متعددة.</PromptNoSelected>
+</Messages>
+<btnOK>
+<Caption>حدد (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>إلغاء (&amp;C)</Caption>
+</btnCancel>
+</TDlgSystemResources>
+<!--边框宽度 窗口 -->
+<TDlgTableBorderWidth>
+<Caption>عرض الحدود</Caption>
+<LabelBorderWidth>
+<Caption>عرض الحدود</Caption>
+</LabelBorderWidth>
+<btnOK>
+<Caption>موافق (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>إلغاء (&amp;C)</Caption>
+</btnCancel>
+</TDlgTableBorderWidth>
+<!-- 导入U盘 窗口-->
+<TDlgUsbForm>
+<Caption>استيراد يو القرص</Caption>
+<Messages>
+<NoUsb>لم يتم العثور على القرص U، U إدراج القرص!</NoUsb>
+<MonitorSize>شاشة عرض شاشة نقطة%d%d نقاط</MonitorSize>
+<MonitorBoardType>%s,%s </MonitorBoardType>
+<AutoAlertLight>ضبط السطوع تلقائيا</AutoAlertLight>
+<ManualAlertLight>ضبط يدويا سطوع:٪ مستوى د</ManualAlertLight>
+<MonitorTimeOnOffDisabled>لم يتم تمكين.</MonitorTimeOnOffDisabled>
+<MonitorTimeOnOffEnabled>تم تمكين%s%s</MonitorTimeOnOffEnabled>
+<OutOfStorageCapacity>استيراد U فشل القرص، وحجم المحتوى ولدت خارج البطاقة في القدرة المتبقية.</OutOfStorageCapacity>
+<CancelExportToUsb>إلغاء استيراد قرص يو.</CancelExportToUsb>
+<UsbNotFound>لم يتم العثور على القرص U، U إدراج القرص.</UsbNotFound>
+<ExportToUsbSuccess>تم استيراد الملف بنجاح إلى القرص U.</ExportToUsbSuccess>
+<ExportToUsbFail>استيراد فشل القرص U.</ExportToUsbFail>
+<ExportToUsbRunning>يتم إنشاؤها، يرجى الانتظار ...</ExportToUsbRunning>
+<ReadUsbFileSystemFail>U نظام الملفات على القرص لا تعترف!</ReadUsbFileSystemFail>
+<InvalidUsbFileSystemFail>يمكنك فقط استخدام FAT أو FAT32 تهيئة القرص USB!</InvalidUsbFileSystemFail>
+</Messages>
+<LabelSelectUsb>
+<Caption>حدد محرك الأقراص USB</Caption>
+</LabelSelectUsb>
+<LabelMonitorSize>
+<Caption>حجم الشاشة:</Caption>
+</LabelMonitorSize>
+<LabelMonitorBoardType>
+<Caption>خلية نوع اللوحة:</Caption>
+</LabelMonitorBoardType>
+<chkCheckTime>
+<Caption>المدرسة:</Caption>
+</chkCheckTime>
+<chkAlertLight>
+<Caption>تعديل السطوع:</Caption>
+</chkAlertLight>
+<chkTimeOnOff>
+<Caption>توقيت التبديل الشاشة:</Caption>
+</chkTimeOnOff>
+<btnLoadUsbDrivers>
+<Caption>اختبار المعدات</Caption>
+</btnLoadUsbDrivers>
+<btnExport>
+<Caption>استيراد يو القرص</Caption>
+</btnExport>
+<btnCancel>
+<Caption>إلغاء</Caption>
+</btnCancel>
+<btnExportToLocal>
+<Caption>في المحلية</Caption>
+</btnExportToLocal>
+<!--2013.1.30 新增-->
+<!--校时-->
+<optManulTiming>
+<Caption>كتيب</Caption>
+</optManulTiming>
+<optAutoTiming>
+<Caption>وقت النظام</Caption>
+</optAutoTiming>
+<!--亮度调节：-->
+<optManualLight>
+<Caption>كتيب</Caption>
+</optManualLight>
+<optAutoLight>
+<Caption>أوتوماتيكي</Caption>
+</optAutoLight>
+<!--定时开关屏：-->
+<LabelOn>
+<Caption>التمهيد الوقت</Caption>
+</LabelOn>
+<LabelOff>
+<Caption>قبالة الوقت</Caption>
+</LabelOff>
+<!--2013.1.30 新增结束-->
+<!--2013.5.4 新增-->
+<LabelUsbFreeSize>
+<Caption>القدرة المتاحة:</Caption>
+</LabelUsbFreeSize>
+<LabelUsbFileSystem>
+<Caption>صيغة الملف:</Caption>
+</LabelUsbFileSystem>
+<LabelDateTimeNoChange>
+<Caption>تبقى على حالها</Caption>
+</LabelDateTimeNoChange>
+<LabelLightNoChange>
+<Caption>تبقى على حالها</Caption>
+</LabelLightNoChange>
+<LabelOnOffNoChange>
+<Caption>دائما</Caption>
+</LabelOnOffNoChange>
+<!--2013.5.4 新增结束-->
+</TDlgUsbForm>
+<!-- 时钟区域参数设置界面 -->
+<TFrameOptionClock>
+<!--时钟属性-->
+<GroupBoxRegionInfo>
+<Caption>خصائص مدار الساعة</Caption>
+</GroupBoxRegionInfo>
+<optOneLine>
+<Caption>عرض واحد سطر</Caption>
+</optOneLine>
+<optMultiLine>
+<Caption>عرض متعدد الخطوط</Caption>
+</optMultiLine>
+<LabelFieldSpace>
+<Caption>مباعدة</Caption>
+</LabelFieldSpace>
+<chkDateWeekExchange>
+<Caption>مبادلة الدولة من تاريخ ويوم من أيام الأسبوع</Caption>
+</chkDateWeekExchange>
+<chkShowDate>
+<Caption>يعرض التاريخ</Caption>
+</chkShowDate>
+<chkShowWeek>
+<Caption>يظهر في الأسبوع</Caption>
+</chkShowWeek>
+<chkShowTime>
+<Caption>عرض الوقت</Caption>
+</chkShowTime>
+<!-- 时差-->
+<GroupBoxTimeDiff>
+<Caption>فارق التوقيت</Caption>
+</GroupBoxTimeDiff>
+<LabelDeltHour>
+<Caption>وقت</Caption>
+</LabelDeltHour>
+<LabelDeltMinute>
+<Caption>دقيقة</Caption>
+</LabelDeltMinute>
+<LabelDeltMinute>
+<Caption>دقيقة</Caption>
+</LabelDeltMinute>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>نص ثابت</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>استخدام نص ثابت</Caption>
+</chkEnabledText>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>محرف</Caption>
+</GroupBoxFont>
+<!--2013.1.30 新增-->
+<!--星期格式-->
+<cmbWeekFormat>
+<Items>
+<Item>الصينية</Item>
+<Item>الإثنين</Item>
+<Item>العربية</Item>
+<Item>يوم الاثنين</Item>
+</Items>
+</cmbWeekFormat>
+<!--2013.1.30 新增结束-->
+</TFrameOptionClock>
+<!-- 动态背景-->
+<TFrameOptionDynamicBackground>
+<GroupBoxInfo>
+<Caption>الخلفية الديناميكية</Caption>
+</GroupBoxInfo>
+<chkEnabledDynamicBackground>
+<Caption>استخدام الخلفية الديناميكية</Caption>
+</chkEnabledDynamicBackground>
+<LabelDynamicBackgroundStyle>
+<Caption>أسلوب</Caption>
+</LabelDynamicBackgroundStyle>
+<LabelDynamicBackgroundSpeed>
+<Caption>سرعة</Caption>
+</LabelDynamicBackgroundSpeed>
+<cmbDynamicBackgroundSpeed>
+<Items>
+<Item>1 (أسرع)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (أبطأ)</Item>
+</Items>
+</cmbDynamicBackgroundSpeed>
+<cmbDynamicBackgroundStyle>
+<Items>
+<Item>حلقة</Item>
+<Item>النجمة الخماسية</Item>
+<Item>السماء مليئة بالنجوم</Item>
+<Item>ندفة الثلج</Item>
+<Item>اليسار واليمين السهام</Item>
+<Item>sidesway العمودي إلى</Item>
+<Item>الحانات على هذه الخطوة</Item>
+<Item>الماس</Item>
+<Item>صندوق</Item>
+<Item>دائرة</Item>
+<Item>مسح خط مزدوج</Item>
+<Item>مسح واحد</Item>
+</Items>
+</cmbDynamicBackgroundStyle>
+</TFrameOptionDynamicBackground>
+<!-- 炫动字区域参数设置界面-->
+<TFrameOptionFlashText>
+<GroupBoxRegionInfo>
+<Caption>وكلمة Xuandong تحرير</Caption>
+</GroupBoxRegionInfo>
+<ToolButtonBold>
+<Hint>جريء</Hint>
+</ToolButtonBold>
+<ToolButtonItalic>
+<Hint>مائل</Hint>
+</ToolButtonItalic>
+<ToolButtonUnderline>
+<Hint>تؤكد</Hint>
+</ToolButtonUnderline>
+<cmbFontName>
+<Hint>اسم الخط</Hint>
+</cmbFontName>
+<cmbFontSize>
+<Hint>حجم الخط</Hint>
+</cmbFontSize>
+<cmbFontColor>
+<Hint>لون الخط</Hint>
+</cmbFontColor>
+</TFrameOptionFlashText>
+<!-- 图文区域参数设置界面-->
+<TFrameOptionPicture>
+<Messages>
+<InfoSelectDeletedFile>الرجاء اختيار الملف الذي تريد حذفه!</InfoSelectDeletedFile>
+<ConfDeleteFile>تأكيد أنك تريد حذف هذا؟</ConfDeleteFile>
+<WarnFileNotExists>عدم وجود الملف!</WarnFileNotExists>
+</Messages>
+<GroupBoxRegionInfo>
+<Caption>قائمة الملفات</Caption>
+</GroupBoxRegionInfo>
+<btnAdd>
+<Caption>إضافة</Caption>
+</btnAdd>
+<btnDelete>
+<Caption>حذف</Caption>
+</btnDelete>
+<btnUp>
+<Hint>تحرك</Hint>
+</btnUp>
+<btnDown>
+<Hint>إلى</Hint>
+</btnDown>
+<!-- 添加菜单-->
+<PopupMenuAddFile>
+<Items>
+<Item>جديد التشعبي</Item>
+<Item>إضافة النص التشعبي</Item>
+<Item>اضف صورة</Item>
+</Items>
+</PopupMenuAddFile>
+<!--2013.5.4 增加-->
+<ToolButtonNewRtf>
+<Hint>إضافة RTF</Hint>
+</ToolButtonNewRtf>
+<ToolButtonAddPicture>
+<Hint>اضف صورة</Hint>
+</ToolButtonAddPicture>
+<ToolButtonAddGrid>
+<Hint>إضافة جدول</Hint>
+</ToolButtonAddGrid>
+<ToolButtonAddWord>
+<Hint>إضافة WORD</Hint>
+</ToolButtonAddWord>
+<ToolButtonAddExcel>
+<Hint>إضافة EXCEL</Hint>
+</ToolButtonAddExcel>
+<ToolButtonDelete>
+<Hint>حذف</Hint>
+</ToolButtonDelete>
+<ToolButtonUp>
+<Hint>تحرك</Hint>
+</ToolButtonUp>
+<ToolButtonDown>
+<Hint>إلى</Hint>
+</ToolButtonDown>
+<chkShowPath>
+<Caption>مشاهدة مسار</Caption>
+</chkShowPath>
+<!--2013.5.4 增加结束-->
+</TFrameOptionPicture>
+<!-- 节目参数设置界面-->
+<TFrameOptionProgram>
+<GroupBoxProgramInfo>
+<Caption>تلعب نوع</Caption>
+</GroupBoxProgramInfo>
+<optPlayModeNormal>
+<Caption>اجل اللعب</Caption>
+</optPlayModeNormal>
+<optPlayModeHeart>
+<Caption>مسرحية ذات طول ثابت (ق)</Caption>
+</optPlayModeHeart>
+<optPlayModeSetTime>
+<Caption>بث بانتظام</Caption>
+</optPlayModeSetTime>
+<LabelStartDateTime>
+<Caption>وقت البدء</Caption>
+</LabelStartDateTime>
+<LabelEndDateTime>
+<Caption>نهاية الوقت</Caption>
+</LabelEndDateTime>
+<chkWeekDaysSunday>
+<Caption>الأحد</Caption>
+</chkWeekDaysSunday>
+<chkWeekDaysMonday>
+<Caption>يوم الاثنين</Caption>
+</chkWeekDaysMonday>
+<chkWeekDaysTuesday>
+<Caption>الثلاثاء</Caption>
+</chkWeekDaysTuesday>
+<chkWeekDaysWednesday>
+<Caption>الأربعاء</Caption>
+</chkWeekDaysWednesday>
+<chkWeekDaysThurday>
+<Caption>الخميس</Caption>
+</chkWeekDaysThurday>
+<chkWeekDaysFriday>
+<Caption>الجمعة</Caption>
+</chkWeekDaysFriday>
+<chkWeekDaysSaturday>
+<Caption>السبت</Caption>
+</chkWeekDaysSaturday>
+</TFrameOptionProgram>
+<!-- 温度区域参数设置界面-->
+<TFrameOptionTempreture>
+<GroupBoxRegionInfo>
+<Caption>خصائص درجة الحرارة</Caption>
+</GroupBoxRegionInfo>
+<LabelMode>
+<Caption>وحدات درجة الحرارة</Caption>
+</LabelMode>
+<LabelDelt>
+<Caption>تصحيح</Caption>
+</LabelDelt>
+<LabelNumberColor>
+<Caption>لون الرقمية</Caption>
+</LabelNumberColor>
+<LabelUnitColor>
+<Caption>وحدة اللون</Caption>
+</LabelUnitColor>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>نص ثابت</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>استخدام نص ثابت</Caption>
+</chkEnabledText>
+<chkTwoLine>
+<Caption>التفاف</Caption>
+</chkTwoLine>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>محرف</Caption>
+</GroupBoxFont>
+</TFrameOptionTempreture>
+<!--字幕区域参数设置界面 -->
+<TFrameOptionText>
+<GroupBoxRegionInfo>
+<Caption>الترجمة محرر</Caption>
+</GroupBoxRegionInfo>
+<LabelWordSpace>
+<Caption>تباعد الكلمات:</Caption>
+</LabelWordSpace>
+</TFrameOptionText>
+<!-- 计时区域参数设置界面-->
+<TFrameOptionTiming>
+<!-- 时钟属性-->
+<GroupBoxRegionInfo>
+<Caption>خصائص مدار الساعة</Caption>
+</GroupBoxRegionInfo>
+<optCountDown>
+<Caption>العد التنازلي</Caption>
+</optCountDown>
+<optCountUp>
+<Caption>هو توقيت</Caption>
+</optCountUp>
+<LabelDest>
+<Caption>الوقت المستهدف</Caption>
+</LabelDest>
+<LabelFormat>
+<Caption>عرض الصيغة</Caption>
+</LabelFormat>
+<chkShowDay>
+<Caption>يوم</Caption>
+</chkShowDay>
+<chkShowHour>
+<Caption>وقت</Caption>
+</chkShowHour>
+<chkShowMinute>
+<Caption>دقيقة</Caption>
+</chkShowMinute>
+<chkShowSecond>
+<Caption>ثان</Caption>
+</chkShowSecond>
+<LabelNumberColor>
+<Caption>لون الرقمية</Caption>
+</LabelNumberColor>
+<LabelUnitColor>
+<Caption>وحدة اللون</Caption>
+</LabelUnitColor>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>نص ثابت</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>استخدام نص ثابت</Caption>
+</chkEnabledText>
+<chkTwoLine>
+<Caption>التفاف</Caption>
+</chkTwoLine>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>محرف</Caption>
+</GroupBoxFont>
+</TFrameOptionTiming>
+<!-- 表盘盘区域参数设置界面-->
+<TFrameOptionWatch>
+<!-- 表盘属性-->
+<GroupBoxRegionInfo>
+<Caption>طلب خصائص</Caption>
+</GroupBoxRegionInfo>
+<LabelStyle>
+<Caption>أسلوب</Caption>
+</LabelStyle>
+<cmbStyle>
+<Items>
+<Item>التقليد</Item>
+</Items>
+</cmbStyle>
+<LabelTickWidth>
+<Caption>عرض</Caption>
+</LabelTickWidth>
+<LabelTickColor>
+<Caption>اللون</Caption>
+</LabelTickColor>
+<LabelHourTickWidth>
+<Caption>بيت القصيد من الممتلكات</Caption>
+</LabelHourTickWidth>
+<Label369TickWidth>
+<Caption>3.6.9 خصائص نقطة</Caption>
+</Label369TickWidth>
+<LabelMinuteTickWidth>
+<Caption>خصائص نقطة</Caption>
+</LabelMinuteTickWidth>
+<LabelLineWidth>
+<Caption>عرض</Caption>
+</LabelLineWidth>
+<LabelLineColor>
+<Caption>اللون</Caption>
+</LabelLineColor>
+<LabelHourLineWidth>
+<Caption>في اتجاه عقارب الساعة</Caption>
+</LabelHourLineWidth>
+<LabelMinuteLineWidth>
+<Caption>عقرب الدقائق</Caption>
+</LabelMinuteLineWidth>
+<LabelSecondLineWidth>
+<Caption>من جهة ثانية</Caption>
+</LabelSecondLineWidth>
+<!-- 时差-->
+<GroupBoxTimeDiff>
+<Caption>فارق التوقيت</Caption>
+</GroupBoxTimeDiff>
+<LabelDeltHour>
+<Caption>وقت</Caption>
+</LabelDeltHour>
+<LabelDeltMinute>
+<Caption>دقيقة</Caption>
+</LabelDeltMinute>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>نص ثابت</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>استخدام نص ثابت</Caption>
+</chkEnabledText>
+<btnTextDown>
+<Hint>إلى</Hint>
+</btnTextDown>
+<btnTextLeft>
+<Hint>اليسار</Hint>
+</btnTextLeft>
+<btnTextCenter>
+<Hint>مركز</Hint>
+</btnTextCenter>
+<btnTextRight>
+<Hint>انتقل إلى اليمين</Hint>
+</btnTextRight>
+<btnTextUp>
+<Hint>تحرك</Hint>
+</btnTextUp>
+</TFrameOptionWatch>
+<!--表格编辑主界面-->
+<CGridEditorMainForm>
+<Caption>تحرير الجداول</Caption>
+<!--单色-->
+<PopupMenuSingleColor>
+<Items>
+<Item>لا</Item>
+<Item>أحمر</Item>
+</Items>
+</PopupMenuSingleColor>
+<!--双色-->
+<PopupMenuTwoColor>
+<Items>
+<Item>لا</Item>
+<Item>أحمر</Item>
+<Item>أصفر</Item>
+<Item>أخضر</Item>
+</Items>
+</PopupMenuTwoColor>
+</CGridEditorMainForm>
+<!--表格编辑插入表格界面-->
+<CGridEditorInsertCells>
+<Caption>إضافة جدول</Caption>
+<LabelType>
+<Caption>النوع:</Caption>
+</LabelType>
+<optTypeRow>
+<Caption>صف</Caption>
+</optTypeRow>
+<optTypeCol>
+<Caption>صف</Caption>
+</optTypeCol>
+<LabelCount>
+<Caption>الكمية:</Caption>
+</LabelCount>
+<LabelPosition>
+<Caption>الموقع:</Caption>
+</LabelPosition>
+<optPositionCurrent>
+<Caption>حالي</Caption>
+</optPositionCurrent>
+<optPositionEnd>
+<Caption>آخر</Caption>
+</optPositionEnd>
+<btnOK>
+<Caption>موافق (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>إلغاء (&amp;C)</Caption>
+</btnCancel>
+</CGridEditorInsertCells>
+<!--表格编辑删除单元格界面-->
+<CGridEditorDeleteCells>
+<Caption>حذف خلايا</Caption>
+<optTypeRow>
+<Caption>السطر بالكامل</Caption>
+</optTypeRow>
+<optTypeCol>
+<Caption>عمود بأكمله</Caption>
+</optTypeCol>
+<btnOK>
+<Caption>موافق (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>إلغاء (&amp;C)</Caption>
+</btnCancel>
+</CGridEditorDeleteCells>
+</Languages>

@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="superModal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lemonnt.dynamic.card.ui.active.ActiveController">
+   <children>
+      <Pane fx:id="header" layoutX="10.0" layoutY="10.0" prefHeight="57.0" prefWidth="732.0" style="-fx-background-color: #137B86; -fx-border-color: transparent transparent #08585F transparent;">
+         <children>
+		 <!-- <Pane fx:id="minPane" layoutX="652.0" layoutY="2.0" prefHeight="29.0" prefWidth="35.0">
+         <children>
+            <Text fx:id="minText" layoutX="6.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+      </Pane> -->
+      <Pane fx:id="closePane" layoutX="690.0" layoutY="2.0" prefHeight="29.0" prefWidth="35.0">
+         <children>
+            <Text fx:id="closeText" layoutX="7.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+      </Pane>
+            <HBox fx:id="activeHBox" layoutX="10.0" layoutY="7.0" onMouseClicked="#activeHBox" prefHeight="50.0" prefWidth="90.0" style="-fx-background-color: white; -fx-background-radius: 5 5 0 0; -fx-border-color: #08585F #08585F transparent #08585F; -fx-border-radius: 3 3 0 0;">
+               <children>
+                  <Pane fx:id="activeWebFontPane" prefHeight="48.0" prefWidth="60.0">
+                     <children>
+                        <Text fx:id="activeWebFont" layoutX="13.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="font-1" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="activePane" prefHeight="48.0" prefWidth="99.0">
+                     <children>
+                        <Text fx:id="activeFont" layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="激活" />
+                     </children>
+                  </Pane>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </HBox>
+            <HBox fx:id="trialHBox" layoutX="100.0" onMouseClicked="#trialHBox" layoutY="7.0" prefHeight="50.0" prefWidth="90.0" style="-fx-background-color: #6AC1C9; -fx-background-radius: 5 5 0 0; -fx-border-color: #08585F #08585F #08585F #08585F; -fx-border-radius: 3 3 0 0;">
+               <children>
+                  <Pane fx:id="trialWebFontPane" prefHeight="48.0" prefWidth="60.0">
+                     <children>
+                        <Text fx:id="trialWebFont" layoutX="13.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="font-1" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="trailPane" prefHeight="48.0" prefWidth="99.0">
+                     <children>
+                        <Text fx:id="trailFont" layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="试用" />
+                     </children>
+                  </Pane>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </HBox>
+         </children>
+      </Pane>
+      <VBox fx:id="activeCoreHBox" layoutX="81.0" layoutY="84.0" prefHeight="452.0" prefWidth="589.0">
+         <children>
+            <Pane fx:id="activeFailedDescPane" prefHeight="46.0" prefWidth="589.0" >
+               <children>
+                  <Text fx:id="activeFailedDesc" visible="false" layoutX="135.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="激活失败，你的激活码不正确" />
+               </children>
+            </Pane>
+            <Pane fx:id="activeCorePane" prefHeight="272.0" prefWidth="589.0">
+               <children>
+                  <VBox fx:id="activeContentPane" layoutX="-38.0" prefHeight="236.0" prefWidth="599.0">
+                     <children>
+                        <Pane fx:id="activeUserNamePane" prefHeight="200.0" prefWidth="559.0">
+                           <children>
+                              <HBox prefHeight="59.0" prefWidth="599.0">
+                                 <children>
+                                    <Pane prefHeight="44.0" prefWidth="149.0">
+                                       <children>
+                                          <Text fx:id="activeUserNameText" layoutX="39.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="用  户  名" />
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="79.0" prefWidth="291.0">
+                                       <children>
+                                          <TextField fx:id="activeUserNameTextField" layoutY="5.0" prefHeight="48.0" prefWidth="274.0" promptText="用户名"/>
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="79.0" prefWidth="209.0">
+                                       <children>
+                                          <HBox prefHeight="59.0" prefWidth="200.0">
+                                             <children>
+                                                <Pane prefHeight="59.0" prefWidth="82.0">
+                                                   <children>
+                                                      <Text fx:id="activeUserNameReminderOne" layoutX="15.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Text fx:id="activeUserNameReminderTwo" layoutX="6.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="只能为数字和字母组成" />
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="activePasswordPane" prefHeight="200.0" prefWidth="559.0">
+                           <children>
+                              <HBox prefHeight="59.0" prefWidth="599.0">
+                                 <children>
+                                    <Pane prefHeight="44.0" prefWidth="149.0">
+                                       <children>
+                                          <Text fx:id="activePasswordText" layoutX="39.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="密       码" />
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="79.0" prefWidth="291.0">
+                                       <children>
+                                          <PasswordField fx:id="activePasswordTextField" layoutY="5.0" prefHeight="48.0" prefWidth="274.0" promptText="密码"/>
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="79.0" prefWidth="209.0">
+                                       <children>
+                                          <HBox prefHeight="59.0" prefWidth="200.0">
+                                             <children>
+                                                <Pane prefHeight="59.0" prefWidth="82.0">
+                                                   <children>
+                                                      <Text fx:id="activePasswordReminderOne" layoutX="15.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Text fx:id="activePasswordReminderTwo" layoutX="6.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8到32位字母和字符组成" />
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="activeConfirmPasswordPane" prefHeight="200.0" prefWidth="599.0">
+                           <children>
+                              <HBox prefHeight="59.0" prefWidth="599.0">
+                                 <children>
+                                    <Pane prefHeight="44.0" prefWidth="149.0">
+                                       <children>
+                                          <Text fx:id="activeConfirmText" layoutX="36.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="确认密码" />
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="79.0" prefWidth="291.0">
+                                       <children>
+                                          <PasswordField fx:id="activeConfirmTextField" layoutY="5.0" prefHeight="48.0" prefWidth="274.0" promptText="确认密码"/>
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="79.0" prefWidth="209.0">
+                                       <children>
+                                          <HBox prefHeight="59.0" prefWidth="200.0">
+                                             <children>
+                                                <Pane prefHeight="59.0" prefWidth="82.0">
+                                                   <children>
+                                                      <Text fx:id="activeConfirmReminderOne" layoutX="15.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Text fx:id="activeConfirmReminderTwo" layoutX="6.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="密码必须输入一致" />
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="activeCodePane" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="59.0" prefWidth="599.0">
+                                 <children>
+                                    <Pane prefHeight="44.0" prefWidth="149.0">
+                                       <children>
+                                          <Text fx:id="activeCodeText" layoutX="39.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="激  活  码" />
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="79.0" prefWidth="291.0">
+                                       <children>
+                                          <TextField fx:id="activeCodeTextField" layoutY="5.0" prefHeight="48.0" prefWidth="274.0" promptText="XXXX-XXXX-XXXX-XXXX"/>
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="79.0" prefWidth="209.0">
+                                       <children>
+                                          <HBox prefHeight="59.0" prefWidth="200.0">
+                                             <children>
+                                                <Pane prefHeight="59.0" prefWidth="82.0">
+                                                   <children>
+                                                      <Text fx:id="activeCodeReminderOne" layoutX="15.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Text fx:id="activeCodeReminderTwo" layoutX="6.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="输入正确的格式的激活码" />
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+            
+            <Pane  fx:id="activeBtnByCode" prefHeight="43.0" prefWidth="589.0">
+               <children>
+                     <Pane fx:id="activeBtnlevelOnePane" onMouseClicked="#activeByActiveCode" layoutX="217.0"  layoutY="-15.0" prefHeight="40.0" prefWidth="113.0">
+                        <children>
+                         <Text fx:id="activeBtnText" style="-fx-fill:white;-fx-font-weight:bold;" layoutX="40.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="激活" />
+                        </children>
+                     </Pane>
+               </children>
+            </Pane>
+            
+            <Pane fx:id="activeReminderPane" prefHeight="80.0" prefWidth="589.0" style="-fx-border-color: #0F98A5; -fx-border-radius: 5; -fx-background-color: #0F98A5;">
+               <children>
+                  <Text fx:id="activeReminderOne" layoutX="259.0" layoutY="8.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                  <Text fx:id="activeReminderTwo" fill="WHITE" layoutX="42.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="注册的用户名与密码将用作日后软件登录的凭证之一，请保存好用户名和密码 ！" />
+                  <Text fx:id="activeReminderThree" fill="WHITE" layoutX="82.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="一个激活码仅用于激活一台电脑，一旦激活后，激活码立即失效！" />
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+      <VBox fx:id="trialCoreHBox" layoutX="81.0" layoutY="84.0" prefHeight="452.0" prefWidth="589.0" visible="false">
+         <children>
+            <Pane fx:id="activeFailedDescPane" prefHeight="46.0" prefWidth="589.0">
+               <children>
+                  <Text fx:id="trialFailedDesc"  visible="false" layoutX="135.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="激活失败，你的激活码不正确" />
+               </children>
+            </Pane>
+            <Pane fx:id="trialCorePane" prefHeight="272.0" prefWidth="589.0">
+               <children>
+                  <VBox fx:id="trialContentPane" layoutX="-38.0" prefHeight="236.0" prefWidth="599.0">
+                     <children>
+                        <Pane fx:id="trialUserNamePane" prefHeight="200.0" prefWidth="559.0">
+                           <children>
+                              <HBox prefHeight="59.0" prefWidth="599.0">
+                                 <children>
+                                    <Pane prefHeight="44.0" prefWidth="149.0">
+                                       <children>
+                                          <Text fx:id="trialUserNameText" layoutX="39.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="用  户  名" />
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="79.0" prefWidth="291.0">
+                                       <children>
+                                          <TextField fx:id="trialUserNameTextField" layoutY="5.0" prefHeight="48.0" prefWidth="274.0" promptText="用户名"/>
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="79.0" prefWidth="209.0">
+                                       <children>
+                                          <HBox prefHeight="59.0" prefWidth="200.0">
+                                             <children>
+                                                <Pane prefHeight="59.0" prefWidth="82.0">
+                                                   <children>
+                                                      <Text fx:id="trialUserNameReminderOne" layoutX="15.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Text fx:id="trialUserNameReminderTwo" layoutX="6.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="只能为数字和字母组成" />
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="trialPasswordPane" prefHeight="200.0" prefWidth="559.0">
+                           <children>
+                              <HBox prefHeight="59.0" prefWidth="599.0">
+                                 <children>
+                                    <Pane prefHeight="44.0" prefWidth="149.0">
+                                       <children>
+                                          <Text fx:id="trialPasswordText" layoutX="39.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="密       码" />
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="79.0" prefWidth="291.0">
+                                       <children>
+                                          <PasswordField fx:id="trialPasswordTextField" layoutY="5.0" prefHeight="48.0" prefWidth="274.0" promptText="密码"/>
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="79.0" prefWidth="209.0">
+                                       <children>
+                                          <HBox prefHeight="59.0" prefWidth="200.0">
+                                             <children>
+                                                <Pane prefHeight="59.0" prefWidth="82.0">
+                                                   <children>
+                                                      <Text fx:id="trialPasswordReminderOne" layoutX="15.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Text fx:id="trialPasswordReminderTwo" layoutX="6.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8到32位字母和字符组成" />
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="trialConfirmPasswordPane" prefHeight="200.0" prefWidth="599.0">
+                           <children>
+                              <HBox prefHeight="59.0" prefWidth="599.0">
+                                 <children>
+                                    <Pane prefHeight="44.0" prefWidth="149.0">
+                                       <children>
+                                          <Text fx:id="trialConfirmText" layoutX="36.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="确认密码" />
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="79.0" prefWidth="291.0">
+                                       <children>
+                                          <PasswordField fx:id="trialConfirmTextField" layoutY="5.0" prefHeight="48.0" prefWidth="274.0" promptText="确认密码"/>
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="79.0" prefWidth="209.0">
+                                       <children>
+                                          <HBox prefHeight="59.0" prefWidth="200.0">
+                                             <children>
+                                                <Pane prefHeight="59.0" prefWidth="82.0">
+                                                   <children>
+                                                      <Text fx:id="trialConfirmReminderOne" layoutX="15.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Text fx:id="trialConfirmReminderTwo" layoutX="6.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="密码必须输入一致" />
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="trialCodePane" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="59.0" prefWidth="599.0">
+                                 <children>
+                                    <Pane prefHeight="44.0" prefWidth="149.0">
+                                       <children>
+                                          <Text fx:id="trialCodeText" layoutX="39.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="手机号码" />
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="79.0" prefWidth="291.0">
+                                       <children>
+                                          <TextField fx:id="trialCodeTextField" layoutY="5.0" prefHeight="48.0" prefWidth="274.0" promptText="手机号码"/>
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="79.0" prefWidth="209.0">
+                                       <children>
+                                          <HBox prefHeight="59.0" prefWidth="200.0">
+                                             <children>
+                                                <Pane prefHeight="59.0" prefWidth="82.0">
+                                                   <children>
+                                                      <Text fx:id="trialCodeReminderOne" layoutX="15.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Text fx:id="trialCodeReminderTwo" layoutX="6.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="输入正确的格式的手机号码" />
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+             <Pane  fx:id="activeBtnByCellphone" prefHeight="43.0" prefWidth="589.0">
+               <children>
+                     <Pane fx:id="activeBtnlevelOnePaneByCellphone" onMouseClicked="#activeByCellphone" layoutX="217.0"  layoutY="-15.0" prefHeight="40.0" prefWidth="113.0">
+                        <children>
+                         <Text fx:id="activeBtnText" style="-fx-fill:white;-fx-font-weight:bold;" layoutX="40.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="激活" />
+                        </children>
+                     </Pane>
+               </children>
+            </Pane>
+            <Pane fx:id="trialReminderPane" prefHeight="80.0" prefWidth="589.0" style="-fx-border-color: #0F98A5; -fx-border-radius: 5; -fx-background-color: #0F98A5; -fx-background-radius: 7;">
+               <children>
+                  <Text fx:id="trialReminderOne" layoutX="259.0" layoutY="8.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                  <Text fx:id="trialReminderTwo" fill="WHITE" layoutX="42.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="注册的用户名与密码将用作日后软件登录的凭证之一，请保存好用户名和密码 ！" />
+                  <Text fx:id="trialReminderThree" fill="WHITE" layoutX="100.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="一个手机号码和一台电脑仅可被试用一次，试用期限5天！" />
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+   </children>
+</Pane>

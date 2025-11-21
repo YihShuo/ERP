@@ -1,0 +1,67 @@
+2019-05-03 20:32:22,892 - lemonnt
+2019-05-03 20:32:22,932 - false
+2019-05-03 20:32:23,204 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-05-03 20:32:23,216 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-05-03 20:32:23,232 - Obtain the parameters  : [DIGITNUMBER]
+2019-05-03 20:32:23,239 - Obtain the env parameters  : [4]
+2019-05-03 20:32:23,417 - Success to query records [4]
+2019-05-03 20:32:23,437 - [{"connection":false,"date":1556012549959,"desc":"1","gprs":0,"ip":"192.168.1.10","name":"1","order":"1","port":"1233","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1556185639349,"desc":"11","gprs":0,"ip":"10.224.34.43","name":"11","order":"11","port":"11","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1556185663938,"desc":"11","gprs":0,"ip":"10.34.56.64","name":"23","order":"34","port":"34","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-05-03 20:32:23,749 - Obtain the parameters  : [SYSTEMNAME]
+2019-05-03 20:32:23,756 - Obtain the parameters  : [null]
+2019-05-03 20:32:23,914 - Obtain the parameters  : [MONITORINTRVAL]
+2019-05-03 20:32:23,922 - Obtain the parameters  : [null]
+2019-05-03 20:32:23,925 - Monitor Interval : [10s]
+2019-05-03 20:32:26,435 - Success to query records [3]
+2019-05-03 20:32:26,479 - Success to query records [3]
+2019-05-03 20:32:26,481 - start : 0, end : 3
+2019-05-03 20:32:29,102 - The name of plugin is [File]
+2019-05-03 20:32:29,102 - The name of pluginType is [file]
+2019-05-03 20:32:29,110 - Success to query records [1]
+2019-05-03 20:32:30,309 - Obtain the parameters  : [SENDDELAY]
+2019-05-03 20:32:30,315 - Obtain the parameters  : [null]
+2019-05-03 20:32:30,321 - It's going to parsing : C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties
+2019-05-03 20:32:30,323 - It has been parsed ,following [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-05-03 20:32:30,326 - It has been loaded ,following : [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-05-03 20:32:30,326 - {"pluginName":"File","properties":{"monitorPath":"C:/Users/gavli/Desktop/test"}}
+2019-05-03 20:32:30,339 - Success to query records [1]
+2019-05-03 20:32:30,348 - Success to query records [1]
+2019-05-03 20:32:30,357 - Success to query records [2]
+2019-05-03 20:32:30,363 - Success to query records [1]
+2019-05-03 20:32:30,370 - Success to query records [1]
+2019-05-03 20:32:30,375 - Monitor type : directory
+2019-05-03 20:32:55,422 - Send with UDP
+2019-05-03 20:32:55,424 - Send the content for the msg [4211], and the location ID [0]
+2019-05-03 20:32:55,424 - Send the messages have been format: [KLB00010000005700100000004211KLEAB]
+2019-05-03 20:32:55,434 - Success to send the datums
+2019-05-03 20:32:56,436 - Send the content for the msg [1111], and the location ID [1]
+2019-05-03 20:32:56,437 - Send the messages have been format: [KLB00010000005700100100001111KLEA8]
+2019-05-03 20:32:56,438 - Success to send the datums
+2019-05-03 20:32:57,438 - Send the content for the msg [111.1], and the location ID [2]
+2019-05-03 20:32:57,439 - Send the messages have been format: [KLB0001000000570011020000111.1KLED8]
+2019-05-03 20:32:57,440 - Success to send the datums
+2019-05-03 20:32:58,440 - Send the content for the msg [11.2], and the location ID [3]
+2019-05-03 20:32:58,440 - Send the messages have been format: [KLB000100000057001003000011.2KLEA8]
+2019-05-03 20:32:58,441 - Success to send the datums
+2019-05-03 20:32:59,495 - [11] has no records need to be send !!!
+2019-05-03 20:32:59,495 - [23] has no records need to be send !!!
+2019-05-03 20:33:00,736 - Success to query records [4]
+2019-05-03 20:33:02,071 - Success to query records [4]
+2019-05-03 20:33:02,154 - Success to query records [4]
+2019-05-03 20:33:02,182 - start : 0, end : 4
+2019-05-03 20:43:16,445 - Success to query records [4]
+2019-05-03 20:43:26,994 - Success to query records [4]
+2019-05-03 20:43:27,024 - Success to query records [4]
+2019-05-03 20:43:27,025 - start : 0, end : 4
+2019-05-03 20:43:31,351 - Success to query records [4]
+2019-05-03 20:43:47,467 - Success to query records [4]
+2019-05-03 20:44:02,388 - Success to query records [4]
+2019-05-03 20:44:18,483 - Success to query records [4]
+2019-05-03 20:44:33,424 - Success to query records [4]
+2019-05-03 20:44:49,509 - Success to query records [4]
+2019-05-03 20:45:04,452 - Success to query records [4]
+2019-05-03 20:45:20,525 - Success to query records [4]
+2019-05-03 20:45:35,466 - Success to query records [4]
+2019-05-03 20:45:51,537 - Success to query records [4]
+2019-05-03 20:46:06,508 - Success to query records [4]
+2019-05-03 20:46:22,579 - Success to query records [4]
+2019-05-03 20:46:37,560 - Success to query records [4]

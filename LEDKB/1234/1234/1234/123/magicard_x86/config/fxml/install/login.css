@@ -1,0 +1,72 @@
+
+.root {
+  -fx-opacity: 1;
+  
+}
+
+
+#closeText,#minText{
+	-fx-fill:#A3C6E5;
+}
+
+#closePane:hover,#minPane:hover{
+	-fx-background-color:white;
+	-fx-cursor:hand;
+}
+#loginBtnPane{
+	-fx-background-color:#0E7783;
+}
+
+#loginBtn{
+	-fx-font-family: 'Microsoft YaHei';
+	-fx-fill:white;
+	-fx-font-weight:bold;
+}
+
+#loginReminder{
+	-fx-font-family: 'Microsoft YaHei';
+	-fx-fill:red;
+}
+
+#loginBtnPane:hover{
+	-fx-cursor:hand;
+	-fx-background-color:#438D93;
+}
+#loginUserNameFont,#loginPasswordFont{
+	-fx-fill:gray;
+}
+#forgetPassword,#activeNow{
+	-fx-fill:#137C87;
+	-fx-font-family: 'Microsoft YaHei';
+	
+	
+}
+
+#rememberPassword,#autoLogin{
+	-fx-font-family: 'Microsoft YaHei';
+	-fx-text-fill:gray;
+}
+
+#rememberPassword:hover,#autoLogin:hover{
+	-fx-cursor:hand;
+}
+#forgetPassword:hover,#activeNow:hover{
+	-fx-cursor:hand;
+	-fx-fill:#438D93;
+}
+#fontOne,#fontTwo,#fontThree,#desOne,#desTwo,#desThree{
+	-fx-fill: white;
+
+    
+}
+#desOne,#desTwo,#desThree{
+	-fx-font-family: 'Microsoft YaHei';
+	-fx-font-weight:bold;
+}
+
+#superPane{
+	-fx-border-color:#20888E;
+
+
+   -fx-effect:dropshadow(three-pass-box, gray, 10, 0.5, 0, 0);
+}

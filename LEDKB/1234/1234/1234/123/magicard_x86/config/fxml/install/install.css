@@ -1,0 +1,64 @@
+#superModalPane{
+ 
+   -fx-background:transparent;
+
+}
+
+#installText,#agreementYes,#changeUnitBtn,#userDefinedInstall,#agreement,#installUnit,#needSpace,#installAddress,#surplusSpace,#speedLinkd,#addToDeskshop{
+	-fx-font-family: 'Microsoft YaHei';
+}
+.root {
+  -fx-opacity: 1;
+  
+}
+
+#userDefinedInstall{
+	-fx-fill:#117580;
+}
+
+#userDefinedWayPane{
+	  -fx-border-color:white #34AC91 #34AC91 #34AC91;
+	  -fx-border-width:2px;
+	  -fx-background-color:white #34AC91 #34AC91 #34AC91;
+}
+
+#defaultInstallPane{
+	 -fx-background-color:white;
+	 -fx-border-color:white #34AC91 #34AC91 #34AC91;
+	 -fx-border-width:2px;
+}
+#installPane{
+	-fx-border-color:white;
+}
+
+#closeText,#minText{
+	-fx-fill:#A3C6E5;
+}
+
+#closePane:hover,#minPane:hover{
+	-fx-background-color:white;
+	-fx-cursor:hand;
+}
+
+#circleHide:hover{
+	-fx-cursor:hand;
+}
+#userDefinedInstall:hover{
+	-fx-cursor:hand;
+	-fx-fill: #39AAB4;
+}
+
+#agreement{
+	-fx-text-fill:#117580;
+}
+#hideText{
+	-fx-fill:white;
+	-fx-font-weight:bold;
+	-fx-font-size:16;
+}
+#installPane:hover{
+	-fx-background-color:#39A68F;
+}
+#installText{
+	-fx-font-size:24;
+}

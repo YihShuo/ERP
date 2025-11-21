@@ -1,0 +1,35 @@
+=================================
+Time:09:01:34:622
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+ToString:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+=================================
+=================================
+Time:09:01:34:630
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+ToString:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+=================================
+=================================
+Time:09:02:34:238
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 00A699EF in module 'X Show 2015(V5.0.4.9).exe'. Write of address 00000034
+ToString:Access violation at address 00A699EF in module 'X Show 2015(V5.0.4.9).exe'. Write of address 00000034
+=================================
+=================================
+Time:09:26:38:441
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+ToString:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+=================================
+=================================
+Time:09:26:38:449
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+ToString:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+=================================

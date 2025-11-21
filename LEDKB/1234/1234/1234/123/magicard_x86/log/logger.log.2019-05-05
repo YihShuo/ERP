@@ -1,0 +1,13 @@
+2019-05-05 21:51:47,898 - lemonnt
+2019-05-05 21:51:48,144 - false
+2019-05-05 21:51:48,532 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-05-05 21:51:48,548 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-05-05 21:51:48,553 - Obtain the parameters  : [DIGITNUMBER]
+2019-05-05 21:51:48,570 - Obtain the env parameters  : [4]
+2019-05-05 21:51:48,804 - Success to query records [4]
+2019-05-05 21:51:48,810 - [{"connection":false,"date":1556012549959,"desc":"1","gprs":0,"ip":"192.168.1.10","name":"1","order":"1","port":"1233","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1556185639349,"desc":"11","gprs":0,"ip":"10.224.34.43","name":"11","order":"11","port":"11","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1556185663938,"desc":"11","gprs":0,"ip":"10.34.56.64","name":"23","order":"34","port":"34","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-05-05 21:51:49,375 - Obtain the parameters  : [SYSTEMNAME]
+2019-05-05 21:51:49,382 - Obtain the parameters  : [null]
+2019-05-05 21:51:49,514 - Obtain the parameters  : [MONITORINTRVAL]
+2019-05-05 21:51:49,520 - Obtain the parameters  : [null]
+2019-05-05 21:51:49,521 - Monitor Interval : [10s]

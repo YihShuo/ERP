@@ -1,0 +1,84 @@
+.root {
+  -fx-opacity: 0.8;
+}
+
+#rootParent{
+   -fx-background-insets: 10;
+   -fx-background-radius: 5;
+   -fx-background-color: white;
+   -fx-effect:dropshadow(three-pass-box, gray, 10, 0.5, 0, 0);
+}
+
+#titleBox{
+	-fx-background-color: #BCBCBC;
+	-fx-background-insets: 10;
+    -fx-background-radius: 5 5 0 0;
+}
+
+#actionBox{
+
+	-fx-background-insets: 0 10 10 10;
+    -fx-background-radius: 0 0 5 5;
+}
+
+#title{
+	-fx-font-weight:bold;
+	-fx-fill: #404040;
+	-fx-font-family: 'Microsoft YaHei';
+}
+
+#contentBox {
+	-fx-background-insets: 0 10 0 10;
+} 
+
+
+#confirmBtn:hover,#cancelBtn:hover{
+	-fx-cursor:hand;
+}
+
+
+
+/*modals*/
+
+#actionBoxs{
+	-fx-background-color:#BCBCBC;
+	-fx-background-insets: 0 10 10 10;
+	-fx-background-radius: 0 0 5 5;
+}
+
+#confirm{
+	-fx-background-insets: 0 10 10 10;
+	-fx-background-radius: 0 0 5 5;
+}
+
+#confirm:hover{
+	-fx-background-insets: 0 10 10 10;
+	-fx-background-radius: 0 0 5 5;
+	-fx-background-color:#EAEAEA;
+	-fx-cursor:hand;
+}
+
+
+#confirmTextHover{
+	-fx-fill:green;
+}
+
+#titleSuccess,#titleWarning,#titleError{
+	-fx-font-weight:bold;
+}
+
+#contentSuccess,#contentWarning,#contentError,#titleSuccess,#titleWarning,#titleError{
+	-fx-font-family: 'Microsoft YaHei';
+}
+
+#titleSuccess,#success,#contentSuccess,#confirmTextSuccess{
+	-fx-fill:green;
+}
+
+#warning,#titleWarning,#contentWarning,#confirmTextWarning{
+	-fx-fill:#F0711F;
+}
+
+#error,#titleError,#contentError,#confirmTextError{
+	-fx-fill:#C62727;
+}

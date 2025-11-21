@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="modalPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane fx:id="titlePane" prefHeight="68.0" prefWidth="900.0">
+         <children>
+            <Text fx:id="title" layoutX="9.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="六安柠檬网络软件许可协议" textAlignment="CENTER" wrappingWidth="880.6708984375" />
+         </children>
+      </Pane>
+      <Pane fx:id="contentPane" layoutY="47.0" prefHeight="104.0" prefWidth="400.0">
+         <children>
+            <Text fx:id="content" layoutX="28.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="本协议是您(个人或单一实体)与软件作者《六安柠檬网络有限公司》的法律协议，其中包含软件开发商软件作者对用户的承诺、技术支持以及软件升级的说明，请认真阅读。 &#10;该软件包括计算机软件，以及联机的电子文档(下称“软件产品”或“软件”)。一旦安装、复制或以其他方式使用本软件产品，即表示同意接受协议各项条件的约束。&#10;如果您不同意协议的条件，则不能获得使用本软件产品的权力。 &#10;1.本软件产品的版权归软件作者所有，受到适用版权法及其他知识产权法及条约的保护。 &#10;2.软件持有者修改该程序，从而对您的网站或计算机造成严重后果的本公司概不负责。&#10;3.您不得: &#10; (1)删除本软件及其他副本上一切关于版权的信息； &#10; (2)销售、出租此软件产品的任何部分； &#10; (3)制作和提供该软件的注册机及破解程序； &#10; (4)未经本公司同意，不得随意传播该软件。&#10; (5)对本软件进行反向工程，如反汇编、反编译等。 &#10;4.如果您未遵守本协议的任一条款，软件作者有权立即终止本协议，且您必须立即终止使用本软件并销毁本软件产品的所有副本。这项要求对各种拷贝形式有效。 &#10;5.使用风险： &#10;使用本软件产品的未注册版本由您自己承担风险。在适用法律允许的最大范围内，软件作者在任何情况下不就因使用或不能使用本软件产品的未注册版本所发生的特殊的、&#10;意外的、直接或间接的损失承担赔偿责任。即使已事先被告知该损害发生的可能性。因此，未注册用户在使用本软件时由于意外事故、操作不当或使用错误所引起的故障甚至损坏，软件作者及共享版提供者均不承担任何责任。 &#10;注册用户在使用本软件时由于意外事故、操作不当或使用错误所引起的故障，由《六安柠檬网络科技有限公司》技术支持工程师通过电子邮件帮助用户进行恢复、修复等处理。 &#10;6.售后服务：注册用户在使用本软件的过程中遇到任何使用问题均可通过电子邮件与我们联系以获取技术支持和保障。&#10;7.盗版用户：使用盗版的本软件产品的一切后果由使用者自己承担。对于使用盗版的该软件产品对使用者操作系统造成的故障及损害，软件作者不承担任何责任。 &#10;8.补充：若您对本协议内容有任何疑问，可与lemonnt@lemonnt.com 联系。" wrappingWidth="848.6708984375" />
+         </children>
+      </Pane>
+      <Pane fx:id="confirmPane" layoutY="636.0" prefHeight="64.0" prefWidth="900.0">
+         <children>
+            <Text fx:id="confirmText" layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OK" textAlignment="CENTER" wrappingWidth="850.6708984375" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+         <!--  
+      <Pane fx:id="cancelPane" layoutX="190.0" layoutY="137.0" prefHeight="64.0" prefWidth="210.0">
+         <children>
+            <Text fx:id="cancelText" layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cancel" textAlignment="CENTER" wrappingWidth="175.6708984375" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>-->
+   </children>
+</Pane>

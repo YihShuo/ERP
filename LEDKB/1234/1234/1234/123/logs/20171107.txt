@@ -1,0 +1,7 @@
+=================================
+Time:14:00:10:794
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 00A699EF in module 'X Show 2015(V5.0.4.9).exe'. Write of address 00000034
+ToString:Access violation at address 00A699EF in module 'X Show 2015(V5.0.4.9).exe'. Write of address 00000034
+=================================

@@ -1,0 +1,184 @@
+2019-03-27 13:22:04,257 - lemonnt
+2019-03-27 13:22:04,294 - false
+2019-03-27 13:22:04,696 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-03-27 13:22:04,720 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-03-27 13:22:04,723 - Obtain the parameters  : [DIGITNUMBER]
+2019-03-27 13:22:04,731 - Obtain the env parameters  : [4]
+2019-03-27 13:22:04,921 - Success to query records [1]
+2019-03-27 13:22:04,924 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-03-27 13:22:05,430 - Obtain the parameters  : [SYSTEMNAME]
+2019-03-27 13:22:05,450 - Obtain the parameters  : [null]
+2019-03-27 13:22:05,597 - Obtain the parameters  : [MONITORINTRVAL]
+2019-03-27 13:22:05,605 - Obtain the parameters  : [null]
+2019-03-27 13:22:05,609 - Monitor Interval : [10s]
+2019-03-27 13:22:12,802 - Success to query records [1]
+2019-03-27 13:22:12,828 - Success to query records [1]
+2019-03-27 13:22:12,829 - start : 0, end : 1
+2019-03-27 13:22:16,373 - Success to query records [1]
+2019-03-27 13:22:18,753 - start : 0, end : 0
+2019-03-27 13:22:40,801 - Success save the system setting
+2019-03-27 13:22:43,061 - Success to query records [1]
+2019-03-27 13:22:43,077 - Success to query records [1]
+2019-03-27 13:22:43,079 - start : 0, end : 1
+2019-03-27 13:22:45,598 - Success to query records [1]
+2019-03-27 13:22:45,625 - Success to query records [1]
+2019-03-27 13:22:48,542 - Update by the id [4] ,tableName [plugins]
+2019-03-27 13:22:50,625 - The name of plugin is [1111]
+2019-03-27 13:22:50,625 - The name of pluginType is [db]
+2019-03-27 13:22:50,641 - Success to query records [1]
+2019-03-27 13:22:51,913 - Obtain the parameters  : [SENDDELAY]
+2019-03-27 13:22:51,920 - Obtain the parameters  : [null]
+2019-03-27 13:22:52,180 - Success to get SqlsessionFactory [webDB]
+2019-03-27 13:22:52,259 - It's going to parsing : C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties
+2019-03-27 13:22:52,260 - It has been parsed ,following [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-03-27 13:22:52,263 - It has been loaded ,following : [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-03-27 13:22:52,264 - {"pluginName":"1111","properties":{"dotBit":"#.00","webDB.connection.password":"pass","webDB.connection.driverClassName":"oracle.jdbc.driver.OracleDriver","showElements":"C,Mn,Si,P,S,Ni,Cr,Cu,Mo,V,Ti,Al,Nb,As,Sn,Pb,Sb,Bi","webDB.connection.username":"test","webDB.connection.url":"jdbc:oracle:thin:@//10.224.38.97:2702/frwd.webex.com"}}
+2019-03-27 13:22:52,272 - Success to query records [1]
+2019-03-27 13:22:52,278 - Success to query records [1]
+2019-03-27 13:22:52,283 - Success to query records [1]
+2019-03-27 13:23:02,316 - java.lang.reflect.InvocationTargetException
+2019-03-27 13:23:02,316 - java.lang.NullPointerException
+2019-03-27 13:23:12,306 - java.lang.reflect.InvocationTargetException
+2019-03-27 13:23:12,306 - java.lang.NullPointerException
+2019-03-27 13:23:22,295 - java.lang.reflect.InvocationTargetException
+2019-03-27 13:23:22,296 - java.lang.NullPointerException
+2019-03-27 13:23:30,100 - The name of plugin is [1111]
+2019-03-27 13:23:30,101 - The name of pluginType is [db]
+2019-03-27 13:23:31,152 - Force stop the timeExecute []
+2019-03-27 13:25:55,972 - lemonnt
+2019-03-27 13:25:56,016 - false
+2019-03-27 13:25:56,268 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-03-27 13:25:56,303 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-03-27 13:25:56,360 - Obtain the parameters  : [DIGITNUMBER]
+2019-03-27 13:25:56,394 - Obtain the env parameters  : [4]
+2019-03-27 13:25:56,591 - Success to query records [1]
+2019-03-27 13:25:56,600 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-03-27 13:25:56,907 - Obtain the parameters  : [SYSTEMNAME]
+2019-03-27 13:25:56,915 - Obtain the parameters  : [null]
+2019-03-27 13:25:57,059 - Obtain the parameters  : [MONITORINTRVAL]
+2019-03-27 13:25:57,071 - Obtain the parameters  : [null]
+2019-03-27 13:25:57,075 - Monitor Interval : [10s]
+2019-03-27 13:26:01,146 - Success to query records [1]
+2019-03-27 13:26:01,180 - Success to query records [1]
+2019-03-27 13:26:01,181 - start : 0, end : 1
+2019-03-27 13:26:02,880 - The name of plugin is [1111]
+2019-03-27 13:26:02,880 - The name of pluginType is [db]
+2019-03-27 13:26:02,888 - Success to query records [1]
+2019-03-27 13:26:04,047 - Obtain the parameters  : [SENDDELAY]
+2019-03-27 13:26:04,052 - Obtain the parameters  : [null]
+2019-03-27 13:26:04,263 - Success to get SqlsessionFactory [webDB]
+2019-03-27 13:26:04,343 - It's going to parsing : C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties
+2019-03-27 13:26:04,344 - It has been parsed ,following [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-03-27 13:26:04,346 - It has been loaded ,following : [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-03-27 13:26:04,347 - {"pluginName":"1111","properties":{"dotBit":"#.00","webDB.connection.password":"pass","webDB.connection.driverClassName":"oracle.jdbc.driver.OracleDriver","showElements":"C,Mn,Si,P,S,Ni,Cr,Cu,Mo,V,Ti,Al,Nb,As,Sn,Pb,Sb,Bi","webDB.connection.username":"test","webDB.connection.url":"jdbc:oracle:thin:@//10.224.38.97:2702/frwd.webex.com"}}
+2019-03-27 13:26:04,357 - Success to query records [1]
+2019-03-27 13:26:04,364 - Success to query records [1]
+2019-03-27 13:26:04,372 - Success to query records [1]
+2019-03-27 13:26:15,656 - Send with UDP
+2019-03-27 13:26:15,660 - Send the content for the msg [%ForwardSubjectDesc%Join me now in my Personal Room], and the location ID [0]
+2019-03-27 13:26:15,661 - Send the messages have been format: [KLB0001000000570057000000%ForwardSubjectDesc%Join me now in my Personal RoomKLE70]
+2019-03-27 13:26:15,671 - Success to send the datums
+2019-03-27 13:26:24,675 - Send with UDP
+2019-03-27 13:26:24,676 - Send the content for the msg [%ForwardSubjectDesc%Join me now in my Personal Room], and the location ID [0]
+2019-03-27 13:26:24,676 - Send the messages have been format: [KLB0001000000570057000000%ForwardSubjectDesc%Join me now in my Personal RoomKLE70]
+2019-03-27 13:26:24,677 - Success to send the datums
+2019-03-27 13:26:34,543 - Send with UDP
+2019-03-27 13:26:34,544 - Send the content for the msg [%ForwardSubjectDesc%Join me now in my Personal Room], and the location ID [0]
+2019-03-27 13:26:34,545 - Send the messages have been format: [KLB0001000000570057000000%ForwardSubjectDesc%Join me now in my Personal RoomKLE70]
+2019-03-27 13:26:34,546 - Success to send the datums
+2019-03-27 13:26:44,530 - Send with UDP
+2019-03-27 13:26:44,531 - Send the content for the msg [%ForwardSubjectDesc%Join me now in my Personal Room], and the location ID [0]
+2019-03-27 13:26:44,531 - Send the messages have been format: [KLB0001000000570057000000%ForwardSubjectDesc%Join me now in my Personal RoomKLE70]
+2019-03-27 13:26:44,532 - Success to send the datums
+2019-03-27 13:26:54,537 - Send with UDP
+2019-03-27 13:26:54,538 - Send the content for the msg [%ForwardSubjectDesc%Join me now in my Personal Room], and the location ID [0]
+2019-03-27 13:26:54,539 - Send the messages have been format: [KLB0001000000570057000000%ForwardSubjectDesc%Join me now in my Personal RoomKLE70]
+2019-03-27 13:26:54,540 - Success to send the datums
+2019-03-27 13:26:55,134 - Success to query records [1]
+2019-03-27 13:26:55,144 - Success to query records [1]
+2019-03-27 13:26:55,145 - start : 0, end : 1
+2019-03-27 13:26:56,602 - Success to query records [5]
+2019-03-27 13:26:56,629 - Success to query records [5]
+2019-03-27 13:26:56,632 - start : 0, end : 5
+2019-03-27 13:27:04,546 - Send with UDP
+2019-03-27 13:27:04,546 - Send the content for the msg [%ForwardSubjectDesc%Join me now in my Personal Room], and the location ID [0]
+2019-03-27 13:27:04,547 - Send the messages have been format: [KLB0001000000570057000000%ForwardSubjectDesc%Join me now in my Personal RoomKLE70]
+2019-03-27 13:27:04,549 - Success to send the datums
+2019-03-27 17:49:34,763 - lemonnt
+2019-03-27 17:49:34,798 - false
+2019-03-27 17:49:35,045 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-03-27 17:49:35,058 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-03-27 17:49:35,084 - Obtain the parameters  : [DIGITNUMBER]
+2019-03-27 17:49:35,092 - Obtain the env parameters  : [4]
+2019-03-27 17:49:35,256 - Success to query records [1]
+2019-03-27 17:49:35,258 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-03-27 17:49:35,646 - Obtain the parameters  : [SYSTEMNAME]
+2019-03-27 17:49:35,652 - Obtain the parameters  : [null]
+2019-03-27 17:49:35,819 - Obtain the parameters  : [MONITORINTRVAL]
+2019-03-27 17:49:35,828 - Obtain the parameters  : [null]
+2019-03-27 17:49:35,834 - Monitor Interval : [10s]
+2019-03-27 17:49:38,216 - Success to query records [1]
+2019-03-27 17:49:38,257 - Success to query records [1]
+2019-03-27 17:49:38,259 - start : 0, end : 1
+2019-03-27 17:49:40,061 - The name of plugin is [1111]
+2019-03-27 17:49:40,062 - The name of pluginType is [db]
+2019-03-27 17:49:40,070 - Success to query records [1]
+2019-03-27 17:49:42,473 - Obtain the parameters  : [SENDDELAY]
+2019-03-27 17:49:42,481 - Obtain the parameters  : [null]
+2019-03-27 17:49:42,838 - Success to get SqlsessionFactory [webDB]
+2019-03-27 17:49:42,973 - It's going to parsing : C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties
+2019-03-27 17:49:42,992 - It has been parsed ,following [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-03-27 17:49:42,998 - It has been loaded ,following : [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-03-27 17:49:43,017 - {"pluginName":"1111","properties":{"dotBit":"#.00","webDB.connection.password":"sy","webDB.connection.driverClassName":"com.microsoft.sqlserver.jdbc.SQLServerDriver","showElements":"C,Mn,Si,P,S,Ni,Cr,Cu,Mo,V,Ti,Al,Nb,As,Sn,Pb,Sb,Bi","webDB.connection.username":"sa","webDB.connection.url":"jdbc:sqlserver://192.168.10.10:1433;DatabaseName=fxjl"}}
+2019-03-27 17:49:43,032 - Success to query records [1]
+2019-03-27 17:49:43,057 - Success to query records [1]
+2019-03-27 17:49:43,087 - Success to query records [1]
+2019-03-27 17:49:44,089 - ShowElements [[C, MN, SI, P, S, NI, CR, CU, MO, V, TI, AL, NB, AS, SN, PB, SB, BI]]
+2019-03-27 17:49:44,089 - DotBit [#.00]
+2019-03-27 17:49:44,120 - java.lang.reflect.InvocationTargetException
+2019-03-27 17:49:44,120 - 
+2019-03-27 17:49:44,120 - java.lang.NullPointerException
+2019-03-27 17:49:54,105 - java.lang.reflect.InvocationTargetException
+2019-03-27 17:49:54,105 - 
+2019-03-27 17:49:54,105 - java.lang.NullPointerException
+2019-03-27 17:50:04,101 - java.lang.reflect.InvocationTargetException
+2019-03-27 17:50:04,101 - 
+2019-03-27 17:50:04,101 - java.lang.NullPointerException
+2019-03-27 17:50:14,102 - java.lang.reflect.InvocationTargetException
+2019-03-27 17:50:14,102 - 
+2019-03-27 17:50:14,102 - java.lang.NullPointerException
+2019-03-27 17:50:14,936 - The name of plugin is [1111]
+2019-03-27 17:50:14,937 - The name of pluginType is [db]
+2019-03-27 17:50:19,678 - Success to query records [1]
+2019-03-27 17:50:24,102 - java.lang.reflect.InvocationTargetException
+2019-03-27 17:50:24,102 - 
+2019-03-27 17:50:24,102 - java.lang.NullPointerException
+2019-03-27 17:50:25,580 - The name of plugin is [1111]
+2019-03-27 17:50:25,585 - The name of pluginType is [db]
+2019-03-27 17:50:26,653 - Force stop the timeExecute []
+2019-03-27 17:55:22,346 - lemonnt
+2019-03-27 17:55:22,381 - false
+2019-03-27 17:55:22,600 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-03-27 17:55:22,611 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-03-27 17:55:22,628 - Obtain the parameters  : [DIGITNUMBER]
+2019-03-27 17:55:22,635 - Obtain the env parameters  : [4]
+2019-03-27 17:55:22,782 - Success to query records [1]
+2019-03-27 17:55:22,783 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-03-27 17:55:23,103 - Obtain the parameters  : [SYSTEMNAME]
+2019-03-27 17:55:23,108 - Obtain the parameters  : [null]
+2019-03-27 17:55:23,246 - Obtain the parameters  : [MONITORINTRVAL]
+2019-03-27 17:55:23,255 - Obtain the parameters  : [null]
+2019-03-27 17:55:23,260 - Monitor Interval : [10s]
+2019-03-27 18:00:30,329 - lemonnt
+2019-03-27 18:00:30,652 - false
+2019-03-27 18:00:31,712 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-03-27 18:00:31,852 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-03-27 18:00:31,923 - Obtain the parameters  : [DIGITNUMBER]
+2019-03-27 18:00:32,018 - Obtain the env parameters  : [4]
+2019-03-27 18:00:32,925 - Success to query records [1]
+2019-03-27 18:00:33,019 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-03-27 18:00:34,863 - Obtain the parameters  : [SYSTEMNAME]
+2019-03-27 18:00:34,958 - Obtain the parameters  : [null]
+2019-03-27 18:00:35,945 - Obtain the parameters  : [MONITORINTRVAL]
+2019-03-27 18:00:36,053 - Obtain the parameters  : [null]
+2019-03-27 18:00:36,192 - Monitor Interval : [10s]

@@ -1,0 +1,2205 @@
+<?xml version="1.0"?>
+<Languages>
+<!--修改记录>
+41399
+1. 校时调试，节点<TDlgProtocolSetDateTime>
+增加<btnGetSystemTime>
+2. 通讯参数设置窗口，GPRS页，节点<TDlgNetworkSetting>
+增加<LabelDeviceId>
+3. 定时开关调试，节点<TDlgProtocolOnOff>
+增加<chkAutoOnOff>
+4. 区域显示参数设置，主界面，节点<TMainForm>
+增加<chkContinuousLeft>,<chkContinuousTop>
+41398
+1. 增加表格编辑器语言
+节点：<CGridEditorMainForm>,<CGridEditorInsertCells>,<CGridEditorDeleteCells>
+2. USB导出界面，节点<TDlgUsbForm>
+增加<LabelUsbFreeSize>,<LabelUsbFileSystem>,<LabelDateTimeNoChange>,<LabelLightNoChange>,<LabelOnOffNoChange>
+3. 定时开关调试，节点<TDlgProtocolOnOff>
+增加<MemoHelp>
+4. 亮度调节调试，节点<TDlgProtocolSetLight>
+增加<MemoHelp>
+5. 校时调试，节点<TDlgProtocolSetDateTime>
+增加<MemoHelp>
+6. 屏幕参数设置，节点<TdlgMonitorSetting>
+增加<chkDotFrequencyAuto>,<chkLineBlankingAuto>
+7. 图文区域编辑选项界面，<TFrameOptionPicture>
+增加<ToolButtonNewRtf>,<ToolButtonAddPicture>,<ToolButtonAddGrid>
+<ToolButtonAddWord>,<ToolButtonAddExcel>,<ToolButtonDelete>,
+<ToolButtonUp>,<ToolButtonDown>
+<chkShowPath>
+8. 主界面工具条，<TMainForm>
+增加 <ToolButtonTiming>,<ToolButtonSeDateTime>,<ToolButtonSetLight>
+<ToolButtonOnOff>
+<修改记录-->
+<!--这个文件定义中文简体-->
+<!-- Messages段定义一些信息提示信息-->
+<Messages>
+<!--;通用消息-->
+<Comm>
+<Comm.InitFail>Başlatma başarısız oldu!</Comm.InitFail>
+<!--图文编辑添加文本文件时打开文件对话框的文件扩展名提示-->
+<FileFilterText>Metin dosyası (*.txt)</FileFilterText>
+<!--图文编辑添加RTF文件时打开文件对话框的文件扩展名提示-->
+<FileFilterRTF>RTF dosyası (*.rtf)</FileFilterRTF>
+<OpenRtfFail>Okuma RTF dosyası başarısız oldu!</OpenRtfFail>
+<!--图文编辑添加图片文件时打开文件对话框的文件扩展名提示-->
+<FileFilterPicture>Resim dosyaları(*.BMP;*.JPG;*.GIF;*.PNG)</FileFilterPicture>
+<OpenPictureFail>Görüntü dosyası okunamıyor!</OpenPictureFail>
+<!--图文编辑添加WORD文件时打开文件对话框的文件扩展名提示-->
+<FileFilterWord>Word belgesi(*.doc;*.docx)|*.doc;*.docx|WPS(*.wps)|*.wps|</FileFilterWord>
+<OpenWordFail>Word belgeleri okuyamaz, Word yüklemek emin olun!</OpenWordFail>
+<!--图文编辑添加EXCEL文件时打开文件对话框的文件扩展名提示-->
+<FileFilterExcel>Excel belgeleri (*.xls;*.xlsx)|WPS(*.et)|*.et|</FileFilterExcel>
+<OpenExcelFail>Excel belgeleri okunamıyor! >>%s</OpenExcelFail>
+<!-- 工程打开保存的提示信息-->
+<SaveProjectFail>Proje kaydedilemedi!</SaveProjectFail>
+<CreateDirFail>Dizin oluşturulamadı!</CreateDirFail>
+<OpenProjectFail>Proje açılamadı!</OpenProjectFail>
+<ErrorProjectVersion>Proje dosya sürümü tanımıyor!</ErrorProjectVersion>
+<ErrorProjectFile>Proje dosyası bozuk!</ErrorProjectFile>
+<!--;提示保存工程-->
+<ProjectChangedPrompt>Proje aynı zamanda değişti, kaydetmek?</ProjectChangedPrompt>
+<!--;默认的新工程-->
+<NewProjectName>(Yeni Yapıtlar)</NewProjectName>
+<!--;工程没有内容-->
+<ProjectNull>Içerik kaydedilebilir yok!</ProjectNull>
+<Unknown>Bilinmeyen</Unknown>
+<!--通讯时的些操作信息-->
+<ProtocolTestStart>Kontrol kartına bağlı olmak, lütfen bekleyin ...</ProtocolTestStart>
+<ProtocolSuccess>Kontrol kartı başarısı bağlayın.</ProtocolSuccess>
+<ProtocolFail>Işlemi başarısız olur, seri port kontrol veya ağ normaldir.</ProtocolFail>
+<ErrorComPort>Geçersiz seri numarası%s! Iletişim parametreleri set kontrol edin!</ErrorComPort>
+<ProtocolReadyFail>Aygıt hazır değil! Seri port veya ağ normaldir kontrol edin.</ProtocolReadyFail>
+<ProtocolOnScreenSuccess>Açılış ekranı!</ProtocolOnScreenSuccess>
+<ProtocolOffScreenSuccess>Ekran dışı başarı!</ProtocolOffScreenSuccess>
+<ProtocolSetAutoOnOff>Zamanlayıcı anahtarı ekran başarı ayarlayın.</ProtocolSetAutoOnOff>
+<ProtocolReadParamsSuccess>Parametre geri okuma başarı.</ProtocolReadParamsSuccess>
+<ProgressPrompt>İlerleme oranı:</ProgressPrompt>
+<RemainTimePrompt>Zaman kalan:%d saniye</RemainTimePrompt>
+<MakingMonitorFile>Ekran parametre dosyası oluşturulur ediliyor ...</MakingMonitorFile>
+<SendingMonitorFile>Ekran parametre dosya gönderiliyor ...</SendingMonitorFile>
+<MakingDataFile>Içerik verilerini oluşturulan ...</MakingDataFile>
+<DataFileOutofCapacity>İletim, kalan kapasite kartı dışında gönderilen içerik boyutu başarısız olur.</DataFileOutofCapacity>
+<SendingDataFile>İçerik veri hazır, göndermeye başlayabilirsiniz ...</SendingDataFile>
+<SendDataFileSuccess>Başarıyla gönderildi.</SendDataFileSuccess>
+<SendDataFileFail>%s: iletim, hatanın nedeni başarısız olur.</SendDataFileFail>
+<ProtocolReadParamsSuccess>Parametre geri okuma başarı.</ProtocolReadParamsSuccess>
+<SaveScanSetInfoFail>Kaydet Tarama modu ayarları başarısız oldu:%s</SaveScanSetInfoFail>
+<ConfDeleteScanSetInfo>Eğer bunu silmek istediğinizden emin olun?</ConfDeleteScanSetInfo>
+<CreateCommFail>Oluşturma iletişim bileşenleri başarısız oldu!</CreateCommFail>
+<!--;默认字体-->
+<DefaultFontName>Arial</DefaultFontName>
+<DefaultFontSize>10</DefaultFontSize>
+<!--;颜色列表-->
+<ColorList>
+<Item>Monokrom</Item>
+<Item>Rengi</Item>
+<Item>Gökkuşağı</Item>
+<Item>Full Color</Item>
+</ColorList>
+<!--;单基色颜色列表-->
+<SingleColorList>
+<Item>Kırmızı</Item>
+</SingleColorList>
+<!--;双基色颜色列表-->
+<DoubleColorList>
+<Item>Kırmızı</Item>
+<Item>Sarı</Item>
+<Item>Yeşil</Item>
+</DoubleColorList>
+<!--;全彩色颜色列表-->
+<SevenColorList>
+<Item>Kırmızı</Item>
+<Item>Sarı</Item>
+<Item>Yeşil</Item>
+</SevenColorList>
+<!--;灰度列表-->
+<ColorGrayList>
+<Item>Gri</Item>
+<Item>32</Item>
+<Item>256</Item>
+</ColorGrayList>
+<!--;计时区域的显示格式-->
+<TimingDayLabel>Gün</TimingDayLabel>
+<TimingDayFormat>%d%s</TimingDayFormat>
+<TimingHourLabel>Zaman</TimingHourLabel>
+<TimingHourFormat>%d%s</TimingHourFormat>
+<TimingMinuteLabel>Dakika</TimingMinuteLabel>
+<TimingMinuteFormat>%d%s</TimingMinuteFormat>
+<TimingSecondLabel>Ikinci</TimingSecondLabel>
+<TimingSecondFormat>%d saniye</TimingSecondFormat>
+<!--集群操作信息-->
+<GprsValidateError>GPRS hesabı şifre yanlış doğrulamak!</GprsValidateError>
+<GprsConnectError>GPRS sunucu bağlanamıyor!</GprsConnectError>
+<GprsImeiError>GPRS iletişim kullanarak, ekran adı DTU 15 IMEI numarası olmalıdır.</GprsImeiError>
+<NoGprsIdFilterFile>GPRS filtre dosya eksikliği!</NoGprsIdFilterFile>
+<UpdateGprsCardsCompleted>Küme çevrimiçi listenin tamamlanması alın</UpdateGprsCardsCompleted>
+<UpdateGprsCardsError>Bağlantı hatası, bir küme yeniden elde edin.</UpdateGprsCardsError>
+<ConnectingColonyServer>Küme sunucuları, lütfen bekleyin ...</ConnectingColonyServer>
+<ConnectColonyServerSuccess>Kümedeki sunucuların başarısı.</ConnectColonyServerSuccess>
+<ConnectColonyServerFail>Küme sunucuya bağlanamıyor.</ConnectColonyServerFail>
+<PromptSelectColonyCommandItem>Bir komut girişi çalıştırmak için ihtiyaç seçin.</PromptSelectColonyCommandItem>
+<ColonyCommandOutofCapacity>Komut başarısız olur yürütmek, {0} ekran üretilen veri boyutu adı kartın kapasitesinin boyutunu aşıyor.</ColonyCommandOutofCapacity>
+<PromptColonyCloneOnlyOneRegion>Alt ekran adaptif ana ekran modunda, yalnızca bir grafik alanı oluşturabilir ve alan büyüklüğü ekran boyutu için mevcut olmalıdır.</PromptColonyCloneOnlyOneRegion>
+<SendColonyCommandSuccess>Gerçekleştirin küme komut başarılı.</SendColonyCommandSuccess>
+<SendColonyCommandFail>Küme komut başarısız olur.</SendColonyCommandFail>
+<PromptColonyVetifyNullIp>Sunucu adresi boş olamaz!</PromptColonyVetifyNullIp>
+<PromptColonyVetifyNullPassword>Sunucu şifresi boş olamaz!</PromptColonyVetifyNullPassword>
+<ColonyVetifyInvalidPassword>Şifre yanlış.</ColonyVetifyInvalidPassword>
+<ColonyVetiryServerError>Sunucu işlemleri başarısız.</ColonyVetiryServerError>
+<GprsColonyOperationReady>Hazır</GprsColonyOperationReady>
+<!--扫描信息的名称描述-->
+<ScanSetName1>01) P10 12 arayüzü monokrom</ScanSetName1>
+<!--未知的扫描方式名称-->
+<UnknownScanSetName>Bilinmeyen tarama</UnknownScanSetName>
+<!--协议名称-->
+<ProtocolSerialPort>Seri portlar</ProtocolSerialPort>
+<ProtocolNet>Ağ bağlantı noktası</ProtocolNet>
+<ProtocolDirectNet>Ağ bağlantı noktası doğrudan bağlı</ProtocolDirectNet>
+<ProtocolGprs>GPRS</ProtocolGprs>
+<ProtocolUnknown>Bilinmeyen</ProtocolUnknown>
+<!--2013-04-09-->
+<!--通讯测试错误-->
+<UnauthorizedAccessReplyPacket>Geçerli bir yanıt paketi değil.</UnauthorizedAccessReplyPacket>
+<OpenPortFail>Başarısız seri port açın.</OpenPortFail>
+<CancelSending>Gönderme iptal.</CancelSending>
+<CreateFail>Bir iletişim bileşeni başarısız oluşturun</CreateFail>
+<SocketError>Şebeke hatası</SocketError>
+<ColonyNotExists>Küme terminali yok</ColonyNotExists>
+<ColonyOffline>Küme terminal hattı</ColonyOffline>
+<ColonyBusy>Küme hattı meşgul</ColonyBusy>
+</Comm>
+</Messages>
+<!-- 以下是窗口界面的文字信息-->
+<!-- 其中的<Messages>段是一些提示信息, 其他段是界面上控件的文字信息-->
+<!-- 主窗口-->
+<TMainForm>
+<!-- 标题栏-->
+<Caption>X Show yazılım</Caption>
+<Messages>
+<LoadSystemConfigFail>Sistem yapılandırma hatası yükleme!</LoadSystemConfigFail>
+<MonitorName>Ekran%d</MonitorName>
+<ProgramName>Program%d</ProgramName>
+<RegionNamePicture>Grafik%d</RegionNamePicture>
+<RegionNameText>Altyazı%d</RegionNameText>
+<RegionNameFlashText>Animasyon kelime%d</RegionNameFlashText>
+<RegionNameClock>Saat%d</RegionNameClock>
+<RegionNameWatch>Dial%d</RegionNameWatch>
+<RegionNameTiming>Zamanlama%d</RegionNameTiming>
+<RegionNameDefaul>Bölge%d</RegionNameDefaul>
+<AskToSelectOneTreeNode>Bir düğüm seçin!</AskToSelectOneTreeNode>
+<WarnOnDeleteOneMonitor>Silinemez, proje en az bir ekran olmalı!</WarnOnDeleteOneMonitor>
+<ConfDeleteProgramListNode>Eğer bunu silmek istediğinizden emin olun?</ConfDeleteProgramListNode>
+<!--有重叠区域-->
+<RegionOverlapping>Operasyon,%s başarısız oldu: üst üste bölgeleri içeren.</RegionOverlapping>
+<!--导入U盘时如果没有选择屏幕提示-->
+<AskToSelectMonitor>Bir ekran seçin!</AskToSelectMonitor>
+<!--显示区域页数信息-->
+<RegionPagesInfo>Sayfa%d /%d sayfa</RegionPagesInfo>
+<!--对象克隆后加的前缀 -->
+<CloneAddText>Kopyalama</CloneAddText>
+<!--超出节目数提示-->
+<MaxProgramCountInfo>Maksimum destek%d programları!</MaxProgramCountInfo>
+<!--超出区域数提示-->
+<MaxRegionCountInfo>Maksimum destek%d bölge!</MaxRegionCountInfo>
+<!--超出具体区域数提示-->
+<MaxRegionDetailCountInfo>Bölgenin en büyük destek%d!</MaxRegionDetailCountInfo>
+<MaxSpeedNote>(Hızlı)</MaxSpeedNote>
+<MinSpeedNote>(En yavaş)</MinSpeedNote>
+<!--屏幕名称不允许重复-->
+<ScreeNameRepeat>Ekran adı tekrar izin verilmez!</ScreeNameRepeat>
+<!--检测空区域-->
+<HaveNoRegions>Mevcut program alanı! Çalışması mümkün!</HaveNoRegions>
+<AllRegionsIsNull>Programın tüm alanlar boş! Çalışması mümkün!</AllRegionsIsNull>
+<ConfHaveNulRegions>Algılanan boş başlıkları, veya grafik alanında çalışmaya devam etmenin?</ConfHaveNulRegions>
+</Messages>
+<!--另存工程对话框-->
+<dlgSave>
+<Project>
+<Filter>Proje Kalerka dosyası</Filter>
+</Project>
+<SaveProject>
+<Title>As Proje Kaydet ...</Title>
+</SaveProject>
+<SaveAsProject>
+<Title>Olarak Projeyi kaydedin ...</Title>
+</SaveAsProject>
+</dlgSave>
+<dlgOpen>
+<OpenProject>
+<Title>Projeyi açın ...</Title>
+</OpenProject>
+</dlgOpen>
+<!--节目管理按钮-->
+<btnProgramList>
+<Caption>Program yönetimi</Caption>
+</btnProgramList>
+<!--节目管理树右键菜单-->
+<PopupMenuTreeProgramList>
+<Items>
+<Item>Hareket</Item>
+<Item>Aşağı</Item>
+<Item>-</Item>
+<Item>Silmek</Item>
+<Item>Kopyalama</Item>
+<Item>Sopa</Item>
+<Item>-</Item>
+<Item>Genişleme</Item>
+<Item>Çöküş</Item>
+<Item>-</Item>
+<Item>Yeni ad vermek</Item>
+<Item>-</Item>
+<Item>Clone ekran</Item>
+</Items>
+</PopupMenuTreeProgramList>
+<!--图片资源库按钮-->
+<btnPictures>
+<Caption>Resim kaynak kütüphanesi</Caption>
+</btnPictures>
+<!--图片资源库树-->
+<treePictures>
+<Items>
+<Item>
+<Text>Resim</Text>
+<Items>
+<Item>Olimpiyat</Item>
+<Item>İşaretle</Item>
+<Item>Oklar</Item>
+<Item>Statik logo</Item>
+<Item>Yıldızlar ve başlık</Item>
+<Item>Özel karakterler</Item>
+<Item>Simge</Item>
+<Item>Hayat</Item>
+</Items>
+</Item>
+<Item>
+<Text>Animasyon</Text>
+<Items>
+<Item>Logo animasyon</Item>
+<Item>Ifade</Item>
+</Items>
+</Item>
+</Items>
+</treePictures>
+<!--主工具条的按钮-->
+<ToolButtonProgram>
+<Caption>Program</Caption>
+<Hint>Program</Hint>
+</ToolButtonProgram>
+<ToolButtonDynamicBackground>
+<Caption>Dinamik Arkaplan</Caption>
+<Hint>Dinamik Arkaplan</Hint>
+</ToolButtonDynamicBackground>
+<ToolButtonPicture>
+<Caption>Grafik</Caption>
+<Hint>Grafik</Hint>
+</ToolButtonPicture>
+<ToolButtonText>
+<Caption>Altyazı</Caption>
+<Hint>Altyazı</Hint>
+</ToolButtonText>
+<ToolButtonFlashText>
+<Caption>Animasyon kelime</Caption>
+<Hint>Animasyon kelime</Hint>
+</ToolButtonFlashText>
+<ToolButtonClock>
+<Caption>Saat</Caption>
+<Hint>Saat</Hint>
+</ToolButtonClock>
+<ToolButtonWatch>
+<Caption>Kadran</Caption>
+<Hint>Kadran</Hint>
+</ToolButtonWatch>
+<ToolButtonDelete>
+<Caption>Silmek</Caption>
+<Hint>Silmek</Hint>
+</ToolButtonDelete>
+<ToolButtonPreview>
+<Caption>Önizleme</Caption>
+<Hint>Önizleme</Hint>
+<Caption1>Durdurmak</Caption1>
+<Hint1>Durdurmak</Hint1>
+</ToolButtonPreview>
+<ToolButtonSend>
+<Caption>Göndermek</Caption>
+<Hint>Göndermek</Hint>
+</ToolButtonSend>
+<ToolButtonUSB>
+<Caption>USB</Caption>
+<Hint>USB</Hint>
+</ToolButtonUSB>
+<ToolButtonSearchCard>
+<Caption>Ekranı kontrol edin</Caption>
+<Hint>Ekranı kontrol edin</Hint>
+</ToolButtonSearchCard>
+<!-- 2013.5.4 增加-->
+<ToolButtonTiming>
+<Caption>Zamanlama</Caption>
+<Hint>Zamanlama</Hint>
+</ToolButtonTiming>
+<ToolButtonSeDateTime>
+<Caption>Zamanlama</Caption>
+<Hint>Zamanlama</Hint>
+</ToolButtonSeDateTime>
+<ToolButtonSetLight>
+<Caption>Parlaklık</Caption>
+<Hint>Parlaklık</Hint>
+</ToolButtonSetLight>
+<ToolButtonOnOff>
+<Caption>Zamanlayıcı anahtarı</Caption>
+<Hint>Zamanlayıcı anahtarı</Hint>
+</ToolButtonOnOff>
+<!-- 2013.5.4 增加结束-->
+<!--区域属性操作的工具栏：区域缩放、位置、翻页-->
+<ToolButtonZoomInit>
+<Hint>Orijinal Boyutu</Hint>
+</ToolButtonZoomInit>
+<ToolButtonZoomOut>
+<Hint>Büyütmek</Hint>
+</ToolButtonZoomOut>
+<ToolButtonZoomIn>
+<Hint>Dar</Hint>
+</ToolButtonZoomIn>
+<ToolButtonRegionLeft>
+<Hint>Bölgesel sol</Hint>
+</ToolButtonRegionLeft>
+<ToolButtonRegionRight>
+<Hint>Mesken Bölgesel sağ</Hint>
+</ToolButtonRegionRight>
+<ToolButtonRegionTop>
+<Hint>Bölgesel Top</Hint>
+</ToolButtonRegionTop>
+<ToolButtonRegionBottom>
+<Hint>Bölge sonunda ayarlanır</Hint>
+</ToolButtonRegionBottom>
+<ToolButtonLastRegionPage>
+<Hint>Önceki</Hint>
+</ToolButtonLastRegionPage>
+<ToolButtonNextRegionPage>
+<Hint>Sonraki</Hint>
+</ToolButtonNextRegionPage>
+<!--主菜单-->
+<ActionManagerMain>
+<ActionBars>
+<ActionBar>
+<Items>
+<Item>
+<Caption>Dosya (&amp;F)</Caption>
+<Items>
+<Item>Yeni inşaat (&amp;N)</Item>
+#N/A
+<Item>-</Item>
+<Item>Kaydet(&amp;S) </Item>
+<Item>Farklı kaydet ...</Item>
+<Item>-</Item>
+<Item>ihracat</Item>
+<Item>İthalat</Item>
+<Item>-</Item>
+<Item>Exit (&amp;E)</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Ve Ekle(&amp;I)</Caption>
+<Items>
+<Item>Ekran</Item>
+<Item>Program</Item>
+<Item>Dinamik Arkaplan</Item>
+<Item>-</Item>
+<Item>Altyazı</Item>
+<Item>Grafik</Item>
+<Item>Animasyon kelime</Item>
+<Item>Saat</Item>
+<Item>Kadran</Item>
+<Item>Zamanlama</Item>
+<Item>Sıcaklık</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Set (&amp;S)</Caption>
+<Items>
+<Item>Ekran Parametreler</Item>
+<Item>İletişim parametreleri</Item>
+<Item>-</Item>
+<Item>Kartı IP değiştirin</Item>
+<Item>-</Item>
+<Item>Otomatik olarak birim kurulu yapılandırmak</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Hata ayıklama (&amp;D)</Caption>
+<Items>
+<Item>Zamanlama</Item>
+<Item>Parlaklık ayarı</Item>
+<Item>Talep Modeli</Item>
+<Item>Yazılım anahtarı ekran</Item>
+<Item>-</Item>
+<Item>Önizleme</Item>
+<Item>Göndermek</Item>
+<Item>İthalat U disk</Item>
+<Item>-</Item>
+<Item>Günlüğü Görüntüle</Item>
+</Items>
+</Item>
+<Item>
+<Caption V="0">Kümeleri (&amp;C)</Caption>
+<Items>
+<Item>Sunucu Yapılandırması</Item>
+<Item>Küme Yönetimi</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Dil (&amp;L)</Caption>
+<Items>
+<Item>Otomatik olarak seçer</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Yardım(&amp;A)</Caption>
+</Item>
+</Items>
+</ActionBar>
+</ActionBars>
+</ActionManagerMain>
+<!--基本属性-->
+<GroupBoxBaseInfo>
+<Caption>Temel özellikleri</Caption>
+</GroupBoxBaseInfo>
+<LabelRegionName>
+<Caption>Ad</Caption>
+</LabelRegionName>
+<LabelRegionX>
+<Caption>Konumu X</Caption>
+</LabelRegionX>
+<LabelRegionY>
+<Caption>Pozisyonu Y</Caption>
+</LabelRegionY>
+<LabelRegionWidth>
+<Caption>Genişlik</Caption>
+</LabelRegionWidth>
+<LabelRegionHeight>
+<Caption>Yükseklik</Caption>
+</LabelRegionHeight>
+<!--基本属性-->
+<GroupBoxDisplayInfo>
+<Caption>Görüntü Özellikleri</Caption>
+</GroupBoxDisplayInfo>
+<LabelDisplayMode>
+<Caption>Ekran modu</Caption>
+</LabelDisplayMode>
+<cmbDisplayMode>
+<Items>
+<Item>Rasgele görüntülemek</Item>
+<Item>Yine</Item>
+<Item>Sağa kayar</Item>
+<Item>Sol</Item>
+<Item>Aşağı</Item>
+<Item>Hareket</Item>
+<Item>Sağ kapsama</Item>
+<Item>Sol kapsama</Item>
+<Item>Aşağıdaki kapsama</Item>
+<Item>Kapağında</Item>
+<Item>Yatay açılma</Item>
+<Item>Dikey açılması</Item>
+<Item>Çapraz kapanış</Item>
+<Item>Dikey kapanış</Item>
+<Item>Sağ panjur</Item>
+<Item>Sol panjurlar</Item>
+<Item>Panjur altında</Item>
+<Item>Güneşlik</Item>
+<Item>Titreme</Item>
+<Item>Sağ fırça kelime</Item>
+<Item>Sol Fırça kelime</Item>
+<Item>Fırça sözcüğün altında</Item>
+<Item>Fırça kelime</Item>
+<Item>Sayfa sol</Item>
+<Item>Sağ sonraki sayfada</Item>
+<Item>Havalandırın</Item>
+<Item>Fan kapalı</Item>
+<Item>Sağ elini kullanan</Item>
+<Item>L-</Item>
+<Item>Seviye serpiştirilmiş</Item>
+<Item>Dikey serpiştirilmiş</Item>
+<Item>Perde aşağı kaydırın</Item>
+<Item>Sağ deklanşör</Item>
+<Item>Çerçeve</Item>
+<Item>Anti-beyaz yanıp sönen</Item>
+<Item>Dikdörtgen genişletin</Item>
+<Item>Dikdörtgen daralma</Item>
+<Item>Elmas genişletin</Item>
+<Item>Elmas daralma</Item>
+<Item>Çapraz genişletin</Item>
+<Item>Daralma Çapraz</Item>
+<Item>Sol alt dikdörtgen</Item>
+<Item>Sol üst dikdörtgen</Item>
+<Item>Doğru dikdörtgen indirin</Item>
+<Item>Sağ üst dikdörtgen</Item>
+<Item>Sol alt çizgi</Item>
+<Item>Sol üst çizgi</Item>
+<Item>Sağ alt çizgi</Item>
+<Item>Pozitif eğimli</Item>
+<Item>Xiasha</Item>
+<Item>Çerçeve</Item>
+<Item>Şimdi göster</Item>
+<Item>Boyuna kare</Item>
+</Items>
+</cmbDisplayMode>
+<LabelClearMode>
+<Caption>Tarafından ekranı temizlemek</Caption>
+</LabelClearMode>
+<LabelSpeed>
+<Caption>Hız</Caption>
+</LabelSpeed>
+<cmbSpeed>
+<Items>
+<Item>1 (hızlı)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (yavaş)</Item>
+</Items>
+</cmbSpeed>
+<LabelDisplayDelay>
+<Caption>Süre</Caption>
+</LabelDisplayDelay>
+<LabelDisplayStyle>
+<Caption>Stil</Caption>
+</LabelDisplayStyle>
+<cmbDisplayStyle>
+<Items>
+<Item>Heartbeat</Item>
+<Item>Vals</Item>
+<Item>Sürüklenme</Item>
+<Item>Elektromanyetik dalgalar</Item>
+<Item>Flaş ampulü</Item>
+<Item>Bahar</Item>
+<Item>Rulo</Item>
+<Item>Domino</Item>
+<Item>Ters Drift</Item>
+<Item>Swirling</Item>
+<Item>neon ışık</Item>
+<Item>DOUCAI</Item>
+<Item>Rainbow (a)</Item>
+<Item>Rainbow (altında)</Item>
+<Item>Rainbow (sol)</Item>
+<Item>Rainbow (sağ)</Item>
+</Items>
+</cmbDisplayStyle>
+<!-- 动感边框-->
+<GroupBoxFlashBorder>
+<Caption>Dinamik sınırları</Caption>
+</GroupBoxFlashBorder>
+<chkFlashBorderEnabled>
+<Caption>Dinamik sınır Ekran</Caption>
+</chkFlashBorderEnabled>
+<optFlashBorderOneColor>
+<Caption>Tek renkli</Caption>
+</optFlashBorderOneColor>
+<optFlashBorderFlashColor>
+<Caption>Hyun-renk</Caption>
+</optFlashBorderFlashColor>
+<LabelFlashBorderSpeed>
+<Caption>Hız yürüyüş</Caption>
+</LabelFlashBorderSpeed>
+<cmbFlashBorderSpeed>
+<Items>
+<Item>1 (hızlı)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (yavaş)</Item>
+</Items>
+</cmbFlashBorderSpeed>
+<LabelFlashBorderDirection>
+<Caption>Göçmen yön</Caption>
+</LabelFlashBorderDirection>
+<cmbFlashBorderDirection>
+<Items>
+<Item>Sabit ekran</Item>
+<Item>Saat yönünde</Item>
+<Item>Dönüş yönünün tersine</Item>
+<Item>Titreme</Item>
+<Item>Yanıp sönen + saat yönünde</Item>
+<Item>Yanıp sönen + dönüş yönünün tersine</Item>
+</Items>
+</cmbFlashBorderDirection>
+<!--屏幕属性-->
+<LabelCardModel>
+<Caption>Kontrol Kart Model:</Caption>
+</LabelCardModel>
+<LabelMonitorWidth>
+<Caption>Ekran genişliği:</Caption>
+</LabelMonitorWidth>
+<LabelMonitorHeight>
+<Caption>Ekran yüksekliği:</Caption>
+</LabelMonitorHeight>
+<LabelMonitorColorMode>
+<Caption>Hücre plaka renk:</Caption>
+</LabelMonitorColorMode>
+<LabelMonitorConnectMode>
+<Caption>Iletişim araçları:</Caption>
+</LabelMonitorConnectMode>
+<LabelMonitorConnectPort>
+<Caption>Limanlar:</Caption>
+</LabelMonitorConnectPort>
+<!--2013.5.5 增加-->
+<chkContinuousLeft>
+<Caption>Sürekli sol</Caption>
+</chkContinuousLeft>
+<chkContinuousTop>
+<Caption>Sürekli hareket halinde</Caption>
+</chkContinuousTop>
+<!--2013.5.5 增加结束-->
+</TMainForm>
+<!--关于对话框-->
+<TDlgAbout>
+<Caption>Hakkında ...</Caption>
+<LabelAppName>
+<Caption>X Show yazılım</Caption>
+</LabelAppName>
+<LabelAppVersion>
+<Caption>Sürüm:%s</Caption>
+</LabelAppVersion>
+<MemoAppNote>
+<Items>
+<Item>Uyarı: Bu bilgisayar programı bu program savcılık bir kısmını veya tamamını, ciddi hukuki ve cezai ve yasaların izin verdiği maksimum ölçüde tabi neden olabilir izinsiz çoğaltma ve dağıtım korunmaktadır telif hakkı yasaları ve uluslararası sözleşmeler ile korunmaktadır.</Item>
+</Items>
+</MemoAppNote>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+</TDlgAbout>
+<!--网络集群发送-->
+<TDlgColonySend>
+<Caption>Küme gönderme yönetimi</Caption>
+<chkSelectAll>
+<Caption>Seçmek</Caption>
+</chkSelectAll>
+<!--提示信息-->
+<MemoNote>
+<Items>
+<Item>Açıklama:</Item>
+<Item></Item>
+<Item>1, bu grup iletişimi ağ bağlantı noktası veya GPRS tek modu, katılabilirsiniz önce.</Item>
+<Item></Item>
+<Item>2 klon grubu Gönder: tüm ekranlarda grubuna gönderilen verilerin ana ekranda gönder, klonlama kullanımı isteği grup ekran ekran boyutu göndermek, parametreleri aynıdır. Ana ekran göndermeden önce gerekli.</Item>
+<Item></Item>
+<Item>3, geleneksel grup Gönderilen: kelime ekran veri bırakın ilgili ekrana gönderilir.</Item>
+</Items>
+</MemoNote>
+<!--设备列表-->
+<ListViewCards>
+<Columns>
+<Column>Durum</Column>
+<Column>Ad</Column>
+<Column>Model</Column>
+<Column>Ekran genişliği</Column>
+<Column>Ekran yüksekliği</Column>
+<Column>Hücre plakalı</Column>
+<Column>Iletişim araçları</Column>
+<Column>Parlaklık</Column>
+<Column>Zamanlayıcı anahtarı</Column>
+</Columns>
+</ListViewCards>
+<!--操作选择项-->
+<optRegularSend>
+<Caption>Konvansiyonel grup gönderdi</Caption>
+</optRegularSend>
+<optCloneSend>
+<Caption>Clone grup gönderdi</Caption>
+</optCloneSend>
+<optOpenScreen>
+<Caption>Yazılım çizme</Caption>
+</optOpenScreen>
+<optCloseScreen>
+<Caption>Soft-Off</Caption>
+</optCloseScreen>
+<optTiming>
+<Caption>Zamanlama</Caption>
+</optTiming>
+<btnSendProtocol>
+<Caption>Komutu çalıştırmak</Caption>
+</btnSendProtocol>
+<!--指定主屏幕-->
+<LabelCloneScreens>
+<Caption>Ana ekran belirtin:</Caption>
+</LabelCloneScreens>
+</TDlgColonySend>
+<!--网络集群登录验证窗口-->
+<TDlgColonyVerify>
+<Caption>Kimlik doğrulama giriş</Caption>
+<LabelPassword>
+<Caption>Parola</Caption>
+</LabelPassword>
+<LabelServerIp>
+<Caption>Sunucu</Caption>
+</LabelServerIp>
+<LabelPort>
+<Caption>Liman</Caption>
+</LabelPort>
+<btnOK>
+<Caption>Belirlemek</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Iptal</Caption>
+</btnCancel>
+</TDlgColonyVerify>
+<!--GPRS群组发送窗口-->
+<TDlgGprsColony>
+<Caption>Küme Yönetimi</Caption>
+<Messages>
+<AllScreens>Tam ekran</AllScreens>
+<AddGroupCaption>Grup Ekle</AddGroupCaption>
+<AddGroupPrompt>Grubun adını girin:</AddGroupPrompt>
+<AddGroupExists>Grup adı zaten var!</AddGroupExists>
+<AddGroupFail>Grup Ekle başarısız oldu!</AddGroupFail>
+<ConfDeleteGroup>Eğer grubu silmek istediğinizi onaylamak için?</ConfDeleteGroup>
+<ConfDeleteDevice>Seçili terminali silmek istediğinizi onaylayın?</ConfDeleteDevice>
+<NoScreen>Hiçbir ekran ekleyebilirsiniz!</NoScreen>
+<DeviceIdExists>Terminal ID zaten var!</DeviceIdExists>
+<NoItemChecked>Bir terminal seçiniz! (Seçmek için seçim kutusunu kullanın)</NoItemChecked>
+<NoItemSelected>Bir terminal seçiniz! (Fare tıklama satır seçimi)</NoItemSelected>
+<!--终端在线状态-->
+<StatusOnline>Çevrimiçi</StatusOnline>
+<StatusOffline>Online değil</StatusOffline>
+<!--命令发送状态-->
+<SendStatusSending>Gönderme</SendStatusSending>
+<SendStatusSuccess>Başarı</SendStatusSuccess>
+<SendStatusScreenParamFail>Ekran parametreleri başarısız oldu</SendStatusScreenParamFail>
+<SendStatusConnectFail>Bağlantı başarısız</SendStatusConnectFail>
+</Messages>
+<chkSelectAll>
+<Caption>Seçmek</Caption>
+</chkSelectAll>
+<LabelGroups>
+<Caption>Gruplar:</Caption>
+</LabelGroups>
+<btnEditGroup>
+<Caption>Edit Grup</Caption>
+</btnEditGroup>
+<btnAddGroup>
+<Caption>Grup Ekle</Caption>
+</btnAddGroup>
+<btnDeleteGroup>
+<Caption>Bir grubu silme</Caption>
+</btnDeleteGroup>
+<btnAddDevice>
+<Caption>Terminal ekle</Caption>
+</btnAddDevice>
+<btnEditDevice>
+<Caption>Terminal Değiştir</Caption>
+</btnEditDevice>
+<btnDeleteDevice>
+<Caption>Terminal çıkarın</Caption>
+</btnDeleteDevice>
+<btnUpdateColony>
+<Caption>Küme alın</Caption>
+</btnUpdateColony>
+<btnSendProtocol>
+<Caption>Komutu çalıştırmak</Caption>
+</btnSendProtocol>
+<!--提示信息-->
+<MemoNote>
+<Items>
+<Item>Açıklama:</Item>
+<Item></Item>
+<Item>1, Terminal silmek, terminal değiştirmek terminal seçmek üzere listede satır tıklayınız.</Item>
+<Item></Item>
+<Item>Komutları terminal seçmek için liste kutusunu seçin gönder.</Item>
+</Items>
+</MemoNote>
+<!--设备列表-->
+<ListViewCards>
+<Columns>
+<Column>Hayır.</Column>
+<Column>Çevrimiçi</Column>
+<Column>Ekran Adı</Column>
+<Column>Aygıt Kimliği</Column>
+<Column>Kart modeli</Column>
+<Column>Ekran genişliği</Column>
+<Column>Ekran yüksekliği</Column>
+<Column>Hücre plakalı</Column>
+<Column>Parlaklık</Column>
+<Column>Zamanlayıcı anahtarı</Column>
+<Column>Işletme</Column>
+</Columns>
+</ListViewCards>
+<!--操作选择项-->
+<optRegularSend>
+<Caption>Konvansiyonel grup gönderdi</Caption>
+</optRegularSend>
+<optCloneSend>
+<Caption>Clone grup gönderdi</Caption>
+</optCloneSend>
+<optOpenScreen>
+<Caption>Yazılım çizme</Caption>
+</optOpenScreen>
+<optCloseScreen>
+<Caption>Soft-Off</Caption>
+</optCloseScreen>
+<optTiming>
+<Caption>Zamanlama</Caption>
+</optTiming>
+<optQueryStatus>
+<Caption>Durumunu kontrol edin</Caption>
+</optQueryStatus>
+<!--指定主屏幕-->
+<LabelCloneScreens>
+<Caption>Ana ekran belirtin:</Caption>
+</LabelCloneScreens>
+</TDlgGprsColony>
+<!--集群服务器终端编辑窗口-->
+<TDlgColonyAddDevice>
+<Caption>Terminal düzenleme</Caption>
+<LabelDeviceId>
+<Caption>Terminal ID</Caption>
+</LabelDeviceId>
+<LabelScreenName>
+<Caption>Ekran</Caption>
+</LabelScreenName>
+<LabelGroupName>
+<Caption>Gruplar</Caption>
+</LabelGroupName>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>İptal (&amp;C)</Caption>
+</btnCancel>
+</TDlgColonyAddDevice>
+<!--GPRS集群配置 窗口-->
+<TDlgGprsColonySetting>
+<Caption>Cluster Server yapılandırma</Caption>
+<LabelGprsServerIp>
+<Caption>Sunucu IP:</Caption>
+</LabelGprsServerIp>
+<LabelGprsServerPort>
+<Caption>Limanlar:</Caption>
+</LabelGprsServerPort>
+<chkEnableAutoFillScreen>
+<Caption>Açık alt ekran adaptif ana ekran</Caption>
+</chkEnableAutoFillScreen>
+<chkEnableAuthen>
+<Caption>Doğrulamak için açık izni</Caption>
+</chkEnableAuthen>
+<LabelGprsAccount>
+<Caption>Hesap</Caption>
+</LabelGprsAccount>
+<LabelGprsPassword>
+<Caption>Parola</Caption>
+</LabelGprsPassword>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>İptal (&amp;C)</Caption>
+</btnCancel>
+</TDlgGprsColonySetting>
+<!-- GPRS集群组管理 窗口-->
+<TDlgGprsGroup>
+<Caption>GPRS küme grup yönetimi</Caption>
+<LabelGroups>
+<Caption>Grup listesi</Caption>
+</LabelGroups>
+<LabelGroupName>
+<Caption>Ad</Caption>
+</LabelGroupName>
+<btnEditGroup>
+<Caption>Değiştirmek</Caption>
+</btnEditGroup>
+<btnAddGroup>
+<Caption>Eklemek</Caption>
+</btnAddGroup>
+<btnDeleteGroup>
+<Caption>Silmek</Caption>
+</btnDeleteGroup>
+<btnSelectAllCards>
+<Caption>Tümünü seç</Caption>
+</btnSelectAllCards>
+<btnClearCurrentSelectedCards>
+<Caption>Geçerli seçimi temizleyin</Caption>
+</btnClearCurrentSelectedCards>
+<btnClearSelectedAllCards>
+<Caption>Tüm seçimleri kaldır</Caption>
+</btnClearSelectedAllCards>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>İptal (&amp;C)</Caption>
+</btnCancel>
+<LabelCards>
+<Caption>Görüntüleme listesi</Caption>
+</LabelCards>
+<btnUpdateCards>
+<Caption>Sunucu listesini güncellemek</Caption>
+</btnUpdateCards>
+<!--设备卡列表-->
+<ListViewCards>
+<Columns>
+<Column>Durum</Column>
+<Column>Ad</Column>
+</Columns>
+</ListViewCards>
+</TDlgGprsGroup>
+<!--导入Excel 窗口-->
+<TDlgImportExcel>
+<Caption>Excel'e</Caption>
+<LabelSheetNames>
+<Caption>Çalışma sayfası adı</Caption>
+</LabelSheetNames>
+<LabelRowCount>
+<Caption>Satır sayısı</Caption>
+</LabelRowCount>
+<LabelColumnCount>
+<Caption>Sütun sayısı</Caption>
+</LabelColumnCount>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>İptal (&amp;C)</Caption>
+</btnCancel>
+</TDlgImportExcel>
+<!-- 屏幕参数 窗口-->
+<TdlgMonitorSetting>
+<Caption>Ekran parametre</Caption>
+<Messages>
+<InvalidMonitorSize>Geçersiz ekran boyutu!</InvalidMonitorSize>
+<InvalidCardModelInfo>Geçersiz kart parametreleri!</InvalidCardModelInfo>
+<InvalidGammaReviseValue>Geçersiz gamma düzeltme değeri!</InvalidGammaReviseValue>
+</Messages>
+<LabelMonitorWidth>
+<Caption>Genişlik</Caption>
+</LabelMonitorWidth>
+<LabelMonitorHeight>
+<Caption>Yükseklik</Caption>
+</LabelMonitorHeight>
+<LabelMonitorColor>
+<Caption>Renk</Caption>
+</LabelMonitorColor>
+<LabelMonitorGray>
+<Caption>Gri</Caption>
+</LabelMonitorGray>
+<LabelCardType>
+<Caption>Kontrol kartı modeli</Caption>
+</LabelCardType>
+<LabelCardParams>
+<Caption>Performans parametreleri</Caption>
+</LabelCardParams>
+<LabelBoardType>
+<Caption>Hücre plakalı</Caption>
+</LabelBoardType>
+<LabelDEPrompt>
+<Caption>OE kutup</Caption>
+</LabelDEPrompt>
+<LabelDEPromptNote>
+<Caption>Kontrol kartındaki jumper başlığı ayarlayın Lütfen</Caption>
+</LabelDEPromptNote>
+<LabelThreshold>
+<Caption>Eşik</Caption>
+</LabelThreshold>
+<LabelDotFrequency>
+<Caption>Noktası frekansı</Caption>
+</LabelDotFrequency>
+<LabelLineBlanking>
+<Caption>Hat karartmayı</Caption>
+</LabelLineBlanking>
+<LabelInterlaceControl>
+<Caption>Hat ayarı</Caption>
+</LabelInterlaceControl>
+<LabelGammaReviseValue>
+<Caption>Gamma düzeltme</Caption>
+</LabelGammaReviseValue>
+<LabelAdvanced>
+<Caption>Az Gelişmiş Parametreler</Caption>
+</LabelAdvanced>
+<btnReadParams>
+<Caption>Parametre geri okuma</Caption>
+</btnReadParams>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<!--2013.5.4 增加-->
+<chkDotFrequencyAuto>
+<Caption>Otomatik</Caption>
+</chkDotFrequencyAuto>
+<chkLineBlankingAuto>
+<Caption>Otomatik</Caption>
+</chkLineBlankingAuto>
+<!--2013.5.4 增加结束-->
+</TdlgMonitorSetting>
+<!--通讯参数 窗口-->
+<TDlgNetworkSetting>
+<Caption>İletişim parametreleri</Caption>
+<Messages>
+<AskToSelectComPort>Seri numarasını seçin!</AskToSelectComPort>
+<ErrorIp>Geçersiz IP adresi!</ErrorIp>
+<UnknownCard>Bilinmeyen</UnknownCard>
+<LabelTestResult>
+<Success>
+<Caption>Başarılı şekilde iletişim testi!</Caption>
+</Success>
+<Fail>
+<Caption>İletişim sınaması başarısız oldu!</Caption>
+</Fail>
+</LabelTestResult>
+</Messages>
+<!--选择通讯模式页-->
+<LabelNetworkType>
+<Caption>Iletişim modunu seçin</Caption>
+</LabelNetworkType>
+<optSerialPort>
+<Caption>Seri portlar</Caption>
+</optSerialPort>
+<optNet>
+<Caption>Ağ bağlantı noktası</Caption>
+</optNet>
+<optDirectNet>
+<Caption>Ağ bağlantı noktası doğrudan bağlı</Caption>
+</optDirectNet>
+<optGprs>
+<Caption>GPRS veya İnternet</Caption>
+</optGprs>
+<!-- 串口参数设置页 -->
+<LabelSerialPortComs>
+<Caption>Bağlantı noktası numarası</Caption>
+</LabelSerialPortComs>
+<!-- 网口参数设置页-->
+<LabelNetIp>
+<Caption>IP adresleri</Caption>
+</LabelNetIp>
+<LabelNetPort>
+<Caption>Bağlantı noktası numarası</Caption>
+</LabelNetPort>
+<LabelNetGateway>
+<Caption>Geçit</Caption>
+</LabelNetGateway>
+<LabelNetSubnetMask>
+<Caption>Alt ağ maskesi</Caption>
+</LabelNetSubnetMask>
+<LabelEditMACPrompt>
+<Caption>MAC adresini değiştirmek için, MAC hata ayıklama araçları indirin</Caption>
+</LabelEditMACPrompt>
+<!-- GPRS设置页-->
+<LabelGprsIp>
+<Caption>GPRS sunucusunun IP adresi</Caption>
+</LabelGprsIp>
+<LabelGprsPort>
+<Caption>Bağlantı noktası numarası</Caption>
+</LabelGprsPort>
+<chkGprsEnableAuth>
+<Caption>Doğrulamak için açık izni</Caption>
+</chkGprsEnableAuth>
+<LabelGprsAccount>
+<Caption>Hesap</Caption>
+</LabelGprsAccount>
+<LabelGprsPassword>
+<Caption>Parola</Caption>
+</LabelGprsPassword>
+<!-- 测试结果页-->
+<LabelTestResultType>
+<Caption>İletişim modu:</Caption>
+</LabelTestResultType>
+<LabelTestResultPort>
+<Caption>Bağlantı noktası numarası:</Caption>
+</LabelTestResultPort>
+<LabelTestResultCard>
+<Caption>Kontrol Kart Model:</Caption>
+</LabelTestResultCard>
+<btnSave>
+<Caption>Kaydedin ve çıkın</Caption>
+</btnSave>
+<btnSetMonitor>
+<Caption>Ekran Parametreleri</Caption>
+</btnSetMonitor>
+<!-- 高级参数 -->
+<GroupBoxAdvanceParams>
+<Caption>Gelişmiş Parametreler</Caption>
+</GroupBoxAdvanceParams>
+<LabelSerialPortDelay>
+<Caption>Gecikme</Caption>
+</LabelSerialPortDelay>
+<LabelSerialPortFrameLength>
+<Caption>Çerçeve uzunluğu</Caption>
+</LabelSerialPortFrameLength>
+<btnTestExit>
+<Caption>Dönmek</Caption>
+</btnTestExit>
+<btnChooseTypeNextStep>
+<Caption>Sonraki</Caption>
+</btnChooseTypeNextStep>
+<btnSerialPortLastStep>
+<Caption>Önceki</Caption>
+</btnSerialPortLastStep>
+<btnTest>
+<Caption>İletişim Testi</Caption>
+</btnTest>
+<!--2013.5.5 增加-->
+<LabelDeviceId>
+<Caption>Aygıt Kimliği</Caption>
+</LabelDeviceId>
+<!--2013.5.5 增加结束-->
+</TDlgNetworkSetting>
+<!-- 新建表格 窗口-->
+<TDlgNewTable>
+<Caption>Yeni Elektronik Tablo</Caption>
+<LabelRowCount>
+<Caption>Sıra</Caption>
+</LabelRowCount>
+<LabelColCount>
+<Caption>Sıra</Caption>
+</LabelColCount>
+<LabelBorderWidth>
+<Caption>Çerçeve</Caption>
+</LabelBorderWidth>
+<LabelBorderColor>
+<Caption>Renk</Caption>
+</LabelBorderColor>
+<chkSetCellWidth>
+<Caption>Sabit hücre genişliği</Caption>
+</chkSetCellWidth>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>İptal (&amp;C)</Caption>
+</btnCancel>
+</TDlgNewTable>
+<!-- 软件开关屏 窗口-->
+<TDlgProtocolOnOff>
+<Caption>Yazılım anahtarı ekran</Caption>
+<optManual>
+<Caption>Manuel anahtar</Caption>
+</optManual>
+<btnOn>
+<Caption>Açılış ekranı</Caption>
+</btnOn>
+<btnOff>
+<Caption>Ekran dışı</Caption>
+</btnOff>
+<optAuto>
+<Caption>Zamanlayıcı anahtarı</Caption>
+</optAuto>
+<LabelOn>
+<Caption>Zaman Boot</Caption>
+</LabelOn>
+<LabelOff>
+<Caption>Zaman kapalı</Caption>
+</LabelOff>
+<btnSave>
+<Caption>&amp;U disk kaydetmek</Caption>
+</btnSave>
+<btnOK>
+<Caption>Gönder (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>İptal (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>Bu parlaklık / okul / zamanlayıcı anahtarı ayarlamak için U disk kullanımı gibi, USB ihracat parametrelerini ayarlamak</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+<!--2013.5.5 增加-->
+<chkAutoOnOff>
+<Caption>Zamanlayıcı anahtarı</Caption>
+</chkAutoOnOff>
+<!--2013.5.5 增加结束-->
+</TDlgProtocolOnOff>
+<!-- 请求型号 窗口-->
+<TDlgProtocolQueryModel>
+<Caption>Talep Modeli</Caption>
+<LabelCardMode>
+<Caption>Kontrol Kart Model:</Caption>
+</LabelCardMode>
+<LabelCardVersion>
+<Caption>Kodun donanım versiyonu:</Caption>
+</LabelCardVersion>
+<LabelCardGuid>
+<Caption>Benzersiz seri numarası:</Caption>
+</LabelCardGuid>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+</TDlgProtocolQueryModel>
+<!-- 校时... 窗口-->
+<TDlgProtocolSetDateTime>
+<Caption>Okulu ...</Caption>
+<LabelDate>
+<Caption>Tarihi:</Caption>
+</LabelDate>
+<LabelTime>
+<Caption>Zaman:</Caption>
+</LabelTime>
+<btnSave>
+<Caption>&amp;U disk kaydetmek</Caption>
+</btnSave>
+<btnOK>
+<Caption>Gönder (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>İptal (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>Bu parlaklık / okul / zamanlayıcı anahtarı ayarlamak için U disk kullanımı gibi, USB ihracat parametrelerini ayarlamak</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+<!--2013.5.5 增加-->
+<btnGetSystemTime>
+<Caption>Sistem Zaman</Caption>
+</btnGetSystemTime>
+<!--2013.5.5 增加结束-->
+</TDlgProtocolSetDateTime>
+<!--亮度调节 窗口 -->
+<TDlgProtocolSetLight>
+<Caption>Parlaklık ayarı</Caption>
+<optAuto>
+<Caption>Otomatik algılama</Caption>
+</optAuto>
+<optManual>
+<Caption>Manuel ayarlama</Caption>
+</optManual>
+<btnSave>
+<Caption>&amp;U disk kaydetmek</Caption>
+</btnSave>
+<btnOK>
+<Caption>Gönder (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>İptal (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>Bu parlaklık / okul / zamanlayıcı anahtarı ayarlamak için U disk kullanımı gibi, USB ihracat parametrelerini ayarlamak</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+</TDlgProtocolSetLight>
+<!-- 图文编辑 窗口-->
+<TDlgRtfEditor>
+<Caption>Editör</Caption>
+<Messages>
+<!--RTF编辑对话框 -->
+<!--表格垂直拆分输入框标题-->
+<TableSplitVerticallyCaption>Dikey bölünmüş</TableSplitVerticallyCaption>
+<!--表格垂直拆分输入框提示信息-->
+<TableSplitVerticallyPrompt>Sütun sayısı bölünmüş:</TableSplitVerticallyPrompt>
+<!--表格水平拆分输入框标题 -->
+<TableSplitHorizontallyCaption>Yatay bölünmüş</TableSplitHorizontallyCaption>
+<!--表格水平拆分输入框提示信息-->
+<TableSplitHorizontallyPrompt>Satır sayısını bölünmüş:</TableSplitHorizontallyPrompt>
+<!--提示选择一个表格-->
+<InfoSelectOneTable>Bir tablo seçin!</InfoSelectOneTable>
+</Messages>
+<ToolButtonLoadFiles>
+<Hint>Dosya Ekle</Hint>
+</ToolButtonLoadFiles>
+<!-- 文件操作菜单 -->
+<PopupMenuAddFile>
+<Items>
+<Item>Metin ekleme</Item>
+<Item>RTF dosyası ekle</Item>
+<Item>Resim ekleme</Item>
+<Item>DOC ekle</Item>
+<Item>EXCEL ekle</Item>
+</Items>
+</PopupMenuAddFile>
+<ToolButtonSave>
+<Hint>Kurtarmak</Hint>
+</ToolButtonSave>
+<ToolButtonLeft>
+<Hint>Yatay sol</Hint>
+</ToolButtonLeft>
+<ToolButtonCenter>
+<Hint>Yatay Merkezli</Hint>
+</ToolButtonCenter>
+<ToolButtonRight>
+<Hint>Mesken yatay doğru</Hint>
+</ToolButtonRight>
+<ToolButtonBold>
+<Hint>Cesur</Hint>
+</ToolButtonBold>
+<ToolButtonItalic>
+<Hint>Italik</Hint>
+</ToolButtonItalic>
+<ToolButtonUnderline>
+<Hint>Vurgulamak</Hint>
+</ToolButtonUnderline>
+<ToolButtonTop>
+<Hint>Dizilmiş</Hint>
+</ToolButtonTop>
+<ToolButtonVCenter>
+<Hint>Merkezli dikey</Hint>
+</ToolButtonVCenter>
+<ToolButtonBottom>
+<Hint>Alta Hizala</Hint>
+</ToolButtonBottom>
+<!-- 表格-->
+<ToolButtonTable>
+<Hint>Form</Hint>
+</ToolButtonTable>
+<!--表格操作菜单-->
+<PopupMenuTable>
+<Items>
+<Item>Yeni Elektronik Tablo</Item>
+<Item>-</Item>
+<Item>Çerçeve Rengi</Item>
+<Item>Sınır genişliği</Item>
+<Item>-</Item>
+<Item>
+<Caption>Satır Ekle</Caption>
+<Items>
+<Item>Yukarıda Eklenen</Item>
+<Item>Aşağıda Ekle</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Sütun Ekle</Caption>
+<Items>
+<Item>Sol takılı</Item>
+<Item>Sağ tarafı</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Silmek</Caption>
+<Items>
+<Item>Sıra</Item>
+<Item>Sıra</Item>
+</Items>
+</Item>
+<Item>-</Item>
+<Item>Hücreleri Birleştirme</Item>
+<Item>
+<Caption>Bölünmüş Hücre</Caption>
+<Items>
+<Item>Dikey bölünmüş</Item>
+<Item>Yatay bölünmüş</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Birleşme yeniden başlaması</Caption>
+<Items>
+<Item>Sıra</Item>
+<Item>Sıra</Item>
+<Item>Bütün</Item>
+</Items>
+</Item>
+<Item>-</Item>
+<Item>
+<Caption>Dikey hizalama</Caption>
+<Items>
+<Item>Dizilmiş</Item>
+<Item>Merkezli dikey</Item>
+<Item>Alta Hizala</Item>
+</Items>
+</Item>
+</Items>
+</PopupMenuTable>
+<!-- 编辑菜单 -->
+<PopupMenuEditor>
+<Items>
+<Item>Kopyalama</Item>
+<Item>Sopa</Item>
+<Item>Seçmek</Item>
+</Items>
+</PopupMenuEditor>
+<LabelWordSpace>
+<Caption>Kelime aralığı:</Caption>
+</LabelWordSpace>
+<LabelLineSpace>
+<Caption>Satır aralığı:</Caption>
+</LabelLineSpace>
+</TDlgRtfEditor>
+<!-- 扫描方式设置 窗口-->
+<TDlgScanSet>
+<Caption>Modu ayarları Tarama</Caption>
+<LabelScanSetName>
+<Caption>Yapılandırma adı</Caption>
+</LabelScanSetName>
+<LabelScanType>
+<Caption>Tarama modu</Caption>
+</LabelScanType>
+<cmbScanType>
+<Items>
+<Item>Statik tarama</Item>
+<Item>1/2 tarama</Item>
+<Item>1/4 tarama</Item>
+<Item>1/8 tarama</Item>
+<Item>1/16 tarama</Item>
+</Items>
+</cmbScanType>
+<LabelWrap>
+<Caption>Kat satırı modu</Caption>
+</LabelWrap>
+<cmbWrap>
+<Items>
+<Item>4 katlama hattı</Item>
+<Item>8 kat hattı</Item>
+<Item>Off line 16%</Item>
+</Items>
+</cmbWrap>
+<LabelWinding>
+<Caption>Şekilde sarma</Caption>
+</LabelWinding>
+<cmbWinding>
+<Items>
+<Item>Serpantin üzerinde</Item>
+<Item>Serpantin altında</Item>
+</Items>
+</cmbWinding>
+<LabelScanLines>
+<Caption>Tarama çizgisi sayısı</Caption>
+</LabelScanLines>
+<cmbScanLines>
+<Items>
+<Item>1 satır</Item>
+<Item>2 satır</Item>
+<Item>4 satır</Item>
+<Item>8 sıra</Item>
+<Item>Alan başına 16 satır</Item>
+</Items>
+</cmbScanLines>
+<LabelStr>
+<Caption>STR kutup</Caption>
+</LabelStr>
+<cmbStr>
+<Items>
+<Item>Pozitif kutup</Item>
+<Item>Bir negatif elektrodu</Item>
+</Items>
+</cmbStr>
+<LabelSecondaryWind>
+<Caption>Sekonder sargı</Caption>
+</LabelSecondaryWind>
+<cmbSecondaryWind>
+<Items>
+<Item>Yok</Item>
+<Item>Olmak</Item>
+</Items>
+</cmbSecondaryWind>
+<LabelDecoding>
+<Caption>138 kod çözme</Caption>
+</LabelDecoding>
+<cmbDecoding>
+<Items>
+<Item>138 kod çözme</Item>
+<Item>Edebi yüksek</Item>
+<Item>138 kod çözme</Item>
+<Item>Edebi düşük</Item>
+</Items>
+</cmbDecoding>
+<LabelMirror>
+<Caption>Veri akış</Caption>
+</LabelMirror>
+<cmbMirror>
+<Items>
+<Item>Normal</Item>
+<Item>Ayna</Item>
+</Items>
+</cmbMirror>
+<LabelDataPolarity>
+<Caption>Veri kutup</Caption>
+</LabelDataPolarity>
+<cmbDataPolarity>
+<Items>
+<Item>Pozitif kutup</Item>
+<Item>Bir negatif elektrodu</Item>
+</Items>
+</cmbDataPolarity>
+<chkJiaoTi>
+<Caption>Normal alternatif</Caption>
+</chkJiaoTi>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>İptal (&amp;C)</Caption>
+</btnCancel>
+</TDlgScanSet>
+<!-- 查屏 窗口-->
+<TDlgSearchCard>
+<Caption>Ekranı kontrol edin</Caption>
+<!-- 开始查找页-->
+<LabelFinding>
+<Caption>Kontrol kartı arıyorsunuz ......</Caption>
+</LabelFinding>
+<MemoPrompt>
+<Items>
+<Item>Eğer kontrol kartı bilgilerinizi güncellemek için U disk kullanmak istiyorsanız, bu adımı kontrol kartı bulmak gerekmez iptal edebilirsiniz!</Item>
+</Items>
+</MemoPrompt>
+<btnCancel>
+<Caption>İptal (&amp;C)</Caption>
+</btnCancel>
+<!-- 查找成功页-->
+<LabelSearchSuccess>
+<Caption>Bir başarı bulmak!</Caption>
+</LabelSearchSuccess>
+<LabelType>
+<Caption>İletişim modu:</Caption>
+</LabelType>
+<LabelPort>
+<Caption>Bağlantı noktası numarası:</Caption>
+</LabelPort>
+<LabelCardType>
+<Caption>Kontrol Kart Model:</Caption>
+</LabelCardType>
+<!-- 查找失败页-->
+<LabelSearchFail>
+<Caption>Başarısız bulun!</Caption>
+</LabelSearchFail>
+<btnSearchAgain>
+<Caption>Yeni arama</Caption>
+</btnSearchAgain>
+<MemoIncDelayRetry>
+<Items>
+<Item>Sistem otomatik olarak tüm portları taramak için çalışın yeniden ertelendi artacak</Item>
+</Items>
+</MemoIncDelayRetry>
+<btnManualSetting>
+<Caption>Gelenek</Caption>
+</btnManualSetting>
+<MemoManualSetInfo>
+<Items>
+<Item>El iletişim parametrelerini belirlemek</Item>
+</Items>
+</MemoManualSetInfo>
+</TDlgSearchCard>
+<!-- 数据发送 窗口-->
+<TDlgSend>
+<Caption>Veri iletim</Caption>
+</TDlgSend>
+<!--资源选择窗口 窗口 -->
+<TDlgSystemResources>
+<Caption>Kaynak seçim penceresi</Caption>
+<Messages>
+<PromptNoSelected>Herhangi bir resim seçilmezse, resim seçimi tıklayınız veya sürükleyip birden çok seçim için bırakın.</PromptNoSelected>
+</Messages>
+<btnOK>
+<Caption>Seçin (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>İptal (&amp;C)</Caption>
+</btnCancel>
+</TDlgSystemResources>
+<!--边框宽度 窗口 -->
+<TDlgTableBorderWidth>
+<Caption>Sınır genişliği</Caption>
+<LabelBorderWidth>
+<Caption>Sınır genişliği</Caption>
+</LabelBorderWidth>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>İptal (&amp;C)</Caption>
+</btnCancel>
+</TDlgTableBorderWidth>
+<!-- 导入U盘 窗口-->
+<TDlgUsbForm>
+<Caption>İthalat U disk</Caption>
+<Messages>
+<NoUsb>U disk, insert U disk Bulunamadı!</NoUsb>
+<MonitorSize>genişlik%d,yükseklik%d</MonitorSize>
+<MonitorBoardType>%s,%s </MonitorBoardType>
+<AutoAlertLight>Parlaklığı otomatik olarak ayarlamak</AutoAlertLight>
+<ManualAlertLight>Parlaklık ayarı manuel olarak:%d seviye</ManualAlertLight>
+<MonitorTimeOnOffDisabled>Etkin değil.</MonitorTimeOnOffDisabled>
+<MonitorTimeOnOffEnabled>Etkin olduğu,%s-%s</MonitorTimeOnOffEnabled>
+<OutOfStorageCapacity>İthalat U disk hatası, kalan kapasite kartı ötesinde oluşturulan içeriklerin boyutu.</OutOfStorageCapacity>
+<CancelExportToUsb>Ithalat U disk iptal edin.</CancelExportToUsb>
+<UsbNotFound>U disk, insert U disk bulunamadı.</UsbNotFound>
+<ExportToUsbSuccess>Dosya başarıyla U disk içine ithal edilmiştir.</ExportToUsbSuccess>
+<ExportToUsbFail>U disk hatası alın.</ExportToUsbFail>
+<ExportToUsbRunning>Üretilen, lütfen bekleyin ...</ExportToUsbRunning>
+<ReadUsbFileSystemFail>U disk dosya sistemi tanımıyor!</ReadUsbFileSystemFail>
+<InvalidUsbFileSystemFail>Sadece FAT veya FAT32 formatlı USB disk kullanabilirsiniz!</InvalidUsbFileSystemFail>
+</Messages>
+<LabelSelectUsb>
+<Caption>USB sürücüyü seçin</Caption>
+</LabelSelectUsb>
+<LabelMonitorSize>
+<Caption>Ekran Boyutu:</Caption>
+</LabelMonitorSize>
+<LabelMonitorBoardType>
+<Caption>Hücre plaka tipi:</Caption>
+</LabelMonitorBoardType>
+<chkCheckTime>
+<Caption>Okul:</Caption>
+</chkCheckTime>
+<chkAlertLight>
+<Caption>Parlaklık ayarı:</Caption>
+</chkAlertLight>
+<chkTimeOnOff>
+<Caption>Zamanlayıcı anahtarı ekran:</Caption>
+</chkTimeOnOff>
+<btnLoadUsbDrivers>
+<Caption>Test ekipmanları</Caption>
+</btnLoadUsbDrivers>
+<btnExport>
+<Caption>İthalat U disk</Caption>
+</btnExport>
+<btnCancel>
+<Caption>Iptal</Caption>
+</btnCancel>
+<btnExportToLocal>
+<Caption>Yerel içine</Caption>
+</btnExportToLocal>
+<!--2013.1.30 新增-->
+<!--校时-->
+<optManulTiming>
+<Caption>Manuel</Caption>
+</optManulTiming>
+<optAutoTiming>
+<Caption>Sistem Zaman</Caption>
+</optAutoTiming>
+<!--亮度调节：-->
+<optManualLight>
+<Caption>Manuel</Caption>
+</optManualLight>
+<optAutoLight>
+<Caption>Otomatik</Caption>
+</optAutoLight>
+<!--定时开关屏：-->
+<LabelOn>
+<Caption>Zaman Boot</Caption>
+</LabelOn>
+<LabelOff>
+<Caption>Zaman kapalı</Caption>
+</LabelOff>
+<!--2013.1.30 新增结束-->
+<!--2013.5.4 新增-->
+<LabelUsbFreeSize>
+<Caption>Mevcut Kapasite:</Caption>
+</LabelUsbFreeSize>
+<LabelUsbFileSystem>
+<Caption>Dosya formatı:</Caption>
+</LabelUsbFileSystem>
+<LabelDateTimeNoChange>
+<Caption>Değişmeden kalır</Caption>
+</LabelDateTimeNoChange>
+<LabelLightNoChange>
+<Caption>Değişmeden kalır</Caption>
+</LabelLightNoChange>
+<LabelOnOffNoChange>
+<Caption>Her zaman</Caption>
+</LabelOnOffNoChange>
+<!--2013.5.4 新增结束-->
+</TDlgUsbForm>
+<!-- 时钟区域参数设置界面 -->
+<TFrameOptionClock>
+<!--时钟属性-->
+<GroupBoxRegionInfo>
+<Caption>Saat Özellikleri</Caption>
+</GroupBoxRegionInfo>
+<optOneLine>
+<Caption>Tek satır ekran</Caption>
+</optOneLine>
+<optMultiLine>
+<Caption>Çok satırlı ekran</Caption>
+</optMultiLine>
+<LabelFieldSpace>
+<Caption>Aralık</Caption>
+</LabelFieldSpace>
+<chkDateWeekExchange>
+<Caption>Haftanın tarih ve gün yerini değiştirin</Caption>
+</chkDateWeekExchange>
+<chkShowDate>
+<Caption>Tarihi görüntüler</Caption>
+</chkShowDate>
+<chkShowWeek>
+<Caption>Haftada gösterir</Caption>
+</chkShowWeek>
+<chkShowTime>
+<Caption>Zaman Ekran</Caption>
+</chkShowTime>
+<!-- 时差-->
+<GroupBoxTimeDiff>
+<Caption>Saat farkı</Caption>
+</GroupBoxTimeDiff>
+<LabelDeltHour>
+<Caption>Zaman</Caption>
+</LabelDeltHour>
+<LabelDeltMinute>
+<Caption>Dakika</Caption>
+</LabelDeltMinute>
+<LabelDeltMinute>
+<Caption>Dakika</Caption>
+</LabelDeltMinute>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>Sabit metin</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>Sabit metin kullanın</Caption>
+</chkEnabledText>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>Harf büyüklüğü</Caption>
+</GroupBoxFont>
+<!--2013.1.30 新增-->
+<!--星期格式-->
+<cmbWeekFormat>
+<Items>
+<Item>Çin</Item>
+<Item>Pazartesi</Item>
+<Item>Pazartesi</Item>
+</Items>
+</cmbWeekFormat>
+<!--2013.1.30 新增结束-->
+</TFrameOptionClock>
+<!-- 动态背景-->
+<TFrameOptionDynamicBackground>
+<GroupBoxInfo>
+<Caption>Dinamik Arkaplan</Caption>
+</GroupBoxInfo>
+<chkEnabledDynamicBackground>
+<Caption>Dinamik arka kullanımı</Caption>
+</chkEnabledDynamicBackground>
+<LabelDynamicBackgroundStyle>
+<Caption>Stil</Caption>
+</LabelDynamicBackgroundStyle>
+<LabelDynamicBackgroundSpeed>
+<Caption>Hız</Caption>
+</LabelDynamicBackgroundSpeed>
+<cmbDynamicBackgroundSpeed>
+<Items>
+<Item>1 (hızlı)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (yavaş)</Item>
+</Items>
+</cmbDynamicBackgroundSpeed>
+<cmbDynamicBackgroundStyle>
+<Items>
+<Item>Halka</Item>
+<Item>Beş köşeli yıldız</Item>
+<Item>Yıldız dolu gökyüzü</Item>
+<Item>Kar taneciği</Item>
+<Item>Sol ve sağ oklar</Item>
+<Item>Dikey yanal yerdeğiştirmeye</Item>
+<Item>Hareket Barlar</Item>
+<Item>Elmas</Item>
+<Item>Kutu</Item>
+<Item>Daire</Item>
+<Item>Çift devreli tarama</Item>
+<Item>Tek tarama</Item>
+</Items>
+</cmbDynamicBackgroundStyle>
+</TFrameOptionDynamicBackground>
+<!-- 炫动字区域参数设置界面-->
+<TFrameOptionFlashText>
+<GroupBoxRegionInfo>
+<Caption>Animasyon kelime düzenleme</Caption>
+</GroupBoxRegionInfo>
+<ToolButtonBold>
+<Hint>Cesur</Hint>
+</ToolButtonBold>
+<ToolButtonItalic>
+<Hint>Italik</Hint>
+</ToolButtonItalic>
+<ToolButtonUnderline>
+<Hint>Vurgulamak</Hint>
+</ToolButtonUnderline>
+<cmbFontName>
+<Hint>Yazı Tipi Adı</Hint>
+</cmbFontName>
+<cmbFontSize>
+<Hint>Yazı Tipi Boyutu</Hint>
+</cmbFontSize>
+<cmbFontColor>
+<Hint>Yazı tipi rengi</Hint>
+</cmbFontColor>
+</TFrameOptionFlashText>
+<!-- 图文区域参数设置界面-->
+<TFrameOptionPicture>
+<Messages>
+<InfoSelectDeletedFile>Silmek istediğiniz dosyayı seçin!</InfoSelectDeletedFile>
+<ConfDeleteFile>Eğer bunu silmek istediğinizden emin olun?</ConfDeleteFile>
+<WarnFileNotExists>Dosya yok!</WarnFileNotExists>
+</Messages>
+<GroupBoxRegionInfo>
+<Caption>Dosya listesi</Caption>
+</GroupBoxRegionInfo>
+<btnAdd>
+<Caption>Eklemek</Caption>
+</btnAdd>
+<btnDelete>
+<Caption>Silmek</Caption>
+</btnDelete>
+<btnUp>
+<Hint>Hareket</Hint>
+</btnUp>
+<btnDown>
+<Hint>Aşağı</Hint>
+</btnDown>
+<!-- 添加菜单-->
+<PopupMenuAddFile>
+<Items>
+<Item>Yeni Köprü</Item>
+<Item>Köprü ekle</Item>
+<Item>Resim ekleme</Item>
+</Items>
+</PopupMenuAddFile>
+<!--2013.5.4 增加-->
+<ToolButtonNewRtf>
+<Hint>RTF ekle</Hint>
+</ToolButtonNewRtf>
+<ToolButtonAddPicture>
+<Hint>Resim ekleme</Hint>
+</ToolButtonAddPicture>
+<ToolButtonAddGrid>
+<Hint>Bir tablo eklemek</Hint>
+</ToolButtonAddGrid>
+<ToolButtonAddWord>
+<Hint>WORD ekle</Hint>
+</ToolButtonAddWord>
+<ToolButtonAddExcel>
+<Hint>EXCEL ekle</Hint>
+</ToolButtonAddExcel>
+<ToolButtonDelete>
+<Hint>Silmek</Hint>
+</ToolButtonDelete>
+<ToolButtonUp>
+<Hint>Hareket</Hint>
+</ToolButtonUp>
+<ToolButtonDown>
+<Hint>Aşağı</Hint>
+</ToolButtonDown>
+<chkShowPath>
+<Caption>Yol göster</Caption>
+</chkShowPath>
+<!--2013.5.4 增加结束-->
+</TFrameOptionPicture>
+<!-- 节目参数设置界面-->
+<TFrameOptionProgram>
+<GroupBoxProgramInfo>
+<Caption>Tip oyna</Caption>
+</GroupBoxProgramInfo>
+<optPlayModeNormal>
+<Caption>Oyun sırası</Caption>
+</optPlayModeNormal>
+<optPlayModeHeart>
+<Caption>Sabit uzunlukta oyun (lar)</Caption>
+</optPlayModeHeart>
+<optPlayModeSetTime>
+<Caption>Düzenli yayın</Caption>
+</optPlayModeSetTime>
+<LabelStartDateTime>
+<Caption>Başlangıç ​​saati</Caption>
+</LabelStartDateTime>
+<LabelEndDateTime>
+<Caption>Bitiş Zamanı</Caption>
+</LabelEndDateTime>
+<chkWeekDaysSunday>
+<Caption>Pazar</Caption>
+</chkWeekDaysSunday>
+<chkWeekDaysMonday>
+<Caption>Pazartesi</Caption>
+</chkWeekDaysMonday>
+<chkWeekDaysTuesday>
+<Caption>Salı</Caption>
+</chkWeekDaysTuesday>
+<chkWeekDaysWednesday>
+<Caption>Çarşamba</Caption>
+</chkWeekDaysWednesday>
+<chkWeekDaysThurday>
+<Caption>Perşembe</Caption>
+</chkWeekDaysThurday>
+<chkWeekDaysFriday>
+<Caption>Cuma</Caption>
+</chkWeekDaysFriday>
+<chkWeekDaysSaturday>
+<Caption>Cumartesi</Caption>
+</chkWeekDaysSaturday>
+</TFrameOptionProgram>
+<!-- 温度区域参数设置界面-->
+<TFrameOptionTempreture>
+<GroupBoxRegionInfo>
+<Caption>Sıcaklık özellikleri</Caption>
+</GroupBoxRegionInfo>
+<LabelMode>
+<Caption>Sıcaklık Birimleri</Caption>
+</LabelMode>
+<LabelDelt>
+<Caption>Düzeltme</Caption>
+</LabelDelt>
+<LabelNumberColor>
+<Caption>Dijital renkli</Caption>
+</LabelNumberColor>
+<LabelUnitColor>
+<Caption>Birim Renk</Caption>
+</LabelUnitColor>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>Sabit metin</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>Sabit metin kullanın</Caption>
+</chkEnabledText>
+<chkTwoLine>
+<Caption>Wrap</Caption>
+</chkTwoLine>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>Harf büyüklüğü</Caption>
+</GroupBoxFont>
+</TFrameOptionTempreture>
+<!--字幕区域参数设置界面 -->
+<TFrameOptionText>
+<GroupBoxRegionInfo>
+<Caption>Altyazı Editör</Caption>
+</GroupBoxRegionInfo>
+<LabelWordSpace>
+<Caption>Kelime aralığı:</Caption>
+</LabelWordSpace>
+</TFrameOptionText>
+<!-- 计时区域参数设置界面-->
+<TFrameOptionTiming>
+<!-- 时钟属性-->
+<GroupBoxRegionInfo>
+<Caption>Saat Özellikleri</Caption>
+</GroupBoxRegionInfo>
+<optCountDown>
+<Caption>Geriye sayım</Caption>
+</optCountDown>
+<optCountUp>
+<Caption>Zamanlama</Caption>
+</optCountUp>
+<LabelDest>
+<Caption>Hedef zaman</Caption>
+</LabelDest>
+<LabelFormat>
+<Caption>Formatı Ekran</Caption>
+</LabelFormat>
+<chkShowDay>
+<Caption>Gün</Caption>
+</chkShowDay>
+<chkShowHour>
+<Caption>Zaman</Caption>
+</chkShowHour>
+<chkShowMinute>
+<Caption>Dakika</Caption>
+</chkShowMinute>
+<chkShowSecond>
+<Caption>Ikinci</Caption>
+</chkShowSecond>
+<LabelNumberColor>
+<Caption>Dijital renkli</Caption>
+</LabelNumberColor>
+<LabelUnitColor>
+<Caption>Birim Renk</Caption>
+</LabelUnitColor>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>Sabit metin</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>Sabit metin kullanın</Caption>
+</chkEnabledText>
+<chkTwoLine>
+<Caption>Wrap</Caption>
+</chkTwoLine>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>Harf büyüklüğü</Caption>
+</GroupBoxFont>
+</TFrameOptionTiming>
+<!-- 表盘盘区域参数设置界面-->
+<TFrameOptionWatch>
+<!-- 表盘属性-->
+<GroupBoxRegionInfo>
+<Caption>Özellikleri Dial</Caption>
+</GroupBoxRegionInfo>
+<LabelStyle>
+<Caption>Stil</Caption>
+</LabelStyle>
+<cmbStyle>
+<Items>
+<Item>Gelenek</Item>
+</Items>
+</cmbStyle>
+<LabelTickWidth>
+<Caption>Genişlik</Caption>
+</LabelTickWidth>
+<LabelTickColor>
+<Caption>Renk</Caption>
+</LabelTickColor>
+<LabelHourTickWidth>
+<Caption>Mülkiyet bütün mesele</Caption>
+</LabelHourTickWidth>
+<Label369TickWidth>
+<Caption>3.6.9 Nokta Özellikleri</Caption>
+</Label369TickWidth>
+<LabelMinuteTickWidth>
+<Caption>Noktalarına özellikleri</Caption>
+</LabelMinuteTickWidth>
+<LabelLineWidth>
+<Caption>Genişlik</Caption>
+</LabelLineWidth>
+<LabelLineColor>
+<Caption>Renk</Caption>
+</LabelLineColor>
+<LabelHourLineWidth>
+<Caption>Saat yönünde</Caption>
+</LabelHourLineWidth>
+<LabelMinuteLineWidth>
+<Caption>Yelkovan</Caption>
+</LabelMinuteLineWidth>
+<LabelSecondLineWidth>
+<Caption>Saniye ibresi</Caption>
+</LabelSecondLineWidth>
+<!-- 时差-->
+<GroupBoxTimeDiff>
+<Caption>Saat farkı</Caption>
+</GroupBoxTimeDiff>
+<LabelDeltHour>
+<Caption>Zaman</Caption>
+</LabelDeltHour>
+<LabelDeltMinute>
+<Caption>Dakika</Caption>
+</LabelDeltMinute>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>Sabit metin</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>Sabit metin kullanın</Caption>
+</chkEnabledText>
+<btnTextDown>
+<Hint>Aşağı</Hint>
+</btnTextDown>
+<btnTextLeft>
+<Hint>Sol</Hint>
+</btnTextLeft>
+<btnTextCenter>
+<Hint>Merkez</Hint>
+</btnTextCenter>
+<btnTextRight>
+<Hint>Sağa kayar</Hint>
+</btnTextRight>
+<btnTextUp>
+<Hint>Hareket</Hint>
+</btnTextUp>
+</TFrameOptionWatch>
+<!--表格编辑主界面-->
+<CGridEditorMainForm>
+<Caption>Tablolar Düzenleme</Caption>
+<!--单色-->
+<PopupMenuSingleColor>
+<Items>
+<Item>Yok</Item>
+<Item>Kırmızı</Item>
+</Items>
+</PopupMenuSingleColor>
+<!--双色-->
+<PopupMenuTwoColor>
+<Items>
+<Item>Yok</Item>
+<Item>Kırmızı</Item>
+<Item>Sarı</Item>
+<Item>Yeşil</Item>
+</Items>
+</PopupMenuTwoColor>
+</CGridEditorMainForm>
+<!--表格编辑插入表格界面-->
+<CGridEditorInsertCells>
+<Caption>Bir tablo eklemek</Caption>
+<LabelType>
+<Caption>Türü:</Caption>
+</LabelType>
+<optTypeRow>
+<Caption>Sıra</Caption>
+</optTypeRow>
+<optTypeCol>
+<Caption>Sıra</Caption>
+</optTypeCol>
+<LabelCount>
+<Caption>Adet:</Caption>
+</LabelCount>
+<LabelPosition>
+<Caption>Yer:</Caption>
+</LabelPosition>
+<optPositionCurrent>
+<Caption>Akım</Caption>
+</optPositionCurrent>
+<optPositionEnd>
+<Caption>Son</Caption>
+</optPositionEnd>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>İptal (&amp;C)</Caption>
+</btnCancel>
+</CGridEditorInsertCells>
+<!--表格编辑删除单元格界面-->
+<CGridEditorDeleteCells>
+<Caption>Hücreleri Sil</Caption>
+<optTypeRow>
+<Caption>Tüm çizgi</Caption>
+</optTypeRow>
+<optTypeCol>
+<Caption>Tüm sütunu</Caption>
+</optTypeCol>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>İptal (&amp;C)</Caption>
+</btnCancel>
+</CGridEditorDeleteCells>
+</Languages>

@@ -1,0 +1,445 @@
+2019-04-25 17:46:59,019 - lemonnt
+2019-04-25 17:46:59,058 - false
+2019-04-25 17:46:59,293 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-04-25 17:46:59,303 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-04-25 17:46:59,306 - Obtain the parameters  : [DIGITNUMBER]
+2019-04-25 17:46:59,312 - Obtain the env parameters  : [4]
+2019-04-25 17:46:59,475 - Success to query records [2]
+2019-04-25 17:46:59,480 - [{"connection":false,"date":1556012549959,"desc":"1","gprs":0,"ip":"192.168.1.10","name":"1","order":"1","port":"1233","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-04-25 17:46:59,918 - Obtain the parameters  : [SYSTEMNAME]
+2019-04-25 17:46:59,923 - Obtain the parameters  : [null]
+2019-04-25 17:47:00,062 - Obtain the parameters  : [MONITORINTRVAL]
+2019-04-25 17:47:00,069 - Obtain the parameters  : [null]
+2019-04-25 17:47:00,071 - Monitor Interval : [10s]
+2019-04-25 17:47:19,352 - UI
+2019-04-25 17:47:19,382 - Success to query records [3]
+2019-04-25 17:47:21,331 - Success to query records [3]
+2019-04-25 17:47:21,355 - Success to query records [3]
+2019-04-25 17:47:21,356 - start : 0, end : 3
+2019-04-25 17:47:43,936 - UI
+2019-04-25 17:47:44,037 - Success to query records [3]
+2019-04-25 17:47:48,600 - Success to query records [4]
+2019-04-25 17:47:48,618 - Success to query records [4]
+2019-04-25 17:47:48,620 - start : 0, end : 4
+2019-04-25 17:47:53,122 - Success to query records [3]
+2019-04-25 17:47:53,136 - Success to query records [3]
+2019-04-25 17:47:53,137 - start : 0, end : 3
+2019-04-25 17:47:56,545 - Success to query records [4]
+2019-04-25 17:47:56,576 - Success to query records [4]
+2019-04-25 17:48:07,232 - Success to query records [4]
+2019-04-25 17:48:07,245 - Success to query records [4]
+2019-04-25 17:48:07,245 - start : 0, end : 4
+2019-04-25 17:48:12,487 - Success to query records [3]
+2019-04-25 17:48:12,504 - Success to query records [3]
+2019-04-25 17:48:12,506 - start : 0, end : 3
+2019-04-25 17:48:14,217 - Success to query records [4]
+2019-04-25 17:48:14,245 - Success to query records [4]
+2019-04-25 17:48:26,097 - Success to query records [4]
+2019-04-25 17:48:26,108 - Success to query records [4]
+2019-04-25 17:48:26,109 - start : 0, end : 4
+2019-04-25 17:48:28,492 - Success to query records [3]
+2019-04-25 17:48:28,508 - Success to query records [3]
+2019-04-25 17:48:28,509 - start : 0, end : 3
+2019-04-25 17:48:30,664 - Success to query records [4]
+2019-04-25 17:48:30,688 - Success to query records [4]
+2019-04-25 17:48:34,877 - Update by the id [7] ,tableName [plugins]
+2019-04-25 17:48:38,399 - The name of plugin is [File]
+2019-04-25 17:48:38,399 - The name of pluginType is [file]
+2019-04-25 17:48:38,415 - Success to query records [1]
+2019-04-25 17:48:39,691 - Obtain the parameters  : [SENDDELAY]
+2019-04-25 17:48:39,696 - Obtain the parameters  : [null]
+2019-04-25 17:48:39,703 - It's going to parsing : C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties
+2019-04-25 17:48:39,705 - It has been parsed ,following [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-04-25 17:48:39,720 - It has been loaded ,following : [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-04-25 17:48:39,721 - {"pluginName":"File","properties":{"dotBit":"#.00","cardNames":"11,21,23","showElements":"C,Mn,Si,P,S,Ni,Cr,Cu,Mo,V,Ti,Al,Nb,As,Sn,Pb,Sb,Bi"}}
+2019-04-25 17:48:39,729 - Success to query records [1]
+2019-04-25 17:48:39,736 - Success to query records [1]
+2019-04-25 17:48:39,743 - Success to query records [2]
+2019-04-25 17:48:39,751 - Success to query records [1]
+2019-04-25 17:48:39,757 - Success to query records [1]
+2019-04-25 17:48:40,760 - ShowElements [[C, MN, SI, P, S, NI, CR, CU, MO, V, TI, AL, NB, AS, SN, PB, SB, BI]]
+2019-04-25 17:48:40,761 - DotBit [#.00]
+2019-04-25 17:48:40,773 - [1] has no records need to be send !!!
+2019-04-25 17:48:40,776 - Send with UDP
+2019-04-25 17:48:40,778 - Send the content for the msg [0.53], and the location ID [0]
+2019-04-25 17:48:40,779 - Send the messages have been format: [KLB00010000005700100000000.53KLEA9]
+2019-04-25 17:48:40,810 - Success to send the datums
+2019-04-25 17:48:41,856 - Send the content for the msg [0.14], and the location ID [1]
+2019-04-25 17:48:41,856 - Send the messages have been format: [KLB00010000005700100100000.14KLEA7]
+2019-04-25 17:48:41,860 - Success to send the datums
+2019-04-25 17:48:42,860 - Send the content for the msg [0.38], and the location ID [2]
+2019-04-25 17:48:42,860 - Send the messages have been format: [KLB00010000005700100200000.38KLEAE]
+2019-04-25 17:48:42,863 - Success to send the datums
+2019-04-25 17:48:43,142 - Success to query records [4]
+2019-04-25 17:48:43,864 - Send the content for the msg [0.21], and the location ID [3]
+2019-04-25 17:48:43,866 - Send the messages have been format: [KLB00010000005700100300000.21KLEA7]
+2019-04-25 17:48:43,875 - Success to send the datums
+2019-04-25 17:48:44,877 - Send the content for the msg [0.28], and the location ID [4]
+2019-04-25 17:48:44,877 - Send the messages have been format: [KLB00010000005700100400000.28KLEAF]
+2019-04-25 17:48:44,880 - Success to send the datums
+2019-04-25 17:48:45,883 - Send the content for the msg [0.18], and the location ID [5]
+2019-04-25 17:48:45,883 - Send the messages have been format: [KLB00010000005700100500000.18KLEAF]
+2019-04-25 17:48:45,887 - Success to send the datums
+2019-04-25 17:48:46,887 - Send the content for the msg [0.49], and the location ID [6]
+2019-04-25 17:48:46,888 - Send the messages have been format: [KLB00010000005700100600000.49KLEB4]
+2019-04-25 17:48:46,893 - Success to send the datums
+2019-04-25 17:48:47,893 - Send the content for the msg [0.59], and the location ID [7]
+2019-04-25 17:48:47,894 - Send the messages have been format: [KLB00010000005700100700000.59KLEB6]
+2019-04-25 17:48:47,901 - Success to send the datums
+2019-04-25 17:48:48,902 - Send the content for the msg [0.73], and the location ID [8]
+2019-04-25 17:48:48,903 - Send the messages have been format: [KLB00010000005700100800000.73KLEB3]
+2019-04-25 17:48:48,906 - Success to send the datums
+2019-04-25 17:48:49,907 - Send the content for the msg [0.77], and the location ID [9]
+2019-04-25 17:48:49,907 - Send the messages have been format: [KLB00010000005700100900000.77KLEB8]
+2019-04-25 17:48:49,911 - Success to send the datums
+2019-04-25 17:48:50,912 - Send the content for the msg [0.3], and the location ID [10]
+2019-04-25 17:48:50,912 - Send the messages have been format: [KLB00010000005700091000000.3KLE7D]
+2019-04-25 17:48:50,918 - Success to send the datums
+2019-04-25 17:48:51,920 - Send the content for the msg [0.28], and the location ID [11]
+2019-04-25 17:48:51,921 - Send the messages have been format: [KLB00010000005700101100000.28KLEAD]
+2019-04-25 17:48:51,926 - Success to send the datums
+2019-04-25 17:48:52,927 - Send the content for the msg [0.82], and the location ID [12]
+2019-04-25 17:48:52,927 - Send the messages have been format: [KLB00010000005700101200000.82KLEAE]
+2019-04-25 17:48:52,934 - Success to send the datums
+2019-04-25 17:48:53,936 - Send the content for the msg [0.55], and the location ID [13]
+2019-04-25 17:48:53,937 - Send the messages have been format: [KLB00010000005700101300000.55KLEAF]
+2019-04-25 17:48:53,943 - Success to send the datums
+2019-04-25 17:48:54,944 - Send the content for the msg [0.25], and the location ID [14]
+2019-04-25 17:48:54,944 - Send the messages have been format: [KLB00010000005700101400000.25KLEAD]
+2019-04-25 17:48:54,948 - Success to send the datums
+2019-04-25 17:48:55,950 - Send the content for the msg [0.73], and the location ID [15]
+2019-04-25 17:48:55,950 - Send the messages have been format: [KLB00010000005700101500000.73KLEB1]
+2019-04-25 17:48:55,953 - Success to send the datums
+2019-04-25 17:48:56,954 - Send the content for the msg [0.2], and the location ID [16]
+2019-04-25 17:48:56,955 - Send the messages have been format: [KLB00010000005700091600000.2KLE82]
+2019-04-25 17:48:56,962 - Success to send the datums
+2019-04-25 17:48:57,964 - Send the content for the msg [0.76], and the location ID [17]
+2019-04-25 17:48:57,965 - Send the messages have been format: [KLB00010000005700101700000.76KLEB6]
+2019-04-25 17:48:57,973 - Success to send the datums
+2019-04-25 17:48:59,006 - Send with UDP
+2019-04-25 17:48:59,007 - Send the content for the msg [0.53], and the location ID [0]
+2019-04-25 17:48:59,007 - Send the messages have been format: [KLB00010000005700100000000.53KLEA9]
+2019-04-25 17:48:59,010 - Success to send the datums
+2019-04-25 17:49:00,011 - Send the content for the msg [0.14], and the location ID [1]
+2019-04-25 17:49:00,014 - Send the messages have been format: [KLB00010000005700100100000.14KLEA7]
+2019-04-25 17:49:00,018 - Success to send the datums
+2019-04-25 17:49:01,020 - Send the content for the msg [0.38], and the location ID [2]
+2019-04-25 17:49:01,021 - Send the messages have been format: [KLB00010000005700100200000.38KLEAE]
+2019-04-25 17:49:01,027 - Success to send the datums
+2019-04-25 17:49:01,729 - Success to query records [4]
+2019-04-25 17:49:02,029 - Send the content for the msg [0.21], and the location ID [3]
+2019-04-25 17:49:02,029 - Send the messages have been format: [KLB00010000005700100300000.21KLEA7]
+2019-04-25 17:49:02,031 - Success to send the datums
+2019-04-25 17:49:03,032 - Send the content for the msg [0.28], and the location ID [4]
+2019-04-25 17:49:03,033 - Send the messages have been format: [KLB00010000005700100400000.28KLEAF]
+2019-04-25 17:49:03,037 - Success to send the datums
+2019-04-25 17:49:04,037 - Send the content for the msg [0.18], and the location ID [5]
+2019-04-25 17:49:04,037 - Send the messages have been format: [KLB00010000005700100500000.18KLEAF]
+2019-04-25 17:49:04,042 - Success to send the datums
+2019-04-25 17:49:05,043 - Send the content for the msg [0.49], and the location ID [6]
+2019-04-25 17:49:05,044 - Send the messages have been format: [KLB00010000005700100600000.49KLEB4]
+2019-04-25 17:49:05,048 - Success to send the datums
+2019-04-25 17:49:06,050 - Send the content for the msg [0.59], and the location ID [7]
+2019-04-25 17:49:06,051 - Send the messages have been format: [KLB00010000005700100700000.59KLEB6]
+2019-04-25 17:49:06,055 - Success to send the datums
+2019-04-25 17:49:07,056 - Send the content for the msg [0.73], and the location ID [8]
+2019-04-25 17:49:07,056 - Send the messages have been format: [KLB00010000005700100800000.73KLEB3]
+2019-04-25 17:49:07,059 - Success to send the datums
+2019-04-25 17:49:07,613 - Success to query records [4]
+2019-04-25 17:49:08,061 - Send the content for the msg [0.77], and the location ID [9]
+2019-04-25 17:49:08,061 - Send the messages have been format: [KLB00010000005700100900000.77KLEB8]
+2019-04-25 17:49:08,064 - Success to send the datums
+2019-04-25 17:49:09,066 - Send the content for the msg [0.3], and the location ID [10]
+2019-04-25 17:49:09,067 - Send the messages have been format: [KLB00010000005700091000000.3KLE7D]
+2019-04-25 17:49:09,071 - Success to send the datums
+2019-04-25 17:49:10,072 - Send the content for the msg [0.28], and the location ID [11]
+2019-04-25 17:49:10,072 - Send the messages have been format: [KLB00010000005700101100000.28KLEAD]
+2019-04-25 17:49:10,075 - Success to send the datums
+2019-04-25 17:49:11,077 - Send the content for the msg [0.82], and the location ID [12]
+2019-04-25 17:49:11,077 - Send the messages have been format: [KLB00010000005700101200000.82KLEAE]
+2019-04-25 17:49:11,081 - Success to send the datums
+2019-04-25 17:49:12,082 - Send the content for the msg [0.55], and the location ID [13]
+2019-04-25 17:49:12,082 - Send the messages have been format: [KLB00010000005700101300000.55KLEAF]
+2019-04-25 17:49:12,087 - Success to send the datums
+2019-04-25 17:49:13,089 - Send the content for the msg [0.25], and the location ID [14]
+2019-04-25 17:49:13,089 - Send the messages have been format: [KLB00010000005700101400000.25KLEAD]
+2019-04-25 17:49:13,092 - Success to send the datums
+2019-04-25 17:49:14,093 - Send the content for the msg [0.73], and the location ID [15]
+2019-04-25 17:49:14,094 - Send the messages have been format: [KLB00010000005700101500000.73KLEB1]
+2019-04-25 17:49:14,099 - Success to send the datums
+2019-04-25 17:49:15,011 - Obtain the parameters  : [SYSTEMNAME]
+2019-04-25 17:49:15,015 - Obtain the parameters  : [null]
+2019-04-25 17:49:15,100 - Send the content for the msg [0.2], and the location ID [16]
+2019-04-25 17:49:15,123 - Send the messages have been format: [KLB00010000005700091600000.2KLE82]
+2019-04-25 17:49:15,128 - Success to send the datums
+2019-04-25 17:49:16,131 - Send the content for the msg [0.76], and the location ID [17]
+2019-04-25 17:49:16,132 - Send the messages have been format: [KLB00010000005700101700000.76KLEB6]
+2019-04-25 17:49:16,136 - Success to send the datums
+2019-04-25 17:49:17,150 - [1] has no records need to be send !!!
+2019-04-25 17:49:17,150 - Send with UDP
+2019-04-25 17:49:17,151 - Send the content for the msg [0.31], and the location ID [0]
+2019-04-25 17:49:17,151 - Send the messages have been format: [KLB00010000005700100000000.31KLEA5]
+2019-04-25 17:49:17,154 - Success to send the datums
+2019-04-25 17:49:18,157 - Send the content for the msg [0.53], and the location ID [1]
+2019-04-25 17:49:18,158 - Send the messages have been format: [KLB00010000005700100100000.53KLEAA]
+2019-04-25 17:49:18,162 - Success to send the datums
+2019-04-25 17:49:19,162 - Send the content for the msg [0.87], and the location ID [2]
+2019-04-25 17:49:19,162 - Send the messages have been format: [KLB00010000005700100200000.87KLEB2]
+2019-04-25 17:49:19,168 - Success to send the datums
+2019-04-25 17:49:20,171 - Send the content for the msg [0.75], and the location ID [3]
+2019-04-25 17:49:20,171 - Send the messages have been format: [KLB00010000005700100300000.75KLEB0]
+2019-04-25 17:49:20,173 - Success to send the datums
+2019-04-25 17:49:21,175 - Send the content for the msg [0.24], and the location ID [4]
+2019-04-25 17:49:21,176 - Send the messages have been format: [KLB00010000005700100400000.24KLEAB]
+2019-04-25 17:49:21,181 - Success to send the datums
+2019-04-25 17:49:21,578 - Obtain the parameters  : [SYSTEMNAME]
+2019-04-25 17:49:21,594 - Obtain the parameters  : [null]
+2019-04-25 17:49:22,183 - Send the content for the msg [0.28], and the location ID [5]
+2019-04-25 17:49:22,183 - Send the messages have been format: [KLB00010000005700100500000.28KLEB0]
+2019-04-25 17:49:22,186 - Success to send the datums
+2019-04-25 17:49:23,181 - Success to query records [4]
+2019-04-25 17:49:23,188 - Send the content for the msg [0.47], and the location ID [6]
+2019-04-25 17:49:23,188 - Send the messages have been format: [KLB00010000005700100600000.47KLEB2]
+2019-04-25 17:49:23,193 - Success to send the datums
+2019-04-25 17:49:24,193 - Send the content for the msg [0.55], and the location ID [7]
+2019-04-25 17:49:24,193 - Send the messages have been format: [KLB00010000005700100700000.55KLEB2]
+2019-04-25 17:49:24,197 - Success to send the datums
+2019-04-25 17:49:25,198 - Send the content for the msg [0.12], and the location ID [8]
+2019-04-25 17:49:25,198 - Send the messages have been format: [KLB00010000005700100800000.12KLEAC]
+2019-04-25 17:49:25,206 - Success to send the datums
+2019-04-25 17:49:26,207 - Send the content for the msg [0.86], and the location ID [9]
+2019-04-25 17:49:26,207 - Send the messages have been format: [KLB00010000005700100900000.86KLEB8]
+2019-04-25 17:49:26,211 - Success to send the datums
+2019-04-25 17:49:27,213 - Send the content for the msg [0.08], and the location ID [10]
+2019-04-25 17:49:27,214 - Send the messages have been format: [KLB00010000005700101000000.08KLEAA]
+2019-04-25 17:49:27,218 - Success to send the datums
+2019-04-25 17:49:28,219 - Send the content for the msg [0.18], and the location ID [11]
+2019-04-25 17:49:28,219 - Send the messages have been format: [KLB00010000005700101100000.18KLEAC]
+2019-04-25 17:49:28,222 - Success to send the datums
+2019-04-25 17:49:29,222 - Send the content for the msg [0.79], and the location ID [12]
+2019-04-25 17:49:29,222 - Send the messages have been format: [KLB00010000005700101200000.79KLEB4]
+2019-04-25 17:49:29,225 - Success to send the datums
+2019-04-25 17:49:30,225 - Send the content for the msg [0.48], and the location ID [13]
+2019-04-25 17:49:30,225 - Send the messages have been format: [KLB00010000005700101300000.48KLEB1]
+2019-04-25 17:49:30,228 - Success to send the datums
+2019-04-25 17:49:31,228 - Send the content for the msg [0.95], and the location ID [14]
+2019-04-25 17:49:31,228 - Send the messages have been format: [KLB00010000005700101400000.95KLEB4]
+2019-04-25 17:49:31,231 - Success to send the datums
+2019-04-25 17:49:32,233 - Send the content for the msg [0.33], and the location ID [15]
+2019-04-25 17:49:32,233 - Send the messages have been format: [KLB00010000005700101500000.33KLEAD]
+2019-04-25 17:49:32,237 - Success to send the datums
+2019-04-25 17:49:33,237 - Send the content for the msg [0.99], and the location ID [16]
+2019-04-25 17:49:33,237 - Send the messages have been format: [KLB00010000005700101600000.99KLEBA]
+2019-04-25 17:49:33,240 - Success to send the datums
+2019-04-25 17:49:34,241 - Send the content for the msg [0.92], and the location ID [17]
+2019-04-25 17:49:34,241 - Send the messages have been format: [KLB00010000005700101700000.92KLEB4]
+2019-04-25 17:49:34,246 - Success to send the datums
+2019-04-25 17:49:35,254 - Send with UDP
+2019-04-25 17:49:35,255 - Send the content for the msg [0.31], and the location ID [0]
+2019-04-25 17:49:35,257 - Send the messages have been format: [KLB00010000005700100000000.31KLEA5]
+2019-04-25 17:49:35,260 - Success to send the datums
+2019-04-25 17:49:36,261 - Send the content for the msg [0.53], and the location ID [1]
+2019-04-25 17:49:36,261 - Send the messages have been format: [KLB00010000005700100100000.53KLEAA]
+2019-04-25 17:49:36,263 - Success to send the datums
+2019-04-25 17:49:37,264 - Send the content for the msg [0.87], and the location ID [2]
+2019-04-25 17:49:37,265 - Send the messages have been format: [KLB00010000005700100200000.87KLEB2]
+2019-04-25 17:49:37,271 - Success to send the datums
+2019-04-25 17:49:38,274 - Send the content for the msg [0.75], and the location ID [3]
+2019-04-25 17:49:38,274 - Send the messages have been format: [KLB00010000005700100300000.75KLEB0]
+2019-04-25 17:49:38,276 - Success to send the datums
+2019-04-25 17:49:39,276 - Send the content for the msg [0.24], and the location ID [4]
+2019-04-25 17:49:39,276 - Send the messages have been format: [KLB00010000005700100400000.24KLEAB]
+2019-04-25 17:49:39,280 - Success to send the datums
+2019-04-25 17:49:40,282 - Send the content for the msg [0.28], and the location ID [5]
+2019-04-25 17:49:40,282 - Send the messages have been format: [KLB00010000005700100500000.28KLEB0]
+2019-04-25 17:49:40,285 - Success to send the datums
+2019-04-25 17:49:41,285 - Send the content for the msg [0.47], and the location ID [6]
+2019-04-25 17:49:41,286 - Send the messages have been format: [KLB00010000005700100600000.47KLEB2]
+2019-04-25 17:49:41,293 - Success to send the datums
+2019-04-25 17:49:41,784 - Success to query records [4]
+2019-04-25 17:49:42,296 - Send the content for the msg [0.55], and the location ID [7]
+2019-04-25 17:49:42,296 - Send the messages have been format: [KLB00010000005700100700000.55KLEB2]
+2019-04-25 17:49:42,299 - Success to send the datums
+2019-04-25 17:49:43,301 - Send the content for the msg [0.12], and the location ID [8]
+2019-04-25 17:49:43,301 - Send the messages have been format: [KLB00010000005700100800000.12KLEAC]
+2019-04-25 17:49:43,305 - Success to send the datums
+2019-04-25 17:49:44,305 - Send the content for the msg [0.86], and the location ID [9]
+2019-04-25 17:49:44,305 - Send the messages have been format: [KLB00010000005700100900000.86KLEB8]
+2019-04-25 17:49:44,310 - Success to send the datums
+2019-04-25 17:49:45,312 - Send the content for the msg [0.08], and the location ID [10]
+2019-04-25 17:49:45,312 - Send the messages have been format: [KLB00010000005700101000000.08KLEAA]
+2019-04-25 17:49:45,315 - Success to send the datums
+2019-04-25 17:49:46,317 - Send the content for the msg [0.18], and the location ID [11]
+2019-04-25 17:49:46,317 - Send the messages have been format: [KLB00010000005700101100000.18KLEAC]
+2019-04-25 17:49:46,320 - Success to send the datums
+2019-04-25 17:49:47,321 - Send the content for the msg [0.79], and the location ID [12]
+2019-04-25 17:49:47,321 - Send the messages have been format: [KLB00010000005700101200000.79KLEB4]
+2019-04-25 17:49:47,327 - Success to send the datums
+2019-04-25 17:49:47,641 - Success to query records [4]
+2019-04-25 17:49:48,328 - Send the content for the msg [0.48], and the location ID [13]
+2019-04-25 17:49:48,328 - Send the messages have been format: [KLB00010000005700101300000.48KLEB1]
+2019-04-25 17:49:48,331 - Success to send the datums
+2019-04-25 17:49:49,332 - Send the content for the msg [0.95], and the location ID [14]
+2019-04-25 17:49:49,332 - Send the messages have been format: [KLB00010000005700101400000.95KLEB4]
+2019-04-25 17:49:49,337 - Success to send the datums
+2019-04-25 17:49:50,339 - Send the content for the msg [0.33], and the location ID [15]
+2019-04-25 17:49:50,339 - Send the messages have been format: [KLB00010000005700101500000.33KLEAD]
+2019-04-25 17:49:50,345 - Success to send the datums
+2019-04-25 17:49:51,345 - Send the content for the msg [0.99], and the location ID [16]
+2019-04-25 17:49:51,345 - Send the messages have been format: [KLB00010000005700101600000.99KLEBA]
+2019-04-25 17:49:51,350 - Success to send the datums
+2019-04-25 17:49:51,597 - Obtain the parameters  : [SYSTEMNAME]
+2019-04-25 17:49:51,601 - Obtain the parameters  : [null]
+2019-04-25 17:49:52,350 - Send the content for the msg [0.92], and the location ID [17]
+2019-04-25 17:49:52,350 - Send the messages have been format: [KLB00010000005700101700000.92KLEB4]
+2019-04-25 17:49:52,355 - Success to send the datums
+2019-04-25 17:49:53,368 - [1] has no records need to be send !!!
+2019-04-25 17:49:53,368 - Send with UDP
+2019-04-25 17:49:53,369 - Send the content for the msg [0.51], and the location ID [0]
+2019-04-25 17:49:53,369 - Send the messages have been format: [KLB00010000005700100000000.51KLEA7]
+2019-04-25 17:49:53,372 - Success to send the datums
+2019-04-25 17:49:54,373 - Send the content for the msg [0.49], and the location ID [1]
+2019-04-25 17:49:54,373 - Send the messages have been format: [KLB00010000005700100100000.49KLEAF]
+2019-04-25 17:49:54,376 - Success to send the datums
+2019-04-25 17:49:55,377 - Send the content for the msg [0.65], and the location ID [2]
+2019-04-25 17:49:55,377 - Send the messages have been format: [KLB00010000005700100200000.65KLEAE]
+2019-04-25 17:49:55,380 - Success to send the datums
+2019-04-25 17:49:56,380 - Send the content for the msg [0.36], and the location ID [3]
+2019-04-25 17:49:56,380 - Send the messages have been format: [KLB00010000005700100300000.36KLEAD]
+2019-04-25 17:49:56,383 - Success to send the datums
+2019-04-25 17:49:57,383 - Send the content for the msg [0.76], and the location ID [4]
+2019-04-25 17:49:57,383 - Send the messages have been format: [KLB00010000005700100400000.76KLEB2]
+2019-04-25 17:49:57,386 - Success to send the datums
+2019-04-25 17:49:58,388 - Send the content for the msg [0.86], and the location ID [5]
+2019-04-25 17:49:58,388 - Send the messages have been format: [KLB00010000005700100500000.86KLEB4]
+2019-04-25 17:49:58,390 - Success to send the datums
+2019-04-25 17:49:59,391 - Send the content for the msg [0.89], and the location ID [6]
+2019-04-25 17:49:59,391 - Send the messages have been format: [KLB00010000005700100600000.89KLEB8]
+2019-04-25 17:49:59,399 - Success to send the datums
+2019-04-25 17:50:00,401 - Send the content for the msg [0.88], and the location ID [7]
+2019-04-25 17:50:00,401 - Send the messages have been format: [KLB00010000005700100700000.88KLEB8]
+2019-04-25 17:50:00,404 - Success to send the datums
+2019-04-25 17:50:01,405 - Send the content for the msg [0.86], and the location ID [8]
+2019-04-25 17:50:01,405 - Send the messages have been format: [KLB00010000005700100800000.86KLEB7]
+2019-04-25 17:50:01,411 - Success to send the datums
+2019-04-25 17:50:02,411 - Send the content for the msg [0.95], and the location ID [9]
+2019-04-25 17:50:02,411 - Send the messages have been format: [KLB00010000005700100900000.95KLEB8]
+2019-04-25 17:50:02,414 - Success to send the datums
+2019-04-25 17:50:03,218 - Success to query records [4]
+2019-04-25 17:50:03,416 - Send the content for the msg [0.02], and the location ID [10]
+2019-04-25 17:50:03,416 - Send the messages have been format: [KLB00010000005700101000000.02KLEA4]
+2019-04-25 17:50:03,419 - Success to send the datums
+2019-04-25 17:50:04,420 - Send the content for the msg [0.72], and the location ID [11]
+2019-04-25 17:50:04,421 - Send the messages have been format: [KLB00010000005700101100000.72KLEAC]
+2019-04-25 17:50:04,427 - Success to send the datums
+2019-04-25 17:50:05,428 - Send the content for the msg [0.71], and the location ID [12]
+2019-04-25 17:50:05,428 - Send the messages have been format: [KLB00010000005700101200000.71KLEAC]
+2019-04-25 17:50:05,434 - Success to send the datums
+2019-04-25 17:50:06,435 - Send the content for the msg [0.21], and the location ID [13]
+2019-04-25 17:50:06,435 - Send the messages have been format: [KLB00010000005700101300000.21KLEA8]
+2019-04-25 17:50:06,440 - Success to send the datums
+2019-04-25 17:50:07,442 - Send the content for the msg [0.16], and the location ID [14]
+2019-04-25 17:50:07,442 - Send the messages have been format: [KLB00010000005700101400000.16KLEAD]
+2019-04-25 17:50:07,448 - Success to send the datums
+2019-04-25 17:50:08,449 - Send the content for the msg [0.9], and the location ID [15]
+2019-04-25 17:50:08,449 - Send the messages have been format: [KLB00010000005700091500000.9KLE88]
+2019-04-25 17:50:08,455 - Success to send the datums
+2019-04-25 17:50:09,455 - Send the content for the msg [0.1], and the location ID [16]
+2019-04-25 17:50:09,455 - Send the messages have been format: [KLB00010000005700091600000.1KLE81]
+2019-04-25 17:50:09,460 - Success to send the datums
+2019-04-25 17:50:10,461 - Send the content for the msg [0.62], and the location ID [17]
+2019-04-25 17:50:10,462 - Send the messages have been format: [KLB00010000005700101700000.62KLEB1]
+2019-04-25 17:50:10,467 - Success to send the datums
+2019-04-25 17:50:11,478 - Send with UDP
+2019-04-25 17:50:11,478 - Send the content for the msg [0.51], and the location ID [0]
+2019-04-25 17:50:11,479 - Send the messages have been format: [KLB00010000005700100000000.51KLEA7]
+2019-04-25 17:50:11,481 - Success to send the datums
+2019-04-25 17:50:12,482 - Send the content for the msg [0.49], and the location ID [1]
+2019-04-25 17:50:12,482 - Send the messages have been format: [KLB00010000005700100100000.49KLEAF]
+2019-04-25 17:50:12,487 - Success to send the datums
+2019-04-25 17:50:13,487 - Send the content for the msg [0.65], and the location ID [2]
+2019-04-25 17:50:13,487 - Send the messages have been format: [KLB00010000005700100200000.65KLEAE]
+2019-04-25 17:50:13,492 - Success to send the datums
+2019-04-25 17:50:14,493 - Send the content for the msg [0.36], and the location ID [3]
+2019-04-25 17:50:14,493 - Send the messages have been format: [KLB00010000005700100300000.36KLEAD]
+2019-04-25 17:50:14,495 - Success to send the datums
+2019-04-25 17:50:15,496 - Send the content for the msg [0.76], and the location ID [4]
+2019-04-25 17:50:15,496 - Send the messages have been format: [KLB00010000005700100400000.76KLEB2]
+2019-04-25 17:50:15,500 - Success to send the datums
+2019-04-25 17:50:16,501 - Send the content for the msg [0.86], and the location ID [5]
+2019-04-25 17:50:16,502 - Send the messages have been format: [KLB00010000005700100500000.86KLEB4]
+2019-04-25 17:50:16,505 - Success to send the datums
+2019-04-25 17:50:17,505 - Send the content for the msg [0.89], and the location ID [6]
+2019-04-25 17:50:17,505 - Send the messages have been format: [KLB00010000005700100600000.89KLEB8]
+2019-04-25 17:50:17,508 - Success to send the datums
+2019-04-25 17:50:18,508 - Send the content for the msg [0.88], and the location ID [7]
+2019-04-25 17:50:18,508 - Send the messages have been format: [KLB00010000005700100700000.88KLEB8]
+2019-04-25 17:50:18,514 - Success to send the datums
+2019-04-25 17:50:19,516 - Send the content for the msg [0.86], and the location ID [8]
+2019-04-25 17:50:19,517 - Send the messages have been format: [KLB00010000005700100800000.86KLEB7]
+2019-04-25 17:50:19,522 - Success to send the datums
+2019-04-25 17:50:20,524 - Send the content for the msg [0.95], and the location ID [9]
+2019-04-25 17:50:20,524 - Send the messages have been format: [KLB00010000005700100900000.95KLEB8]
+2019-04-25 17:50:20,528 - Success to send the datums
+2019-04-25 17:50:21,529 - Send the content for the msg [0.02], and the location ID [10]
+2019-04-25 17:50:21,529 - Send the messages have been format: [KLB00010000005700101000000.02KLEA4]
+2019-04-25 17:50:21,535 - Success to send the datums
+2019-04-25 17:50:21,819 - Success to query records [4]
+2019-04-25 17:50:22,535 - Send the content for the msg [0.72], and the location ID [11]
+2019-04-25 17:50:22,536 - Send the messages have been format: [KLB00010000005700101100000.72KLEAC]
+2019-04-25 17:50:22,540 - Success to send the datums
+2019-04-25 17:50:23,540 - Send the content for the msg [0.71], and the location ID [12]
+2019-04-25 17:50:23,540 - Send the messages have been format: [KLB00010000005700101200000.71KLEAC]
+2019-04-25 17:50:23,543 - Success to send the datums
+2019-04-25 17:50:24,543 - Send the content for the msg [0.21], and the location ID [13]
+2019-04-25 17:50:24,543 - Send the messages have been format: [KLB00010000005700101300000.21KLEA8]
+2019-04-25 17:50:24,545 - Success to send the datums
+2019-04-25 17:50:25,546 - Send the content for the msg [0.16], and the location ID [14]
+2019-04-25 17:50:25,546 - Send the messages have been format: [KLB00010000005700101400000.16KLEAD]
+2019-04-25 17:50:25,551 - Success to send the datums
+2019-04-25 17:50:26,553 - Send the content for the msg [0.9], and the location ID [15]
+2019-04-25 17:50:26,553 - Send the messages have been format: [KLB00010000005700091500000.9KLE88]
+2019-04-25 17:50:26,558 - Success to send the datums
+2019-04-25 17:50:27,559 - Send the content for the msg [0.1], and the location ID [16]
+2019-04-25 17:50:27,560 - Send the messages have been format: [KLB00010000005700091600000.1KLE81]
+2019-04-25 17:50:27,566 - Success to send the datums
+2019-04-25 17:50:27,656 - Success to query records [4]
+2019-04-25 17:50:28,567 - Send the content for the msg [0.62], and the location ID [17]
+2019-04-25 17:50:28,568 - Send the messages have been format: [KLB00010000005700101700000.62KLEB1]
+2019-04-25 17:50:28,573 - Success to send the datums
+2019-04-25 17:50:29,591 - [1] has no records need to be send !!!
+2019-04-25 17:50:29,591 - Send with UDP
+2019-04-25 17:50:29,592 - Send the content for the msg [0.25], and the location ID [0]
+2019-04-25 17:50:29,592 - Send the messages have been format: [KLB00010000005700100000000.25KLEA8]
+2019-04-25 17:50:29,596 - Success to send the datums
+2019-04-25 17:50:30,597 - Send the content for the msg [0.94], and the location ID [1]
+2019-04-25 17:50:30,597 - Send the messages have been format: [KLB00010000005700100100000.94KLEAF]
+2019-04-25 17:50:30,602 - Success to send the datums
+2019-04-25 17:50:31,602 - Send the content for the msg [0.51], and the location ID [2]
+2019-04-25 17:50:31,602 - Send the messages have been format: [KLB00010000005700100200000.51KLEA9]
+2019-04-25 17:50:31,605 - Success to send the datums
+2019-04-25 17:50:32,606 - Send the content for the msg [0.39], and the location ID [3]
+2019-04-25 17:50:32,606 - Send the messages have been format: [KLB00010000005700100300000.39KLEB0]
+2019-04-25 17:50:32,610 - Success to send the datums
+2019-04-25 17:50:33,612 - Send the content for the msg [0.88], and the location ID [4]
+2019-04-25 17:50:33,612 - Send the messages have been format: [KLB00010000005700100400000.88KLEB5]
+2019-04-25 17:50:33,618 - Success to send the datums
+2019-04-25 17:50:34,620 - Send the content for the msg [0.21], and the location ID [5]
+2019-04-25 17:50:34,620 - Send the messages have been format: [KLB00010000005700100500000.21KLEA9]
+2019-04-25 17:50:34,622 - Success to send the datums
+2019-04-25 18:27:37,067 - lemonnt
+2019-04-25 18:27:37,095 - false
+2019-04-25 18:27:37,313 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-04-25 18:27:37,323 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-04-25 18:27:37,325 - Obtain the parameters  : [DIGITNUMBER]
+2019-04-25 18:27:37,331 - Obtain the env parameters  : [4]
+2019-04-25 18:27:37,490 - Success to query records [4]
+2019-04-25 18:27:37,496 - [{"connection":false,"date":1556012549959,"desc":"1","gprs":0,"ip":"192.168.1.10","name":"1","order":"1","port":"1233","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1556185639349,"desc":"11","gprs":0,"ip":"10.224.34.43","name":"11","order":"11","port":"11","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1556185663938,"desc":"11","gprs":0,"ip":"10.34.56.64","name":"23","order":"34","port":"34","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-04-25 18:27:37,864 - Obtain the parameters  : [SYSTEMNAME]
+2019-04-25 18:27:37,869 - Obtain the parameters  : [null]
+2019-04-25 18:27:38,001 - Obtain the parameters  : [MONITORINTRVAL]
+2019-04-25 18:27:38,008 - Obtain the parameters  : [null]
+2019-04-25 18:27:38,009 - Monitor Interval : [10s]
+2019-04-25 18:27:41,444 - Success to query records [4]
+2019-04-25 18:27:41,472 - Success to query records [4]
+2019-04-25 18:27:41,473 - start : 0, end : 4

@@ -1,0 +1,180 @@
+=================================
+Time:10:07:02:775
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:System Error.  Code: 87.
+The parameter is incorrect
+ToString:System Error.  Code: 87.
+The parameter is incorrect
+=================================
+=================================
+Time:10:07:02:789
+ClassName:TMainForm
+UnitName:main
+Message:Access violation at address 00AFDE51 in module 'X Show 2015(V5.0.4.9).exe'. Read of address 0000000C
+ToString:Access violation at address 00AFDE51 in module 'X Show 2015(V5.0.4.9).exe'. Read of address 0000000C
+=================================
+=================================
+Time:10:07:03:044
+ClassName:TsuiImageButton
+UnitName:SUIButton
+Message:Out of system resources
+ToString:Out of system resources
+=================================
+=================================
+Time:10:07:03:060
+ClassName:TsuiImageButton
+UnitName:SUIButton
+Message:Cannot create a file when that file already exists.
+
+ToString:Cannot create a file when that file already exists.
+
+=================================
+=================================
+Time:10:07:03:075
+ClassName:TsuiImageButton
+UnitName:SUIButton
+Message:Cannot create a file when that file already exists.
+
+ToString:Cannot create a file when that file already exists.
+
+=================================
+=================================
+Time:10:07:03:199
+ClassName:TMainForm
+UnitName:main
+Message:Error creating window device context
+ToString:Error creating window device context
+=================================
+=================================
+Time:10:07:03:249
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Error creating window device context
+ToString:Error creating window device context
+=================================
+=================================
+Time:10:07:03:265
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Error creating window device context
+ToString:Error creating window device context
+=================================
+=================================
+Time:10:07:03:280
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Error creating window device context
+ToString:Error creating window device context
+=================================
+=================================
+Time:10:07:03:294
+ClassName:TsuiImageButton
+UnitName:SUIButton
+Message:Cannot create a file when that file already exists.
+
+ToString:Cannot create a file when that file already exists.
+
+=================================
+=================================
+Time:10:07:03:310
+ClassName:TsuiImageButton
+UnitName:SUIButton
+Message:Cannot create a file when that file already exists.
+
+ToString:Cannot create a file when that file already exists.
+
+=================================
+=================================
+Time:10:07:03:771
+ClassName:TApplication
+UnitName:Forms
+Message:Error creating window device context
+ToString:Error creating window device context
+=================================
+=================================
+Time:10:07:28:576
+ClassName:TToolBar
+UnitName:ComCtrls
+Message:Error creating window device context
+ToString:Error creating window device context
+=================================
+=================================
+Time:10:07:28:620
+ClassName:TToolBar
+UnitName:ComCtrls
+Message:Error creating window device context
+ToString:Error creating window device context
+=================================
+=================================
+Time:10:07:29:781
+ClassName:TsuiImageButton
+UnitName:SUIButton
+Message:Invalid device context (DC) handle.
+
+ToString:Invalid device context (DC) handle.
+
+=================================
+=================================
+Time:06:12:11:666
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+ToString:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+=================================
+=================================
+Time:06:12:11:682
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+ToString:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+=================================
+=================================
+Time:06:14:56:397
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 00A699EF in module 'X Show 2015(V5.0.4.9).exe'. Write of address 00000034
+ToString:Access violation at address 00A699EF in module 'X Show 2015(V5.0.4.9).exe'. Write of address 00000034
+=================================
+=================================
+Time:12:10:31:275
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+ToString:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+=================================
+=================================
+Time:12:10:31:291
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+ToString:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+=================================
+=================================
+Time:12:30:51:703
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+ToString:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+=================================
+=================================
+Time:12:30:51:703
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+ToString:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+=================================
+=================================
+Time:13:01:13:598
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+ToString:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+=================================
+=================================
+Time:13:01:13:608
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+ToString:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+=================================

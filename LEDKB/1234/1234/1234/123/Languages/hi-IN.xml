@@ -1,0 +1,2198 @@
+﻿<?xml version="1.0"?>
+<Languages>
+<!--修改记录>
+41399
+1. 校时调试，节点<TDlgProtocolSetDateTime>
+增加<btnGetSystemTime>
+2. 通讯参数设置窗口，GPRS页，节点<TDlgNetworkSetting>
+增加<LabelDeviceId>
+3. 定时开关调试，节点<TDlgProtocolOnOff>
+增加<chkAutoOnOff>
+4. 区域显示参数设置，主界面，节点<TMainForm>
+增加<chkContinuousLeft>,<chkContinuousTop>
+41398
+1. 增加表格编辑器语言
+节点：<CGridEditorMainForm>,<CGridEditorInsertCells>,<CGridEditorDeleteCells>
+2. USB导出界面，节点<TDlgUsbForm>
+增加<LabelUsbFreeSize>,<LabelUsbFileSystem>,<LabelDateTimeNoChange>,<LabelLightNoChange>,<LabelOnOffNoChange>
+3. 定时开关调试，节点<TDlgProtocolOnOff>
+增加<MemoHelp>
+4. 亮度调节调试，节点<TDlgProtocolSetLight>
+增加<MemoHelp>
+5. 校时调试，节点<TDlgProtocolSetDateTime>
+增加<MemoHelp>
+6. 屏幕参数设置，节点<TdlgMonitorSetting>
+增加<chkDotFrequencyAuto>,<chkLineBlankingAuto>
+7. 图文区域编辑选项界面，<TFrameOptionPicture>
+增加<ToolButtonNewRtf>,<ToolButtonAddPicture>,<ToolButtonAddGrid>
+<ToolButtonAddWord>,<ToolButtonAddExcel>,<ToolButtonDelete>,
+<ToolButtonUp>,<ToolButtonDown>
+<chkShowPath>
+8. 主界面工具条，<TMainForm>
+增加 <ToolButtonTiming>,<ToolButtonSeDateTime>,<ToolButtonSetLight>
+<ToolButtonOnOff>
+<修改记录-->
+<!--这个文件定义中文简体-->
+<!-- Messages段定义一些信息提示信息-->
+<Messages>
+<!--;通用消息-->
+<Comm>
+<Comm.InitFail>प्रारंभ विफल !</Comm.InitFail>
+<!--图文编辑添加文本文件时打开文件对话框的文件扩展名提示-->
+<FileFilterText>पाठ फ़ाइलें (* . Txt)</FileFilterText>
+<!--图文编辑添加RTF文件时打开文件对话框的文件扩展名提示-->
+<FileFilterRTF>आरटीएफ फ़ाइलें (* . आरटीएफ)</FileFilterRTF>
+<OpenRtfFail>आरटीएफ फाइल पढ़ें विफल रहा है !</OpenRtfFail>
+<!--图文编辑添加图片文件时打开文件对话框的文件扩展名提示-->
+<FileFilterPicture>छवि फ़ाइलें (* बीएमपी ; .. * jpg; . * GIF ; . * पीएनजी)</FileFilterPicture>
+<OpenPictureFail>छवि फ़ाइल नहीं पढ़ सकते हैं !</OpenPictureFail>
+<!--图文编辑添加WORD文件时打开文件对话框的文件扩展名提示-->
+<FileFilterWord>Word दस्तावेज़ (* डॉक्टर ; .. * docx)</FileFilterWord>
+<OpenWordFail>, वर्ड दस्तावेजों को पढ़ने के पद की स्थापना की पुष्टि नहीं कर सकते!</OpenWordFail>
+<!--图文编辑添加EXCEL文件时打开文件对话框的文件扩展名提示-->
+<FileFilterExcel>एक्सेल दस्तावेज़ (* xls , .. * xlsx)</FileFilterExcel>
+<OpenExcelFail>एक्सेल फाइल नहीं पढ़ सकते हैं !</OpenExcelFail>
+<!-- 工程打开保存的提示信息-->
+<SaveProjectFail>परियोजना को बचाने में विफल रहा है !</SaveProjectFail>
+<CreateDirFail>निर्देशिका बनाने में विफल !</CreateDirFail>
+<OpenProjectFail>परियोजना खोलना असफल !</OpenProjectFail>
+<ErrorProjectVersion>परियोजना फ़ाइल संस्करण पहचान नहीं है !</ErrorProjectVersion>
+<ErrorProjectFile>परियोजना फ़ाइल भ्रष्ट है !</ErrorProjectFile>
+<!--;提示保存工程-->
+<ProjectChangedPrompt>भी बदल काम करता है, इसे बचाने के लिए ?</ProjectChangedPrompt>
+<!--;默认的新工程-->
+<NewProjectName>(नई परियोजना)</NewProjectName>
+<!--;工程没有内容-->
+<ProjectNull>कोई सामग्री नहीं बचाया जा सकता है !</ProjectNull>
+<Unknown>अज्ञात</Unknown>
+<!--通讯时的些操作信息-->
+<ProtocolTestStart>नियंत्रण कार्ड को जोड़ने , कृपया प्रतीक्षा करें ...</ProtocolTestStart>
+<ProtocolSuccess>कनेक्शन नियंत्रण कार्ड सफल .</ProtocolSuccess>
+<ProtocolFail>कार्रवाई विफल , धारावाहिक जाँच या नेटवर्क सामान्य है .</ProtocolFail>
+<ErrorComPort>अवैध सीरियल नंबर %s है ! सेट संचार मापदंडों की जांच करें !</ErrorComPort>
+<ProtocolReadyFail>डिवाइस तैयार नहीं है ! धारावाहिक की जांच या नेटवर्क सामान्य है कृपया .</ProtocolReadyFail>
+<ProtocolOnScreenSuccess>स्क्रीन सफलता खुलने !</ProtocolOnScreenSuccess>
+<ProtocolOffScreenSuccess>ऑफ स्क्रीन सफलता !</ProtocolOffScreenSuccess>
+<ProtocolSetAutoOnOff>टाइमर स्विच स्क्रीन सफलता निर्धारित करें.</ProtocolSetAutoOnOff>
+<ProtocolReadParamsSuccess>पैरामीटर पढ़ने के लिए वापस सफलता .</ProtocolReadParamsSuccess>
+<ProgressPrompt>प्रगति अनुपात :</ProgressPrompt>
+<RemainTimePrompt>शेष समय: के बारे में %d सेकेंड</RemainTimePrompt>
+<MakingMonitorFile>स्क्रीन पैरामीटर फाइल उत्पन्न किया जा रहा है ...</MakingMonitorFile>
+<SendingMonitorFile>स्क्रीन पैरामीटर फाइल भेजी जा रही है ...</SendingMonitorFile>
+<MakingDataFile>सामग्री डेटा पैदा ...</MakingDataFile>
+<DataFileOutofCapacity>ट्रांसमिशन में विफल रहता है , कार्ड की सामग्री भेजा गया था शेष क्षमता के आकार से अधिक है.</DataFileOutofCapacity>
+<SendingDataFile>सामग्री डेटा तैयार , भेजने शुरू ...</SendingDataFile>
+<SendDataFileSuccess>सफलतापूर्वक भेजा .</SendDataFileSuccess>
+<SendDataFileFail>%s: विफल रहा , त्रुटि कारण भेजें .</SendDataFileFail>
+<ProtocolReadParamsSuccess>पैरामीटर पढ़ने के लिए वापस सफलता .</ProtocolReadParamsSuccess>
+<SaveScanSetInfoFail>स्कैन मोड सेटिंग्स सहेजना विफल :%s</SaveScanSetInfoFail>
+<ConfDeleteScanSetInfo>सुनिश्चित करें कि आप इसे हटाना चाहते हैं ?</ConfDeleteScanSetInfo>
+<CreateCommFail>एक संचार घटक विफल रहता है बनाएँ!</CreateCommFail>
+<!--;默认字体-->
+<DefaultFontName>टाइम्स न्यू रोमन</DefaultFontName>
+<DefaultFontSize>11</DefaultFontSize>
+<!--;颜色列表-->
+<ColorList>
+<Item>एकल रंग</Item>
+<Item>दोहरी रंग</Item>
+<Item>पूर्ण रंग</Item>
+</ColorList>
+<!--;单基色颜色列表-->
+<SingleColorList>
+<Item>लाल</Item>
+</SingleColorList>
+<!--;双基色颜色列表-->
+<DoubleColorList>
+<Item>लाल</Item>
+<Item>पीला</Item>
+<Item>हरा</Item>
+</DoubleColorList>
+<!--;全彩色颜色列表-->
+<SevenColorList>
+<Item>लाल</Item>
+<Item>पीला</Item>
+<Item>हरा</Item>
+</SevenColorList>
+<!--;灰度列表-->
+<ColorGrayList>
+<Item>कोई ग्रे</Item>
+<Item>32</Item>
+<Item>256</Item>
+</ColorGrayList>
+<!--;计时区域的显示格式-->
+<TimingDayLabel>दिन</TimingDayLabel>
+<TimingDayFormat>%d%s</TimingDayFormat>
+<TimingHourLabel>समय</TimingHourLabel>
+<TimingHourFormat>%d%s</TimingHourFormat>
+<TimingMinuteLabel>बिन्दु</TimingMinuteLabel>
+<TimingMinuteFormat>%d%s</TimingMinuteFormat>
+<TimingSecondLabel>दूसरा</TimingSecondLabel>
+<TimingSecondFormat>%d सेकेंड</TimingSecondFormat>
+<!--集群操作信息-->
+<GprsValidateError>जीपीआरएस सत्यापित खाते पासवर्ड गलत है !</GprsValidateError>
+<GprsConnectError>जीपीआरएस सर्वर से कनेक्ट करने में असमर्थ!</GprsConnectError>
+<GprsImeiError>जीपीआरएस संचार का उपयोग करते समय , स्क्रीन नाम DTU 15 IMEI नंबर होना चाहिए .</GprsImeiError>
+<NoGprsIdFilterFile>जीपीआरएस फिल्टर फाइल गुम है !</NoGprsIdFilterFile>
+<UpdateGprsCardsCompleted>पूरा ऑनलाइन क्लस्टर की एक सूची प्राप्त करें</UpdateGprsCardsCompleted>
+<UpdateGprsCardsError>कनेक्शन त्रुटि , कृपया पुनः प्राप्त क्लस्टर .</UpdateGprsCardsError>
+<ConnectingColonyServer>क्लस्टर सर्वर से कनेक्ट , कृपया प्रतीक्षा करें ...</ConnectingColonyServer>
+<ConnectColonyServerSuccess>क्लस्टर सर्वर कनेक्शन सफल .</ConnectColonyServerSuccess>
+<ConnectColonyServerFail>क्लस्टर सर्वर से कनेक्ट करने में असमर्थ.</ConnectColonyServerFail>
+<PromptSelectColonyCommandItem>प्रविष्टियों आदेश पर अमल करने की जरूरत है चुनें.</PromptSelectColonyCommandItem>
+<ColonyCommandOutofCapacity>आदेश में विफल रहता है निष्पादित, नाम { 0} स्क्रीन उत्पन्न डेटा आकार कार्ड के आकार की क्षमता से अधिक है .</ColonyCommandOutofCapacity>
+<PromptColonyCloneOnlyOneRegion>उप स्क्रीन अनुकूलन मुख्य स्क्रीन मोड में, आप केवल एक ग्राफिक क्षेत्र बना सकते हैं , और क्षेत्र उपलब्ध स्क्रीन आकार का अधिकतम आकार का होना चाहिए .</PromptColonyCloneOnlyOneRegion>
+<SendColonyCommandSuccess>क्लस्टर आदेश को सफलतापूर्वक मार डाला .</SendColonyCommandSuccess>
+<SendColonyCommandFail>क्लस्टर आदेश में विफल रहा है .</SendColonyCommandFail>
+<PromptColonyVetifyNullIp>सर्वर पते खाली नहीं हो सकता!</PromptColonyVetifyNullIp>
+<PromptColonyVetifyNullPassword>सर्वर पासवर्ड खाली नहीं हो सकता!</PromptColonyVetifyNullPassword>
+<ColonyVetifyInvalidPassword>पासवर्ड गलत है .</ColonyVetifyInvalidPassword>
+<ColonyVetiryServerError>सर्वर असफल .</ColonyVetiryServerError>
+<GprsColonyOperationReady>तैयार रहें</GprsColonyOperationReady>
+<!--扫描信息的名称描述-->
+<ScanSetName1>01) P10 मोनोक्रोम 12 इंटरफेस</ScanSetName1>
+<!--未知的扫描方式名称-->
+<UnknownScanSetName>अज्ञात स्कैन</UnknownScanSetName>
+<!--协议名称-->
+<ProtocolSerialPort>सीरियल बंदरगाहों</ProtocolSerialPort>
+<ProtocolNet>जालक्रम संद्वार</ProtocolNet>
+<ProtocolDirectNet>सीधा कनेक्ट नेटवर्क पोर्ट</ProtocolDirectNet>
+<ProtocolGprs>जीपीआरएस</ProtocolGprs>
+<ProtocolUnknown>अज्ञात</ProtocolUnknown>
+<!--2013-04-09-->
+<!--通讯测试错误-->
+<UnauthorizedAccessReplyPacket>एक वैध प्रतिक्रिया पैकेट नहीं है .</UnauthorizedAccessReplyPacket>
+<OpenPortFail>ओपन सीरियल पोर्ट में विफल रहा है .</OpenPortFail>
+<CancelSending>भेजना रद्द .</CancelSending>
+<CreateFail>एक संचार घटक विफल रहता बनाएँ</CreateFail>
+<SocketError>नेटवर्क कनेक्शन विफलता</SocketError>
+<ColonyNotExists>क्लस्टर टर्मिनल मौजूद नहीं है</ColonyNotExists>
+<ColonyOffline>कोई केबल trunking टर्मिनलों</ColonyOffline>
+<ColonyBusy>क्लस्टर लाइन व्यस्त है</ColonyBusy>
+</Comm>
+</Messages>
+<!-- 以下是窗口界面的文字信息-->
+<!-- 其中的<Messages>段是一些提示信息, 其他段是界面上控件的文字信息-->
+<!-- 主窗口-->
+<TMainForm>
+<!-- 标题栏-->
+<Caption>XShow ग्राफिक संपादन सॉफ्टवेयर</Caption>
+<Messages>
+<LoadSystemConfigFail>लोडिंग सिस्टम विन्यास में विफल रहा है !</LoadSystemConfigFail>
+<MonitorName>%d जो प्रदर्शक</MonitorName>
+<ProgramName>कार्यक्रम में%d</ProgramName>
+<RegionNamePicture>Teletext %d</RegionNamePicture>
+<RegionNameText>मूवी %d</RegionNameText>
+<RegionNameFlashText>Xuandong शब्द %d</RegionNameFlashText>
+<RegionNameClock>घड़ी %d</RegionNameClock>
+<RegionNameWatch>%d डायल</RegionNameWatch>
+<RegionNameTiming>%d समय</RegionNameTiming>
+<RegionNameDefaul>एरिया %d</RegionNameDefaul>
+<AskToSelectOneTreeNode>एक नोड का चयन करें!</AskToSelectOneTreeNode>
+<WarnOnDeleteOneMonitor>आप हटा नहीं सकते , निर्माण में कम से कम एक स्क्रीन होना चाहिए!</WarnOnDeleteOneMonitor>
+<ConfDeleteProgramListNode>सुनिश्चित करें कि आप इसे हटाना चाहते हैं ?</ConfDeleteProgramListNode>
+<!--有重叠区域-->
+<RegionOverlapping>अतिव्यापी क्षेत्रों में शामिल हैं: ऑपरेशन %s है , विफल रही है .</RegionOverlapping>
+<!--导入U盘时如果没有选择屏幕提示-->
+<AskToSelectMonitor>एक स्क्रीन का चयन करो !</AskToSelectMonitor>
+<!--显示区域页数信息-->
+<RegionPagesInfo>के पृष्ठ %d /%d पन्ने</RegionPagesInfo>
+<!--对象克隆后加的前缀 -->
+<CloneAddText>नकल</CloneAddText>
+<!--超出节目数提示-->
+<MaxProgramCountInfo>%d शो के लिए अधिकतम समर्थन !</MaxProgramCountInfo>
+<!--超出区域数提示-->
+<MaxRegionCountInfo>अधिकतम समर्थन %d क्षेत्रों !</MaxRegionCountInfo>
+<!--超出具体区域数提示-->
+<MaxRegionDetailCountInfo>%d क्षेत्र की सबसे बड़ी समर्थन !</MaxRegionDetailCountInfo>
+<MaxSpeedNote>(सबसे तेज़)</MaxSpeedNote>
+<MinSpeedNote>(धीरे)</MinSpeedNote>
+<!--屏幕名称不允许重复-->
+<ScreeNameRepeat>स्क्रीन नाम को दोहराने की अनुमति नहीं है!</ScreeNameRepeat>
+<!--检测空区域-->
+<HaveNoRegions>कोई मौजूदा कार्यक्रम के क्षेत्र ! काम करने में असमर्थ !</HaveNoRegions>
+<AllRegionsIsNull>सभी क्षेत्रों में मौजूदा कार्यक्रम खाली हैं! काम करने में असमर्थ !</AllRegionsIsNull>
+<ConfHaveNulRegions>एक खाली शीर्षक या ग्राफिक क्षेत्र , यह काम जारी है का पता लगाता है ?</ConfHaveNulRegions>
+</Messages>
+<!--另存工程对话框-->
+<dlgSave>
+<Project>
+<Filter>Kalerka परियोजना फ़ाइल</Filter>
+</Project>
+<SaveProject>
+<Title>परियोजना को बचाने के रूप में ...</Title>
+</SaveProject>
+<SaveAsProject>
+<Title>परियोजना के रूप में सहेजें ...</Title>
+</SaveAsProject>
+</dlgSave>
+<dlgOpen>
+<OpenProject>
+<Title>ओपन परियोजना ...</Title>
+</OpenProject>
+</dlgOpen>
+<!--节目管理按钮-->
+<btnProgramList>
+<Caption>कार्यक्रम प्रबंधन</Caption>
+</btnProgramList>
+<!--节目管理树右键菜单-->
+<PopupMenuTreeProgramList>
+<Items>
+<Item>चाल</Item>
+<Item>नीचे</Item>
+<Item>-</Item>
+<Item>हटाना</Item>
+<Item>नकल</Item>
+<Item>छड़ी</Item>
+<Item>-</Item>
+<Item>विस्तार</Item>
+<Item>संक्षिप्त करें</Item>
+<Item>-</Item>
+<Item>पुनर्नामित</Item>
+<Item>-</Item>
+<Item>क्लोन स्क्रीन</Item>
+</Items>
+</PopupMenuTreeProgramList>
+<!--图片资源库按钮-->
+<btnPictures>
+<Caption>छवि लाइब्रेरी</Caption>
+</btnPictures>
+<!--图片资源库树-->
+<treePictures>
+<Items>
+<Item>
+<Text>तस्वीर</Text>
+<Items>
+<Item>ओलंपिक</Item>
+<Item>निशान</Item>
+<Item>तीर</Item>
+<Item>स्टेटिक लोगो</Item>
+<Item>स्टार और बैनर</Item>
+<Item>विशेष वर्ण</Item>
+<Item>प्रतीक</Item>
+<Item>जीवन</Item>
+</Items>
+</Item>
+<Item>
+<Text>एनीमेशन</Text>
+<Items>
+<Item>लोगो एनीमेशन</Item>
+<Item>अभिव्यक्ति</Item>
+</Items>
+</Item>
+</Items>
+</treePictures>
+<!--主工具条的按钮-->
+<ToolButtonProgram>
+<Caption>कार्यक्रम</Caption>
+<Hint>कार्यक्रम</Hint>
+</ToolButtonProgram>
+<ToolButtonDynamicBackground>
+<Caption>गतिशील पृष्ठभूमि</Caption>
+<Hint>गतिशील पृष्ठभूमि</Hint>
+</ToolButtonDynamicBackground>
+<ToolButtonPicture>
+<Caption>ग्राफ़िक</Caption>
+<Hint>ग्राफ़िक</Hint>
+</ToolButtonPicture>
+<ToolButtonText>
+<Caption>उपशीर्षक</Caption>
+<Hint>उपशीर्षक</Hint>
+</ToolButtonText>
+<ToolButtonFlashText>
+<Caption>Xuandong शब्द</Caption>
+<Hint>Xuandong शब्द</Hint>
+</ToolButtonFlashText>
+<ToolButtonClock>
+<Caption>घड़ी</Caption>
+<Hint>घड़ी</Hint>
+</ToolButtonClock>
+<ToolButtonWatch>
+<Caption>डायल</Caption>
+<Hint>डायल</Hint>
+</ToolButtonWatch>
+<ToolButtonDelete>
+<Caption>हटाना</Caption>
+<Hint>हटाना</Hint>
+</ToolButtonDelete>
+<ToolButtonPreview>
+<Caption>पूर्वावलोकन</Caption>
+<Hint>पूर्वावलोकन</Hint>
+<Caption1>रोक</Caption1>
+<Hint1>रोक</Hint1>
+</ToolButtonPreview>
+<ToolButtonSend>
+<Caption>भेजें</Caption>
+<Hint>भेजें</Hint>
+</ToolButtonSend>
+<ToolButtonUSB>
+<Caption>यूएसबी</Caption>
+<Hint>यूएसबी</Hint>
+</ToolButtonUSB>
+<ToolButtonSearchCard>
+<Caption>स्क्रीन की जाँच करें</Caption>
+<Hint>स्क्रीन की जाँच करें</Hint>
+</ToolButtonSearchCard>
+<!-- 2013.5.4 增加-->
+<ToolButtonTiming>
+<Caption>समय</Caption>
+<Hint>समय</Hint>
+</ToolButtonTiming>
+<ToolButtonSeDateTime>
+<Caption>पढ़ाई के घंटे</Caption>
+<Hint>पढ़ाई के घंटे</Hint>
+</ToolButtonSeDateTime>
+<ToolButtonSetLight>
+<Caption>चमक</Caption>
+<Hint>चमक</Hint>
+</ToolButtonSetLight>
+<ToolButtonOnOff>
+<Caption>समय स्विच</Caption>
+<Hint>समय स्विच</Hint>
+</ToolButtonOnOff>
+<!-- 2013.5.4 增加结束-->
+<!--区域属性操作的工具栏：区域缩放、位置、翻页-->
+<ToolButtonZoomInit>
+<Hint>मूल आकार</Hint>
+</ToolButtonZoomInit>
+<ToolButtonZoomOut>
+<Hint>बढ़ाना</Hint>
+</ToolButtonZoomOut>
+<ToolButtonZoomIn>
+<Hint>संकीर्ण</Hint>
+</ToolButtonZoomIn>
+<ToolButtonRegionLeft>
+<Hint>क्षेत्रीय छोड़ दिया घर</Hint>
+</ToolButtonRegionLeft>
+<ToolButtonRegionRight>
+<Hint>क्षेत्रीय पर्यावास का अधिकार</Hint>
+</ToolButtonRegionRight>
+<ToolButtonRegionTop>
+<Hint>क्षेत्रीय प्रमुख</Hint>
+</ToolButtonRegionTop>
+<ToolButtonRegionBottom>
+<Hint>निचला क्षेत्र होम</Hint>
+</ToolButtonRegionBottom>
+<ToolButtonLastRegionPage>
+<Hint>पिछला</Hint>
+</ToolButtonLastRegionPage>
+<ToolButtonNextRegionPage>
+<Hint>अगला</Hint>
+</ToolButtonNextRegionPage>
+<!--主菜单-->
+<ActionManagerMain>
+<ActionBars>
+<ActionBar>
+<Items>
+<Item>
+<Caption>फ़ाइल (&amp;F)</Caption>
+<Items>
+<Item>नई निर्माण (&amp;N)</Item>
+<Item>ओपन (&amp;O)</Item>
+<Item>-</Item>
+<Item>सहेजें (&amp;S)</Item>
+<Item>के रूप में सहेजें ...</Item>
+<Item>-</Item>
+<Item>निर्यात (&amp;E)</Item>
+<Item>आयात (&amp;I)</Item>
+<Item>-</Item>
+<Item>बाहर निकलें (&amp;E)</Item>
+</Items>
+</Item>
+<Item>
+<Caption>डालें (&amp;I)</Caption>
+<Items>
+<Item>स्क्रीन</Item>
+<Item>कार्यक्रम</Item>
+<Item>गतिशील पृष्ठभूमि</Item>
+<Item>-</Item>
+<Item>उपशीर्षक</Item>
+<Item>ग्राफ़िक</Item>
+<Item>Xuandong शब्द</Item>
+<Item>घड़ी</Item>
+<Item>डायल</Item>
+<Item>समय</Item>
+<Item>तापमान</Item>
+</Items>
+</Item>
+<Item>
+<Caption>सेट (&amp;S)</Caption>
+<Items>
+<Item>स्क्रीन पैरामीटर्स</Item>
+<Item>संचार प्राचल</Item>
+<Item>-</Item>
+<Item V="0">कार्ड आईपी सुधारे</Item>
+<Item V="0">-</Item>
+<Item>ऑटो विन्यास इकाई बोर्ड</Item>
+</Items>
+</Item>
+<Item>
+<Caption>कमीशन (&amp;D)</Caption>
+<Items>
+<Item>पढ़ाई के घंटे</Item>
+<Item>चमक समायोजन</Item>
+<Item>अनुरोध मॉडल</Item>
+<Item>सॉफ्टवेयर स्विच स्क्रीन</Item>
+<Item>-</Item>
+<Item>पूर्वावलोकन</Item>
+<Item>भेजें</Item>
+<Item>यू डिस्क का आयात</Item>
+<Item V="0">-</Item>
+<Item V="0">-</Item>
+<Item V="0">देखें प्रवेश करें</Item>
+<Item V="0">-</Item>
+</Items>
+</Item>
+<Item>
+<Caption>समूहों (&amp;C)</Caption>
+<Items>
+<Item>सर्वर विन्यास</Item>
+<Item>क्लस्टर प्रबंधन</Item>
+</Items>
+</Item>
+<Item>
+<Caption>भाषा (&amp;l)</Caption>
+<Items>
+<Item>स्वत वरण</Item>
+</Items>
+</Item>
+<Item>
+<Caption>के बारे में (&amp;A)</Caption>
+</Item>
+</Items>
+</ActionBar>
+</ActionBars>
+</ActionManagerMain>
+<!--基本属性-->
+<GroupBoxBaseInfo>
+<Caption>मूल गुण</Caption>
+</GroupBoxBaseInfo>
+<LabelRegionName>
+<Caption>नाम</Caption>
+</LabelRegionName>
+<LabelRegionX>
+<Caption>स्थान एक्स</Caption>
+</LabelRegionX>
+<LabelRegionY>
+<Caption>स्थिति वाई</Caption>
+</LabelRegionY>
+<LabelRegionWidth>
+<Caption>चौडाई</Caption>
+</LabelRegionWidth>
+<LabelRegionHeight>
+<Caption>ऊंचाई</Caption>
+</LabelRegionHeight>
+<!--基本属性-->
+<GroupBoxDisplayInfo>
+<Caption>प्रदर्शन गुण</Caption>
+</GroupBoxDisplayInfo>
+<LabelDisplayMode>
+<Caption>पर स्क्रीन मोड</Caption>
+</LabelDisplayMode>
+<cmbDisplayMode>
+<Items>
+<Item>यादृच्छिक प्रदर्शन</Item>
+<Item>अब तक</Item>
+<Item>सही</Item>
+<Item>बाएं</Item>
+<Item>नीचे</Item>
+<Item>चाल</Item>
+<Item>सही कवर</Item>
+<Item>वाम कवर</Item>
+<Item>कवर के तहत</Item>
+<Item>कवर पर</Item>
+<Item>क्षैतिज उद्घाटन</Item>
+<Item>उर्ध्व द्वार</Item>
+<Item>क्रॉस समापन</Item>
+<Item>कार्यक्षेत्र क्लोजर</Item>
+<Item>सही अंधा</Item>
+<Item>वाम louvers</Item>
+<Item>अंधा कर रही है के तहत</Item>
+<Item>louvers</Item>
+<Item>झिलमिलाहट</Item>
+<Item>सही शब्द ब्रश</Item>
+<Item>छोड़ दिया ब्रश वर्ण</Item>
+<Item>ब्रश शब्द के तहत</Item>
+<Item>ब्रश पर पद</Item>
+<Item>बाएँ पृष्ठ</Item>
+<Item>राइट अगले पेज</Item>
+<Item>प्रशंसक</Item>
+<Item>फैन बंद</Item>
+<Item>दक्षिणावर्त</Item>
+<Item>एल</Item>
+<Item>interspersed स्तर</Item>
+<Item>कार्यक्षेत्र interspersed</Item>
+<Item>पर्दा नीचे स्क्रॉल</Item>
+<Item>रोलिंग सही</Item>
+<Item>ढांचा</Item>
+<Item>हाइलाइट चमक</Item>
+<Item>विस्तार आयताकार</Item>
+<Item>आयताकार संकुचन</Item>
+<Item>डायमंड का शुभारंभ</Item>
+<Item>डायमंड संकुचन</Item>
+<Item>क्रॉस का शुभारंभ</Item>
+<Item>क्रॉस संकुचन</Item>
+<Item>वाम आयत</Item>
+<Item>अपर आयत छोड़ा</Item>
+<Item>राइट आयत</Item>
+<Item>शीर्ष सही आयत</Item>
+<Item>बाईं स्लैश</Item>
+<Item>अपर विकर्ण छोड़ा</Item>
+<Item>राइट स्लैश</Item>
+<Item>ऊपरी सही विकर्ण</Item>
+<Item>Xiasha</Item>
+<Item>ढांचा</Item>
+<Item>तुरंत प्रदर्शित</Item>
+<Item>कार्यक्षेत्र फ्रेम</Item>
+</Items>
+</cmbDisplayMode>
+<LabelClearMode>
+<Caption>साफ स्क्रीन मोड</Caption>
+</LabelClearMode>
+<LabelSpeed>
+<Caption>गति</Caption>
+</LabelSpeed>
+<cmbSpeed>
+<Items>
+<Item>1 (सबसे तेजी से)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (धीरे)</Item>
+</Items>
+</cmbSpeed>
+<LabelDisplayDelay>
+<Caption>निवास समय</Caption>
+</LabelDisplayDelay>
+<LabelDisplayStyle>
+<Caption>शैली</Caption>
+</LabelDisplayStyle>
+<cmbDisplayStyle>
+<Items>
+<Item>दिल की धड़कन</Item>
+<Item>वाल्ट्ज</Item>
+<Item>बहाव</Item>
+<Item>विद्युतचुंबकीय</Item>
+<Item>फ़्लैश बल्ब</Item>
+<Item>वसंत</Item>
+<Item>रोल</Item>
+<Item>मास्क</Item>
+</Items>
+</cmbDisplayStyle>
+<!-- 动感边框-->
+<GroupBoxFlashBorder>
+<Caption>गतिशील सीमा</Caption>
+</GroupBoxFlashBorder>
+<chkFlashBorderEnabled>
+<Caption>गतिशील बॉर्डर प्रदर्शित</Caption>
+</chkFlashBorderEnabled>
+<optFlashBorderOneColor>
+<Caption>मोनोक्रोम</Caption>
+</optFlashBorderOneColor>
+<optFlashBorderFlashColor>
+<Caption>ह्यून रंग</Caption>
+</optFlashBorderFlashColor>
+<LabelFlashBorderSpeed>
+<Caption>गति वाल्क</Caption>
+</LabelFlashBorderSpeed>
+<cmbFlashBorderSpeed>
+<Items>
+<Item>1 (सबसे तेजी से)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (धीरे)</Item>
+</Items>
+</cmbFlashBorderSpeed>
+<LabelFlashBorderDirection>
+<Caption>प्रवासी दिशा</Caption>
+</LabelFlashBorderDirection>
+<cmbFlashBorderDirection>
+<Items>
+<Item>फिक्स्ड प्रदर्शन</Item>
+<Item>दक्षिणावर्त</Item>
+<Item>वामावर्त रोटेशन</Item>
+<Item>झिलमिलाहट</Item>
+#NAME?
+<Item>वामावर्त + बारी बारी से चमकती</Item>
+</Items>
+</cmbFlashBorderDirection>
+<!--屏幕属性-->
+<LabelCardModel>
+<Caption>नियंत्रण कार्ड आदर्श:</Caption>
+</LabelCardModel>
+<LabelMonitorWidth>
+<Caption>स्क्रीन चौड़ाई :</Caption>
+</LabelMonitorWidth>
+<LabelMonitorHeight>
+<Caption>स्क्रीन ऊंचाई :</Caption>
+</LabelMonitorHeight>
+<LabelMonitorColorMode>
+<Caption>यूनिट बोर्ड का रंग:</Caption>
+</LabelMonitorColorMode>
+<LabelMonitorConnectMode>
+<Caption>संचार:</Caption>
+</LabelMonitorConnectMode>
+<LabelMonitorConnectPort>
+<Caption>बंदरगाह:</Caption>
+</LabelMonitorConnectPort>
+<!--2013.5.5 增加-->
+<chkContinuousLeft>
+<Caption>सतत छोड़ दिया</Caption>
+</chkContinuousLeft>
+<chkContinuousTop>
+<Caption>सतत हटो</Caption>
+</chkContinuousTop>
+<!--2013.5.5 增加结束-->
+</TMainForm>
+<!--关于对话框-->
+<TDlgAbout>
+<Caption>के बारे में ...</Caption>
+<LabelAppName>
+<Caption>एक्स शो फोटो एडिटिंग सॉफ्टवेयर</Caption>
+</LabelAppName>
+<LabelAppVersion>
+<Caption>संस्करण: %s</Caption>
+</LabelAppVersion>
+<MemoAppNote>
+<Items>
+<Item>4.03</Item>
+</Items>
+</MemoAppNote>
+<btnOK>
+<Caption>ठीक (&amp;O)</Caption>
+</btnOK>
+</TDlgAbout>
+<!--网络集群发送-->
+<TDlgColonySend>
+<Caption>क्लस्टर प्रबंधन भेजें</Caption>
+<chkSelectAll>
+<Caption>चयन</Caption>
+</chkSelectAll>
+<!--提示信息-->
+<MemoNote>
+<Items>
+<Item>विवरण:</Item>
+<Item></Item>
+<Item>वे समूह में शामिल हो सकते से पहले 1 , केवल संचार मोड या जीपीआरएस नेटवर्क पोर्ट है .</Item>
+<Item></Item>
+<Item>2 , क्लोन समूह भेजने : समूह में सभी स्क्रीन पर मुख्य स्क्रीन करने के लिए डाटा भेजने , भेजने के लिए, समूह के भीतर , भेजने के लिए क्लोनिंग का उपयोग मापदंडों के अनुरूप हैं , सभी स्क्रीन स्क्रीन आकार की आवश्यकता है. मुख्य स्क्रीन निर्दिष्ट करने की आवश्यकता भेजने से पहले .</Item>
+<Item></Item>
+<Item>3 , पारंपरिक समूह भेजा : ड्रॉप स्क्रीन डाटा इसी स्क्रीन करने के लिए शब्द भेजा .</Item>
+</Items>
+</MemoNote>
+<!--设备列表-->
+<ListViewCards>
+<Columns>
+<Column>हैसियत</Column>
+<Column>नाम</Column>
+<Column>मॉडल</Column>
+<Column>स्क्रीन चौड़ाई</Column>
+<Column>स्क्रीन उच्च</Column>
+<Column>सेल थाली प्रकार</Column>
+<Column>संचार</Column>
+<Column>चमक</Column>
+<Column>समय स्विच</Column>
+</Columns>
+</ListViewCards>
+<!--操作选择项-->
+<optRegularSend>
+<Caption>भेजा परम्परागत समूह</Caption>
+</optRegularSend>
+<optCloneSend>
+<Caption>क्लोन समूह भेजें</Caption>
+</optCloneSend>
+<optOpenScreen>
+<Caption>सॉफ्टवेयर बूट</Caption>
+</optOpenScreen>
+<optCloseScreen>
+<Caption>सॉफ्टवेयर शटडाउन</Caption>
+</optCloseScreen>
+<optTiming>
+<Caption>पढ़ाई के घंटे</Caption>
+</optTiming>
+<btnSendProtocol>
+<Caption>दौड़</Caption>
+</btnSendProtocol>
+<!--指定主屏幕-->
+<LabelCloneScreens>
+<Caption>मुख्य स्क्रीन निर्दिष्ट करें:</Caption>
+</LabelCloneScreens>
+</TDlgColonySend>
+<!--网络集群登录验证窗口-->
+<TDlgColonyVerify>
+<Caption>इन प्रमाणीकरण</Caption>
+<LabelPassword>
+<Caption>पासवर्ड</Caption>
+</LabelPassword>
+<LabelServerIp>
+<Caption>सेवक</Caption>
+</LabelServerIp>
+<LabelPort>
+<Caption>बंदरगाह</Caption>
+</LabelPort>
+<btnOK>
+<Caption>निर्धारण करें</Caption>
+</btnOK>
+<btnCancel>
+<Caption>रद्द करें</Caption>
+</btnCancel>
+</TDlgColonyVerify>
+<!--GPRS群组发送窗口-->
+<TDlgGprsColony>
+<Caption>क्लस्टर प्रबंधन</Caption>
+<Messages>
+<AllScreens>पूर्ण स्क्रीन</AllScreens>
+<AddGroupCaption>जोड़ें समूह</AddGroupCaption>
+<AddGroupPrompt>एक समूह का नाम दर्ज करें :</AddGroupPrompt>
+<AddGroupExists>समूह का नाम पहले से ही मौजूद है!</AddGroupExists>
+<AddGroupFail>समूह विफल जोड़ें!</AddGroupFail>
+<ConfDeleteGroup>आप इस समूह को नष्ट करना चाहते हैं इसकी पुष्टि ?</ConfDeleteGroup>
+<ConfDeleteDevice>आप चयनित टर्मिनल करते हटाना चाहते हैं सुनिश्चित करें?</ConfDeleteDevice>
+<NoScreen>कोई स्क्रीन जोड़ सकते हैं!</NoScreen>
+<DeviceIdExists>टर्मिनल आईडी पहले से ही मौजूद है!</DeviceIdExists>
+<NoItemChecked>टर्मिनल का चयन करें! (चयन करने के लिए चयन बॉक्स का उपयोग करें)</NoItemChecked>
+<NoItemSelected>टर्मिनल का चयन करें! (माउस का चयन करने के लिए ठीक क्लिक करें)</NoItemSelected>
+<!--终端在线状态-->
+<StatusOnline>ऑनलाइन</StatusOnline>
+<StatusOffline>ऑनलाइन नहीं</StatusOffline>
+<!--命令发送状态-->
+<SendStatusSending>पारेषण</SendStatusSending>
+<SendStatusSuccess>सफलता</SendStatusSuccess>
+<SendStatusScreenParamFail>विफल स्क्रीन मापदंडों</SendStatusScreenParamFail>
+<SendStatusConnectFail>कनेक्शन विफल</SendStatusConnectFail>
+</Messages>
+<chkSelectAll>
+<Caption>चयन</Caption>
+</chkSelectAll>
+<LabelGroups>
+<Caption>समूह :</Caption>
+</LabelGroups>
+<btnEditGroup>
+<Caption>संपादन समूह</Caption>
+</btnEditGroup>
+<btnAddGroup>
+<Caption>जोड़ें समूह</Caption>
+</btnAddGroup>
+<btnDeleteGroup>
+<Caption>समूह हटाएं</Caption>
+</btnDeleteGroup>
+<btnAddDevice>
+<Caption>टर्मिनल जोड़ना</Caption>
+</btnAddDevice>
+<btnEditDevice>
+<Caption>टर्मिनल सुधारे</Caption>
+</btnEditDevice>
+<btnDeleteDevice>
+<Caption>टर्मिनल हटाएं</Caption>
+</btnDeleteDevice>
+<btnUpdateColony>
+<Caption>क्लस्टर करें</Caption>
+</btnUpdateColony>
+<btnSendProtocol>
+<Caption>दौड़</Caption>
+</btnSendProtocol>
+<!--提示信息-->
+<MemoNote>
+<Items>
+<Item>विवरण:</Item>
+<Item></Item>
+<Item>1 , टर्मिनल , संशोधित करने, टर्मिनल विलोपन सूची , टर्मिनल का चयन करने के लिए ठीक क्लिक करें.</Item>
+<Item></Item>
+<Item>2 , टर्मिनल का चयन करने के लिए भेजने के आदेश चयन सूची बॉक्स का उपयोग करें .</Item>
+</Items>
+</MemoNote>
+<!--设备列表-->
+<ListViewCards>
+<Columns>
+<Column>नहीं.</Column>
+<Column>ऑनलाइन स्थिति</Column>
+<Column>स्क्रीन नाम</Column>
+<Column>डिवाइस आईडी</Column>
+<Column>कार्ड का प्रकार</Column>
+<Column>स्क्रीन चौड़ाई</Column>
+<Column>स्क्रीन उच्च</Column>
+<Column>सेल थाली प्रकार</Column>
+<Column>चमक</Column>
+<Column>समय स्विच</Column>
+<Column>परिचालन</Column>
+</Columns>
+</ListViewCards>
+<!--操作选择项-->
+<optRegularSend>
+<Caption>भेजा परम्परागत समूह</Caption>
+</optRegularSend>
+<optCloneSend>
+<Caption>क्लोन समूह भेजें</Caption>
+</optCloneSend>
+<optOpenScreen>
+<Caption>सॉफ्टवेयर बूट</Caption>
+</optOpenScreen>
+<optCloseScreen>
+<Caption>सॉफ्टवेयर शटडाउन</Caption>
+</optCloseScreen>
+<optTiming>
+<Caption>पढ़ाई के घंटे</Caption>
+</optTiming>
+<optQueryStatus>
+<Caption>स्थिति की जांच करें</Caption>
+</optQueryStatus>
+<!--指定主屏幕-->
+<LabelCloneScreens>
+<Caption>मुख्य स्क्रीन निर्दिष्ट करें:</Caption>
+</LabelCloneScreens>
+</TDlgGprsColony>
+<!--集群服务器终端编辑窗口-->
+<TDlgColonyAddDevice>
+<Caption>टर्मिनल संपादन</Caption>
+<LabelDeviceId>
+<Caption>टर्मिनल आईडी</Caption>
+</LabelDeviceId>
+<LabelScreenName>
+<Caption>स्क्रीन</Caption>
+</LabelScreenName>
+<LabelGroupName>
+<Caption>समूह</Caption>
+</LabelGroupName>
+<btnOK>
+<Caption>ठीक (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>रद्द (&amp;C)</Caption>
+</btnCancel>
+</TDlgColonyAddDevice>
+<!--GPRS集群配置 窗口-->
+<TDlgGprsColonySetting>
+<Caption>क्लस्टर सर्वर विन्यास</Caption>
+<LabelGprsServerIp>
+<Caption>सर्वर आईपी :</Caption>
+</LabelGprsServerIp>
+<LabelGprsServerPort>
+<Caption>बंदरगाह:</Caption>
+</LabelGprsServerPort>
+<chkEnableAutoFillScreen>
+<Caption>उप स्क्रीन रूपांतर खोलने के लिए मुख्य स्क्रीन</Caption>
+</chkEnableAutoFillScreen>
+<chkEnableAuthen>
+<Caption>सत्यापन खोलने की अनुमति</Caption>
+</chkEnableAuthen>
+<LabelGprsAccount>
+<Caption>खाता</Caption>
+</LabelGprsAccount>
+<LabelGprsPassword>
+<Caption>पासवर्ड</Caption>
+</LabelGprsPassword>
+<btnOK>
+<Caption>ठीक (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>रद्द (&amp;C)</Caption>
+</btnCancel>
+</TDlgGprsColonySetting>
+<!-- GPRS集群组管理 窗口-->
+<TDlgGprsGroup>
+<Caption>जीपीआरएस क्लस्टर समूह प्रबंधन</Caption>
+<LabelGroups>
+<Caption>समूहन सूची</Caption>
+</LabelGroups>
+<LabelGroupName>
+<Caption>नाम</Caption>
+</LabelGroupName>
+<btnEditGroup>
+<Caption>संशोधन</Caption>
+</btnEditGroup>
+<btnAddGroup>
+<Caption>जोड़ना</Caption>
+</btnAddGroup>
+<btnDeleteGroup>
+<Caption>हटाना</Caption>
+</btnDeleteGroup>
+<btnSelectAllCards>
+<Caption>सभी का चयन करें</Caption>
+</btnSelectAllCards>
+<btnClearCurrentSelectedCards>
+<Caption>वर्तमान चयन को साफ़</Caption>
+</btnClearCurrentSelectedCards>
+<btnClearSelectedAllCards>
+<Caption>सभी सेलेक्शन साफ़</Caption>
+</btnClearSelectedAllCards>
+<btnOK>
+<Caption>ठीक (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>रद्द (&amp;C)</Caption>
+</btnCancel>
+<LabelCards>
+<Caption>प्रदर्शित सूची</Caption>
+</LabelCards>
+<btnUpdateCards>
+<Caption>अद्यतन सर्वर की सूची</Caption>
+</btnUpdateCards>
+<!--设备卡列表-->
+<ListViewCards>
+<Columns>
+<Column>हैसियत</Column>
+<Column>नाम</Column>
+</Columns>
+</ListViewCards>
+</TDlgGprsGroup>
+<!--导入Excel 窗口-->
+<TDlgImportExcel>
+<Caption>आयात एक्सेल</Caption>
+<LabelSheetNames>
+<Caption>वर्कशीट नाम</Caption>
+</LabelSheetNames>
+<LabelRowCount>
+<Caption>पंक्तियाँ</Caption>
+</LabelRowCount>
+<LabelColumnCount>
+<Caption>स्तंभों की संख्या</Caption>
+</LabelColumnCount>
+<btnOK>
+<Caption>ठीक (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>रद्द (&amp;C)</Caption>
+</btnCancel>
+</TDlgImportExcel>
+<!-- 屏幕参数 窗口-->
+<TdlgMonitorSetting>
+<Caption>स्क्रीन पैरामीटर</Caption>
+<Messages>
+<InvalidMonitorSize>श्रृंखला के स्क्रीन आकार !</InvalidMonitorSize>
+<InvalidCardModelInfo>अवैध कार्ड मापदंडों !</InvalidCardModelInfo>
+<InvalidGammaReviseValue>अवैध गामा सुधार मूल्य !</InvalidGammaReviseValue>
+</Messages>
+<LabelMonitorWidth>
+<Caption>चौडाई</Caption>
+</LabelMonitorWidth>
+<LabelMonitorHeight>
+<Caption>ऊंचाई</Caption>
+</LabelMonitorHeight>
+<LabelMonitorColor>
+<Caption>रंग</Caption>
+</LabelMonitorColor>
+<LabelMonitorGray>
+<Caption>स्केल</Caption>
+</LabelMonitorGray>
+<LabelCardType>
+<Caption>नियंत्रण कार्ड मॉडल</Caption>
+</LabelCardType>
+<LabelCardParams>
+<Caption>प्रदर्शन मानकों</Caption>
+</LabelCardParams>
+<LabelBoardType>
+<Caption>सेल थाली प्रकार</Caption>
+</LabelBoardType>
+<LabelDEPrompt>
+<Caption>ँ ध्रुवता</Caption>
+</LabelDEPrompt>
+<LabelDEPromptNote>
+<Caption>नियंत्रण कार्ड पर जम्पर समायोजित करें</Caption>
+</LabelDEPromptNote>
+<LabelThreshold>
+<Caption>दहलीज़</Caption>
+</LabelThreshold>
+<LabelDotFrequency>
+<Caption>प्वाइंट आवृत्ति</Caption>
+</LabelDotFrequency>
+<LabelLineBlanking>
+<Caption>रेखा ब्लैंकिंग</Caption>
+</LabelLineBlanking>
+<LabelInterlaceControl>
+<Caption>रेखा समायोजन</Caption>
+</LabelInterlaceControl>
+<LabelGammaReviseValue>
+<Caption>गामा सुधार</Caption>
+</LabelGammaReviseValue>
+<LabelAdvanced>
+<Caption>कम उन्नत मापदंडों</Caption>
+</LabelAdvanced>
+<btnReadParams>
+<Caption>पैरामीटर्स readback</Caption>
+</btnReadParams>
+<btnOK>
+<Caption>ठीक (&amp;O)</Caption>
+</btnOK>
+<!--2013.5.4 增加-->
+<chkDotFrequencyAuto>
+<Caption>स्वचालित</Caption>
+</chkDotFrequencyAuto>
+<chkLineBlankingAuto>
+<Caption>स्वचालित</Caption>
+</chkLineBlankingAuto>
+<!--2013.5.4 增加结束-->
+</TdlgMonitorSetting>
+<!--通讯参数 窗口-->
+<TDlgNetworkSetting>
+<Caption>संचार प्राचल</Caption>
+<Messages>
+<AskToSelectComPort>सीरियल नंबर का चयन करें!</AskToSelectComPort>
+<ErrorIp>अमान्य आईपी पता !</ErrorIp>
+<UnknownCard>अज्ञात</UnknownCard>
+<LabelTestResult>
+<Success>
+<Caption>संचार परीक्षण सफल रहा है !</Caption>
+</Success>
+<Fail>
+<Caption>संचार परीक्षण में विफल रहा है !</Caption>
+</Fail>
+</LabelTestResult>
+</Messages>
+<!--选择通讯模式页-->
+<LabelNetworkType>
+<Caption>संचार मोड का चयन करें</Caption>
+</LabelNetworkType>
+<optSerialPort>
+<Caption>सीरियल बंदरगाहों</Caption>
+</optSerialPort>
+<optNet>
+<Caption>जालक्रम संद्वार</Caption>
+</optNet>
+<optDirectNet>
+<Caption>सीधा कनेक्ट नेटवर्क पोर्ट</Caption>
+</optDirectNet>
+<optGprs>
+<Caption>जीपीआरएस या इंटरनेट</Caption>
+</optGprs>
+<!-- 串口参数设置页 -->
+<LabelSerialPortComs>
+<Caption>पोर्ट संख्या</Caption>
+</LabelSerialPortComs>
+<!-- 网口参数设置页-->
+<LabelNetIp>
+<Caption>आईपी ​​पतों</Caption>
+</LabelNetIp>
+<LabelNetPort>
+<Caption>पोर्ट संख्या</Caption>
+</LabelNetPort>
+<LabelNetGateway>
+<Caption>प्रवेश द्वार</Caption>
+</LabelNetGateway>
+<LabelNetSubnetMask>
+<Caption>नेटवर्क सबनेट मास्क</Caption>
+</LabelNetSubnetMask>
+<LabelEditMACPrompt>
+<Caption>मैक पते को संशोधित करने के लिए, मैक डीबगिंग उपकरण डाउनलोड</Caption>
+</LabelEditMACPrompt>
+<!-- GPRS设置页-->
+<LabelGprsIp>
+<Caption>जीपीआरएस सर्वर आईपी पते</Caption>
+</LabelGprsIp>
+<LabelGprsPort>
+<Caption>पोर्ट संख्या</Caption>
+</LabelGprsPort>
+<chkGprsEnableAuth>
+<Caption>सत्यापन खोलने की अनुमति</Caption>
+</chkGprsEnableAuth>
+<LabelGprsAccount>
+<Caption>खाता</Caption>
+</LabelGprsAccount>
+<LabelGprsPassword>
+<Caption>पासवर्ड</Caption>
+</LabelGprsPassword>
+<!-- 测试结果页-->
+<LabelTestResultType>
+<Caption>संचार विधा के प्रकार:</Caption>
+</LabelTestResultType>
+<LabelTestResultPort>
+<Caption>पोर्ट संख्या :</Caption>
+</LabelTestResultPort>
+<LabelTestResultCard>
+<Caption>नियंत्रण कार्ड आदर्श:</Caption>
+</LabelTestResultCard>
+<btnSave>
+<Caption>सहेजें और बाहर निकलें</Caption>
+</btnSave>
+<btnSetMonitor>
+<Caption>सेट स्क्रीन पैरामीटर्स</Caption>
+</btnSetMonitor>
+<!-- 高级参数 -->
+<GroupBoxAdvanceParams>
+<Caption>उन्नत मापदंडों</Caption>
+</GroupBoxAdvanceParams>
+<LabelSerialPortDelay>
+<Caption>देरी</Caption>
+</LabelSerialPortDelay>
+<LabelSerialPortFrameLength>
+<Caption>फ्रेम की लंबाई</Caption>
+</LabelSerialPortFrameLength>
+<btnTestExit>
+<Caption>वापसी</Caption>
+</btnTestExit>
+<btnChooseTypeNextStep>
+<Caption>अगला</Caption>
+</btnChooseTypeNextStep>
+<btnSerialPortLastStep>
+<Caption>पिछला</Caption>
+</btnSerialPortLastStep>
+<btnTest>
+<Caption>संचार टेस्ट</Caption>
+</btnTest>
+<!--2013.5.5 增加-->
+<LabelDeviceId>
+<Caption>डिवाइस आईडी</Caption>
+</LabelDeviceId>
+<!--2013.5.5 增加结束-->
+</TDlgNetworkSetting>
+<!-- 新建表格 窗口-->
+<TDlgNewTable>
+<Caption>नए रूप में</Caption>
+<LabelRowCount>
+<Caption>पंक्ति</Caption>
+</LabelRowCount>
+<LabelColCount>
+<Caption>पंक्ति</Caption>
+</LabelColCount>
+<LabelBorderWidth>
+<Caption>ढांचा</Caption>
+</LabelBorderWidth>
+<LabelBorderColor>
+<Caption>रंग</Caption>
+</LabelBorderColor>
+<chkSetCellWidth>
+<Caption>निश्चित सेल चौड़ाई</Caption>
+</chkSetCellWidth>
+<btnOK>
+<Caption>ठीक (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>रद्द (&amp;C)</Caption>
+</btnCancel>
+</TDlgNewTable>
+<!-- 软件开关屏 窗口-->
+<TDlgProtocolOnOff>
+<Caption>सॉफ्टवेयर स्विच स्क्रीन</Caption>
+<optManual>
+<Caption>मैनुअल स्विच</Caption>
+</optManual>
+<btnOn>
+<Caption>प्रारंभिक स्क्रीन</Caption>
+</btnOn>
+<btnOff>
+<Caption>स्क्रीन बंद</Caption>
+</btnOff>
+<optAuto>
+<Caption>समय स्विच</Caption>
+</optAuto>
+<LabelOn>
+<Caption>बूट समय</Caption>
+</LabelOn>
+<LabelOff>
+<Caption>समय से दूर</Caption>
+</LabelOff>
+<btnSave>
+<Caption>डिस्क बचाने &amp;u</Caption>
+</btnSave>
+<btnOK>
+<Caption>भेजें (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>रद्द (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>यूएसबी जब निर्यात में इस तरह की चमक / स्कूल / टाइमर स्विच समायोजित करने के लिए उपयोग यू डिस्क के रूप में , मानकों सेट</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+<!--2013.5.5 增加-->
+<chkAutoOnOff>
+<Caption>समय स्विच</Caption>
+</chkAutoOnOff>
+<!--2013.5.5 增加结束-->
+</TDlgProtocolOnOff>
+<!-- 请求型号 窗口-->
+<TDlgProtocolQueryModel>
+<Caption>अनुरोध मॉडल</Caption>
+<LabelCardMode>
+<Caption>नियंत्रण कार्ड आदर्श:</Caption>
+</LabelCardMode>
+<LabelCardVersion>
+<Caption>कोड के हार्डवेयर संस्करण :</Caption>
+</LabelCardVersion>
+<LabelCardGuid>
+<Caption>अद्वितीय सीरियल नंबर :</Caption>
+</LabelCardGuid>
+<btnOK>
+<Caption>ठीक (&amp;O)</Caption>
+</btnOK>
+</TDlgProtocolQueryModel>
+<!-- 校时... 窗口-->
+<TDlgProtocolSetDateTime>
+<Caption>स्कूल में जब ...</Caption>
+<LabelDate>
+<Caption>दिनांक:</Caption>
+</LabelDate>
+<LabelTime>
+<Caption>समय:</Caption>
+</LabelTime>
+<btnSave>
+<Caption>डिस्क बचाने &amp;u</Caption>
+</btnSave>
+<btnOK>
+<Caption>भेजें (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>रद्द (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>यूएसबी जब निर्यात में इस तरह की चमक / स्कूल / टाइमर स्विच समायोजित करने के लिए उपयोग यू डिस्क के रूप में , मानकों सेट</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+<!--2013.5.5 增加-->
+<btnGetSystemTime>
+<Caption>सिस्टम का समय</Caption>
+</btnGetSystemTime>
+<!--2013.5.5 增加结束-->
+</TDlgProtocolSetDateTime>
+<!--亮度调节 窗口 -->
+<TDlgProtocolSetLight>
+<Caption>चमक समायोजन</Caption>
+<optAuto>
+<Caption>ऑटो संवेदन</Caption>
+</optAuto>
+<optManual>
+<Caption>मैनुअल समायोजन</Caption>
+</optManual>
+<btnSave>
+<Caption>डिस्क बचाने &amp;u</Caption>
+</btnSave>
+<btnOK>
+<Caption>भेजें (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>रद्द (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>यूएसबी जब निर्यात में इस तरह की चमक / स्कूल / टाइमर स्विच समायोजित करने के लिए उपयोग यू डिस्क के रूप में , मानकों सेट</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+</TDlgProtocolSetLight>
+<!-- 图文编辑 窗口-->
+<TDlgRtfEditor>
+<Caption>संपादक</Caption>
+<Messages>
+<!--RTF编辑对话框 -->
+<!--表格垂直拆分输入框标题-->
+<TableSplitVerticallyCaption>कार्यक्षेत्र विभक्त</TableSplitVerticallyCaption>
+<!--表格垂直拆分输入框提示信息-->
+<TableSplitVerticallyPrompt>भाजित कॉलम:</TableSplitVerticallyPrompt>
+<!--表格水平拆分输入框标题 -->
+<TableSplitHorizontallyCaption>अलग स्तर</TableSplitHorizontallyCaption>
+<!--表格水平拆分输入框提示信息-->
+<TableSplitHorizontallyPrompt>स्प्लिट लाइनों :</TableSplitHorizontallyPrompt>
+<!--提示选择一个表格-->
+<InfoSelectOneTable>एक तालिका का चयन करें!</InfoSelectOneTable>
+</Messages>
+<ToolButtonLoadFiles>
+<Hint>योग संचिका</Hint>
+</ToolButtonLoadFiles>
+<!-- 文件操作菜单 -->
+<PopupMenuAddFile>
+<Items>
+<Item>पाठ जोड़ें</Item>
+<Item>आरटीएफ फाइल जोड़ना</Item>
+<Item>एक तस्वीर जोड़ें</Item>
+<Item>डॉक्टर जोड़ें</Item>
+<Item>जोड़ें एक्सेल</Item>
+</Items>
+</PopupMenuAddFile>
+<ToolButtonSave>
+<Hint>बचाना</Hint>
+</ToolButtonSave>
+<ToolButtonLeft>
+<Hint>क्षैतिज छोड़ दिया घर</Hint>
+</ToolButtonLeft>
+<ToolButtonCenter>
+<Hint>क्षैतिज केंद्र</Hint>
+</ToolButtonCenter>
+<ToolButtonRight>
+<Hint>सही होम स्तर</Hint>
+</ToolButtonRight>
+<ToolButtonBold>
+<Hint>बोल्ड</Hint>
+</ToolButtonBold>
+<ToolButtonItalic>
+<Hint>इटैलिक</Hint>
+</ToolButtonItalic>
+<ToolButtonUnderline>
+<Hint>रेखांकन</Hint>
+</ToolButtonUnderline>
+<ToolButtonTop>
+<Hint>संरेखित</Hint>
+</ToolButtonTop>
+<ToolButtonVCenter>
+<Hint>खड़ी केंद्रित</Hint>
+</ToolButtonVCenter>
+<ToolButtonBottom>
+<Hint>संरेखण के तहत</Hint>
+</ToolButtonBottom>
+<!-- 表格-->
+<ToolButtonTable>
+<Hint>प्रपत्र</Hint>
+</ToolButtonTable>
+<!--表格操作菜单-->
+<PopupMenuTable>
+<Items>
+<Item>नए रूप में</Item>
+<Item>-</Item>
+<Item>बॉर्डर का रंग</Item>
+<Item>बार्डरकीचौड़ाई</Item>
+<Item>-</Item>
+<Item>
+<Caption>पंक्ति सम्मिलित</Caption>
+<Items>
+<Item>डालने का शीर्ष</Item>
+<Item>कम में</Item>
+</Items>
+</Item>
+<Item>
+<Caption>कॉलम डालें</Caption>
+<Items>
+<Item>बाएँ में डाला</Item>
+<Item>सही डालें</Item>
+</Items>
+</Item>
+<Item>
+<Caption>हटाना</Caption>
+<Items>
+<Item>पंक्ति</Item>
+<Item>पंक्ति</Item>
+</Items>
+</Item>
+<Item>-</Item>
+<Item>कक्ष मर्ज</Item>
+<Item>
+<Caption>स्प्लिट सेल</Caption>
+<Items>
+<Item>कार्यक्षेत्र विभक्त</Item>
+<Item>अलग स्तर</Item>
+</Items>
+</Item>
+<Item>
+<Caption>रिकवरी मर्ज</Caption>
+<Items>
+<Item>पंक्ति</Item>
+<Item>पंक्ति</Item>
+<Item>संपूर्ण</Item>
+</Items>
+</Item>
+<Item>-</Item>
+<Item>
+<Caption>अनुलंब संरेखण</Caption>
+<Items>
+<Item>संरेखित</Item>
+<Item>खड़ी केंद्रित</Item>
+<Item>संरेखण के तहत</Item>
+</Items>
+</Item>
+</Items>
+</PopupMenuTable>
+<!-- 编辑菜单 -->
+<PopupMenuEditor>
+<Items>
+<Item>नकल</Item>
+<Item>छड़ी</Item>
+<Item>चयन</Item>
+</Items>
+</PopupMenuEditor>
+<LabelWordSpace>
+<Caption>पद रिक्ति :</Caption>
+</LabelWordSpace>
+<LabelLineSpace>
+<Caption>पंक्ति रिक्ति :</Caption>
+</LabelLineSpace>
+</TDlgRtfEditor>
+<!-- 扫描方式设置 窗口-->
+<TDlgScanSet>
+<Caption>स्कैन मोड सेटिंग्स</Caption>
+<LabelScanSetName>
+<Caption>विन्यास नाम</Caption>
+</LabelScanSetName>
+<LabelScanType>
+<Caption>स्कैनिंग</Caption>
+</LabelScanType>
+<cmbScanType>
+<Items>
+<Item>स्टेटिक स्कैनिंग</Item>
+<Item>1/2 स्कैन 1</Item>
+<Item>1/4 स्कैन</Item>
+<Item>1/8 स्कैन</Item>
+<Item>41290</Item>
+</Items>
+</cmbScanType>
+<LabelWrap>
+<Caption>लाइन मोड बंद</Caption>
+</LabelWrap>
+<cmbWrap>
+<Items>
+<Item>4 लपेटें</Item>
+<Item>8 लपेटें</Item>
+<Item>16 लपेटें</Item>
+</Items>
+</cmbWrap>
+<LabelWinding>
+<Caption>घुमावदार रास्ता</Caption>
+</LabelWinding>
+<cmbWinding>
+<Items>
+<Item>टेढ़ा</Item>
+<Item>टेढ़ा के तहत</Item>
+</Items>
+</cmbWinding>
+<LabelScanLines>
+<Caption>स्कैनिंग लाइनों की संख्या</Caption>
+</LabelScanLines>
+<cmbScanLines>
+<Items>
+<Item>प्रत्येक जिले में एक पंक्ति</Item>
+<Item>प्रत्येक जिले में 2 लाइनों</Item>
+<Item>प्रत्येक जिले में 4 पंक्तियों</Item>
+<Item>क्षेत्र के प्रति 8 लाइनों</Item>
+<Item>प्रत्येक जिले में 16 पंक्तियों</Item>
+</Items>
+</cmbScanLines>
+<LabelStr>
+<Caption>एसटीआर ध्रुवता</Caption>
+</LabelStr>
+<cmbStr>
+<Items>
+<Item>सकारात्मक polarity</Item>
+<Item>नकारात्मक</Item>
+</Items>
+</cmbStr>
+<LabelSecondaryWind>
+<Caption>माध्यमिक घुमावदार</Caption>
+</LabelSecondaryWind>
+<cmbSecondaryWind>
+<Items>
+<Item>नहीं</Item>
+<Item>होना</Item>
+</Items>
+</cmbSecondaryWind>
+<LabelDecoding>
+<Caption>138 डिकोडर</Caption>
+</LabelDecoding>
+<cmbDecoding>
+<Items>
+<Item>उच्च 138 व्याख्या करना</Item>
+<Item>उच्च शाब्दिक</Item>
+<Item>कम 138 डिकोडिंग</Item>
+<Item>कम शाब्दिक</Item>
+</Items>
+</cmbDecoding>
+<LabelMirror>
+<Caption>डाटा प्रवाह</Caption>
+</LabelMirror>
+<cmbMirror>
+<Items>
+<Item>साधारण</Item>
+<Item>दर्पण</Item>
+</Items>
+</cmbMirror>
+<LabelDataPolarity>
+<Caption>डाटा ध्रुवता</Caption>
+</LabelDataPolarity>
+<cmbDataPolarity>
+<Items>
+<Item>सकारात्मक polarity</Item>
+<Item>नकारात्मक</Item>
+</Items>
+</cmbDataPolarity>
+<chkJiaoTi>
+<Caption>सामान्य प्रत्यावर्तन</Caption>
+</chkJiaoTi>
+<btnOK>
+<Caption>ठीक (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>रद्द (&amp;C)</Caption>
+</btnCancel>
+</TDlgScanSet>
+<!-- 查屏 窗口-->
+<TDlgSearchCard>
+<Caption>स्क्रीन की जाँच करें</Caption>
+<!-- 开始查找页-->
+<LabelFinding>
+<Caption>नियंत्रण कार्ड ढूँढना ......</Caption>
+</LabelFinding>
+<MemoPrompt>
+<Items>
+<Item>आप नियंत्रण कार्ड की जानकारी को अपडेट करने के लिए यू डिस्क का उपयोग करना चाहते हैं, तो आप इस चरण , कोई देखने का नियंत्रण कार्ड रद्द कर सकते हैं !</Item>
+</Items>
+</MemoPrompt>
+<btnCancel>
+<Caption>रद्द (&amp;C)</Caption>
+</btnCancel>
+<!-- 查找成功页-->
+<LabelSearchSuccess>
+<Caption>एक सफलता है!</Caption>
+</LabelSearchSuccess>
+<LabelType>
+<Caption>संचार मोड :</Caption>
+</LabelType>
+<LabelPort>
+<Caption>पोर्ट संख्या :</Caption>
+</LabelPort>
+<LabelCardType>
+<Caption>नियंत्रण कार्ड आदर्श:</Caption>
+</LabelCardType>
+<!-- 查找失败页-->
+<LabelSearchFail>
+<Caption>खोजें विफल!</Caption>
+</LabelSearchFail>
+<btnSearchAgain>
+<Caption>नई खोज</Caption>
+</btnSearchAgain>
+<MemoIncDelayRetry>
+<Items>
+<Item>देरी जब सिस्टम स्वचालित रूप से सभी बंदरगाहों स्कैन करने के लिए कोशिश कर फिर से वृद्धि होगी</Item>
+</Items>
+</MemoIncDelayRetry>
+<btnManualSetting>
+<Caption>रिवाज</Caption>
+</btnManualSetting>
+<MemoManualSetInfo>
+<Items>
+<Item>मैन्युअल संचार पैरामीटर निर्दिष्ट</Item>
+</Items>
+</MemoManualSetInfo>
+</TDlgSearchCard>
+<!-- 数据发送 窗口-->
+<TDlgSend>
+<Caption>आंकड़ा संचरण</Caption>
+</TDlgSend>
+<!--资源选择窗口 窗口 -->
+<TDlgSystemResources>
+<Caption>संसाधन चयन खिड़की</Caption>
+<Messages>
+<PromptNoSelected>कोई इमेज नहीं चुना जाता है , चित्र चयन पर क्लिक करें , या एकाधिक चयन खींचें .</PromptNoSelected>
+</Messages>
+<btnOK>
+<Caption>चुनें (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>रद्द (&amp;C)</Caption>
+</btnCancel>
+</TDlgSystemResources>
+<!--边框宽度 窗口 -->
+<TDlgTableBorderWidth>
+<Caption>बार्डरकीचौड़ाई</Caption>
+<LabelBorderWidth>
+<Caption>बार्डरकीचौड़ाई</Caption>
+</LabelBorderWidth>
+<btnOK>
+<Caption>ठीक (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>रद्द (&amp;C)</Caption>
+</btnCancel>
+</TDlgTableBorderWidth>
+<!-- 导入U盘 窗口-->
+<TDlgUsbForm>
+<Caption>यू डिस्क का आयात</Caption>
+<Messages>
+<NoUsb>नहीं मिला यू डिस्क , यू डिस्क डालें !</NoUsb>
+<MonitorSize>स्क्रीन चौड़ाई %d%d प्वाइंट उच्च बिंदु स्क्रीन</MonitorSize>
+<MonitorBoardType>%s %s</MonitorBoardType>
+<AutoAlertLight>स्वचालित रूप से चमक को समायोजित</AutoAlertLight>
+<ManualAlertLight>मैन्युअल चमक को समायोजित :%d स्तर</ManualAlertLight>
+<MonitorTimeOnOffDisabled>सक्षम नहीं है.</MonitorTimeOnOffDisabled>
+<MonitorTimeOnOffEnabled>सक्षम, %s- %s</MonitorTimeOnOffEnabled>
+<OutOfStorageCapacity>आयात यू डिस्क उत्पन्न सामग्री का आकार बहुत कार्ड की शेष क्षमता से अधिक , विफल रहता है.</OutOfStorageCapacity>
+<CancelExportToUsb>आयात यू डिस्क रद्द .</CancelExportToUsb>
+<UsbNotFound>नहीं मिला यू डिस्क , यू डिस्क डालें.</UsbNotFound>
+<ExportToUsbSuccess>फ़ाइल सफलतापूर्वक यू डिस्क में आयात किया गया है .</ExportToUsbSuccess>
+<ExportToUsbFail>यू डिस्क विफलता का आयात.</ExportToUsbFail>
+<ExportToUsbRunning>उत्पन्न किया जा रहा , कृपया प्रतीक्षा करें ...</ExportToUsbRunning>
+<ReadUsbFileSystemFail>पहचाने न जाने वाले यू डिस्क फाइल सिस्टम !</ReadUsbFileSystemFail>
+<InvalidUsbFileSystemFail>केवल वसा या FAT322 यू डिस्क का उपयोग प्रारूपित किया जा सकता !</InvalidUsbFileSystemFail>
+</Messages>
+<LabelSelectUsb>
+<Caption>यूएसबी ड्राइव का चयन करें</Caption>
+</LabelSelectUsb>
+<LabelMonitorSize>
+<Caption>स्क्रीन आकार:</Caption>
+</LabelMonitorSize>
+<LabelMonitorBoardType>
+<Caption>यूनिट बोर्ड के प्रकार:</Caption>
+</LabelMonitorBoardType>
+<chkCheckTime>
+<Caption>स्कूल समय :</Caption>
+</chkCheckTime>
+<chkAlertLight>
+<Caption>चमक समायोजन :</Caption>
+</chkAlertLight>
+<chkTimeOnOff>
+<Caption>टाइमर स्विच स्क्रीन :</Caption>
+</chkTimeOnOff>
+<btnLoadUsbDrivers>
+<Caption>परीक्षण उपकरण</Caption>
+</btnLoadUsbDrivers>
+<btnExport>
+<Caption>यू डिस्क का आयात</Caption>
+</btnExport>
+<btnCancel>
+<Caption>रद्द करें</Caption>
+</btnCancel>
+<btnExportToLocal>
+<Caption>स्थानीय आयात</Caption>
+</btnExportToLocal>
+<!--2013.1.30 新增-->
+<!--校时-->
+<optManulTiming>
+<Caption>मैनुअल</Caption>
+</optManulTiming>
+<optAutoTiming>
+<Caption>सिस्टम का समय</Caption>
+</optAutoTiming>
+<!--亮度调节：-->
+<optManualLight>
+<Caption>मैनुअल</Caption>
+</optManualLight>
+<optAutoLight>
+<Caption>स्वचालित</Caption>
+</optAutoLight>
+<!--定时开关屏：-->
+<LabelOn>
+<Caption>बूट समय</Caption>
+</LabelOn>
+<LabelOff>
+<Caption>समय से दूर</Caption>
+</LabelOff>
+<!--2013.1.30 新增结束-->
+<!--2013.5.4 新增-->
+<LabelUsbFreeSize>
+<Caption>उपलब्ध क्षमता :</Caption>
+</LabelUsbFreeSize>
+<LabelUsbFileSystem>
+<Caption>फ़ाइल का स्वरूप:</Caption>
+</LabelUsbFileSystem>
+<LabelDateTimeNoChange>
+<Caption>अपरिवर्तित</Caption>
+</LabelDateTimeNoChange>
+<LabelLightNoChange>
+<Caption>अपरिवर्तित</Caption>
+</LabelLightNoChange>
+<LabelOnOffNoChange>
+<Caption>सदैव</Caption>
+</LabelOnOffNoChange>
+<!--2013.5.4 新增结束-->
+</TDlgUsbForm>
+<!-- 时钟区域参数设置界面 -->
+<TFrameOptionClock>
+<!--时钟属性-->
+<GroupBoxRegionInfo>
+<Caption>घड़ी गुण</Caption>
+</GroupBoxRegionInfo>
+<optOneLine>
+<Caption>सिंगल लाइन प्रदर्शन</Caption>
+</optOneLine>
+<optMultiLine>
+<Caption>मल्टी लाइन प्रदर्शन</Caption>
+</optMultiLine>
+<LabelFieldSpace>
+<Caption>अंतर</Caption>
+</LabelFieldSpace>
+<chkDateWeekExchange>
+<Caption>तिथि और परस्पर विनिमय सप्ताह का स्थान</Caption>
+</chkDateWeekExchange>
+<chkShowDate>
+<Caption>दिखाएँ तिथि</Caption>
+</chkShowDate>
+<chkShowWeek>
+<Caption>दिखाएँ सप्ताह</Caption>
+</chkShowWeek>
+<chkShowTime>
+<Caption>टाइम शो</Caption>
+</chkShowTime>
+<!-- 时差-->
+<GroupBoxTimeDiff>
+<Caption>समय का अंतर</Caption>
+</GroupBoxTimeDiff>
+<LabelDeltHour>
+<Caption>समय</Caption>
+</LabelDeltHour>
+<LabelDeltMinute>
+<Caption>बिन्दु</Caption>
+</LabelDeltMinute>
+<LabelDeltMinute>
+<Caption>बिन्दु</Caption>
+</LabelDeltMinute>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>स्थिर पाठ</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>स्थिर पाठ का प्रयोग करें</Caption>
+</chkEnabledText>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>अक्षराकृति</Caption>
+</GroupBoxFont>
+<!--2013.1.30 新增-->
+<!--星期格式-->
+<cmbWeekFormat>
+<Items>
+<Item>चीनी</Item>
+<Item>मोन</Item>
+<Item>सोमवार</Item>
+</Items>
+</cmbWeekFormat>
+<!--2013.1.30 新增结束-->
+</TFrameOptionClock>
+<!-- 动态背景-->
+<TFrameOptionDynamicBackground>
+<GroupBoxInfo>
+<Caption>गतिशील पृष्ठभूमि</Caption>
+</GroupBoxInfo>
+<chkEnabledDynamicBackground>
+<Caption>गतिशील पृष्ठभूमि का प्रयोग करें</Caption>
+</chkEnabledDynamicBackground>
+<LabelDynamicBackgroundStyle>
+<Caption>शैली</Caption>
+</LabelDynamicBackgroundStyle>
+<LabelDynamicBackgroundSpeed>
+<Caption>गति</Caption>
+</LabelDynamicBackgroundSpeed>
+<cmbDynamicBackgroundSpeed>
+<Items>
+<Item>1 (सबसे तेजी से)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (धीरे)</Item>
+</Items>
+</cmbDynamicBackgroundSpeed>
+<cmbDynamicBackgroundStyle>
+<Items>
+<Item>अंगूठी</Item>
+<Item>पांच उठाई सितारा</Item>
+<Item>तारों से जड़ा</Item>
+<Item>हिमपात का एक खंड</Item>
+<Item>तीर</Item>
+<Item>सलाखों बोलबाला</Item>
+<Item>हटो पर बार्स</Item>
+<Item>हीरा</Item>
+<Item>डिब्बा</Item>
+<Item>वृत्त</Item>
+<Item>दोहरी लाइन स्कैन</Item>
+<Item>एकल स्कैन</Item>
+</Items>
+</cmbDynamicBackgroundStyle>
+</TFrameOptionDynamicBackground>
+<!-- 炫动字区域参数设置界面-->
+<TFrameOptionFlashText>
+<GroupBoxRegionInfo>
+<Caption>Xuandong शब्द संपादक</Caption>
+</GroupBoxRegionInfo>
+<ToolButtonBold>
+<Hint>बोल्ड</Hint>
+</ToolButtonBold>
+<ToolButtonItalic>
+<Hint>इटैलिक</Hint>
+</ToolButtonItalic>
+<ToolButtonUnderline>
+<Hint>रेखांकन</Hint>
+</ToolButtonUnderline>
+<cmbFontName>
+<Hint>फ़ॉन्ट का नाम</Hint>
+</cmbFontName>
+<cmbFontSize>
+<Hint>फ़ॉन्ट का आकार</Hint>
+</cmbFontSize>
+<cmbFontColor>
+<Hint>फ़ॉन्ट रंग</Hint>
+</cmbFontColor>
+</TFrameOptionFlashText>
+<!-- 图文区域参数设置界面-->
+<TFrameOptionPicture>
+<Messages>
+<InfoSelectDeletedFile>हटाए जाने के लिए फ़ाइल का चयन करें!</InfoSelectDeletedFile>
+<ConfDeleteFile>सुनिश्चित करें कि आप इसे हटाना चाहते हैं ?</ConfDeleteFile>
+<WarnFileNotExists>फ़ाइल मौजूद नहीं है !</WarnFileNotExists>
+</Messages>
+<GroupBoxRegionInfo>
+<Caption>फ़ाइल सूची</Caption>
+</GroupBoxRegionInfo>
+<btnAdd>
+<Caption>जोड़ना</Caption>
+</btnAdd>
+<btnDelete>
+<Caption>हटाना</Caption>
+</btnDelete>
+<btnUp>
+<Hint>चाल</Hint>
+</btnUp>
+<btnDown>
+<Hint>नीचे</Hint>
+</btnDown>
+<!-- 添加菜单-->
+<PopupMenuAddFile>
+<Items>
+<Item>नई हाइपरटेक्स्ट</Item>
+<Item>हाइपरटेक्स्ट जोड़ना</Item>
+<Item>एक तस्वीर जोड़ें</Item>
+</Items>
+</PopupMenuAddFile>
+<!--2013.5.4 增加-->
+<ToolButtonNewRtf>
+<Hint>आरटीएफ जोड़ना</Hint>
+</ToolButtonNewRtf>
+<ToolButtonAddPicture>
+<Hint>एक तस्वीर जोड़ें</Hint>
+</ToolButtonAddPicture>
+<ToolButtonAddGrid>
+<Hint>तालिका जोड़ें</Hint>
+</ToolButtonAddGrid>
+<ToolButtonAddWord>
+<Hint>जोड़ें वर्ड</Hint>
+</ToolButtonAddWord>
+<ToolButtonAddExcel>
+<Hint>जोड़ें एक्सेल</Hint>
+</ToolButtonAddExcel>
+<ToolButtonDelete>
+<Hint>हटाना</Hint>
+</ToolButtonDelete>
+<ToolButtonUp>
+<Hint>चाल</Hint>
+</ToolButtonUp>
+<ToolButtonDown>
+<Hint>नीचे</Hint>
+</ToolButtonDown>
+<chkShowPath>
+<Caption>रास्ता दिखाने</Caption>
+</chkShowPath>
+<!--2013.5.4 增加结束-->
+</TFrameOptionPicture>
+<!-- 节目参数设置界面-->
+<TFrameOptionProgram>
+<GroupBoxProgramInfo>
+<Caption>प्रकार खेलें</Caption>
+</GroupBoxProgramInfo>
+<optPlayModeNormal>
+<Caption>खेलने के क्रम</Caption>
+</optPlayModeNormal>
+<optPlayModeHeart>
+<Caption>अचल लंबाई प्ले (ओं)</Caption>
+</optPlayModeHeart>
+<optPlayModeSetTime>
+<Caption>प्ले समय</Caption>
+</optPlayModeSetTime>
+<LabelStartDateTime>
+<Caption>प्रारंभ समय</Caption>
+</LabelStartDateTime>
+<LabelEndDateTime>
+<Caption>अंत समय</Caption>
+</LabelEndDateTime>
+<chkWeekDaysSunday>
+<Caption>रविवार</Caption>
+</chkWeekDaysSunday>
+<chkWeekDaysMonday>
+<Caption>सोमवार</Caption>
+</chkWeekDaysMonday>
+<chkWeekDaysTuesday>
+<Caption>मंगलवार</Caption>
+</chkWeekDaysTuesday>
+<chkWeekDaysWednesday>
+<Caption>बुधवार</Caption>
+</chkWeekDaysWednesday>
+<chkWeekDaysThurday>
+<Caption>बृहस्पतिवार</Caption>
+</chkWeekDaysThurday>
+<chkWeekDaysFriday>
+<Caption>शुक्रवार</Caption>
+</chkWeekDaysFriday>
+<chkWeekDaysSaturday>
+<Caption>शनिवार</Caption>
+</chkWeekDaysSaturday>
+</TFrameOptionProgram>
+<!-- 温度区域参数设置界面-->
+<TFrameOptionTempreture>
+<GroupBoxRegionInfo>
+<Caption>तापमान गुण</Caption>
+</GroupBoxRegionInfo>
+<LabelMode>
+<Caption>तापमान इकाइयों</Caption>
+</LabelMode>
+<LabelDelt>
+<Caption>सुधार</Caption>
+</LabelDelt>
+<LabelNumberColor>
+<Caption>डिजिटल रंग</Caption>
+</LabelNumberColor>
+<LabelUnitColor>
+<Caption>यूनिट का रंग</Caption>
+</LabelUnitColor>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>स्थिर पाठ</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>स्थिर पाठ का प्रयोग करें</Caption>
+</chkEnabledText>
+<chkTwoLine>
+<Caption>लपेटना</Caption>
+</chkTwoLine>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>अक्षराकृति</Caption>
+</GroupBoxFont>
+</TFrameOptionTempreture>
+<!--字幕区域参数设置界面 -->
+<TFrameOptionText>
+<GroupBoxRegionInfo>
+<Caption>उपशीर्षक संपादित करें</Caption>
+</GroupBoxRegionInfo>
+<LabelWordSpace>
+<Caption>पद रिक्ति :</Caption>
+</LabelWordSpace>
+</TFrameOptionText>
+<!-- 计时区域参数设置界面-->
+<TFrameOptionTiming>
+<!-- 时钟属性-->
+<GroupBoxRegionInfo>
+<Caption>घड़ी गुण</Caption>
+</GroupBoxRegionInfo>
+<optCountDown>
+<Caption>उलटी गिनती</Caption>
+</optCountDown>
+<optCountUp>
+<Caption>समय है</Caption>
+</optCountUp>
+<LabelDest>
+<Caption>समय लक्ष्य</Caption>
+</LabelDest>
+<LabelFormat>
+<Caption>प्रदर्शन स्वरूप</Caption>
+</LabelFormat>
+<chkShowDay>
+<Caption>दिन</Caption>
+</chkShowDay>
+<chkShowHour>
+<Caption>समय</Caption>
+</chkShowHour>
+<chkShowMinute>
+<Caption>बिन्दु</Caption>
+</chkShowMinute>
+<chkShowSecond>
+<Caption>दूसरा</Caption>
+</chkShowSecond>
+<LabelNumberColor>
+<Caption>डिजिटल रंग</Caption>
+</LabelNumberColor>
+<LabelUnitColor>
+<Caption>यूनिट का रंग</Caption>
+</LabelUnitColor>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>स्थिर पाठ</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>स्थिर पाठ का प्रयोग करें</Caption>
+</chkEnabledText>
+<chkTwoLine>
+<Caption>लपेटना</Caption>
+</chkTwoLine>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>अक्षराकृति</Caption>
+</GroupBoxFont>
+</TFrameOptionTiming>
+<!-- 表盘盘区域参数设置界面-->
+<TFrameOptionWatch>
+<!-- 表盘属性-->
+<GroupBoxRegionInfo>
+<Caption>गुण डायल</Caption>
+</GroupBoxRegionInfo>
+<LabelStyle>
+<Caption>शैली</Caption>
+</LabelStyle>
+<cmbStyle>
+<Items>
+<Item>परंपरा</Item>
+</Items>
+</cmbStyle>
+<LabelTickWidth>
+<Caption>चौडाई</Caption>
+</LabelTickWidth>
+<LabelTickColor>
+<Caption>रंग</Caption>
+</LabelTickColor>
+<LabelHourTickWidth>
+<Caption>संपत्ति की पूरी बात</Caption>
+</LabelHourTickWidth>
+<Label369TickWidth>
+<Caption>3.6.9 प्वाइंट के नजदीक</Caption>
+</Label369TickWidth>
+<LabelMinuteTickWidth>
+<Caption>अंक गुण</Caption>
+</LabelMinuteTickWidth>
+<LabelLineWidth>
+<Caption>चौडाई</Caption>
+</LabelLineWidth>
+<LabelLineColor>
+<Caption>रंग</Caption>
+</LabelLineColor>
+<LabelHourLineWidth>
+<Caption>घंटा</Caption>
+</LabelHourLineWidth>
+<LabelMinuteLineWidth>
+<Caption>मिनट</Caption>
+</LabelMinuteLineWidth>
+<LabelSecondLineWidth>
+<Caption>पुराना</Caption>
+</LabelSecondLineWidth>
+<!-- 时差-->
+<GroupBoxTimeDiff>
+<Caption>समय का अंतर</Caption>
+</GroupBoxTimeDiff>
+<LabelDeltHour>
+<Caption>समय</Caption>
+</LabelDeltHour>
+<LabelDeltMinute>
+<Caption>बिन्दु</Caption>
+</LabelDeltMinute>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>स्थिर पाठ</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>स्थिर पाठ का प्रयोग करें</Caption>
+</chkEnabledText>
+<btnTextDown>
+<Hint>नीचे</Hint>
+</btnTextDown>
+<btnTextLeft>
+<Hint>बाएं</Hint>
+</btnTextLeft>
+<btnTextCenter>
+<Hint>केंद्र</Hint>
+</btnTextCenter>
+<btnTextRight>
+<Hint>सही</Hint>
+</btnTextRight>
+<btnTextUp>
+<Hint>चाल</Hint>
+</btnTextUp>
+</TFrameOptionWatch>
+<!--表格编辑主界面-->
+<CGridEditorMainForm>
+<Caption>संपादन पर्चा</Caption>
+<!--单色-->
+<PopupMenuSingleColor>
+<Items>
+<Item>नहीं</Item>
+<Item>लाल</Item>
+</Items>
+</PopupMenuSingleColor>
+<!--双色-->
+<PopupMenuTwoColor>
+<Items>
+<Item>नहीं</Item>
+<Item>लाल</Item>
+<Item>पीला</Item>
+<Item>हरा</Item>
+</Items>
+</PopupMenuTwoColor>
+</CGridEditorMainForm>
+<!--表格编辑插入表格界面-->
+<CGridEditorInsertCells>
+<Caption>तालिका जोड़ें</Caption>
+<LabelType>
+<Caption>प्रकार:</Caption>
+</LabelType>
+<optTypeRow>
+<Caption>पंक्ति</Caption>
+</optTypeRow>
+<optTypeCol>
+<Caption>पंक्ति</Caption>
+</optTypeCol>
+<LabelCount>
+<Caption>मात्रा:</Caption>
+</LabelCount>
+<LabelPosition>
+<Caption>स्थान:</Caption>
+</LabelPosition>
+<optPositionCurrent>
+<Caption>वर्तमान</Caption>
+</optPositionCurrent>
+<optPositionEnd>
+<Caption>अंतिम</Caption>
+</optPositionEnd>
+<btnOK>
+<Caption>ठीक (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>रद्द (&amp;C)</Caption>
+</btnCancel>
+</CGridEditorInsertCells>
+<!--表格编辑删除单元格界面-->
+<CGridEditorDeleteCells>
+<Caption>प्रकोष्ठों हटाएं</Caption>
+<optTypeRow>
+<Caption>पूरी लाइन</Caption>
+</optTypeRow>
+<optTypeCol>
+<Caption>संपूर्ण स्तंभ</Caption>
+</optTypeCol>
+<btnOK>
+<Caption>ठीक (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>रद्द (&amp;C)</Caption>
+</btnCancel>
+</CGridEditorDeleteCells>
+</Languages>

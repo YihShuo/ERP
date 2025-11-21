@@ -1,0 +1,35 @@
+#modalPane{
+   -fx-background-insets: 10;
+   -fx-background-radius: 5;
+   	-fx-background-color: white;
+   -fx-effect:dropshadow(three-pass-box, gray, 10, 0.5, 0, 0);
+}
+/* text set the color -fx-fill */
+#closeModalBtn,#confirmBtn,#askHelp,#closeModal{
+	-fx-fill: #4B4B4B;
+}
+#titlePane{
+	-fx-background-color: #BCBCBC;
+	-fx-background-insets: 10;
+    -fx-background-radius: 0,0,5,5;
+}
+#descriptionContent{
+	
+}
+
+#alertTitle{
+	-fx-font-weight:bold;
+	-fx-fill: #404040;
+}
+.root {
+  -fx-opacity: 0.8;
+}
+
+#closeModal:hover{
+	-fx-fill: black;
+	
+}
+/* text set the color -fx-text-fill*/
+#reminderMessage {
+	-fx-text-fill: #4B4B4B;
+} 

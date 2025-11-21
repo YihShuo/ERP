@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="modalPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane fx:id="titlePane" prefHeight="68.0" prefWidth="400.0">
+         <children>
+            <Text fx:id="title" layoutX="9.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title ,add the title here" textAlignment="CENTER" wrappingWidth="380.6708984375" />
+         </children>
+      </Pane>
+      <Pane fx:id="contentPane" layoutY="47.0" prefHeight="104.0" prefWidth="400.0">
+         <children>
+            <Text fx:id="content" layoutX="28.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add the content here !" wrappingWidth="348.6708984375" />
+         </children>
+      </Pane>
+      <Pane fx:id="confirmPane" layoutY="137.0" prefHeight="64.0" prefWidth="210.0">
+         <children>
+            <Text fx:id="confirmText" layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OK" textAlignment="CENTER" wrappingWidth="175.6708984375" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane fx:id="cancelPane" layoutX="190.0" layoutY="137.0" prefHeight="64.0" prefWidth="210.0">
+         <children>
+            <Text fx:id="cancelText" layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cancel" textAlignment="CENTER" wrappingWidth="175.6708984375" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+   </children>
+</Pane>

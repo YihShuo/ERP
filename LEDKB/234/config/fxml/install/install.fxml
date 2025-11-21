@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="superModalPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="installImageView" fitHeight="416.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true">
+      </ImageView>
+      <Pane fx:id="installPane" layoutX="255.0" layoutY="238.0" prefHeight="53.0" prefWidth="221.0">
+         <children>
+            <Text fx:id="installText" fill="WHITE" layoutX="14.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="立即安装" textAlignment="CENTER" wrappingWidth="189.6708984375" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="closePane" layoutX="710.0" layoutY="6.0" prefHeight="25.0" prefWidth="25.0">
+         <children>
+            <Text fx:id="closeText" layoutX="3.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+      </Pane>
+      <Pane fx:id="minPane" layoutX="675.0" layoutY="6.0" prefHeight="25.0" prefWidth="25.0">
+         <children>
+            <Text fx:id="minText" layoutX="3.0" layoutY="21.0"  strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+      </Pane>
+      
+      <Pane fx:id="defaultInstallPane" layoutX="0.0" layoutY="337.0" prefHeight="79.0" prefWidth="750.0">
+                  <children>
+            <CheckBox fx:id="agreementYesOrNot" layoutX="26.0" layoutY="23.0" mnemonicParsing="false" selected="true"  />
+            <Text fx:id="agreementYes" layoutX="55.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="同意">
+            </Text>
+            <Hyperlink fx:id="agreement" layoutX="82.0" layoutY="19.0" text="柠檬网络软件许可协议">
+            </Hyperlink>
+            <Text fx:id="userDefinedInstall" layoutX="612.0" layoutY="38.0" text="自定义安装">
+            </Text>
+            <Circle fx:id="circleHide" fill="#268d88" layoutX="712.0" layoutY="32.0" radius="11.0" stroke="TRANSPARENT" strokeType="INSIDE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+             </Circle>
+            <Text fx:id="hideText" layoutX="704.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+      </Pane>
+      
+      
+      <Pane fx:id="userDefinedWayPane" visible="false" layoutY="414.0" prefHeight="100.0" prefWidth="750.0">
+         <children>
+            <Label fx:id="installUnit" layoutX="40.0" layoutY="3.0" text="安装目录 :">
+            </Label>
+            <TextField fx:id="installAddress" layoutX="126.0" layoutY="0.0" prefHeight="29.0" prefWidth="499.0" />
+            <Button fx:id="changeUnitBtn" layoutX="639.0" layoutY="0.0" mnemonicParsing="false" text="更改目录">
+                 <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+             </Button>
+            <Label fx:id="needSpace" layoutX="135.0" layoutY="45.0" text="所需空间 :170MB" />
+            <Label fx:id="surplusSpace" layoutX="270.0" layoutY="45.0" text="可用空间 :20GB" />
+            <CheckBox fx:id="speedLinkd" layoutX="425.0" layoutY="45.0" mnemonicParsing="false" text="快速启动栏" />
+            <CheckBox fx:id="addToDeskshop" layoutX="542.0" layoutY="45.0" mnemonicParsing="false" text="添加到桌面" />
+         </children>
+      </Pane>
+   </children>
+</Pane>

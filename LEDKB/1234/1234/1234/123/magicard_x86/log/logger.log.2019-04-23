@@ -1,0 +1,236 @@
+2019-04-23 17:42:02,389 - lemonnt
+2019-04-23 17:42:02,443 - false
+2019-04-23 17:42:02,805 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-04-23 17:42:02,820 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-04-23 17:42:02,823 - Obtain the parameters  : [DIGITNUMBER]
+2019-04-23 17:42:02,833 - Obtain the env parameters  : [4]
+2019-04-23 17:42:03,035 - Success to query records [1]
+2019-04-23 17:42:03,045 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-04-23 17:42:03,787 - Obtain the parameters  : [SYSTEMNAME]
+2019-04-23 17:42:03,795 - Obtain the parameters  : [null]
+2019-04-23 17:42:03,998 - Obtain the parameters  : [MONITORINTRVAL]
+2019-04-23 17:42:04,005 - Obtain the parameters  : [null]
+2019-04-23 17:42:04,012 - Monitor Interval : [10s]
+2019-04-23 17:42:24,447 - UI
+2019-04-23 17:42:24,477 - Success to query records [2]
+2019-04-23 17:42:24,523 - Success to query records [1]
+2019-04-23 17:42:29,958 - UI
+2019-04-23 17:42:29,990 - Success to query records [2]
+2019-04-23 17:43:05,124 - Success to query records [2]
+2019-04-23 17:43:05,166 - Success to query records [2]
+2019-04-23 17:43:05,181 - start : 0, end : 2
+2019-04-23 17:43:07,962 - Success to query records [2]
+2019-04-23 17:43:07,977 - Success to query records [2]
+2019-04-23 17:43:07,986 - start : 0, end : 2
+2019-04-23 17:43:54,652 - Success save the system setting
+2019-04-23 17:43:58,801 - Success to query records [3]
+2019-04-23 17:43:58,836 - Success to query records [3]
+2019-04-23 17:43:58,838 - start : 0, end : 3
+2019-04-23 17:44:01,375 - Success to query records [2]
+2019-04-23 17:44:01,426 - Success to query records [2]
+2019-04-23 17:44:04,686 - Update by the id [7] ,tableName [plugins]
+2019-04-23 17:44:07,647 - The name of plugin is [File]
+2019-04-23 17:44:07,647 - The name of pluginType is [file]
+2019-04-23 17:44:07,664 - Success to query records [1]
+2019-04-23 17:44:08,958 - Failed to load class [com.lemonnt.file.FileMonitorPlugin]
+java.lang.NoSuchMethodException: com.lemonnt.file.FileMonitorPlugin.<init>(java.lang.Number)
+	at java.lang.Class.getConstructor0(Class.java:3082)
+	at java.lang.Class.getConstructor(Class.java:1825)
+	at com.lemonnt.dynamic.card.classLoader.CoreUtil.newInstance(CoreUtil.java:171)
+	at com.lemonnt.dynamic.card.production.CardUtil.findService(CardUtil.java:249)
+	at com.lemonnt.dynamic.card.production.ui.aischema.bean.Plugin$3.call(Plugin.java:282)
+	at com.lemonnt.dynamic.card.production.CardUtil$4$1.call(CardUtil.java:157)
+	at com.lemonnt.dynamic.card.ui.uitool.webfont.popup.TitleConfirmModal$1.handle(TitleConfirmModal.java:256)
+	at com.lemonnt.dynamic.card.ui.uitool.webfont.popup.TitleConfirmModal$1.handle(TitleConfirmModal.java:1)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$ClickGenerator.postProcess(Scene.java:3471)
+	at javafx.scene.Scene$ClickGenerator.access$8100(Scene.java:3399)
+	at javafx.scene.Scene$MouseHandler.process(Scene.java:3767)
+	at javafx.scene.Scene$MouseHandler.access$1500(Scene.java:3486)
+	at javafx.scene.Scene.impl_processMouseEvent(Scene.java:1762)
+	at javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2495)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:350)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:275)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$350(GlassViewEventHandler.java:385)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$209/1987166045.get(Unknown Source)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:404)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:384)
+	at com.sun.glass.ui.View.handleMouseEvent(View.java:555)
+	at com.sun.glass.ui.View.notifyMouse(View.java:927)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.lambda$null$145(WinApplication.java:101)
+	at com.sun.glass.ui.win.WinApplication$$Lambda$36/1915503092.run(Unknown Source)
+	at java.lang.Thread.run(Thread.java:745)
+2019-04-23 17:48:13,832 - lemonnt
+2019-04-23 17:48:13,874 - false
+2019-04-23 17:48:14,116 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-04-23 17:48:14,131 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-04-23 17:48:14,144 - Obtain the parameters  : [DIGITNUMBER]
+2019-04-23 17:48:14,154 - Obtain the env parameters  : [4]
+2019-04-23 17:48:14,317 - Success to query records [2]
+2019-04-23 17:48:14,324 - [{"connection":false,"date":1556012549959,"desc":"1","gprs":0,"ip":"192.168.1.10","name":"1","order":"1","port":"1233","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-04-23 17:48:14,720 - Obtain the parameters  : [SYSTEMNAME]
+2019-04-23 17:48:14,735 - Obtain the parameters  : [null]
+2019-04-23 17:48:14,937 - Obtain the parameters  : [MONITORINTRVAL]
+2019-04-23 17:48:14,945 - Obtain the parameters  : [null]
+2019-04-23 17:48:14,947 - Monitor Interval : [10s]
+2019-04-23 17:48:17,992 - Success to query records [3]
+2019-04-23 17:48:18,018 - Success to query records [3]
+2019-04-23 17:48:18,020 - start : 0, end : 3
+2019-04-23 17:48:19,937 - The name of plugin is [File]
+2019-04-23 17:48:19,944 - The name of pluginType is [file]
+2019-04-23 17:48:19,953 - Success to query records [1]
+2019-04-23 17:48:20,949 - Obtain the parameters  : [SENDDELAY]
+2019-04-23 17:48:20,958 - Obtain the parameters  : [null]
+2019-04-23 17:48:20,970 - It's going to parsing : C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties
+2019-04-23 17:48:20,971 - It has been parsed ,following [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-04-23 17:48:20,975 - It has been loaded ,following : [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-04-23 17:48:20,976 - {"pluginName":"File","properties":{"dotBit":"#.00","cardNames":"11,21,14","webDB.connection.password":"pass","monitorPath":"C:UsersgavliDesktop\test","webDB.connection.driverClassName":"oracle.jdbc.driver.OracleDriver","showElements":"C,Mn,Si,P,S,Ni,Cr,Cu,Mo,V,Ti,Al,Nb,As,Sn,Pb,Sb,Bi","webDB.connection.username":"test","webDB.connection.url":"jdbc:oracle:thin:@//10.224.38.97:2702/frwd.webex.com"}}
+2019-04-23 17:48:20,991 - Success to query records [1]
+2019-04-23 17:48:21,006 - Success to query records [1]
+2019-04-23 17:48:21,018 - Success to query records [1]
+2019-04-23 17:48:24,154 - Success to query records [2]
+2019-04-23 17:48:44,208 - Success to query records [2]
+2019-04-23 17:48:48,350 - Success to query records [2]
+2019-04-23 17:48:48,361 - Success to query records [2]
+2019-04-23 17:48:48,362 - start : 0, end : 2
+2019-04-23 17:48:49,663 - start : 0, end : 0
+2019-04-23 17:48:51,435 - Success to query records [2]
+2019-04-23 17:48:51,459 - Success to query records [2]
+2019-04-23 17:48:51,467 - start : 0, end : 2
+2019-04-23 17:48:52,608 - start : 0, end : 0
+2019-04-23 17:48:53,939 - Success to query records [2]
+2019-04-23 17:48:53,959 - Success to query records [2]
+2019-04-23 17:48:53,965 - start : 0, end : 2
+2019-04-23 17:48:55,296 - start : 0, end : 0
+2019-04-23 17:48:56,215 - start : 0, end : 0
+2019-04-23 17:48:56,888 - Success to query records [2]
+2019-04-23 17:48:56,900 - Success to query records [2]
+2019-04-23 17:48:56,903 - start : 0, end : 2
+2019-04-23 17:48:57,540 - start : 0, end : 0
+2019-04-23 17:49:01,759 - Success to query records [2]
+2019-04-23 17:49:01,775 - Success to query records [2]
+2019-04-23 17:49:01,777 - start : 0, end : 2
+2019-04-23 17:49:02,461 - start : 0, end : 0
+2019-04-23 17:49:03,775 - Success to query records [2]
+2019-04-23 17:49:23,811 - Success to query records [2]
+2019-04-23 17:49:43,827 - Success to query records [2]
+2019-04-23 17:50:03,085 - Success to query records [3]
+2019-04-23 17:50:03,101 - Success to query records [3]
+2019-04-23 17:50:03,103 - start : 0, end : 3
+2019-04-23 17:50:51,041 - lemonnt
+2019-04-23 17:50:51,079 - false
+2019-04-23 17:50:51,565 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-04-23 17:50:51,577 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-04-23 17:50:51,583 - Obtain the parameters  : [DIGITNUMBER]
+2019-04-23 17:50:51,591 - Obtain the env parameters  : [4]
+2019-04-23 17:50:51,741 - Success to query records [2]
+2019-04-23 17:50:51,747 - [{"connection":false,"date":1556012549959,"desc":"1","gprs":0,"ip":"192.168.1.10","name":"1","order":"1","port":"1233","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-04-23 17:50:52,069 - Obtain the parameters  : [SYSTEMNAME]
+2019-04-23 17:50:52,076 - Obtain the parameters  : [null]
+2019-04-23 17:50:52,208 - Obtain the parameters  : [MONITORINTRVAL]
+2019-04-23 17:50:52,214 - Obtain the parameters  : [null]
+2019-04-23 17:50:52,216 - Monitor Interval : [10s]
+2019-04-23 17:50:56,923 - Success to query records [3]
+2019-04-23 17:50:56,955 - Success to query records [3]
+2019-04-23 17:50:56,960 - start : 0, end : 3
+2019-04-23 17:50:58,714 - The name of plugin is [File]
+2019-04-23 17:50:58,715 - The name of pluginType is [file]
+2019-04-23 17:50:58,725 - Success to query records [1]
+2019-04-23 17:50:59,896 - Obtain the parameters  : [SENDDELAY]
+2019-04-23 17:50:59,905 - Obtain the parameters  : [null]
+2019-04-23 17:50:59,918 - It's going to parsing : C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties
+2019-04-23 17:50:59,920 - It has been parsed ,following [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-04-23 17:50:59,946 - It has been loaded ,following : [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-04-23 17:50:59,947 - {"pluginName":"File","properties":{"dotBit":"#.00","cardNames":"11,21,14","webDB.connection.password":"pass","monitorPath":"C:/Users/gavli/Desktop/test","webDB.connection.driverClassName":"oracle.jdbc.driver.OracleDriver","showElements":"C,Mn,Si,P,S,Ni,Cr,Cu,Mo,V,Ti,Al,Nb,As,Sn,Pb,Sb,Bi","webDB.connection.username":"test","webDB.connection.url":"jdbc:oracle:thin:@//10.224.38.97:2702/frwd.webex.com"}}
+2019-04-23 17:50:59,961 - Success to query records [1]
+2019-04-23 17:50:59,973 - Success to query records [1]
+2019-04-23 17:50:59,982 - Success to query records [1]
+2019-04-23 17:50:59,988 - Monitor type : directory
+2019-04-23 17:51:35,604 - The name of plugin is [File]
+2019-04-23 17:51:35,621 - The name of pluginType is [file]
+2019-04-23 17:51:36,798 - Force stop the timeExecute []
+2019-04-23 18:04:57,483 - lemonnt
+2019-04-23 18:04:57,528 - false
+2019-04-23 18:04:57,883 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-04-23 18:04:57,900 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-04-23 18:04:57,926 - Obtain the parameters  : [DIGITNUMBER]
+2019-04-23 18:04:57,935 - Obtain the env parameters  : [4]
+2019-04-23 18:04:58,126 - Success to query records [2]
+2019-04-23 18:04:58,135 - [{"connection":false,"date":1556012549959,"desc":"1","gprs":0,"ip":"192.168.1.10","name":"1","order":"1","port":"1233","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-04-23 18:04:58,606 - Obtain the parameters  : [SYSTEMNAME]
+2019-04-23 18:04:58,616 - Obtain the parameters  : [null]
+2019-04-23 18:04:58,797 - Obtain the parameters  : [MONITORINTRVAL]
+2019-04-23 18:04:58,805 - Obtain the parameters  : [null]
+2019-04-23 18:04:58,806 - Monitor Interval : [10s]
+2019-04-23 18:05:03,479 - Success to query records [2]
+2019-04-23 18:05:05,224 - start : 0, end : 0
+2019-04-23 18:05:07,812 - Success to query records [3]
+2019-04-23 18:05:07,862 - Success to query records [3]
+2019-04-23 18:05:07,866 - start : 0, end : 3
+2019-04-23 18:05:45,937 - The name of plugin is [File]
+2019-04-23 18:05:45,944 - The name of pluginType is [file]
+2019-04-23 18:05:45,965 - Success to query records [1]
+2019-04-23 18:05:46,991 - Obtain the parameters  : [SENDDELAY]
+2019-04-23 18:05:47,003 - Obtain the parameters  : [null]
+2019-04-23 18:05:47,037 - It's going to parsing : C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties
+2019-04-23 18:05:47,059 - It has been parsed ,following [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-04-23 18:05:47,230 - It has been loaded ,following : [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-04-23 18:05:47,398 - {"pluginName":"File","properties":{"dotBit":"#.00","cardNames":"11,21,14","webDB.connection.password":"pass","monitorPath":"C:/Users/gavli/Desktop/test","webDB.connection.driverClassName":"oracle.jdbc.driver.OracleDriver","showElements":"C,Mn,Si,P,S,Ni,Cr,Cu,Mo,V,Ti,Al,Nb,As,Sn,Pb,Sb,Bi","webDB.connection.username":"test","webDB.connection.url":"jdbc:oracle:thin:@//10.224.38.97:2702/frwd.webex.com"}}
+2019-04-23 18:05:47,427 - Success to query records [1]
+2019-04-23 18:05:47,504 - Success to query records [1]
+2019-04-23 18:05:47,533 - Success to query records [1]
+2019-04-23 18:05:47,549 - Monitor type : directory
+2019-04-23 18:05:57,647 - Send with UDP
+2019-04-23 18:05:57,650 - Send the content for the msg [4111], and the location ID [0]
+2019-04-23 18:05:57,650 - Send the messages have been format: [KLB00010000005700100000004111KLEAA]
+2019-04-23 18:05:57,673 - Success to send the datums
+2019-04-23 18:05:58,695 - Send the content for the msg [1111], and the location ID [1]
+2019-04-23 18:05:58,696 - Send the messages have been format: [KLB00010000005700100100001111KLEA8]
+2019-04-23 18:05:58,700 - Success to send the datums
+2019-04-23 18:05:59,431 - start : 0, end : 0
+2019-04-23 18:05:59,701 - Send the content for the msg [111.1], and the location ID [2]
+2019-04-23 18:05:59,701 - Send the messages have been format: [KLB0001000000570011020000111.1KLED8]
+2019-04-23 18:05:59,704 - Success to send the datums
+2019-04-23 18:06:00,705 - Send the content for the msg [11.0], and the location ID [3]
+2019-04-23 18:06:00,708 - Send the messages have been format: [KLB000100000057001003000011.0KLEA6]
+2019-04-23 18:06:00,712 - Success to send the datums
+2019-04-23 18:06:00,987 - Success to query records [2]
+2019-04-23 18:06:01,023 - Success to query records [2]
+2019-04-23 18:06:01,049 - start : 0, end : 2
+2019-04-23 18:06:01,878 - Success to query records [1]
+2019-04-23 18:06:01,907 - Success to query records [1]
+2019-04-23 18:06:01,927 - start : 0, end : 1
+2019-04-23 18:06:03,744 - Success to query records [2]
+2019-04-23 18:06:05,200 - Obtain the parameters  : [SYSTEMNAME]
+2019-04-23 18:06:05,245 - Obtain the parameters  : [null]
+2019-04-23 18:06:23,799 - Success to query records [2]
+2019-04-23 18:06:31,856 - Send with UDP
+2019-04-23 18:06:31,856 - Send the content for the msg [4211], and the location ID [0]
+2019-04-23 18:06:31,861 - Send the messages have been format: [KLB00010000005700100000004211KLEAB]
+2019-04-23 18:06:31,865 - Success to send the datums
+2019-04-23 18:06:32,866 - Send the content for the msg [1111], and the location ID [1]
+2019-04-23 18:06:33,067 - Send the messages have been format: [KLB00010000005700100100001111KLEA8]
+2019-04-23 18:06:33,180 - Success to send the datums
+2019-04-23 18:06:34,216 - Send the content for the msg [111.1], and the location ID [2]
+2019-04-23 18:06:34,217 - Send the messages have been format: [KLB0001000000570011020000111.1KLED8]
+2019-04-23 18:06:34,221 - Success to send the datums
+2019-04-23 18:06:35,225 - Send the content for the msg [11.0], and the location ID [3]
+2019-04-23 18:06:35,225 - Send the messages have been format: [KLB000100000057001003000011.0KLEA6]
+2019-04-23 18:06:35,228 - Success to send the datums
+2019-04-23 18:06:43,955 - Success to query records [2]

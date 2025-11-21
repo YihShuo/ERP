@@ -1,0 +1,2205 @@
+<?xml version="1.0"?>
+<Languages>
+<!--修改记录>
+41399
+1. 校时调试，节点<TDlgProtocolSetDateTime>
+增加<btnGetSystemTime>
+2. 通讯参数设置窗口，GPRS页，节点<TDlgNetworkSetting>
+增加<LabelDeviceId>
+3. 定时开关调试，节点<TDlgProtocolOnOff>
+增加<chkAutoOnOff>
+4. 区域显示参数设置，主界面，节点<TMainForm>
+增加<chkContinuousLeft>,<chkContinuousTop>
+41398
+1. 增加表格编辑器语言
+节点：<CGridEditorMainForm>,<CGridEditorInsertCells>,<CGridEditorDeleteCells>
+2. USB导出界面，节点<TDlgUsbForm>
+增加<LabelUsbFreeSize>,<LabelUsbFileSystem>,<LabelDateTimeNoChange>,<LabelLightNoChange>,<LabelOnOffNoChange>
+3. 定时开关调试，节点<TDlgProtocolOnOff>
+增加<MemoHelp>
+4. 亮度调节调试，节点<TDlgProtocolSetLight>
+增加<MemoHelp>
+5. 校时调试，节点<TDlgProtocolSetDateTime>
+增加<MemoHelp>
+6. 屏幕参数设置，节点<TdlgMonitorSetting>
+增加<chkDotFrequencyAuto>,<chkLineBlankingAuto>
+7. 图文区域编辑选项界面，<TFrameOptionPicture>
+增加<ToolButtonNewRtf>,<ToolButtonAddPicture>,<ToolButtonAddGrid>
+<ToolButtonAddWord>,<ToolButtonAddExcel>,<ToolButtonDelete>,
+<ToolButtonUp>,<ToolButtonDown>
+<chkShowPath>
+8. 主界面工具条，<TMainForm>
+增加 <ToolButtonTiming>,<ToolButtonSeDateTime>,<ToolButtonSetLight>
+<ToolButtonOnOff>
+<修改记录-->
+<!--这个文件定义中文简体-->
+<!-- Messages段定义一些信息提示信息-->
+<Messages>
+<!--;通用消息-->
+<Comm>
+<Comm.InitFail>Сбой при инициализации!</Comm.InitFail>
+<!--图文编辑添加文本文件时打开文件对话框的文件扩展名提示-->
+<FileFilterText>Текстовые файлы(*.txt)</FileFilterText>
+<!--图文编辑添加RTF文件时打开文件对话框的文件扩展名提示-->
+<FileFilterRTF>RTF файл (*.rtf)</FileFilterRTF>
+<OpenRtfFail>Прочитать RTF файл не удалось!</OpenRtfFail>
+<!--图文编辑添加图片文件时打开文件对话框的文件扩展名提示-->
+<FileFilterPicture>Графические файлы (*.BMP;*.JPG;*.GIF;*.PNG)</FileFilterPicture>
+<OpenPictureFail>Невозможно прочитать файл изображения!</OpenPictureFail>
+<!--图文编辑添加WORD文件时打开文件对话框的文件扩展名提示-->
+<FileFilterWord>Документ Word (*.doc;*.docx)|*.doc;*.docx|WPS(*.wps)|*.wps|</FileFilterWord>
+<OpenWordFail>Не удается произвести чтение документов Word, убедитесь, что вы установите Слово!</OpenWordFail>
+<!--图文编辑添加EXCEL文件时打开文件对话框的文件扩展名提示-->
+<FileFilterExcel>Excel документов(*.xls;*.xlsx)|WPS(*.et)|*.et|</FileFilterExcel>
+<OpenExcelFail>Excel документов не может быть прочитана! >>%s</OpenExcelFail>
+<!-- 工程打开保存的提示信息-->
+<SaveProjectFail>Не удалось сохранить проект!</SaveProjectFail>
+<CreateDirFail>Не удалось создать каталог!</CreateDirFail>
+<OpenProjectFail>Не удалось открыть проект!</OpenProjectFail>
+<ErrorProjectVersion>Версия Файл проекта не признают!</ErrorProjectVersion>
+<ErrorProjectFile>Проект файл поврежден!</ErrorProjectFile>
+<!--;提示保存工程-->
+<ProjectChangedPrompt>В рамках проекта также изменились, сохранить?</ProjectChangedPrompt>
+<!--;默认的新工程-->
+<NewProjectName>(Новые работы)</NewProjectName>
+<!--;工程没有内容-->
+<ProjectNull>Нет содержания могут быть сохранены!</ProjectNull>
+<Unknown>Неизвестный</Unknown>
+<!--通讯时的些操作信息-->
+<ProtocolTestStart>Будучи подключенным к плате управления, пожалуйста, подождите ...</ProtocolTestStart>
+<ProtocolSuccess>Подключите успех плате управления.</ProtocolSuccess>
+<ProtocolFail>Операция не поможет, проверьте последовательный порт или сеть нормально.</ProtocolFail>
+<ErrorComPort>Неверный серийный номер %s! Пожалуйста, проверьте набор параметров связи!</ErrorComPort>
+<ProtocolReadyFail>Устройство не готово! Пожалуйста, проверьте последовательный порт или по сети нормальное.</ProtocolReadyFail>
+<ProtocolOnScreenSuccess>Открытие экрана!</ProtocolOnScreenSuccess>
+<ProtocolOffScreenSuccess>За кадром успеха!</ProtocolOffScreenSuccess>
+<ProtocolSetAutoOnOff>Установите экран, таймер успеха.</ProtocolSetAutoOnOff>
+<ProtocolReadParamsSuccess>Считывание параметров успеха.</ProtocolReadParamsSuccess>
+<ProgressPrompt>Прогресс отношение:</ProgressPrompt>
+<RemainTimePrompt>Оставшееся время:%d секунд</RemainTimePrompt>
+<MakingMonitorFile>Параметр экрана файл генерируется ...</MakingMonitorFile>
+<SendingMonitorFile>Параметр экрана файл посылается ...</SendingMonitorFile>
+<MakingDataFile>Генерируется содержание данных ...</MakingDataFile>
+<DataFileOutofCapacity>Передача выходит из строя, размер содержимого отправлены за пределы карты в оставшейся емкости.</DataFileOutofCapacity>
+<SendingDataFile>Содержание данных будет готова, начать передачу ...</SendingDataFile>
+<SendDataFileSuccess>Успешно отправлено.</SendDataFileSuccess>
+<SendDataFileFail>Передача выходит из строя, причины ошибки:% S.</SendDataFileFail>
+<ProtocolReadParamsSuccess>Считывание параметров успеха.</ProtocolReadParamsSuccess>
+<SaveScanSetInfoFail>Сохранить настройки сканирования режиме не удалось:%s</SaveScanSetInfoFail>
+<ConfDeleteScanSetInfo>Подтвердите, что Вы хотите удалить?</ConfDeleteScanSetInfo>
+<CreateCommFail>Создать коммуникационные компоненты не удалось!</CreateCommFail>
+<!--;默认字体-->
+<DefaultFontName>Arial</DefaultFontName>
+<DefaultFontSize>10</DefaultFontSize>
+<!--;颜色列表-->
+<ColorList>
+<Item>Один цвет</Item>
+<Item>Двухцветный</Item>
+<Item>Трехцветный</Item>
+<Item>Полноцветный</Item>
+</ColorList>
+<!--;单基色颜色列表-->
+<SingleColorList>
+<Item>Красный</Item>
+</SingleColorList>
+<!--;双基色颜色列表-->
+<DoubleColorList>
+<Item>Красный</Item>
+<Item>Желтый</Item>
+<Item>Зеленый</Item>
+</DoubleColorList>
+<!--;全彩色颜色列表-->
+<SevenColorList>
+<Item>Красный</Item>
+<Item>Желтый</Item>
+<Item>Зеленый</Item>
+</SevenColorList>
+<!--;灰度列表-->
+<ColorGrayList>
+<Item>Серый</Item>
+<Item>32</Item>
+<Item>256</Item>
+</ColorGrayList>
+<!--;计时区域的显示格式-->
+<TimingDayLabel>День</TimingDayLabel>
+<TimingDayFormat>%d%s</TimingDayFormat>
+<TimingHourLabel>Время</TimingHourLabel>
+<TimingHourFormat>%d%s</TimingHourFormat>
+<TimingMinuteLabel>Минута</TimingMinuteLabel>
+<TimingMinuteFormat>%d%s</TimingMinuteFormat>
+<TimingSecondLabel>Второй</TimingSecondLabel>
+<TimingSecondFormat>Секунд%d</TimingSecondFormat>
+<!--集群操作信息-->
+<GprsValidateError>GPRS проверить счета неправильный пароль!</GprsValidateError>
+<GprsConnectError>Не удается подключиться GPRS сервер!</GprsConnectError>
+<GprsImeiError>Использование GPRS связи, экран имя должно быть ДТУ 15 IMEI номеру.</GprsImeiError>
+<NoGprsIdFilterFile>Отсутствие файла GPRS фильтр!</NoGprsIdFilterFile>
+<UpdateGprsCardsCompleted>Получить завершение кластер онлайн список</UpdateGprsCardsCompleted>
+<UpdateGprsCardsError>Ошибка соединения, пожалуйста, приобрести кластера.</UpdateGprsCardsError>
+<ConnectingColonyServer>Серверами в кластере, пожалуйста, подождите ...</ConnectingColonyServer>
+<ConnectColonyServerSuccess>Успех серверов в кластере.</ConnectColonyServerSuccess>
+<ConnectColonyServerFail>Не удается подключиться к серверу кластера.</ConnectColonyServerFail>
+<PromptSelectColonyCommandItem>Пожалуйста, выберите необходимость выполнения команды записи.</PromptSelectColonyCommandItem>
+<ColonyCommandOutofCapacity>Выполните команду не удается, именем {0} экрана сгенерированных данных размер превышает размер емкости карты.</ColonyCommandOutofCapacity>
+<PromptColonyCloneOnlyOneRegion>В дополнительного экрана адаптивного главный экран, можно только создать графический области, и размер области должны быть доступны для размера экрана.</PromptColonyCloneOnlyOneRegion>
+<SendColonyCommandSuccess>Выполните кластера команда выполнена успешно.</SendColonyCommandSuccess>
+<SendColonyCommandFail>Кластерной команды не удается.</SendColonyCommandFail>
+<PromptColonyVetifyNullIp>Адрес сервера не может быть пустым!</PromptColonyVetifyNullIp>
+<PromptColonyVetifyNullPassword>Пароль сервера не может быть пустым!</PromptColonyVetifyNullPassword>
+<ColonyVetifyInvalidPassword>Неверный пароль.</ColonyVetifyInvalidPassword>
+<ColonyVetiryServerError>Сервер обрабатывает неудачу.</ColonyVetiryServerError>
+<GprsColonyOperationReady>Готовый</GprsColonyOperationReady>
+<!--扫描信息的名称描述-->
+<ScanSetName1>01) P10 12 Интерфейс монохромный</ScanSetName1>
+<!--未知的扫描方式名称-->
+<UnknownScanSetName>Неизвестный сканирования</UnknownScanSetName>
+<!--协议名称-->
+<ProtocolSerialPort>Последовательные порты</ProtocolSerialPort>
+<ProtocolNet>Сетевой порт</ProtocolNet>
+<ProtocolDirectNet>Сетевой порт напрямую связан</ProtocolDirectNet>
+<ProtocolGprs>GPRS</ProtocolGprs>
+<ProtocolUnknown>Неизвестный</ProtocolUnknown>
+<!--2013-04-09-->
+<!--通讯测试错误-->
+<UnauthorizedAccessReplyPacket>Не является допустимым пакетом ответа.</UnauthorizedAccessReplyPacket>
+<OpenPortFail>Открытие последовательного порта не удалось.</OpenPortFail>
+<CancelSending>Отменить передачу.</CancelSending>
+<CreateFail>Создайте связи компонента из строя</CreateFail>
+<SocketError>Сбой сети</SocketError>
+<ColonyNotExists>Кластер терминала не существует</ColonyNotExists>
+<ColonyOffline>Кластер линии терминала</ColonyOffline>
+<ColonyBusy>Кластер линия занята</ColonyBusy>
+</Comm>
+</Messages>
+<!-- 以下是窗口界面的文字信息-->
+<!-- 其中的<Messages>段是一些提示信息, 其他段是界面上控件的文字信息-->
+<!-- 主窗口-->
+<TMainForm>
+<!-- 标题栏-->
+<Caption>X Show программное обеспечение</Caption>
+<Messages>
+<LoadSystemConfigFail>Загрузка отказа системы конфигурации!</LoadSystemConfigFail>
+<MonitorName>Отображение%d</MonitorName>
+<ProgramName>Программа%d</ProgramName>
+<RegionNamePicture>Графический%d</RegionNamePicture>
+<RegionNameText>Субтитры%d</RegionNameText>
+<RegionNameFlashText>Xuandong слова%d</RegionNameFlashText>
+<RegionNameClock>Часы%d</RegionNameClock>
+<RegionNameWatch>Наберите%d</RegionNameWatch>
+<RegionNameTiming>Сроки%d</RegionNameTiming>
+<RegionNameDefaul>Регион%d</RegionNameDefaul>
+<AskToSelectOneTreeNode>Пожалуйста, выберите узел!</AskToSelectOneTreeNode>
+<WarnOnDeleteOneMonitor>Не может быть удален, проект должен быть хотя бы один экран!</WarnOnDeleteOneMonitor>
+<ConfDeleteProgramListNode>Подтвердите, что Вы хотите удалить?</ConfDeleteProgramListNode>
+<!--有重叠区域-->
+<RegionOverlapping>Операция не удалась,%s: содержащие перекрывающиеся области.</RegionOverlapping>
+<!--导入U盘时如果没有选择屏幕提示-->
+<AskToSelectMonitor>Пожалуйста, выберите экран!</AskToSelectMonitor>
+<!--显示区域页数信息-->
+<RegionPagesInfo>%d / %d</RegionPagesInfo>
+<!--对象克隆后加的前缀 -->
+<CloneAddText>Скопируйте</CloneAddText>
+<!--超出节目数提示-->
+<MaxProgramCountInfo>Максимальная поддержка%d программ!</MaxProgramCountInfo>
+<!--超出区域数提示-->
+<MaxRegionCountInfo>Максимальная поддержка%dрегионах!</MaxRegionCountInfo>
+<!--超出具体区域数提示-->
+<MaxRegionDetailCountInfo>Наибольшую поддержку региона %d!</MaxRegionDetailCountInfo>
+<MaxSpeedNote>(Самый быстрый)</MaxSpeedNote>
+<MinSpeedNote>(Самый медленный)</MinSpeedNote>
+<!--屏幕名称不允许重复-->
+<ScreeNameRepeat>Отображаемое имя не имеет права повторить!</ScreeNameRepeat>
+<!--检测空区域-->
+<HaveNoRegions>Текущая область программы! Не работает!</HaveNoRegions>
+<AllRegionsIsNull>Все области программы пусты! Не работает!</AllRegionsIsNull>
+<ConfHaveNulRegions>Обнаружены пустые названия, или графической области для продолжения работы?</ConfHaveNulRegions>
+</Messages>
+<!--另存工程对话框-->
+<dlgSave>
+<Project>
+<Filter>Файл проекта Kalerka</Filter>
+</Project>
+<SaveProject>
+<Title>Сохранить проект как ...</Title>
+</SaveProject>
+<SaveAsProject>
+<Title>Сохранить проект как ...</Title>
+</SaveAsProject>
+</dlgSave>
+<dlgOpen>
+<OpenProject>
+<Title>Откройте проект ...</Title>
+</OpenProject>
+</dlgOpen>
+<!--节目管理按钮-->
+<btnProgramList>
+<Caption>Управление программой</Caption>
+</btnProgramList>
+<!--节目管理树右键菜单-->
+<PopupMenuTreeProgramList>
+<Items>
+<Item>Двигаться</Item>
+<Item>Вниз</Item>
+<Item>-</Item>
+<Item>Удалять</Item>
+<Item>Скопируйте</Item>
+<Item>Придерживаться</Item>
+<Item>-</Item>
+<Item>Расширение</Item>
+<Item>Крах</Item>
+<Item>-</Item>
+<Item>Переименовать</Item>
+<Item>-</Item>
+<Item>Клон экрана</Item>
+</Items>
+</PopupMenuTreeProgramList>
+<!--图片资源库按钮-->
+<btnPictures>
+<Caption>Библиотека Изображений ресурса</Caption>
+</btnPictures>
+<!--图片资源库树-->
+<treePictures>
+<Items>
+<Item>
+<Text>Картина</Text>
+<Items>
+<Item>Олимпийский</Item>
+<Item>Отметить</Item>
+<Item>Стрелки</Item>
+<Item>Статические логотипа</Item>
+<Item>Звезды и флаги</Item>
+<Item>Специальные символы</Item>
+<Item>Символ</Item>
+<Item>Жизнь</Item>
+</Items>
+</Item>
+<Item>
+<Text>Анимация</Text>
+<Items>
+<Item>Логотип анимации</Item>
+<Item>Выражение</Item>
+</Items>
+</Item>
+</Items>
+</treePictures>
+<!--主工具条的按钮-->
+<ToolButtonProgram>
+<Caption>Программа</Caption>
+<Hint>Программа</Hint>
+</ToolButtonProgram>
+<ToolButtonDynamicBackground>
+<Caption>Динамического фона</Caption>
+<Hint>Динамического фона</Hint>
+</ToolButtonDynamicBackground>
+<ToolButtonPicture>
+<Caption>Графический</Caption>
+<Hint>Графический</Hint>
+</ToolButtonPicture>
+<ToolButtonText>
+<Caption>Субтитр</Caption>
+<Hint>Субтитр</Hint>
+</ToolButtonText>
+<ToolButtonFlashText>
+<Caption>Xuandong слова</Caption>
+<Hint>Xuandong слова</Hint>
+</ToolButtonFlashText>
+<ToolButtonClock>
+<Caption>Часы</Caption>
+<Hint>Часы</Hint>
+</ToolButtonClock>
+<ToolButtonWatch>
+<Caption>Набирать номер</Caption>
+<Hint>Набирать номер</Hint>
+</ToolButtonWatch>
+<ToolButtonDelete>
+<Caption>Удалять</Caption>
+<Hint>Удалять</Hint>
+</ToolButtonDelete>
+<ToolButtonPreview>
+<Caption>Предварительный просмотр</Caption>
+<Hint>Предварительный просмотр</Hint>
+<Caption1>Стоп</Caption1>
+<Hint1>Стоп</Hint1>
+</ToolButtonPreview>
+<ToolButtonSend>
+<Caption>Послать</Caption>
+<Hint>Послать</Hint>
+</ToolButtonSend>
+<ToolButtonUSB>
+<Caption>USB</Caption>
+<Hint>USB</Hint>
+</ToolButtonUSB>
+<ToolButtonSearchCard>
+<Caption>Проверьте экран</Caption>
+<Hint>Проверьте экран</Hint>
+</ToolButtonSearchCard>
+<!-- 2013.5.4 增加-->
+<ToolButtonTiming>
+<Caption>Синхронизация</Caption>
+<Hint>Синхронизация</Hint>
+</ToolButtonTiming>
+<ToolButtonSeDateTime>
+<Caption>Синхронизация</Caption>
+<Hint>Синхронизация</Hint>
+</ToolButtonSeDateTime>
+<ToolButtonSetLight>
+<Caption>Яркость</Caption>
+<Hint>Яркость</Hint>
+</ToolButtonSetLight>
+<ToolButtonOnOff>
+<Caption>Таймером</Caption>
+<Hint>Таймером</Hint>
+</ToolButtonOnOff>
+<!-- 2013.5.4 增加结束-->
+<!--区域属性操作的工具栏：区域缩放、位置、翻页-->
+<ToolButtonZoomInit>
+<Hint>В исходном размере</Hint>
+</ToolButtonZoomInit>
+<ToolButtonZoomOut>
+<Hint>Увеличить</Hint>
+</ToolButtonZoomOut>
+<ToolButtonZoomIn>
+<Hint>Узкий</Hint>
+</ToolButtonZoomIn>
+<ToolButtonRegionLeft>
+<Hint>Региональные левой</Hint>
+</ToolButtonRegionLeft>
+<ToolButtonRegionRight>
+<Hint>Региональное право на проживание</Hint>
+</ToolButtonRegionRight>
+<ToolButtonRegionTop>
+<Hint>Региональные Топ</Hint>
+</ToolButtonRegionTop>
+<ToolButtonRegionBottom>
+<Hint>Область установлен в конце</Hint>
+</ToolButtonRegionBottom>
+<ToolButtonLastRegionPage>
+<Hint>Предыдущий</Hint>
+</ToolButtonLastRegionPage>
+<ToolButtonNextRegionPage>
+<Hint>Следующий</Hint>
+</ToolButtonNextRegionPage>
+<!--主菜单-->
+<ActionManagerMain>
+<ActionBars>
+<ActionBar>
+<Items>
+<Item>
+<Caption>Файл (&amp;F)</Caption>
+<Items>
+<Item>Новое строительство(&amp;N)</Item>
+<Item>Open (&amp;O)</Item>
+<Item>-</Item>
+<Item>Сохранить(&amp;S)</Item>
+<Item>Сохранить как ...</Item>
+<Item>-</Item>
+<Item>экспорт</Item>
+<Item>импортирующий</Item>
+<Item>-</Item>
+<Item>Выход(&amp;E)</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Insert (&amp;I)</Caption>
+<Items>
+<Item>Экран</Item>
+<Item>Программа</Item>
+<Item>Динамического фона</Item>
+<Item>-</Item>
+<Item>Субтитр</Item>
+<Item>Графический</Item>
+<Item>Xuandong слова</Item>
+<Item>Часы</Item>
+<Item>Набирать номер</Item>
+<Item>Синхронизация</Item>
+<Item>Температура</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Set (&amp;S)</Caption>
+<Items>
+<Item>Параметры экрана</Item>
+<Item>Параметры связи</Item>
+<Item>-</Item>
+<Item>Измените IP карты</Item>
+<Item>-</Item>
+<Item>Автоматическая настройка блока доски</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Отладка (&amp;D)</Caption>
+<Items>
+<Item>Синхронизация</Item>
+<Item>Регулировка яркости</Item>
+<Item>Запрос модели</Item>
+<Item>Экран переключения программного обеспечения</Item>
+<Item>-</Item>
+<Item>Предварительный просмотр</Item>
+<Item>Послать</Item>
+<Item>Импорт U диска</Item>
+<Item>-</Item>
+<Item>Просмотр журнала</Item>
+</Items>
+</Item>
+<Item>
+<Caption V="0">Кластеров (&amp;C)</Caption>
+<Items>
+<Item>Конфигурация сервера</Item>
+<Item>Управление кластерами</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Язык (&amp;L)</Caption>
+<Items>
+<Item>Автоматический выбор</Item>
+</Items>
+</Item>
+<Item>
+<Caption>помощь(&amp;A)</Caption>
+</Item>
+</Items>
+</ActionBar>
+</ActionBars>
+</ActionManagerMain>
+<!--基本属性-->
+<GroupBoxBaseInfo>
+<Caption>Основные свойства</Caption>
+</GroupBoxBaseInfo>
+<LabelRegionName>
+<Caption>Название</Caption>
+</LabelRegionName>
+<LabelRegionX>
+<Caption>Положение X</Caption>
+</LabelRegionX>
+<LabelRegionY>
+<Caption>Положение Y</Caption>
+</LabelRegionY>
+<LabelRegionWidth>
+<Caption>Ширина</Caption>
+</LabelRegionWidth>
+<LabelRegionHeight>
+<Caption>Высота</Caption>
+</LabelRegionHeight>
+<!--基本属性-->
+<GroupBoxDisplayInfo>
+<Caption>Свойства экрана</Caption>
+</GroupBoxDisplayInfo>
+<LabelDisplayMode>
+<Caption>На экране режима</Caption>
+</LabelDisplayMode>
+<cmbDisplayMode>
+<Items>
+<Item>Случайно отображать</Item>
+<Item>Еще</Item>
+<Item>Сдвигом вправо</Item>
+<Item>Левая</Item>
+<Item>Вниз</Item>
+<Item>Двигаться</Item>
+<Item>Право покрытия</Item>
+<Item>Левая покрытия</Item>
+<Item>Следующее освещение</Item>
+<Item>На обложке</Item>
+<Item>Горизонтальное раскрытие</Item>
+<Item>Открытие вертикальной</Item>
+<Item>Кросс-закрытие</Item>
+<Item>Вертикальное закрытие</Item>
+<Item>Право жалюзи</Item>
+<Item>Левая жалюзи</Item>
+<Item>Под жалюзи</Item>
+<Item>На жалюзи</Item>
+<Item>Мерцать</Item>
+<Item>Право слово кисти</Item>
+<Item>Левая кисть слова</Item>
+<Item>Под кистью слова</Item>
+<Item>На кисти слово</Item>
+<Item>Page Left</Item>
+<Item>Право следующую страницу</Item>
+<Item>Вентилятор</Item>
+<Item>Вентилятор закрыта</Item>
+<Item>Правосторонний</Item>
+<Item>L-</Item>
+<Item>Уровень перемежаются</Item>
+<Item>Вертикальные перемежаются</Item>
+<Item>Прокрутите вниз занавес</Item>
+<Item>Право затвора</Item>
+<Item>Кадр</Item>
+<Item>Anti-белый мигающий</Item>
+<Item>Развернуть прямоугольника</Item>
+<Item>Прямоугольные сокращения</Item>
+<Item>Развернуть алмазов</Item>
+<Item>Алмазный сокращения</Item>
+<Item>Развернуть Крест</Item>
+<Item>Крест сокращении</Item>
+<Item>Нижний левый прямоугольник</Item>
+<Item>Верхний левый прямоугольник</Item>
+<Item>Нижний правый прямоугольник</Item>
+<Item>В правом верхнем углу прямоугольника</Item>
+<Item>Нижняя левая косая черта</Item>
+<Item>В верхней левой косой черты</Item>
+<Item>Нижний правый слэш</Item>
+<Item>Положительные склоны</Item>
+<Item>Xiasha</Item>
+<Item>Кадр</Item>
+<Item>Сериал Сейчас</Item>
+<Item>Продольные кадров</Item>
+</Items>
+</cmbDisplayMode>
+<LabelClearMode>
+<Caption>Очистить экран</Caption>
+</LabelClearMode>
+<LabelSpeed>
+<Caption>Скорость</Caption>
+</LabelSpeed>
+<cmbSpeed>
+<Items>
+<Item>1 (самый быстрый)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (самый медленный)</Item>
+</Items>
+</cmbSpeed>
+<LabelDisplayDelay>
+<Caption>Продолжительность</Caption>
+</LabelDisplayDelay>
+<LabelDisplayStyle>
+<Caption>Стиль</Caption>
+</LabelDisplayStyle>
+<cmbDisplayStyle>
+<Items>
+<Item>Сердцебиение</Item>
+<Item>Вальс</Item>
+<Item>Дрейфовать</Item>
+<Item>Электромагнитные волны</Item>
+<Item>Лампа-вспышка</Item>
+<Item>Весна</Item>
+<Item>Катиться</Item>
+<Item>Домино</Item>
+<Item>Обратный дрейф</Item>
+<Item>завихрение</Item>
+<Item>Неоновый свет</Item>
+<Item>DOUCAI</Item>
+<Item>Радуга (а)</Item>
+<Item>Радуга (под)</Item>
+<Item>Радуга (слева)</Item>
+<Item>Радуга (справа)</Item>
+</Items>
+</cmbDisplayStyle>
+<!-- 动感边框-->
+<GroupBoxFlashBorder>
+<Caption>Динамический границ</Caption>
+</GroupBoxFlashBorder>
+<chkFlashBorderEnabled>
+<Caption>Отображения динамических границу</Caption>
+</chkFlashBorderEnabled>
+<optFlashBorderOneColor>
+<Caption>Монохромный</Caption>
+</optFlashBorderOneColor>
+<optFlashBorderFlashColor>
+<Caption>Хен цвет</Caption>
+</optFlashBorderFlashColor>
+<LabelFlashBorderSpeed>
+<Caption>Скорость ходьбы</Caption>
+</LabelFlashBorderSpeed>
+<cmbFlashBorderSpeed>
+<Items>
+<Item>1 (самый быстрый)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (самый медленный)</Item>
+</Items>
+</cmbFlashBorderSpeed>
+<LabelFlashBorderDirection>
+<Caption>Мигрирующих направлении</Caption>
+</LabelFlashBorderDirection>
+<cmbFlashBorderDirection>
+<Items>
+<Item>Исправлено отображение</Item>
+<Item>Вращение вправо</Item>
+<Item>Вращение влево</Item>
+<Item>Мерцать</Item>
+<Item>Мигающий + по часовой стрелке</Item>
+<Item>Мигающий + вращение против часовой стрелки</Item>
+</Items>
+</cmbFlashBorderDirection>
+<!--屏幕属性-->
+<LabelCardModel>
+<Caption>Модель платы управления:</Caption>
+</LabelCardModel>
+<LabelMonitorWidth>
+<Caption>Ширина экрана:</Caption>
+</LabelMonitorWidth>
+<LabelMonitorHeight>
+<Caption>Высота экрана:</Caption>
+</LabelMonitorHeight>
+<LabelMonitorColorMode>
+<Caption>Цвет сотовый пластина:</Caption>
+</LabelMonitorColorMode>
+<LabelMonitorConnectMode>
+<Caption>Средства связи:</Caption>
+</LabelMonitorConnectMode>
+<LabelMonitorConnectPort>
+<Caption>Порты:</Caption>
+</LabelMonitorConnectPort>
+<!--2013.5.5 增加-->
+<chkContinuousLeft>
+<Caption>Непрерывный левый</Caption>
+</chkContinuousLeft>
+<chkContinuousTop>
+<Caption>Постоянно в движении</Caption>
+</chkContinuousTop>
+<!--2013.5.5 增加结束-->
+</TMainForm>
+<!--关于对话框-->
+<TDlgAbout>
+<Caption>О ...</Caption>
+<LabelAppName>
+<Caption>X Show программное обеспечение</Caption>
+</LabelAppName>
+<LabelAppVersion>
+<Caption>Версия:%s</Caption>
+</LabelAppVersion>
+<MemoAppNote>
+<Items>
+<Item>Предупреждение: Эта компьютерная программа защищена законами об авторских правах и международными конвенциями защищены от несанкционированного воспроизведения или распространения этой программы некоторые или все обвинения, может повлечь за собой гражданскую и уголовную ответственность, и в зависимости от максимально возможной степени, разрешенной законом.</Item>
+</Items>
+</MemoAppNote>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+</TDlgAbout>
+<!--网络集群发送-->
+<TDlgColonySend>
+<Caption>Отправить управления кластером</Caption>
+<chkSelectAll>
+<Caption>Выбирать</Caption>
+</chkSelectAll>
+<!--提示信息-->
+<MemoNote>
+<Items>
+<Item>Описание:</Item>
+<Item></Item>
+<Item>1, единственный способ общения сетевой порт или GPRS, прежде чем они могут присоединиться к группе.</Item>
+<Item></Item>
+<Item>2 клона группы Отправка: Отправить основной экран данные, посылаемые в группе на всех экранах, использование клонирования отправить запрос группы Размер экрана, параметры такие же. Обязательно перед отправкой главном экране.</Item>
+<Item></Item>
+<Item>3, обычная группа направила: отказаться от слова данных экрана отправляется на соответствующий экран.</Item>
+</Items>
+</MemoNote>
+<!--设备列表-->
+<ListViewCards>
+<Columns>
+<Column>Статус</Column>
+<Column>Название</Column>
+<Column>Модель</Column>
+<Column>Ширина экрана</Column>
+<Column>Высота экрана</Column>
+<Column>Тип клетки пластины</Column>
+<Column>Средства сообщения</Column>
+<Column>Яркость</Column>
+<Column>Таймером</Column>
+</Columns>
+</ListViewCards>
+<!--操作选择项-->
+<optRegularSend>
+<Caption>Обычная группа направила</Caption>
+</optRegularSend>
+<optCloneSend>
+<Caption>Клон группа направила</Caption>
+</optCloneSend>
+<optOpenScreen>
+<Caption>Программное обеспечение загрузки</Caption>
+</optOpenScreen>
+<optCloseScreen>
+<Caption>Soft-Off</Caption>
+</optCloseScreen>
+<optTiming>
+<Caption>Синхронизация</Caption>
+</optTiming>
+<btnSendProtocol>
+<Caption>Выполните команду</Caption>
+</btnSendProtocol>
+<!--指定主屏幕-->
+<LabelCloneScreens>
+<Caption>Укажите основной экран:</Caption>
+</LabelCloneScreens>
+</TDlgColonySend>
+<!--网络集群登录验证窗口-->
+<TDlgColonyVerify>
+<Caption>Аутентификация Логин</Caption>
+<LabelPassword>
+<Caption>Пароль</Caption>
+</LabelPassword>
+<LabelServerIp>
+<Caption>Сервер</Caption>
+</LabelServerIp>
+<LabelPort>
+<Caption>Порт</Caption>
+</LabelPort>
+<btnOK>
+<Caption>Определять</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Отменить</Caption>
+</btnCancel>
+</TDlgColonyVerify>
+<!--GPRS群组发送窗口-->
+<TDlgGprsColony>
+<Caption>Управление кластерами</Caption>
+<Messages>
+<AllScreens>Полный экран</AllScreens>
+<AddGroupCaption>Добавить группу</AddGroupCaption>
+<AddGroupPrompt>Пожалуйста, введите имя группы:</AddGroupPrompt>
+<AddGroupExists>Название группы уже существует!</AddGroupExists>
+<AddGroupFail>Добавить группу не удалось!</AddGroupFail>
+<ConfDeleteGroup>Чтобы подтвердить, что вы хотите удалить группу?</ConfDeleteGroup>
+<ConfDeleteDevice>Подтвердите, что Вы хотите удалить выбранный терминал?</ConfDeleteDevice>
+<NoScreen>Без экрана не может добавить!</NoScreen>
+<DeviceIdExists>Терминал ID уже существует!</DeviceIdExists>
+<NoItemChecked>Пожалуйста, выберите терминал! (Используйте поле выбора, чтобы выбрать)</NoItemChecked>
+<NoItemSelected>Пожалуйста, выберите терминал! (Щелчок мышью выбора строки)</NoItemSelected>
+<!--终端在线状态-->
+<StatusOnline>Интернет</StatusOnline>
+<StatusOffline>Не в сети</StatusOffline>
+<!--命令发送状态-->
+<SendStatusSending>Посылающий</SendStatusSending>
+<SendStatusSuccess>Успех</SendStatusSuccess>
+<SendStatusScreenParamFail>Экран неудачных параметров</SendStatusScreenParamFail>
+<SendStatusConnectFail>Соединение не</SendStatusConnectFail>
+</Messages>
+<chkSelectAll>
+<Caption>Выбирать</Caption>
+</chkSelectAll>
+<LabelGroups>
+<Caption>Группы:</Caption>
+</LabelGroups>
+<btnEditGroup>
+<Caption>Редактировать группу</Caption>
+</btnEditGroup>
+<btnAddGroup>
+<Caption>Добавить группу</Caption>
+</btnAddGroup>
+<btnDeleteGroup>
+<Caption>Удаление группы</Caption>
+</btnDeleteGroup>
+<btnAddDevice>
+<Caption>Добавить терминала</Caption>
+</btnAddDevice>
+<btnEditDevice>
+<Caption>Изменить терминал</Caption>
+</btnEditDevice>
+<btnDeleteDevice>
+<Caption>Снимите крышку клеммной</Caption>
+</btnDeleteDevice>
+<btnUpdateColony>
+<Caption>Получить кластера</Caption>
+</btnUpdateColony>
+<btnSendProtocol>
+<Caption>Выполните команду</Caption>
+</btnSendProtocol>
+<!--提示信息-->
+<MemoNote>
+<Items>
+<Item>Описание:</Item>
+<Item></Item>
+<Item>1, измените терминал, терминал удалить пожалуйста, нажмите на список, чтобы выбрать строку терминала.</Item>
+<Item></Item>
+<Item>Отправить команды выбирают списка выберите терминал.</Item>
+</Items>
+</MemoNote>
+<!--设备列表-->
+<ListViewCards>
+<Columns>
+<Column>Нет.</Column>
+<Column>Интернет</Column>
+<Column>Псевдоним</Column>
+<Column>ID устройства</Column>
+<Column>Карты модели</Column>
+<Column>Ширина экрана</Column>
+<Column>Высота экрана</Column>
+<Column>Тип клетки пластины</Column>
+<Column>Яркость</Column>
+<Column>Таймером</Column>
+<Column>Операционный</Column>
+</Columns>
+</ListViewCards>
+<!--操作选择项-->
+<optRegularSend>
+<Caption>Обычная группа направила</Caption>
+</optRegularSend>
+<optCloneSend>
+<Caption>Клон группа направила</Caption>
+</optCloneSend>
+<optOpenScreen>
+<Caption>Программное обеспечение загрузки</Caption>
+</optOpenScreen>
+<optCloseScreen>
+<Caption>Soft-Off</Caption>
+</optCloseScreen>
+<optTiming>
+<Caption>Синхронизация</Caption>
+</optTiming>
+<optQueryStatus>
+<Caption>Проверить состояние</Caption>
+</optQueryStatus>
+<!--指定主屏幕-->
+<LabelCloneScreens>
+<Caption>Укажите основной экран:</Caption>
+</LabelCloneScreens>
+</TDlgGprsColony>
+<!--集群服务器终端编辑窗口-->
+<TDlgColonyAddDevice>
+<Caption>Терминал редактирование</Caption>
+<LabelDeviceId>
+<Caption>Терминал ID</Caption>
+</LabelDeviceId>
+<LabelScreenName>
+<Caption>Экран</Caption>
+</LabelScreenName>
+<LabelGroupName>
+<Caption>Группы</Caption>
+</LabelGroupName>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Отменить(&amp;C)</Caption>
+</btnCancel>
+</TDlgColonyAddDevice>
+<!--GPRS集群配置 窗口-->
+<TDlgGprsColonySetting>
+<Caption>Конфигурация Cluster Server</Caption>
+<LabelGprsServerIp>
+<Caption>IP сервера:</Caption>
+</LabelGprsServerIp>
+<LabelGprsServerPort>
+<Caption>Порты:</Caption>
+</LabelGprsServerPort>
+<chkEnableAutoFillScreen>
+<Caption>Открытое дополнительного экрана адаптивной главный экран</Caption>
+</chkEnableAutoFillScreen>
+<chkEnableAuthen>
+<Caption>Открытое разрешение для проверки</Caption>
+</chkEnableAuthen>
+<LabelGprsAccount>
+<Caption>Счет</Caption>
+</LabelGprsAccount>
+<LabelGprsPassword>
+<Caption>Пароль</Caption>
+</LabelGprsPassword>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Отменить(&amp;C)</Caption>
+</btnCancel>
+</TDlgGprsColonySetting>
+<!-- GPRS集群组管理 窗口-->
+<TDlgGprsGroup>
+<Caption>GPRS кластерную группу управления</Caption>
+<LabelGroups>
+<Caption>Список групп</Caption>
+</LabelGroups>
+<LabelGroupName>
+<Caption>Название</Caption>
+</LabelGroupName>
+<btnEditGroup>
+<Caption>Изменять</Caption>
+</btnEditGroup>
+<btnAddGroup>
+<Caption>Добавлять</Caption>
+</btnAddGroup>
+<btnDeleteGroup>
+<Caption>Удалять</Caption>
+</btnDeleteGroup>
+<btnSelectAllCards>
+<Caption>Выбрать все</Caption>
+</btnSelectAllCards>
+<btnClearCurrentSelectedCards>
+<Caption>Снять текущее выделение</Caption>
+</btnClearCurrentSelectedCards>
+<btnClearSelectedAllCards>
+<Caption>Очистить все выборы</Caption>
+</btnClearSelectedAllCards>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Отменить(&amp;C)</Caption>
+</btnCancel>
+<LabelCards>
+<Caption>Список отображения</Caption>
+</LabelCards>
+<btnUpdateCards>
+<Caption>Обновить список серверов</Caption>
+</btnUpdateCards>
+<!--设备卡列表-->
+<ListViewCards>
+<Columns>
+<Column>Статус</Column>
+<Column>Название</Column>
+</Columns>
+</ListViewCards>
+</TDlgGprsGroup>
+<!--导入Excel 窗口-->
+<TDlgImportExcel>
+<Caption>В Excel</Caption>
+<LabelSheetNames>
+<Caption>Имя листа</Caption>
+</LabelSheetNames>
+<LabelRowCount>
+<Caption>Число строк</Caption>
+</LabelRowCount>
+<LabelColumnCount>
+<Caption>Число столбцов</Caption>
+</LabelColumnCount>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Отменить(&amp;C)</Caption>
+</btnCancel>
+</TDlgImportExcel>
+<!-- 屏幕参数 窗口-->
+<TdlgMonitorSetting>
+<Caption>Параметр экрана</Caption>
+<Messages>
+<InvalidMonitorSize>Неверный размер экрана!</InvalidMonitorSize>
+<InvalidCardModelInfo>Неверные параметры карты!</InvalidCardModelInfo>
+<InvalidGammaReviseValue>Неверное значение гамма-коррекции!</InvalidGammaReviseValue>
+</Messages>
+<LabelMonitorWidth>
+<Caption>Ширина</Caption>
+</LabelMonitorWidth>
+<LabelMonitorHeight>
+<Caption>Высота</Caption>
+</LabelMonitorHeight>
+<LabelMonitorColor>
+<Caption>Цвет</Caption>
+</LabelMonitorColor>
+<LabelMonitorGray>
+<Caption>Серый</Caption>
+</LabelMonitorGray>
+<LabelCardType>
+<Caption>Модель платы управления</Caption>
+</LabelCardType>
+<LabelCardParams>
+<Caption>Рабочие параметры</Caption>
+</LabelCardParams>
+<LabelBoardType>
+<Caption>Тип клетки пластины</Caption>
+</LabelBoardType>
+<LabelDEPrompt>
+<Caption>OE полярности</Caption>
+</LabelDEPrompt>
+<LabelDEPromptNote>
+<Caption>Пожалуйста, установите джампер крышкой на плате управления</Caption>
+</LabelDEPromptNote>
+<LabelThreshold>
+<Caption>Порог</Caption>
+</LabelThreshold>
+<LabelDotFrequency>
+<Caption>Точка частоты</Caption>
+</LabelDotFrequency>
+<LabelLineBlanking>
+<Caption>Линия гашения</Caption>
+</LabelLineBlanking>
+<LabelInterlaceControl>
+<Caption>Уравнивание</Caption>
+</LabelInterlaceControl>
+<LabelGammaReviseValue>
+<Caption>Гамма-коррекция</Caption>
+</LabelGammaReviseValue>
+<LabelAdvanced>
+<Caption>Менее Расширенные параметры</Caption>
+</LabelAdvanced>
+<btnReadParams>
+<Caption>Считывание параметров</Caption>
+</btnReadParams>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<!--2013.5.4 增加-->
+<chkDotFrequencyAuto>
+<Caption>Автоматический</Caption>
+</chkDotFrequencyAuto>
+<chkLineBlankingAuto>
+<Caption>Автоматический</Caption>
+</chkLineBlankingAuto>
+<!--2013.5.4 增加结束-->
+</TdlgMonitorSetting>
+<!--通讯参数 窗口-->
+<TDlgNetworkSetting>
+<Caption>Параметры связи</Caption>
+<Messages>
+<AskToSelectComPort>Пожалуйста, выберите серийный номер!</AskToSelectComPort>
+<ErrorIp>Неверный IP-адрес!</ErrorIp>
+<UnknownCard>Неизвестный</UnknownCard>
+<LabelTestResult>
+<Success>
+<Caption>Тест связи успешно!</Caption>
+</Success>
+<Fail>
+<Caption>Проверка связи не удалось!</Caption>
+</Fail>
+</LabelTestResult>
+</Messages>
+<!--选择通讯模式页-->
+<LabelNetworkType>
+<Caption>Выберите режим связи</Caption>
+</LabelNetworkType>
+<optSerialPort>
+<Caption>Последовательные порты</Caption>
+</optSerialPort>
+<optNet>
+<Caption>Сетевой порт</Caption>
+</optNet>
+<optDirectNet>
+<Caption>Сетевой порт напрямую связан</Caption>
+</optDirectNet>
+<optGprs>
+<Caption>GPRS или Интернет</Caption>
+</optGprs>
+<!-- 串口参数设置页 -->
+<LabelSerialPortComs>
+<Caption>Номер порта</Caption>
+</LabelSerialPortComs>
+<!-- 网口参数设置页-->
+<LabelNetIp>
+<Caption>IP-адреса</Caption>
+</LabelNetIp>
+<LabelNetPort>
+<Caption>Номер порта</Caption>
+</LabelNetPort>
+<LabelNetGateway>
+<Caption>Шлюз</Caption>
+</LabelNetGateway>
+<LabelNetSubnetMask>
+<Caption>Маска подсети</Caption>
+</LabelNetSubnetMask>
+<LabelEditMACPrompt>
+<Caption>Чтобы изменить МАС-адрес, пожалуйста, загрузите инструменты отладки MAC</Caption>
+</LabelEditMACPrompt>
+<!-- GPRS设置页-->
+<LabelGprsIp>
+<Caption>GPRS IP-адрес сервера</Caption>
+</LabelGprsIp>
+<LabelGprsPort>
+<Caption>Номер порта</Caption>
+</LabelGprsPort>
+<chkGprsEnableAuth>
+<Caption>Открытое разрешение для проверки</Caption>
+</chkGprsEnableAuth>
+<LabelGprsAccount>
+<Caption>Счет</Caption>
+</LabelGprsAccount>
+<LabelGprsPassword>
+<Caption>Пароль</Caption>
+</LabelGprsPassword>
+<!-- 测试结果页-->
+<LabelTestResultType>
+<Caption>Режим связи:</Caption>
+</LabelTestResultType>
+<LabelTestResultPort>
+<Caption>Номер порта:</Caption>
+</LabelTestResultPort>
+<LabelTestResultCard>
+<Caption>Модель платы управления:</Caption>
+</LabelTestResultCard>
+<btnSave>
+<Caption>Сохранить и выйти</Caption>
+</btnSave>
+<btnSetMonitor>
+<Caption>Установите параметры экрана</Caption>
+</btnSetMonitor>
+<!-- 高级参数 -->
+<GroupBoxAdvanceParams>
+<Caption>Расширенные параметры</Caption>
+</GroupBoxAdvanceParams>
+<LabelSerialPortDelay>
+<Caption>Задержка</Caption>
+</LabelSerialPortDelay>
+<LabelSerialPortFrameLength>
+<Caption>Длина рамы</Caption>
+</LabelSerialPortFrameLength>
+<btnTestExit>
+<Caption>Возврат</Caption>
+</btnTestExit>
+<btnChooseTypeNextStep>
+<Caption>Следующий</Caption>
+</btnChooseTypeNextStep>
+<btnSerialPortLastStep>
+<Caption>Предыдущий</Caption>
+</btnSerialPortLastStep>
+<btnTest>
+<Caption>Проверка связи</Caption>
+</btnTest>
+<!--2013.5.5 增加-->
+<LabelDeviceId>
+<Caption>ID устройства</Caption>
+</LabelDeviceId>
+<!--2013.5.5 增加结束-->
+</TDlgNetworkSetting>
+<!-- 新建表格 窗口-->
+<TDlgNewTable>
+<Caption>Новая таблица</Caption>
+<LabelRowCount>
+<Caption>Строка</Caption>
+</LabelRowCount>
+<LabelColCount>
+<Caption>Строка</Caption>
+</LabelColCount>
+<LabelBorderWidth>
+<Caption>Кадр</Caption>
+</LabelBorderWidth>
+<LabelBorderColor>
+<Caption>Цвет</Caption>
+</LabelBorderColor>
+<chkSetCellWidth>
+<Caption>Фиксированная ширина ячейки</Caption>
+</chkSetCellWidth>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Отменить(&amp;C)</Caption>
+</btnCancel>
+</TDlgNewTable>
+<!-- 软件开关屏 窗口-->
+<TDlgProtocolOnOff>
+<Caption>Экран переключения программного обеспечения</Caption>
+<optManual>
+<Caption>Ручной выключатель</Caption>
+</optManual>
+<btnOn>
+<Caption>Открытие экрана</Caption>
+</btnOn>
+<btnOff>
+<Caption>Вне экрана</Caption>
+</btnOff>
+<optAuto>
+<Caption>Таймером</Caption>
+</optAuto>
+<LabelOn>
+<Caption>Время загрузки</Caption>
+</LabelOn>
+<LabelOff>
+<Caption>Время выключения</Caption>
+</LabelOff>
+<btnSave>
+<Caption>&amp;У диска Сохранить</Caption>
+</btnSave>
+<btnOK>
+<Caption>Отправить (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Отменить(&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>Такие, как использование дискового U для регулировки яркости / школа / таймера, установите параметры в экспорте USB</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+<!--2013.5.5 增加-->
+<chkAutoOnOff>
+<Caption>Таймером</Caption>
+</chkAutoOnOff>
+<!--2013.5.5 增加结束-->
+</TDlgProtocolOnOff>
+<!-- 请求型号 窗口-->
+<TDlgProtocolQueryModel>
+<Caption>Запрос модели</Caption>
+<LabelCardMode>
+<Caption>Модель платы управления:</Caption>
+</LabelCardMode>
+<LabelCardVersion>
+<Caption>Аппаратная версия кода:</Caption>
+</LabelCardVersion>
+<LabelCardGuid>
+<Caption>Уникальный серийный номер:</Caption>
+</LabelCardGuid>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+</TDlgProtocolQueryModel>
+<!-- 校时... 窗口-->
+<TDlgProtocolSetDateTime>
+<Caption>Школа ...</Caption>
+<LabelDate>
+<Caption>Дата:</Caption>
+</LabelDate>
+<LabelTime>
+<Caption>Время:</Caption>
+</LabelTime>
+<btnSave>
+<Caption>&amp;У диска Сохранить</Caption>
+</btnSave>
+<btnOK>
+<Caption>Отправить (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Отменить(&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>Такие, как использование дискового U для регулировки яркости / школа / таймера, установите параметры в экспорте USB</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+<!--2013.5.5 增加-->
+<btnGetSystemTime>
+<Caption>Системное время</Caption>
+</btnGetSystemTime>
+<!--2013.5.5 增加结束-->
+</TDlgProtocolSetDateTime>
+<!--亮度调节 窗口 -->
+<TDlgProtocolSetLight>
+<Caption>Регулировка яркости</Caption>
+<optAuto>
+<Caption>Автоматическое определение</Caption>
+</optAuto>
+<optManual>
+<Caption>Ручная регулировка</Caption>
+</optManual>
+<btnSave>
+<Caption>&amp;У диска Сохранить</Caption>
+</btnSave>
+<btnOK>
+<Caption>Отправить (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Отменить(&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>Такие, как использование дискового U для регулировки яркости / школа / таймера, установите параметры в экспорте USB</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+</TDlgProtocolSetLight>
+<!-- 图文编辑 窗口-->
+<TDlgRtfEditor>
+<Caption>Редактор</Caption>
+<Messages>
+<!--RTF编辑对话框 -->
+<!--表格垂直拆分输入框标题-->
+<TableSplitVerticallyCaption>Вертикальный раскол</TableSplitVerticallyCaption>
+<!--表格垂直拆分输入框提示信息-->
+<TableSplitVerticallyPrompt>Разделите количество столбцов:</TableSplitVerticallyPrompt>
+<!--表格水平拆分输入框标题 -->
+<TableSplitHorizontallyCaption>Горизонтальным разъемом</TableSplitHorizontallyCaption>
+<!--表格水平拆分输入框提示信息-->
+<TableSplitHorizontallyPrompt>Разделите количество строк:</TableSplitHorizontallyPrompt>
+<!--提示选择一个表格-->
+<InfoSelectOneTable>Пожалуйста, выберите стол!</InfoSelectOneTable>
+</Messages>
+<ToolButtonLoadFiles>
+<Hint>Добавить файл</Hint>
+</ToolButtonLoadFiles>
+<!-- 文件操作菜单 -->
+<PopupMenuAddFile>
+<Items>
+<Item>Добавить текст</Item>
+<Item>Добавить файл RTF</Item>
+<Item>Добавить изображение</Item>
+<Item>Добавить DOC</Item>
+<Item>Добавить EXCEL</Item>
+</Items>
+</PopupMenuAddFile>
+<ToolButtonSave>
+<Hint>Экономить</Hint>
+</ToolButtonSave>
+<ToolButtonLeft>
+<Hint>Горизонтально слева</Hint>
+</ToolButtonLeft>
+<ToolButtonCenter>
+<Hint>По горизонтали в центре</Hint>
+</ToolButtonCenter>
+<ToolButtonRight>
+<Hint>Горизонтальные право на проживание</Hint>
+</ToolButtonRight>
+<ToolButtonBold>
+<Hint>Смелый</Hint>
+</ToolButtonBold>
+<ToolButtonItalic>
+<Hint>Курсив</Hint>
+</ToolButtonItalic>
+<ToolButtonUnderline>
+<Hint>Подчеркивать</Hint>
+</ToolButtonUnderline>
+<ToolButtonTop>
+<Hint>Выровнены по</Hint>
+</ToolButtonTop>
+<ToolButtonVCenter>
+<Hint>Вертикально по центру</Hint>
+</ToolButtonVCenter>
+<ToolButtonBottom>
+<Hint>Выровнять по нижнему краю</Hint>
+</ToolButtonBottom>
+<!-- 表格-->
+<ToolButtonTable>
+<Hint>Форма</Hint>
+</ToolButtonTable>
+<!--表格操作菜单-->
+<PopupMenuTable>
+<Items>
+<Item>Новая таблица</Item>
+<Item>-</Item>
+<Item>Цвет рамки</Item>
+<Item>Ширина границы</Item>
+<Item>-</Item>
+<Item>
+<Caption>Вставить строку</Caption>
+<Items>
+<Item>Вставляется над</Item>
+<Item>Вставить ниже</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Вставить столбец</Caption>
+<Items>
+<Item>Вставленную в левую</Item>
+<Item>Правая сторона</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Удалять</Caption>
+<Items>
+<Item>Строка</Item>
+<Item>Строка</Item>
+</Items>
+</Item>
+<Item>-</Item>
+<Item>Объединить ячейки</Item>
+<Item>
+<Caption>Разбить ячейку</Caption>
+<Items>
+<Item>Вертикальный раскол</Item>
+<Item>Горизонтальным разъемом</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Возобновление слияния</Caption>
+<Items>
+<Item>Строка</Item>
+<Item>Строка</Item>
+<Item>Все</Item>
+</Items>
+</Item>
+<Item>-</Item>
+<Item>
+<Caption>Вертикальное выравнивание</Caption>
+<Items>
+<Item>Выровнены по</Item>
+<Item>Вертикально по центру</Item>
+<Item>Выровнять по нижнему краю</Item>
+</Items>
+</Item>
+</Items>
+</PopupMenuTable>
+<!-- 编辑菜单 -->
+<PopupMenuEditor>
+<Items>
+<Item>Скопируйте</Item>
+<Item>Придерживаться</Item>
+<Item>Выбирать</Item>
+</Items>
+</PopupMenuEditor>
+<LabelWordSpace>
+<Caption>Расстояние между словами:</Caption>
+</LabelWordSpace>
+<LabelLineSpace>
+<Caption>Интервал между строками:</Caption>
+</LabelLineSpace>
+</TDlgRtfEditor>
+<!-- 扫描方式设置 窗口-->
+<TDlgScanSet>
+<Caption>Режим сканирования параметров</Caption>
+<LabelScanSetName>
+<Caption>Имя конфигурации</Caption>
+</LabelScanSetName>
+<LabelScanType>
+<Caption>Режим сканирования</Caption>
+</LabelScanType>
+<cmbScanType>
+<Items>
+<Item>Статические сканирования</Item>
+<Item>1/2 сканирования</Item>
+<Item>1/4 сканирования</Item>
+<Item>1/8 сканирования</Item>
+<Item>1/16 сканирования</Item>
+</Items>
+</cmbScanType>
+<LabelWrap>
+<Caption>Сложить строки режима</Caption>
+</LabelWrap>
+<cmbWrap>
+<Items>
+<Item>4 линии сгиба</Item>
+<Item>8 линии сгиба</Item>
+<Item>16% в автономном режиме</Item>
+</Items>
+</cmbWrap>
+<LabelWinding>
+<Caption>Обмотка пути</Caption>
+</LabelWinding>
+<cmbWinding>
+<Items>
+<Item>По серпантину</Item>
+<Item>Под серпантином</Item>
+</Items>
+</cmbWinding>
+<LabelScanLines>
+<Caption>Количество строк развертки</Caption>
+</LabelScanLines>
+<cmbScanLines>
+<Items>
+<Item>1 ряд</Item>
+<Item>2 ряда</Item>
+<Item>4 ряда</Item>
+<Item>8 рядов</Item>
+<Item>16 линий на единицу площади</Item>
+</Items>
+</cmbScanLines>
+<LabelStr>
+<Caption>STR полярности</Caption>
+</LabelStr>
+<cmbStr>
+<Items>
+<Item>Положительная полярность</Item>
+<Item>Отрицательный электрод</Item>
+</Items>
+</cmbStr>
+<LabelSecondaryWind>
+<Caption>Вторичная обмотка</Caption>
+</LabelSecondaryWind>
+<cmbSecondaryWind>
+<Items>
+<Item>Нет</Item>
+<Item>Быть</Item>
+</Items>
+</cmbSecondaryWind>
+<LabelDecoding>
+<Caption>138 декодирования</Caption>
+</LabelDecoding>
+<cmbDecoding>
+<Items>
+<Item>138 декодирования</Item>
+<Item>Буквальное высокой</Item>
+<Item>138 декодирования</Item>
+<Item>Буквальное низкой</Item>
+</Items>
+</cmbDecoding>
+<LabelMirror>
+<Caption>Поток данных</Caption>
+</LabelMirror>
+<cmbMirror>
+<Items>
+<Item>Нормальный</Item>
+<Item>Зеркало</Item>
+</Items>
+</cmbMirror>
+<LabelDataPolarity>
+<Caption>Данные полярности</Caption>
+</LabelDataPolarity>
+<cmbDataPolarity>
+<Items>
+<Item>Положительная полярность</Item>
+<Item>Отрицательный электрод</Item>
+</Items>
+</cmbDataPolarity>
+<chkJiaoTi>
+<Caption>Нормальный переменный</Caption>
+</chkJiaoTi>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Отменить(&amp;C)</Caption>
+</btnCancel>
+</TDlgScanSet>
+<!-- 查屏 窗口-->
+<TDlgSearchCard>
+<Caption>Проверьте экран</Caption>
+<!-- 开始查找页-->
+<LabelFinding>
+<Caption>Ищут платы управления ......</Caption>
+</LabelFinding>
+<MemoPrompt>
+<Items>
+<Item>Если вы хотите использовать U диск, чтобы обновить информацию платы управления, вы можете отменить это действие не нужно найти плату управления!</Item>
+</Items>
+</MemoPrompt>
+<btnCancel>
+<Caption>Отменить(&amp;C)</Caption>
+</btnCancel>
+<!-- 查找成功页-->
+<LabelSearchSuccess>
+<Caption>Найти успех!</Caption>
+</LabelSearchSuccess>
+<LabelType>
+<Caption>Режим связи:</Caption>
+</LabelType>
+<LabelPort>
+<Caption>Номер порта:</Caption>
+</LabelPort>
+<LabelCardType>
+<Caption>Модель платы управления:</Caption>
+</LabelCardType>
+<!-- 查找失败页-->
+<LabelSearchFail>
+<Caption>Найти не удалось!</Caption>
+</LabelSearchFail>
+<btnSearchAgain>
+<Caption>Новый поиск</Caption>
+</btnSearchAgain>
+<MemoIncDelayRetry>
+<Items>
+<Item>Система будет автоматически увеличиваться снова откладывается пытаюсь выполнить сканирование всех портов</Item>
+</Items>
+</MemoIncDelayRetry>
+<btnManualSetting>
+<Caption>Обычай</Caption>
+</btnManualSetting>
+<MemoManualSetInfo>
+<Items>
+<Item>Вручную указать параметры связи</Item>
+</Items>
+</MemoManualSetInfo>
+</TDlgSearchCard>
+<!-- 数据发送 窗口-->
+<TDlgSend>
+<Caption>Передача данных</Caption>
+</TDlgSend>
+<!--资源选择窗口 窗口 -->
+<TDlgSystemResources>
+<Caption>Окно выбора ресурса</Caption>
+<Messages>
+<PromptNoSelected>Изображение не выбрано, пожалуйста, нажмите на картинку отбора, или перетащить на несколько элементов.</PromptNoSelected>
+</Messages>
+<btnOK>
+<Caption>Выберите&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Отменить(&amp;C)</Caption>
+</btnCancel>
+</TDlgSystemResources>
+<!--边框宽度 窗口 -->
+<TDlgTableBorderWidth>
+<Caption>Ширина границы</Caption>
+<LabelBorderWidth>
+<Caption>Ширина границы</Caption>
+</LabelBorderWidth>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Отменить(&amp;C)</Caption>
+</btnCancel>
+</TDlgTableBorderWidth>
+<!-- 导入U盘 窗口-->
+<TDlgUsbForm>
+<Caption>Импорт U диска</Caption>
+<Messages>
+<NoUsb>Не Found U диск, вставьте диск U!</NoUsb>
+<MonitorSize>ширина %d , высота %d</MonitorSize>
+<MonitorBoardType>%s，%s </MonitorBoardType>
+<AutoAlertLight>Автоматическая регулировка яркости</AutoAlertLight>
+<ManualAlertLight>Ручная регулировка яркости: Уровень%d</ManualAlertLight>
+<MonitorTimeOnOffDisabled>Не включено.</MonitorTimeOnOffDisabled>
+<MonitorTimeOnOffEnabled>Включена,%s-%s</MonitorTimeOnOffEnabled>
+<OutOfStorageCapacity>Импорт U сбоя диска, размер генерируемого содержимого за пределы карты в оставшейся емкости.</OutOfStorageCapacity>
+<CancelExportToUsb>Отменить импорт U диск.</CancelExportToUsb>
+<UsbNotFound>Не Found U диск, вставьте U диск.</UsbNotFound>
+<ExportToUsbSuccess>Файл успешно импортирована в диске U.</ExportToUsbSuccess>
+<ExportToUsbFail>Импорт U сбоя диска.</ExportToUsbFail>
+<ExportToUsbRunning>Генерируется, пожалуйста, подождите ...</ExportToUsbRunning>
+<ReadUsbFileSystemFail>У диска с файловой системой не признает!</ReadUsbFileSystemFail>
+<InvalidUsbFileSystemFail>Вы можете использовать только FAT или FAT32 отформатированный диск USB!</InvalidUsbFileSystemFail>
+</Messages>
+<LabelSelectUsb>
+<Caption>Выберите диск USB</Caption>
+</LabelSelectUsb>
+<LabelMonitorSize>
+<Caption>Размер экрана:</Caption>
+</LabelMonitorSize>
+<LabelMonitorBoardType>
+<Caption>Тип клетки пластины:</Caption>
+</LabelMonitorBoardType>
+<chkCheckTime>
+<Caption>Школа:</Caption>
+</chkCheckTime>
+<chkAlertLight>
+<Caption>Регулировка яркости:</Caption>
+</chkAlertLight>
+<chkTimeOnOff>
+<Caption>Экран таймера:</Caption>
+</chkTimeOnOff>
+<btnLoadUsbDrivers>
+<Caption>Испытательное оборудование</Caption>
+</btnLoadUsbDrivers>
+<btnExport>
+<Caption>Импорт U диска</Caption>
+</btnExport>
+<btnCancel>
+<Caption>Отменить</Caption>
+</btnCancel>
+<btnExportToLocal>
+<Caption>В местном</Caption>
+</btnExportToLocal>
+<!--2013.1.30 新增-->
+<!--校时-->
+<optManulTiming>
+<Caption>Руководство</Caption>
+</optManulTiming>
+<optAutoTiming>
+<Caption>Системное время</Caption>
+</optAutoTiming>
+<!--亮度调节：-->
+<optManualLight>
+<Caption>Руководство</Caption>
+</optManualLight>
+<optAutoLight>
+<Caption>Автоматический</Caption>
+</optAutoLight>
+<!--定时开关屏：-->
+<LabelOn>
+<Caption>Время загрузки</Caption>
+</LabelOn>
+<LabelOff>
+<Caption>Время выключения</Caption>
+</LabelOff>
+<!--2013.1.30 新增结束-->
+<!--2013.5.4 新增-->
+<LabelUsbFreeSize>
+<Caption>Доступная емкость:</Caption>
+</LabelUsbFreeSize>
+<LabelUsbFileSystem>
+<Caption>Формат файла:</Caption>
+</LabelUsbFileSystem>
+<LabelDateTimeNoChange>
+<Caption>Оставаться без изменений</Caption>
+</LabelDateTimeNoChange>
+<LabelLightNoChange>
+<Caption>Оставаться без изменений</Caption>
+</LabelLightNoChange>
+<LabelOnOffNoChange>
+<Caption>Всегда</Caption>
+</LabelOnOffNoChange>
+<!--2013.5.4 新增结束-->
+</TDlgUsbForm>
+<!-- 时钟区域参数设置界面 -->
+<TFrameOptionClock>
+<!--时钟属性-->
+<GroupBoxRegionInfo>
+<Caption>Часы Свойства</Caption>
+</GroupBoxRegionInfo>
+<optOneLine>
+<Caption>Одноместный-строчный дисплей</Caption>
+</optOneLine>
+<optMultiLine>
+<Caption>Многоканальный дисплей</Caption>
+</optMultiLine>
+<LabelFieldSpace>
+<Caption>Расстояние</Caption>
+</LabelFieldSpace>
+<chkDateWeekExchange>
+<Caption>Поменять местами расположения дата и день недели</Caption>
+</chkDateWeekExchange>
+<chkShowDate>
+<Caption>Отображение даты</Caption>
+</chkShowDate>
+<chkShowWeek>
+<Caption>Шоу в неделю</Caption>
+</chkShowWeek>
+<chkShowTime>
+<Caption>Показать время</Caption>
+</chkShowTime>
+<!-- 时差-->
+<GroupBoxTimeDiff>
+<Caption>Разница во времени</Caption>
+</GroupBoxTimeDiff>
+<LabelDeltHour>
+<Caption>Время</Caption>
+</LabelDeltHour>
+<LabelDeltMinute>
+<Caption>Минута</Caption>
+</LabelDeltMinute>
+<LabelDeltMinute>
+<Caption>Минута</Caption>
+</LabelDeltMinute>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>Фиксированный текст</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>Использование фиксированного текста</Caption>
+</chkEnabledText>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>Начертание</Caption>
+</GroupBoxFont>
+<!--2013.1.30 新增-->
+<!--星期格式-->
+<cmbWeekFormat>
+<Items>
+<Item>китайский</Item>
+<Item>Понедельник</Item>
+<Item>Понедельник</Item>
+</Items>
+</cmbWeekFormat>
+<!--2013.1.30 新增结束-->
+</TFrameOptionClock>
+<!-- 动态背景-->
+<TFrameOptionDynamicBackground>
+<GroupBoxInfo>
+<Caption>Динамического фона</Caption>
+</GroupBoxInfo>
+<chkEnabledDynamicBackground>
+<Caption>Использование динамического фона</Caption>
+</chkEnabledDynamicBackground>
+<LabelDynamicBackgroundStyle>
+<Caption>Стиль</Caption>
+</LabelDynamicBackgroundStyle>
+<LabelDynamicBackgroundSpeed>
+<Caption>Скорость</Caption>
+</LabelDynamicBackgroundSpeed>
+<cmbDynamicBackgroundSpeed>
+<Items>
+<Item>1 (самый быстрый)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (самый медленный)</Item>
+</Items>
+</cmbDynamicBackgroundSpeed>
+<cmbDynamicBackgroundStyle>
+<Items>
+<Item>Кольцо</Item>
+<Item>Пятиконечная звезда</Item>
+<Item>Небо, полное звезд</Item>
+<Item>Снежинка</Item>
+<Item>Стрелки влево и вправо</Item>
+<Item>Вертикальный перекос в</Item>
+<Item>Бары на ходу</Item>
+<Item>Алмаз</Item>
+<Item>Коробка</Item>
+<Item>Круг</Item>
+<Item>Двойная линия сканирования</Item>
+<Item>СКАН</Item>
+</Items>
+</cmbDynamicBackgroundStyle>
+</TFrameOptionDynamicBackground>
+<!-- 炫动字区域参数设置界面-->
+<TFrameOptionFlashText>
+<GroupBoxRegionInfo>
+<Caption>И слово Xuandong Редактировать</Caption>
+</GroupBoxRegionInfo>
+<ToolButtonBold>
+<Hint>Смелый</Hint>
+</ToolButtonBold>
+<ToolButtonItalic>
+<Hint>Курсив</Hint>
+</ToolButtonItalic>
+<ToolButtonUnderline>
+<Hint>Подчеркивать</Hint>
+</ToolButtonUnderline>
+<cmbFontName>
+<Hint>Название шрифта</Hint>
+</cmbFontName>
+<cmbFontSize>
+<Hint>Размер шрифта</Hint>
+</cmbFontSize>
+<cmbFontColor>
+<Hint>Цвет шрифта</Hint>
+</cmbFontColor>
+</TFrameOptionFlashText>
+<!-- 图文区域参数设置界面-->
+<TFrameOptionPicture>
+<Messages>
+<InfoSelectDeletedFile>Пожалуйста, выберите файл, который Вы хотите удалить!</InfoSelectDeletedFile>
+<ConfDeleteFile>Подтвердите, что Вы хотите удалить?</ConfDeleteFile>
+<WarnFileNotExists>Этот файл не существует!</WarnFileNotExists>
+</Messages>
+<GroupBoxRegionInfo>
+<Caption>Список файлов</Caption>
+</GroupBoxRegionInfo>
+<btnAdd>
+<Caption>Добавлять</Caption>
+</btnAdd>
+<btnDelete>
+<Caption>Удалять</Caption>
+</btnDelete>
+<btnUp>
+<Hint>Двигаться</Hint>
+</btnUp>
+<btnDown>
+<Hint>Вниз</Hint>
+</btnDown>
+<!-- 添加菜单-->
+<PopupMenuAddFile>
+<Items>
+<Item>Новый гипертекстовой</Item>
+<Item>Добавить гипертекстовых</Item>
+<Item>Добавить изображение</Item>
+</Items>
+</PopupMenuAddFile>
+<!--2013.5.4 增加-->
+<ToolButtonNewRtf>
+<Hint>Добавить RTF</Hint>
+</ToolButtonNewRtf>
+<ToolButtonAddPicture>
+<Hint>Добавить изображение</Hint>
+</ToolButtonAddPicture>
+<ToolButtonAddGrid>
+<Hint>Добавить таблицу</Hint>
+</ToolButtonAddGrid>
+<ToolButtonAddWord>
+<Hint>Добавить слово</Hint>
+</ToolButtonAddWord>
+<ToolButtonAddExcel>
+<Hint>Добавить EXCEL</Hint>
+</ToolButtonAddExcel>
+<ToolButtonDelete>
+<Hint>Удалять</Hint>
+</ToolButtonDelete>
+<ToolButtonUp>
+<Hint>Двигаться</Hint>
+</ToolButtonUp>
+<ToolButtonDown>
+<Hint>Вниз</Hint>
+</ToolButtonDown>
+<chkShowPath>
+<Caption>Показать путь</Caption>
+</chkShowPath>
+<!--2013.5.4 增加结束-->
+</TFrameOptionPicture>
+<!-- 节目参数设置界面-->
+<TFrameOptionProgram>
+<GroupBoxProgramInfo>
+<Caption>Играть типа</Caption>
+</GroupBoxProgramInfo>
+<optPlayModeNormal>
+<Caption>Порядок игры</Caption>
+</optPlayModeNormal>
+<optPlayModeHeart>
+<Caption>Фиксированной длины играет (играют)</Caption>
+</optPlayModeHeart>
+<optPlayModeSetTime>
+<Caption>Трансляция регулярно</Caption>
+</optPlayModeSetTime>
+<LabelStartDateTime>
+<Caption>Время начала</Caption>
+</LabelStartDateTime>
+<LabelEndDateTime>
+<Caption>Время окончания</Caption>
+</LabelEndDateTime>
+<chkWeekDaysSunday>
+<Caption>Воскресенье</Caption>
+</chkWeekDaysSunday>
+<chkWeekDaysMonday>
+<Caption>Понедельник</Caption>
+</chkWeekDaysMonday>
+<chkWeekDaysTuesday>
+<Caption>Вторник</Caption>
+</chkWeekDaysTuesday>
+<chkWeekDaysWednesday>
+<Caption>Среда</Caption>
+</chkWeekDaysWednesday>
+<chkWeekDaysThurday>
+<Caption>Четверг</Caption>
+</chkWeekDaysThurday>
+<chkWeekDaysFriday>
+<Caption>Пятница</Caption>
+</chkWeekDaysFriday>
+<chkWeekDaysSaturday>
+<Caption>Суббота</Caption>
+</chkWeekDaysSaturday>
+</TFrameOptionProgram>
+<!-- 温度区域参数设置界面-->
+<TFrameOptionTempreture>
+<GroupBoxRegionInfo>
+<Caption>Температурные свойства</Caption>
+</GroupBoxRegionInfo>
+<LabelMode>
+<Caption>Единицы измерения температуры</Caption>
+</LabelMode>
+<LabelDelt>
+<Caption>Коррекция</Caption>
+</LabelDelt>
+<LabelNumberColor>
+<Caption>Цифровая цветная</Caption>
+</LabelNumberColor>
+<LabelUnitColor>
+<Caption>Единица Цвет</Caption>
+</LabelUnitColor>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>Фиксированный текст</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>Использование фиксированного текста</Caption>
+</chkEnabledText>
+<chkTwoLine>
+<Caption>Оберните</Caption>
+</chkTwoLine>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>Начертание</Caption>
+</GroupBoxFont>
+</TFrameOptionTempreture>
+<!--字幕区域参数设置界面 -->
+<TFrameOptionText>
+<GroupBoxRegionInfo>
+<Caption>Редактор субтитров</Caption>
+</GroupBoxRegionInfo>
+<LabelWordSpace>
+<Caption>Расстояние между словами:</Caption>
+</LabelWordSpace>
+</TFrameOptionText>
+<!-- 计时区域参数设置界面-->
+<TFrameOptionTiming>
+<!-- 时钟属性-->
+<GroupBoxRegionInfo>
+<Caption>Часы Свойства</Caption>
+</GroupBoxRegionInfo>
+<optCountDown>
+<Caption>Обратный отсчет</Caption>
+</optCountDown>
+<optCountUp>
+<Caption>Заключается во времени</Caption>
+</optCountUp>
+<LabelDest>
+<Caption>Целевое время</Caption>
+</LabelDest>
+<LabelFormat>
+<Caption>Форма дисплея</Caption>
+</LabelFormat>
+<chkShowDay>
+<Caption>День</Caption>
+</chkShowDay>
+<chkShowHour>
+<Caption>Время</Caption>
+</chkShowHour>
+<chkShowMinute>
+<Caption>Минута</Caption>
+</chkShowMinute>
+<chkShowSecond>
+<Caption>Второй</Caption>
+</chkShowSecond>
+<LabelNumberColor>
+<Caption>Цифровая цветная</Caption>
+</LabelNumberColor>
+<LabelUnitColor>
+<Caption>Единица Цвет</Caption>
+</LabelUnitColor>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>Фиксированный текст</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>Использование фиксированного текста</Caption>
+</chkEnabledText>
+<chkTwoLine>
+<Caption>Оберните</Caption>
+</chkTwoLine>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>Начертание</Caption>
+</GroupBoxFont>
+</TFrameOptionTiming>
+<!-- 表盘盘区域参数设置界面-->
+<TFrameOptionWatch>
+<!-- 表盘属性-->
+<GroupBoxRegionInfo>
+<Caption>Свойства коммутируемого</Caption>
+</GroupBoxRegionInfo>
+<LabelStyle>
+<Caption>Стиль</Caption>
+</LabelStyle>
+<cmbStyle>
+<Items>
+<Item>Традиция</Item>
+</Items>
+</cmbStyle>
+<LabelTickWidth>
+<Caption>Ширина</Caption>
+</LabelTickWidth>
+<LabelTickColor>
+<Caption>Цвет</Caption>
+</LabelTickColor>
+<LabelHourTickWidth>
+<Caption>Весь смысл собственности</Caption>
+</LabelHourTickWidth>
+<Label369TickWidth>
+<Caption>3.6.9 Свойства Точка</Caption>
+</Label369TickWidth>
+<LabelMinuteTickWidth>
+<Caption>Свойства точки</Caption>
+</LabelMinuteTickWidth>
+<LabelLineWidth>
+<Caption>Ширина</Caption>
+</LabelLineWidth>
+<LabelLineColor>
+<Caption>Цвет</Caption>
+</LabelLineColor>
+<LabelHourLineWidth>
+<Caption>По часовой стрелке</Caption>
+</LabelHourLineWidth>
+<LabelMinuteLineWidth>
+<Caption>Минутная стрелка</Caption>
+</LabelMinuteLineWidth>
+<LabelSecondLineWidth>
+<Caption>Секундная стрелка</Caption>
+</LabelSecondLineWidth>
+<!-- 时差-->
+<GroupBoxTimeDiff>
+<Caption>Разница во времени</Caption>
+</GroupBoxTimeDiff>
+<LabelDeltHour>
+<Caption>Время</Caption>
+</LabelDeltHour>
+<LabelDeltMinute>
+<Caption>Минута</Caption>
+</LabelDeltMinute>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>Фиксированный текст</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>Использование фиксированного текста</Caption>
+</chkEnabledText>
+<btnTextDown>
+<Hint>Вниз</Hint>
+</btnTextDown>
+<btnTextLeft>
+<Hint>Левая</Hint>
+</btnTextLeft>
+<btnTextCenter>
+<Hint>Центр</Hint>
+</btnTextCenter>
+<btnTextRight>
+<Hint>Сдвигом вправо</Hint>
+</btnTextRight>
+<btnTextUp>
+<Hint>Двигаться</Hint>
+</btnTextUp>
+</TFrameOptionWatch>
+<!--表格编辑主界面-->
+<CGridEditorMainForm>
+<Caption>Редактирование таблиц</Caption>
+<!--单色-->
+<PopupMenuSingleColor>
+<Items>
+<Item>Нет</Item>
+<Item>Красный</Item>
+</Items>
+</PopupMenuSingleColor>
+<!--双色-->
+<PopupMenuTwoColor>
+<Items>
+<Item>Нет</Item>
+<Item>Красный</Item>
+<Item>Желтый</Item>
+<Item>Зеленый</Item>
+</Items>
+</PopupMenuTwoColor>
+</CGridEditorMainForm>
+<!--表格编辑插入表格界面-->
+<CGridEditorInsertCells>
+<Caption>Добавить таблицу</Caption>
+<LabelType>
+<Caption>Тип:</Caption>
+</LabelType>
+<optTypeRow>
+<Caption>Строка</Caption>
+</optTypeRow>
+<optTypeCol>
+<Caption>Строка</Caption>
+</optTypeCol>
+<LabelCount>
+<Caption>Количество:</Caption>
+</LabelCount>
+<LabelPosition>
+<Caption>Расположение:</Caption>
+</LabelPosition>
+<optPositionCurrent>
+<Caption>Текущий</Caption>
+</optPositionCurrent>
+<optPositionEnd>
+<Caption>Последний</Caption>
+</optPositionEnd>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Отменить(&amp;C)</Caption>
+</btnCancel>
+</CGridEditorInsertCells>
+<!--表格编辑删除单元格界面-->
+<CGridEditorDeleteCells>
+<Caption>Удалить ячейки</Caption>
+<optTypeRow>
+<Caption>Вся линейка</Caption>
+</optTypeRow>
+<optTypeCol>
+<Caption>Целые колонки</Caption>
+</optTypeCol>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Отменить(&amp;C)</Caption>
+</btnCancel>
+</CGridEditorDeleteCells>
+</Languages>

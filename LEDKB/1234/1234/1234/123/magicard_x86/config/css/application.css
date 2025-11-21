@@ -1,0 +1,7 @@
+#addLedcardPane{
+     /*-fx-effect: dropshadow(three-pass-box, gray, 10, 0, 2, 2); 
+    -fx-background-color: derive(cadetblue, -20%); */
+    -fx-background-insets:3;
+    -fx-background-color: white;  
+    -fx-effect: dropshadow( three-pass-box , black , 5, 0.0 , 0 , 1 ); 
+}

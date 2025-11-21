@@ -1,0 +1,242 @@
+.root {
+  -fx-opacity: 1;
+}
+
+#superPane{
+   -fx-background-insets: 10;
+   -fx-background-color: white;
+   -fx-background-radius: 7;
+   -fx-effect:dropshadow(three-pass-box, black, 5, 0.5, 0, 0);
+}
+
+#superVBox{
+	-fx-background-insets: 10;
+	  -fx-background-radius: 7;
+   -fx-background-color: #1C1D20;
+}
+
+#headerHBox{
+	-fx-background-insets: 10 10 0 10;
+	  -fx-background-radius: 5 5 0 0;
+	 -fx-background-color: #1C1D20;
+}
+
+#bodyHBox{
+	-fx-background-insets: 0 10 0 10;
+	-fx-background-color: #1C1D20;
+}
+
+#headerLeftPane{
+	-fx-background-insets: 10 0 0 10;
+	-fx-background-radius: 5 0 0 0;
+	-fx-border-width:0 2 0 0;
+	-fx-border-color:#252629;
+	-fx-border-insets: 10 0 0 10;
+	
+}
+
+#headerMiddlePane{
+	-fx-background-insets: 10 0 0 0;
+	-fx-border-width:0 1 0 1;
+	-fx-border-color:#343436;
+	-fx-border-insets: 10 0 0 0;
+}
+
+#headerRightPane{
+	-fx-background-insets: 10 10 0 0;
+	-fx-background-radius: 0 5 0 0;
+	
+    -fx-border-width:0 0 0 2;
+	-fx-border-color:#252629;
+	-fx-border-insets: 10 10 0 0;
+}
+
+#footerHBox{
+	-fx-background-insets: 0 10 10 10;
+	-fx-background-color: #2D2E30;
+	-fx-background-radius: 0 0 5 5;
+}
+#footerReminder{
+	-fx-background-insets: 0 10 10 10;
+	-fx-background-radius: 0 0 5 5;
+}
+#footerReminderBlank,#footerReminderResize{
+	-fx-background-insets: 0 10 10 10;
+	-fx-background-radius: 0 0 5 5;
+}
+
+#logoPane{
+	-fx-border-width:0 2 0 0;
+	-fx-border-color:#2E2F31;
+}
+
+#minAndMax{
+	-fx-border-width:0 0 0 2;
+	-fx-border-color:#2E2F31;
+}
+
+#logoPaneSeparator{
+    -fx-halignment:left;
+}
+
+
+/*************************** header */
+#logoImage{
+	-fx-fill:#727783;
+	-fx-font-family: 'Microsoft YaHei';
+	-fx-font-weight:bold;
+}
+
+#headerMiddlePaneUserName{
+	-fx-fill:#656565;
+	-fx-font-family: 'Microsoft YaHei';
+	-fx-font-weight:bold;
+	-fx-font-size:14;
+}
+
+#headerMiddlePaneUserDown{
+	-fx-fill:#656565;
+}
+#styleFont,#msgFont,#settingFont{
+	-fx-fill:#656565;
+
+}
+
+#headerMiddlePaneStyle:hover,#headerMiddlePaneMsg:hover,#headerMiddlePaneSetting:hover{
+	-fx-background-color:#B9B9B9;
+	-fx-cursor:hand;
+	
+}
+
+#msgCircleFont{
+	-fx-fill:#FF6565;
+}
+
+#msgNumberFont{
+	-fx-fill:white;
+	-fx-font-size:14;
+}
+#headerMiddlePaneUserDown:hover{
+	-fx-cursor:hand;
+}
+
+#headerMiddlePaneRightHBoxzLeftImage,#headerPicture,#headerPictures{
+	-fx-background-radius: 50%;
+}
+
+#minProcess,#maxProcess,#closeProcess{
+
+	-fx-fill:#727783;
+	-fx-size:20;
+}
+
+#minProcessPane:hover,#maxProcessPane:hover{
+	-fx-background-color:#B9B9B9;
+	-fx-cursor:hand;
+}
+#closeProcessPane:hover{
+	-fx-background-color:#FF6565;
+	-fx-cursor:hand;
+}
+
+/***************footer */
+#footerReminderTrumpet{
+	-fx-fill:#E58B03;
+	-fx-font-size:20;
+}
+#footerReminderText{
+	-fx-font-family: 'Microsoft YaHei';
+	-fx-font-size:12;
+	-fx-fill:#E58B03;
+	-fx-underline:true;
+}
+#footerReminderText:hover{
+	-fx-cursor:hand;
+}
+
+#footerReminderResizeFont{
+	-fx-fill:#A0A1A2;
+}
+
+/*############## skin############# */
+#styleColorOne,#styleColorTwo,#styleColorThree{
+	-fx-font-family: 'Microsoft YaHei';
+	-fx-fill:#E5E5E5;
+	-fx-font-size:14;
+	-fx-font-weight:bold;
+
+}
+
+#styleChoiceHBoxThreePaneOne,#styleChoiceHBoxOnePaneOne,#styleChoiceHBoxOnePaneTwo,
+#styleChoiceHBoxThreePaneTwo,#styleChoiceHBoxThreePaneThree,#styleChoiceHBoxOnePaneThree{
+	-fx-background-radius: 5;
+}
+#styleChoiceHBoxThreePaneOne:hover,#styleChoiceHBoxOnePaneOne:hover,#styleChoiceHBoxOnePaneTwo:hover,
+#styleChoiceHBoxThreePaneTwo:hover,#styleChoiceHBoxThreePaneThree:hover,#styleChoiceHBoxOnePaneThree:hover{
+	-fx-cursor:hand;
+	-fx-background-radius: 5;
+   -fx-effect:dropshadow(three-pass-box, #8B0564, 5, 0.5, 0, 0);
+}
+
+#styleChoiceHBoxOnePaneOne{
+	-fx-background-radius: 5;
+    -fx-effect:dropshadow(three-pass-box, #F203C6, 5, 0.5, 0, 0);
+}
+#styleChoicePane{
+	-fx-background-color: #E5E5E5;
+}
+#dropDownTriangle{
+	-fx-fill:#E5E5E5;
+}
+#styleChoiceHBoxOnePaneOne{
+	-fx-background-color:#202125;
+}
+#styleChoiceHBoxOnePaneTwo{
+	-fx-background-color:#0A9B98;
+}
+#styleChoiceHBoxOnePaneThree{
+	-fx-background-color:#EB4747;
+}
+#styleChoiceHBoxThreePaneOne{
+	-fx-background-color:#7C03C1;
+}
+#styleChoiceHBoxThreePaneTwo{
+	-fx-background-color:#054390;
+}
+#styleChoiceHBoxThreePaneThree{
+	-fx-background-color:gray;
+}
+
+/*************message****************/
+#messagePane{
+	-fx-background-color: #E5E5E5;
+}
+#dropDownTriangle4Message{
+	-fx-fill:#E5E5E5;
+	
+}
+#messageHBox{
+	-fx-background-color: #D1D1D1;
+}
+#messagePicture{
+	-fx-background-radius: 5;
+}
+#messageUserName,#minutesText,#messageTopic,#allAlerts{
+	-fx-font-family: 'Microsoft YaHei';
+	-fx-fill:#5A738E;
+	-fx-font-size:15;
+}
+
+/* 
+#messageUserName:hover,#minutesText:hover,#messageTopic:hover,#allAlerts:hover{
+	-fx-fill:black;
+
+}
+*/
+#minutesText{
+	-fx-font-weight:bold;
+
+}
+#allAlerts{
+	-fx-font-weight:bold;
+}

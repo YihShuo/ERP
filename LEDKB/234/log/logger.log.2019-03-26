@@ -1,0 +1,435 @@
+2019-03-26 18:06:33,860 - lemonnt
+2019-03-26 18:06:33,888 - false
+2019-03-26 18:06:34,081 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-03-26 18:06:34,094 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-03-26 18:06:34,100 - Obtain the parameters  : [DIGITNUMBER]
+2019-03-26 18:06:34,108 - Obtain the env parameters  : [4]
+2019-03-26 18:06:34,255 - Success to query records [1]
+2019-03-26 18:06:34,261 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-03-26 18:06:34,605 - Obtain the parameters  : [SYSTEMNAME]
+2019-03-26 18:06:34,612 - Obtain the parameters  : [null]
+2019-03-26 18:06:34,768 - Obtain the parameters  : [MONITORINTRVAL]
+2019-03-26 18:06:34,775 - Obtain the parameters  : [null]
+2019-03-26 18:06:34,780 - Monitor Interval : [10s]
+2019-03-26 18:06:37,080 - Success to query records [2]
+2019-03-26 18:06:37,102 - Success to query records [2]
+2019-03-26 18:06:37,104 - start : 0, end : 2
+2019-03-26 18:06:41,900 - The name of plugin is [DBPlugin]
+2019-03-26 18:06:41,901 - The name of pluginType is [db]
+2019-03-26 18:06:41,910 - Success to query records [1]
+2019-03-26 18:06:42,853 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:06:42,872 - Obtain the parameters  : [SENDDELAY]
+2019-03-26 18:06:42,877 - Obtain the parameters  : [null]
+2019-03-26 18:06:43,076 - Success to get SqlsessionFactory [webDB]
+2019-03-26 18:06:43,204 - It's going to parsing : config/properties/configuration.properties
+2019-03-26 18:06:43,206 - It has been parsed ,following [config/properties/configuration.properties]
+2019-03-26 18:06:43,224 - {"pluginName":"DBPlugin"}
+2019-03-26 18:06:43,236 - Success to query records [1]
+2019-03-26 18:06:43,245 - Success to query records [1]
+2019-03-26 18:06:43,254 - Success to query records [1]
+2019-03-26 18:06:53,257 - Plugin name : [DBPlugin]
+2019-03-26 18:06:53,269 - Success to query records [1]
+2019-03-26 18:06:53,293 - Success to query records [1]
+2019-03-26 18:06:55,687 - The name of plugin is [DBPlugin]
+2019-03-26 18:06:55,688 - The name of pluginType is [db]
+2019-03-26 18:06:56,646 - Force stop the timeExecute []
+2019-03-26 18:09:44,638 - lemonnt
+2019-03-26 18:09:44,667 - false
+2019-03-26 18:09:44,875 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-03-26 18:09:44,886 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-03-26 18:09:44,893 - Obtain the parameters  : [DIGITNUMBER]
+2019-03-26 18:09:44,900 - Obtain the env parameters  : [4]
+2019-03-26 18:09:45,054 - Success to query records [1]
+2019-03-26 18:09:45,057 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-03-26 18:09:45,404 - Obtain the parameters  : [SYSTEMNAME]
+2019-03-26 18:09:45,409 - Obtain the parameters  : [null]
+2019-03-26 18:09:45,536 - Obtain the parameters  : [MONITORINTRVAL]
+2019-03-26 18:09:45,542 - Obtain the parameters  : [null]
+2019-03-26 18:09:45,546 - Monitor Interval : [10s]
+2019-03-26 18:09:47,956 - Success to query records [2]
+2019-03-26 18:09:47,982 - Success to query records [2]
+2019-03-26 18:09:47,984 - start : 0, end : 2
+2019-03-26 18:09:49,395 - The name of plugin is [DBPlugin]
+2019-03-26 18:09:49,395 - The name of pluginType is [db]
+2019-03-26 18:09:49,404 - Success to query records [1]
+2019-03-26 18:09:50,286 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:09:50,306 - Obtain the parameters  : [SENDDELAY]
+2019-03-26 18:09:50,312 - Obtain the parameters  : [null]
+2019-03-26 18:09:50,540 - Success to get SqlsessionFactory [webDB]
+2019-03-26 18:09:50,691 - It's going to parsing : config/properties/configuration.properties
+2019-03-26 18:09:50,693 - It has been parsed ,following [config/properties/configuration.properties]
+2019-03-26 18:09:50,757 - {"pluginName":"DBPlugin"}
+2019-03-26 18:09:50,773 - Success to query records [1]
+2019-03-26 18:09:50,786 - Success to query records [1]
+2019-03-26 18:09:50,797 - Success to query records [1]
+2019-03-26 18:10:00,800 - Plugin name : [DBPlugin]
+2019-03-26 18:10:00,807 - Success to query records [1]
+2019-03-26 18:10:00,815 - Success to query records [1]
+2019-03-26 18:10:02,816 - The name of plugin is [DBPlugin]
+2019-03-26 18:10:02,816 - The name of pluginType is [db]
+2019-03-26 18:10:04,202 - Force stop the timeExecute []
+2019-03-26 18:10:31,152 - Success to query records [1]
+2019-03-26 18:13:23,672 - lemonnt
+2019-03-26 18:13:23,701 - false
+2019-03-26 18:13:23,906 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-03-26 18:13:23,917 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-03-26 18:13:23,927 - Obtain the parameters  : [DIGITNUMBER]
+2019-03-26 18:13:23,934 - Obtain the env parameters  : [4]
+2019-03-26 18:13:24,115 - Success to query records [1]
+2019-03-26 18:13:24,128 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-03-26 18:13:24,466 - Obtain the parameters  : [SYSTEMNAME]
+2019-03-26 18:13:24,472 - Obtain the parameters  : [null]
+2019-03-26 18:13:24,606 - Obtain the parameters  : [MONITORINTRVAL]
+2019-03-26 18:13:24,612 - Obtain the parameters  : [null]
+2019-03-26 18:13:24,617 - Monitor Interval : [10s]
+2019-03-26 18:13:36,733 - Success to query records [2]
+2019-03-26 18:13:36,769 - Success to query records [2]
+2019-03-26 18:13:36,771 - start : 0, end : 2
+2019-03-26 18:13:39,004 - The name of plugin is [DBPlugin]
+2019-03-26 18:13:39,005 - The name of pluginType is [db]
+2019-03-26 18:13:39,012 - Success to query records [1]
+2019-03-26 18:13:40,324 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:13:40,345 - Obtain the parameters  : [SENDDELAY]
+2019-03-26 18:13:40,353 - Obtain the parameters  : [null]
+2019-03-26 18:13:40,601 - Success to get SqlsessionFactory [webDB]
+2019-03-26 18:13:40,755 - It's going to parsing : config/properties/configuration.properties
+2019-03-26 18:13:40,758 - It has been parsed ,following [config/properties/configuration.properties]
+2019-03-26 18:13:40,781 - {"pluginName":"DBPlugin"}
+2019-03-26 18:13:40,792 - Success to query records [1]
+2019-03-26 18:13:40,802 - Success to query records [1]
+2019-03-26 18:13:40,816 - Success to query records [1]
+2019-03-26 18:13:50,823 - Plugin name : [DBPlugin]
+2019-03-26 18:13:50,831 - Success to query records [1]
+2019-03-26 18:13:50,839 - Success to query records [1]
+2019-03-26 18:13:53,337 - The name of plugin is [DBPlugin]
+2019-03-26 18:13:53,338 - The name of pluginType is [db]
+2019-03-26 18:13:54,813 - Force stop the timeExecute []
+2019-03-26 18:16:24,422 - lemonnt
+2019-03-26 18:16:24,454 - false
+2019-03-26 18:16:24,718 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-03-26 18:16:24,731 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-03-26 18:16:24,735 - Obtain the parameters  : [DIGITNUMBER]
+2019-03-26 18:16:24,743 - Obtain the env parameters  : [4]
+2019-03-26 18:16:24,905 - Success to query records [1]
+2019-03-26 18:16:24,906 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-03-26 18:16:25,310 - Obtain the parameters  : [SYSTEMNAME]
+2019-03-26 18:16:25,316 - Obtain the parameters  : [null]
+2019-03-26 18:16:25,472 - Obtain the parameters  : [MONITORINTRVAL]
+2019-03-26 18:16:25,481 - Obtain the parameters  : [null]
+2019-03-26 18:16:25,486 - Monitor Interval : [10s]
+2019-03-26 18:16:27,891 - Success to query records [2]
+2019-03-26 18:16:27,928 - Success to query records [2]
+2019-03-26 18:16:27,931 - start : 0, end : 2
+2019-03-26 18:16:30,059 - The name of plugin is [DBPlugin]
+2019-03-26 18:16:30,059 - The name of pluginType is [db]
+2019-03-26 18:16:30,067 - Success to query records [1]
+2019-03-26 18:16:31,163 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:16:31,182 - Obtain the parameters  : [SENDDELAY]
+2019-03-26 18:16:31,187 - Obtain the parameters  : [null]
+2019-03-26 18:16:31,433 - Success to get SqlsessionFactory [webDB]
+2019-03-26 18:16:31,616 - ----------------------------------------------------222
+2019-03-26 18:16:31,637 - It's going to parsing : config/properties/configuration.properties
+2019-03-26 18:16:31,645 - It has been parsed ,following [config/properties/configuration.properties]
+2019-03-26 18:16:31,754 - {"pluginName":"DBPlugin"}
+2019-03-26 18:16:31,767 - Success to query records [1]
+2019-03-26 18:16:31,784 - Success to query records [1]
+2019-03-26 18:16:31,793 - Success to query records [1]
+2019-03-26 18:16:41,795 - Plugin name : [DBPlugin]
+2019-03-26 18:16:41,802 - Success to query records [1]
+2019-03-26 18:16:41,811 - Success to query records [1]
+2019-03-26 18:16:45,943 - The name of plugin is [DBPlugin]
+2019-03-26 18:16:45,944 - The name of pluginType is [db]
+2019-03-26 18:16:46,800 - Force stop the timeExecute []
+2019-03-26 18:19:46,424 - lemonnt
+2019-03-26 18:19:46,453 - false
+2019-03-26 18:19:46,649 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-03-26 18:19:46,659 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-03-26 18:19:46,663 - Obtain the parameters  : [DIGITNUMBER]
+2019-03-26 18:19:46,670 - Obtain the env parameters  : [4]
+2019-03-26 18:19:46,803 - Success to query records [1]
+2019-03-26 18:19:46,804 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-03-26 18:19:47,128 - Obtain the parameters  : [SYSTEMNAME]
+2019-03-26 18:19:47,135 - Obtain the parameters  : [null]
+2019-03-26 18:19:47,288 - Obtain the parameters  : [MONITORINTRVAL]
+2019-03-26 18:19:47,297 - Obtain the parameters  : [null]
+2019-03-26 18:19:47,306 - Monitor Interval : [10s]
+2019-03-26 18:19:49,597 - Success to query records [2]
+2019-03-26 18:19:49,629 - Success to query records [2]
+2019-03-26 18:19:49,630 - start : 0, end : 2
+2019-03-26 18:19:51,484 - The name of plugin is [DBPlugin]
+2019-03-26 18:19:51,485 - The name of pluginType is [db]
+2019-03-26 18:19:51,492 - Success to query records [1]
+2019-03-26 18:19:52,713 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:19:52,731 - Obtain the parameters  : [SENDDELAY]
+2019-03-26 18:19:52,736 - Obtain the parameters  : [null]
+2019-03-26 18:19:52,922 - Success to get SqlsessionFactory [webDB]
+2019-03-26 18:19:55,716 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:19:57,326 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:19:57,853 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:19:58,235 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:19:58,450 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:19:58,641 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:19:58,823 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:19:59,000 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:19:59,180 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:19:59,384 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:19:59,597 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:20:03,782 - The name of plugin is [DBPlugin]
+2019-03-26 18:20:03,782 - The name of pluginType is [db]
+2019-03-26 18:20:03,789 - Success to query records [1]
+2019-03-26 18:20:05,166 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:20:05,593 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:20:05,784 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:20:06,020 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:20:30,377 - The name of plugin is [DBPlugin]
+2019-03-26 18:20:30,377 - The name of pluginType is [db]
+2019-03-26 18:20:30,383 - Success to query records [1]
+2019-03-26 18:20:31,324 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:20:31,942 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:20:32,144 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:20:32,335 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:20:32,538 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:20:32,729 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:20:32,921 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:20:33,089 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:20:33,258 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:20:33,415 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:20:33,618 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:22:56,983 - lemonnt
+2019-03-26 18:22:57,010 - false
+2019-03-26 18:22:57,208 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-03-26 18:22:57,218 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-03-26 18:22:57,222 - Obtain the parameters  : [DIGITNUMBER]
+2019-03-26 18:22:57,229 - Obtain the env parameters  : [4]
+2019-03-26 18:22:57,362 - Success to query records [1]
+2019-03-26 18:22:57,364 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-03-26 18:22:57,702 - Obtain the parameters  : [SYSTEMNAME]
+2019-03-26 18:22:57,709 - Obtain the parameters  : [null]
+2019-03-26 18:22:57,859 - Obtain the parameters  : [MONITORINTRVAL]
+2019-03-26 18:22:57,867 - Obtain the parameters  : [null]
+2019-03-26 18:22:57,872 - Monitor Interval : [10s]
+2019-03-26 18:23:00,104 - Success to query records [2]
+2019-03-26 18:23:00,130 - Success to query records [2]
+2019-03-26 18:23:00,132 - start : 0, end : 2
+2019-03-26 18:23:01,560 - The name of plugin is [DBPlugin]
+2019-03-26 18:23:01,561 - The name of pluginType is [db]
+2019-03-26 18:23:01,569 - Success to query records [1]
+2019-03-26 18:23:02,587 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:23:02,609 - Obtain the parameters  : [SENDDELAY]
+2019-03-26 18:23:02,618 - Obtain the parameters  : [null]
+2019-03-26 18:23:02,891 - Success to get SqlsessionFactory [webDB]
+2019-03-26 18:23:03,100 - ----------------------------------------------------222
+2019-03-26 18:23:03,122 - It's going to parsing : /C:/Users/gavli/Desktop/magicard/magicard_x64-original/magicard_x64/plugin/config/config/properties/configuration.properties
+2019-03-26 18:23:03,188 - It has been parsed ,following [/C:/Users/gavli/Desktop/magicard/magicard_x64-original/magicard_x64/plugin/config/config/properties/configuration.properties]
+2019-03-26 18:23:03,333 - {"pluginName":"DBPlugin"}
+2019-03-26 18:23:03,345 - Success to query records [1]
+2019-03-26 18:23:03,354 - Success to query records [1]
+2019-03-26 18:23:03,362 - Success to query records [1]
+2019-03-26 18:23:13,363 - Plugin name : [DBPlugin]
+2019-03-26 18:23:13,369 - Success to query records [1]
+2019-03-26 18:23:13,376 - Success to query records [1]
+2019-03-26 18:23:19,617 - The name of plugin is [DBPlugin]
+2019-03-26 18:23:19,617 - The name of pluginType is [db]
+2019-03-26 18:23:20,789 - Force stop the timeExecute []
+2019-03-26 18:26:34,827 - lemonnt
+2019-03-26 18:26:34,851 - false
+2019-03-26 18:26:35,007 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-03-26 18:26:35,016 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-03-26 18:26:35,020 - Obtain the parameters  : [DIGITNUMBER]
+2019-03-26 18:26:35,025 - Obtain the env parameters  : [4]
+2019-03-26 18:26:35,152 - Success to query records [1]
+2019-03-26 18:26:35,153 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-03-26 18:26:35,431 - Obtain the parameters  : [SYSTEMNAME]
+2019-03-26 18:26:35,438 - Obtain the parameters  : [null]
+2019-03-26 18:26:35,560 - Obtain the parameters  : [MONITORINTRVAL]
+2019-03-26 18:26:35,568 - Obtain the parameters  : [null]
+2019-03-26 18:26:35,572 - Monitor Interval : [10s]
+2019-03-26 18:26:37,630 - Success to query records [2]
+2019-03-26 18:26:37,653 - Success to query records [2]
+2019-03-26 18:26:37,654 - start : 0, end : 2
+2019-03-26 18:26:38,844 - The name of plugin is [DBPlugin]
+2019-03-26 18:26:38,844 - The name of pluginType is [db]
+2019-03-26 18:26:38,852 - Success to query records [1]
+2019-03-26 18:26:39,882 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:26:39,903 - Obtain the parameters  : [SENDDELAY]
+2019-03-26 18:26:39,909 - Obtain the parameters  : [null]
+2019-03-26 18:26:40,123 - Success to get SqlsessionFactory [webDB]
+2019-03-26 18:26:40,259 - ----------------------------------------------------222
+2019-03-26 18:26:40,266 - It's going to parsing : /C:/Users/gavli/Desktop/magicard/magicard_x64-original/magicard_x64/plugin/config/properties/configuration.properties
+2019-03-26 18:26:40,267 - It has been parsed ,following [/C:/Users/gavli/Desktop/magicard/magicard_x64-original/magicard_x64/plugin/config/properties/configuration.properties]
+2019-03-26 18:26:40,271 - It has been loaded ,following : [/C:/Users/gavli/Desktop/magicard/magicard_x64-original/magicard_x64/plugin/config/properties/configuration.properties]
+2019-03-26 18:26:40,278 - {"pluginName":"DBPlugin","properties":{"dotBit":"#.00","webDB.connection.password":"pass","webDB.connection.driverClassName":"oracle.jdbc.driver.OracleDriver","showElements":"C,Mn,Si,P,S,Ni,Cr,Cu,Mo,V,Ti,Al,Nb,As,Sn,Pb,Sb,Bi","webDB.connection.username":"test","webDB.connection.url":"jdbc:oracle:thin:@//10.224.38.97:2702/frwd.webex.com"}}
+2019-03-26 18:26:40,290 - Success to query records [1]
+2019-03-26 18:26:40,300 - Success to query records [1]
+2019-03-26 18:26:40,309 - Success to query records [1]
+2019-03-26 18:26:50,311 - Plugin name : [DBPlugin]
+2019-03-26 18:26:50,316 - Success to query records [1]
+2019-03-26 18:26:50,325 - Success to query records [1]
+2019-03-26 18:26:54,583 - The name of plugin is [DBPlugin]
+2019-03-26 18:26:54,584 - The name of pluginType is [db]
+2019-03-26 18:26:55,451 - Force stop the timeExecute []
+2019-03-26 18:29:07,417 - The name of plugin is [DBPlugin]
+2019-03-26 18:29:07,418 - The name of pluginType is [db]
+2019-03-26 18:29:07,424 - Success to query records [1]
+2019-03-26 18:29:09,240 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:29:09,260 - ----------------------------------------------------222
+2019-03-26 18:29:09,261 - It's going to parsing : /C:/Users/gavli/Desktop/magicard/magicard_x64-original/magicard_x64/plugin/config/properties/configuration.properties
+2019-03-26 18:29:09,261 - It has been parsed ,following [/C:/Users/gavli/Desktop/magicard/magicard_x64-original/magicard_x64/plugin/config/properties/configuration.properties]
+2019-03-26 18:29:09,265 - It has been loaded ,following : [/C:/Users/gavli/Desktop/magicard/magicard_x64-original/magicard_x64/plugin/config/properties/configuration.properties]
+2019-03-26 18:29:09,265 - {"pluginName":"DBPlugin","properties":{"dotBit":"#.00","webDB.connection.password":"pass","webDB.connection.driverClassName":"oracle.jdbc.driver.OracleDriver","showElements":"C,Mn,Si,P,S,Ni,Cr,Cu,Mo,V,Ti,Al,Nb,As,Sn,Pb,Sb,Bi","webDB.connection.username":"test","webDB.connection.url":"jdbc:oracle:thin:@//10.224.38.97:2702/frwd.webex.com"}}
+2019-03-26 18:29:19,267 - Plugin name : [DBPlugin]
+2019-03-26 18:29:22,616 - The name of plugin is [DBPlugin]
+2019-03-26 18:29:22,617 - The name of pluginType is [db]
+2019-03-26 18:29:23,675 - Force stop the timeExecute []
+2019-03-26 18:33:07,100 - lemonnt
+2019-03-26 18:33:07,132 - false
+2019-03-26 18:33:07,318 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-03-26 18:33:07,329 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-03-26 18:33:07,334 - Obtain the parameters  : [DIGITNUMBER]
+2019-03-26 18:33:07,340 - Obtain the env parameters  : [4]
+2019-03-26 18:33:07,478 - Success to query records [1]
+2019-03-26 18:33:07,480 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-03-26 18:33:07,795 - Obtain the parameters  : [SYSTEMNAME]
+2019-03-26 18:33:07,801 - Obtain the parameters  : [null]
+2019-03-26 18:33:07,944 - Obtain the parameters  : [MONITORINTRVAL]
+2019-03-26 18:33:07,951 - Obtain the parameters  : [null]
+2019-03-26 18:33:07,956 - Monitor Interval : [10s]
+2019-03-26 18:33:10,194 - Success to query records [2]
+2019-03-26 18:33:10,215 - Success to query records [2]
+2019-03-26 18:33:10,217 - start : 0, end : 2
+2019-03-26 18:33:13,441 - Success to query records [1]
+2019-03-26 18:33:15,839 - Success to query records [1]
+2019-03-26 18:33:15,859 - Success to query records [1]
+2019-03-26 18:33:15,862 - start : 0, end : 1
+2019-03-26 18:33:19,750 - Success to query records [1]
+2019-03-26 18:33:22,308 - start : 0, end : 0
+2019-03-26 18:33:46,324 - Success save the system setting
+2019-03-26 18:33:48,182 - Success to query records [1]
+2019-03-26 18:33:48,190 - Success to query records [1]
+2019-03-26 18:33:48,192 - start : 0, end : 1
+2019-03-26 18:33:50,700 - Success to query records [1]
+2019-03-26 18:33:50,728 - Success to query records [1]
+2019-03-26 18:33:53,022 - Update by the id [3] ,tableName [plugins]
+2019-03-26 18:33:55,150 - The name of plugin is [Dbplugin]
+2019-03-26 18:33:55,150 - The name of pluginType is [db]
+2019-03-26 18:33:55,166 - Success to query records [1]
+2019-03-26 18:33:56,073 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:33:56,078 - Obtain the parameters  : [SENDDELAY]
+2019-03-26 18:33:56,082 - Obtain the parameters  : [null]
+2019-03-26 18:33:56,292 - Success to get SqlsessionFactory [webDB]
+2019-03-26 18:33:56,367 - ----------------------------------------------------111
+2019-03-26 18:33:56,371 - It's going to parsing : C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties
+2019-03-26 18:33:56,372 - It has been parsed ,following [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-03-26 18:33:56,375 - It has been loaded ,following : [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-03-26 18:33:56,375 - {"pluginName":"Dbplugin","properties":{"dotBit":"#.00","webDB.connection.password":"pass","webDB.connection.driverClassName":"oracle.jdbc.driver.OracleDriver","showElements":"C,Mn,Si,P,S,Ni,Cr,Cu,Mo,V,Ti,Al,Nb,As,Sn,Pb,Sb,Bi","webDB.connection.username":"test","webDB.connection.url":"jdbc:oracle:thin:@//10.224.38.97:2702/frwd.webex.com"}}
+2019-03-26 18:33:56,386 - Success to query records [1]
+2019-03-26 18:33:56,393 - Success to query records [1]
+2019-03-26 18:33:56,398 - Success to query records [1]
+2019-03-26 18:34:06,399 - ========================================================================
+2019-03-26 18:34:16,399 - ========================================================================
+2019-03-26 18:34:26,400 - ========================================================================
+2019-03-26 18:34:30,915 - The name of plugin is [Dbplugin]
+2019-03-26 18:34:30,915 - The name of pluginType is [db]
+2019-03-26 18:34:32,110 - Force stop the timeExecute []
+2019-03-26 18:36:05,795 - lemonnt
+2019-03-26 18:36:05,825 - false
+2019-03-26 18:36:06,020 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-03-26 18:36:06,029 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-03-26 18:36:06,032 - Obtain the parameters  : [DIGITNUMBER]
+2019-03-26 18:36:06,039 - Obtain the env parameters  : [4]
+2019-03-26 18:36:06,172 - Success to query records [1]
+2019-03-26 18:36:06,174 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-03-26 18:36:06,469 - Obtain the parameters  : [SYSTEMNAME]
+2019-03-26 18:36:06,474 - Obtain the parameters  : [null]
+2019-03-26 18:36:06,605 - Obtain the parameters  : [MONITORINTRVAL]
+2019-03-26 18:36:06,612 - Obtain the parameters  : [null]
+2019-03-26 18:36:06,616 - Monitor Interval : [10s]
+2019-03-26 18:36:08,785 - Success to query records [1]
+2019-03-26 18:36:08,819 - Success to query records [1]
+2019-03-26 18:36:08,820 - start : 0, end : 1
+2019-03-26 18:36:10,878 - The name of plugin is [Dbplugin]
+2019-03-26 18:36:10,879 - The name of pluginType is [db]
+2019-03-26 18:36:10,885 - Success to query records [1]
+2019-03-26 18:36:11,927 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:36:11,943 - Obtain the parameters  : [SENDDELAY]
+2019-03-26 18:36:11,948 - Obtain the parameters  : [null]
+2019-03-26 18:36:12,127 - Success to get SqlsessionFactory [webDB]
+2019-03-26 18:36:12,197 - ----------------------------------------------------111
+2019-03-26 18:36:12,200 - It's going to parsing : C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties
+2019-03-26 18:36:12,201 - It has been parsed ,following [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-03-26 18:36:12,204 - It has been loaded ,following : [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-03-26 18:36:12,204 - {"pluginName":"Dbplugin","properties":{"dotBit":"#.00","webDB.connection.password":"pass","webDB.connection.driverClassName":"oracle.jdbc.driver.OracleDriver","showElements":"C,Mn,Si,P,S,Ni,Cr,Cu,Mo,V,Ti,Al,Nb,As,Sn,Pb,Sb,Bi","webDB.connection.username":"test","webDB.connection.url":"jdbc:oracle:thin:@//10.224.38.97:2702/frwd.webex.com"}}
+2019-03-26 18:36:12,216 - Success to query records [1]
+2019-03-26 18:36:12,226 - Success to query records [1]
+2019-03-26 18:36:12,234 - Success to query records [1]
+2019-03-26 18:36:22,236 - ========================================================================
+2019-03-26 18:36:22,263 - ==================== 111 [null]
+2019-03-26 18:36:22,265 - [{{{{ 0]
+2019-03-26 18:36:32,236 - ========================================================================
+2019-03-26 18:36:32,297 - ==================== 111 [null]
+2019-03-26 18:36:32,300 - [{{{{ 0]
+2019-03-26 18:36:40,502 - The name of plugin is [Dbplugin]
+2019-03-26 18:36:40,502 - The name of pluginType is [db]
+2019-03-26 18:36:41,504 - Force stop the timeExecute []
+2019-03-26 18:39:55,753 - lemonnt
+2019-03-26 18:39:55,784 - false
+2019-03-26 18:39:55,976 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-03-26 18:39:55,987 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-03-26 18:39:55,991 - Obtain the parameters  : [DIGITNUMBER]
+2019-03-26 18:39:55,998 - Obtain the env parameters  : [4]
+2019-03-26 18:39:56,145 - Success to query records [1]
+2019-03-26 18:39:56,147 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-03-26 18:39:56,509 - Obtain the parameters  : [SYSTEMNAME]
+2019-03-26 18:39:56,578 - Obtain the parameters  : [null]
+2019-03-26 18:39:56,775 - Obtain the parameters  : [MONITORINTRVAL]
+2019-03-26 18:39:56,782 - Obtain the parameters  : [null]
+2019-03-26 18:39:56,787 - Monitor Interval : [10s]
+2019-03-26 18:40:01,677 - Success to query records [1]
+2019-03-26 18:40:01,697 - Success to query records [1]
+2019-03-26 18:40:01,698 - start : 0, end : 1
+2019-03-26 18:40:03,735 - The name of plugin is [Dbplugin]
+2019-03-26 18:40:03,735 - The name of pluginType is [db]
+2019-03-26 18:40:03,744 - Success to query records [1]
+2019-03-26 18:40:04,772 - Failed to read jar [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin\config (Access is denied)]
+2019-03-26 18:40:04,788 - Obtain the parameters  : [SENDDELAY]
+2019-03-26 18:40:04,792 - Obtain the parameters  : [null]
+2019-03-26 18:40:04,988 - Success to get SqlsessionFactory [webDB]
+2019-03-26 18:40:05,065 - ----------------------------------------------------111
+2019-03-26 18:40:05,069 - It's going to parsing : C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties
+2019-03-26 18:40:05,070 - It has been parsed ,following [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-03-26 18:40:05,073 - It has been loaded ,following : [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-03-26 18:40:05,073 - {"pluginName":"Dbplugin","properties":{"dotBit":"#.00","webDB.connection.password":"pass","webDB.connection.driverClassName":"oracle.jdbc.driver.OracleDriver","showElements":"C,Mn,Si,P,S,Ni,Cr,Cu,Mo,V,Ti,Al,Nb,As,Sn,Pb,Sb,Bi","webDB.connection.username":"test","webDB.connection.url":"jdbc:oracle:thin:@//10.224.38.97:2702/frwd.webex.com"}}
+2019-03-26 18:40:05,087 - Success to query records [1]
+2019-03-26 18:40:05,095 - Success to query records [1]
+2019-03-26 18:40:05,101 - Success to query records [1]
+2019-03-26 18:40:15,104 - ========================================================================
+2019-03-26 18:40:15,148 - java.lang.reflect.InvocationTargetException
+2019-03-26 18:40:15,149 - error
+2019-03-26 18:40:15,149 - ==================== 111 [null]
+2019-03-26 18:40:15,149 - java.lang.NullPointerException
+2019-03-26 18:40:15,150 - error
+2019-03-26 18:40:15,151 - [{{{{ 0]
+2019-03-26 18:40:25,105 - ========================================================================
+2019-03-26 18:40:25,122 - java.lang.reflect.InvocationTargetException
+2019-03-26 18:40:25,123 - error
+2019-03-26 18:40:25,123 - ==================== 111 [null]
+2019-03-26 18:40:25,123 - java.lang.NullPointerException
+2019-03-26 18:40:25,123 - error
+2019-03-26 18:40:25,125 - [{{{{ 0]
+2019-03-26 18:40:35,105 - ========================================================================
+2019-03-26 18:40:35,132 - java.lang.reflect.InvocationTargetException
+2019-03-26 18:40:35,132 - error
+2019-03-26 18:40:35,133 - ==================== 111 [null]
+2019-03-26 18:40:35,133 - java.lang.NullPointerException
+2019-03-26 18:40:35,133 - error
+2019-03-26 18:40:35,135 - [{{{{ 0]
+2019-03-26 18:40:45,106 - ========================================================================
+2019-03-26 18:40:45,137 - java.lang.reflect.InvocationTargetException
+2019-03-26 18:40:45,137 - error
+2019-03-26 18:40:45,138 - ==================== 111 [null]
+2019-03-26 18:40:45,138 - java.lang.NullPointerException
+2019-03-26 18:40:45,138 - error
+2019-03-26 18:40:45,139 - [{{{{ 0]
+2019-03-26 18:40:53,182 - The name of plugin is [Dbplugin]
+2019-03-26 18:40:53,182 - The name of pluginType is [db]
+2019-03-26 18:40:54,173 - Force stop the timeExecute []

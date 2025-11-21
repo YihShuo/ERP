@@ -1,0 +1,29 @@
+#modalPane{
+     /*-fx-effect: dropshadow(three-pass-box, gray, 10, 0, 2, 2); 
+    -fx-background-color: derive(cadetblue, -20%);
+    -fx-background-insets:10;
+   -fx-background-color: white;  
+    -fx-effect: dropshadow(two-pass-box , black , 30, 0, 0, 0 );
+   -fx-background-color: palegreen; */
+   -fx-background-insets: 10;
+   -fx-background-radius: 5;
+   -fx-effect:dropshadow(three-pass-box, gray, 10, 0.5, 0, 0);
+   /*-fx-effect:dropshadow(three-pass-box, derive(cadetblue, -20%), 10, 0.8, 0, 0);*/
+}
+/* text set the color -fx-fill */
+#closeModalBtn,#confirmBtn,#askHelp,#closeModal{
+	-fx-fill: #4B4B4B;
+}
+
+.root {
+  -fx-opacity: 0.8;
+}
+
+#closeModal:hover{
+	-fx-fill: black;
+	
+}
+/* text set the color -fx-text-fill*/
+#reminderMessage {
+	-fx-text-fill: #4B4B4B;
+} 

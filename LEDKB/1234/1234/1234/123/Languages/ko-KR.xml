@@ -1,0 +1,2205 @@
+<?xml version="1.0"?>
+<Languages>
+<!--修改记录>
+41399
+1. 校时调试，节点<TDlgProtocolSetDateTime>
+增加<btnGetSystemTime>
+2. 通讯参数设置窗口，GPRS页，节点<TDlgNetworkSetting>
+增加<LabelDeviceId>
+3. 定时开关调试，节点<TDlgProtocolOnOff>
+增加<chkAutoOnOff>
+4. 区域显示参数设置，主界面，节点<TMainForm>
+增加<chkContinuousLeft>,<chkContinuousTop>
+41398
+1. 增加表格编辑器语言
+节点：<CGridEditorMainForm>,<CGridEditorInsertCells>,<CGridEditorDeleteCells>
+2. USB导出界面，节点<TDlgUsbForm>
+增加<LabelUsbFreeSize>,<LabelUsbFileSystem>,<LabelDateTimeNoChange>,<LabelLightNoChange>,<LabelOnOffNoChange>
+3. 定时开关调试，节点<TDlgProtocolOnOff>
+增加<MemoHelp>
+4. 亮度调节调试，节点<TDlgProtocolSetLight>
+增加<MemoHelp>
+5. 校时调试，节点<TDlgProtocolSetDateTime>
+增加<MemoHelp>
+6. 屏幕参数设置，节点<TdlgMonitorSetting>
+增加<chkDotFrequencyAuto>,<chkLineBlankingAuto>
+7. 图文区域编辑选项界面，<TFrameOptionPicture>
+增加<ToolButtonNewRtf>,<ToolButtonAddPicture>,<ToolButtonAddGrid>
+<ToolButtonAddWord>,<ToolButtonAddExcel>,<ToolButtonDelete>,
+<ToolButtonUp>,<ToolButtonDown>
+<chkShowPath>
+8. 主界面工具条，<TMainForm>
+增加 <ToolButtonTiming>,<ToolButtonSeDateTime>,<ToolButtonSetLight>
+<ToolButtonOnOff>
+<修改记录-->
+<!--这个文件定义中文简体-->
+<!-- Messages段定义一些信息提示信息-->
+<Messages>
+<!--;通用消息-->
+<Comm>
+<Comm.InitFail>초기화에 실패했습니다!</Comm.InitFail>
+<!--图文编辑添加文本文件时打开文件对话框的文件扩展名提示-->
+<FileFilterText>텍스트 파일 (*.txt)</FileFilterText>
+<!--图文编辑添加RTF文件时打开文件对话框的文件扩展名提示-->
+<FileFilterRTF>RTF 파일 (*.rtf)</FileFilterRTF>
+<OpenRtfFail>읽기 RTF 파일이 실패했습니다!</OpenRtfFail>
+<!--图文编辑添加图片文件时打开文件对话框的文件扩展名提示-->
+<FileFilterPicture>이미지 파일 (*.BMP;*.JPG;*.GIF;*.PNG)</FileFilterPicture>
+<OpenPictureFail>이미지 파일을 읽을 수 없습니다!</OpenPictureFail>
+<!--图文编辑添加WORD文件时打开文件对话框的文件扩展名提示-->
+<FileFilterWord>Word 문서 (*.doc;*.docx)|*.doc;*.docx|WPS(*.wps)|*.wps|</FileFilterWord>
+<OpenWordFail>Word 문서를 읽을 수 없습니다, 당신은 말씀을 설치해야합니다!</OpenWordFail>
+<!--图文编辑添加EXCEL文件时打开文件对话框的文件扩展名提示-->
+<FileFilterExcel>엑셀 문서 (*.xls;*.xlsx)|WPS(*.et)|*.et|</FileFilterExcel>
+<OpenExcelFail>엑셀 문서를 읽을 수 없습니다! >> %s</OpenExcelFail>
+<!-- 工程打开保存的提示信息-->
+<SaveProjectFail>프로젝트를 저장하지 못했습니다!</SaveProjectFail>
+<CreateDirFail>디렉토리를 생성하지 못했습니다!</CreateDirFail>
+<OpenProjectFail>프로젝트를 열지 못했습니다!</OpenProjectFail>
+<ErrorProjectVersion>프로젝트 파일 버전은 인식하지 않습니다!</ErrorProjectVersion>
+<ErrorProjectFile>프로젝트 파일이 손상되었습니다!</ErrorProjectFile>
+<!--;提示保存工程-->
+<ProjectChangedPrompt>이 프로젝트는 또한 변경을 저장?</ProjectChangedPrompt>
+<!--;默认的新工程-->
+<NewProjectName>(새 작품)</NewProjectName>
+<!--;工程没有内容-->
+<ProjectNull>콘텐츠가 저장 될 수 없습니다!</ProjectNull>
+<Unknown>알 수없는</Unknown>
+<!--通讯时的些操作信息-->
+<ProtocolTestStart>제어 카드에 연결되는 잠​​시만 기다려주세요 ...</ProtocolTestStart>
+<ProtocolSuccess>제어 카드의 성공을 연결합니다.</ProtocolSuccess>
+<ProtocolFail>작업이 실패하면 직렬 포트를 확인하거나 네트워크가 정상입니다.</ProtocolFail>
+<ErrorComPort>잘못된 일련 번호 %s이! 통신 파라미터 설정을 확인하십시오!</ErrorComPort>
+<ProtocolReadyFail>장치가 준비되지 않았습니다! 직렬 포트 또는 네트워크가 정상인지 확인하시기 바랍니다.</ProtocolReadyFail>
+<ProtocolOnScreenSuccess>시작 화면!</ProtocolOnScreenSuccess>
+<ProtocolOffScreenSuccess>오프 스크린 성공!</ProtocolOffScreenSuccess>
+<ProtocolSetAutoOnOff>타이머 스위치 화면의 성공을 설정할 수 있습니다.</ProtocolSetAutoOnOff>
+<ProtocolReadParamsSuccess>매개 변수 리드 백 성공.</ProtocolReadParamsSuccess>
+<ProgressPrompt>진행 비율 :</ProgressPrompt>
+<RemainTimePrompt>남은 시간 : %d의 초</RemainTimePrompt>
+<MakingMonitorFile>스크린 매개 변수 파일이 생성되고 ...</MakingMonitorFile>
+<SendingMonitorFile>스크린 매개 변수 파일이 전송되는 ...</SendingMonitorFile>
+<MakingDataFile>콘텐츠 데이터를 생성하는 ...</MakingDataFile>
+<DataFileOutofCapacity>전송, 남은 용량의 카드를 외부에 보내는 내용의 크기를 실패합니다.</DataFileOutofCapacity>
+<SendingDataFile>콘텐츠 데이터 준비가 전송을 시작 ...</SendingDataFile>
+<SendDataFileSuccess>성공적으로 전송.</SendDataFileSuccess>
+<SendDataFileFail>%s의 : 전송, 오류의 원인을 실패합니다.</SendDataFileFail>
+<ProtocolReadParamsSuccess>매개 변수 리드 백 성공.</ProtocolReadParamsSuccess>
+<SaveScanSetInfoFail>저장 스캔 모드 설정 실패 : %s의</SaveScanSetInfoFail>
+<ConfDeleteScanSetInfo>당신이 삭제할 것인지 확인?</ConfDeleteScanSetInfo>
+<CreateCommFail>만들기 통신 구성 요소가 실패했습니다!</CreateCommFail>
+<!--;默认字体-->
+<DefaultFontName>Arial</DefaultFontName>
+<DefaultFontSize>10</DefaultFontSize>
+<!--;颜色列表-->
+<ColorList>
+<Item>하나의 색상</Item>
+<Item>두 가지 색</Item>
+<Item>삼색</Item>
+<Item>풀 컬러</Item>
+</ColorList>
+<!--;单基色颜色列表-->
+<SingleColorList>
+<Item>빨강</Item>
+</SingleColorList>
+<!--;双基色颜色列表-->
+<DoubleColorList>
+<Item>빨강</Item>
+<Item>황색</Item>
+<Item>녹색</Item>
+</DoubleColorList>
+<!--;全彩色颜色列表-->
+<SevenColorList>
+<Item>빨강</Item>
+<Item>황색</Item>
+<Item>녹색</Item>
+</SevenColorList>
+<!--;灰度列表-->
+<ColorGrayList>
+<Item>회색</Item>
+<Item>32</Item>
+<Item>256</Item>
+</ColorGrayList>
+<!--;计时区域的显示格式-->
+<TimingDayLabel>하루</TimingDayLabel>
+<TimingDayFormat>%d%s</TimingDayFormat>
+<TimingHourLabel>시간</TimingHourLabel>
+<TimingHourFormat>%d%s</TimingHourFormat>
+<TimingMinuteLabel>분</TimingMinuteLabel>
+<TimingMinuteFormat>%d%s</TimingMinuteFormat>
+<TimingSecondLabel>초</TimingSecondLabel>
+<TimingSecondFormat>%d초</TimingSecondFormat>
+<!--集群操作信息-->
+<GprsValidateError>GPRS는 계정 암호가 올바르지 확인!</GprsValidateError>
+<GprsConnectError>GPRS 서버에 연결할 수 없습니다!</GprsConnectError>
+<GprsImeiError>GPRS 통신을 사용하여 화면에 이름이 DTU 15 IMEI 번호가 있어야합니다.</GprsImeiError>
+<NoGprsIdFilterFile>GPRS 필터 파일의 부족!</NoGprsIdFilterFile>
+<UpdateGprsCardsCompleted>클러스터의 온라인 목록의 완료를 얻을</UpdateGprsCardsCompleted>
+<UpdateGprsCardsError>연결 오류가 클러스터를 다시 취득하시기 바랍니다.</UpdateGprsCardsError>
+<ConnectingColonyServer>클러스터의 서버는 기다려주십시오 ...</ConnectingColonyServer>
+<ConnectColonyServerSuccess>클러스터에있는 서버의 성공.</ConnectColonyServerSuccess>
+<ConnectColonyServerFail>클러스터 서버에 연결할 수 없습니다.</ConnectColonyServerFail>
+<PromptSelectColonyCommandItem>명령 입력을 수행 할 필요성을 선택하십시오.</PromptSelectColonyCommandItem>
+<ColonyCommandOutofCapacity>명령이 실패 실행 {0} 화면에 생성 된 데이터의 크기 이름은 카드 용량의 크기를 초과합니다.</ColonyCommandOutofCapacity>
+<PromptColonyCloneOnlyOneRegion>서브 화면 적응 기본 화면 모드에서, 당신은 그래픽 영역을 만들 수 있으며 영역의 크기는 화면 크기에 사용할 수 있어야합니다.</PromptColonyCloneOnlyOneRegion>
+<SendColonyCommandSuccess>실행 클러스터 명령이 성공합니다.</SendColonyCommandSuccess>
+<SendColonyCommandFail>클러스터 명령이 실패합니다.</SendColonyCommandFail>
+<PromptColonyVetifyNullIp>서버 주소가 비어있을 수 없습니다!</PromptColonyVetifyNullIp>
+<PromptColonyVetifyNullPassword>서버 암호는 비워 둘 수 없습니다!</PromptColonyVetifyNullPassword>
+<ColonyVetifyInvalidPassword>암호가 잘못되었습니다.</ColonyVetifyInvalidPassword>
+<ColonyVetiryServerError>서버 프로세스가 실패합니다.</ColonyVetiryServerError>
+<GprsColonyOperationReady>준비된</GprsColonyOperationReady>
+<!--扫描信息的名称描述-->
+<ScanSetName1>01) P10 12 인터페이스를 흑백</ScanSetName1>
+<!--未知的扫描方式名称-->
+<UnknownScanSetName>알 수없는 검색</UnknownScanSetName>
+<!--协议名称-->
+<ProtocolSerialPort>시리얼 포트</ProtocolSerialPort>
+<ProtocolNet>네트워크 포트</ProtocolNet>
+<ProtocolDirectNet>네트워크 포트에 직접 연결</ProtocolDirectNet>
+<ProtocolGprs>GPRS</ProtocolGprs>
+<ProtocolUnknown>알 수없는</ProtocolUnknown>
+<!--2013-04-09-->
+<!--通讯测试错误-->
+<UnauthorizedAccessReplyPacket>유효한 응답 패킷이 아닙니다.</UnauthorizedAccessReplyPacket>
+<OpenPortFail>실패 직렬 포트를 엽니 다.</OpenPortFail>
+<CancelSending>전송을 취소합니다.</CancelSending>
+<CreateFail>통신 구성 요소를 만들지 못한다</CreateFail>
+<SocketError>네트워크 오류</SocketError>
+<ColonyNotExists>클러스터 단자가 존재하지 않습니다</ColonyNotExists>
+<ColonyOffline>클러스터 터미널 라인</ColonyOffline>
+<ColonyBusy>클러스터 라인 중입니다</ColonyBusy>
+</Comm>
+</Messages>
+<!-- 以下是窗口界面的文字信息-->
+<!-- 其中的<Messages>段是一些提示信息, 其他段是界面上控件的文字信息-->
+<!-- 主窗口-->
+<TMainForm>
+<!-- 标题栏-->
+<Caption>X Show 소프트웨어</Caption>
+<Messages>
+<LoadSystemConfigFail>시스템 구성 오류를로드!</LoadSystemConfigFail>
+<MonitorName>디스플레이%d</MonitorName>
+<ProgramName>프로그램 %d</ProgramName>
+<RegionNamePicture>그래픽 %d</RegionNamePicture>
+<RegionNameText>자막 %d</RegionNameText>
+<RegionNameFlashText>생기%d</RegionNameFlashText>
+<RegionNameClock>시계 %d</RegionNameClock>
+<RegionNameWatch>다이얼%d</RegionNameWatch>
+<RegionNameTiming>타이밍%d</RegionNameTiming>
+<RegionNameDefaul>지역 %d</RegionNameDefaul>
+<AskToSelectOneTreeNode>노드를 선택하십시오!</AskToSelectOneTreeNode>
+<WarnOnDeleteOneMonitor>삭제할 수 없습니다,이 프로젝트는 적어도 하나의 화면을해야합니다!</WarnOnDeleteOneMonitor>
+<ConfDeleteProgramListNode>당신이 삭제할 것인지 확인?</ConfDeleteProgramListNode>
+<!--有重叠区域-->
+<RegionOverlapping>작업은 %s을 (를) 실패했습니다 : 중복 영역을 포함.</RegionOverlapping>
+<!--导入U盘时如果没有选择屏幕提示-->
+<AskToSelectMonitor>화면을 선택하십시오!</AskToSelectMonitor>
+<!--显示区域页数信息-->
+<RegionPagesInfo>페이지 %d / %d 개 페이지</RegionPagesInfo>
+<!--对象克隆后加的前缀 -->
+<CloneAddText>복사</CloneAddText>
+<!--超出节目数提示-->
+<MaxProgramCountInfo>최대 지원 %d 프로그램!</MaxProgramCountInfo>
+<!--超出区域数提示-->
+<MaxRegionCountInfo>최대 지원 %d 개의 지역!</MaxRegionCountInfo>
+<!--超出具体区域数提示-->
+<MaxRegionDetailCountInfo>이 지역의 가장 큰 지원 %d이!</MaxRegionDetailCountInfo>
+<MaxSpeedNote>(가장 빠른)</MaxSpeedNote>
+<MinSpeedNote>(가장 느림)</MinSpeedNote>
+<!--屏幕名称不允许重复-->
+<ScreeNameRepeat>화면 이름을 반복 할 수 없습니다!</ScreeNameRepeat>
+<!--检测空区域-->
+<HaveNoRegions>현재 프로그램 영역! 운영 할 수 없습니다!</HaveNoRegions>
+<AllRegionsIsNull>프로그램의 모든 영역이 비어 있습니다! 운영 할 수 없습니다!</AllRegionsIsNull>
+<ConfHaveNulRegions>발견 된 빈 제목 또는 그래픽 영역은 작업을 계속?</ConfHaveNulRegions>
+</Messages>
+<!--另存工程对话框-->
+<dlgSave>
+<Project>
+<Filter>프로젝트 Kalerka 파일</Filter>
+</Project>
+<SaveProject>
+<Title>이름으로 프로젝트 저장 ...</Title>
+</SaveProject>
+<SaveAsProject>
+<Title>로 프로젝트를 저장 ...</Title>
+</SaveAsProject>
+</dlgSave>
+<dlgOpen>
+<OpenProject>
+<Title>프로젝트를 엽니 다 ...</Title>
+</OpenProject>
+</dlgOpen>
+<!--节目管理按钮-->
+<btnProgramList>
+<Caption>프로그램 관리</Caption>
+</btnProgramList>
+<!--节目管理树右键菜单-->
+<PopupMenuTreeProgramList>
+<Items>
+<Item>움직임</Item>
+<Item>아래로</Item>
+<Item>-</Item>
+<Item>삭제</Item>
+<Item>복사</Item>
+<Item>스틱</Item>
+<Item>-</Item>
+<Item>확장</Item>
+<Item>축소</Item>
+<Item>-</Item>
+<Item>이름 바꾸기</Item>
+<Item>-</Item>
+<Item>복제 화면</Item>
+</Items>
+</PopupMenuTreeProgramList>
+<!--图片资源库按钮-->
+<btnPictures>
+<Caption>이미지 리소스 라이브러리</Caption>
+</btnPictures>
+<!--图片资源库树-->
+<treePictures>
+<Items>
+<Item>
+<Text>그림</Text>
+<Items>
+<Item>국제 올림픽 경기 대회</Item>
+<Item>표시</Item>
+<Item>화살표</Item>
+<Item>정적 로고</Item>
+<Item>별 및 현수막</Item>
+<Item>특수 문자</Item>
+<Item>상징</Item>
+<Item>생활</Item>
+</Items>
+</Item>
+<Item>
+<Text>생기</Text>
+<Items>
+<Item>로고 애​​니메이션</Item>
+<Item>표현</Item>
+</Items>
+</Item>
+</Items>
+</treePictures>
+<!--主工具条的按钮-->
+<ToolButtonProgram>
+<Caption>프로그램</Caption>
+<Hint>프로그램</Hint>
+</ToolButtonProgram>
+<ToolButtonDynamicBackground>
+<Caption>동적 배경</Caption>
+<Hint>동적 배경</Hint>
+</ToolButtonDynamicBackground>
+<ToolButtonPicture>
+<Caption>문자로 쓰는</Caption>
+<Hint>문자로 쓰는</Hint>
+</ToolButtonPicture>
+<ToolButtonText>
+<Caption>부제</Caption>
+<Hint>부제</Hint>
+</ToolButtonText>
+<ToolButtonFlashText>
+<Caption>생기</Caption>
+<Hint>생기</Hint>
+</ToolButtonFlashText>
+<ToolButtonClock>
+<Caption>시계</Caption>
+<Hint>시계</Hint>
+</ToolButtonClock>
+<ToolButtonWatch>
+<Caption>다이얼</Caption>
+<Hint>다이얼</Hint>
+</ToolButtonWatch>
+<ToolButtonDelete>
+<Caption>삭제</Caption>
+<Hint>삭제</Hint>
+</ToolButtonDelete>
+<ToolButtonPreview>
+<Caption>시사</Caption>
+<Hint>시사</Hint>
+<Caption1>정지</Caption1>
+<Hint1>정지</Hint1>
+</ToolButtonPreview>
+<ToolButtonSend>
+<Caption>보내기</Caption>
+<Hint>보내기</Hint>
+</ToolButtonSend>
+<ToolButtonUSB>
+<Caption>USB</Caption>
+<Hint>USB</Hint>
+</ToolButtonUSB>
+<ToolButtonSearchCard>
+<Caption>확인 화면</Caption>
+<Hint>확인 화면</Hint>
+</ToolButtonSearchCard>
+<!-- 2013.5.4 增加-->
+<ToolButtonTiming>
+<Caption>타이밍</Caption>
+<Hint>타이밍</Hint>
+</ToolButtonTiming>
+<ToolButtonSeDateTime>
+<Caption>타이밍</Caption>
+<Hint>타이밍</Hint>
+</ToolButtonSeDateTime>
+<ToolButtonSetLight>
+<Caption>명도</Caption>
+<Hint>명도</Hint>
+</ToolButtonSetLight>
+<ToolButtonOnOff>
+<Caption>타이머 스위치</Caption>
+<Hint>타이머 스위치</Hint>
+</ToolButtonOnOff>
+<!-- 2013.5.4 增加结束-->
+<!--区域属性操作的工具栏：区域缩放、位置、翻页-->
+<ToolButtonZoomInit>
+<Hint>원본 크기</Hint>
+</ToolButtonZoomInit>
+<ToolButtonZoomOut>
+<Hint>확대</Hint>
+</ToolButtonZoomOut>
+<ToolButtonZoomIn>
+<Hint>폭이 좁은</Hint>
+</ToolButtonZoomIn>
+<ToolButtonRegionLeft>
+<Hint>지역 왼쪽</Hint>
+</ToolButtonRegionLeft>
+<ToolButtonRegionRight>
+<Hint>거주 지역 오른쪽</Hint>
+</ToolButtonRegionRight>
+<ToolButtonRegionTop>
+<Hint>지역 최고</Hint>
+</ToolButtonRegionTop>
+<ToolButtonRegionBottom>
+<Hint>영역의 끝 부분에 설정되어</Hint>
+</ToolButtonRegionBottom>
+<ToolButtonLastRegionPage>
+<Hint>이전</Hint>
+</ToolButtonLastRegionPage>
+<ToolButtonNextRegionPage>
+<Hint>다음</Hint>
+</ToolButtonNextRegionPage>
+<!--主菜单-->
+<ActionManagerMain>
+<ActionBars>
+<ActionBar>
+<Items>
+<Item>
+<Caption>파일 (&amp;F)</Caption>
+<Items>
+<Item>새로운 건설 (&amp;N)</Item>
+#N/A
+<Item>-</Item>
+<Item>저장(&amp;S)</Item>
+<Item>다른 이름으로 저장 ...</Item>
+<Item>-</Item>
+<Item>수출</Item>
+<Item>가져 오기</Item>
+<Item>-</Item>
+<Item>종료 (&amp;E)</Item>
+</Items>
+</Item>
+<Item>
+<Caption>및 삽입(&amp;I)</Caption>
+<Items>
+<Item>화면</Item>
+<Item>프로그램</Item>
+<Item>동적 배경</Item>
+<Item>-</Item>
+<Item>부제</Item>
+<Item>문자로 쓰는</Item>
+<Item>생기</Item>
+<Item>시계</Item>
+<Item>다이얼</Item>
+<Item>타이밍</Item>
+<Item>온도</Item>
+</Items>
+</Item>
+<Item>
+<Caption>설정 (&amp;S)</Caption>
+<Items>
+<Item>스크린 매개 변수</Item>
+<Item>통신 매개 변수</Item>
+<Item>-</Item>
+<Item>카드 IP를 수정</Item>
+<Item>-</Item>
+<Item>자동 장치 보드를 구성</Item>
+</Items>
+</Item>
+<Item>
+<Caption>디버깅 (&amp;D)</Caption>
+<Items>
+<Item>타이밍</Item>
+<Item>밝기 조정</Item>
+<Item>요청 모델</Item>
+<Item>소프트웨어 스위치 화면</Item>
+<Item>-</Item>
+<Item>시사</Item>
+<Item>보내기</Item>
+<Item>가져 오기 U 디스크</Item>
+<Item>-</Item>
+<Item>로그보기</Item>
+</Items>
+</Item>
+<Item>
+<Caption V="0">클러스터 (&amp;C)</Caption>
+<Items>
+<Item>서버 구성</Item>
+<Item>클러스터 관리</Item>
+</Items>
+</Item>
+<Item>
+<Caption>언어 (&amp;L)</Caption>
+<Items>
+<Item>자동 선택</Item>
+</Items>
+</Item>
+<Item>
+<Caption>도움(&amp;A)</Caption>
+</Item>
+</Items>
+</ActionBar>
+</ActionBars>
+</ActionManagerMain>
+<!--基本属性-->
+<GroupBoxBaseInfo>
+<Caption>의 기본 속성</Caption>
+</GroupBoxBaseInfo>
+<LabelRegionName>
+<Caption>이름</Caption>
+</LabelRegionName>
+<LabelRegionX>
+<Caption>위치 X</Caption>
+</LabelRegionX>
+<LabelRegionY>
+<Caption>위치 Y</Caption>
+</LabelRegionY>
+<LabelRegionWidth>
+<Caption>폭</Caption>
+</LabelRegionWidth>
+<LabelRegionHeight>
+<Caption>신장</Caption>
+</LabelRegionHeight>
+<!--基本属性-->
+<GroupBoxDisplayInfo>
+<Caption>디스플레이 등록 정보를</Caption>
+</GroupBoxDisplayInfo>
+<LabelDisplayMode>
+<Caption>화면 모드에</Caption>
+</LabelDisplayMode>
+<cmbDisplayMode>
+<Items>
+<Item>무작위로 표시</Item>
+<Item>여전히</Item>
+<Item>오른쪽으로 이동</Item>
+<Item>왼쪽</Item>
+<Item>아래로</Item>
+<Item>움직임</Item>
+<Item>오른쪽 범위</Item>
+<Item>왼쪽 보험</Item>
+<Item>다음 범위</Item>
+<Item>표지에</Item>
+<Item>수평 열기</Item>
+<Item>수직의 개통</Item>
+<Item>크로스 결산</Item>
+<Item>세로 마감</Item>
+<Item>오른쪽 블라인드</Item>
+<Item>왼쪽 미늘창</Item>
+<Item>블라인드 이하</Item>
+<Item>블라인드에</Item>
+<Item>깜박임</Item>
+<Item>오른쪽 브러시 단어</Item>
+<Item>왼쪽 브러쉬 단어</Item>
+<Item>브러시 단어 아래</Item>
+<Item>브러시 단어</Item>
+<Item>페이지 왼쪽</Item>
+<Item>마우스 오른쪽 버튼으로 다음 페이지</Item>
+<Item>에 바람을 불어</Item>
+<Item>팬 폐쇄</Item>
+<Item>오른 손잡이의</Item>
+<Item>L-</Item>
+<Item>레벨 산재</Item>
+<Item>수직 산재</Item>
+<Item>커튼을 아래로 스크롤</Item>
+<Item>오른쪽 셔터</Item>
+<Item>구조</Item>
+<Item>안티 - 흰색 깜박임</Item>
+<Item>사각형을 확장</Item>
+<Item>직사각형의 수축</Item>
+<Item>다이아몬드를 확장</Item>
+<Item>다이아몬드 수축</Item>
+<Item>교차 확장</Item>
+<Item>수축 교차</Item>
+<Item>왼쪽 사각형</Item>
+<Item>왼쪽 사각형</Item>
+<Item>오른쪽 사각형을 낮 춥니 다</Item>
+<Item>오른쪽 사각형</Item>
+<Item>왼쪽 슬래시</Item>
+<Item>왼쪽 슬래시</Item>
+<Item>오른쪽 아래에 슬래시</Item>
+<Item>긍정적 인 슬로프</Item>
+<Item>하사</Item>
+<Item>구조</Item>
+<Item>이제보기</Item>
+<Item>종 늑골</Item>
+</Items>
+</cmbDisplayMode>
+<LabelClearMode>
+<Caption>하여 화면을 취소</Caption>
+</LabelClearMode>
+<LabelSpeed>
+<Caption>속도</Caption>
+</LabelSpeed>
+<cmbSpeed>
+<Items>
+<Item>1 (가장 빠름)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (느린)</Item>
+</Items>
+</cmbSpeed>
+<LabelDisplayDelay>
+<Caption>지속</Caption>
+</LabelDisplayDelay>
+<LabelDisplayStyle>
+<Caption>스타일</Caption>
+</LabelDisplayStyle>
+<cmbDisplayStyle>
+<Items>
+<Item>심장의 고동</Item>
+<Item>왈츠</Item>
+<Item>드리프트</Item>
+<Item>전자파</Item>
+<Item>섬광 전구</Item>
+<Item>봄</Item>
+<Item>구르기</Item>
+<Item>각설탕</Item>
+<Item>역 드리프트</Item>
+<Item>소용돌이</Item>
+<Item>네온 빛</Item>
+<Item>DOUCAI</Item>
+<Item>레인보우 ()</Item>
+<Item>레인보우 (아래)</Item>
+<Item>레인보우 (왼쪽)</Item>
+<Item>레인보우 (오른쪽)</Item>
+</Items>
+</cmbDisplayStyle>
+<!-- 动感边框-->
+<GroupBoxFlashBorder>
+<Caption>동적 경계</Caption>
+</GroupBoxFlashBorder>
+<chkFlashBorderEnabled>
+<Caption>동적 경계를 표시</Caption>
+</chkFlashBorderEnabled>
+<optFlashBorderOneColor>
+<Caption>흑백의</Caption>
+</optFlashBorderOneColor>
+<optFlashBorderFlashColor>
+<Caption>현 색</Caption>
+</optFlashBorderFlashColor>
+<LabelFlashBorderSpeed>
+<Caption>속도를 걷다</Caption>
+</LabelFlashBorderSpeed>
+<cmbFlashBorderSpeed>
+<Items>
+<Item>1 (가장 빠름)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (느린)</Item>
+</Items>
+</cmbFlashBorderSpeed>
+<LabelFlashBorderDirection>
+<Caption>철새 방향</Caption>
+</LabelFlashBorderDirection>
+<cmbFlashBorderDirection>
+<Items>
+<Item>고정 표시</Item>
+<Item>시계 방향 회전</Item>
+<Item>회전 반 시계 방향으로</Item>
+<Item>깜박임</Item>
+<Item>깜박이 + 시계 방향으로</Item>
+<Item>깜박이 + 회전 반 시계 방향으로</Item>
+</Items>
+</cmbFlashBorderDirection>
+<!--屏幕属性-->
+<LabelCardModel>
+<Caption>제어 카드 모델 :</Caption>
+</LabelCardModel>
+<LabelMonitorWidth>
+<Caption>화면 너비 :</Caption>
+</LabelMonitorWidth>
+<LabelMonitorHeight>
+<Caption>화면 높이 :</Caption>
+</LabelMonitorHeight>
+<LabelMonitorColorMode>
+<Caption>셀 플레이트 색상 :</Caption>
+</LabelMonitorColorMode>
+<LabelMonitorConnectMode>
+<Caption>통신 수단 :</Caption>
+</LabelMonitorConnectMode>
+<LabelMonitorConnectPort>
+<Caption>포트 :</Caption>
+</LabelMonitorConnectPort>
+<!--2013.5.5 增加-->
+<chkContinuousLeft>
+<Caption>계속 왼쪽으로</Caption>
+</chkContinuousLeft>
+<chkContinuousTop>
+<Caption>지속적으로 이동</Caption>
+</chkContinuousTop>
+<!--2013.5.5 增加结束-->
+</TMainForm>
+<!--关于对话框-->
+<TDlgAbout>
+<Caption>에 대해 ...</Caption>
+<LabelAppName>
+<Caption>X Show 소프트웨어</Caption>
+</LabelAppName>
+<LabelAppVersion>
+<Caption>버전 : %s의</Caption>
+</LabelAppVersion>
+<MemoAppNote>
+<Items>
+<Item>경고 :이 컴퓨터 프로그램은이 프로그램 검찰의 일부 또는 전체가 심각한 민사 및 형사 처벌, 법률에 의해 허용 가능한 최대 범위까지 적용 될 수 있습니다 무단으로 복제 또는 배포로부터 보호 저작권법과 국제 협약에 의해 보호됩니다.</Item>
+</Items>
+</MemoAppNote>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+</TDlgAbout>
+<!--网络集群发送-->
+<TDlgColonySend>
+<Caption>클러스터 전송 관리</Caption>
+<chkSelectAll>
+<Caption>선택</Caption>
+</chkSelectAll>
+<!--提示信息-->
+<MemoNote>
+<Items>
+<Item>설명 :</Item>
+<Item></Item>
+<Item>1, 그들은 그룹을 통신 네트워크 포트 또는 GPRS의 전용 모드에 가입하기 전에.</Item>
+<Item></Item>
+<Item>2 클론 그룹 보내기 : 모든 화면에서 그룹에 전송되는 데이터의 메인 화면을 전송, 복제의 사용 요청 그룹 화면 화면 크기를 보낼 매개 변수는 동일합니다. 메인 화면을 전송하기 전에 필요합니다.</Item>
+<Item></Item>
+<Item>3 기존의 그룹 전송 : 워드 화면 데이터 삭제는 해당 화면으로 전송됩니다.</Item>
+</Items>
+</MemoNote>
+<!--设备列表-->
+<ListViewCards>
+<Columns>
+<Column>지위</Column>
+<Column>이름</Column>
+<Column>모델</Column>
+<Column>화면 폭</Column>
+<Column>화면 높이</Column>
+<Column>셀 플레이트 타입</Column>
+<Column>통신 수단</Column>
+<Column>명도</Column>
+<Column>타이머 스위치</Column>
+</Columns>
+</ListViewCards>
+<!--操作选择项-->
+<optRegularSend>
+<Caption>기존 그룹 전송</Caption>
+</optRegularSend>
+<optCloneSend>
+<Caption>복제 그룹 전송</Caption>
+</optCloneSend>
+<optOpenScreen>
+<Caption>소프트웨어 부팅</Caption>
+</optOpenScreen>
+<optCloseScreen>
+<Caption>소프트 오프</Caption>
+</optCloseScreen>
+<optTiming>
+<Caption>타이밍</Caption>
+</optTiming>
+<btnSendProtocol>
+<Caption>명령을 실행</Caption>
+</btnSendProtocol>
+<!--指定主屏幕-->
+<LabelCloneScreens>
+<Caption>메인 화면으로 지정하십시오</Caption>
+</LabelCloneScreens>
+</TDlgColonySend>
+<!--网络集群登录验证窗口-->
+<TDlgColonyVerify>
+<Caption>로그인 인증</Caption>
+<LabelPassword>
+<Caption>암호</Caption>
+</LabelPassword>
+<LabelServerIp>
+<Caption>서버</Caption>
+</LabelServerIp>
+<LabelPort>
+<Caption>포트</Caption>
+</LabelPort>
+<btnOK>
+<Caption>결정</Caption>
+</btnOK>
+<btnCancel>
+<Caption>취소</Caption>
+</btnCancel>
+</TDlgColonyVerify>
+<!--GPRS群组发送窗口-->
+<TDlgGprsColony>
+<Caption>클러스터 관리</Caption>
+<Messages>
+<AllScreens>전체 화면</AllScreens>
+<AddGroupCaption>그룹 추가</AddGroupCaption>
+<AddGroupPrompt>그룹의 이름을 입력하십시오 :</AddGroupPrompt>
+<AddGroupExists>그룹 이름이 이미 존재합니다!</AddGroupExists>
+<AddGroupFail>그룹 추가 실패!</AddGroupFail>
+<ConfDeleteGroup>당신이 그룹을 삭제할 것인지 확인하는 메시지가 나타나면?</ConfDeleteGroup>
+<ConfDeleteDevice>당신이 선택한 단말기를 삭제하려면 확인을?</ConfDeleteDevice>
+<NoScreen>어떤 화면에 추가 할 수 없습니다!</NoScreen>
+<DeviceIdExists>단말 ID가 이미 존재합니다!</DeviceIdExists>
+<NoItemChecked>터미널을 선택하십시오! (선택 선택 상자를 사용하여)</NoItemChecked>
+<NoItemSelected>터미널을 선택하십시오! (마우스 클릭 행 선택)</NoItemSelected>
+<!--终端在线状态-->
+<StatusOnline>온라인으로</StatusOnline>
+<StatusOffline>온라인으로</StatusOffline>
+<!--命令发送状态-->
+<SendStatusSending>전송</SendStatusSending>
+<SendStatusSuccess>성공</SendStatusSuccess>
+<SendStatusScreenParamFail>스크린 매개 변수가 실패</SendStatusScreenParamFail>
+<SendStatusConnectFail>연결이 실패합니다</SendStatusConnectFail>
+</Messages>
+<chkSelectAll>
+<Caption>선택</Caption>
+</chkSelectAll>
+<LabelGroups>
+<Caption>그룹 :</Caption>
+</LabelGroups>
+<btnEditGroup>
+<Caption>그룹 편집</Caption>
+</btnEditGroup>
+<btnAddGroup>
+<Caption>그룹 추가</Caption>
+</btnAddGroup>
+<btnDeleteGroup>
+<Caption>그룹 삭제</Caption>
+</btnDeleteGroup>
+<btnAddDevice>
+<Caption>터미널 추가</Caption>
+</btnAddDevice>
+<btnEditDevice>
+<Caption>터미널을 수정</Caption>
+</btnEditDevice>
+<btnDeleteDevice>
+<Caption>터미널을 제거</Caption>
+</btnDeleteDevice>
+<btnUpdateColony>
+<Caption>클러스터를 얻을</Caption>
+</btnUpdateColony>
+<btnSendProtocol>
+<Caption>명령을 실행</Caption>
+</btnSendProtocol>
+<!--提示信息-->
+<MemoNote>
+<Items>
+<Item>설명 :</Item>
+<Item></Item>
+<Item>1, 터미널, 삭제, 터미널을 수정하면 터미널을 선택하려면 목록의 행을 클릭하십시오.</Item>
+<Item></Item>
+<Item>명령은 터미널을 선택하려면 목록 상자를 선택 보낼 수 있습니다.</Item>
+</Items>
+</MemoNote>
+<!--设备列表-->
+<ListViewCards>
+<Columns>
+<Column>아니오.</Column>
+<Column>온라인으로</Column>
+<Column>화면 이름</Column>
+<Column>장치 ID</Column>
+<Column>카드 모델</Column>
+<Column>화면 폭</Column>
+<Column>화면 높이</Column>
+<Column>셀 플레이트 타입</Column>
+<Column>명도</Column>
+<Column>타이머 스위치</Column>
+<Column>운영</Column>
+</Columns>
+</ListViewCards>
+<!--操作选择项-->
+<optRegularSend>
+<Caption>기존 그룹 전송</Caption>
+</optRegularSend>
+<optCloneSend>
+<Caption>복제 그룹 전송</Caption>
+</optCloneSend>
+<optOpenScreen>
+<Caption>소프트웨어 부팅</Caption>
+</optOpenScreen>
+<optCloseScreen>
+<Caption>소프트 오프</Caption>
+</optCloseScreen>
+<optTiming>
+<Caption>타이밍</Caption>
+</optTiming>
+<optQueryStatus>
+<Caption>상태를 확인</Caption>
+</optQueryStatus>
+<!--指定主屏幕-->
+<LabelCloneScreens>
+<Caption>메인 화면으로 지정하십시오</Caption>
+</LabelCloneScreens>
+</TDlgGprsColony>
+<!--集群服务器终端编辑窗口-->
+<TDlgColonyAddDevice>
+<Caption>터미널 편집</Caption>
+<LabelDeviceId>
+<Caption>단말기 ID</Caption>
+</LabelDeviceId>
+<LabelScreenName>
+<Caption>화면</Caption>
+</LabelScreenName>
+<LabelGroupName>
+<Caption>그룹</Caption>
+</LabelGroupName>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>취소 (&amp;C)</Caption>
+</btnCancel>
+</TDlgColonyAddDevice>
+<!--GPRS集群配置 窗口-->
+<TDlgGprsColonySetting>
+<Caption>클러스터 서버 구성</Caption>
+<LabelGprsServerIp>
+<Caption>서버 IP :</Caption>
+</LabelGprsServerIp>
+<LabelGprsServerPort>
+<Caption>포트 :</Caption>
+</LabelGprsServerPort>
+<chkEnableAutoFillScreen>
+<Caption>오픈 부 화면의 적응 메인 화면</Caption>
+</chkEnableAutoFillScreen>
+<chkEnableAuthen>
+<Caption>확인 열기 권한</Caption>
+</chkEnableAuthen>
+<LabelGprsAccount>
+<Caption>계정</Caption>
+</LabelGprsAccount>
+<LabelGprsPassword>
+<Caption>암호</Caption>
+</LabelGprsPassword>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>취소 (&amp;C)</Caption>
+</btnCancel>
+</TDlgGprsColonySetting>
+<!-- GPRS集群组管理 窗口-->
+<TDlgGprsGroup>
+<Caption>GPRS 클러스터 그룹 관리</Caption>
+<LabelGroups>
+<Caption>그룹 목록</Caption>
+</LabelGroups>
+<LabelGroupName>
+<Caption>이름</Caption>
+</LabelGroupName>
+<btnEditGroup>
+<Caption>수정</Caption>
+</btnEditGroup>
+<btnAddGroup>
+<Caption>추가</Caption>
+</btnAddGroup>
+<btnDeleteGroup>
+<Caption>삭제</Caption>
+</btnDeleteGroup>
+<btnSelectAllCards>
+<Caption>모두 선택</Caption>
+</btnSelectAllCards>
+<btnClearCurrentSelectedCards>
+<Caption>현재 선택을 취소합니다</Caption>
+</btnClearCurrentSelectedCards>
+<btnClearSelectedAllCards>
+<Caption>모든 선택을 취소합니다</Caption>
+</btnClearSelectedAllCards>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>취소 (&amp;C)</Caption>
+</btnCancel>
+<LabelCards>
+<Caption>표시 목록</Caption>
+</LabelCards>
+<btnUpdateCards>
+<Caption>서버 목록을 업데이트</Caption>
+</btnUpdateCards>
+<!--设备卡列表-->
+<ListViewCards>
+<Columns>
+<Column>지위</Column>
+<Column>이름</Column>
+</Columns>
+</ListViewCards>
+</TDlgGprsGroup>
+<!--导入Excel 窗口-->
+<TDlgImportExcel>
+<Caption>Excel로</Caption>
+<LabelSheetNames>
+<Caption>워크 시트 이름</Caption>
+</LabelSheetNames>
+<LabelRowCount>
+<Caption>행의 수</Caption>
+</LabelRowCount>
+<LabelColumnCount>
+<Caption>열 수</Caption>
+</LabelColumnCount>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>취소 (&amp;C)</Caption>
+</btnCancel>
+</TDlgImportExcel>
+<!-- 屏幕参数 窗口-->
+<TdlgMonitorSetting>
+<Caption>스크린 매개 변수</Caption>
+<Messages>
+<InvalidMonitorSize>잘못된 화면 크기!</InvalidMonitorSize>
+<InvalidCardModelInfo>잘못된 카드 매개 변수!</InvalidCardModelInfo>
+<InvalidGammaReviseValue>잘못된 감마 보정 값!</InvalidGammaReviseValue>
+</Messages>
+<LabelMonitorWidth>
+<Caption>폭</Caption>
+</LabelMonitorWidth>
+<LabelMonitorHeight>
+<Caption>신장</Caption>
+</LabelMonitorHeight>
+<LabelMonitorColor>
+<Caption>색</Caption>
+</LabelMonitorColor>
+<LabelMonitorGray>
+<Caption>회색</Caption>
+</LabelMonitorGray>
+<LabelCardType>
+<Caption>제어 카드 모델</Caption>
+</LabelCardType>
+<LabelCardParams>
+<Caption>성능 매개 변수</Caption>
+</LabelCardParams>
+<LabelBoardType>
+<Caption>셀 플레이트 타입</Caption>
+</LabelBoardType>
+<LabelDEPrompt>
+<Caption>OE 극성</Caption>
+</LabelDEPrompt>
+<LabelDEPromptNote>
+<Caption>제어 카드에 점퍼 캡을 조정하십시오</Caption>
+</LabelDEPromptNote>
+<LabelThreshold>
+<Caption>임계 값</Caption>
+</LabelThreshold>
+<LabelDotFrequency>
+<Caption>포인트 주파수</Caption>
+</LabelDotFrequency>
+<LabelLineBlanking>
+<Caption>라인 블랭킹</Caption>
+</LabelLineBlanking>
+<LabelInterlaceControl>
+<Caption>선 조정</Caption>
+</LabelInterlaceControl>
+<LabelGammaReviseValue>
+<Caption>감마 보정</Caption>
+</LabelGammaReviseValue>
+<LabelAdvanced>
+<Caption>적은 고급 매개 변수</Caption>
+</LabelAdvanced>
+<btnReadParams>
+<Caption>매개 변수 리드 백</Caption>
+</btnReadParams>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<!--2013.5.4 增加-->
+<chkDotFrequencyAuto>
+<Caption>자동적 인</Caption>
+</chkDotFrequencyAuto>
+<chkLineBlankingAuto>
+<Caption>자동적 인</Caption>
+</chkLineBlankingAuto>
+<!--2013.5.4 增加结束-->
+</TdlgMonitorSetting>
+<!--通讯参数 窗口-->
+<TDlgNetworkSetting>
+<Caption>통신 매개 변수</Caption>
+<Messages>
+<AskToSelectComPort>일련 번호를 선택하세요!</AskToSelectComPort>
+<ErrorIp>잘못된 IP 주소!</ErrorIp>
+<UnknownCard>알 수없는</UnknownCard>
+<LabelTestResult>
+<Success>
+<Caption>성공적으로 통신 테스트!</Caption>
+</Success>
+<Fail>
+<Caption>통신 테스트가 실패!</Caption>
+</Fail>
+</LabelTestResult>
+</Messages>
+<!--选择通讯模式页-->
+<LabelNetworkType>
+<Caption>통신 모드를 선택</Caption>
+</LabelNetworkType>
+<optSerialPort>
+<Caption>시리얼 포트</Caption>
+</optSerialPort>
+<optNet>
+<Caption>네트워크 포트</Caption>
+</optNet>
+<optDirectNet>
+<Caption>네트워크 포트에 직접 연결</Caption>
+</optDirectNet>
+<optGprs>
+<Caption>GPRS 또는 인터넷</Caption>
+</optGprs>
+<!-- 串口参数设置页 -->
+<LabelSerialPortComs>
+<Caption>포트 번호</Caption>
+</LabelSerialPortComs>
+<!-- 网口参数设置页-->
+<LabelNetIp>
+<Caption>IP 주소</Caption>
+</LabelNetIp>
+<LabelNetPort>
+<Caption>포트 번호</Caption>
+</LabelNetPort>
+<LabelNetGateway>
+<Caption>게이트웨이</Caption>
+</LabelNetGateway>
+<LabelNetSubnetMask>
+<Caption>서브넷 마스크</Caption>
+</LabelNetSubnetMask>
+<LabelEditMACPrompt>
+<Caption>MAC 주소를 수정하려면, MAC 디버깅 도구를 다운로드하십시오</Caption>
+</LabelEditMACPrompt>
+<!-- GPRS设置页-->
+<LabelGprsIp>
+<Caption>GPRS 서버 IP 주소</Caption>
+</LabelGprsIp>
+<LabelGprsPort>
+<Caption>포트 번호</Caption>
+</LabelGprsPort>
+<chkGprsEnableAuth>
+<Caption>확인 열기 권한</Caption>
+</chkGprsEnableAuth>
+<LabelGprsAccount>
+<Caption>계정</Caption>
+</LabelGprsAccount>
+<LabelGprsPassword>
+<Caption>암호</Caption>
+</LabelGprsPassword>
+<!-- 测试结果页-->
+<LabelTestResultType>
+<Caption>통신 모드 :</Caption>
+</LabelTestResultType>
+<LabelTestResultPort>
+<Caption>포트 번호 :</Caption>
+</LabelTestResultPort>
+<LabelTestResultCard>
+<Caption>제어 카드 모델 :</Caption>
+</LabelTestResultCard>
+<btnSave>
+<Caption>저장하고 종료</Caption>
+</btnSave>
+<btnSetMonitor>
+<Caption>스크린 매개 변수 설정</Caption>
+</btnSetMonitor>
+<!-- 高级参数 -->
+<GroupBoxAdvanceParams>
+<Caption>고급 매개 변수</Caption>
+</GroupBoxAdvanceParams>
+<LabelSerialPortDelay>
+<Caption>지연</Caption>
+</LabelSerialPortDelay>
+<LabelSerialPortFrameLength>
+<Caption>프레임 길이</Caption>
+</LabelSerialPortFrameLength>
+<btnTestExit>
+<Caption>반환</Caption>
+</btnTestExit>
+<btnChooseTypeNextStep>
+<Caption>다음</Caption>
+</btnChooseTypeNextStep>
+<btnSerialPortLastStep>
+<Caption>이전</Caption>
+</btnSerialPortLastStep>
+<btnTest>
+<Caption>통신 테스트</Caption>
+</btnTest>
+<!--2013.5.5 增加-->
+<LabelDeviceId>
+<Caption>장치 ID</Caption>
+</LabelDeviceId>
+<!--2013.5.5 增加结束-->
+</TDlgNetworkSetting>
+<!-- 新建表格 窗口-->
+<TDlgNewTable>
+<Caption>새 스프레드 시트</Caption>
+<LabelRowCount>
+<Caption>열</Caption>
+</LabelRowCount>
+<LabelColCount>
+<Caption>열</Caption>
+</LabelColCount>
+<LabelBorderWidth>
+<Caption>구조</Caption>
+</LabelBorderWidth>
+<LabelBorderColor>
+<Caption>색</Caption>
+</LabelBorderColor>
+<chkSetCellWidth>
+<Caption>고정 셀 너비</Caption>
+</chkSetCellWidth>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>취소 (&amp;C)</Caption>
+</btnCancel>
+</TDlgNewTable>
+<!-- 软件开关屏 窗口-->
+<TDlgProtocolOnOff>
+<Caption>소프트웨어 스위치 화면</Caption>
+<optManual>
+<Caption>수동 스위치</Caption>
+</optManual>
+<btnOn>
+<Caption>시작 화면</Caption>
+</btnOn>
+<btnOff>
+<Caption>오프 스크린</Caption>
+</btnOff>
+<optAuto>
+<Caption>타이머 스위치</Caption>
+</optAuto>
+<LabelOn>
+<Caption>부팅 시간</Caption>
+</LabelOn>
+<LabelOff>
+<Caption>오프 시간</Caption>
+</LabelOff>
+<btnSave>
+<Caption>&amp;U 디스크 저장</Caption>
+</btnSave>
+<btnOK>
+<Caption>보내기 (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>취소 (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>같은 밝기 / 학교 / 타이머 스위치를 조정하는 U 디스크의 사용으로, USB의 수출 매개 변수를 설정</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+<!--2013.5.5 增加-->
+<chkAutoOnOff>
+<Caption>타이머 스위치</Caption>
+</chkAutoOnOff>
+<!--2013.5.5 增加结束-->
+</TDlgProtocolOnOff>
+<!-- 请求型号 窗口-->
+<TDlgProtocolQueryModel>
+<Caption>요청 모델</Caption>
+<LabelCardMode>
+<Caption>제어 카드 모델 :</Caption>
+</LabelCardMode>
+<LabelCardVersion>
+<Caption>코드의 하드웨어 버전 :</Caption>
+</LabelCardVersion>
+<LabelCardGuid>
+<Caption>고유 한 일련 번호 :</Caption>
+</LabelCardGuid>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+</TDlgProtocolQueryModel>
+<!-- 校时... 窗口-->
+<TDlgProtocolSetDateTime>
+<Caption>학교 ...</Caption>
+<LabelDate>
+<Caption>날짜 :</Caption>
+</LabelDate>
+<LabelTime>
+<Caption>시간 :</Caption>
+</LabelTime>
+<btnSave>
+<Caption>&amp;U 디스크 저장</Caption>
+</btnSave>
+<btnOK>
+<Caption>보내기 (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>취소 (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>같은 밝기 / 학교 / 타이머 스위치를 조정하는 U 디스크의 사용으로, USB의 수출 매개 변수를 설정</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+<!--2013.5.5 增加-->
+<btnGetSystemTime>
+<Caption>시스템 시간</Caption>
+</btnGetSystemTime>
+<!--2013.5.5 增加结束-->
+</TDlgProtocolSetDateTime>
+<!--亮度调节 窗口 -->
+<TDlgProtocolSetLight>
+<Caption>밝기 조정</Caption>
+<optAuto>
+<Caption>자동 감지</Caption>
+</optAuto>
+<optManual>
+<Caption>수동 조정</Caption>
+</optManual>
+<btnSave>
+<Caption>&amp;U 디스크 저장</Caption>
+</btnSave>
+<btnOK>
+<Caption>보내기 (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>취소 (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>같은 밝기 / 학교 / 타이머 스위치를 조정하는 U 디스크의 사용으로, USB의 수출 매개 변수를 설정</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+</TDlgProtocolSetLight>
+<!-- 图文编辑 窗口-->
+<TDlgRtfEditor>
+<Caption>편집자</Caption>
+<Messages>
+<!--RTF编辑对话框 -->
+<!--表格垂直拆分输入框标题-->
+<TableSplitVerticallyCaption>수직 분할</TableSplitVerticallyCaption>
+<!--表格垂直拆分输入框提示信息-->
+<TableSplitVerticallyPrompt>열 수를 분할 :</TableSplitVerticallyPrompt>
+<!--表格水平拆分输入框标题 -->
+<TableSplitHorizontallyCaption>수평 분할</TableSplitHorizontallyCaption>
+<!--表格水平拆分输入框提示信息-->
+<TableSplitHorizontallyPrompt>줄의 수를 분할 :</TableSplitHorizontallyPrompt>
+<!--提示选择一个表格-->
+<InfoSelectOneTable>테이블을 선택하십시오!</InfoSelectOneTable>
+</Messages>
+<ToolButtonLoadFiles>
+<Hint>파일 추가</Hint>
+</ToolButtonLoadFiles>
+<!-- 文件操作菜单 -->
+<PopupMenuAddFile>
+<Items>
+<Item>텍스트를 추가</Item>
+<Item>RTF 파일을 추가</Item>
+<Item>사진 추가</Item>
+<Item>DOC 추가</Item>
+<Item>EXCEL 추가</Item>
+</Items>
+</PopupMenuAddFile>
+<ToolButtonSave>
+<Hint>저장</Hint>
+</ToolButtonSave>
+<ToolButtonLeft>
+<Hint>수평 왼쪽</Hint>
+</ToolButtonLeft>
+<ToolButtonCenter>
+<Hint>가로로 가운데</Hint>
+</ToolButtonCenter>
+<ToolButtonRight>
+<Hint>거처의 수평 오른쪽</Hint>
+</ToolButtonRight>
+<ToolButtonBold>
+<Hint>대담한</Hint>
+</ToolButtonBold>
+<ToolButtonItalic>
+<Hint>이탤릭체</Hint>
+</ToolButtonItalic>
+<ToolButtonUnderline>
+<Hint>밑줄</Hint>
+</ToolButtonUnderline>
+<ToolButtonTop>
+<Hint>에 정렬</Hint>
+</ToolButtonTop>
+<ToolButtonVCenter>
+<Hint>수직으로 중심</Hint>
+</ToolButtonVCenter>
+<ToolButtonBottom>
+<Hint>아래쪽 맞춤</Hint>
+</ToolButtonBottom>
+<!-- 表格-->
+<ToolButtonTable>
+<Hint>형태</Hint>
+</ToolButtonTable>
+<!--表格操作菜单-->
+<PopupMenuTable>
+<Items>
+<Item>새 스프레드 시트</Item>
+<Item>-</Item>
+<Item>테두리 색상</Item>
+<Item>테두리 폭</Item>
+<Item>-</Item>
+<Item>
+<Caption>행 삽입</Caption>
+<Items>
+<Item>위에 삽입</Item>
+<Item>아래에 삽입</Item>
+</Items>
+</Item>
+<Item>
+<Caption>열 삽입</Caption>
+<Items>
+<Item>왼쪽에 삽입</Item>
+<Item>의 오른쪽</Item>
+</Items>
+</Item>
+<Item>
+<Caption>삭제</Caption>
+<Items>
+<Item>열</Item>
+<Item>열</Item>
+</Items>
+</Item>
+<Item>-</Item>
+<Item>셀 병합</Item>
+<Item>
+<Caption>셀 분할</Caption>
+<Items>
+<Item>수직 분할</Item>
+<Item>수평 분할</Item>
+</Items>
+</Item>
+<Item>
+<Caption>합병의 재개</Caption>
+<Items>
+<Item>열</Item>
+<Item>열</Item>
+<Item>전체의</Item>
+</Items>
+</Item>
+<Item>-</Item>
+<Item>
+<Caption>수직 정렬</Caption>
+<Items>
+<Item>에 정렬</Item>
+<Item>수직으로 중심</Item>
+<Item>아래쪽 맞춤</Item>
+</Items>
+</Item>
+</Items>
+</PopupMenuTable>
+<!-- 编辑菜单 -->
+<PopupMenuEditor>
+<Items>
+<Item>복사</Item>
+<Item>스틱</Item>
+<Item>선택</Item>
+</Items>
+</PopupMenuEditor>
+<LabelWordSpace>
+<Caption>단어 간격 :</Caption>
+</LabelWordSpace>
+<LabelLineSpace>
+<Caption>줄 간격 :</Caption>
+</LabelLineSpace>
+</TDlgRtfEditor>
+<!-- 扫描方式设置 窗口-->
+<TDlgScanSet>
+<Caption>모드 설정을 검사</Caption>
+<LabelScanSetName>
+<Caption>구성 이름</Caption>
+</LabelScanSetName>
+<LabelScanType>
+<Caption>스캔 모드</Caption>
+</LabelScanType>
+<cmbScanType>
+<Items>
+<Item>정적 검색</Item>
+<Item>1 / 2 스캔</Item>
+<Item>1 / 4의 검사</Item>
+<Item>1 / 8 스캔</Item>
+<Item>1 / 16 스캔</Item>
+</Items>
+</cmbScanType>
+<LabelWrap>
+<Caption>접기 선 모드</Caption>
+</LabelWrap>
+<cmbWrap>
+<Items>
+<Item>4 배 선</Item>
+<Item>8 배 선</Item>
+<Item>오프라인 16 %</Item>
+</Items>
+</cmbWrap>
+<LabelWinding>
+<Caption>길을 와인딩</Caption>
+</LabelWinding>
+<cmbWinding>
+<Items>
+<Item>뱀에</Item>
+<Item>뱀 이하</Item>
+</Items>
+</cmbWinding>
+<LabelScanLines>
+<Caption>스캔 라인의 수</Caption>
+</LabelScanLines>
+<cmbScanLines>
+<Items>
+<Item>1 행</Item>
+<Item>2 행</Item>
+<Item>4 행</Item>
+<Item>8 행</Item>
+<Item>영역 당 16 선</Item>
+</Items>
+</cmbScanLines>
+<LabelStr>
+<Caption>STR 극성</Caption>
+</LabelStr>
+<cmbStr>
+<Items>
+<Item>양극</Item>
+<Item>음극</Item>
+</Items>
+</cmbStr>
+<LabelSecondaryWind>
+<Caption>보조 권선</Caption>
+</LabelSecondaryWind>
+<cmbSecondaryWind>
+<Items>
+<Item>아니</Item>
+<Item>있다</Item>
+</Items>
+</cmbSecondaryWind>
+<LabelDecoding>
+<Caption>138 디코딩</Caption>
+</LabelDecoding>
+<cmbDecoding>
+<Items>
+<Item>138 디코딩</Item>
+<Item>문자 고</Item>
+<Item>138 디코딩</Item>
+<Item>리터럴 낮은</Item>
+</Items>
+</cmbDecoding>
+<LabelMirror>
+<Caption>데이터 흐름</Caption>
+</LabelMirror>
+<cmbMirror>
+<Items>
+<Item>표준</Item>
+<Item>거울</Item>
+</Items>
+</cmbMirror>
+<LabelDataPolarity>
+<Caption>데이터 극성</Caption>
+</LabelDataPolarity>
+<cmbDataPolarity>
+<Items>
+<Item>양극</Item>
+<Item>음극</Item>
+</Items>
+</cmbDataPolarity>
+<chkJiaoTi>
+<Caption>정상 교류</Caption>
+</chkJiaoTi>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>취소 (&amp;C)</Caption>
+</btnCancel>
+</TDlgScanSet>
+<!-- 查屏 窗口-->
+<TDlgSearchCard>
+<Caption>확인 화면</Caption>
+<!-- 开始查找页-->
+<LabelFinding>
+<Caption>제어 카드를 찾고 있습니다 ......</Caption>
+</LabelFinding>
+<MemoPrompt>
+<Items>
+<Item>당신이 제어 카드 정보를 업데이트하기 위해 U 디스크를 사용하려는 경우,이 단계는 제어 카드를 찾을 필요가 없습니다 취소 할 수 있습니다!</Item>
+</Items>
+</MemoPrompt>
+<btnCancel>
+<Caption>취소 (&amp;C)</Caption>
+</btnCancel>
+<!-- 查找成功页-->
+<LabelSearchSuccess>
+<Caption>성공을 찾아라!</Caption>
+</LabelSearchSuccess>
+<LabelType>
+<Caption>통신 모드 :</Caption>
+</LabelType>
+<LabelPort>
+<Caption>포트 번호 :</Caption>
+</LabelPort>
+<LabelCardType>
+<Caption>제어 카드 모델 :</Caption>
+</LabelCardType>
+<!-- 查找失败页-->
+<LabelSearchFail>
+<Caption>실패보세요!</Caption>
+</LabelSearchFail>
+<btnSearchAgain>
+<Caption>새로운 검색</Caption>
+</btnSearchAgain>
+<MemoIncDelayRetry>
+<Items>
+<Item>시스템은 자동으로 모든 포트를 스캔하려고 다시 지연 증가</Item>
+</Items>
+</MemoIncDelayRetry>
+<btnManualSetting>
+<Caption>사용자 정의</Caption>
+</btnManualSetting>
+<MemoManualSetInfo>
+<Items>
+<Item>수동 통신 매개 변수를 지정</Item>
+</Items>
+</MemoManualSetInfo>
+</TDlgSearchCard>
+<!-- 数据发送 窗口-->
+<TDlgSend>
+<Caption>데이터 전송</Caption>
+</TDlgSend>
+<!--资源选择窗口 窗口 -->
+<TDlgSystemResources>
+<Caption>리소스 선택 창</Caption>
+<Messages>
+<PromptNoSelected>어떤 사진을 선택하지 않은, 사진 선택을 클릭하십시오, 또는 드래그 다중 선택을 위해 놓습니다.</PromptNoSelected>
+</Messages>
+<btnOK>
+<Caption>선택 (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>취소 (&amp;C)</Caption>
+</btnCancel>
+</TDlgSystemResources>
+<!--边框宽度 窗口 -->
+<TDlgTableBorderWidth>
+<Caption>테두리 폭</Caption>
+<LabelBorderWidth>
+<Caption>테두리 폭</Caption>
+</LabelBorderWidth>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>취소 (&amp;C)</Caption>
+</btnCancel>
+</TDlgTableBorderWidth>
+<!-- 导入U盘 窗口-->
+<TDlgUsbForm>
+<Caption>가져 오기 U 디스크</Caption>
+<Messages>
+<NoUsb>U 디스크, 삽입 U 디스크를 찾을 수 없습니다!</NoUsb>
+<MonitorSize>폭 %d,신장%d</MonitorSize>
+<MonitorBoardType>%s，%s </MonitorBoardType>
+<AutoAlertLight>자동으로 밝기를 조정</AutoAlertLight>
+<ManualAlertLight>수동으로 밝기를 조정합니다 : %d 개 수준</ManualAlertLight>
+<MonitorTimeOnOffDisabled>사용할 수 없습니다.</MonitorTimeOnOffDisabled>
+<MonitorTimeOnOffEnabled>사용할 수 있습니다, %s-%s</MonitorTimeOnOffEnabled>
+<OutOfStorageCapacity>가져 오기 U 디스크 장애, 남은 용량의 카드 이상 발생 내용의 크기.</OutOfStorageCapacity>
+<CancelExportToUsb>가져 오기 U 디스크를 취소 할 수 있습니다.</CancelExportToUsb>
+<UsbNotFound>U 디스크, 삽입 U 디스크를 찾을 수 없습니다.</UsbNotFound>
+<ExportToUsbSuccess>파일이 성공적으로 U 디스크로 가져 왔습니다.</ExportToUsbSuccess>
+<ExportToUsbFail>U 디스크 오류를 가져옵니다.</ExportToUsbFail>
+<ExportToUsbRunning>생성되는 잠시만 기다려주세요 ...</ExportToUsbRunning>
+<ReadUsbFileSystemFail>U 디스크 파일 시스템은 인식하지 않습니다!</ReadUsbFileSystemFail>
+<InvalidUsbFileSystemFail>당신은 FAT 또는 FAT32 포맷 된 USB 디스크를 사용할 수 있습니다!</InvalidUsbFileSystemFail>
+</Messages>
+<LabelSelectUsb>
+<Caption>USB 드라이브를 선택</Caption>
+</LabelSelectUsb>
+<LabelMonitorSize>
+<Caption>화면 크기 :</Caption>
+</LabelMonitorSize>
+<LabelMonitorBoardType>
+<Caption>셀 플레이트 타입 :</Caption>
+</LabelMonitorBoardType>
+<chkCheckTime>
+<Caption>학교 :</Caption>
+</chkCheckTime>
+<chkAlertLight>
+<Caption>밝기 조정 :</Caption>
+</chkAlertLight>
+<chkTimeOnOff>
+<Caption>타이머 스위치 스크린 :</Caption>
+</chkTimeOnOff>
+<btnLoadUsbDrivers>
+<Caption>시험 장비</Caption>
+</btnLoadUsbDrivers>
+<btnExport>
+<Caption>가져 오기 U 디스크</Caption>
+</btnExport>
+<btnCancel>
+<Caption>취소</Caption>
+</btnCancel>
+<btnExportToLocal>
+<Caption>지역으로</Caption>
+</btnExportToLocal>
+<!--2013.1.30 新增-->
+<!--校时-->
+<optManulTiming>
+<Caption>사용 설명서</Caption>
+</optManulTiming>
+<optAutoTiming>
+<Caption>시스템 시간</Caption>
+</optAutoTiming>
+<!--亮度调节：-->
+<optManualLight>
+<Caption>사용 설명서</Caption>
+</optManualLight>
+<optAutoLight>
+<Caption>자동적 인</Caption>
+</optAutoLight>
+<!--定时开关屏：-->
+<LabelOn>
+<Caption>부팅 시간</Caption>
+</LabelOn>
+<LabelOff>
+<Caption>오프 시간</Caption>
+</LabelOff>
+<!--2013.1.30 新增结束-->
+<!--2013.5.4 新增-->
+<LabelUsbFreeSize>
+<Caption>유효한 수용량 :</Caption>
+</LabelUsbFreeSize>
+<LabelUsbFileSystem>
+<Caption>파일 형식 :</Caption>
+</LabelUsbFileSystem>
+<LabelDateTimeNoChange>
+<Caption>변경되지 않은 상태로 유지</Caption>
+</LabelDateTimeNoChange>
+<LabelLightNoChange>
+<Caption>변경되지 않은 상태로 유지</Caption>
+</LabelLightNoChange>
+<LabelOnOffNoChange>
+<Caption>항상</Caption>
+</LabelOnOffNoChange>
+<!--2013.5.4 新增结束-->
+</TDlgUsbForm>
+<!-- 时钟区域参数设置界面 -->
+<TFrameOptionClock>
+<!--时钟属性-->
+<GroupBoxRegionInfo>
+<Caption>시계 등록</Caption>
+</GroupBoxRegionInfo>
+<optOneLine>
+<Caption>싱글 라인 디스플레이</Caption>
+</optOneLine>
+<optMultiLine>
+<Caption>멀티 라인 디스플레이</Caption>
+</optMultiLine>
+<LabelFieldSpace>
+<Caption>간격</Caption>
+</LabelFieldSpace>
+<chkDateWeekExchange>
+<Caption>일주일의 날짜와의 위치 교환</Caption>
+</chkDateWeekExchange>
+<chkShowDate>
+<Caption>날짜를 표시합니다</Caption>
+</chkShowDate>
+<chkShowWeek>
+<Caption>주에게 보여줍니다</Caption>
+</chkShowWeek>
+<chkShowTime>
+<Caption>시간 표시</Caption>
+</chkShowTime>
+<!-- 时差-->
+<GroupBoxTimeDiff>
+<Caption>시차</Caption>
+</GroupBoxTimeDiff>
+<LabelDeltHour>
+<Caption>시간</Caption>
+</LabelDeltHour>
+<LabelDeltMinute>
+<Caption>분</Caption>
+</LabelDeltMinute>
+<LabelDeltMinute>
+<Caption>분</Caption>
+</LabelDeltMinute>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>고정 텍스트</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>고정 텍스트를 사용</Caption>
+</chkEnabledText>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>서체</Caption>
+</GroupBoxFont>
+<!--2013.1.30 新增-->
+<!--星期格式-->
+<cmbWeekFormat>
+<Items>
+<Item>중국의</Item>
+<Item>월</Item>
+<Item>월요일</Item>
+</Items>
+</cmbWeekFormat>
+<!--2013.1.30 新增结束-->
+</TFrameOptionClock>
+<!-- 动态背景-->
+<TFrameOptionDynamicBackground>
+<GroupBoxInfo>
+<Caption>동적 배경</Caption>
+</GroupBoxInfo>
+<chkEnabledDynamicBackground>
+<Caption>동적 배경 사용</Caption>
+</chkEnabledDynamicBackground>
+<LabelDynamicBackgroundStyle>
+<Caption>스타일</Caption>
+</LabelDynamicBackgroundStyle>
+<LabelDynamicBackgroundSpeed>
+<Caption>속도</Caption>
+</LabelDynamicBackgroundSpeed>
+<cmbDynamicBackgroundSpeed>
+<Items>
+<Item>1 (가장 빠름)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (느린)</Item>
+</Items>
+</cmbDynamicBackgroundSpeed>
+<cmbDynamicBackgroundStyle>
+<Items>
+<Item>링</Item>
+<Item>다섯개 별</Item>
+<Item>별이 가득 하늘</Item>
+<Item>눈송이</Item>
+<Item>왼쪽 및 오른쪽 화살표</Item>
+<Item>수직 sidesway</Item>
+<Item>이동 막대</Item>
+<Item>다이아몬드</Item>
+<Item>상자</Item>
+<Item>원</Item>
+<Item>듀얼 라인 스캔</Item>
+<Item>싱글 스캔 (Single Scan)</Item>
+</Items>
+</cmbDynamicBackgroundStyle>
+</TFrameOptionDynamicBackground>
+<!-- 炫动字区域参数设置界面-->
+<TFrameOptionFlashText>
+<GroupBoxRegionInfo>
+<Caption>그리고 단어 생기편집</Caption>
+</GroupBoxRegionInfo>
+<ToolButtonBold>
+<Hint>대담한</Hint>
+</ToolButtonBold>
+<ToolButtonItalic>
+<Hint>이탤릭체</Hint>
+</ToolButtonItalic>
+<ToolButtonUnderline>
+<Hint>밑줄</Hint>
+</ToolButtonUnderline>
+<cmbFontName>
+<Hint>글꼴 이름</Hint>
+</cmbFontName>
+<cmbFontSize>
+<Hint>글꼴 크기</Hint>
+</cmbFontSize>
+<cmbFontColor>
+<Hint>글꼴 색상</Hint>
+</cmbFontColor>
+</TFrameOptionFlashText>
+<!-- 图文区域参数设置界面-->
+<TFrameOptionPicture>
+<Messages>
+<InfoSelectDeletedFile>삭제할 파일을 선택하십시오!</InfoSelectDeletedFile>
+<ConfDeleteFile>당신이 삭제할 것인지 확인?</ConfDeleteFile>
+<WarnFileNotExists>파일이 존재하지 않습니다!</WarnFileNotExists>
+</Messages>
+<GroupBoxRegionInfo>
+<Caption>파일 목록</Caption>
+</GroupBoxRegionInfo>
+<btnAdd>
+<Caption>추가</Caption>
+</btnAdd>
+<btnDelete>
+<Caption>삭제</Caption>
+</btnDelete>
+<btnUp>
+<Hint>움직임</Hint>
+</btnUp>
+<btnDown>
+<Hint>아래로</Hint>
+</btnDown>
+<!-- 添加菜单-->
+<PopupMenuAddFile>
+<Items>
+<Item>새로운 하이퍼 텍스트</Item>
+<Item>하이퍼 텍스트 추가</Item>
+<Item>사진 추가</Item>
+</Items>
+</PopupMenuAddFile>
+<!--2013.5.4 增加-->
+<ToolButtonNewRtf>
+<Hint>RTF 추가</Hint>
+</ToolButtonNewRtf>
+<ToolButtonAddPicture>
+<Hint>사진 추가</Hint>
+</ToolButtonAddPicture>
+<ToolButtonAddGrid>
+<Hint>테이블을 추가</Hint>
+</ToolButtonAddGrid>
+<ToolButtonAddWord>
+<Hint>WORD 추가</Hint>
+</ToolButtonAddWord>
+<ToolButtonAddExcel>
+<Hint>EXCEL 추가</Hint>
+</ToolButtonAddExcel>
+<ToolButtonDelete>
+<Hint>삭제</Hint>
+</ToolButtonDelete>
+<ToolButtonUp>
+<Hint>움직임</Hint>
+</ToolButtonUp>
+<ToolButtonDown>
+<Hint>아래로</Hint>
+</ToolButtonDown>
+<chkShowPath>
+<Caption>경로 표시</Caption>
+</chkShowPath>
+<!--2013.5.4 增加结束-->
+</TFrameOptionPicture>
+<!-- 节目参数设置界面-->
+<TFrameOptionProgram>
+<GroupBoxProgramInfo>
+<Caption>형식 재생</Caption>
+</GroupBoxProgramInfo>
+<optPlayModeNormal>
+<Caption>재생 순서</Caption>
+</optPlayModeNormal>
+<optPlayModeHeart>
+<Caption>고정 길이 플레이 (들)</Caption>
+</optPlayModeHeart>
+<optPlayModeSetTime>
+<Caption>정기적으로 방송</Caption>
+</optPlayModeSetTime>
+<LabelStartDateTime>
+<Caption>시작 시간</Caption>
+</LabelStartDateTime>
+<LabelEndDateTime>
+<Caption>종료 시간</Caption>
+</LabelEndDateTime>
+<chkWeekDaysSunday>
+<Caption>일요일</Caption>
+</chkWeekDaysSunday>
+<chkWeekDaysMonday>
+<Caption>월요일</Caption>
+</chkWeekDaysMonday>
+<chkWeekDaysTuesday>
+<Caption>화요일</Caption>
+</chkWeekDaysTuesday>
+<chkWeekDaysWednesday>
+<Caption>수요일</Caption>
+</chkWeekDaysWednesday>
+<chkWeekDaysThurday>
+<Caption>목요일</Caption>
+</chkWeekDaysThurday>
+<chkWeekDaysFriday>
+<Caption>금요일</Caption>
+</chkWeekDaysFriday>
+<chkWeekDaysSaturday>
+<Caption>토요일</Caption>
+</chkWeekDaysSaturday>
+</TFrameOptionProgram>
+<!-- 温度区域参数设置界面-->
+<TFrameOptionTempreture>
+<GroupBoxRegionInfo>
+<Caption>온도 특성</Caption>
+</GroupBoxRegionInfo>
+<LabelMode>
+<Caption>온도 단위</Caption>
+</LabelMode>
+<LabelDelt>
+<Caption>교정</Caption>
+</LabelDelt>
+<LabelNumberColor>
+<Caption>디지털 방식으로 색깔</Caption>
+</LabelNumberColor>
+<LabelUnitColor>
+<Caption>단위 색상</Caption>
+</LabelUnitColor>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>고정 텍스트</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>고정 텍스트를 사용</Caption>
+</chkEnabledText>
+<chkTwoLine>
+<Caption>포장</Caption>
+</chkTwoLine>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>서체</Caption>
+</GroupBoxFont>
+</TFrameOptionTempreture>
+<!--字幕区域参数设置界面 -->
+<TFrameOptionText>
+<GroupBoxRegionInfo>
+<Caption>자막 편집기</Caption>
+</GroupBoxRegionInfo>
+<LabelWordSpace>
+<Caption>단어 간격 :</Caption>
+</LabelWordSpace>
+</TFrameOptionText>
+<!-- 计时区域参数设置界面-->
+<TFrameOptionTiming>
+<!-- 时钟属性-->
+<GroupBoxRegionInfo>
+<Caption>시계 등록</Caption>
+</GroupBoxRegionInfo>
+<optCountDown>
+<Caption>카운트 다운</Caption>
+</optCountDown>
+<optCountUp>
+<Caption>타이밍이다</Caption>
+</optCountUp>
+<LabelDest>
+<Caption>대상 시간</Caption>
+</LabelDest>
+<LabelFormat>
+<Caption>형식 표시</Caption>
+</LabelFormat>
+<chkShowDay>
+<Caption>하루</Caption>
+</chkShowDay>
+<chkShowHour>
+<Caption>시간</Caption>
+</chkShowHour>
+<chkShowMinute>
+<Caption>분</Caption>
+</chkShowMinute>
+<chkShowSecond>
+<Caption>초</Caption>
+</chkShowSecond>
+<LabelNumberColor>
+<Caption>디지털 방식으로 색깔</Caption>
+</LabelNumberColor>
+<LabelUnitColor>
+<Caption>단위 색상</Caption>
+</LabelUnitColor>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>고정 텍스트</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>고정 텍스트를 사용</Caption>
+</chkEnabledText>
+<chkTwoLine>
+<Caption>포장</Caption>
+</chkTwoLine>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>서체</Caption>
+</GroupBoxFont>
+</TFrameOptionTiming>
+<!-- 表盘盘区域参数设置界面-->
+<TFrameOptionWatch>
+<!-- 表盘属性-->
+<GroupBoxRegionInfo>
+<Caption>속성 전화</Caption>
+</GroupBoxRegionInfo>
+<LabelStyle>
+<Caption>스타일</Caption>
+</LabelStyle>
+<cmbStyle>
+<Items>
+<Item>전통</Item>
+</Items>
+</cmbStyle>
+<LabelTickWidth>
+<Caption>폭</Caption>
+</LabelTickWidth>
+<LabelTickColor>
+<Caption>색</Caption>
+</LabelTickColor>
+<LabelHourTickWidth>
+<Caption>숙박 시설의 전체 지점</Caption>
+</LabelHourTickWidth>
+<Label369TickWidth>
+<Caption>3.6.9 포인트 등록</Caption>
+</Label369TickWidth>
+<LabelMinuteTickWidth>
+<Caption>포인트의 속성</Caption>
+</LabelMinuteTickWidth>
+<LabelLineWidth>
+<Caption>폭</Caption>
+</LabelLineWidth>
+<LabelLineColor>
+<Caption>색</Caption>
+</LabelLineColor>
+<LabelHourLineWidth>
+<Caption>시계 방향으로</Caption>
+</LabelHourLineWidth>
+<LabelMinuteLineWidth>
+<Caption>분침</Caption>
+</LabelMinuteLineWidth>
+<LabelSecondLineWidth>
+<Caption>초침</Caption>
+</LabelSecondLineWidth>
+<!-- 时差-->
+<GroupBoxTimeDiff>
+<Caption>시차</Caption>
+</GroupBoxTimeDiff>
+<LabelDeltHour>
+<Caption>시간</Caption>
+</LabelDeltHour>
+<LabelDeltMinute>
+<Caption>분</Caption>
+</LabelDeltMinute>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>고정 텍스트</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>고정 텍스트를 사용</Caption>
+</chkEnabledText>
+<btnTextDown>
+<Hint>아래로</Hint>
+</btnTextDown>
+<btnTextLeft>
+<Hint>왼쪽</Hint>
+</btnTextLeft>
+<btnTextCenter>
+<Hint>센터</Hint>
+</btnTextCenter>
+<btnTextRight>
+<Hint>오른쪽으로 이동</Hint>
+</btnTextRight>
+<btnTextUp>
+<Hint>움직임</Hint>
+</btnTextUp>
+</TFrameOptionWatch>
+<!--表格编辑主界面-->
+<CGridEditorMainForm>
+<Caption>테이블 편집</Caption>
+<!--单色-->
+<PopupMenuSingleColor>
+<Items>
+<Item>아니</Item>
+<Item>빨강</Item>
+</Items>
+</PopupMenuSingleColor>
+<!--双色-->
+<PopupMenuTwoColor>
+<Items>
+<Item>아니</Item>
+<Item>빨강</Item>
+<Item>황색</Item>
+<Item>녹색</Item>
+</Items>
+</PopupMenuTwoColor>
+</CGridEditorMainForm>
+<!--表格编辑插入表格界面-->
+<CGridEditorInsertCells>
+<Caption>테이블을 추가</Caption>
+<LabelType>
+<Caption>유형 :</Caption>
+</LabelType>
+<optTypeRow>
+<Caption>열</Caption>
+</optTypeRow>
+<optTypeCol>
+<Caption>열</Caption>
+</optTypeCol>
+<LabelCount>
+<Caption>양 :</Caption>
+</LabelCount>
+<LabelPosition>
+<Caption>위치 :</Caption>
+</LabelPosition>
+<optPositionCurrent>
+<Caption>현재</Caption>
+</optPositionCurrent>
+<optPositionEnd>
+<Caption>마지막</Caption>
+</optPositionEnd>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>취소 (&amp;C)</Caption>
+</btnCancel>
+</CGridEditorInsertCells>
+<!--表格编辑删除单元格界面-->
+<CGridEditorDeleteCells>
+<Caption>셀 삭제</Caption>
+<optTypeRow>
+<Caption>전체 선</Caption>
+</optTypeRow>
+<optTypeCol>
+<Caption>전체 열</Caption>
+</optTypeCol>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>취소 (&amp;C)</Caption>
+</btnCancel>
+</CGridEditorDeleteCells>
+</Languages>

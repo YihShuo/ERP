@@ -1,0 +1,2272 @@
+<?xml version="1.0"?>
+<Languages>
+<!--修改记录>
+41399
+1. 校时调试，节点<TDlgProtocolSetDateTime>
+增加<btnGetSystemTime>
+2. 通讯参数设置窗口，GPRS页，节点<TDlgNetworkSetting>
+增加<LabelDeviceId>
+3. 定时开关调试，节点<TDlgProtocolOnOff>
+增加<chkAutoOnOff>
+4. 区域显示参数设置，主界面，节点<TMainForm>
+增加<chkContinuousLeft>,<chkContinuousTop>
+41398
+1. 增加表格编辑器语言
+节点：<CGridEditorMainForm>,<CGridEditorInsertCells>,<CGridEditorDeleteCells>
+2. USB导出界面，节点<TDlgUsbForm>
+增加<LabelUsbFreeSize>,<LabelUsbFileSystem>,<LabelDateTimeNoChange>,<LabelLightNoChange>,<LabelOnOffNoChange>
+3. 定时开关调试，节点<TDlgProtocolOnOff>
+增加<MemoHelp>
+4. 亮度调节调试，节点<TDlgProtocolSetLight>
+增加<MemoHelp>
+5. 校时调试，节点<TDlgProtocolSetDateTime>
+增加<MemoHelp>
+6. 屏幕参数设置，节点<TdlgMonitorSetting>
+增加<chkDotFrequencyAuto>,<chkLineBlankingAuto>
+7. 图文区域编辑选项界面，<TFrameOptionPicture>
+增加<ToolButtonNewRtf>,<ToolButtonAddPicture>,<ToolButtonAddGrid>
+<ToolButtonAddWord>,<ToolButtonAddExcel>,<ToolButtonDelete>,
+<ToolButtonUp>,<ToolButtonDown>
+<chkShowPath>
+8. 主界面工具条，<TMainForm>
+增加 <ToolButtonTiming>,<ToolButtonSeDateTime>,<ToolButtonSetLight>
+<ToolButtonOnOff>
+<修改记录-->
+<!--这个文件定义中文简体-->
+<!-- Messages段定义一些信息提示信息-->
+<Messages>
+<!--;通用消息-->
+<Comm>
+<Comm.InitFail>Khởi tạo không thành công!</Comm.InitFail>
+<!--图文编辑添加文本文件时打开文件对话框的文件扩展名提示-->
+<FileFilterText>File text(*.txt)</FileFilterText>
+<!--图文编辑添加RTF文件时打开文件对话框的文件扩展名提示-->
+<FileFilterRTF>RTF tập tin (*.rtf)</FileFilterRTF>
+<OpenRtfFail>Đọc tập tin RTF không thành công!</OpenRtfFail>
+<!--图文编辑添加图片文件时打开文件对话框的文件扩展名提示-->
+<FileFilterPicture>Tập tin hình ảnh (*.BMP;*.JPG;*.GIF;*.PNG)</FileFilterPicture>
+<OpenPictureFail>Không thể đọc được file ảnh!</OpenPictureFail>
+<!--图文编辑添加WORD文件时打开文件对话框的文件扩展名提示-->
+<FileFilterWord>Tài liệu Word(*.doc;*.docx)|*.doc;*.docx|WPS(*.wps)|*.wps|</FileFilterWord>
+<OpenWordFail>Không thể đọc được các tài liệu Word, chắc chắn rằng bạn cài đặt Word!</OpenWordFail>
+<!--图文编辑添加EXCEL文件时打开文件对话框的文件扩展名提示-->
+<FileFilterExcel>Các tài liệu Excel (*.xls;*.xlsx)|WPS(*.et)|*.et|</FileFilterExcel>
+<OpenExcelFail>Excel tài liệu không thể đọc được! >>%s</OpenExcelFail>
+<!-- 工程打开保存的提示信息-->
+<SaveProjectFail>Không thể lưu dự án!</SaveProjectFail>
+<CreateDirFail>Không thể tạo thư mục!</CreateDirFail>
+<OpenProjectFail>Không thể mở dự án!</OpenProjectFail>
+<ErrorProjectVersion>Phiên bản tập tin dự án không công nhận!</ErrorProjectVersion>
+<ErrorProjectFile>Hồ sơ dự án là tham nhũng!</ErrorProjectFile>
+<!--;提示保存工程-->
+<ProjectChangedPrompt>Dự án cũng thay đổi, lưu nó?</ProjectChangedPrompt>
+<!--;默认的新工程-->
+<NewProjectName>(Tác phẩm mới)</NewProjectName>
+<!--;工程没有内容-->
+<ProjectNull>Không có nội dung có thể được lưu!</ProjectNull>
+<Unknown>Chưa biết</Unknown>
+<!--通讯时的些操作信息-->
+<ProtocolTestStart>Được kết nối với card điều khiển, xin vui lòng chờ ...</ProtocolTestStart>
+<ProtocolSuccess>Kết nối sự thành công của thẻ kiểm soát.</ProtocolSuccess>
+<ProtocolFail>Hoạt động không, kiểm tra các cổng nối tiếp hoặc mạng là bình thường.</ProtocolFail>
+<ErrorComPort>Không hợp lệ nối tiếp số%s! Hãy kiểm tra các thông số truyền thông thiết lập!</ErrorComPort>
+<ProtocolReadyFail>Thiết bị này là không sẵn sàng! Hãy kiểm tra các cổng nối tiếp hoặc mạng là bình thường.</ProtocolReadyFail>
+<ProtocolOnScreenSuccess>Màn hình mở!</ProtocolOnScreenSuccess>
+<ProtocolOffScreenSuccess>Tắt màn hình thành công!</ProtocolOffScreenSuccess>
+<ProtocolSetAutoOnOff>Thiết lập bộ đếm thời gian chuyển đổi thành công màn hình.</ProtocolSetAutoOnOff>
+<ProtocolReadParamsSuccess>Tham số thành công readback.</ProtocolReadParamsSuccess>
+<ProgressPrompt>Tỷ lệ tiến bộ:</ProgressPrompt>
+<RemainTimePrompt>Thời gian còn lại:%d giây</RemainTimePrompt>
+<MakingMonitorFile>Tập tin thông số màn hình đang được tạo ra ...</MakingMonitorFile>
+<SendingMonitorFile>Tập tin thông số màn hình đang được gửi ...</SendingMonitorFile>
+<MakingDataFile>Được tạo ra dữ liệu nội dung ...</MakingDataFile>
+<DataFileOutofCapacity>Truyền không, kích thước của các nội dung gửi bên ngoài thẻ trong khả năng còn lại.</DataFileOutofCapacity>
+<SendingDataFile>Nội dung dữ liệu đã sẵn sàng, bắt đầu gửi ...</SendingDataFile>
+<SendDataFileSuccess>Gửi thành công.</SendDataFileSuccess>
+<SendDataFileFail>Truyền thất bại, nguyên nhân của lỗi:%s.</SendDataFileFail>
+<ProtocolReadParamsSuccess>Tham số thành công readback.</ProtocolReadParamsSuccess>
+<SaveScanSetInfoFail>Lưu các thiết lập chế độ quét không thành công:%s</SaveScanSetInfoFail>
+<ConfDeleteScanSetInfo>Xác nhận rằng bạn muốn xóa này?</ConfDeleteScanSetInfo>
+<CreateCommFail>Thành phần tạo ra thông tin liên lạc không thành công!</CreateCommFail>
+<!--;默认字体-->
+<DefaultFontName>Arial</DefaultFontName>
+<DefaultFontSize>10</DefaultFontSize>
+<!--;颜色列表-->
+<ColorList>
+<Item>Đơn sắc</Item>
+<Item>Màu</Item>
+<Item>Cầu vồng</Item>
+<Item>Màu Full</Item>
+</ColorList>
+<!--;单基色颜色列表-->
+<SingleColorList>
+<Item>Đỏ</Item>
+</SingleColorList>
+<!--;双基色颜色列表-->
+<DoubleColorList>
+<Item>Đỏ</Item>
+<Item>Vàng</Item>
+<Item>Xanh</Item>
+</DoubleColorList>
+<!--;全彩色颜色列表-->
+<SevenColorList>
+<Item>Đỏ</Item>
+<Item>Vàng</Item>
+<Item>Xanh</Item>
+</SevenColorList>
+<!--;灰度列表-->
+<ColorGrayList>
+<Item>Màu xám</Item>
+<Item>32</Item>
+<Item>256</Item>
+</ColorGrayList>
+<!--;计时区域的显示格式-->
+<TimingDayLabel>Ngày</TimingDayLabel>
+<TimingDayFormat>%d%s</TimingDayFormat>
+<TimingHourLabel>Thời gian</TimingHourLabel>
+<TimingHourFormat>%d%s</TimingHourFormat>
+<TimingMinuteLabel>Phút</TimingMinuteLabel>
+<TimingMinuteFormat>%d%s</TimingMinuteFormat>
+<TimingSecondLabel>Thứ hai</TimingSecondLabel>
+<TimingSecondFormat>%d giây</TimingSecondFormat>
+<!--集群操作信息-->
+<GprsValidateError>GPRS xác minh mật khẩu tài khoản là không chính xác!</GprsValidateError>
+<GprsConnectError>Không thể kết nối máy chủ GPRS!</GprsConnectError>
+<GprsImeiError>Bằng cách sử dụng thông tin liên lạc GPRS, tên màn hình phải là Duy Tân 15 số IMEI.</GprsImeiError>
+<NoGprsIdFilterFile>Thiếu GPRS bộ lọc tập tin!</NoGprsIdFilterFile>
+<UpdateGprsCardsCompleted>Được hoàn thành của các cụm danh sách trực tuyến</UpdateGprsCardsCompleted>
+<UpdateGprsCardsError>Lỗi kết nối, xin vui lòng lại có được một cụm.</UpdateGprsCardsError>
+<ConnectingColonyServer>Máy chủ trong cluster, xin vui lòng chờ ...</ConnectingColonyServer>
+<ConnectColonyServerSuccess>Sự thành công của các máy chủ trong cluster.</ConnectColonyServerSuccess>
+<ConnectColonyServerFail>Không thể kết nối với các cụm máy chủ.</ConnectColonyServerFail>
+<PromptSelectColonyCommandItem>Vui lòng chọn sự cần thiết phải thực hiện một mục lệnh.</PromptSelectColonyCommandItem>
+<ColonyCommandOutofCapacity>Thực hiện lệnh không thành công, tên {0} tạo ra màn hình kích thước dữ liệu vượt quá kích thước của dung lượng thẻ.</ColonyCommandOutofCapacity>
+<PromptColonyCloneOnlyOneRegion>Trong tiểu màn hình chế độ màn hình chính thích ứng, bạn chỉ có thể tạo ra một khu vực đồ họa, và kích thước của khu vực này phải có sẵn cho các kích thước màn hình.</PromptColonyCloneOnlyOneRegion>
+<SendColonyCommandSuccess>Thực hiện lệnh cụm là thành công.</SendColonyCommandSuccess>
+<SendColonyCommandFail>Lệnh cụm thất bại.</SendColonyCommandFail>
+<PromptColonyVetifyNullIp>Địa chỉ máy chủ không thể để trống!</PromptColonyVetifyNullIp>
+<PromptColonyVetifyNullPassword>Mật khẩu máy chủ không thể để trống!</PromptColonyVetifyNullPassword>
+<ColonyVetifyInvalidPassword>Mật khẩu không đúng.</ColonyVetifyInvalidPassword>
+<ColonyVetiryServerError>Các quá trình máy chủ thất bại.</ColonyVetiryServerError>
+<GprsColonyOperationReady>Sẵn sàng</GprsColonyOperationReady>
+<!--扫描信息的名称描述-->
+<ScanSetName1>01) P10 đơn sắc 12 giao diện</ScanSetName1>
+<!--未知的扫描方式名称-->
+<UnknownScanSetName>Quét chưa biết</UnknownScanSetName>
+<!--协议名称-->
+<ProtocolSerialPort>Cổng nối tiếp</ProtocolSerialPort>
+<ProtocolNet>Cổng mạng</ProtocolNet>
+<ProtocolDirectNet>Cổng mạng kết nối trực tiếp</ProtocolDirectNet>
+<ProtocolGprs>GPRS</ProtocolGprs>
+<ProtocolUnknown>Chưa biết</ProtocolUnknown>
+<!--2013-04-09-->
+<!--通讯测试错误-->
+<UnauthorizedAccessReplyPacket>Không phải là một gói tin trả lời hợp lệ.</UnauthorizedAccessReplyPacket>
+<OpenPortFail>Mở cổng nối tiếp thất bại.</OpenPortFail>
+<CancelSending>Hủy gửi tin.</CancelSending>
+<CreateFail>Tạo ra một thành phần thông tin liên lạc không</CreateFail>
+<SocketError>Lỗi mạng</SocketError>
+<ColonyNotExists>Cụm thiết bị đầu cuối không tồn tại</ColonyNotExists>
+<ColonyOffline>Dòng thiết bị đầu cuối cụm</ColonyOffline>
+<ColonyBusy>Dòng cụm là bận rộn</ColonyBusy>
+</Comm>
+</Messages>
+<!-- 以下是窗口界面的文字信息-->
+<!-- 其中的<Messages>段是一些提示信息, 其他段是界面上控件的文字信息-->
+<!-- 主窗口-->
+<TMainForm>
+<!-- 标题栏-->
+<Caption>X Show phần mềm</Caption>
+<Messages>
+<LoadSystemConfigFail>Tải thất bại cấu hình hệ thống!</LoadSystemConfigFail>
+<MonitorName>Hiển thị%d</MonitorName>
+<ProgramName>Chương trình%d</ProgramName>
+<RegionNamePicture>Đồ họa%d</RegionNamePicture>
+<RegionNameText>Phụ đề%d</RegionNameText>
+<RegionNameFlashText>hoạt hình%d</RegionNameFlashText>
+<RegionNameClock>Đồng hồ%d</RegionNameClock>
+<RegionNameWatch>Quay số%d</RegionNameWatch>
+<RegionNameTiming>Thời gian%d</RegionNameTiming>
+<RegionNameDefaul>Vùng%d</RegionNameDefaul>
+<AskToSelectOneTreeNode>Vui lòng chọn một nút!</AskToSelectOneTreeNode>
+<WarnOnDeleteOneMonitor>Không thể xóa được, dự án phải có ít nhất một màn hình!</WarnOnDeleteOneMonitor>
+<ConfDeleteProgramListNode>Xác nhận rằng bạn muốn xóa này?</ConfDeleteProgramListNode>
+<!--有重叠区域-->
+<RegionOverlapping>Chiến dịch thất bại,%s: chứa đựng những vùng chồng lấn.</RegionOverlapping>
+<!--导入U盘时如果没有选择屏幕提示-->
+<AskToSelectMonitor>Vui lòng chọn một màn hình!</AskToSelectMonitor>
+<!--显示区域页数信息-->
+<RegionPagesInfo>Trang%d /%d trang</RegionPagesInfo>
+<!--对象克隆后加的前缀 -->
+<CloneAddText>Sao chép</CloneAddText>
+<!--超出节目数提示-->
+<MaxProgramCountInfo>Hỗ trợ tối đa%d chương trình!</MaxProgramCountInfo>
+<!--超出区域数提示-->
+<MaxRegionCountInfo>Hỗ trợ tối đa%d khu vực!</MaxRegionCountInfo>
+<!--超出具体区域数提示-->
+<MaxRegionDetailCountInfo>Hỗ trợ lớn nhất%d của khu vực!</MaxRegionDetailCountInfo>
+<MaxSpeedNote>(Nhanh nhất)</MaxSpeedNote>
+<MinSpeedNote>(Chậm nhất)</MinSpeedNote>
+<!--屏幕名称不允许重复-->
+<ScreeNameRepeat>Tên màn hình không được phép lặp lại!</ScreeNameRepeat>
+<!--检测空区域-->
+<HaveNoRegions>Khu vực chương trình hiện tại! Không thể hoạt động!</HaveNoRegions>
+<AllRegionsIsNull>Tất cả các lĩnh vực của chương trình là không có gì! Không thể hoạt động!</AllRegionsIsNull>
+<ConfHaveNulRegions>Các phát hiện tiêu đề trống rỗng, hoặc khu vực đồ họa tiếp tục hoạt động?</ConfHaveNulRegions>
+</Messages>
+<!--另存工程对话框-->
+<dlgSave>
+<Project>
+<Filter>Các tập tin Kalerka dự án</Filter>
+</Project>
+<SaveProject>
+<Title>Save Project As ...</Title>
+</SaveProject>
+<SaveAsProject>
+<Title>Lưu dự án như ...</Title>
+</SaveAsProject>
+</dlgSave>
+<dlgOpen>
+<OpenProject>
+<Title>Mở các dự án ...</Title>
+</OpenProject>
+</dlgOpen>
+<!--节目管理按钮-->
+<btnProgramList>
+<Caption>Quản lý chương trình</Caption>
+</btnProgramList>
+<!--节目管理树右键菜单-->
+<PopupMenuTreeProgramList>
+<Items>
+<Item>Di chuyển</Item>
+<Item>Xuống</Item>
+<Item>-</Item>
+<Item>Xóa</Item>
+<Item>Sao chép</Item>
+<Item>Dính</Item>
+<Item>-</Item>
+<Item>Mở rộng</Item>
+<Item>Sụp đổ</Item>
+<Item>-</Item>
+<Item>Đổi tên</Item>
+<Item>-</Item>
+<Item>Màn hình bản sao</Item>
+</Items>
+</PopupMenuTreeProgramList>
+<!--图片资源库按钮-->
+<btnPictures>
+<Caption>Thư viện tài nguyên hình ảnh</Caption>
+</btnPictures>
+<!--图片资源库树-->
+<treePictures>
+<Items>
+<Item>
+<Text>Phim</Text>
+<Items>
+<Item>Olympic</Item>
+<Item>Đánh dấu</Item>
+<Item>Mũi tên</Item>
+<Item>Biểu tượng tĩnh</Item>
+<Item>Sao và biểu ngữ</Item>
+<Item>Ký tự đặc biệt</Item>
+<Item>Biểu tượng</Item>
+<Item>Cuộc sống</Item>
+</Items>
+</Item>
+<Item>
+<Text>Hoạt hình</Text>
+<Items>
+<Item>Biểu tượng hoạt hình</Item>
+<Item>Biểu</Item>
+</Items>
+</Item>
+</Items>
+</treePictures>
+<!--主工具条的按钮-->
+<ToolButtonProgram>
+<Caption>Chương trình</Caption>
+<Hint>Chương trình</Hint>
+</ToolButtonProgram>
+<ToolButtonDynamicBackground>
+<Caption>Năng động nền</Caption>
+<Hint>Năng động nền</Hint>
+</ToolButtonDynamicBackground>
+<ToolButtonPicture>
+<Caption>Đồ họa</Caption>
+<Hint>Đồ họa</Hint>
+</ToolButtonPicture>
+<ToolButtonText>
+<Caption>Phụ đề</Caption>
+<Hint>Phụ đề</Hint>
+</ToolButtonText>
+<ToolButtonFlashText>
+<Caption>Xuandong từ</Caption>
+<Hint>Xuandong từ</Hint>
+</ToolButtonFlashText>
+<ToolButtonClock>
+<Caption>Đồng hồ</Caption>
+<Hint>Đồng hồ</Hint>
+</ToolButtonClock>
+<ToolButtonWatch>
+<Caption>Quay số</Caption>
+<Hint>Quay số</Hint>
+</ToolButtonWatch>
+<ToolButtonDelete>
+<Caption>Xóa</Caption>
+<Hint>Xóa</Hint>
+</ToolButtonDelete>
+<ToolButtonPreview>
+<Caption>Xem trước</Caption>
+<Hint>Xem trước</Hint>
+<Caption1>Thôi</Caption1>
+<Hint1>Thôi</Hint1>
+</ToolButtonPreview>
+<ToolButtonSend>
+<Caption>Gửi</Caption>
+<Hint>Gửi</Hint>
+</ToolButtonSend>
+<ToolButtonUSB>
+<Caption>USB</Caption>
+<Hint>USB</Hint>
+</ToolButtonUSB>
+<ToolButtonSearchCard>
+<Caption>Kiểm tra màn hình</Caption>
+<Hint>Kiểm tra màn hình</Hint>
+</ToolButtonSearchCard>
+<!-- 2013.5.4 增加-->
+<ToolButtonTiming>
+<Caption>Thời gian</Caption>
+<Hint>Thời gian</Hint>
+</ToolButtonTiming>
+<ToolButtonSeDateTime>
+<Caption>Thời gian</Caption>
+<Hint>Thời gian</Hint>
+</ToolButtonSeDateTime>
+<ToolButtonSetLight>
+<Caption>Độ sáng</Caption>
+<Hint>Độ sáng</Hint>
+</ToolButtonSetLight>
+<ToolButtonOnOff>
+<Caption>Bộ đếm thời gian chuyển đổi</Caption>
+<Hint>Bộ đếm thời gian chuyển đổi</Hint>
+</ToolButtonOnOff>
+<!-- 2013.5.4 增加结束-->
+<!--区域属性操作的工具栏：区域缩放、位置、翻页-->
+<ToolButtonZoomInit>
+<Hint>Kích cỡ ban đầu</Hint>
+</ToolButtonZoomInit>
+<ToolButtonZoomOut>
+<Hint>Phóng to</Hint>
+</ToolButtonZoomOut>
+<ToolButtonZoomIn>
+<Hint>Hẹp</Hint>
+</ToolButtonZoomIn>
+<ToolButtonRegionLeft>
+<Hint>Bên trái khu vực</Hint>
+</ToolButtonRegionLeft>
+<ToolButtonRegionRight>
+<Hint>Ngay khu vực nơi ở</Hint>
+</ToolButtonRegionRight>
+<ToolButtonRegionTop>
+<Hint>Lên trên khu vực</Hint>
+</ToolButtonRegionTop>
+<ToolButtonRegionBottom>
+<Hint>Khu vực được thiết lập vào cuối năm</Hint>
+</ToolButtonRegionBottom>
+<ToolButtonLastRegionPage>
+<Hint>Trước</Hint>
+</ToolButtonLastRegionPage>
+<ToolButtonNextRegionPage>
+<Hint>Tiếp theo</Hint>
+</ToolButtonNextRegionPage>
+<!--主菜单-->
+<ActionManagerMain>
+<ActionBars>
+<ActionBar>
+<Items>
+<Item>
+<Caption>Tập tin (&amp;F)</Caption>
+<Items>
+<Item>Xây dựng mới (&amp;N)</Item>
+#N/A
+<Item>-</Item>
+<Item>Tiết kiệm (&amp;S)</Item>
+<Item>Tiết kiệm như ...</Item>
+<Item>-</Item>
+<Item>xuất khẩu</Item>
+<Item>nhập khẩu</Item>
+<Item>-</Item>
+<Item>Xuất cảnh (&amp;E)</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Insert(&amp;I)</Caption>
+<Items>
+<Item>Màn hình</Item>
+<Item>Chương trình</Item>
+<Item>Năng động nền</Item>
+<Item>-</Item>
+<Item>Phụ đề</Item>
+<Item>Đồ họa</Item>
+<Item>Xuandong từ</Item>
+<Item>Đồng hồ</Item>
+<Item>Quay số</Item>
+<Item>Thời gian</Item>
+<Item>Nhiệt độ</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Thiết lập (&amp;S)</Caption>
+<Items>
+<Item>Các thông số màn hình</Item>
+<Item>Các thông số truyền thông</Item>
+<Item>-</Item>
+<Item>Thay đổi địa chỉ IP thẻ</Item>
+<Item>-</Item>
+<Item>Tự động cấu hình hội đồng quản trị đơn vị</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Gỡ lỗi (&amp;D)</Caption>
+<Items>
+<Item>Thời gian</Item>
+<Item>Điều chỉnh độ sáng</Item>
+<Item>Yêu cầu mẫu</Item>
+<Item>Màn hình chuyển đổi phần mềm</Item>
+<Item>-</Item>
+<Item>Xem trước</Item>
+<Item>Gửi</Item>
+<Item>Nhập khẩu U đĩa</Item>
+<Item>-</Item>
+<Item>Xem Đăng nhập</Item>
+<Item>-</Item>
+<Item>Gửi mọi loại màn hình</Item>
+</Items>
+</Item>
+<Item>
+<Caption V="0">Các cụm (&amp;C)</Caption>
+<Items>
+<Item>Cấu hình máy chủ</Item>
+<Item>Quản lý cụm</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Ngôn ngữ (&amp;L)</Caption>
+<Items>
+<Item>Tự động chọn</Item>
+</Items>
+</Item>
+<Item>
+<Caption>giúp(&amp;A)</Caption>
+</Item>
+</Items>
+</ActionBar>
+</ActionBars>
+</ActionManagerMain>
+<!--基本属性-->
+<GroupBoxBaseInfo>
+<Caption>Tính chất cơ bản của</Caption>
+</GroupBoxBaseInfo>
+<LabelRegionName>
+<Caption>Tên</Caption>
+</LabelRegionName>
+<LabelRegionX>
+<Caption>Vị trí X</Caption>
+</LabelRegionX>
+<LabelRegionY>
+<Caption>Vị trí Y</Caption>
+</LabelRegionY>
+<LabelRegionWidth>
+<Caption>Chiều rộng</Caption>
+</LabelRegionWidth>
+<LabelRegionHeight>
+<Caption>Cao</Caption>
+</LabelRegionHeight>
+<!--基本属性-->
+<GroupBoxDisplayInfo>
+<Caption>Hiển thị thuộc tính</Caption>
+</GroupBoxDisplayInfo>
+<LabelDisplayMode>
+<Caption>Về chế độ màn hình</Caption>
+</LabelDisplayMode>
+<cmbDisplayMode>
+<Items>
+<Item>Hiển thị ngẫu nhiên</Item>
+<Item>Vẫn còn</Item>
+<Item>Chuyển sang bên phải</Item>
+<Item>Bên trái</Item>
+<Item>Xuống</Item>
+<Item>Di chuyển</Item>
+<Item>Bảo hiểm phải</Item>
+<Item>Bảo hiểm trái</Item>
+<Item>Phạm vi bảo hiểm sau đây</Item>
+<Item>Trên trang bìa</Item>
+<Item>Mở ngang</Item>
+<Item>Việc mở theo chiều dọc</Item>
+<Item>Xuyên đóng cửa</Item>
+<Item>Đóng dọc</Item>
+<Item>Rèm phải</Item>
+<Item>Cửa chớp bên trái</Item>
+<Item>Dưới rèm</Item>
+<Item>Trên rèm</Item>
+<Item>Chập chờn</Item>
+<Item>Phải bàn chải từ</Item>
+<Item>Trái Cọ từ</Item>
+<Item>Dưới từ bàn chải</Item>
+<Item>Vào từ bàn chải</Item>
+<Item>Trang lại</Item>
+<Item>Phải trang tiếp theo</Item>
+<Item>Quạt</Item>
+<Item>Quạt đóng cửa</Item>
+<Item>Thuận tay phải</Item>
+<Item>L-</Item>
+<Item>Mức độ xen kẽ</Item>
+<Item>Dọc xen kẽ</Item>
+<Item>Di chuyển xuống màn</Item>
+<Item>Bên phải màn trập</Item>
+<Item>Khung</Item>
+<Item>Nhấp nháy chống trắng</Item>
+<Item>Mở rộng hình chữ nhật</Item>
+<Item>Co hình chữ nhật</Item>
+<Item>Mở rộng kim cương</Item>
+<Item>Co kim cương</Item>
+<Item>Mở rộng chéo</Item>
+<Item>Qua co</Item>
+<Item>Hình chữ nhật dưới bên trái</Item>
+<Item>Hình chữ nhật phía trên bên trái</Item>
+<Item>Hình chữ nhật phải giảm</Item>
+<Item>Hình chữ nhật phía trên bên phải</Item>
+<Item>Dấu gạch chéo dưới bên trái</Item>
+<Item>Các dấu gạch chéo phía trên bên trái</Item>
+<Item>Giảm dưới bên phải</Item>
+<Item>Taluy dương</Item>
+<Item>Xiasha</Item>
+<Item>Khung ngang</Item>
+<Item>Khung thẳng đứng</Item>
+</Items>
+</cmbDisplayMode>
+<LabelClearMode>
+<Caption>Xóa màn hình bằng cách</Caption>
+</LabelClearMode>
+<LabelSpeed>
+<Caption>Tốc độ</Caption>
+</LabelSpeed>
+<cmbSpeed>
+<Items>
+<Item>1 (nhanh nhất)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (chậm nhất)</Item>
+</Items>
+</cmbSpeed>
+<LabelDisplayDelay>
+<Caption>Thời gian</Caption>
+</LabelDisplayDelay>
+<LabelDisplayStyle>
+<Caption>Phong cách</Caption>
+</LabelDisplayStyle>
+<cmbDisplayStyle>
+<Items>
+<Item>Nhịp tim</Item>
+<Item>Điệu van sờ</Item>
+<Item>Trôi giạt</Item>
+<Item>Sóng điện từ</Item>
+<Item>Bóng đèn</Item>
+<Item>Mùa xuân</Item>
+<Item>Lăn</Item>
+<Item>Dương cầm</Item>
+<Item>Drift ngược</Item>
+<Item>xoáy</Item>
+<Item>ánh sáng neon</Item>
+<Item>DOUCAI</Item>
+<Item>Cầu vồng (a)</Item>
+<Item>Cầu vồng (dưới)</Item>
+<Item>Cầu vồng (trái)</Item>
+<Item>Cầu vồng (bên phải)</Item>
+</Items>
+</cmbDisplayStyle>
+<!-- 动感边框-->
+<GroupBoxFlashBorder>
+<Caption>Biên giới năng động</Caption>
+</GroupBoxFlashBorder>
+<chkFlashBorderEnabled>
+<Caption>Hiển thị biên giới năng động</Caption>
+</chkFlashBorderEnabled>
+<optFlashBorderOneColor>
+<Caption>Đơn sắc</Caption>
+</optFlashBorderOneColor>
+<optFlashBorderFlashColor>
+<Caption>Hyun màu</Caption>
+</optFlashBorderFlashColor>
+<optFlashBorderSeven>
+<Caption>đầy màu sắc</Caption>
+</optFlashBorderSeven>
+<optFlashBorderAll>
+<Caption>đầy đủ màu</Caption>
+</optFlashBorderAll>
+<LabelFlashBorderSpeed>
+<Caption>Đi bộ tốc độ</Caption>
+</LabelFlashBorderSpeed>
+<cmbFlashBorderSpeed>
+<Items>
+<Item>1 (nhanh nhất)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (chậm nhất)</Item>
+</Items>
+</cmbFlashBorderSpeed>
+<LabelFlashBorderDirection>
+<Caption>Hướng di cư</Caption>
+</LabelFlashBorderDirection>
+<cmbFlashBorderDirection>
+<Items>
+<Item>Cố định màn hình hiển thị</Item>
+<Item>Xoay chiều kim đồng hồ</Item>
+<Item>Quay ngược</Item>
+<Item>Chập chờn</Item>
+<Item>Nhấp nháy + chiều kim đồng hồ</Item>
+<Item>Nhấp nháy + quay ngược</Item>
+</Items>
+</cmbFlashBorderDirection>
+<!--屏幕属性-->
+<LabelCardModel>
+<Caption>Kiểm soát thẻ Model:</Caption>
+</LabelCardModel>
+<LabelMonitorWidth>
+<Caption>Màn hình rộng:</Caption>
+</LabelMonitorWidth>
+<LabelMonitorHeight>
+<Caption>Chiều cao màn hình:</Caption>
+</LabelMonitorHeight>
+<LabelMonitorColorMode>
+<Caption>Tế bào tấm màu:</Caption>
+</LabelMonitorColorMode>
+<LabelMonitorConnectMode>
+<Caption>Phương tiện truyền thông:</Caption>
+</LabelMonitorConnectMode>
+<LabelMonitorConnectPort>
+<Caption>Cổng:</Caption>
+</LabelMonitorConnectPort>
+<!--2013.5.5 增加-->
+<chkContinuousLeft>
+<Caption>Liên tục trái</Caption>
+</chkContinuousLeft>
+<chkContinuousTop>
+<Caption>Liên tục di chuyển</Caption>
+</chkContinuousTop>
+<!--2013.5.5 增加结束-->
+</TMainForm>
+<!--关于对话框-->
+<TDlgAbout>
+<Caption>Về ...</Caption>
+<LabelAppName>
+<Caption>X Show phần mềm</Caption>
+</LabelAppName>
+<LabelAppVersion>
+<Caption>Phiên bản:%s</Caption>
+</LabelAppVersion>
+<MemoAppNote>
+<Items>
+<Item>1,Tăng chức năng quét điểm, từ sau phiên bản 4.03 có thể hỗ trợ bất kỳ hội đồng di động. Xây dựng một số lượng rất lớn các thông số, xem bảng di động.
+2, đồ họa, bảng biểu, đầu vào đó là sự hỗ trợ đáng kể cho điều đó .
+3, hỗ trợ phụ đề liên tục bên trái, hỗ trợ Teletext di chuyển liên tục .
+4, cho màn hình dài, điểm và dòng tần số được tự động thiết lập để mặc định tẩy trống .
+5, để hoàn thành bản dịch đa ngôn ngữ .
+6, card giao diện mạng hỗ trợ DHCP và chức năng DNS.</Item>
+</Items>
+</MemoAppNote>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+</TDlgAbout>
+<!--网络集群发送-->
+<TDlgColonySend>
+<Caption>Cụm quản lý gửi</Caption>
+<chkSelectAll>
+<Caption>Chọn</Caption>
+</chkSelectAll>
+<!--提示信息-->
+<MemoNote>
+<Items>
+<Item>Mô tả:</Item>
+<Item></Item>
+<Item>1, chế độ duy nhất của cổng mạng thông tin liên lạc hoặc GPRS, trước khi họ có thể tham gia nhóm.</Item>
+<Item></Item>
+<Item>2 nhóm nhân bản Gửi: Gửi màn hình chính của dữ liệu gửi đến nhóm trên tất cả các màn hình, việc sử dụng nhân bản gửi yêu cầu nhóm kích thước màn hình màn hình, các thông số đều giống nhau. Yêu cầu trước khi gửi màn hình chính.</Item>
+<Item></Item>
+<Item>3, nhóm thông thường gửi: thả các dữ liệu từ màn hình được gửi đến màn hình tương ứng.</Item>
+</Items>
+</MemoNote>
+<!--设备列表-->
+<ListViewCards>
+<Columns>
+<Column>Tình trạng</Column>
+<Column>Tên</Column>
+<Column>Mô hình</Column>
+<Column>Chiều rộng màn hình</Column>
+<Column>Chiều cao màn hình</Column>
+<Column>Loại tấm di động</Column>
+<Column>Phương tiện truyền thông</Column>
+<Column>Độ sáng</Column>
+<Column>Bộ đếm thời gian chuyển đổi</Column>
+</Columns>
+</ListViewCards>
+<!--操作选择项-->
+<optRegularSend>
+<Caption>Nhóm thông thường gửi</Caption>
+</optRegularSend>
+<optCloneSend>
+<Caption>Bản sao nhóm gửi</Caption>
+</optCloneSend>
+<optOpenScreen>
+<Caption>Phần mềm khởi động</Caption>
+</optOpenScreen>
+<optCloseScreen>
+<Caption>Mềm Tắt</Caption>
+</optCloseScreen>
+<optTiming>
+<Caption>Thời gian</Caption>
+</optTiming>
+<btnSendProtocol>
+<Caption>Thực hiện lệnh</Caption>
+</btnSendProtocol>
+<!--指定主屏幕-->
+<LabelCloneScreens>
+<Caption>Xác định màn hình chính:</Caption>
+</LabelCloneScreens>
+</TDlgColonySend>
+<!--网络集群登录验证窗口-->
+<TDlgColonyVerify>
+<Caption>Đăng nhập xác thực</Caption>
+<LabelPassword>
+<Caption>Mật khẩu</Caption>
+</LabelPassword>
+<LabelServerIp>
+<Caption>Máy chủ</Caption>
+</LabelServerIp>
+<LabelPort>
+<Caption>Cổng</Caption>
+</LabelPort>
+<btnOK>
+<Caption>Xác định</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Hủy bỏ</Caption>
+</btnCancel>
+</TDlgColonyVerify>
+<!--GPRS群组发送窗口-->
+<TDlgGprsColony>
+<Caption>Quản lý cụm</Caption>
+<Messages>
+<AllScreens>Toàn màn hình</AllScreens>
+<AddGroupCaption>Thêm Nhóm</AddGroupCaption>
+<AddGroupPrompt>Xin vui lòng nhập vào tên của nhóm:</AddGroupPrompt>
+<AddGroupExists>Tên nhóm đã tồn tại!</AddGroupExists>
+<AddGroupFail>Thêm Nhóm không thành công!</AddGroupFail>
+<ConfDeleteGroup>Để xác nhận rằng bạn muốn xóa nhóm?</ConfDeleteGroup>
+<ConfDeleteDevice>Xác nhận bạn muốn xóa các thiết bị đầu cuối được lựa chọn?</ConfDeleteDevice>
+<NoScreen>Không có màn hình có thể thêm!</NoScreen>
+<DeviceIdExists>Thiết bị đầu cuối ID đã tồn tại!</DeviceIdExists>
+<NoItemChecked>Vui lòng chọn một thiết bị đầu cuối! (Sử dụng hộp lựa chọn để lựa chọn)</NoItemChecked>
+<NoItemSelected>Vui lòng chọn một thiết bị đầu cuối! (Nhấp chuột lựa chọn hàng)</NoItemSelected>
+<!--终端在线状态-->
+<StatusOnline>Trực tuyến</StatusOnline>
+<StatusOffline>Không trực tuyến</StatusOffline>
+<!--命令发送状态-->
+<SendStatusSending>Gửi</SendStatusSending>
+<SendStatusSuccess>Thành công</SendStatusSuccess>
+<SendStatusScreenParamFail>Các thông số màn hình không</SendStatusScreenParamFail>
+<SendStatusConnectFail>Kết nối không thành</SendStatusConnectFail>
+</Messages>
+<chkSelectAll>
+<Caption>Chọn</Caption>
+</chkSelectAll>
+<LabelGroups>
+<Caption>Nhóm:</Caption>
+</LabelGroups>
+<btnEditGroup>
+<Caption>Sửa Nhóm</Caption>
+</btnEditGroup>
+<btnAddGroup>
+<Caption>Thêm Nhóm</Caption>
+</btnAddGroup>
+<btnDeleteGroup>
+<Caption>Xóa một nhóm</Caption>
+</btnDeleteGroup>
+<btnAddDevice>
+<Caption>Thêm thiết bị đầu cuối</Caption>
+</btnAddDevice>
+<btnEditDevice>
+<Caption>Sửa đổi các thiết bị đầu cuối</Caption>
+</btnEditDevice>
+<btnDeleteDevice>
+<Caption>Loại bỏ các thiết bị đầu cuối</Caption>
+</btnDeleteDevice>
+<btnUpdateColony>
+<Caption>Lấy cụm</Caption>
+</btnUpdateColony>
+<btnSendProtocol>
+<Caption>Thực hiện lệnh</Caption>
+</btnSendProtocol>
+<!--提示信息-->
+<MemoNote>
+<Items>
+<Item>Mô tả:</Item>
+<Item></Item>
+<Item>1, sửa đổi các thiết bị đầu cuối, thiết bị đầu cuối xóa bạn hãy click vào hàng danh sách để lựa chọn thiết bị đầu cuối.</Item>
+<Item></Item>
+<Item>Gửi lệnh chọn hộp danh sách để lựa chọn thiết bị đầu cuối.</Item>
+</Items>
+</MemoNote>
+<!--设备列表-->
+<ListViewCards>
+<Columns>
+<Column>Không.</Column>
+<Column>Trực tuyến</Column>
+<Column>Tên màn hình</Column>
+<Column>Thiết bị ID</Column>
+<Column>Mô hình thẻ</Column>
+<Column>Chiều rộng màn hình</Column>
+<Column>Chiều cao màn hình</Column>
+<Column>Loại tấm di động</Column>
+<Column>Độ sáng</Column>
+<Column>Bộ đếm thời gian chuyển đổi</Column>
+<Column>Hoạt động</Column>
+</Columns>
+</ListViewCards>
+<!--操作选择项-->
+<optRegularSend>
+<Caption>Nhóm thông thường gửi</Caption>
+</optRegularSend>
+<optCloneSend>
+<Caption>Bản sao nhóm gửi</Caption>
+</optCloneSend>
+<optOpenScreen>
+<Caption>Phần mềm khởi động</Caption>
+</optOpenScreen>
+<optCloseScreen>
+<Caption>Mềm Tắt</Caption>
+</optCloseScreen>
+<optTiming>
+<Caption>Thời gian</Caption>
+</optTiming>
+<optQueryStatus>
+<Caption>Kiểm tra tình trạng</Caption>
+</optQueryStatus>
+<!--指定主屏幕-->
+<LabelCloneScreens>
+<Caption>Xác định màn hình chính:</Caption>
+</LabelCloneScreens>
+</TDlgGprsColony>
+<!--集群服务器终端编辑窗口-->
+<TDlgColonyAddDevice>
+<Caption>Chỉnh sửa thiết bị đầu cuối</Caption>
+<LabelDeviceId>
+<Caption>Thiết bị đầu cuối ID</Caption>
+</LabelDeviceId>
+<LabelScreenName>
+<Caption>Màn hình</Caption>
+</LabelScreenName>
+<LabelGroupName>
+<Caption>Nhóm</Caption>
+</LabelGroupName>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Hủy bỏ (&amp;C)</Caption>
+</btnCancel>
+</TDlgColonyAddDevice>
+<!--GPRS集群配置 窗口-->
+<TDlgGprsColonySetting>
+<Caption>Cấu hình Cluster Server</Caption>
+<LabelGprsServerIp>
+<Caption>IP máy chủ:</Caption>
+</LabelGprsServerIp>
+<LabelGprsServerPort>
+<Caption>Cổng:</Caption>
+</LabelGprsServerPort>
+<chkEnableAutoFillScreen>
+<Caption>Mở tiểu màn hình màn hình chính thích ứng</Caption>
+</chkEnableAutoFillScreen>
+<chkEnableAuthen>
+<Caption>Mở cho phép để xác minh</Caption>
+</chkEnableAuthen>
+<LabelGprsAccount>
+<Caption>Tài khoản</Caption>
+</LabelGprsAccount>
+<LabelGprsPassword>
+<Caption>Mật khẩu</Caption>
+</LabelGprsPassword>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Hủy bỏ (&amp;C)</Caption>
+</btnCancel>
+</TDlgGprsColonySetting>
+<!-- GPRS集群组管理 窗口-->
+<TDlgGprsGroup>
+<Caption>GPRS cụm quản lý nhóm</Caption>
+<LabelGroups>
+<Caption>Danh sách nhóm</Caption>
+</LabelGroups>
+<LabelGroupName>
+<Caption>Tên</Caption>
+</LabelGroupName>
+<btnEditGroup>
+<Caption>Sửa đổi</Caption>
+</btnEditGroup>
+<btnAddGroup>
+<Caption>Thêm</Caption>
+</btnAddGroup>
+<btnDeleteGroup>
+<Caption>Xóa</Caption>
+</btnDeleteGroup>
+<btnSelectAllCards>
+<Caption>Chọn tất cả</Caption>
+</btnSelectAllCards>
+<btnClearCurrentSelectedCards>
+<Caption>Rõ ràng các lựa chọn hiện tại</Caption>
+</btnClearCurrentSelectedCards>
+<btnClearSelectedAllCards>
+<Caption>Xóa tất cả các lựa chọn</Caption>
+</btnClearSelectedAllCards>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Hủy bỏ (&amp;C)</Caption>
+</btnCancel>
+<LabelCards>
+<Caption>Danh sách hiển thị</Caption>
+</LabelCards>
+<btnUpdateCards>
+<Caption>Cập nhật danh sách máy chủ</Caption>
+</btnUpdateCards>
+<!--设备卡列表-->
+<ListViewCards>
+<Columns>
+<Column>Tình trạng</Column>
+<Column>Tên</Column>
+</Columns>
+</ListViewCards>
+</TDlgGprsGroup>
+<!--导入Excel 窗口-->
+<TDlgImportExcel>
+<Caption>Vào Excel</Caption>
+<LabelSheetNames>
+<Caption>Tên bảng</Caption>
+</LabelSheetNames>
+<LabelRowCount>
+<Caption>Số lượng hàng</Caption>
+</LabelRowCount>
+<LabelColumnCount>
+<Caption>Số cột</Caption>
+</LabelColumnCount>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Hủy bỏ (&amp;C)</Caption>
+</btnCancel>
+</TDlgImportExcel>
+<!-- 屏幕参数 窗口-->
+<TdlgMonitorSetting>
+<Caption>Thông số màn hình</Caption>
+<Messages>
+<InvalidMonitorSize>Kích thước màn hình không hợp lệ!</InvalidMonitorSize>
+<InvalidCardModelInfo>Các thông số thẻ không hợp lệ!</InvalidCardModelInfo>
+<InvalidGammaReviseValue>Giá trị hiệu chỉnh gamma không hợp lệ!</InvalidGammaReviseValue>
+</Messages>
+<LabelMonitorWidth>
+<Caption>Chiều rộng</Caption>
+</LabelMonitorWidth>
+<LabelMonitorHeight>
+<Caption>Cao</Caption>
+</LabelMonitorHeight>
+<LabelMonitorColor>
+<Caption>Màu</Caption>
+</LabelMonitorColor>
+<LabelMonitorGray>
+<Caption>Màu xám</Caption>
+</LabelMonitorGray>
+<LabelCardType>
+<Caption>Mô hình thẻ kiểm soát</Caption>
+</LabelCardType>
+<LabelCardParams>
+<Caption>Thông số hoạt động</Caption>
+</LabelCardParams>
+<LabelBoardType>
+<Caption>Loại tấm di động</Caption>
+</LabelBoardType>
+<LabelDEPrompt>
+<Caption>OE cực</Caption>
+</LabelDEPrompt>
+<LabelDEPromptNote>
+<Caption>Vui lòng điều chỉnh nắp nhảy trên thẻ kiểm soát</Caption>
+</LabelDEPromptNote>
+<LabelThreshold>
+<Caption>Ngưỡng</Caption>
+</LabelThreshold>
+<LabelDotFrequency>
+<Caption>Điểm tần số</Caption>
+</LabelDotFrequency>
+<LabelLineBlanking>
+<Caption>Dòng tẩy trống</Caption>
+</LabelLineBlanking>
+<LabelInterlaceControl>
+<Caption>Điều chỉnh dòng</Caption>
+</LabelInterlaceControl>
+<LabelGammaReviseValue>
+<Caption>Chỉnh sửa gamma</Caption>
+</LabelGammaReviseValue>
+<LabelAdvanced>
+<Caption>Thông số ít tiên tiến</Caption>
+<Caption>Các thông số ít chi tiết</Caption>
+</LabelAdvanced>
+<btnReadParams>
+<Caption>Tham số readback</Caption>
+</btnReadParams>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<!--2013.5.4 增加-->
+<chkDotFrequencyAuto>
+<Caption>Tự động</Caption>
+</chkDotFrequencyAuto>
+<chkLineBlankingAuto>
+<Caption>Tự động</Caption>
+</chkLineBlankingAuto>
+<!--2013.5.4 增加结束-->
+</TdlgMonitorSetting>
+<!--通讯参数 窗口-->
+<TDlgNetworkSetting>
+<Caption>Các thông số truyền thông</Caption>
+<Messages>
+<AskToSelectComPort>Xin chọn số nối tiếp!</AskToSelectComPort>
+<ErrorIp>Không hợp lệ địa chỉ IP!</ErrorIp>
+<UnknownCard>Chưa biết</UnknownCard>
+<LabelTestResult>
+<Success>
+<Caption>Kiểm tra thông tin liên lạc thành công!</Caption>
+</Success>
+<Fail>
+<Caption>Kiểm tra thông tin liên lạc không thành công!</Caption>
+</Fail>
+</LabelTestResult>
+</Messages>
+<!--选择通讯模式页-->
+<LabelNetworkType>
+<Caption>Chọn chế độ thông tin liên lạc</Caption>
+</LabelNetworkType>
+<optSerialPort>
+<Caption>Cổng nối tiếp</Caption>
+</optSerialPort>
+<optNet>
+<Caption>Cổng mạng</Caption>
+</optNet>
+<optDirectNet>
+<Caption>Cổng mạng kết nối trực tiếp</Caption>
+</optDirectNet>
+<optGprs>
+<Caption>GPRS hoặc Internet</Caption>
+</optGprs>
+<!-- 串口参数设置页 -->
+<LabelSerialPortComs>
+<Caption>Số cổng</Caption>
+</LabelSerialPortComs>
+<!-- 网口参数设置页-->
+<LabelNetIp>
+<Caption>Địa chỉ IP</Caption>
+</LabelNetIp>
+<LabelNetPort>
+<Caption>Số cổng</Caption>
+</LabelNetPort>
+<LabelNetGateway>
+<Caption>Cửa ngõ</Caption>
+</LabelNetGateway>
+<LabelNetSubnetMask>
+<Caption>Subnet mask</Caption>
+</LabelNetSubnetMask>
+<LabelEditMACPrompt>
+<Caption>Để thay đổi địa chỉ MAC, xin vui lòng tải về các công cụ gỡ lỗi MAC</Caption>
+</LabelEditMACPrompt>
+<!-- GPRS设置页-->
+<LabelGprsIp>
+<Caption>GPRS máy chủ địa chỉ IP</Caption>
+</LabelGprsIp>
+<LabelGprsPort>
+<Caption>Số cổng</Caption>
+</LabelGprsPort>
+<chkGprsEnableAuth>
+<Caption>Mở cho phép để xác minh</Caption>
+</chkGprsEnableAuth>
+<LabelGprsAccount>
+<Caption>Tài khoản</Caption>
+</LabelGprsAccount>
+<LabelGprsPassword>
+<Caption>Mật khẩu</Caption>
+</LabelGprsPassword>
+<!-- 测试结果页-->
+<LabelTestResultType>
+<Caption>Chế độ thông tin liên lạc:</Caption>
+</LabelTestResultType>
+<LabelTestResultPort>
+<Caption>Số cổng:</Caption>
+</LabelTestResultPort>
+<LabelTestResultCard>
+<Caption>Kiểm soát thẻ Model:</Caption>
+</LabelTestResultCard>
+<btnSave>
+<Caption>Lưu và thoát</Caption>
+</btnSave>
+<btnSetMonitor>
+<Caption>Thiết lập các thông số màn hình</Caption>
+</btnSetMonitor>
+<!-- 高级参数 -->
+<GroupBoxAdvanceParams>
+<Caption>Các thông số tiên tiến</Caption>
+</GroupBoxAdvanceParams>
+<LabelSerialPortDelay>
+<Caption>Trì hoãn</Caption>
+</LabelSerialPortDelay>
+<LabelSerialPortFrameLength>
+<Caption>Chiều dài khung</Caption>
+</LabelSerialPortFrameLength>
+<btnTestExit>
+<Caption>Quay trở lại</Caption>
+</btnTestExit>
+<btnChooseTypeNextStep>
+<Caption>Tiếp theo</Caption>
+</btnChooseTypeNextStep>
+<btnSerialPortLastStep>
+<Caption>Trước</Caption>
+</btnSerialPortLastStep>
+<btnTest>
+<Caption>Kiểm tra thông tin liên lạc</Caption>
+</btnTest>
+<!--2013.5.5 增加-->
+<LabelDeviceId>
+<Caption>Thiết bị ID</Caption>
+</LabelDeviceId>
+<!--2013.5.5 增加结束-->
+<btnDirectUdpLastStep>
+<Caption>trước</Caption>
+</btnDirectUdpLastStep>
+<btnGprsLastStep>
+<Caption>trước</Caption>
+</btnGprsLastStep>
+<btnNetLastStep>
+<Caption>trước</Caption>
+</btnNetLastStep>
+
+</TDlgNetworkSetting>
+<!-- 新建表格 窗口-->
+<TDlgNewTable>
+<Caption>Bảng tính mới</Caption>
+<LabelRowCount>
+<Caption>Hàng</Caption>
+</LabelRowCount>
+<LabelColCount>
+<Caption>Hàng</Caption>
+</LabelColCount>
+<LabelBorderWidth>
+<Caption>Khung</Caption>
+</LabelBorderWidth>
+<LabelBorderColor>
+<Caption>Màu</Caption>
+</LabelBorderColor>
+<chkSetCellWidth>
+<Caption>Chiều rộng di động cố định</Caption>
+</chkSetCellWidth>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Hủy bỏ (&amp;C)</Caption>
+</btnCancel>
+</TDlgNewTable>
+<!-- 软件开关屏 窗口-->
+<TDlgProtocolOnOff>
+<Caption>Màn hình chuyển đổi phần mềm</Caption>
+<optManual>
+<Caption>Công tắc tay</Caption>
+</optManual>
+<btnOn>
+<Caption>Màn hình mở</Caption>
+</btnOn>
+<btnOff>
+<Caption>Tắt màn hình</Caption>
+</btnOff>
+<optAuto>
+<Caption>Bộ đếm thời gian chuyển đổi</Caption>
+</optAuto>
+<LabelOn>
+<Caption>Thời gian khởi động</Caption>
+</LabelOn>
+<LabelOff>
+<Caption>Giờ</Caption>
+</LabelOff>
+<btnSave>
+<Caption>&amp;U đĩa lưu</Caption>
+</btnSave>
+<btnOK>
+<Caption>Gửi (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Hủy bỏ (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>Chẳng hạn như việc sử dụng U đĩa để điều chỉnh chuyển đổi độ sáng / trường / giờ, thiết lập các thông số trong xuất khẩu của USB</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+<!--2013.5.5 增加-->
+<chkAutoOnOff>
+<Caption>Bộ đếm thời gian chuyển đổi</Caption>
+</chkAutoOnOff>
+<!--2013.5.5 增加结束-->
+</TDlgProtocolOnOff>
+<!-- 请求型号 窗口-->
+<TDlgProtocolQueryModel>
+<Caption>Yêu cầu mẫu</Caption>
+<LabelCardMode>
+<Caption>Kiểm soát thẻ Model:</Caption>
+</LabelCardMode>
+<LabelCardVersion>
+<Caption>Phiên bản phần cứng của mã này:</Caption>
+</LabelCardVersion>
+<LabelCardGuid>
+<Caption>Số duy nhất nối tiếp:</Caption>
+</LabelCardGuid>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+</TDlgProtocolQueryModel>
+<!-- 校时... 窗口-->
+<TDlgProtocolSetDateTime>
+<Caption>Trường học ...</Caption>
+<LabelDate>
+<Caption>Ngày:</Caption>
+</LabelDate>
+<LabelTime>
+<Caption>Thời gian:</Caption>
+</LabelTime>
+<btnSave>
+<Caption>&amp;U đĩa lưu</Caption>
+</btnSave>
+<btnOK>
+<Caption>Gửi (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Hủy bỏ (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>Chẳng hạn như việc sử dụng U đĩa để điều chỉnh chuyển đổi độ sáng / trường / giờ, thiết lập các thông số trong xuất khẩu của USB</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+<!--2013.5.5 增加-->
+<btnGetSystemTime>
+<Caption>Hệ thống Thời gian</Caption>
+</btnGetSystemTime>
+<!--2013.5.5 增加结束-->
+</TDlgProtocolSetDateTime>
+<!--亮度调节 窗口 -->
+<TDlgProtocolSetLight>
+<Caption>Điều chỉnh độ sáng</Caption>
+<optAuto>
+<Caption>Tự động cảm ứng</Caption>
+</optAuto>
+<optManual>
+<Caption>Điều chỉnh bằng tay</Caption>
+</optManual>
+<btnSave>
+<Caption>&amp;U đĩa lưu</Caption>
+</btnSave>
+<btnOK>
+<Caption>Gửi (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Hủy bỏ (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>Chẳng hạn như việc sử dụng U đĩa để điều chỉnh chuyển đổi độ sáng / trường / giờ, thiết lập các thông số trong xuất khẩu của USB</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+</TDlgProtocolSetLight>
+<!-- 图文编辑 窗口-->
+<TDlgRtfEditor>
+<Caption>Biên tập viên</Caption>
+<Messages>
+<!--RTF编辑对话框 -->
+<!--表格垂直拆分输入框标题-->
+<TableSplitVerticallyCaption>Chia theo chiều dọc</TableSplitVerticallyCaption>
+<!--表格垂直拆分输入框提示信息-->
+<TableSplitVerticallyPrompt>Chia số cột:</TableSplitVerticallyPrompt>
+<!--表格水平拆分输入框标题 -->
+<TableSplitHorizontallyCaption>Chia ngang</TableSplitHorizontallyCaption>
+<!--表格水平拆分输入框提示信息-->
+<TableSplitHorizontallyPrompt>Chia số dòng:</TableSplitHorizontallyPrompt>
+<!--提示选择一个表格-->
+<InfoSelectOneTable>Vui lòng chọn một bảng!</InfoSelectOneTable>
+</Messages>
+<ToolButtonLoadFiles>
+<Hint>Add File</Hint>
+</ToolButtonLoadFiles>
+<!-- 文件操作菜单 -->
+<PopupMenuAddFile>
+<Items>
+<Item>Thêm văn bản</Item>
+<Item>Thêm các tập tin RTF</Item>
+<Item>Thêm một hình ảnh</Item>
+<Item>Thêm DOC</Item>
+<Item>Thêm EXCEL</Item>
+</Items>
+</PopupMenuAddFile>
+<ToolButtonSave>
+<Hint>Tiết kiệm</Hint>
+</ToolButtonSave>
+<ToolButtonLeft>
+<Hint>Ngang trái</Hint>
+</ToolButtonLeft>
+<ToolButtonCenter>
+<Hint>Tập trung theo chiều ngang</Hint>
+</ToolButtonCenter>
+<ToolButtonRight>
+<Hint>Ngang quyền cư trú</Hint>
+</ToolButtonRight>
+<ToolButtonBold>
+<Hint>Đậm</Hint>
+</ToolButtonBold>
+<ToolButtonItalic>
+<Hint>Nghiêng</Hint>
+</ToolButtonItalic>
+<ToolButtonUnderline>
+<Hint>Nhấn mạnh</Hint>
+</ToolButtonUnderline>
+<ToolButtonTop>
+<Hint>Xếp trên</Hint>
+</ToolButtonTop>
+<ToolButtonVCenter>
+<Hint>Trung tâm theo chiều dọc</Hint>
+</ToolButtonVCenter>
+<ToolButtonBottom>
+<Hint>Sắp xếp dưới</Hint>
+</ToolButtonBottom>
+<!-- 表格-->
+<ToolButtonTable>
+<Hint>Hình thức</Hint>
+</ToolButtonTable>
+<!--表格操作菜单-->
+<PopupMenuTable>
+<Items>
+<Item>Bảng tính mới</Item>
+<Item>-</Item>
+<Item>Màu viền</Item>
+<Item>Chiều rộng biên giới</Item>
+<Item>-</Item>
+<Item>
+<Caption>Chèn Hàng</Caption>
+<Items>
+<Item>Chèn vào phía trên</Item>
+<Item>Dưới đây chèn</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Chèn cột</Caption>
+<Items>
+<Item>Chèn vào bên trái</Item>
+<Item>Bên phải của</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Xóa</Caption>
+<Items>
+<Item>Hàng</Item>
+<Item>Hàng</Item>
+</Items>
+</Item>
+<Item>-</Item>
+<Item>Merge Cells</Item>
+<Item>
+<Caption>Phân chia di động</Caption>
+<Items>
+<Item>Chia theo chiều dọc</Item>
+<Item>Chia ngang</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Nối lại sáp nhập</Caption>
+<Items>
+<Item>Hàng</Item>
+<Item>Hàng</Item>
+<Item>Toàn bộ</Item>
+</Items>
+</Item>
+<Item>-</Item>
+<Item>
+<Caption>Kết theo chiều dọc</Caption>
+<Items>
+<Item>Xếp trên</Item>
+<Item>Trung tâm theo chiều dọc</Item>
+<Item>Sắp xếp dưới</Item>
+</Items>
+</Item>
+</Items>
+</PopupMenuTable>
+<!-- 编辑菜单 -->
+<PopupMenuEditor>
+<Items>
+<Item>Sao chép</Item>
+<Item>Dính</Item>
+<Item>Chọn</Item>
+</Items>
+</PopupMenuEditor>
+<LabelWordSpace>
+<Caption>Từ khoảng cách:</Caption>
+</LabelWordSpace>
+<LabelLineSpace>
+<Caption>Khoảng cách dòng:</Caption>
+</LabelLineSpace>
+</TDlgRtfEditor>
+<!-- 扫描方式设置 窗口-->
+<TDlgScanSet>
+<Caption>Quét các thiết lập chế độ</Caption>
+<LabelScanSetName>
+<Caption>Tên cấu hình</Caption>
+</LabelScanSetName>
+<LabelScanType>
+<Caption>Chế độ quét</Caption>
+</LabelScanType>
+<cmbScanType>
+<Items>
+<Item>Tĩnh quét</Item>
+<Item>1/2 quét</Item>
+<Item>1/4 quét</Item>
+<Item>1/8 quét</Item>
+<Item>1/16 quét</Item>
+</Items>
+</cmbScanType>
+<LabelWrap>
+<Caption>Chế độ dòng lần</Caption>
+</LabelWrap>
+<cmbWrap>
+<Items>
+<Item>4 lần dòng</Item>
+<Item>8 đường gấp</Item>
+<Item>16% off line</Item>
+</Items>
+</cmbWrap>
+<LabelWinding>
+<Caption>Quanh co cách</Caption>
+</LabelWinding>
+<cmbWinding>
+<Items>
+<Item>Trên serpentine</Item>
+<Item>Theo serpentine</Item>
+</Items>
+</cmbWinding>
+<LabelScanLines>
+<Caption>Số dòng quét</Caption>
+</LabelScanLines>
+<cmbScanLines>
+<Items>
+<Item>1 hàng</Item>
+<Item>2 hàng</Item>
+<Item>4 hàng</Item>
+<Item>8 hàng</Item>
+<Item>16 dòng cho mỗi khu vực</Item>
+</Items>
+</cmbScanLines>
+<LabelStr>
+<Caption>STR cực</Caption>
+</LabelStr>
+<cmbStr>
+<Items>
+<Item>Cực dương</Item>
+<Item>Một điện cực âm</Item>
+</Items>
+</cmbStr>
+<LabelSecondaryWind>
+<Caption>Quanh co</Caption>
+</LabelSecondaryWind>
+<cmbSecondaryWind>
+<Items>
+<Item>Không</Item>
+<Item>Được</Item>
+</Items>
+</cmbSecondaryWind>
+<LabelDecoding>
+<Caption>138 giải mã</Caption>
+</LabelDecoding>
+<cmbDecoding>
+<Items>
+<Item>138 giải mã</Item>
+<Item>Các cao đen</Item>
+<Item>138 giải mã</Item>
+<Item>Nghĩa đen thấp</Item>
+</Items>
+</cmbDecoding>
+<LabelMirror>
+<Caption>Lưu lượng dữ liệu</Caption>
+</LabelMirror>
+<cmbMirror>
+<Items>
+<Item>Bình thường</Item>
+<Item>Gương</Item>
+</Items>
+</cmbMirror>
+<LabelDataPolarity>
+<Caption>Cực dữ liệu</Caption>
+</LabelDataPolarity>
+<cmbDataPolarity>
+<Items>
+<Item>Cực dương</Item>
+<Item>Một điện cực âm</Item>
+</Items>
+</cmbDataPolarity>
+<chkJiaoTi>
+<Caption>Bình thường xen kẽ</Caption>
+</chkJiaoTi>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Hủy bỏ (&amp;C)</Caption>
+</btnCancel>
+</TDlgScanSet>
+<!-- 查屏 窗口-->
+<TDlgSearchCard>
+<Caption>Kiểm tra màn hình</Caption>
+<!-- 开始查找页-->
+<LabelFinding>
+<Caption>Đang tìm kiếm các thẻ kiểm soát ......</Caption>
+</LabelFinding>
+<MemoPrompt>
+<Items>
+<Item>Nếu bạn muốn sử dụng U đĩa để cập nhật các thông tin thẻ kiểm soát, bạn có thể hủy bước này không cần phải tìm thẻ kiểm soát!</Item>
+</Items>
+</MemoPrompt>
+<btnCancel>
+<Caption>Hủy bỏ (&amp;C)</Caption>
+</btnCancel>
+<!-- 查找成功页-->
+<LabelSearchSuccess>
+<Caption>Tìm một thành công!</Caption>
+</LabelSearchSuccess>
+<LabelType>
+<Caption>Chế độ thông tin liên lạc:</Caption>
+</LabelType>
+<LabelPort>
+<Caption>Số cổng:</Caption>
+</LabelPort>
+<LabelCardType>
+<Caption>Kiểm soát thẻ Model:</Caption>
+</LabelCardType>
+<!-- 查找失败页-->
+<LabelSearchFail>
+<Caption>Tìm không thành công!</Caption>
+</LabelSearchFail>
+<btnSearchAgain>
+<Caption>Tìm kiếm mới</Caption>
+</btnSearchAgain>
+<MemoIncDelayRetry>
+<Items>
+<Item>Hệ thống sẽ tự động tăng chậm lại cố gắng để quét tất cả các cổng</Item>
+</Items>
+</MemoIncDelayRetry>
+<btnManualSetting>
+<Caption>Tùy chỉnh</Caption>
+</btnManualSetting>
+<MemoManualSetInfo>
+<Items>
+<Item>Tự xác định các thông số thông tin liên lạc</Item>
+</Items>
+</MemoManualSetInfo>
+<btnSave>
+<Caption>Lưu và đóng</Caption>
+</btnSave>
+<btnSetMonitor>
+<Caption>Thiết lập thông số màn hình</Caption>
+</btnSetMonitor>
+</TDlgSearchCard>
+<!-- 数据发送 窗口-->
+<TDlgSend>
+<Caption>Truyền dữ liệu</Caption>
+</TDlgSend>
+<!--资源选择窗口 窗口 -->
+<TDlgSystemResources>
+<Caption>Cửa sổ lựa chọn nguồn tài nguyên</Caption>
+<Messages>
+<PromptNoSelected>Không có hình ảnh được chọn, bạn hãy click vào lựa chọn hình ảnh, hoặc kéo và thả cho nhiều lựa chọn.</PromptNoSelected>
+</Messages>
+<btnOK>
+<Caption>Chọn (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Hủy bỏ (&amp;C)</Caption>
+</btnCancel>
+</TDlgSystemResources>
+<!--边框宽度 窗口 -->
+<TDlgTableBorderWidth>
+<Caption>Chiều rộng biên giới</Caption>
+<LabelBorderWidth>
+<Caption>Chiều rộng biên giới</Caption>
+</LabelBorderWidth>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Hủy bỏ (&amp;C)</Caption>
+</btnCancel>
+</TDlgTableBorderWidth>
+<!-- 导入U盘 窗口-->
+<TDlgUsbForm>
+<Caption>Nhập khẩu U đĩa</Caption>
+<Messages>
+<NoUsb>Không tìm thấy U đĩa, chèn U đĩa!</NoUsb>
+<MonitorSize>Màn hình rộng màn hình điểm%d%d điểm</MonitorSize>
+<MonitorBoardType>%s,%s </MonitorBoardType>
+<AutoAlertLight>Tự động điều chỉnh độ sáng</AutoAlertLight>
+<ManualAlertLight>Tự điều chỉnh độ sáng:% mức d</ManualAlertLight>
+<MonitorTimeOnOffDisabled>Không được kích hoạt.</MonitorTimeOnOffDisabled>
+<MonitorTimeOnOffEnabled>Được kích hoạt,%s-%s</MonitorTimeOnOffEnabled>
+<OutOfStorageCapacity>Nhập khẩu U đĩa thất bại, kích thước của các nội dung được tạo ra ngoài thẻ trong khả năng còn lại.</OutOfStorageCapacity>
+<CancelExportToUsb>Hủy bỏ U đĩa nhập khẩu.</CancelExportToUsb>
+<UsbNotFound>Không tìm thấy U đĩa, chèn U đĩa.</UsbNotFound>
+<ExportToUsbSuccess>Các tập tin đã được nhập thành công vào đĩa U.</ExportToUsbSuccess>
+<ExportToUsbFail>Nhập khẩu U đĩa thất bại.</ExportToUsbFail>
+<ExportToUsbRunning>Được tạo ra, xin vui lòng chờ ...</ExportToUsbRunning>
+<ReadUsbFileSystemFail>U hệ thống tập tin trên đĩa không nhận ra!</ReadUsbFileSystemFail>
+<InvalidUsbFileSystemFail>Bạn chỉ có thể sử dụng ổ đĩa USB được định dạng FAT hoặc FAT32!</InvalidUsbFileSystemFail>
+</Messages>
+<LabelSelectUsb>
+<Caption>Chọn ổ đĩa USB</Caption>
+</LabelSelectUsb>
+<LabelMonitorSize>
+<Caption>Kích thước màn hình:</Caption>
+</LabelMonitorSize>
+<LabelMonitorBoardType>
+<Caption>Tế bào loại tấm:</Caption>
+</LabelMonitorBoardType>
+<chkCheckTime>
+<Caption>Trường:</Caption>
+</chkCheckTime>
+<chkAlertLight>
+<Caption>Điều chỉnh độ sáng:</Caption>
+</chkAlertLight>
+<chkTimeOnOff>
+<Caption>Màn hình chuyển đổi bộ đếm thời gian:</Caption>
+</chkTimeOnOff>
+<btnLoadUsbDrivers>
+<Caption>Kiểm tra thiết bị</Caption>
+</btnLoadUsbDrivers>
+<btnExport>
+<Caption>Nhập khẩu U đĩa</Caption>
+</btnExport>
+<btnCancel>
+<Caption>Hủy bỏ</Caption>
+</btnCancel>
+<btnExportToLocal>
+<Caption>Vào các địa phương</Caption>
+</btnExportToLocal>
+<!--2013.1.30 新增-->
+<!--校时-->
+<optManulTiming>
+<Caption>Hướng dẫn sử dụng</Caption>
+</optManulTiming>
+<optAutoTiming>
+<Caption>Hệ thống Thời gian</Caption>
+</optAutoTiming>
+<!--亮度调节：-->
+<optManualLight>
+<Caption>Hướng dẫn sử dụng</Caption>
+</optManualLight>
+<optAutoLight>
+<Caption>Tự động</Caption>
+</optAutoLight>
+<!--定时开关屏：-->
+<LabelOn>
+<Caption>Thời gian khởi động</Caption>
+</LabelOn>
+<LabelOff>
+<Caption>Giờ</Caption>
+</LabelOff>
+<!--2013.1.30 新增结束-->
+<!--2013.5.4 新增-->
+<LabelUsbFreeSize>
+<Caption>Sẵn suất:</Caption>
+</LabelUsbFreeSize>
+<LabelUsbFileSystem>
+<Caption>Định dạng tập tin:</Caption>
+</LabelUsbFileSystem>
+<LabelDateTimeNoChange>
+<Caption>Vẫn không thay đổi</Caption>
+</LabelDateTimeNoChange>
+<LabelLightNoChange>
+<Caption>Vẫn không thay đổi</Caption>
+</LabelLightNoChange>
+<LabelOnOffNoChange>
+<Caption>Luôn luôn</Caption>
+</LabelOnOffNoChange>
+<!--2013.5.4 新增结束-->
+</TDlgUsbForm>
+<!-- 时钟区域参数设置界面 -->
+<TFrameOptionClock>
+<!--时钟属性-->
+<GroupBoxRegionInfo>
+<Caption>Đồng hồ tính</Caption>
+</GroupBoxRegionInfo>
+<optOneLine>
+<Caption>Màn hình hiển thị một dòng</Caption>
+</optOneLine>
+<optMultiLine>
+<Caption>Màn hình hiển thị nhiều đường</Caption>
+</optMultiLine>
+<LabelFieldSpace>
+<Caption>Khoảng cách</Caption>
+</LabelFieldSpace>
+<chkDateWeekExchange>
+<Caption>Trao đổi vị trí của ngày và ngày trong tuần</Caption>
+</chkDateWeekExchange>
+<chkShowDate>
+<Caption>Hiển thị ngày</Caption>
+</chkShowDate>
+<chkShowWeek>
+<Caption>Cho thấy một tuần</Caption>
+</chkShowWeek>
+<chkShowTime>
+<Caption>Thời gian hiển thị</Caption>
+</chkShowTime>
+<!-- 时差-->
+<GroupBoxTimeDiff>
+<Caption>Thời gian khác nhau</Caption>
+</GroupBoxTimeDiff>
+<LabelDeltHour>
+<Caption>Thời gian</Caption>
+</LabelDeltHour>
+<LabelDeltMinute>
+<Caption>Phút</Caption>
+</LabelDeltMinute>
+<LabelDeltMinute>
+<Caption>Phút</Caption>
+</LabelDeltMinute>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>Cố định văn bản</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>Sử dụng văn bản cố định</Caption>
+</chkEnabledText>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>Kiểu chữ</Caption>
+</GroupBoxFont>
+<!--2013.1.30 新增-->
+<!--星期格式-->
+<cmbWeekFormat>
+<Items>
+<Item>Trung Quốc</Item>
+<Item>Mon</Item>
+<Item>Thứ hai</Item>
+</Items>
+</cmbWeekFormat>
+<!--2013.1.30 新增结束-->
+</TFrameOptionClock>
+<!-- 动态背景-->
+<TFrameOptionDynamicBackground>
+<GroupBoxInfo>
+<Caption>Năng động nền</Caption>
+</GroupBoxInfo>
+<chkEnabledDynamicBackground>
+<Caption>Việc sử dụng các nền tảng năng động</Caption>
+</chkEnabledDynamicBackground>
+<LabelDynamicBackgroundStyle>
+<Caption>Phong cách</Caption>
+</LabelDynamicBackgroundStyle>
+<LabelDynamicBackgroundSpeed>
+<Caption>Tốc độ</Caption>
+</LabelDynamicBackgroundSpeed>
+<cmbDynamicBackgroundSpeed>
+<Items>
+<Item>1 (nhanh nhất)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (chậm nhất)</Item>
+</Items>
+</cmbDynamicBackgroundSpeed>
+<cmbDynamicBackgroundStyle>
+<Items>
+<Item>Vòng</Item>
+<Item>Ngôi sao năm cánh</Item>
+<Item>Bầu trời đầy sao</Item>
+<Item>Bông tuyết</Item>
+<Item>Mũi tên trái và phải</Item>
+<Item>Sidesway dọc</Item>
+<Item>Thanh di chuyển</Item>
+<Item>Kim cương</Item>
+<Item>Hộp</Item>
+<Item>Vòng tròn</Item>
+<Item>Hai dòng quét</Item>
+<Item>Quét</Item>
+</Items>
+</cmbDynamicBackgroundStyle>
+<optBaseMode>
+<Caption>cổ điển kết hợp</Caption>
+</optBaseMode>
+<optCustomMode>
+<Caption>miễn phí với</Caption>
+</optCustomMode>
+<optImageMode>
+<Caption>Xem trình diễn</Caption>
+</optImageMode>
+</TFrameOptionDynamicBackground>
+<!-- 炫动字区域参数设置界面-->
+<TFrameOptionFlashText>
+<GroupBoxRegionInfo>
+<Caption>Và từ Xuandong Sửa</Caption>
+</GroupBoxRegionInfo>
+<ToolButtonBold>
+<Hint>Đậm</Hint>
+</ToolButtonBold>
+<ToolButtonItalic>
+<Hint>Nghiêng</Hint>
+</ToolButtonItalic>
+<ToolButtonUnderline>
+<Hint>Nhấn mạnh</Hint>
+</ToolButtonUnderline>
+<cmbFontName>
+<Hint>Tên phông chữ</Hint>
+</cmbFontName>
+<cmbFontSize>
+<Hint>Kích thước phông chữ</Hint>
+</cmbFontSize>
+<cmbFontColor>
+<Hint>Màu chữ</Hint>
+</cmbFontColor>
+</TFrameOptionFlashText>
+<!-- 图文区域参数设置界面-->
+<TFrameOptionPicture>
+<Messages>
+<InfoSelectDeletedFile>Vui lòng chọn các tập tin bạn muốn xóa!</InfoSelectDeletedFile>
+<ConfDeleteFile>Xác nhận rằng bạn muốn xóa này?</ConfDeleteFile>
+<WarnFileNotExists>Các tập tin không tồn tại!</WarnFileNotExists>
+</Messages>
+<GroupBoxRegionInfo>
+<Caption>Danh sách tập tin</Caption>
+</GroupBoxRegionInfo>
+<btnAdd>
+<Caption>Thêm</Caption>
+</btnAdd>
+<btnDelete>
+<Caption>Xóa</Caption>
+</btnDelete>
+<btnUp>
+<Hint>Di chuyển</Hint>
+</btnUp>
+<btnDown>
+<Hint>Xuống</Hint>
+</btnDown>
+<!-- 添加菜单-->
+<PopupMenuAddFile>
+<Items>
+<Item>Mới Hypertext</Item>
+<Item>Thêm siêu văn bản</Item>
+<Item>Thêm một hình ảnh</Item>
+</Items>
+</PopupMenuAddFile>
+<!--2013.5.4 增加-->
+<ToolButtonNewRtf>
+<Hint>Thêm RTF</Hint>
+</ToolButtonNewRtf>
+<ToolButtonAddPicture>
+<Hint>Thêm một hình ảnh</Hint>
+</ToolButtonAddPicture>
+<ToolButtonAddGrid>
+<Hint>Thêm một bảng</Hint>
+</ToolButtonAddGrid>
+<ToolButtonAddWord>
+<Hint>Thêm WORD</Hint>
+</ToolButtonAddWord>
+<ToolButtonAddExcel>
+<Hint>Thêm EXCEL</Hint>
+</ToolButtonAddExcel>
+<ToolButtonDelete>
+<Hint>Xóa</Hint>
+</ToolButtonDelete>
+<ToolButtonUp>
+<Hint>Di chuyển</Hint>
+</ToolButtonUp>
+<ToolButtonDown>
+<Hint>Xuống</Hint>
+</ToolButtonDown>
+<chkShowPath>
+<Caption>Hiển thị đường dẫn</Caption>
+</chkShowPath>
+<!--2013.5.4 增加结束-->
+</TFrameOptionPicture>
+<!-- 节目参数设置界面-->
+<TFrameOptionProgram>
+<GroupBoxProgramInfo>
+<Caption>Loại chơi</Caption>
+</GroupBoxProgramInfo>
+<optPlayModeNormal>
+<Caption>Để chơi</Caption>
+</optPlayModeNormal>
+<optPlayModeHeart>
+<Caption>Chơi chiều dài cố định (s)</Caption>
+</optPlayModeHeart>
+<optPlayModeSetTime>
+<Caption>Phát sóng thường xuyên</Caption>
+</optPlayModeSetTime>
+<LabelStartDateTime>
+<Caption>Thời gian bắt đầu</Caption>
+</LabelStartDateTime>
+<LabelEndDateTime>
+<Caption>Thời gian kết thúc</Caption>
+</LabelEndDateTime>
+<chkWeekDaysSunday>
+<Caption>Chủ Nhật</Caption>
+</chkWeekDaysSunday>
+<chkWeekDaysMonday>
+<Caption>Thứ hai</Caption>
+</chkWeekDaysMonday>
+<chkWeekDaysTuesday>
+<Caption>Thứ ba</Caption>
+</chkWeekDaysTuesday>
+<chkWeekDaysWednesday>
+<Caption>Thứ tư</Caption>
+</chkWeekDaysWednesday>
+<chkWeekDaysThurday>
+<Caption>Thứ năm</Caption>
+</chkWeekDaysThurday>
+<chkWeekDaysFriday>
+<Caption>Thứ sáu</Caption>
+</chkWeekDaysFriday>
+<chkWeekDaysSaturday>
+<Caption>Thứ bảy</Caption>
+</chkWeekDaysSaturday>
+<chkEveryDay>
+<Caption>mỗi ngày</Caption>
+</chkEveryDay>
+</TFrameOptionProgram>
+<!-- 温度区域参数设置界面-->
+<TFrameOptionTempreture>
+<GroupBoxRegionInfo>
+<Caption>Tính nhiệt độ</Caption>
+</GroupBoxRegionInfo>
+<LabelMode>
+<Caption>Các đơn vị nhiệt độ</Caption>
+</LabelMode>
+<LabelDelt>
+<Caption>Sửa chữa</Caption>
+</LabelDelt>
+<LabelNumberColor>
+<Caption>Màu kỹ thuật số</Caption>
+</LabelNumberColor>
+<LabelUnitColor>
+<Caption>Đơn vị màu</Caption>
+</LabelUnitColor>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>Cố định văn bản</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>Sử dụng văn bản cố định</Caption>
+</chkEnabledText>
+<chkTwoLine>
+<Caption>Quấn</Caption>
+</chkTwoLine>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>Kiểu chữ</Caption>
+</GroupBoxFont>
+</TFrameOptionTempreture>
+<!--字幕区域参数设置界面 -->
+<TFrameOptionText>
+<GroupBoxRegionInfo>
+<Caption>Biên tập phụ đề</Caption>
+</GroupBoxRegionInfo>
+<LabelWordSpace>
+<Caption>Từ khoảng cách:</Caption>
+</LabelWordSpace>
+</TFrameOptionText>
+<!-- 计时区域参数设置界面-->
+<TFrameOptionTiming>
+<!-- 时钟属性-->
+<GroupBoxRegionInfo>
+<Caption>Đồng hồ tính</Caption>
+</GroupBoxRegionInfo>
+<optCountDown>
+<Caption>Đếm ngược</Caption>
+</optCountDown>
+<optCountUp>
+<Caption>Là thời gian</Caption>
+</optCountUp>
+<LabelDest>
+<Caption>Hiện mục tiêu</Caption>
+</LabelDest>
+<LabelFormat>
+<Caption>Định dạng hiển thị</Caption>
+</LabelFormat>
+<chkShowDay>
+<Caption>Ngày</Caption>
+</chkShowDay>
+<chkShowHour>
+<Caption>Thời gian</Caption>
+</chkShowHour>
+<chkShowMinute>
+<Caption>Phút</Caption>
+</chkShowMinute>
+<chkShowSecond>
+<Caption>Thứ hai</Caption>
+</chkShowSecond>
+<LabelNumberColor>
+<Caption>Màu kỹ thuật số</Caption>
+</LabelNumberColor>
+<LabelUnitColor>
+<Caption>Đơn vị màu</Caption>
+</LabelUnitColor>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>Cố định văn bản</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>Sử dụng văn bản cố định</Caption>
+</chkEnabledText>
+<chkTwoLine>
+<Caption>Quấn</Caption>
+</chkTwoLine>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>Kiểu chữ</Caption>
+</GroupBoxFont>
+</TFrameOptionTiming>
+<!-- 表盘盘区域参数设置界面-->
+<TFrameOptionWatch>
+<!-- 表盘属性-->
+<GroupBoxRegionInfo>
+<Caption>Quay số thuộc tính</Caption>
+</GroupBoxRegionInfo>
+<LabelStyle>
+<Caption>Phong cách</Caption>
+</LabelStyle>
+<cmbStyle>
+<Items>
+<Item>Truyền thống</Item>
+</Items>
+</cmbStyle>
+<LabelTickWidth>
+<Caption>Chiều rộng</Caption>
+</LabelTickWidth>
+<LabelTickColor>
+<Caption>Màu</Caption>
+</LabelTickColor>
+<LabelHourTickWidth>
+<Caption>Điểm toàn bộ tài sản</Caption>
+</LabelHourTickWidth>
+<Label369TickWidth>
+<Caption>3.6.9 điểm tính</Caption>
+</Label369TickWidth>
+<LabelMinuteTickWidth>
+<Caption>Tính chất của các điểm</Caption>
+</LabelMinuteTickWidth>
+<LabelLineWidth>
+<Caption>Chiều rộng</Caption>
+</LabelLineWidth>
+<LabelLineColor>
+<Caption>Màu</Caption>
+</LabelLineColor>
+<LabelHourLineWidth>
+<Caption>Kim đồng hồ</Caption>
+</LabelHourLineWidth>
+<LabelMinuteLineWidth>
+<Caption>Cây kim chỉ phút</Caption>
+</LabelMinuteLineWidth>
+<LabelSecondLineWidth>
+<Caption>Tay thứ hai</Caption>
+</LabelSecondLineWidth>
+<!-- 时差-->
+<GroupBoxTimeDiff>
+<Caption>Thời gian khác nhau</Caption>
+</GroupBoxTimeDiff>
+<LabelDeltHour>
+<Caption>Thời gian</Caption>
+</LabelDeltHour>
+<LabelDeltMinute>
+<Caption>Phút</Caption>
+</LabelDeltMinute>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>Cố định văn bản</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>Sử dụng văn bản cố định</Caption>
+</chkEnabledText>
+<btnTextDown>
+<Hint>Xuống</Hint>
+</btnTextDown>
+<btnTextLeft>
+<Hint>Bên trái</Hint>
+</btnTextLeft>
+<btnTextCenter>
+<Hint>Trung tâm</Hint>
+</btnTextCenter>
+<btnTextRight>
+<Hint>Chuyển sang bên phải</Hint>
+</btnTextRight>
+<btnTextUp>
+<Hint>Di chuyển</Hint>
+</btnTextUp>
+</TFrameOptionWatch>
+<!--表格编辑主界面-->
+<CGridEditorMainForm>
+<Caption>Chỉnh sửa bảng</Caption>
+<!--单色-->
+<PopupMenuSingleColor>
+<Items>
+<Item>Không</Item>
+<Item>Đỏ</Item>
+</Items>
+</PopupMenuSingleColor>
+<!--双色-->
+<PopupMenuTwoColor>
+<Items>
+<Item>Không</Item>
+<Item>Đỏ</Item>
+<Item>Vàng</Item>
+<Item>Xanh</Item>
+</Items>
+</PopupMenuTwoColor>
+</CGridEditorMainForm>
+<!--表格编辑插入表格界面-->
+<CGridEditorInsertCells>
+<Caption>Thêm một bảng</Caption>
+<LabelType>
+<Caption>Đi:</Caption>
+</LabelType>
+<optTypeRow>
+<Caption>Hàng</Caption>
+</optTypeRow>
+<optTypeCol>
+<Caption>Hàng</Caption>
+</optTypeCol>
+<LabelCount>
+<Caption>Số lượng:</Caption>
+</LabelCount>
+<LabelPosition>
+<Caption>Địa chỉ:</Caption>
+</LabelPosition>
+<optPositionCurrent>
+<Caption>Hiện tại</Caption>
+</optPositionCurrent>
+<optPositionEnd>
+<Caption>Cuối cùng</Caption>
+</optPositionEnd>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Hủy bỏ (&amp;C)</Caption>
+</btnCancel>
+</CGridEditorInsertCells>
+<!--表格编辑删除单元格界面-->
+<CGridEditorDeleteCells>
+<Caption>Xóa tế bào</Caption>
+<optTypeRow>
+<Caption>Toàn bộ dây chuyền</Caption>
+</optTypeRow>
+<optTypeCol>
+<Caption>Toàn bộ cột</Caption>
+</optTypeCol>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Hủy bỏ (&amp;C)</Caption>
+</btnCancel>
+</CGridEditorDeleteCells>
+<!--动态背景定义窗口-->
+<TDlgDynamicBackground>
+<Caption>Tùy chỉnh năng động nền</Caption>
+<grpElements>
+<Caption>yếu tố</Caption>
+</grpElements>
+<grpActions>
+<Caption>hành động</Caption>
+</grpActions>
+<btnOK>
+<Caption>xác định(&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>hủy bỏ(&amp;C)</Caption>
+</btnCancel>
+</TDlgDynamicBackground>
+<!--动态背景幻灯片选择窗口-->
+<TDlgDynamicBackgroundImages>
+<Caption>phim</Caption>
+<btnOK>
+<Caption>xác định(&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>hủy bỏ(&amp;C)</Caption>
+</btnCancel>
+</TDlgDynamicBackgroundImages>
+</Languages>

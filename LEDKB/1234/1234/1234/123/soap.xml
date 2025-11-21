@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<serv:message  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:serv="http://www.webex.com/schemas/2002/06/service">
+<header>
+  <securityContext>
+    <siteName>qat33</siteName>   
+    <webExID>tina</webExID>  
+    <password>P@ss123</password>
+    <partnerID>3ft9C7Q0BNi7_frycm3omQ</partnerID>
+  </securityContext>
+</header>
+
+<body>
+<bodyContent xsi:type="java:com.webex.service.binding.meeting.CreateMeeting">
+<accessControl>
+    <listToPublic>true</listToPublic>
+    <isPublic>true</isPublic>
+    <meetingPassword>P@ss123456789012</meetingPassword>
+</accessControl> 
+<metaData> 
+    <confName>schedule meeting from xmlapi</confName> 
+    <meetingType>3</meetingType> 
+    <agenda>Agenda:</agenda> 
+    <greeting>greeting</greeting> 
+    <location>location</location> 
+    <invitation>invitation</invitation> 
+</metaData> 
+<participants> 
+    <attendees> 
+    <attendee>
+        <person>
+            <name>fdsafdsa</name>
+            <title>24 hours:</title>
+            <company>Company</company>
+            <webExId></webExId>           		
+            <address>		
+            <addressType>PERSONAL</addressType>		
+            <address1>address1</address1>		
+            <address2>address2</address2>		
+            <city>city</city>		
+            <state>state</state>		
+            <zipCode>213215</zipCode>		
+            <country>country</country>		   
+            </address>		
+            <phones>		
+            <phone>213213212</phone>		
+            <mobilePhone>3213213213</mobilePhone>		
+            <fax>3132131</fax>		
+            </phones>		
+            <email>tinatest1@qa.webex.com</email>		
+            <notes>notes</notes>
+            <url>notes</url>
+            <type>VISITOR</type>  
+        </person>        
+        <contactID></contactID>
+        <joinStatus>REGISTER</joinStatus> 
+        <meetingKey></meetingKey>
+        <sessionKey></sessionKey>
+        <emailInvitations>true</emailInvitations>
+        <role>ATTENDEE</role>
+        <language>ENGLISH</language>
+    </attendee>
+    </attendees>
+</participants>
+<enableOptions>
+    <chat>true</chat>
+    <poll>true</poll>
+    <audioVideo>true</audioVideo>
+    <attendeeList>false</attendeeList>
+    <fileShare>true</fileShare>
+    <sendFeedback>true</sendFeedback>
+    <presentation>true</presentation>
+    <applicationShare>true</applicationShare>
+
+    <webTour>true</webTour>
+    <meetingRecord>false</meetingRecord>
+    <annotation>true</annotation>
+    <importDocument>true</importDocument>
+    <saveDocument>true</saveDocument>
+    <printDocument>true</printDocument>
+    <pointer>true</pointer>
+    <switchPage>true</switchPage>
+    <fullScreen>true</fullScreen>
+    <thumbnail>true</thumbnail>
+    <zoom>true</zoom>
+    <copyPage>true</copyPage>
+ 
+
+
+    <javaClient>true</javaClient>
+    <nativeClient>true</nativeClient>
+    <attendeeRecordMeeting>true</attendeeRecordMeeting>
+    <voip>false</voip>
+    <faxIntoMeeting>true</faxIntoMeeting>
+    <enableReg>true</enableReg>
+    <supportQandA>true</supportQandA>
+
+    <displayQuickStartHost>true</displayQuickStartHost>
+    <displayQuickStartAttendees>false</displayQuickStartAttendees>
+
+    <supportPanelists>true</supportPanelists>
+    <supportRemoteComputer>true</supportRemoteComputer>
+     <supportShareWebContent>true</supportShareWebContent>
+    <supportUCFWebPages>true</supportUCFWebPages>
+    <supportUCFRichMedia>true</supportUCFRichMedia>
+    <autoDeleteAfterMeetingEnd>true</autoDeleteAfterMeetingEnd>
+    <viewAnyDoc>true</viewAnyDoc>
+    <viewAnyPage>true</viewAnyPage>
+    <allowContactPrivate>true</allowContactPrivate>
+    <chatHost>true</chatHost>
+    <chatPresenter>true</chatPresenter>
+    <chatAllAttendees>true</chatAllAttendees>
+    <multiVideo>true</multiVideo>
+    <notes>true</notes>
+    <closedCaptions>true</closedCaptions>
+    <singleNote>true</singleNote>
+</enableOptions>
+<schedule>
+  <startDate>03/22/2018 05:15:00</startDate>
+<duration>1440</duration>
+  <timeZoneID>2</timeZoneID>
+  <showFileStartMode>showFileStartMode</showFileStartMode>
+  <showFilePath>showFilePath</showFilePath>
+  <templateFilePath>www.google.com</templateFilePath>
+  <showFileContPlayFlag>1</showFileContPlayFlag>
+  <showFileInterVal>2</showFileInterVal>
+  <entryExitTone>2</entryExitTone>
+  <extNotifyTime>15</extNotifyTime>
+  <extURL>extURL</extURL>
+  <joinNotifyURL>joinNotifyURL</joinNotifyURL>
+</schedule>
+<telephony>
+  <!--<telephonySupport>CALLIN</telephonySupport>-->
+  <enableTSP>false</enableTSP>
+  <intlLocalCallIn>true</intlLocalCallIn>
+  <tollFree>true</tollFree>
+
+</telephony>
+ <tracking>
+    <trackingCode1>trackingCode1</trackingCode1>
+    <trackingCode2>trackingCode2</trackingCode2>
+    <trackingCode3>trackingCode2</trackingCode3>
+    <trackingCode4>trackingCode2</trackingCode4>
+    <trackingCode5>trackingCode2</trackingCode5>
+    <trackingCode6>trackingCode2</trackingCode6>
+    <trackingCode7>trackingCode2</trackingCode7>
+    <trackingCode8>trackingCode2</trackingCode8>	
+    <trackingCode9>trackingCode2</trackingCode9>	
+    <trackingCode10>trackingCode2</trackingCode10>	
+</tracking>	
+
+<remind>
+    <enableReminder>true</enableReminder>
+    <emails>
+        <email>tinatest@qa.webex.com</email>
+    </emails>
+    <sendEmail>false</sendEmail>
+    <mobile>21321321</mobile>
+    <sendMobile>true</sendMobile>
+    <daysAhead>0</daysAhead>
+    <hoursAhead>0</hoursAhead>
+    <minutesAhead>15</minutesAhead>
+</remind>
+<attendeeOptions>
+    <emailInvitations>false</emailInvitations>
+    <participantLimit></participantLimit>
+    <request>true</request>
+    <registration>true</registration>
+    <auto>true</auto>
+    <excludePassword>true</excludePassword>
+    <joinRequiresAccount>true</joinRequiresAccount>
+</attendeeOptions>
+
+</bodyContent>
+</body>
+</serv:message>

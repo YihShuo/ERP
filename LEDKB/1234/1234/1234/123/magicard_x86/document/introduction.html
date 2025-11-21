@@ -1,0 +1,276 @@
+﻿
+<!doctype html>
+<html lang="en">
+  
+  <head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title></head>
+	<style>
+	   table,a,li,div,ul,h1,h2,h3,h4,h5,h6,code,p{
+          font-family: "Microsoft YaHei","Times New Roman",Serif;
+         }
+	</style>
+  
+  <body>
+<div class="editormd-preview editormd-preview-theme-dark" style="display: block; width: 768px; top: 40px; height: 231px;">
+  <div class="markdown-body editormd-preview-container" previewcontainer="true" style="padding: 20px;">
+    <br>
+    <div class="markdown-toc editormd-markdown-toc">
+      <ul class="markdown-toc-list">
+        <li>
+          <a class="toc-level-2" href="#&lt;center&gt;&lt;h3&gt;动态LED平台使用手册&lt;/h3&gt;&lt;/br&gt; &lt;h4&gt;【柠檬网络科技】&lt;/h4&gt;&lt;/center &gt;" level="2">
+            <center>
+              <h3>动态LED平台使用手册</h3>
+              <br>
+              <h4>【柠檬网络科技】</h4></center>
+          </a>
+          <ul>
+            <li>
+              <a class="toc-level-3" href="#什么是动态LED平台？" level="3">什么是动态LED平台？</a></li>
+            <li>
+              <a class="toc-level-3" href="#界面" level="3">界面</a>
+              <ul>
+                <li>
+                  <a class="toc-level-4" href="#系统设置" level="4">系统设置</a>
+                  <ul>
+                    <li>
+                      <a class="toc-level-5" href="#卡片添加" level="5">卡片添加</a></li>
+                    <li>
+                      <a class="toc-level-5" href="#高级设置" level="5">高级设置</a></li>
+                    <li>
+                      <a class="toc-level-5" href="#系统帮助" level="5">系统帮助</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a class="toc-level-4" href="#系统管理" level="4">系统管理</a>
+                  <ul>
+                    <li>
+                      <a class="toc-level-5" href="#卡片管理" level="5">卡片管理</a></li>
+                    <li>
+                      <a class="toc-level-5" href="#日志管理" level="5">日志管理</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a class="toc-level-4" href="#智能模式" level="4">智能模式</a>
+                  <ul>
+                    <li>
+                      <a class="toc-level-5" href="#文件模式" level="5">文件模式</a></li>
+                    <li>
+                      <a class="toc-level-5" href="#接口模式" level="5">接口模式</a></li>
+                    <li>
+                      <a class="toc-level-5" href="#插件管理" level="5">插件管理</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a class="toc-level-4" href="#手动模式" level="4">手动模式</a></li>
+                <li>
+                  <a class="toc-level-4" href="#状态监控" level="4">状态监控</a>
+                  <ul></ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <h2 id="h2--center-h3-led-h3-br-h4-h4-center-">
+      <a name="<center><h3>动态LED平台使用手册</h3></br> <h4>【柠檬网络科技】</h4></center >" class="reference-link"></a>
+      <span class="header-link octicon octicon-link"></span>
+      <center>
+        <h3>动态LED平台使用手册</h3>
+        <br>
+        <h4>【柠檬网络科技】</h4></center>
+    </h2>
+    <h3 id="h3--led-">
+      <a name="什么是动态LED平台？" class="reference-link"></a>
+      <span class="header-link octicon octicon-link"></span>什么是动态LED平台？</h3>
+    <hr>
+    <p>动态LED平台是为了解决从数据的采集，解析，以及发送实现动态的一体化。
+      <br>
+      <br></p>
+    <h3 id="h3-u754Cu9762">
+      <a name="界面" class="reference-link"></a>
+      <span class="header-link octicon octicon-link"></span>界面</h3>
+    <p>
+      <code>包含核心需求，以及支持一些基本操作体验需求，例如，缩小，放大，最小，以及手动拖大和拖动以及全屏模式等</code>
+      <br>
+      <img src="image/main.png" alt=""></p>
+    <h4 id="h4-u7CFBu7EDFu8BBEu7F6E">
+      <a name="系统设置" class="reference-link"></a>
+      <span class="header-link octicon octicon-link"></span>系统设置</h4>
+    <p>
+      <code>包括三个模块，卡片添加、程序设置和系统帮助</code></p>
+    <h5 id="h5-u5361u7247u6DFBu52A0">
+      <a name="卡片添加" class="reference-link"></a>
+      <span class="header-link octicon octicon-link"></span>卡片添加</h5>
+    <p>
+      <code>主要实现LED卡的 绑定（支持绑定最大的LED卡的个数为100）</code>
+      <br>
+      <img src="image/basicSetting.png" alt=""></p>
+    <ul>
+      <li>
+        <strong>IP地址 :</strong>LED卡的IP地址，必须符合规则(IPV4)有效，否则添加失败，一个IP只允许绑定一次。</li>
+      <li>
+        <strong>端口 :</strong>LED卡的有效端口，端口范围为[0,65535]。</li>
+      <li>
+        <strong>名称 :</strong>卡的名称，将用于程序的对卡的有效识别，名称不可重复。</li>
+      <li>
+        <strong>卡编号 :</strong>程序会按照符合规则的按照该编号的大小排序进行消息发送。</li>
+      <li>
+        <strong>说明 :</strong>可以对卡做简短的说明。</li>
+      <li>
+        <strong>激活 :</strong>保证添加的卡的ip地址必须有效，并且可以UDP协议通信，只有激活的卡才能被手动模式使用。</li>
+      <li>
+        <strong>启用 :</strong>一旦启用，必须要激活，只有启用和激活的卡，才被视为有效的卡，才可以被程序主动推送信息。</li></ul>
+    <h5 id="h5-u9AD8u7EA7u8BBEu7F6E">
+      <a name="高级设置" class="reference-link"></a>
+      <span class="header-link octicon octicon-link"></span>高级设置</h5>
+    <p>
+      <code>主要对程序的基本参数的设置</code>
+      <br>
+      <img src="image/processSetting.png" alt=""></p>
+    <ul>
+      <li>
+        <strong>系统名称 :</strong>改程序主界面左上角显示的公司名称，默认为柠檬网络科技。</li>
+      <li>
+        <strong>状态间隔 :</strong>状态监控的监控间隔，单位为S。</li></ul>
+    <h5 id="h5-u7CFBu7EDFu5E2Eu52A9">
+      <a name="系统帮助" class="reference-link"></a>
+      <span class="header-link octicon octicon-link"></span>系统帮助</h5>
+    <p>
+      <code>主要对程序的使用规则的说明</code></p>
+    <h4 id="h4-u7CFBu7EDFu7BA1u7406">
+      <a name="系统管理" class="reference-link"></a>
+      <span class="header-link octicon octicon-link"></span>系统管理</h4>
+    <p>
+      <code>对系统的主要要素进行管理</code></p>
+    <h5 id="h5-u5361u7247u7BA1u7406">
+      <a name="卡片管理" class="reference-link"></a>
+      <span class="header-link octicon octicon-link"></span>卡片管理</h5>
+    <p>
+      <code>列出绑定成功的LED卡，双击该卡，可以对当前卡进行删除，修改等操作，默认卡编号不可修改</code>
+      <br>
+      <img src="image/managementLED.png" alt=""></p>
+    <h5 id="h5-u65E5u5FD7u7BA1u7406">
+      <a name="日志管理" class="reference-link"></a>
+      <span class="header-link octicon octicon-link"></span>日志管理</h5>
+    <p>
+      <code>列出所有发送的日志记录，可以通过时间来查询，有必要时可以导出该文件</code>
+      <br>
+      <img src="image/record.png" alt=""></p>
+    <h4 id="h4-u667Au80FDu6A21u5F0F">
+      <a name="智能模式" class="reference-link"></a>
+      <span class="header-link octicon octicon-link"></span>智能模式</h4>
+    <p>
+      <code>程序的核心模块，实现对动态的支持</code></p>
+    <h5 id="h5-u6587u4EF6u6A21u5F0F">
+      <a name="文件模式" class="reference-link"></a>
+      <span class="header-link octicon octicon-link"></span>文件模式</h5>
+    <p>
+      <code>主要实现对文件的动态监控，以插件的性能运行，需要导入插件，并且绑定卡，支持多个插件同时运行</code>
+      <br>
+      <img src="image/fileModel.png" alt=""></p>
+    <ul>
+      <li>
+        <strong>插件名称 :</strong>当前插件的名称。</li>
+      <li>
+        <strong>插件说明 :</strong>对当前插件做简要的说明。</li>
+      <li>
+        <strong>文件模式 :</strong>对文件的类型的监控，有文件（监控特定文件）、目录（监听整个目录）、文件后缀（监听某个类型后缀文件）。</li>
+      <li>
+        <strong>文件路径 :</strong>需要监听文件的文件路径。</li>
+      <li>
+        <strong>触发模式 :</strong>noAction（任何情况下的改变程序都不做监控）、change（当前监控文件一旦发生改变，第一次创建不会被监控）、create（文件第一次创建就会被监控）、create_change（包括change和create两种行为的监控）。</li>
+      <li>
+        <strong>监控间隔 :</strong>监控的文件的间隔，单位为秒，间隔越小，程序对文件变化反应越快。</li>
+      <li>
+        <strong>插件路径 :</strong>对当前文件的解析的插件，需要符合插件规则，具体规则可以咨询
+        <a href="www.lemonnt.com">六安柠檬网络科技</a>。</li></ul>
+    <h5 id="h5-u63A5u53E3u6A21u5F0F">
+      <a name="接口模式" class="reference-link"></a>
+      <span class="header-link octicon octicon-link"></span>接口模式</h5>
+    <p>
+      <code>主要实现对各种协议的接口的动态监控，以插件的性能运行，需要导入插件，并且绑定卡，支持多个插件同时运行</code>
+      <br>
+      <img src="image/interfaceModel.png" alt=""></p>
+    <ul>
+      <li>
+        <strong>插件名称 :</strong>当前插件的名称。</li>
+      <li>
+        <strong>插件说明 :</strong>对当前插件做简要的说明。</li>
+      <li>
+        <strong>Appkey :</strong>接口验证的必要信息，需要接口提供。</li>
+      <li>
+        <strong>SecretKey :</strong>接口验证的必要信息，需要接口提供。</li>
+      <li>
+        <strong>监控间隔 :</strong>监控的文件的间隔，单位为秒，间隔越小，程序对文件变化反应越快。</li>
+      <li>
+        <strong>接口地址 :</strong>接口服务器的地址，
+        <a href="http://IP:PORT">http://IP:PORT</a>或
+        <a href="http://domainName。">http://domainName。</a></li>
+      <li>
+        <strong>协议类型 :</strong>当前接口的协议类型。</li>
+      <li>
+        <strong>接口名称 :</strong>当前接口的服务名称。</li>
+      <li>
+        <strong>插件路径 :</strong>对当前文件的解析的插件，需要符合插件规则，具体规则可以咨询
+        <a href="www.lemonnt.com">六安柠檬网络科技</a>。</li></ul>
+    <h5 id="h5-u63D2u4EF6u7BA1u7406">
+      <a name="插件管理" class="reference-link"></a>
+      <span class="header-link octicon octicon-link"></span>插件管理</h5>
+    <p>
+      <code>主要实现对添加的插件进行管理，编辑、删除、绑定卡、运行</code>
+      <br>
+      <img src="image/pluginManagement.png" alt=""></p>
+    <ul>
+      <li>
+        <strong>编辑/删除 :</strong>双击插件名称和插件类型。</li>
+      <li>
+        <strong>绑定卡 :</strong>点击绑定按钮。</li>
+      <li>
+        <strong>运行 :</strong>点击运行按钮，运行插件。</li></ul>
+    <h4 id="h4-u624Bu52A8u6A21u5F0F">
+      <a name="手动模式" class="reference-link"></a>
+      <span class="header-link octicon octicon-link"></span>手动模式</h4>
+    <p>
+      <code>支持手动发送消息到卡上</code>
+      <br>
+      <img src="image/handler.png" alt=""></p>
+    <ul>
+      <li>
+        <strong>目标卡 :</strong>列出所有激活未被启用的卡，All card（内容发往所有符合条件的卡）。</li>
+      <li>
+        <strong>区域ID :</strong>卡片的区域ID。</li>
+      <li>
+        <strong>分隔符 :</strong>内容的分隔符，如果区域ID为空，该选项生效，程序会按照分隔符号，分割内容字符串，按照顺序从0开始发送到卡的对应的区域ID上。</li></ul>
+    <h4 id="h4-u72B6u6001u76D1u63A7">
+      <a name="状态监控" class="reference-link"></a>
+      <span class="header-link octicon octicon-link"></span>状态监控</h4>
+    <p>
+      <code>动态监控所有绑定成功的LED卡的状态</code>
+      <br>
+      <img src="image/status.png" alt=""></p>
+    <ul>
+      <li>
+        <strong>正常 ：</strong>LED卡的网络良好，能正常通信。</li>
+      <li>
+        <strong>告警 ：</strong>LED卡的网络交叉好，能正常通信，可能存在数据包的丢失。</li>
+      <li>
+        <strong>异常 ：</strong>改卡的IP地址无效，或者失去网络连接。</li>
+      <li>
+        <strong>未激活 ：</strong>未激活的卡片，不会对此状态进行检查和监控。</li>
+      <li>
+        <strong>启用 ：</strong>已经启用的卡，显示形状为小圆角。</li>
+      <li>
+        <strong>未启用 ：</strong>未启用的卡片，在监控的列表中，该类卡片可以手动推送信息。</li>
+      <li>
+        <strong>其他说明 :</strong>刷新时间在系统管理 — &gt; 高级设置里面进行设置，图形上颜色代表了状态，里面的内容代表当前卡，上次推送的消息内容;双击图片可以显示具体的卡上显示的内容。</li></ul>
+  </div>
+</div>
+  </body>
+
+</html>

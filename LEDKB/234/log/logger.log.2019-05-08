@@ -1,0 +1,63 @@
+2019-05-08 00:03:56,800 - lemonnt
+2019-05-08 00:03:57,168 - false
+2019-05-08 00:03:57,543 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-05-08 00:03:57,550 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-05-08 00:03:57,567 - Obtain the parameters  : [DIGITNUMBER]
+2019-05-08 00:03:57,569 - Obtain the env parameters  : [4]
+2019-05-08 00:03:58,287 - Success to query records [1]
+2019-05-08 00:03:58,300 - [{"connection":false,"date":1557191062404,"desc":"1","gprs":0,"ip":"192.168.1.150","name":"卡1","order":"1","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-05-08 00:03:59,348 - Obtain the parameters  : [SYSTEMNAME]
+2019-05-08 00:03:59,351 - Obtain the env parameters  : [蓝通光电]
+2019-05-08 00:03:59,620 - Obtain the parameters  : [MONITORINTRVAL]
+2019-05-08 00:03:59,627 - Obtain the env parameters  : [10]
+2019-05-08 00:03:59,635 - Monitor Interval : [10s]
+2019-05-08 00:04:04,339 - Success to query records [1]
+2019-05-08 00:04:04,384 - Success to query records [1]
+2019-05-08 00:04:04,385 - start : 0, end : 1
+2019-05-08 00:04:56,442 - The name of plugin is [LT]
+2019-05-08 00:04:56,443 - The name of pluginType is [file]
+2019-05-08 00:04:56,463 - Success to query records [1]
+2019-05-08 00:04:57,943 - Obtain the parameters  : [SENDDELAY]
+2019-05-08 00:04:57,950 - Obtain the env parameters  : [20]
+2019-05-08 00:04:58,010 - Failed to read jar [error in opening zip file]
+2019-05-08 00:04:58,011 - Failed to read jar [error in opening zip file]
+2019-05-08 00:04:58,016 - It's going to parsing : K:\magicard_x86\plugin/config/properties/configuration.properties
+2019-05-08 00:04:58,017 - It has been parsed ,following [K:\magicard_x86\plugin/config/properties/configuration.properties]
+2019-05-08 00:04:58,017 - It has been loaded ,following : [K:\magicard_x86\plugin/config/properties/configuration.properties]
+2019-05-08 00:04:58,027 - {"pluginName":"LT","properties":{"monitorPath":"K:/test"}}
+2019-05-08 00:04:58,036 - Success to query records [1]
+2019-05-08 00:04:58,040 - Success to query records [1]
+2019-05-08 00:04:58,052 - Success to query records [1]
+2019-05-08 00:04:58,059 - Monitor type : directory
+2019-05-08 00:05:29,835 - Success to query records [1]
+2019-05-08 00:05:29,838 - Success to query records [1]
+2019-05-08 00:05:29,838 - start : 0, end : 1
+2019-05-08 00:05:33,898 - Success to query records [1]
+2019-05-08 00:07:01,570 - Success to query records [1]
+2019-05-08 00:07:06,923 - Success to query records [1]
+2019-05-08 00:07:06,926 - Success to query records [1]
+2019-05-08 00:07:06,927 - start : 0, end : 1
+2019-05-08 00:07:10,094 - Obtain the parameters  : [SYSTEMNAME]
+2019-05-08 00:07:10,095 - Obtain the env parameters  : [蓝通光电]
+2019-05-08 00:09:44,155 - Success to query records [1]
+2019-05-08 00:09:44,158 - Success to query records [1]
+2019-05-08 00:09:44,159 - start : 0, end : 1
+2019-05-08 00:09:50,594 - Success to query records [1]
+2019-05-08 00:10:01,083 - lemonnt
+2019-05-08 00:10:01,135 - false
+2019-05-08 00:10:01,236 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-05-08 00:10:01,241 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-05-08 00:10:01,260 - Obtain the parameters  : [DIGITNUMBER]
+2019-05-08 00:10:01,263 - Obtain the env parameters  : [4]
+2019-05-08 00:10:01,425 - Success to query records [1]
+2019-05-08 00:10:01,426 - [{"connection":false,"date":1557191062404,"desc":"1","gprs":0,"ip":"192.168.1.150","name":"卡1","order":"1","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-05-08 00:10:01,582 - Obtain the parameters  : [SYSTEMNAME]
+2019-05-08 00:10:01,584 - Obtain the env parameters  : [蓝通光电]
+2019-05-08 00:10:01,641 - Obtain the parameters  : [MONITORINTRVAL]
+2019-05-08 00:10:01,643 - Obtain the env parameters  : [10]
+2019-05-08 00:10:01,645 - Monitor Interval : [10s]
+2019-05-08 00:10:04,611 - Success to query records [1]
+2019-05-08 00:10:04,643 - Success to query records [1]
+2019-05-08 00:10:04,644 - start : 0, end : 1
+2019-05-08 00:10:06,250 - Success to query records [1]
+2019-05-08 00:10:06,310 - Success to query records [1]

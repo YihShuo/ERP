@@ -1,0 +1,2205 @@
+<?xml version="1.0"?>
+<Languages>
+<!--修改记录>
+41399
+1. 校时调试，节点<TDlgProtocolSetDateTime>
+增加<btnGetSystemTime>
+2. 通讯参数设置窗口，GPRS页，节点<TDlgNetworkSetting>
+增加<LabelDeviceId>
+3. 定时开关调试，节点<TDlgProtocolOnOff>
+增加<chkAutoOnOff>
+4. 区域显示参数设置，主界面，节点<TMainForm>
+增加<chkContinuousLeft>,<chkContinuousTop>
+41398
+1. 增加表格编辑器语言
+节点：<CGridEditorMainForm>,<CGridEditorInsertCells>,<CGridEditorDeleteCells>
+2. USB导出界面，节点<TDlgUsbForm>
+增加<LabelUsbFreeSize>,<LabelUsbFileSystem>,<LabelDateTimeNoChange>,<LabelLightNoChange>,<LabelOnOffNoChange>
+3. 定时开关调试，节点<TDlgProtocolOnOff>
+增加<MemoHelp>
+4. 亮度调节调试，节点<TDlgProtocolSetLight>
+增加<MemoHelp>
+5. 校时调试，节点<TDlgProtocolSetDateTime>
+增加<MemoHelp>
+6. 屏幕参数设置，节点<TdlgMonitorSetting>
+增加<chkDotFrequencyAuto>,<chkLineBlankingAuto>
+7. 图文区域编辑选项界面，<TFrameOptionPicture>
+增加<ToolButtonNewRtf>,<ToolButtonAddPicture>,<ToolButtonAddGrid>
+<ToolButtonAddWord>,<ToolButtonAddExcel>,<ToolButtonDelete>,
+<ToolButtonUp>,<ToolButtonDown>
+<chkShowPath>
+8. 主界面工具条，<TMainForm>
+增加 <ToolButtonTiming>,<ToolButtonSeDateTime>,<ToolButtonSetLight>
+<ToolButtonOnOff>
+<修改记录-->
+<!--这个文件定义中文简体-->
+<!-- Messages段定义一些信息提示信息-->
+<Messages>
+<!--;通用消息-->
+<Comm>
+<Comm.InitFail>การเริ่มต้นที่ล้มเหลว!</Comm.InitFail>
+<!--图文编辑添加文本文件时打开文件对话框的文件扩展名提示-->
+<FileFilterText>แฟ้มข้อความ(*.txt)</FileFilterText>
+<!--图文编辑添加RTF文件时打开文件对话框的文件扩展名提示-->
+<FileFilterRTF>ไฟล์ RTF (*.rtf)</FileFilterRTF>
+<OpenRtfFail>อ่านไฟล์ RTF ล้มเหลว!</OpenRtfFail>
+<!--图文编辑添加图片文件时打开文件对话框的文件扩展名提示-->
+<FileFilterPicture>ไฟล์ภาพ (*.BMP;*.JPG;*.GIF;*.PNG)</FileFilterPicture>
+<OpenPictureFail>ไม่สามารถอ่านไฟล์ภาพ!</OpenPictureFail>
+<!--图文编辑添加WORD文件时打开文件对话框的文件扩展名提示-->
+<FileFilterWord>เอกสาร Word (*.doc;*.docx)|*.doc;*.docx|WPS(*.wps)|*.wps|</FileFilterWord>
+<OpenWordFail>ไม่สามารถอ่านเอกสาร Word, ให้แน่ใจว่าคุณติดตั้งโปรแกรม Word!</OpenWordFail>
+<!--图文编辑添加EXCEL文件时打开文件对话框的文件扩展名提示-->
+<FileFilterExcel>เอกสาร Excel(*.xls;*.xlsx)|WPS(*.et)|*.et|</FileFilterExcel>
+<OpenExcelFail>เอกสาร Excel ไม่สามารถอ่าน! >>%s</OpenExcelFail>
+<!-- 工程打开保存的提示信息-->
+<SaveProjectFail>ไม่สามารถบันทึกโครงการ!</SaveProjectFail>
+<CreateDirFail>ล้มเหลวในการสร้างไดเรกทอรี!</CreateDirFail>
+<OpenProjectFail>ล้มเหลวในการเปิดโครงการ!</OpenProjectFail>
+<ErrorProjectVersion>รุ่นของแฟ้มโครงการไม่รู้จัก!</ErrorProjectVersion>
+<ErrorProjectFile>แฟ้มโครงการเสียหาย!</ErrorProjectFile>
+<!--;提示保存工程-->
+<ProjectChangedPrompt>โครงการยังมีการเปลี่ยนแปลงบันทึกหรือไม่</ProjectChangedPrompt>
+<!--;默认的新工程-->
+<NewProjectName>(งานโยธาใหม่)</NewProjectName>
+<!--;工程没有内容-->
+<ProjectNull>ไม่มีเนื้อหาที่จะถูกบันทึกไว้!</ProjectNull>
+<Unknown>ไม่ทราบ</Unknown>
+<!--通讯时的些操作信息-->
+<ProtocolTestStart>การเชื่อมต่อกับการ์ดควบคุมโปรดรอสักครู่ ...</ProtocolTestStart>
+<ProtocolSuccess>เชื่อมต่อความสำเร็จของการควบคุมบัตร</ProtocolSuccess>
+<ProtocolFail>การดำเนินการล้มเหลวในการตรวจสอบพอร์ตอนุกรมหรือเครือข่ายเป็นเรื่องปกติ</ProtocolFail>
+<ErrorComPort>ไม่ถูกต้องจำนวนของอนุกรม%s! กรุณาตรวจสอบการสื่อสารชุดพารามิเตอร์</ErrorComPort>
+<ProtocolReadyFail>อุปกรณ์ยังไม่พร้อม! กรุณาตรวจสอบพอร์ตอนุกรมหรือเครือข่ายเป็นเรื่องปกติ</ProtocolReadyFail>
+<ProtocolOnScreenSuccess>เปิดหน้าจอ!</ProtocolOnScreenSuccess>
+<ProtocolOffScreenSuccess>ปิดหน้าจอความสำเร็จ!</ProtocolOffScreenSuccess>
+<ProtocolSetAutoOnOff>สวิทช์ตั้งเวลาความสำเร็จของหน้าจอ</ProtocolSetAutoOnOff>
+<ProtocolReadParamsSuccess>ความสำเร็จ readback พารามิเตอร์</ProtocolReadParamsSuccess>
+<ProgressPrompt>อัตราส่วนความคืบหน้า:</ProgressPrompt>
+<RemainTimePrompt>เวลาที่เหลือ:%d วินาที</RemainTimePrompt>
+<MakingMonitorFile>แฟ้มพารามิเตอร์หน้าจอจะถูกสร้างขึ้น ...</MakingMonitorFile>
+<SendingMonitorFile>แฟ้มพารามิเตอร์หน้าจอจะถูกส่ง ...</SendingMonitorFile>
+<MakingDataFile>การสร้างเนื้อหาข้อมูล ...</MakingDataFile>
+<DataFileOutofCapacity>การส่งล้มเหลวขนาดของเนื้อหาที่ส่งออกไปภายนอกบัตรในความจุที่เหลืออยู่</DataFileOutofCapacity>
+<SendingDataFile>ข้อมูลเนื้อหาจะพร้อมเริ่มต้นการส่ง ...</SendingDataFile>
+<SendDataFileSuccess>ส่งเรียบร้อยแล้ว</SendDataFileSuccess>
+<SendDataFileFail>การส่งล้มเหลวสาเหตุของข้อผิดพลาด:%s</SendDataFileFail>
+<ProtocolReadParamsSuccess>ความสำเร็จ readback พารามิเตอร์</ProtocolReadParamsSuccess>
+<SaveScanSetInfoFail>บันทึกการตั้งค่าโหมดการสแกนล้มเหลว:%s</SaveScanSetInfoFail>
+<ConfDeleteScanSetInfo>ยืนยันว่าคุณต้องการลบรายการนี​​้</ConfDeleteScanSetInfo>
+<CreateCommFail>องค์ประกอบการสื่อสารที่สร้างความล้มเหลว!</CreateCommFail>
+<!--;默认字体-->
+<DefaultFontName>Arial</DefaultFontName>
+<DefaultFontSize>10</DefaultFontSize>
+<!--;颜色列表-->
+<ColorList>
+				<Item>ขาวดำ</Item>
+				<Item>สี</Item>
+				<Item>รุ้ง</Item>
+				<Item>สีเต็มรูปแบบ</Item>
+</ColorList>
+<!--;单基色颜色列表-->
+<SingleColorList>
+<Item>สีแดง</Item>
+</SingleColorList>
+<!--;双基色颜色列表-->
+<DoubleColorList>
+<Item>สีแดง</Item>
+<Item>สีเหลือง</Item>
+<Item>สีเขียว</Item>
+</DoubleColorList>
+<!--;全彩色颜色列表-->
+<SevenColorList>
+<Item>สีแดง</Item>
+<Item>สีเหลือง</Item>
+<Item>สีเขียว</Item>
+</SevenColorList>
+<!--;灰度列表-->
+<ColorGrayList>
+<Item>สีเทา</Item>
+<Item>32</Item>
+<Item>256</Item>
+</ColorGrayList>
+<!--;计时区域的显示格式-->
+<TimingDayLabel>วัน</TimingDayLabel>
+<TimingDayFormat>%d%s</TimingDayFormat>
+<TimingHourLabel>เวลา</TimingHourLabel>
+<TimingHourFormat>%d%s</TimingHourFormat>
+<TimingMinuteLabel>นาที</TimingMinuteLabel>
+<TimingMinuteFormat>%d%s</TimingMinuteFormat>
+<TimingSecondLabel>ที่สอง</TimingSecondLabel>
+<TimingSecondFormat>วินาที%d</TimingSecondFormat>
+<!--集群操作信息-->
+<GprsValidateError>GPRS ตรวจสอบรหัสผ่านของบัญชีไม่ถูกต้อง!</GprsValidateError>
+<GprsConnectError>ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ GPRS!</GprsConnectError>
+<GprsImeiError>การใช้การสื่อสาร GPRS, ชื่อหน้าจอจะต้อง DTU 15 หมายเลข IMEI</GprsImeiError>
+<NoGprsIdFilterFile>ขาดไฟล์ GPRS กรอง!</NoGprsIdFilterFile>
+<UpdateGprsCardsCompleted>รับความสำเร็จของรายการคลัสเตอร์ออนไลน์</UpdateGprsCardsCompleted>
+<UpdateGprsCardsError>ข้อผิดพลาดการเชื่อมต่ออีกครั้งโปรดรับคลัสเตอร์</UpdateGprsCardsError>
+<ConnectingColonyServer>เซิร์ฟเวอร์ในคลัสเตอร์กรุณารอสักครู่ ...</ConnectingColonyServer>
+<ConnectColonyServerSuccess>ความสำเร็จของเซิร์ฟเวอร์ในคลัสเตอร์</ConnectColonyServerSuccess>
+<ConnectColonyServerFail>ไม่สามารถเชื่อมต่อไปยังเซิร์ฟเวอร์คลัสเตอร์</ConnectColonyServerFail>
+<PromptSelectColonyCommandItem>กรุณาเลือกจำเป็นที่จะต้องดำเนินการรายการคำสั่ง</PromptSelectColonyCommandItem>
+<ColonyCommandOutofCapacity>รันคำสั่งล้มเหลวชื่อ {0} ขนาดหน้าจอข้อมูลที่สร้างขึ้นเกินกว่าขนาดของการ์ดความจุ</ColonyCommandOutofCapacity>
+<PromptColonyCloneOnlyOneRegion>ในย่อยหน้าจอโหมดหน้าจอหลักที่ปรับแต่งได้คุณสามารถสร้างพื้นที่กราฟิกและขนาดของพื้นที่ที่จะต้องมีสำหรับขนาดของหน้าจอ</PromptColonyCloneOnlyOneRegion>
+<SendColonyCommandSuccess>คำสั่งคลัสเตอร์ดำเนินการจะประสบความสำเร็จ</SendColonyCommandSuccess>
+<SendColonyCommandFail>คำสั่งคลัสเตอร์ล้มเหลว</SendColonyCommandFail>
+<PromptColonyVetifyNullIp>ที่อยู่เซิร์ฟเวอร์ไม่สามารถว่างเปล่า!</PromptColonyVetifyNullIp>
+<PromptColonyVetifyNullPassword>Server รหัสผ่านไม่สามารถว่างเปล่า!</PromptColonyVetifyNullPassword>
+<ColonyVetifyInvalidPassword>รหัสผ่านไม่ถูกต้อง</ColonyVetifyInvalidPassword>
+<ColonyVetiryServerError>กระบวนการเซิร์ฟเวอร์ล้มเหลว</ColonyVetiryServerError>
+<GprsColonyOperationReady>พร้อมแล้ว</GprsColonyOperationReady>
+<!--扫描信息的名称描述-->
+<ScanSetName1>01) P10 ขาวดำ 12 อินเตอร์เฟซ</ScanSetName1>
+<!--未知的扫描方式名称-->
+<UnknownScanSetName>การสแกนที่ไม่รู้จัก</UnknownScanSetName>
+<!--协议名称-->
+<ProtocolSerialPort>พอร์ตอนุกรม</ProtocolSerialPort>
+<ProtocolNet>พอร์ตเครือข่าย</ProtocolNet>
+<ProtocolDirectNet>เครือข่ายพอร์ตเชื่อมต่อโดยตรง</ProtocolDirectNet>
+<ProtocolGprs>GPRS</ProtocolGprs>
+<ProtocolUnknown>ไม่ทราบ</ProtocolUnknown>
+<!--2013-04-09-->
+<!--通讯测试错误-->
+<UnauthorizedAccessReplyPacket>ไม่ได้เป็นแพ็คเก็ตการตอบสนองที่ถูกต้อง</UnauthorizedAccessReplyPacket>
+<OpenPortFail>เปิดพอร์ตอนุกรมล้มเหลว</OpenPortFail>
+<CancelSending>ยกเลิกการส่ง</CancelSending>
+<CreateFail>สร้างองค์ประกอบการสื่อสารล้มเหลว</CreateFail>
+<SocketError>ความล้มเหลวของเครือข่าย</SocketError>
+<ColonyNotExists>สถานีคลัสเตอร์ไม่อยู่</ColonyNotExists>
+<ColonyOffline>สายขั้วคลัสเตอร์</ColonyOffline>
+<ColonyBusy>คลัสเตอร์สายไม่ว่าง</ColonyBusy>
+</Comm>
+</Messages>
+<!-- 以下是窗口界面的文字信息-->
+<!-- 其中的<Messages>段是一些提示信息, 其他段是界面上控件的文字信息-->
+<!-- 主窗口-->
+<TMainForm>
+<!-- 标题栏-->
+<Caption>X Show ซอฟต์แวร์</Caption>
+<Messages>
+<LoadSystemConfigFail>โหลดความล้มเหลวของการกำหนดค่าระบบ!</LoadSystemConfigFail>
+<MonitorName>แสดง%d</MonitorName>
+<ProgramName>โปรแกรม%d</ProgramName>
+<RegionNamePicture>กราฟิก%d</RegionNamePicture>
+<RegionNameText>คำบรรยาย%d</RegionNameText>
+<RegionNameFlashText>แอนิเมชั่%d</RegionNameFlashText>
+<RegionNameClock>นาฬิกา%d</RegionNameClock>
+<RegionNameWatch>กด%d</RegionNameWatch>
+<RegionNameTiming>เวลา%d</RegionNameTiming>
+<RegionNameDefaul>ภาค%d</RegionNameDefaul>
+<AskToSelectOneTreeNode>เลือกโหนด!</AskToSelectOneTreeNode>
+<WarnOnDeleteOneMonitor>ไม่สามารถลบได้, โครงการจะต้องมีอย่างน้อยหนึ่งหน้าจอ!</WarnOnDeleteOneMonitor>
+<ConfDeleteProgramListNode>ยืนยันว่าคุณต้องการลบรายการนี​​้</ConfDeleteProgramListNode>
+<!--有重叠区域-->
+<RegionOverlapping>ดำเนินการล้มเหลว%s: ที่มีพื้นที่ทับซ้อนกัน</RegionOverlapping>
+<!--导入U盘时如果没有选择屏幕提示-->
+<AskToSelectMonitor>เลือกหน้าจอ!</AskToSelectMonitor>
+<!--显示区域页数信息-->
+<RegionPagesInfo>หน้า%d /%d หน้า</RegionPagesInfo>
+<!--对象克隆后加的前缀 -->
+<CloneAddText>คัดลอก</CloneAddText>
+<!--超出节目数提示-->
+<MaxProgramCountInfo>สนับสนุนโปรแกรม%d สูงสุด!</MaxProgramCountInfo>
+<!--超出区域数提示-->
+<MaxRegionCountInfo>สนับสนุนภูมิภาค%d สูงสุด!</MaxRegionCountInfo>
+<!--超出具体区域数提示-->
+<MaxRegionDetailCountInfo>สนับสนุน %d ภูมิภาคท​​ี่ใหญ่ที่สุดใน!</MaxRegionDetailCountInfo>
+<MaxSpeedNote>(เร็ว)</MaxSpeedNote>
+<MinSpeedNote>(ช้าที่สุด)</MinSpeedNote>
+<!--屏幕名称不允许重复-->
+<ScreeNameRepeat>ชื่อบนหน้าจอไม่ได้รับอนุญาตที่จะทำซ้ำ!</ScreeNameRepeat>
+<!--检测空区域-->
+<HaveNoRegions>พื้นที่โครงการในปัจจุบัน! ไม่สามารถที่จะทำงาน!</HaveNoRegions>
+<AllRegionsIsNull>พื้นที่ทั้งหมดของโปรแกรมที่ว่างเปล่า! ไม่สามารถที่จะทำงาน!</AllRegionsIsNull>
+<ConfHaveNulRegions>ตรวจพบชื่อที่ว่างเปล่าหรือพื้นที่กราฟิกเพื่อดำเนินการต่อ?</ConfHaveNulRegions>
+</Messages>
+<!--另存工程对话框-->
+<dlgSave>
+<Project>
+<Filter>แฟ้มโครงการ Kalerka</Filter>
+</Project>
+<SaveProject>
+<Title>บันทึกโครงการเป็น ...</Title>
+</SaveProject>
+<SaveAsProject>
+<Title>บันทึกโครงการเป็น ...</Title>
+</SaveAsProject>
+</dlgSave>
+<dlgOpen>
+<OpenProject>
+<Title>เปิดโครงการ ...</Title>
+</OpenProject>
+</dlgOpen>
+<!--节目管理按钮-->
+<btnProgramList>
+<Caption>การบริหารจัดการโครงการ</Caption>
+</btnProgramList>
+<!--节目管理树右键菜单-->
+<PopupMenuTreeProgramList>
+<Items>
+<Item>ย้าย</Item>
+<Item>ลง</Item>
+<Item>-</Item>
+<Item>ลบ</Item>
+<Item>คัดลอก</Item>
+<Item>ติด</Item>
+<Item>-</Item>
+<Item>การขยายตัว</Item>
+<Item>ล่มสลาย</Item>
+<Item>-</Item>
+<Item>ตั้งชื่อใหม่</Item>
+<Item>-</Item>
+<Item>หน้าจอ Clone</Item>
+</Items>
+</PopupMenuTreeProgramList>
+<!--图片资源库按钮-->
+<btnPictures>
+<Caption>ทรัพยากรห้องสมุดภาพ</Caption>
+</btnPictures>
+<!--图片资源库树-->
+<treePictures>
+<Items>
+<Item>
+<Text>ภาพ</Text>
+<Items>
+<Item>โอลิมปิค</Item>
+<Item>ทำเครื่องหมาย</Item>
+<Item>ลูกศร</Item>
+<Item>โลโก้แบบคงที่</Item>
+<Item>ดาวและป้าย</Item>
+<Item>อักขระพิเศษ</Item>
+<Item>สัญญลักษณ์</Item>
+<Item>ชีวิต</Item>
+</Items>
+</Item>
+<Item>
+<Text>แอนิเมชั่</Text>
+<Items>
+<Item>ภาพเคลื่อนไหวโลโก้</Item>
+<Item>การแสดงออก</Item>
+</Items>
+</Item>
+</Items>
+</treePictures>
+<!--主工具条的按钮-->
+<ToolButtonProgram>
+<Caption>โครงการ</Caption>
+<Hint>โครงการ</Hint>
+</ToolButtonProgram>
+<ToolButtonDynamicBackground>
+<Caption>พื้นหลังแบบไดนามิก</Caption>
+<Hint>พื้นหลังแบบไดนามิก</Hint>
+</ToolButtonDynamicBackground>
+<ToolButtonPicture>
+<Caption>กราฟิก</Caption>
+<Hint>กราฟิก</Hint>
+</ToolButtonPicture>
+<ToolButtonText>
+<Caption>หัวเรื่องย่อย</Caption>
+<Hint>หัวเรื่องย่อย</Hint>
+</ToolButtonText>
+<ToolButtonFlashText>
+<Caption>คำ Xuandong</Caption>
+<Hint>คำ Xuandong</Hint>
+</ToolButtonFlashText>
+<ToolButtonClock>
+<Caption>นาฬิกา</Caption>
+<Hint>นาฬิกา</Hint>
+</ToolButtonClock>
+<ToolButtonWatch>
+<Caption>หมุน</Caption>
+<Hint>หมุน</Hint>
+</ToolButtonWatch>
+<ToolButtonDelete>
+<Caption>ลบ</Caption>
+<Hint>ลบ</Hint>
+</ToolButtonDelete>
+<ToolButtonPreview>
+<Caption>แสดงตัวอย่าง</Caption>
+<Hint>แสดงตัวอย่าง</Hint>
+<Caption1>หยุด</Caption1>
+<Hint1>หยุด</Hint1>
+</ToolButtonPreview>
+<ToolButtonSend>
+<Caption>ส่ง</Caption>
+<Hint>ส่ง</Hint>
+</ToolButtonSend>
+<ToolButtonUSB>
+<Caption>USB</Caption>
+<Hint>USB</Hint>
+</ToolButtonUSB>
+<ToolButtonSearchCard>
+<Caption>ตรวจสอบหน้าจอ</Caption>
+<Hint>ตรวจสอบหน้าจอ</Hint>
+</ToolButtonSearchCard>
+<!-- 2013.5.4 增加-->
+<ToolButtonTiming>
+<Caption>การจับเวลา</Caption>
+<Hint>การจับเวลา</Hint>
+</ToolButtonTiming>
+<ToolButtonSeDateTime>
+<Caption>การจับเวลา</Caption>
+<Hint>การจับเวลา</Hint>
+</ToolButtonSeDateTime>
+<ToolButtonSetLight>
+<Caption>ความสว่าง</Caption>
+<Hint>ความสว่าง</Hint>
+</ToolButtonSetLight>
+<ToolButtonOnOff>
+<Caption>สวิทช์ตั้งเวลา</Caption>
+<Hint>สวิทช์ตั้งเวลา</Hint>
+</ToolButtonOnOff>
+<!-- 2013.5.4 增加结束-->
+<!--区域属性操作的工具栏：区域缩放、位置、翻页-->
+<ToolButtonZoomInit>
+<Hint>ขนาดดั้งเดิม</Hint>
+</ToolButtonZoomInit>
+<ToolButtonZoomOut>
+<Hint>ขยาย</Hint>
+</ToolButtonZoomOut>
+<ToolButtonZoomIn>
+<Hint>แคบ</Hint>
+</ToolButtonZoomIn>
+<ToolButtonRegionLeft>
+<Hint>ซ้ายในภูมิภาค</Hint>
+</ToolButtonRegionLeft>
+<ToolButtonRegionRight>
+<Hint>ขวาของภูมิภาคท​​ี่อยู่อาศัย</Hint>
+</ToolButtonRegionRight>
+<ToolButtonRegionTop>
+<Hint>สูงสุดในภูมิภาค</Hint>
+</ToolButtonRegionTop>
+<ToolButtonRegionBottom>
+<Hint>ภูมิภาคมีการตั้งค่าที่ส่วนท้ายของ</Hint>
+</ToolButtonRegionBottom>
+<ToolButtonLastRegionPage>
+<Hint>ก่อน</Hint>
+</ToolButtonLastRegionPage>
+<ToolButtonNextRegionPage>
+<Hint>ต่อไป</Hint>
+</ToolButtonNextRegionPage>
+<!--主菜单-->
+<ActionManagerMain>
+<ActionBars>
+<ActionBar>
+<Items>
+<Item>
+<Caption>ไฟล์ (&amp;F)</Caption>
+<Items>
+<Item>ก่อสร้างใหม่ (&amp;N)</Item>
+#N/A
+<Item>-</Item>
+<Item>บันทึก (&amp;S)</Item>
+<Item>บันทึกเป็น ...</Item>
+<Item>-</Item>
+<Item>ส่งออก</Item>
+<Item>การนำเข้า</Item>
+<Item>-</Item>
+<Item>เลิก(&amp;E)</Item>
+</Items>
+</Item>
+<Item>
+<Caption>แทรก(&amp;I)</Caption>
+<Items>
+<Item>จอภาพ</Item>
+<Item>โครงการ</Item>
+<Item>พื้นหลังแบบไดนามิก</Item>
+<Item>-</Item>
+<Item>หัวเรื่องย่อย</Item>
+<Item>กราฟิก</Item>
+<Item>คำ Xuandong</Item>
+<Item>นาฬิกา</Item>
+<Item>หมุน</Item>
+<Item>การจับเวลา</Item>
+<Item>อุณหภูมิ</Item>
+</Items>
+</Item>
+<Item>
+<Caption>ตั้ง (&amp;S)</Caption>
+<Items>
+<Item>พารามิเตอร์หน้าจอ</Item>
+<Item>พารามิเตอร์การสื่อสาร</Item>
+<Item>-</Item>
+<Item>ปรับเปลี่ยน IP บัตร</Item>
+<Item>-</Item>
+<Item>คณะกรรมการกำหนดค่าโดยอัตโนมัติหน่วย</Item>
+</Items>
+</Item>
+<Item>
+<Caption>การแก้จุดบกพร่อง (&amp;D)</Caption>
+<Items>
+<Item>การจับเวลา</Item>
+<Item>การปรับความสว่าง</Item>
+<Item>รุ่นร้องขอ</Item>
+<Item>หน้าจอสวิทช์ซอฟแวร์</Item>
+<Item>-</Item>
+<Item>แสดงตัวอย่าง</Item>
+<Item>ส่ง</Item>
+<Item>ดิสก์ U นำเข้า</Item>
+<Item>-</Item>
+<Item>ดูเข้าสู่ระบบ</Item>
+</Items>
+</Item>
+<Item>
+<Caption V="0">กลุ่ม (&amp;C)</Caption>
+<Items>
+<Item>การกำหนดค่าเซิร์ฟเวอร์</Item>
+<Item>การจัดการคลัสเตอร์</Item>
+</Items>
+</Item>
+<Item>
+<Caption>ภาษา (&amp;L)</Caption>
+<Items>
+<Item>จะเลือก</Item>
+</Items>
+</Item>
+<Item>
+<Caption>ช่วย(&amp;A)</Caption>
+</Item>
+</Items>
+</ActionBar>
+</ActionBars>
+</ActionManagerMain>
+<!--基本属性-->
+<GroupBoxBaseInfo>
+<Caption>คุณสมบัติพื้นฐานของ</Caption>
+</GroupBoxBaseInfo>
+<LabelRegionName>
+<Caption>ชื่อ</Caption>
+</LabelRegionName>
+<LabelRegionX>
+<Caption>X ตำแหน่ง</Caption>
+</LabelRegionX>
+<LabelRegionY>
+<Caption>Y ตำแหน่ง</Caption>
+</LabelRegionY>
+<LabelRegionWidth>
+<Caption>ความกว้าง</Caption>
+</LabelRegionWidth>
+<LabelRegionHeight>
+<Caption>ความสูง</Caption>
+</LabelRegionHeight>
+<!--基本属性-->
+<GroupBoxDisplayInfo>
+<Caption>คุณสมบัติการแสดงผล</Caption>
+</GroupBoxDisplayInfo>
+<LabelDisplayMode>
+<Caption>โหมดหน้าจอ</Caption>
+</LabelDisplayMode>
+<cmbDisplayMode>
+<Items>
+<Item>สุ่มแสดง</Item>
+<Item>ยังคง</Item>
+<Item>ขยับตัวไปทางขวา</Item>
+<Item>ซ้าย</Item>
+<Item>ลง</Item>
+<Item>ย้าย</Item>
+<Item>ความคุ้มครองที่เหมาะสม</Item>
+<Item>ความคุ้มครองด้านซ้าย</Item>
+<Item>ความคุ้มครองต่อไปนี้</Item>
+<Item>บนหน้าปก</Item>
+<Item>เปิดแนวนอน</Item>
+<Item>การเปิดตัวของแนวตั้ง</Item>
+<Item>ข้ามปิด</Item>
+<Item>ปิดแนวตั้ง</Item>
+<Item>ผ้าม่านขวา</Item>
+<Item>บานเกล็ดซ้าย</Item>
+<Item>ภายใต้ผ้าม่าน</Item>
+<Item>เมื่อผ้าม่าน</Item>
+<Item>วูบวาบ</Item>
+<Item>คำแปรงขวา</Item>
+<Item>คำแปรงซ้าย</Item>
+<Item>ภายใต้คำแปรง</Item>
+<Item>คำแปรง</Item>
+<Item>หน้าซ้าย</Item>
+<Item>หน้าข้างขวาถัดไป</Item>
+<Item>พัดลม</Item>
+<Item>ปิดพัดลม</Item>
+<Item>ถนัดมือขวา</Item>
+<Item>L-</Item>
+<Item>ระดับสลับ</Item>
+<Item>แนวตั้งสลับ</Item>
+<Item>เลื่อนลงม่าน</Item>
+<Item>ชัตเตอร์ขวา</Item>
+<Item>กรอบ</Item>
+<Item>กระพริบต่อต้านสีขาว</Item>
+<Item>ขยายรูปสี่เหลี่ยมผืนผ้า</Item>
+<Item>การหดตัวเป็นรูปสี่เหลี่ยมผืนผ้า</Item>
+<Item>ขยายเพชร</Item>
+<Item>การหดตัวของเพชร</Item>
+<Item>ขยายข้าม</Item>
+<Item>ข้ามการหดตัว</Item>
+<Item>สี่เหลี่ยมผืนผ้าล่างซ้าย</Item>
+<Item>สี่เหลี่ยมผืนผ้าด้านบนซ้าย</Item>
+<Item>ลดสี่เหลี่ยมผืนผ้าขวา</Item>
+<Item>สี่เหลี่ยมผืนผ้าด้านบนขวา</Item>
+<Item>เฉือนล่างซ้าย</Item>
+<Item>ทับด้านบนซ้าย</Item>
+<Item>ขวาล่างเฉือน</Item>
+<Item>ที่ลาดเชิงบวก</Item>
+<Item>Xiasha</Item>
+<Item>กรอบ</Item>
+<Item>แสดงตอนนี้</Item>
+<Item>เฟรมยาว</Item>
+</Items>
+</cmbDisplayMode>
+<LabelClearMode>
+<Caption>ล้างหน้าจอโดย</Caption>
+</LabelClearMode>
+<LabelSpeed>
+<Caption>ความเร็ว</Caption>
+</LabelSpeed>
+<cmbSpeed>
+<Items>
+<Item>1 (เร็ว)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (ช้า)</Item>
+</Items>
+</cmbSpeed>
+<LabelDisplayDelay>
+<Caption>ระยะเวลา</Caption>
+</LabelDisplayDelay>
+<LabelDisplayStyle>
+<Caption>สไตล์</Caption>
+</LabelDisplayStyle>
+<cmbDisplayStyle>
+<Items>
+<Item>การเต้นของหัวใจ</Item>
+<Item>เพลงเต้นรำ</Item>
+<Item>ลอยไป</Item>
+<Item>คลื่นแม่เหล็กไฟฟ้า</Item>
+<Item>หลอดไฟ</Item>
+<Item>ฤดูใบไม้ผลิ</Item>
+<Item>ม้วน</Item>
+<Item>หมากดอมินอ</Item>
+<Item>Drift กลับ</Item>
+<Item>การหมุน</Item>
+<Item>แสงนีออน</Item>
+<Item>DOUCAI</Item>
+<Item>รุ้ง ()</Item>
+<Item>รุ้ง (ใต้)</Item>
+<Item>รุ้ง (ซ้าย)</Item>
+<Item>รุ้ง (ขวา)</Item>
+</Items>
+</cmbDisplayStyle>
+<!-- 动感边框-->
+<GroupBoxFlashBorder>
+<Caption>พรมแดนแบบไดนามิก</Caption>
+</GroupBoxFlashBorder>
+<chkFlashBorderEnabled>
+<Caption>การแสดงผลแบบไดนามิกชายแดน</Caption>
+</chkFlashBorderEnabled>
+<optFlashBorderOneColor>
+<Caption>ขาวดำ</Caption>
+</optFlashBorderOneColor>
+<optFlashBorderFlashColor>
+<Caption>ฮยอนสี</Caption>
+</optFlashBorderFlashColor>
+<LabelFlashBorderSpeed>
+<Caption>ความเร็วเดิน</Caption>
+</LabelFlashBorderSpeed>
+<cmbFlashBorderSpeed>
+<Items>
+<Item>1 (เร็ว)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (ช้า)</Item>
+</Items>
+</cmbFlashBorderSpeed>
+<LabelFlashBorderDirection>
+<Caption>ทิศทางการอพยพย้ายถิ่น</Caption>
+</LabelFlashBorderDirection>
+<cmbFlashBorderDirection>
+<Items>
+<Item>จอแสดงผลคงที่</Item>
+<Item>หมุนตามเข็มนาฬิกา</Item>
+<Item>หมุนทวนเข็มนาฬิกา</Item>
+<Item>วูบวาบ</Item>
+<Item>กระพริบ + ตามเข็มนาฬิกา</Item>
+<Item>กระพริบ + หมุนทวนเข็มนาฬิกา</Item>
+</Items>
+</cmbFlashBorderDirection>
+<!--屏幕属性-->
+<LabelCardModel>
+<Caption>รุ่นการ์ดควบคุม:</Caption>
+</LabelCardModel>
+<LabelMonitorWidth>
+<Caption>ความกว้างหน้าจอ:</Caption>
+</LabelMonitorWidth>
+<LabelMonitorHeight>
+<Caption>ความสูงของหน้าจอ:</Caption>
+</LabelMonitorHeight>
+<LabelMonitorColorMode>
+<Caption>สีแผ่นเซลล์:</Caption>
+</LabelMonitorColorMode>
+<LabelMonitorConnectMode>
+<Caption>วิธีการสื่อสาร:</Caption>
+</LabelMonitorConnectMode>
+<LabelMonitorConnectPort>
+<Caption>Ports:</Caption>
+</LabelMonitorConnectPort>
+<!--2013.5.5 增加-->
+<chkContinuousLeft>
+<Caption>ซ้ายอย่างต่อเนื่อง</Caption>
+</chkContinuousLeft>
+<chkContinuousTop>
+<Caption>อย่างต่อเนื่องในการย้าย</Caption>
+</chkContinuousTop>
+<!--2013.5.5 增加结束-->
+</TMainForm>
+<!--关于对话框-->
+<TDlgAbout>
+<Caption>เกี่ยวกับ ...</Caption>
+<LabelAppName>
+<Caption>X Show ซอฟต์แวร์</Caption>
+</LabelAppName>
+<LabelAppVersion>
+<Caption>เวอร์ชัน:%s</Caption>
+</LabelAppVersion>
+<MemoAppNote>
+<Items>
+<Item>คำเตือน: โปรแกรมคอมพิวเตอร์นี้ถูกปกป้องด้วยกฎหมายลิขสิทธิ์และการประชุมระหว่างประเทศที่ได้รับการคุ้มครองจากการทำซ้ำไม่ได้รับอนุญาตหรือการกระจายตัวของโปรแกรมนี้บางส่วนหรือทั้งหมดของการฟ้องร้องอาจส่งผลในการลงโทษทางแพ่งและอาญาที่รุนแรงและอาจมีการแสดงความคิดเห็นเป็นไปได้สูงสุดที่ได้รับอนุญาตตามกฎหมาย</Item>
+</Items>
+</MemoAppNote>
+<btnOK>
+<Caption>ตกลง (&amp;O)</Caption>
+</btnOK>
+</TDlgAbout>
+<!--网络集群发送-->
+<TDlgColonySend>
+<Caption>คลัสเตอร์การจัดการส่ง</Caption>
+<chkSelectAll>
+<Caption>เลือก</Caption>
+</chkSelectAll>
+<!--提示信息-->
+<MemoNote>
+<Items>
+<Item>รายละเอียด:</Item>
+<Item></Item>
+<Item>1 โหมดเดียวของเครือข่ายการสื่อสารพอร์ตหรือ GPRS ก่อนที่พวกเขาสามารถเข้าร่วมกลุ่ม</Item>
+<Item></Item>
+<Item>กลุ่มโคลน 2 ส่งส่งหน้าจอหลักของข้อมูลที่ส่งไปยังกลุ่มบนหน้าจอทุกการใช้งานของโคลนส่งกลุ่มหน้าจอแจ้งการขนาดหน้าจอพารามิเตอร์เหมือนกัน ที่จำเป็นก่อนที่จะส่งหน้าจอหลัก</Item>
+<Item></Item>
+<Item>3 กลุ่มการชุมนุมส่ง: วางข้อมูลบนหน้าจอคำจะถูกส่งไปยังหน้าจอที่สอดคล้องกัน</Item>
+</Items>
+</MemoNote>
+<!--设备列表-->
+<ListViewCards>
+<Columns>
+<Column>สถานะ</Column>
+<Column>ชื่อ</Column>
+<Column>แบบ</Column>
+<Column>กว้างของหน้าจอ</Column>
+<Column>สูงของหน้าจอ</Column>
+<Column>ประเภทแผ่นเซลล์</Column>
+<Column>วิธีการสื่อสาร</Column>
+<Column>ความสว่าง</Column>
+<Column>สวิทช์ตั้งเวลา</Column>
+</Columns>
+</ListViewCards>
+<!--操作选择项-->
+<optRegularSend>
+<Caption>กลุ่ม Conventional ส่ง</Caption>
+</optRegularSend>
+<optCloneSend>
+<Caption>โคลนกลุ่มส่ง</Caption>
+</optCloneSend>
+<optOpenScreen>
+<Caption>บูตซอฟแวร์</Caption>
+</optOpenScreen>
+<optCloseScreen>
+<Caption>Soft-Off</Caption>
+</optCloseScreen>
+<optTiming>
+<Caption>การจับเวลา</Caption>
+</optTiming>
+<btnSendProtocol>
+<Caption>รันคำสั่ง</Caption>
+</btnSendProtocol>
+<!--指定主屏幕-->
+<LabelCloneScreens>
+<Caption>ระบุหน้าจอหลัก:</Caption>
+</LabelCloneScreens>
+</TDlgColonySend>
+<!--网络集群登录验证窗口-->
+<TDlgColonyVerify>
+<Caption>เข้าสู่ระบบการตรวจสอบ</Caption>
+<LabelPassword>
+<Caption>รหัสผ่าน</Caption>
+</LabelPassword>
+<LabelServerIp>
+<Caption>เซิร์ฟเวอร์</Caption>
+</LabelServerIp>
+<LabelPort>
+<Caption>พอร์ต</Caption>
+</LabelPort>
+<btnOK>
+<Caption>กำหนด</Caption>
+</btnOK>
+<btnCancel>
+<Caption>ยกเลิก</Caption>
+</btnCancel>
+</TDlgColonyVerify>
+<!--GPRS群组发送窗口-->
+<TDlgGprsColony>
+<Caption>การจัดการคลัสเตอร์</Caption>
+<Messages>
+<AllScreens>แบบเต็มหน้าจอ</AllScreens>
+<AddGroupCaption>เพิ่มกลุ่ม</AddGroupCaption>
+<AddGroupPrompt>กรุณาป้อนชื่อของกลุ่ม:</AddGroupPrompt>
+<AddGroupExists>ชื่อของกลุ่มที่มีอยู่แล้ว!</AddGroupExists>
+<AddGroupFail>กลุ่มเพิ่มล้มเหลว!</AddGroupFail>
+<ConfDeleteGroup>เพื่อยืนยันว่าคุณต้องการลบกลุ่ม?</ConfDeleteGroup>
+<ConfDeleteDevice>ยืนยันว่าคุณต้องการลบสถานีที่เลือก?</ConfDeleteDevice>
+<NoScreen>หน้าจอไม่สามารถเพิ่ม!</NoScreen>
+<DeviceIdExists>เทอร์มิ ID อยู่แล้ว!</DeviceIdExists>
+<NoItemChecked>เลือกขั้ว! (ใช้กล่องที่เลือกไปเลือก)</NoItemChecked>
+<NoItemSelected>เลือกขั้ว! (Mouse เลือกแถวคลิก)</NoItemSelected>
+<!--终端在线状态-->
+<StatusOnline>ออนไลน์</StatusOnline>
+<StatusOffline>ไม่ได้ออนไลน์</StatusOffline>
+<!--命令发送状态-->
+<SendStatusSending>การส่ง</SendStatusSending>
+<SendStatusSuccess>ความสำเร็จ</SendStatusSuccess>
+<SendStatusScreenParamFail>พารามิเตอร์หน้าจอล้มเหลว</SendStatusScreenParamFail>
+<SendStatusConnectFail>ล้มเหลวในการเชื่อมต่อ</SendStatusConnectFail>
+</Messages>
+<chkSelectAll>
+<Caption>เลือก</Caption>
+</chkSelectAll>
+<LabelGroups>
+<Caption>กลุ่ม:</Caption>
+</LabelGroups>
+<btnEditGroup>
+<Caption>แก้ไขกลุ่ม</Caption>
+</btnEditGroup>
+<btnAddGroup>
+<Caption>เพิ่มกลุ่ม</Caption>
+</btnAddGroup>
+<btnDeleteGroup>
+<Caption>ลบกลุ่ม</Caption>
+</btnDeleteGroup>
+<btnAddDevice>
+<Caption>เพิ่มสถานี</Caption>
+</btnAddDevice>
+<btnEditDevice>
+<Caption>การปรับเปลี่ยนขั้ว</Caption>
+</btnEditDevice>
+<btnDeleteDevice>
+<Caption>ลบสถานี</Caption>
+</btnDeleteDevice>
+<btnUpdateColony>
+<Caption>รับคลัสเตอร์</Caption>
+</btnUpdateColony>
+<btnSendProtocol>
+<Caption>รันคำสั่ง</Caption>
+</btnSendProtocol>
+<!--提示信息-->
+<MemoNote>
+<Items>
+<Item>รายละเอียด:</Item>
+<Item></Item>
+<Item>1 แก้ไขขั้วลบสถานีโปรดคลิกที่แถวรายการเพื่อเลือกขั้ว</Item>
+<Item></Item>
+<Item>ส่งคำสั่งเลือกกล่องรายการเพื่อเลือกขั้ว</Item>
+</Items>
+</MemoNote>
+<!--设备列表-->
+<ListViewCards>
+<Columns>
+<Column>เลขที่</Column>
+<Column>ออนไลน์</Column>
+<Column>ชื่อหน้าจอ</Column>
+<Column>ID อุปกรณ์</Column>
+<Column>รูปแบบบัตร</Column>
+<Column>กว้างของหน้าจอ</Column>
+<Column>สูงของหน้าจอ</Column>
+<Column>ประเภทแผ่นเซลล์</Column>
+<Column>ความสว่าง</Column>
+<Column>สวิทช์ตั้งเวลา</Column>
+<Column>ที่ทำงาน</Column>
+</Columns>
+</ListViewCards>
+<!--操作选择项-->
+<optRegularSend>
+<Caption>กลุ่ม Conventional ส่ง</Caption>
+</optRegularSend>
+<optCloneSend>
+<Caption>โคลนกลุ่มส่ง</Caption>
+</optCloneSend>
+<optOpenScreen>
+<Caption>บูตซอฟแวร์</Caption>
+</optOpenScreen>
+<optCloseScreen>
+<Caption>Soft-Off</Caption>
+</optCloseScreen>
+<optTiming>
+<Caption>การจับเวลา</Caption>
+</optTiming>
+<optQueryStatus>
+<Caption>ตรวจสอบสถานะ</Caption>
+</optQueryStatus>
+<!--指定主屏幕-->
+<LabelCloneScreens>
+<Caption>ระบุหน้าจอหลัก:</Caption>
+</LabelCloneScreens>
+</TDlgGprsColony>
+<!--集群服务器终端编辑窗口-->
+<TDlgColonyAddDevice>
+<Caption>แก้ไขสถานี</Caption>
+<LabelDeviceId>
+<Caption>เทอร์มิ ID</Caption>
+</LabelDeviceId>
+<LabelScreenName>
+<Caption>จอภาพ</Caption>
+</LabelScreenName>
+<LabelGroupName>
+<Caption>กลุ่ม</Caption>
+</LabelGroupName>
+<btnOK>
+<Caption>ตกลง (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>ยกเลิก (&amp;C)</Caption>
+</btnCancel>
+</TDlgColonyAddDevice>
+<!--GPRS集群配置 窗口-->
+<TDlgGprsColonySetting>
+<Caption>การกำหนดค่าคลัสเตอร์ Server</Caption>
+<LabelGprsServerIp>
+<Caption>IP ของเซิร์ฟเวอร์:</Caption>
+</LabelGprsServerIp>
+<LabelGprsServerPort>
+<Caption>Ports:</Caption>
+</LabelGprsServerPort>
+<chkEnableAutoFillScreen>
+<Caption>เปิดย่อยหน้าจอหน้าจอหลักที่ปรับแต่งได้</Caption>
+</chkEnableAutoFillScreen>
+<chkEnableAuthen>
+<Caption>ได้รับอนุญาตเปิดเพื่อตรวจสอบ</Caption>
+</chkEnableAuthen>
+<LabelGprsAccount>
+<Caption>บัญชี</Caption>
+</LabelGprsAccount>
+<LabelGprsPassword>
+<Caption>รหัสผ่าน</Caption>
+</LabelGprsPassword>
+<btnOK>
+<Caption>ตกลง (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>ยกเลิก (&amp;C)</Caption>
+</btnCancel>
+</TDlgGprsColonySetting>
+<!-- GPRS集群组管理 窗口-->
+<TDlgGprsGroup>
+<Caption>GPRS การจัดการกลุ่มกลุ่ม</Caption>
+<LabelGroups>
+<Caption>รายการกลุ่ม</Caption>
+</LabelGroups>
+<LabelGroupName>
+<Caption>ชื่อ</Caption>
+</LabelGroupName>
+<btnEditGroup>
+<Caption>แก้ไข</Caption>
+</btnEditGroup>
+<btnAddGroup>
+<Caption>เพิ่ม</Caption>
+</btnAddGroup>
+<btnDeleteGroup>
+<Caption>ลบ</Caption>
+</btnDeleteGroup>
+<btnSelectAllCards>
+<Caption>เลือกทั้งหมด</Caption>
+</btnSelectAllCards>
+<btnClearCurrentSelectedCards>
+<Caption>ล้างการเลือกปัจจุบัน</Caption>
+</btnClearCurrentSelectedCards>
+<btnClearSelectedAllCards>
+<Caption>ล้างการเลือกทั้งหมด</Caption>
+</btnClearSelectedAllCards>
+<btnOK>
+<Caption>ตกลง (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>ยกเลิก (&amp;C)</Caption>
+</btnCancel>
+<LabelCards>
+<Caption>แสดงรายการ</Caption>
+</LabelCards>
+<btnUpdateCards>
+<Caption>ปรับปรุงรายการเซิร์ฟเวอร์</Caption>
+</btnUpdateCards>
+<!--设备卡列表-->
+<ListViewCards>
+<Columns>
+<Column>สถานะ</Column>
+<Column>ชื่อ</Column>
+</Columns>
+</ListViewCards>
+</TDlgGprsGroup>
+<!--导入Excel 窗口-->
+<TDlgImportExcel>
+<Caption>ลงใน Excel</Caption>
+<LabelSheetNames>
+<Caption>ชื่อแผ่น</Caption>
+</LabelSheetNames>
+<LabelRowCount>
+<Caption>จำนวนแถว</Caption>
+</LabelRowCount>
+<LabelColumnCount>
+<Caption>จำนวนคอลัมน์</Caption>
+</LabelColumnCount>
+<btnOK>
+<Caption>ตกลง (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>ยกเลิก (&amp;C)</Caption>
+</btnCancel>
+</TDlgImportExcel>
+<!-- 屏幕参数 窗口-->
+<TdlgMonitorSetting>
+<Caption>พารามิเตอร์หน้าจอ</Caption>
+<Messages>
+<InvalidMonitorSize>ขนาดหน้าจอที่ไม่ถูกต้อง!</InvalidMonitorSize>
+<InvalidCardModelInfo>พารามิเตอร์บัตรไม่ถูกต้อง!</InvalidCardModelInfo>
+<InvalidGammaReviseValue>แกมมาค่าไม่ถูกต้องแก้ไข!</InvalidGammaReviseValue>
+</Messages>
+<LabelMonitorWidth>
+<Caption>ความกว้าง</Caption>
+</LabelMonitorWidth>
+<LabelMonitorHeight>
+<Caption>ความสูง</Caption>
+</LabelMonitorHeight>
+<LabelMonitorColor>
+<Caption>สี</Caption>
+</LabelMonitorColor>
+<LabelMonitorGray>
+<Caption>สีเทา</Caption>
+</LabelMonitorGray>
+<LabelCardType>
+<Caption>รูปแบบการ์ดควบคุม</Caption>
+</LabelCardType>
+<LabelCardParams>
+<Caption>ค่าประสิทธิภาพ</Caption>
+</LabelCardParams>
+<LabelBoardType>
+<Caption>ประเภทแผ่นเซลล์</Caption>
+</LabelBoardType>
+<LabelDEPrompt>
+<Caption>ขั้ว OE</Caption>
+</LabelDEPrompt>
+<LabelDEPromptNote>
+<Caption>กรุณาปรับฝาจัมเปอร์บนการ์ดควบคุม</Caption>
+</LabelDEPromptNote>
+<LabelThreshold>
+<Caption>ธรณีประตู</Caption>
+</LabelThreshold>
+<LabelDotFrequency>
+<Caption>ความถี่จุด</Caption>
+</LabelDotFrequency>
+<LabelLineBlanking>
+<Caption>blanking สาย</Caption>
+</LabelLineBlanking>
+<LabelInterlaceControl>
+<Caption>ปรับสาย</Caption>
+</LabelInterlaceControl>
+<LabelGammaReviseValue>
+<Caption>แก้ไขแกมมา</Caption>
+</LabelGammaReviseValue>
+<LabelAdvanced>
+<Caption>พารามิเตอร์ขั้นสูงน้อย</Caption>
+</LabelAdvanced>
+<btnReadParams>
+<Caption>readback พารามิเตอร์</Caption>
+</btnReadParams>
+<btnOK>
+<Caption>ตกลง (&amp;O)</Caption>
+</btnOK>
+<!--2013.5.4 增加-->
+<chkDotFrequencyAuto>
+<Caption>อัตโนมัติ</Caption>
+</chkDotFrequencyAuto>
+<chkLineBlankingAuto>
+<Caption>อัตโนมัติ</Caption>
+</chkLineBlankingAuto>
+<!--2013.5.4 增加结束-->
+</TdlgMonitorSetting>
+<!--通讯参数 窗口-->
+<TDlgNetworkSetting>
+<Caption>พารามิเตอร์การสื่อสาร</Caption>
+<Messages>
+<AskToSelectComPort>กรุณาเลือกหมายเลขอนุกรม</AskToSelectComPort>
+<ErrorIp>ไม่ถูกต้องที่อยู่ IP!</ErrorIp>
+<UnknownCard>ไม่ทราบ</UnknownCard>
+<LabelTestResult>
+<Success>
+<Caption>การทดสอบการสื่อสารที่ประสบความสำเร็จ!</Caption>
+</Success>
+<Fail>
+<Caption>การสื่อสารการทดสอบล้มเหลว!</Caption>
+</Fail>
+</LabelTestResult>
+</Messages>
+<!--选择通讯模式页-->
+<LabelNetworkType>
+<Caption>เลือกโหมดการสื่อสาร</Caption>
+</LabelNetworkType>
+<optSerialPort>
+<Caption>พอร์ตอนุกรม</Caption>
+</optSerialPort>
+<optNet>
+<Caption>พอร์ตเครือข่าย</Caption>
+</optNet>
+<optDirectNet>
+<Caption>เครือข่ายพอร์ตเชื่อมต่อโดยตรง</Caption>
+</optDirectNet>
+<optGprs>
+<Caption>GPRS หรืออินเทอร์เน็ต</Caption>
+</optGprs>
+<!-- 串口参数设置页 -->
+<LabelSerialPortComs>
+<Caption>หมายเลขพอร์ต</Caption>
+</LabelSerialPortComs>
+<!-- 网口参数设置页-->
+<LabelNetIp>
+<Caption>ที่อยู่ IP</Caption>
+</LabelNetIp>
+<LabelNetPort>
+<Caption>หมายเลขพอร์ต</Caption>
+</LabelNetPort>
+<LabelNetGateway>
+<Caption>เกตเวย์</Caption>
+</LabelNetGateway>
+<LabelNetSubnetMask>
+<Caption>หน้ากาก subnet</Caption>
+</LabelNetSubnetMask>
+<LabelEditMACPrompt>
+<Caption>การปรับเปลี่ยนที่อยู่ MAC โปรดดาวน์โหลด MAC เครื่องมือการแก้จุดบกพร่อง</Caption>
+</LabelEditMACPrompt>
+<!-- GPRS设置页-->
+<LabelGprsIp>
+<Caption>GPRS เซิร์ฟเวอร์ที่อยู่ IP</Caption>
+</LabelGprsIp>
+<LabelGprsPort>
+<Caption>หมายเลขพอร์ต</Caption>
+</LabelGprsPort>
+<chkGprsEnableAuth>
+<Caption>ได้รับอนุญาตเปิดเพื่อตรวจสอบ</Caption>
+</chkGprsEnableAuth>
+<LabelGprsAccount>
+<Caption>บัญชี</Caption>
+</LabelGprsAccount>
+<LabelGprsPassword>
+<Caption>รหัสผ่าน</Caption>
+</LabelGprsPassword>
+<!-- 测试结果页-->
+<LabelTestResultType>
+<Caption>โหมดการสื่อสาร:</Caption>
+</LabelTestResultType>
+<LabelTestResultPort>
+<Caption>หมายเลขพอร์ต:</Caption>
+</LabelTestResultPort>
+<LabelTestResultCard>
+<Caption>รุ่นการ์ดควบคุม:</Caption>
+</LabelTestResultCard>
+<btnSave>
+<Caption>บันทึกและออกจาก</Caption>
+</btnSave>
+<btnSetMonitor>
+<Caption>กำหนดค่าหน้าจอ</Caption>
+</btnSetMonitor>
+<!-- 高级参数 -->
+<GroupBoxAdvanceParams>
+<Caption>พารามิเตอร์ขั้นสูง</Caption>
+</GroupBoxAdvanceParams>
+<LabelSerialPortDelay>
+<Caption>ความล่าช้า</Caption>
+</LabelSerialPortDelay>
+<LabelSerialPortFrameLength>
+<Caption>ระยะเวลาในกรอบ</Caption>
+</LabelSerialPortFrameLength>
+<btnTestExit>
+<Caption>กลับ</Caption>
+</btnTestExit>
+<btnChooseTypeNextStep>
+<Caption>ต่อไป</Caption>
+</btnChooseTypeNextStep>
+<btnSerialPortLastStep>
+<Caption>ก่อน</Caption>
+</btnSerialPortLastStep>
+<btnTest>
+<Caption>การทดสอบการสื่อสาร</Caption>
+</btnTest>
+<!--2013.5.5 增加-->
+<LabelDeviceId>
+<Caption>ID อุปกรณ์</Caption>
+</LabelDeviceId>
+<!--2013.5.5 增加结束-->
+</TDlgNetworkSetting>
+<!-- 新建表格 窗口-->
+<TDlgNewTable>
+<Caption>สเปรดชีต</Caption>
+<LabelRowCount>
+<Caption>แถว</Caption>
+</LabelRowCount>
+<LabelColCount>
+<Caption>แถว</Caption>
+</LabelColCount>
+<LabelBorderWidth>
+<Caption>กรอบ</Caption>
+</LabelBorderWidth>
+<LabelBorderColor>
+<Caption>สี</Caption>
+</LabelBorderColor>
+<chkSetCellWidth>
+<Caption>ความกว้างของเซลล์คงที่</Caption>
+</chkSetCellWidth>
+<btnOK>
+<Caption>ตกลง (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>ยกเลิก (&amp;C)</Caption>
+</btnCancel>
+</TDlgNewTable>
+<!-- 软件开关屏 窗口-->
+<TDlgProtocolOnOff>
+<Caption>หน้าจอสวิทช์ซอฟแวร์</Caption>
+<optManual>
+<Caption>สวิทช์คู่มือการใช้งาน</Caption>
+</optManual>
+<btnOn>
+<Caption>เปิดหน้าจอ</Caption>
+</btnOn>
+<btnOff>
+<Caption>ปิดหน้าจอ</Caption>
+</btnOff>
+<optAuto>
+<Caption>สวิทช์ตั้งเวลา</Caption>
+</optAuto>
+<LabelOn>
+<Caption>บูตเวลา</Caption>
+</LabelOn>
+<LabelOff>
+<Caption>ระยะเวลาปิด</Caption>
+</LabelOff>
+<btnSave>
+<Caption>&amp;บันทึกดิสก์ U</Caption>
+</btnSave>
+<btnOK>
+<Caption>ส่ง (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>ยกเลิก (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>เช่นการใช้งานของดิสก์ U เพื่อปรับเปลี่ยนความสว่างโรงเรียน / / จับเวลา, ตั้งค่าพารามิเตอร์ในการส่งออกจาก USB</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+<!--2013.5.5 增加-->
+<chkAutoOnOff>
+<Caption>สวิทช์ตั้งเวลา</Caption>
+</chkAutoOnOff>
+<!--2013.5.5 增加结束-->
+</TDlgProtocolOnOff>
+<!-- 请求型号 窗口-->
+<TDlgProtocolQueryModel>
+<Caption>รุ่นร้องขอ</Caption>
+<LabelCardMode>
+<Caption>รุ่นการ์ดควบคุม:</Caption>
+</LabelCardMode>
+<LabelCardVersion>
+<Caption>ฮาร์ดแวร์รุ่นของรหัส:</Caption>
+</LabelCardVersion>
+<LabelCardGuid>
+<Caption>หมายเลขที่ไม่ซ้ำ:</Caption>
+</LabelCardGuid>
+<btnOK>
+<Caption>ตกลง (&amp;O)</Caption>
+</btnOK>
+</TDlgProtocolQueryModel>
+<!-- 校时... 窗口-->
+<TDlgProtocolSetDateTime>
+<Caption>โรงเรียน ...</Caption>
+<LabelDate>
+<Caption>วันที่:</Caption>
+</LabelDate>
+<LabelTime>
+<Caption>ระยะเวลา:</Caption>
+</LabelTime>
+<btnSave>
+<Caption>&amp;บันทึกดิสก์ U</Caption>
+</btnSave>
+<btnOK>
+<Caption>ส่ง (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>ยกเลิก (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>เช่นการใช้งานของดิสก์ U เพื่อปรับเปลี่ยนความสว่างโรงเรียน / / จับเวลา, ตั้งค่าพารามิเตอร์ในการส่งออกจาก USB</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+<!--2013.5.5 增加-->
+<btnGetSystemTime>
+<Caption>เวลาระบบ</Caption>
+</btnGetSystemTime>
+<!--2013.5.5 增加结束-->
+</TDlgProtocolSetDateTime>
+<!--亮度调节 窗口 -->
+<TDlgProtocolSetLight>
+<Caption>การปรับความสว่าง</Caption>
+<optAuto>
+<Caption>auto-sensing</Caption>
+</optAuto>
+<optManual>
+<Caption>การปรับใช้</Caption>
+</optManual>
+<btnSave>
+<Caption>&amp;บันทึกดิสก์ U</Caption>
+</btnSave>
+<btnOK>
+<Caption>ส่ง (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>ยกเลิก (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>เช่นการใช้งานของดิสก์ U เพื่อปรับเปลี่ยนความสว่างโรงเรียน / / จับเวลา, ตั้งค่าพารามิเตอร์ในการส่งออกจาก USB</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+</TDlgProtocolSetLight>
+<!-- 图文编辑 窗口-->
+<TDlgRtfEditor>
+<Caption>บรรณาธิการ</Caption>
+<Messages>
+<!--RTF编辑对话框 -->
+<!--表格垂直拆分输入框标题-->
+<TableSplitVerticallyCaption>แยกแนวตั้ง</TableSplitVerticallyCaption>
+<!--表格垂直拆分输入框提示信息-->
+<TableSplitVerticallyPrompt>แยกจำนวนของคอลัมน์:</TableSplitVerticallyPrompt>
+<!--表格水平拆分输入框标题 -->
+<TableSplitHorizontallyCaption>แยกแนวนอน</TableSplitHorizontallyCaption>
+<!--表格水平拆分输入框提示信息-->
+<TableSplitHorizontallyPrompt>แยกจำนวนบรรทัด:</TableSplitHorizontallyPrompt>
+<!--提示选择一个表格-->
+<InfoSelectOneTable>กรุณาเลือกตาราง!</InfoSelectOneTable>
+</Messages>
+<ToolButtonLoadFiles>
+<Hint>เพิ่มไฟล์</Hint>
+</ToolButtonLoadFiles>
+<!-- 文件操作菜单 -->
+<PopupMenuAddFile>
+<Items>
+<Item>เพิ่มข้อความ</Item>
+<Item>เพิ่มไฟล์ RTF</Item>
+<Item>เพิ่มรูปภาพ</Item>
+<Item>เพิ่ม DOC</Item>
+<Item>เพิ่ม EXCEL</Item>
+</Items>
+</PopupMenuAddFile>
+<ToolButtonSave>
+<Hint>ประหยัด</Hint>
+</ToolButtonSave>
+<ToolButtonLeft>
+<Hint>แนวนอนซ้าย</Hint>
+</ToolButtonLeft>
+<ToolButtonCenter>
+<Hint>Centered แนวนอน</Hint>
+</ToolButtonCenter>
+<ToolButtonRight>
+<Hint>ขวาแนวนอนของที่อยู่อาศัย</Hint>
+</ToolButtonRight>
+<ToolButtonBold>
+<Hint>กล้าหาญ</Hint>
+</ToolButtonBold>
+<ToolButtonItalic>
+<Hint>ตัวเอียง</Hint>
+</ToolButtonItalic>
+<ToolButtonUnderline>
+<Hint>ขีดเส้นใต้</Hint>
+</ToolButtonUnderline>
+<ToolButtonTop>
+<Hint>ชิด</Hint>
+</ToolButtonTop>
+<ToolButtonVCenter>
+<Hint>แนวศูนย์กลาง</Hint>
+</ToolButtonVCenter>
+<ToolButtonBottom>
+<Hint>ตําแหน่งด้านล่าง</Hint>
+</ToolButtonBottom>
+<!-- 表格-->
+<ToolButtonTable>
+<Hint>แบบ</Hint>
+</ToolButtonTable>
+<!--表格操作菜单-->
+<PopupMenuTable>
+<Items>
+<Item>สเปรดชีต</Item>
+<Item>-</Item>
+<Item>สีเส้นขอบ</Item>
+<Item>ความกว้างชายแดน</Item>
+<Item>-</Item>
+<Item>
+<Caption>ใส่แถวของ</Caption>
+<Items>
+<Item>แทรกดังกล่าวข้างต้น</Item>
+<Item>ใส่ด้านล่าง</Item>
+</Items>
+</Item>
+<Item>
+<Caption>ใส่คอลัมน์</Caption>
+<Items>
+<Item>แทรกลงในด้านซ้าย</Item>
+<Item>ด้านขวาของ</Item>
+</Items>
+</Item>
+<Item>
+<Caption>ลบ</Caption>
+<Items>
+<Item>แถว</Item>
+<Item>แถว</Item>
+</Items>
+</Item>
+<Item>-</Item>
+<Item>ผสานเซลล์</Item>
+<Item>
+<Caption>แยกเซลล์</Caption>
+<Items>
+<Item>แยกแนวตั้ง</Item>
+<Item>แยกแนวนอน</Item>
+</Items>
+</Item>
+<Item>
+<Caption>เริ่มต้นใหม่ของการควบรวมกิจการ</Caption>
+<Items>
+<Item>แถว</Item>
+<Item>แถว</Item>
+<Item>ทั้งสิ้น</Item>
+</Items>
+</Item>
+<Item>-</Item>
+<Item>
+<Caption>แนวตั้ง</Caption>
+<Items>
+<Item>ชิด</Item>
+<Item>แนวศูนย์กลาง</Item>
+<Item>ตําแหน่งด้านล่าง</Item>
+</Items>
+</Item>
+</Items>
+</PopupMenuTable>
+<!-- 编辑菜单 -->
+<PopupMenuEditor>
+<Items>
+<Item>คัดลอก</Item>
+<Item>ติด</Item>
+<Item>เลือก</Item>
+</Items>
+</PopupMenuEditor>
+<LabelWordSpace>
+<Caption>การเว้นวรรคคำ:</Caption>
+</LabelWordSpace>
+<LabelLineSpace>
+<Caption>ระยะห่างบรรทัด:</Caption>
+</LabelLineSpace>
+</TDlgRtfEditor>
+<!-- 扫描方式设置 窗口-->
+<TDlgScanSet>
+<Caption>สแกนการตั้งค่าโหมด</Caption>
+<LabelScanSetName>
+<Caption>ชื่อการตั้งค่า</Caption>
+</LabelScanSetName>
+<LabelScanType>
+<Caption>โหมดการสแกน</Caption>
+</LabelScanType>
+<cmbScanType>
+<Items>
+<Item>การสแกนแบบคงที่</Item>
+<Item>สแกน 1/2</Item>
+<Item>สแกน 1/4</Item>
+<Item>1/8 สแกน</Item>
+<Item>1/16 สแกน</Item>
+</Items>
+</cmbScanType>
+<LabelWrap>
+<Caption>โหมดบรรทัดพับ</Caption>
+</LabelWrap>
+<cmbWrap>
+<Items>
+<Item>บรรทัดที่ 4 พับ</Item>
+<Item>บรรทัดที่ 8 เท่า</Item>
+<Item>16% ปิดสาย</Item>
+</Items>
+</cmbWrap>
+<LabelWinding>
+<Caption>คดเคี้ยว</Caption>
+</LabelWinding>
+<cmbWinding>
+<Items>
+<Item>เมื่อคดเคี้ยว</Item>
+<Item>ภายใต้คดเคี้ยว</Item>
+</Items>
+</cmbWinding>
+<LabelScanLines>
+<Caption>จำนวนเส้นสแกน</Caption>
+</LabelScanLines>
+<cmbScanLines>
+<Items>
+<Item>แถวที่ 1</Item>
+<Item>2 แถว</Item>
+<Item>4 แถว</Item>
+<Item>8 แถว</Item>
+<Item>16 เส้นต่อพื้นที่</Item>
+</Items>
+</cmbScanLines>
+<LabelStr>
+<Caption>ขั้ว STR</Caption>
+</LabelStr>
+<cmbStr>
+<Items>
+<Item>ขั้วบวก</Item>
+<Item>ขั้วลบ</Item>
+</Items>
+</cmbStr>
+<LabelSecondaryWind>
+<Caption>ขดลวดทุติยภูมิ</Caption>
+</LabelSecondaryWind>
+<cmbSecondaryWind>
+<Items>
+<Item>ไม่</Item>
+<Item>เป็น</Item>
+</Items>
+</cmbSecondaryWind>
+<LabelDecoding>
+<Caption>138 ถอดรหัส</Caption>
+</LabelDecoding>
+<cmbDecoding>
+<Items>
+<Item>138 ถอดรหัส</Item>
+<Item>สูงตามตัวอักษร</Item>
+<Item>138 ถอดรหัส</Item>
+<Item>ตัวอักษรต่ำ</Item>
+</Items>
+</cmbDecoding>
+<LabelMirror>
+<Caption>การไหลของข้อมูล</Caption>
+</LabelMirror>
+<cmbMirror>
+<Items>
+<Item>ปกติ</Item>
+<Item>กระจก</Item>
+</Items>
+</cmbMirror>
+<LabelDataPolarity>
+<Caption>ขั้วข้อมูล</Caption>
+</LabelDataPolarity>
+<cmbDataPolarity>
+<Items>
+<Item>ขั้วบวก</Item>
+<Item>ขั้วลบ</Item>
+</Items>
+</cmbDataPolarity>
+<chkJiaoTi>
+<Caption>ปกติสลับ</Caption>
+</chkJiaoTi>
+<btnOK>
+<Caption>ตกลง (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>ยกเลิก (&amp;C)</Caption>
+</btnCancel>
+</TDlgScanSet>
+<!-- 查屏 窗口-->
+<TDlgSearchCard>
+<Caption>ตรวจสอบหน้าจอ</Caption>
+<!-- 开始查找页-->
+<LabelFinding>
+<Caption>กำลังมองหาการ์ดควบคุม ......</Caption>
+</LabelFinding>
+<MemoPrompt>
+<Items>
+<Item>ถ้าคุณต้องการที่จะใช้ดิสก์ U เพื่ออัปเดตข้อมูลบัตรควบคุมคุณสามารถยกเลิกขั้นตอนนี้ไม่ต้องไปหาการ์ดควบคุม!</Item>
+</Items>
+</MemoPrompt>
+<btnCancel>
+<Caption>ยกเลิก (&amp;C)</Caption>
+</btnCancel>
+<!-- 查找成功页-->
+<LabelSearchSuccess>
+<Caption>พบความสำเร็จ!</Caption>
+</LabelSearchSuccess>
+<LabelType>
+<Caption>โหมดการสื่อสาร:</Caption>
+</LabelType>
+<LabelPort>
+<Caption>หมายเลขพอร์ต:</Caption>
+</LabelPort>
+<LabelCardType>
+<Caption>รุ่นการ์ดควบคุม:</Caption>
+</LabelCardType>
+<!-- 查找失败页-->
+<LabelSearchFail>
+<Caption>ค้นหาล้มเหลว!</Caption>
+</LabelSearchFail>
+<btnSearchAgain>
+<Caption>ค้นหาใหม่</Caption>
+</btnSearchAgain>
+<MemoIncDelayRetry>
+<Items>
+<Item>ระบบจะเพิ่มขึ้นโดยอัตโนมัติล่าช้าอีกครั้งพยายามที่จะสแกนพอร์ตทั้งหมด</Item>
+</Items>
+</MemoIncDelayRetry>
+<btnManualSetting>
+<Caption>ประเพณี</Caption>
+</btnManualSetting>
+<MemoManualSetInfo>
+<Items>
+<Item>ด้วยตนเองระบุพารามิเตอร์การสื่อสาร</Item>
+</Items>
+</MemoManualSetInfo>
+</TDlgSearchCard>
+<!-- 数据发送 窗口-->
+<TDlgSend>
+<Caption>ส่งข้อมูล</Caption>
+</TDlgSend>
+<!--资源选择窗口 窗口 -->
+<TDlgSystemResources>
+<Caption>หน้าต่างการเลือกทรัพยากร</Caption>
+<Messages>
+<PromptNoSelected>ไม่มีภาพถูกเลือกกรุณาคลิกเลือกรูปภาพหรือลากและวางสำหรับการเลือกหลาย</PromptNoSelected>
+</Messages>
+<btnOK>
+<Caption>เลือก (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>ยกเลิก (&amp;C)</Caption>
+</btnCancel>
+</TDlgSystemResources>
+<!--边框宽度 窗口 -->
+<TDlgTableBorderWidth>
+<Caption>ความกว้างชายแดน</Caption>
+<LabelBorderWidth>
+<Caption>ความกว้างชายแดน</Caption>
+</LabelBorderWidth>
+<btnOK>
+<Caption>ตกลง (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>ยกเลิก (&amp;C)</Caption>
+</btnCancel>
+</TDlgTableBorderWidth>
+<!-- 导入U盘 窗口-->
+<TDlgUsbForm>
+<Caption>ดิสก์ U นำเข้า</Caption>
+<Messages>
+<NoUsb>ไม่พบดิสก์ U, ดิสก์แทรก U!</NoUsb>
+<MonitorSize>ความกว้าง%d,ความสูง%d</MonitorSize>
+<MonitorBoardType>%s,%s </MonitorBoardType>
+<AutoAlertLight>โดยอัตโนมัติปรับความสว่าง</AutoAlertLight>
+<ManualAlertLight>ด้วยตนเองปรับความสว่าง: ระดับ%d</ManualAlertLight>
+<MonitorTimeOnOffDisabled>ไม่ได้เปิดใช้</MonitorTimeOnOffDisabled>
+<MonitorTimeOnOffEnabled>มีการใช้งาน%s-%s</MonitorTimeOnOffEnabled>
+<OutOfStorageCapacity>นำความล้มเหลวของดิสก์ U ขนาดของเนื้อหาที่สร้างเกินกว่าบัตรในความจุที่เหลืออยู่</OutOfStorageCapacity>
+<CancelExportToUsb>ยกเลิกการนำเข้าดิสก์ U</CancelExportToUsb>
+<UsbNotFound>ไม่พบดิสก์ U แทรกดิสก์ U</UsbNotFound>
+<ExportToUsbSuccess>ไฟล์ที่ได้รับนำเข้ามาประสบความสำเร็จในดิสก์ U</ExportToUsbSuccess>
+<ExportToUsbFail>นำความล้มเหลวของดิสก์ U</ExportToUsbFail>
+<ExportToUsbRunning>ถูกสร้างขึ้นกรุณารอสักครู่ ...</ExportToUsbRunning>
+<ReadUsbFileSystemFail>U ระบบแฟ้มดิสก์ไม่รู้จัก!</ReadUsbFileSystemFail>
+<InvalidUsbFileSystemFail>คุณสามารถใช้ FAT หรือ FAT32 ดิสก์ที่จัดรูปแบบ USB!</InvalidUsbFileSystemFail>
+</Messages>
+<LabelSelectUsb>
+<Caption>เลือกไดรฟ์ USB</Caption>
+</LabelSelectUsb>
+<LabelMonitorSize>
+<Caption>ขนาดหน้าจอ:</Caption>
+</LabelMonitorSize>
+<LabelMonitorBoardType>
+<Caption>ประเภทแผ่นเซลล์:</Caption>
+</LabelMonitorBoardType>
+<chkCheckTime>
+<Caption>โรงเรียน:</Caption>
+</chkCheckTime>
+<chkAlertLight>
+<Caption>การปรับความสว่าง:</Caption>
+</chkAlertLight>
+<chkTimeOnOff>
+<Caption>หน้าจอสวิทช์ตั้งเวลา:</Caption>
+</chkTimeOnOff>
+<btnLoadUsbDrivers>
+<Caption>การทดสอบอุปกรณ์</Caption>
+</btnLoadUsbDrivers>
+<btnExport>
+<Caption>ดิสก์ U นำเข้า</Caption>
+</btnExport>
+<btnCancel>
+<Caption>ยกเลิก</Caption>
+</btnCancel>
+<btnExportToLocal>
+<Caption>ในท้องถิ่น</Caption>
+</btnExportToLocal>
+<!--2013.1.30 新增-->
+<!--校时-->
+<optManulTiming>
+<Caption>คู่มือ</Caption>
+</optManulTiming>
+<optAutoTiming>
+<Caption>เวลาระบบ</Caption>
+</optAutoTiming>
+<!--亮度调节：-->
+<optManualLight>
+<Caption>คู่มือ</Caption>
+</optManualLight>
+<optAutoLight>
+<Caption>อัตโนมัติ</Caption>
+</optAutoLight>
+<!--定时开关屏：-->
+<LabelOn>
+<Caption>บูตเวลา</Caption>
+</LabelOn>
+<LabelOff>
+<Caption>ระยะเวลาปิด</Caption>
+</LabelOff>
+<!--2013.1.30 新增结束-->
+<!--2013.5.4 新增-->
+<LabelUsbFreeSize>
+<Caption>ความจุที่มีอยู่:</Caption>
+</LabelUsbFreeSize>
+<LabelUsbFileSystem>
+<Caption>รูปแบบไฟล์:</Caption>
+</LabelUsbFileSystem>
+<LabelDateTimeNoChange>
+<Caption>ประทัง</Caption>
+</LabelDateTimeNoChange>
+<LabelLightNoChange>
+<Caption>ประทัง</Caption>
+</LabelLightNoChange>
+<LabelOnOffNoChange>
+<Caption>เสมอ</Caption>
+</LabelOnOffNoChange>
+<!--2013.5.4 新增结束-->
+</TDlgUsbForm>
+<!-- 时钟区域参数设置界面 -->
+<TFrameOptionClock>
+<!--时钟属性-->
+<GroupBoxRegionInfo>
+<Caption>คุณสมบัตินาฬิกา</Caption>
+</GroupBoxRegionInfo>
+<optOneLine>
+<Caption>จอแสดงผลบรรทัดเดียว</Caption>
+</optOneLine>
+<optMultiLine>
+<Caption>จอแสดงผลหลายสาย</Caption>
+</optMultiLine>
+<LabelFieldSpace>
+<Caption>การเว้นวรรค</Caption>
+</LabelFieldSpace>
+<chkDateWeekExchange>
+<Caption>สลับตำแหน่งของวันที่และวันของสัปดาห์</Caption>
+</chkDateWeekExchange>
+<chkShowDate>
+<Caption>แสดงวันที่</Caption>
+</chkShowDate>
+<chkShowWeek>
+<Caption>แสดงให้เห็นถึงสัปดาห์</Caption>
+</chkShowWeek>
+<chkShowTime>
+<Caption>แสดงเวลา</Caption>
+</chkShowTime>
+<!-- 时差-->
+<GroupBoxTimeDiff>
+<Caption>ความแตกต่างเวลา</Caption>
+</GroupBoxTimeDiff>
+<LabelDeltHour>
+<Caption>เวลา</Caption>
+</LabelDeltHour>
+<LabelDeltMinute>
+<Caption>นาที</Caption>
+</LabelDeltMinute>
+<LabelDeltMinute>
+<Caption>นาที</Caption>
+</LabelDeltMinute>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>ข้อความถาวร</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>ใช้ข้อความคงที่</Caption>
+</chkEnabledText>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>อักษร</Caption>
+</GroupBoxFont>
+<!--2013.1.30 新增-->
+<!--星期格式-->
+<cmbWeekFormat>
+<Items>
+<Item>จีน</Item>
+<Item>จ.</Item>
+<Item>วันจันทร์</Item>
+</Items>
+</cmbWeekFormat>
+<!--2013.1.30 新增结束-->
+</TFrameOptionClock>
+<!-- 动态背景-->
+<TFrameOptionDynamicBackground>
+<GroupBoxInfo>
+<Caption>พื้นหลังแบบไดนามิก</Caption>
+</GroupBoxInfo>
+<chkEnabledDynamicBackground>
+<Caption>การใช้พื้นหลังแบบไดนามิก</Caption>
+</chkEnabledDynamicBackground>
+<LabelDynamicBackgroundStyle>
+<Caption>สไตล์</Caption>
+</LabelDynamicBackgroundStyle>
+<LabelDynamicBackgroundSpeed>
+<Caption>ความเร็ว</Caption>
+</LabelDynamicBackgroundSpeed>
+<cmbDynamicBackgroundSpeed>
+<Items>
+<Item>1 (เร็ว)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (ช้า)</Item>
+</Items>
+</cmbDynamicBackgroundSpeed>
+<cmbDynamicBackgroundStyle>
+<Items>
+<Item>แหวน</Item>
+<Item>ดาวห้าแฉก</Item>
+<Item>ท้องฟ้าเต็มไปด้วยดาว</Item>
+<Item>เกล็ดหิมะ</Item>
+<Item>ลูกศรซ้ายและขวา</Item>
+<Item>sidesway แนวตั้งเพื่อ</Item>
+<Item>บาร์ในการย้าย</Item>
+<Item>เพชร</Item>
+<Item>กล่อง</Item>
+<Item>วงกลม</Item>
+<Item>สแกนสองสาย</Item>
+<Item>เดียวสแกน</Item>
+</Items>
+</cmbDynamicBackgroundStyle>
+</TFrameOptionDynamicBackground>
+<!-- 炫动字区域参数设置界面-->
+<TFrameOptionFlashText>
+<GroupBoxRegionInfo>
+<Caption>และพระวจนะเมื่อ Xuandong</Caption>
+</GroupBoxRegionInfo>
+<ToolButtonBold>
+<Hint>กล้าหาญ</Hint>
+</ToolButtonBold>
+<ToolButtonItalic>
+<Hint>ตัวเอียง</Hint>
+</ToolButtonItalic>
+<ToolButtonUnderline>
+<Hint>ขีดเส้นใต้</Hint>
+</ToolButtonUnderline>
+<cmbFontName>
+<Hint>ชื่อ Font</Hint>
+</cmbFontName>
+<cmbFontSize>
+<Hint>ขนาดตัวอักษร</Hint>
+</cmbFontSize>
+<cmbFontColor>
+<Hint>สีตัวอักษร</Hint>
+</cmbFontColor>
+</TFrameOptionFlashText>
+<!-- 图文区域参数设置界面-->
+<TFrameOptionPicture>
+<Messages>
+<InfoSelectDeletedFile>โปรดเลือกไฟล์ที่คุณต้องการลบ!</InfoSelectDeletedFile>
+<ConfDeleteFile>ยืนยันว่าคุณต้องการลบรายการนี​​้</ConfDeleteFile>
+<WarnFileNotExists>ไฟล์ไม่อยู่!</WarnFileNotExists>
+</Messages>
+<GroupBoxRegionInfo>
+<Caption>รายชื่อแฟ้ม</Caption>
+</GroupBoxRegionInfo>
+<btnAdd>
+<Caption>เพิ่ม</Caption>
+</btnAdd>
+<btnDelete>
+<Caption>ลบ</Caption>
+</btnDelete>
+<btnUp>
+<Hint>ย้าย</Hint>
+</btnUp>
+<btnDown>
+<Hint>ลง</Hint>
+</btnDown>
+<!-- 添加菜单-->
+<PopupMenuAddFile>
+<Items>
+<Item>Hypertext ใหม่</Item>
+<Item>เพิ่มไฮเปอร์เท็กซ์</Item>
+<Item>เพิ่มรูปภาพ</Item>
+</Items>
+</PopupMenuAddFile>
+<!--2013.5.4 增加-->
+<ToolButtonNewRtf>
+<Hint>เพิ่ม RTF</Hint>
+</ToolButtonNewRtf>
+<ToolButtonAddPicture>
+<Hint>เพิ่มรูปภาพ</Hint>
+</ToolButtonAddPicture>
+<ToolButtonAddGrid>
+<Hint>การเพิ่มตาราง</Hint>
+</ToolButtonAddGrid>
+<ToolButtonAddWord>
+<Hint>เพิ่มคำ</Hint>
+</ToolButtonAddWord>
+<ToolButtonAddExcel>
+<Hint>เพิ่ม EXCEL</Hint>
+</ToolButtonAddExcel>
+<ToolButtonDelete>
+<Hint>ลบ</Hint>
+</ToolButtonDelete>
+<ToolButtonUp>
+<Hint>ย้าย</Hint>
+</ToolButtonUp>
+<ToolButtonDown>
+<Hint>ลง</Hint>
+</ToolButtonDown>
+<chkShowPath>
+<Caption>แสดงเส้นทาง</Caption>
+</chkShowPath>
+<!--2013.5.4 增加结束-->
+</TFrameOptionPicture>
+<!-- 节目参数设置界面-->
+<TFrameOptionProgram>
+<GroupBoxProgramInfo>
+<Caption>เล่นประเภท</Caption>
+</GroupBoxProgramInfo>
+<optPlayModeNormal>
+<Caption>การสั่งซื้อของการเล่น</Caption>
+</optPlayModeNormal>
+<optPlayModeHeart>
+<Caption>เล่นยาวคงที่ (s)</Caption>
+</optPlayModeHeart>
+<optPlayModeSetTime>
+<Caption>ออกอากาศเป็นประจำ</Caption>
+</optPlayModeSetTime>
+<LabelStartDateTime>
+<Caption>เวลาเริ่มต้น</Caption>
+</LabelStartDateTime>
+<LabelEndDateTime>
+<Caption>เวลาสิ้นสุด</Caption>
+</LabelEndDateTime>
+<chkWeekDaysSunday>
+<Caption>วันอาทิตย์</Caption>
+</chkWeekDaysSunday>
+<chkWeekDaysMonday>
+<Caption>วันจันทร์</Caption>
+</chkWeekDaysMonday>
+<chkWeekDaysTuesday>
+<Caption>วันอังคาร</Caption>
+</chkWeekDaysTuesday>
+<chkWeekDaysWednesday>
+<Caption>วันพุธ</Caption>
+</chkWeekDaysWednesday>
+<chkWeekDaysThurday>
+<Caption>วันพฤหัสบดี</Caption>
+</chkWeekDaysThurday>
+<chkWeekDaysFriday>
+<Caption>วันศุกร์</Caption>
+</chkWeekDaysFriday>
+<chkWeekDaysSaturday>
+<Caption>วันเสาร์</Caption>
+</chkWeekDaysSaturday>
+</TFrameOptionProgram>
+<!-- 温度区域参数设置界面-->
+<TFrameOptionTempreture>
+<GroupBoxRegionInfo>
+<Caption>คุณสมบัติของอุณหภูมิ</Caption>
+</GroupBoxRegionInfo>
+<LabelMode>
+<Caption>หน่วยอุณหภูมิ</Caption>
+</LabelMode>
+<LabelDelt>
+<Caption>การแก้ไข</Caption>
+</LabelDelt>
+<LabelNumberColor>
+<Caption>สีดิจิตอล</Caption>
+</LabelNumberColor>
+<LabelUnitColor>
+<Caption>สีหน่วย</Caption>
+</LabelUnitColor>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>ข้อความถาวร</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>ใช้ข้อความคงที่</Caption>
+</chkEnabledText>
+<chkTwoLine>
+<Caption>ห่อ</Caption>
+</chkTwoLine>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>อักษร</Caption>
+</GroupBoxFont>
+</TFrameOptionTempreture>
+<!--字幕区域参数设置界面 -->
+<TFrameOptionText>
+<GroupBoxRegionInfo>
+<Caption>แก้ไขคำบรรยาย</Caption>
+</GroupBoxRegionInfo>
+<LabelWordSpace>
+<Caption>การเว้นวรรคคำ:</Caption>
+</LabelWordSpace>
+</TFrameOptionText>
+<!-- 计时区域参数设置界面-->
+<TFrameOptionTiming>
+<!-- 时钟属性-->
+<GroupBoxRegionInfo>
+<Caption>คุณสมบัตินาฬิกา</Caption>
+</GroupBoxRegionInfo>
+<optCountDown>
+<Caption>นับถอยหลัง</Caption>
+</optCountDown>
+<optCountUp>
+<Caption>เวลาคือ</Caption>
+</optCountUp>
+<LabelDest>
+<Caption>เวลาเป้าหมาย</Caption>
+</LabelDest>
+<LabelFormat>
+<Caption>รูปแบบการแสดง</Caption>
+</LabelFormat>
+<chkShowDay>
+<Caption>วัน</Caption>
+</chkShowDay>
+<chkShowHour>
+<Caption>เวลา</Caption>
+</chkShowHour>
+<chkShowMinute>
+<Caption>นาที</Caption>
+</chkShowMinute>
+<chkShowSecond>
+<Caption>ที่สอง</Caption>
+</chkShowSecond>
+<LabelNumberColor>
+<Caption>สีดิจิตอล</Caption>
+</LabelNumberColor>
+<LabelUnitColor>
+<Caption>สีหน่วย</Caption>
+</LabelUnitColor>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>ข้อความถาวร</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>ใช้ข้อความคงที่</Caption>
+</chkEnabledText>
+<chkTwoLine>
+<Caption>ห่อ</Caption>
+</chkTwoLine>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>อักษร</Caption>
+</GroupBoxFont>
+</TFrameOptionTiming>
+<!-- 表盘盘区域参数设置界面-->
+<TFrameOptionWatch>
+<!-- 表盘属性-->
+<GroupBoxRegionInfo>
+<Caption>กด Properties</Caption>
+</GroupBoxRegionInfo>
+<LabelStyle>
+<Caption>สไตล์</Caption>
+</LabelStyle>
+<cmbStyle>
+<Items>
+<Item>ประเพณี</Item>
+</Items>
+</cmbStyle>
+<LabelTickWidth>
+<Caption>ความกว้าง</Caption>
+</LabelTickWidth>
+<LabelTickColor>
+<Caption>สี</Caption>
+</LabelTickColor>
+<LabelHourTickWidth>
+<Caption>จุดรวมของสถ​​านที่ให้บริการ</Caption>
+</LabelHourTickWidth>
+<Label369TickWidth>
+<Caption>3.6.9 คุณสมบัติจุด</Caption>
+</Label369TickWidth>
+<LabelMinuteTickWidth>
+<Caption>คุณสมบัติของจุด</Caption>
+</LabelMinuteTickWidth>
+<LabelLineWidth>
+<Caption>ความกว้าง</Caption>
+</LabelLineWidth>
+<LabelLineColor>
+<Caption>สี</Caption>
+</LabelLineColor>
+<LabelHourLineWidth>
+<Caption>ตามเข็มนาฬิกา</Caption>
+</LabelHourLineWidth>
+<LabelMinuteLineWidth>
+<Caption>เข็มนาที</Caption>
+</LabelMinuteLineWidth>
+<LabelSecondLineWidth>
+<Caption>มือสอง</Caption>
+</LabelSecondLineWidth>
+<!-- 时差-->
+<GroupBoxTimeDiff>
+<Caption>ความแตกต่างเวลา</Caption>
+</GroupBoxTimeDiff>
+<LabelDeltHour>
+<Caption>เวลา</Caption>
+</LabelDeltHour>
+<LabelDeltMinute>
+<Caption>นาที</Caption>
+</LabelDeltMinute>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>ข้อความถาวร</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>ใช้ข้อความคงที่</Caption>
+</chkEnabledText>
+<btnTextDown>
+<Hint>ลง</Hint>
+</btnTextDown>
+<btnTextLeft>
+<Hint>ซ้าย</Hint>
+</btnTextLeft>
+<btnTextCenter>
+<Hint>ศูนย์</Hint>
+</btnTextCenter>
+<btnTextRight>
+<Hint>ขยับตัวไปทางขวา</Hint>
+</btnTextRight>
+<btnTextUp>
+<Hint>ย้าย</Hint>
+</btnTextUp>
+</TFrameOptionWatch>
+<!--表格编辑主界面-->
+<CGridEditorMainForm>
+<Caption>การแก้ไขตาราง</Caption>
+<!--单色-->
+<PopupMenuSingleColor>
+<Items>
+<Item>ไม่</Item>
+<Item>สีแดง</Item>
+</Items>
+</PopupMenuSingleColor>
+<!--双色-->
+<PopupMenuTwoColor>
+<Items>
+<Item>ไม่</Item>
+<Item>สีแดง</Item>
+<Item>สีเหลือง</Item>
+<Item>สีเขียว</Item>
+</Items>
+</PopupMenuTwoColor>
+</CGridEditorMainForm>
+<!--表格编辑插入表格界面-->
+<CGridEditorInsertCells>
+<Caption>การเพิ่มตาราง</Caption>
+<LabelType>
+<Caption>ประเภท:</Caption>
+</LabelType>
+<optTypeRow>
+<Caption>แถว</Caption>
+</optTypeRow>
+<optTypeCol>
+<Caption>แถว</Caption>
+</optTypeCol>
+<LabelCount>
+<Caption>จำนวน:</Caption>
+</LabelCount>
+<LabelPosition>
+<Caption>ที่อยู่:</Caption>
+</LabelPosition>
+<optPositionCurrent>
+<Caption>ปัจจุบัน</Caption>
+</optPositionCurrent>
+<optPositionEnd>
+<Caption>ล่าสุด</Caption>
+</optPositionEnd>
+<btnOK>
+<Caption>ตกลง (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>ยกเลิก (&amp;C)</Caption>
+</btnCancel>
+</CGridEditorInsertCells>
+<!--表格编辑删除单元格界面-->
+<CGridEditorDeleteCells>
+<Caption>ลบเซลล์</Caption>
+<optTypeRow>
+<Caption>ทั้งเส้น</Caption>
+</optTypeRow>
+<optTypeCol>
+<Caption>คอลัมน์ทั้งหมด</Caption>
+</optTypeCol>
+<btnOK>
+<Caption>ตกลง (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>ยกเลิก (&amp;C)</Caption>
+</btnCancel>
+</CGridEditorDeleteCells>
+</Languages>

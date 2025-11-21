@@ -1,0 +1,13 @@
+2019-04-03 17:42:16,054 - lemonnt
+2019-04-03 17:42:16,109 - false
+2019-04-03 17:42:16,436 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-04-03 17:42:16,448 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-04-03 17:42:16,463 - Obtain the parameters  : [DIGITNUMBER]
+2019-04-03 17:42:16,470 - Obtain the env parameters  : [4]
+2019-04-03 17:42:16,678 - Success to query records [1]
+2019-04-03 17:42:16,696 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-04-03 17:42:17,242 - Obtain the parameters  : [SYSTEMNAME]
+2019-04-03 17:42:17,248 - Obtain the parameters  : [null]
+2019-04-03 17:42:17,428 - Obtain the parameters  : [MONITORINTRVAL]
+2019-04-03 17:42:17,436 - Obtain the parameters  : [null]
+2019-04-03 17:42:17,443 - Monitor Interval : [10s]

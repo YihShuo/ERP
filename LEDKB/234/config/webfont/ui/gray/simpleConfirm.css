@@ -1,0 +1,63 @@
+#modalPane{
+   -fx-background-insets: 10;
+   -fx-background-radius: 5;
+   	-fx-background-color: white;
+   -fx-effect:dropshadow(three-pass-box, gray, 10, 0.5, 0, 0);
+}
+
+#titlePane{
+	-fx-background-color: #BCBCBC;
+	-fx-background-insets: 10;
+    -fx-background-radius: 0,0,5,5;
+}
+
+
+#confirmPane{
+	-fx-background-color: #BCBCBC;
+	-fx-background-insets: 10;
+    -fx-background-radius: 0,0,5,0;
+    /*-fx-border-color: #C5C5C5,#C5C5C5,#C5C5C5,red;
+     
+    -fx-border-radius:10;
+    -fx-border-insets: 0,0,5,0;*/
+}
+
+#cancelPane{
+	-fx-background-color: #BCBCBC;
+	-fx-background-insets: 10;
+    -fx-background-radius: 0,0,0,5;
+      /*-fx-border-color: #C5C5C5,#C5C5C5,#C5C5C5,red;
+      
+    -fx-border-radius:10;
+    -fx-border-insets: 0,0,5,0;*/
+}
+
+#cancelPane:hover{
+	-fx-background-color: #D1D1D1;
+}
+
+#title{
+	-fx-font-weight:bold;
+	-fx-fill: #404040;
+}
+
+#confirmPane:hover{
+	-fx-background-color: #D1D1D1;
+}
+
+#alertTitle{
+	-fx-font-weight:bold;
+	-fx-fill: #404040;
+}
+.root {
+  -fx-opacity: 0.8;
+}
+
+#closeModal:hover{
+	-fx-fill: black;
+	
+}
+/* text set the color -fx-text-fill*/
+#reminderMessage {
+	-fx-text-fill: #4B4B4B;
+} 

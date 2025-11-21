@@ -1,0 +1,3 @@
+方法就是通过vbs脚本来彻底隐藏执行bat批处理文件，将以下代码保存为.vbs文件，然后直接执行这个.vbs文件即可彻底隐藏cmd窗口了：
+Set ws = CreateObject("Wscript.Shell")
+ws.run "cmd /c htmer.bat",vbhide

@@ -1,0 +1,86 @@
+2019-04-01 11:10:30,199 - lemonnt
+2019-04-01 11:10:30,242 - false
+2019-04-01 11:10:30,422 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2019-04-01 11:10:30,433 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2019-04-01 11:10:30,438 - Obtain the parameters  : [DIGITNUMBER]
+2019-04-01 11:10:30,444 - Obtain the env parameters  : [4]
+2019-04-01 11:10:30,588 - Success to query records [1]
+2019-04-01 11:10:30,591 - [{"connection":false,"date":1553592491145,"desc":"12","gprs":0,"ip":"192.168.1.1","name":"13","order":"12","port":"12","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2019-04-01 11:10:30,913 - Obtain the parameters  : [SYSTEMNAME]
+2019-04-01 11:10:30,918 - Obtain the parameters  : [null]
+2019-04-01 11:10:31,112 - Obtain the parameters  : [MONITORINTRVAL]
+2019-04-01 11:10:31,156 - Obtain the parameters  : [null]
+2019-04-01 11:10:31,166 - Monitor Interval : [10s]
+2019-04-01 11:10:35,731 - Success to query records [2]
+2019-04-01 11:10:35,773 - Success to query records [2]
+2019-04-01 11:10:35,777 - start : 0, end : 2
+2019-04-01 11:10:40,216 - The name of plugin is [TestPlugin]
+2019-04-01 11:10:40,216 - The name of pluginType is [db]
+2019-04-01 11:10:40,223 - Success to query records [1]
+2019-04-01 11:10:41,521 - Obtain the parameters  : [SENDDELAY]
+2019-04-01 11:10:41,526 - Obtain the parameters  : [null]
+2019-04-01 11:10:41,745 - Success to get SqlsessionFactory [webDB]
+2019-04-01 11:10:41,858 - It's going to parsing : C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties
+2019-04-01 11:10:41,860 - It has been parsed ,following [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-04-01 11:10:41,864 - It has been loaded ,following : [C:\Users\gavli\Desktop\magicard\magicard_x64-original\magicard_x64\plugin/config/properties/configuration.properties]
+2019-04-01 11:10:41,869 - {"pluginName":"TestPlugin","properties":{"dotBit":"#.00","cardNames":"11,21,13","webDB.connection.password":"sy","webDB.connection.driverClassName":"com.microsoft.sqlserver.jdbc.SQLServerDriver","showElements":"C,Mn,Si,P,S,Ni,Cr,Cu,Mo,V,Ti,Al,Nb,As,Sn,Pb,Sb,Bi","webDB.connection.username":"sa","webDB.connection.url":"jdbc:sqlserver://192.168.10.10:1433;DatabaseName=fxjl"}}
+2019-04-01 11:10:41,883 - Success to query records [1]
+2019-04-01 11:10:41,893 - Success to query records [1]
+2019-04-01 11:10:41,900 - Success to query records [1]
+2019-04-01 11:10:42,902 - ShowElements [[C, MN, SI, P, S, NI, CR, CU, MO, V, TI, AL, NB, AS, SN, PB, SB, BI]]
+2019-04-01 11:10:42,915 - DotBit [#.00]
+2019-04-01 11:10:42,924 - Send with UDP
+2019-04-01 11:10:42,927 - Send the content for the msg [0.7], and the location ID [0]
+2019-04-01 11:10:42,928 - Send the messages have been format: [KLB00010000005700090000000.7KLE80]
+2019-04-01 11:10:42,945 - Success to send the datums
+2019-04-01 11:10:43,947 - Send the content for the msg [0.64], and the location ID [1]
+2019-04-01 11:10:43,952 - Send the messages have been format: [KLB00010000005700100100000.64KLEAC]
+2019-04-01 11:10:43,959 - Success to send the datums
+2019-04-01 11:10:44,962 - Send the content for the msg [0.25], and the location ID [2]
+2019-04-01 11:10:44,962 - Send the messages have been format: [KLB00010000005700100200000.25KLEAA]
+2019-04-01 11:10:44,963 - Success to send the datums
+2019-04-01 11:10:45,963 - Send the content for the msg [0.3], and the location ID [3]
+2019-04-01 11:10:45,963 - Send the messages have been format: [KLB00010000005700090300000.3KLE7F]
+2019-04-01 11:10:45,964 - Success to send the datums
+2019-04-01 11:10:46,977 - Send the content for the msg [0.13], and the location ID [4]
+2019-04-01 11:10:46,980 - Send the messages have been format: [KLB00010000005700100400000.13KLEA9]
+2019-04-01 11:10:46,987 - Success to send the datums
+2019-04-01 11:10:47,992 - Send the content for the msg [0.52], and the location ID [5]
+2019-04-01 11:10:47,992 - Send the messages have been format: [KLB00010000005700100500000.52KLEAD]
+2019-04-01 11:10:47,993 - Success to send the datums
+2019-04-01 11:10:48,993 - Send the content for the msg [0.68], and the location ID [6]
+2019-04-01 11:10:48,994 - Send the messages have been format: [KLB00010000005700100600000.68KLEB5]
+2019-04-01 11:10:49,000 - Success to send the datums
+2019-04-01 11:10:50,002 - Send the content for the msg [0.42], and the location ID [7]
+2019-04-01 11:10:50,002 - Send the messages have been format: [KLB00010000005700100700000.42KLEAE]
+2019-04-01 11:10:50,003 - Success to send the datums
+2019-04-01 11:10:51,003 - Send the content for the msg [0.2], and the location ID [8]
+2019-04-01 11:10:51,003 - Send the messages have been format: [KLB00010000005700090800000.2KLE83]
+2019-04-01 11:10:51,004 - Success to send the datums
+2019-04-01 11:10:52,004 - Send the content for the msg [0.13], and the location ID [9]
+2019-04-01 11:10:52,004 - Send the messages have been format: [KLB00010000005700100900000.13KLEAE]
+2019-04-01 11:10:52,005 - Success to send the datums
+2019-04-01 11:10:53,005 - Send the content for the msg [0.36], and the location ID [10]
+2019-04-01 11:10:53,006 - Send the messages have been format: [KLB00010000005700101000000.36KLEAB]
+2019-04-01 11:10:53,014 - Success to send the datums
+2019-04-01 11:10:54,017 - Send the content for the msg [0.36], and the location ID [11]
+2019-04-01 11:10:54,017 - Send the messages have been format: [KLB00010000005700101100000.36KLEAC]
+2019-04-01 11:10:54,017 - Success to send the datums
+2019-04-01 11:10:55,019 - Send the content for the msg [0.1], and the location ID [12]
+2019-04-01 11:10:55,019 - Send the messages have been format: [KLB00010000005700091200000.1KLE7D]
+2019-04-01 11:10:55,020 - Success to send the datums
+2019-04-01 11:10:56,020 - Send the content for the msg [0.33], and the location ID [13]
+2019-04-01 11:10:56,020 - Send the messages have been format: [KLB00010000005700101300000.33KLEAB]
+2019-04-01 11:10:56,021 - Success to send the datums
+2019-04-01 11:10:57,021 - Send the content for the msg [0.23], and the location ID [14]
+2019-04-01 11:10:57,021 - Send the messages have been format: [KLB00010000005700101400000.23KLEAB]
+2019-04-01 11:10:57,022 - Success to send the datums
+2019-04-01 11:10:58,022 - Send the content for the msg [0.4], and the location ID [15]
+2019-04-01 11:10:58,022 - Send the messages have been format: [KLB00010000005700091500000.4KLE83]
+2019-04-01 11:10:58,023 - Success to send the datums
+2019-04-01 11:10:59,024 - Send the content for the msg [0.31], and the location ID [16]
+2019-04-01 11:10:59,024 - Send the messages have been format: [KLB00010000005700101600000.31KLEAC]
+2019-04-01 11:10:59,025 - Success to send the datums
+2019-04-01 11:11:00,026 - Send the content for the msg [0.14], and the location ID [17]
+2019-04-01 11:11:00,026 - Send the messages have been format: [KLB00010000005700101700000.14KLEAE]
+2019-04-01 11:11:00,027 - Success to send the datums

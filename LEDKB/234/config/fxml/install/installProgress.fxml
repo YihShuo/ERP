@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="modalPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle fx:id="fadeInShape" arcHeight="15.0" arcWidth="15.0" fill="white" height="580.0" layoutX="10.0" layoutY="10.0" stroke="TRANSPARENT" strokeType="INSIDE" width="780.0" />
+      <ProgressIndicator fx:id="progress" layoutX="338.0" layoutY="131.0" prefHeight="113.0" prefWidth="126.0" progress="0.0" />
+      <Text fx:id="installing" layoutX="290" layoutY="472.0" strokeType="OUTSIDE" strokeWidth="0.0" text="正在安装程序,请耐心等待 " />
+      
+      <Label fx:id="progressPercent" layoutX="389.0" layoutY="177.0" text="0%" />
+      <Pane fx:id="closePaneForProgress" layoutX="750.0" layoutY="14.0" prefHeight="25.0" prefWidth="25.0">
+         <children>
+            <Text fx:id="closeText" layoutX="3.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+      </Pane>
+      <Pane fx:id="minPane" layoutX="715.0" layoutY="16.0" prefHeight="25.0" prefWidth="25.0">
+         <children>
+            <Text fx:id="minText" layoutX="3.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+      </Pane>
+      <Pane fx:id="successInstalling" layoutX="56.0" layoutY="117.0" prefHeight="240.0" prefWidth="691.0" visible="false">
+         <children>
+            <Text fx:id="fontTwo" layoutX="310.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="font-2" />
+            <Text fx:id="fontOne" layoutX="107.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="font-1" />
+            <Text fx:id="fontThree" layoutX="505.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="font-3" />
+            <Text fx:id="desOne" layoutX="107.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="des-1" />
+            <Text fx:id="desTwo" layoutX="310.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="des-2" />
+            <Text fx:id="desThree" layoutX="505.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="des-3" />
+            
+            <Text fx:id="fontFour" layoutX="310.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="font-4" />
+            <Text fx:id="fontFive" layoutX="107.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="font-5" />
+            <Text fx:id="fontSix" layoutX="505.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="font-6" />
+            <Text fx:id="desFour" layoutX="107.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="des-4" />
+            <Text fx:id="desFive" layoutX="310.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="des-5" />
+            <Text fx:id="desSix" layoutX="505.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="des-6" />
+         </children>
+      </Pane>
+      
+   </children>
+</Pane>

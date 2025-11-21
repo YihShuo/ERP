@@ -1,0 +1,930 @@
+2025-10-02 15:39:39,765 - lemonnt
+2025-10-02 15:39:39,807 - false
+2025-10-02 15:39:39,927 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2025-10-02 15:39:39,932 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2025-10-02 15:39:39,933 - Obtain the parameters  : [DIGITNUMBER]
+2025-10-02 15:39:39,935 - Obtain the env parameters  : [4]
+2025-10-02 15:39:40,037 - Success to query records [4]
+2025-10-02 15:39:40,041 - [{"connection":false,"date":1759008713551,"desc":"A1","gprs":0,"ip":"192.168.79.205","name":"SCX1","order":"1","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1759008615914,"desc":"A2","gprs":0,"ip":"192.168.79.206","name":"SCX2","order":"2","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1759008650273,"desc":"A3","gprs":0,"ip":"192.168.79.207","name":"SCX3","order":"3","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1759008697648,"desc":"A4","gprs":0,"ip":"192.168.79.208","name":"SCX4","order":"4","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2025-10-02 15:39:40,237 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 15:39:40,241 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 15:39:40,339 - Obtain the parameters  : [MONITORINTRVAL]
+2025-10-02 15:39:40,342 - Obtain the env parameters  : [10]
+2025-10-02 15:39:40,343 - Monitor Interval : [10s]
+2025-10-02 15:39:52,940 - Success to query records [4]
+2025-10-02 15:39:57,947 - Obtain the parameters  : [SENDDELAY]
+2025-10-02 15:39:57,950 - Obtain the env parameters  : [15]
+2025-10-02 15:40:02,939 - Success to query records [4]
+2025-10-02 15:40:12,939 - Success to query records [4]
+2025-10-02 15:40:22,939 - Success to query records [4]
+2025-10-02 15:40:32,938 - Success to query records [4]
+2025-10-02 15:40:42,937 - Success to query records [4]
+2025-10-02 15:40:52,937 - Success to query records [4]
+2025-10-02 15:41:02,937 - Success to query records [4]
+2025-10-02 15:41:12,937 - Success to query records [4]
+2025-10-02 15:41:22,937 - Success to query records [4]
+2025-10-02 15:41:32,937 - Success to query records [4]
+2025-10-02 15:41:42,937 - Success to query records [4]
+2025-10-02 15:41:52,937 - Success to query records [4]
+2025-10-02 15:42:02,937 - Success to query records [4]
+2025-10-02 15:42:12,937 - Success to query records [4]
+2025-10-02 15:42:22,938 - Success to query records [4]
+2025-10-02 15:42:32,941 - Success to query records [4]
+2025-10-02 15:42:42,938 - Success to query records [4]
+2025-10-02 15:42:52,939 - Success to query records [4]
+2025-10-02 15:43:02,937 - Success to query records [4]
+2025-10-02 15:43:12,940 - Success to query records [4]
+2025-10-02 15:43:22,937 - Success to query records [4]
+2025-10-02 15:43:32,937 - Success to query records [4]
+2025-10-02 15:43:42,937 - Success to query records [4]
+2025-10-02 15:43:52,938 - Success to query records [4]
+2025-10-02 15:44:02,937 - Success to query records [4]
+2025-10-02 15:44:12,936 - Success to query records [4]
+2025-10-02 15:44:22,937 - Success to query records [4]
+2025-10-02 15:44:32,936 - Success to query records [4]
+2025-10-02 15:44:42,937 - Success to query records [4]
+2025-10-02 15:44:52,936 - Success to query records [4]
+2025-10-02 15:45:02,937 - Success to query records [4]
+2025-10-02 15:45:12,937 - Success to query records [4]
+2025-10-02 15:45:22,936 - Success to query records [4]
+2025-10-02 15:45:26,592 - Success to query records [1]
+2025-10-02 15:45:26,602 - Success to query records [1]
+2025-10-02 15:45:26,603 - start : 0, end : 1
+2025-10-02 15:45:29,869 - The name of plugin is [XM4L]
+2025-10-02 15:45:29,869 - The name of pluginType is [db]
+2025-10-02 15:45:29,873 - Success to query records [1]
+2025-10-02 15:45:42,489 - The name of plugin is [XM4L]
+2025-10-02 15:45:42,490 - The name of pluginType is [db]
+2025-10-02 15:45:42,492 - Success to query records [1]
+2025-10-02 15:46:15,891 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 15:46:15,894 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 15:46:15,895 - Obtain the parameters  : [MONITORINTRVAL]
+2025-10-02 15:46:15,904 - Obtain the env parameters  : [10]
+2025-10-02 15:46:15,905 - Obtain the parameters  : [SENDDELAY]
+2025-10-02 15:46:15,907 - Obtain the env parameters  : [15]
+2025-10-02 15:46:17,066 - file:/C:\LEDKB\234\document/introduction.html
+2025-10-02 15:46:18,070 - Success to query records [4]
+2025-10-02 15:46:18,076 - Success to query records [4]
+2025-10-02 15:46:18,077 - start : 0, end : 4
+2025-10-02 15:46:24,989 - Success to query records [1]
+2025-10-02 15:46:25,002 - Success to query records [1]
+2025-10-02 15:46:25,002 - start : 0, end : 1
+2025-10-02 15:46:30,810 - The name of plugin is [XM4L]
+2025-10-02 15:46:30,810 - The name of pluginType is [db]
+2025-10-02 15:46:30,812 - Success to query records [1]
+2025-10-02 15:47:13,938 - Success to query records [4]
+2025-10-02 15:47:15,525 - Success to query records [1]
+2025-10-02 15:47:15,530 - Success to query records [1]
+2025-10-02 15:47:15,530 - start : 0, end : 1
+2025-10-02 15:49:23,599 - UI
+2025-10-02 15:49:23,609 - Success to query records [1]
+2025-10-02 15:49:26,957 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 15:49:26,960 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 15:49:26,961 - Obtain the parameters  : [MONITORINTRVAL]
+2025-10-02 15:49:26,963 - Obtain the env parameters  : [10]
+2025-10-02 15:49:26,964 - Obtain the parameters  : [SENDDELAY]
+2025-10-02 15:49:26,966 - Obtain the env parameters  : [15]
+2025-10-02 15:49:33,721 - Success to query records [1]
+2025-10-02 15:49:33,728 - Success to query records [1]
+2025-10-02 15:49:33,729 - start : 0, end : 1
+2025-10-02 15:49:34,834 - Success to query records [4]
+2025-10-02 15:49:34,844 - Success to query records [4]
+2025-10-02 15:49:34,845 - start : 0, end : 4
+2025-10-02 15:49:44,611 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 15:49:44,614 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 15:49:50,140 - UI
+2025-10-02 15:49:50,146 - Success to query records [1]
+2025-10-02 15:49:54,575 - Success to query records [1]
+2025-10-02 15:50:02,070 - Success to query records [1]
+2025-10-02 15:50:04,590 - UI
+2025-10-02 15:50:04,597 - Success to query records [1]
+2025-10-02 15:50:09,908 - UI
+2025-10-02 15:50:09,914 - Success to query records [1]
+2025-10-02 15:50:24,503 - Success to query records [1]
+2025-10-02 15:50:24,506 - Success to query records [1]
+2025-10-02 15:50:24,507 - start : 0, end : 1
+2025-10-02 15:50:30,189 - The name of plugin is [XM4L]
+2025-10-02 15:50:30,189 - The name of pluginType is [db]
+2025-10-02 15:50:30,193 - Success to query records [1]
+2025-10-02 15:50:37,193 - Success to query records [4]
+2025-10-02 15:50:37,206 - Success to query records [4]
+2025-10-02 15:54:36,975 - The name of plugin is [XM4L]
+2025-10-02 15:54:36,976 - The name of pluginType is [db]
+2025-10-02 15:54:36,983 - Success to query records [1]
+2025-10-02 15:54:41,651 - Success to query records [1]
+2025-10-02 15:54:43,909 - start : 0, end : 0
+2025-10-02 15:56:46,791 - Success save the system setting
+2025-10-02 15:56:50,635 - Success to query records [1]
+2025-10-02 15:56:50,639 - Success to query records [1]
+2025-10-02 15:56:50,639 - start : 0, end : 1
+2025-10-02 15:56:54,521 - The name of plugin is [4LLEDKB]
+2025-10-02 15:56:54,521 - The name of pluginType is [db]
+2025-10-02 15:56:58,256 - The name of plugin is [4LLEDKB]
+2025-10-02 15:56:58,257 - The name of pluginType is [db]
+2025-10-02 15:57:57,372 - lemonnt
+2025-10-02 15:57:57,459 - false
+2025-10-02 15:57:57,588 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2025-10-02 15:57:57,594 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2025-10-02 15:57:57,595 - Obtain the parameters  : [DIGITNUMBER]
+2025-10-02 15:57:57,597 - Obtain the env parameters  : [4]
+2025-10-02 15:57:57,697 - Success to query records [4]
+2025-10-02 15:57:57,700 - [{"connection":false,"date":1759008713551,"desc":"A1","gprs":0,"ip":"192.168.79.205","name":"SCX1","order":"1","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1759008615914,"desc":"A2","gprs":0,"ip":"192.168.79.206","name":"SCX2","order":"2","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1759008650273,"desc":"A3","gprs":0,"ip":"192.168.79.207","name":"SCX3","order":"3","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1759008697648,"desc":"A4","gprs":0,"ip":"192.168.79.208","name":"SCX4","order":"4","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2025-10-02 15:57:57,926 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 15:57:57,929 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 15:57:58,033 - Obtain the parameters  : [MONITORINTRVAL]
+2025-10-02 15:57:58,036 - Obtain the env parameters  : [10]
+2025-10-02 15:57:58,037 - Monitor Interval : [10s]
+2025-10-02 15:58:04,734 - Success to query records [1]
+2025-10-02 15:58:04,750 - Success to query records [1]
+2025-10-02 15:58:04,752 - start : 0, end : 1
+2025-10-02 15:58:08,980 - The name of plugin is [4LLEDKB]
+2025-10-02 15:58:08,980 - The name of pluginType is [db]
+2025-10-02 15:58:59,789 - Success to query records [1]
+2025-10-02 15:58:59,794 - Success to query records [1]
+2025-10-02 15:58:59,795 - start : 0, end : 1
+2025-10-02 15:59:01,407 - Success to query records [1]
+2025-10-02 15:59:01,550 - Success to query records [1]
+2025-10-02 15:59:01,551 - start : 0, end : 1
+2025-10-02 15:59:02,309 - Success to query records [1]
+2025-10-02 15:59:06,653 - start : 0, end : 0
+2025-10-02 15:59:15,111 - start : 0, end : 0
+2025-10-02 15:59:17,849 - Success to query records [4]
+2025-10-02 15:59:17,867 - Success to query records [4]
+2025-10-02 15:59:17,869 - start : 0, end : 4
+2025-10-02 15:59:21,482 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 15:59:21,484 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 15:59:24,119 - delete : {order=1}
+2025-10-02 15:59:24,128 - Success to query records [3]
+2025-10-02 15:59:24,170 - Success to query records [3]
+2025-10-02 15:59:24,171 - start : 0, end : 3
+2025-10-02 15:59:27,049 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 15:59:27,051 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 15:59:31,137 - delete : {order=2}
+2025-10-02 15:59:31,145 - Success to query records [2]
+2025-10-02 15:59:31,295 - Success to query records [2]
+2025-10-02 15:59:31,297 - start : 0, end : 2
+2025-10-02 15:59:35,227 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 15:59:35,229 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 15:59:38,424 - delete : {order=3}
+2025-10-02 15:59:38,431 - Success to query records [1]
+2025-10-02 15:59:38,447 - Success to query records [1]
+2025-10-02 15:59:38,448 - start : 0, end : 1
+2025-10-02 15:59:40,469 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 15:59:40,471 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 15:59:42,557 - delete : {order=4}
+2025-10-02 15:59:42,579 - start : 0, end : 0
+2025-10-02 15:59:46,446 - file:/C:\LEDKB\234\document/introduction.html
+2025-10-02 15:59:48,271 - file:/C:\LEDKB\234\document/introduction.html
+2025-10-02 15:59:48,607 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 15:59:48,609 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 15:59:48,610 - Obtain the parameters  : [MONITORINTRVAL]
+2025-10-02 15:59:48,612 - Obtain the env parameters  : [10]
+2025-10-02 15:59:48,613 - Obtain the parameters  : [SENDDELAY]
+2025-10-02 15:59:48,614 - Obtain the env parameters  : [15]
+2025-10-02 16:00:07,777 - UI
+2025-10-02 16:00:13,535 - UI
+2025-10-02 16:00:13,544 - Success to query records [1]
+2025-10-02 16:00:20,879 - UI
+2025-10-02 16:00:20,909 - Success to query records [1]
+2025-10-02 16:00:26,213 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 16:00:26,215 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 16:00:26,216 - Obtain the parameters  : [MONITORINTRVAL]
+2025-10-02 16:00:26,217 - Obtain the env parameters  : [10]
+2025-10-02 16:00:26,222 - Obtain the parameters  : [SENDDELAY]
+2025-10-02 16:00:26,226 - Obtain the env parameters  : [15]
+2025-10-02 16:00:26,897 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 16:00:26,899 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 16:00:26,901 - Obtain the parameters  : [MONITORINTRVAL]
+2025-10-02 16:00:26,903 - Obtain the env parameters  : [10]
+2025-10-02 16:00:26,904 - Obtain the parameters  : [SENDDELAY]
+2025-10-02 16:00:26,906 - Obtain the env parameters  : [15]
+2025-10-02 16:00:29,406 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 16:00:29,408 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 16:00:29,409 - Obtain the parameters  : [MONITORINTRVAL]
+2025-10-02 16:00:29,411 - Obtain the env parameters  : [10]
+2025-10-02 16:00:29,412 - Obtain the parameters  : [SENDDELAY]
+2025-10-02 16:00:29,413 - Obtain the env parameters  : [15]
+2025-10-02 16:00:31,803 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 16:00:31,804 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 16:00:31,806 - Obtain the parameters  : [MONITORINTRVAL]
+2025-10-02 16:00:31,807 - Obtain the env parameters  : [10]
+2025-10-02 16:00:31,808 - Obtain the parameters  : [SENDDELAY]
+2025-10-02 16:00:31,809 - Obtain the env parameters  : [15]
+2025-10-02 16:01:04,299 - start : 0, end : 0
+2025-10-02 16:01:20,104 - UI
+2025-10-02 16:01:20,112 - Success to query records [1]
+2025-10-02 16:01:46,133 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 16:01:46,135 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 16:01:46,136 - Obtain the parameters  : [MONITORINTRVAL]
+2025-10-02 16:01:46,137 - Obtain the env parameters  : [10]
+2025-10-02 16:01:46,138 - Obtain the parameters  : [SENDDELAY]
+2025-10-02 16:01:46,140 - Obtain the env parameters  : [15]
+2025-10-02 16:01:47,206 - file:/C:\LEDKB\234\document/introduction.html
+2025-10-02 16:01:48,038 - Success to query records [1]
+2025-10-02 16:01:48,043 - Success to query records [1]
+2025-10-02 16:01:48,043 - start : 0, end : 1
+2025-10-02 16:01:54,219 - start : 0, end : 0
+2025-10-02 16:01:56,598 - Success to query records [1]
+2025-10-02 16:01:56,604 - Obtain the parameters  : [SENDDELAY]
+2025-10-02 16:01:56,606 - Obtain the env parameters  : [15]
+2025-10-02 16:02:20,759 - Success to query records [1]
+2025-10-02 16:02:20,764 - Success to query records [1]
+2025-10-02 16:02:20,765 - start : 0, end : 1
+2025-10-02 16:02:44,733 - UI
+2025-10-02 16:02:46,653 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 16:02:46,656 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 16:02:46,657 - Obtain the parameters  : [MONITORINTRVAL]
+2025-10-02 16:02:46,659 - Obtain the env parameters  : [10]
+2025-10-02 16:02:46,660 - Obtain the parameters  : [SENDDELAY]
+2025-10-02 16:02:46,663 - Obtain the env parameters  : [15]
+2025-10-02 16:02:50,408 - start : 0, end : 0
+2025-10-02 16:02:51,015 - Success to query records [2]
+2025-10-02 16:02:51,019 - Success to query records [2]
+2025-10-02 16:02:51,019 - start : 0, end : 2
+2025-10-02 16:03:08,350 - UI
+2025-10-02 16:03:10,148 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 16:03:10,150 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 16:03:10,151 - Obtain the parameters  : [MONITORINTRVAL]
+2025-10-02 16:03:10,153 - Obtain the env parameters  : [10]
+2025-10-02 16:03:10,154 - Obtain the parameters  : [SENDDELAY]
+2025-10-02 16:03:10,155 - Obtain the env parameters  : [15]
+2025-10-02 16:03:22,077 - UI
+2025-10-02 16:04:20,645 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 16:04:20,649 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 16:04:20,650 - Obtain the parameters  : [MONITORINTRVAL]
+2025-10-02 16:04:20,652 - Obtain the env parameters  : [10]
+2025-10-02 16:04:20,652 - Obtain the parameters  : [SENDDELAY]
+2025-10-02 16:04:20,654 - Obtain the env parameters  : [15]
+2025-10-02 16:04:22,329 - Success to query records [4]
+2025-10-02 16:04:22,334 - Success to query records [4]
+2025-10-02 16:04:22,335 - start : 0, end : 4
+2025-10-02 16:04:58,543 - Success save the system setting
+2025-10-02 16:05:01,497 - Success to query records [1]
+2025-10-02 16:05:01,502 - Success to query records [1]
+2025-10-02 16:05:01,502 - start : 0, end : 1
+2025-10-02 16:05:04,833 - The name of plugin is [4LLEDKB]
+2025-10-02 16:05:04,833 - The name of pluginType is [db]
+2025-10-02 16:05:53,526 - Success to query records [4]
+2025-10-02 16:05:53,546 - Success to query records [4]
+2025-10-02 16:06:25,688 - Update by the id [29] ,tableName [plugins]
+2025-10-02 16:06:33,901 - The name of plugin is [4LLEDKB]
+2025-10-02 16:06:33,902 - The name of pluginType is [db]
+2025-10-02 16:06:33,905 - Success to query records [1]
+2025-10-02 16:06:37,381 - Failed to read jar [JAR entry META-INF/ not found in C:\LEDKB\234\234.zip]
+2025-10-02 16:06:37,405 - Failed to read jar [JAR entry META-INF/ not found in C:\LEDKB\234\magicard_x86.zip]
+2025-10-02 16:06:37,408 - Failed to read jar [error in opening zip file]
+2025-10-02 16:06:37,409 - Failed to read jar [error in opening zip file]
+2025-10-02 16:06:37,415 - It's going to parsing : C:\LEDKB\234\plugin/config/properties/configuration.properties
+2025-10-02 16:06:37,416 - It has been parsed ,following [C:\LEDKB\234\plugin/config/properties/configuration.properties]
+2025-10-02 16:06:37,417 - It has been loaded ,following : [C:\LEDKB\234\plugin/config/properties/configuration.properties]
+2025-10-02 16:06:37,418 - {"pluginName":"4LLEDKB","properties":{"monitorPath":"C:/Data/"}}
+2025-10-02 16:06:37,448 - Success to query records [1]
+2025-10-02 16:06:37,454 - Success to query records [1]
+2025-10-02 16:06:37,458 - Success to query records [1]
+2025-10-02 16:06:37,460 - Success to query records [1]
+2025-10-02 16:06:37,463 - Success to query records [1]
+2025-10-02 16:06:37,465 - Success to query records [1]
+2025-10-02 16:06:37,469 - Monitor type : directory
+2025-10-02 16:06:48,091 - Success to query records [4]
+2025-10-02 16:06:58,087 - Success to query records [4]
+2025-10-02 16:07:08,098 - Success to query records [4]
+2025-10-02 16:07:08,725 - Send with UDP
+2025-10-02 16:07:08,925 - Send the content for the msg [1040], and the location ID [0]
+2025-10-02 16:07:08,951 - Send the messages have been format: [KLB00010000005700100000001040KLEA8]
+2025-10-02 16:07:08,961 - Success to send the datums
+2025-10-02 16:07:09,160 - Send the content for the msg [1060], and the location ID [1]
+2025-10-02 16:07:09,164 - Send the messages have been format: [KLB00010000005700100100001060KLEAB]
+2025-10-02 16:07:09,243 - Success to send the datums
+2025-10-02 16:07:09,270 - Send the content for the msg [101.9], and the location ID [2]
+2025-10-02 16:07:09,275 - Send the messages have been format: [KLB0001000000570011020000101.9KLEDF]
+2025-10-02 16:07:09,284 - Success to send the datums
+2025-10-02 16:07:09,322 - Send the content for the msg [938.7], and the location ID [3]
+2025-10-02 16:07:09,327 - Send the messages have been format: [KLB0001000000570011030000938.7KLEF0]
+2025-10-02 16:07:09,330 - Success to send the datums
+2025-10-02 16:07:09,364 - Send with UDP
+2025-10-02 16:07:09,365 - Send the content for the msg [1760], and the location ID [0]
+2025-10-02 16:07:09,365 - Send the messages have been format: [KLB00010000005700100000001760KLEB1]
+2025-10-02 16:07:09,366 - Success to send the datums
+2025-10-02 16:07:09,382 - Send the content for the msg [1795], and the location ID [1]
+2025-10-02 16:07:09,383 - Send the messages have been format: [KLB00010000005700100100001795KLEBA]
+2025-10-02 16:07:09,383 - Success to send the datums
+2025-10-02 16:07:09,399 - Send the content for the msg [102.0], and the location ID [2]
+2025-10-02 16:07:09,399 - Send the messages have been format: [KLB0001000000570011020000102.0KLED7]
+2025-10-02 16:07:09,400 - Success to send the datums
+2025-10-02 16:07:09,415 - Send the content for the msg [967.1], and the location ID [3]
+2025-10-02 16:07:09,415 - Send the messages have been format: [KLB0001000000570011030000967.1KLEEC]
+2025-10-02 16:07:09,416 - Success to send the datums
+2025-10-02 16:07:09,434 - Send with UDP
+2025-10-02 16:07:09,435 - Send the content for the msg [1280], and the location ID [0]
+2025-10-02 16:07:09,435 - Send the messages have been format: [KLB00010000005700100000001280KLEAE]
+2025-10-02 16:07:09,436 - Success to send the datums
+2025-10-02 16:07:09,451 - Send the content for the msg [0884], and the location ID [1]
+2025-10-02 16:07:09,451 - Send the messages have been format: [KLB00010000005700100100000884KLEB8]
+2025-10-02 16:07:09,452 - Success to send the datums
+2025-10-02 16:07:09,468 - Send the content for the msg [690.6], and the location ID [2]
+2025-10-02 16:07:09,468 - Send the messages have been format: [KLB0001000000570011020000690.6KLEE9]
+2025-10-02 16:07:09,469 - Success to send the datums
+2025-10-02 16:07:09,484 - Send the content for the msg [910.6], and the location ID [3]
+2025-10-02 16:07:09,484 - Send the messages have been format: [KLB0001000000570011030000910.6KLEE5]
+2025-10-02 16:07:09,485 - Success to send the datums
+2025-10-02 16:07:09,505 - [SCX4] has no records need to be send !!!
+2025-10-02 16:07:18,087 - Success to query records [4]
+2025-10-02 16:07:23,840 - [SCX1] has no records need to be send !!!
+2025-10-02 16:07:24,049 - [SCX2] has no records need to be send !!!
+2025-10-02 16:07:24,246 - [SCX3] has no records need to be send !!!
+2025-10-02 16:07:24,446 - Send with UDP
+2025-10-02 16:07:24,592 - Send the content for the msg [1440], and the location ID [0]
+2025-10-02 16:07:24,595 - Send the messages have been format: [KLB00010000005700100000001440KLEAC]
+2025-10-02 16:07:24,598 - Failed to send the datums
+java.net.SocketException: No buffer space available (maximum connections reached?): Datagram send failed
+	at java.net.DualStackPlainDatagramSocketImpl.socketSend(Native Method)
+	at java.net.DualStackPlainDatagramSocketImpl.send(Unknown Source)
+	at java.net.DatagramSocket.send(Unknown Source)
+	at com.lemonnt.dynamic.card.udpsend.UDPSend.send(UDPSend.java:32)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.autoSendDatums(AbstractTask.java:324)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.udp(AbstractTask.java:214)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.core(AbstractTask.java:162)
+	at com.lemonnt.dynamic.card.threadpool.TimerExecute$1.run(TimerExecute.java:73)
+	at java.util.TimerThread.mainLoop(Unknown Source)
+	at java.util.TimerThread.run(Unknown Source)
+2025-10-02 16:07:24,795 - Send the content for the msg [1356], and the location ID [1]
+2025-10-02 16:07:24,798 - Send the messages have been format: [KLB00010000005700100100001356KLEB3]
+2025-10-02 16:07:24,984 - Success to send the datums
+2025-10-02 16:07:25,299 - Send the content for the msg [941.7], and the location ID [2]
+2025-10-02 16:07:25,547 - Send the messages have been format: [KLB0001000000570011020000941.7KLEE9]
+2025-10-02 16:07:25,553 - Success to send the datums
+2025-10-02 16:07:25,585 - Send the content for the msg [929.9], and the location ID [3]
+2025-10-02 16:07:25,597 - Send the messages have been format: [KLB0001000000570011030000929.9KLEF2]
+2025-10-02 16:07:25,606 - Success to send the datums
+2025-10-02 16:07:28,085 - Success to query records [4]
+2025-10-02 16:07:38,093 - Success to query records [4]
+2025-10-02 16:07:40,087 - Success to query records [1]
+2025-10-02 16:07:40,091 - Success to query records [1]
+2025-10-02 16:07:40,092 - start : 0, end : 1
+2025-10-02 16:07:40,949 - Success to query records [1]
+2025-10-02 16:07:40,953 - Success to query records [1]
+2025-10-02 16:07:40,954 - start : 0, end : 1
+2025-10-02 16:08:08,852 - Send with UDP
+2025-10-02 16:08:08,852 - Send the content for the msg [1040], and the location ID [0]
+2025-10-02 16:08:08,853 - Send the messages have been format: [KLB00010000005700100000001040KLEA8]
+2025-10-02 16:08:08,853 - Success to send the datums
+2025-10-02 16:08:08,869 - Send the content for the msg [1060], and the location ID [1]
+2025-10-02 16:08:08,869 - Send the messages have been format: [KLB00010000005700100100001060KLEAB]
+2025-10-02 16:08:08,870 - Success to send the datums
+2025-10-02 16:08:08,885 - Send the content for the msg [101.9], and the location ID [2]
+2025-10-02 16:08:08,885 - Send the messages have been format: [KLB0001000000570011020000101.9KLEDF]
+2025-10-02 16:08:08,886 - Success to send the datums
+2025-10-02 16:08:08,901 - Send the content for the msg [938.7], and the location ID [3]
+2025-10-02 16:08:08,901 - Send the messages have been format: [KLB0001000000570011030000938.7KLEF0]
+2025-10-02 16:08:08,902 - Success to send the datums
+2025-10-02 16:08:08,922 - [SCX2] has no records need to be send !!!
+2025-10-02 16:08:08,922 - [SCX3] has no records need to be send !!!
+2025-10-02 16:08:08,922 - [SCX4] has no records need to be send !!!
+2025-10-02 16:08:23,852 - [SCX1] has no records need to be send !!!
+2025-10-02 16:08:23,852 - Send with UDP
+2025-10-02 16:08:23,852 - Send the content for the msg [1760], and the location ID [0]
+2025-10-02 16:08:23,852 - Send the messages have been format: [KLB00010000005700100000001760KLEB1]
+2025-10-02 16:08:23,853 - Success to send the datums
+2025-10-02 16:08:23,869 - Send the content for the msg [1800], and the location ID [1]
+2025-10-02 16:08:23,869 - Send the messages have been format: [KLB00010000005700100100001800KLEAD]
+2025-10-02 16:08:23,869 - Success to send the datums
+2025-10-02 16:08:23,886 - Send the content for the msg [102.3], and the location ID [2]
+2025-10-02 16:08:23,886 - Send the messages have been format: [KLB0001000000570011020000102.3KLEDA]
+2025-10-02 16:08:23,886 - Success to send the datums
+2025-10-02 16:08:23,902 - Send the content for the msg [967.2], and the location ID [3]
+2025-10-02 16:08:23,902 - Send the messages have been format: [KLB0001000000570011030000967.2KLEED]
+2025-10-02 16:08:23,903 - Success to send the datums
+2025-10-02 16:08:23,922 - Send with UDP
+2025-10-02 16:08:23,923 - Send the content for the msg [1280], and the location ID [0]
+2025-10-02 16:08:23,923 - Send the messages have been format: [KLB00010000005700100000001280KLEAE]
+2025-10-02 16:08:23,923 - Success to send the datums
+2025-10-02 16:08:23,938 - Send the content for the msg [0884], and the location ID [1]
+2025-10-02 16:08:23,938 - Send the messages have been format: [KLB00010000005700100100000884KLEB8]
+2025-10-02 16:08:23,938 - Success to send the datums
+2025-10-02 16:08:23,954 - Send the content for the msg [690.6], and the location ID [2]
+2025-10-02 16:08:23,954 - Send the messages have been format: [KLB0001000000570011020000690.6KLEE9]
+2025-10-02 16:08:23,954 - Success to send the datums
+2025-10-02 16:08:23,970 - Send the content for the msg [910.6], and the location ID [3]
+2025-10-02 16:08:23,970 - Send the messages have been format: [KLB0001000000570011030000910.6KLEE5]
+2025-10-02 16:08:23,970 - Success to send the datums
+2025-10-02 16:08:23,988 - Send with UDP
+2025-10-02 16:08:23,989 - Send the content for the msg [1440], and the location ID [0]
+2025-10-02 16:08:23,989 - Send the messages have been format: [KLB00010000005700100000001440KLEAC]
+2025-10-02 16:08:23,989 - Success to send the datums
+2025-10-02 16:08:24,004 - Send the content for the msg [1360], and the location ID [1]
+2025-10-02 16:08:24,004 - Send the messages have been format: [KLB00010000005700100100001360KLEAE]
+2025-10-02 16:08:24,004 - Success to send the datums
+2025-10-02 16:08:24,021 - Send the content for the msg [944.4], and the location ID [2]
+2025-10-02 16:08:24,021 - Send the messages have been format: [KLB0001000000570011020000944.4KLEE9]
+2025-10-02 16:08:24,021 - Success to send the datums
+2025-10-02 16:08:24,036 - Send the content for the msg [930.1], and the location ID [3]
+2025-10-02 16:08:24,036 - Send the messages have been format: [KLB0001000000570011030000930.1KLEE2]
+2025-10-02 16:08:24,036 - Success to send the datums
+2025-10-02 16:09:06,463 - lemonnt
+2025-10-02 16:09:06,491 - false
+2025-10-02 16:09:06,608 - Obtain the parameters  : [ELEMENTSNUMBERS]
+2025-10-02 16:09:06,614 - Obtain the env parameters  : [Mn,Mo,B,C,Al,Co,Cr,P,Cu,Pb,S,Nb,Ti,Si,V,W,Ni,Sn,Fe,IFe]
+2025-10-02 16:09:06,615 - Obtain the parameters  : [DIGITNUMBER]
+2025-10-02 16:09:06,617 - Obtain the env parameters  : [4]
+2025-10-02 16:09:06,713 - Success to query records [4]
+2025-10-02 16:09:06,716 - [{"connection":false,"date":1759446007778,"desc":"A1","gprs":0,"ip":"192.168.79.205","name":"SCX1","order":"1","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1759446164734,"desc":"A2","gprs":0,"ip":"192.168.79.206","name":"SCX2","order":"2","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1759446188349,"desc":"A3","gprs":0,"ip":"192.168.79.207","name":"SCX3","order":"3","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}, {"connection":false,"date":1759446202078,"desc":"A4","gprs":0,"ip":"192.168.79.208","name":"SCX4","order":"4","port":"5060","realTimeStatus":3,"status":"激活","useStatus":"启用"}]
+2025-10-02 16:09:06,896 - Obtain the parameters  : [SYSTEMNAME]
+2025-10-02 16:09:06,899 - Obtain the env parameters  : [蓝通光电]
+2025-10-02 16:09:06,994 - Obtain the parameters  : [MONITORINTRVAL]
+2025-10-02 16:09:06,997 - Obtain the env parameters  : [10]
+2025-10-02 16:09:06,998 - Monitor Interval : [10s]
+2025-10-02 16:10:20,160 - Success to query records [1]
+2025-10-02 16:10:20,175 - Success to query records [1]
+2025-10-02 16:10:20,176 - start : 0, end : 1
+2025-10-02 16:10:21,999 - The name of plugin is [4LLEDKB]
+2025-10-02 16:10:22,000 - The name of pluginType is [db]
+2025-10-02 16:10:22,004 - Success to query records [1]
+2025-10-02 16:10:23,251 - Failed to read jar [JAR entry META-INF/ not found in C:\LEDKB\234\234.zip]
+2025-10-02 16:10:23,259 - Obtain the parameters  : [SENDDELAY]
+2025-10-02 16:10:23,262 - Obtain the env parameters  : [15]
+2025-10-02 16:10:23,278 - Failed to read jar [JAR entry META-INF/ not found in C:\LEDKB\234\magicard_x86.zip]
+2025-10-02 16:10:23,279 - Failed to read jar [error in opening zip file]
+2025-10-02 16:10:23,279 - Failed to read jar [error in opening zip file]
+2025-10-02 16:10:23,283 - It's going to parsing : C:\LEDKB\234\plugin/config/properties/configuration.properties
+2025-10-02 16:10:23,284 - It has been parsed ,following [C:\LEDKB\234\plugin/config/properties/configuration.properties]
+2025-10-02 16:10:23,285 - It has been loaded ,following : [C:\LEDKB\234\plugin/config/properties/configuration.properties]
+2025-10-02 16:10:23,285 - {"pluginName":"4LLEDKB","properties":{"monitorPath":"C:/Data/"}}
+2025-10-02 16:10:23,304 - Success to query records [1]
+2025-10-02 16:10:23,308 - Success to query records [1]
+2025-10-02 16:10:23,311 - Success to query records [1]
+2025-10-02 16:10:23,315 - Success to query records [1]
+2025-10-02 16:10:23,318 - Success to query records [1]
+2025-10-02 16:10:23,321 - Success to query records [1]
+2025-10-02 16:10:23,324 - Monitor type : directory
+2025-10-02 16:10:25,764 - Success to query records [4]
+2025-10-02 16:10:35,760 - Success to query records [4]
+2025-10-02 16:10:45,756 - Success to query records [4]
+2025-10-02 16:10:55,756 - Success to query records [4]
+2025-10-02 16:11:05,755 - Success to query records [4]
+2025-10-02 16:11:09,334 - Send with UDP
+2025-10-02 16:11:09,337 - Send the content for the msg [1040], and the location ID [0]
+2025-10-02 16:11:09,337 - Send the messages have been format: [KLB00010000005700100000001040KLEA8]
+2025-10-02 16:11:09,343 - Success to send the datums
+2025-10-02 16:11:09,359 - Send the content for the msg [1060], and the location ID [1]
+2025-10-02 16:11:09,359 - Send the messages have been format: [KLB00010000005700100100001060KLEAB]
+2025-10-02 16:11:09,360 - Success to send the datums
+2025-10-02 16:11:09,377 - Send the content for the msg [101.9], and the location ID [2]
+2025-10-02 16:11:09,377 - Send the messages have been format: [KLB0001000000570011020000101.9KLEDF]
+2025-10-02 16:11:09,378 - Success to send the datums
+2025-10-02 16:11:09,394 - Send the content for the msg [938.7], and the location ID [3]
+2025-10-02 16:11:09,394 - Send the messages have been format: [KLB0001000000570011030000938.7KLEF0]
+2025-10-02 16:11:09,395 - Success to send the datums
+2025-10-02 16:11:09,437 - Send with UDP
+2025-10-02 16:11:09,437 - Send the content for the msg [1760], and the location ID [0]
+2025-10-02 16:11:09,438 - Send the messages have been format: [KLB00010000005700100000001760KLEB1]
+2025-10-02 16:11:09,439 - Success to send the datums
+2025-10-02 16:11:09,455 - Send the content for the msg [1790], and the location ID [1]
+2025-10-02 16:11:09,455 - Send the messages have been format: [KLB00010000005700100100001790KLEB5]
+2025-10-02 16:11:09,457 - Success to send the datums
+2025-10-02 16:11:09,472 - Send the content for the msg [101.7], and the location ID [2]
+2025-10-02 16:11:09,472 - Send the messages have been format: [KLB0001000000570011020000101.7KLEDD]
+2025-10-02 16:11:09,473 - Success to send the datums
+2025-10-02 16:11:09,489 - Send the content for the msg [965.4], and the location ID [3]
+2025-10-02 16:11:09,489 - Send the messages have been format: [KLB0001000000570011030000965.4KLEED]
+2025-10-02 16:11:09,490 - Success to send the datums
+2025-10-02 16:11:09,510 - Send with UDP
+2025-10-02 16:11:09,511 - Send the content for the msg [1280], and the location ID [0]
+2025-10-02 16:11:09,512 - Send the messages have been format: [KLB00010000005700100000001280KLEAE]
+2025-10-02 16:11:09,512 - Success to send the datums
+2025-10-02 16:11:09,529 - Send the content for the msg [0892], and the location ID [1]
+2025-10-02 16:11:09,529 - Send the messages have been format: [KLB00010000005700100100000892KLEB7]
+2025-10-02 16:11:09,530 - Success to send the datums
+2025-10-02 16:11:09,547 - Send the content for the msg [696.9], and the location ID [2]
+2025-10-02 16:11:09,547 - Send the messages have been format: [KLB0001000000570011020000696.9KLEF2]
+2025-10-02 16:11:09,548 - Success to send the datums
+2025-10-02 16:11:09,564 - Send the content for the msg [911.4], and the location ID [3]
+2025-10-02 16:11:09,564 - Send the messages have been format: [KLB0001000000570011030000911.4KLEE4]
+2025-10-02 16:11:09,565 - Success to send the datums
+2025-10-02 16:11:09,585 - Send with UDP
+2025-10-02 16:11:09,586 - Send the content for the msg [1440], and the location ID [0]
+2025-10-02 16:11:09,587 - Send the messages have been format: [KLB00010000005700100000001440KLEAC]
+2025-10-02 16:11:09,587 - Success to send the datums
+2025-10-02 16:11:09,603 - Send the content for the msg [1372], and the location ID [1]
+2025-10-02 16:11:09,603 - Send the messages have been format: [KLB00010000005700100100001372KLEB1]
+2025-10-02 16:11:09,604 - Success to send the datums
+2025-10-02 16:11:09,621 - Send the content for the msg [952.8], and the location ID [2]
+2025-10-02 16:11:09,622 - Send the messages have been format: [KLB0001000000570011020000952.8KLEEC]
+2025-10-02 16:11:09,623 - Success to send the datums
+2025-10-02 16:11:09,639 - Send the content for the msg [930.8], and the location ID [3]
+2025-10-02 16:11:09,639 - Send the messages have been format: [KLB0001000000570011030000930.8KLEE9]
+2025-10-02 16:11:09,641 - Success to send the datums
+2025-10-02 16:11:15,755 - Success to query records [4]
+2025-10-02 16:11:25,754 - Success to query records [4]
+2025-10-02 16:11:35,754 - Success to query records [4]
+2025-10-02 16:11:45,754 - Success to query records [4]
+2025-10-02 16:11:55,754 - Success to query records [4]
+2025-10-02 16:12:05,754 - Success to query records [4]
+2025-10-02 16:12:09,337 - Send with UDP
+2025-10-02 16:12:09,337 - Send the content for the msg [1040], and the location ID [0]
+2025-10-02 16:12:09,338 - Send the messages have been format: [KLB00010000005700100000001040KLEA8]
+2025-10-02 16:12:09,339 - Success to send the datums
+2025-10-02 16:12:09,357 - Send the content for the msg [1060], and the location ID [1]
+2025-10-02 16:12:09,357 - Send the messages have been format: [KLB00010000005700100100001060KLEAB]
+2025-10-02 16:12:09,358 - Success to send the datums
+2025-10-02 16:12:09,374 - Send the content for the msg [101.9], and the location ID [2]
+2025-10-02 16:12:09,375 - Send the messages have been format: [KLB0001000000570011020000101.9KLEDF]
+2025-10-02 16:12:09,375 - Success to send the datums
+2025-10-02 16:12:09,391 - Send the content for the msg [930.2], and the location ID [3]
+2025-10-02 16:12:09,392 - Send the messages have been format: [KLB0001000000570011030000930.2KLEE3]
+2025-10-02 16:12:09,393 - Success to send the datums
+2025-10-02 16:12:09,412 - Send with UDP
+2025-10-02 16:12:09,413 - Send the content for the msg [1760], and the location ID [0]
+2025-10-02 16:12:09,414 - Send the messages have been format: [KLB00010000005700100000001760KLEB1]
+2025-10-02 16:12:09,415 - Success to send the datums
+2025-10-02 16:12:09,430 - Send the content for the msg [1790], and the location ID [1]
+2025-10-02 16:12:09,430 - Send the messages have been format: [KLB00010000005700100100001790KLEB5]
+2025-10-02 16:12:09,433 - Failed to send the datums
+java.net.SocketException: No buffer space available (maximum connections reached?): Datagram send failed
+	at java.net.DualStackPlainDatagramSocketImpl.socketSend(Native Method)
+	at java.net.DualStackPlainDatagramSocketImpl.send(Unknown Source)
+	at java.net.DatagramSocket.send(Unknown Source)
+	at com.lemonnt.dynamic.card.udpsend.UDPSend.send(UDPSend.java:32)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.autoSendDatums(AbstractTask.java:324)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.udp(AbstractTask.java:214)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.core(AbstractTask.java:162)
+	at com.lemonnt.dynamic.card.threadpool.TimerExecute$1.run(TimerExecute.java:73)
+	at java.util.TimerThread.mainLoop(Unknown Source)
+	at java.util.TimerThread.run(Unknown Source)
+2025-10-02 16:12:09,452 - Send the content for the msg [101.7], and the location ID [2]
+2025-10-02 16:12:09,453 - Send the messages have been format: [KLB0001000000570011020000101.7KLEDD]
+2025-10-02 16:12:09,454 - Failed to send the datums
+java.net.SocketException: No buffer space available (maximum connections reached?): Datagram send failed
+	at java.net.DualStackPlainDatagramSocketImpl.socketSend(Native Method)
+	at java.net.DualStackPlainDatagramSocketImpl.send(Unknown Source)
+	at java.net.DatagramSocket.send(Unknown Source)
+	at com.lemonnt.dynamic.card.udpsend.UDPSend.send(UDPSend.java:32)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.autoSendDatums(AbstractTask.java:324)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.udp(AbstractTask.java:214)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.core(AbstractTask.java:162)
+	at com.lemonnt.dynamic.card.threadpool.TimerExecute$1.run(TimerExecute.java:73)
+	at java.util.TimerThread.mainLoop(Unknown Source)
+	at java.util.TimerThread.run(Unknown Source)
+2025-10-02 16:12:09,471 - Send the content for the msg [965.4], and the location ID [3]
+2025-10-02 16:12:09,471 - Send the messages have been format: [KLB0001000000570011030000965.4KLEED]
+2025-10-02 16:12:09,472 - Failed to send the datums
+java.net.SocketException: No buffer space available (maximum connections reached?): Datagram send failed
+	at java.net.DualStackPlainDatagramSocketImpl.socketSend(Native Method)
+	at java.net.DualStackPlainDatagramSocketImpl.send(Unknown Source)
+	at java.net.DatagramSocket.send(Unknown Source)
+	at com.lemonnt.dynamic.card.udpsend.UDPSend.send(UDPSend.java:32)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.autoSendDatums(AbstractTask.java:324)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.udp(AbstractTask.java:214)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.core(AbstractTask.java:162)
+	at com.lemonnt.dynamic.card.threadpool.TimerExecute$1.run(TimerExecute.java:73)
+	at java.util.TimerThread.mainLoop(Unknown Source)
+	at java.util.TimerThread.run(Unknown Source)
+2025-10-02 16:12:09,494 - Send with UDP
+2025-10-02 16:12:09,495 - Send the content for the msg [1280], and the location ID [0]
+2025-10-02 16:12:09,495 - Send the messages have been format: [KLB00010000005700100000001280KLEAE]
+2025-10-02 16:12:09,496 - Failed to send the datums
+java.net.SocketException: No buffer space available (maximum connections reached?): Datagram send failed
+	at java.net.DualStackPlainDatagramSocketImpl.socketSend(Native Method)
+	at java.net.DualStackPlainDatagramSocketImpl.send(Unknown Source)
+	at java.net.DatagramSocket.send(Unknown Source)
+	at com.lemonnt.dynamic.card.udpsend.UDPSend.send(UDPSend.java:32)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.autoSendDatums(AbstractTask.java:324)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.udp(AbstractTask.java:214)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.core(AbstractTask.java:162)
+	at com.lemonnt.dynamic.card.threadpool.TimerExecute$1.run(TimerExecute.java:73)
+	at java.util.TimerThread.mainLoop(Unknown Source)
+	at java.util.TimerThread.run(Unknown Source)
+2025-10-02 16:12:09,513 - Send the content for the msg [0897], and the location ID [1]
+2025-10-02 16:12:09,513 - Send the messages have been format: [KLB00010000005700100100000897KLEBC]
+2025-10-02 16:12:09,514 - Failed to send the datums
+java.net.SocketException: No buffer space available (maximum connections reached?): Datagram send failed
+	at java.net.DualStackPlainDatagramSocketImpl.socketSend(Native Method)
+	at java.net.DualStackPlainDatagramSocketImpl.send(Unknown Source)
+	at java.net.DatagramSocket.send(Unknown Source)
+	at com.lemonnt.dynamic.card.udpsend.UDPSend.send(UDPSend.java:32)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.autoSendDatums(AbstractTask.java:324)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.udp(AbstractTask.java:214)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.core(AbstractTask.java:162)
+	at com.lemonnt.dynamic.card.threadpool.TimerExecute$1.run(TimerExecute.java:73)
+	at java.util.TimerThread.mainLoop(Unknown Source)
+	at java.util.TimerThread.run(Unknown Source)
+2025-10-02 16:12:09,532 - Send the content for the msg [700.8], and the location ID [2]
+2025-10-02 16:12:09,532 - Send the messages have been format: [KLB0001000000570011020000700.8KLEE3]
+2025-10-02 16:12:09,533 - Failed to send the datums
+java.net.SocketException: No buffer space available (maximum connections reached?): Datagram send failed
+	at java.net.DualStackPlainDatagramSocketImpl.socketSend(Native Method)
+	at java.net.DualStackPlainDatagramSocketImpl.send(Unknown Source)
+	at java.net.DatagramSocket.send(Unknown Source)
+	at com.lemonnt.dynamic.card.udpsend.UDPSend.send(UDPSend.java:32)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.autoSendDatums(AbstractTask.java:324)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.udp(AbstractTask.java:214)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.core(AbstractTask.java:162)
+	at com.lemonnt.dynamic.card.threadpool.TimerExecute$1.run(TimerExecute.java:73)
+	at java.util.TimerThread.mainLoop(Unknown Source)
+	at java.util.TimerThread.run(Unknown Source)
+2025-10-02 16:12:09,551 - Send the content for the msg [911.9], and the location ID [3]
+2025-10-02 16:12:09,551 - Send the messages have been format: [KLB0001000000570011030000911.9KLEE9]
+2025-10-02 16:12:09,552 - Failed to send the datums
+java.net.SocketException: No buffer space available (maximum connections reached?): Datagram send failed
+	at java.net.DualStackPlainDatagramSocketImpl.socketSend(Native Method)
+	at java.net.DualStackPlainDatagramSocketImpl.send(Unknown Source)
+	at java.net.DatagramSocket.send(Unknown Source)
+	at com.lemonnt.dynamic.card.udpsend.UDPSend.send(UDPSend.java:32)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.autoSendDatums(AbstractTask.java:324)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.udp(AbstractTask.java:214)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.core(AbstractTask.java:162)
+	at com.lemonnt.dynamic.card.threadpool.TimerExecute$1.run(TimerExecute.java:73)
+	at java.util.TimerThread.mainLoop(Unknown Source)
+	at java.util.TimerThread.run(Unknown Source)
+2025-10-02 16:12:09,572 - Send with UDP
+2025-10-02 16:12:09,573 - Send the content for the msg [1440], and the location ID [0]
+2025-10-02 16:12:09,574 - Send the messages have been format: [KLB00010000005700100000001440KLEAC]
+2025-10-02 16:12:09,574 - Failed to send the datums
+java.net.SocketException: No buffer space available (maximum connections reached?): Datagram send failed
+	at java.net.DualStackPlainDatagramSocketImpl.socketSend(Native Method)
+	at java.net.DualStackPlainDatagramSocketImpl.send(Unknown Source)
+	at java.net.DatagramSocket.send(Unknown Source)
+	at com.lemonnt.dynamic.card.udpsend.UDPSend.send(UDPSend.java:32)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.autoSendDatums(AbstractTask.java:324)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.udp(AbstractTask.java:214)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.core(AbstractTask.java:162)
+	at com.lemonnt.dynamic.card.threadpool.TimerExecute$1.run(TimerExecute.java:73)
+	at java.util.TimerThread.mainLoop(Unknown Source)
+	at java.util.TimerThread.run(Unknown Source)
+2025-10-02 16:12:09,592 - Send the content for the msg [1377], and the location ID [1]
+2025-10-02 16:12:09,593 - Send the messages have been format: [KLB00010000005700100100001377KLEB6]
+2025-10-02 16:12:09,594 - Failed to send the datums
+java.net.SocketException: No buffer space available (maximum connections reached?): Datagram send failed
+	at java.net.DualStackPlainDatagramSocketImpl.socketSend(Native Method)
+	at java.net.DualStackPlainDatagramSocketImpl.send(Unknown Source)
+	at java.net.DatagramSocket.send(Unknown Source)
+	at com.lemonnt.dynamic.card.udpsend.UDPSend.send(UDPSend.java:32)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.autoSendDatums(AbstractTask.java:324)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.udp(AbstractTask.java:214)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.core(AbstractTask.java:162)
+	at com.lemonnt.dynamic.card.threadpool.TimerExecute$1.run(TimerExecute.java:73)
+	at java.util.TimerThread.mainLoop(Unknown Source)
+	at java.util.TimerThread.run(Unknown Source)
+2025-10-02 16:12:09,611 - Send the content for the msg [956.3], and the location ID [2]
+2025-10-02 16:12:09,611 - Send the messages have been format: [KLB0001000000570011020000956.3KLEEB]
+2025-10-02 16:12:09,612 - Failed to send the datums
+java.net.SocketException: No buffer space available (maximum connections reached?): Datagram send failed
+	at java.net.DualStackPlainDatagramSocketImpl.socketSend(Native Method)
+	at java.net.DualStackPlainDatagramSocketImpl.send(Unknown Source)
+	at java.net.DatagramSocket.send(Unknown Source)
+	at com.lemonnt.dynamic.card.udpsend.UDPSend.send(UDPSend.java:32)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.autoSendDatums(AbstractTask.java:324)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.udp(AbstractTask.java:214)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.core(AbstractTask.java:162)
+	at com.lemonnt.dynamic.card.threadpool.TimerExecute$1.run(TimerExecute.java:73)
+	at java.util.TimerThread.mainLoop(Unknown Source)
+	at java.util.TimerThread.run(Unknown Source)
+2025-10-02 16:12:09,630 - Send the content for the msg [931.0], and the location ID [3]
+2025-10-02 16:12:09,630 - Send the messages have been format: [KLB0001000000570011030000931.0KLEE2]
+2025-10-02 16:12:09,631 - Failed to send the datums
+java.net.SocketException: No buffer space available (maximum connections reached?): Datagram send failed
+	at java.net.DualStackPlainDatagramSocketImpl.socketSend(Native Method)
+	at java.net.DualStackPlainDatagramSocketImpl.send(Unknown Source)
+	at java.net.DatagramSocket.send(Unknown Source)
+	at com.lemonnt.dynamic.card.udpsend.UDPSend.send(UDPSend.java:32)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.autoSendDatums(AbstractTask.java:324)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.udp(AbstractTask.java:214)
+	at com.lemonnt.dynamic.card.production.spi.AbstractTask.core(AbstractTask.java:162)
+	at com.lemonnt.dynamic.card.threadpool.TimerExecute$1.run(TimerExecute.java:73)
+	at java.util.TimerThread.mainLoop(Unknown Source)
+	at java.util.TimerThread.run(Unknown Source)
+2025-10-02 16:12:15,757 - Success to query records [4]
+2025-10-02 16:12:25,753 - Success to query records [4]
+2025-10-02 16:12:35,755 - Success to query records [4]
+2025-10-02 16:12:45,753 - Success to query records [4]
+2025-10-02 16:12:55,754 - Success to query records [4]
+2025-10-02 16:13:05,753 - Success to query records [4]
+2025-10-02 16:13:09,340 - Send with UDP
+2025-10-02 16:13:09,340 - Send the content for the msg [1040], and the location ID [0]
+2025-10-02 16:13:09,341 - Send the messages have been format: [KLB00010000005700100000001040KLEA8]
+2025-10-02 16:13:09,341 - Success to send the datums
+2025-10-02 16:13:09,356 - Send the content for the msg [1060], and the location ID [1]
+2025-10-02 16:13:09,356 - Send the messages have been format: [KLB00010000005700100100001060KLEAB]
+2025-10-02 16:13:09,357 - Success to send the datums
+2025-10-02 16:13:09,372 - Send the content for the msg [101.9], and the location ID [2]
+2025-10-02 16:13:09,372 - Send the messages have been format: [KLB0001000000570011020000101.9KLEDF]
+2025-10-02 16:13:09,374 - Success to send the datums
+2025-10-02 16:13:09,390 - Send the content for the msg [930.2], and the location ID [3]
+2025-10-02 16:13:09,390 - Send the messages have been format: [KLB0001000000570011030000930.2KLEE3]
+2025-10-02 16:13:09,391 - Success to send the datums
+2025-10-02 16:13:09,409 - Send with UDP
+2025-10-02 16:13:09,409 - Send the content for the msg [1760], and the location ID [0]
+2025-10-02 16:13:09,410 - Send the messages have been format: [KLB00010000005700100000001760KLEB1]
+2025-10-02 16:13:09,413 - Success to send the datums
+2025-10-02 16:13:09,429 - Send the content for the msg [1790], and the location ID [1]
+2025-10-02 16:13:09,430 - Send the messages have been format: [KLB00010000005700100100001790KLEB5]
+2025-10-02 16:13:09,432 - Success to send the datums
+2025-10-02 16:13:09,447 - Send the content for the msg [101.7], and the location ID [2]
+2025-10-02 16:13:09,447 - Send the messages have been format: [KLB0001000000570011020000101.7KLEDD]
+2025-10-02 16:13:09,448 - Success to send the datums
+2025-10-02 16:13:09,465 - Send the content for the msg [965.4], and the location ID [3]
+2025-10-02 16:13:09,465 - Send the messages have been format: [KLB0001000000570011030000965.4KLEED]
+2025-10-02 16:13:09,466 - Success to send the datums
+2025-10-02 16:13:09,491 - Send with UDP
+2025-10-02 16:13:09,491 - Send the content for the msg [1280], and the location ID [0]
+2025-10-02 16:13:09,492 - Send the messages have been format: [KLB00010000005700100000001280KLEAE]
+2025-10-02 16:13:09,492 - Success to send the datums
+2025-10-02 16:13:09,509 - Send the content for the msg [0900], and the location ID [1]
+2025-10-02 16:13:09,509 - Send the messages have been format: [KLB00010000005700100100000900KLEAD]
+2025-10-02 16:13:09,510 - Success to send the datums
+2025-10-02 16:13:09,525 - Send the content for the msg [703.1], and the location ID [2]
+2025-10-02 16:13:09,525 - Send the messages have been format: [KLB0001000000570011020000703.1KLEDF]
+2025-10-02 16:13:09,526 - Success to send the datums
+2025-10-02 16:13:09,541 - Send the content for the msg [912.2], and the location ID [3]
+2025-10-02 16:13:09,541 - Send the messages have been format: [KLB0001000000570011030000912.2KLEE3]
+2025-10-02 16:13:09,542 - Success to send the datums
+2025-10-02 16:13:09,563 - Send with UDP
+2025-10-02 16:13:09,564 - Send the content for the msg [1440], and the location ID [0]
+2025-10-02 16:13:09,565 - Send the messages have been format: [KLB00010000005700100000001440KLEAC]
+2025-10-02 16:13:09,565 - Success to send the datums
+2025-10-02 16:13:09,580 - Send the content for the msg [1377], and the location ID [1]
+2025-10-02 16:13:09,580 - Send the messages have been format: [KLB00010000005700100100001377KLEB6]
+2025-10-02 16:13:09,581 - Success to send the datums
+2025-10-02 16:13:09,596 - Send the content for the msg [956.3], and the location ID [2]
+2025-10-02 16:13:09,596 - Send the messages have been format: [KLB0001000000570011020000956.3KLEEB]
+2025-10-02 16:13:09,597 - Success to send the datums
+2025-10-02 16:13:09,613 - Send the content for the msg [931.0], and the location ID [3]
+2025-10-02 16:13:09,614 - Send the messages have been format: [KLB0001000000570011030000931.0KLEE2]
+2025-10-02 16:13:09,615 - Success to send the datums
+2025-10-02 16:13:15,753 - Success to query records [4]
+2025-10-02 16:13:25,753 - Success to query records [4]
+2025-10-02 16:13:35,754 - Success to query records [4]
+2025-10-02 16:13:45,753 - Success to query records [4]
+2025-10-02 16:13:55,753 - Success to query records [4]
+2025-10-02 16:14:05,754 - Success to query records [4]
+2025-10-02 16:14:09,343 - Send with UDP
+2025-10-02 16:14:09,343 - Send the content for the msg [1040], and the location ID [0]
+2025-10-02 16:14:09,344 - Send the messages have been format: [KLB00010000005700100000001040KLEA8]
+2025-10-02 16:14:09,344 - Success to send the datums
+2025-10-02 16:14:09,361 - Send the content for the msg [1060], and the location ID [1]
+2025-10-02 16:14:09,361 - Send the messages have been format: [KLB00010000005700100100001060KLEAB]
+2025-10-02 16:14:09,361 - Success to send the datums
+2025-10-02 16:14:09,377 - Send the content for the msg [101.9], and the location ID [2]
+2025-10-02 16:14:09,377 - Send the messages have been format: [KLB0001000000570011020000101.9KLEDF]
+2025-10-02 16:14:09,378 - Success to send the datums
+2025-10-02 16:14:09,393 - Send the content for the msg [930.2], and the location ID [3]
+2025-10-02 16:14:09,393 - Send the messages have been format: [KLB0001000000570011030000930.2KLEE3]
+2025-10-02 16:14:09,394 - Success to send the datums
+2025-10-02 16:14:09,412 - Send with UDP
+2025-10-02 16:14:09,413 - Send the content for the msg [1760], and the location ID [0]
+2025-10-02 16:14:09,414 - Send the messages have been format: [KLB00010000005700100000001760KLEB1]
+2025-10-02 16:14:09,415 - Success to send the datums
+2025-10-02 16:14:09,430 - Send the content for the msg [1790], and the location ID [1]
+2025-10-02 16:14:09,430 - Send the messages have been format: [KLB00010000005700100100001790KLEB5]
+2025-10-02 16:14:09,431 - Success to send the datums
+2025-10-02 16:14:09,447 - Send the content for the msg [101.7], and the location ID [2]
+2025-10-02 16:14:09,447 - Send the messages have been format: [KLB0001000000570011020000101.7KLEDD]
+2025-10-02 16:14:09,448 - Success to send the datums
+2025-10-02 16:14:09,463 - Send the content for the msg [965.4], and the location ID [3]
+2025-10-02 16:14:09,463 - Send the messages have been format: [KLB0001000000570011030000965.4KLEED]
+2025-10-02 16:14:09,464 - Success to send the datums
+2025-10-02 16:14:09,484 - Send with UDP
+2025-10-02 16:14:09,485 - Send the content for the msg [1280], and the location ID [0]
+2025-10-02 16:14:09,485 - Send the messages have been format: [KLB00010000005700100000001280KLEAE]
+2025-10-02 16:14:09,486 - Success to send the datums
+2025-10-02 16:14:09,502 - Send the content for the msg [0903], and the location ID [1]
+2025-10-02 16:14:09,502 - Send the messages have been format: [KLB00010000005700100100000903KLEB0]
+2025-10-02 16:14:09,503 - Success to send the datums
+2025-10-02 16:14:09,520 - Send the content for the msg [705.5], and the location ID [2]
+2025-10-02 16:14:09,520 - Send the messages have been format: [KLB0001000000570011020000705.5KLEE5]
+2025-10-02 16:14:09,521 - Success to send the datums
+2025-10-02 16:14:09,538 - Send the content for the msg [912.5], and the location ID [3]
+2025-10-02 16:14:09,538 - Send the messages have been format: [KLB0001000000570011030000912.5KLEE6]
+2025-10-02 16:14:09,539 - Success to send the datums
+2025-10-02 16:14:09,558 - Send with UDP
+2025-10-02 16:14:09,559 - Send the content for the msg [1440], and the location ID [0]
+2025-10-02 16:14:09,559 - Send the messages have been format: [KLB00010000005700100000001440KLEAC]
+2025-10-02 16:14:09,560 - Success to send the datums
+2025-10-02 16:14:09,576 - Send the content for the msg [1381], and the location ID [1]
+2025-10-02 16:14:09,576 - Send the messages have been format: [KLB00010000005700100100001381KLEB1]
+2025-10-02 16:14:09,577 - Success to send the datums
+2025-10-02 16:14:09,594 - Send the content for the msg [959.0], and the location ID [2]
+2025-10-02 16:14:09,594 - Send the messages have been format: [KLB0001000000570011020000959.0KLEEB]
+2025-10-02 16:14:09,595 - Success to send the datums
+2025-10-02 16:14:09,610 - Send the content for the msg [931.2], and the location ID [3]
+2025-10-02 16:14:09,610 - Send the messages have been format: [KLB0001000000570011030000931.2KLEE4]
+2025-10-02 16:14:09,611 - Success to send the datums
+2025-10-02 16:14:15,754 - Success to query records [4]
+2025-10-02 16:14:25,755 - Success to query records [4]
+2025-10-02 16:14:35,756 - Success to query records [4]
+2025-10-02 16:14:45,756 - Success to query records [4]
+2025-10-02 16:14:55,755 - Success to query records [4]
+2025-10-02 16:15:05,754 - Success to query records [4]
+2025-10-02 16:15:09,345 - Send with UDP
+2025-10-02 16:15:09,345 - Send the content for the msg [1040], and the location ID [0]
+2025-10-02 16:15:09,346 - Send the messages have been format: [KLB00010000005700100000001040KLEA8]
+2025-10-02 16:15:09,346 - Success to send the datums
+2025-10-02 16:15:09,363 - Send the content for the msg [1060], and the location ID [1]
+2025-10-02 16:15:09,363 - Send the messages have been format: [KLB00010000005700100100001060KLEAB]
+2025-10-02 16:15:09,364 - Success to send the datums
+2025-10-02 16:15:09,379 - Send the content for the msg [101.9], and the location ID [2]
+2025-10-02 16:15:09,379 - Send the messages have been format: [KLB0001000000570011020000101.9KLEDF]
+2025-10-02 16:15:09,380 - Success to send the datums
+2025-10-02 16:15:09,395 - Send the content for the msg [930.2], and the location ID [3]
+2025-10-02 16:15:09,395 - Send the messages have been format: [KLB0001000000570011030000930.2KLEE3]
+2025-10-02 16:15:09,396 - Success to send the datums
+2025-10-02 16:15:09,415 - Send with UDP
+2025-10-02 16:15:09,416 - Send the content for the msg [1760], and the location ID [0]
+2025-10-02 16:15:09,417 - Send the messages have been format: [KLB00010000005700100000001760KLEB1]
+2025-10-02 16:15:09,418 - Success to send the datums
+2025-10-02 16:15:09,433 - Send the content for the msg [1790], and the location ID [1]
+2025-10-02 16:15:09,433 - Send the messages have been format: [KLB00010000005700100100001790KLEB5]
+2025-10-02 16:15:09,434 - Success to send the datums
+2025-10-02 16:15:09,449 - Send the content for the msg [101.7], and the location ID [2]
+2025-10-02 16:15:09,449 - Send the messages have been format: [KLB0001000000570011020000101.7KLEDD]
+2025-10-02 16:15:09,450 - Success to send the datums
+2025-10-02 16:15:09,466 - Send the content for the msg [965.4], and the location ID [3]
+2025-10-02 16:15:09,466 - Send the messages have been format: [KLB0001000000570011030000965.4KLEED]
+2025-10-02 16:15:09,467 - Success to send the datums
+2025-10-02 16:15:09,485 - Send with UDP
+2025-10-02 16:15:09,486 - Send the content for the msg [1280], and the location ID [0]
+2025-10-02 16:15:09,486 - Send the messages have been format: [KLB00010000005700100000001280KLEAE]
+2025-10-02 16:15:09,487 - Success to send the datums
+2025-10-02 16:15:09,502 - Send the content for the msg [0903], and the location ID [1]
+2025-10-02 16:15:09,502 - Send the messages have been format: [KLB00010000005700100100000903KLEB0]
+2025-10-02 16:15:09,503 - Success to send the datums
+2025-10-02 16:15:09,519 - Send the content for the msg [705.5], and the location ID [2]
+2025-10-02 16:15:09,519 - Send the messages have been format: [KLB0001000000570011020000705.5KLEE5]
+2025-10-02 16:15:09,520 - Success to send the datums
+2025-10-02 16:15:09,535 - Send the content for the msg [902.5], and the location ID [3]
+2025-10-02 16:15:09,536 - Send the messages have been format: [KLB0001000000570011030000902.5KLEE5]
+2025-10-02 16:15:09,537 - Success to send the datums
+2025-10-02 16:15:09,555 - Send with UDP
+2025-10-02 16:15:09,556 - Send the content for the msg [1440], and the location ID [0]
+2025-10-02 16:15:09,556 - Send the messages have been format: [KLB00010000005700100000001440KLEAC]
+2025-10-02 16:15:09,557 - Success to send the datums
+2025-10-02 16:15:09,572 - Send the content for the msg [1382], and the location ID [1]
+2025-10-02 16:15:09,572 - Send the messages have been format: [KLB00010000005700100100001382KLEB2]
+2025-10-02 16:15:09,573 - Success to send the datums
+2025-10-02 16:15:09,589 - Send the content for the msg [959.7], and the location ID [2]
+2025-10-02 16:15:09,589 - Send the messages have been format: [KLB0001000000570011020000959.7KLEF2]
+2025-10-02 16:15:09,590 - Success to send the datums
+2025-10-02 16:15:09,606 - Send the content for the msg [931.3], and the location ID [3]
+2025-10-02 16:15:09,606 - Send the messages have been format: [KLB0001000000570011030000931.3KLEE5]
+2025-10-02 16:15:09,607 - Success to send the datums
+2025-10-02 16:15:15,754 - Success to query records [4]
+2025-10-02 16:15:25,754 - Success to query records [4]
+2025-10-02 16:15:35,753 - Success to query records [4]
+2025-10-02 16:15:45,756 - Success to query records [4]
+2025-10-02 16:15:55,754 - Success to query records [4]
+2025-10-02 16:16:05,755 - Success to query records [4]
+2025-10-02 16:16:09,346 - Send with UDP
+2025-10-02 16:16:09,346 - Send the content for the msg [1040], and the location ID [0]
+2025-10-02 16:16:09,347 - Send the messages have been format: [KLB00010000005700100000001040KLEA8]
+2025-10-02 16:16:09,347 - Success to send the datums
+2025-10-02 16:16:09,362 - Send the content for the msg [1060], and the location ID [1]
+2025-10-02 16:16:09,362 - Send the messages have been format: [KLB00010000005700100100001060KLEAB]
+2025-10-02 16:16:09,363 - Success to send the datums
+2025-10-02 16:16:09,378 - Send the content for the msg [101.9], and the location ID [2]
+2025-10-02 16:16:09,378 - Send the messages have been format: [KLB0001000000570011020000101.9KLEDF]
+2025-10-02 16:16:09,379 - Success to send the datums
+2025-10-02 16:16:09,396 - Send the content for the msg [930.2], and the location ID [3]
+2025-10-02 16:16:09,396 - Send the messages have been format: [KLB0001000000570011030000930.2KLEE3]
+2025-10-02 16:16:09,397 - Success to send the datums
+2025-10-02 16:16:09,422 - Send with UDP
+2025-10-02 16:16:09,424 - Send the content for the msg [1760], and the location ID [0]
+2025-10-02 16:16:09,425 - Send the messages have been format: [KLB00010000005700100000001760KLEB1]
+2025-10-02 16:16:09,426 - Success to send the datums
+2025-10-02 16:16:09,441 - Send the content for the msg [1790], and the location ID [1]
+2025-10-02 16:16:09,441 - Send the messages have been format: [KLB00010000005700100100001790KLEB5]
+2025-10-02 16:16:09,442 - Success to send the datums
+2025-10-02 16:16:09,458 - Send the content for the msg [101.7], and the location ID [2]
+2025-10-02 16:16:09,458 - Send the messages have been format: [KLB0001000000570011020000101.7KLEDD]
+2025-10-02 16:16:09,459 - Success to send the datums
+2025-10-02 16:16:09,475 - Send the content for the msg [965.4], and the location ID [3]
+2025-10-02 16:16:09,475 - Send the messages have been format: [KLB0001000000570011030000965.4KLEED]
+2025-10-02 16:16:09,476 - Success to send the datums
+2025-10-02 16:16:09,496 - Send with UDP
+2025-10-02 16:16:09,497 - Send the content for the msg [1280], and the location ID [0]
+2025-10-02 16:16:09,497 - Send the messages have been format: [KLB00010000005700100000001280KLEAE]
+2025-10-02 16:16:09,498 - Success to send the datums
+2025-10-02 16:16:09,514 - Send the content for the msg [0907], and the location ID [1]
+2025-10-02 16:16:09,514 - Send the messages have been format: [KLB00010000005700100100000907KLEB4]
+2025-10-02 16:16:09,515 - Success to send the datums
+2025-10-02 16:16:09,531 - Send the content for the msg [708.6], and the location ID [2]
+2025-10-02 16:16:09,531 - Send the messages have been format: [KLB0001000000570011020000708.6KLEE9]
+2025-10-02 16:16:09,532 - Success to send the datums
+2025-10-02 16:16:09,547 - Send the content for the msg [903.0], and the location ID [3]
+2025-10-02 16:16:09,547 - Send the messages have been format: [KLB0001000000570011030000903.0KLEE1]
+2025-10-02 16:16:09,548 - Success to send the datums
+2025-10-02 16:16:09,568 - Send with UDP
+2025-10-02 16:16:09,568 - Send the content for the msg [1440], and the location ID [0]
+2025-10-02 16:16:09,569 - Send the messages have been format: [KLB00010000005700100000001440KLEAC]
+2025-10-02 16:16:09,569 - Success to send the datums
+2025-10-02 16:16:09,586 - Send the content for the msg [1385], and the location ID [1]
+2025-10-02 16:16:09,586 - Send the messages have been format: [KLB00010000005700100100001385KLEB5]
+2025-10-02 16:16:09,587 - Success to send the datums
+2025-10-02 16:16:09,603 - Send the content for the msg [961.8], and the location ID [2]
+2025-10-02 16:16:09,603 - Send the messages have been format: [KLB0001000000570011020000961.8KLEEC]
+2025-10-02 16:16:09,604 - Success to send the datums
+2025-10-02 16:16:09,621 - Send the content for the msg [931.4], and the location ID [3]
+2025-10-02 16:16:09,621 - Send the messages have been format: [KLB0001000000570011030000931.4KLEE6]
+2025-10-02 16:16:09,622 - Success to send the datums
+2025-10-02 16:16:15,755 - Success to query records [4]
+2025-10-02 16:16:18,031 - Success to query records [1]
+2025-10-02 16:16:18,040 - Success to query records [1]
+2025-10-02 16:16:18,041 - start : 0, end : 1

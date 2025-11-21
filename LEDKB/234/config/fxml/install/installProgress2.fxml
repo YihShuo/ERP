@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="modalPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle fx:id="fadeInShape" arcHeight="15.0" arcWidth="15.0" fill="white" height="580.0" layoutX="10.0" layoutY="10.0" stroke="TRANSPARENT" strokeType="INSIDE" width="780.0" />
+      <ProgressIndicator fx:id="progress" layoutX="338.0" layoutY="131.0" prefHeight="113.0" prefWidth="126.0" progress="0.0" />
+      <Text fx:id="installing" layoutX="290" layoutY="472.0" strokeType="OUTSIDE" strokeWidth="0.0" text="正在准备环境 ,请耐心等待 !" />
+      
+      <Label fx:id="progressPercent" layoutX="389.0" layoutY="177.0" text="0%" />
+      <Pane fx:id="closePaneForProgress" layoutX="750.0" layoutY="14.0" prefHeight="25.0" prefWidth="25.0">
+         <children>
+            <Text fx:id="closeText" layoutX="3.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+      </Pane>
+      <Pane fx:id="minPane" layoutX="715.0" layoutY="16.0" prefHeight="25.0" prefWidth="25.0">
+         <children>
+            <Text fx:id="minText" layoutX="3.0" layoutY="21.0"  strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+      </Pane>
+      
+   </children>
+</Pane>

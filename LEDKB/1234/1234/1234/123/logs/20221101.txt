@@ -1,0 +1,350 @@
+=================================
+Time:21:18:44:038
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 00A699EF in module 'X Show 2015(V5.0.4.9).exe'. Write of address 00000034
+ToString:Access violation at address 00A699EF in module 'X Show 2015(V5.0.4.9).exe'. Write of address 00000034
+=================================
+=================================
+Time:21:22:05:322
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+ToString:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+=================================
+=================================
+Time:21:22:05:408
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+ToString:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+=================================
+=================================
+Time:21:23:24:131
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl580937.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl580937.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:24:257
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl581062.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl581062.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:24:497
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl581296.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl581296.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:24:649
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl581453.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl581453.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:24:721
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl581531.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl581531.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:24:905
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl581703.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl581703.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:27:928
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl584734.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl584734.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:30:102
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl586906.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl586906.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:32:865
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl589671.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl589671.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:33:009
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl589812.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl589812.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:33:639
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl590437.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl590437.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:33:685
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl590484.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl590484.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:33:729
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl590531.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl590531.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:33:854
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl590656.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl590656.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:34:054
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl590859.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl590859.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:34:222
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl591031.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl591031.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:34:377
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl591171.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl591171.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:34:425
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl591218.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl591218.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:34:474
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl591281.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl591281.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:36:759
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl593562.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl593562.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:37:955
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl594765.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl594765.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:45:046
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl601843.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl601843.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:52:317
+ClassName:TPanel
+UnitName:ExtCtrls
+Message:Cannot create file "D:\亿春看板\123\Project\kl609125.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl609125.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:54:291
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl611093.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl611093.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:55:493
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl612296.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl612296.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:56:220
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl613031.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl613031.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:23:56:599
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl613406.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl613406.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:24:02:016
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl618828.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl618828.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:24:02:546
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl619343.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl619343.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:24:03:945
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl620750.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl620750.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:24:04:316
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl621125.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl621125.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:24:07:436
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl624234.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl624234.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:24:07:781
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl624578.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl624578.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:24:10:830
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl627640.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl627640.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:24:11:573
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl628375.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl628375.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:24:12:411
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl629218.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl629218.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:24:12:822
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl629625.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl629625.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:24:13:161
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl629968.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl629968.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:24:13:498
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl630296.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl630296.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:21:24:14:320
+ClassName:TDlgRtfEditor
+UnitName:uDialogRtfEditor
+Message:Cannot create file "D:\亿春看板\123\Project\kl631125.rtf". The system cannot find the path specified
+ToString:Cannot create file "D:\亿春看板\123\Project\kl631125.rtf". The system cannot find the path specified
+=================================
+=================================
+Time:23:00:39:258
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 00A699EF in module 'X Show 2015(V5.0.4.9).exe'. Write of address 00000034
+ToString:Access violation at address 00A699EF in module 'X Show 2015(V5.0.4.9).exe'. Write of address 00000034
+=================================
+=================================
+Time:23:03:00:861
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+ToString:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+=================================
+=================================
+Time:23:03:00:871
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+ToString:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+=================================
+=================================
+Time:23:08:58:088
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+ToString:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+=================================
+=================================
+Time:23:08:58:097
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+ToString:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+=================================
+=================================
+Time:23:10:56:753
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+ToString:Access violation at address 0083D3EA in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C4
+=================================
+=================================
+Time:23:10:56:770
+ClassName:TEasySpinEdit
+UnitName:EasySpinEdit
+Message:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+ToString:Access violation at address 0083D46E in module 'X Show 2015(V5.0.4.9).exe'. Read of address 000000C8
+=================================

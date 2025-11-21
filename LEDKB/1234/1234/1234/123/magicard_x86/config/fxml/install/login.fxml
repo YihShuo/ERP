@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="superPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="loginView" layoutX="1.0" layoutY="1.0" fitHeight="550.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../login_bc.png" />
+         </image></ImageView>
+      <Pane fx:id="closePane" layoutX="700.0" layoutY="2.0" prefHeight="29.0" prefWidth="35.0">
+         <children>
+            <Text fx:id="closeText" layoutX="7.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+      </Pane>
+      <Pane fx:id="minPane" layoutX="662.0" layoutY="2.0" prefHeight="29.0" prefWidth="35.0">
+         <children>
+            <Text fx:id="minText" layoutX="6.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+      </Pane>
+      <Text fx:id="autoVersion2" fill="WHITE" layoutX="18.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="动态LED卡V2.0">
+         <font>
+            <Font name="Microsoft YaHei" size="15.0" />
+         </font>
+      </Text>
+      <Pane layoutY="301.0" prefHeight="208.0" prefWidth="750.0">
+         <children>
+            <ImageView fx:id="loginPicture" fitHeight="150.0" fitWidth="180.0" layoutX="65.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@login.JPG" />
+               </image>
+            </ImageView>
+             <Text fx:id="loginReminder" visible="false" layoutX="305.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="登录错误！" />
+            <TextField fx:id="userName" layoutX="298.0" layoutY="49.0" prefHeight="31.0" prefWidth="290.0" text=""/>
+            <PasswordField fx:id="password" layoutX="297.0" layoutY="105.0" prefHeight="31.0" prefWidth="290.0" text=""/>
+            <Text fx:id="activeNow" layoutX="615.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="立即激活" />
+            <Text fx:id="forgetPassword" layoutX="614.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="忘记密码" />
+            <CheckBox fx:id="rememberPassword" layoutX="352.0" layoutY="157.0" mnemonicParsing="false" text="记住密码" />
+            <CheckBox fx:id="autoLogin" layoutX="485.0" layoutY="157.0" mnemonicParsing="false" text="自动登录" />
+            <Separator layoutX="260.0" layoutY="24.0" orientation="VERTICAL" prefHeight="160.0" prefWidth="7.0" />
+            <Text fx:id="loginUserNameFont" layoutX="558.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UN" />
+            <Text fx:id="loginPasswordFont" layoutX="561.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PW" />
+         </children>
+      </Pane>
+      <Pane fx:id="loginBtnPane" layoutX="1.0" layoutY="509.0" prefHeight="45.0" prefWidth="750.0">
+         <children>
+            <Text fx:id="loginBtn" layoutX="356.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="登  录" />
+         </children>
+      </Pane>
+      <Pane layoutX="35.0" layoutY="41.0" prefHeight="200.0" prefWidth="700.0">
+         <children>
+            <Text fx:id="fontOne" layoutX="148.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="font-1" />
+            <Text fx:id="fontTwo" layoutX="327.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="font-2" />
+            <Text fx:id="fontThree" layoutX="485.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="font-3" />
+            <Text fx:id="desOne" layoutX="149.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="desc-1" />
+            <Text fx:id="desTwo" layoutX="325.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="desc-2" />
+            <Text fx:id="desThree" layoutX="490.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="desc-3" />
+         </children>
+      </Pane>
+   </children>
+</Pane>

@@ -1,0 +1,91 @@
+.root {
+  -fx-opacity: 1;
+}
+
+#rootParent{
+   -fx-background-insets: 10;
+   -fx-background-radius: 10;
+   -fx-background-color: white;
+   -fx-effect:dropshadow(three-pass-box, gray, 10, 0.5, 0, 0);
+}
+
+#titleBox{
+	-fx-background-color: #F0F0F0;
+	-fx-background-insets: 10;
+    -fx-background-radius: 5 5 0 0;
+}
+
+#actionBox{
+
+	-fx-background-insets: 0 10 10 10;
+    -fx-background-radius: 0 0 5 5;
+}
+
+#title{
+	-fx-font-weight:bold;
+	-fx-fill: #4D4D4D;
+	-fx-font-family: 'Microsoft YaHei';
+}
+
+#contentBox {
+	-fx-background-insets: 0 10 0 10;
+} 
+
+#content{
+	-fx-fill: #4D4D4D;
+	-fx-font-family: 'Microsoft YaHei';
+}
+
+#confirmBtn:hover,#cancelBtn:hover{
+	-fx-cursor:hand;
+}
+
+
+
+/*modals*/
+
+#actionBoxs{
+	-fx-background-color:#F0F0F0;
+	-fx-background-insets: 0 10 10 10;
+	-fx-background-radius: 0 0 5 5;
+}
+
+#confirm{
+	-fx-background-insets: 0 0 10 10;
+	-fx-background-radius: 0 0 0 5;
+}
+
+#cancel{
+	-fx-background-insets: 0 10 10 0;
+	-fx-background-radius: 0 0 5 0;
+}
+
+#confirm:hover{
+	-fx-background-insets: 0 0 10 10;
+	-fx-background-radius: 0 0 0 5;
+	-fx-background-color:#D1D1D1;
+	-fx-cursor:hand;
+}
+
+#cancel:hover{
+	-fx-background-insets: 0 10 10 0;
+	-fx-background-radius: 0 0 5 0;
+	-fx-background-color:#D1D1D1;
+	-fx-cursor:hand;
+}
+
+#confirmTextHover{
+	-fx-fill:green;
+}
+
+#confirmText{
+	-fx-fill: #4D4D4D;
+}
+
+#cancelTextHover{
+	-fx-fill:red;
+}
+
+#cancelText{
+	-fx-fill: #4D4D4D;
+}

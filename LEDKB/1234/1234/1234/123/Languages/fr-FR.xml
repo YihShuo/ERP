@@ -1,0 +1,2205 @@
+<?xml version="1.0"?>
+<Languages>
+<!--修改记录>
+41399
+1. 校时调试，节点<TDlgProtocolSetDateTime>
+增加<btnGetSystemTime>
+2. 通讯参数设置窗口，GPRS页，节点<TDlgNetworkSetting>
+增加<LabelDeviceId>
+3. 定时开关调试，节点<TDlgProtocolOnOff>
+增加<chkAutoOnOff>
+4. 区域显示参数设置，主界面，节点<TMainForm>
+增加<chkContinuousLeft>,<chkContinuousTop>
+41398
+1. 增加表格编辑器语言
+节点：<CGridEditorMainForm>,<CGridEditorInsertCells>,<CGridEditorDeleteCells>
+2. USB导出界面，节点<TDlgUsbForm>
+增加<LabelUsbFreeSize>,<LabelUsbFileSystem>,<LabelDateTimeNoChange>,<LabelLightNoChange>,<LabelOnOffNoChange>
+3. 定时开关调试，节点<TDlgProtocolOnOff>
+增加<MemoHelp>
+4. 亮度调节调试，节点<TDlgProtocolSetLight>
+增加<MemoHelp>
+5. 校时调试，节点<TDlgProtocolSetDateTime>
+增加<MemoHelp>
+6. 屏幕参数设置，节点<TdlgMonitorSetting>
+增加<chkDotFrequencyAuto>,<chkLineBlankingAuto>
+7. 图文区域编辑选项界面，<TFrameOptionPicture>
+增加<ToolButtonNewRtf>,<ToolButtonAddPicture>,<ToolButtonAddGrid>
+<ToolButtonAddWord>,<ToolButtonAddExcel>,<ToolButtonDelete>,
+<ToolButtonUp>,<ToolButtonDown>
+<chkShowPath>
+8. 主界面工具条，<TMainForm>
+增加 <ToolButtonTiming>,<ToolButtonSeDateTime>,<ToolButtonSetLight>
+<ToolButtonOnOff>
+<修改记录-->
+<!--这个文件定义中文简体-->
+<!-- Messages段定义一些信息提示信息-->
+<Messages>
+<!--;通用消息-->
+<Comm>
+<Comm.InitFail>L'initialisation a échoué!</Comm.InitFail>
+<!--图文编辑添加文本文件时打开文件对话框的文件扩展名提示-->
+<FileFilterText>Fichier texte (*.txt)</FileFilterText>
+<!--图文编辑添加RTF文件时打开文件对话框的文件扩展名提示-->
+<FileFilterRTF>Fichier RTF(*.rtf)</FileFilterRTF>
+<OpenRtfFail>Fichier RTF lecture a échoué!</OpenRtfFail>
+<!--图文编辑添加图片文件时打开文件对话框的文件扩展名提示-->
+<FileFilterPicture>Les fichiers image (*.BMP;*.JPG;*.GIF;*.PNG)</FileFilterPicture>
+<OpenPictureFail>Impossible de lire le fichier image!</OpenPictureFail>
+<!--图文编辑添加WORD文件时打开文件对话框的文件扩展名提示-->
+<FileFilterWord>document Word(*.doc;*.docx)|*.doc;*.docx|WPS(*.wps)|*.wps|</FileFilterWord>
+<OpenWordFail>Impossible de lire les documents Word, assurez-vous d'installer la Parole!</OpenWordFail>
+<!--图文编辑添加EXCEL文件时打开文件对话框的文件扩展名提示-->
+<FileFilterExcel>Documents Excel (*.xls;*.xlsx)|WPS(*.et)|*.et|</FileFilterExcel>
+<OpenExcelFail>Documents Excel ne peuvent pas être lues! >>%s</OpenExcelFail>
+<!-- 工程打开保存的提示信息-->
+<SaveProjectFail>Impossible d'enregistrer le projet!</SaveProjectFail>
+<CreateDirFail>Impossible de créer le répertoire!</CreateDirFail>
+<OpenProjectFail>Impossible d'ouvrir le projet!</OpenProjectFail>
+<ErrorProjectVersion>version du fichier de projet ne reconnaît pas!</ErrorProjectVersion>
+<ErrorProjectFile>Le dossier du projet est corrompu!</ErrorProjectFile>
+<!--;提示保存工程-->
+<ProjectChangedPrompt>Le projet a également changé, le sauver?</ProjectChangedPrompt>
+<!--;默认的新工程-->
+<NewProjectName>(New Works)</NewProjectName>
+<!--;工程没有内容-->
+<ProjectNull>Aucun contenu ne peut être sauvé!</ProjectNull>
+<Unknown>Inconnue</Unknown>
+<!--通讯时的些操作信息-->
+<ProtocolTestStart>Etre connecté à la carte de commande, s'il vous plaît patienter ...</ProtocolTestStart>
+<ProtocolSuccess>Raccorder le succès de la carte de commande.</ProtocolSuccess>
+<ProtocolFail>Opération échoue, vérifiez le port série ou réseau est normale.</ProtocolFail>
+<ErrorComPort>Invalide numéro de série%s! S'il vous plaît vérifier les paramètres de jeu de communication!</ErrorComPort>
+<ProtocolReadyFail>Le périphérique n'est pas prêt! Veuillez vérifier le port série ou le réseau est normal.</ProtocolReadyFail>
+<ProtocolOnScreenSuccess>L'écran d'accueil!</ProtocolOnScreenSuccess>
+<ProtocolOffScreenSuccess>Hors écran succès!</ProtocolOffScreenSuccess>
+<ProtocolSetAutoOnOff>Réglez le succès de l'écran de commutation de la minuterie.</ProtocolSetAutoOnOff>
+<ProtocolReadParamsSuccess>Paramètre de réussite de relecture.</ProtocolReadParamsSuccess>
+<ProgressPrompt>Rapport d'étape:</ProgressPrompt>
+<RemainTimePrompt>Temps restant:%d secondes</RemainTimePrompt>
+<MakingMonitorFile>fichier de paramètres de l'écran est généré ...</MakingMonitorFile>
+<SendingMonitorFile>fichier de paramètres de l'écran est envoyé ...</SendingMonitorFile>
+<MakingDataFile>Généré des données de contenu ...</MakingDataFile>
+<DataFileOutofCapacity>La transmission échoue, la taille du contenu envoyé à l'extérieur de la carte dans l'espace restant.</DataFileOutofCapacity>
+<SendingDataFile>Les données de contenu est prêt, commencer à envoyer ...</SendingDataFile>
+<SendDataFileSuccess>Envoyé avec succès.</SendDataFileSuccess>
+<SendDataFileFail>La transmission échoue, la cause de l'erreur:% s.</SendDataFileFail>
+<ProtocolReadParamsSuccess>Paramètre de réussite de relecture.</ProtocolReadParamsSuccess>
+<SaveScanSetInfoFail>Enregistrer les paramètres du mode de numérisation a échoué:%s</SaveScanSetInfoFail>
+<ConfDeleteScanSetInfo>Confirmez que vous souhaitez supprimer votre évaluation?</ConfDeleteScanSetInfo>
+<CreateCommFail>Créer des composants de communication a échoué!</CreateCommFail>
+<!--;默认字体-->
+<DefaultFontName>Arial</DefaultFontName>
+<DefaultFontSize>10</DefaultFontSize>
+<!--;颜色列表-->
+<ColorList>
+<Item>Une couleur</Item>
+<Item>deux couleurs</Item>
+<Item>Tri-couleur</Item>
+<Item>Full Color</Item>
+</ColorList>
+<!--;单基色颜色列表-->
+<SingleColorList>
+<Item>Rouge</Item>
+</SingleColorList>
+<!--;双基色颜色列表-->
+<DoubleColorList>
+<Item>Rouge</Item>
+<Item>Jaune</Item>
+<Item>Vert</Item>
+</DoubleColorList>
+<!--;全彩色颜色列表-->
+<SevenColorList>
+<Item>Rouge</Item>
+<Item>Jaune</Item>
+<Item>Vert</Item>
+</SevenColorList>
+<!--;灰度列表-->
+<ColorGrayList>
+<Item>Gris</Item>
+<Item>32</Item>
+<Item>256</Item>
+</ColorGrayList>
+<!--;计时区域的显示格式-->
+<TimingDayLabel>Journée</TimingDayLabel>
+<TimingDayFormat>%d%s</TimingDayFormat>
+<TimingHourLabel>Heure</TimingHourLabel>
+<TimingHourFormat>%d%s</TimingHourFormat>
+<TimingMinuteLabel>Minute</TimingMinuteLabel>
+<TimingMinuteFormat>%d%s</TimingMinuteFormat>
+<TimingSecondLabel>Deuxième</TimingSecondLabel>
+<TimingSecondFormat>%d S</TimingSecondFormat>
+<!--集群操作信息-->
+<GprsValidateError>GPRS vérifier le mot de passe est incorrect!</GprsValidateError>
+<GprsConnectError>Impossible de se connecter serveur GPRS!</GprsConnectError>
+<GprsImeiError>Utilisation de la communication GPRS, nom d'écran doit être le numéro IMEI DTU 15.</GprsImeiError>
+<NoGprsIdFilterFile>Manque de fichier filtre GPRS!</NoGprsIdFilterFile>
+<UpdateGprsCardsCompleted>Obtenez achèvement de la liste de cluster en ligne</UpdateGprsCardsCompleted>
+<UpdateGprsCardsError>Erreur de connexion, veuillez ré-acquérir un cluster.</UpdateGprsCardsError>
+<ConnectingColonyServer>Serveurs de la grappe, veuillez patienter ...</ConnectingColonyServer>
+<ConnectColonyServerSuccess>Le succès des serveurs dans le cluster.</ConnectColonyServerSuccess>
+<ConnectColonyServerFail>Impossible de se connecter au serveur de cluster.</ConnectColonyServerFail>
+<PromptSelectColonyCommandItem>S'il vous plaît sélectionner la nécessité d'exécuter une entrée de commande.</PromptSelectColonyCommandItem>
+<ColonyCommandOutofCapacity>Exécuter la commande échoue, le nom {0} écran généré de la taille des données est supérieure à la taille de la capacité de la carte.</ColonyCommandOutofCapacity>
+<PromptColonyCloneOnlyOneRegion>Dans le sous-écran en mode écran principal adaptatif, vous pouvez seulement créer une zone graphique, et la taille de la zone doivent être disponibles pour la taille d'écran.</PromptColonyCloneOnlyOneRegion>
+<SendColonyCommandSuccess>Commande Exécuter du cluster est réussie.</SendColonyCommandSuccess>
+<SendColonyCommandFail>La commande cluster échoue.</SendColonyCommandFail>
+<PromptColonyVetifyNullIp>L'adresse du serveur ne peut pas être vide!</PromptColonyVetifyNullIp>
+<PromptColonyVetifyNullPassword>mot de passe du serveur ne peut pas être vide!</PromptColonyVetifyNullPassword>
+<ColonyVetifyInvalidPassword>Le mot de passe est incorrect.</ColonyVetifyInvalidPassword>
+<ColonyVetiryServerError>Les processus serveur échouent.</ColonyVetiryServerError>
+<GprsColonyOperationReady>Prêt</GprsColonyOperationReady>
+<!--扫描信息的名称描述-->
+<ScanSetName1>01) P10 monochrome 12 Interface</ScanSetName1>
+<!--未知的扫描方式名称-->
+<UnknownScanSetName>Inconnu scan</UnknownScanSetName>
+<!--协议名称-->
+<ProtocolSerialPort>Les ports série</ProtocolSerialPort>
+<ProtocolNet>Port réseau</ProtocolNet>
+<ProtocolDirectNet>Port réseau directement connecté</ProtocolDirectNet>
+<ProtocolGprs>GPRS</ProtocolGprs>
+<ProtocolUnknown>Inconnue</ProtocolUnknown>
+<!--2013-04-09-->
+<!--通讯测试错误-->
+<UnauthorizedAccessReplyPacket>N'est-ce pas un paquet de réponse valide.</UnauthorizedAccessReplyPacket>
+<OpenPortFail>Ouvrez le port série échoué.</OpenPortFail>
+<CancelSending>Annuler l'envoi.</CancelSending>
+<CreateFail>Créer un composant de communication échoue</CreateFail>
+<SocketError>panne de réseau</SocketError>
+<ColonyNotExists>borne de cluster n'existe pas</ColonyNotExists>
+<ColonyOffline>ligne de terminal Cluster</ColonyOffline>
+<ColonyBusy>ligne de cluster est occupé</ColonyBusy>
+</Comm>
+</Messages>
+<!-- 以下是窗口界面的文字信息-->
+<!-- 其中的<Messages>段是一些提示信息, 其他段是界面上控件的文字信息-->
+<!-- 主窗口-->
+<TMainForm>
+<!-- 标题栏-->
+<Caption>X show logiciel</Caption>
+<Messages>
+<LoadSystemConfigFail>Chargement en échec de la configuration du système!</LoadSystemConfigFail>
+<MonitorName>Afficher%d</MonitorName>
+<ProgramName>Le programme%d</ProgramName>
+<RegionNamePicture>Graphic%d</RegionNamePicture>
+<RegionNameText>Subtitle%d</RegionNameText>
+<RegionNameFlashText>Xuandong mot%d</RegionNameFlashText>
+<RegionNameClock>Horloge%d</RegionNameClock>
+<RegionNameWatch>Composez%d</RegionNameWatch>
+<RegionNameTiming>Timing%d</RegionNameTiming>
+<RegionNameDefaul>Région%d</RegionNameDefaul>
+<AskToSelectOneTreeNode>S'il vous plaît sélectionner un nœud!</AskToSelectOneTreeNode>
+<WarnOnDeleteOneMonitor>Ne peut pas être supprimé, le projet doit être d'au moins un écran!</WarnOnDeleteOneMonitor>
+<ConfDeleteProgramListNode>Confirmez que vous souhaitez supprimer votre évaluation?</ConfDeleteProgramListNode>
+<!--有重叠区域-->
+<RegionOverlapping>L'opération a échoué,%s: contenant des régions qui se chevauchent.</RegionOverlapping>
+<!--导入U盘时如果没有选择屏幕提示-->
+<AskToSelectMonitor>S'il vous plaît sélectionner un écran!</AskToSelectMonitor>
+<!--显示区域页数信息-->
+<RegionPagesInfo>La page%d /%d pages</RegionPagesInfo>
+<!--对象克隆后加的前缀 -->
+<CloneAddText>Copiez</CloneAddText>
+<!--超出节目数提示-->
+<MaxProgramCountInfo>Soutien des programmes d% maximum!</MaxProgramCountInfo>
+<!--超出区域数提示-->
+<MaxRegionCountInfo>Appui maximum%d régions!</MaxRegionCountInfo>
+<!--超出具体区域数提示-->
+<MaxRegionDetailCountInfo>Plus grand soutien%d de la région!</MaxRegionDetailCountInfo>
+<MaxSpeedNote>(Le plus rapide)</MaxSpeedNote>
+<MinSpeedNote>(Le plus lent)</MinSpeedNote>
+<!--屏幕名称不允许重复-->
+<ScreeNameRepeat>Nom à l'écran n'est pas autorisé à répéter!</ScreeNameRepeat>
+<!--检测空区域-->
+<HaveNoRegions>La zone du programme en cours! Impossible de faire fonctionner!</HaveNoRegions>
+<AllRegionsIsNull>Tous les domaines du programme sont vides! Impossible de faire fonctionner!</AllRegionsIsNull>
+<ConfHaveNulRegions>Les titres vides détectés ou zone graphique de continuer à fonctionner?</ConfHaveNulRegions>
+</Messages>
+<!--另存工程对话框-->
+<dlgSave>
+<Project>
+<Filter>Le fichier Kalerka projet</Filter>
+</Project>
+<SaveProject>
+<Title>Enregistrer le projet sous ...</Title>
+</SaveProject>
+<SaveAsProject>
+<Title>Enregistrer le projet sous ...</Title>
+</SaveAsProject>
+</dlgSave>
+<dlgOpen>
+<OpenProject>
+<Title>Ouvrez le projet ...</Title>
+</OpenProject>
+</dlgOpen>
+<!--节目管理按钮-->
+<btnProgramList>
+<Caption>La gestion du programme</Caption>
+</btnProgramList>
+<!--节目管理树右键菜单-->
+<PopupMenuTreeProgramList>
+<Items>
+<Item>Déplacer</Item>
+<Item>Vers le bas</Item>
+<Item>-</Item>
+<Item>Supprimer</Item>
+<Item>Copiez</Item>
+<Item>Collez</Item>
+<Item>-</Item>
+<Item>Expansion</Item>
+<Item>Réduire</Item>
+<Item>-</Item>
+<Item>Renommez</Item>
+<Item>-</Item>
+<Item>écran Clone</Item>
+</Items>
+</PopupMenuTreeProgramList>
+<!--图片资源库按钮-->
+<btnPictures>
+<Caption>bibliothèque de ressources de l'image</Caption>
+</btnPictures>
+<!--图片资源库树-->
+<treePictures>
+<Items>
+<Item>
+<Text>Tableau</Text>
+<Items>
+<Item>Olympique</Item>
+<Item>Marquez</Item>
+<Item>Arrows</Item>
+<Item>Logo statique</Item>
+<Item>Etoiles et bannières</Item>
+<Item>Les caractères spéciaux</Item>
+<Item>Symbole</Item>
+<Item>Vie</Item>
+</Items>
+</Item>
+<Item>
+<Text>Animations</Text>
+<Items>
+<Item>Logo animation</Item>
+<Item>Expression</Item>
+</Items>
+</Item>
+</Items>
+</treePictures>
+<!--主工具条的按钮-->
+<ToolButtonProgram>
+<Caption>Programme</Caption>
+<Hint>Programme</Hint>
+</ToolButtonProgram>
+<ToolButtonDynamicBackground>
+<Caption>Contexte dynamique</Caption>
+<Hint>Contexte dynamique</Hint>
+</ToolButtonDynamicBackground>
+<ToolButtonPicture>
+<Caption>Graphique</Caption>
+<Hint>Graphique</Hint>
+</ToolButtonPicture>
+<ToolButtonText>
+<Caption>Sous-titres</Caption>
+<Hint>Sous-titres</Hint>
+</ToolButtonText>
+<ToolButtonFlashText>
+<Caption>Animations</Caption>
+<Hint>Animations</Hint>
+</ToolButtonFlashText>
+<ToolButtonClock>
+<Caption>Horloge</Caption>
+<Hint>Horloge</Hint>
+</ToolButtonClock>
+<ToolButtonWatch>
+<Caption>Composez</Caption>
+<Hint>Composez</Hint>
+</ToolButtonWatch>
+<ToolButtonDelete>
+<Caption>Supprimer</Caption>
+<Hint>Supprimer</Hint>
+</ToolButtonDelete>
+<ToolButtonPreview>
+<Caption>Avant-première</Caption>
+<Hint>Avant-première</Hint>
+<Caption1>Arrêter</Caption1>
+<Hint1>Arrêter</Hint1>
+</ToolButtonPreview>
+<ToolButtonSend>
+<Caption>Envoyer</Caption>
+<Hint>Envoyer</Hint>
+</ToolButtonSend>
+<ToolButtonUSB>
+<Caption>USB</Caption>
+<Hint>USB</Hint>
+</ToolButtonUSB>
+<ToolButtonSearchCard>
+<Caption>Vérifiez si l'écran</Caption>
+<Hint>Vérifiez si l'écran</Hint>
+</ToolButtonSearchCard>
+<!-- 2013.5.4 增加-->
+<ToolButtonTiming>
+<Caption>Chronométrage</Caption>
+<Hint>Chronométrage</Hint>
+</ToolButtonTiming>
+<ToolButtonSeDateTime>
+<Caption>Chronométrage</Caption>
+<Hint>Chronométrage</Hint>
+</ToolButtonSeDateTime>
+<ToolButtonSetLight>
+<Caption>Éclat</Caption>
+<Hint>Éclat</Hint>
+</ToolButtonSetLight>
+<ToolButtonOnOff>
+<Caption>Commutateur de temporisateur</Caption>
+<Hint>Commutateur de temporisateur</Hint>
+</ToolButtonOnOff>
+<!-- 2013.5.4 增加结束-->
+<!--区域属性操作的工具栏：区域缩放、位置、翻页-->
+<ToolButtonZoomInit>
+<Hint>Taille d'origine</Hint>
+</ToolButtonZoomInit>
+<ToolButtonZoomOut>
+<Hint>Agrandir</Hint>
+</ToolButtonZoomOut>
+<ToolButtonZoomIn>
+<Hint>Narrow</Hint>
+</ToolButtonZoomIn>
+<ToolButtonRegionLeft>
+<Hint>Gauche régional</Hint>
+</ToolButtonRegionLeft>
+<ToolButtonRegionRight>
+<Hint>Droit régional de résidence</Hint>
+</ToolButtonRegionRight>
+<ToolButtonRegionTop>
+<Hint>Top régional</Hint>
+</ToolButtonRegionTop>
+<ToolButtonRegionBottom>
+<Hint>Région est fixé à l'extrémité d'</Hint>
+</ToolButtonRegionBottom>
+<ToolButtonLastRegionPage>
+<Hint>Précédent</Hint>
+</ToolButtonLastRegionPage>
+<ToolButtonNextRegionPage>
+<Hint>Suivant</Hint>
+</ToolButtonNextRegionPage>
+<!--主菜单-->
+<ActionManagerMain>
+<ActionBars>
+<ActionBar>
+<Items>
+<Item>
+<Caption>Fichier (&amp;F)</Caption>
+<Items>
+<Item>Nouvelle construction (&amp;N)</Item>
+<Item>Ouvert (&amp;O)</Item>
+<Item>-</Item>
+<Item>Enregistrer (&amp;S)</Item>
+<Item>Enregistrer sous ...</Item>
+<Item>-</Item>
+<Item>Exporter</Item>
+<Item>Importation</Item>
+<Item>-</Item>
+<Item>Quitter (&amp;E)</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Et d'insertion (&amp;I)</Caption>
+<Items>
+<Item>Écran</Item>
+<Item>Programme</Item>
+<Item>Contexte dynamique</Item>
+<Item>-</Item>
+<Item>Sous-titres</Item>
+<Item>Graphique</Item>
+<Item>Animations</Item>
+<Item>Horloge</Item>
+<Item>Composez</Item>
+<Item>Chronométrage</Item>
+<Item>Température</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Set (&amp;S)</Caption>
+<Items>
+<Item>Paramètres d'écran</Item>
+<Item>Les paramètres de communication</Item>
+<Item>-</Item>
+<Item>Modifier la carte IP</Item>
+<Item>-</Item>
+<Item>Configurer automatiquement la carte de l'unité</Item>
+</Items>
+</Item>
+<Item>
+<Caption>La mise au point (&amp;D)</Caption>
+<Items>
+<Item>Chronométrage</Item>
+<Item>Réglage de la luminosité</Item>
+<Item>Demande Modèle</Item>
+<Item>écran de commutation logicielle</Item>
+<Item>-</Item>
+<Item>Avant-première</Item>
+<Item>Envoyer</Item>
+<Item>Importer U disque</Item>
+<Item>-</Item>
+<Item>Afficher le journal</Item>
+</Items>
+</Item>
+<Item>
+<Caption V="0">Les clusters (&amp;C)</Caption>
+<Items>
+<Item>Configuration du serveur</Item>
+<Item>Gestion du cluster</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Langue (&amp;L)</Caption>
+<Items>
+<Item>Sélectionne automatiquement</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Aide(&amp;A)</Caption>
+</Item>
+</Items>
+</ActionBar>
+</ActionBars>
+</ActionManagerMain>
+<!--基本属性-->
+<GroupBoxBaseInfo>
+<Caption>Les propriétés de base de</Caption>
+</GroupBoxBaseInfo>
+<LabelRegionName>
+<Caption>Nom</Caption>
+</LabelRegionName>
+<LabelRegionX>
+<Caption>Position X</Caption>
+</LabelRegionX>
+<LabelRegionY>
+<Caption>Position Y</Caption>
+</LabelRegionY>
+<LabelRegionWidth>
+<Caption>Largeur</Caption>
+</LabelRegionWidth>
+<LabelRegionHeight>
+<Caption>Hauteur</Caption>
+</LabelRegionHeight>
+<!--基本属性-->
+<GroupBoxDisplayInfo>
+<Caption>Propriétés d'affichage</Caption>
+</GroupBoxDisplayInfo>
+<LabelDisplayMode>
+<Caption>Sur le mode d'écran</Caption>
+</LabelDisplayMode>
+<cmbDisplayMode>
+<Items>
+<Item>Afficher aléatoirement</Item>
+<Item>Toujours</Item>
+<Item>Décalée vers la droite</Item>
+<Item>La gauche</Item>
+<Item>Vers le bas</Item>
+<Item>Déplacer</Item>
+<Item>Couverture droit</Item>
+<Item>Couverture gauche</Item>
+<Item>La couverture suivante</Item>
+<Item>Sur la couverture</Item>
+<Item>Ouverture horizontale</Item>
+<Item>L'ouverture de la verticale</Item>
+<Item>Cross-fermeture</Item>
+<Item>Fermeture verticale</Item>
+<Item>Stores droite</Item>
+<Item>Persiennes gauche</Item>
+<Item>Sous stores</Item>
+<Item>Sur les stores</Item>
+<Item>Flicker</Item>
+<Item>Bon mot de brosse</Item>
+<Item>Mot de brosse gauche</Item>
+<Item>Sous le mot de brosse</Item>
+<Item>Sur le mot de la brosse</Item>
+<Item>Page laissée</Item>
+<Item>Droite page suivante</Item>
+<Item>Aérez le</Item>
+<Item>Fan fermé</Item>
+<Item>Droitier</Item>
+<Item>L-</Item>
+<Item>Niveau entrecoupées</Item>
+<Item>Entrecoupées verticale</Item>
+<Item>Faites défiler rideau</Item>
+<Item>Volet droit</Item>
+<Item>Cadre</Item>
+<Item>Clignotant anti-blanc</Item>
+<Item>Développer rectangle</Item>
+<Item>Contraction rectangulaire</Item>
+<Item>Développer diamant</Item>
+<Item>Contraction de diamant</Item>
+<Item>Développer Croix</Item>
+<Item>Traversez contraction</Item>
+<Item>Rectangle en bas à gauche</Item>
+<Item>Le rectangle en haut à gauche</Item>
+<Item>Abaissez rectangle à droite</Item>
+<Item>Upper rectangle à droite</Item>
+<Item>Slash inférieur gauche</Item>
+<Item>La barre oblique supérieur gauche</Item>
+<Item>En bas à droite slash</Item>
+<Item>Des pentes positives</Item>
+<Item>Xiasha</Item>
+<Item>Cadre</Item>
+<Item>Voir maintenant</Item>
+<Item>Membrures longitudinales</Item>
+</Items>
+</cmbDisplayMode>
+<LabelClearMode>
+<Caption>Effacer l'écran par</Caption>
+</LabelClearMode>
+<LabelSpeed>
+<Caption>Accélérer</Caption>
+</LabelSpeed>
+<cmbSpeed>
+<Items>
+<Item>1 (le plus rapide)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (le plus lent)</Item>
+</Items>
+</cmbSpeed>
+<LabelDisplayDelay>
+<Caption>Durée</Caption>
+</LabelDisplayDelay>
+<LabelDisplayStyle>
+<Caption>Style</Caption>
+</LabelDisplayStyle>
+<cmbDisplayStyle>
+<Items>
+<Item>Pulsation</Item>
+<Item>Waltz</Item>
+<Item>Drift</Item>
+<Item>Les ondes électromagnétiques</Item>
+<Item>Flashbulb</Item>
+<Item>Printemps</Item>
+<Item>Rouler</Item>
+<Item>Domino</Item>
+<Item>Drift inverse</Item>
+<Item>tourbillonnement</Item>
+<Item>éclairage au néon</Item>
+<Item>Doucai</Item>
+<Item>Rainbow (a)</Item>
+<Item>Rainbow (sous)</Item>
+<Item>Rainbow (à gauche)</Item>
+<Item>Rainbow (à droite)</Item>
+</Items>
+</cmbDisplayStyle>
+<!-- 动感边框-->
+<GroupBoxFlashBorder>
+<Caption>Frontières dynamiques</Caption>
+</GroupBoxFlashBorder>
+<chkFlashBorderEnabled>
+<Caption>Afficher frontière dynamique</Caption>
+</chkFlashBorderEnabled>
+<optFlashBorderOneColor>
+<Caption>Monochrome</Caption>
+</optFlashBorderOneColor>
+<optFlashBorderFlashColor>
+<Caption>Hyun-couleur</Caption>
+</optFlashBorderFlashColor>
+<LabelFlashBorderSpeed>
+<Caption>Marchez vitesse</Caption>
+</LabelFlashBorderSpeed>
+<cmbFlashBorderSpeed>
+<Items>
+<Item>1 (le plus rapide)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (le plus lent)</Item>
+</Items>
+</cmbFlashBorderSpeed>
+<LabelFlashBorderDirection>
+<Caption>Direction migrateurs</Caption>
+</LabelFlashBorderDirection>
+<cmbFlashBorderDirection>
+<Items>
+<Item>Correction de l'affichage</Item>
+<Item>Rotation à droite</Item>
+<Item>Rotation à gauche</Item>
+<Item>Flicker</Item>
+<Item>Clignotant + dans le sens horaire</Item>
+<Item>Clignotant + antihoraire</Item>
+</Items>
+</cmbFlashBorderDirection>
+<!--屏幕属性-->
+<LabelCardModel>
+<Caption>Card Control Modèle:</Caption>
+</LabelCardModel>
+<LabelMonitorWidth>
+<Caption>largeur de l'écran:</Caption>
+</LabelMonitorWidth>
+<LabelMonitorHeight>
+<Caption>Hauteur de l'écran:</Caption>
+</LabelMonitorHeight>
+<LabelMonitorColorMode>
+<Caption>Cellule couleur de la plaque:</Caption>
+</LabelMonitorColorMode>
+<LabelMonitorConnectMode>
+<Caption>Moyens de communication:</Caption>
+</LabelMonitorConnectMode>
+<LabelMonitorConnectPort>
+<Caption>Ports:</Caption>
+</LabelMonitorConnectPort>
+<!--2013.5.5 增加-->
+<chkContinuousLeft>
+<Caption>Gauche continue</Caption>
+</chkContinuousLeft>
+<chkContinuousTop>
+<Caption>Continuellement en mouvement</Caption>
+</chkContinuousTop>
+<!--2013.5.5 增加结束-->
+</TMainForm>
+<!--关于对话框-->
+<TDlgAbout>
+<Caption>A propos de ...</Caption>
+<LabelAppName>
+<Caption>X show logiciel</Caption>
+</LabelAppName>
+<LabelAppVersion>
+<Caption>Version:%s</Caption>
+</LabelAppVersion>
+<MemoAppNote>
+<Items>
+<Item>Avertissement: Ce programme informatique est protégé par les lois et conventions internationales protégées contre toute reproduction ou distribution non autorisée de ce programme tout ou partie de la poursuite, peut entraîner des sanctions civiles et pénales sévères, et sous réserve, dans la mesure du possible permise par la loi.</Item>
+</Items>
+</MemoAppNote>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+</TDlgAbout>
+<!--网络集群发送-->
+<TDlgColonySend>
+<Caption>gestion de cluster envoi</Caption>
+<chkSelectAll>
+<Caption>Sélectionner</Caption>
+</chkSelectAll>
+<!--提示信息-->
+<MemoNote>
+<Items>
+<Item>Description:</Item>
+<Item></Item>
+<Item>1, le seul mode de communication ou le port réseau GPRS, avant de pouvoir rejoindre le groupe.</Item>
+<Item></Item>
+<Item>2 groupe de clones Envoyer: Envoyer l'écran principal des données envoyées au groupe sur tous les écrans, l'utilisation du clonage envoyer groupe demande écran taille de l'écran, les paramètres sont les mêmes. Nécessaire avant l'envoi de l'écran principal.</Item>
+<Item></Item>
+<Item>3, le groupe conventionnel Sent: supprimer les données de l'écran de mot est envoyé à l'écran correspondant.</Item>
+</Items>
+</MemoNote>
+<!--设备列表-->
+<ListViewCards>
+<Columns>
+<Column>Statut</Column>
+<Column>Nom</Column>
+<Column>Modèle</Column>
+<Column>largeur de l'écran</Column>
+<Column>Hauteur de l'écran</Column>
+<Column>le type de plaque de cellule</Column>
+<Column>Moyens de communication</Column>
+<Column>Éclat</Column>
+<Column>Commutateur de temporisateur</Column>
+</Columns>
+</ListViewCards>
+<!--操作选择项-->
+<optRegularSend>
+<Caption>Groupe conventionnel envoyé</Caption>
+</optRegularSend>
+<optCloneSend>
+<Caption>Groupe Clone envoyé</Caption>
+</optCloneSend>
+<optOpenScreen>
+<Caption>Logiciel boot</Caption>
+</optOpenScreen>
+<optCloseScreen>
+<Caption>Soft-Off</Caption>
+</optCloseScreen>
+<optTiming>
+<Caption>Chronométrage</Caption>
+</optTiming>
+<btnSendProtocol>
+<Caption>Exécutez la commande</Caption>
+</btnSendProtocol>
+<!--指定主屏幕-->
+<LabelCloneScreens>
+<Caption>Spécifiez l'écran principal:</Caption>
+</LabelCloneScreens>
+</TDlgColonySend>
+<!--网络集群登录验证窗口-->
+<TDlgColonyVerify>
+<Caption>Connexion authentification</Caption>
+<LabelPassword>
+<Caption>Mot de passe</Caption>
+</LabelPassword>
+<LabelServerIp>
+<Caption>Serveur</Caption>
+</LabelServerIp>
+<LabelPort>
+<Caption>Port</Caption>
+</LabelPort>
+<btnOK>
+<Caption>Déterminer</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Résilier</Caption>
+</btnCancel>
+</TDlgColonyVerify>
+<!--GPRS群组发送窗口-->
+<TDlgGprsColony>
+<Caption>Gestion du cluster</Caption>
+<Messages>
+<AllScreens>Plein écran</AllScreens>
+<AddGroupCaption>Ajouter un groupe</AddGroupCaption>
+<AddGroupPrompt>S'il vous plaît entrer le nom du groupe:</AddGroupPrompt>
+<AddGroupExists>Le nom de groupe existe déjà!</AddGroupExists>
+<AddGroupFail>Ajouter un groupe a échoué!</AddGroupFail>
+<ConfDeleteGroup>Pour confirmer que vous voulez supprimer le groupe?</ConfDeleteGroup>
+<ConfDeleteDevice>Confirmez que vous souhaitez supprimer le terminal sélectionné?</ConfDeleteDevice>
+<NoScreen>Pas d'écran peut ajouter!</NoScreen>
+<DeviceIdExists>Terminal ID existe déjà!</DeviceIdExists>
+<NoItemChecked>S'il vous plaît sélectionner un terminal! (Utilisez la boîte de sélection pour sélectionner)</NoItemChecked>
+<NoItemSelected>S'il vous plaît sélectionner un terminal! (Cliquez sur la sélection de ligne de la souris)</NoItemSelected>
+<!--终端在线状态-->
+<StatusOnline>En ligne</StatusOnline>
+<StatusOffline>Pas en ligne</StatusOffline>
+<!--命令发送状态-->
+<SendStatusSending>Envoi</SendStatusSending>
+<SendStatusSuccess>Succès</SendStatusSuccess>
+<SendStatusScreenParamFail>paramètres d'écran en panne</SendStatusScreenParamFail>
+<SendStatusConnectFail>Connexion échoue</SendStatusConnectFail>
+</Messages>
+<chkSelectAll>
+<Caption>Sélectionner</Caption>
+</chkSelectAll>
+<LabelGroups>
+<Caption>Groupes:</Caption>
+</LabelGroups>
+<btnEditGroup>
+<Caption>Modifier le groupe</Caption>
+</btnEditGroup>
+<btnAddGroup>
+<Caption>Ajouter un groupe</Caption>
+</btnAddGroup>
+<btnDeleteGroup>
+<Caption>Supprimer un groupe</Caption>
+</btnDeleteGroup>
+<btnAddDevice>
+<Caption>Ajouter borne</Caption>
+</btnAddDevice>
+<btnEditDevice>
+<Caption>Modifier le terminal</Caption>
+</btnEditDevice>
+<btnDeleteDevice>
+<Caption>Retirez le Terminal</Caption>
+</btnDeleteDevice>
+<btnUpdateColony>
+<Caption>Obtenez le cluster</Caption>
+</btnUpdateColony>
+<btnSendProtocol>
+<Caption>Exécutez la commande</Caption>
+</btnSendProtocol>
+<!--提示信息-->
+<MemoNote>
+<Items>
+<Item>Description:</Item>
+<Item></Item>
+<Item>1, modifier le terminal, supprimer borne veuillez cliquer sur le couloir de la liste pour sélectionner le terminal.</Item>
+<Item></Item>
+<Item>Envoyer des commandes sélectionner la zone de liste pour sélectionner le terminal.</Item>
+</Items>
+</MemoNote>
+<!--设备列表-->
+<ListViewCards>
+<Columns>
+<Column>No.</Column>
+<Column>En ligne</Column>
+<Column>Nom d'écran</Column>
+<Column>Device ID</Column>
+<Column>modèle de la carte</Column>
+<Column>largeur de l'écran</Column>
+<Column>Hauteur de l'écran</Column>
+<Column>le type de plaque de cellule</Column>
+<Column>Éclat</Column>
+<Column>Commutateur de temporisateur</Column>
+<Column>D'exploitation</Column>
+</Columns>
+</ListViewCards>
+<!--操作选择项-->
+<optRegularSend>
+<Caption>Groupe conventionnel envoyé</Caption>
+</optRegularSend>
+<optCloneSend>
+<Caption>Groupe Clone envoyé</Caption>
+</optCloneSend>
+<optOpenScreen>
+<Caption>Logiciel boot</Caption>
+</optOpenScreen>
+<optCloseScreen>
+<Caption>Soft-Off</Caption>
+</optCloseScreen>
+<optTiming>
+<Caption>Chronométrage</Caption>
+</optTiming>
+<optQueryStatus>
+<Caption>Vérifier l'état</Caption>
+</optQueryStatus>
+<!--指定主屏幕-->
+<LabelCloneScreens>
+<Caption>Spécifiez l'écran principal:</Caption>
+</LabelCloneScreens>
+</TDlgGprsColony>
+<!--集群服务器终端编辑窗口-->
+<TDlgColonyAddDevice>
+<Caption>Terminal édition</Caption>
+<LabelDeviceId>
+<Caption>Terminal ID</Caption>
+</LabelDeviceId>
+<LabelScreenName>
+<Caption>Écran</Caption>
+</LabelScreenName>
+<LabelGroupName>
+<Caption>Groupes</Caption>
+</LabelGroupName>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Annuler (&amp;C)</Caption>
+</btnCancel>
+</TDlgColonyAddDevice>
+<!--GPRS集群配置 窗口-->
+<TDlgGprsColonySetting>
+<Caption>configuration Cluster Server</Caption>
+<LabelGprsServerIp>
+<Caption>IP du serveur:</Caption>
+</LabelGprsServerIp>
+<LabelGprsServerPort>
+<Caption>Ports:</Caption>
+</LabelGprsServerPort>
+<chkEnableAutoFillScreen>
+<Caption>Ouvert sous-écran écran principal adaptatif</Caption>
+</chkEnableAutoFillScreen>
+<chkEnableAuthen>
+<Caption>Ouvrir la permission de vérifier</Caption>
+</chkEnableAuthen>
+<LabelGprsAccount>
+<Caption>Considération</Caption>
+</LabelGprsAccount>
+<LabelGprsPassword>
+<Caption>Mot de passe</Caption>
+</LabelGprsPassword>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Annuler (&amp;C)</Caption>
+</btnCancel>
+</TDlgGprsColonySetting>
+<!-- GPRS集群组管理 窗口-->
+<TDlgGprsGroup>
+<Caption>GPRS gestion groupe groupe</Caption>
+<LabelGroups>
+<Caption>Liste des groupes</Caption>
+</LabelGroups>
+<LabelGroupName>
+<Caption>Nom</Caption>
+</LabelGroupName>
+<btnEditGroup>
+<Caption>Modifier</Caption>
+</btnEditGroup>
+<btnAddGroup>
+<Caption>Ajouter</Caption>
+</btnAddGroup>
+<btnDeleteGroup>
+<Caption>Supprimer</Caption>
+</btnDeleteGroup>
+<btnSelectAllCards>
+<Caption>Sélectionner tous</Caption>
+</btnSelectAllCards>
+<btnClearCurrentSelectedCards>
+<Caption>Effacer la sélection actuelle</Caption>
+</btnClearCurrentSelectedCards>
+<btnClearSelectedAllCards>
+<Caption>Effacer toutes les sélections</Caption>
+</btnClearSelectedAllCards>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Annuler (&amp;C)</Caption>
+</btnCancel>
+<LabelCards>
+<Caption>La liste d'affichage</Caption>
+</LabelCards>
+<btnUpdateCards>
+<Caption>Mettre à jour la liste des serveurs</Caption>
+</btnUpdateCards>
+<!--设备卡列表-->
+<ListViewCards>
+<Columns>
+<Column>Statut</Column>
+<Column>Nom</Column>
+</Columns>
+</ListViewCards>
+</TDlgGprsGroup>
+<!--导入Excel 窗口-->
+<TDlgImportExcel>
+<Caption>Dans Excel</Caption>
+<LabelSheetNames>
+<Caption>nom de la feuille</Caption>
+</LabelSheetNames>
+<LabelRowCount>
+<Caption>Le nombre de lignes</Caption>
+</LabelRowCount>
+<LabelColumnCount>
+<Caption>Le nombre de colonnes</Caption>
+</LabelColumnCount>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Annuler (&amp;C)</Caption>
+</btnCancel>
+</TDlgImportExcel>
+<!-- 屏幕参数 窗口-->
+<TdlgMonitorSetting>
+<Caption>Paramètre d'écran</Caption>
+<Messages>
+<InvalidMonitorSize>Taille de l'écran invalide!</InvalidMonitorSize>
+<InvalidCardModelInfo>Paramètres de la carte invalide!</InvalidCardModelInfo>
+<InvalidGammaReviseValue>La valeur de correction de gamma non valable!</InvalidGammaReviseValue>
+</Messages>
+<LabelMonitorWidth>
+<Caption>Largeur</Caption>
+</LabelMonitorWidth>
+<LabelMonitorHeight>
+<Caption>Hauteur</Caption>
+</LabelMonitorHeight>
+<LabelMonitorColor>
+<Caption>Couleur</Caption>
+</LabelMonitorColor>
+<LabelMonitorGray>
+<Caption>Gris</Caption>
+</LabelMonitorGray>
+<LabelCardType>
+<Caption>modèle de carte de contrôle</Caption>
+</LabelCardType>
+<LabelCardParams>
+<Caption>Les paramètres de performance</Caption>
+</LabelCardParams>
+<LabelBoardType>
+<Caption>le type de plaque de cellule</Caption>
+</LabelBoardType>
+<LabelDEPrompt>
+<Caption>OE polarité</Caption>
+</LabelDEPrompt>
+<LabelDEPromptNote>
+<Caption>S'il vous plaît régler le jumper sur la carte de contrôle</Caption>
+</LabelDEPromptNote>
+<LabelThreshold>
+<Caption>Seuil</Caption>
+</LabelThreshold>
+<LabelDotFrequency>
+<Caption>la fréquence de point</Caption>
+</LabelDotFrequency>
+<LabelLineBlanking>
+<Caption>suppression de ligne</Caption>
+</LabelLineBlanking>
+<LabelInterlaceControl>
+<Caption>l'ajustement de la ligne</Caption>
+</LabelInterlaceControl>
+<LabelGammaReviseValue>
+<Caption>La correction gamma</Caption>
+</LabelGammaReviseValue>
+<LabelAdvanced>
+<Caption>Les paramètres les moins avancés</Caption>
+</LabelAdvanced>
+<btnReadParams>
+<Caption>relecture des paramètres</Caption>
+</btnReadParams>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<!--2013.5.4 增加-->
+<chkDotFrequencyAuto>
+<Caption>Automatique</Caption>
+</chkDotFrequencyAuto>
+<chkLineBlankingAuto>
+<Caption>Automatique</Caption>
+</chkLineBlankingAuto>
+<!--2013.5.4 增加结束-->
+</TdlgMonitorSetting>
+<!--通讯参数 窗口-->
+<TDlgNetworkSetting>
+<Caption>Les paramètres de communication</Caption>
+<Messages>
+<AskToSelectComPort>S'il vous plaît sélectionner le numéro de série!</AskToSelectComPort>
+<ErrorIp>Une adresse IP incorrecte!</ErrorIp>
+<UnknownCard>Inconnue</UnknownCard>
+<LabelTestResult>
+<Success>
+<Caption>test de communications avec succès!</Caption>
+</Success>
+<Fail>
+<Caption>Test de communication a échoué!</Caption>
+</Fail>
+</LabelTestResult>
+</Messages>
+<!--选择通讯模式页-->
+<LabelNetworkType>
+<Caption>Sélectionnez le mode de communication</Caption>
+</LabelNetworkType>
+<optSerialPort>
+<Caption>Les ports série</Caption>
+</optSerialPort>
+<optNet>
+<Caption>Port réseau</Caption>
+</optNet>
+<optDirectNet>
+<Caption>Port réseau directement connecté</Caption>
+</optDirectNet>
+<optGprs>
+<Caption>GPRS ou l'Internet</Caption>
+</optGprs>
+<!-- 串口参数设置页 -->
+<LabelSerialPortComs>
+<Caption>Numéro de port</Caption>
+</LabelSerialPortComs>
+<!-- 网口参数设置页-->
+<LabelNetIp>
+<Caption>Les adresses IP</Caption>
+</LabelNetIp>
+<LabelNetPort>
+<Caption>Numéro de port</Caption>
+</LabelNetPort>
+<LabelNetGateway>
+<Caption>Passerelle</Caption>
+</LabelNetGateway>
+<LabelNetSubnetMask>
+<Caption>masque de sous-réseau</Caption>
+</LabelNetSubnetMask>
+<LabelEditMACPrompt>
+<Caption>Pour modifier l'adresse MAC, s'il vous plaît télécharger les outils de débogage MAC</Caption>
+</LabelEditMACPrompt>
+<!-- GPRS设置页-->
+<LabelGprsIp>
+<Caption>Adresse IP du serveur GPRS</Caption>
+</LabelGprsIp>
+<LabelGprsPort>
+<Caption>Numéro de port</Caption>
+</LabelGprsPort>
+<chkGprsEnableAuth>
+<Caption>Ouvrir la permission de vérifier</Caption>
+</chkGprsEnableAuth>
+<LabelGprsAccount>
+<Caption>Considération</Caption>
+</LabelGprsAccount>
+<LabelGprsPassword>
+<Caption>Mot de passe</Caption>
+</LabelGprsPassword>
+<!-- 测试结果页-->
+<LabelTestResultType>
+<Caption>Mode de communication:</Caption>
+</LabelTestResultType>
+<LabelTestResultPort>
+<Caption>Numéro de port:</Caption>
+</LabelTestResultPort>
+<LabelTestResultCard>
+<Caption>Card Control Modèle:</Caption>
+</LabelTestResultCard>
+<btnSave>
+<Caption>Sauvegardez et quittez</Caption>
+</btnSave>
+<btnSetMonitor>
+<Caption>Définissez les paramètres de l'écran</Caption>
+</btnSetMonitor>
+<!-- 高级参数 -->
+<GroupBoxAdvanceParams>
+<Caption>Paramètres avancés</Caption>
+</GroupBoxAdvanceParams>
+<LabelSerialPortDelay>
+<Caption>Retard</Caption>
+</LabelSerialPortDelay>
+<LabelSerialPortFrameLength>
+<Caption>Longueur de la trame</Caption>
+</LabelSerialPortFrameLength>
+<btnTestExit>
+<Caption>Retour</Caption>
+</btnTestExit>
+<btnChooseTypeNextStep>
+<Caption>Suivant</Caption>
+</btnChooseTypeNextStep>
+<btnSerialPortLastStep>
+<Caption>Précédent</Caption>
+</btnSerialPortLastStep>
+<btnTest>
+<Caption>Test de communication</Caption>
+</btnTest>
+<!--2013.5.5 增加-->
+<LabelDeviceId>
+<Caption>Device ID</Caption>
+</LabelDeviceId>
+<!--2013.5.5 增加结束-->
+</TDlgNetworkSetting>
+<!-- 新建表格 窗口-->
+<TDlgNewTable>
+<Caption>Nouvelle feuille de calcul</Caption>
+<LabelRowCount>
+<Caption>Row</Caption>
+</LabelRowCount>
+<LabelColCount>
+<Caption>Row</Caption>
+</LabelColCount>
+<LabelBorderWidth>
+<Caption>Cadre</Caption>
+</LabelBorderWidth>
+<LabelBorderColor>
+<Caption>Couleur</Caption>
+</LabelBorderColor>
+<chkSetCellWidth>
+<Caption>Largeur de cellule fixe</Caption>
+</chkSetCellWidth>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Annuler (&amp;C)</Caption>
+</btnCancel>
+</TDlgNewTable>
+<!-- 软件开关屏 窗口-->
+<TDlgProtocolOnOff>
+<Caption>écran de commutation logicielle</Caption>
+<optManual>
+<Caption>Interrupteur manuel</Caption>
+</optManual>
+<btnOn>
+<Caption>L'écran d'ouverture</Caption>
+</btnOn>
+<btnOff>
+<Caption>Hors écran</Caption>
+</btnOff>
+<optAuto>
+<Caption>Commutateur de temporisateur</Caption>
+</optAuto>
+<LabelOn>
+<Caption>Temps de démarrage</Caption>
+</LabelOn>
+<LabelOff>
+<Caption>Temps d'arrêt</Caption>
+</LabelOff>
+<btnSave>
+<Caption>&amp;U disque de sauvegarde</Caption>
+</btnSave>
+<btnOK>
+<Caption>Send (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Annuler (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>Telles que l'utilisation de disque U pour régler la luminosité commutateur / école / de la minuterie, réglez les paramètres dans l'exportation de l'USB</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+<!--2013.5.5 增加-->
+<chkAutoOnOff>
+<Caption>Commutateur de temporisateur</Caption>
+</chkAutoOnOff>
+<!--2013.5.5 增加结束-->
+</TDlgProtocolOnOff>
+<!-- 请求型号 窗口-->
+<TDlgProtocolQueryModel>
+<Caption>Demande Modèle</Caption>
+<LabelCardMode>
+<Caption>Card Control Modèle:</Caption>
+</LabelCardMode>
+<LabelCardVersion>
+<Caption>La version matérielle du code:</Caption>
+</LabelCardVersion>
+<LabelCardGuid>
+<Caption>Numéro de série unique:</Caption>
+</LabelCardGuid>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+</TDlgProtocolQueryModel>
+<!-- 校时... 窗口-->
+<TDlgProtocolSetDateTime>
+<Caption>L'école ...</Caption>
+<LabelDate>
+<Caption>Date:</Caption>
+</LabelDate>
+<LabelTime>
+<Caption>Temps:</Caption>
+</LabelTime>
+<btnSave>
+<Caption>&amp;U disque de sauvegarde</Caption>
+</btnSave>
+<btnOK>
+<Caption>Send (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Annuler (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>Telles que l'utilisation de disque U pour régler la luminosité commutateur / école / de la minuterie, réglez les paramètres dans l'exportation de l'USB</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+<!--2013.5.5 增加-->
+<btnGetSystemTime>
+<Caption>System Time</Caption>
+</btnGetSystemTime>
+<!--2013.5.5 增加结束-->
+</TDlgProtocolSetDateTime>
+<!--亮度调节 窗口 -->
+<TDlgProtocolSetLight>
+<Caption>Réglage de la luminosité</Caption>
+<optAuto>
+<Caption>Auto-détection</Caption>
+</optAuto>
+<optManual>
+<Caption>Réglage manuel</Caption>
+</optManual>
+<btnSave>
+<Caption>&amp;U disque de sauvegarde</Caption>
+</btnSave>
+<btnOK>
+<Caption>Send (&amp;S)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Annuler (&amp;C)</Caption>
+</btnCancel>
+<!--2013.5.4 增加-->
+<MemoHelp>
+<Items>
+<Item>Telles que l'utilisation de disque U pour régler la luminosité commutateur / école / de la minuterie, réglez les paramètres dans l'exportation de l'USB</Item>
+</Items>
+</MemoHelp>
+<!--2013.5.4 增加结束-->
+</TDlgProtocolSetLight>
+<!-- 图文编辑 窗口-->
+<TDlgRtfEditor>
+<Caption>Éditeur</Caption>
+<Messages>
+<!--RTF编辑对话框 -->
+<!--表格垂直拆分输入框标题-->
+<TableSplitVerticallyCaption>Fissure verticale</TableSplitVerticallyCaption>
+<!--表格垂直拆分输入框提示信息-->
+<TableSplitVerticallyPrompt>Diviser le nombre de colonnes:</TableSplitVerticallyPrompt>
+<!--表格水平拆分输入框标题 -->
+<TableSplitHorizontallyCaption>Fissure horizontale</TableSplitHorizontallyCaption>
+<!--表格水平拆分输入框提示信息-->
+<TableSplitHorizontallyPrompt>Diviser le nombre de lignes:</TableSplitHorizontallyPrompt>
+<!--提示选择一个表格-->
+<InfoSelectOneTable>S'il vous plaît choisir une table!</InfoSelectOneTable>
+</Messages>
+<ToolButtonLoadFiles>
+<Hint>Ajouter un fichier</Hint>
+</ToolButtonLoadFiles>
+<!-- 文件操作菜单 -->
+<PopupMenuAddFile>
+<Items>
+<Item>Ajouter du texte</Item>
+<Item>Ajoutez le fichier RTF</Item>
+<Item>Ajouter une photo</Item>
+<Item>Ajouter DOC</Item>
+<Item>Ajouter EXCEL</Item>
+</Items>
+</PopupMenuAddFile>
+<ToolButtonSave>
+<Hint>Sauvegarder</Hint>
+</ToolButtonSave>
+<ToolButtonLeft>
+<Hint>Gauche horizontale</Hint>
+</ToolButtonLeft>
+<ToolButtonCenter>
+<Hint>Centré horizontalement</Hint>
+</ToolButtonCenter>
+<ToolButtonRight>
+<Hint>Droite horizontale de résidence</Hint>
+</ToolButtonRight>
+<ToolButtonBold>
+<Hint>Gras</Hint>
+</ToolButtonBold>
+<ToolButtonItalic>
+<Hint>Italique</Hint>
+</ToolButtonItalic>
+<ToolButtonUnderline>
+<Hint>Souligner</Hint>
+</ToolButtonUnderline>
+<ToolButtonTop>
+<Hint>Alignée sur les</Hint>
+</ToolButtonTop>
+<ToolButtonVCenter>
+<Hint>Centré verticalement</Hint>
+</ToolButtonVCenter>
+<ToolButtonBottom>
+<Hint>Aligner en bas</Hint>
+</ToolButtonBottom>
+<!-- 表格-->
+<ToolButtonTable>
+<Hint>Formulaire</Hint>
+</ToolButtonTable>
+<!--表格操作菜单-->
+<PopupMenuTable>
+<Items>
+<Item>Nouvelle feuille de calcul</Item>
+<Item>-</Item>
+<Item>Couleur de la bordure</Item>
+<Item>Largeur de la bordure</Item>
+<Item>-</Item>
+<Item>
+<Caption>Insérer une ligne</Caption>
+<Items>
+<Item>Inséré au-dessus</Item>
+<Item>Insérer en dessous</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Insérer une colonne</Caption>
+<Items>
+<Item>Inséré dans la gauche</Item>
+<Item>Le côté droit de la</Item>
+</Items>
+</Item>
+<Item>
+<Caption>Supprimer</Caption>
+<Items>
+<Item>Row</Item>
+<Item>Row</Item>
+</Items>
+</Item>
+<Item>-</Item>
+<Item>Fusionner les cellules</Item>
+<Item>
+<Caption>Fractionner la cellule</Caption>
+<Items>
+<Item>Fissure verticale</Item>
+<Item>Fissure horizontale</Item>
+</Items>
+</Item>
+<Item>
+<Caption>La reprise de la fusion</Caption>
+<Items>
+<Item>Row</Item>
+<Item>Row</Item>
+<Item>Ensemble</Item>
+</Items>
+</Item>
+<Item>-</Item>
+<Item>
+<Caption>L'alignement vertical</Caption>
+<Items>
+<Item>Alignée sur les</Item>
+<Item>Centré verticalement</Item>
+<Item>Aligner en bas</Item>
+</Items>
+</Item>
+</Items>
+</PopupMenuTable>
+<!-- 编辑菜单 -->
+<PopupMenuEditor>
+<Items>
+<Item>Copiez</Item>
+<Item>Collez</Item>
+<Item>Sélectionner</Item>
+</Items>
+</PopupMenuEditor>
+<LabelWordSpace>
+<Caption>Espacement des mots:</Caption>
+</LabelWordSpace>
+<LabelLineSpace>
+<Caption>Interligne:</Caption>
+</LabelLineSpace>
+</TDlgRtfEditor>
+<!-- 扫描方式设置 窗口-->
+<TDlgScanSet>
+<Caption>Paramètres du mode Numérisation</Caption>
+<LabelScanSetName>
+<Caption>Nom de la configuration</Caption>
+</LabelScanSetName>
+<LabelScanType>
+<Caption>Mode de numérisation</Caption>
+</LabelScanType>
+<cmbScanType>
+<Items>
+<Item>Analyse statique</Item>
+<Item>1/2 de balayage</Item>
+<Item>1/4 de balayage</Item>
+<Item>1/8 de balayage</Item>
+<Item>1/16 de balayage</Item>
+</Items>
+</cmbScanType>
+<LabelWrap>
+<Caption>Mode ligne de pliage</Caption>
+</LabelWrap>
+<cmbWrap>
+<Items>
+<Item>4 ligne de pliage</Item>
+<Item>8 ligne de pliage</Item>
+<Item>16% off line</Item>
+</Items>
+</cmbWrap>
+<LabelWinding>
+<Caption>Winding Way</Caption>
+</LabelWinding>
+<cmbWinding>
+<Items>
+<Item>Sur serpentine</Item>
+<Item>En vertu de la serpentine</Item>
+</Items>
+</cmbWinding>
+<LabelScanLines>
+<Caption>Nombre de lignes de balayage</Caption>
+</LabelScanLines>
+<cmbScanLines>
+<Items>
+<Item>1 rangée</Item>
+<Item>2 rangées</Item>
+<Item>4 rangées</Item>
+<Item>8 rangs</Item>
+<Item>16 lignes par région</Item>
+</Items>
+</cmbScanLines>
+<LabelStr>
+<Caption>STR polarité</Caption>
+</LabelStr>
+<cmbStr>
+<Items>
+<Item>Polarité positive</Item>
+<Item>Une électrode négative</Item>
+</Items>
+</cmbStr>
+<LabelSecondaryWind>
+<Caption>Enroulement secondaire</Caption>
+</LabelSecondaryWind>
+<cmbSecondaryWind>
+<Items>
+<Item>Non</Item>
+<Item>Soyez</Item>
+</Items>
+</cmbSecondaryWind>
+<LabelDecoding>
+<Caption>Décodage 138</Caption>
+</LabelDecoding>
+<cmbDecoding>
+<Items>
+<Item>Décodage 138</Item>
+<Item>La haute littérale</Item>
+<Item>Décodage 138</Item>
+<Item>La faible littérale</Item>
+</Items>
+</cmbDecoding>
+<LabelMirror>
+<Caption>Flux de données</Caption>
+</LabelMirror>
+<cmbMirror>
+<Items>
+<Item>Normale</Item>
+<Item>Mirror</Item>
+</Items>
+</cmbMirror>
+<LabelDataPolarity>
+<Caption>polarité des données</Caption>
+</LabelDataPolarity>
+<cmbDataPolarity>
+<Items>
+<Item>Polarité positive</Item>
+<Item>Une électrode négative</Item>
+</Items>
+</cmbDataPolarity>
+<chkJiaoTi>
+<Caption>Normale alternatif</Caption>
+</chkJiaoTi>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Annuler (&amp;C)</Caption>
+</btnCancel>
+</TDlgScanSet>
+<!-- 查屏 窗口-->
+<TDlgSearchCard>
+<Caption>Vérifiez si l'écran</Caption>
+<!-- 开始查找页-->
+<LabelFinding>
+<Caption>Sont à la recherche de la carte de contrôle ......</Caption>
+</LabelFinding>
+<MemoPrompt>
+<Items>
+<Item>Si vous voulez utiliser le disque U pour mettre à jour les informations de carte de commande, vous pouvez annuler cette étape n'est pas nécessaire pour trouver la carte de contrôle!</Item>
+</Items>
+</MemoPrompt>
+<btnCancel>
+<Caption>Annuler (&amp;C)</Caption>
+</btnCancel>
+<!-- 查找成功页-->
+<LabelSearchSuccess>
+<Caption>Trouvez un succès!</Caption>
+</LabelSearchSuccess>
+<LabelType>
+<Caption>Mode de communication:</Caption>
+</LabelType>
+<LabelPort>
+<Caption>Numéro de port:</Caption>
+</LabelPort>
+<LabelCardType>
+<Caption>Card Control Modèle:</Caption>
+</LabelCardType>
+<!-- 查找失败页-->
+<LabelSearchFail>
+<Caption>Trouvez échoué!</Caption>
+</LabelSearchFail>
+<btnSearchAgain>
+<Caption>Nouvelle recherche</Caption>
+</btnSearchAgain>
+<MemoIncDelayRetry>
+<Items>
+<Item>Le système va automatiquement augmenter à nouveau retardé essayer de balayer tous les ports</Item>
+</Items>
+</MemoIncDelayRetry>
+<btnManualSetting>
+<Caption>Coutume</Caption>
+</btnManualSetting>
+<MemoManualSetInfo>
+<Items>
+<Item>Spécifier manuellement les paramètres de communication</Item>
+</Items>
+</MemoManualSetInfo>
+</TDlgSearchCard>
+<!-- 数据发送 窗口-->
+<TDlgSend>
+<Caption>La transmission des données</Caption>
+</TDlgSend>
+<!--资源选择窗口 窗口 -->
+<TDlgSystemResources>
+<Caption>fenêtre de sélection de ressources</Caption>
+<Messages>
+<PromptNoSelected>Aucune photo est sélectionnée, cliquez sur la sélection de l'image, ou glisser-déposer pour les sélections multiples.</PromptNoSelected>
+</Messages>
+<btnOK>
+<Caption>Sélectionnez (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Annuler (&amp;C)</Caption>
+</btnCancel>
+</TDlgSystemResources>
+<!--边框宽度 窗口 -->
+<TDlgTableBorderWidth>
+<Caption>Largeur de la bordure</Caption>
+<LabelBorderWidth>
+<Caption>Largeur de la bordure</Caption>
+</LabelBorderWidth>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Annuler (&amp;C)</Caption>
+</btnCancel>
+</TDlgTableBorderWidth>
+<!-- 导入U盘 窗口-->
+<TDlgUsbForm>
+<Caption>Importer U disque</Caption>
+<Messages>
+<NoUsb>Introuvable U disque, disque insert U!</NoUsb>
+<MonitorSize>Largeur de l'écran le point écran%d%d points</MonitorSize>
+<MonitorBoardType>%s，%s </MonitorBoardType>
+<AutoAlertLight>Ajuster automatiquement la luminosité</AutoAlertLight>
+<ManualAlertLight>Ajuster manuellement la luminosité:%d Niveau de</ManualAlertLight>
+<MonitorTimeOnOffDisabled>N'est pas activé.</MonitorTimeOnOffDisabled>
+<MonitorTimeOnOffEnabled>Est activée,%s-%s</MonitorTimeOnOffEnabled>
+<OutOfStorageCapacity>Importation panne de disque d'U, la taille du contenu produit au-delà de la carte dans l'espace restant.</OutOfStorageCapacity>
+<CancelExportToUsb>Annuler le disque d'U d'importation.</CancelExportToUsb>
+<UsbNotFound>Introuvable U disque, disque U insert.</UsbNotFound>
+<ExportToUsbSuccess>Le fichier a été importé avec succès dans le disque d'U.</ExportToUsbSuccess>
+<ExportToUsbFail>Importer une panne de disque U.</ExportToUsbFail>
+<ExportToUsbRunning>Généré, s'il vous plaît patienter ...</ExportToUsbRunning>
+<ReadUsbFileSystemFail>Système de fichiers du disque U ne reconnaît pas!</ReadUsbFileSystemFail>
+<InvalidUsbFileSystemFail>Vous ne pouvez utiliser le disque USB formaté FAT ou FAT32!</InvalidUsbFileSystemFail>
+</Messages>
+<LabelSelectUsb>
+<Caption>Sélectionnez le lecteur USB</Caption>
+</LabelSelectUsb>
+<LabelMonitorSize>
+<Caption>Taille de l'écran:</Caption>
+</LabelMonitorSize>
+<LabelMonitorBoardType>
+<Caption>Type de cellules de la plaque:</Caption>
+</LabelMonitorBoardType>
+<chkCheckTime>
+<Caption>École:</Caption>
+</chkCheckTime>
+<chkAlertLight>
+<Caption>Réglage de la luminosité:</Caption>
+</chkAlertLight>
+<chkTimeOnOff>
+<Caption>écran de commande de la minuterie:</Caption>
+</chkTimeOnOff>
+<btnLoadUsbDrivers>
+<Caption>L'équipement d'essai</Caption>
+</btnLoadUsbDrivers>
+<btnExport>
+<Caption>Importer U disque</Caption>
+</btnExport>
+<btnCancel>
+<Caption>Résilier</Caption>
+</btnCancel>
+<btnExportToLocal>
+<Caption>Dans l'économie locale</Caption>
+</btnExportToLocal>
+<!--2013.1.30 新增-->
+<!--校时-->
+<optManulTiming>
+<Caption>Manuel</Caption>
+</optManulTiming>
+<optAutoTiming>
+<Caption>System Time</Caption>
+</optAutoTiming>
+<!--亮度调节：-->
+<optManualLight>
+<Caption>Manuel</Caption>
+</optManualLight>
+<optAutoLight>
+<Caption>Automatique</Caption>
+</optAutoLight>
+<!--定时开关屏：-->
+<LabelOn>
+<Caption>Temps de démarrage</Caption>
+</LabelOn>
+<LabelOff>
+<Caption>Temps d'arrêt</Caption>
+</LabelOff>
+<!--2013.1.30 新增结束-->
+<!--2013.5.4 新增-->
+<LabelUsbFreeSize>
+<Caption>Capacité disponible:</Caption>
+</LabelUsbFreeSize>
+<LabelUsbFileSystem>
+<Caption>Format de fichier:</Caption>
+</LabelUsbFileSystem>
+<LabelDateTimeNoChange>
+<Caption>Restent inchangés</Caption>
+</LabelDateTimeNoChange>
+<LabelLightNoChange>
+<Caption>Restent inchangés</Caption>
+</LabelLightNoChange>
+<LabelOnOffNoChange>
+<Caption>Toujours</Caption>
+</LabelOnOffNoChange>
+<!--2013.5.4 新增结束-->
+</TDlgUsbForm>
+<!-- 时钟区域参数设置界面 -->
+<TFrameOptionClock>
+<!--时钟属性-->
+<GroupBoxRegionInfo>
+<Caption>Propriétés de l'horloge</Caption>
+</GroupBoxRegionInfo>
+<optOneLine>
+<Caption>Affichage d'une seule ligne</Caption>
+</optOneLine>
+<optMultiLine>
+<Caption>Écran Multi-ligne</Caption>
+</optMultiLine>
+<LabelFieldSpace>
+<Caption>Espacement</Caption>
+</LabelFieldSpace>
+<chkDateWeekExchange>
+<Caption>Remplacez le lieu de la date et jour de la semaine</Caption>
+</chkDateWeekExchange>
+<chkShowDate>
+<Caption>Affiche la date</Caption>
+</chkShowDate>
+<chkShowWeek>
+<Caption>Affiche une semaine</Caption>
+</chkShowWeek>
+<chkShowTime>
+<Caption>Temps d'affichage</Caption>
+</chkShowTime>
+<!-- 时差-->
+<GroupBoxTimeDiff>
+<Caption>Décalage horaire</Caption>
+</GroupBoxTimeDiff>
+<LabelDeltHour>
+<Caption>Heure</Caption>
+</LabelDeltHour>
+<LabelDeltMinute>
+<Caption>Minute</Caption>
+</LabelDeltMinute>
+<LabelDeltMinute>
+<Caption>Minute</Caption>
+</LabelDeltMinute>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>Texte fixe</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>Utilisez un texte fixe</Caption>
+</chkEnabledText>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>Police de caractères</Caption>
+</GroupBoxFont>
+<!--2013.1.30 新增-->
+<!--星期格式-->
+<cmbWeekFormat>
+<Items>
+<Item>Chinois</Item>
+<Item>Mon</Item>
+<Item>Lundi</Item>
+</Items>
+</cmbWeekFormat>
+<!--2013.1.30 新增结束-->
+</TFrameOptionClock>
+<!-- 动态背景-->
+<TFrameOptionDynamicBackground>
+<GroupBoxInfo>
+<Caption>Contexte dynamique</Caption>
+</GroupBoxInfo>
+<chkEnabledDynamicBackground>
+<Caption>L'utilisation de la dynamique de fond</Caption>
+</chkEnabledDynamicBackground>
+<LabelDynamicBackgroundStyle>
+<Caption>Style</Caption>
+</LabelDynamicBackgroundStyle>
+<LabelDynamicBackgroundSpeed>
+<Caption>Accélérer</Caption>
+</LabelDynamicBackgroundSpeed>
+<cmbDynamicBackgroundSpeed>
+<Items>
+<Item>1 (le plus rapide)</Item>
+<Item>2</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item>7</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>
+<Item>13</Item>
+<Item>14</Item>
+<Item>15</Item>
+<Item>16</Item>
+<Item>17</Item>
+<Item>18</Item>
+<Item>19</Item>
+<Item>20 (le plus lent)</Item>
+</Items>
+</cmbDynamicBackgroundSpeed>
+<cmbDynamicBackgroundStyle>
+<Items>
+<Item>Anneau</Item>
+<Item>Étoile à cinq branches</Item>
+<Item>Ciel plein d'étoiles</Item>
+<Item>Flocon de neige</Item>
+<Item>Les flèches gauche et droite</Item>
+<Item>Déplacements latéraux verticale</Item>
+<Item>Bars en mouvement</Item>
+<Item>Diamant</Item>
+<Item>Box</Item>
+<Item>Cercle</Item>
+<Item>Scan Dual en ligne</Item>
+<Item>Un seul balayage</Item>
+</Items>
+</cmbDynamicBackgroundStyle>
+</TFrameOptionDynamicBackground>
+<!-- 炫动字区域参数设置界面-->
+<TFrameOptionFlashText>
+<GroupBoxRegionInfo>
+<Caption>Et le Animations Edition</Caption>
+</GroupBoxRegionInfo>
+<ToolButtonBold>
+<Hint>Gras</Hint>
+</ToolButtonBold>
+<ToolButtonItalic>
+<Hint>Italique</Hint>
+</ToolButtonItalic>
+<ToolButtonUnderline>
+<Hint>Souligner</Hint>
+</ToolButtonUnderline>
+<cmbFontName>
+<Hint>Nom de la police</Hint>
+</cmbFontName>
+<cmbFontSize>
+<Hint>Taille de police</Hint>
+</cmbFontSize>
+<cmbFontColor>
+<Hint>Couleur de la police</Hint>
+</cmbFontColor>
+</TFrameOptionFlashText>
+<!-- 图文区域参数设置界面-->
+<TFrameOptionPicture>
+<Messages>
+<InfoSelectDeletedFile>S'il vous plaît sélectionnez le fichier que vous souhaitez supprimer!</InfoSelectDeletedFile>
+<ConfDeleteFile>Confirmez que vous souhaitez supprimer votre évaluation?</ConfDeleteFile>
+<WarnFileNotExists>Le fichier n'existe pas!</WarnFileNotExists>
+</Messages>
+<GroupBoxRegionInfo>
+<Caption>Liste des fichiers</Caption>
+</GroupBoxRegionInfo>
+<btnAdd>
+<Caption>Ajouter</Caption>
+</btnAdd>
+<btnDelete>
+<Caption>Supprimer</Caption>
+</btnDelete>
+<btnUp>
+<Hint>Déplacer</Hint>
+</btnUp>
+<btnDown>
+<Hint>Vers le bas</Hint>
+</btnDown>
+<!-- 添加菜单-->
+<PopupMenuAddFile>
+<Items>
+<Item>New Hypertext</Item>
+<Item>Ajouter hypertexte</Item>
+<Item>Ajouter une photo</Item>
+</Items>
+</PopupMenuAddFile>
+<!--2013.5.4 增加-->
+<ToolButtonNewRtf>
+<Hint>Ajouter RTF</Hint>
+</ToolButtonNewRtf>
+<ToolButtonAddPicture>
+<Hint>Ajouter une photo</Hint>
+</ToolButtonAddPicture>
+<ToolButtonAddGrid>
+<Hint>Ajouter une table</Hint>
+</ToolButtonAddGrid>
+<ToolButtonAddWord>
+<Hint>Ajouter WORD</Hint>
+</ToolButtonAddWord>
+<ToolButtonAddExcel>
+<Hint>Ajouter EXCEL</Hint>
+</ToolButtonAddExcel>
+<ToolButtonDelete>
+<Hint>Supprimer</Hint>
+</ToolButtonDelete>
+<ToolButtonUp>
+<Hint>Déplacer</Hint>
+</ToolButtonUp>
+<ToolButtonDown>
+<Hint>Vers le bas</Hint>
+</ToolButtonDown>
+<chkShowPath>
+<Caption>Voir le chemin</Caption>
+</chkShowPath>
+<!--2013.5.4 增加结束-->
+</TFrameOptionPicture>
+<!-- 节目参数设置界面-->
+<TFrameOptionProgram>
+<GroupBoxProgramInfo>
+<Caption>Play Type</Caption>
+</GroupBoxProgramInfo>
+<optPlayModeNormal>
+<Caption>L'ordre de jeu</Caption>
+</optPlayModeNormal>
+<optPlayModeHeart>
+<Caption>Lecture de longueur fixe (s)</Caption>
+</optPlayModeHeart>
+<optPlayModeSetTime>
+<Caption>Diffuser régulièrement</Caption>
+</optPlayModeSetTime>
+<LabelStartDateTime>
+<Caption>Heure de départ</Caption>
+</LabelStartDateTime>
+<LabelEndDateTime>
+<Caption>Heure de fin</Caption>
+</LabelEndDateTime>
+<chkWeekDaysSunday>
+<Caption>Dimanche</Caption>
+</chkWeekDaysSunday>
+<chkWeekDaysMonday>
+<Caption>Lundi</Caption>
+</chkWeekDaysMonday>
+<chkWeekDaysTuesday>
+<Caption>Mardi</Caption>
+</chkWeekDaysTuesday>
+<chkWeekDaysWednesday>
+<Caption>Mercredi</Caption>
+</chkWeekDaysWednesday>
+<chkWeekDaysThurday>
+<Caption>Jeudi</Caption>
+</chkWeekDaysThurday>
+<chkWeekDaysFriday>
+<Caption>Vendredi</Caption>
+</chkWeekDaysFriday>
+<chkWeekDaysSaturday>
+<Caption>Samedi</Caption>
+</chkWeekDaysSaturday>
+</TFrameOptionProgram>
+<!-- 温度区域参数设置界面-->
+<TFrameOptionTempreture>
+<GroupBoxRegionInfo>
+<Caption>propriétés de température</Caption>
+</GroupBoxRegionInfo>
+<LabelMode>
+<Caption>Unités de température</Caption>
+</LabelMode>
+<LabelDelt>
+<Caption>Correction</Caption>
+</LabelDelt>
+<LabelNumberColor>
+<Caption>Couleur numérique</Caption>
+</LabelNumberColor>
+<LabelUnitColor>
+<Caption>Unit Color</Caption>
+</LabelUnitColor>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>Texte fixe</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>Utilisez un texte fixe</Caption>
+</chkEnabledText>
+<chkTwoLine>
+<Caption>Enveloppez</Caption>
+</chkTwoLine>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>Police de caractères</Caption>
+</GroupBoxFont>
+</TFrameOptionTempreture>
+<!--字幕区域参数设置界面 -->
+<TFrameOptionText>
+<GroupBoxRegionInfo>
+<Caption>Subtitle Editor</Caption>
+</GroupBoxRegionInfo>
+<LabelWordSpace>
+<Caption>Espacement des mots:</Caption>
+</LabelWordSpace>
+</TFrameOptionText>
+<!-- 计时区域参数设置界面-->
+<TFrameOptionTiming>
+<!-- 时钟属性-->
+<GroupBoxRegionInfo>
+<Caption>Propriétés de l'horloge</Caption>
+</GroupBoxRegionInfo>
+<optCountDown>
+<Caption>Compte à rebours</Caption>
+</optCountDown>
+<optCountUp>
+<Caption>Est le timing</Caption>
+</optCountUp>
+<LabelDest>
+<Caption>Temps cible</Caption>
+</LabelDest>
+<LabelFormat>
+<Caption>Format d'affichage</Caption>
+</LabelFormat>
+<chkShowDay>
+<Caption>Journée</Caption>
+</chkShowDay>
+<chkShowHour>
+<Caption>Heure</Caption>
+</chkShowHour>
+<chkShowMinute>
+<Caption>Minute</Caption>
+</chkShowMinute>
+<chkShowSecond>
+<Caption>Deuxième</Caption>
+</chkShowSecond>
+<LabelNumberColor>
+<Caption>Couleur numérique</Caption>
+</LabelNumberColor>
+<LabelUnitColor>
+<Caption>Unit Color</Caption>
+</LabelUnitColor>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>Texte fixe</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>Utilisez un texte fixe</Caption>
+</chkEnabledText>
+<chkTwoLine>
+<Caption>Enveloppez</Caption>
+</chkTwoLine>
+<!-- 字体-->
+<GroupBoxFont>
+<Caption>Police de caractères</Caption>
+</GroupBoxFont>
+</TFrameOptionTiming>
+<!-- 表盘盘区域参数设置界面-->
+<TFrameOptionWatch>
+<!-- 表盘属性-->
+<GroupBoxRegionInfo>
+<Caption>Composez Propriétés</Caption>
+</GroupBoxRegionInfo>
+<LabelStyle>
+<Caption>Style</Caption>
+</LabelStyle>
+<cmbStyle>
+<Items>
+<Item>Tradition</Item>
+</Items>
+</cmbStyle>
+<LabelTickWidth>
+<Caption>Largeur</Caption>
+</LabelTickWidth>
+<LabelTickColor>
+<Caption>Couleur</Caption>
+</LabelTickColor>
+<LabelHourTickWidth>
+<Caption>Le point entier de propriété</Caption>
+</LabelHourTickWidth>
+<Label369TickWidth>
+<Caption>3.6.9 Propriétés des points</Caption>
+</Label369TickWidth>
+<LabelMinuteTickWidth>
+<Caption>Propriétés des points</Caption>
+</LabelMinuteTickWidth>
+<LabelLineWidth>
+<Caption>Largeur</Caption>
+</LabelLineWidth>
+<LabelLineColor>
+<Caption>Couleur</Caption>
+</LabelLineColor>
+<LabelHourLineWidth>
+<Caption>Dans le sens horaire</Caption>
+</LabelHourLineWidth>
+<LabelMinuteLineWidth>
+<Caption>Grande aiguille</Caption>
+</LabelMinuteLineWidth>
+<LabelSecondLineWidth>
+<Caption>Seconde main</Caption>
+</LabelSecondLineWidth>
+<!-- 时差-->
+<GroupBoxTimeDiff>
+<Caption>Décalage horaire</Caption>
+</GroupBoxTimeDiff>
+<LabelDeltHour>
+<Caption>Heure</Caption>
+</LabelDeltHour>
+<LabelDeltMinute>
+<Caption>Minute</Caption>
+</LabelDeltMinute>
+<!-- 固定文本-->
+<GroupBoxText>
+<Caption>Texte fixe</Caption>
+</GroupBoxText>
+<chkEnabledText>
+<Caption>Utilisez un texte fixe</Caption>
+</chkEnabledText>
+<btnTextDown>
+<Hint>Vers le bas</Hint>
+</btnTextDown>
+<btnTextLeft>
+<Hint>La gauche</Hint>
+</btnTextLeft>
+<btnTextCenter>
+<Hint>Centre</Hint>
+</btnTextCenter>
+<btnTextRight>
+<Hint>Décalée vers la droite</Hint>
+</btnTextRight>
+<btnTextUp>
+<Hint>Déplacer</Hint>
+</btnTextUp>
+</TFrameOptionWatch>
+<!--表格编辑主界面-->
+<CGridEditorMainForm>
+<Caption>Modification des tables</Caption>
+<!--单色-->
+<PopupMenuSingleColor>
+<Items>
+<Item>Non</Item>
+<Item>Rouge</Item>
+</Items>
+</PopupMenuSingleColor>
+<!--双色-->
+<PopupMenuTwoColor>
+<Items>
+<Item>Non</Item>
+<Item>Rouge</Item>
+<Item>Jaune</Item>
+<Item>Vert</Item>
+</Items>
+</PopupMenuTwoColor>
+</CGridEditorMainForm>
+<!--表格编辑插入表格界面-->
+<CGridEditorInsertCells>
+<Caption>Ajouter une table</Caption>
+<LabelType>
+<Caption>Type:</Caption>
+</LabelType>
+<optTypeRow>
+<Caption>Row</Caption>
+</optTypeRow>
+<optTypeCol>
+<Caption>Row</Caption>
+</optTypeCol>
+<LabelCount>
+<Caption>Quantité:</Caption>
+</LabelCount>
+<LabelPosition>
+<Caption>Localisation:</Caption>
+</LabelPosition>
+<optPositionCurrent>
+<Caption>Courant</Caption>
+</optPositionCurrent>
+<optPositionEnd>
+<Caption>Dernier</Caption>
+</optPositionEnd>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Annuler (&amp;C)</Caption>
+</btnCancel>
+</CGridEditorInsertCells>
+<!--表格编辑删除单元格界面-->
+<CGridEditorDeleteCells>
+<Caption>Supprimer les cellules</Caption>
+<optTypeRow>
+<Caption>Toute la gamme</Caption>
+</optTypeRow>
+<optTypeCol>
+<Caption>Colonne entière</Caption>
+</optTypeCol>
+<btnOK>
+<Caption>OK (&amp;O)</Caption>
+</btnOK>
+<btnCancel>
+<Caption>Annuler (&amp;C)</Caption>
+</btnCancel>
+</CGridEditorDeleteCells>
+</Languages>

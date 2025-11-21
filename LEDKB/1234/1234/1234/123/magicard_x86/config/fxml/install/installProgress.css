@@ -1,0 +1,72 @@
+#modalPane,#fadeInShape{
+   -fx-background-insets: 10;
+   -fx-background-radius: 8;
+   	-fx-background-color: #157A85;
+  /*  -fx-effect:dropshadow(three-pass-box, #64939B, 10, 0.5, 0, 0);*/
+}
+
+
+
+#titlePane{
+	-fx-background-color: #BCBCBC;
+	-fx-background-insets: 10;
+    -fx-background-radius: 5 5 0 0;
+}
+
+
+#confirmPane{
+	-fx-background-color: #BCBCBC;
+	-fx-background-insets: 10;
+    -fx-background-radius: 0 0 5 5;
+    /*-fx-border-color: #C5C5C5,#C5C5C5,#C5C5C5,red;
+     
+    -fx-border-radius:10;
+    -fx-border-insets: 0,0,5,0;*/
+}
+
+#title,#confirmText{
+	-fx-fill: #4B4B4B;
+	-fx-font-weight:bold;
+
+}
+
+#confirmPane:hover{
+	-fx-background-color: #D1D1D1;
+	    -fx-background-radius: 0 0 5 5;
+}
+#progress{
+-fx-accent:white;
+}
+
+#installing{
+	-fx-fill: white;
+	-fx-font-size:20;
+}
+#fontOne,#fontTwo,#fontThree,#desOne,#desTwo,#desThree,#fontFour,#fontFive,#fontSix,#desFour,#desFive,#desSix{
+	-fx-fill: white;
+
+    
+}
+#desOne,#desTwo,#desThree,#desFour,#desFive,#desSix{
+	-fx-font-family: 'Microsoft YaHei';
+	-fx-font-weight:bold;
+}
+
+#progressPercent,#installing{
+	-fx-text-fill: white;
+	-fx-font-family: 'Microsoft YaHei';
+	-fx-font-weight:bold;
+}
+
+.root {
+  -fx-opacity: 1;
+}
+
+#closeText,#minText{
+	-fx-fill:#A3C6E5;
+}
+
+#closePaneForProgress:hover,#minPane:hover{
+	-fx-background-color:white;
+	-fx-cursor:hand;
+}

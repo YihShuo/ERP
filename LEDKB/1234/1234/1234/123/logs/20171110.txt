@@ -1,0 +1,7 @@
+=================================
+Time:10:57:22:162
+ClassName:TApplication
+UnitName:Forms
+Message:Access violation at address 005288CB in module 'X Show 2015(V5.0.4.9).exe'. Read of address 00000010
+ToString:Access violation at address 005288CB in module 'X Show 2015(V5.0.4.9).exe'. Read of address 00000010
+=================================

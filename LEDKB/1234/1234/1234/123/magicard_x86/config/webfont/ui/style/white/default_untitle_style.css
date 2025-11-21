@@ -1,0 +1,49 @@
+.root {
+  -fx-opacity: 1;
+}
+
+#rootParent{
+   -fx-background-insets: 10;
+   -fx-background-radius: 10;
+   -fx-background-color: white;
+   -fx-effect:dropshadow(three-pass-box, #2C2D30, 10, 0.5, 0, 0);
+}
+
+#titleBox{
+	-fx-background-insets: 10;
+    -fx-background-radius: 5 5 0 0;
+}
+
+#actionBox{
+
+	-fx-background-insets: 0 10 10 10;
+    -fx-background-radius: 0 0 5 5;
+}
+
+#title{
+	-fx-font-weight:bold;
+	-fx-fill: #404040;
+}
+
+#title:hover{
+	-fx-fill:red;
+	-fx-cursor:hand;
+}
+
+#contentBox {
+	-fx-background-insets: 0 10 0 10;
+} 
+
+#content{
+	-fx-fill: #5A5A5A;
+	-fx-font-family: 'Microsoft YaHei';
+}
+
+#confirmBtn,#cancelBtn{
+	-fx-text-fill: #5A5A5A;
+	-fx-font-family: 'Microsoft YaHei';
+}
+
+#confirmBtn:hover,#cancelBtn:hover{
+	-fx-cursor:hand;
+}

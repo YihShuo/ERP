@@ -1,0 +1,70 @@
+.root {
+  -fx-opacity: 1;
+  
+}
+#closeText,#minText{
+	-fx-fill:#A3C6E5;
+}
+
+#closePane:hover,#minPane:hover{
+	-fx-background-color:white;
+	-fx-cursor:hand;
+}
+#header{
+	-fx-background-radius: 5 5 0 0;
+}
+#activeFont,#trailFont,#activeUserNameText,#activePasswordText,#activeConfirmText,#activeCodeText
+,#activeUserNameReminderTwo,#activePasswordReminderTwo,#activeConfirmReminderTwo,#activeCodeReminderTwo
+,#activeReminderTwo,#activeReminderThree{
+	-fx-font-family: 'Microsoft YaHei';
+}
+#activeFont,#trailFont,#activeUserNameText,#activePasswordText,#activeConfirmText,#activeCodeText
+,#activeUserNameReminderTwo,#activePasswordReminderTwo,#activeConfirmReminderTwo,#activeCodeReminderTwo
+,#trialWebFont,#activeWebFont{
+	-fx-fill:gray;
+}
+
+#trialFont,#trailFont,#trialUserNameText,#trialPasswordText,#trialConfirmText,#trialCodeText
+,#trialUserNameReminderTwo,#trialPasswordReminderTwo,#trialConfirmReminderTwo,#trialCodeReminderTwo
+,#trialReminderTwo,#trialReminderThree,#activeBtnText,#trialFailedDesc,#activeFailedDesc{
+	-fx-font-family: 'Microsoft YaHei';
+}
+#trialFont,#trailFont,#trialUserNameText,#trialPasswordText,#trialConfirmText,#trialCodeText
+,#trialUserNameReminderTwo,#trialPasswordReminderTwo,#trialConfirmReminderTwo,#trialCodeReminderTwo{
+	-fx-fill:gray;
+}
+
+#activeUserNameReminderOne,#activePasswordReminderOne,#activeConfirmReminderOne,#activeCodeReminderOne,
+#trialUserNameReminderOne,#trialPasswordReminderOne,#trialConfirmReminderOne,#trialCodeReminderOne{
+	-fx-fill:red;
+	-fx-font-size:24;
+}
+
+#activeFont,#trailFont{
+	-fx-font-weight:bold;
+}
+
+#trialWebFont,#trailFont{
+	-fx-fill:white;
+}
+
+#activeReminderOne,#trialReminderOne{
+	-fx-fill:#0F98A5;
+}
+
+#activeBtnlevelOnePane,#activeBtnlevelOnePaneByCellphone{
+	-fx-background-color:#0F98A5;
+}
+
+#activeBtnlevelOnePane:hover,#activeBtnlevelOnePaneByCellphone:hover{
+	-fx-cursor:hand;
+	-fx-background-color:#34868E;
+}
+
+#superModal{
+	-fx-background-insets: 10;
+   -fx-background-radius: 7;
+
+   -fx-effect:dropshadow(three-pass-box, #505050, 10, 0.5, 0, 0);
+}
+
