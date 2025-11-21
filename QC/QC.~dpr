@@ -149,7 +149,10 @@ uses
   Failed_Cartons_Input_Depname1 in 'Source\SN4A\Failed_Cartons_Input_Depname1.pas' {Failed_Cartons_Input_Depname},
   Failed_Cartons_Input_ID1 in 'Source\SN4A\Failed_Cartons_Input_ID1.pas' {Failed_Cartons_Input_ID},
   Failed_Cartons_Input1 in 'Source\SN4A\Failed_Cartons_Input1.pas' {Failed_Cartons_Input},
-  InventoryBC_Print1 in 'Source\SN35\InventoryBC_Print1.pas' {InventoryBC_Print};
+  InventoryBC_Print1 in 'Source\SN35\InventoryBC_Print1.pas' {InventoryBC_Print},
+  NguyenLieuDauVaoTN in 'Source\SN9\NguyenLieuDauVaoTN.pas' {IncomingMatTest},
+  DailyOutsourcingCheck_ in 'Source\SN9\DailyOutsourcingCheck_.pas' {DailyOutsourcingCheck},
+  IncomeMatRubberOutsole in 'Source\SN9\IncomeMatRubberOutsole.pas' {IncomeMatRubberOutsoles};
 
 {$R *.res}
 
@@ -174,7 +177,6 @@ begin
   Application.Title := 'Lai Yih ERP system----QC';
   Application.CreateForm(TDM2, DM2);
   Application.CreateForm(Tmain, main);
-  //Application.CreateForm(TMaterialTest, MaterialTest);
   QCFlowChart := TQCFlowChart.Create(main);
   login.Hide;
   login.Free;

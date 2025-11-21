@@ -3454,7 +3454,7 @@ begin
             sql.Add('		     round((sum(isnull(Leather_GradeP.AcQty,0) - isnull(Grade7.AcQty,0)) - sum(isnull(Leather_GradeP.DeQty,0) - isnull(Grade7.DeQty,0)))/sum(isnull(Leather_GradeP.AcQty,0) - isnull(Grade7.AcQty,0))*100,0)  end Per_Use');
             }
             sql.Add('from Leather_GradeP');
-            sql.Add('LEFT JOIN (SELECT No_ID,Package,Sequence,Grade,AcQty,DeQty');
+            sql.Add('LEFT JOIN (  SELECT No_ID,Package,Sequence,Grade,AcQty,DeQty');
             sql.Add('						  FROM Leather_GradeP WHERE SP=''N'' AND Grade = ''VII'' AND No_ID=:No_ID ');
             sql.Add('          )Grade7 ON Grade7.No_ID=Leather_GradeP.No_ID AND Grade7.Package = Leather_GradeP.Package');
             sql.Add('									AND Grade7.Sequence = Leather_GradeP.Sequence AND Grade7.Grade = Leather_GradeP.Grade');

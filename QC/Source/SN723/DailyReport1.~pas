@@ -234,7 +234,7 @@ begin
             sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP3.date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP4.date)+''' ');
         end;
         if edtMatID.Text <> '' then
-            sql.Add('       and mc.CLBH like ''%'+edtMatID.Text+'%'' ');
+            sql.Add('       and CLBH like ''%'+edtMatID.Text+'%'' ');
         if edtSupp.Text <> '' then
             sql.Add('       and ZSYWJC like ''%'+edtSupp.Text+'%'' ');
         if edtArticle.Text <> '' then

@@ -198,11 +198,6 @@ type
     procedure N922LabTestInput1Click(Sender: TObject);
     procedure N923KCSSupervisor1Click(Sender: TObject);
     procedure N924KCSLeader1Click(Sender: TObject);
-    procedure N931QCInput1Click(Sender: TObject);
-    procedure N932LabTestInput1Click(Sender: TObject);
-    procedure N933KCSSupervisorCfm1Click(Sender: TObject);
-    procedure N934KCSLeaderCfm1Click(Sender: TObject);
-    procedure N935MaterialSupervisorCfm1Click(Sender: TObject);
 
   private
     MKID: string;
@@ -1002,36 +997,6 @@ procedure Tmain.N924KCSLeader1Click(Sender: TObject);
 begin
   ShowFm(Pointer(DailyOutsourcingCheck), TDailyOutsourcingCheck, TMenuItem(Sender).Name);
   DailyOutsourcingCheck.MenuCode.Text := 'N924';
-end;
-
-procedure Tmain.N931QCInput1Click(Sender: TObject);
-begin
-  ShowFm(Pointer(IncomeMatRubberOutsoles), TIncomeMatRubberOutsoles, TMenuItem(Sender).Name);
-  IncomeMatRubberOutsoles.MenuCode.Text := 'N931'
-end;
-
-procedure Tmain.N932LabTestInput1Click(Sender: TObject);
-begin
-  ShowFm(Pointer(IncomeMatRubberOutsoles), TIncomeMatRubberOutsoles, TMenuItem(Sender).Name);
-  IncomeMatRubberOutsoles.MenuCode.Text := 'N932'
-end;
-
-procedure Tmain.N933KCSSupervisorCfm1Click(Sender: TObject);
-begin
-  ShowFm(Pointer(IncomeMatRubberOutsoles), TIncomeMatRubberOutsoles, TMenuItem(Sender).Name);
-  IncomeMatRubberOutsoles.MenuCode.Text := 'N933'
-end;
-
-procedure Tmain.N934KCSLeaderCfm1Click(Sender: TObject);
-begin
-  ShowFm(Pointer(IncomeMatRubberOutsoles), TIncomeMatRubberOutsoles, TMenuItem(Sender).Name);
-  IncomeMatRubberOutsoles.MenuCode.Text := 'N934'
-end;
-
-procedure Tmain.N935MaterialSupervisorCfm1Click(Sender: TObject);
-begin
-  ShowFm(Pointer(IncomeMatRubberOutsoles), TIncomeMatRubberOutsoles, TMenuItem(Sender).Name);
-  IncomeMatRubberOutsoles.MenuCode.Text := 'N935'
 end;
 
 end.

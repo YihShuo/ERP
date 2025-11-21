@@ -1,8 +1,8 @@
 object MatQcCheck: TMatQcCheck
-  Left = 475
-  Top = 321
+  Left = 257
+  Top = 158
   Width = 1425
-  Height = 630
+  Height = 832
   Caption = 'MatQcCheck'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -841,7 +841,7 @@ object MatQcCheck: TMatQcCheck
     Left = 0
     Top = 117
     Width = 1409
-    Height = 474
+    Height = 676
     ActivePage = TabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
@@ -855,7 +855,7 @@ object MatQcCheck: TMatQcCheck
       Caption = 'All'
       object Splitter3: TSplitter
         Left = 0
-        Top = 233
+        Top = 345
         Width = 1401
         Height = 2
         Cursor = crVSplit
@@ -867,7 +867,7 @@ object MatQcCheck: TMatQcCheck
         Left = 0
         Top = 0
         Width = 1401
-        Height = 233
+        Height = 345
         Align = alTop
         DataSource = DS_Qc
         Flat = False
@@ -1491,9 +1491,9 @@ object MatQcCheck: TMatQcCheck
       end
       object PageControl3: TPageControl
         Left = 0
-        Top = 235
+        Top = 347
         Width = 1401
-        Height = 208
+        Height = 298
         ActivePage = TabSheet7
         Align = alClient
         TabOrder = 1
@@ -1672,7 +1672,7 @@ object MatQcCheck: TMatQcCheck
             Left = 0
             Top = 42
             Width = 1393
-            Height = 135
+            Height = 225
             Align = alClient
             DataSource = DS_RY
             Flat = False
@@ -1757,7 +1757,7 @@ object MatQcCheck: TMatQcCheck
       object Splitter1: TSplitter
         Left = 358
         Top = 0
-        Height = 451
+        Height = 645
         Color = clSkyBlue
         ParentColor = False
       end
@@ -1765,7 +1765,7 @@ object MatQcCheck: TMatQcCheck
         Left = 729
         Top = 0
         Width = 2
-        Height = 451
+        Height = 645
         Color = clSkyBlue
         ParentColor = False
       end
@@ -1773,7 +1773,7 @@ object MatQcCheck: TMatQcCheck
         Left = 0
         Top = 0
         Width = 358
-        Height = 451
+        Height = 645
         Align = alLeft
         TabOrder = 0
         object Panel9: TPanel
@@ -1790,7 +1790,7 @@ object MatQcCheck: TMatQcCheck
           Left = 1
           Top = 34
           Width = 356
-          Height = 416
+          Height = 610
           Align = alClient
           DataSource = DS1
           Flat = False
@@ -1833,7 +1833,7 @@ object MatQcCheck: TMatQcCheck
         Left = 361
         Top = 0
         Width = 368
-        Height = 451
+        Height = 645
         Align = alLeft
         TabOrder = 1
         object Panel10: TPanel
@@ -1850,7 +1850,7 @@ object MatQcCheck: TMatQcCheck
           Left = 1
           Top = 34
           Width = 366
-          Height = 416
+          Height = 610
           Align = alClient
           DataSource = DS2
           Flat = False
@@ -1892,14 +1892,14 @@ object MatQcCheck: TMatQcCheck
       object Panel8: TPanel
         Left = 731
         Top = 0
-        Width = 483
-        Height = 451
+        Width = 670
+        Height = 645
         Align = alClient
         TabOrder = 2
         object Panel12: TPanel
           Left = 1
           Top = 1
-          Width = 481
+          Width = 668
           Height = 33
           Align = alTop
           Caption = 'Chat luong vat tu (Material Quality)'
@@ -1909,8 +1909,8 @@ object MatQcCheck: TMatQcCheck
         object DBGridEh4: TDBGridEh
           Left = 1
           Top = 34
-          Width = 481
-          Height = 416
+          Width = 668
+          Height = 610
           Align = alClient
           DataSource = DS3
           Flat = False
@@ -1953,8 +1953,8 @@ object MatQcCheck: TMatQcCheck
   end
   object DS_Qc: TDataSource
     DataSet = qry_Qc
-    Left = 176
-    Top = 272
+    Left = 168
+    Top = 344
   end
   object Upd_QC: TUpdateSQL
     ModifySQL.Strings = (
@@ -2003,13 +2003,13 @@ object MatQcCheck: TMatQcCheck
     DeleteSQL.Strings = (
       'delete from MaterialQCcheck '
       'where NO_ID=:old_NO_ID')
-    Left = 176
-    Top = 304
+    Left = 168
+    Top = 392
   end
   object Pop_All: TPopupMenu
     AutoHotkeys = maManual
-    Left = 424
-    Top = 312
+    Left = 568
+    Top = 288
     object mnu2: TMenuItem
       Caption = 'Download Reprot/GL'
       Enabled = False
@@ -2028,13 +2028,13 @@ object MatQcCheck: TMatQcCheck
   end
   object OpenDialog1: TOpenDialog
     Filter = '*.*'
-    Left = 460
-    Top = 314
+    Left = 628
+    Top = 298
   end
   object SaveDialog1: TSaveDialog
     Filter = '*.*'
-    Left = 492
-    Top = 314
+    Left = 700
+    Top = 298
   end
   object qry_Qc: TQuery
     AfterOpen = qry_QcAfterOpen
@@ -2075,8 +2075,8 @@ object MatQcCheck: TMatQcCheck
       'and ZSYWJC like '#39'%'#39
       'order by mc.Userdate desc,CLBH,LB asc')
     UpdateObject = Upd_QC
-    Left = 176
-    Top = 240
+    Left = 168
+    Top = 296
     object qry_QcNo_ID: TAutoIncField
       FieldName = 'No_ID'
     end
@@ -2320,8 +2320,8 @@ object MatQcCheck: TMatQcCheck
       'select CodeID,DefectName'
       'from QC_MatDefect'
       'where Types='#39'A'#39' and GSBH=:GSBH')
-    Left = 717
-    Top = 430
+    Left = 1029
+    Top = 590
     ParamData = <
       item
         DataType = ftUnknown
@@ -2347,8 +2347,8 @@ object MatQcCheck: TMatQcCheck
       'select CodeID,DefectName'
       'from QC_MatDefect'
       'where Types='#39'C'#39' and GSBH=:GSBH')
-    Left = 760
-    Top = 430
+    Left = 1096
+    Top = 606
     ParamData = <
       item
         DataType = ftUnknown
@@ -2374,8 +2374,8 @@ object MatQcCheck: TMatQcCheck
       'select CodeID,DefectName'
       'from QC_MatDefect'
       'where Types='#39'M'#39' and GSBH=:GSBH')
-    Left = 808
-    Top = 430
+    Left = 1160
+    Top = 606
     ParamData = <
       item
         DataType = ftUnknown
@@ -2397,28 +2397,28 @@ object MatQcCheck: TMatQcCheck
   end
   object DS1: TDataSource
     DataSet = qry_App
-    Left = 717
-    Top = 462
+    Left = 1037
+    Top = 670
   end
   object DS2: TDataSource
     DataSet = qry_Color
-    Left = 760
-    Top = 462
+    Left = 1104
+    Top = 678
   end
   object DS3: TDataSource
     DataSet = qry_MatQuality
-    Left = 804
-    Top = 462
+    Left = 1164
+    Top = 662
   end
   object Query1: TQuery
     DatabaseName = 'DB'
-    Left = 211
-    Top = 240
+    Left = 219
+    Top = 352
   end
   object Pop_defects: TPopupMenu
     AutoHotkeys = maManual
-    Left = 760
-    Top = 511
+    Left = 1104
+    Top = 727
     object Defects1: TMenuItem
       Caption = 'Defects...'
       OnClick = Defects1Click
@@ -2434,8 +2434,8 @@ object MatQcCheck: TMatQcCheck
       '  left join lbzls on do.DDGB=lbzls.lbdh and lbzls.lb='#39'13'#39
       'where No_ID=:No_ID')
     UpdateObject = Upd_RY
-    Left = 260
-    Top = 407
+    Left = 284
+    Top = 527
     ParamData = <
       item
         DataType = ftAutoInc
@@ -2492,8 +2492,8 @@ object MatQcCheck: TMatQcCheck
   end
   object DS_RY: TDataSource
     DataSet = qry_RY
-    Left = 292
-    Top = 407
+    Left = 324
+    Top = 535
   end
   object Upd_RY: TUpdateSQL
     ModifySQL.Strings = (
@@ -2515,7 +2515,7 @@ object MatQcCheck: TMatQcCheck
     DeleteSQL.Strings = (
       'DELETE MaterialQCcheck_RY'
       'WHERE No_ID=:old_No_ID AND RY=:old_RY   ')
-    Left = 324
-    Top = 407
+    Left = 364
+    Top = 527
   end
 end

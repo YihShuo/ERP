@@ -1,0 +1,657 @@
+unit IncomeMatRubberOutsole;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DBTables, DB, GridsEh, DBGridEh, StdCtrls, Mask, DBCtrls,
+  Buttons, ExtCtrls, ComObj, ShellAPI, ComCtrls, DBCtrlsEh;
+
+type
+  TIncomeMatRubberOutsoles = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    BB1: TBitBtn;
+    BB2: TBitBtn;
+    BB3: TBitBtn;
+    BB4: TBitBtn;
+    BB5: TBitBtn;
+    BB6: TBitBtn;
+    Button1: TButton;
+    bbt6: TBitBtn;
+    edtDDBH: TEdit;
+    bExcel: TBitBtn;
+    bExF: TBitBtn;
+    cbPDF: TCheckBox;
+    edtZSBH: TEdit;
+    ckUSERDate: TCheckBox;
+    dtpUSERDate: TDateTimePicker;
+    MenuCode: TEdit;
+    edtRID: TEdit;
+    DBGrid1: TDBGridEh;
+    Query1: TQuery;
+    DS1: TDataSource;
+    UpSQL1: TUpdateSQL;
+    Qtemp: TQuery;
+    OpenDialog1: TOpenDialog;
+    SaveDialog: TSaveDialog;
+    QGetID: TQuery;
+    Query1ReportID: TAutoIncField;
+    Query1InspecDate: TDateTimeField;
+    Query1CLBH: TStringField;
+    Query1Supplier: TStringField;
+    Query1XieMing: TStringField;
+    Query1DDBH: TStringField;
+    Query1TOderQty: TIntegerField;
+    Query1RQty: TIntegerField;
+    Query1Article: TStringField;
+    Query1Size: TStringField;
+    Query1TArrQty: TIntegerField;
+    Query1IQty: TIntegerField;
+    Query1LHard: TStringField;
+    Query1RHard: TStringField;
+    Query1SHard: TStringField;
+    Query1LWeight: TStringField;
+    Query1RWeight: TStringField;
+    Query1SWeight: TStringField;
+    Query1Issues: TStringField;
+    Query1DeQty: TIntegerField;
+    Query1DeRate: TFloatField;
+    Query1WPLLen: TIntegerField;
+    Query1WPRLen: TIntegerField;
+    Query1WPLSize: TIntegerField;
+    Query1WPRSize: TIntegerField;
+    Query1SendDate: TDateTimeField;
+    Query1LabID: TStringField;
+    Query1LabResult: TStringField;
+    Query1Reject: TStringField;
+    Query1SCFID: TStringField;
+    Query1SCFDate: TDateTimeField;
+    Query1LCFID: TStringField;
+    Query1LCFDate: TDateTimeField;
+    Query1MSCFID: TStringField;
+    Query1MSCFDate: TDateTimeField;
+    Query1YN: TIntegerField;
+    Query1USERID: TStringField;
+    Query1USERDate: TDateTimeField;
+    dtpInsDate: TDateTimePicker;
+    Label5: TLabel;
+    edtStyle: TEdit;
+    Label6: TLabel;
+    edtTOQty: TEdit;
+    Label7: TLabel;
+    edtMatID: TEdit;
+    Label8: TLabel;
+    edtRQty: TEdit;
+    Label9: TLabel;
+    edtSKU: TEdit;
+    btClear: TButton;
+    ckInsDate: TCheckBox;
+    procedure Button1Click(Sender: TObject);
+    function NewID: string;
+    procedure BB1Click(Sender: TObject);
+    procedure BB2Click(Sender: TObject);
+    procedure BB3Click(Sender: TObject);
+    procedure BB4Click(Sender: TObject);
+    procedure BB5Click(Sender: TObject);
+    procedure DBGrid1KeyPress(Sender: TObject; var Key: Char);
+    procedure Query1AfterOpen(DataSet: TDataSet);
+    procedure bExcelClick(Sender: TObject);
+    procedure bExFClick(Sender: TObject);
+    procedure Query1AfterScroll(DataSet: TDataSet);
+    procedure btClearClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  IncomeMatRubberOutsoles: TIncomeMatRubberOutsoles;
+
+implementation
+
+uses main1;
+
+{$R *.dfm}
+
+function TIncomeMatRubberOutsoles.NewID: string;
+var
+  Prefix, LastID: string;
+  Seq: Integer;
+begin
+  Prefix := FormatDateTime('yymm', Date);
+
+  with QGetID do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add(
+      'select top 1 ReportID ' +
+      'from QC_RubSole ' +
+      'where left(ReportID, 4) = :P ' +
+      'order by ReportID desc');
+    ParamByName('P').AsString := Prefix;
+    Active := true;
+  end;
+
+  if QGetID.IsEmpty then
+    Seq := 1
+  else
+  begin
+    LastID := QGetID.FieldByName('ReportID').AsString;
+    Seq := StrToInt(Copy(LastID, 5, 4)) + 1;
+  end;
+
+  Result := Prefix + FormatFloat('0000', Seq);
+end;
+
+procedure TIncomeMatRubberOutsoles.Button1Click(Sender: TObject);
+begin
+
+  if MenuCode.Text = 'N931' then
+  begin
+    DBGrid1.FieldColumns['LabID'].ReadOnly := True;
+    DBGrid1.FieldColumns['LabResult'].ReadOnly := True;
+    DBGrid1.FieldColumns['Reject'].ReadOnly := True;
+    DBGrid1.FieldColumns['SCFID'].ReadOnly := True;
+    DBGrid1.FieldColumns['LCFID'].ReadOnly := True;
+    DBGrid1.FieldColumns['MSCFID'].ReadOnly := True;
+  end else if MenuCode.Text = 'N932' then
+  begin
+    DBGrid1.FieldColumns['MatName'].ReadOnly := True;
+    DBGrid1.FieldColumns['XieMing'].ReadOnly := True;
+    DBGrid1.FieldColumns['Article'].ReadOnly := True;
+    DBGrid1.FieldColumns['DDBH'].ReadOnly := True;
+    DBGrid1.FieldColumns['CLBH'].ReadOnly := True;
+    DBGrid1.FieldColumns['RQty'].ReadOnly := True;
+    DBGrid1.FieldColumns['SendDate'].ReadOnly := True;
+    DBGrid1.FieldColumns['ZSBH'].ReadOnly := True;
+    DBGrid1.FieldColumns['SCFID'].ReadOnly := True;
+    DBGrid1.FieldColumns['LCFID'].ReadOnly := True;
+    DBGrid1.FieldColumns['MSCFID'].ReadOnly := True;
+  end else if MenuCode.Text = 'N933' then
+  begin
+    DBGrid1.FieldColumns['LabRequest'].ReadOnly := True;
+    DBGrid1.FieldColumns['LabID'].ReadOnly := True;
+    DBGrid1.FieldColumns['Result'].ReadOnly := True;
+    DBGrid1.FieldColumns['Defects'].ReadOnly := True;
+    DBGrid1.FieldColumns['MatName'].ReadOnly := True;
+    DBGrid1.FieldColumns['XieMing'].ReadOnly := True;
+    DBGrid1.FieldColumns['Article'].ReadOnly := True;
+    DBGrid1.FieldColumns['DDBH'].ReadOnly := True;
+    DBGrid1.FieldColumns['CLBH'].ReadOnly := True;
+    DBGrid1.FieldColumns['RQty'].ReadOnly := True;
+    DBGrid1.FieldColumns['SendDate'].ReadOnly := True;
+    DBGrid1.FieldColumns['ResultDate'].ReadOnly := True;
+    DBGrid1.FieldColumns['ZSBH'].ReadOnly := True;
+    DBGrid1.FieldColumns['LCFID'].ReadOnly := True;
+  end else if MenuCode.Text = 'N934' then
+  begin
+    DBGrid1.FieldColumns['LabRequest'].ReadOnly := True;
+    DBGrid1.FieldColumns['LabID'].ReadOnly := True;
+    DBGrid1.FieldColumns['Result'].ReadOnly := True;
+    DBGrid1.FieldColumns['Defects'].ReadOnly := True;
+    DBGrid1.FieldColumns['MatName'].ReadOnly := True;
+    DBGrid1.FieldColumns['XieMing'].ReadOnly := True;
+    DBGrid1.FieldColumns['Article'].ReadOnly := True;
+    DBGrid1.FieldColumns['DDBH'].ReadOnly := True;
+    DBGrid1.FieldColumns['CLBH'].ReadOnly := True;
+    DBGrid1.FieldColumns['RQty'].ReadOnly := True;
+    DBGrid1.FieldColumns['SendDate'].ReadOnly := True;
+    DBGrid1.FieldColumns['ResultDate'].ReadOnly := True;
+    DBGrid1.FieldColumns['ZSBH'].ReadOnly := True;
+    DBGrid1.FieldColumns['SCFID'].ReadOnly := True;
+  end;
+
+  with Query1 do
+  begin
+    Active:= false;
+    SQL.Clear;
+    SQL.Add('select * from QC_RubSole ');
+    SQL.Add('where DDBH like '''+edtDDBH.Text+'%'' ');
+    
+    if ckInsDate.Checked then
+      SQL.Add('and CAST(InspecDate as DATE) = '''+FormatDateTime('yyyy-mm-dd hh:nn:ss', dtpInsDate.Date)+''' ');
+    if edtMatID.Text <> '' then
+      SQL.Add('and CLBH like '''+edtMatID.Text+''' ');
+    if edtZSBH.Text <> '' then
+      SQL.Add('and Supplier like '''+edtZSBH.Text+''' ');
+    if edtRID.Text <> '' then
+      SQL.Add('and ReportID like '''+edtRID.Text+''' ');
+    Active := true;
+  end;
+end;
+
+procedure TIncomeMatRubberOutsoles.BB1Click(Sender: TObject);
+begin
+  with query1 do
+  begin
+  RequestLive :=  true;
+  CachedUpdates:= true;
+  Insert;
+  end;
+bb4.enabled:=true;
+bb5.enabled:=true;
+end;
+
+procedure TIncomeMatRubberOutsoles.BB2Click(Sender: TObject);
+begin
+if messagedlg('Are you sure you want to delete?',mtconfirmation,[mbYes,mbNo],0)<>mrYes then
+  begin
+    abort;
+  end;
+with query1 do
+  begin
+    cachedupdates:=true;
+    requestlive:=true;
+    edit;
+    fieldbyname('YN').Value:=0;
+    dbgrid1.ReadOnly := true;
+  end;
+bb4.enabled:=true;
+bb5.enabled:=true;
+end;
+
+procedure TIncomeMatRubberOutsoles.BB3Click(Sender: TObject);
+begin
+with query1 do
+  begin
+    cachedupdates:=true;
+    requestlive:=true;
+    query1.edit;
+  end;
+bb4.enabled:=true;
+bb5.enabled:=true;
+//DBGrid1.SetFocus;
+//DBGrid1.SelectedIndex := DBGrid1.FieldColumns['SCFID'].Index;
+end;
+
+procedure TIncomeMatRubberOutsoles.BB4Click(Sender: TObject);
+var i: integer;
+begin
+  if not QGetID.Active then QGetID.Active;
+  try
+    query1.first;
+    for i:=1 to query1.RecordCount do
+      begin
+        case query1.updatestatus of
+          usinserted:
+            begin
+              if query1.fieldbyname('DDBH').isnull then
+              begin
+                query1.delete;
+              end else
+              begin
+                Query1.Edit;
+                Query1.FieldByName('ReportID').Value := NewID;
+                Query1.FieldByName('USERID').Value := main.Edit1.Text;
+                Query1.FieldByName('YN').Value := 1;
+                Query1.FieldByName('USERDate').Value := FormatDateTime('yyyy-mm-dd hh:nn:ss', Now);
+                upsql1.apply(ukinsert);
+              end;
+            end;
+          usmodified:
+             begin
+               if query1.FieldByName('YN').value='0' then
+                 begin
+                   if messagedlg('Are you sure you want to delete?',mtconfirmation,[mbYes,mbNo],0)=mrYes then
+                   begin
+                    Query1.Edit;
+                    Query1.FieldByName('USERID').Value := main.Edit1.Text;
+                    UpSQL1.Apply(ukdelete)
+                   end;
+                 end else
+                 begin
+                  Query1.Edit;
+                  if MenuCode.Text = 'N931' then
+                    begin
+                      Query1.FieldByName('USERID').Value := main.Edit1.Text;
+                      Query1.FieldByName('USERDate').Value := FormatDateTime('yyyy-mm-dd hh:nn:ss', Now);
+                    end;
+                  if MenuCode.Text = 'N933' then
+                    begin
+                      Query1.FieldByName('SCFDate').Value := FormatDateTime('yyyy-mm-dd hh:nn:ss', Now);
+                    end;
+                  if MenuCode.Text = 'N934' then
+                    begin
+                      Query1.FieldByName('LCFDate').Value := FormatDateTime('yyyy-mm-dd hh:nn:ss', Now);
+                    end;
+                  if MenuCode.Text = 'N935' then
+                    begin
+                      Query1.FieldByName('MSCFDate').Value := FormatDateTime('yyyy-mm-dd hh:nn:ss', Now);
+                    end;
+                  upsql1.apply(ukmodify);
+                 end;
+              end;
+        end;
+        query1.next;
+      end;
+    query1.active:=false;
+    query1.cachedupdates:=false;
+    query1.requestlive:=false;
+    query1.active:=true;
+    bb4.enabled:=false;
+    bb5.enabled:=false;
+    dbgrid1.ReadOnly := false;
+  except
+   Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+  end;
+end;
+
+procedure TIncomeMatRubberOutsoles.BB5Click(Sender: TObject);
+begin
+  with Query1 do
+  begin
+    CachedUpdates := false;
+    RequestLive := false;
+    BB4.Enabled := false;
+    BB5.Enabled := false;
+    dbgrid1.ReadOnly := false;
+  end;
+end;
+
+procedure TIncomeMatRubberOutsoles.DBGrid1KeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  // Neu nhan Enter
+  if Key = #13 then
+  begin
+
+    if (DBGrid1.SelectedField.FieldName = 'SCFID') and (MenuCode.Text = 'N933') and Query1.CachedUpdates then
+    begin
+      Query1.Edit;
+      Query1.FieldByName('SCFID').AsString := main.Edit1.Text;
+      Query1.Post;
+    end;
+
+    if (DBGrid1.SelectedField.FieldName = 'LCFID') and (MenuCode.Text = 'N934') and Query1.CachedUpdates then
+    begin
+      Query1.Edit;
+      Query1.FieldByName('LCFID').AsString := main.Edit1.Text;
+      Query1.Post;
+    end;
+    if (DBGrid1.SelectedField.FieldName = 'MSCFID') and (MenuCode.Text = 'N935') and Query1.CachedUpdates then
+    begin
+      Query1.Edit;
+      Query1.FieldByName('MSCFID').AsString := main.Edit1.Text;
+      Query1.Post;
+    end;
+
+    if DBGrid1.SelectedField.FieldName = 'DDBH' then
+    begin
+      if Query1.CachedUpdates then
+      begin
+        Qtemp.Close;
+        Qtemp.SQL.Clear;
+        Qtemp.SQL.Add('select DDZL.DDBH, DDZL.ARTICLE, DDZL.Pairs, xxzl.XieMing from DDZL ');
+        Qtemp.SQL.Add('left join xxzl on xxzl.XieXing = DDZL.XieXing and xxzl.SheHao = DDZL.SheHao ');
+        Qtemp.SQL.Add('where DDZL.DDBH = :DDBH');
+        Qtemp.ParamByName('DDBH').AsString := DBGrid1.SelectedField.AsString;
+        Qtemp.Open;
+
+        if not Qtemp.IsEmpty then
+        begin
+          Query1.Edit;
+          Query1.FieldByName('ARTICLE').AsString := Qtemp.FieldByName('ARTICLE').AsString;
+          Query1.FieldByName('XieMing').AsString := Qtemp.FieldByName('XieMing').AsString;
+          Query1.FieldByName('TOderQty').AsString := Qtemp.FieldByName('Pairs').AsString;
+          Query1.Post;
+        end else
+        begin
+          Query1.Edit;
+          Query1.FieldByName('ARTICLE').AsString := '';
+          Query1.FieldByName('XieMing').AsString := '';
+          Query1.FieldByName('TOderQty').AsString := '';
+          Query1.Post;
+        end;
+      end;
+    end;
+  end;
+end;
+
+procedure TIncomeMatRubberOutsoles.Query1AfterOpen(DataSet: TDataSet);
+begin
+  BB1.Enabled:=true;
+  BB2.Enabled:=true;
+  BB3.Enabled:=true;
+  bbt6.Enabled:=true;
+  bExcel.Enabled := true;
+  bExF.Enabled := true;
+end;
+
+procedure TIncomeMatRubberOutsoles.bExcelClick(Sender: TObject);
+var
+  ExcelApp, Workbook, Worksheet: OleVariant;
+  Row, Col: Integer;
+begin
+  ExcelApp := CreateOleObject('Excel.Application');
+  ExcelApp.Visible := True;
+
+  Workbook := ExcelApp.Workbooks.Add;
+  Worksheet := Workbook.Worksheets[1];
+
+  for Col := 0 to Query1.FieldCount - 1 do
+    Worksheet.Cells[1, Col + 1] := Query1.Fields[Col].FieldName;
+
+  Row := 2;
+  Query1.First;
+  while not Query1.Eof do
+  begin
+    for Col := 0 to Query1.FieldCount - 1 do
+      Worksheet.Cells[Row, Col + 1] := Query1.Fields[Col].AsString;
+    Inc(Row);
+    Query1.Next;
+  end;
+  Worksheet.Columns.AutoFit;
+end;
+
+procedure TIncomeMatRubberOutsoles.bExFClick(Sender: TObject);
+var
+  ExcelApp, Workbook, Worksheet, borderRange: OleVariant;
+  StartRow, InsertRow: Integer;
+  DuongDanFile, SaveFile, s: string;
+  i, p: Integer;
+  MaxHeight: Double;
+begin
+  DuongDanFile := ExtractFilePath(ParamStr(0)) + 'A-QIP-WS001-03D.xlsx';
+
+  StartRow := 10;
+
+  SaveDialog := TSaveDialog.Create(nil);
+  try
+    if not cbPDF.Checked then
+    begin
+      SaveDialog.Filter := 'Excel Files (*.xlsx)|*.xlsx';
+      SaveDialog.DefaultExt := 'xlsx';
+      SaveDialog.FileName := 'A-QIP-WS001-03D_' + FormatDateTime('yyyy-mm-dd_hh-nn-ss', Now) + '.xlsx';
+      SaveDialog.Title := 'Chon noi luu file Excel moi';
+    end else
+    begin
+      SaveDialog.Filter := 'PDF (*.pdf)|*.pdf';
+      SaveDialog.DefaultExt := 'pdf';
+      SaveDialog.FileName := 'A-QIP-WS001-03D_' + FormatDateTime('yyyy-mm-dd_hh-nn-ss', Now) + '.pdf';
+      SaveDialog.Title := 'Chon noi luu file PDF moi';
+    end;
+
+    if not SaveDialog.Execute then
+      Exit;
+
+    SaveFile := SaveDialog.FileName;
+  finally
+    SaveDialog.Free;
+  end;
+
+  ExcelApp := CreateOleObject('Excel.Application');
+
+  Workbook := ExcelApp.Workbooks.Open(DuongDanFile);
+  Worksheet := Workbook.WorkSheets[1];
+
+  //hang 2
+  for i := 1 to 20 do
+  begin
+    s := VarToStr(Worksheet.Cells[2, i].Value);
+    p := Pos(Chr(10), s);
+
+    if p = 0 then
+      p := Length(s) + 1
+    else
+      p := p + 1;
+
+    case i of
+      1: Worksheet.Cells[2, i].Characters(p, 0).Text :=
+            ' ' + FormatDateTime('yyyy-mm-dd', dtpInsDate.Date);
+
+      7: Worksheet.Cells[2, i].Characters(p, 0).Text :=
+            ' ' + edtMatID.Text;
+      12: Worksheet.Cells[2, i].Characters(p, 0).Text :=
+            ' ' + edtZSBH.Text;
+    end;
+  end;
+
+  //hang 3
+  for i := 1 to 20 do
+  begin
+    s := VarToStr(Worksheet.Cells[3, i].Value);
+    p := Pos(Chr(10), s);
+
+    if p = 0 then
+      p := Length(s) + 1
+    else
+      p := p + 1;
+
+    case i of
+      1: Worksheet.Cells[3, i].Characters(p, 0).Text :=
+            ' ' + edtStyle.Text;
+
+      7: Worksheet.Cells[3, i].Characters(p, 0).Text :=
+            ' ' + edtDDBH.Text;
+    end;
+  end;
+
+  //hang 4
+  for i := 1 to 20 do
+  begin
+    s := VarToStr(Worksheet.Cells[4, i].Value);
+    p := Pos(Chr(10), s);
+
+    if p = 0 then
+      p := Length(s) + 1
+    else
+      p := p + 1;
+
+    case i of
+      1: Worksheet.Cells[4, i].Characters(p, 0).Text :=
+            ' ' + edtTOQty.Text;
+
+      7: Worksheet.Cells[4, i].Characters(p, 0).Text :=
+            ' ' + edtRQty.Text;
+      12: Worksheet.Cells[4, i].Characters(p, 0).Text :=
+            ' ' + edtSKU.Text;
+    end;
+  end;
+
+  //hang 9
+  s := VarToStr(Worksheet.Cells[9, 4].Value);
+  p := Pos(Chr(10), s);
+  Worksheet.Cells[9, 4].Characters(p, 0).Text := ' ' + Query1.FieldByName('SHard').Value;
+
+  Query1.First;
+  InsertRow := StartRow;
+
+  while not Query1.Eof do
+  begin
+    Worksheet.Rows[Format('%d:%d', [InsertRow, InsertRow])].Insert;
+
+    borderRange := Worksheet.Range[Format('A%d:S%d', [InsertRow, InsertRow])];
+    borderRange.Borders.LineStyle := 1;
+    borderRange.Borders.Weight := 2;
+
+
+    Worksheet.Cells[InsertRow, 1].Value := Query1.FieldByName('Size').AsString;
+    Worksheet.Cells[InsertRow, 2].Value := Query1.FieldByName('TArrQty').AsString;
+    Worksheet.Cells[InsertRow, 3].Value := Query1.FieldByName('IQty').AsString;
+    Worksheet.Cells[InsertRow, 4].Value := Query1.FieldByName('LHard').AsString;
+    Worksheet.Cells[InsertRow, 5].Value := Query1.FieldByName('RHard').AsString;
+    Worksheet.Cells[InsertRow, 6].Value := Query1.FieldByName('SWeight').AsString;
+    Worksheet.Cells[InsertRow, 7].Value := Query1.FieldByName('LWeight').AsString;
+    Worksheet.Cells[InsertRow, 8].Value := Query1.FieldByName('RWeight').AsString;
+    Worksheet.Cells[InsertRow, 9].Value := Query1.FieldByName('Issues').AsString;
+    Worksheet.Cells[InsertRow, 10].Value := Query1.FieldByName('DeQty').AsString;
+    Worksheet.Cells[InsertRow, 11].Value := Query1.FieldByName('DeRate').AsString;
+    Worksheet.Cells[InsertRow, 12].Value := Query1.FieldByName('WPLLen').AsString;
+    Worksheet.Cells[InsertRow, 13].Value := Query1.FieldByName('WPRLen').AsString;
+    Worksheet.Cells[InsertRow, 14].Value := Query1.FieldByName('WPLSize').AsString;
+    Worksheet.Cells[InsertRow, 15].Value := Query1.FieldByName('WPRSize').AsString;
+    Worksheet.Cells[InsertRow, 16].Value := Query1.FieldByName('SendDate').AsString;
+    Worksheet.Cells[InsertRow, 17].Value := Query1.FieldByName('LabID').AsString;
+    Worksheet.Cells[InsertRow, 18].Value := Query1.FieldByName('LabResult').AsString;
+    Worksheet.Cells[InsertRow, 19].Value := Query1.FieldByName('Reject').AsString;
+    Worksheet.Rows[InsertRow].AutoFit;
+
+    Inc(InsertRow);
+    Query1.Next;
+  end;
+
+  Worksheet.Rows[Format('%d:%d', [InsertRow, InsertRow])].Delete;
+
+  if cbPDF.Checked then
+  begin
+    Worksheet.PageSetup.PrintTitleRows := '$1:$5';
+    //Worksheet.PageSetup.CenterFooter := '&P / &N';
+    Workbook.ExportAsFixedFormat(0, SaveFile);
+    ShowMessage('Duong dan PDF: ' + SaveFile);
+    ShellExecute(0, 'open', PChar(SaveFile), nil, nil, SW_SHOWNORMAL);
+  end
+  else
+  begin
+    Worksheet.PageSetup.PrintTitleRows := '$1:$5';
+    //Worksheet.PageSetup.CenterFooter := '&P / &N';
+    Workbook.SaveAs(SaveFile);
+    ShowMessage('Duong dan Excel: ' + SaveFile);
+    ExcelApp.Visible := True;
+  end;
+
+  ExcelApp := Unassigned;
+  Workbook := Unassigned;
+  Worksheet := Unassigned;
+
+end;
+
+procedure TIncomeMatRubberOutsoles.Query1AfterScroll(DataSet: TDataSet);
+begin
+  if (Query1.RecordCount > 0)  and not Query1.CachedUpdates then
+  begin
+    dtpInsDate.Date := Query1.FieldByName('InspecDate').AsDateTime;
+    edtTOQty.Text := Query1.FieldByName('TOderQty').AsString;
+    edtStyle.Text := Query1.FieldByName('XieMing').AsString;
+    edtRQty.Text := Query1.FieldByName('RQty').AsString;
+    edtSKU.Text := Query1.FieldByName('Article').AsString;
+    edtRID.Text := Query1.FieldByName('ReportID').AsString;
+    edtDDBH.Text := Query1.FieldByName('DDBH').AsString;
+    edtMatID.Text := Query1.FieldByName('CLBH').AsString;
+    edtZSBH.Text := Query1.FieldByName('Supplier').AsString;
+  end;
+end;
+
+procedure TIncomeMatRubberOutsoles.btClearClick(Sender: TObject);
+begin
+  edtMatID.Clear;
+  edtDDBH.Clear;
+  edtZSBH.Clear;
+  edtRID.Clear;
+  edtSKU.Clear;
+  edtRQty.Clear;
+  edtTOQty.Clear;
+  edtStyle.Clear;
+end;
+
+procedure TIncomeMatRubberOutsoles.FormCreate(Sender: TObject);
+begin
+ DBGrid1.FrozenCols := 6;
+end;
+
+end.

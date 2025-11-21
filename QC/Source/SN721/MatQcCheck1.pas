@@ -276,7 +276,8 @@ begin
       sql.Clear;
       SQL.Add('Select ');
       SQL.Add('       mc.No_ID,mc.GSBH,mc.CLBH,mc.CGNO,mc.RKNO,mc.DateInput,mc.Hours ,mc.LB,mc.ZSBH,mc.RY,mc.Article,mc.CustPO,mc.Qty,mc.Remark,mc.Tracking,mc.SampleSent,');
-      SQL.Add('       mc.QC_Check,mc.RandomQty,mc.DefectQty,mc.QC_Reason,mc.Per_Defect,mc.QC_FinishDate,mc.Settlement,mc.File_Name,mc.QC_Date,mc.QC_USERID,');
+      SQL.Add('       mc.QC_Check, mc.RandomQty, ISNULL(mc.DefectQty, Leather_GradePX.DefectQty) as DefectQty, ');
+      SQL.Add('       mc.QC_Reason,mc.Per_Defect,mc.QC_FinishDate,mc.Settlement,mc.File_Name,mc.QC_Date,mc.QC_USERID,');
       SQL.Add('       mc.Lab_Check,mc.Lab_Reason,mc.Lab_Num,mc.Lab_Result,mc.DefectName,mc.Lab_FinishDate,mc.Lab_PDM_ID,mc.PDM_File_Name,mc.File_Name_Lab,mc.Comparision,');
       SQL.Add('       mc.Lab_DateRemark,mc.Lab_ConfirmDate,mc.Lab_UserID,mc.Lab_Date,mc.Final_Remark,mc.Final_Status,mc.UserDate,mc.UserID,mc.YN,      ');
       SQL.Add('       clzl.YWPM as MaterialName,ZSZL.ZSYWJC as SupplierName,clzl.DWBH,ZSZL.ZSYWJC,mc.ManagerCheck,mc.ManagerID,mc.ManagerCFMDate  ');
@@ -284,14 +285,16 @@ begin
       sql.Add('left join clzl on clzl.CLDH = mc.CLBH');
       sql.Add('left Join ZSZL on ZSZL.ZSDH =mc.ZSBH');
       sql.Add('left join MaterialQCcheck_RY on mc.No_ID = MaterialQCcheck_RY.No_ID');
+      sql.Add('left join Leather_QC on Leather_QC.ReportID = mc.No_ID');
+      sql.Add('left join (select ISNULL(SUM(DeQty),0) as DefectQty, No_ID from Leather_GradeP group by No_ID) Leather_GradePX on Leather_QC.No_ID = Leather_GradePX.No_ID');
       sql.Add('where mc.GSBH='''+main.Edit2.Text+''' ');
       if chk1.Checked then
       begin
-          sql.Add('and CONVERT(varchar(10),DateInput,111) between');
+          sql.Add('and CONVERT(varchar(10),mc.DateInput,111) between');
           sql.add('''' + formatdatetime('yyyy/MM/dd', DTP1.date) + ''' and ''' + formatdatetime('yyyy/MM/dd', DTP2.date) + '''');
       end;
       sql.Add('and CGNO like ''' + edt1.Text + '%''');
-      sql.Add('and CLBH like ''' + edt2.Text + '%''');
+      sql.Add('and mc.CLBH like ''' + edt2.Text + '%''');
       sql.Add('and ZSYWJC like ''' + edt3.Text + '%''');
       sql.Add('and RKNO like ''%' + edtRKNO.Text + '%''');
       
@@ -335,8 +338,8 @@ begin
       SQL.Add('       mc.QC_Check,mc.RandomQty,mc.DefectQty,mc.QC_Reason,mc.Per_Defect,mc.QC_FinishDate,mc.Settlement,mc.File_Name,mc.QC_Date,mc.QC_USERID,');
       SQL.Add('       mc.Lab_Check,mc.Lab_Reason,mc.Lab_Num,mc.Lab_Result,mc.DefectName,mc.Lab_FinishDate,mc.Lab_PDM_ID,mc.PDM_File_Name,mc.File_Name_Lab,mc.Comparision,');
       SQL.Add('       mc.Lab_DateRemark,mc.Lab_ConfirmDate,mc.Lab_UserID,mc.Lab_Date,mc.Final_Remark,mc.Final_Status,mc.UserDate,mc.UserID,mc.YN,      ');
-      SQL.Add('       clzl.YWPM,ZSZL.ZSYWJC,clzl.DWBH,ZSZL.ZSYWJC,mc.ManagerCheck,mc.ManagerID,mc.ManagerCFMDate ');
-      sql.Add('order by mc.Userdate desc,CLBH,LB asc');
+      SQL.Add('       clzl.YWPM,ZSZL.ZSYWJC,clzl.DWBH,ZSZL.ZSYWJC,mc.ManagerCheck,mc.ManagerID,mc.ManagerCFMDate, Leather_GradePX.DefectQty ');
+      sql.Add('order by mc.Userdate desc,mc.CLBH,LB asc');
       //funcObj.WriteErrorLog(sql.Text);
       active := true;
     end;

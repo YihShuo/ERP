@@ -440,23 +440,18 @@ object main: Tmain
         Caption = 'N93 Income Mat Rubber Outsole'
         object N931QCInput1: TMenuItem
           Caption = 'N931 QC Input'
-          OnClick = N931QCInput1Click
         end
         object N932LabTestInput1: TMenuItem
           Caption = 'N932 Lab Test Input'
-          OnClick = N932LabTestInput1Click
         end
         object N933KCSSupervisorCfm1: TMenuItem
           Caption = 'N933 KCS Supervisor Cfm'
-          OnClick = N933KCSSupervisorCfm1Click
         end
         object N934KCSLeaderCfm1: TMenuItem
           Caption = 'N934 KCS Leader Cfm'
-          OnClick = N934KCSLeaderCfm1Click
         end
         object N935MaterialSupervisorCfm1: TMenuItem
           Caption = 'N935 Material Supervisor Cfm'
-          OnClick = N935MaterialSupervisorCfm1Click
         end
       end
     end

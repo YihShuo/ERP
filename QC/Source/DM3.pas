@@ -31,7 +31,7 @@ var textfilevar:textfile;
     susername,spassword,sline,pp:string;
 
 begin
-assignfile(textfilevar,a+'datalogin.txt');
+{assignfile(textfilevar,a+'datalogin.txt');
 reset(textfilevar);
 readln(textfilevar,pp);
 // ±K½X¥[±K´ú¸Õ
@@ -63,14 +63,14 @@ for i:=1 to (length(pp)) do //¥[±K°j°é
 assignfile(textfilevar,a+'datalogin.txt');
 Rewrite(textfilevar);
 writeln(textfilevar,sline);
-closefile(textfilevar);
+closefile(textfilevar);}
 end;
 
 procedure TDM2.DataModuleCreate(Sender: TObject);
 var sline:string;
 databasevar:textfile;
 begin
-a:=ExtractFilePath(ParamStr(0));
+{a:=ExtractFilePath(ParamStr(0));
 DBshipping.Connected:=false;
 assignfile(databasevar,a+'database.txt');
 reset(databasevar);
@@ -79,7 +79,7 @@ readln(databasevar,sline);
 closefile(databasevar);
 
 DBshipping.aliasname:=sline;
-DBshipping.Connected:=true;
+DBshipping.Connected:=true;}
 end;
 
 end.
