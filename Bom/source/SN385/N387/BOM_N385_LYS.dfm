@@ -1,0 +1,547 @@
+object CostingPriceList_LYS: TCostingPriceList_LYS
+  Left = 469
+  Top = 252
+  Width = 1305
+  Height = 675
+  Caption = 'CostingPriceList LYS'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  WindowState = wsMaximized
+  PixelsPerInch = 96
+  TextHeight = 13
+  object PageControl1: TPageControl
+    Left = 0
+    Top = 0
+    Width = 1289
+    Height = 636
+    ActivePage = TabSheet1
+    Align = alClient
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'Query DB'
+      object Label8: TLabel
+        Left = 8
+        Top = 24
+        Width = 42
+        Height = 16
+        Alignment = taRightJustify
+        AutoSize = False
+        Caption = 'SKU'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBGridEh2: TDBGridEh
+        Left = 0
+        Top = 49
+        Width = 1281
+        Height = 559
+        Align = alClient
+        DataSource = DataSource1
+        Flat = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        FooterColor = clWindow
+        FooterFont.Charset = DEFAULT_CHARSET
+        FooterFont.Color = clWindowText
+        FooterFont.Height = -11
+        FooterFont.Name = 'MS Sans Serif'
+        FooterFont.Style = []
+        FooterRowCount = 1
+        ParentFont = False
+        SumList.Active = True
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        Columns = <
+          item
+            EditButtons = <>
+            FieldName = 'NO'
+            Footers = <>
+          end
+          item
+            EditButtons = <>
+            FieldName = 'PricingSeason'
+            Footers = <>
+            Width = 84
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Style_Number'
+            Footers = <>
+            Width = 80
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Round'
+            Footers = <>
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Style_Name'
+            Footers = <>
+            Width = 271
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Division'
+            Footers = <>
+            Width = 45
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Colorway'
+            Footers = <>
+            Width = 112
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Color_Code'
+            Footers = <>
+          end
+          item
+            DisplayFormat = '#,##0.00'
+            EditButtons = <>
+            FieldName = 'FOB'
+            Footers = <>
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Remark'
+            Footers = <>
+            Width = 213
+          end
+          item
+            EditButtons = <>
+            FieldName = 'CheckID'
+            Footers = <>
+          end
+          item
+            EditButtons = <>
+            FieldName = 'CheckDate'
+            Footers = <>
+          end>
+      end
+      object Panel1: TPanel
+        Left = 0
+        Top = 0
+        Width = 1281
+        Height = 49
+        Align = alTop
+        TabOrder = 1
+        object Label3: TLabel
+          Left = 120
+          Top = 16
+          Width = 42
+          Height = 16
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Style'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label4: TLabel
+          Left = 8
+          Top = 16
+          Width = 50
+          Height = 16
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Season'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label1: TLabel
+          Left = 272
+          Top = 16
+          Width = 42
+          Height = 16
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Round'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object BA8: TBitBtn
+          Left = 664
+          Top = 0
+          Width = 49
+          Height = 49
+          Hint = 'Modify Current'
+          Caption = 'Excel'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          OnClick = BA8Click
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000130B0000130B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033333333B333
+            333B33FF33337F3333F73BB3777BB7777BB3377FFFF77FFFF77333B000000000
+            0B3333777777777777333330FFFFFFFF07333337F33333337F333330FFFFFFFF
+            07333337F3FF3FFF7F333330F00F000F07333337F77377737F333330FFFFFFFF
+            07333FF7F3FFFF3F7FFFBBB0F0000F0F0BB37777F7777373777F3BB0FFFFFFFF
+            0BBB3777F3FF3FFF77773330F00F000003333337F773777773333330FFFF0FF0
+            33333337F3FF7F37F3333330F08F0F0B33333337F7737F77FF333330FFFF003B
+            B3333337FFFF77377FF333B000000333BB33337777777F3377FF3BB3333BB333
+            3BB33773333773333773B333333B3333333B7333333733333337}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+        end
+        object BA3: TBitBtn
+          Left = 520
+          Top = 0
+          Width = 49
+          Height = 49
+          Hint = 'Delete one Record'
+          Caption = 'Delete'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          OnClick = BA3Click
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000130B0000130B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+            333333333333333333FF33333333333330003333333333333777333333333333
+            300033FFFFFF3333377739999993333333333777777F3333333F399999933333
+            3300377777733333337733333333333333003333333333333377333333333333
+            3333333333333333333F333333333333330033333F33333333773333C3333333
+            330033337F3333333377333CC3333333333333F77FFFFFFF3FF33CCCCCCCCCC3
+            993337777777777F77F33CCCCCCCCCC399333777777777737733333CC3333333
+            333333377F33333333FF3333C333333330003333733333333777333333333333
+            3000333333333333377733333333333333333333333333333333}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+        end
+        object BA5: TBitBtn
+          Left = 568
+          Top = 0
+          Width = 49
+          Height = 49
+          Hint = 'Save Current'
+          Caption = 'Save'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
+          OnClick = BA5Click
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000120B0000120B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+            555555555555555555555555555555555555555555FF55555555555559055555
+            55555555577FF5555555555599905555555555557777F5555555555599905555
+            555555557777FF5555555559999905555555555777777F555555559999990555
+            5555557777777FF5555557990599905555555777757777F55555790555599055
+            55557775555777FF5555555555599905555555555557777F5555555555559905
+            555555555555777FF5555555555559905555555555555777FF55555555555579
+            05555555555555777FF5555555555557905555555555555777FF555555555555
+            5990555555555555577755555555555555555555555555555555}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+        end
+        object BA2: TBitBtn
+          Left = 472
+          Top = 0
+          Width = 49
+          Height = 49
+          Hint = 'Insert one New Record'
+          Caption = 'Insert'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 3
+          OnClick = BA2Click
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000130B0000130B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+            33333333FF33333333FF333993333333300033377F3333333777333993333333
+            300033F77FFF3333377739999993333333333777777F3333333F399999933333
+            33003777777333333377333993333333330033377F3333333377333993333333
+            3333333773333333333F333333333333330033333333F33333773333333C3333
+            330033333337FF3333773333333CC333333333FFFFF77FFF3FF33CCCCCCCCCC3
+            993337777777777F77F33CCCCCCCCCC3993337777777777377333333333CC333
+            333333333337733333FF3333333C333330003333333733333777333333333333
+            3000333333333333377733333333333333333333333333333333}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+        end
+        object BA1: TBitBtn
+          Left = 424
+          Top = 0
+          Width = 49
+          Height = 49
+          Caption = 'Query'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 4
+          OnClick = BA1Click
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000130B0000130B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+            333333333333333FF3FF3333333333CC30003333333333773777333333333C33
+            3000333FF33337F33777339933333C3333333377F33337F3333F339933333C33
+            33003377333337F33377333333333C333300333F333337F33377339333333C33
+            3333337FF3333733333F33993333C33333003377FF33733333773339933C3333
+            330033377FF73F33337733339933C33333333FF377F373F3333F993399333C33
+            330077F377F337F33377993399333C33330077FF773337F33377399993333C33
+            33333777733337F333FF333333333C33300033333333373FF7773333333333CC
+            3000333333333377377733333333333333333333333333333333}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+        end
+        object ED1: TEdit
+          Left = 163
+          Top = 8
+          Width = 102
+          Height = 24
+          CharCase = ecUpperCase
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 5
+        end
+        object ED2: TEdit
+          Left = 69
+          Top = 9
+          Width = 44
+          Height = 24
+          CharCase = ecUpperCase
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 6
+        end
+        object BB1: TButton
+          Left = 616
+          Top = 0
+          Width = 49
+          Height = 49
+          Caption = 'Import'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 7
+          OnClick = BB1Click
+        end
+        object Edit1: TEdit
+          Left = 315
+          Top = 8
+          Width = 102
+          Height = 24
+          CharCase = ecUpperCase
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 8
+        end
+      end
+    end
+  end
+  object Query1: TQuery
+    CachedUpdates = True
+    DatabaseName = 'DB'
+    RequestLive = True
+    SQL.Strings = (
+      'select * from costingpricelist'
+      '')
+    UpdateObject = UpdateSQL1
+    Left = 36
+    Top = 192
+    object Query1NO: TSmallintField
+      FieldName = 'NO'
+      Origin = 'DB.CostingPriceList.NO'
+    end
+    object Query1PricingSeason: TStringField
+      FieldName = 'PricingSeason'
+      Origin = 'DB.CostingPriceList.PricingSeason'
+      FixedChar = True
+      Size = 10
+    end
+    object Query1StyleNumber: TStringField
+      FieldName = 'Style_Number'
+      Origin = 'DB.CostingPriceList.StyleNumber'
+      FixedChar = True
+      Size = 10
+    end
+    object Query1Round: TStringField
+      FieldName = 'Round'
+      Origin = 'DB.CostingPriceList.Round'
+      FixedChar = True
+      Size = 10
+    end
+    object Query1Style_Name: TStringField
+      FieldName = 'Style_Name'
+      Origin = 'DB.CostingPriceList.Style_Name'
+      FixedChar = True
+      Size = 50
+    end
+    object Query1Division: TStringField
+      FieldName = 'Division'
+      Origin = 'DB.CostingPriceList.Division'
+      FixedChar = True
+      Size = 10
+    end
+    object Query1Colorway: TStringField
+      FieldName = 'Colorway'
+      Origin = 'DB.CostingPriceList.Colorway'
+      FixedChar = True
+      Size = 50
+    end
+    object Query1ColorCode: TStringField
+      FieldName = 'Color_Code'
+      Origin = 'DB.CostingPriceList.ColorCode'
+      FixedChar = True
+      Size = 10
+    end
+    object Query1FOB: TCurrencyField
+      FieldName = 'FOB'
+      Origin = 'DB.CostingPriceList.FOB'
+    end
+    object Query1Remark: TStringField
+      FieldName = 'Remark'
+      Origin = 'DB.CostingPriceList.Remark'
+      FixedChar = True
+      Size = 40
+    end
+    object Query1CheckID: TStringField
+      FieldName = 'CheckID'
+      Origin = 'DB.CostingPriceList.CheckID'
+      FixedChar = True
+      Size = 10
+    end
+    object Query1CheckDate: TDateTimeField
+      FieldName = 'CheckDate'
+      Origin = 'DB.CostingPriceList.CheckDate'
+    end
+    object Query1KFCQ: TStringField
+      FieldName = 'KFCQ'
+      Origin = 'DB.CostingPriceList.KFCQ'
+      FixedChar = True
+      Size = 10
+    end
+    object Query1KHDH: TStringField
+      FieldName = 'KHDH'
+      Origin = 'DB.CostingPriceList.KHDH'
+      FixedChar = True
+      Size = 5
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = Query1
+    Left = 36
+    Top = 256
+  end
+  object UpdateSQL1: TUpdateSQL
+    ModifySQL.Strings = (
+      'update CostingPriceList'
+      'set'
+      '  PricingSeason = :PricingSeason,'
+      '  SKU = :Style_Name,'
+      '  Remark = :Remark,'
+      '  CheckID = :CheckID,'
+      '  CheckDate = :CheckDate,'
+      '  FOB = :FOB,'
+      '  KFCQ = :KFCQ,'
+      '  KHDH = :KHDH,'
+      '  Style_Number = :Style_Number,'
+      '  Round = :Round,'
+      '  Style_Name = :Style_Name,'
+      '  Division = :Division,'
+      '  Colorway = :Colorway,'
+      '  Color_Code = :Color_Code'
+      'where'
+      '  NO = :OLD_NO and'
+      '  PricingSeason = :OLD_PricingSeason')
+    InsertSQL.Strings = (
+      'insert into CostingPriceList'
+      
+        '  (PricingSeason, SKU, Remark, CheckID, CheckDate, FOB, KFCQ, KH' +
+        'DH, '
+      'Style_Number, '
+      '   Round, Style_Name, Division, Colorway, Color_Code)'
+      'values'
+      
+        '  (:PricingSeason, :Style_Number, :Remark, :CheckID, :CheckDate,' +
+        ' :FOB, :KFCQ, '
+      ':KHDH, '
+      
+        '   :Style_Number, :Round, :Style_Name, :Division, :Colorway, :Co' +
+        'lor_Code)')
+    DeleteSQL.Strings = (
+      'delete from CostingPriceList'
+      'where'
+      '  NO = :OLD_NO and'
+      '  PricingSeason = :OLD_PricingSeason')
+    Left = 44
+    Top = 304
+  end
+  object opendialog: TOpenDialog
+    Left = 40
+    Top = 360
+  end
+end

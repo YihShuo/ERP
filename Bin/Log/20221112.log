@@ -1,0 +1,34 @@
+insert into YPZL_log
+(YPDH,oldQuantity,Quantity,OLDYPCC,YPCC,OLDYPCCO,YPCCO,OLDYPCCL,YPCCL,OldYPCCM,YPCCM,UserID,UserDate)
+values ('FTDS200800009',
+'1','1',
+'09','09',
+'09','09',
+'09','09',
+'','',
+'316503',getdate())
+insert into YPZL_log
+(YPDH,oldQuantity,Quantity,OLDYPCC,YPCC,OLDYPCCO,YPCCO,OLDYPCCL,YPCCL,OldYPCCM,YPCCM,UserID,UserDate)
+values ('FTDS200800009',
+'1','1',
+'09','09',
+'09','09',
+'09','09',
+'','',
+'316503',getdate())
+insert into YPZL_log
+(YPDH,oldQuantity,Quantity,OLDYPCC,YPCC,OLDYPCCO,YPCCO,OLDYPCCL,YPCCL,OldYPCCM,YPCCM,UserID,UserDate)
+values ('FTDS200800009',
+'1','1',
+'09','09',
+'09','09',
+'09','09',
+'','',
+'316503',getdate())
+2022/11/12 下午 03:00:40 Insert:Select top 1 * from KFXXZL where XieXing='CON23FUC0005' and SheHao='01'
+2022/11/12 下午 03:00:40 Insert:Select top 1 * from KFXXZL where XieXing='CON23FUC9A01' and SheHao='01'
+2022/11/12 下午 03:00:40 Insert:Select top 1 * from KFXXZL where XieXing='CON23FUC9B01' and SheHao='01'
+2022/11/12 下午 03:00:40 Insert:Select top 1 * from KFXXZL where XieXing='CON23FUC9B01' and SheHao='02'
+2022/11/12 下午 03:00:40 Insert:Select top 1 * from KFXXZL where XieXing='CON23HUC6M01' and SheHao='01'
+2022/11/12 下午 03:00:40 Insert:Select top 1 * from KFXXZL where XieXing='CON23HUC7F02' and SheHao='01'
+2022/11/12 下午 03:00:41 Insert:Select top 1 * from KFXXZL where XieXing='CON23HUK1L02' and SheHao='01'

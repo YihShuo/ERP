@@ -1,0 +1,1015 @@
+unit LastSTOCK_new1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DBTables, DB, GridsEh, DBGridEh, ExtCtrls, StdCtrls, ComCtrls,comobj,
+  Menus,ehlibBDE, ShellAPI ,DBGridEhImpExp , DateUtils, Buttons;
+
+type
+  TLastSizeR=record
+   CLBH:string;
+   IsSizR:array [0..39] of Boolean;
+end;
+//
+type
+  TLastSTOCK = class(TForm)
+    panel2: TPanel;
+    qry1: TQuery;
+    ds1: TDataSource;
+    EditMatNo: TEdit;
+    lbl1: TLabel;
+    btn1: TButton;
+    pm1: TPopupMenu;
+    S1: TMenuItem;
+    dlgSave1: TSaveDialog;
+    Qtemp1: TQuery;
+    Label3: TLabel;
+    EditMatNM: TEdit;
+    DTP1: TDateTimePicker;
+    Label4: TLabel;
+    CBX1: TComboBox;
+    Label2: TLabel;
+    Panel1: TPanel;
+    LastMonth: TLabel;
+    BB1: TBitBtn;
+    BB2: TBitBtn;
+    bbt6: TBitBtn;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    dbgrdh1: TDBGridEh;
+    qry2: TQuery;
+    ds2: TDataSource;
+    dbgrdh2: TDBGridEh;
+    LastSizQ: TQuery;
+    TabSheet3: TTabSheet;
+    qry3: TQuery;
+    ds3: TDataSource;
+    dbgrdh3: TDBGridEh;
+    TabSheet4: TTabSheet;
+    dbgrdh4: TDBGridEh;
+    ds4: TDataSource;
+    qry4: TQuery;
+    TabSheet5: TTabSheet;
+    dbgrdh5: TDBGridEh;
+    qry5: TQuery;
+    DS5: TDataSource;
+    btn_Print_Kho: TBitBtn;
+    CheckBox1: TCheckBox;
+    qry1CLBH: TStringField;
+    qry1YWPM: TStringField;
+    qry1Total: TFloatField;
+    qry1BDEDesigner100: TFloatField;
+    qry1BDEDesigner105: TFloatField;
+    qry1BDEDesigner110: TFloatField;
+    qry1BDEDesigner115: TFloatField;
+    qry1BDEDesigner120: TFloatField;
+    qry1BDEDesigner125: TFloatField;
+    qry1BDEDesigner130: TFloatField;
+    qry1BDEDesigner135: TFloatField;
+    qry1BDEDesigner000: TFloatField;
+    qry1BDEDesigner010: TFloatField;
+    qry1BDEDesigner015: TFloatField;
+    qry1BDEDesigner020: TFloatField;
+    qry1BDEDesigner025: TFloatField;
+    qry1BDEDesigner030: TFloatField;
+    qry1BDEDesigner035: TFloatField;
+    qry1BDEDesigner040: TFloatField;
+    qry1BDEDesigner045: TFloatField;
+    qry1BDEDesigner050: TFloatField;
+    qry1BDEDesigner055: TFloatField;
+    qry1BDEDesigner060: TFloatField;
+    qry1BDEDesigner065: TFloatField;
+    qry1BDEDesigner070: TFloatField;
+    qry1BDEDesigner075: TFloatField;
+    qry1BDEDesigner080: TFloatField;
+    qry1BDEDesigner085: TFloatField;
+    qry1BDEDesigner090: TFloatField;
+    qry1BDEDesigner095: TFloatField;
+    qry1BDEDesigner1002: TFloatField;
+    qry1BDEDesigner1052: TFloatField;
+    qry1BDEDesigner1102: TFloatField;
+    qry1BDEDesigner1152: TFloatField;
+    qry1BDEDesigner1202: TFloatField;
+    qry1BDEDesigner1252: TFloatField;
+    qry1BDEDesigner1302: TFloatField;
+    qry1BDEDesigner1352: TFloatField;
+    qry1BDEDesigner140: TFloatField;
+    qry1BDEDesigner145: TFloatField;
+    qry1BDEDesigner150: TFloatField;
+    qry1BDEDesigner155: TFloatField;
+    qry1BDEDesigner160: TFloatField;
+    qry1BDEDesigner170: TFloatField;
+    qry1BDEDesigner180: TFloatField;
+    qry1CQDH: TStringField;
+    qry1DWBH: TStringField;
+    btn_Print_Tong: TBitBtn;
+    qry2CLBH: TStringField;
+    qry2YWPM: TStringField;
+    qry2Total: TFloatField;
+    qry2BDEDesigner100: TFloatField;
+    qry2BDEDesigner105: TFloatField;
+    qry2BDEDesigner110: TFloatField;
+    qry2BDEDesigner115: TFloatField;
+    qry2BDEDesigner120: TFloatField;
+    qry2BDEDesigner125: TFloatField;
+    qry2BDEDesigner130: TFloatField;
+    qry2BDEDesigner135: TFloatField;
+    qry2BDEDesigner000: TFloatField;
+    qry2BDEDesigner010: TFloatField;
+    qry2BDEDesigner015: TFloatField;
+    qry2BDEDesigner020: TFloatField;
+    qry2BDEDesigner025: TFloatField;
+    qry2BDEDesigner030: TFloatField;
+    qry2BDEDesigner035: TFloatField;
+    qry2BDEDesigner040: TFloatField;
+    qry2BDEDesigner045: TFloatField;
+    qry2BDEDesigner050: TFloatField;
+    qry2BDEDesigner055: TFloatField;
+    qry2BDEDesigner060: TFloatField;
+    qry2BDEDesigner065: TFloatField;
+    qry2BDEDesigner070: TFloatField;
+    qry2BDEDesigner075: TFloatField;
+    qry2BDEDesigner080: TFloatField;
+    qry2BDEDesigner085: TFloatField;
+    qry2BDEDesigner090: TFloatField;
+    qry2BDEDesigner095: TFloatField;
+    qry2BDEDesigner1002: TFloatField;
+    qry2BDEDesigner1052: TFloatField;
+    qry2BDEDesigner1102: TFloatField;
+    qry2BDEDesigner1152: TFloatField;
+    qry2BDEDesigner1202: TFloatField;
+    qry2BDEDesigner1252: TFloatField;
+    qry2BDEDesigner1302: TFloatField;
+    qry2BDEDesigner1352: TFloatField;
+    qry2BDEDesigner140: TFloatField;
+    qry2BDEDesigner145: TFloatField;
+    qry2BDEDesigner150: TFloatField;
+    qry2BDEDesigner155: TFloatField;
+    qry2BDEDesigner160: TFloatField;
+    qry2BDEDesigner170: TFloatField;
+    qry2BDEDesigner180: TFloatField;
+    qry2ZZZ: TFloatField;
+    qry2CQDH: TStringField;
+    qry2DWBH: TStringField;
+    TabSheet6: TTabSheet;
+    DBGridEh7: TDBGridEh;
+    DS6: TDataSource;
+    qry6: TQuery;
+    qry2BDEDesigner165: TFloatField;
+    procedure btn1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure S1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure bbt6Click(Sender: TObject);
+    procedure BB1Click(Sender: TObject);
+    procedure BB2Click(Sender: TObject);
+    procedure DTP1Change(Sender: TObject);
+    procedure dbgrdh1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure dbgrdh2DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure dbgrdh4DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure btn_Print_KhoClick(Sender: TObject);
+    procedure btn_Print_TongClick(Sender: TObject);
+    procedure DBGridEh7DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+  private
+    XXCC:array of string;
+    LastSizeR:array of TLastSizeR;
+    LastMon:string; //上個月(Month)
+    LastYear:string;//上個月(Year)
+    STLastMonDate:string; //上個月初
+    EDLastMonDate:string; //上個月底
+    //
+    LastMon2:string;//上上一個月(Month) 月結累積加總計算
+    LastYear2:string;//上上一個月(Year)
+    //
+    STDate:string; //當月月初
+    EDDate:string; //今天
+    { Private declarations }
+    procedure DBGridInit();
+    procedure GetDateParam();
+    function CheckLastMonthEnding():boolean;
+    procedure OutputExcel(Query:TQuery);
+    procedure Last_Size_Range_Init();
+  public
+    { Public declarations }
+  end;
+
+var
+  LastSTOCK: TLastSTOCK;
+  TCLBH:string;
+  TLCRY:string;
+
+implementation
+
+uses  main1, Laststock_Det1, FunUnit, LastSTOCK_Print1,
+  LastSTOCK_PrintTong1;
+
+{$R *.dfm}
+//當月天數
+function   DaysOfItsMonth(ADate:   TDateTime):   Word;
+var
+   Y,M,D:Word;
+begin
+    DecodeDate(ADate,Y,M,D);
+    ADate:=EncodeDate(Y,M,1);
+    Result:=Trunc(IncMonth(ADate,1)-ADate);
+end;
+//取得時間參數
+procedure TLastSTOCK.GetDateParam();
+var myYear, myMonth, myDay : Word;
+    tmpDate:TDate;
+begin
+  //取得上個月起始和結束日期
+  tmpDate:=incmonth(DTP1.Date,-1);
+  DecodeDate(tmpDate, myYear, myMonth, myDay);
+  LastMon:=Format('%.2d',[myMonth]);
+  LastYear:=Format('%.4d',[myYear]);
+  STLastMonDate:=FormatDateTime('YYYY/MM/DD', EncodeDate(myYear, myMonth, 1));  //月初日期
+  EDLastMonDate:=FormatDateTime('YYYY/MM/DD', EncodeDate(myYear, myMonth, DaysOfItsMonth(tmpDate)));//月底
+  if CheckLastMonthEnding()=false then
+    LastMonth.Caption:=STLastMonDate+'-'+EDLastMonDate+' Khong co ket thuc hang thang!'
+  else
+    LastMonth.Caption:='';
+  //取得上上個月用來月結資料累積加總
+  tmpDate:=incmonth(DTP1.Date,-2);
+  DecodeDate(tmpDate, myYear, myMonth, myDay);
+  LastMon2:=Format('%.2d',[myMonth]);
+  LastYear2:=Format('%.4d',[myYear]);
+  //取得當月初和今天日期
+  DecodeDate(DTP1.Date, myYear, myMonth, myDay);
+  STDate:=FormatDateTime('YYYY/MM/DD', EncodeDate(myYear, myMonth, 1));  //月初日期
+  EDDate:=FormatDateTime('YYYY/MM/DD', DTP1.Date);//基礎日
+end;
+
+procedure TLastSTOCK.DBGridInit();
+var i:integer;
+    objColumn:TColumnEh;
+begin
+    //
+    with Qtemp1 do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('Select Siz from LastSize where LB=''01'' order by Siz  ');
+      Active:=true;
+      if RecordCount>0 then
+      begin
+        setlength(XXCC,RecordCount);
+        for i:=0 to RecordCount-1 do
+        begin
+          XXCC[i]:=FieldByName('Siz').AsString;
+          //
+          objColumn:=DBGrdh1.Columns.Add;
+          objColumn.FieldName:='['+FieldByName('Siz').AsString+']';
+          objColumn.Title.Caption:='尺碼|'+'['+FieldByName('Siz').AsString+']';
+          objColumn.Width:=42;
+          if Copy(FieldByName('Siz').AsString,1,1)=' ' then
+          objColumn.Color:=clyellow;
+          objColumn.Checkboxes:=False;
+          //
+          objColumn:=DBGrdh2.Columns.Add;
+          objColumn.FieldName:='['+FieldByName('Siz').AsString+']';
+          objColumn.Title.Caption:='尺碼|'+'['+FieldByName('Siz').AsString+']';
+          objColumn.Width:=42;
+          if Copy(FieldByName('Siz').AsString,1,1)=' ' then
+          objColumn.Color:=clyellow;
+          objColumn.Checkboxes:=False;
+          //
+          objColumn:=DBGrdh3.Columns.Add;
+          objColumn.FieldName:='['+FieldByName('Siz').AsString+']';
+          objColumn.Title.Caption:='尺碼|'+'['+FieldByName('Siz').AsString+']';
+          objColumn.Width:=42;
+          if Copy(FieldByName('Siz').AsString,1,1)=' ' then
+          objColumn.Color:=clyellow;
+          objColumn.Checkboxes:=False;
+          //
+          objColumn:=DBGrdh4.Columns.Add;
+          objColumn.FieldName:='['+FieldByName('Siz').AsString+']';
+          objColumn.Title.Caption:='尺碼|'+'['+FieldByName('Siz').AsString+']';
+          objColumn.Width:=42;
+          if Copy(FieldByName('Siz').AsString,1,1)=' ' then
+          objColumn.Color:=clyellow;
+          objColumn.Checkboxes:=False;
+          //
+          objColumn:=DBGrdh5.Columns.Add;
+          objColumn.FieldName:='['+FieldByName('Siz').AsString+']';
+          objColumn.Title.Caption:='尺碼|'+'['+FieldByName('Siz').AsString+']';
+          objColumn.Width:=42;
+          if Copy(FieldByName('Siz').AsString,1,1)=' ' then
+          objColumn.Color:=clyellow;
+          objColumn.Checkboxes:=False;
+          //
+          objColumn:=DBGridEh7.Columns.Add;
+          objColumn.FieldName:='['+FieldByName('Siz').AsString+']';
+          objColumn.Title.Caption:='尺碼|'+'['+FieldByName('Siz').AsString+']';
+          objColumn.Width:=42;
+          if Copy(FieldByName('Siz').AsString,1,1)=' ' then
+          objColumn.Color:=clyellow;
+          objColumn.Checkboxes:=False;
+          //
+          Next;
+        end;
+      end else
+      begin
+         setlength(XXCC,0);
+      end;
+      Active:=false;
+    end;
+end;
+
+procedure TLastSTOCK.btn1Click(Sender: TObject);
+var year,month,day:word;
+    i:integer;
+    ayear,amonth:string;
+begin
+  if LastMonth.Caption<>'' then
+  begin
+    if Dialogs.MessageDlg('Not yet Month Ending Calculate, quantity not exact.'+#13#10+' Chua co ket thuc hang thang, so luong khong chinh xac.', mtConfirmation, [mbYes, mbNo], 0) = mrNo then exit;
+  end;
+  
+  decodedate(DTP1.Date,Year,Month,Day);   //找庫存相關的數據
+  incAMonth(Year,Month,Day,-1);
+  ayear:=floattostr(year);
+  amonth:=floattostr(month);
+  if length(amonth)=1 then
+    amonth:='0'+amonth;
+ //目前庫存
+ if PageControl1.ActivePage=TabSheet1 then
+ begin
+   with Qry1 do
+   begin
+      Active:=false;
+      SQL.Clear;
+      sql.add('  if object_id(''tempdb..#CLZLKC_Last'') is not null  ');
+      sql.add('begin   drop table #CLZLKC_Last end   ');
+      SQL.Add('select NowKC.CKBH,NowKC.CLBH,NowKC.SIZ,IsNull(NowKC.NowRKQty,0)-IsNull(LL.LLQty,0) as Qty,LastKC.LastRem,RK.RKQty,LL.LLQty into #CLZLKC_Last from (');
+      SQL.Add('  select CKBH,CLBH,SIZ,Sum(RKQty) as NowRKQty from (');
+      SQL.Add('  select LTRK.CKBH,LTRKSS.CLBH,LTRKSS.SIZ,SUM(LTRKSS.Qty) as RKQty from LTRKSS,LTRK ');
+      SQL.Add('  where LTRKSS.RKNO=LTRK.RKNO and isnull(LTRK.flowflag,'''') <>''X'' and LTRK.SFL in (''1'',''2'') and LTRK.CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''') and convert(smalldatetime,convert(varchar,LTRK.UserDate,111)) between '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP1.date))+''' and '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''' ');
+      if CBX1.Text <> '' then
+        SQL.Add('  and LTRK.CKBH='''+CBX1.Text+''' ');
+      SQL.Add('  Group by LTRK.CKBH,LTRKSS.CLBH,LTRKSS.SIZ ');
+      SQL.Add('  Union All ');
+      SQL.Add('  select CKBH,CLBH,SIZ,QTY as LastRem from Lastmonth where KCYEAR='''+ayear+''' and KCMonth='''+amonth+'''  and CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''')  ');
+      if CBX1.Text <> '' then
+        SQL.Add('  and CKBH='''+CBX1.Text+''' ')
+      else
+        SQL.Add('  and CKBH not like ''%#L'' ');
+      SQL.Add('  ) as tmpRKTLFL ');
+      SQL.Add('  group by CKBH,CLBH,SIZ ) as NowKC');
+      SQL.Add('left join ( ');
+      SQL.Add('   select CKBH,CLBH,SIZ,QTY as LastRem from Lastmonth where KCYEAR='''+ayear+''' and KCMonth='''+amonth+'''  and CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''')  ');
+      if CBX1.Text <> '' then
+        SQL.Add('  and CKBH='''+CBX1.Text+''' ');
+      SQL.Add('   ) as LastKC on NowKC.CKBH=LastKC.CKBH and NowKC.CLBH=LastKC.CLBH and NowKC.SIZ=LastKC.SIZ');
+      SQL.Add('left join ( ');
+      SQL.Add('  select LTRK.CKBH,LTRKSS.CLBH,LTRKSS.SIZ,SUM(LTRKSS.Qty) as RKQty from LTRKSS,LTRK ');
+      SQL.Add('  where LTRKSS.RKNO=LTRK.RKNO and isnull(LTRK.flowflag,'''') <>''X'' and LTRK.SFL in (''1'',''2'') and LTRK.CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''') and convert(smalldatetime,convert(varchar,LTRK.UserDate,111)) between '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP1.date))+''' and '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''' ');
+      if CBX1.Text <> '' then
+        SQL.Add('  and LTRK.CKBH='''+CBX1.Text+'''  ');
+      SQL.Add('  Group by LTRK.CKBH,LTRKSS.CLBH,LTRKSS.SIZ  ) RK on NowKC.CKBH=RK.CKBH and NowKC.CLBH=RK.CLBH and NowKC.SIZ=RK.SIZ');
+      SQL.Add('left join ( ');
+      SQL.Add('   select LTLL.CKBH,LTLLSS.CLBH,LTLLSS.SIZ,SUM(LTLLSS.Qty) as LLQty from LTLLSS,LTLL ');
+      SQL.Add('   where LTLLSS.LLNO=LTLL.LLNO and isnull(LTLL.flowflag,'''') <>''X'' and LTLL.CFMID<>''NO'' and LTLL.SFL in (''1'',''2'',''3'',''4'') and LTLL.CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''')   and convert(smalldatetime,convert(varchar,LTLL.CFMDate,111)) between '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP1.date))+''' and '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''' ');
+      if CBX1.Text <> '' then
+        SQL.Add(' and LTLL.CKBH='''+CBX1.Text+''' ');
+      SQL.Add('   Group by LTLL.CKBH,LTLLSS.CLBH,LTLLSS.SIZ ) LL on NowKC.CKBH=LL.CKBH and NowKC.CLBH=LL.CLBH and NowKC.SIZ=LL.SIZ');
+      //
+      SQL.Add('select #CLZLKC_Last.CLBH,CLZL.YWPM, SUM(Qty) as Total,');
+      for i:=0 to High(XXCC) do
+      begin
+        SQL.Add('   Max(case when SIZ='''+XXCC[i]+''' then Qty end) as ''['+XXCC[i]+']'', ');
+      end;
+      SQL.Add('     CLZL.CQDH,CLZL.DWBH ');
+      SQL.Add('from #CLZLKC_Last  ');
+      SQL.Add('left join CLZL on CLZL.cldh=#CLZLKC_Last.CLBH  where 1=1 ');
+      if EditMatNo.Text<>'' then
+        SQL.Add('and #CLZLKC_Last.CLBH like '''+EditMatNo.Text+'%'' ');
+      if EditMatNM.Text<>'' then
+        SQL.Add('and CLZL.YWPM like ''%'+EditMatNM.Text+'%'' ');
+      SQL.Add('Group by #CLZLKC_Last.CLBH,CLZL.YWPM,CLZL.CQDH,CLZL.DWBH ');
+      if CheckBox1.Checked then
+        SQL.Add('HAVING SUM(Qty) > 0 ');
+      //funcObj.WriteErrorLog(sql.Text);
+      Active:=true;
+   end;
+ end else if PageControl1.ActivePage=TabSheet2 then
+ begin
+   with Qry2 do
+   begin
+      Active:=false;
+      SQL.Clear;
+      sql.add('  if object_id(''tempdb..#CLZLKC_LastK'') is not null  ');
+      sql.add('begin   drop table #CLZLKC_LastK end   ');
+      SQL.Add('select NowKC.CKBH,NowKC.CLBH,NowKC.SIZ,IsNull(NowKC.NowRKQty,0)-IsNull(LL.LLQty,0) as Qty into #CLZLKC_LastK from (');
+      SQL.Add('  select CKBH,CLBH,SIZ,Sum(RKQty) as NowRKQty from (');
+      SQL.Add('  select LTRK.CKBH+''#L'' as CKBH,LTRKSS.CLBH,LTRKSS.SIZ,SUM(LTRKSS.Qty) as RKQty from LTRKSS,LTRK ');
+      SQL.Add('  where LTRKSS.RKNO=LTRK.RKNO and isnull(LTRK.flowflag,'''') <>''X'' and LTRK.SFL = ''2''  and LTRK.CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''') and convert(smalldatetime,convert(varchar,LTRK.UserDate,111)) between '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP1.date))+''' and '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''' ');
+      if CBX1.Text <> '' then
+        SQL.Add(' and LTRK.CKBH='''+CBX1.Text+''' ');
+      SQL.Add('  Group by LTRK.CKBH,LTRKSS.CLBH,LTRKSS.SIZ ');
+      SQL.Add('  Union All ');
+      SQL.Add('  select CKBH,CLBH,SIZ,QTY as LastRem from Lastmonth where KCYEAR='''+ayear+''' and KCMonth='''+amonth+'''  and CKBH in (Select CKBH+''#L'' from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''')   ');
+      if CBX1.Text <> '' then
+        SQL.Add(' and CKBH='''+CBX1.Text+'#L'' ')
+      else
+        SQL.Add(' and CKBH like ''%#L'' ');
+      SQL.Add('  ) as tmpRKTLFL ');
+      SQL.Add('  group by CKBH,CLBH,SIZ ) as NowKC');
+      SQL.Add('left join ( ');
+      SQL.Add('   select LTLL.CKBH+''#L'' as CKBH,LTLLSS.CLBH,LTLLSS.SIZ,SUM(LTLLSS.Qty) as LLQty from LTLLSS,LTLL ');
+      SQL.Add('   where ((LTLLSS.LLNO=LTLL.LLNO and isnull(LTLL.flowflag,'''') <>''X'' and LTLL.CFMID<>''NO'' and LTLL.SFL in (''2'',''4'') and convert(smalldatetime,convert(varchar,LTLL.CFMDate,111)) between '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP1.date))+''' and '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''') ');
+      SQL.Add('        or (LTLLSS.LLNO=LTLL.LLNO  and Isnull(LTLL.CFMID1,''NO'')<>''NO'' and LTLL.SFL=''3'' and convert(smalldatetime,convert(varchar,LTLL.CFMDate1,111)) between '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP1.date))+''' and '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''')) ');
+      SQL.Add('   and LTLL.CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''') ');
+      if CBX1.Text <> '' then
+        SQL.Add(' and LTLL.CKBH='''+CBX1.Text+''' ');
+      SQL.Add('   Group by LTLL.CKBH,LTLLSS.CLBH,LTLLSS.SIZ ) LL on NowKC.CKBH=LL.CKBH  and NowKC.CLBH=LL.CLBH and NowKC.SIZ=LL.SIZ');
+      //
+      SQL.Add('select #CLZLKC_LastK.CLBH,CLZL.YWPM, SUM(Qty) as Total,');
+      for i:=0 to High(XXCC) do
+      begin
+        SQL.Add('   Max(case when SIZ='''+XXCC[i]+''' then Qty end) as ''['+XXCC[i]+']'', ');
+      end;
+      SQL.Add('CLZL.CQDH, CLZL.DWBH ');
+      SQL.Add('from #CLZLKC_LastK  ');
+      SQL.Add('left join CLZL on CLZL.cldh=#CLZLKC_LastK.CLBH where 1=1 ');
+      if EditMatNo.Text<>'' then
+        SQL.Add('and #CLZLKC_LastK.CLBH like '''+EditMatNo.Text+'%'' ');
+      if EditMatNM.Text<>'' then
+        SQL.Add('and CLZL.YWPM like ''%'+EditMatNM.Text+'%'' ');
+      SQL.Add('Group by #CLZLKC_LastK.CLBH,CLZL.YWPM,CLZL.CQDH, CLZL.DWBH ');
+      if CheckBox1.Checked then
+        SQL.Add('HAVING SUM(Qty) > 0 ');
+      //funcObj.WriteErrorLog(sql.Text);
+      Active:=true;
+   end;
+ end else if PageControl1.ActivePage=TabSheet3 then
+ begin
+   with Qry3 do
+   begin
+      Active:=false;
+      sql.Clear;
+      sql.add(' if object_id(''tempdb..#CLZLKC_LastOut'') is not null  ');
+      sql.add('begin   drop table #CLZLKC_LastOut end   ');
+      sql.add('select NowKC.DepID,NowKC.CLBH,NowKC.SIZ,IsNull(NowKC.NowLLQty,0)-IsNull(RK.RKQty,0) as Qty into #CLZLKC_LastOut  from ( ');
+      sql.add('select DepID,CLBH,SIZ,Sum(LLQty) as NowLLQty from (');
+      sql.add('select LTLL.DepID,LTLLSS.CLBH,LTLLSS.SIZ,SUM(LTLLSS.Qty) as LLQty from LTLLSS,LTLL ');
+      sql.add('where LTLLSS.LLNO=LTLL.LLNO and isnull(LTLL.flowflag,'''') <>''X'' and LTLL.CFMID<>''NO'' and LTLL.SFL=''1'' and LTLL.CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''')  and convert(smalldatetime,convert(varchar,LTLL.CFMDate,111)) between '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP1.date))+''' and '''+formatdatetime('yyyy/MM/dd',DTP1.date)+'''  ');
+      if CBX1.Text <> '' then
+        SQL.Add(' and LTLL.CKBH='''+CBX1.Text+''' ');
+      sql.add('Group by LTLL.DepID,LTLLSS.CLBH,LTLLSS.SIZ ');
+      sql.add('Union All ');
+      sql.add('select DepID,CLBH,SIZ,QTY as LastRem from Lastmonth_Out where KCYEAR='''+ayear+''' and KCMonth='''+amonth+''' and CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''')  ');
+      if CBX1.Text <> '' then
+        SQL.Add(' and CKBH='''+CBX1.Text+''' ');
+      sql.add(') as tmpRKTLFL ');
+      sql.add('group by DepID,CLBH,SIZ ) as NowKC ');
+      sql.add('left join ( select LTRK.DepID,LTRKSS.CLBH,LTRKSS.SIZ,SUM(LTRKSS.Qty) as RKQty from LTRKSS,LTRK  ');
+      sql.add('where LTRKSS.RKNO=LTRK.RKNO and isnull(LTRK.flowflag,'''') <>''X'' and LTRK.SFL=''1'' and LTRK.CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''')   and convert(smalldatetime,convert(varchar,LTRK.UserDate,111)) between '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP1.date))+''' and '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''' ');
+      if CBX1.Text <> '' then
+        SQL.Add(' and LTRK.CKBH='''+CBX1.Text+''' ');
+      sql.add('Group by LTRK.DepID,LTRKSS.CLBH,LTRKSS.SIZ )  RK on NowKC.DepID=RK.DepID and NowKC.CLBH=RK.CLBH and NowKC.SIZ=RK.SIZ ');
+      sql.add('where  IsNull(NowKC.NowLLQty,0)-IsNull(RK.RKQty,0) >0 ');
+      //
+      SQL.Add('select BDepartment.DepName,#CLZLKC_LastOut.CLBH,CLZL.YWPM, SUM(Qty) as Total,');
+      for i:=0 to High(XXCC) do
+      begin
+        SQL.Add('   Max(case when SIZ='''+XXCC[i]+''' then Qty end) as ''['+XXCC[i]+']'', ');
+      end;
+      SQL.Add('CLZL.CQDH ');
+      SQL.Add('from #CLZLKC_LastOut  ');
+      SQL.Add('left join CLZL on CLZL.cldh=#CLZLKC_LastOut.CLBH  ');
+      SQL.Add('Left join BDepartment on BDepartment.ID=#CLZLKC_LastOut.DepID ');
+      SQL.Add('where 1=1 ');
+      if EditMatNo.Text<>'' then
+        SQL.Add('and #CLZLKC_LastOut.CLBH like '''+EditMatNo.Text+'%'' ');
+      if EditMatNM.Text<>'' then
+        SQL.Add('and CLZL.YWPM like ''%'+EditMatNM.Text+'%'' ');
+      SQL.Add('Group by BDepartment.DepName ,#CLZLKC_LastOut.CLBH,CLZL.YWPM,CLZL.CQDH ');
+      //FuncObj.WriteErrorLog(sql.Text);
+      Active:=true;
+   end;
+ end else if PageControl1.ActivePage=TabSheet4 then
+ begin
+   with Qry4 do
+   begin
+      Active:=false;
+      SQL.Clear;
+      sql.add('  if object_id(''tempdb..#CLZLKC_BO'') is not null  ');
+      sql.add('begin   drop table #CLZLKC_BO end   ');
+      SQL.Add('   select LTLL.CKBH,LTLLSS.CLBH,LTLLSS.SIZ,SUM(LTLLSS.Qty) as Qty into #CLZLKC_BO from LTLLSS,LTLL ');
+      SQL.Add('   where ((LTLLSS.LLNO=LTLL.LLNO  and LTLL.CFMID<>''NO'' and LTLL.SFL in (''2'') and convert(smalldatetime,convert(varchar,LTLL.CFMDate,111)) <= '''+formatdatetime('yyyy/MM/dd',DTP1.Date)+''') ');
+      SQL.Add('        or (LTLLSS.LLNO=LTLL.LLNO and isnull(LTLL.flowflag,'''') <>''X'' and Isnull(LTLL.CFMID1,''NO'')<>''NO'' and LTLL.SFL in (''3'') and convert(smalldatetime,convert(varchar,LTLL.CFMDate1,111)) <= '''+formatdatetime('yyyy/MM/dd',DTP1.Date)+'''))');
+      //SQL.Add('   and convert(smalldatetime,convert(varchar,LTLL.CFMDate,111)) between '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP1.date))+''' and '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''' ');
+      SQL.Add('   ');
+      SQL.Add('and LTLL.CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''')  ');
+      if CBX1.Text <> '' then
+        SQL.Add(' and LTLL.CKBH='''+CBX1.Text+''' ');
+      SQL.Add('   Group by LTLL.CKBH,LTLLSS.CLBH,LTLLSS.SIZ ');
+      SQL.Add('select #CLZLKC_BO.CLBH,CLZL.YWPM, SUM(Qty) as Total,');
+      for i:=0 to High(XXCC) do
+      begin
+        SQL.Add('   Max(case when SIZ='''+XXCC[i]+''' then Qty end) as ''['+XXCC[i]+']'', ');
+      end;
+      SQL.Add('CLZL.CQDH ');
+      SQL.Add('from #CLZLKC_BO  ');
+      SQL.Add('left join CLZL on CLZL.cldh=#CLZLKC_BO.CLBH  where 1=1 ');
+      if EditMatNo.Text<>'' then
+        SQL.Add('and #CLZLKC_BO.CLBH like '''+EditMatNo.Text+'%'' ');
+      if EditMatNM.Text<>'' then
+        SQL.Add('and CLZL.YWPM like ''%'+EditMatNM.Text+'%'' ');
+      SQL.Add('Group by #CLZLKC_BO.CLBH,CLZL.YWPM,CLZL.CQDH ');
+      //funcObj.WriteErrorLog(sql.Text);
+      Active:=true;
+   end;
+ end else if PageControl1.ActivePage=TabSheet5 then
+ begin
+   with Qry5 do
+   begin
+      Active:=false;
+      SQL.Clear;
+      sql.add('  if object_id(''tempdb..#CLZLKC_CHOTL'') is not null  ');
+      sql.add('begin   drop table #CLZLKC_CHOTL end   ');
+      SQL.Add('   select LTLL.CKBH,LTLLSS.CLBH,LTLLSS.SIZ,SUM(LTLLSS.Qty) as Qty into #CLZLKC_CHOTL from LTLLSS,LTLL ');
+      SQL.Add('   where LTLLSS.LLNO=LTLL.LLNO and isnull(LTLL.flowflag,'''') <>''X'' and LTLL.CFMID<>''NO'' and  isnull(LTLL.CFMID1,''NO'') =''NO''  and LTLL.SFL in (''3'') and LTLL.CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''')  ');
+      //SQL.Add('   and convert(smalldatetime,convert(varchar,LTLL.CFMDate,111)) between '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP1.date))+''' and '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''' ');
+      SQL.Add('   and convert(smalldatetime,convert(varchar,LTLL.CFMDate,111)) <= '''+formatdatetime('yyyy/MM/dd',DTP1.Date)+''' ');
+      if CBX1.Text <> '' then
+        SQL.Add(' and LTLL.CKBH='''+CBX1.Text+''' ');
+      SQL.Add('   Group by LTLL.CKBH,LTLLSS.CLBH,LTLLSS.SIZ ');
+      SQL.Add('select #CLZLKC_CHOTL.CLBH,CLZL.YWPM, SUM(Qty) as Total,');
+      for i:=0 to High(XXCC) do
+      begin
+        SQL.Add('   Max(case when SIZ='''+XXCC[i]+''' then Qty end) as ''['+XXCC[i]+']'', ');
+      end;
+      SQL.Add('CLZL.CQDH ');
+      SQL.Add('from #CLZLKC_CHOTL  ');
+      SQL.Add('left join CLZL on CLZL.cldh=#CLZLKC_CHOTL.CLBH  where 1=1 ');
+      if EditMatNo.Text<>'' then
+        SQL.Add('and #CLZLKC_CHOTL.CLBH like '''+EditMatNo.Text+'%'' ');
+      if EditMatNM.Text<>'' then
+        SQL.Add('and CLZL.YWPM like ''%'+EditMatNM.Text+'%'' ');
+      SQL.Add('Group by #CLZLKC_CHOTL.CLBH,CLZL.YWPM,CLZL.CQDH ');
+      //funcObj.WriteErrorLog(sql.Text);
+      Active:=true;
+   end;
+//15.05=========================
+   end else if  PageControl1.ActivePage=TabSheet6 then
+   begin
+     with Qry6 do
+     begin
+        Active:=false;
+        SQL.Clear;
+        sql.add('  if object_id(''tempdb..#CLZLKC_Chuyen'') is not null  ');
+        sql.add('begin   drop table #CLZLKC_Chuyen end   ');
+        SQL.Add('   select LTLL.CKBH,LTLLSS.CLBH,LTLLSS.SIZ,SUM(LTLLSS.Qty) as Qty into #CLZLKC_Chuyen from LTLLSS,LTLL ');
+        SQL.Add('   where (LTLLSS.LLNO=LTLL.LLNO  and LTLL.CFMID<>''NO'' and LTLL.SFL in (''4'') and convert(smalldatetime,convert(varchar,LTLL.CFMDate,111)) <= '''+formatdatetime('yyyy/MM/dd',DTP1.Date)+''') ');
+        SQL.Add('   ');
+        SQL.Add('and LTLL.CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''')  ');
+        if CBX1.Text <> '' then
+          SQL.Add(' and LTLL.CKBH='''+CBX1.Text+''' ');
+        SQL.Add('   Group by LTLL.CKBH,LTLLSS.CLBH,LTLLSS.SIZ ');
+        SQL.Add('select #CLZLKC_Chuyen.CLBH,CLZL.YWPM, SUM(Qty) as Total,');
+        for i:=0 to High(XXCC) do
+        begin
+          SQL.Add('   Max(case when SIZ='''+XXCC[i]+''' then Qty end) as ''['+XXCC[i]+']'', ');
+        end;
+        SQL.Add('CLZL.CQDH ');
+        SQL.Add('from #CLZLKC_Chuyen  ');
+        SQL.Add('left join CLZL on CLZL.cldh=#CLZLKC_Chuyen.CLBH  where 1=1 ');
+        if EditMatNo.Text<>'' then
+          SQL.Add('and #CLZLKC_Chuyen.CLBH like '''+EditMatNo.Text+'%'' ');
+        if EditMatNM.Text<>'' then
+          SQL.Add('and CLZL.YWPM like ''%'+EditMatNM.Text+'%'' ');
+        SQL.Add('Group by #CLZLKC_Chuyen.CLBH,CLZL.YWPM,CLZL.CQDH ');
+        //funcObj.WriteErrorLog(sql.Text);
+        //showmessage(sql.Text);
+        Active:=true;
+     end;
+   end;
+//===============================
+ Qtemp1.Active:=false;
+end;
+
+procedure TLastSTOCK.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  action:=cafree;
+end;
+
+procedure TLastSTOCK.FormDestroy(Sender: TObject);
+begin
+  LastSTOCK:=nil;
+end;
+
+procedure TLastSTOCK.S1Click(Sender: TObject);
+begin
+      Laststock_Det:=TLaststock_Det.create(self);
+      Laststock_Det.show;
+end;
+//Last Size Range
+procedure TLastSTOCK.Last_Size_Range_Init();
+  function GetDBGridTitle_Siz(str:string):string;
+  begin
+    result:=Copy(str,2,length(str)-2);
+  end;
+var i,j:integer;
+begin
+  //
+  Qtemp1.Active:=false;
+  Qtemp1.SQL.Clear;
+  Qtemp1.SQL.Add('Select CLBH from LastSizeR where LB=''01'' Group by CLBH Order by CLBH ');
+  Qtemp1.Active:=true;
+  //
+  if Qtemp1.RecordCount>0 then
+  begin
+    setlength(LastSizeR,Qtemp1.RecordCount);
+    for i:=0  to Qtemp1.RecordCount-1 do
+    begin
+      LastSizeR[i].CLBH:=Qtemp1.FieldByName('CLBH').AsString;
+      Qtemp1.Next;
+    end;
+    Qtemp1.Active:=false;
+    for i:=0 to  High(LastSizeR) do
+    begin
+      Qtemp1.Active:=false;
+      Qtemp1.SQL.Clear;
+      Qtemp1.SQL.Add('Select SIZ from LastSizeR where CLBH='''+LastSizeR[i].CLBH+''' and LB=''02'' Order by SIZ ');
+      Qtemp1.Active:=true;
+      for j:=3 to dbgrdh1.Columns.Count-1 do
+      begin
+         if Qtemp1.Locate('SIZ',GetDBGridTitle_Siz(dbgrdh1.Columns[j].FieldName),[]) =true then
+           LastSizeR[i].IsSizR[j-3]:=true
+         else
+           LastSizeR[i].IsSizR[j-3]:=false;
+      end;
+    end;
+    //
+  end;
+  Qtemp1.Active:=false;
+  //
+end;
+//
+procedure TLastSTOCK.FormCreate(Sender: TObject);
+var NDate:TDate;
+begin
+  with Qtemp1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select getdate() as NDate ');
+    active:=true;
+    NDate:=fieldbyname('NDate').Value;
+    active:=false;
+    sql.Clear;
+    sql.add('select CKBH from LastKCCK ');
+    sql.add('where GSBH='''+main.edit2.text+''' and LB=''01'' ');
+    sql.add('order by CKBH ');
+    active:=true;
+    CBX1.items.clear;
+    while not eof do
+      begin
+        CBX1.items.add(fieldbyname('CKBH').AsString);
+        next;
+      end;
+    CBX1.Items.Add('');
+    CBX1.itemindex:=0;
+    active:=false;
+  end;
+  DTP1.Date:=NDate;
+  GetDateParam();
+  DBGridInit();
+  PageControl1.ActivePage:=TabSheet2;
+  //
+  //Last_Size_Range_Init();
+end;
+
+procedure TLastStock.OutputExcel(Query:TQuery);
+var eclApp,WorkBook:olevariant;
+    i,j:integer;
+begin
+  if Query.Active=false then exit;
+  try
+    eclApp:=CreateOleObject('Excel.Application');
+    WorkBook:=CreateOleObject('Excel.Sheet');
+  except
+    Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+    Exit;
+  end;
+
+  try
+    WorkBook:=eclApp.workbooks.Add;
+    for   i:=0   to   Query.fieldcount-1   do
+    begin
+      eclApp.Cells(1,i+1):=Query.fields[i].FieldName;
+    end;
+    //抬頭顏色
+    eclApp.Range[eclApp.Cells[1,1],eclApp.Cells[1,Query.fieldcount]].interior.color:=clyellow;
+    eclApp.Range[eclApp.Cells[1,1],eclApp.Cells[1,Query.fieldcount]].font.color:=clred;
+    eclApp.Range[eclApp.Cells[1,1],eclApp.Cells[Query.RecordCount+1,Query.fieldcount]].Borders.weight:=2;
+    //
+    Query.First;
+    j:=2;
+    while   not  Query.Eof   do
+    begin
+        for   i:=0   to   Query.fieldcount-1   do
+        begin
+          eclApp.Cells(j,i+1):=Query.Fields[i].Value;
+        end;
+        Query.Next;
+        inc(j);
+    end;
+    eclapp.columns.autofit;
+    showmessage('Succeed.');
+    eclApp.Visible:=True;
+  except
+    on   F:Exception   do
+      showmessage(F.Message);
+  end;
+end;
+procedure TLastSTOCK.bbt6Click(Sender: TObject);
+begin
+  if PageControl1.ActivePage=TabSheet1 then
+    OutputExcel(Qry1);
+  if PageControl1.ActivePage=TabSheet2 then
+    OutputExcel(Qry2);
+  if PageControl1.ActivePage=TabSheet3 then
+    OutputExcel(Qry3);
+  if PageControl1.ActivePage=TabSheet4 then
+    OutputExcel(Qry4);
+end;
+
+procedure TLastSTOCK.BB1Click(Sender: TObject);
+begin
+  panel2.Visible:=true;
+end;
+
+//檢查上個月是否結算資料
+function TLastSTOCK.CheckLastMonthEnding():boolean;
+begin
+
+ with  Qtemp1 do
+ begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('Select KCYear from LASTMONTH where KCYear='''+LastYear+''' and KCMonth='''+LastMon+''' and CKBH='''+CBX1.Text+''' ');
+    Active:=true;
+    //是否有上個月資料
+    if RecordCount=0 then
+      result:=false
+    else
+      result:=true;
+    active:=false;
+ end;
+
+end;
+
+procedure TLastSTOCK.BB2Click(Sender: TObject);
+var IsCal:boolean;
+begin
+  if CBX1.Text = '' then begin
+    showmessage('Please Choice CKBH !');
+    exit;
+  end;
+  //
+  with Qtemp1 do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('Select top 1 KCYEAR,YN from LASTMONTH where KCYEAR='''+LastYear+''' and KCMONTH='''+LastMon+''' and CKBH='''+CBX1.Text+'''  ');
+    Active:=true;
+    if FieldByName('YN').AsString='2' then
+    begin
+      Showmessage('Can''t be recalculated: '+LastYear+'/'+LastMon );
+      Active:=false;
+      Exit;
+    end;
+    Active:=false;
+  end;
+  //
+  if CheckLastMonthEnding()=true then
+  begin
+    if  Messagedlg(Pchar('Are you sure caluate Monthly Ending?'),mtInformation,[mbYES,mbNo],0)=mrYes then
+      IsCal:=true
+    else
+      IsCal:=false;
+  end else
+  begin
+    IsCal:=true;
+  end;
+  if IsCal=true then
+  begin
+      //產生月結資料
+      with  Qtemp1 do
+      begin
+        Active:=false;
+        SQL.Clear;
+        SQL.Add('Delete from LASTMONTH where KCYear='''+LastYear+''' and KCMonth='''+LastMon+''' and CKBH='''+CBX1.Text+''' and YN=''1'' ');
+        SQL.Add('Insert into LASTMONTH ');
+        SQL.Add('select '''+LastYear+''' as KCYear,'''+LastMon+''' as KCMonth,NowKC.CKBH,NowKC.CLBH,NowKC.SIZ,IsNull(NowKC.NowRKQty,0)-IsNull(LL.LLQty,0) as Qty,'''+main.Edit1.Text+''',GetDate(),''1''  from (');
+        SQL.Add('  select CKBH,CLBH,SIZ,Sum(RKQty) as NowRKQty from (');
+        SQL.Add('  select LTRK.CKBH,LTRKSS.CLBH,LTRKSS.SIZ,SUM(LTRKSS.Qty) as RKQty from LTRKSS,LTRK ');
+        SQL.Add('  where LTRKSS.RKNO=LTRK.RKNO and isnull(LTRK.flowflag,'''') <>''X'' and LTRK.CKBH='''+CBX1.Text+''' and LTRK.SFL in (''1'',''2'') and LTRK.CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''')  and convert(smalldatetime,convert(varchar,LTRK.UserDate,111)) between '''+STLastMonDate+''' and '''+EDLastMonDate+''' ');
+        SQL.Add('  Group by LTRK.CKBH,LTRKSS.CLBH,LTRKSS.SIZ ');
+        SQL.Add('  Union All ');
+        SQL.Add('  select CKBH,CLBH,SIZ,QTY as LastRem from Lastmonth where CKBH='''+CBX1.Text+''' and KCYEAR='''+LastYear2+''' and KCMonth='''+LastMon2+'''  and CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''') ) as tmpRKTLFL ');
+        SQL.Add('  group by CKBH,CLBH,SIZ ) as NowKC');
+        SQL.Add('left join ( ');
+        SQL.Add('   select CKBH,CLBH,SIZ,QTY as LastRem from Lastmonth where CKBH='''+CBX1.Text+''' and KCYEAR='''+LastYear2+''' and KCMonth='''+LastMon2+''' and CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''') ) as LastKC on NowKC.CKBH=LastKC.CKBH and NowKC.CLBH=LastKC.CLBH and NowKC.SIZ=LastKC.SIZ');
+        SQL.Add('left join ( ');
+        SQL.Add('  select LTRK.CKBH,LTRKSS.CLBH,LTRKSS.SIZ,SUM(LTRKSS.Qty) as RKQty from LTRKSS,LTRK ');
+        SQL.Add('  where LTRKSS.RKNO=LTRK.RKNO and isnull(LTRK.flowflag,'''') <>''X'' and LTRK.CKBH='''+CBX1.Text+''' and LTRK.SFL in (''1'',''2'') and LTRK.CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''') and convert(smalldatetime,convert(varchar,LTRK.UserDate,111)) between '''+STLastMonDate+''' and '''+EDLastMonDate+''' ');
+        SQL.Add('  Group by LTRK.CKBH,LTRKSS.CLBH,LTRKSS.SIZ  ) RK on NowKC.CKBH=RK.CKBH and NowKC.CLBH=RK.CLBH and NowKC.SIZ=RK.SIZ');
+        SQL.Add('left join ( ');
+        SQL.Add('   select LTLL.CKBH,LTLLSS.CLBH,LTLLSS.SIZ,SUM(LTLLSS.Qty) as LLQty from LTLLSS,LTLL ');
+        SQL.Add('   where LTLLSS.LLNO=LTLL.LLNO and isnull(LTLL.flowflag,'''') <>''X'' and LTLL.CFMID<>''NO'' and LTLL.CKBH='''+CBX1.Text+''' and LTLL.SFL in (''1'',''2'',''3'',''4'') and LTLL.CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''') and convert(smalldatetime,convert(varchar,LTLL.CFMDate,111)) between '''+STLastMonDate+''' and '''+EDLastMonDate+''' ');
+        SQL.Add('   Group by LTLL.CKBH,LTLLSS.CLBH,LTLLSS.SIZ ) LL on NowKC.CKBH=LL.CKBH and NowKC.CLBH=LL.CLBH and NowKC.SIZ=LL.SIZ');
+        //showmessage(sql.Text);
+        ExecSQL();
+        //月結全部庫存
+        Active:=false;
+        SQL.Clear;
+        SQL.Add('Delete from LASTMONTH where KCYear='''+LastYear+''' and KCMonth='''+LastMon+''' and CKBH='''+CBX1.Text+'#L'' and YN=''1'' ');
+        SQL.Add('Insert into LASTMONTH ');
+        SQL.Add('select '''+LastYear+''' as KCYear,'''+LastMon+''' as KCMonth,'''+CBX1.Text+'#L'',NowKC.CLBH,NowKC.SIZ,IsNull(NowKC.NowRKQty,0)-IsNull(LL.LLQty,0) as Qty,'''+main.Edit1.Text+''',GetDate(),''1''  from (');
+        SQL.Add('  select CLBH,SIZ,Sum(RKQty) as NowRKQty from (');
+        SQL.Add('  select LTRKSS.CLBH,LTRKSS.SIZ,SUM(LTRKSS.Qty) as RKQty from LTRKSS,LTRK ');
+        SQL.Add('  where LTRKSS.RKNO=LTRK.RKNO and isnull(LTRK.flowflag,'''') <>''X'' and LTRK.CKBH='''+CBX1.Text+''' and LTRK.SFL=''2'' and LTRK.CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''') and convert(smalldatetime,convert(varchar,LTRK.UserDate,111)) between '''+STLastMonDate+''' and '''+EDLastMonDate+''' ');
+        SQL.Add('  Group by LTRKSS.CLBH,LTRKSS.SIZ ');
+        SQL.Add('  Union All ');
+        SQL.Add('  select CLBH,SIZ,QTY as LastRem from Lastmonth where CKBH='''+CBX1.Text+'#L'' and KCYEAR='''+LastYear2+''' and KCMonth='''+LastMon2+''' and CKBH in (Select CKBH+''#L'' from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''')  ) as tmpRKTLFL ');
+        SQL.Add('  group by CLBH,SIZ) as NowKC');
+        SQL.Add('left join ( ');
+        SQL.Add('   select LTLLSS.CLBH,LTLLSS.SIZ,SUM(LTLLSS.Qty) as LLQty from LTLLSS,LTLL ');
+        SQL.Add('   where ((LTLLSS.LLNO=LTLL.LLNO and isnull(LTLL.flowflag,'''') <>''X'' and LTLL.CFMID<>''NO'' and LTLL.CKBH='''+CBX1.Text+''' and LTLL.SFL in (''2'',''4'')  and convert(smalldatetime,convert(varchar,LTLL.CFMDate,111)) between '''+STLastMonDate+''' and '''+EDLastMonDate+''' )' );
+        SQL.Add('         or (LTLLSS.LLNO=LTLL.LLNO  and Isnull(LTLL.CFMID1,''NO'')<>''NO'' and LTLL.CKBH='''+CBX1.Text+''' and LTLL.SFL=''3''  and convert(smalldatetime,convert(varchar,LTLL.CFMDate1,111)) between '''+STLastMonDate+''' and '''+EDLastMonDate+''' ))' );
+        SQL.Add('      and LTLL.CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''') ');
+        SQL.Add('   Group by LTLLSS.CLBH,LTLLSS.SIZ ) LL on  NowKC.CLBH=LL.CLBH and NowKC.SIZ=LL.SIZ');
+       // sql.Add('  group by NowKC.CLBH,NowKC.SIZ');
+       //showmessage(sql.Text);
+        ExecSQL();
+
+        //月結流通在外
+        Active:=false;
+        SQL.Clear;
+        SQL.Add('Delete from LASTMONTH_Out where KCYear='''+LastYear+''' and KCMonth='''+LastMon+''' and CKBH='''+CBX1.Text+''' ');
+        SQL.Add('Insert into LASTMONTH_Out ');
+        sql.add('select '''+CBX1.Text+''' as CKBH,'''+LastYear+''' as KCYear,'''+LastMon+''' as KCMonth,NowKC.DepID,NowKC.CLBH,NowKC.SIZ,IsNull(NowKC.NowLLQty,0)-IsNull(RK.RKQty,0) as Qty,'''+main.Edit1.Text+''',GetDate(),''1''  from ( ');
+        sql.add('select DepID,CLBH,SIZ,Sum(LLQty) as NowLLQty from (');
+        sql.add('select LTLL.DepID,LTLLSS.CLBH,LTLLSS.SIZ,SUM(LTLLSS.Qty) as LLQty from LTLLSS,LTLL ');
+        sql.add('where LTLLSS.LLNO=LTLL.LLNO and isnull(LTLL.flowflag,'''') <>''X'' and LTLL.CFMID<>''NO'' and LTLL.CKBH='''+CBX1.Text+''' and LTLL.SFL=''1'' and LTLL.CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''')  and convert(smalldatetime,convert(varchar,LTLL.CFMDate,111)) between '''+STLastMonDate+''' and '''+EDLastMonDate+'''  ');
+        sql.add('Group by LTLL.DepID,LTLLSS.CLBH,LTLLSS.SIZ ');
+        sql.add('Union All ');
+        sql.add('select DepID,CLBH,SIZ,QTY as LastRem from Lastmonth_Out where  KCYEAR='''+LastYear2+''' and KCMonth='''+LastMon2+''' and CKBH='''+CBX1.Text+''' and CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''')  ) as tmpRKTLFL ');
+        sql.add('group by DepID,CLBH,SIZ ) as NowKC ');
+        sql.add('left join ( select LTRK.DepID,LTRKSS.CLBH,LTRKSS.SIZ,SUM(LTRKSS.Qty) as RKQty from LTRKSS,LTRK  ');
+        sql.add('where LTRKSS.RKNO=LTRK.RKNO and isnull(LTRK.flowflag,'''') <>''X'' and LTRK.CKBH='''+CBX1.Text+''' and LTRK.SFL=''1''  and LTRK.CKBH in (Select CKBH from LastKCCK where LB=''01'' and GSBH='''+main.Edit2.Text+''')  and convert(smalldatetime,convert(varchar,LTRK.UserDate,111)) between '''+STLastMonDate+''' and '''+EDLastMonDate+''' ');
+        sql.add('Group by LTRK.DepID,LTRKSS.CLBH,LTRKSS.SIZ )  RK on NowKC.DepID=RK.DepID and NowKC.CLBH=RK.CLBH and NowKC.SIZ=RK.SIZ ');
+        sql.add('where  IsNull(NowKC.NowLLQty,0)-IsNull(RK.RKQty,0) >0 ');
+        ExecSQL();
+      end;
+
+      if CheckLastMonthEnding()=true then LastMonth.Caption:='';
+      showmessage('Tinh het / Calculate over!');
+  end;
+
+end;
+
+procedure TLastSTOCK.DTP1Change(Sender: TObject);
+begin
+  //取得時間參數
+  GetDateParam();
+end;
+//
+procedure TLastSTOCK.dbgrdh1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+var i:integer;
+begin
+  //
+  if qry1.FieldByName('CLBH').AsString<>'' then
+  begin
+    DBGrdh1.Canvas.Brush.Color:=clLime;
+    for i:=0 to High(LastSizeR) do
+    begin
+      if LastSizeR[i].CLBH = qry1.FieldByName('CLBH').AsString then
+      begin
+         if DataCol>=3 then
+           if LastSizeR[i].IsSizR[DataCol-3]=true then
+             DBGrdh1.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+         break;
+      end;
+    end;
+  end;
+  //
+end;
+
+procedure TLastSTOCK.dbgrdh2DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+var i:integer;
+begin
+  //
+  if qry2.FieldByName('CLBH').AsString<>'' then
+  begin
+    dbgrdh2.Canvas.Brush.Color:=clLime;
+    for i:=0 to High(LastSizeR) do
+    begin
+      if LastSizeR[i].CLBH = qry2.FieldByName('CLBH').AsString then
+      begin
+         if DataCol>=3 then
+           if LastSizeR[i].IsSizR[DataCol-3]=true then
+             dbgrdh2.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+         break;
+      end;
+    end;
+  end;
+  //
+
+end;
+
+procedure TLastSTOCK.dbgrdh4DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+var i:integer;
+begin
+  if qry4.FieldByName('CLBH').AsString<>'' then
+  begin
+    DBGrdh4.Canvas.Brush.Color:=clLime;
+    for i:=0 to High(LastSizeR) do
+    begin
+      if LastSizeR[i].CLBH = qry4.FieldByName('CLBH').AsString then
+      begin
+         if DataCol>=3 then
+           if LastSizeR[i].IsSizR[DataCol-3]=true then
+             DBGrdh4.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+         break;
+      end;
+    end;
+  end;
+end;
+
+procedure TLastSTOCK.btn_Print_KhoClick(Sender: TObject);
+begin
+  with Qtemp1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select CKBH,Memo from LastKCCK WHERE GSBH='''+main.Edit2.text+''' and LB =''01'' and CKBH ='''+CBX1.Text+''' order by CKBH');
+    active:=true;
+  end;
+  LastSTOCK_Print:=TLastSTOCK_Print.Create(self);
+  LastSTOCK_Print.quickrep1.prepare;
+  LastSTOCK_Print.QRLabel39.Caption:=Qtemp1.FieldByName('CKBH').AsString+'-'+Qtemp1.FieldByName('Memo').AsString;
+  LastSTOCK_Print.QRLabel35.Caption:=main.Edit2.text;
+  LastSTOCK_Print.PageN.caption:=inttostr(LastSTOCK_Print.quickrep1.QRPrinter.pagecount);
+  LastSTOCK_Print.quickrep1.preview;
+  LastSTOCK_Print.free;
+end;
+
+procedure TLastSTOCK.btn_Print_TongClick(Sender: TObject);
+begin
+  with Qtemp1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select CKBH,Memo from LastKCCK WHERE GSBH='''+main.Edit2.text+''' and LB =''01'' and CKBH ='''+CBX1.Text+''' order by CKBH');
+    active:=true;
+  end;
+  LastSTOCK_PrintTong:=TLastSTOCK_PrintTong.Create(self);
+  LastSTOCK_PrintTong.quickrep1.prepare;
+  LastSTOCK_PrintTong.QRLabel39.Caption:=Qtemp1.FieldByName('CKBH').AsString+'-'+Qtemp1.FieldByName('Memo').AsString;
+  LastSTOCK_PrintTong.QRLabel35.Caption:=main.Edit2.text;
+  LastSTOCK_PrintTong.PageN.caption:=inttostr(LastSTOCK_PrintTong.quickrep1.QRPrinter.pagecount);
+  LastSTOCK_PrintTong.quickrep1.preview;
+  LastSTOCK_PrintTong.free;
+end;
+
+procedure TLastSTOCK.DBGridEh7DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+var i:integer;
+begin
+  if qry6.FieldByName('CLBH').AsString<>'' then
+  begin
+    DBGridEh7.Canvas.Brush.Color:=clLime;
+    for i:=0 to High(LastSizeR) do
+    begin
+      if LastSizeR[i].CLBH = qry6.FieldByName('CLBH').AsString then
+      begin
+         if DataCol>=3 then
+           if LastSizeR[i].IsSizR[DataCol-3]=true then
+             DBGridEh7.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+         break;
+      end;
+    end;
+  end;
+end;
+
+end.

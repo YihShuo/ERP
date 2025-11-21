@@ -1,0 +1,19 @@
+object MaterialTrace_JGA: TMaterialTrace_JGA
+  Left = 447
+  Top = 264
+  Width = 436
+  Height = 413
+  BorderIcons = [biSystemMenu]
+  Caption = 'MaterialTrace_JGA'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+end

@@ -1,0 +1,24 @@
+select max(CONVERT(varchar,KCCLMONTH.kcyear)) as kcyear,max(convert(varchar,KCCLMONTH.kcmonth)) as kcmonth,
+ KCCLMONTH.ckbh,KCCLMONTH.clbh,clzl.ywpm,clzl.zwpm,
+          kcclmonth.qty,isnull(k.needqty,0) as needqty, (isnull(kcclmonth.qty,0)-isnull(k.needqty,0)) as mmq 
+         ,((isnull(kcclmonth.qty,0)-isnull(k.needqty,0)) * isnull(vnprice,0)) / (case when cwhl <> 0 then cwhl else 1 end) as incostus
+         ,(case when cwhl <> 0 then (isnull(kcclmonth.qty,0)-isnull(k.needqty,0)) * isnull(vnprice,0) / 21036 else 0 end) as nowcost
+         ,(case when cwhl <> 0 then (((isnull(kcclmonth.qty,0)-isnull(k.needqty,0)) * isnull(vnprice,0)) /  cwhl) 
+	           - ((isnull(kcclmonth.qty,0)-isnull(k.needqty,0)) * isnull(vnprice,0) /21036) else 0 end) as agio
+ from KCCLMONTH 
+right join 
+          (select max(KCCLMONTH.kcyear+KCCLMONTH.kcmonth) as ym,ckbh,clbh 
+           from kcclmonth
+           group by KCCLMONTH.ckbh,KCCLMONTH.clbh) as h on 
+           h.ym=(KCCLMONTH.kcyear+KCCLMONTH.kcmonth) and kcclmonth.ckbh=h.ckbh and kcclmonth.clbh=h.clbh 
+left join clzl on clzl.cldh=kcclmonth.clbh 
+full join 
+          (select ywdd.gsbh,zlzls2.clbh,sum(clsl) as needqty from zlzls2 
+           left join ywdd on ywdd.ysbh=zlzls2.zlbh 
+           where (ywdd.sb is null or ywdd.sb <> 'OK')  and ywdd.etd >= getdate() 
+           group by ywdd.gsbh,zlzls2.clbh) as K on k.gsbh=kcclmonth.ckbh and k.clbh = KCCLMONTH.clbh 
+where  (kcclmonth.qty-isnull(k.needqty,0)) > 0 
+ and KCCLMONTH.ckbh='VB1'
+ group by  KCCLMONTH.ckbh,KCCLMONTH.clbh,clzl.ywpm,clzl.zwpm, kcclmonth.qty,k.needqty,vnprice,KCCLMONTH.CWHL,KCCLMONTH.kcyear,KCCLMONTH.kcmonth
+ order by KCCLMONTH.kcyear,KCCLMONTH.kcmonth,KCCLMONTH.ckbh,KCCLMONTH.clbh
+

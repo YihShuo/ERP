@@ -1,0 +1,289 @@
+object OrderCheck: TOrderCheck
+  Left = 275
+  Top = 196
+  Width = 901
+  Height = 500
+  Caption = 'OrderCheck'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -16
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 20
+  object Label8: TLabel
+    Left = 808
+    Top = 32
+    Width = 66
+    Height = 20
+    Caption = 'No Finish'
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 893
+    Height = 129
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 24
+      Top = 40
+      Width = 61
+      Height = 20
+      Caption = 'Process:'
+    end
+    object Label2: TLabel
+      Left = 160
+      Top = 40
+      Width = 111
+      Height = 20
+      Caption = 'ETD(yyyyy/mm):'
+    end
+    object Label3: TLabel
+      Left = 424
+      Top = 40
+      Width = 61
+      Height = 20
+      Caption = 'SpecNo:'
+    end
+    object Label6: TLabel
+      Left = 200
+      Top = 96
+      Width = 67
+      Height = 20
+      Caption = 'ArtName:'
+    end
+    object Label4: TLabel
+      Left = 408
+      Top = 96
+      Width = 81
+      Height = 20
+      Caption = 'Query Way:'
+    end
+    object Label5: TLabel
+      Left = 24
+      Top = 96
+      Width = 68
+      Height = 20
+      Caption = 'ArticleNo:'
+    end
+    object Label7: TLabel
+      Left = 808
+      Top = 64
+      Width = 60
+      Height = 20
+      Caption = 'Finished'
+    end
+    object Label9: TLabel
+      Left = 808
+      Top = 32
+      Width = 66
+      Height = 20
+      Caption = 'No Finish'
+    end
+    object Label10: TLabel
+      Left = 808
+      Top = 96
+      Width = 59
+      Height = 20
+      Caption = 'No Start'
+    end
+    object CBX1: TComboBox
+      Left = 96
+      Top = 32
+      Width = 49
+      Height = 28
+      DropDownCount = 10
+      ItemHeight = 20
+      ItemIndex = 0
+      TabOrder = 0
+      Text = 'ALL'
+      Items.Strings = (
+        'ALL'
+        'C'
+        'S'
+        'A'
+        'O'
+        'W'
+        'I'
+        'L'
+        'Y'
+        'Z')
+    end
+    object Edit1: TEdit
+      Left = 272
+      Top = 32
+      Width = 121
+      Height = 28
+      TabOrder = 1
+      Text = '2007/05'
+    end
+    object Edit2: TEdit
+      Left = 504
+      Top = 32
+      Width = 121
+      Height = 28
+      CharCase = ecUpperCase
+      TabOrder = 2
+    end
+    object Edit4: TEdit
+      Left = 272
+      Top = 88
+      Width = 121
+      Height = 28
+      CharCase = ecUpperCase
+      TabOrder = 4
+    end
+    object Button1: TButton
+      Left = 640
+      Top = 80
+      Width = 105
+      Height = 41
+      Caption = 'Query'
+      TabOrder = 6
+      OnClick = Button1Click
+    end
+    object CBX3: TComboBox
+      Left = 504
+      Top = 88
+      Width = 121
+      Height = 28
+      ItemHeight = 20
+      ItemIndex = 0
+      TabOrder = 5
+      Text = 'Order'
+      Items.Strings = (
+        'Order'
+        'Article'
+        'Color'
+        'ETD')
+    end
+    object Edit3: TEdit
+      Left = 96
+      Top = 88
+      Width = 65
+      Height = 28
+      CharCase = ecUpperCase
+      TabOrder = 3
+    end
+    object Button2: TButton
+      Left = 640
+      Top = 24
+      Width = 105
+      Height = 33
+      Caption = 'EXCEL'
+      TabOrder = 7
+      OnClick = Button2Click
+    end
+    object Edit5: TEdit
+      Left = 776
+      Top = 32
+      Width = 25
+      Height = 21
+      Color = clRed
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -8
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 8
+    end
+  end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 129
+    Width = 893
+    Height = 337
+    Align = alClient
+    DataSource = DataSource1
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    PopupMenu = PopupMenu1
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -16
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    OnDrawColumnCell = DBGrid1DrawColumnCell
+  end
+  object Edit6: TEdit
+    Left = 776
+    Top = 64
+    Width = 25
+    Height = 21
+    Color = clLime
+    Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -8
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+  end
+  object Edit7: TEdit
+    Left = 776
+    Top = 96
+    Width = 25
+    Height = 21
+    Color = clWhite
+    Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -8
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+  end
+  object Query1: TQuery
+    AfterOpen = Query1AfterOpen
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select *'
+      'from SCZKZL3')
+    Left = 496
+    Top = 160
+  end
+  object DataSource1: TDataSource
+    DataSet = Query1
+    Left = 536
+    Top = 160
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 224
+    Top = 200
+    object NN1: TMenuItem
+      Caption = 'Detail'
+      OnClick = NN1Click
+    end
+    object NN2: TMenuItem
+      Caption = 'Excel'
+      OnClick = NN2Click
+    end
+    object NN3: TMenuItem
+      Caption = 'Print'
+    end
+  end
+end

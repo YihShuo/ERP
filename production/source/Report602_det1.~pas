@@ -1,0 +1,37 @@
+unit Report602_det1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs;
+
+type
+  TReport602_det = class(TForm)
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Report602_det: TReport602_det;
+
+implementation
+
+{$R *.dfm}
+
+procedure TReport602_det.FormDestroy(Sender: TObject);
+begin
+Report602_det:=nil;
+end;
+
+procedure TReport602_det.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+query1.active:=false;
+end;
+
+end.

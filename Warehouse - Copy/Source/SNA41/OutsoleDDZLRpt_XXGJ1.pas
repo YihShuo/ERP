@@ -1,0 +1,49 @@
+unit OutsoleDDZLRpt_XXGJ1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, GridsEh, DBGridEh;
+
+type
+  TOutsoleDDZLRpt_XXGJ = class(TForm)
+    DBGridEh2: TDBGridEh;
+    XXGJQry: TQuery;
+    DS1: TDataSource;
+    XXGJQryARTICLE: TStringField;
+    XXGJQryXXCC: TStringField;
+    XXGJQryGJCC: TStringField;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  OutsoleDDZLRpt_XXGJ: TOutsoleDDZLRpt_XXGJ;
+
+implementation
+   uses OutsoleDDZLRtp1;
+{$R *.dfm}
+
+procedure TOutsoleDDZLRpt_XXGJ.FormDestroy(Sender: TObject);
+begin
+  OutsoleDDZLRpt_XXGJ:=nil;
+end;
+
+procedure TOutsoleDDZLRpt_XXGJ.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action:=CaFree;
+end;
+
+procedure TOutsoleDDZLRpt_XXGJ.FormCreate(Sender: TObject);
+begin
+ XXGJQry.Active:=true;
+end;
+
+end.

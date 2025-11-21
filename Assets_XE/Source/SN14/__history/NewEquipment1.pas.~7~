@@ -1,0 +1,1447 @@
+﻿unit NewEquipment1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,funUnit,
+  Dialogs, DB, DBTables, StdCtrls, Mask, DBCtrls, GridsEh, DBGridEh,
+  ComCtrls, Buttons, ExtCtrls, IdBaseComponent, IdComponent,
+  IdTCPConnection, IdTCPClient, IdTime, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, EhLibVCL, DBAxisGridsEh, Vcl.Menus, comobj, ShellAPI;
+
+
+type
+  TNewEquipment = class(TForm)
+    TSCD: TQuery;
+    UpMas: TUpdateSQL;
+    DS1: TDataSource;
+    Qtemp: TQuery;
+    TSCDTSID: TStringField;
+    TSCDTSBH: TStringField;
+    TSCDSBBH: TStringField;
+    TSCDQTY: TFloatField;
+    TSCDDEPID: TStringField;
+    TSCDDEPID_MEMO: TStringField;
+    TSCDstatus: TStringField;
+    TSCDuserid: TStringField;
+    TSCDuserdate: TDateTimeField;
+    TSCDLLNO: TStringField;
+    TSCDRKNO: TStringField;
+    TSCDLB: TStringField;
+    BDelRec: TQuery;
+    TSCDYN: TStringField;
+    OpenDialog: TOpenDialog;
+    TSCDdepname: TStringField;
+    TSCDYWPM: TStringField;
+    TSCDLabel_Tag: TStringField;
+    TSCDRFID_Tag: TStringField;
+    TSCDUSERID_Tag: TStringField;
+    TSCDUSERDATE_Tag: TDateTimeField;
+    PC1: TPageControl;
+    TS1: TTabSheet;
+    TS2: TTabSheet;
+    Panel1: TPanel;
+    InfoLable: TLabel;
+    BB2: TBitBtn;
+    BB3: TBitBtn;
+    BB4: TBitBtn;
+    BB5: TBitBtn;
+    BB6: TBitBtn;
+    BB7: TBitBtn;
+    BB1: TBitBtn;
+    bbt6: TBitBtn;
+    Panel3: TPanel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    edtTSID: TEdit;
+    btnQuery: TButton;
+    CheckMine: TCheckBox;
+    DTP1: TDateTimePicker;
+    DTP2: TDateTimePicker;
+    DBGridEh1: TDBGridEh;
+    bbt7: TBitBtn;
+    Panel8: TPanel;
+    DBGridEh5: TDBGridEh;
+    Panel10: TPanel;
+    ITAssetIDBtn: TBitBtn;
+    TVAssetIDBtn: TBitBtn;
+    Splitter2: TSplitter;
+    Panel9: TPanel;
+    Panel5: TPanel;
+    BC2: TBitBtn;
+    BC3: TBitBtn;
+    BC4: TBitBtn;
+    BC5: TBitBtn;
+    BC6: TBitBtn;
+    BitBtn6: TBitBtn;
+    btc6: TBitBtn;
+    Panel6: TPanel;
+    QueryBtn: TButton;
+    DBGridEh4: TDBGridEh;
+    DS4: TDataSource;
+    TSBHAllQry: TQuery;
+    Label2: TLabel;
+    TSBHEdit: TEdit;
+    DS3: TDataSource;
+    TSCDQry: TQuery;
+    TSCDQryTSID: TStringField;
+    TSCDQryTSBH: TStringField;
+    TSCDQrySBBH: TStringField;
+    TSCDQryQty: TFloatField;
+    TSCDQryXSBH: TStringField;
+    TSCDQryNSX: TStringField;
+    TSCDQryStatus: TStringField;
+    TSCDQryywpm: TStringField;
+    TSCDQryzwpm: TStringField;
+    TSCDQryDepName: TStringField;
+    TSCDQryRFID_Tag: TStringField;
+    TSCDQryLABEL_Tag: TStringField;
+    TSCDQryUSERID_Tag: TStringField;
+    TSCDQryUSERDATE_Tag: TDateTimeField;
+    TSCDQryRKNO: TStringField;
+    TSCDQryLLNO: TStringField;
+    TSCDUPDet: TUpdateSQL;
+    TSCDZWPM: TStringField;
+    Label5: TLabel;
+    Label6: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    TSCDMemo: TStringField;
+    TSCDQryMemo: TStringField;
+    TSCDQryDepID_Memo: TStringField;
+    QueryUser: TQuery;
+    Label7: TLabel;
+    Label8: TLabel;
+    Edit4: TEdit;
+    Label9: TLabel;
+    TSCDMSBBH: TStringField;
+    TSCDMYWPM: TStringField;
+    TSCDMZWPM: TStringField;
+    DepNMEdit: TComboBox;
+    CheckBox1: TCheckBox;
+    MSBBHCombo: TComboBox;
+    CheckBox2: TCheckBox;
+    TSCDMachine_Type: TStringField;
+    TSCDDepMemo: TStringField;
+    TSCDLeanName: TStringField;
+    TSCDLean_ID: TStringField;
+    eLLNO: TEdit;
+    Label10: TLabel;
+    Label11: TLabel;
+    eLabelTag: TEdit;
+    GroupBox2: TGroupBox;
+    RB2: TRadioButton;
+    RB3: TRadioButton;
+    CheckBox3: TCheckBox;
+    ComboBox1: TComboBox;
+    Label12: TLabel;
+    QueryIT: TQuery;
+    procedure BB1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure btnQueryClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure BB2Click(Sender: TObject);
+    procedure BB3Click(Sender: TObject);
+    procedure BB4Click(Sender: TObject);
+    procedure BB5Click(Sender: TObject);
+    procedure BB6Click(Sender: TObject);
+    procedure bbt6Click(Sender: TObject);
+    procedure TSCDAfterOpen(DataSet: TDataSet);
+    procedure DBGridEh1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure bbt7Click(Sender: TObject);
+    procedure DBGridEh1EditButtonClick(Sender: TObject);
+    procedure PC1Change(Sender: TObject);
+    procedure QueryBtnClick(Sender: TObject);
+    procedure BC4Click(Sender: TObject);
+    procedure BC6Click(Sender: TObject);
+    procedure BC5Click(Sender: TObject);
+    procedure ITAssetIDBtnClick(Sender: TObject);
+    procedure btc6Click(Sender: TObject);
+    procedure TVAssetIDBtnClick(Sender: TObject);
+    procedure DBGridEh1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure TSCDMSBBHSetText(Sender: TField; const Text: string);
+  private
+    AppDir:string;
+    NDate:TDate;
+    iYear,iMonth,TSID: string;
+    IsAdmin:boolean;
+    IsModify:boolean;
+    User,Pass:string;
+    spassword_TX,spassword_LT,spassword_TB:string;
+    SocketServerIP:string;
+    SocketServerPort:integer;
+    function CheckUserID:boolean;
+    { Private declarations }
+    procedure ReFresh_ComboboDepNM();
+    procedure TSCDXLS_Import();
+    procedure AssetID_Generate(Header:String);
+    procedure AssetID_Clear(Memo:String);
+  public
+    { Public declarations }
+  end;
+
+var
+  NewEquipment: TNewEquipment;
+
+implementation
+
+{$R *.dfm}
+
+uses main1, NewEquipment_Materal1, NewEquipment_CLZL1, NewEquipment_Depname1;
+
+
+function TNewEquipment.CheckUserID():boolean;
+var iRes:boolean;
+    IP:string;
+begin
+  IsAdmin:=false;
+  iRes:=false;
+  with QueryUser do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('select * from Busers');
+    sql.Add('where userid='''+main.edit1.Text+'''');
+    active:=true;
+  end;
+  if QueryUser.RecordCount>0 then
+  begin
+    iRes:=true;
+    if Pos('Admin:',QueryUser.FieldByName('Report').AsString)>0 then
+    begin
+      if Pos('CreateMaterialNew',QueryUser.FieldByName('Report').AsString)>0 then
+      begin
+        IsAdmin:=true;
+      end;
+    end;
+  end;
+  result:= iRes;
+end;
+
+procedure TNewEquipment.BB1Click(Sender: TObject);
+begin
+  Panel3.Visible:=true;
+end;
+
+procedure TNewEquipment.BB2Click(Sender: TObject);
+begin
+  with TSCD do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    Insert;
+  end;
+  BB5.Enabled:=true;
+  BB6.Enabled:=true;
+  DBGridEh1.columns[2].ButtonStyle:=cbsEllipsis;
+  DBGridEh1.columns[8].ButtonStyle:=cbsEllipsis;
+  DBGridEh1.columns[11].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TNewEquipment.BB3Click(Sender: TObject);
+begin
+  CheckUserID();
+  with TSCD do
+  begin
+    if IsAdmin=true then
+    begin
+      requestlive:=true;
+      cachedupdates:=true;
+      edit;
+      fieldbyname('YN').Value:='0';
+    end else
+    begin
+      if fieldbyname('USERID').value=main.edit1.Text then
+      begin
+        if TSCD.FieldByName('LABEL_Tag').AsString='' then
+        begin
+          requestlive:=true;
+          cachedupdates:=true;
+          edit;
+          fieldbyname('YN').Value:='0';
+        end else
+          showmessage('LABEL_Tag is exists,can not delete.');
+      end else
+        showmessage('It is not yours,can not delete.');
+    end;
+  end;
+  BB5.Enabled:=true;
+  BB6.Enabled:=true;
+  DBGridEh1.columns[2].ButtonStyle:=cbsEllipsis;
+  DBGridEh1.columns[8].ButtonStyle:=cbsEllipsis;
+  DBGridEh1.columns[11].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TNewEquipment.BB4Click(Sender: TObject);
+var i:integer;
+begin
+  with TSCD do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+  BB5.Enabled:=true;
+  BB6.Enabled:=true;
+  DBGridEh1.columns[2].ButtonStyle:=cbsEllipsis;
+  DBGridEh1.columns[8].ButtonStyle:=cbsEllipsis;
+  DBGridEh1.columns[11].ButtonStyle:=cbsEllipsis;
+  CheckUserID();
+end;
+
+procedure TNewEquipment.BB5Click(Sender: TObject);
+var x,y,m,TSID,tsbh,depid,depmemo:string;
+    i:integer;
+begin
+  if ((TSCD.fieldbyname('SBBH').Value = NULL) or (TSCD.fieldbyname('DepID').Value = NULL )) then
+  begin
+    showmessage('Chua nhap Ma tai san hoac Don vi.');
+    abort;
+  end;
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('select year(getdate()) as FY,month(getdate()) as FM,getdate() as NDate ');
+    active:=true;
+    y:=fieldbyname('FY').asstring;
+    m:=fieldbyname('FM').asstring;
+    NDate:=fieldbyname('NDate').Value;
+    active:=false;
+  end;
+  if length(m)<2 then
+    m:='0'+m;
+  try
+    TSCD.first;
+    if (main.edit1.text='83489') then
+    begin
+      if (edit1.Text<>'') or (edit2.Text<>'') then
+      begin
+        tsbh:=TSCD.fieldbyname('TSBH').AsString;
+        depid:=TSCD.fieldbyname('DEPID').AsString;
+        depmemo:=TSCD.fieldbyname('DEPID_MEMO').AsString;
+        if messagedlg('Cap nhat dong loat ?',mtinformation,[mbYes,mbNo],0)=mrYes then
+        begin
+          for i:=1 to TSCD.RecordCount do
+          begin
+            TSCD.edit;
+            TSCD.FieldByName('TSBH').Value:=tsbh;
+            TSCD.FieldByName('DEPID').Value:=depid;
+            TSCD.FieldByName('DEPID_MEMO').Value:=depmemo;
+            TSCD.Next;
+          end;
+        end;
+      end;
+    end;
+    TSCD.first;
+    for i:=1 to TSCD.RecordCount do
+    begin
+      case TSCD.updatestatus of
+        usinserted:
+        begin
+          with Qtemp do
+          begin
+          active:=false;
+          sql.Clear;
+          sql.Add('select TSID from TSCD where TSID like '''+y+m+'%''');
+          sql.add('order by TSID');
+          active:=true;
+          if recordcount >0 then
+          begin
+            last;
+            TSID:=fieldbyname('TSID').AsString;
+            TSID:=copy(TSID,7,5);
+            TSID:=inttostr(strtoint(TSID)+1);
+            while length(TSID)<5 do
+            begin
+              TSID:='0'+TSID;
+            end;
+          end else
+          begin
+            TSID:='00001';
+          end;
+          TSID :=y+m+TSID;
+          active:=false;
+          if rb2.Checked = true then
+            begin
+              with queryIT do
+              begin
+                 active:=false;
+                 sql.Clear;
+                case StrToIntDef(Copy(ComboBox1.Text, 1, 2), 0) of
+                  01:
+                      begin
+                        X := 'CAM'; // Gán giá trị X là "CAM"
+                        sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''' + X + '%''');
+                        sql.Add('ORDER BY TSBH DESC');
+                      end;
+                  02: // Thêm điều kiện khác nếu cần (ví dụ '02')
+                    begin
+                      X := 'TCPU';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''TCPU%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                    03:
+                    begin
+                      X := 'ACPU';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''ACPU%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                  04: // Thêm điều kiện khác nếu cần (ví dụ '02')
+                    begin
+                      X := 'INKI';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''INKI%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                    05:
+                    begin
+                      X := 'MHMT';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''MHMT%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                  06: // Thêm điều kiện khác nếu cần (ví dụ '02')
+                    begin
+                      X := 'NASS';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''NASS%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                    07:
+                    begin
+                      X := 'MEPN';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''MEPN%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                  08: // Thêm điều kiện khác nếu cần (ví dụ '02')
+                    begin
+                      X := 'INVP';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''INVP%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                    09:
+                    begin
+                      X := 'MCHI';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''MCHI%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                  10: // Thêm điều kiện khác nếu cần (ví dụ '02')
+                    begin
+                      X := 'FIRE';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''FIRE%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                    11:
+                    begin
+                      X := 'SCAN';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''SCAN%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                  12: // Thêm điều kiện khác nếu cần (ví dụ '02')
+                    begin
+                      X := 'MCVP';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''MCVP%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                    13:
+                    begin
+                      X := 'HTCAM';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''HTCAM%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                  14: // Thêm điều kiện khác nếu cần (ví dụ '02')
+                    begin
+                      X := 'TIVI';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''TIVI%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                    15: // Thêm điều kiện khác nếu cần (ví dụ '02')
+                    begin
+                      X := 'BLD';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''BLD%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                    16:
+                    begin
+                      X := 'WIFI';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''WIFI%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                  17: // Thêm điều kiện khác nếu cần (ví dụ '02')
+                    begin
+                      X := 'PCOM';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''PCOM%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                    18:
+                    begin
+                      X := 'OMCC';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''OMCC%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                  19: // Thêm điều kiện khác nếu cần (ví dụ '02')
+                    begin
+                      X := 'INHAN';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''INHAN%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                  20: // Thêm điều kiện khác nếu cần (ví dụ '02')
+                    begin
+                      X := 'LAPTOP';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''LAPTOP%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                    21:
+                    begin
+                      X := 'WCAM';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''WCAM%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                else
+                    begin
+                      X := 'HLOA';
+                      sql.Add('SELECT TOP 1 TSBH FROM TSCD WHERE TSBH LIKE ''HLOA%''');
+                      sql.Add('ORDER BY TSBH DESC');
+                    end;
+                end;
+                active := true;
+                if recordcount >0 then
+                  begin
+                    last;
+                    TSBH:=fieldbyname('TSBH').AsString;
+                    TSBH := Copy(TSBH, Length(TSBH) - 3, 4);
+                    TSBH:=inttostr(strtoint(TSBH)+1);
+                    while length(TSBH)<4 do
+                    begin
+                      TSBH :='0'+TSBH ;
+                    end;
+                  end else
+                  begin
+                    TSBH :='0001';
+                  end;
+                  TSBH  :=X+TSBH;
+                  active:=false;
+               end;
+             end;
+        end;
+          TSCD.edit;
+          TSCD.fieldbyname('TSID').Value:=TSID;
+          TSCD.fieldbyname('TSBH').Value:=TSBH;
+          TSCD.FieldByName('Qty').Value:=1;
+          TSCD.FieldByName('Status').Value:='Y';
+          TSCD.FieldByName('LLNO').Value:='ZZZZZZZZZZ';
+          if TSCD.FieldByName('LB').IsNull then
+          begin
+           //ERP的料號
+           if ((Copy(TSCD.fieldbyname('SBBH').AsString,1,1)='X') or (Copy(TSCD.fieldbyname('SBBH').AsString,1,1)='Y') or (Copy(TSCD.fieldbyname('SBBH').AsString,1,1)='Z'))   then
+           begin
+             TSCD.FieldByName('LB').Value:='2';
+           end else
+           begin
+             TSCD.FieldByName('LB').Value:='1';
+           end;
+          end;
+          TSCD.FieldByName('userID').Value:=main.edit1.text;
+          TSCD.FieldByName('userdate').Value:=NDate;
+          TSCD.FieldByName('YN').Value:='1';
+
+          upMas.apply(ukinsert);
+        end;
+        usmodified:
+        begin
+          if IsAdmin=true then
+          begin
+            if TSCD.fieldbyname('YN').value='0' then
+            begin
+              with BDelRec do
+              begin
+                active:=false;
+                sql.Clear;
+                sql.add('insert into BDelRec ');
+                sql.add('(TableName ,TNO,CLBH,OldID,DelID,DelDate)');
+                sql.add('values (''TSCD'','''+TSCD.fieldbyname('TSID').Value+'''');
+                sql.add(','''','''+TSCD.fieldbyname('USERID').Value+''',');
+                sql.add(''''+main.Edit1.Text+''',Getdate())');
+                execsql;
+                active:=false;
+              end;
+              upMas.apply(ukdelete);
+            end else
+            begin
+              TSCD.edit;
+              TSCD.FieldByName('userID').Value:=main.edit1.text;
+              TSCD.FieldByName('userdate').Value:=Ndate;
+              upMas.apply(ukmodify);
+            end;
+          end else
+          begin
+            if TSCD.FieldByName('USERID').value<>main.Edit1.Text then
+            begin
+              showmessage('不是你的，不要亂動。khong phai ban khong duoc tu sua');
+            end else
+            begin
+              if TSCD.fieldbyname('YN').value='0' then
+              begin
+                with BDelRec do
+                begin
+                  active:=false;
+                  sql.Clear;
+                  sql.add('insert into BDelRec ');
+                  sql.add('(TableName ,TNO,CLBH,OldID,DelID,DelDate)');
+                  sql.add('values (''TSCD'','''+TSCD.fieldbyname('TSID').Value+'''');
+                  sql.add(','''','''+TSCD.fieldbyname('USERID').Value+''',');
+                  sql.add(''''+main.Edit1.Text+''',Getdate())');
+                  execsql;
+                  active:=false;
+                end;
+                upMas.apply(ukdelete);
+              end else
+              begin
+                if (NDate-TSCD.FieldByName('USERDATE').value)<=7  then
+                begin
+                  TSCD.edit;
+                  TSCD.FieldByName('userID').Value:=main.edit1.text;
+                  TSCD.FieldByName('userdate').Value:=Ndate;
+                  upMas.apply(ukmodify);
+                end else
+                begin
+                  showmessage('Date>7, can not modify.');
+                end;
+              end;
+            end;
+          end;
+        end;
+      end;
+      TSCD.next;
+    end;
+    TSCD.active:=false;
+    TSCD.cachedupdates:=false;
+    TSCD.requestlive:=false;
+    TSCD.active:=true;
+    //
+    BB5.enabled:=false;
+    BB6.enabled:=false;
+    DBGridEh1.columns[2].ButtonStyle:=cbsnone;
+    DBGridEh1.columns[8].ButtonStyle:=cbsnone;
+    DBGridEh1.columns[11].ButtonStyle:=cbsnone;
+    showmessage('Succeed.');
+  except
+    Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+  end;
+end;
+
+procedure TNewEquipment.BB6Click(Sender: TObject);
+begin
+  with TSCD do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  BB5.enabled:=false;
+  BB6.enabled:=false;
+  DBGridEh1.columns[2].ButtonStyle:=cbsnone;
+  DBGridEh1.columns[8].ButtonStyle:=cbsnone;
+  DBGridEh1.columns[11].ButtonStyle:=cbsnone;
+end;
+
+procedure TNewEquipment.bbt6Click(Sender: TObject);
+var   a:string;
+      eclApp,WorkBook:olevariant;
+      i,j:integer;
+begin
+  if  TSCD.active  then
+  begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+        WorkBook:=eclApp.workbooks.Add;
+        for   i:=0   to   TSCD.fieldcount-1   do
+        begin
+           eclApp.Cells(1,i+1):=TSCD.fields[i].FieldName;
+        end;
+
+        TSCD.First;
+        j:=2;
+        while   not TSCD.Eof   do
+        begin
+          for   i:=0   to  TSCD.fieldcount-1  do
+          begin
+            eclApp.Cells(j,i+1):=TSCD.Fields[i].AsString;
+          end;
+          TSCD.Next;
+          inc(j);
+        end;
+       eclapp.columns.autofit;
+       eclApp.Visible:=True;
+       showmessage('Succeed');
+      except
+        on   F:Exception   do
+          showmessage(F.Message);
+      end;
+  end;
+
+end;
+
+procedure TNewEquipment.bbt7Click(Sender: TObject);
+begin
+  TSCDXLS_Import();
+end;
+
+procedure TNewEquipment.BC4Click(Sender: TObject);
+begin
+  with TSCDQry do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+  BC5.Enabled:=true;
+  BC6.Enabled:=true;
+  CheckUserID();
+  IsModify:=true;
+end;
+
+procedure TNewEquipment.BC5Click(Sender: TObject);
+var i:integer;
+begin
+
+  TSCDQry.First;
+  for i:=0 to  TSCDQry.RecordCount-1 do
+  begin
+    case TSCDQry.updatestatus of
+      usmodified:
+      begin
+        if (TSCDQry.FieldByName('UserID_Tag').AsString='') or (TSCDQry.FieldByName('UserID_Tag').AsString=main.Edit1.Text)   then
+        begin
+            if (NDate-TSCDQry.FieldByName('UserDate_Tag').Value<=1) or (IsAdmin=true) then
+            begin
+              if (IsModify=true) then
+              begin
+                if TSCDQry.FieldByName('Label_Tag').OldValue=null then
+                begin
+                  TSCDQry.edit;
+                  TSCDQry.FieldByName('UserID_Tag').Value:=main.edit1.text;
+                  TSCDQry.FieldByName('UserDate_Tag').Value:=formatdatetime('yyyy/MM/dd',Ndate);
+                  TSCDUPDet.apply(ukmodify);
+                end else begin
+                  TSCDQry.edit;
+                  TSCDQry.FieldByName('Label_Tag').Value:=TSCDQry.FieldByName('Label_Tag').OldValue;
+                  TSCDQry.FieldByName('RFID_Tag').Value:=TSCDQry.FieldByName('RFID_Tag').OldValue;
+                  TSCDQry.FieldByName('UserID_Tag').Value:=main.edit1.text;
+                  TSCDQry.FieldByName('UserDate_Tag').Value:=formatdatetime('yyyy/MM/dd',Ndate);
+                  TSCDUPDet.apply(ukmodify);
+                end;
+              end;
+              TSCDQry.edit;
+              TSCDQry.FieldByName('UserID_Tag').Value:=main.edit1.text;
+              TSCDQry.FieldByName('UserDate_Tag').Value:=formatdatetime('yyyy/MM/dd',Ndate);
+              TSCDUPDet.apply(ukmodify);
+            end else
+            begin
+              Showmessage('Date > 1, can not modify.');
+            end;
+        end else
+        begin
+          Showmessage('It is not yours, can not modify.');
+        end;
+      end;
+    end;
+    TSCDQry.Next;
+  end;
+  TSCDQry.active:=false;
+  TSCDQry.cachedupdates:=false;
+  TSCDQry.requestlive:=false;
+  TSCDQry.active:=true;
+
+  BC5.Enabled:=false;
+  BC6.Enabled:=false;
+  IsModify:=false;
+end;
+
+procedure TNewEquipment.BC6Click(Sender: TObject);
+begin
+  with TSCDQry do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  BC5.Enabled:=false;
+  BC6.Enabled:=false;
+end;
+
+procedure TNewEquipment.BitBtn1Click(Sender: TObject);
+begin
+
+end;
+
+//Excel File Import
+procedure TNewEquipment.TSCDXLS_Import();
+var OrderListExcel:Variant;
+    OrderExcFN:String;
+    offset,RowSIndex:integer;
+    Isbreak:Boolean;
+    //
+    SBBH_Column,TSBH_Column,Qty_Column,DepID_Column,DepID_Memo_Column:String;
+    SBBH,TSBH,Qty,DepID,DepID_Memo:String;
+begin
+  if OpenDialog.Execute=true then
+  begin
+    try
+      OrderListExcel:=CreateOleObject('Excel.Application');
+    except
+      on E:Exception do
+      begin
+        Application.MessageBox(PChar('NO EXCEL'+E.Message),'', MB_OK);
+        EXIT;
+      end;
+    end;
+    try
+        OrderExcFN:=OpenDialog.FileName;
+        OrderListExcel.WorkBooks.Open(OpenDialog.FileName);
+        OrderListExcel.WorkSheets[1].Activate;
+        //
+        offset:=0;
+        RowSIndex:=1;
+        TSBH_Column:=OrderListExcel.Cells[RowSIndex+offset,1];
+        SBBH_Column:=OrderListExcel.Cells[RowSIndex+offset,2];
+        Qty_Column:=OrderListExcel.Cells[RowSIndex+offset,3];
+        DepID_Column:=OrderListExcel.Cells[RowSIndex+offset,4];
+        DepID_Memo_Column:=OrderListExcel.Cells[RowSIndex+offset,5];
+        if ((TSBH_Column='TSBH') and (SBBH_Column='SBBH') and (Qty_Column='Qty') and (DepID_Column='DepID') and (DepID_Memo_Column='DepID_Memo') ) then
+        begin
+          if TSCD.RequestLive=false then BB2.Click;
+          Isbreak:=false;
+          repeat
+            RowSIndex:=RowSIndex+1;
+            TSBH:=OrderListExcel.Cells[RowSIndex+offset,1];
+            SBBH:=OrderListExcel.Cells[RowSIndex+offset,2];
+            Qty:=OrderListExcel.Cells[RowSIndex+offset,3];
+            DepID:=OrderListExcel.Cells[RowSIndex+offset,4];
+            DepID_Memo:=OrderListExcel.Cells[RowSIndex+offset,5];
+            if ((trim(SBBH)='') or (trim(TSBH)='') or (trim(Qty)='') or (trim(DepID_Memo)='') or (trim(DepID_Memo)='') ) then
+            begin
+              Isbreak:=true;
+            end else
+            begin
+              TSCD.Edit;
+              TSCD.FieldByName('SBBH').Value:=SBBH;
+              TSCD.FieldByName('TSBH').Value:=TSBH;
+              TSCD.FieldByName('Qty').Value:=Qty;
+              TSCD.FieldByName('DepID').Value:=DepID;
+              TSCD.FieldByName('DepID_Memo').Value:=DepID_Memo;
+              //TSCD.FieldByName('Memo').Value:=DepID_Memo;
+              if ( (Copy(SBBH,1,1)='X') or (Copy(SBBH,1,1)='Y') or (Copy(SBBH,1,1)='Z') ) then
+              begin
+                TSCD.FieldByName('LB').Value:='2';
+              end else
+              begin
+                TSCD.FieldByName('LB').Value:='1';
+              end;
+              TSCD.Post;
+              TSCD.Insert;
+            end;
+          until IsBreak=true;
+        end else
+        begin
+          Showmessage('Excel not exact format!'+TSBH_Column+' '+SBBH_Column+' '+Qty_Column+' '+DepID_Column+' '+DepID_Memo_Column);
+        end;
+        OrderListExcel.Quit;
+    except
+      on E:Exception do
+      begin
+        Application.MessageBox(PChar('NO EXCEL'+E.Message),'', MB_OK);
+        Exit;
+      end;
+    end;
+  end;
+end;
+
+procedure TNewEquipment.TVAssetIDBtnClick(Sender: TObject);
+begin
+  IsModify:=false;
+  AssetID_Generate('B');
+end;
+
+//
+procedure TNewEquipment.btc6Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j:integer;
+    QrCodeInfoList:TStringList;
+    Label_Tag,RFID_Tag,Memo:String;
+begin
+  if  TSCDQry.Active  then
+  begin
+    if(not DirectoryExists(AppDir+'Additional\'))  then ForceDirectories(AppDir+'Additional\');
+    CopyFile(Pchar('\\'+main.ServerIP+'\liy_erp\Additional\Production_SN326_ERP_TSCDLIst.xls'),Pchar(AppDir+'Additional\Production_SN326_ERP_TSCDLIst.xls'),false);
+    if FileExists(AppDir+'Additional\Production_SN326_ERP_TSCDLIst.xls') then
+    begin
+      try
+        eclApp:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+      try
+          eclApp.DisplayAlerts := False;
+          eclApp.WorkBooks.Open(AppDir+'Additional\Production_SN326_ERP_TSCDLIst.xls');
+          QrCodeInfoList:=TStringlist.Create;
+          Label_Tag:='';
+          RFID_Tag:='';
+          //
+          j:=2;
+          TSCDQry.First;
+          for i:=0 to TSCDQry.RecordCount-1  do
+          begin
+            if (Label_Tag<>TSCDQry.FieldByName('Label_Tag').AsString) and (Label_Tag<>'') then
+            begin
+              //儲存Excel
+              eclApp.Cells(j,1):=Label_Tag;
+              eclApp.Cells(j,2):=RFID_Tag;
+              eclApp.Cells(j,4):=trim(QrCodeInfoList.Text);
+              eclApp.Cells(j,5):=Memo;
+              QrCodeInfoList.Clear;
+              Label_Tag:='';
+              RFID_Tag:='';
+              Inc(j);
+              //
+            end;
+            if Label_Tag='' then
+            begin
+              Label_Tag:=TSCDQry.FieldByName('Label_Tag').AsString;
+              RFID_Tag:=TSCDQry.FieldByName('RFID_Tag').AsString;
+              Memo:=TSCDQry.FieldByName('DepID_Memo').AsString;
+              QrCodeInfoList.Add(Label_Tag); //財產編號
+              QrCodeInfoList.Add(TSCDQry.FieldByName('TSBH').AsString);
+              //QrCodeInfoList.Add('Ma So nhap kho:'+ TSCDQry.FieldByName('RKNO').AsString);
+              //QrCodeInfoList.Add('Ma so vat lieu:'+ TSCDQry.FieldByName('LLNO').AsString);
+              //QrCodeInfoList.Add('don vi lanh vat tu:'+ TSCDQry.FieldByName('DepName').AsString);
+              QrCodeInfoList.Add('Don vi bao quan:'+ TSCDQry.FieldByName('DepName').AsString);
+              QrCodeInfoList.Add('*********************');
+            end;
+            if TSCDQry.FieldByName('Memo').AsString<>'' then
+               QrCodeInfoList.Add(TSCDQry.FieldByName('YWPM').AsString+'//'+TSCDQry.FieldByName('Memo').AsString)
+            else
+               QrCodeInfoList.Add(TSCDQry.FieldByName('YWPM').AsString);
+            TSCDQry.Next;
+          end;
+          if (QrCodeInfoList.Text<>'') and (Label_Tag<>'')  then
+          begin
+            //儲存Excel
+            eclApp.Cells(j,1):=Label_Tag;
+            eclApp.Cells(j,2):=RFID_Tag;
+            eclApp.Cells(j,4):=trim(QrCodeInfoList.Text);
+            if Copy(Label_Tag,1,1)='A' then
+              eclApp.Cells(j,5):=''
+            else eclApp.Cells(j,5):=Memo;
+            eclApp.Cells(j,6):= TSCDQry.FieldByName('TSBH').AsString;
+            QrCodeInfoList.Clear;
+            Label_Tag:='';
+            RFID_Tag:='';
+          end;
+          QrCodeInfoList.Free;
+          //
+          if FileExists(AppDir+'TSCDLIst.xls')=true then DeleteFile(AppDir+'TSCDLIst.xls');
+          eclApp.ActiveWorkbook.SaveAs(AppDir+'TSCDLIst.xls',-4143 );
+          eclApp.quit;
+          //
+          if fileexists(extractfilepath(application.ExeName)+'ERP_TSCD_RFID.btw') then
+          begin
+             ShellExecute(Handle,'open',PChar(ExtractFilePath(Application.ExeName)+'ERP_TSCD_RFID.btw'),nil,pchar(ExtractFilePath(Application.ExeName)),SW_SHOW);
+          end else
+          begin
+            showmessage('Pls setup the program ERP_TSCD_RFID.btw first. Abort');
+          end;
+
+        except
+          on  F:Exception   do
+            showmessage(F.Message);
+        end;
+      end else
+      begin
+        Showmessage('Pls setup  Production_SN326_ERP_TSCDLIst.xls first');
+      end;
+    end;
+
+end;
+//query1
+procedure TNewEquipment.btnQueryClick(Sender: TObject);
+begin
+  with TSCD do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select TSID,TSBH,TSCD.SBBH,QTY,TSCD.DEPID,DEPID_MEMO,status,BDepartment.depname,TSCD.userid,TSCD.userdate,LLNO,RKNO,LB,TSCD.YN   ');
+    sql.add('       ,IsNull(TSCD_SB.YWPM,CLZL.YWPM) as YWPM,IsNull(TSCD_SB.ZWPM,CLZL.ZWPM) as ZWPM ');
+    sql.add('       ,TSCD.Label_Tag,TSCD.RFID_Tag,TSCD.USERID_Tag,TSCD.USERDATE_Tag,TSCD.Memo,TSCD.MSBBH,IsNull(TSCD_SB.YWPM,MCLZL.YWPM) as MYWPM,IsNull(TSCD_SB.ZWPM,MCLZL.ZWPM) as MZWPM ');
+    sql.add('       ,TSCD.Machine_Type,TSCD.Lean_ID,BDepart.DepName as LeanName,BDepart.DepMemo ');
+    sql.add('from TSCD');
+    sql.add('left join  TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID ');
+    sql.add('left join  TSCD_BDepartment BDepart on BDepart.ID=TSCD.Lean_ID ');
+    sql.add('left join clzl on TSCD.SBBH = clzl.cldh ');
+    sql.add('left join TSCD_SB on TSCD.SBBH = TSCD_SB.SBBH ');
+    sql.add('left join clzl MCLZL on TSCD.MSBBH = MCLZL.cldh ');
+//    sql.add('left join TSCD_SB MTSCD_SB on TSCD.SBBH = MTSCD_SB.SBBH  ');
+    sql.add('where 1=1 ');
+    if edtTSID.Text <> '' then
+      sql.add('and TSCD.TSID like '''+edtTSID.Text+'%'+''' ');
+    if eLLNO.Text <> '' then
+      sql.add('and TSCD.TSID IN (SELECT TSID FROM TSCD_KCSSS WHERE LLNO like '''+eLLNO.Text+'%'') ');
+    //20-12-2024
+    if eLabelTag.Text <> '' then
+      sql.add('and TSCD.LABEL_Tag like '''+eLabelTag.Text+'%'+''' ');
+    if Edit1.Text <> '' then
+      sql.add('and TSCD.TSBH like '''+Edit1.Text+'%'+''' ');
+    if Edit2.Text <> '' then
+      sql.add('and TSCD.DEPID_MEMO = '''+Edit2.Text+''' ');
+    if DepNMEdit.Text <> '' then
+      sql.add('and BDepartment.DepName = '''+DepNMEdit.Text+''' ');
+    if Edit4.Text <> '' then
+      sql.add('and TSCD.SBBH like '''+Edit4.Text+'%'' ');
+    if MSBBHCombo.Text <> '' then
+      sql.add('and TSCD.MSBBH like '''+Copy(MSBBHCombo.Text,1,Pos('-',MSBBHCombo.Text)-1)+'%'' ');
+    if CheckMine.Checked then
+      sql.add('and TSCD.USERID ='''+main.Edit1.Text+''' ');
+    if CheckBox2.Checked then
+      sql.add('and TSCD.status not in (''B'') ');
+
+    //20-12-2024;
+    {if RB2.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''A%'' ');
+    if RB3.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''B%'' '); }
+    if Checkbox3.Checked then
+      begin
+      if RB2.Checked = true then
+        SQL.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''A%'' ');
+      if RB3.Checked = true then
+        SQL.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''B%'' ');
+    end;
+
+    sql.add('and convert(smalldatetime,convert(varchar,TSCD.USERDATE,111)) between ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+    sql.add(' and ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP2.Date) +'''');
+    sql.add('order by TSID desc');
+    //showmessage(sql.Text);
+    //funcobj.WriteErrorLog(sql.Text);
+    active:=true;
+  end;
+  if CheckBox1.Checked=true then  ReFresh_ComboboDepNM();
+  //
+  with TSBHAllQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('Select TSCD.TSBH from TSCD ');
+    SQL.add('left join  TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID ');
+    SQL.add('where IsNull(TSBH,'''')<>'''' ');
+    if edtTSID.Text <> '' then
+      SQL.add('and TSCD.TSID like '''+edtTSID.Text+'%'+''' ');
+    if CheckMine.Checked then
+      SQL.add('and TSCD.USERID ='''+main.Edit1.Text+''' ');
+    if Edit1.Text <> '' then
+      sql.add('and TSCD.TSBH like '''+Edit1.Text+'%'+''' ');
+    if Edit2.Text <> '' then
+      sql.add('and TSCD.DEPID_MEMO = '''+Edit2.Text+''' ');
+    if DepNMEdit.Text <> '' then
+      sql.add('and BDepartment.DepName = '''+DepNMEdit.Text+''' ');
+    if Edit4.Text <> '' then
+      sql.add('and TSCD.SBBH like '''+Edit4.Text+'%'' ');
+    //20-12-2024
+    if eLabelTag.Text <> '' then
+      sql.add('and TSCD.LABEL_Tag like '''+eLabelTag.Text+'%'+''' ');
+    if MSBBHCombo.Text <> '' then
+      //sql.add('and TSCD.MSBBH like '''+Copy(MSBBHCombo.Text,1,Pos('-',MSBBHCombo.Text)-1)+'%'' ');
+      sql.add('and IsNull(MSBBH,SBBH) like '''+Copy(MSBBHCombo.Text,1,Pos('-',MSBBHCombo.Text)-1)+'%'' ');
+    sql.add('and convert(smalldatetime,convert(varchar,TSCD.USERDATE,111)) between ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+    sql.add(' and ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP2.Date) +'''');
+
+    //20-12-2024
+    {if CheckBox2.Checked then
+      sql.add('and TSCD.status not in (''B'') ');
+    if RB2.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''A%'' ');
+    if RB3.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''B%'' ');  }
+    if Checkbox3.Checked then
+      begin
+      if RB2.Checked = true then
+        SQL.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''A%'' ');
+      if RB3.Checked = true then
+        SQL.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''B%'' ');
+    end;
+
+    sql.Add('Group by TSCD.TSBH ');
+    //showmessage(sql.Text);
+  end;
+end;
+//end-query1
+
+
+procedure TNewEquipment.DBGridEh1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+  if TSCD.FieldByName('Status').value='B' then
+  begin
+    DBGridEh1.Canvas.font.Color:=clblue;
+    DBGridEh1.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  end;
+end;
+
+procedure TNewEquipment.DBGridEh1EditButtonClick(Sender: TObject);
+begin
+  if DBGridEh1.selectedfield.fieldname='SBBH'  then
+  begin
+    if messagedlg('Chon Ma vat tu hoac Tai san  ?',mtinformation,[mbYes,mbNo],0)=mrYes then
+    begin
+      NewEquipment_CLZL:=TNewEquipment_CLZL.Create(self);
+      NewEquipment_CLZL.Show;
+    end else
+    begin
+      NewEquipment_Materal:=TNewEquipment_Materal.Create(self);
+      NewEquipment_Materal.Show;
+    end;
+  end;
+  if DBGridEh1.selectedfield.fieldname='DEPID' then
+  begin
+    NewEquipment_Depname:=TNewEquipment_Depname.Create(self);
+    NewEquipment_Depname.Show;
+  end
+  else if DBGridEh1.selectedfield.fieldname='Lean_ID' then
+  begin
+    NewEquipment_Depname:=TNewEquipment_Depname.Create(self);
+    NewEquipment_Depname.Show;
+    NewEquipment_Depname.Label3.Caption := 'Lean';
+  end;
+end;
+
+procedure TNewEquipment.DBGridEh1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if TSCD.FieldByName('YN').value='0' then
+  begin
+    DBGridEh1.canvas.font.color:=clred;
+  end;
+end;
+
+procedure TNewEquipment.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action:=CaFree;
+end;
+//組別清單
+procedure TNewEquipment.ReFresh_ComboboDepNM();
+var DepNM,SubSQL:string;
+    i,index:integer;
+begin
+  //
+  index:=-1;
+  DepNM:=DepNMEdit.Text;
+  with Qtemp do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('Select  Distinct BDepartment.DepName ');
+    SQL.Add('from TSCD');
+    SQL.Add('left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH');
+    SQL.Add('left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS.SBBH=TSCD.SBBH  ');
+    SQL.Add('left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO ');
+    SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+    SQL.Add('left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS ');
+    SQL.Add('left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS ');
+    SQL.Add('left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH');
+    SQL.Add('left join TSCD_BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+    SQL.Add('where 1=1 ');
+    if edtTSID.Text <> '' then
+      sql.add('and TSCD.TSID like '''+edtTSID.Text+'%'+''' ');
+    if Edit1.Text <> '' then
+      sql.add('and TSCD.TSBH like '''+Edit1.Text+'%'+''' ');
+    if Edit2.Text <> '' then
+      sql.add('and TSCD.DEPID_MEMO = '''+Edit2.Text+''' ');
+    if DepNMEdit.Text <> '' then
+      sql.add('and BDepartment.DepName = '''+DepNMEdit.Text+''' ');
+    if Edit4.Text <> '' then
+      sql.add('and TSCD.SBBH like '''+Edit4.Text+'%'' ');
+    if MSBBHCombo.Text <> '' then
+      sql.add('and TSCD.MSBBH like '''+Copy(MSBBHCombo.Text,1,Pos('-',MSBBHCombo.Text)-1)+'%'' ');
+    if CheckMine.Checked then
+      sql.add('and TSCD.USERID ='''+main.Edit1.Text+''' ');
+    sql.add('and convert(smalldatetime,convert(varchar,TSCD.USERDATE,111)) between ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+    sql.add(' and ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP2.Date) +'''');
+    sql.Add('Order by BDepartment.DepName ');
+    //funcObj.WriteErrorLog(SQL.Text);
+    Active:=true;
+    DepNMEdit.Items.Clear;
+    DepNMEdit.Items.Add('');
+    for i:=0 to Qtemp.RecordCount-1 do
+    begin
+      if DepNM=FieldByName('DepName').AsString then  index:=i;
+      DepNMEdit.Items.Add(FieldByName('DepName').AsString);
+      Next;
+    end;
+    Active:=false;
+  end;
+  if DepNMEdit.Items.Count>0 then
+  begin
+    DepNMEdit.ItemIndex:=index+1;
+  end;
+
+end;
+
+procedure TNewEquipment.FormCreate(Sender: TObject);
+begin
+  AppDir:=ExtractFilePath(Application.ExeName);
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('select year(getdate()) as FY,month(getdate()) as FM,getdate() as NDate ');
+    active:=true;
+    NDate:=fieldbyname('NDate').Value;
+    iYear:=fieldbyname('FY').asstring;
+    iMonth:=fieldbyname('FM').asstring;
+    if length(iMonth)<2 then iMonth:='0'+iMonth;
+    DTP1.Date:= NDate-3;
+    DTP2.Date:= NDate;
+  end;
+  ReFresh_ComboboDepNM();
+end;
+
+procedure TNewEquipment.FormDestroy(Sender: TObject);
+begin
+  NewEquipment:=nil;
+end;
+
+procedure TNewEquipment.ITAssetIDBtnClick(Sender: TObject);
+begin
+  IsModify:=false;
+  AssetID_Generate('A');
+end;
+
+procedure TNewEquipment.PC1Change(Sender: TObject);
+begin
+  if PC1.ActivePage=TS1 then
+  begin
+    TSBHAllQry.Active:=false;
+    if not DBGridEh1.DataSource.DataSet.IsEmpty then
+      btnQuery.Click;
+  end else
+  begin
+    TSBHAllQry.Active:=true;
+  end;
+
+end;
+
+procedure TNewEquipment.QueryBtnClick(Sender: TObject);
+begin
+  //
+  with  TSCDQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('Select  TSCD.TSID,TSCD.TSBH, TSCD.SBBH , TSCD.Qty, TSCD.XSBH, TSCD.NSX, TSCD.Status,TSCD.Label_Tag,TSCD.RFID_Tag,');
+    SQL.Add('        TSCD.USERID_Tag, TSCD.USERDATE_Tag,TSCD.RKNO, TSCD.LLNO, ');
+    SQL.Add('        BDepartment.DepName,TSCD.Memo, TSCD.DepID_Memo, ');
+    SQL.Add('        IsNull(TSCD_SB.YWPM,CLZL.YWPM) as YWPM,IsNull(TSCD_SB.ZWPM,CLZL.ZWPM) as ZWPM ');
+    SQL.Add('from TSCD ');
+    sql.add('left join clzl on TSCD.SBBH = clzl.cldh ');
+    sql.add('left join TSCD_SB on TSCD.SBBH = TSCD_SB.SBBH ');
+    SQL.Add('Left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID ');
+    sql.add('where 1=1 ');
+    if edtTSID.Text <> '' then
+      sql.add('and TSCD.TSID like '''+edtTSID.Text+'%'+''' ');
+    if Edit1.Text <> '' then
+      sql.add('and TSCD.TSBH like '''+Edit1.Text+'%'+''' ');
+    if Edit2.Text <> '' then
+      sql.add('and TSCD.DEPID_MEMO = '''+Edit2.Text+''' ');
+    if DepNMEdit.Text <> '' then
+      sql.add('and BDepartment.DepName = '''+DepNMEdit.Text+''' ');
+    if Edit4.Text <> '' then
+      sql.add('and TSCD.SBBH like '''+Edit4.Text+'%'' ');
+    if MSBBHCombo.Text <> '' then
+      sql.add('and TSCD.MSBBH like '''+Copy(MSBBHCombo.Text,1,Pos('-',MSBBHCombo.Text)-1)+'%'' ');
+    if CheckMine.Checked then
+      sql.add('and TSCD.USERID ='''+main.Edit1.Text+''' ');
+
+    //20-12-2024
+    {
+    if RB2.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''A%'' ');
+    if RB3.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''B%'' ');     }
+    if CheckBox2.Checked then
+      sql.add('and TSCD.status not in (''B'') ');
+    if Checkbox3.Checked then
+      begin
+      if RB2.Checked = true then
+        SQL.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''A%'' ');
+      if RB3.Checked = true then
+        SQL.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''B%'' ');
+    end;
+
+    sql.add('and convert(smalldatetime,convert(varchar,TSCD.USERDATE,111)) between ');
+    sql.add(' '''+formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+    sql.add(' and ');
+    sql.add(' '''+formatdatetime('yyyy/MM/dd',DTP2.Date) +'''');
+    if eLabelTag.Text <> '' then
+      sql.add('and TSCD.LABEL_Tag = '''+eLabelTag.Text+''' ');
+    if TSBHEdit.Text<>'' then
+    sql.Add(' and TSCD.TSBH='''+TSBHEdit.Text+'''  ');
+    SQL.Add('Order by TSCD.Label_Tag,TSCD_SB.YWPM');
+    //funcObj.WriteErrorLog(sql.Text);
+    Active:=true;
+  end;
+  BC4.Enabled:=true;
+  //
+end;
+
+procedure TNewEquipment.TSCDAfterOpen(DataSet: TDataSet);
+begin
+  BB2.enabled:=true;
+  BB3.enabled:=true;
+  BB4.enabled:=true;
+  bbt6.Enabled:=true;
+  bbt7.Enabled:=true;
+end;
+
+procedure TNewEquipment.TSCDMSBBHSetText(Sender: TField; const Text: string);
+begin
+  Sender.Value:=Text;
+  with Qtemp do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('Select YWPM,ZWPM from CLZL ');
+    SQL.Add('where CLZL.CLDH='''+Sender.Value+'''  ');
+    //funcObj.WriteErrorLog(SQL.Text);
+    Active:=true;
+    if RecordCount>0 then
+    begin
+      TSCD.Edit;
+      TSCD.FieldByName('MYWPM').Value:=FieldByName('YWPM').AsString;
+      TSCD.FieldByName('MZWPM').Value:=FieldByName('ZWPM').AsString;
+      TSCD.Post;
+    end;
+    Active:=false;
+  end;
+end;
+
+//清除編碼
+procedure TNewEquipment.AssetID_Clear(Memo:String);
+begin
+  with Qtemp do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.add('update TSCD set Label_Tag=null,RFID_Tag=null where Label_Tag is null and UserID_Tag='''+main.Edit1.Text+''' and UserDate_Tag>GetDate()-1 ');
+    SQL.Add('and TSCD.TSBH='''+Memo+'''  ');
+    if Edit2.Text <> '' then
+      sql.add('and TSCD.DEPID_MEMO = '''+Edit2.Text+''' ');
+    if DepNMEdit.Text <> '' then
+      sql.add('and TSCD.DepID in (Select ID from TSCD_BDepartment BDepartment where BDepartment.DepName = '''+DepNMEdit.Text+''') ');
+    if Edit4.Text <> '' then
+      sql.add('and TSCD.SBBH like '''+Edit4.Text+'%'' ');
+    if MSBBHCombo.Text <> '' then
+      sql.add('and TSCD.MSBBH like '''+Copy(MSBBHCombo.Text,1,Pos('-',MSBBHCombo.Text)-1)+'%'' ');
+    //funcobj.WriteErrorLog(sql.Text);
+    ExecSQL;
+  end;
+end;
+//自動編碼
+procedure TNewEquipment.AssetID_Generate(Header:String);
+var i,j:integer;
+    Label_Tag:String;
+begin
+  if TSBHAllQry.Active=false then Exit;
+  try
+      //清空標籤
+      TSBHAllQry.First;
+      for i:=0 to TSBHAllQry.RecordCount-1 do
+      begin
+        AssetID_Clear(TSBHAllQry.FieldByName('TSBH').AsString);
+        TSBHAllQry.Next;
+      end;
+      //
+      TSBHAllQry.First;
+      for i:=0 to TSBHAllQry.RecordCount-1 do
+      begin
+        //
+        with Qtemp do    //計算設備單流水號
+        begin
+          active:=false;
+          sql.Clear;
+          sql.Add('select top 1 Label_Tag from TSCD where Label_Tag like '''+Header+iYear+iMonth+'%''');
+          sql.add('order by Label_Tag desc');
+          active:=true;
+          if recordcount >0 then
+          begin
+            last;
+            Label_Tag:=fieldbyname('Label_Tag').AsString;
+            Label_Tag:=copy(Label_Tag,8,5);
+            Label_Tag:=inttostr(strtoint(Label_Tag)+1);
+            while length(Label_Tag)<5 do
+            begin
+              Label_Tag:='0'+Label_Tag;
+            end;
+          end else
+          begin
+            Label_Tag:='00001';
+          end;
+          Label_Tag :=Header+iYear+iMonth+Label_Tag;
+          active:=false;
+        end;
+        //開啟TSCDQry編輯模式
+        TSBHEdit.Text:=TSBHAllQry.FieldByName('TSBH').AsString;
+        QueryBtn.Click;
+        with TSCDQry do
+        begin
+          requestlive:=true;
+          cachedupdates:=true;
+          edit;
+        end;
+        BC5.Enabled:=true;
+        BC6.Enabled:=true;
+        CheckUserID();
+        TSCDQry.First;
+        while Not TSCDQry.Eof do
+        begin
+          if TSCDQry.FieldByName('Label_Tag').AsString='' then
+          begin
+            TSCDQry.Edit;
+            TSCDQry.FieldByName('Label_Tag').Value:=Label_Tag+Format('%.3d',[1]);
+            TSCDQry.FieldByName('RFID_Tag').Value:=Label_Tag+Format('%.3d',[1]);
+            TSCDQry.Post;
+          end;
+          TSCDQry.Next;
+        end;
+        BC5.Click; //儲存Save TSCD
+        TSBHAllQry.Next;
+      end;
+  except
+    on E:Exception do
+    begin
+      Application.MessageBox(PChar('NO EXCEL'+E.Message),'', MB_OK);
+      Exit;
+    end;
+  end;
+end;
+
+end.

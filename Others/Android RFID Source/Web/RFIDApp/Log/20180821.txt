@@ -1,0 +1,40 @@
+﻿2018/8/21 上午 08:00:38 歡迎光臨 起始化!
+2018/8/21 上午 08:00:42 Login
+2018/8/21 上午 08:00:44 Newtonsoft.Json.JsonReaderException: Input string '18080001C010002596001100' is not a valid number. Path '', line 1, position 24.
+   於 Newtonsoft.Json.JsonTextReader.ParseNumber() 於 c:\Development\Releases\Json\Working\Newtonsoft.Json\Src\Newtonsoft.Json\JsonTextReader.cs: 行 1177
+   於 Newtonsoft.Json.JsonTextReader.ParseValue() 於 c:\Development\Releases\Json\Working\Newtonsoft.Json\Src\Newtonsoft.Json\JsonTextReader.cs: 行 1026
+   於 Newtonsoft.Json.JsonTextReader.ReadInternal() 於 c:\Development\Releases\Json\Working\Newtonsoft.Json\Src\Newtonsoft.Json\JsonTextReader.cs: 行 382
+   於 Newtonsoft.Json.JsonTextReader.Read() 於 c:\Development\Releases\Json\Working\Newtonsoft.Json\Src\Newtonsoft.Json\JsonTextReader.cs: 行 303
+   於 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.ReadForType(JsonReader reader, JsonContract contract, Boolean hasConverter) 於 c:\Development\Releases\Json\Working\Newtonsoft.Json\Src\Newtonsoft.Json\Serialization\JsonSerializerInternalReader.cs: 行 1841
+   於 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent) 於 c:\Development\Releases\Json\Working\Newtonsoft.Json\Src\Newtonsoft.Json\Serialization\JsonSerializerInternalReader.cs: 行 183
+   於 Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType) 於 c:\Development\Releases\Json\Working\Newtonsoft.Json\Src\Newtonsoft.Json\JsonSerializer.cs: 行 710
+   於 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings) 於 c:\Development\Releases\Json\Working\Newtonsoft.Json\Src\Newtonsoft.Json\JsonConvert.cs: 行 846
+   於 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings) 於 c:\Development\Releases\Json\Working\Newtonsoft.Json\Src\Newtonsoft.Json\JsonConvert.cs: 行 805
+   於 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value) 於 c:\Development\Releases\Json\Working\Newtonsoft.Json\Src\Newtonsoft.Json\JsonConvert.cs: 行 742
+   於 ASP.epcdata_aspx.ConductEPCMat(String ID, String EPCMat) 於 c:\inetpub\wwwroot\RFIDApp\EPCData.aspx: 行 134
+2018/8/21 上午 08:02:00 Login
+2018/8/21 上午 08:02:01 select KCRKScan_RFSS.SCNO,KCRKScan_RFSS.CLBH,CLZL.YWPM, KCZLS.KCQty, KCZLS.KCBH
+       ,cast((select C.DDBH+',' from KCRKS A,KCRK B,DDZL C 
+       where  A.RKNO=B.RKNO and A.CGBH=C.DDBH 
+       and IsNull(B.SCNO,'')=KCRKScan_RF.SCNO and A.CLBH=KCRKScan_RFSS.CLBH group by C.DDBH for XML Path ('') ) as varchar(max)) as DDBH 
+       ,cast((select C.Article+',' from KCRKS A,KCRK B,DDZL C 
+       where  A.RKNO=B.RKNO and A.CGBH=C.DDBH 
+       and IsNull(B.SCNO,'')=KCRKScan_RF.SCNO and A.CLBH=KCRKScan_RFSS.CLBH group by C.Article for XML Path ('') ) as varchar(max)) as Article 
+       ,cast((select C.BUYNO+',' from KCRKS A,KCRK B,DDZL C 
+       where  A.RKNO=B.RKNO and A.CGBH=C.DDBH 
+       and IsNull(B.SCNO,'')=KCRKScan_RF.SCNO and A.CLBH=KCRKScan_RFSS.CLBH group by C.BUYNO for XML Path ('') ) as varchar(max)) as BUYNO 
+       ,cast((select B.DOCNO+',' from KCRKS A,KCRK B 
+       where  A.RKNO=B.RKNO  
+       and IsNull(B.SCNO,'')=KCRKScan_RF.SCNO and A.CLBH=KCRKScan_RFSS.CLBH group by B.DOCNO for XML Path ('') ) as varchar(max)) as DOCNO 
+       ,cast((select B.ZSNO+',' from KCRKS A,KCRK B 
+       where  A.RKNO=B.RKNO  
+       and IsNull(B.SCNO,'')=KCRKScan_RF.SCNO and A.CLBH=KCRKScan_RFSS.CLBH group by B.ZSNO for XML Path ('') ) as varchar(max)) as ZSNO 
+       ,Convert(varchar,Max(KCRKScan_RFSS.USERDATE),111) as RKDate 
+       ,CLZL.DWBH,KCRKScan_RFSS.TagID 
+from KCRKScan_RFSS
+left join KCRKScan_RF on KCRKScan_RF.SCNO=KCRKScan_RFSS.SCNO
+left join CLZL on CLZL.CLDH=KCRKScan_RFSS.CLBH
+left join KCZLS on KCRKScan_RF.CKBH=KCZLS.CKBH and KCRKScan_RFSS.CLBH=KCZLS.CLBH
+where KCRKScan_RFSS.SCNO='2018080001' and KCRKScan_RFSS.CLBH='C010002596' and KCRKScan_RFSS.Pack=1 
+Group by KCRKScan_RFSS.SCNO,KCRKScan_RFSS.CLBH,KCRKScan_RFSS.TagID,CLZL.YWPM, KCZLS.KCQty, KCZLS.KCBH,KCRKScan_RF.SCNO,CLZL.DWBH 
+

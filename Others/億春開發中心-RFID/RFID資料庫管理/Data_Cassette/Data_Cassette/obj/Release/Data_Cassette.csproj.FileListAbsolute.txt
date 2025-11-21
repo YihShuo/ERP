@@ -1,0 +1,12 @@
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\bin\Release\Data_Cassette.exe.config
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\bin\Release\Data_Cassette.exe
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\bin\Release\Data_Cassette.pdb
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\bin\Release\Reader.dll
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Release\Data_Cassette.csprojAssemblyReference.cache
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Release\Data_Cassette.frmLog_Cassette.resources
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Release\Data_Cassette.Properties.Resources.resources
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Release\Data_Cassette.csproj.GenerateResource.cache
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Release\Data_Cassette.csproj.CoreCompileInputs.cache
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Release\Data_Cassette.csproj.CopyComplete
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Release\Data_Cassette.exe
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Release\Data_Cassette.pdb

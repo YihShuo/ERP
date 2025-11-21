@@ -1,0 +1,517 @@
+object PrintQR: TPrintQR
+  Left = 673
+  Top = 310
+  Width = 1305
+  Height = 675
+  Caption = 'Print QR code'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel3: TPanel
+    Left = 0
+    Top = 0
+    Width = 1289
+    Height = 73
+    Align = alTop
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 0
+      Top = 13
+      Width = 73
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'OrdNo:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 0
+      Top = 45
+      Width = 74
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'DepName:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 976
+      Top = 48
+      Width = 55
+      Height = 16
+      Caption = 'So luong:'
+    end
+    object Edit1: TEdit
+      Left = 83
+      Top = 10
+      Width = 254
+      Height = 24
+      AutoSelect = False
+      CharCase = ecUpperCase
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+    end
+    object Edit2: TEdit
+      Left = 84
+      Top = 42
+      Width = 141
+      Height = 24
+      CharCase = ecUpperCase
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 1
+    end
+    object Query: TButton
+      Left = 360
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = 'Query'
+      TabOrder = 2
+      OnClick = QueryClick
+    end
+    object Depname: TButton
+      Left = 360
+      Top = 40
+      Width = 75
+      Height = 25
+      Caption = 'Dep Name'
+      TabOrder = 3
+      OnClick = DepnameClick
+    end
+    object Edit3: TEdit
+      Left = 232
+      Top = 40
+      Width = 105
+      Height = 24
+      ReadOnly = True
+      TabOrder = 4
+      Visible = False
+    end
+    object Add: TButton
+      Left = 696
+      Top = 40
+      Width = 75
+      Height = 25
+      Caption = 'Insert'
+      TabOrder = 5
+      OnClick = AddClick
+    end
+    object Print: TButton
+      Left = 784
+      Top = 40
+      Width = 105
+      Height = 25
+      Caption = 'Print QR Code'
+      TabOrder = 6
+      OnClick = PrintClick
+    end
+    object Edit4: TEdit
+      Left = 1040
+      Top = 40
+      Width = 121
+      Height = 24
+      TabOrder = 7
+      Text = '1'
+    end
+  end
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 73
+    Width = 792
+    Height = 563
+    Align = alClient
+    DataSource = DS1
+    Flat = False
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -11
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind]
+    SumList.Active = True
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    OnCellClick = DBGridEh1CellClick
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'DDBH'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'GXLB'
+        Footers = <>
+        Width = 33
+      end
+      item
+        EditButtons = <>
+        FieldName = 'YSBH'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Article'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'XieMing'
+        Footers = <>
+        Width = 150
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Qty'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 40
+      end
+      item
+        EditButtons = <>
+        FieldName = 'OKdate'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'KFJC'
+        Footers = <>
+      end>
+  end
+  object DBGridEh2: TDBGridEh
+    Left = 792
+    Top = 73
+    Width = 497
+    Height = 563
+    Align = alRight
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    DataSource = DS2
+    Flat = False
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -11
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    SumList.Active = True
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'DDBH'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'SIZE'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Qty'
+        Footer.ValueType = fvtSum
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DepID'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DepName'
+        Footers = <>
+        Width = 150
+      end
+      item
+        EditButtons = <>
+        FieldName = 'USERID'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'USERDATE'
+        Footers = <>
+      end>
+  end
+  object Qtemp: TQuery
+    DatabaseName = 'DB'
+    Left = 168
+    Top = 216
+  end
+  object DS1: TDataSource
+    DataSet = SMDD
+    Left = 120
+    Top = 256
+  end
+  object SMDD: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select SMDD.*,KFZL.KFJC'
+      'from SMDD'
+      'left join DDZL on DDZl.ZLBH=SMDD.YSBH'
+      'left join KFZL on KFZL.KFDH=DDZL.KHBH'
+      'where SMDD.DDBH like '#39'%'#39
+      '      and isnull(KFZL.KFJC,'#39#39') like '#39'%%'#39
+      '      and SMDD.SCYEAR='#39'2009'#39
+      '      and SMDD.SCMONTH='#39'09'#39
+      'order by SMDD.DDBH,SMDD.SCCX'
+      '')
+    Left = 128
+    Top = 216
+    object SMDDDDBH: TStringField
+      FieldName = 'DDBH'
+      FixedChar = True
+      Size = 15
+    end
+    object SMDDGXLB: TStringField
+      FieldName = 'GXLB'
+      FixedChar = True
+      Size = 1
+    end
+    object SMDDYSBH: TStringField
+      FieldName = 'YSBH'
+      FixedChar = True
+      Size = 15
+    end
+    object SMDDGSBH: TStringField
+      FieldName = 'GSBH'
+      FixedChar = True
+      Size = 4
+    end
+    object SMDDArticle: TStringField
+      FieldName = 'Article'
+      FixedChar = True
+    end
+    object SMDDXieMing: TStringField
+      FieldName = 'XieMing'
+      FixedChar = True
+      Size = 50
+    end
+    object SMDDQty: TIntegerField
+      FieldName = 'Qty'
+    end
+    object SMDDSCCX: TStringField
+      FieldName = 'SCCX'
+      FixedChar = True
+      Size = 1
+    end
+    object SMDDSB: TStringField
+      FieldName = 'SB'
+      FixedChar = True
+      Size = 1
+    end
+    object SMDDSCYEAR: TStringField
+      FieldName = 'SCYEAR'
+      FixedChar = True
+      Size = 4
+    end
+    object SMDDSCMONTH: TStringField
+      FieldName = 'SCMONTH'
+      FixedChar = True
+      Size = 2
+    end
+    object SMDDDepNO: TStringField
+      FieldName = 'DepNO'
+      FixedChar = True
+      Size = 10
+    end
+    object SMDDPlanDate: TDateTimeField
+      FieldName = 'PlanDate'
+    end
+    object SMDDUSERDate: TDateTimeField
+      FieldName = 'USERDate'
+    end
+    object SMDDUSERID: TStringField
+      FieldName = 'USERID'
+      FixedChar = True
+    end
+    object SMDDYN: TStringField
+      FieldName = 'YN'
+      FixedChar = True
+      Size = 1
+    end
+    object SMDDPlanEdate: TDateTimeField
+      FieldName = 'PlanEdate'
+    end
+    object SMDDPRdate: TDateTimeField
+      FieldName = 'PRdate'
+    end
+    object SMDDOKdate: TDateTimeField
+      FieldName = 'OKdate'
+    end
+    object SMDDRDepNO: TStringField
+      FieldName = 'RDepNO'
+      FixedChar = True
+      Size = 10
+    end
+    object SMDDRPlanDate: TDateTimeField
+      FieldName = 'RPlanDate'
+    end
+    object SMDDRPlanEdate: TDateTimeField
+      FieldName = 'RPlanEdate'
+    end
+    object SMDDROrder: TIntegerField
+      FieldName = 'ROrder'
+    end
+    object SMDDXH: TIntegerField
+      FieldName = 'XH'
+    end
+    object SMDDKFJC: TStringField
+      FieldName = 'KFJC'
+      FixedChar = True
+    end
+  end
+  object DepNo: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select *'
+      'from BDepartment'
+      'where ProYN=1'
+      'and gxlb='#39'C'#39
+      'order by ID')
+    Left = 440
+    Top = 8
+    object DepNoID: TStringField
+      FieldName = 'ID'
+      Origin = 'DB.BDepartment.ID'
+      FixedChar = True
+      Size = 10
+    end
+    object DepNoGSBH: TStringField
+      FieldName = 'GSBH'
+      Origin = 'DB.BDepartment.GSBH'
+      FixedChar = True
+      Size = 4
+    end
+    object DepNoDepName: TStringField
+      FieldName = 'DepName'
+      Origin = 'DB.BDepartment.DepName'
+      FixedChar = True
+      Size = 50
+    end
+    object DepNoDepMemo: TStringField
+      FieldName = 'DepMemo'
+      Origin = 'DB.BDepartment.DepMemo'
+      FixedChar = True
+      Size = 50
+    end
+    object DepNoGXLB: TStringField
+      FieldName = 'GXLB'
+      Origin = 'DB.BDepartment.GXLB'
+      FixedChar = True
+      Size = 10
+    end
+  end
+  object CutDispatchSSS: TQuery
+    DatabaseName = 'DB'
+    DataSource = DS1
+    SQL.Strings = (
+      'select CutDispatchSSS.*, BDepartment.DepName'
+      'from CutDispatchSSS'
+      'left join BDepartment on BDepartment.ID=CutDispatchSSS.DepID'
+      'where CutDispatchSSS.DDBH='#39'JHS2412-156-001A'#39)
+    Left = 944
+    Top = 184
+    object CutDispatchSSSDDBH: TStringField
+      FieldName = 'DDBH'
+      FixedChar = True
+      Size = 15
+    end
+    object CutDispatchSSSSIZE: TStringField
+      FieldName = 'SIZE'
+      FixedChar = True
+      Size = 6
+    end
+    object CutDispatchSSSQty: TIntegerField
+      FieldName = 'Qty'
+    end
+    object CutDispatchSSSDepID: TStringField
+      FieldName = 'DepID'
+      FixedChar = True
+      Size = 10
+    end
+    object CutDispatchSSSScanInQty: TIntegerField
+      FieldName = 'ScanInQty'
+    end
+    object CutDispatchSSSScanOutQty: TIntegerField
+      FieldName = 'ScanOutQty'
+    end
+    object CutDispatchSSSUSERID: TStringField
+      FieldName = 'USERID'
+      FixedChar = True
+    end
+    object CutDispatchSSSUSERDATE: TDateTimeField
+      FieldName = 'USERDATE'
+    end
+    object CutDispatchSSSDepName: TStringField
+      FieldName = 'DepName'
+      FixedChar = True
+      Size = 50
+    end
+  end
+  object DS2: TDataSource
+    DataSet = CutDispatchSSS
+    Left = 1016
+    Top = 192
+  end
+  object OpenDialog: TOpenDialog
+    FileName = '*.xlsx'
+    Filter = 'CSV|*.csv|EXCEL|*.xls|EXCEL|*.xlsx'
+    Left = 904
+    Top = 32
+  end
+end

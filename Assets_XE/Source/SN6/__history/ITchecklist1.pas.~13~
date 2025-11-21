@@ -1,0 +1,100 @@
+unit ITchecklist1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, GridsEh, DBGridEh, StdCtrls, ComCtrls, ExtCtrls, ComObj, Excel2000,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,ShellAPI,
+  DBAxisGridsEh, Vcl.Menus;
+
+type
+  TITchecklist = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Button1: TButton;
+    DataSource1: TDataSource;
+    Query1: TQuery;
+    Query2: TQuery;
+    Edit1: TEdit;
+    DBGridEh1: TDBGridEh;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    Label2: TLabel;
+    Edit2: TEdit;
+    Label3: TLabel;
+    Edit3: TEdit;
+    CheckBox3: TCheckBox;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ITchecklist: TITchecklist;
+
+implementation
+ uses main1;
+{$R *.dfm}
+
+procedure TITchecklist.Button1Click(Sender: TObject);
+var
+  i,index: Integer;
+  depnm: string;
+begin
+     with query1 do
+      begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('Select TSCD_KK.ID, TSCD.TSBH,TSCD.SBBH');
+      SQL.Add('       ,TSCD_IT.NameVN as VWPM,TSCD_IT.NameTW as zwpm');
+      SQL.Add('       ,CLZL.dwbh,CLZL.cqdh');
+      SQL.Add('       ,BDepartment.DepName,BDepartment.DepMemo, case when TSCD_KK.unit_name is null then ''TSCD'' else ''CCDC'' END as phanloai, x.it_id ,x.kk_id   ');
+      SQL.Add('from TSCD');
+      SQL.Add('left join CLZL on CLZL.CLDH = TSCD.SBBH');
+      SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+      SQL.Add('left join TSCD_BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+      SQL.Add('left join TSCD_BDepartment Lean_Dep on Lean_Dep.ID=TSCD.Lean_ID ');
+      SQL.Add('left join TSCD_IT on TSCD_IT.TSBH = SUBSTRING(TSCD.TSBH, 1, CHARINDEX(''0'', TSCD.TSBH) - 1)');
+      sql.Add('left join Asset_details x on TSCD.RFID_Tag=item_id and MONTH(x.it_date)=MONTH(GETDATE())');
+      sql.Add('left join TSCD_KK on TSCD_KK.RFID=TSCD.RFID_Tag');
+      SQL.Add('where TSCD.LB=2');
+      if checkbox1.Checked then
+      sql.Add('and x.it_id is null ');
+      if checkbox2.Checked then
+      sql.Add('and x.it_id is not null ');
+      if edit1.Text<>'' then
+      sql.Add('and BDepartment.DepName like ''%'+Edit1.Text+'%'' ');
+      if edit2.Text<>'' then
+      sql.Add('and x.it_id like ''%'+Edit2.Text+'%'' ');
+      if edit3.Text<>'' then
+      sql.Add('and x.kk_id like ''%'+Edit3.Text+'%'' ');
+      sql.Add('ORDER BY TSCD_KK.unit_name asc,  CAST(TSCD_KK.ID AS INT) ASC');
+       Active:=true;
+    end;
+     with DBGrideh1 do
+   begin
+    for i := 0 to Columns.Count - 1 do
+     begin
+        Columns[1].Footer.ValueType := fvtCount;
+        columns[i].Width:=120;
+        //Columns[j].Title.TitleButton := True;
+     end;
+
+end;
+ end;
+procedure TITchecklist.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  action:=Cafree;
+end;
+
+procedure TITchecklist.FormDestroy(Sender: TObject);
+begin
+  ITchecklist:=nil;
+end;
+
+end.

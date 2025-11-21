@@ -1,0 +1,5 @@
+F:\国旭资料共享\超高频读写器OEM\罗丹贝尔\R2000开发套件资料Word\软件\Windows\UHFDemo_v3.65_CHN_source\UHFDemo_v3.65\Reader\bin\Release\Reader.dll
+F:\国旭资料共享\超高频读写器OEM\罗丹贝尔\R2000开发套件资料Word\软件\Windows\UHFDemo_v3.65_CHN_source\UHFDemo_v3.65\Reader\bin\Release\Reader.pdb
+F:\国旭资料共享\超高频读写器OEM\罗丹贝尔\R2000开发套件资料Word\软件\Windows\UHFDemo_v3.65_CHN_source\UHFDemo_v3.65\Reader\obj\Release\ResolveAssemblyReference.cache
+F:\国旭资料共享\超高频读写器OEM\罗丹贝尔\R2000开发套件资料Word\软件\Windows\UHFDemo_v3.65_CHN_source\UHFDemo_v3.65\Reader\obj\Release\Reader.dll
+F:\国旭资料共享\超高频读写器OEM\罗丹贝尔\R2000开发套件资料Word\软件\Windows\UHFDemo_v3.65_CHN_source\UHFDemo_v3.65\Reader\obj\Release\Reader.pdb

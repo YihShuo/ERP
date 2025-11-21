@@ -1,0 +1,1364 @@
+object StockAnlysis: TStockAnlysis
+  Left = 246
+  Top = 229
+  Width = 929
+  Height = 480
+  Caption = 'Stock Anlysis'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label5: TLabel
+    Left = 200
+    Top = 50
+    Width = 45
+    Height = 16
+    Caption = 'Factory'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label4: TLabel
+    Left = 208
+    Top = 16
+    Width = 67
+    Height = 16
+    Caption = 'Data Mode'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 913
+    Height = 81
+    Align = alTop
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 16
+      Top = 16
+      Width = 39
+      Height = 16
+      Caption = 'IN this '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 16
+      Top = 50
+      Width = 45
+      Height = 16
+      Caption = 'Factory'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object syear: TDateTimePicker
+      Left = 144
+      Top = 16
+      Width = 89
+      Height = 21
+      Date = 40179.509120532410000000
+      Time = 40179.509120532410000000
+      TabOrder = 0
+    end
+    object Factory: TComboBox
+      Left = 72
+      Top = 48
+      Width = 89
+      Height = 21
+      ItemHeight = 13
+      TabOrder = 1
+      Text = 'ALL'
+      Items.Strings = (
+        'ALL'
+        'VA12'
+        'VA3'
+        'VB1')
+    end
+  end
+  object P1: TPageControl
+    Left = 0
+    Top = 81
+    Width = 913
+    Height = 361
+    ActivePage = TabSheet3
+    Align = alClient
+    TabOrder = 1
+    OnChange = P1Change
+    object TabSheet1: TTabSheet
+      Caption = 'StorkIn VS Assemble'
+      object DBChart1: TDBChart
+        Left = 273
+        Top = 0
+        Width = 632
+        Height = 333
+        AnimatedZoom = True
+        AnimatedZoomSteps = 9
+        BackWall.Brush.Color = clWhite
+        MarginRight = 5
+        Title.Text.Strings = (
+          #25104#22411#21644#25104#21697#20489#27604#36611
+          'Stork Qty and Assemble Qty ')
+        Chart3DPercent = 10
+        LeftAxis.Grid.Style = psDashDotDot
+        LeftAxis.Grid.SmallDots = True
+        LeftAxis.LabelsMultiLine = True
+        LeftAxis.MinorTickCount = 0
+        LeftAxis.MinorTickLength = 0
+        LeftAxis.MinorTicks.Style = psDash
+        LeftAxis.MinorTicks.SmallDots = True
+        LeftAxis.TickLength = 0
+        LeftAxis.TickOnLabelsOnly = False
+        LeftAxis.Ticks.Style = psDashDotDot
+        LeftAxis.Ticks.SmallDots = True
+        Legend.ColorWidth = 20
+        Legend.TextStyle = ltsPlain
+        View3DOptions.Elevation = 315
+        View3DOptions.Orthogonal = False
+        View3DOptions.Perspective = 0
+        View3DOptions.Rotation = 360
+        Align = alClient
+        BorderStyle = bsSingle
+        TabOrder = 0
+        AutoSize = True
+        object Series1: TBarSeries
+          Marks.ArrowLength = 20
+          Marks.BackColor = 8421631
+          Marks.Visible = True
+          DataSource = StorkInQP
+          SeriesColor = clRed
+          Title = 'StorkIn'
+          BarWidthPercent = 50
+          XValues.DateTime = False
+          XValues.Name = 'X'
+          XValues.Multiplier = 1.000000000000000000
+          XValues.Order = loAscending
+          XValues.ValueSource = 'COLUMN1'
+          YValues.DateTime = False
+          YValues.Name = 'Bar'
+          YValues.Multiplier = 1.000000000000000000
+          YValues.Order = loNone
+          YValues.ValueSource = 'COLUMN2'
+        end
+        object Series2: TBarSeries
+          Marks.ArrowLength = 20
+          Marks.Visible = True
+          DataSource = AssembleQP
+          SeriesColor = clGreen
+          Title = 'Assmble'
+          BarWidthPercent = 50
+          XValues.DateTime = False
+          XValues.Name = 'X'
+          XValues.Multiplier = 1.000000000000000000
+          XValues.Order = loAscending
+          XValues.ValueSource = 'COLUMN1'
+          YValues.DateTime = False
+          YValues.Name = 'Bar'
+          YValues.Multiplier = 1.000000000000000000
+          YValues.Order = loNone
+          YValues.ValueSource = 'aqty'
+        end
+      end
+      object DBGridEh1: TDBGridEh
+        Left = 0
+        Top = 0
+        Width = 273
+        Height = 333
+        Align = alLeft
+        DataSource = SADS
+        Flat = False
+        FooterColor = clWindow
+        FooterFont.Charset = DEFAULT_CHARSET
+        FooterFont.Color = clWindowText
+        FooterFont.Height = -11
+        FooterFont.Name = 'MS Sans Serif'
+        FooterFont.Style = []
+        FooterRowCount = 1
+        FrozenCols = 1
+        SumList.Active = True
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        UseMultiTitle = True
+        OnCellClick = DBGridEh1CellClick
+        OnTitleClick = DBGridEh1TitleClick
+        Columns = <
+          item
+            EditButtons = <>
+            FieldName = 'gsbh'
+            Footers = <>
+            Title.Caption = #24288#21312'|gsbh'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = 'aqty'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                FieldName = 'aqty'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#22411#25976'|aqty'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = 'sqty'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                FieldName = 'sqty'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#21697#20489'|sqty'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = 'pp'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #24046#25976'|pp'
+          end>
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Storkin VS Shiping'
+      ImageIndex = 1
+      object DBGridEh2: TDBGridEh
+        Left = 0
+        Top = 0
+        Width = 273
+        Height = 333
+        Align = alLeft
+        DataSource = SSDS
+        Flat = False
+        FooterColor = clWindow
+        FooterFont.Charset = DEFAULT_CHARSET
+        FooterFont.Color = clWindowText
+        FooterFont.Height = -11
+        FooterFont.Name = 'MS Sans Serif'
+        FooterFont.Style = []
+        FooterRowCount = 1
+        FrozenCols = 1
+        SumList.Active = True
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        UseMultiTitle = True
+        OnCellClick = DBGridEh2CellClick
+        OnTitleClick = DBGridEh2TitleClick
+        Columns = <
+          item
+            EditButtons = <>
+            FieldName = 'gsbh'
+            Footers = <>
+            Title.Caption = #24288#21312'|gsbh'
+            Width = 34
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = 'sqty'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #20837#24235#25976'|sqty'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = 'aqty'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #20986#36008#25976'|aqty'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = 'pp'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #24046#25976'|pp'
+          end>
+      end
+      object DBChart2: TDBChart
+        Left = 273
+        Top = 0
+        Width = 632
+        Height = 333
+        AnimatedZoom = True
+        AnimatedZoomSteps = 9
+        BackWall.Brush.Color = clWhite
+        MarginRight = 5
+        Title.Text.Strings = (
+          #25104#21697#20489#21644#20986#36008#27604#36611
+          'Stork Qty and Shiping Qty ')
+        Chart3DPercent = 10
+        LeftAxis.Grid.Style = psDashDotDot
+        LeftAxis.Grid.SmallDots = True
+        LeftAxis.LabelsMultiLine = True
+        LeftAxis.MinorTickCount = 0
+        LeftAxis.MinorTickLength = 0
+        LeftAxis.MinorTicks.Style = psDash
+        LeftAxis.MinorTicks.SmallDots = True
+        LeftAxis.TickLength = 0
+        LeftAxis.TickOnLabelsOnly = False
+        LeftAxis.Ticks.Style = psDashDotDot
+        LeftAxis.Ticks.SmallDots = True
+        Legend.ColorWidth = 20
+        Legend.TextStyle = ltsPlain
+        View3DOptions.Elevation = 315
+        View3DOptions.Orthogonal = False
+        View3DOptions.Perspective = 0
+        View3DOptions.Rotation = 360
+        Align = alClient
+        BorderStyle = bsSingle
+        TabOrder = 1
+        AutoSize = True
+        object BarSeries1: TBarSeries
+          Marks.ArrowLength = 50
+          Marks.BackColor = 8421631
+          Marks.Visible = True
+          DataSource = StorkInQP
+          SeriesColor = clRed
+          Title = 'StorkIn'
+          BarWidthPercent = 50
+          XValues.DateTime = False
+          XValues.Name = 'X'
+          XValues.Multiplier = 1.000000000000000000
+          XValues.Order = loAscending
+          XValues.ValueSource = 'COLUMN1'
+          YValues.DateTime = False
+          YValues.Name = 'Bar'
+          YValues.Multiplier = 1.000000000000000000
+          YValues.Order = loNone
+          YValues.ValueSource = 'COLUMN2'
+        end
+        object BarSeries2: TBarSeries
+          Marks.ArrowLength = 20
+          Marks.Visible = True
+          DataSource = ShipingQP
+          SeriesColor = clYellow
+          Title = 'Shping'
+          BarWidthPercent = 50
+          XValues.DateTime = False
+          XValues.Name = 'X'
+          XValues.Multiplier = 1.000000000000000000
+          XValues.Order = loAscending
+          XValues.ValueSource = 'COLUMN1'
+          YValues.DateTime = False
+          YValues.Name = 'Bar'
+          YValues.Multiplier = 1.000000000000000000
+          YValues.Order = loNone
+          YValues.ValueSource = 'aqty'
+        end
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'Storkin VS Shiping VS Assemble '
+      ImageIndex = 2
+      object DBGridEh3: TDBGridEh
+        Left = 0
+        Top = 0
+        Width = 273
+        Height = 333
+        Align = alLeft
+        DataSource = SSADS
+        Flat = False
+        FooterColor = clWindow
+        FooterFont.Charset = DEFAULT_CHARSET
+        FooterFont.Color = clWindowText
+        FooterFont.Height = -11
+        FooterFont.Name = 'MS Sans Serif'
+        FooterFont.Style = []
+        FooterRowCount = 1
+        FrozenCols = 1
+        SumList.Active = True
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        UseMultiTitle = True
+        OnCellClick = DBGridEh3CellClick
+        OnTitleClick = DBGridEh3TitleClick
+        Columns = <
+          item
+            EditButtons = <>
+            FieldName = 'gsbh'
+            Footers = <>
+            Title.Caption = #24288#21312'|gsbh'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = 'aqty'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#22411#25976'|aqty'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = 'sqty'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#21697#20489'|sqty'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = 'shqty'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #20986#36008#25976'|shqty'
+          end>
+      end
+      object DBChart3: TDBChart
+        Left = 273
+        Top = 0
+        Width = 632
+        Height = 333
+        AnimatedZoom = True
+        AnimatedZoomSteps = 9
+        BackWall.Brush.Color = clWhite
+        MarginRight = 5
+        Title.Text.Strings = (
+          #25104#21697#20489#21644#20986#36008#21644#25104#22411#27604#36611
+          'Stork Qty and Assemble Qty ')
+        Chart3DPercent = 10
+        LeftAxis.Grid.Style = psDashDotDot
+        LeftAxis.Grid.SmallDots = True
+        LeftAxis.LabelsMultiLine = True
+        LeftAxis.MinorTickCount = 0
+        LeftAxis.MinorTickLength = 0
+        LeftAxis.MinorTicks.Style = psDash
+        LeftAxis.MinorTicks.SmallDots = True
+        LeftAxis.TickLength = 0
+        LeftAxis.TickOnLabelsOnly = False
+        LeftAxis.Ticks.Style = psDashDotDot
+        LeftAxis.Ticks.SmallDots = True
+        Legend.ColorWidth = 20
+        Legend.TextStyle = ltsPlain
+        View3DOptions.Elevation = 315
+        View3DOptions.Orthogonal = False
+        View3DOptions.Perspective = 0
+        View3DOptions.Rotation = 360
+        Align = alClient
+        BorderStyle = bsSingle
+        TabOrder = 1
+        AutoSize = True
+        object BarSeries3: TBarSeries
+          Marks.ArrowLength = 50
+          Marks.BackColor = 8421631
+          Marks.Visible = True
+          DataSource = StorkInQP
+          SeriesColor = clRed
+          Title = 'StorkIn'
+          BarWidthPercent = 50
+          XValues.DateTime = False
+          XValues.Name = 'X'
+          XValues.Multiplier = 1.000000000000000000
+          XValues.Order = loAscending
+          XValues.ValueSource = 'COLUMN1'
+          YValues.DateTime = False
+          YValues.Name = 'Bar'
+          YValues.Multiplier = 1.000000000000000000
+          YValues.Order = loNone
+          YValues.ValueSource = 'COLUMN2'
+        end
+        object BarSeries4: TBarSeries
+          Marks.ArrowLength = 20
+          Marks.Visible = True
+          DataSource = ShipingQP
+          SeriesColor = clYellow
+          Title = 'Shping'
+          BarWidthPercent = 50
+          XValues.DateTime = False
+          XValues.Name = 'X'
+          XValues.Multiplier = 1.000000000000000000
+          XValues.Order = loAscending
+          XValues.ValueSource = 'COLUMN1'
+          YValues.DateTime = False
+          YValues.Name = 'Bar'
+          YValues.Multiplier = 1.000000000000000000
+          YValues.Order = loNone
+          YValues.ValueSource = 'aqty'
+        end
+        object Series3: TBarSeries
+          Marks.ArrowLength = 20
+          Marks.BackColor = 8454016
+          Marks.Visible = True
+          DataSource = AssembleQP
+          SeriesColor = clGreen
+          Title = 'Assemble '
+          BarWidthPercent = 50
+          XValues.DateTime = False
+          XValues.Name = 'X'
+          XValues.Multiplier = 1.000000000000000000
+          XValues.Order = loAscending
+          XValues.ValueSource = 'COLUMN1'
+          YValues.DateTime = False
+          YValues.Name = 'Bar'
+          YValues.Multiplier = 1.000000000000000000
+          YValues.Order = loNone
+          YValues.ValueSource = 'aqty'
+        end
+      end
+    end
+    object TabSheet4: TTabSheet
+      Caption = 'AVG In Date(Shiping Out)'
+      ImageIndex = 3
+      object DBGridEh4: TDBGridEh
+        Left = 0
+        Top = 0
+        Width = 273
+        Height = 333
+        Align = alLeft
+        DataSource = ASSDS
+        Flat = False
+        FooterColor = clWindow
+        FooterFont.Charset = DEFAULT_CHARSET
+        FooterFont.Color = clWindowText
+        FooterFont.Height = -11
+        FooterFont.Name = 'MS Sans Serif'
+        FooterFont.Style = []
+        FooterRowCount = 1
+        FrozenCols = 1
+        SumList.Active = True
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        UseMultiTitle = True
+        Columns = <
+          item
+            EditButtons = <>
+            FieldName = 'gsbh'
+            Footers = <>
+            Title.Caption = #24288#21029'|gsbh'
+            Width = 41
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = '0D'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #28961#23384#36008#22825#25976'|0D'
+            Width = 79
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = '7D'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#21697'1-7'#22825'|7D'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = '15D'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#21697'8-15'#22825'|15D'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = '30D'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#21697'16-30'#22825'|30D'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = '60D'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#21697'31-60'#22825'|60D'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = '90D'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#21697'61-90'#22825'|90D'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = '120D'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#21697'91-120'#22825'|120D'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = 'Over 120D'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#21697#36229#36942'120'#22825'|Over 120D'
+          end>
+      end
+      object DBChart4: TDBChart
+        Left = 273
+        Top = 0
+        Width = 632
+        Height = 333
+        AllowPanning = pmNone
+        AllowZoom = False
+        AnimatedZoom = True
+        AnimatedZoomSteps = 9
+        BackWall.Brush.Color = clWhite
+        BackWall.Brush.Style = bsClear
+        BackWall.Pen.Visible = False
+        MarginRight = 5
+        Title.Text.Strings = (
+          #24050#20986#36008#35330#21934#25104#21697#23384#36008#22825#25976
+          'IN Stork Date of Shiping ')
+        AxisVisible = False
+        Chart3DPercent = 10
+        ClipPoints = False
+        Frame.Visible = False
+        LeftAxis.Grid.Style = psDashDotDot
+        LeftAxis.Grid.SmallDots = True
+        LeftAxis.LabelsMultiLine = True
+        LeftAxis.MinorTickCount = 0
+        LeftAxis.MinorTickLength = 0
+        LeftAxis.MinorTicks.Style = psDash
+        LeftAxis.MinorTicks.SmallDots = True
+        LeftAxis.TickLength = 0
+        LeftAxis.TickOnLabelsOnly = False
+        LeftAxis.Ticks.Style = psDashDotDot
+        LeftAxis.Ticks.SmallDots = True
+        LeftAxis.Visible = False
+        Legend.ColorWidth = 15
+        Legend.ShadowSize = 1
+        Legend.TextStyle = ltsRightValue
+        Legend.TopPos = 3
+        View3DOptions.Elevation = 315
+        View3DOptions.Orthogonal = False
+        View3DOptions.Perspective = 0
+        View3DOptions.Rotation = 360
+        View3DWalls = False
+        Align = alClient
+        BorderStyle = bsSingle
+        TabOrder = 1
+        AutoSize = True
+        object BarSeries7: TPieSeries
+          Marks.ArrowLength = 20
+          Marks.BackColor = 8454016
+          Marks.Style = smsPercent
+          Marks.Visible = True
+          DataSource = ASSDS
+          SeriesColor = clGreen
+          Title = 'Assemble '
+          ExplodeBiggest = 15
+          OtherSlice.Style = poBelowPercent
+          OtherSlice.Text = 'Other'
+          PieValues.DateTime = False
+          PieValues.Name = 'Pie'
+          PieValues.Multiplier = 1.000000000000000000
+          PieValues.Order = loNone
+          PieValues.ValueSource = '0D;7D;15D;30D;60D;90D;120D;Over 120D'
+          RotationAngle = 90
+        end
+      end
+    end
+    object TabSheet5: TTabSheet
+      Caption = 'AVG IN Date(Be Shipping)'
+      ImageIndex = 4
+      object DBGridEh5: TDBGridEh
+        Left = 0
+        Top = 0
+        Width = 273
+        Height = 333
+        Align = alLeft
+        DataSource = ASBSDS
+        Flat = False
+        FooterColor = clWindow
+        FooterFont.Charset = DEFAULT_CHARSET
+        FooterFont.Color = clWindowText
+        FooterFont.Height = -11
+        FooterFont.Name = 'MS Sans Serif'
+        FooterFont.Style = []
+        FooterRowCount = 1
+        FrozenCols = 1
+        SumList.Active = True
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        UseMultiTitle = True
+        Columns = <
+          item
+            EditButtons = <>
+            FieldName = 'gsbh'
+            Footers = <>
+            Title.Caption = #24288#21029'|gsbh'
+            Width = 41
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = 'Today'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #28961#23384#36008#22825#25976'|0D'
+            Width = 79
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = '7D'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#21697'1-7'#22825'|7D'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = '15D'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#21697'8-15'#22825'|15D'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = '30D'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#21697'16-30'#22825'|30D'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = '60D'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#21697'31-60'#22825'|60D'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = '90D'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#21697'61-90'#22825'|90D'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = '120D'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#21697'91-120'#22825'|120D'
+          end
+          item
+            DisplayFormat = '#,###'
+            EditButtons = <>
+            FieldName = 'Over 120D'
+            Footers = <
+              item
+                DisplayFormat = '#,###'
+                ValueType = fvtSum
+              end>
+            Title.Caption = #25104#21697#36229#36942'120'#22825'|Over 120D'
+          end>
+      end
+      object DBChart5: TDBChart
+        Left = 273
+        Top = 0
+        Width = 632
+        Height = 333
+        AllowPanning = pmNone
+        AllowZoom = False
+        AnimatedZoom = True
+        AnimatedZoomSteps = 9
+        BackWall.Brush.Color = clWhite
+        BackWall.Brush.Style = bsClear
+        BackWall.Pen.Visible = False
+        MarginRight = 5
+        Title.Text.Strings = (
+          #26410#20986#36008#35330#21934#25104#21697#23384#36008#22825#25976
+          'IN Stork Date of Be Shiping ')
+        AxisVisible = False
+        Chart3DPercent = 10
+        ClipPoints = False
+        Frame.Visible = False
+        LeftAxis.Grid.Style = psDashDotDot
+        LeftAxis.Grid.SmallDots = True
+        LeftAxis.LabelsMultiLine = True
+        LeftAxis.MinorTickCount = 0
+        LeftAxis.MinorTickLength = 0
+        LeftAxis.MinorTicks.Style = psDash
+        LeftAxis.MinorTicks.SmallDots = True
+        LeftAxis.TickLength = 0
+        LeftAxis.TickOnLabelsOnly = False
+        LeftAxis.Ticks.Style = psDashDotDot
+        LeftAxis.Ticks.SmallDots = True
+        LeftAxis.Visible = False
+        Legend.ColorWidth = 15
+        Legend.ShadowSize = 1
+        Legend.TextStyle = ltsRightValue
+        Legend.TopPos = 8
+        View3DOptions.Elevation = 315
+        View3DOptions.Orthogonal = False
+        View3DOptions.Perspective = 0
+        View3DOptions.Rotation = 360
+        View3DWalls = False
+        Align = alClient
+        BorderStyle = bsSingle
+        TabOrder = 1
+        AutoSize = True
+        object PieSeries1: TPieSeries
+          Marks.ArrowLength = 20
+          Marks.BackColor = 8454016
+          Marks.Style = smsPercent
+          Marks.Visible = True
+          DataSource = ASBSDS
+          SeriesColor = clGreen
+          Title = 'Assemble '
+          ExplodeBiggest = 15
+          OtherSlice.Style = poBelowPercent
+          OtherSlice.Text = 'Other'
+          PieValues.DateTime = False
+          PieValues.Name = 'Pie'
+          PieValues.Multiplier = 1.000000000000000000
+          PieValues.Order = loNone
+          PieValues.ValueSource = 'Today;7D;15D;30D;60D;90D;120D;Over 120D'
+          RotationAngle = 90
+        end
+      end
+    end
+  end
+  object datamode: TComboBox
+    Left = 64
+    Top = 16
+    Width = 73
+    Height = 21
+    ItemHeight = 13
+    ItemIndex = 0
+    TabOrder = 2
+    Text = 'Year'
+    Items.Strings = (
+      'Year'
+      'Month')
+  end
+  object SAQ: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'select a.gsbh as gsbh,a.aqty,isnull(s.sqty,0) as sqty,(a.aqty-is' +
+        'null(s.sqty,0)) as pp'
+      
+        'from  (select isnull(ddzl.gsbh,'#39'ERR'#39') as gsbh,sum(scbbs.qty) as ' +
+        'aqty  from scbbs'
+      #9'left join scbb on scbb.prono=scbbs.prono'
+      #9'left join ddzl on scbbs.scbh=ddzl.ddbh'
+      #9'where year(scbb.scdate)=2010 and scbbs.gxlb='#39'A'#39
+      #9'group by  ddzl.gsbh) as A'
+      'left join '
+      '      (select k.gsbh,sum(k.q1) as sqty from'
+      
+        #9'( select ddzl.ddbh,sum(ywcp.qty) as q1,month(ywcp.lastindate) a' +
+        's ld,isnull(ddzl.gsbh,'#39'ERR'#39') as gsbh,ddzl.pairs  from ywcp'
+      #9'left join ywdd on ywcp.ddbh=ywdd.ddbh'
+      #9'left join ddzl on ywdd.ysbh=ddzl.ddbh'
+      
+        #9'where (ywcp.lastindate is not null) and ywcp.lastindate > '#39'2010' +
+        '/01/01'#39
+      #9'group by ddzl.ddbh,ddzl.gsbh,ddzl.pairs,month(ywcp.lastindate)'
+      #9' union all'
+      
+        ' '#9'select ddzl.ddbh  as ddbh,sum(ywcpold.qty) as q1,month(ywcpold' +
+        '.lastindate) as ld,isnull(ddzl.gsbh,'#39'ERR'#39') as gsbh,ddzl.pairs  f' +
+        'rom ywcpold'
+      #9'left join ywdd on ywcpold.ddbh=ywdd.ddbh'
+      #9'left join ddzl on ywdd.ysbh=ddzl.ddbh'
+      
+        #9'where (ywcpold.lastindate is not null) and ywcpold.lastindate >' +
+        ' '#39'2010/01/01'#39
+      
+        ' '#9'group by ddzl.ddbh,ddzl.gsbh,ddzl.pairs,month(ywcpold.lastinda' +
+        'te)) as k'
+      '        group by k.gsbh ) as s on a.gsbh=s.gsbh'
+      'order by gsbh')
+    Left = 373
+    Top = 10
+    object SAQgsbh: TStringField
+      FieldName = 'gsbh'
+      FixedChar = True
+      Size = 4
+    end
+    object SAQaqty: TFloatField
+      FieldName = 'aqty'
+    end
+    object SAQsqty: TIntegerField
+      FieldName = 'sqty'
+    end
+    object SAQpp: TFloatField
+      FieldName = 'pp'
+    end
+  end
+  object SADS: TDataSource
+    DataSet = SAQ
+    Left = 341
+    Top = 10
+  end
+  object StorkInQP: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select month(lastindate),sum(k.q1) from'
+      '('
+      
+        ' select ddzl.ddbh,sum(ywcp.qty) as q1,ywcp.lastindate,ddzl.gsbh,' +
+        'ddzl.pairs  from ywcp'
+      #9'left join ywdd on ywcp.ddbh=ywdd.ddbh'
+      #9'left join ddzl on ywdd.ysbh=ddzl.ddbh'
+      
+        #9'where (ywcp.lastindate is not null) and ywcp.lastindate > '#39'2010' +
+        '/01/01'#39
+      #9'group by ddzl.ddbh,ddzl.gsbh,ddzl.pairs,ywcp.lastindate'
+      ' union all'
+      
+        ' select ddzl.ddbh,sum(ywcpold.qty) as q1,ywcpold.lastindate,ddzl' +
+        '.gsbh,ddzl.pairs  from ywcpold'
+      #9'left join ywdd on ywcpold.ddbh=ywdd.ddbh'
+      #9'left join ddzl on ywdd.ysbh=ddzl.ddbh'
+      
+        #9'where (ywcpold.lastindate is not null) and ywcpold.lastindate >' +
+        ' '#39'2010/01/01'#39
+      ' group by ddzl.ddbh,ddzl.gsbh,ddzl.pairs ,ywcpold.lastindate'
+      ') as k'
+      'group by  month(lastindate)'
+      'order by   month(lastindate)'
+      '')
+    Left = 405
+    Top = 10
+  end
+  object AssembleQP: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select month(scbb.scdate),sum(scbbs.qty) as aqty  from scbbs'
+      #9'left join scbb on scbb.prono=scbbs.prono'
+      #9'left join ddzl on scbbs.scbh=ddzl.ddbh'
+      #9'where year(scbb.scdate)=2010 and scbbs.gxlb='#39'A'#39
+      '                          and ddzl.gsbh='#39'VA12'#39
+      #9'group by  month(scbb.scdate)')
+    Left = 437
+    Top = 10
+  end
+  object SSDS: TDataSource
+    DataSet = SSQ
+    Left = 341
+    Top = 42
+  end
+  object SSQ: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'select k.gsbh,sum(k.q1) as sqty,sum(case when sb='#39'3'#39' then k.q1 e' +
+        'nd) as aqty,'
+      '(sum(k.q1)-sum(case when sb='#39'3'#39' then k.q1 end)) as pp  from'
+      
+        #9'( select ddzl.ddbh,sum(ywcp.qty) as q1,month(ywcp.lastindate) a' +
+        's ld,isnull(ddzl.gsbh,'#39'ERR'#39') as gsbh,ddzl.pairs,ywcp.sb  from yw' +
+        'cp'
+      #9'left join ywdd on ywcp.ddbh=ywdd.ddbh'
+      #9'left join ddzl on ywdd.ysbh=ddzl.ddbh'
+      
+        #9'where (ywcp.lastindate is not null) and ywcp.lastindate > '#39'2010' +
+        '/01/01'#39
+      
+        #9'group by ddzl.ddbh,ddzl.gsbh,ddzl.pairs,month(ywcp.lastindate),' +
+        'ywcp.sb'
+      #9' union all'
+      
+        ' '#9'select ddzl.ddbh  as ddbh,sum(ywcpold.qty) as q1,month(ywcpold' +
+        '.lastindate) as ld,'
+      
+        #9#9'isnull(ddzl.gsbh,'#39'ERR'#39') as gsbh,ddzl.pairs,ywcpold.sb  from yw' +
+        'cpold'
+      #9'left join ywdd on ywcpold.ddbh=ywdd.ddbh'
+      #9'left join ddzl on ywdd.ysbh=ddzl.ddbh'
+      
+        #9'where (ywcpold.lastindate is not null) and ywcpold.lastindate >' +
+        ' '#39'2010/01/01'#39
+      
+        ' '#9'group by ddzl.ddbh,ddzl.gsbh,ddzl.pairs,month(ywcpold.lastinda' +
+        'te),ywcpold.sb) as k'
+      '        group by k.gsbh')
+    Left = 373
+    Top = 42
+    object SSQgsbh: TStringField
+      FieldName = 'gsbh'
+      FixedChar = True
+      Size = 4
+    end
+    object SSQsqty: TIntegerField
+      FieldName = 'sqty'
+    end
+    object SSQaqty: TIntegerField
+      FieldName = 'aqty'
+    end
+    object SSQpp: TIntegerField
+      FieldName = 'pp'
+    end
+  end
+  object ShipingQP: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select month(lastindate),sum(k.q1) as aqty from'
+      '('
+      
+        ' select ddzl.ddbh,sum(ywcp.qty) as q1,ywcp.lastindate,ddzl.gsbh,' +
+        'ddzl.pairs  from ywcp'
+      #9'left join ywdd on ywcp.ddbh=ywdd.ddbh'
+      #9'left join ddzl on ywdd.ysbh=ddzl.ddbh'
+      #9'where (ywcp.lastindate is not null) '
+      '                          and ywcp.lastindate > '#39'2010/01/01'#39
+      '                          and ywcp.sb='#39'3'#39
+      #9'group by ddzl.ddbh,ddzl.gsbh,ddzl.pairs,ywcp.lastindate'
+      ' union all'
+      
+        ' select ddzl.ddbh,sum(ywcpold.qty) as q1,ywcpold.lastindate,ddzl' +
+        '.gsbh,ddzl.pairs  from ywcpold'
+      #9'left join ywdd on ywcpold.ddbh=ywdd.ddbh'
+      #9'left join ddzl on ywdd.ysbh=ddzl.ddbh'
+      
+        #9'where (ywcpold.lastindate is not null) and ywcpold.lastindate >' +
+        ' '#39'2010/01/01'#39
+      ' group by ddzl.ddbh,ddzl.gsbh,ddzl.pairs ,ywcpold.lastindate'
+      ') as k'
+      'group by  month(lastindate)'
+      'order by   month(lastindate)')
+    Left = 469
+    Top = 10
+  end
+  object SSADS: TDataSource
+    DataSet = SSAQ
+    Left = 405
+    Top = 42
+  end
+  object SSAQ: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'select a.gsbh as gsbh,a.aqty,isnull(s.sqty,0) as sqty,isnull(s.a' +
+        'qty,0) as shqty'
+      
+        'from  (select isnull(ddzl.gsbh,'#39'ERR'#39') as gsbh,sum(scbbs.qty) as ' +
+        'aqty  from scbbs'
+      #9'left join scbb on scbb.prono=scbbs.prono'
+      #9'left join ddzl on scbbs.scbh=ddzl.ddbh'
+      #9'where year(scbb.scdate)=2010 and scbbs.gxlb='#39'A'#39
+      #9'group by  ddzl.gsbh) as A'
+      'left join '
+      
+        '      (select k.gsbh,sum(k.q1) as sqty,sum(case when sb='#39'3'#39' then' +
+        ' k.q1 end) as aqty,'
+      #9'(sum(k.q1)-sum(case when sb='#39'3'#39' then k.q1 end)) as pp  from'
+      
+        #9'( select ddzl.ddbh,sum(ywcp.qty) as q1,month(ywcp.lastindate) a' +
+        's ld,isnull(ddzl.gsbh,'#39'ERR'#39') as gsbh,ddzl.pairs,ywcp.sb  from yw' +
+        'cp'
+      #9'left join ywdd on ywcp.ddbh=ywdd.ddbh'
+      #9'left join ddzl on ywdd.ysbh=ddzl.ddbh'
+      
+        #9'where (ywcp.lastindate is not null) and ywcp.lastindate > '#39'2010' +
+        '/01/01'#39
+      
+        #9'group by ddzl.ddbh,ddzl.gsbh,ddzl.pairs,month(ywcp.lastindate),' +
+        'ywcp.sb'
+      #9' union all'
+      
+        ' '#9'select ddzl.ddbh  as ddbh,sum(ywcpold.qty) as q1,month(ywcpold' +
+        '.lastindate) as ld,'
+      
+        #9#9'isnull(ddzl.gsbh,'#39'ERR'#39') as gsbh,ddzl.pairs,ywcpold.sb  from yw' +
+        'cpold'
+      #9'left join ywdd on ywcpold.ddbh=ywdd.ddbh'
+      #9'left join ddzl on ywdd.ysbh=ddzl.ddbh'
+      
+        #9'where (ywcpold.lastindate is not null) and ywcpold.lastindate >' +
+        ' '#39'2010/01/01'#39
+      
+        ' '#9'group by ddzl.ddbh,ddzl.gsbh,ddzl.pairs,month(ywcpold.lastinda' +
+        'te),ywcpold.sb) as k'
+      '        group by k.gsbh'
+      ') as s on a.gsbh=s.gsbh'
+      'order by gsbh')
+    Left = 437
+    Top = 42
+    object SSAQgsbh: TStringField
+      FieldName = 'gsbh'
+      FixedChar = True
+      Size = 4
+    end
+    object SSAQaqty: TFloatField
+      FieldName = 'aqty'
+    end
+    object SSAQsqty: TIntegerField
+      FieldName = 'sqty'
+    end
+    object SSAQshqty: TIntegerField
+      FieldName = 'shqty'
+    end
+  end
+  object ASSQ: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select k.gsbh,'
+      'sum(case when lp = 0 then k.q1 end) as '#39'0D'#39','
+      'sum(case when lp > 0 and lp<=7 then k.q1 end) as '#39'7D'#39','
+      'sum(case when lp > 7 and lp<=15 then k.q1 end) as '#39'15D'#39','
+      'sum(case when lp > 15 and lp<=30 then k.q1 end) as '#39'30D'#39','
+      'sum(case when lp > 30 and lp<=60 then k.q1 end) as '#39'60D'#39','
+      'sum(case when lp > 60 and lp<=90 then k.q1 end) as '#39'90D'#39','
+      'sum(case when lp > 90 and lp<=120 then k.q1 end) as '#39'120D'#39','
+      'sum(case when lp > 120  then k.q1 end) as '#39'Over 120D'#39
+      'from '
+      
+        '( select ddzl.ddbh,sum(ywcp.qty) as q1,ywcp.exedate,ywcp.lastind' +
+        'ate,'
+      
+        #9'convert(int,convert(real,(CONVERT(datetime,ywcp.exedate,111)-CO' +
+        'NVERT(datetime,ywcp.lastindate,111)))) as lp ,'
+      #9'isnull(ddzl.gsbh,'#39'ERR'#39') as gsbh,ddzl.pairs  from ywcp'
+      #9'left join ywdd on ywcp.ddbh=ywdd.ddbh'
+      #9'left join ddzl on ywdd.ysbh=ddzl.ddbh'
+      #9'where ywcp.sb='#39'3'#39'  '
+      '                --and ywcp.lastindate > '#39'2010/01/01'#39
+      
+        #9'group by ddzl.ddbh,ddzl.gsbh,ddzl.pairs,ywcp.exedate,ywcp.lasti' +
+        'ndate'
+      #9' union all'
+      
+        ' select ddzl.ddbh  as ddbh,sum(ywcpold.qty) as q1,ywcpold.exedat' +
+        'e,ywcpold.lastindate,'
+      
+        #9'convert(int,convert(real,( CONVERT(datetime,ywcpold.exedate,111' +
+        ')-CONVERT(datetime,ywcpold.lastindate,111)))) as lp,'
+      #9'isnull(ddzl.gsbh,'#39'ERR'#39') as gsbh,ddzl.pairs  from ywcpold'
+      #9'left join ywdd on ywcpold.ddbh=ywdd.ddbh'
+      #9'left join ddzl on ywdd.ysbh=ddzl.ddbh'
+      #9'where (ywcpold.lastindate is not null) '
+      '                --and ywcpold.lastindate > '#39'2010/01/01'#39
+      
+        #9'group by ddzl.ddbh,ddzl.gsbh,ddzl.pairs,ywcpold.lastindate,ywcp' +
+        'old.exedate) as k'
+      'group by  k.gsbh')
+    Left = 501
+    Top = 42
+    object ASSQgsbh: TStringField
+      FieldName = 'gsbh'
+      FixedChar = True
+      Size = 4
+    end
+    object ASSQBDEDesigner0D: TIntegerField
+      FieldName = '0D'
+    end
+    object ASSQBDEDesigner7D: TIntegerField
+      FieldName = '7D'
+    end
+    object ASSQBDEDesigner15D: TIntegerField
+      FieldName = '15D'
+    end
+    object ASSQBDEDesigner30D: TIntegerField
+      FieldName = '30D'
+    end
+    object ASSQBDEDesigner60D: TIntegerField
+      FieldName = '60D'
+    end
+    object ASSQBDEDesigner90D: TIntegerField
+      FieldName = '90D'
+    end
+    object ASSQBDEDesigner120D: TIntegerField
+      FieldName = '120D'
+    end
+    object ASSQOver120D: TIntegerField
+      FieldName = 'Over 120D'
+    end
+  end
+  object ASSDS: TDataSource
+    DataSet = ASSQ
+    Left = 469
+    Top = 42
+  end
+  object ASBSDS: TDataSource
+    DataSet = ASBS
+    Left = 541
+    Top = 42
+  end
+  object ASBS: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select k.gsbh,'
+      'sum(case when lp <= 0 then k.q1 end) as '#39'Today'#39','
+      'sum(case when lp > 0 and lp<=7 then k.q1 end) as '#39'7D'#39','
+      'sum(case when lp > 7 and lp<=15 then k.q1 end) as '#39'15D'#39','
+      'sum(case when lp > 15 and lp<=30 then k.q1 end) as '#39'30D'#39','
+      'sum(case when lp > 30 and lp<=60 then k.q1 end) as '#39'60D'#39','
+      'sum(case when lp > 60 and lp<=90 then k.q1 end) as '#39'90D'#39','
+      'sum(case when lp > 90 and lp<=120 then k.q1 end) as '#39'120D'#39','
+      'sum(case when lp > 120  then k.q1 end) as '#39'Over 120D'#39
+      'from '
+      
+        '( select ddzl.ddbh,sum(ywcp.qty) as q1,ddzl.shipdate,ywcp.lastin' +
+        'date,'
+      
+        #9'convert(int,convert(real,(CONVERT(datetime,ddzl.shipdate,111)-C' +
+        'ONVERT(datetime,ywcp.lastindate,111)))) as lp ,'
+      #9'isnull(ddzl.gsbh,'#39'ERR'#39') as gsbh,ddzl.pairs  from ywcp'
+      #9'left join ywdd on ywcp.ddbh=ywdd.ddbh'
+      #9'left join ddzl on ywdd.ysbh=ddzl.ddbh'
+      #9'where ywcp.sb='#39'1'#39' '
+      
+        #9'group by ddzl.ddbh,ddzl.gsbh,ddzl.pairs,ddzl.shipdate,ywcp.last' +
+        'indate'
+      ') as k'
+      'group by  k.gsbh')
+    Left = 573
+    Top = 42
+    object StringField1: TStringField
+      FieldName = 'gsbh'
+      FixedChar = True
+      Size = 4
+    end
+    object ASBSToday: TIntegerField
+      FieldName = 'Today'
+    end
+    object IntegerField2: TIntegerField
+      FieldName = '7D'
+    end
+    object IntegerField3: TIntegerField
+      FieldName = '15D'
+    end
+    object IntegerField4: TIntegerField
+      FieldName = '30D'
+    end
+    object IntegerField5: TIntegerField
+      FieldName = '60D'
+    end
+    object IntegerField6: TIntegerField
+      FieldName = '90D'
+    end
+    object IntegerField7: TIntegerField
+      FieldName = '120D'
+    end
+    object IntegerField8: TIntegerField
+      FieldName = 'Over 120D'
+    end
+  end
+end

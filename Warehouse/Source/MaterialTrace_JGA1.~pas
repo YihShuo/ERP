@@ -1,0 +1,24 @@
+unit MaterialTrace_JGA1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs;
+
+type
+  TMaterialTrace_JGA = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MaterialTrace_JGA: TMaterialTrace_JGA;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,13 @@
+■ MSCOMM32 RS-232 通訊元件的安裝與分發
+1.找到 MSCOMM32.OCX, MSCOMM32.DEP, MSCOMM.reg 三個檔案 ( 下載 ) , 並丟入 C:\WINDOWS\SYSTEM32\
+2.註冊 MSCOMM32.OCX 元件 (以下兩步驟都要做)
+  (1)執行 regsvr32.exe MSCOMM32.OCX (可在 DOS COMMAND 下做) 
+  (2)滑鼠點兩下 MSCOMM.reg
+3.MSCOMM.reg 內容(可用記事本自己編輯並存檔為 MSCOMM.reg)
+//----------------------------------------------------------------------------------------
+REGEDIT 
+HKEY_CLASSES_ROOT\Licenses = Licensing: Copying the keys may be a violation of established copyrights.
+// The MsComm32 Control License follows: 
+HKEY_CLASSES_ROOT\Licenses\4250E830-6AC2-11cf-8ADB-00AA00C00905 = kjljvjjjoquqmjjjvpqqkqmqykypoqjquoun
+//----------------------------------------------------------------------------------------
+4.若你的 COM PORT 應用程式移到客戶端 , 並在客戶端註冊完 MSComm32.OCX , 執行程式仍出現 "應用程式正常初始(0xc0000135)失敗."  , 那是因為客戶端沒有 .NET FRAME WORK 環境 , 而非通訊元件的問題 , 請另行安裝 .NET FRAME WORK  (VS2003 開發的應用程式需要 .NET FRAME WORK 1.1 環境 )

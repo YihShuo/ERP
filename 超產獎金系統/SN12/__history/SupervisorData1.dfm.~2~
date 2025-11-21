@@ -1,0 +1,1742 @@
+object SupervisorData: TSupervisorData
+  Left = 0
+  Top = 0
+  Caption = 'SupervisorData'
+  ClientHeight = 589
+  ClientWidth = 1284
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object ProgressBar1: TProgressBar
+    Left = 379
+    Top = 69
+    Width = 150
+    Height = 17
+    TabOrder = 0
+    Visible = False
+  end
+  object PC1: TPageControl
+    Left = 0
+    Top = 0
+    Width = 1284
+    Height = 589
+    ActivePage = TabSheet1
+    Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    object TabSheet1: TTabSheet
+      Caption = 'Toa'#768'n B'#244#803
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
+      object Panel2: TPanel
+        Left = 0
+        Top = 65
+        Width = 1276
+        Height = 136
+        Align = alTop
+        TabOrder = 0
+        object Label1: TLabel
+          Left = 20
+          Top = 9
+          Width = 67
+          Height = 16
+          Caption = 'S'#7889' th'#7867#24037#34399
+        end
+        object Label2: TLabel
+          Left = 33
+          Top = 66
+          Width = 51
+          Height = 32
+          Alignment = taRightJustify
+          Caption = 'Ngh'#7881' vi'#7879'c '#38626#32887
+          WordWrap = True
+        end
+        object Label3: TLabel
+          Left = 6
+          Top = 101
+          Width = 57
+          Height = 32
+          Alignment = taRightJustify
+          Caption = 'Qu'#7889'c t'#7883'ch '#22283#31821
+          WordWrap = True
+        end
+        object Label4: TLabel
+          Left = 5
+          Top = 33
+          Width = 80
+          Height = 32
+          Alignment = taRightJustify
+          Caption = 'H'#7885' v'#224' t'#234'n Hoa '#22995#21517
+          WordWrap = True
+        end
+        object Label5: TLabel
+          Left = 221
+          Top = 31
+          Width = 112
+          Height = 32
+          Alignment = taRightJustify
+          Caption = 'H'#7885' v'#224' t'#234'n ti'#7871'ng Anh '#33521#25991#22995#21517
+          WordWrap = True
+        end
+        object Label6: TLabel
+          Left = 262
+          Top = 9
+          Width = 74
+          Height = 16
+          Caption = 'khu v'#7921'c'#24288#21312
+        end
+        object Label7: TLabel
+          Left = 462
+          Top = 8
+          Width = 66
+          Height = 16
+          Caption = #272#417'n v'#7883#21934#20301
+        end
+        object Label8: TLabel
+          Left = 475
+          Top = 32
+          Width = 50
+          Height = 32
+          Alignment = taRightJustify
+          Caption = 'Ch'#7913'c v'#7909' '#32887#21209
+          WordWrap = True
+        end
+        object Label9: TLabel
+          Left = 855
+          Top = 78
+          Width = 5
+          Height = 16
+          Caption = '-'
+        end
+        object Label10: TLabel
+          Left = 855
+          Top = 45
+          Width = 5
+          Height = 16
+          Caption = '-'
+        end
+        object Label11: TLabel
+          Left = 663
+          Top = 4
+          Width = 60
+          Height = 32
+          Alignment = taRightJustify
+          Caption = 'Ph'#226'n lo'#7841'i '#20998#39006#24288#21312
+          WordWrap = True
+        end
+        object ED_ID1: TEdit
+          Left = 91
+          Top = 6
+          Width = 121
+          Height = 24
+          TabOrder = 0
+        end
+        object Button1: TButton
+          Left = 855
+          Top = 102
+          Width = 115
+          Height = 25
+          Caption = 'Truy v'#7845'n'#26597#35426
+          TabOrder = 1
+          OnClick = Button1Click
+        end
+        object GroupBox1: TGroupBox
+          Left = 92
+          Top = 69
+          Width = 434
+          Height = 29
+          TabOrder = 2
+          object RB21: TRadioButton
+            Left = 3
+            Top = 6
+            Width = 97
+            Height = 17
+            Caption = 'Toa'#768'n B'#244#803#20840#37096
+            TabOrder = 0
+          end
+          object RB22: TRadioButton
+            Left = 101
+            Top = 5
+            Width = 145
+            Height = 17
+            Caption = 'Ch'#432'a Ngh'#7881' vi'#7879'c'#22312#32887
+            Checked = True
+            TabOrder = 1
+            TabStop = True
+          end
+          object RB23: TRadioButton
+            Left = 246
+            Top = 6
+            Width = 135
+            Height = 17
+            Caption = #272'a'#771' Ngh'#7881' vi'#7879'c'#24050#38626#32887
+            TabOrder = 2
+          end
+        end
+        object GroupBox2: TGroupBox
+          Left = 69
+          Top = 101
+          Width = 779
+          Height = 29
+          TabOrder = 3
+          object RB11: TRadioButton
+            Left = 3
+            Top = 8
+            Width = 98
+            Height = 17
+            Caption = 'Toa'#768'n B'#244#803#20840#37096
+            TabOrder = 0
+          end
+          object CB12: TCheckBox
+            Left = 119
+            Top = 8
+            Width = 103
+            Height = 17
+            Caption = #272'a'#768'i Loan'#21488#28771
+            TabOrder = 1
+            WordWrap = True
+          end
+          object CB13: TCheckBox
+            Left = 228
+            Top = 8
+            Width = 133
+            Height = 17
+            Caption = 'Trung Qu'#7889'c'#20013#22283
+            TabOrder = 2
+            WordWrap = True
+          end
+          object CB14: TCheckBox
+            Left = 364
+            Top = 8
+            Width = 133
+            Height = 17
+            Caption = 'Philippines'#33778#24459#36051
+            TabOrder = 3
+            WordWrap = True
+          end
+          object CB15: TCheckBox
+            Left = 509
+            Top = 8
+            Width = 112
+            Height = 17
+            Caption = 'Vi'#7879't Nam'#36234#21335
+            TabOrder = 4
+            WordWrap = True
+          end
+          object CB16: TCheckBox
+            Left = 642
+            Top = 8
+            Width = 112
+            Height = 17
+            Caption = 'Indonesia'#21360#23612
+            TabOrder = 5
+            WordWrap = True
+          end
+        end
+        object Edit1: TEdit
+          Left = 91
+          Top = 38
+          Width = 121
+          Height = 24
+          TabOrder = 4
+        end
+        object Edit2: TEdit
+          Left = 339
+          Top = 37
+          Width = 121
+          Height = 24
+          TabOrder = 5
+        end
+        object Edit3: TEdit
+          Left = 339
+          Top = 6
+          Width = 121
+          Height = 24
+          TabOrder = 6
+        end
+        object Edit4: TEdit
+          Left = 531
+          Top = 6
+          Width = 121
+          Height = 24
+          TabOrder = 7
+        end
+        object Edit5: TEdit
+          Left = 532
+          Top = 38
+          Width = 121
+          Height = 24
+          TabOrder = 8
+        end
+        object DTP1: TDateTimePicker
+          Left = 757
+          Top = 41
+          Width = 97
+          Height = 24
+          Date = 45031.357025682870000000
+          Time = 45031.357025682870000000
+          TabOrder = 9
+        end
+        object DTP2: TDateTimePicker
+          Left = 860
+          Top = 41
+          Width = 97
+          Height = 24
+          Date = 45031.357025682870000000
+          Time = 45031.357025682870000000
+          TabOrder = 10
+        end
+        object CheckBox1: TCheckBox
+          Left = 656
+          Top = 35
+          Width = 98
+          Height = 40
+          Caption = 'Ng'#224'y h'#7871't h'#7841'n'#31805#35657#36942#26399#26085
+          Color = clYellow
+          ParentColor = False
+          TabOrder = 11
+          WordWrap = True
+        end
+        object CheckBox2: TCheckBox
+          Left = 657
+          Top = 70
+          Width = 98
+          Height = 28
+          Caption = 'Nga'#768'y nghi'#777' vi'#234#803'c '#38626#32887#26085
+          TabOrder = 12
+          WordWrap = True
+        end
+        object DTP3: TDateTimePicker
+          Left = 757
+          Top = 75
+          Width = 97
+          Height = 24
+          Date = 45031.357025682870000000
+          Time = 45031.357025682870000000
+          TabOrder = 13
+        end
+        object DTP4: TDateTimePicker
+          Left = 861
+          Top = 74
+          Width = 97
+          Height = 24
+          Date = 45031.357025682870000000
+          Time = 45031.357025682870000000
+          TabOrder = 14
+        end
+        object Edit6: TEdit
+          Left = 729
+          Top = 11
+          Width = 121
+          Height = 24
+          TabOrder = 15
+        end
+        object CheckBox3: TCheckBox
+          Left = 532
+          Top = 67
+          Width = 98
+          Height = 28
+          Caption = #36926#26399#25552#37266
+          TabOrder = 16
+          WordWrap = True
+        end
+      end
+      object DBGridEh1: TDBGridEh
+        Left = 0
+        Top = 201
+        Width = 1276
+        Height = 357
+        Align = alClient
+        DataSource = DSCertificate
+        DynProps = <>
+        FooterRowCount = 1
+        PopupMenu = PopupMenu1
+        SumList.Active = True
+        TabOrder = 1
+        TitleParams.MultiTitle = True
+        OnEditButtonClick = DBGridEh1EditButtonClick
+        OnGetCellParams = DBGridEh1GetCellParams
+        Columns = <
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'OnBoard'
+            Footers = <>
+            Title.Caption = #21040#32887#26085'|Ng'#224'y v'#224'o c'#244'ng ty'
+            Width = 151
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Name'
+            Footer.FieldName = 'Name'
+            Footer.ValueType = fvtCount
+            Footers = <>
+            Title.Caption = #22995#21517'|H'#7885' v'#224' t'#234'n Hoa'
+            Width = 88
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'EngName'
+            Footers = <>
+            Title.Caption = #22995#21517'|H'#7885' v'#224' t'#234'n ti'#7871'ng Anh'
+            Width = 120
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'ID'
+            Footers = <>
+            Title.Caption = #24037#34399'|S'#7889' th'#7867
+            Width = 53
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Gender'
+            Footers = <>
+            PickList.Strings = (
+              #30007
+              #22899)
+            Title.Caption = #24615#21029'|gi'#7899'i t'#237'nh'
+            Width = 51
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Nationality'
+            Footers = <>
+            Title.Caption = #22283#23478'|Qu'#7889'c t'#7883'ch'
+            Width = 63
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Factory'
+            Footers = <>
+            Title.Caption = #24288#21312'|khu v'#7921'c'
+            Width = 84
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Department'
+            Footers = <>
+            Title.Caption = #21934#20301#21029'|'#272#417'n v'#7883
+            Width = 74
+          end
+          item
+            ButtonStyle = cbsNone
+            CellButtons = <>
+            DynProps = <>
+            EditButton.Visible = False
+            EditButtons = <>
+            FieldName = 'Position'
+            Footers = <>
+            Title.Caption = #32887#21209'|Ch'#7913'c v'#7909
+            Width = 70
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'FactoryS'
+            Footers = <>
+            Title.Caption = #20998#39006#24288#21312'|ph'#226'n lo'#7841'i'
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'BirthPlace'
+            Footers = <>
+            Title.Caption = #20986#29983#22320'|BirthPlace'
+            Width = 61
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'ProvinceResidence'
+            Footers = <>
+            Title.Caption = #23621#20303#30465#20221'/'#22478#24066#21029' | ProvinceResidence'
+            Width = 114
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'BirthProvince'
+            Footers = <>
+            Title.Caption = #22320#22336'|BirthProvince'
+            Width = 194
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'IDCard'
+            Footers = <>
+            Title.Caption = #36523#20998#35657#23383#34399'|CNND ID'
+            Width = 134
+          end
+          item
+            CellButtons = <>
+            DisplayFormat = 'yyyy/MM/dd'
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'BirthDate'
+            Footers = <>
+            Title.Caption = #20986#29983#24180#26376#26085'|N'#259'm sinh'
+            Width = 83
+          end
+          item
+            Alignment = taCenter
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Age'
+            Footers = <>
+            Title.Caption = #24180#40801'|Age'
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'PassPort'
+            Footers = <>
+            Title.Caption = #35703#29031#34399#30908'|PassPort'
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'PassPortSD'
+            Footers = <>
+            Title.Caption = #35703#29031#30332#29031#26085#26399'|Issue Date'
+            Width = 98
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'PassPortED'
+            Footers = <>
+            Title.Caption = #35703#29031#26377#25928#26085#26399'|Invalid Date'
+            Width = 94
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Visa'
+            Footers = <>
+            Title.Caption = #36234#21335#31805#35657#34399#30908'|S'#7889' TTT / VISA'
+            Width = 105
+          end
+          item
+            CellButtons = <>
+            DisplayFormat = 'yyyy/MM/dd'
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'VisaDate'
+            Footers = <>
+            Title.Caption = #36234#21335#31805#35657#21040#26399#26085'|Ng'#224'y h'#7871't h'#7841'n'
+            Width = 116
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'WorkPermit'
+            Footers = <>
+            Title.Caption = #24037#20316#35657#32232#34399'|S'#7889' GPL'#272
+            Width = 130
+          end
+          item
+            CellButtons = <>
+            DisplayFormat = 'yyyy/MM/dd'
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'IssueDate'
+            Footers = <>
+            Title.Caption = #31805#30332#26085#26399'|Ng'#224'y c'#7845'p'
+            Width = 81
+          end
+          item
+            CellButtons = <>
+            DisplayFormat = 'yyyy/MM/dd'
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'ExpireDate'
+            Footers = <>
+            Title.Caption = #24037#20316#35657#21040#26399#26085'|Ng'#224'y h'#7871't h'#7841'n'
+            Width = 100
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'ContractDate'
+            Footers = <>
+            Title.Caption = #21512#21516#31805#32626#26085'|ContractDate'
+            Width = 88
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'ContractExpireDate'
+            Footers = <>
+            Title.Caption = #21512#21516#21040#26399#26085'|ContractExpireDate'
+            Width = 117
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DutyDate'
+            Footers = <>
+            Title.Caption = #21040#32887#26085'|DutyDate'
+            Width = 75
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'ArrivalDate'
+            Footers = <>
+            Title.Caption = #20837#24288#26085'|ArrivalDate'
+            Width = 75
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Resigned'
+            Footers = <>
+            Title.Caption = #38626#32887'|Ngh'#7881' vi'#7879'c'
+            Width = 80
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'ResignedDate'
+            Footers = <>
+            Title.Caption = #38626#32887#26085'|nga'#768'y nghi'#777' vi'#234#803'c'
+            Width = 94
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Type'
+            Footers = <>
+            Title.Caption = #26680#30332#39006#21029'|T'#236'nh tr'#7841'ng c'#7845'p GPL'#272
+            Width = 134
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'UserID'
+            Footers = <>
+            Title.Caption = #26356#26032#20154'|UserID'
+            Width = 60
+          end
+          item
+            CellButtons = <>
+            DisplayFormat = 'yyyy/MM/dd'
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'UserDate'
+            Footers = <>
+            Title.Caption = #26356#26032#26085#26399'|UserDate'
+            Width = 100
+          end>
+        object RowDetailData: TRowDetailPanelControlEh
+        end
+      end
+      object Panel1: TPanel
+        Left = 0
+        Top = 0
+        Width = 1276
+        Height = 65
+        Align = alTop
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        object BB1: TBitBtn
+          Left = 8
+          Top = 8
+          Width = 49
+          Height = 49
+          Caption = 'Truy v'#7845'n'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000130B0000130B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+            333333333333333FF3FF3333333333CC30003333333333773777333333333C33
+            3000333FF33337F33777339933333C3333333377F33337F3333F339933333C33
+            33003377333337F33377333333333C333300333F333337F33377339333333C33
+            3333337FF3333733333F33993333C33333003377FF33733333773339933C3333
+            330033377FF73F33337733339933C33333333FF377F373F3333F993399333C33
+            330077F377F337F33377993399333C33330077FF773337F33377399993333C33
+            33333777733337F333FF333333333C33300033333333373FF7773333333333CC
+            3000333333333377377733333333333333333333333333333333}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+          ParentFont = False
+          TabOrder = 0
+          OnClick = BB1Click
+        end
+        object BB2: TBitBtn
+          Left = 57
+          Top = 8
+          Width = 72
+          Height = 49
+          Hint = 'Insert one New Record'
+          Caption = 'Th'#234'm'#26032#22686
+          Enabled = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000130B0000130B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+            33333333FF33333333FF333993333333300033377F3333333777333993333333
+            300033F77FFF3333377739999993333333333777777F3333333F399999933333
+            33003777777333333377333993333333330033377F3333333377333993333333
+            3333333773333333333F333333333333330033333333F33333773333333C3333
+            330033333337FF3333773333333CC333333333FFFFF77FFF3FF33CCCCCCCCCC3
+            993337777777777F77F33CCCCCCCCCC3993337777777777377333333333CC333
+            333333333337733333FF3333333C333330003333333733333777333333333333
+            3000333333333333377733333333333333333333333333333333}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+          ParentFont = False
+          TabOrder = 1
+          OnClick = BB2Click
+        end
+        object BB3: TBitBtn
+          Left = 128
+          Top = 8
+          Width = 63
+          Height = 49
+          Hint = 'Modify Current'
+          Caption = 'S'#7917'a'#20462#25913
+          Enabled = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000120B0000120B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00500005000555
+            555557777F777555F55500000000555055557777777755F75555005500055055
+            555577F5777F57555555005550055555555577FF577F5FF55555500550050055
+            5555577FF77577FF555555005050110555555577F757777FF555555505099910
+            555555FF75777777FF555005550999910555577F5F77777775F5500505509990
+            3055577F75F77777575F55005055090B030555775755777575755555555550B0
+            B03055555F555757575755550555550B0B335555755555757555555555555550
+            BBB35555F55555575F555550555555550BBB55575555555575F5555555555555
+            50BB555555555555575F555555555555550B5555555555555575}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+          ParentFont = False
+          TabOrder = 2
+          OnClick = BB3Click
+        end
+        object BB4: TBitBtn
+          Left = 188
+          Top = 8
+          Width = 64
+          Height = 49
+          Hint = 'Delete one Record'
+          Caption = 'Xo'#769'a'#21034#38500
+          Enabled = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000130B0000130B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+            333333333333333333FF33333333333330003333333333333777333333333333
+            300033FFFFFF3333377739999993333333333777777F3333333F399999933333
+            3300377777733333337733333333333333003333333333333377333333333333
+            3333333333333333333F333333333333330033333F33333333773333C3333333
+            330033337F3333333377333CC3333333333333F77FFFFFFF3FF33CCCCCCCCCC3
+            993337777777777F77F33CCCCCCCCCC399333777777777737733333CC3333333
+            333333377F33333333FF3333C333333330003333733333333777333333333333
+            3000333333333333377733333333333333333333333333333333}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+          ParentFont = False
+          TabOrder = 3
+          OnClick = BB4Click
+        end
+        object BB6: TBitBtn
+          Left = 312
+          Top = 8
+          Width = 64
+          Height = 49
+          Hint = 'Cancel'
+          Caption = 'Hu'#777'y'#21462#28040
+          Enabled = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000130B0000130B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+            333333333333333333333333333333333333333FFF33FF333FFF339993370733
+            999333777FF37FF377733339993000399933333777F777F77733333399970799
+            93333333777F7377733333333999399933333333377737773333333333990993
+            3333333333737F73333333333331013333333333333777FF3333333333910193
+            333333333337773FF3333333399000993333333337377737FF33333399900099
+            93333333773777377FF333399930003999333337773777F777FF339993370733
+            9993337773337333777333333333333333333333333333333333333333333333
+            3333333333333333333333333333333333333333333333333333}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+          ParentFont = False
+          TabOrder = 4
+          OnClick = BB6Click
+        end
+        object BB5: TBitBtn
+          Left = 249
+          Top = 8
+          Width = 64
+          Height = 49
+          Hint = 'Save Current'
+          Caption = 'L'#432'u'#20786#23384
+          Enabled = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000120B0000120B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+            555555555555555555555555555555555555555555FF55555555555559055555
+            55555555577FF5555555555599905555555555557777F5555555555599905555
+            555555557777FF5555555559999905555555555777777F555555559999990555
+            5555557777777FF5555557990599905555555777757777F55555790555599055
+            55557775555777FF5555555555599905555555555557777F5555555555559905
+            555555555555777FF5555555555559905555555555555777FF55555555555579
+            05555555555555777FF5555555555557905555555555555777FF555555555555
+            5990555555555555577755555555555555555555555555555555}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+          ParentFont = False
+          TabOrder = 5
+          OnClick = BB5Click
+        end
+        object BB7: TBitBtn
+          Left = 379
+          Top = 8
+          Width = 67
+          Height = 49
+          Hint = 'Modify Current'
+          Caption = 'Excel'#36664#20986
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000130B0000130B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033333333B333
+            333B33FF33337F3333F73BB3777BB7777BB3377FFFF77FFFF77333B000000000
+            0B3333777777777777333330FFFFFFFF07333337F33333337F333330FFFFFFFF
+            07333337F3FF3FFF7F333330F00F000F07333337F77377737F333330FFFFFFFF
+            07333FF7F3FFFF3F7FFFBBB0F0000F0F0BB37777F7777373777F3BB0FFFFFFFF
+            0BBB3777F3FF3FFF77773330F00F000003333337F773777773333330FFFF0FF0
+            33333337F3FF7F37F3333330F08F0F0B33333337F7737F77FF333330FFFF003B
+            B3333337FFFF77377FF333B000000333BB33337777777F3377FF3BB3333BB333
+            3BB33773333773333773B333333B3333333B7333333733333337}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+          ParentFont = False
+          TabOrder = 6
+          OnClick = BB7Click
+        end
+      end
+    end
+  end
+  object DSCertificate: TDataSource
+    DataSet = CertificateQry
+    Left = 88
+    Top = 320
+  end
+  object U_Certificate: TMyADOUpdateSQL
+    DataSet = CertificateQry
+    ZModifyCommandObj.Connection = DM2.ADOConn2
+    ZModifyCommandObj.Parameters = <
+      item
+        Name = 'OnBoard'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 50
+        Value = Null
+      end
+      item
+        Name = 'Name'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 5
+        Value = Null
+      end
+      item
+        Name = 'Gender'
+        Attributes = [paNullable]
+        DataType = ftString
+        NumericScale = 255
+        Precision = 255
+        Size = 3
+        Value = Null
+      end
+      item
+        Name = 'EngName'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 30
+        Value = Null
+      end
+      item
+        Name = 'BirthDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'BirthPlace'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 30
+        Value = Null
+      end
+      item
+        Name = 'ProvinceResidence'
+        Size = -1
+        Value = Null
+      end
+      item
+        Name = 'BirthProvince'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 30
+        Value = Null
+      end
+      item
+        Name = 'IDCard'
+        Attributes = [paNullable]
+        DataType = ftString
+        NumericScale = 255
+        Precision = 255
+        Size = 20
+        Value = Null
+      end
+      item
+        Name = 'Passport'
+        Attributes = [paNullable]
+        DataType = ftString
+        NumericScale = 255
+        Precision = 255
+        Size = 10
+        Value = Null
+      end
+      item
+        Name = 'PassportSD'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'PassportED'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'Visa'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 15
+        Value = Null
+      end
+      item
+        Name = 'VisaDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'WorkPermit'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 20
+        Value = Null
+      end
+      item
+        Name = 'IssueDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'ExpireDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'ContractDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'ContractExpireDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'NID'
+        Attributes = [paNullable]
+        DataType = ftString
+        NumericScale = 255
+        Precision = 255
+        Size = 3
+        Value = Null
+      end
+      item
+        Name = 'DutyDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'ArrivalDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'Resigned'
+        Attributes = [paNullable]
+        DataType = ftBoolean
+        NumericScale = 255
+        Precision = 255
+        Size = 2
+        Value = Null
+      end
+      item
+        Name = 'ResignedDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'Type'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 50
+        Value = Null
+      end
+      item
+        Name = 'UserID'
+        Attributes = [paNullable]
+        DataType = ftString
+        NumericScale = 255
+        Precision = 255
+        Size = 10
+        Value = Null
+      end
+      item
+        Name = 'Memo'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 50
+        Value = Null
+      end
+      item
+        Name = 'OLD_ID'
+        DataType = ftString
+        NumericScale = 255
+        Precision = 255
+        Size = 10
+        Value = Null
+      end>
+    ZModifyCommandObj.SQL.Strings = (
+      'UPDATE Certificate'
+      'SET'
+      '  OnBoard = :OnBoard,'
+      '  Name = :Name,'
+      '  Gender =:Gender,'
+      '  EngName = :EngName,'
+      '  BirthDate =:BirthDate,'
+      '  BirthPlace =:BirthPlace,'
+      '  ProvinceResidence=:ProvinceResidence,'
+      '  BirthProvince =:BirthProvince,'
+      '  IDCard = :IDCard,'
+      '  Passport =:Passport,'
+      '  PassportSD =:PassportSD,'
+      '  PassportED =:PassportED,'
+      '  Visa = :Visa,'
+      '  VisaDate = :VisaDate,'
+      '  WorkPermit = :WorkPermit,'
+      '  IssueDate = :IssueDate,'
+      '  ExpireDate = :ExpireDate,'
+      '  ContractDate =:ContractDate,'
+      '  ContractExpireDate =:ContractExpireDate,'
+      '  NID =:NID,'
+      '  DutyDate =:DutyDate,'
+      '  ArrivalDate =:ArrivalDate,'
+      '  Resigned = :Resigned,'
+      '  ResignedDate =:ResignedDate,'
+      '  Type = :Type,'
+      '  UserID = :UserID,'
+      '  UserDate = GETDATE(),'
+      '  Memo = :Memo'
+      'WHERE'
+      '  ID = :OLD_ID')
+    ZDeleteCommandObj.Connection = DM2.ADOConn2
+    ZDeleteCommandObj.Parameters = <
+      item
+        Name = 'OLD_ID'
+        DataType = ftString
+        NumericScale = 255
+        Precision = 255
+        Size = 10
+        Value = Null
+      end>
+    ZDeleteCommandObj.SQL.Strings = (
+      'DELETE FROM Certificate WHERE ID = :OLD_ID')
+    ZInsertCommandObj.Connection = DM2.ADOConn2
+    ZInsertCommandObj.Parameters = <
+      item
+        Name = 'ID'
+        DataType = ftString
+        NumericScale = 255
+        Precision = 255
+        Size = 10
+        Value = Null
+      end
+      item
+        Name = 'Gender'
+        Attributes = [paNullable]
+        DataType = ftString
+        NumericScale = 255
+        Precision = 255
+        Size = 3
+        Value = Null
+      end
+      item
+        Name = 'OnBoard'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 50
+        Value = Null
+      end
+      item
+        Name = 'Name'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 5
+        Value = Null
+      end
+      item
+        Name = 'EngName'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 30
+        Value = Null
+      end
+      item
+        Name = 'BirthDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'BirthPlace'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 30
+        Value = Null
+      end
+      item
+        Name = 'ProvinceResidence'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 100
+        Value = Null
+      end
+      item
+        Name = 'BirthProvince'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 30
+        Value = Null
+      end
+      item
+        Name = 'IDCard'
+        Attributes = [paNullable]
+        DataType = ftString
+        NumericScale = 255
+        Precision = 255
+        Size = 20
+        Value = Null
+      end
+      item
+        Name = 'Passport'
+        Attributes = [paNullable]
+        DataType = ftString
+        NumericScale = 255
+        Precision = 255
+        Size = 10
+        Value = Null
+      end
+      item
+        Name = 'PassportSD'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'PassportED'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'Visa'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 15
+        Value = Null
+      end
+      item
+        Name = 'VisaDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'WorkPermit'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 20
+        Value = Null
+      end
+      item
+        Name = 'IssueDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'ExpireDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'ContractDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'ContractExpireDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'NID'
+        Attributes = [paNullable]
+        DataType = ftString
+        NumericScale = 255
+        Precision = 255
+        Size = 3
+        Value = Null
+      end
+      item
+        Name = 'DutyDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'ArrivalDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'Resigned'
+        Attributes = [paNullable]
+        DataType = ftBoolean
+        NumericScale = 255
+        Precision = 255
+        Size = 2
+        Value = Null
+      end
+      item
+        Name = 'ResignedDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'Type'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 50
+        Value = Null
+      end
+      item
+        Name = 'Memo'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 50
+        Value = Null
+      end
+      item
+        Name = 'UserID'
+        Attributes = [paNullable]
+        DataType = ftString
+        NumericScale = 255
+        Precision = 255
+        Size = 10
+        Value = Null
+      end
+      item
+        Name = 'UserDate'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'YN'
+        Attributes = [paNullable]
+        DataType = ftString
+        NumericScale = 255
+        Precision = 255
+        Size = 1
+        Value = Null
+      end>
+    ZInsertCommandObj.SQL.Strings = (
+      'INSERT INTO Certificate'
+      
+        '   (ID, Gender, OnBoard, Name, EngName, BirthDate, BirthPlace,Pr' +
+        'ovinceResidence, BirthProvince, IDCard, Passport, PassportSD, Pa' +
+        'ssportED  , Visa, VisaDate, WorkPermit, IssueDate, ExpireDate, C' +
+        'ontractDate, ContractExpireDate , NID, DutyDate, ArrivalDate , R' +
+        'esigned, ResignedDate, Type, Memo, UserID, UserDate, YN)'
+      'VALUES'
+      
+        '   (:ID, :Gender, :OnBoard, :Name, :EngName, :BirthDate, :BirthP' +
+        'lace,:ProvinceResidence, :BirthProvince, :IDCard, :Passport, :Pa' +
+        'ssportSD, :PassportED ,:Visa, :VisaDate, :WorkPermit, :IssueDate' +
+        ', :ExpireDate, :ContractDate, :ContractExpireDate , :NID, :DutyD' +
+        'ate, :ArrivalDate , :Resigned, :ResignedDate, :Type, :Memo, :Use' +
+        'rID, :UserDate, :YN)')
+    SQLDelete = 'DELETE FROM Certificate WHERE ID = :OLD_ID'
+    SQLInsert = 
+      'INSERT INTO Certificate'#13#10'   (ID, Gender, OnBoard, Name, EngName,' +
+      ' BirthDate, BirthPlace,ProvinceResidence, BirthProvince, IDCard,' +
+      ' Passport, PassportSD, PassportED  , Visa, VisaDate, WorkPermit,' +
+      ' IssueDate, ExpireDate, ContractDate, ContractExpireDate , NID, ' +
+      'DutyDate, ArrivalDate , Resigned, ResignedDate, Type, Memo, User' +
+      'ID, UserDate, YN)'#13#10'VALUES'#13#10'   (:ID, :Gender, :OnBoard, :Name, :E' +
+      'ngName, :BirthDate, :BirthPlace,:ProvinceResidence, :BirthProvin' +
+      'ce, :IDCard, :Passport, :PassportSD, :PassportED ,:Visa, :VisaDa' +
+      'te, :WorkPermit, :IssueDate, :ExpireDate, :ContractDate, :Contra' +
+      'ctExpireDate , :NID, :DutyDate, :ArrivalDate , :Resigned, :Resig' +
+      'nedDate, :Type, :Memo, :UserID, :UserDate, :YN)'
+    SQLModify = 
+      'UPDATE Certificate'#13#10'SET'#13#10'  OnBoard = :OnBoard,'#13#10'  Name = :Name,'#13 +
+      #10'  Gender =:Gender,'#13#10'  EngName = :EngName,'#13#10'  BirthDate =:BirthD' +
+      'ate,'#13#10'  BirthPlace =:BirthPlace,'#13#10'  ProvinceResidence=:ProvinceR' +
+      'esidence,'#13#10'  BirthProvince =:BirthProvince,'#13#10'  IDCard = :IDCard,' +
+      #13#10'  Passport =:Passport,'#13#10'  PassportSD =:PassportSD,'#13#10'  Passport' +
+      'ED =:PassportED,'#13#10'  Visa = :Visa,'#13#10'  VisaDate = :VisaDate,'#13#10'  Wo' +
+      'rkPermit = :WorkPermit,'#13#10'  IssueDate = :IssueDate,'#13#10'  ExpireDate' +
+      ' = :ExpireDate,'#13#10'  ContractDate =:ContractDate,'#13#10'  ContractExpir' +
+      'eDate =:ContractExpireDate,'#13#10'  NID =:NID,'#13#10'  DutyDate =:DutyDate' +
+      ','#13#10'  ArrivalDate =:ArrivalDate,'#13#10'  Resigned = :Resigned,'#13#10'  Resi' +
+      'gnedDate =:ResignedDate,'#13#10'  Type = :Type,'#13#10'  UserID = :UserID,'#13#10 +
+      '  UserDate = GETDATE(),'#13#10'  Memo = :Memo'#13#10'WHERE'#13#10'  ID = :OLD_ID'
+    Left = 88
+    Top = 408
+  end
+  object PopupMenu1: TPopupMenu
+    AutoHotkeys = maManual
+    Left = 88
+    Top = 456
+    object N1: TMenuItem
+      Caption = 'D'#7919' li'#7879'u l'#7883'ch s'#7917' VISA ('#36234#21335#31805#35657#27511#21490#36039#26009')'
+      OnClick = N1Click
+    end
+    object N2: TMenuItem
+      Caption = 'D'#7919' li'#7879'u l'#7883'ch s'#7917' GPL'#272' ('#24037#20316#35657#27511#21490#36039#26009')'
+      OnClick = N2Click
+    end
+  end
+  object CertificateQry: TMyADOQuery
+    Connection = DM2.ADOConn2
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    AfterOpen = CertificateQryAfterOpen
+    BeforeClose = CertificateQryBeforeClose
+    Parameters = <>
+    SQL.Strings = (
+      
+        'SELECT Certificate.OnBoard, Certificate.Name, Certificate.EngNam' +
+        'e, Certificate.ID, Certificate.Gender,Directory.FID,Directory_Fa' +
+        'ctory.Name as Factory, '
+      
+        '       Directory.DID,Directory_Department.Name as Department, Di' +
+        'rectory.PID,Directory_Position.Name as Position,'
+      
+        '       Certificate.BirthDate, Certificate.BirthPlace,Certificate' +
+        '.BirthProvince,Certificate.IDCard,Certificate.PassPort,Certifica' +
+        'te.PassPortSD,Certificate.PassPortED,'
+      
+        '       Certificate.Visa, Certificate.VisaDate, Certificate.WorkP' +
+        'ermit, Certificate.IssueDate,'
+      
+        '       Certificate.ExpireDate, Certificate.NID, Directory_Nation' +
+        'ality.Name as Nationality,Certificate.DutyDate, Certificate.Arri' +
+        'valDate, Certificate.Resigned, Certificate.ResignedDate, '
+      
+        '       Certificate.Type, Certificate.Memo, Certificate.UserID, C' +
+        'ertificate.UserDate, Certificate.YN,Directory.ID as DirectoryID,' +
+        'Directory.FactoryS ,'
+      #9'     Certificate.ContractDate, Certificate.ContractExpireDate'
+      'FROM Certificate'
+      'left join Directory on Directory.ID=Certificate.ID'
+      
+        'Left join Directory_Factory on Directory_Factory.FID=Directory.F' +
+        'ID'
+      
+        'Left join Directory_Department on Directory_Department.DID=Direc' +
+        'tory.DID'
+      
+        'Left join Directory_Position on Directory_Position.PID=Directory' +
+        '.PID'
+      
+        'Left join Directory_Nationality on Directory_Nationality.NID=Cer' +
+        'tificate.NID'
+      'where 1=1 '
+      'ORDER BY ID')
+    Left = 88
+    Top = 368
+    object CertificateQryOnBoard: TWideStringField
+      FieldName = 'OnBoard'
+      Size = 50
+    end
+    object CertificateQryName: TWideStringField
+      FieldName = 'Name'
+      Size = 5
+    end
+    object CertificateQryEngName: TWideStringField
+      FieldName = 'EngName'
+      Size = 30
+    end
+    object CertificateQryID: TStringField
+      FieldName = 'ID'
+      Size = 10
+    end
+    object CertificateQryGender: TStringField
+      FieldName = 'Gender'
+      Size = 3
+    end
+    object CertificateQryFID: TStringField
+      FieldName = 'FID'
+      Size = 3
+    end
+    object CertificateQryFactory: TStringField
+      FieldName = 'Factory'
+      Size = 30
+    end
+    object CertificateQryDID: TStringField
+      FieldName = 'DID'
+      Size = 3
+    end
+    object CertificateQryDepartment: TStringField
+      FieldName = 'Department'
+      Size = 30
+    end
+    object CertificateQryPID: TStringField
+      FieldName = 'PID'
+      Size = 3
+    end
+    object CertificateQryPosition: TWideStringField
+      FieldName = 'Position'
+    end
+    object CertificateQryBirthDate: TDateTimeField
+      FieldName = 'BirthDate'
+      DisplayFormat = 'YYYY/MM/DD'
+    end
+    object CertificateQryAge: TIntegerField
+      FieldName = 'Age'
+    end
+    object CertificateQryBirthPlace: TWideStringField
+      FieldName = 'BirthPlace'
+      Size = 30
+    end
+    object CertificateQryBirthProvince: TWideStringField
+      FieldName = 'BirthProvince'
+      Size = 30
+    end
+    object CertificateQryIDCard: TStringField
+      FieldName = 'IDCard'
+    end
+    object CertificateQryPassPort: TStringField
+      FieldName = 'PassPort'
+      Size = 10
+    end
+    object CertificateQryPassPortSD: TDateTimeField
+      FieldName = 'PassPortSD'
+      DisplayFormat = 'YYYY/MM/DD'
+    end
+    object CertificateQryPassPortED: TDateTimeField
+      FieldName = 'PassPortED'
+      DisplayFormat = 'YYYY/MM/DD'
+    end
+    object CertificateQryVisa: TWideStringField
+      FieldName = 'Visa'
+      Size = 15
+    end
+    object CertificateQryVisaDate: TDateTimeField
+      FieldName = 'VisaDate'
+    end
+    object CertificateQryWorkPermit: TWideStringField
+      FieldName = 'WorkPermit'
+    end
+    object CertificateQryIssueDate: TDateTimeField
+      FieldName = 'IssueDate'
+      DisplayFormat = 'YYYY/MM/DD'
+    end
+    object CertificateQryExpireDate: TDateTimeField
+      FieldName = 'ExpireDate'
+      DisplayFormat = 'YYYY/MM/DD'
+    end
+    object CertificateQryContractDate: TDateTimeField
+      FieldName = 'ContractDate'
+    end
+    object CertificateQryContractExpireDate: TDateTimeField
+      FieldName = 'ContractExpireDate'
+    end
+    object CertificateQryNID: TStringField
+      FieldName = 'NID'
+      Size = 3
+    end
+    object CertificateQryNationality: TWideStringField
+      FieldName = 'Nationality'
+      Size = 15
+    end
+    object CertificateQryDutyDate: TDateTimeField
+      FieldName = 'DutyDate'
+      DisplayFormat = 'YYYY/MM/DD'
+    end
+    object CertificateQryArrivalDate: TDateTimeField
+      FieldName = 'ArrivalDate'
+      DisplayFormat = 'YYYY/MM/DD'
+    end
+    object CertificateQryResigned: TBooleanField
+      FieldName = 'Resigned'
+    end
+    object CertificateQryResignedDate: TDateTimeField
+      FieldName = 'ResignedDate'
+    end
+    object CertificateQryType: TWideStringField
+      FieldName = 'Type'
+      Size = 50
+    end
+    object CertificateQryMemo: TWideStringField
+      FieldName = 'Memo'
+      Size = 50
+    end
+    object CertificateQryFactoryS: TStringField
+      FieldName = 'FactoryS'
+      Size = 10
+    end
+    object CertificateQryUserID: TStringField
+      FieldName = 'UserID'
+      Size = 10
+    end
+    object CertificateQryUserDate: TDateTimeField
+      FieldName = 'UserDate'
+      DisplayFormat = 'YYYY/MM/DD'
+    end
+    object CertificateQryYN: TStringField
+      FieldName = 'YN'
+      Size = 1
+    end
+    object CertificateQryDirectoryID: TStringField
+      FieldName = 'DirectoryID'
+      Size = 10
+    end
+    object CertificateQryProvinceResidence: TWideStringField
+      FieldName = 'ProvinceResidence'
+      Size = 100
+    end
+  end
+  object QUpdate: TMyADOQuery
+    Connection = DM2.ADOConn2
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    Parameters = <>
+    Left = 160
+    Top = 368
+  end
+end

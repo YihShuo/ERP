@@ -1,0 +1,510 @@
+object ScanInSelect: TScanInSelect
+  Left = 331
+  Top = 211
+  Width = 870
+  Height = 500
+  Caption = 'ScanInSelect'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 16
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 862
+    Height = 65
+    Align = alTop
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 0
+      Top = 28
+      Width = 77
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Order NO:'
+    end
+    object Label2: TLabel
+      Left = 176
+      Top = 27
+      Width = 69
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Customer:'
+    end
+    object Label3: TLabel
+      Left = 336
+      Top = 27
+      Width = 53
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'From:'
+    end
+    object Label4: TLabel
+      Left = 488
+      Top = 28
+      Width = 28
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'To:'
+    end
+    object Edit1: TEdit
+      Left = 80
+      Top = 24
+      Width = 97
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 0
+    end
+    object Edit2: TEdit
+      Left = 248
+      Top = 24
+      Width = 89
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 1
+      Text = 'CONVERSE'
+    end
+    object DTP1: TDateTimePicker
+      Left = 392
+      Top = 24
+      Width = 97
+      Height = 24
+      Date = 39895.546852384260000000
+      Format = 'yyyy/MM/dd'
+      Time = 39895.546852384260000000
+      TabOrder = 2
+    end
+    object DTP2: TDateTimePicker
+      Left = 520
+      Top = 24
+      Width = 97
+      Height = 24
+      Date = 39895.547297453700000000
+      Format = 'yyyy/MM/dd'
+      Time = 39895.547297453700000000
+      TabOrder = 3
+    end
+    object Button1: TButton
+      Left = 632
+      Top = 16
+      Width = 73
+      Height = 33
+      Caption = 'QUERY'
+      TabOrder = 4
+      OnClick = Button1Click
+    end
+  end
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 65
+    Width = 568
+    Height = 404
+    Align = alClient
+    DataSource = DS1
+    Flat = False
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -13
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    FrozenCols = 1
+    SumList.Active = True
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    UseMultiTitle = True
+    OnGetCellParams = DBGridEh1GetCellParams
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'DDBH'
+        Footers = <
+          item
+            FieldName = 'DDBH'
+            ValueType = fvtCount
+          end>
+        Title.Caption = #35330#21934#32232#34399'|DDBH'
+        Width = 85
+      end
+      item
+        EditButtons = <>
+        FieldName = 'KHPO'
+        Footers = <>
+        Title.Caption = #23458#25142'PO'#65283'|KHPO'
+        Width = 111
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CTS'
+        Footers = <
+          item
+            FieldName = 'CTS'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #31665#25976'|CTS'
+        Width = 58
+      end
+      item
+        EditButtons = <>
+        FieldName = 'okCTS'
+        Footers = <
+          item
+            FieldName = 'okCTS'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #31665#25976'|okCTS'
+        Width = 58
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Now_CTS'
+        Footers = <
+          item
+            FieldName = 'Now_CTS'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #31665#25976'|Now_CTS'
+        Width = 63
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Qty'
+        Footers = <
+          item
+            FieldName = 'Qty'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #38617#25976'|Qty'
+        Width = 58
+      end
+      item
+        EditButtons = <>
+        FieldName = 'okQty'
+        Footers = <
+          item
+            FieldName = 'okQty'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #38617#25976'|okQty'
+        Width = 58
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Now_Qty'
+        Footers = <
+          item
+            FieldName = 'Now_Qty'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #38617#25976'|Now_Qty'
+        Width = 58
+      end
+      item
+        EditButtons = <>
+        FieldName = 'SB'
+        Footers = <>
+        Width = 21
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Article'
+        Footers = <>
+        Title.Caption = 'SKU'#65283'|Article'
+        Width = 97
+      end
+      item
+        EditButtons = <>
+        FieldName = 'XieMing'
+        Footers = <>
+        Title.Caption = #38795#22411#21517#31281'|XieMing'
+        Width = 141
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Country'
+        Footers = <>
+        Title.Caption = #20986#36008#22283#23478'|Country'
+        Width = 150
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ETD'
+        Footers = <>
+        Title.Caption = #20986#36008#26085#26399'|ETD'
+        Width = 82
+      end
+      item
+        EditButtons = <>
+        FieldName = 'KFJC'
+        Footers = <>
+        Title.Caption = #23458#25142#31777#31281'|KFJC'
+        Width = 85
+      end>
+  end
+  object Panel2: TPanel
+    Left = 568
+    Top = 65
+    Width = 294
+    Height = 404
+    Align = alRight
+    TabOrder = 2
+    object Panel3: TPanel
+      Left = 1
+      Top = 1
+      Width = 292
+      Height = 41
+      Align = alTop
+      TabOrder = 0
+      object CheckBox1: TCheckBox
+        Left = 8
+        Top = 16
+        Width = 65
+        Height = 17
+        Caption = '  All   In'
+        Checked = True
+        State = cbChecked
+        TabOrder = 0
+      end
+    end
+    object DBGridEh2: TDBGridEh
+      Left = 1
+      Top = 42
+      Width = 292
+      Height = 361
+      Align = alClient
+      DataSource = DS2
+      Flat = False
+      FooterColor = clWindow
+      FooterFont.Charset = DEFAULT_CHARSET
+      FooterFont.Color = clWindowText
+      FooterFont.Height = -13
+      FooterFont.Name = 'MS Sans Serif'
+      FooterFont.Style = []
+      FooterRowCount = 1
+      PopupMenu = PopupMenu1
+      SumList.Active = True
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -13
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      OnGetCellParams = DBGridEh2GetCellParams
+      Columns = <
+        item
+          EditButtons = <>
+          FieldName = 'CARTONBAR'
+          Footers = <
+            item
+              FieldName = 'CARTONBAR'
+              ValueType = fvtCount
+            end>
+          Width = 109
+        end
+        item
+          EditButtons = <>
+          FieldName = 'CartonNO'
+          Footers = <>
+          Title.Caption = 'NO'
+          Width = 43
+        end
+        item
+          EditButtons = <>
+          FieldName = 'Qty'
+          Footers = <>
+          Width = 43
+        end
+        item
+          Checkboxes = True
+          EditButtons = <>
+          FieldName = 'TSelect'
+          Footers = <>
+          Width = 57
+        end>
+    end
+  end
+  object YWDD: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'select YWDD.DDBH,XXZL.XieMing,DDZL.KHPO,YWDD.Qty,YWBZPOS.CTS ,YW' +
+        'CP2.okCTS,YWCP2.okQty,YWCP.Now_CTS,'
+      
+        '       YWCP.Now_Qty,LBZLS.YWSM as Country,DDZL.Article,YWDD.ETD,' +
+        'KFZL.KFJC,YWCP3.SB'
+      'from YWDD'
+      'left join DDZL on YWDD.YSBH=DDZl.DDBH'
+      
+        'left join XXZL  on DDZL.XieXing=XXZL.XieXing and DDZL.SheHao=XXZ' +
+        'L.SheHao  '
+      'left join LBZLS on LBZLS.LB='#39'06'#39' and LBZLS.LBDH=DDZL.DDGB'
+      'left join KFZL on KFZL.KFDH=DDZL.KHBH '
+      'left join (select YWBZPOS.DDBH,sum(YWBZPOS.CTS) as CTS'
+      '           from (select distinct DDBH,XH,CTS from YWBZPOS'
+      '                 where DDBH like '#39'%'#39') YWBZPOS '
+      
+        '                 group by YWBZPOS.DDBH) YWBZPOS on YWBZPOS.DDBH=' +
+        'YWDD.DDBH'
+      
+        'left join (select  DDBH ,count(InCS) as Now_CTS,sum(Qty) as Now_' +
+        'Qty from YWCP '
+      
+        '           where convert(smalldatetime,convert(varchar,InDate,11' +
+        '1)) between '
+      '                 '#39'2009/04/09'#39' and '#39'2009/04/16'#39
+      '           group by DDBH ) YWCP on YWCP.DDBH=YWDD.DDBH '
+      
+        'left join (select  DDBH ,count(InCS) as okCTS,sum(Qty) as okQty ' +
+        'from YWCP '
+      '           where InCS is not null '
+      '           group by DDBH ) YWCP2 on YWCP2.DDBH=YWDD.DDBH '
+      'left join (select DDBH,max(SB) as SB from YWCP '
+      '           group by DDBH )YWCP3 on YWCP3.DDBH=YWDD.DDBH '
+      'where DDZL.DDBH like '#39'%'#39
+      '      and KFZL.KFJC like '#39'%CONVERSE%'#39
+      '      and YWBZPOS.DDBH is not null '
+      'order by YWDD.DDBH')
+    Left = 160
+    Top = 136
+    object YWDDDDBH: TStringField
+      FieldName = 'DDBH'
+      FixedChar = True
+      Size = 15
+    end
+    object YWDDArticle: TStringField
+      FieldName = 'Article'
+      FixedChar = True
+    end
+    object YWDDXieMing: TStringField
+      FieldName = 'XieMing'
+      FixedChar = True
+      Size = 50
+    end
+    object YWDDKHPO: TStringField
+      FieldName = 'KHPO'
+      FixedChar = True
+      Size = 25
+    end
+    object YWDDCTS: TIntegerField
+      FieldName = 'CTS'
+    end
+    object YWDDokCTS: TIntegerField
+      FieldName = 'okCTS'
+    end
+    object YWDDNow_CTS: TIntegerField
+      FieldName = 'Now_CTS'
+    end
+    object YWDDQty: TFloatField
+      FieldName = 'Qty'
+    end
+    object YWDDokQty: TIntegerField
+      FieldName = 'okQty'
+    end
+    object YWDDNow_Qty: TIntegerField
+      FieldName = 'Now_Qty'
+    end
+    object YWDDCountry: TStringField
+      FieldName = 'Country'
+      FixedChar = True
+      Size = 50
+    end
+    object YWDDETD: TDateTimeField
+      FieldName = 'ETD'
+      DisplayFormat = 'yyyy/MM/dd'
+    end
+    object YWDDKFJC: TStringField
+      FieldName = 'KFJC'
+      FixedChar = True
+    end
+    object YWDDSB: TStringField
+      FieldName = 'SB'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object DS1: TDataSource
+    DataSet = YWDD
+    Left = 200
+    Top = 136
+  end
+  object YWCP: TQuery
+    CachedUpdates = True
+    AfterOpen = YWCPAfterOpen
+    OnNewRecord = YWCPNewRecord
+    DatabaseName = 'DB'
+    DataSource = DS1
+    RequestLive = True
+    SQL.Strings = (
+      'select CARTONBAR,Qty,CartonNO,0 TSelect'
+      'from YWCP '
+      
+        'where convert(smalldatetime,convert(varchar,InDate,111)) between' +
+        ' '
+      '      '#39'2009/03/23'#39' and '#39'2009/03/23'#39
+      '      and DDBH='#39'AL0903-001'#39' '
+      'order by CARTONBAR ')
+    UpdateObject = UPYWCP
+    Left = 584
+    Top = 136
+    object YWCPCARTONBAR: TStringField
+      FieldName = 'CARTONBAR'
+      FixedChar = True
+    end
+    object YWCPCartonNO: TIntegerField
+      FieldName = 'CartonNO'
+    end
+    object YWCPQty: TIntegerField
+      FieldName = 'Qty'
+    end
+    object YWCPTSelect: TIntegerField
+      FieldName = 'TSelect'
+    end
+  end
+  object DS2: TDataSource
+    DataSet = YWCP
+    Left = 624
+    Top = 136
+  end
+  object UPYWCP: TUpdateSQL
+    Left = 584
+    Top = 168
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 728
+    Top = 168
+    object N1: TMenuItem
+      Caption = 'To Report'
+      OnClick = N1Click
+    end
+    object N2: TMenuItem
+      Caption = 'Select CTS'
+      OnClick = N2Click
+    end
+  end
+  object Qtemp: TQuery
+    DatabaseName = 'DB'
+    Left = 608
+    Top = 216
+  end
+end

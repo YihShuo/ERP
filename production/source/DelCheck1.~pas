@@ -1,0 +1,134 @@
+unit DelCheck1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, StdCtrls, Grids, DBGrids, DBTables, ExtCtrls,comobj;
+
+type
+  TDelCheck = class(TForm)
+    Panel1: TPanel;
+    Query1: TQuery;
+    DataSource1: TDataSource;
+    DBGrid1: TDBGrid;
+    Label1: TLabel;
+    Edit1: TEdit;
+    Label2: TLabel;
+    Edit2: TEdit;
+    Button1: TButton;
+    Query1LLNO: TStringField;
+    Query1CLBH: TStringField;
+    Query1DFL: TStringField;
+    Query1SCBH: TStringField;
+    Query1TempQty: TCurrencyField;
+    Query1Qty: TCurrencyField;
+    Query1CLSL: TCurrencyField;
+    Query1YWPM: TStringField;
+    Query1DWBH: TStringField;
+    Button2: TButton;
+    Query1USERDATE: TDateTimeField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DelCheck: TDelCheck;
+
+implementation
+
+{$R *.dfm}
+
+procedure TDelCheck.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+procedure TDelCheck.Button1Click(Sender: TObject);
+begin
+if (edit1.text='') and (edit2.text='') then
+  begin
+    showmessage('Pls key SCBH or CLBH first.');
+    abort;
+  end;
+with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select KCLLS.*,CLZL.YWPM,CLZL.DWBH');
+    sql.add('from KCLLS');
+    sql.add('left join CLZL on CLZL.CLDH=KCLLS.CLBH');
+    sql.add('where KCLLS.CLBH like'+''''+edit2.Text+'%'+'''');
+    sql.add('and KCLLS.SCBH like '+''''+edit1.Text+'%'+'''');
+    sql.add('order by CLBH,SCBH');
+    active:=true;
+    //Tfloatfield(query1.Fields[9]).displayformat:='##,#0.0' ;
+    DBGrid1.Columns[9].
+  end;
+end;
+
+procedure TDelCheck.Button2Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+ begin
+  if query1.active  then
+    begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+        WorkBook:=eclApp.workbooks.Add;
+        for   i:=0   to   query1.fieldCount-1   do
+          begin
+              eclApp.Cells(1,i+1):=query1.fields[i].FieldName;
+          end;
+
+        query1.First;
+        j:=2;
+        while   not   query1.Eof   do
+          begin
+            for   i:=0   to   query1.FieldCount-1   do
+            begin
+              eclApp.Cells(j,i+1):=query1.Fields[i].Value;
+              eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+            end;
+          query1.Next;
+          inc(j);
+          end;
+     eclapp.columns.autofit;
+   { if SaveDialog1.execute then
+      begin
+        a:=SaveDialog1.FileName;
+      end
+      else
+        begin
+          a:='Unit List';
+        end;
+      WorkBook.SaveAS(a);
+    //  WorkBook.close;    }
+      eclApp.Visible:=True;
+      except
+        on   F:Exception   do
+          showmessage(F.Message);
+      end;
+    end;
+end;
+
+procedure TDelCheck.FormDestroy(Sender: TObject);
+begin
+DelCheck:=nil;
+end;
+
+end.

@@ -1,0 +1,1145 @@
+object MaterialTrace: TMaterialTrace
+  Left = 204
+  Top = 160
+  Width = 1350
+  Height = 639
+  Caption = 'MaterialTrace'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Splitter1: TSplitter
+    Left = 505
+    Top = 113
+    Width = 5
+    Height = 495
+    Color = clHotLight
+    ParentColor = False
+  end
+  object Splitter2: TSplitter
+    Left = 977
+    Top = 113
+    Width = 5
+    Height = 495
+    Color = clHotLight
+    ParentColor = False
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 1342
+    Height = 113
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 14
+      Top = 8
+      Width = 91
+      Height = 17
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Material code : '
+    end
+    object Label2: TLabel
+      Left = 8
+      Top = 63
+      Width = 77
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Remainder : '
+    end
+    object Label4: TLabel
+      Left = 7
+      Top = 86
+      Width = 72
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'MatName:'
+    end
+    object Label6: TLabel
+      Left = 232
+      Top = 9
+      Width = 54
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Date:'
+    end
+    object Label15: TLabel
+      Left = 193
+      Top = 63
+      Width = 68
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'On way: '
+    end
+    object Label17: TLabel
+      Left = 344
+      Top = 63
+      Width = 60
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Need:'
+    end
+    object Label3: TLabel
+      Left = 501
+      Top = 63
+      Width = 46
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Unit:'
+    end
+    object DBText1: TDBText
+      Left = 137
+      Top = 86
+      Width = 528
+      Height = 16
+      Alignment = taRightJustify
+      DataField = 'YWPM'
+      DataSource = DS3
+    end
+    object DBText2: TDBText
+      Left = 558
+      Top = 63
+      Width = 106
+      Height = 16
+      Alignment = taRightJustify
+      DataField = 'DWBH'
+      DataSource = DS3
+    end
+    object DBText3: TDBText
+      Left = 85
+      Top = 63
+      Width = 104
+      Height = 17
+      Alignment = taRightJustify
+      DataField = 'Remainder'
+      DataSource = DS3
+    end
+    object DBText4: TDBText
+      Left = 408
+      Top = 63
+      Width = 87
+      Height = 17
+      Alignment = taRightJustify
+      DataField = 'NeedQty'
+      DataSource = DS3
+    end
+    object DBText5: TDBText
+      Left = 264
+      Top = 63
+      Width = 68
+      Height = 17
+      Alignment = taRightJustify
+      DataField = 'OnQty'
+      DataSource = DS3
+    end
+    object Label5: TLabel
+      Left = 400
+      Top = 8
+      Width = 20
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'To'
+    end
+    object Label7: TLabel
+      Left = 608
+      Top = 7
+      Width = 73
+      Height = 17
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Warehouse'
+    end
+    object Label8: TLabel
+      Left = 34
+      Top = 38
+      Width = 70
+      Height = 17
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'PO No:'
+    end
+    object Label9: TLabel
+      Left = 246
+      Top = 37
+      Width = 72
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Invoice:'
+    end
+    object Label11: TLabel
+      Left = 624
+      Top = 37
+      Width = 57
+      Height = 17
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Shelves:'
+    end
+    object Edit1: TEdit
+      Left = 107
+      Top = 4
+      Width = 121
+      Height = 24
+      CharCase = ecUpperCase
+      Color = clYellow
+      TabOrder = 0
+    end
+    object Button1: TButton
+      Left = 786
+      Top = 8
+      Width = 75
+      Height = 33
+      Caption = 'Search'
+      TabOrder = 1
+      OnClick = Button1Click
+    end
+    object Button2: TButton
+      Left = 786
+      Top = 41
+      Width = 75
+      Height = 33
+      Caption = 'Print'
+      TabOrder = 2
+      OnClick = Button2Click
+    end
+    object DTP1: TDateTimePicker
+      Left = 288
+      Top = 5
+      Width = 113
+      Height = 24
+      Date = 39289.000000000000000000
+      Format = 'yyyy/MM/dd'
+      Time = 39289.000000000000000000
+      TabOrder = 3
+    end
+    object DTP2: TDateTimePicker
+      Left = 424
+      Top = 5
+      Width = 113
+      Height = 24
+      Date = 39289.000000000000000000
+      Format = 'yyyy/MM/dd'
+      Time = 39289.000000000000000000
+      TabOrder = 4
+    end
+    object CBX1: TComboBox
+      Left = 684
+      Top = 4
+      Width = 81
+      Height = 24
+      ItemHeight = 16
+      TabOrder = 5
+    end
+    object CB2: TCheckBox
+      Left = 543
+      Top = 9
+      Width = 58
+      Height = 17
+      Caption = '<2014'
+      TabOrder = 6
+    end
+    object CGNOEdit: TEdit
+      Left = 107
+      Top = 34
+      Width = 121
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 7
+    end
+    object InvEdit: TEdit
+      Left = 320
+      Top = 34
+      Width = 121
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 8
+    end
+    object CB3: TCheckBox
+      Left = 543
+      Top = 39
+      Width = 74
+      Height = 17
+      Caption = 'Confirm'
+      TabOrder = 9
+    end
+    object Button4: TButton
+      Left = 877
+      Top = 74
+      Width = 75
+      Height = 32
+      Caption = 'The Kho'
+      TabOrder = 10
+      OnClick = Button4Click
+    end
+    object Button5: TButton
+      Left = 970
+      Top = 73
+      Width = 75
+      Height = 33
+      Caption = 'Print ALL'
+      TabOrder = 11
+      OnClick = Button5Click
+    end
+    object Button8: TButton
+      Left = 1082
+      Top = 72
+      Width = 75
+      Height = 33
+      Caption = 'Auto Print'
+      TabOrder = 12
+      Visible = False
+      OnClick = Button8Click
+    end
+    object Edit2: TEdit
+      Left = 684
+      Top = 35
+      Width = 81
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 13
+    end
+    object Button9: TButton
+      Left = 877
+      Top = 38
+      Width = 100
+      Height = 33
+      Caption = 'No I/O Mat No'
+      TabOrder = 14
+      OnClick = Button9Click
+    end
+    object Button10: TButton
+      Left = 786
+      Top = 74
+      Width = 75
+      Height = 33
+      Caption = 'Excel'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 15
+      OnClick = Button10Click
+    end
+  end
+  object DBGrid2: TDBGridEh
+    Left = 510
+    Top = 113
+    Width = 467
+    Height = 495
+    Align = alLeft
+    Color = clWhite
+    DataSource = DS2
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -12
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    ParentFont = False
+    PopupMenu = PopupMenu1
+    SumList.Active = True
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -15
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    UseMultiTitle = True
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'LLNO'
+        Footers = <>
+        Title.Caption = #38936#26009#21934#34399'|LLNO'
+        Width = 84
+      end
+      item
+        EditButtons = <>
+        FieldName = 'SCBH'
+        Footers = <>
+        Title.Caption = #35330#21934'|SCBH'
+        Width = 75
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CFMDATE'
+        Footers = <>
+        Title.Caption = #26085#26399'|DATE'
+        Width = 42
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Qty'
+        Footers = <
+          item
+            FieldName = 'Qty'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #25976#37327'|Qty'
+        Width = 50
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CFMID'
+        Footers = <>
+        Title.Caption = #30906#35469'ID|CFMID'
+        Width = 45
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Memo'
+        Footers = <>
+        Title.Caption = #39006#22411#25110#21934#20301'|Memo'
+        Width = 116
+      end>
+  end
+  object DBGrid1: TDBGridEh
+    Left = 0
+    Top = 113
+    Width = 505
+    Height = 495
+    Align = alLeft
+    Color = clWhite
+    DataSource = DS1
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -12
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    ParentFont = False
+    PopupMenu = PopupMenu2
+    SumList.Active = True
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -15
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    UseMultiTitle = True
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'RKNO'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Footers = <>
+        Title.Caption = #20837#24235#21934#34399'|RKNO'
+        Width = 73
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ZSBH'
+        Footers = <>
+        Title.Caption = #24288#21830'ID|ZSBH'
+        Width = 45
+      end
+      item
+        EditButtons = <>
+        FieldName = 'USERDATE'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Footers = <>
+        Title.Caption = #20837#24235#26085'|DATE'
+        Width = 40
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Qty'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Footers = <
+          item
+            FieldName = 'Qty'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #25976#37327'|Qty'
+        Width = 51
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CFMID'
+        Footers = <>
+        Title.Caption = #30906#35469'ID|CFMID'
+        Width = 43
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Memo'
+        Footers = <>
+        Title.Caption = #39006#22411'|Memo'
+        Width = 87
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Invoice'
+        Footers = <>
+        Title.Caption = #30332#31080'|Invoice'
+        Width = 100
+      end
+      item
+        EditButtons = <>
+        FieldName = 'PaperNo'
+        Footers = <>
+        Title.Caption = #25991#20214'|PaperNo'
+        Width = 72
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ZLBH'
+        Footers = <>
+        Title.Caption = #35330#21934'|ZLBH'
+      end>
+  end
+  object Button3: TButton
+    Left = 986
+    Top = 39
+    Width = 87
+    Height = 33
+    Caption = 'No I/O Excel'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+    OnClick = Button3Click
+  end
+  object DBGridEh1: TDBGridEh
+    Left = 982
+    Top = 113
+    Width = 360
+    Height = 495
+    Align = alClient
+    Color = clWhite
+    DataSource = DS4
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -12
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    ParentFont = False
+    PopupMenu = PopupMenu1
+    SumList.Active = True
+    TabOrder = 4
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -15
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    UseMultiTitle = True
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'CLBH'
+        Footer.ValueType = fvtCount
+        Footers = <>
+        Title.Caption = 'Material No'
+      end
+      item
+        EditButtons = <>
+        FieldName = 'KCBH'
+        Footers = <>
+        Title.Caption = 'Shelves'
+      end>
+  end
+  object Panel2: TPanel
+    Left = 536
+    Top = 320
+    Width = 185
+    Height = 97
+    TabOrder = 5
+    Visible = False
+    object Label10: TLabel
+      Left = 11
+      Top = 17
+      Width = 54
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Set Date:'
+    end
+    object DTP3: TDateTimePicker
+      Left = 72
+      Top = 13
+      Width = 65
+      Height = 24
+      Date = 39289.000000000000000000
+      Format = 'yyyy/MM/dd'
+      Time = 39289.000000000000000000
+      TabOrder = 0
+    end
+    object Button6: TButton
+      Left = 16
+      Top = 56
+      Width = 57
+      Height = 25
+      Caption = 'OK'
+      TabOrder = 1
+      OnClick = Button6Click
+    end
+    object Button7: TButton
+      Left = 104
+      Top = 56
+      Width = 57
+      Height = 25
+      Caption = 'Cancel'
+      TabOrder = 2
+      OnClick = Button7Click
+    end
+  end
+  object DBGridEh2: TDBGridEh
+    Left = 982
+    Top = 113
+    Width = 360
+    Height = 495
+    Align = alClient
+    Color = clWhite
+    DataSource = DS4
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -12
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    ParentFont = False
+    PopupMenu = PopupMenu1
+    SumList.Active = True
+    TabOrder = 6
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -15
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    UseMultiTitle = True
+    Visible = False
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'CLBH'
+        Footer.ValueType = fvtCount
+        Footers = <>
+        Title.Caption = 'Material No'
+      end
+      item
+        EditButtons = <>
+        FieldName = 'KCBH'
+        Footers = <>
+        Title.Caption = 'Shelves'
+      end
+      item
+        DisplayFormat = '0.####'
+        EditButtons = <>
+        FieldName = 'QTY'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CKBH'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'EntryDate'
+        Footers = <>
+        Width = 82
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DeliverDate'
+        Footers = <>
+        Width = 84
+      end
+      item
+        DisplayFormat = '0.####'
+        EditButtons = <>
+        FieldName = 'NK'
+        Footers = <>
+      end
+      item
+        DisplayFormat = '0.####'
+        EditButtons = <>
+        FieldName = 'KD'
+        Footers = <>
+      end
+      item
+        DisplayFormat = '0.####'
+        EditButtons = <>
+        FieldName = 'HD'
+        Footers = <>
+      end
+      item
+        DisplayFormat = '0.####'
+        EditButtons = <>
+        FieldName = 'TC'
+        Footers = <>
+      end
+      item
+        DisplayFormat = '0.####'
+        EditButtons = <>
+        FieldName = 'GC'
+        Footers = <>
+      end
+      item
+        DisplayFormat = '0.####'
+        EditButtons = <>
+        FieldName = 'XT'
+        Footers = <>
+      end
+      item
+        DisplayFormat = '0.####'
+        EditButtons = <>
+        FieldName = 'ZZZZ'
+        Footers = <>
+      end>
+  end
+  object KCRK: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'select JGZL.JGNO as RKNO,JGZL.CFMDate1 as USERDATE,JGZL.ZSBH,JGZ' +
+        'L.CFMID1 as CFMID,JGZLS.Qty,'
+      #39'JG'#39' as Memo,'#39#39' as Invoice,'#39#39' as PaperNo,JGZLSS.ZLBH'
+      'from JGZL,JGZLS '
+      
+        'Left join JGZLSS on JGZLSS.CLBH=JGZLS.CLBH and JGZLS.JGNO=JGZLSS' +
+        '.JGNO'
+      'where JGZL.JGNO=JGZLS.JGNO and JGZLS.ZMLB='#39'ZZZZZZZZZZ'#39
+      'and JGZLS.CLBH='#39'P100000306'#39
+      
+        'and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) be' +
+        'tween '
+      #39'2016/12/09'#39
+      ' and '#39'2017/02/28'#39
+      'and JGZL.CKBH='#39'VA12'#39
+      ''
+      'union all'
+      ''
+      
+        'select KCRK.RKNO,KCRK.USERDATE,KCRK.ZSBH,KCRK.CFMID ,KCRKS.Qty,K' +
+        'CRK.ZSNO as Memo,kcrk.docno as Invoice,KCRK.Memo as PaperNo,KCRK' +
+        'S.CGBH as ZLBH'
+      'from KCRKS'
+      'inner join KCRK on KCRK.RKNO=KCRKS.RKNO'
+      'where KCRKS.CLBH='#39'P100000306'#39
+      
+        'and convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) be' +
+        'tween '
+      #39'2017/02/01'#39
+      ' and '#39'2017/02/28'#39
+      'and KCRK.CKBH='#39'VBT'#39
+      'order by kcrk.rkno'
+      '')
+    Left = 160
+    Top = 216
+    object KCRKRKNO: TStringField
+      FieldName = 'RKNO'
+      Origin = 'DB.KCRK.RKNO'
+      FixedChar = True
+      Size = 11
+    end
+    object KCRKUSERDATE: TDateTimeField
+      FieldName = 'USERDATE'
+      Origin = 'DB.KCRK.USERDATE'
+      DisplayFormat = 'm/d'
+    end
+    object KCRKQty: TCurrencyField
+      FieldName = 'Qty'
+      Origin = 'DB.KCRKS.Qty'
+      DisplayFormat = '##,#0.00'
+    end
+    object KCRKZSBH: TStringField
+      FieldName = 'ZSBH'
+      Origin = 'DB.KCRK.ZSBH'
+      FixedChar = True
+      Size = 6
+    end
+    object KCRKCFMID: TStringField
+      FieldName = 'CFMID'
+      Origin = 'DB.KCRK.CFMID'
+      FixedChar = True
+      Size = 15
+    end
+    object KCRKMemo: TStringField
+      FieldName = 'Memo'
+      FixedChar = True
+    end
+    object KCRKInvoice: TStringField
+      FieldName = 'Invoice'
+      FixedChar = True
+      Size = 30
+    end
+    object KCRKPaperNo: TStringField
+      FieldName = 'PaperNo'
+      FixedChar = True
+      Size = 50
+    end
+    object KCRKZLBH: TStringField
+      FieldName = 'ZLBH'
+      FixedChar = True
+      Size = 15
+    end
+  end
+  object DS1: TDataSource
+    DataSet = KCRK
+    Left = 192
+    Top = 216
+  end
+  object KCLL: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select JGZL.JGNO as LLNO,JGZL.CFMDate1 as CFMDate,'
+      'JGZL.CFMID1 as CFMID,JGZLS.Qty*JGZLM.Qty as Qty,'#39'ZZZZ'#39
+      'as SCBH, '#39'JG'#39' as Memo '
+      'from JGZLS  '
+      'left join JGZL on JGZL.JGNO=JGZLS.JGNO  '
+      'left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty from JGZLS '
+      
+        'left join JGZL on JGZL.JGNO=JGZLS.JGNO where convert(smalldateti' +
+        'me,convert(varchar,JGZL.CFMDate1,111)) between '
+      #39'2008/05/01'#39
+      ' and '#39'2008/05/19'#39
+      'and JGZLS.ZMLB='#39'ZZZZZZZZZZ'#39
+      ') JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM.CLBH=JGZLS.CLBH'
+      'where JGZL.CFMDate1>='
+      #39'2008/05/01'#39
+      'and JGZLS.ZMLB='#39'AFG0000107'#39
+      'and JGZLS.ZMLB<>'#39'ZZZZZZZZZZ'#39
+      'union all'
+      
+        'select KCLL.LLNO,KCLL.CFMDATE,KCLL.CFMID,KCLLS.Qty,KCLLS.SCBH, B' +
+        'Department.DepName as Memo'
+      'from KCLLS'
+      'left join KCLL on KCLL.LLNO=KCLLS.LLNO '
+      'left join BDepartment on BDepartment.ID=KCLL.DepID '
+      'where KCLL.LLNO=KCLLS.LLNO'
+      'and KCLLS.CLBH='#39'AFG0000107'#39
+      
+        'and (convert(smalldatetime,convert(varchar,KCLL.CFMDate,111)) be' +
+        'tween '
+      #39'2008/05/01'#39
+      ' and '#39'2008/05/19'#39
+      'or KCLL.CFMDATE is null)'
+      'order by KCLL.LLNO')
+    Left = 560
+    Top = 232
+    object KCLLLLNO: TStringField
+      FieldName = 'LLNO'
+      Origin = 'DB.KCLL.LLNO'
+      FixedChar = True
+      Size = 11
+    end
+    object KCLLSCBH: TStringField
+      FieldName = 'SCBH'
+      Origin = 'DB.KCLLS.SCBH'
+      FixedChar = True
+      Size = 15
+    end
+    object KCLLCFMDATE: TDateTimeField
+      FieldName = 'CFMDATE'
+      DisplayFormat = 'M/d'
+    end
+    object KCLLQty: TCurrencyField
+      FieldName = 'Qty'
+      Origin = 'DB.KCLLS.Qty'
+      DisplayFormat = '##,#0.00'
+    end
+    object KCLLCFMID: TStringField
+      FieldName = 'CFMID'
+      Origin = 'DB.KCLL.CFMID'
+      FixedChar = True
+      Size = 15
+    end
+    object KCLLMemo: TStringField
+      FieldName = 'Memo'
+      FixedChar = True
+      Size = 50
+    end
+  end
+  object DS2: TDataSource
+    DataSet = KCLL
+    Left = 592
+    Top = 232
+  end
+  object Material: TQuery
+    CachedUpdates = True
+    DatabaseName = 'DB'
+    RequestLive = True
+    SQL.Strings = (
+      'select CLDH,YWPM,DWBH,1000.00 as Remainder,'
+      
+        '        1000.00 as RKQty,1000.00 as LLQty,1000.00 as NeedQty,100' +
+        '0.00 as OnQty'
+      'from CLZL ')
+    UpdateObject = UpSQL1
+    Left = 208
+    Top = 128
+  end
+  object UpSQL1: TUpdateSQL
+    Left = 288
+    Top = 128
+  end
+  object DS3: TDataSource
+    DataSet = Material
+    Left = 248
+    Top = 128
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    Left = 272
+    Top = 216
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 504
+    Top = 248
+    object EXCEL1: TMenuItem
+      Caption = 'Excel'
+      OnClick = EXCEL1Click
+    end
+    object JGDet1: TMenuItem
+      Caption = 'JGDet'
+      OnClick = JGDet1Click
+    end
+  end
+  object PopupMenu2: TPopupMenu
+    Left = 232
+    Top = 216
+    object EXCEL2: TMenuItem
+      Caption = 'EXCEL'
+      OnClick = EXCEL2Click
+    end
+    object JGDet2: TMenuItem
+      Caption = 'JGDet'
+      OnClick = JGDet2Click
+    end
+  end
+  object Data: TQuery
+    DatabaseName = 'DB'
+    Left = 273
+    Top = 264
+  end
+  object Query2: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select KCCLMONTH.CLBH,KCZLS.KCBH from KCCLMONTH'
+      
+        'left join KCZLS on KCCLMONTH.CLBH = KCZLS.CLBH and KCZLS.CKBH = ' +
+        #39'CDC'#39' '
+      'where 1=1 and QTY > 0'
+      'and KCYear = '#39'2022'#39
+      'and KCMonth = '#39'05'#39
+      'and KCCLMONTH.CKBH = '#39'CDC'#39
+      'and kczls.KCBH like '#39'A05%'#39
+      'union  '
+      'select KCRKS.CLBH,KCZLS.KCBH from KCRKS  '
+      'left join KCRK on KCRK.RKNO = KCRKS.RKNO  '
+      
+        'left join KCZLS on KCRKS.CLBH = KCZLS.CLBH and KCZLS.CKBH = '#39'CDC' +
+        #39' '
+      'where KCRKS.USERDATE between '#39'2022/06/01'#39' and '#39'2022/06/30'#39' '
+      'and KCRK.CKBH = '#39'CDC'#39' and KCZLS.KCBH like '#39'A05%'#39
+      'group by CLBH,KCBH'
+      'order by CLBH')
+    Left = 712
+    Top = 280
+    object Query2CLBH: TStringField
+      FieldName = 'CLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object Query2KCBH: TStringField
+      FieldName = 'KCBH'
+      FixedChar = True
+      Size = 10
+    end
+  end
+  object PrintDialog1: TPrintDialog
+    Left = 408
+    Top = 224
+  end
+  object DS4: TDataSource
+    DataSet = Query3
+    Left = 712
+    Top = 232
+  end
+  object Query3: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      ''
+      
+        'select CLBH,KCBH,QTY,CKBH,(select MAX(userdate) from KCRKS where' +
+        ' CLBH = KCLL.CLBH) as EntryDate,'
+      
+        '(select MAX(userdate) from KCLLS where CLBH = KCLL.CLBH) as Deli' +
+        'verDate,'
+      
+        '(select top 1 QTY from KCCLMONTH_HGBH where HGLB = '#39'NK'#39' and CLBH' +
+        ' = KCLL.CLBH and KCYEAR = KCLL.KCYEAR and KCMONTH = KCLL.KCMONTH' +
+        ' and CKBH = KCLL.CKBH) as '#39'NK'#39', '
+      
+        '(select top 1 QTY from KCCLMONTH_HGBH where HGLB = '#39'KD'#39' and CLBH' +
+        ' = KCLL.CLBH and KCYEAR = KCLL.KCYEAR and KCMONTH = KCLL.KCMONTH' +
+        ' and CKBH = KCLL.CKBH) as '#39'KD'#39', '
+      
+        '(select top 1 QTY from KCCLMONTH_HGBH where HGLB = '#39'HD'#39' and CLBH' +
+        ' = KCLL.CLBH and KCYEAR = KCLL.KCYEAR and KCMONTH = KCLL.KCMONTH' +
+        ' and CKBH = KCLL.CKBH) as '#39'HD'#39', '
+      
+        '(select top 1 QTY from KCCLMONTH_HGBH where HGLB = '#39'TC'#39' and CLBH' +
+        ' = KCLL.CLBH and KCYEAR = KCLL.KCYEAR and KCMONTH = KCLL.KCMONTH' +
+        ' and CKBH = KCLL.CKBH) as '#39'TC'#39', '
+      
+        '(select top 1 QTY from KCCLMONTH_HGBH where HGLB = '#39'GC'#39' and CLBH' +
+        ' = KCLL.CLBH and KCYEAR = KCLL.KCYEAR and KCMONTH = KCLL.KCMONTH' +
+        ' and CKBH = KCLL.CKBH) as '#39'GC'#39', '
+      
+        '(select top 1 QTY from KCCLMONTH_HGBH where HGLB = '#39'XT'#39' and CLBH' +
+        ' = KCLL.CLBH and KCYEAR = KCLL.KCYEAR and KCMONTH = KCLL.KCMONTH' +
+        ' and CKBH = KCLL.CKBH) as '#39'XT'#39', '
+      
+        '(select top 1 QTY from KCCLMONTH_HGBH where HGLB = '#39'ZZZZ'#39' and CL' +
+        'BH = KCLL.CLBH and KCYEAR = KCLL.KCYEAR and KCMONTH = KCLL.KCMON' +
+        'TH and CKBH = KCLL.CKBH) as '#39'ZZZZ'#39' '
+      'from ('
+      
+        'select KCCLMONTH.CLBH,KCZLS.KCBH,QTY,KCYEAR,KCMONTH,KCCLMONTH.CK' +
+        'BH from KCCLMONTH'
+      
+        'left join KCZLS on KCCLMONTH.CLBH = KCZLS.CLBH and KCZLS.CKBH in' +
+        ' ('#39'CDC'#39','#39'CDT'#39','#39'BYC'#39','#39'BYT'#39') and KCCLMONTH.CKBH = KCZLS.CKBH'
+      'where 1=1 and QTY > 0'
+      'and KCYear = '#39'2022'#39
+      'and KCMonth = '#39'05'#39
+      
+        'and KCCLMONTH.CLBH not in  (select CLBH from KCRKS where convert' +
+        '(smalldatetime,convert(varchar,USERDATE,111)) between '
+      '     '#39'2021/12/03'#39
+      'and '#39'2022/06/01'#39')'
+      
+        'and KCCLMONTH.CLBH not in  (select CLBH from KCLLS where convert' +
+        '(smalldatetime,convert(varchar,USERDATE,111)) between '
+      '     '#39'2021/12/03'#39
+      'and '#39'2022/06/01'#39')'
+      'and KCCLMONTH.CKBH in ('#39'CDC'#39','#39'CDT'#39','#39'BYC'#39','#39'BYT'#39')'
+      'and kczls.KCBH like '#39'A07-02%'#39
+      'and KCCLMONTH.CLBH = '#39'A020003855'#39
+      ')KCLL'
+      'order by CLBH')
+    Left = 776
+    Top = 280
+    object StringField1: TStringField
+      FieldName = 'CLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object StringField2: TStringField
+      FieldName = 'KCBH'
+      FixedChar = True
+      Size = 10
+    end
+    object Query3QTY: TCurrencyField
+      FieldName = 'QTY'
+    end
+    object Query3CKBH: TStringField
+      FieldName = 'CKBH'
+      FixedChar = True
+      Size = 4
+    end
+    object Query3EntryDate: TDateTimeField
+      FieldName = 'EntryDate'
+    end
+    object Query3DeliverDate: TDateTimeField
+      FieldName = 'DeliverDate'
+    end
+    object Query3NK: TCurrencyField
+      FieldName = 'NK'
+    end
+    object Query3KD: TCurrencyField
+      FieldName = 'KD'
+    end
+    object Query3HD: TCurrencyField
+      FieldName = 'HD'
+    end
+    object Query3TC: TCurrencyField
+      FieldName = 'TC'
+    end
+    object Query3GC: TCurrencyField
+      FieldName = 'GC'
+    end
+    object Query3XT: TCurrencyField
+      FieldName = 'XT'
+    end
+    object Query3ZZZZ: TCurrencyField
+      FieldName = 'ZZZZ'
+    end
+  end
+end

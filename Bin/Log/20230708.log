@@ -1,0 +1,9 @@
+select KCRK.*,ZSZL.ZSYWJC 
+from KCRK
+left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH 
+left join KCCK on KCCK.CKBH=KCRK.CKBH 
+where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between '2023/07/05'
+      and '2023/07/08'
+      and KCRK.RKNO like '%'
+      and KCCK.GSBH='VDH'
+order by KCRK.RKNO

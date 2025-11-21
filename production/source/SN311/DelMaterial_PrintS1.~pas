@@ -1,0 +1,129 @@
+unit DelMaterial_PrintS1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, QRCtrls, QuickRpt, ExtCtrls, StdCtrls, QRPDFFilt, DB, DBTables;
+
+type
+  TDelMaterial_PrintS = class(TForm)
+    QuickRep1: TQuickRep;
+    PageHeaderBand1: TQRBand;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;                    
+    QRDBText4: TQRDBText;
+    DetailBand1: TQRBand;
+    QRSysData1: TQRSysData;
+    QRDBText5: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRSysData2: TQRSysData;
+    QRLabel38: TQRLabel;
+    QPage1: TQRLabel;
+    PageFooterBand1: TQRBand;
+    QRDBText10: TQRDBText;
+    Label1: TLabel;
+    QRDBText12: TQRDBText;
+    QRPDFFilter1: TQRPDFFilter;
+    UpdateSQL1: TUpdateSQL;
+    DelTot: TQuery;
+    DelTotCLBH: TStringField;
+    DelTotYWPM: TStringField;
+    DelTotZWPM: TStringField;
+    DelTotDWBH: TStringField;
+    DelTotQty: TCurrencyField;
+    DelTotMEMO: TMemoField;
+    QRDBText9: TQRDBText;
+    DetQry: TQuery;
+    DS1: TDataSource;
+    DelTotLLNO: TStringField;
+    DetQrySCBH: TStringField;
+    DetQryQty: TCurrencyField;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DelMaterial_PrintS: TDelMaterial_PrintS;
+
+implementation
+
+uses DelMaterial1,FunUnit;
+
+{$R *.dfm}
+
+procedure TDelMaterial_PrintS.FormDestroy(Sender: TObject);
+begin
+  DelMaterial_PrintS:=nil;
+end;
+
+procedure TDelMaterial_PrintS.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  action:=Cafree;
+end;
+
+procedure TDelMaterial_PrintS.FormCreate(Sender: TObject);
+var i,j:integer;
+begin
+  if messagedlg('3 Order List only or All Order List?',mtinformation,[mbYes,mbNo],0)=mrYes then
+  begin
+    DelTot.Active:=true;
+    DetQry.Active:=true;
+    for i:=0 to DelTot.RecordCount-1 do
+    begin
+      for j:=0 to DetQry.RecordCount-1 do
+      begin
+        funcObj.WriteErrorLog(DelTot.fieldbyname('CLBH').AsString+' '+DetQry.fieldbyname('SCBH').AsString);
+        if j<2 then
+        begin
+           DelTot.edit;
+           DelTot.fieldbyname('Memo').Value:=DelTot.fieldbyname('Memo').asstring+'// '+inttostr(j)+' '+DetQry.fieldbyname('SCBH').AsString+'('+DetQry.fieldbyname('Qty').AsString+')';
+        end else
+        begin
+           DelTot.edit;
+           DelTot.fieldbyname('Memo').Value:=DelTot.fieldbyname('Memo').asstring+'......';
+           DelTot.post;
+           break;
+        end;
+        DetQry.Next;
+      end;
+      if ((j<>DetQry.RecordCount) and (j>0)) then
+      begin
+         DelTot.edit;
+         DelTot.fieldbyname('Memo').Value:=DelTot.fieldbyname('Memo').asstring+'// '+DetQry.fieldbyname('SCBH').AsString+'('+DetQry.fieldbyname('Qty').AsString+')';
+         DelTot.post;
+      end;
+      DelTot.Next;
+    end;
+    DetQry.Active:=false;
+  end else
+  begin
+    with  DelTot do
+    begin
+      active:=true;
+      DelMaterial.DelDet.first;
+      while not DelMaterial.DelDet.eof do
+      begin
+          if locate('CLBH',DelMaterial.DelDet.FieldByName('CLBH').value,[]) then
+          begin
+              edit;
+              fieldbyname('Memo').Value:=fieldbyname('Memo').asstring+'// '+DelMaterial.DelDet.fieldbyname('SCBH').AsString+'('+DelMaterial.DelDet.fieldbyname('Qty').AsString+')';
+              post;
+          end;
+          DelMaterial.DelDet.next;
+      end;
+      DelMaterial.DelDet.first;
+    end;
+  end;
+end;
+
+end.

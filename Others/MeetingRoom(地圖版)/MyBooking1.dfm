@@ -1,0 +1,395 @@
+object MyBooking: TMyBooking
+  Left = 203
+  Top = 332
+  BorderStyle = bsDialog
+  Caption = 'My Booking'
+  ClientHeight = 331
+  ClientWidth = 1327
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = #24494#36575#27491#40657#39636
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 15
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 161
+    Width = 1327
+    Height = 170
+    Align = alClient
+    DataSource = DataSource1
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = #24494#36575#27491#40657#39636
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -11
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    ParentFont = False
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = #24494#36575#27491#40657#39636
+    TitleFont.Style = []
+    UseMultiTitle = True
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'RoomName'
+        Footers = <>
+        Title.Caption = #26371#35696#23460'|RoomName'
+      end
+      item
+        DisplayFormat = 'yyyy/MM/dd'
+        EditButtons = <>
+        FieldName = 'RoomDate'
+        Footers = <>
+        Title.Caption = #26371#35696#26178#38291'|RoomDate'
+        Width = 79
+      end
+      item
+        EditButtons = <>
+        FieldName = 'RoomTime'
+        Footers = <>
+        Title.Caption = #26371#35696#26178#38291'|RoomTime'
+        Width = 83
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Topic'
+        Footers = <>
+        Title.Caption = #26371#35696#20027#38988'|Topic'
+        Width = 380
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Participant'
+        Footers = <>
+        Title.Caption = #21443#33287#20154#21729'|Participant'
+        Width = 378
+      end
+      item
+        EditButtons = <>
+        FieldName = 'UserName'
+        Footers = <>
+        Title.Caption = #38928#23450#20154'|UserName'
+        Width = 110
+      end
+      item
+        EditButtons = <>
+        FieldName = 'UserDate'
+        Footers = <>
+        Title.Caption = #38928#23450#26178#38291'|UserDate'
+        Width = 133
+      end>
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 1327
+    Height = 41
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 1
+    object Button4: TButton
+      Left = 17
+      Top = 8
+      Width = 105
+      Height = 25
+      Caption = 'CANCEL BOOKING'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnClick = Button4Click
+    end
+  end
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 41
+    Width = 1327
+    Height = 120
+    Align = alTop
+    Caption = 'Cancellation'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = #24494#36575#27491#40657#39636
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+    Visible = False
+    object Label1: TLabel
+      Left = 29
+      Top = 48
+      Width = 36
+      Height = 28
+      AutoSize = False
+      Caption = 'Date'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = []
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Label2: TLabel
+      Left = 28
+      Top = 80
+      Width = 37
+      Height = 28
+      AutoSize = False
+      Caption = 'Time'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = []
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Label4: TLabel
+      Left = 20
+      Top = 16
+      Width = 45
+      Height = 28
+      AutoSize = False
+      Caption = 'Room'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = []
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Label5: TLabel
+      Left = 317
+      Top = 16
+      Width = 108
+      Height = 28
+      AutoSize = False
+      Caption = 'Meeting Topic'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = []
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Label6: TLabel
+      Left = 343
+      Top = 48
+      Width = 82
+      Height = 28
+      AutoSize = False
+      Caption = 'Participant'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = []
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Label7: TLabel
+      Left = 353
+      Top = 80
+      Width = 72
+      Height = 28
+      AutoSize = False
+      Caption = 'Applicant'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = []
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Edit1: TEdit
+      Left = 72
+      Top = 16
+      Width = 225
+      Height = 28
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+    end
+    object Edit2: TEdit
+      Left = 432
+      Top = 16
+      Width = 417
+      Height = 28
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+    end
+    object Edit3: TEdit
+      Left = 432
+      Top = 48
+      Width = 417
+      Height = 28
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+    end
+    object Edit4: TEdit
+      Left = 432
+      Top = 80
+      Width = 417
+      Height = 28
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+    end
+    object Button2: TButton
+      Left = 864
+      Top = 16
+      Width = 75
+      Height = 91
+      Caption = 'CONFIRM'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+      OnClick = Button2Click
+    end
+    object Button3: TButton
+      Left = 944
+      Top = 16
+      Width = 75
+      Height = 41
+      Caption = 'CANCEL'
+      TabOrder = 5
+      Visible = False
+      OnClick = Button3Click
+    end
+    object Edit5: TEdit
+      Left = 72
+      Top = 48
+      Width = 225
+      Height = 28
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 6
+    end
+    object Edit6: TEdit
+      Left = 72
+      Top = 80
+      Width = 225
+      Height = 28
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 7
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = ADOQuery1
+    Left = 16
+    Top = 240
+  end
+  object ADOQuery1: TADOQuery
+    Connection = ADOConnection1
+    AfterScroll = ADOQuery1AfterScroll
+    Parameters = <>
+    Left = 16
+    Top = 272
+    object ADOQuery1RoomName: TStringField
+      FieldName = 'RoomName'
+    end
+    object ADOQuery1UserID: TStringField
+      FieldName = 'UserID'
+    end
+    object ADOQuery1UserName: TStringField
+      FieldName = 'UserName'
+      Size = 30
+    end
+    object ADOQuery1UserDate: TStringField
+      FieldName = 'UserDate'
+    end
+    object ADOQuery1RoomDate: TDateTimeField
+      FieldName = 'RoomDate'
+    end
+    object ADOQuery1RoomTime: TStringField
+      FieldName = 'RoomTime'
+    end
+    object ADOQuery1Topic: TStringField
+      FieldName = 'Topic'
+      Size = 200
+    end
+    object ADOQuery1Participant: TStringField
+      FieldName = 'Participant'
+      Size = 200
+    end
+  end
+  object ADOConnection1: TADOConnection
+    ConnectionString = 
+      'Provider=SQLOLEDB.1;Password=Erp@admin2309;Persist Security Info' +
+      '=True;User ID=tyxuan;Initial Catalog=LIY_TYXUAN;Data Source=192.' +
+      '168.23.9'
+    LoginPrompt = False
+    Provider = 'SQLOLEDB.1'
+    Left = 48
+    Top = 240
+  end
+  object ADOQUpdate: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 48
+    Top = 272
+  end
+end

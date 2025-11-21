@@ -1,0 +1,68 @@
+unit TK_Print1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, QRCtrls, QuickRpt, ExtCtrls, DB, DBTables;
+
+type
+  TTK_Print = class(TForm)
+    QuickRep1: TQuickRep;
+    ColumnHeaderBand1: TQRBand;
+    QRLabel7: TQRLabel;
+    QRShape1: TQRShape;
+    QRShape2: TQRShape;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRLabel11: TQRLabel;
+    QRLabel12: TQRLabel;
+    QRLabel13: TQRLabel;
+    QRLabel14: TQRLabel;
+    QRLabel15: TQRLabel;
+    QRShape3: TQRShape;
+    QRShape4: TQRShape;
+    QRShape5: TQRShape;
+    QRShape6: TQRShape;
+    QRShape7: TQRShape;
+    QRShape8: TQRShape;
+    PageHeaderBand1: TQRBand;
+    QRLabel1: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
+    DetailBand1: TQRBand;
+    QRDBText1: TQRDBText;
+    QRShape9: TQRShape;
+    QRShape10: TQRShape;
+    QRShape11: TQRShape;
+    QRShape12: TQRShape;
+    QRShape13: TQRShape;
+    QRShape14: TQRShape;
+    QRShape15: TQRShape;
+    QRShape16: TQRShape;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRDBText9: TQRDBText;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  TK_Print: TTK_Print;
+
+implementation
+
+{$R *.dfm}
+
+end.

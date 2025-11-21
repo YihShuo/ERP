@@ -1,0 +1,1175 @@
+unit EntryMatRFIDCode1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, GridsEh, DBGridEh, StdCtrls, ComCtrls, Buttons,
+  DBTables, DB, ScktComp, Mask, DBCtrls, comobj;
+
+type
+  TEntryMatRFIDCode = class(TForm)
+    Panel1: TPanel;
+    BB2: TBitBtn;
+    BB3: TBitBtn;
+    BB4: TBitBtn;
+    BB5: TBitBtn;
+    BB6: TBitBtn;
+    BB7: TBitBtn;
+    BB1: TBitBtn;
+    BBT1: TBitBtn;
+    BBT2: TBitBtn;
+    BBT3: TBitBtn;
+    BBT4: TBitBtn;
+    bbt6: TBitBtn;
+    DS1: TDataSource;
+    KCRKRF: TQuery;
+    UpdKCRKRFS: TUpdateSQL;
+    tmpQry: TQuery;
+    KCRKRFS: TQuery;
+    DS2: TDataSource;
+    DS3: TDataSource;
+    KCRKRFSS: TQuery;
+    UpdKCRKFSS: TUpdateSQL;
+    KCRKRFSSSCNO: TStringField;
+    KCRKRFSSCLBH: TStringField;
+    KCRKRFSSPack: TIntegerField;
+    KCRKRFSSQty: TFloatField;
+    KCRKRFSSUSERDATE: TDateTimeField;
+    KCRKRFSSUSERID: TStringField;
+    KCRKRFSSYN: TStringField;
+    ServerSocket: TServerSocket;
+    PC1: TPageControl;
+    TS1: TTabSheet;
+    TS2: TTabSheet;
+    Panel2: TPanel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label7: TLabel;
+    INVEdit: TEdit;
+    DTP1: TDateTimePicker;
+    DTP2: TDateTimePicker;
+    Check: TCheckBox;
+    BitBtn2: TBitBtn;
+    MemoEdit: TEdit;
+    Panel5: TPanel;
+    DBGridEh2: TDBGridEh;
+    Panel3: TPanel;
+    DBGridEh3: TDBGridEh;
+    Panel4: TPanel;
+    BO1: TBitBtn;
+    BO2: TBitBtn;
+    BO3: TBitBtn;
+    BO4: TBitBtn;
+    BO5: TBitBtn;
+    BO6: TBitBtn;
+    Splitter1: TSplitter;
+    Panel6: TPanel;
+    Label17: TLabel;
+    BD2: TBitBtn;
+    BD3: TBitBtn;
+    BD4: TBitBtn;
+    BD5: TBitBtn;
+    BD6: TBitBtn;
+    BD7: TBitBtn;
+    BDT1: TBitBtn;
+    BDT2: TBitBtn;
+    BDT3: TBitBtn;
+    BDT4: TBitBtn;
+    BDT5: TBitBtn;
+    BDT6: TBitBtn;
+    Label18: TLabel;
+    DBGridEh1: TDBGridEh;
+    UpdKCRKRF: TUpdateSQL;
+    KCRKRFSCNO: TStringField;
+    KCRKRFGSBH: TStringField;
+    KCRKRFDOCNO: TStringField;
+    KCRKRFMEMO: TStringField;
+    KCRKRFUSERDATE: TDateTimeField;
+    KCRKRFUSERID: TStringField;
+    KCRKRFYN: TStringField;
+    KCRKRFSSCNO: TStringField;
+    KCRKRFSCLBH: TStringField;
+    KCRKRFSQty: TFloatField;
+    KCRKRFSUSERDATE: TDateTimeField;
+    KCRKRFSUSERID: TStringField;
+    KCRKRFSYN: TStringField;
+    KCRKRFSYWPM: TStringField;
+    KCRKRFSPackQty: TFloatField;
+    KCRKRFCKBH: TStringField;
+    BitBtn1: TBitBtn;
+    ImageOK: TImage;
+    ImageNO: TImage;
+    Panel7: TPanel;
+    Label11: TLabel;
+    Label12: TLabel;
+    DBEdit5: TDBEdit;
+    DBEdit6: TDBEdit;
+    KCRKRFSSTAGID: TIntegerField;
+    BO7: TBitBtn;
+    Label1: TLabel;
+    SCNOEdit: TEdit;
+    Query1: TQuery;
+    KCRKRFSCGNO: TStringField;
+    KCRKRFSSMemo_RY: TStringField;
+    KCRKRFSSMemo_Article: TStringField;
+    BitBtn4: TBitBtn;
+    Query1SCNO: TStringField;
+    Query1CLBH: TStringField;
+    Query1YWPM: TStringField;
+    Query1ZSYWJC: TStringField;
+    Query1CGNO: TStringField;
+    Query1Memo_RY: TStringField;
+    Query1Memo_Article: TStringField;
+    Query1Qty: TFloatField;
+    Query1Pack: TIntegerField;
+    Query1Memo: TStringField;
+    Query1DWBH: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure BO3Click(Sender: TObject);
+    procedure BO2Click(Sender: TObject);
+    procedure BO4Click(Sender: TObject);
+    procedure BO5Click(Sender: TObject);
+    procedure ServerSocketClientConnect(Sender: TObject;
+      Socket: TCustomWinSocket);
+    procedure ServerSocketClientDisconnect(Sender: TObject;
+      Socket: TCustomWinSocket);
+    procedure ServerSocketClientError(Sender: TObject;
+      Socket: TCustomWinSocket; ErrorEvent: TErrorEvent;
+      var ErrorCode: Integer);
+    procedure ServerSocketClientRead(Sender: TObject;
+      Socket: TCustomWinSocket);
+    procedure BO6Click(Sender: TObject);
+    procedure DBGridEh3KeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure KCRKRFSSAfterOpen(DataSet: TDataSet);
+    procedure DBGridEh3GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure BO1Click(Sender: TObject);
+    procedure BB2Click(Sender: TObject);
+    procedure BB3Click(Sender: TObject);
+    procedure BB4Click(Sender: TObject);
+    procedure BB6Click(Sender: TObject);
+    procedure BB5Click(Sender: TObject);
+    procedure PC1Change(Sender: TObject);
+    procedure DBGridEh1DblClick(Sender: TObject);
+    procedure BD2Click(Sender: TObject);
+    procedure BD3Click(Sender: TObject);
+    procedure BD4Click(Sender: TObject);
+    procedure BD6Click(Sender: TObject);
+    procedure BD5Click(Sender: TObject);
+    procedure KCRKRFSAfterOpen(DataSet: TDataSet);
+    procedure DBGridEh2EditButtonClick(Sender: TObject);
+    procedure DBGridEh1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure DBGridEh2GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure KCRKRFAfterOpen(DataSet: TDataSet);
+    procedure KCRKRFSSAfterScroll(DataSet: TDataSet);
+    procedure BB1Click(Sender: TObject);
+    procedure bbt6Click(Sender: TObject);
+    procedure BDT6Click(Sender: TObject);
+    procedure BO7Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+  private
+    iYear,iMonth:String;
+    NDate:TDate;
+    IsProcessRFID:boolean;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  EntryMatRFIDCode: TEntryMatRFIDCode;
+
+implementation
+  uses main1 , EntryMatRFIDCode_QT1, EntryMatRFIDCode_CT1, EntryMatRFIDCode_DLG1, FunUnit,EntryMatRFIDCode_CG1,PrintLabel1;
+{$R *.dfm}
+
+procedure TEntryMatRFIDCode.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action:=Cafree;
+end;
+
+procedure TEntryMatRFIDCode.FormDestroy(Sender: TObject);
+begin
+  EntryMatRFIDCode:=nil;
+end;
+
+procedure TEntryMatRFIDCode.BitBtn2Click(Sender: TObject);
+begin
+  //
+  with KCRKRF do
+  begin
+   Active:=false;
+   SQL.Clear;
+   SQL.Add('Select SCNO,GSBH,CKBH,DOCNO,MEMO,USERID,USERDATE,YN from KCRKScan_RF ');
+   SQL.Add('Where KCRKScan_RF.GSBH='''+main.Edit2.Text+''' ');
+   SQL.Add('   and convert(smalldatetime,convert(varchar,KCRKScan_RF.USERDATE,111)) between ');
+   SQL.add('          '''+formatdatetime('yyyy/MM/dd',DTP1.Date) +''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.Date) +'''');
+   SQL.Add('   and KCRKScan_RF.SCNO like ''%'+SCNOEdit.Text+'%'' ');
+   if INVEdit.Text<>'' then
+     SQL.Add('   and KCRKScan_RF.DOCNO like '''+INVEdit.Text+'%'' ');
+   if MemoEdit.Text<>'' then
+     SQl.Add('   and KCRKScan_RF.MEMO like '''+MemoEdit.Text+'%'' ');
+   if Check.Checked then
+   begin
+      SQL.Add('      and KCRKScan_RF.USERID='+''''+main.Edit1.Text+'''');
+   end;
+   //funcObj.WriteErrorLog(sql.Text);
+   Active:=true;
+  end;
+  Panel2.Visible:=false;
+  BB2.Enabled:=true;
+  BB3.Enabled:=true;
+  BB4.Enabled:=true;
+  bbt6.Enabled:=true;
+  KCRKRFS.Active:=true;
+  KCRKRFSS.Active:=true;
+ 
+end;
+
+procedure TEntryMatRFIDCode.BitBtn1Click(Sender: TObject);
+var i,PackCount:integer;
+    Qty,RemainQty,PackQty:double;
+    SCNO,RY,Article:String;
+begin
+  RY:='';
+  Article:= '';
+  with tmpQry do
+  begin
+    active:=false;
+    sql.Clear;
+    SQL.Add('select CGZLSS.ZLBH  ');
+    SQL.Add('from CGZLSS  ');
+    //SQL.Add('LEFT JOIN DDZL ON DDZL.DDBH = CGZLSS.ZLBH  ');
+    SQL.Add('where CGZLSS.CGNO='''+KCRKRFS.FieldByName('CGNO').AsString+'''  ');
+    SQL.Add('and CGZLSS.CLBH='''+KCRKRFS.FieldByName('CLBH').AsString+'''  ');
+    SQL.Add('group by CGZLSS.ZLBH  ');
+    active:=true;
+    while not tmpQry.eof do
+    begin
+      RY:=RY+tmpQry.fieldbyname('ZLBH').AsString+',';
+      tmpQry.Next;
+    end;
+    sql.Clear;
+    SQL.Add('select DDZL.Article,DDZL.BuyNo   ');
+    SQL.Add('from CGZLSS  ');
+    SQL.Add('left join DDZL on DDZL.DDBH = CGZLSS.ZLBH  ');
+    SQL.Add('where CGZLSS.CGNO='''+KCRKRFS.FieldByName('CGNO').AsString+'''  ');
+    SQL.Add('and CGZLSS.CLBH='''+KCRKRFS.FieldByName('CLBH').AsString+'''  ');
+    SQL.Add('group by DDZL.Article,DDZL.BuyNo  ');
+    active:=true;
+    while not tmpQry.eof do
+    begin
+      Article:=Article+tmpQry.fieldbyname('Article').AsString+'/'+tmpQry.fieldbyname('BuyNo').AsString+',';
+      tmpQry.Next;
+    end;
+  end;
+  RY:=Copy(RY,1,length(RY)-1);
+  Article:=Copy(Article,1,length(Article)-1);
+  //
+
+  with KCRKRFSS do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+  KCRKRFS.First;
+  //
+  SCNO:=KCRKRFS.FieldByName('SCNO').AsString;
+  for i:=0 to KCRKRFS.RecordCount-1 do
+  begin
+    if ((KCRKRFS.FieldByName('Qty').Value>0) and (KCRKRFS.FieldByName('PackQty').Value>0) and (KCRKRFSS.RecordCount=0) ) then
+    begin
+      //
+      PackCount:=1;
+      RemainQty:=KCRKRFS.FieldByName('Qty').Value;
+      PackQty:=KCRKRFS.FieldByName('PackQty').Value;
+      repeat
+        KCRKRFSS.edit;
+        KCRKRFSS.fieldbyname('SCNO').Value:=SCNO;
+        KCRKRFSS.fieldbyname('CLBH').Value:=KCRKRFS.FieldByName('CLBH').Value;
+        KCRKRFSS.fieldbyname('Pack').Value:=PackCount;
+        KCRKRFSS.fieldbyname('Qty').Value:=formatfloat('#,##0.##',PackQty);
+        KCRKRFSS.FieldByName('UserID').Value:=main.edit1.text;
+        KCRKRFSS.FieldByName('UserDate').Value:=NDate;
+        KCRKRFSS.FieldByName('YN').Value:='1';
+        KCRKRFSS.FieldByName('Memo_RY').Value:=RY;
+        KCRKRFSS.FieldByName('Memo_Article').Value:=Article;
+        if (RemainQty-PackQty)>0 then
+        begin
+          KCRKRFSS.fieldbyname('Qty').Value:=formatfloat('#,##0.##',PackQty);
+        end else
+        begin
+          KCRKRFSS.fieldbyname('Qty').Value:=formatfloat('#,##0.##',RemainQty);
+        end;
+        UpdKCRKFSS.apply(ukinsert);
+        //
+        RemainQty:=RemainQty-PackQty;
+        PackCount:=PackCount+1;
+      until ((RemainQty<=0) or (PackCount>250)) ;
+    end;
+    KCRKRFS.Next;
+  end;
+  KCRKRFSS.active:=false;
+  KCRKRFSS.cachedupdates:=false;
+  KCRKRFSS.requestlive:=false;
+  KCRKRFSS.active:=true;
+  KCRKRFSS.Active:=true;
+
+end;
+
+procedure TEntryMatRFIDCode.FormCreate(Sender: TObject);
+begin
+  //
+  with tmpQry do //取服務器的年月值
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('select year(getdate()) as FY,month(getdate()) as FM ,getdate() as NDate');
+    active:=true;
+    iYear:=fieldbyname('FY').asstring;
+    iMonth:=fieldbyname('FM').asstring;
+    NDate:=fieldbyname('NDate').Value;
+    active:=false;
+  end;
+  if length(iMonth)<2 then
+  iMonth:='0'+iMonth;
+  //
+  DTP1.Date:=Date()-3;
+  DTP2.date:=Date();
+  try
+      ServerSocket.Active:=true;
+  except
+    on E:Exception do
+    begin
+      Showmessage('Van den:'+E.Message);
+    end;
+  end;
+end;
+
+procedure TEntryMatRFIDCode.BO3Click(Sender: TObject);
+begin
+  with KCRKRFSS do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+  BO4.Enabled:=true;
+  BO5.Enabled:=true;
+end;
+
+procedure TEntryMatRFIDCode.BO2Click(Sender: TObject);
+begin
+  with KCRKRFSS do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+    fieldbyname('YN').Value:='0';
+  end;
+  BO4.Enabled:=true;
+  BO5.Enabled:=true;
+end;
+
+procedure TEntryMatRFIDCode.BO4Click(Sender: TObject);
+var i,Pack:integer;
+begin
+
+  try
+      KCRKRFSS.first;
+      for i:=1 to KCRKRFSS.RecordCount do
+      begin
+        case KCRKRFSS.updatestatus of
+          usinserted:
+          begin
+            if KCRKRFSS.fieldbyname('Qty').isnull then
+            begin
+              KCRKRFSS.delete;
+            end else
+            begin
+               with tmpQry do
+               begin
+                 Active:=false;
+                 SQL.Clear;
+                 SQL.Add('Select top 1 Pack from KCRKScan_RFSS where SCNO='''+KCRKRFS.fieldbyname('SCNO').AsString+''' and CLBH='''+KCRKRFS.fieldbyname('CLBH').AsString+'''  order by Pack Desc');
+                 Active:=true;
+                 if RecordCount>0 then
+                   Pack:=FieldByName('Pack').AsInteger+1
+                 else
+                   Pack:=1;
+                 Active:=false;
+               end;
+               KCRKRFSS.edit;
+               //
+               KCRKRFSS.fieldbyname('SCNO').Value:=KCRKRFS.FieldByName('SCNO').Value;
+               KCRKRFSS.fieldbyname('CLBH').Value:=KCRKRFS.FieldByName('CLBH').Value;
+               KCRKRFSS.fieldbyname('Pack').Value:=Pack;
+               KCRKRFSS.FieldByName('userID').Value:=main.edit1.text;
+               KCRKRFSS.FieldByName('userdate').Value:=date;
+               KCRKRFSS.FieldByName('YN').Value:='1';
+               if (Pack<=250) then
+               UpdKCRKFSS.apply(ukinsert);
+            end;
+          end;
+          usmodified:
+          begin
+            if KCRKRFSS.fieldbyname('YN').value='0'then
+            begin
+              UpdKCRKFSS.apply(ukdelete);
+            end else
+            begin
+              KCRKRFSS.edit;
+              KCRKRFSS.FieldByName('userID').Value:=main.edit1.text;
+              KCRKRFSS.FieldByName('userdate').Value:=date;
+              UpdKCRKFSS.apply(ukmodify);
+            end;
+          end;
+        end;
+        KCRKRFSS.Next;
+      end;
+      //
+      with tmpQry do
+      begin
+        Active:=false;
+        SQL.Clear;
+        SQL.Add('Update KCRKScan_RFS set Qty=KCRRScan_RFSS.Qty');
+        SQL.Add('from ( ');
+        SQL.Add('select SCNO,CLBH,Sum(Qty) as Qty from KCRKScan_RFSS ');
+        SQL.Add('where SCNO='''+KCRKRFS.FieldByName('SCNO').AsString+''' and CLBH='''+KCRKRFS.FieldByName('CLBH').AsString+''' Group by SCNO,CLBH ) KCRRScan_RFSS ');
+        SQL.Add('where KCRRScan_RFSS.CLBH=KCRKScan_RFS.CLBH and KCRRScan_RFSS.SCNO=KCRKScan_RFS.SCNO ');
+        ExecSQL();
+      end;
+      //KCRKRFS.Active:=false;
+      //KCRKRFS.Active:=true;
+      //
+      KCRKRFSS.active:=false;
+      KCRKRFSS.cachedupdates:=false;
+      KCRKRFSS.requestlive:=false;
+      KCRKRFSS.active:=true;
+      BO4.Enabled:=false;
+      BO5.Enabled:=false;
+  except
+    On E:Exception do
+    begin
+      Messagedlg('Have wrong, can not save data!'+E.Message,mtwarning,[mbyes],0);
+    end;
+  end;
+  //
+
+end;
+
+procedure TEntryMatRFIDCode.BO5Click(Sender: TObject);
+begin
+  with KCRKRFSS do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  BO4.enabled:=false;
+  BO5.enabled:=false;
+end;
+
+procedure TEntryMatRFIDCode.ServerSocketClientConnect(Sender: TObject;
+  Socket: TCustomWinSocket);
+begin
+  FuncObj.WriteErrorLog(datetimetostr(now)+' Socket Client Connect');
+  BO6.Enabled:=true;
+  IsProcessRFID:=false;
+end;
+
+procedure TEntryMatRFIDCode.ServerSocketClientDisconnect(Sender: TObject;
+  Socket: TCustomWinSocket);
+begin
+  FuncObj.WriteErrorLog(datetimetostr(now)+' Socket Client Disconnect');
+  BO6.Enabled:=false;
+end;
+
+procedure TEntryMatRFIDCode.ServerSocketClientError(Sender: TObject;
+  Socket: TCustomWinSocket; ErrorEvent: TErrorEvent;
+  var ErrorCode: Integer);
+begin
+  ErrorCode:=0;
+end;
+
+procedure TEntryMatRFIDCode.ServerSocketClientRead(Sender: TObject;
+  Socket: TCustomWinSocket);
+var Rece:String;
+begin
+  Rece:=Socket.ReceiveText;
+  if Pos('<MATOK>',Rece)>=1 then
+  begin
+    ImageOK.Visible:=true;
+    ImageNO.Visible:=false;
+  end;
+  if Pos('<MATNOK>',Rece)>=1 then
+  begin
+    ImageNO.Visible:=true;
+    ImageOK.Visible:=false;
+  end;
+  IsProcessRFID:=false;
+  FuncObj.WriteErrorLog(datetimetostr(now)+' Rece:'+Rece);
+end;
+
+procedure TEntryMatRFIDCode.BO6Click(Sender: TObject);
+var i:integer;
+   SendRFID:String;
+begin
+  if KCRKRFSS.Active=true then
+  begin
+    if KCRKRFSS.FieldByName('SCNO').AsString<>'' then
+    begin
+      if IsProcessRFID=false then
+      begin
+        SendRFID:='<MAT>'+Copy(KCRKRFSS.FieldByName('SCNO').AsString,3,8)+KCRKRFSS.FieldByName('CLBH').AsString+Format('%.3d',[strtoint(KCRKRFSS.FieldByName('Pack').AsString)])+KCRKRFSS.FieldByName('Qty').AsString;
+        for i:=0 to ServerSocket.Socket.ActiveConnections-1 do
+        begin
+          ServerSocket.Socket.Connections[i].SendText(SendRFID);
+        end;
+        IsProcessRFID:=true;
+      end;
+    end;
+  end;
+end;
+
+procedure TEntryMatRFIDCode.DBGridEh3KeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+    if Key=VK_DOWN then
+    begin
+      if KCRKRFSS.FieldByName('Pack').AsInteger<>KCRKRFSS.RecordCount then
+      begin
+      end else
+      begin
+        if KCRKRFSS.requestlive=false then
+        begin
+          KCRKRFS.Next;
+        end;
+      end;
+    end;
+    if Key=VK_UP then
+    begin
+      if KCRKRFSS.FieldByName('Pack').AsInteger<>1 then
+      begin
+      end else
+      begin
+       if KCRKRFSS.requestlive=false then
+       begin
+         KCRKRFS.Prior;
+         KCRKRFSS.Last;
+       end;
+      end;
+    end;
+    if Key=VK_RETURN then
+    begin
+      if KCRKRFSS.requestlive=false then
+      BO6.Click;
+    end;
+
+end;
+
+procedure TEntryMatRFIDCode.KCRKRFSSAfterOpen(DataSet: TDataSet);
+begin
+  BO1.Enabled:=true;
+  BO2.Enabled:=true;
+  BO3.Enabled:=true;
+  if (NDate-KCRKRF.FieldByName('USERDATE').value)>15 then
+  begin
+    BO1.Enabled:=false;
+    BO2.Enabled:=false;
+    BO3.Enabled:=false;
+  end;
+  if KCRKRF.FieldByName('USERID').value<>main.Edit1.text  then
+  begin
+    BO1.Enabled:=false;
+    BO2.Enabled:=false;
+    BO3.Enabled:=false;
+  end;
+  if KCRKRF.cachedupdates  then
+  begin
+    BO1.Enabled:=false;
+    BO2.Enabled:=false;
+    BO3.Enabled:=false;
+  end;
+end;
+
+procedure TEntryMatRFIDCode.DBGridEh3GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if KCRKRFSS.FieldByName('YN').value='0' then
+  begin
+    DBGridEh3.canvas.font.color:=clred;
+  end;
+end;
+
+procedure TEntryMatRFIDCode.BO1Click(Sender: TObject);
+begin
+  with KCRKRFSS do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    Append;
+  end;
+  BO4.Enabled:=true;
+  BO5.Enabled:=true;
+end;
+
+procedure TEntryMatRFIDCode.BB2Click(Sender: TObject);
+begin
+  with KCRKRF do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    insert;
+  end;
+  BB5.Enabled:=true;
+  BB6.Enabled:=true;
+end;
+
+procedure TEntryMatRFIDCode.BB3Click(Sender: TObject);
+begin
+  if (KCRKRFS.recordcount=0) and (KCRKRFSS.RecordCount=0) then
+  begin
+    with KCRKRF do
+    begin
+        if fieldbyname('USERID').value=main.edit1.Text then
+        begin
+            requestlive:=true;
+            cachedupdates:=true;
+            edit;
+            fieldbyname('YN').Value:='0';
+          end else
+          begin
+            showmessage('It is not yours,can not delete.');
+        end;
+    end;
+  end else
+  begin
+    showmessage('Pls delete the Entry Detail first.')
+  end;
+  BB5.Enabled:=true;
+  BB6.Enabled:=true;
+end;
+
+procedure TEntryMatRFIDCode.BB4Click(Sender: TObject);
+begin
+  with KCRKRF do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+  BB5.Enabled:=true;
+  BB6.Enabled:=true;
+end;
+
+procedure TEntryMatRFIDCode.BB6Click(Sender: TObject);
+begin
+  with KCRKRF do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  BB5.enabled:=false;
+  BB6.enabled:=false;
+end;
+
+procedure TEntryMatRFIDCode.BB5Click(Sender: TObject);
+var i:integer;
+    SCNO:string;
+begin
+
+  try
+      KCRKRF.first;
+      for i:=1 to KCRKRF.RecordCount do
+      begin
+        case KCRKRF.updatestatus of
+          usinserted:
+          begin
+            if ((KCRKRF.fieldbyname('MEMO').isnull) and (KCRKRF.fieldbyname('DOCNO').isnull)) then
+            begin
+              //KCRKRF.delete;
+            end else
+            begin
+             with tmpQry do    //計算領料單流水號
+             begin
+               active:=false;
+               sql.Clear;
+               sql.Add('select SCNO from KCRKScan_RF where SCNO like '+''''+iYear+iMonth+'%'+'''');
+               sql.add('order by SCNO');
+               active:=true;
+               if recordcount >0 then
+               begin
+                 Last;
+                 SCNO:=fieldbyname('SCNO').AsString;
+                 SCNO:=copy(SCNO,7,4);
+                 SCNO:=inttostr(strtoint(SCNO)+1);
+                 while length(SCNO)<4 do
+                 begin
+                   SCNO:='0'+SCNO;
+                 end;
+               end else
+               begin
+                 SCNO:='0001';
+               end;
+               SCNO :=iYear+iMonth+SCNO;
+               //
+               KCRKRF.edit;
+               KCRKRF.FieldByName('SCNO').Value:=SCNO;
+               KCRKRF.FieldByName('CKBH').Value:=main.Edit2.Text;
+               KCRKRF.FieldByName('GSBH').Value:=main.Edit2.Text;
+               KCRKRF.FieldByName('userID').Value:=main.edit1.text;
+               KCRKRF.FieldByName('userdate').Value:=date;
+               KCRKRF.FieldByName('YN').Value:='1';
+               UpdKCRKRF.apply(ukinsert);
+             end;
+            end;
+          end;
+          usmodified:
+          begin
+            if KCRKRF.fieldbyname('YN').value='0' then
+            begin
+              UpdKCRKRF.apply(ukdelete);
+            end else
+            begin
+              KCRKRF.edit;
+              KCRKRF.FieldByName('userID').Value:=main.edit1.text;
+              KCRKRF.FieldByName('userdate').Value:=date;
+              UpdKCRKRF.apply(ukmodify);
+            end;
+          end;
+        end;
+        KCRKRF.Next;
+      end;
+    KCRKRF.active:=false;
+    KCRKRF.cachedupdates:=false;
+    KCRKRF.requestlive:=false;
+    KCRKRF.active:=true;
+    BB5.Enabled:=false;
+    BB6.Enabled:=false;
+  except
+    On E:Exception do
+    begin
+      Messagedlg('Have wrong, can not save data!'+E.Message,mtwarning,[mbyes],0);
+    end;
+  end;
+
+end;
+
+procedure TEntryMatRFIDCode.PC1Change(Sender: TObject);
+begin
+  if PC1.ActivePage=TS1 then
+  begin
+    panel6.visible:=false;
+    panel1.visible:=true;
+  end else
+  begin
+    panel6.visible:=true;
+    panel1.visible:=false;
+    bdt6.Enabled:=true;
+    bo7.Enabled:=true;
+  end;
+end;
+
+procedure TEntryMatRFIDCode.DBGridEh1DblClick(Sender: TObject);
+begin
+  if  KCRKRF.Active then
+  begin
+    if  (KCRKRF.recordcount>0) then
+    begin
+        PC1.ActivePage:=TS2;
+        panel1.Visible:=false;
+        panel6.Visible:=true;
+    end;
+  end;
+end;
+
+procedure TEntryMatRFIDCode.BD2Click(Sender: TObject);
+begin
+  with KCRKRFS do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    insert;
+  end;
+  BD5.Enabled:=true;
+  BD6.Enabled:=true;
+  DBGridEh2.columns[0].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TEntryMatRFIDCode.BD3Click(Sender: TObject);
+begin
+  if (KCRKRFSS.RecordCount=0) then
+  begin
+    with KCRKRFS do
+    begin
+        if fieldbyname('USERID').value=main.edit1.Text then
+        begin
+            requestlive:=true;
+            cachedupdates:=true;
+            edit;
+            fieldbyname('YN').Value:='0';
+          end else
+          begin
+            showmessage('It is not yours,can not delete.');
+        end;
+    end;
+  end else
+  begin
+    showmessage('Pls delete the Entry Detail first.')
+  end;
+  BD5.Enabled:=true;
+  BD6.Enabled:=true;
+  DBGridEh2.columns[0].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TEntryMatRFIDCode.BD4Click(Sender: TObject);
+begin
+  with KCRKRFS do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+  BD5.Enabled:=true;
+  BD6.Enabled:=true;
+  DBGridEh2.columns[0].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TEntryMatRFIDCode.BD6Click(Sender: TObject);
+begin
+  with KCRKRFS do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  BD5.enabled:=false;
+  BD6.enabled:=false;
+  DBGridEh2.columns[0].ButtonStyle:=cbsNone;
+end;
+
+procedure TEntryMatRFIDCode.BD5Click(Sender: TObject);
+var i:integer;
+begin
+
+  try
+      KCRKRFS.first;
+      for i:=1 to KCRKRFS.RecordCount do
+      begin
+        case KCRKRFS.updatestatus of
+          usinserted:
+          begin
+            if (KCRKRFS.fieldbyname('CLBH').isnull) then
+            begin
+              KCRKRFS.delete;
+            end else
+            begin
+               KCRKRFS.edit;
+               KCRKRFS.FieldByName('SCNO').Value:=KCRKRF.FieldByName('SCNO').AsString;
+               KCRKRFS.FieldByName('userID').Value:=main.edit1.text;
+               KCRKRFS.FieldByName('userdate').Value:=date;
+               KCRKRFS.FieldByName('YN').Value:='1';
+               UpdKCRKRFS.apply(ukinsert);
+            end;
+          end;
+          usmodified:
+          begin
+            if KCRKRFS.fieldbyname('YN').value='0'then
+            begin
+              UpdKCRKRFS.apply(ukdelete);
+            end else
+            begin
+              KCRKRFS.edit;
+              KCRKRFS.FieldByName('userID').Value:=main.edit1.text;
+              KCRKRFS.FieldByName('userdate').Value:=date;
+              UpdKCRKRFS.apply(ukmodify);
+            end;
+          end;
+        end;
+        KCRKRFS.Next;
+      end;
+    KCRKRFS.active:=false;
+    KCRKRFS.cachedupdates:=false;
+    KCRKRFS.requestlive:=false;
+    KCRKRFS.active:=true;
+    BD5.Enabled:=false;
+    BD6.Enabled:=false;
+    DBGridEh2.columns[0].ButtonStyle:=cbsNone;
+  except
+    On E:Exception do
+    begin
+      Messagedlg('Have wrong, can not save data!'+E.Message,mtwarning,[mbyes],0);
+    end;
+  end;
+
+end;
+
+procedure TEntryMatRFIDCode.KCRKRFSAfterOpen(DataSet: TDataSet);
+begin
+  //
+  BD2.Enabled:=true;
+  BD3.Enabled:=true;
+  BD4.Enabled:=true;
+  if (NDate-KCRKRF.FieldByName('USERDATE').value)>15 then
+  begin
+    BD2.Enabled:=false;
+    BD3.Enabled:=false;
+    BD4.Enabled:=false;
+  end;
+  if KCRKRF.FieldByName('USERID').value<>main.Edit1.text  then
+  begin
+    BD2.Enabled:=false;
+    BD3.Enabled:=false;
+    BD4.Enabled:=false;
+  end;
+  if KCRKRF.cachedupdates  then
+  begin
+    BD2.Enabled:=false;
+    BD3.Enabled:=false;
+    BD4.Enabled:=false;
+  end;
+  //
+end;
+
+procedure TEntryMatRFIDCode.DBGridEh2EditButtonClick(Sender: TObject);
+begin
+ if (DBGridEh2.SelectedField.FieldName='CLBH') then
+ begin
+   EntryMatRFIDCode_DLG:=TEntryMatRFIDCode_DLG.create(self);
+   EntryMatRFIDCode_DLG.Show;
+ end;
+end;
+
+procedure TEntryMatRFIDCode.DBGridEh1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if KCRKRF.FieldByName('YN').value='0' then
+  begin
+    DBGridEh1.canvas.font.color:=clred;
+  end;
+end;
+
+procedure TEntryMatRFIDCode.DBGridEh2GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if KCRKRFS.FieldByName('YN').value='0' then
+  begin
+    DBGridEh2.canvas.font.color:=clred;
+  end;
+end;
+
+procedure TEntryMatRFIDCode.KCRKRFAfterOpen(DataSet: TDataSet);
+begin
+  if KCRKRF.RecordCount>0 then
+  begin
+    BB2.Enabled:=true;
+    BB3.Enabled:=true;
+    BB4.Enabled:=true;
+  end;
+  if ((NDate-KCRKRF.FieldByName('USERDATE').value)>60)  then
+  begin
+    BB2.Enabled:=false;
+    BB3.Enabled:=false;
+    BB4.Enabled:=false;
+  end;
+  if KCRKRF.FieldByName('USERID').value<>main.edit1.text  then
+  begin
+    BB2.Enabled:=false;
+    BB3.Enabled:=false;
+    BB4.Enabled:=false;
+  end;
+end;
+
+procedure TEntryMatRFIDCode.KCRKRFSSAfterScroll(DataSet: TDataSet);
+begin
+  if BO6.Enabled=true then
+  begin
+    ImageOK.Visible:=false;
+    ImageNO.Visible:=false;
+  end;
+end;
+
+procedure TEntryMatRFIDCode.BB1Click(Sender: TObject);
+begin
+  Panel2.Visible:=true;
+end;
+
+procedure TEntryMatRFIDCode.bbt6Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j,k:integer;
+begin
+    if  KCRKRF.active  then
+    begin
+      try
+        eclApp:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+      try
+          WorkBook:=eclApp.workbooks.Add;
+          for   i:=0   to   5   do
+          begin
+            eclApp.Cells(1,i+1):=KCRKRF.fields[i].FieldName;
+          end;
+          KCRKRF.First;
+          j:=2;
+          while   not   KCRKRF.Eof   do
+            begin
+              for   i:=0   to  5  do
+              begin
+                eclApp.Cells(j,i+1):=KCRKRF.Fields[i].Value;
+              end;
+            KCRKRF.Next;
+            inc(j);
+            end;
+          for k:=1 to 4 do
+          begin
+            eclApp.range[eclApp.cells[1,1],eclApp.cells[j-1,6]].borders[k].linestyle:=1;
+          end;
+         eclapp.columns.autofit;
+         showmessage('Succeed');
+         eclApp.Visible:=True;
+      except
+          on   F:Exception   do
+            showmessage(F.Message);
+      end;
+    end;
+
+end;
+
+procedure TEntryMatRFIDCode.BDT6Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j,k:integer;
+begin
+    if  KCRKRFS.active  then
+    begin
+      try
+        eclApp:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+      try
+          WorkBook:=eclApp.workbooks.Add;
+          for   i:=0   to   3   do
+          begin
+              eclApp.Cells(1,i+1):=KCRKRFS.fields[i+1].FieldName;
+          end;
+
+          KCRKRFS.First;
+          j:=2;
+          while   not   KCRKRFS.Eof   do
+          begin
+            for   i:=0   to   3   do
+            begin
+              eclApp.Cells(j,i+1):=KCRKRFS.fields[i+1].Value;
+            end;
+            KCRKRFS.Next;
+            inc(j);
+          end;
+          for k:=1 to 4 do
+          begin
+            eclApp.range[eclApp.cells[1,1],eclApp.cells[j-1,4]].borders[k].linestyle:=1;
+          end;
+         eclapp.columns.autofit;
+         showmessage('Succeed');
+         eclApp.Visible:=True;
+      except
+          on   F:Exception   do
+            showmessage(F.Message);
+      end;
+    end;
+
+end;
+
+procedure TEntryMatRFIDCode.BO7Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j,k:integer;
+begin
+    if  KCRKRFSS.active  then
+    begin
+      try
+        eclApp:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+      try
+          WorkBook:=eclApp.workbooks.Add;
+          for   i:=0   to   3   do
+          begin
+              eclApp.Cells(1,i+1):=KCRKRFSS.fields[i+1].FieldName;
+          end;
+
+          KCRKRFSS.First;
+          j:=2;
+          while   not   KCRKRFSS.Eof   do
+          begin
+            for   i:=0   to 3  do
+            begin
+              eclApp.Cells(j,i+1):=KCRKRFSS.Fields[i+1].Value;
+            end;
+          KCRKRFSS.Next;
+          inc(j);
+          end;
+          for k:=1 to 4 do
+          begin
+            eclApp.range[eclApp.cells[1,1],eclApp.cells[j-1,4]].borders[k].linestyle:=1;
+          end;
+         eclapp.columns.autofit;
+         showmessage('Succeed');
+         eclApp.Visible:=True;
+      except
+          on   F:Exception   do
+            showmessage(F.Message);
+      end;
+    end;
+
+end;
+
+procedure TEntryMatRFIDCode.BitBtn3Click(Sender: TObject);
+begin
+  with Query1 do
+  begin
+    active:=false;
+    SQL.Clear;
+    SQL.Add('  select KCRKScan_RFSS.SCNO,KCRKScan_RFSS.CLBH,CLZL.YWPM,ZSZL.ZSYWJC,KCRKScan_RFS.CGNO,KCRKScan_RFSS.Memo_RY,KCRKScan_RFSS.Memo_Article,KCRKScan_RFSS.Qty,KCRKScan_RFSS.Pack,KCRKScan_RF.Memo,CLZL.DWBH  ');
+    SQL.Add('  from KCRKScan_RF  ');
+    SQL.Add('  left join KCRKScan_RFS on KCRKScan_RFS.SCNO = KCRKScan_RF.SCNO  ');
+    SQL.Add('  left join KCRKScan_RFSS on KCRKScan_RFSS.SCNO = KCRKScan_RFS.SCNO and KCRKScan_RFSS.CLBH = KCRKScan_RFS.CLBH ');
+    SQL.Add('  left join CGZL on KCRKScan_RFS.CGNO = CGZL.CGNO  ');
+    SQL.Add('  left join ZSZL on CGZL.ZSBH = ZSZL.ZSDH  ');
+    SQL.Add('  left join CLZL on KCRKScan_RFSS.CLBH = CLZL.CLDH  ');
+    SQL.Add('  where KCRKScan_RFSS.SCNO='''+KCRKRF.FieldByName('SCNO').AsString+'''  ');
+    active:=true;
+  end;
+    PrintLabel:=TPrintLabel.Create(nil);
+    PrintLabel.quickrep1.prepare;
+    PrintLabel.quickrep1.preview;
+    PrintLabel.Free;
+end;
+
+end.

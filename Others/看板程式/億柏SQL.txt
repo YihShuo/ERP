@@ -1,0 +1,38 @@
+select C.DepName, C.DepNo, C.sumline, isnull(C.BZDate,(convert(smalldatetime,convert(varchar(10),getdate(),111)))) as BZDate, isnull(C.Qty,0) as Qty, C.nowqty, isnull((round(convert(float,convert(float,(C.nowqty*100)))/C.Qty1,1)*10),0) as PT, C.RFT from (
+select BDepartment.DepName as DepName,isnull(SCBZCL.DepNo,0) as DepNo,BDepartment.sumline, BZDate,SCBZCL.Qty,sum(smzl.cts*smddss.qty) as nowqty,convert(int,isnull(QC_rft_DEP.rft,0)*10) as rft, a.Qty as Qty1
+from smzl 
+left join smddss on smzl.codebar=smddss.codebar
+left join BDepartment on BDepartment.id=smzl.depno
+left join scbzcl on smzl.depno=scbzcl.depno
+and (convert(smalldatetime,convert(varchar,scbzcl.bzdate,111)))=(convert(smalldatetime,convert(varchar(10),getdate(),111)))
+left join (select distinct depno,scyear,scmonth,scday, sum(Qty) as Qty
+from (select distinct SCRL.DepNo,
+SCYEAR,SCMONTH,SCDay,
+--20191115異動
+(case when (datepart(hh,scandate)) in('7','8') then convert(int,round(convert(int, round((IsNULL(SCBZCL.Qty/SCRL.SCGS,0)),2)/2,0),2)) else 
+(case when (datepart(hh,scandate)) in('17') then convert(int,round(convert(int, round((IsNULL(SCBZCL.Qty/SCRL.SCGS,0)),2)*1.5,0),2)) else 
+(case when (datepart(hh,scandate)) in('9','10','11','13','14','15','16') then convert(int,round(convert(int, round((IsNULL(SCBZCL.Qty/SCRL.SCGS,0)),2),0),2)) else 
+(case when (convert(time,scandate) between convert(time,convert(nvarchar(2),(datepart(hh,getdate())))+':00:00') 
+and convert(time,convert(nvarchar(2),(datepart(hh,getdate())))+':59:59')) then convert(int, round((IsNULL(SCBZCL.Qty/SCRL.SCGS,0)),2)) else 0 end) end) end) end) Qty,
+--
+datepart(hh,scandate) as dem
+from SCBZCL
+left join SCRL on SCBZCL.DepNo=SCRL.DepNO and YEAR(BZDate) = SCYEAR and month(BZDate)= SCMONTH and DAY(BZDate) = SCDay
+left join smzl on smzl.depno=scbzcl.depno
+where 1=1
+and smzl.scandate>(convert(smalldatetime,convert(varchar(10),getdate(),111)))
+and SCYEAR=datepart(yyyy,getdate())  
+and SCMONTH=datepart(mm,getdate())  
+and SCDay=datepart(dd,getdate())  
+group by SCRL.DepNo,SCBZCL.Qty,SCRL.SCGS,SCYEAR,SCMONTH,SCDay,smzl.scandate
+) as B
+group by depno,scyear,scmonth,scday) a on a.DepNo=SCBZCL.DepNo and YEAR(BZDate) = a.SCYEAR and month(BZDate)= a.SCMONTH and DAY(BZDate) = a.SCDay
+left join QC_rft_DEP on BDepartment.ID = QC_rft_DEP.DepNO
+where 1=1 
+and BDepartment.GXLB='A' and BDepartment.GSBH='TBA' 
+and smzl.scandate>(convert(smalldatetime,convert(varchar(10),getdate(),111)))
+and smddss.gxlb='A' 
+and BDepartment.sumline is not null
+group by BDepartment.DepName,BDepartment.sumline,scbzcl.qty,QC_rft_DEP.rft , BZDate, SCBZCL.DepNo, a.Qty) C
+group by C.DepName, C.DepNo, C.sumline, C.BZDate, C.Qty, C.nowqty, C.RFT, C.Qty1
+order by C.DepName

@@ -1,0 +1,84 @@
+unit MachineLean1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, GridsEh, DBGridEh, ExtCtrls, DB, DBTables;
+
+type
+  TMachineLean = class(TForm)
+    Panel1: TPanel;
+    DBGridEh1: TDBGridEh;
+    Edit1: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit2: TEdit;
+    Button1: TButton;
+    Query1: TQuery;
+    DataSource1: TDataSource;
+    Query1ID: TStringField;
+    Query1DepName: TStringField;
+    Query1Lean: TStringField;
+    Query1Xuong: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure DBGridEh1DblClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MachineLean: TMachineLean;
+
+implementation
+
+uses main1, CutMachine1;
+
+{$R *.dfm}
+
+procedure TMachineLean.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+procedure TMachineLean.FormDestroy(Sender: TObject);
+begin
+  MachineLean := Nil;
+end;
+
+procedure TMachineLean.FormCreate(Sender: TObject);
+begin
+  Button1Click(Nil);
+end;
+
+procedure TMachineLean.Button1Click(Sender: TObject);
+begin
+  with Query1 do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT ID, DepName, ''LEAN'' + RIGHT(sumline, 2) AS Lean, Xuong FROM BDepartment');
+    SQL.Add('WHERE ProYn = 1 AND YN = 1 AND sumline IS NOT NULL AND GXLB = ''C'' AND GSBH = ''' + main.Edit2.Text + ''' AND Xuong IS NOT NULL');
+    if (Edit1.Text <> '') then
+      SQL.Add('AND Xuong LIKE ''' + Edit1.Text + '%''');
+    if (Edit2.Text <> '') then
+      SQL.Add('AND ID LIKE ''' + Edit2.Text + '%''');
+    SQL.Add('ORDER BY ID');
+    Active := true;
+  end;
+end;
+
+procedure TMachineLean.DBGridEh1DblClick(Sender: TObject);
+begin
+  CutMachine.Query1.FieldByName('DepNo').Value := Query1.FieldByName('ID').AsString;
+  CutMachine.Query1.FieldByName('DepName').Value := Query1.FieldByName('DepName').AsString;
+  Close;
+end;
+
+end.

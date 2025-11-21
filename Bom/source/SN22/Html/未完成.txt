@@ -1,0 +1,6 @@
+BOM N22 
+1.複製目錄 images 要檢查檔名是否重複和 Rename
+2.開啟要更新複製版面 Html\template 到根目錄
+3.切換Page頁面，鼠標顯示載入忙碌中
+4.支援BOM選取多個部位選取同一個區塊
+4.註冊BOM.reg

@@ -1,0 +1,39 @@
+Select VCLID,VCLName_VN as Langeuage from BLanguage WHERE  MKID = '00' and mainForm='main'
+select KCLLS.LLNo,KCLLS.CLBH,KCLLS.DFL,KCLLS.CLSL,KCLLS.SCBH,KCLLS.TempQty,KCLLS.Qty,KCLLS.MEMO,KCLLS.BLSB,KCLLS.USERID,KCLLS.USERDATE
+       ,KCLLS.YYBH,SCBLYY.YWSM,KCLL.CKBH,KCLLS.CLBH as MJBH,'Assembly' as DType,KCLL.CFMID,KCLL.CFMDate 
+from KCLLS
+left join SCBLYY on SCBLYY.YYBH=KCLLS.YYBH
+left join KCLL on KCLL.LLNO=KCLLS.LLNO
+where KCLLS.SCBH='JHS2402-213' 
+      and KCLLS.CLBH='W209000575'
+      and KCLLS.CLBH='W209000575'
+      and 'Assembly'='Assembly'
+      and KCLL.GSBH='VDH' 
+       and KCLL.CFMID<>'NO' 
+      and KCLL.SCBH<>'JJJJJJJJJJ'
+union all
+select JGZLSS.JGNO as LLNO,JGZLS.ZMLB as CLBH,null as DFL,(JGZLSS.CLSL*JGZLS.Qty) as CLSL,JGZLSS.ZLBH as SCBH,(JGZLS.Qty*JGZLSS.Qty) as TempQty,(JGZLS.Qty*JGZLSS.Qty) as Qty, 
+       JGZLS.MEMO,null as BLSB,JGZLSS.USERID,JGZLSS.USERDATE,null YYSB,null as YWSM,JGZL.CKBH,JGZLS.CLBH as MJBH,'Gia cong' as DType,JGZL.CFMID1 as CFMID,JGZL.CFMDate1 as CFMDate 
+from JGZLS
+Left Join JGZLSS on JGZLS.JGNO=JGZLSS.JGNO and JGZLS.CLBH=JGZLSS.CLBH 
+left join JGZL on JGZL.JGNO=JGZLSS.JGNO
+Left join DDZL on DDZL.DDBH=JGZLSS.ZLBH
+where  JGZLSS.ZLBH = 'JHS2402-213' 
+    and JGZLS.ZMLB = 'W209000575'
+    and JGZLS.CLBH='W209000575'
+    and 'Gia cong'='Assembly'
+    and JGZL.GSBH='VDH'  and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) <'2017/09/01'
+    and JGZL.CFMID1<>'NO' 
+union all
+select KCLLS.LLNo,KCLLS.CLBH,KCLLS.DFL,KCLLS.CLSL,KCLLS.SCBH,KCLLS.TempQty,KCLLS.Qty,KCLLS.MEMO,KCLLS.BLSB,KCLLS.USERID,KCLLS.USERDATE
+       ,KCLLS.YYBH,SCBLYY.YWSM,KCLL.CKBH,KCLLS.DFL as MJBH,'Gia Cong' as DType,KCLL.CFMID,KCLL.CFMDate 
+from KCLLS
+left join SCBLYY on SCBLYY.YYBH=KCLLS.YYBH
+left join KCLL on KCLL.LLNO=KCLLS.LLNO
+where KCLLS.SCBH='JHS2402-213' 
+      and KCLLS.CLBH='W209000575'
+      and KCLLS.DFL='W209000575'
+      and 'Gia Cong'='Assembly'
+      and KCLL.GSBH='VDH'  and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='2017/09/01' 
+      and KCLL.CFMID<>'NO' 
+      and KCLL.SCBH='JJJJJJJJJJ'

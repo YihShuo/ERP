@@ -1,0 +1,147 @@
+unit FirstStock_CL1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls, Buttons;
+
+type
+  TFirstStock_CL = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Button1: TButton;
+    Edit2: TEdit;
+    EDIT1: TEdit;
+    DBGrid1: TDBGrid;
+    DS1: TDataSource;
+    Query1: TQuery;
+    Query1cldh: TStringField;
+    Query1cllb: TStringField;
+    Query1ywpm: TStringField;
+    Query1dwbh: TStringField;
+    Query1KCBH: TStringField;
+    Query1LYCC: TStringField;
+    Query1CLZMLB: TStringField;
+    BBT7: TBitBtn;
+    Edit3: TEdit;
+    procedure Button1Click(Sender: TObject);
+    procedure EDIT1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure DBGrid1KeyPress(Sender: TObject; var Key: Char);
+    procedure BBT7Click(Sender: TObject);
+    procedure Edit3KeyPress(Sender: TObject; var Key: Char);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FirstStock_CL: TFirstStock_CL;
+
+implementation
+
+uses  main1,Firststock1, MaterialArea1;
+
+{$R *.dfm}
+
+procedure TFirstStock_CL.Button1Click(Sender: TObject);
+begin
+with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select CLZL.CLDH,CLZL.CLLB,CLZL.YWPM,CLZL.DWBH,KCZLS.KCBH,CLZL.LYCC,CLZL.CLZMLB ');
+    sql.add('from CLZL ');
+    sql.add('left join (select KCZLS.* from KCZLS');
+    sql.add('           left join KCCK on KCCK.CKBH=KCZLS.CKBH ');
+    sql.add('           where KCCK.GSBH='+ ''''+main.edit2.text+'''');
+    sql.add('              ) KCZLS on KCZLS.CLBH=CLZL.CLDH ');
+    sql.add('where CLZL.CLDH like');
+    sql.add(''''+edit1.Text+'%'+'''');
+    sql.add('and CLZL.YWPM like ');
+    sql.add(''''+'%'+edit2.Text+'%'+'''');
+    sql.add('and CLZL.YWPM like ');
+    sql.add(''''+'%'+edit3.Text+'%'+'''');
+    sql.add('order by CLZL.CLDH');
+    active:=true;
+  end;
+end;
+
+procedure TFirstStock_CL.EDIT1KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+edit2.SetFocus;
+end;
+
+procedure TFirstStock_CL.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+edit3.SetFocus;
+end;
+
+procedure TFirstStock_CL.DBGrid1DblClick(Sender: TObject);
+begin
+if Query1.FieldByName('KCBH').IsNull then
+  begin
+    showmessage('Pls select the material site first.');
+    BBT7Click(nil);
+    abort;
+  end;
+
+if query1.recordcount>0 then
+  begin
+    with Firststock.KCCLZL do
+      begin
+        edit;
+        fieldbyname('CLBH').value:=query1.fieldbyname('CLDH').value;
+        fieldbyname('YWPM').value:=query1.fieldbyname('YWPM').value;  
+        fieldbyname('DWBH').value:=query1.fieldbyname('DWBH').value;
+        fieldbyname('KCBH').value:=query1.fieldbyname('KCBH').value;
+        fieldbyname('LYCC').value:=query1.fieldbyname('LYCC').value;
+        fieldbyname('CLZMLB').value:=query1.fieldbyname('CLZMLB').value;
+      end;                 
+    query1.Active:=false;
+    close;
+  end;
+end;
+
+procedure TFirstStock_CL.DBGrid1KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+   DBGrid1DblClick(nil);
+end;
+
+procedure TFirstStock_CL.BBT7Click(Sender: TObject);
+begin
+MaterialArea:=TMaterialArea.create(self);
+MaterialArea.Edit1.Text:=Query1.fieldbyname('CLDH').AsString;
+MaterialArea.button1click(nil);
+MaterialArea.show;
+query1.Active:=false;
+close;
+end;
+
+procedure TFirstStock_CL.Edit3KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+button1Click(nil);
+end;
+
+procedure TFirstStock_CL.FormDestroy(Sender: TObject);
+begin
+FirstStock_CL:=nil;
+end;
+
+procedure TFirstStock_CL.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+end.

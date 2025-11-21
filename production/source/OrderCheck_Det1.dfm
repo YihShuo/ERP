@@ -1,0 +1,283 @@
+object OrderCheck_Det: TOrderCheck_Det
+  Left = 278
+  Top = 188
+  Width = 731
+  Height = 462
+  Caption = 'OrderCheck_Det'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 0
+    Width = 527
+    Height = 428
+    Align = alClient
+    DataSource = DataSource1
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -16
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    OnDrawColumnCell = DBGrid1DrawColumnCell
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'GXLB'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 28
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'KHBH'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 35
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Article'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 80
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'XieMing'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 211
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'zlQty'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 46
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'okQty'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 44
+        Visible = True
+      end>
+  end
+  object Edit1: TEdit
+    Left = 104
+    Top = 104
+    Width = 121
+    Height = 21
+    TabOrder = 1
+    Visible = False
+  end
+  object Panel1: TPanel
+    Left = 527
+    Top = 0
+    Width = 196
+    Height = 428
+    Align = alRight
+    TabOrder = 2
+    object DBGrid2: TDBGrid
+      Left = 8
+      Top = 1
+      Width = 187
+      Height = 426
+      Align = alRight
+      DataSource = DataSource2
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -16
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      OnDrawColumnCell = DBGrid2DrawColumnCell
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'XXCC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          Title.Caption = 'Size'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Width = 39
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'zlQty'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Width = 49
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'okQty'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Width = 44
+          Visible = True
+        end>
+    end
+  end
+  object Button1: TButton
+    Left = 288
+    Top = 136
+    Width = 75
+    Height = 25
+    Caption = 'Button1'
+    TabOrder = 3
+    Visible = False
+    OnClick = Button1Click
+  end
+  object DataSource1: TDataSource
+    DataSet = Query1
+    Left = 344
+    Top = 72
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      '')
+    Left = 384
+    Top = 72
+  end
+  object Query2: TQuery
+    DatabaseName = 'DB'
+    DataSource = DataSource1
+    SQL.Strings = (
+      'select A.SCBH,A.XXCC,A.Qty as zlQty,isnull(C.Qty,0) as okQty'
+      'from SCZLs A'
+      'left join (select SCBH, GXLB,XXCC,sum(Qty) as Qty from SCBBSS '
+      'where SCBH=:SCBH and GXLB=:GXLB'
+      'group by SCBH,GXLB  ,XXCC)  as C '
+      'on A.SCBH=C.SCBH and A.XXCC=C.XXCC'
+      'where A.SCBH=:SCBH '
+      '')
+    Left = 608
+    Top = 96
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'SCBH'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'GXLB'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'SCBH'
+        ParamType = ptUnknown
+      end>
+  end
+  object DataSource2: TDataSource
+    DataSet = Query2
+    Left = 648
+    Top = 96
+  end
+end

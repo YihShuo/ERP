@@ -1,0 +1,97 @@
+unit ArticlePicQP;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, GridsEh, DBGridEh, StdCtrls, ExtCtrls;
+
+type
+  TArticlePicQ = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Edit1: TEdit;
+    CB1: TCheckBox;
+    Label2: TLabel;
+    Edit2: TEdit;
+    Label3: TLabel;
+    Edit3: TEdit;
+    Button1: TButton;
+    DBGridEh1: TDBGridEh;
+    Query1: TQuery;
+    DS1: TDataSource;
+    Query1DDBH: TStringField;
+    Query1ARTICLE: TStringField;
+    Query1XieXing: TStringField;
+    Query1SheHao: TStringField;
+    Query1USERDATE: TDateTimeField;
+    Query1GSBH: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure DBGridEh1DblClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ArticlePicQ: TArticlePicQ;
+
+implementation
+
+uses ArticlePicP, main1;
+
+{$R *.dfm}
+
+procedure TArticlePicQ.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  action:=cafree;
+end;
+
+procedure TArticlePicQ.FormCreate(Sender: TObject);
+begin
+  with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('select GSBH,DDBH,ARTICLE,XieXing,SheHao,USERDATE from DDZL');
+    sql.Add('where DDBH like '+'''%'+ArticlePic.edit1.text+'%'''+'');
+    if ArticlePic.CB1.checked then
+      sql.Add('and USERDATE >= DATEADD(DD,-180,GETDATE())');
+    sql.Add('and ARTICLE like '+'''%'+ArticlePic.edit2.text+'%'''+'');
+    sql.Add('and XieXing like '+'''%'+ArticlePic.edit3.text+'%'''+'');
+    sql.Add('and GSBH = '+''''+main.edit2.text+''''+'');
+    sql.Add('order by DDBH,ARTICLE,XieXing');
+    active:=true;
+  end;
+end;
+
+procedure TArticlePicQ.Button1Click(Sender: TObject);
+begin
+  with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('select GSBH,DDBH,ARTICLE,XieXing,SheHao,USERDATE from DDZL');
+    sql.Add('where DDBH like '+'''%'+edit1.text+'%'''+'');
+    if CB1.checked then
+      sql.Add('and USERDATE >= DATEADD(DD,-180,GETDATE())');
+    sql.Add('and ARTICLE like '+'''%'+edit2.text+'%'''+'');
+    sql.Add('and XieXing like '+'''%'+edit3.text+'%'''+'');
+    sql.Add('and GSBH = '+''''+main.edit2.text+''''+'');
+    sql.Add('order by DDBH,ARTICLE,XieXing');
+    active:=true;
+  end;
+end;
+
+procedure TArticlePicQ.DBGridEh1DblClick(Sender: TObject);
+begin
+  ArticlePic.Edit4.Text:=query1.fieldbyname('XieXing').Value;
+  ArticlePic.Edit5.Text:=query1.fieldbyname('Shehao').Value;
+  close;
+end;
+
+end.

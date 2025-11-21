@@ -1,0 +1,111 @@
+unit Entry_PrintTW1;
+
+interface   
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, QuickRpt, QRCtrls, ExtCtrls,IniFiles;
+
+type
+  TEntry_PrintTW = class(TForm)
+    QuickRep1: TQuickRep;
+    ColumnHeaderBand1: TQRBand;
+    PageHeaderBand1: TQRBand;
+    L1: TQRLabel;
+    DetailBand1: TQRBand;
+    QRDBText1: TQRDBText;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRShape1: TQRShape;
+    QRShape2: TQRShape;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRLabel11: TQRLabel;
+    QRLabel12: TQRLabel;
+    QRLabel13: TQRLabel;
+    QRLabel14: TQRLabel;
+    QRLabel15: TQRLabel;
+    QRShape3: TQRShape;
+    QRShape4: TQRShape;
+    QRShape5: TQRShape;
+    QRShape6: TQRShape;
+    QRShape7: TQRShape;
+    QRShape8: TQRShape;
+    QRShape9: TQRShape;
+    QRShape10: TQRShape;
+    QRShape11: TQRShape;
+    QRShape12: TQRShape;
+    QRShape13: TQRShape;
+    QRShape14: TQRShape;
+    QRShape15: TQRShape;
+    QRShape16: TQRShape;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRDBText9: TQRDBText;
+    QRLabel16: TQRLabel;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+  private
+    ComName:String;
+    { Private declarations }
+    procedure ReadIni();
+  public
+    { Public declarations }
+  end;
+
+var
+  Entry_PrintTW: TEntry_PrintTW;
+
+implementation
+
+{$R *.dfm}
+//20190105 read ini file
+procedure TEntry_PrintTW.ReadIni();
+var MyIni :Tinifile;
+    AppDir:string;
+begin
+  ComName:='CONG TY TNHH TY XUAN';
+  AppDir:=ExtractFilePath(Application.ExeName);
+  if FileExists(AppDir+'\ComName.ini')=true then
+  begin
+    try
+      MyIni := Tinifile.Create(AppDir+'\ComName.ini');
+      ComName:=MyIni.ReadString('ERP',' ComName ','');
+    finally
+      MyIni.Free;
+    end;
+  end;
+end;
+
+procedure TEntry_PrintTW.FormDestroy(Sender: TObject);
+begin
+Entry_PrintTW:=nil;
+end;
+
+procedure TEntry_PrintTW.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=Cafree;
+end;
+
+procedure TEntry_PrintTW.FormCreate(Sender: TObject);
+var textvar:textfile;
+sline:string;
+begin
+  ReadIni();
+  L1.Caption:=ComName;
+end;
+
+end.

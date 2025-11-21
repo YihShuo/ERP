@@ -1,0 +1,367 @@
+object SpecimportCheck: TSpecimportCheck
+  Left = 329
+  Top = 206
+  Width = 729
+  Height = 405
+  BorderIcons = [biSystemMenu]
+  Caption = 'SpecimportCheck'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 16
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 721
+    Height = 57
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 8
+      Top = 24
+      Width = 42
+      Height = 16
+      Caption = 'DDBH:'
+    end
+    object Label2: TLabel
+      Left = 152
+      Top = 24
+      Width = 51
+      Height = 16
+      Caption = 'XieMing:'
+    end
+    object Label3: TLabel
+      Left = 312
+      Top = 24
+      Width = 60
+      Height = 16
+      Caption = 'Customer:'
+    end
+    object Label4: TLabel
+      Left = 472
+      Top = 24
+      Width = 37
+      Height = 16
+      Caption = 'SKU#:'
+    end
+    object Edit1: TEdit
+      Left = 56
+      Top = 16
+      Width = 89
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 0
+    end
+    object Edit2: TEdit
+      Left = 208
+      Top = 16
+      Width = 97
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 1
+    end
+    object Button1: TButton
+      Left = 624
+      Top = 16
+      Width = 65
+      Height = 33
+      Caption = 'QUERY'
+      TabOrder = 2
+      OnClick = Button1Click
+    end
+    object Edit3: TEdit
+      Left = 376
+      Top = 16
+      Width = 81
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 3
+    end
+    object Edit4: TEdit
+      Left = 512
+      Top = 16
+      Width = 89
+      Height = 24
+      TabOrder = 4
+    end
+  end
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 57
+    Width = 721
+    Height = 314
+    Align = alClient
+    DataSource = DataSource1
+    Flat = False
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -13
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'DDBH'
+        Footers = <>
+        Width = 89
+      end
+      item
+        EditButtons = <>
+        FieldName = 'XieMing'
+        Footers = <>
+        Width = 162
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ARTICLE'
+        Footers = <>
+        Width = 122
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ShipDate'
+        Footers = <>
+        Width = 70
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Pairs'
+        Footers = <>
+        Width = 59
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DDZT'
+        Footers = <>
+        Width = 33
+      end
+      item
+        EditButtons = <>
+        FieldName = 'USERDATE'
+        Footers = <>
+        Width = 84
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CQDH'
+        Footers = <>
+        Width = 44
+      end>
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'use LIY_SHOE'
+      'select DDZL.*,XXZL.XieMing,ZLZL.CQDH'
+      'from DDZL'
+      
+        'left join XXZL on XXZl.XieXing=DDZl.XieXIng and XXZl.SheHao=DDZL' +
+        '.SheHao'
+      'left join ZLZL on ZLZL.ZLBH=DDZL.ZLBH')
+    Left = 480
+    Top = 144
+    object Query1DDBH: TStringField
+      FieldName = 'DDBH'
+      FixedChar = True
+      Size = 15
+    end
+    object Query1XieXing: TStringField
+      FieldName = 'XieXing'
+      FixedChar = True
+      Size = 15
+    end
+    object Query1SheHao: TStringField
+      FieldName = 'SheHao'
+      FixedChar = True
+      Size = 5
+    end
+    object Query1ARTICLE: TStringField
+      FieldName = 'ARTICLE'
+      FixedChar = True
+    end
+    object Query1CCGB: TStringField
+      FieldName = 'CCGB'
+      FixedChar = True
+      Size = 1
+    end
+    object Query1KHBH: TStringField
+      FieldName = 'KHBH'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1BB: TStringField
+      FieldName = 'BB'
+      FixedChar = True
+      Size = 3
+    end
+    object Query1KHPO: TStringField
+      FieldName = 'KHPO'
+      FixedChar = True
+      Size = 25
+    end
+    object Query1Version: TSmallintField
+      FieldName = 'Version'
+    end
+    object Query1Trader: TStringField
+      FieldName = 'Trader'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1TraderPO: TStringField
+      FieldName = 'TraderPO'
+      FixedChar = True
+      Size = 19
+    end
+    object Query1DDLB: TStringField
+      FieldName = 'DDLB'
+      FixedChar = True
+      Size = 1
+    end
+    object Query1DDZT: TStringField
+      FieldName = 'DDZT'
+      FixedChar = True
+      Size = 1
+    end
+    object Query1CPLB: TStringField
+      FieldName = 'CPLB'
+      FixedChar = True
+      Size = 1
+    end
+    object Query1BZFS: TStringField
+      FieldName = 'BZFS'
+      FixedChar = True
+      Size = 1
+    end
+    object Query1Dest: TStringField
+      FieldName = 'Dest'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1DDGB: TStringField
+      FieldName = 'DDGB'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1DDRQ: TStringField
+      FieldName = 'DDRQ'
+      FixedChar = True
+      Size = 8
+    end
+    object Query1JYTJ: TStringField
+      FieldName = 'JYTJ'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1FKTJ: TStringField
+      FieldName = 'FKTJ'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1ShipDate: TStringField
+      FieldName = 'ShipDate'
+      FixedChar = True
+      Size = 8
+    end
+    object Query1Pairs: TIntegerField
+      FieldName = 'Pairs'
+    end
+    object Query1Totals: TFloatField
+      FieldName = 'Totals'
+    end
+    object Query1ZLBH: TStringField
+      FieldName = 'ZLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object Query1GSDH: TStringField
+      FieldName = 'GSDH'
+      FixedChar = True
+      Size = 3
+    end
+    object Query1CFNO: TStringField
+      FieldName = 'CFNO'
+      FixedChar = True
+    end
+    object Query1USERID: TStringField
+      FieldName = 'USERID'
+      FixedChar = True
+    end
+    object Query1USERDATE: TStringField
+      FieldName = 'USERDATE'
+      FixedChar = True
+      Size = 8
+    end
+    object Query1DDCZ: TStringField
+      FieldName = 'DDCZ'
+      FixedChar = True
+    end
+    object Query1DDPACKSM: TStringField
+      FieldName = 'DDPACKSM'
+      FixedChar = True
+      Size = 150
+    end
+    object Query1LABELCHARGE: TFloatField
+      FieldName = 'LABELCHARGE'
+    end
+    object Query1SC01: TStringField
+      FieldName = 'SC01'
+      FixedChar = True
+      Size = 1
+    end
+    object Query1SC02: TStringField
+      FieldName = 'SC02'
+      FixedChar = True
+      Size = 1
+    end
+    object Query1PUMAPO: TStringField
+      FieldName = 'PUMAPO'
+      FixedChar = True
+      Size = 25
+    end
+    object Query1Pairs1: TIntegerField
+      FieldName = 'Pairs1'
+    end
+    object Query1balance: TStringField
+      FieldName = 'balance'
+      FixedChar = True
+      Size = 1
+    end
+    object Query1XieMing: TStringField
+      FieldName = 'XieMing'
+      FixedChar = True
+      Size = 50
+    end
+    object Query1CQDH: TStringField
+      FieldName = 'CQDH'
+      FixedChar = True
+      Size = 3
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = Query1
+    Left = 512
+    Top = 144
+  end
+end

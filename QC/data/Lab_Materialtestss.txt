@@ -1,0 +1,33 @@
+USE [NHU_LIY_ERP]
+GO
+
+/****** Object:  Table [dbo].[Lab_Materialtestss]    Script Date: 17/03/2021 08:00:00 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Lab_Materialtestss](
+	[ReportID] [varchar](14) NOT NULL,
+	[DDBH] [varchar](15) NULL,
+	[UserID] [varchar](10) NULL,
+	[UserDate] [nchar](10) NULL,
+	[YN] [varchar](1) NULL,
+
+ CONSTRAINT [PK_Lab_Materialtestss] PRIMARY KEY CLUSTERED 
+(
+	[ReportID] ASC
+
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+

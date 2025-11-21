@@ -1,0 +1,187 @@
+c:\users\lionel\documents\visual studio 2013\Projects\DoAn-2\DoAn-2\bin\Debug\DoAn-2.exe.config
+c:\users\lionel\documents\visual studio 2013\Projects\DoAn-2\DoAn-2\bin\Debug\DoAn-2.exe
+c:\users\lionel\documents\visual studio 2013\Projects\DoAn-2\DoAn-2\bin\Debug\DoAn-2.pdb
+c:\users\lionel\documents\visual studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn_2.Form1.resources
+c:\users\lionel\documents\visual studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn_2.Properties.Resources.resources
+c:\users\lionel\documents\visual studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.GenerateResource.Cache
+c:\users\lionel\documents\visual studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn-2.exe
+c:\users\lionel\documents\visual studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn-2.pdb
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\bin\Debug\FontAwesome.Sharp.dll
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MainControl.resources
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.sanpham.resources
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.BanHang.resources
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.BanHangTT.resources
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.tonkho.resources
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.donhang.resources
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.LoaiSP.resources
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.DonViSP.resources
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.Setting.resources
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.HoaDonChiTiet.resources
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.ResolveComReference.cache
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.Dashboard.resources
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\bin\Debug\Microsoft.ReportViewer.Common.dll
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\bin\Debug\Microsoft.ReportViewer.WebForms.dll
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\bin\Debug\Microsoft.ReportViewer.WebForms.xml
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csprojAssemblyReference.cache
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.CoreCompileInputs.cache
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.CopyComplete
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.ChartMoney.resources
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.ChartSLSP.resources
+C:\Users\lionel\Documents\Visual Studio 2013\Projects\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.ChartSPHet.resources
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csprojAssemblyReference.cache
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.ResolveComReference.cache
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.Form1.resources
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MainControl.resources
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.BanHang.resources
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.BanHangTT.resources
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.ChartMoney.resources
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.ChartSLSP.resources
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.ChartSPHet.resources
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.Dashboard.resources
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.donhang.resources
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.DonViSP.resources
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.HoaDonChiTiet.resources
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.LoaiSP.resources
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.Setting.resources
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.tonkho.resources
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.sanpham.resources
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.Properties.Resources.resources
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.GenerateResource.cache
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.CoreCompileInputs.cache
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.exe
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.pdb
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\DoAn-2.exe.config
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\DoAn-2.exe
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\DoAn-2.pdb
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\FontAwesome.Sharp.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\Microsoft.ReportViewer.WebForms.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\Microsoft.SqlServer.Types.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\de\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\es\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\fr\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\it\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ja\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ko\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\pt\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ru\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\zh-CHS\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\zh-CHT\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\de\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\es\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\fr\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\it\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ja\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ko\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\pt\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ru\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Lionel\Desktop\Đồ án 3\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.CopyComplete
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\DoAn-2.exe.config
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\DoAn-2.exe
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\DoAn-2.pdb
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\FontAwesome.Sharp.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\Microsoft.ReportViewer.WebForms.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\Microsoft.SqlServer.Types.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\de\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\es\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\fr\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\it\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ja\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ko\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\pt\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ru\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\zh-CHS\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\zh-CHT\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\de\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\es\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\fr\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\it\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ja\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ko\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\pt\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ru\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csprojAssemblyReference.cache
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.ResolveComReference.cache
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.Form1.resources
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MainControl.resources
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.BanHang.resources
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.BanHangTT.resources
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.ChartMoney.resources
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.ChartSLSP.resources
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.ChartSPHet.resources
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.Dashboard.resources
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.donhang.resources
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.DonViSP.resources
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.HoaDonChiTiet.resources
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.LoaiSP.resources
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.Setting.resources
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.tonkho.resources
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.sanpham.resources
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.Properties.Resources.resources
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.GenerateResource.cache
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.CoreCompileInputs.cache
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.CopyComplete
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.exe
+D:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.pdb
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\DoAn-2.exe.config
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\DoAn-2.exe
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\DoAn-2.pdb
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\FontAwesome.Sharp.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\Microsoft.ReportViewer.WebForms.xml
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\de\Microsoft.ReportViewer.WebForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\es\Microsoft.ReportViewer.WebForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\fr\Microsoft.ReportViewer.WebForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\it\Microsoft.ReportViewer.WebForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ja\Microsoft.ReportViewer.WebForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ko\Microsoft.ReportViewer.WebForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\pt\Microsoft.ReportViewer.WebForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ru\Microsoft.ReportViewer.WebForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\zh-CHS\Microsoft.ReportViewer.WebForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\zh-CHT\Microsoft.ReportViewer.WebForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\de\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\es\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\fr\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\it\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ja\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ko\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\pt\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\ru\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.AssemblyReference.cache
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.SuggestedBindingRedirects.cache
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.ResolveComReference.cache
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.Form1.resources
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MainControl.resources
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.BanHang.resources
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.BanHangTT.resources
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.ChartMoney.resources
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.ChartSLSP.resources
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.ChartSPHet.resources
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.Dashboard.resources
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.donhang.resources
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.DonViSP.resources
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.HoaDonChiTiet.resources
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.LoaiSP.resources
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.Setting.resources
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.tonkho.resources
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.MenuTab.sanpham.resources
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn_2.Properties.Resources.resources
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.GenerateResource.cache
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.CoreCompileInputs.cache
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.CopyComplete
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.exe
+F:\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.pdb
+E:\down\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\bin\Debug\DoAn-2.exe.config
+E:\down\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.csproj.ResolveComReference.cache
+E:\down\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.exe
+E:\down\Đồ án 3\Project file Visual Studio 2019\DoAn-2\DoAn-2\obj\Debug\DoAn-2.pdb
+C:\Users\PC\Desktop\ScanQR\ScanQR\DoAn-2\bin\Debug\DoAn-2.exe.config
+C:\Users\PC\Desktop\ScanQR\ScanQR\DoAn-2\obj\Debug\DoAn-2.csproj.ResolveComReference.cache
+C:\Users\PC\Desktop\ScanQR\ScanQR\DoAn-2\obj\Debug\DoAn-2.exe
+C:\Users\PC\Desktop\ScanQR\ScanQR\DoAn-2\obj\Debug\DoAn-2.pdb

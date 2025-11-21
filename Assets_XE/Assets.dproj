@@ -1,0 +1,594 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{F4FBE11C-7EAE-4482-B82E-766074945153}</ProjectGuid>
+			<MainSource>Assets.dpr</MainSource>
+			<Base>True</Base>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<TargetedPlatforms>1</TargetedPlatforms>
+			<AppType>Application</AppType>
+			<FrameworkType>VCL</FrameworkType>
+			<ProjectVersion>13.4</ProjectVersion>
+			<Platform Condition="'$(Platform)'==''">Win32</Platform>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+			<Base_Win64>true</Base_Win64>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+			<Base_Win32>true</Base_Win32>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+			<Cfg_2_Win32>true</Cfg_2_Win32>
+			<CfgParent>Cfg_2</CfgParent>
+			<Cfg_2>true</Cfg_2>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UsePackage>vcl;rtl;vclx;indy;inet;xmlrtl;vclie;inetdbbde;inetdbxpress;dbrtl;dsnap;dsnapcon;vcldb;soaprtl;VclSmp;dbexpress;dbxcds;bdertl;vcldbx;webdsnap;websnap;adortl;ibxpress;teeui;teedb;tee;dss;visualclx;visualdbclx;vclactnband;vclshlctrls;IntrawebDB_50_70;Intraweb_50_70;Rave50CLX;Rave50VCL;dclOfficeXP;QR4RunD7;EhLib70;EhLibDataDrivers70;mscomm_Package;GifImage_Package;Colorbottom_Package;inetdb;$(DCC_UsePackage)</DCC_UsePackage>
+			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+			<DCC_SymbolReferenceInfo>1</DCC_SymbolReferenceInfo>
+			<DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;Bde;Data.Win;System.Win;$(DCC_Namespace)</DCC_Namespace>
+			<DCC_ExeOutput>../Bin</DCC_ExeOutput>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_K>false</DCC_K>
+			<DCC_N>true</DCC_N>
+			<DCC_S>false</DCC_S>
+			<VerInfo_Locale>1028</VerInfo_Locale>
+			<DCC_E>false</DCC_E>
+			<DCC_F>false</DCC_F>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base_Win64)'!=''">
+			<Icon_MainIcon>Assets_Icon.ico</Icon_MainIcon>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base_Win32)'!=''">
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<Icon_MainIcon>Assets_Icon.ico</Icon_MainIcon>
+			<DCC_Namespace>Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
+			<VerInfo_Locale>1033</VerInfo_Locale>
+			<Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<VerInfo_Locale>1033</VerInfo_Locale>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="$(MainSource)">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="source\main1.pas">
+				<Form>main</Form>
+			</DCCReference>
+			<DCCReference Include="source\ulogin.pas">
+				<Form>LOGIN</Form>
+			</DCCReference>
+			<DCCReference Include="source\DM1.pas">
+				<Form>DM</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="Source\SN12\EquipmentClassification1.pas">
+				<Form>Equipment_Classification</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN12\NewEquipmentClassification_Sup1.pas">
+				<Form>NewEquipmentClassification_Sup</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN12\EquipmentClassification_LB1.pas">
+				<Form>EquipmentClassification_LB</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN13\EquipmentSupplier1.pas">
+				<Form>EquipmentSupplier</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN13\EquipmentSupplier_Sup1.pas">
+				<Form>EquipmentSupplier_Sup</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN13\EquipmentSupplier_Brand1.pas">
+				<Form>EquipmentSupplier_Brand</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN22\EquipmentEntryConfirm1.pas">
+				<Form>EquipmentEntryConfirm</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN231\EquipmentConfirm1.pas">
+				<Form>EquipmentConfirm</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN211\EntryEquipment1.pas">
+				<Form>EntryEquipment</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN211\Equipment_SBBH1.pas">
+				<Form>Equipment_SBBH</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN211\EquipmentDepName1.pas">
+				<Form>EquipmentDepName</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN212\Deliver_Equipment1.pas">
+				<Form>Deliver_Equipment</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN212\Equipment_Dep1.pas">
+				<Form>Equipment_Dep</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN212\Equipment_DepName1.pas">
+				<Form>Equipment_DepName</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN212\Equipment1.pas">
+				<Form>Equipment</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN24\EquipmentList1.pas">
+				<Form>EquipmentList</Form>
+			</DCCReference>
+			<DCCReference Include="Source\AssetFlowChart1.pas">
+				<Form>AssetFlowChart</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN31\EquipmentAccountConfirm1.pas">
+				<Form>EquipmentAccountConfirm</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN211\EntryEquipmentSupplier1.pas">
+				<Form>EntryEquipmentSupplier</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN36\EquipmentCal1.pas">
+				<Form>EquipmentCal</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN37\EquipmentAssetRpt1.pas">
+				<Form>EquipmentAssetRpt</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN38\EquipmentMonthS1.pas">
+				<Form>EquipmentMonthS</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN217\PurEquipment1.pas">
+				<Form>PurEquipment</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN217\PurEquipmentDepName1.pas">
+				<Form>PurEquipmentDepName</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN217\PurEquipmentSupplier1.pas">
+				<Form>PurEquipmentSupplier</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN217\PurEquipment_SBBH1.pas">
+				<Form>PurEquipment_SBBH</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN211\Equipment_CGZL1.pas">
+				<Form>Equipment_CGZL</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN11\EquipmentCode1.pas">
+				<Form>EquipmentCode</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN13\EquipmentSupplier_LB1.pas">
+				<Form>EquipmentSupplier_LB</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN218\ApplyEquipment1.pas">
+				<Form>ApplyEquipment</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN218\ApplyEquipmentDepName1.pas">
+				<Form>ApplyEquipmentDepName</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN218\ApplyEquipment_SBBH1.pas">
+				<Form>ApplyEquipment_SBBH</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN12\EquipmentClassification_Clzhzl1.pas">
+				<Form>EquipmentClassification_Clzhzl</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN12\EquipmentClassification_LBChild1.pas">
+				<Form>EquipmentClassification_LBChild</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN218\ApplyEquipment_print1.pas">
+				<Form>ApplyEquipment_print</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN217\PurEquipment_print1.pas">
+				<Form>PurEquipment_print</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN211\EntryEquipment_print1.pas">
+				<Form>EntryEquipment_print</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN22\EquipmentEntryConfirm_print1.pas">
+				<Form>EquipmentEntryConfirm_print</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN213\Deliver_EquipmentB1.pas">
+				<Form>Deliver_EquipmentB</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN213\EquipmentB_Dep1.pas">
+				<Form>EquipmentB_Dep</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN213\EquipmentB1.pas">
+				<Form>EquipmentB</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN2141\Deliver_EquipmentM1.pas">
+				<Form>Deliver_EquipmentM</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN2141\EquipmentM_Dep1.pas">
+				<Form>EquipmentM_Dep</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN2141\EquipmentM1.pas">
+				<Form>EquipmentM</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN2141\EquipmentM_DepName1.pas">
+				<Form>EquipmentM_DepName</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN215\Deliver_EquipmentS1.pas">
+				<Form>Deliver_EquipmentS</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN215\EquipmentS_Dep1.pas">
+				<Form>EquipmentS_Dep</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN215\EquipmentS_DepName1.pas">
+				<Form>EquipmentS_DepName</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN215\EquipmentS1.pas">
+				<Form>EquipmentS</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN216\Deliver_EquipmentR1.pas">
+				<Form>Deliver_EquipmentR</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN216\EquipmentR_Dep1.pas">
+				<Form>EquipmentR_Dep</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN216\EquipmentR1.pas">
+				<Form>EquipmentR</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN212\Deliver_Equipment_print1.pas">
+				<Form>Deliver_Equipment_print</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN213\Deliver_EquipmentB_print1.pas">
+				<Form>Deliver_EquipmentB_print</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN2141\Deliver_EquipmentM_print1.pas">
+				<Form>Deliver_EquipmentM_print</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN215\Deliver_EquipmentS_print1.pas">
+				<Form>Deliver_EquipmentS_print</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN216\Deliver_EquipmentR_print1.pas">
+				<Form>Deliver_EquipmentR_print</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN217\PurEquipment_SGDH1.pas">
+				<Form>PurEquipment_SGDH</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN211\EntryEquipment_BDep1.pas">
+				<Form>EntryEquipment_BDep</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN2141\Deliver_EquipmentM_printTW1.pas">
+				<Form>Deliver_EquipmentM_printTW</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN219\Deliver_EquipmentD_print1.pas">
+				<Form>Deliver_EquipmentD_print</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN219\Deliver_EquipmentD_printTW1.pas">
+				<Form>Deliver_EquipmentD_printTW</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN219\Deliver_EquipmentD1.pas">
+				<Form>Deliver_EquipmentD</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN219\EquipmentD_Dep1.pas">
+				<Form>EquipmentD_Dep</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN219\EquipmentD1.pas">
+				<Form>EquipmentD</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN25\DelAsset_TSCD1.pas">
+				<Form>DelAsset_TSCD</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN14\NewEquipment1.pas">
+				<Form>NewEquipment</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN14\NewEquipment_Materal1.pas">
+				<Form>NewEquipment_Materal</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN14\NewEquipment_Depname1.pas">
+				<Form>NewEquipment_Depname</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN14\NewEquipment_CLZL1.pas">
+				<Form>NewEquipment_CLZL</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN15\NewDepartment1.pas">
+				<Form>NewDepartment</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN217\PurEquipment_printP1.pas">
+				<Form>PurEquipment_printP</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN31\EquipmentAccountConfirm_print1.pas">
+				<Form>EquipmentAccountConfirm_print</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN351\AdjustDelivery1.pas">
+				<Form>AdjustDelivery</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN352\AdjustEntry1.pas">
+				<Form>AdjustEntry</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN32\AccountConfirm1.pas">
+				<Form>AccountConfirm</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN341\MonthMaterialEntry1.pas">
+				<Form>MonthMaterialEntry</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN33\DeliveryConfirm1.pas">
+				<Form>DeliveryConfirm</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN342\MonthDeliverCheck1.pas">
+				<Form>MonthDeliverCheck</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN26\Deliver_Detail1.pas">
+				<Form>Deliver_Detail</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN211\EntryEquipment_LBChild1.pas">
+				<Form>EntryEquipment_LBChild</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN217\ApplyPurEquipment1.pas">
+				<Form>ApplyPurEquipment</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN218\ApplyEquipment_printTW1.pas">
+				<Form>ApplyEquipment_printTW</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN21A1\Deliver_EquipmentF_print1.pas">
+				<Form>Deliver_EquipmentF_print</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN21A1\Deliver_EquipmentF1.pas">
+				<Form>Deliver_EquipmentF</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN21A1\EquipmentF_Dep1.pas">
+				<Form>EquipmentF_Dep</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN21A1\EquipmentF_DepName1.pas">
+				<Form>EquipmentF_DepName</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN21A1\EquipmentF1.pas">
+				<Form>EquipmentF</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN21A1\Deliver_EquipmentF_printTW1.pas">
+				<Form>Deliver_EquipmentF_printTW</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN21A2\Deliver_EquipmentT_print1.pas">
+				<Form>Deliver_EquipmentT_print</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN21A2\Deliver_EquipmentT_printTW1.pas">
+				<Form>Deliver_EquipmentT_printTW</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN21A2\Deliver_EquipmentT1.pas">
+				<Form>Deliver_EquipmentT</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN21A2\EquipmentT_Dep1.pas">
+				<Form>EquipmentT_Dep</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN21A2\EquipmentT1.pas">
+				<Form>EquipmentT</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN2142\Deliver_EquipmentH_print1.pas">
+				<Form>Deliver_EquipmentH_print</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN2142\Deliver_EquipmentH_printTW1.pas">
+				<Form>Deliver_EquipmentH_printTW</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN2142\Deliver_EquipmentH1.pas">
+				<Form>Deliver_EquipmentH</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN2142\EquipmentH_Dep1.pas">
+				<Form>EquipmentH_Dep</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN2142\EquipmentH1.pas">
+				<Form>EquipmentH</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN24\Equipment_History1.pas">
+				<Form>Equipment_History</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN2142\EquipmentH_DepName1.pas">
+				<Form>EquipmentH_DepName</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN21A2\EquipmentT_DepName1.pas">
+				<Form>EquipmentT_DepName</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN216\EquipmentR_DepName1.pas">
+				<Form>EquipmentR_DepName</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN215\Deliver_EquipmentS_PrintTW1.pas">
+				<Form>Deliver_EquipmentS_PrintTW</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN213\Deliver_EquipmentB_printTW1.pas">
+				<Form>Deliver_EquipmentB_printTW</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN21B\ChangeEquipment1.pas">
+				<Form>ChangeEquipmentC</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN21B\EquipmentC_Dep1.pas">
+				<Form>EquipmentC_Dep</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN21B\EquipmentC1.pas">
+				<Form>EquipmentC</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN16\EquipmentPrice1.pas">
+				<Form>EquipmentPrice</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN23A\EquipmentConfirm_CC1.pas">
+				<Form>EquipmentConfirm_CC</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN232\EquipmentConfirm_BB1.pas">
+				<Form>EquipmentConfirm_BB</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN233\EquipmentConfirm_MM1.pas">
+				<Form>EquipmentConfirm_MM</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN234\EquipmentConfirm_HH1.pas">
+				<Form>EquipmentConfirm_HH</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN235\EquipmentConfirm_SS1.pas">
+				<Form>EquipmentConfirm_SS</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN236\EquipmentConfirm_RR1.pas">
+				<Form>EquipmentConfirm_RR</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN237\EquipmentConfirm_DD1.pas">
+				<Form>EquipmentConfirm_DD</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN239\EquipmentConfirm_TT1.pas">
+				<Form>EquipmentConfirm_TT</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN238\EquipmentConfirm_FF1.pas">
+				<Form>EquipmentConfirm_FF</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN41\Maintenance_item1.pas">
+				<Form>Maintenance_item</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN42\ElectricalEquipment_NewLean1.pas">
+				<Form>ElectricalEquipment_NewLean</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN42\ElectricalEquipment1.pas">
+				<Form>ElectricalEquipment</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN51\ProductionToolRepair1.pas">
+				<Form>ProductionToolRepair</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN51\ProductionToolRepair_Dep1.pas">
+				<Form>ProductionToolRepair_Dep</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN51\ProductionToolRepair_CL1.pas">
+				<Form>ProductionToolRepair_CL</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN51\ProductionToolRepair_printTW1.pas">
+				<Form>ProductionToolRepair_printTW</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN213\Deliver_EquipmentB_printTT1.pas">
+				<Form>Deliver_EquipmentB_printTT</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN219\Deliver_EquipmentD_printTB1.pas">
+				<Form>Deliver_EquipmentD_printTB</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN43\MaintainanceWorks1.pas">
+				<Form>MaintainanceWorks</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN44\FillInMaintainance1.pas">
+				<Form>FillInMaintainance</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN43\ExporPrint1.pas">
+				<Form>ExporPrint</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN45\Fault_item1.pas">
+				<Form>Fault_item</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN24\EquipmentList_ReportList1.pas">
+				<Form>EquipmentList_ReportList</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN46\RepairItems1.pas">
+				<Form>RepairItems</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN45\RepairDevice1.pas">
+				<Form>RepairDevice</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN43\ExportItems1.pas">
+				<Form>ExportItems</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN27\EquipmentPurchasePutrace1.pas">
+				<Form>EquipmentPurchasePutrace</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN46\OilManage1.pas">
+				<Form>OilManage</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="Source\SN6\ITchecklist1.pas">
+				<Form>ITchecklist</Form>
+			</DCCReference>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Source>
+						<Source Name="MainSource">Assets.dpr</Source>
+					</Source>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1028</VersionInfo>
+						<VersionInfo Name="CodePage">950</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\bcboffice2k160.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\bcbofficexp160.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dcloffice2k160.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclofficexp160.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+					</Excluded_Packages>
+				</Delphi.Personality>
+				<Platforms>
+					<Platform value="Win64">False</Platform>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+	</Project>

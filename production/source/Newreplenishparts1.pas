@@ -1,0 +1,112 @@
+unit Newreplenishparts1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, StdCtrls, Grids, DBGrids, DBTables, ExtCtrls, ComCtrls,
+  Mask, DBCtrls;
+
+type
+  TNewreplenishparts = class(TForm)
+    Panel1: TPanel;
+    DataSource1: TDataSource;
+    Query1: TQuery;
+    DBGrid1: TDBGrid;
+    Label1: TLabel;
+    Edit1: TEdit;
+    Button1: TButton;
+    Query1CLSL: TFloatField;
+    Query1YWSM: TStringField;
+    Query1YWPM: TStringField;
+    Query1DWBH: TStringField;
+    Query1LYCC: TStringField;
+    Query1BWBH: TStringField;
+    StatusBar1: TStatusBar;
+    Query1CLBH: TStringField;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    DBEdit3: TDBEdit;
+    procedure Button1Click(Sender: TObject);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure DBGrid1KeyPress(Sender: TObject; var Key: Char);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Newreplenishparts: TNewreplenishparts;
+
+implementation
+
+uses NewreplenishPart1;
+
+{$R *.dfm}
+
+procedure TNewreplenishparts.Button1Click(Sender: TObject);
+begin
+with Query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select  XXZLS.BWBH  ,isnull(XXZLS.CLSL,0) as CLSL, ');
+    sql.add('BWZL.YWSM, XXZLS.CLBH,CLZL.YWPM, CLZL.DWBH,CLZL.LYCC');
+    sql.add('from XXZLS left join BWZL on BWZL.BWDH=XXZLS.BWBH');
+    sql.add('left join CLZL on CLZL.CLDH=XXZLS.CLBH');
+    sql.add('where XXZLS.XieXing=');
+    sql.add(''''+NewReplenishPart.QMas.fieldbyname('XieXing').AsString+'''');
+    sql.add('and XXZLS.SheHao=');
+    sql.add(''''+ NewReplenishPart.QMas.fieldbyname('SheHao').AsString +'''');
+    sql.add('and BWZL.YWSM like ');
+    sql.add(''''+'%'+edit1.Text+'%'+'''');
+    sql.add('order by XXZLS.BWBH');
+    active:=true;
+  end;
+end;
+
+procedure TNewreplenishparts.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+  button1Click(nil);
+end;
+
+procedure TNewreplenishparts.DBGrid1DblClick(Sender: TObject);
+begin
+if Query1.RecordCount>0 then
+  begin
+    with Newreplenishpart.QDet do
+      begin
+        edit;
+        fieldbyname('BWBH').Value:=Query1.fieldbyname('BWBH').value;
+        fieldbyname('YWSM').Value:=Query1.fieldbyname('YWSM').value;
+        fieldbyname('CLBH').Value:=Query1.fieldbyname('CLBH').value;
+        fieldbyname('CLSL').Value:=Query1.fieldbyname('CLSL').value;
+      end;
+    close;
+  end;
+end;
+
+procedure TNewreplenishparts.DBGrid1KeyPress(Sender: TObject;
+  var Key: Char);
+begin
+if key=#13 then
+  DBGrid1Dblclick(nil);
+end;
+
+procedure TNewreplenishparts.FormDestroy(Sender: TObject);
+begin
+Newreplenishparts:=nil;
+end;
+
+procedure TNewreplenishparts.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=Cafree;
+end;
+
+end.

@@ -1,0 +1,762 @@
+unit CD_SMDD1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, PrnDbgeh, DB, DBTables, GridsEh, DBGridEh, StdCtrls, ComCtrls,
+  ExtCtrls, Dateutils, Menus , CD_QuickSMDD1, Buttons;
+
+type
+  TCD_SMDD = class(TForm)
+    Panel2: TPanel;
+    Label8: TLabel;
+    DTP1: TDateTimePicker;
+    DTP2: TDateTimePicker;
+    Button2: TButton;
+    Button4: TButton;
+    SMDDS: TQuery;
+    DS1: TDataSource;
+    PrintDBGridEh1: TPrintDBGridEh;
+    Label1: TLabel;
+    XuongCB: TComboBox;
+    Label2: TLabel;
+    DepNameCB: TComboBox;
+    QTemp: TQuery;
+    PopupMenu: TPopupMenu;
+    N1: TMenuItem;
+    Label3: TLabel;
+    DDBHEdit: TEdit;
+    CheckBox1: TCheckBox;
+    AddSizeBtn: TBitBtn;
+    Panel1: TPanel;
+    Splitter1: TSplitter;
+    DBGridEh1: TDBGridEh;
+    BWBHQry: TQuery;
+    BWBHQryBWBH: TStringField;
+    BWBHQryYWSM: TStringField;
+    BWBHQryVWSM: TStringField;
+    DS2: TDataSource;
+    DBGridEh2: TDBGridEh;
+    AddPartBtn: TBitBtn;
+    MachineBox: TScrollBox;
+    Panel7: TPanel;
+    Option_OK: TButton;
+    Option_cancel: TButton;
+    TypeBox: TComboBox;
+    BWBHQryBWBH_DS: TStringField;
+    MachineLeanBox: TComboBox;
+    QMachine: TQuery;
+    QLean: TQuery;
+    SMachineBox: TComboBox;
+    procedure Button4Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure XuongCBChange(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure N1Click(Sender: TObject);
+    procedure DBGridEh1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure AddSizeBtnClick(Sender: TObject);
+    procedure AddPartBtnClick(Sender: TObject);
+    procedure Option_OKClick(Sender: TObject);
+    procedure Option_cancelClick(Sender: TObject);
+    procedure TypeBoxChange(Sender: TObject);
+    procedure MachineLeanBoxChange(Sender: TObject);
+    procedure DepNameCBChange(Sender: TObject);
+  private
+    DepID, MachineType: String;
+    DepIDList, LeanID, MachineID: TStringlist;
+    { Private declarations }
+    procedure SetDepartment;
+    procedure SetFactory;
+    procedure SetMachineLean;
+    procedure SetMachine;
+    function GetQuerySubSQL(Query: TQuery; DBGridEh: TDBGridEh; FieldNM: String): String;
+    procedure SetDBGridEh1Format();
+  public
+    { Public declarations }
+    function CreateDispathCutting():boolean;
+  end;
+
+var
+  CD_SMDD: TCD_SMDD;
+
+implementation
+
+uses
+  main1, FunUnit, PlanDate1;
+
+{$R *.dfm}
+procedure TCD_SMDD.SetFactory;
+begin
+  with QTemp do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT Xuong FROM BDepartment');
+    SQL.Add('WHERE ProYn = 1 AND YN = 1 AND sumline IS NOT NULL');
+    SQL.Add('AND GXLB = ''C'' AND GSBH = ''' + main.Edit2.Text + ''' AND ISNULL(Xuong, '''') <> ''''');
+    SQL.Add('GROUP BY Xuong');
+    //SQL.Add('ORDER BY CONVERT(INT, REPLACE(Xuong, ''A'', ''''))');
+    SQL.Add('ORDER BY case when Xuong like ''A%'' then CONVERT(INT, REPLACE(Xuong, ''A'','''')) else  CONVERT(INT, REPLACE(Xuong, ''B'','''')) end ');
+    Active := true;
+    XuongCB.Items.Clear;
+    XuongCB.Items.Add('');
+    while not Eof do
+    begin
+      XuongCB.Items.Add(FieldByName('Xuong').AsString);
+      Next;
+    end;
+  end;
+end;
+
+procedure TCD_SMDD.SetDepartment;
+begin
+  with QTemp do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT ID, DepName FROM BDepartment');
+    SQL.Add('WHERE ProYn = 1 AND YN = 1 AND sumline IS NOT NULL AND GXLB = ''C'' AND GSBH = ''' + main.Edit2.Text + ''' AND Xuong = ''' + XuongCB.Text + '''');
+    SQL.Add('ORDER BY ID');
+    Active := true;
+    DepNameCB.Items.Clear;
+    DepIDList.Clear;
+    DepNameCB.Items.Add('');
+    DepIDList.Add('');
+    while not Eof do
+    begin
+      DepNameCB.Items.Add(FieldByName('DepName').AsString);
+      DepIDList.Add(FieldByName('ID').AsString);
+      Next;
+    end;
+  end;
+end;
+
+procedure TCD_SMDD.SetMachineLean;
+begin
+  with QLean do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT ID, ''LEAN'' + RIGHT(sumline, 2) AS Lean FROM BDepartment');
+    SQL.Add('WHERE ProYn = 1 AND YN = 1 AND sumline IS NOT NULL AND GXLB = ''C'' AND GSBH = ''' + main.Edit2.Text + ''' AND Xuong IS NOT NULL');
+    SQL.Add('ORDER BY Lean');
+    Active := true;
+
+    MachineLeanBox.Items.Clear;
+    LeanID.Clear;
+    MachineLeanBox.Items.Add('');
+    while not Eof do
+    begin
+      MachineLeanBox.Items.Add(FieldByName('Lean').AsString);
+      LeanID.Add(FieldByName('ID').AsString);
+      Next;
+    end;
+    MachineLeanBox.Items.Add('OTHER');
+    MachineLeanBox.ItemIndex := 0;
+  end;
+end;
+
+procedure TCD_SMDD.SetMachine;
+begin
+  with QMachine do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT ID, MachineName FROM BMachine');
+    if (MachineLeanBox.Text = 'OTHER') then
+      SQL.Add('WHERE MachineType = ''Leather''')
+    else
+      SQL.Add('WHERE MachineType = ''' + MachineType + '''');
+    if (MachineLeanBox.ItemIndex = 0) then
+      SQL.Add('AND ISNULL(DepNo, '''') = ''''')
+    else if (MachineType = 'MC') AND (MachineLeanBox.Text <> 'OTHER') then
+      SQL.Add('AND DepNo = ''' + LeanID[MachineLeanBox.ItemIndex-1] + '''');
+    Active := true;
+
+    SMachineBox.Items.Clear;
+    MachineID.Clear;
+    SMachineBox.Items.Add('');
+    while not Eof do
+    begin
+      SMachineBox.Items.Add(FieldByName('MachineName').AsString);
+      MachineID.Add(FieldByName('ID').AsString);
+      Next;
+    end;
+    SMachineBox.ItemIndex := 0;
+  end;
+end;
+
+procedure TCD_SMDD.Button4Click(Sender: TObject);
+var i:integer;
+    DDBH,DDBHSubSQL:String;
+    DDBHList:TStringList;
+begin
+  //
+  if ((DepNameCB.text='') and (DDBHEdit.Text='')) then
+  begin
+    showmessage('Pls select Department first.');
+    abort;
+  end;
+  if Pos(',',DDBHEdit.Text)>0 then
+  begin
+     DDBHList:=TStringlist.Create;
+     DDBHList:=funcObj.SplitString(DDBHEdit.Text,',');
+     for i:=0 to DDBHLIst.Count-1 do
+     begin
+       DDBH:=DDBH+' YSBH like '''+DDBHLIst.Strings[i]+'%'' or ';
+     end;
+     DDBHSubSQL:='(Select distinct DDBH from SMDD where GXLB=''C'' and '+ Copy(DDBH,1,length(DDBH)-3)+')';
+     DDBHList.Free;
+  end else
+  begin
+     DDBHSubSQL:='(Select distinct DDBH from SMDD where GXLB=''C'' and YSBH  like '''+DDBHEdit.Text+'%'')';
+  end;
+  //
+  DepID:='';
+  if DepNameCB.ItemIndex>-1 then
+  DepID:=DepIDList.Strings[DepNameCB.ItemIndex]; //'A2010208';//A2_LEAN2-08_C
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select distinct ZLZLS.ZLCC,SMDDS.XXCC from SMDDS  ');
+    sql.add('left join SMDD on SMDD.DDBH=SMDDS.DDBH ');
+    sql.add('left join ZLZLS on ZLZLS.ZLBH=SMDD.YSBH and ZLZLS.XXCC=SMDDS.XXCC');
+    sql.Add(' left join BDepartment on BDepartment.id = smdd.depno');
+    sql.add('where BDepartment.ID like '''+DepID+'%'' ');
+    if DDBHEdit.Text<>'' then
+    sql.add('      and SMDD.DDBH in '+DDBHSubSQL);
+    if CheckBox1.Checked=true then
+    begin
+    sql.add('      and (convert(smalldatetime,convert(varchar,SMDD.PlanDate,111)) between ');
+    sql.add('       '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''+' and  '+ ''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''+')');
+    end;
+    sql.add('      and SMDD.GXLB=''C'' ');
+    sql.add('order by  SMDDS.XXCC DESC ');
+    //funcObj.WriteErrorLog(sql.Text);
+    active:=true;
+  end;
+  //
+  with SMDDS do
+  begin
+    Qtemp.first;
+    active:=false;
+    SQL.Clear;
+    SQL.add('select SMDD.YSBH,CutDispatchS.CutNumZL,SMDD.DDBH,SMDD.Article,SMDD.XieMing,XXZL.DAOMH,SMDD.PlanDate,SMDD.Qty as Qty');
+    while not Qtemp.Eof do
+    begin
+        SQL.add(',Max(case  when SMDDS.XXCC='+''''+Qtemp.fieldbyname('XXCC').value+'''');
+        SQL.add(' then SMDDS.Qty else null end) as '+''''+Qtemp.fieldbyname('XXCC').value+'|'+Qtemp.fieldbyname('ZLCC').value+'''');
+        Qtemp.Next;
+    end;
+    SQL.add('from SMDDS ');
+    SQL.add('left join SMDD on SMDD.DDBH=SMDDS.DDBH ');
+    SQL.add('left join DDZL on SMDD.YSBH=DDZL.ZLBH ');
+    SQL.add('left join XXZL on XXZL.XieXing=DDZL.XieXing and DDZL.Shehao=XXZL.SheHao ');
+    //
+    SQL.Add('Left join ( ');
+    SQL.Add('select CutDispatchZL.DDBH,SUM(case when CutDispatchS.DDBH  is NULL then CutNumZL else 0 end ) as CutNumZL  from (');   //Max(IsNull(CutDispatchS.DDBH,''ZZZ'')) as CutStatus,
+    SQL.Add('select  CutDispatchZL.ZLBH,SMDD.DDBH,CutDispatchZL.BWBH,CutDispatchZL.CLBH,CutDispatchZL.SIZE,Sum(SMDDS.Qty) as Qty,SUM(case when joinnum>0 then CEILING(SMDDS.Qty*piece/convert(float,layer)*joinnum) else 0 end) as CutNumZL from CutDispatchZL ');
+    SQL.Add('inner join SMDD on SMDD.GXLB=''C'' and SMDD.YSBH=CutDispatchZL.ZLBH');
+    SQL.Add('inner join SMDDS on SMDD.DDBH=SMDDS.DDBH and CutDispatchZL.SIZE=SMDDS.XXCC');
+    sql.add('where SMDD.DepNO like '''+DepID+'%'' ');
+    if DDBHEdit.Text<>'' then
+    sql.add('      and SMDD.DDBH in '+DDBHSubSQL);
+    if CheckBox1.Checked=true then
+    begin
+    sql.add('      and (convert(smalldatetime,convert(varchar,SMDD.PlanDate,111)) between ');
+    sql.add('       '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''+' and  '+ ''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''+')');
+    end;
+    SQL.Add('Group by CutDispatchZL.ZLBH,SMDD.DDBH,CutDispatchZL.BWBH,CutDispatchZL.CLBH,CutDispatchZL.SIZE  ) CutDispatchZL');
+    SQL.Add('Left join (');
+    SQL.Add('select CutDispatchS.ZLBH,CutDispatchSS.DDBH,CutDispatchS.BWBH,CutDispatchS.CLBH,CutDispatchS.SIZE,Sum(SMDDS.Qty) as CutNum  from CutDispatchS ');
+    SQL.Add('inner join CutDispatchSS on CutDispatchS.DLNO=CutDispatchSS.DLNO and CutDispatchS.ZLBH=CutDispatchSS.ZLBH and CutDispatchS.BWBH=CutDispatchSS.BWBH  and CutDispatchS.CLBH=CutDispatchSS.CLBH   and CutDispatchS.SIZE=CutDispatchSS.SIZE  ');
+    SQL.Add('left join SMDD on SMDD.GXLB=''C'' and SMDD.DDBH=CutDispatchSS.DDBH ');
+    SQL.Add('inner join SMDDS on SMDD.DDBH=SMDDS.DDBH and CutDispatchS.SIZE=SMDDS.XXCC ');
+    SQL.add('where SMDD.DepNO like '''+DepID+'%''');
+    if DDBHEdit.Text<>'' then
+    sql.add('      and SMDD.DDBH in '+DDBHSubSQL);
+    if CheckBox1.Checked=true then
+    begin
+    SQL.add('      and (convert(smalldatetime,convert(varchar,SMDD.PlanDate,111)) between ');
+    SQL.add('       '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''' and '''+formatdatetime('yyyy/MM/dd',DTP2.date)+''' )');
+    end;
+    SQL.Add('Group by CutDispatchS.ZLBH,CutDispatchSS.DDBH,CutDispatchS.BWBH,CutDispatchS.CLBH,CutDispatchS.SIZE ) CutDispatchS on  ');
+    SQL.Add('       CutDispatchS.ZLBH=CutDispatchZL.ZLBH and CutDispatchS.DDBH=CutDispatchZL.DDBH and CutDispatchS.BWBH=CutDispatchZL.BWBH and CutDispatchS.CLBH=CutDispatchZL.CLBH  and CutDispatchS.SIZE=CutDispatchZL.SIZE ');
+    SQL.Add('where  1=1  ');
+    SQL.Add('Group by CutDispatchZL.DDBH ) CutDispatchS on CutDispatchS.DDBH=SMDD.DDBH ');
+    //
+    SQL.add('where SMDD.DepNO like '''+DepID+'%''');
+    if DDBHEdit.Text<>'' then
+    sql.add('      and SMDD.DDBH in '+DDBHSubSQL);
+    if CheckBox1.Checked=true then
+    begin
+    SQL.add('      and (convert(smalldatetime,convert(varchar,SMDD.PlanDate,111)) between ');
+    SQL.add('       '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''+' and  '+ ''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''+')');
+    end;
+    SQL.add('      and SMDD.GXLB=''C'' ');
+    SQL.add('group by SMDD.YSBH,CutDispatchS.CutNumZL,SMDD.DDBH,SMDD.Article,SMDD.XieMing,XXZL.DAOMH,SMDD.PlanDate,SMDD.Qty ');
+    SQL.add('order by SMDD.PlanDate, SMDD.DDBH ');
+    //funcObj.WriteErrorLog(sql.Text);
+    active:=true;
+  end;
+  //部位
+  with BWBHQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select SMDDS.BWBH,bwzl.YWSM,bwzlvn.VWSM,SMDDS.BWBH as BWBH_DS from (');
+    SQL.Add('select BWBH from CutDispatchZL ');
+    SQL.Add('inner join SMDD on SMDD.YSBH=CutDispatchZL.ZLBH and SMDD.GXLB=''C'' ');
+    SQL.Add('         where 1=1 ');
+    if CheckBox1.Checked=true then
+    begin
+    sql.add('      and (convert(smalldatetime,convert(varchar,SMDD.PlanDate,111)) between ');
+    sql.add('       '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''+' and  '+ ''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''+')');
+    end;
+    if DDBHEdit.Text<>'' then
+    sql.add('      and SMDD.DDBH in '+DDBHSubSQL);
+    SQL.Add('Group by BWBH ) SMDDS');
+    SQL.Add('Left join bwzl on bwzl.bwdh=SMDDS.BWBH ');
+    SQL.Add('Left join bwzlvn on bwzlvn.bwdh=SMDDS.BWBH');
+    //funcObj.WriteErrorLog(SQL.Text);
+    Active:=true;
+    DBGridEh2.SelectedRows.Clear;
+    DBGridEh2.SelectedRows.SelectAll;
+  end;
+  SetDBGridEh1Format();
+end;
+procedure TCD_SMDD.SetDBGridEh1Format();
+var i:integer;
+begin
+  //
+  DBGridEh1.columns[0].Visible:=false;
+  DBGridEh1.columns[1].font.size:=10;
+  DBGridEh1.columns[1].title.caption:='CutNum|SL Dao';
+  DBGridEh1.columns[1].width:=45;
+  DBGridEh1.columns[2].width:=95;
+  DBGridEh1.columns[2].font.size:=10;
+  DBGridEh1.columns[3].width:=100;
+  DBGridEh1.columns[3].font.size:=8;
+  DBGridEh1.columns[4].width:=100;
+  DBGridEh1.columns[4].font.size:=8;
+  DBGridEh1.columns[5].width:=100;
+  DBGridEh1.columns[5].font.size:=8;
+  DBGridEh1.columns[6].width:=40;
+  DBGridEh1.columns[6].font.size:=8;
+  TDatefield(SMDDS.Fields[6]).displayformat:='MM/dd' ;
+  DBGridEh1.columns[7].width:=45;
+  DBGridEh1.columns[7].title.caption:='XXCC|DDCC';
+  DBGridEh1.columns[7].footer.valuetype:=fvtsum;
+  Tfloatfield(SMDDS.Fields[7]).displayformat:='##,#0' ;
+  DBGridEh1.columns[1].footer.valuetype:=fvtcount;
+  for i:=8 to SMDDS.fieldcount-1 do
+  begin
+    DBGridEh1.columns[i].width:=35;
+    DBGridEh1.columns[i].footer.valuetype:=fvtsum;
+    Tfloatfield(SMDDS.Fields[i]).displayformat:='##,#0' ;
+  end;
+end;
+
+procedure TCD_SMDD.FormCreate(Sender: TObject);
+begin
+  DepIDList := TStringList.Create;
+  LeanID := TStringList.Create;
+  MachineID := TStringList.Create;
+  DTP1.Date := StartOfTheWeek(IncWeek(Date, 1));
+  DTP2.Date := EndOfTheWeek(IncWeek(Date, 1));
+  SetFactory;           
+  MachineType := 'MC';
+  SetMachineLean;
+end;
+
+procedure TCD_SMDD.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action:=CaFree;
+end;
+
+procedure TCD_SMDD.FormDestroy(Sender: TObject);
+begin
+  DepIDList.Free;
+  CD_SMDD:=nil;
+end;
+
+procedure TCD_SMDD.XuongCBChange(Sender: TObject);
+begin
+ SetDepartment;
+end;
+
+procedure TCD_SMDD.DepNameCBChange(Sender: TObject);
+var
+  i: integer;
+begin
+  for i := 0 to LeanID.Count-1 do
+  begin
+    if (DepIDList.Strings[DepNameCB.ItemIndex] = LeanID[i]) then
+    begin
+      MachineLeanBox.ItemIndex := i + 1;
+      SetMachine;
+      Break;
+    end;
+  end;
+end;
+
+procedure TCD_SMDD.Button2Click(Sender: TObject);
+begin
+  PrintDBGrideh1.Preview;
+end;
+
+procedure TCD_SMDD.N1Click(Sender: TObject);
+var i:integer;
+    bm:Tbookmark;
+    bookmarklist:tbookmarklistEh;
+    TotalDDBHList:String;
+begin
+  SMDDS.disablecontrols;
+  bm:=SMDDS.getbookmark;
+  bookmarklist:=DBGridEh1.selectedrows;
+  //
+  TotalDDBHList:='';
+  try
+    if (DBGridEh1.SelectedRows.Count > 0) then
+    begin
+        for i:=0 to bookmarklist.count-1 do
+        begin
+          SMDDS.gotobookmark(pointer(bookmarklist[i]));
+          TotalDDBHList:=TotalDDBHList+SMDDS.FieldByName('DDBH').AsString+',';
+        end;
+
+    end else
+    begin
+      Showmessage('Please Select DDBH');
+    end;
+  finally
+    begin
+      SMDDS.gotobookmark(bm);
+      SMDDS.freebookmark(bm);
+      SMDDS.enablecontrols;
+    end;
+  end;
+  //
+  if length(TotalDDBHList)>0 then
+  begin
+    if DepNameCB.ItemIndex>-1 then
+    DepID:=DepIDList.Strings[DepNameCB.ItemIndex]; //'A2010208';//A2_LEAN2-08_C
+    if CD_QuickSMDD=nil then
+    begin
+      CD_QuickSMDD:=TCD_QuickSMDD.Create(nil);
+      CD_QuickSMDD.Init(Copy(TotalDDBHList, 1, length(TotalDDBHList)-1), DepID);
+      CD_QuickSMDD.Show;
+    end else
+    begin
+      CD_QuickSMDD.Show;
+    end;
+  end;
+end;
+
+procedure TCD_SMDD.DBGridEh1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if SMDDS.FieldByName('CutNumZL').value=0 then
+  begin
+    DBGridEh1.canvas.font.color:=clred;
+  end;
+end;
+
+procedure TCD_SMDD.AddSizeBtnClick(Sender: TObject);
+begin
+  N1.Click;
+end;
+
+function TCD_SMDD.GetQuerySubSQL(Query: TQuery; DBGridEh: TDBGridEh; FieldNM: String): String;
+   function StringListIsExists(tmpList:TStringlist;Str:String):boolean;
+   var i:integer;
+       IsExists:boolean;
+   begin
+     IsExists:=false;
+     for i:=0 to tmpList.Count-1 do
+     begin
+       if tmpList.Strings[i]=Str then
+       begin
+        IsExists:=true;
+        break;
+       end;
+     end;
+     result:=IsExists;
+   end;
+var i,count:integer;
+    bm:Tbookmark;
+    bookmarklist:tbookmarklistEh;
+    TotalList,PlanDate:String;
+    IsSelected:boolean;
+    tmpList:TStringlist;
+begin
+  Query.disablecontrols;
+  bm:=Query.getbookmark;
+  bookmarklist:=DBGridEh.selectedrows;
+  //
+  tmpList:=TStringlist.Create;
+  TotalList:='';
+  try
+    if (DBGridEh.SelectedRows.Count > 0) then
+    begin
+        count:=0;
+          for i:=0 to bookmarklist.count-1 do
+          begin
+            IsSelected:=true;
+            if Query.BookmarkValid(pointer(bookmarklist[i])) then
+            begin
+              Query.gotobookmark(pointer(bookmarklist[i]));
+              if ((FieldNM='SIZE') or (FieldNM='BWBH')) then
+                if Query.FieldByName(FieldNM+'_DS').AsString='' then IsSelected:=false;
+              //
+              if IsSelected=true then
+              begin
+                if StringListIsExists(tmpList,Query.FieldByName(FieldNM).AsString)=false then
+                begin
+                  TotalList:=TotalList+''''+Query.FieldByName(FieldNM).AsString+''',';
+                  count:=count+1;
+                  tmpList.Add(Query.FieldByName(FieldNM).AsString);
+                end;
+              end;
+              if count>=99 then break;
+            end;
+          end;
+    end;
+  finally
+    begin
+      Query.gotobookmark(bm);
+      Query.freebookmark(bm);
+      Query.enablecontrols;
+    end;
+  end;
+  if length(TotalList)>0 then
+    TotalList:=' ('+Copy(TotalList,1,length(TotalList)-1)+')';
+  tmpList.Free;
+  result:=TotalList;
+end;
+
+//產生表單
+function TCD_SMDD.CreateDispathCutting():boolean;
+var
+  sYear, sMonth, DLNO, CLBH: string;
+  h,i: integer;
+  NDate:TDate;
+  ZLBHSubSQL,BWBHSubSQL,DDBHSubSQL:String;
+  iRes:boolean;
+  //
+begin
+  DLNO:='';
+  try
+      ZLBHSubSQL:=GetQuerySubSQL(SMDDS,DBGridEh1,'YSBH');
+      DDBHSubSQL:=GetQuerySubSQL(SMDDS,DBGridEh1,'DDBH');
+      BWBHSubSQL:=GetQuerySubSQL(BWBHQry,DBGridEh2,'BWBH');
+      if ((ZLBHSubSQL='')  or (BWBHSubSQL='')) then iRes:=false else  iRes:=true;
+      if iRes=true then
+      begin
+        //
+        if DLNO='' then
+        begin
+          //Insert into CutDisPatch
+          //取Server的年月值
+          with QTemp do
+          begin
+            Active := false;
+            SQL.Clear;
+            SQL.Add('SELECT YEAR(GETDATE()) AS FY, MONTH(GETDATE()) AS FM, GETDATE() AS NDate');
+            Active := true;
+            NDate := FieldByName('NDate').Value;
+            sYear := FieldByName('FY').AsString;
+            sMonth := FieldByName('FM').AsString;
+            Active := false;
+          end;
+          if (Length(sMonth) < 2) then
+          begin
+            sMonth := '0' + sMonth;
+          end;
+          with QTemp do    //計算領料單流水號
+          begin
+            Active := false;
+            SQL.Clear;
+            SQL.Add('SELECT DLNO FROM CutDispatch WHERE DLNO LIKE '''+sYear+sMonth+'%''');
+            SQL.Add('ORDER BY DLNO');
+            Active := true;
+
+            if (RecordCount > 0) then
+            begin
+              Last;
+              DLNO := FieldByName('DLNO').AsString;
+              DLNO := Copy(DLNO, 7, 5);
+              DLNO := IntToStr(StrToInt(DLNO)+1);
+              while (Length(DLNO) < 5) do
+              begin
+                DLNO := '0' + DLNO;
+              end;
+            end
+            else begin
+              DLNO := '00001';
+            end;
+            DLNO := sYear + sMonth + DLNO;
+            //
+            Active := false;
+            SQL.Clear;
+            SQL.Add('INSERT INTO CutDispatch ');
+            SQL.Add('(DLNO, DLLB, GSBH, DepID, PlanDate, Memo, USERID, USERDATE, YN) ');
+            SQL.Add('VALUES ');
+            SQL.Add('('''+DLNO+''',''' + MachineType + ''','''+main.Edit2.Text+''','''+DepID+''',Convert(varchar,GetDate(),111),null,'''+main.Edit1.Text+''',GetDate(),1)');
+            //funcObj.WriteErrorLog(sql.Text);
+            ExecSQL();
+          end;
+        end;
+        //
+        with QTemp do
+        begin
+          Active := false;
+          SQL.Clear;
+          SQL.Add('Insert into CutDisPatchS ');
+          SQL.Add('select '''+DLNO+''' as DLNO,ZLBH,BWBH,SIZE,CLBH,Qty,XXCC,0 as CutNum,0 as okCutNum,'''+main.Edit1.text+''' as USERID,GetDate() as USERDATE,null as ScanUser,null as ScanDate,1 as YN from (');
+          SQL.Add('select CutDispatchZL.ZLBH,CutDispatchZL.BWBH,CutDispatchZL.SIZE,CutDispatchZL.CLBH,CutDispatchZL.XXCC,SUM(CutDispatchZL.Qty-IsNull(CutDispatchZL.DQty,0)) as Qty from ( ');
+          SQL.Add('select CutDispatchZL.DDBH,CutDispatchZL.ZLBH,CutDispatchZL.BWBH,CutDispatchZL.SIZE,CutDispatchZL.XXCC,CutDispatchZL.CLBH,CutDispatchZL.Qty,IsNull(CutDisPatchS.DQty,0) as DQty from (');
+          SQL.Add('	Select SMDD.DDBH,ZLBH,BWBH,SIZE,CutDispatchZL.XXCC,CLBH,SMDDS.Qty from CutDispatchZL ');
+          SQL.Add('	left join SMDD on SMDD.YSBH=CutDispatchZL.ZLBH and SMDD.GXLB=''C''');
+          SQL.Add('	left join SMDDS on SMDDS.DDBH=SMDD.DDBH and SMDDS.XXCC=CutDispatchZL.SIZE ');
+          SQL.Add('	where 1=1   and CutDispatchZL.ZLBH in '+ZLBHSubSQL);
+          SQL.Add('	 and CutDispatchZL.BWBH in '+BWBHSubSQL);
+          SQL.Add('	 and SMDD.DDBH in '+DDBHSubSQL+') CutDispatchZL');
+          SQL.Add('	 left join (');
+          SQL.Add('	  select CutDispatchSS.DDBH,CutDisPatchS.ZLBH,CutDisPatchS.BWBH,CutDisPatchS.SIZE,CutDisPatchS.CLBH,Sum(CutDisPatchSS.Qty) as DQty from CutDisPatchS');
+          SQL.Add('	  Left join  CutDispatchSS on CutDisPatchS.DLNO=CutDispatchSS.DLNO and CutDispatchS.ZLBH=CutDispatchSS.ZLBH and CutDispatchS.BWBH=CutDispatchSS.BWBH  and CutDispatchS.SIZE=CutDispatchSS.SIZE and CutDispatchS.SIZE=CutDispatchSS.SIZE');
+          SQL.Add('	  where 1=1 ');
+          SQL.Add('	  and CutDisPatchS.ZLBH in  '+ZLBHSubSQL);
+          SQL.Add('	  and CutDisPatchS.BWBH in '+BWBHSubSQL);
+          SQL.Add('	  and CutDispatchSS.DDBH in '+DDBHSubSQL+' ');
+          SQL.Add('	  Group by CutDispatchSS.DDBH,CutDisPatchS.ZLBH,CutDisPatchS.BWBH,CutDisPatchS.SIZE,CutDisPatchS.CLBH ');
+          SQL.Add('	 ) CutDisPatchS on CutDisPatchS.ZLBH=CutDispatchZL.ZLBH and CutDisPatchS.DDBH=CutDispatchZL.DDBH and CutDisPatchS.BWBH=CutDispatchZL.BWBH and CutDisPatchS.SIZE=CutDispatchZL.SIZE and CutDisPatchS.CLBH=CutDispatchZL.CLBH');
+          SQL.Add('where CutDispatchZL.Qty>IsNull(CutDispatchS.DQty,0) ) CutDispatchZL');
+          SQL.Add('Group by CutDispatchZL.ZLBH,CutDispatchZL.BWBH,CutDispatchZL.SIZE,CutDispatchZL.CLBH,CutDispatchZL.XXCC   ) CutDispatchS ');
+          //funcObj.WriteErrorLog(sql.Text);
+          ExecSQL();
+        end;
+        //Insert into CutDisPatchSS
+        with QTemp do
+        begin
+          Active := false;
+          SQL.Clear;
+          SQL.Add('Insert into CutDisPatchSS ');
+          if (SMachineBox.ItemIndex <= 0) then
+            SQL.Add('select '''+DLNO+''' as DLNO,ZLBH,DDBH,BWBH,SIZE,CLBH,Qty,0,0,Null,Null,'''+main.Edit1.Text+''' as USERID,GetDate() as USERDATE,1 as YN from ( ')
+          else
+            SQL.Add('select '''+DLNO+''' as DLNO,ZLBH,DDBH,BWBH,SIZE,CLBH,Qty,0,0,''' + MachineID.Strings[SMachineBox.ItemIndex-1] + ''',Convert(varchar,GetDate(),111),'''+main.Edit1.Text+''' as USERID,GetDate() as USERDATE,1 as YN from ( ');
+          SQL.Add('select CutDispatchZL.DDBH,CutDispatchZL.ZLBH,CutDispatchZL.BWBH,CutDispatchZL.SIZE,CutDispatchZL.XXCC,CutDispatchZL.CLBH,CutDispatchZL.Qty,IsNull(CutDisPatchS.DQty,0) as DQty from (');
+          SQL.Add('	Select SMDD.DDBH,ZLBH,BWBH,SIZE,CutDispatchZL.XXCC,CLBH,SMDDS.Qty from CutDispatchZL ');
+          SQL.Add('	left join SMDD on SMDD.YSBH=CutDispatchZL.ZLBH and SMDD.GXLB=''C''');
+          SQL.Add('	left join SMDDS on SMDDS.DDBH=SMDD.DDBH and SMDDS.XXCC=CutDispatchZL.SIZE ');
+          SQL.Add('	where 1=1   and CutDispatchZL.ZLBH in '+ZLBHSubSQL);
+          SQL.Add('	 and CutDispatchZL.BWBH in '+BWBHSubSQL);
+          SQL.Add('	 and SMDD.DDBH in '+DDBHSubSQL+') CutDispatchZL');
+          SQL.Add('	 left join (');
+          SQL.Add('	  select CutDispatchSS.DDBH,CutDisPatchS.ZLBH,CutDisPatchS.BWBH,CutDisPatchS.SIZE,CutDisPatchS.CLBH,Sum(CutDisPatchSS.Qty) as DQty from CutDisPatchS');
+          SQL.Add('	  Left join  CutDispatchSS on CutDisPatchS.DLNO=CutDispatchSS.DLNO and CutDispatchS.ZLBH=CutDispatchSS.ZLBH and CutDispatchS.BWBH=CutDispatchSS.BWBH  and CutDispatchS.SIZE=CutDispatchSS.SIZE and CutDispatchS.SIZE=CutDispatchSS.SIZE');
+          SQL.Add('	  where 1=1 ');
+          SQL.Add('	  and CutDisPatchS.ZLBH in  '+ZLBHSubSQL);
+          SQL.Add('	  and CutDisPatchS.BWBH in '+BWBHSubSQL);
+          SQL.Add('	  and CutDispatchSS.DDBH in '+DDBHSubSQL+' ');
+          SQL.Add('	  Group by CutDispatchSS.DDBH,CutDisPatchS.ZLBH,CutDisPatchS.BWBH,CutDisPatchS.SIZE,CutDisPatchS.CLBH ');
+          SQL.Add('	 ) CutDisPatchS on CutDisPatchS.ZLBH=CutDispatchZL.ZLBH and CutDisPatchS.DDBH=CutDispatchZL.DDBH and CutDisPatchS.BWBH=CutDispatchZL.BWBH and CutDisPatchS.SIZE=CutDispatchZL.SIZE and CutDisPatchS.CLBH=CutDispatchZL.CLBH');
+          SQL.Add('where CutDispatchZL.Qty>IsNull(CutDispatchS.DQty,0) ) CutDispatchSS');
+          //FuncObj.WriteErrorLog(sql.Text);
+          ExecSQL();
+        end;
+      //end;
+    end;
+    //根據迴轉計算派工刀數
+    with QTemp do
+    begin
+      Active:=false;
+      SQL.Clear;
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('update CutDispatchS Set CutNum=CutDS.CutNum ');
+      SQL.Add('from (');
+      SQL.Add('select CutDispatchS.DLNO,CutDispatchS.ZLBH,CutDispatchS.BWBH,CutDispatchS.CLBH,CutDispatchS.SIZE ');
+      SQL.Add('       ,case when CutDispatchZL.joinnum>0 then CEILING((CutDispatchS.Qty)*CutDispatchZL.piece/convert(float,CutDispatchZL.layer)*joinnum) else 0 end as CutNum');
+      SQL.Add('from CutDispatchS');
+      SQL.Add('Left join CutDispatchZL on CutDispatchS.ZLBH=CutDispatchZL.ZLBH and CutDispatchS.BWBH=CutDispatchZL.BWBH and CutDispatchS.CLBH=CutDispatchZL.CLBH and CutDispatchZL.SIZE=CutDispatchZL.SIZE');
+      SQL.Add('where CutDispatchS.DLNO='''+DLNO+''' ) CutDS ');
+      SQL.Add('where CutDS.DLNO=CutDispatchS.DLNO and CutDS.ZLBH=CutDispatchS.ZLBH and CutDS.BWBH=CutDispatchS.BWBH and CutDS.CLBH=CutDispatchS.CLBH and CutDS.SIZE=CutDispatchS.SIZE');
+      //funcObj.WriteErrorLog(sql.Text);
+      ExecSQL();
+    end;
+      //
+  finally
+      begin
+      end;
+  end;
+  result:=iRes;
+end;
+
+procedure TCD_SMDD.AddPartBtnClick(Sender: TObject);
+begin
+  MachineBox.Left := (CD_SMDD.Width - MachineBox.Width) DIV 2;
+  MachineBox.Top := (CD_SMDD.Height - MachineBox.Height) DIV 2;
+  MachineBox.Visible := true;
+end;
+
+procedure TCD_SMDD.Option_OKClick(Sender: TObject);
+begin
+  MachineBox.Visible := false;
+  if messagedlg('Are you sure to do this Cutting Dispath? ban muon mo phieu san xuat chat', mtCustom, [mbYes,mbCancel], 0)=mrYes then
+  begin
+    if DepNameCB.ItemIndex>-1 then
+      DepID := DepIDList.Strings[DepNameCB.ItemIndex]; //'A2010208';//A2_LEAN2-08_C
+    if CreateDispathCutting()=true then
+    begin
+      SMDDS.Active:=false;
+      SMDDS.Active:=true;
+      SetDBGridEh1Format();
+      Showmessage('Success');
+    end
+    else begin
+      Showmessage('請選部位和尺碼, Xin chon SIZE SO va Chi tet');
+    end;
+  end;
+end;
+
+procedure TCD_SMDD.Option_cancelClick(Sender: TObject);
+begin
+  MachineBox.Visible := false;
+end;
+
+procedure TCD_SMDD.TypeBoxChange(Sender: TObject);
+begin
+  if (TypeBox.ItemIndex = 0) then
+  begin
+    MachineType := 'MC';
+    MachineLeanBox.Enabled := true;
+    SetMachineLean;
+  end
+  else if (TypeBox.ItemIndex = 1) then
+  begin
+    MachineType := 'AC';
+    MachineLeanBox.Enabled := false;
+    SetMachine;
+  end
+  else if (TypeBox.ItemIndex = 2) then
+  begin
+    MachineType := 'Lectra';
+    MachineLeanBox.Enabled := false;
+    SetMachine;
+  end;
+end;
+
+procedure TCD_SMDD.MachineLeanBoxChange(Sender: TObject);
+begin
+  SetMachine;
+end;
+
+end.

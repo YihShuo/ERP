@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <include
+        android:id="@+id/title"
+        android:layout_alignParentRight="true"
+        layout="@layout/title" />
+        
+    <include
+        android:id="@+id/under"
+        layout="@layout/under" />
+
+    <RelativeLayout
+        android:id="@+id/loginlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="50dip"
+        android:background="@drawable/bg_dark" >
+
+        <TableLayout
+            android:id="@+id/tableLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="50dp" >
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+	                <Button
+	                android:id="@+id/takepotobtn"
+	                android:layout_width="220dp"
+	                android:layout_height="100dp"
+	                android:background="@drawable/btn_login_selector"
+	                android:text="@string/takepoto"
+	                android:layout_marginLeft="10dp"
+	                android:textColor="@android:color/white"
+	                android:textSize="@dimen/textsize" /> 
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp" >
+	                <Button
+	                android:id="@+id/defectbtn"
+	                android:layout_width="220dp"
+	                android:layout_height="100dp"
+	                android:background="@drawable/btn_login_selector"
+	                android:text="@string/defect"
+	                android:layout_marginLeft="10dp"
+	                android:textColor="@android:color/white"
+	                android:textSize="@dimen/textsize" />               
+            </TableRow>
+        </TableLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,42 @@
+進貨單
+Delete from c14tr where fiono='01'
+Delete from c14trmode where fiono='01'
+
+領料單
+Delete from c14tr where fiono='54'
+Delete from c14trmode where fiono='54'
+
+繳庫單
+Delete from c14tr where fiono='03'
+Delete from c14trmode where fiono='03'
+
+加工單
+Delete from c14tr where fiono='05'
+Delete from c14trmode where fiono='05'
+
+銷貨單
+Delete from c14tr where fiono='52'
+Delete from c14trmode where fiono='52'
+
+製令工單
+Delete from pr15tr where fiono='03'
+Delete from pr15trmode where fiono='03'
+
+生產日報
+Delete from pr13tr where fiono='03'
+Delete from pr13trmode where fiono='03'
+
+truncate table  c14tr;
+truncate table  c14trmode;
+
+truncate table pr15tr ;
+truncate table pr15trmode;
+
+truncate table pr13tr ;
+truncate table pr13trmode;
+
+
+
+
+
+

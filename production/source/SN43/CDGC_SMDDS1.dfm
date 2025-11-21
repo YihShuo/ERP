@@ -1,0 +1,237 @@
+object CDGC_SMDDS: TCDGC_SMDDS
+  Left = 1415
+  Top = 219
+  Width = 321
+  Height = 483
+  Caption = 'CDGC_SMDDS'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 16
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 40
+    Width = 305
+    Height = 404
+    Align = alClient
+    DataSource = DS1
+    Flat = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = #24494#36575#27491#40657#39636
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = ANSI_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -11
+    FooterFont.Name = #27161#26999#39636
+    FooterFont.Style = []
+    FooterRowCount = 1
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+    ParentFont = False
+    SumList.Active = True
+    TabOrder = 0
+    TitleFont.Charset = ANSI_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = #26032#32048#26126#39636
+    TitleFont.Style = []
+    UseMultiTitle = True
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'DDBH'
+        Footers = <>
+        Width = 165
+      end
+      item
+        EditButtons = <>
+        FieldName = 'SIZE'
+        Footers = <>
+        Width = 46
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Qty'
+        Footer.FieldName = 'Qty'
+        Footer.Font.Charset = ANSI_CHARSET
+        Footer.Font.Color = clWindowText
+        Footer.Font.Height = -11
+        Footer.Font.Name = #24494#36575#27491#40657#39636
+        Footer.Font.Style = []
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 50
+      end>
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 305
+    Height = 40
+    Align = alTop
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = #24494#36575#27491#40657#39636
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    object Button2: TButton
+      Left = 732
+      Top = 5
+      Width = 65
+      Height = 29
+      Caption = 'Print'
+      TabOrder = 0
+    end
+    object Button1: TButton
+      Left = 11
+      Top = 8
+      Width = 89
+      Height = 28
+      Caption = 'Copy'
+      TabOrder = 1
+      OnClick = Button1Click
+    end
+  end
+  object SMDDS: TQuery
+    DatabaseName = 'DB'
+    DataSource = CutProcessDispatch.DS2
+    SQL.Strings = (
+      
+        'SELECT CutDispatchZL_GC.DDBH, CutDispatchZL_GC.ZLBH, CutDispatch' +
+        'ZL_GC.BWBH, CutDispatchZL_GC.SIZE, CutDispatchZL_GC.GCBWBH, CutD' +
+        'ispatchZL_GC.Qty, IsNull(CutDisPatchS_GC.DQty, 0) AS DQty FROM ('
+      
+        '  SELECT SMDD.DDBH, ZLBH, BWBH, SIZE, GCBWBH, SMDDS.Qty FROM Cut' +
+        'DispatchZL_GC'
+      
+        '  LEFT JOIN SMDD ON SMDD.YSBH = CutDispatchZL_GC.ZLBH AND SMDD.G' +
+        'XLB = '#39'C'#39
+      
+        '  LEFT JOIN SMDDS ON SMDDS.DDBH = SMDD.DDBH AND SMDDS.XXCC = Cut' +
+        'DispatchZL_GC.SIZE'
+      '  WHERE 1 = 1'
+      '  AND CutDispatchZL_GC.ZLBH = :ZLBH'
+      '  AND CutDispatchZL_GC.GCBWBH = :GCBWBH'
+      '  AND CutDispatchZL_GC.SIZE = :SIZE'
+      '  AND CutDispatchZL_GC.BWBH = :BWBH'
+      ') AS CutDispatchZL_GC'
+      'LEFT JOIN ('
+      
+        '  SELECT CutDispatchSS_GC.DDBH, CutDisPatchS_GC.ZLBH, CutDisPatc' +
+        'hS_GC.GCBWBH, CutDisPatchS_GC.SIZE, CutDisPatchS_GC.BWBH, SUM(Cu' +
+        'tDisPatchSS_GC.Qty) AS DQty FROM CutDisPatchS_GC'
+      
+        '  LEFT JOIN CutDispatchSS_GC ON CutDisPatchS_GC.DLNO = CutDispat' +
+        'chSS_GC.DLNO AND CutDispatchS_GC.ZLBH = CutDispatchSS_GC.ZLBH AN' +
+        'D CutDispatchS_GC.GCBWBH = CutDispatchSS_GC.GCBWBH AND CutDispat' +
+        'chS_GC.SIZE = CutDispatchSS_GC.SIZE AND CutDispatchS_GC.BWBH = C' +
+        'utDispatchSS_GC.BWBH'
+      '  WHERE 1 = 1'
+      '  AND CutDisPatchS_GC.ZLBH = :ZLBH'
+      '  AND CutDisPatchS_GC.GCBWBH = :GCBWBH'
+      '  AND CutDisPatchS_GC.SIZE = :SIZE'
+      '  AND CutDisPatchS_GC.BWBH = :BWBH'
+      
+        '  GROUP BY CutDispatchSS_GC.DDBH, CutDisPatchS_GC.ZLBH, CutDisPa' +
+        'tchS_GC.GCBWBH, CutDisPatchS_GC.SIZE, CutDisPatchS_GC.BWBH'
+      
+        ') AS CutDisPatchS_GC ON CutDisPatchS_GC.ZLBH = CutDispatchZL_GC.' +
+        'ZLBH AND CutDisPatchS_GC.DDBH = CutDispatchZL_GC.DDBH AND CutDis' +
+        'PatchS_GC.BWBH = CutDispatchZL_GC.BWBH AND CutDisPatchS_GC.SIZE ' +
+        '= CutDispatchZL_GC.SIZE AND CutDisPatchS_GC.GCBWBH = CutDispatch' +
+        'ZL_GC.GCBWBH'
+      'WHERE CutDispatchZL_GC.Qty > IsNull(CutDispatchS_GC.DQty, 0)')
+    Left = 222
+    Top = 248
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ZLBH'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'GCBWBH'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'SIZE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'BWBH'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ZLBH'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'GCBWBH'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'SIZE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'BWBH'
+        ParamType = ptUnknown
+      end>
+    object SMDDSDDBH: TStringField
+      FieldName = 'DDBH'
+      FixedChar = True
+      Size = 15
+    end
+    object SMDDSZLBH: TStringField
+      FieldName = 'ZLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object SMDDSBWBH: TStringField
+      FieldName = 'BWBH'
+      FixedChar = True
+      Size = 4
+    end
+    object SMDDSSIZE: TStringField
+      FieldName = 'SIZE'
+      FixedChar = True
+      Size = 6
+    end
+    object SMDDSGCBWBH: TStringField
+      FieldName = 'GCBWBH'
+      Size = 6
+    end
+    object SMDDSQty: TIntegerField
+      FieldName = 'Qty'
+    end
+    object SMDDSDQty: TIntegerField
+      FieldName = 'DQty'
+    end
+  end
+  object DS1: TDataSource
+    DataSet = SMDDS
+    Left = 222
+    Top = 281
+  end
+end

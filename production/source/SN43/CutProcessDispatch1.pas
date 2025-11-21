@@ -1,0 +1,1003 @@
+unit CutProcessDispatch1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ComCtrls, GridsEh, DBGridEh, Buttons, ExtCtrls,
+  DBTables, DB;
+
+type
+  TCutProcessDispatch = class(TForm)
+    Panel2: TPanel;
+    BB2: TBitBtn;
+    BB3: TBitBtn;
+    BB4: TBitBtn;
+    BB5: TBitBtn;
+    BB6: TBitBtn;
+    BB7: TBitBtn;
+    BB1: TBitBtn;
+    BB10: TBitBtn;
+    BB12: TBitBtn;
+    Panel3: TPanel;
+    BC2: TBitBtn;
+    BC3: TBitBtn;
+    BC4: TBitBtn;
+    BC5: TBitBtn;
+    BC6: TBitBtn;
+    BC7: TBitBtn;
+    PC1: TPageControl;
+    TS1: TTabSheet;
+    Panel1: TPanel;
+    Label2: TLabel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    DepNameCB: TComboBox;
+    XuongCB: TComboBox;
+    Button1: TButton;
+    DTP1: TDateTimePicker;
+    DTP2: TDateTimePicker;
+    Check: TCheckBox;
+    DLNOEdit: TEdit;
+    TS2: TTabSheet;
+    DBGridEh2: TDBGridEh;
+    DS1: TDataSource;
+    CPDMaster: TQuery;
+    CPDMasterUpd: TUpdateSQL;
+    CPDMasterDLNO: TStringField;
+    CPDMasterGSBH: TStringField;
+    CPDMasterDepID: TStringField;
+    CPDMasterPlanDate: TDateTimeField;
+    CPDMasterMemo: TStringField;
+    CPDMasterUSERID: TStringField;
+    CPDMasterUSERDATE: TDateTimeField;
+    CPDMasterCFMID: TStringField;
+    CPDMasterCFMDate: TDateTimeField;
+    CPDMasterYN: TStringField;
+    DBGridEh1: TDBGridEh;
+    TmpQry: TQuery;
+    CPDDetail: TQuery;
+    DS2: TDataSource;
+    CPDDetailUpd: TUpdateSQL;
+    CPDMasterDepName: TStringField;
+    CPDDetailDLNO: TStringField;
+    CPDDetailZLBH: TStringField;
+    CPDDetailGCBWBH: TStringField;
+    CPDDetailSIZE: TStringField;
+    CPDDetailBWBH: TStringField;
+    CPDDetailTmpQty: TIntegerField;
+    CPDDetailQty: TIntegerField;
+    CPDDetailUSERDATE: TDateTimeField;
+    CPDDetailUSERID: TStringField;
+    CPDDetailYN: TStringField;
+    CPDDetailywsm: TStringField;
+    CPDDetailzwsm: TStringField;
+    CPDDetailbywsm: TStringField;
+    CPDDetailbzwsm: TStringField;
+    Panel4: TPanel;
+    Splitter1: TSplitter;
+    Panel5: TPanel;
+    DBGridEh3: TDBGridEh;
+    BD2: TBitBtn;
+    BD3: TBitBtn;
+    BD4: TBitBtn;
+    BD5: TBitBtn;
+    BD6: TBitBtn;
+    DS3: TDataSource;
+    CPDDetailS: TQuery;
+    CPDDetailSUpd: TUpdateSQL;
+    CPDDetailSDLNO: TStringField;
+    CPDDetailSZLBH: TStringField;
+    CPDDetailSDDBH: TStringField;
+    CPDDetailSGCBWBH: TStringField;
+    CPDDetailSSIZE: TStringField;
+    CPDDetailSBWBH: TStringField;
+    CPDDetailSQty: TIntegerField;
+    CPDDetailSUSERDATE: TDateTimeField;
+    CPDDetailSUSERID: TStringField;
+    CPDDetailSYN: TStringField;
+    BB8: TBitBtn;
+    BB9: TBitBtn;
+    BB13: TBitBtn;
+    CPDMasterZLBHList: TStringField;
+    BitBtn1: TBitBtn;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure BB1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure BB2Click(Sender: TObject);
+    procedure BB3Click(Sender: TObject);
+    procedure BB4Click(Sender: TObject);
+    procedure BB6Click(Sender: TObject);
+    procedure CPDMasterAfterOpen(DataSet: TDataSet);
+    procedure BB5Click(Sender: TObject);
+    procedure DBGridEh1EditButtonClick(Sender: TObject);
+    procedure CPDDetailAfterOpen(DataSet: TDataSet);
+    procedure DBGridEh1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure PC1Change(Sender: TObject);
+    procedure DBGridEh1DblClick(Sender: TObject);
+    procedure BC2Click(Sender: TObject);
+    procedure BC3Click(Sender: TObject);
+    procedure BC4Click(Sender: TObject);
+    procedure BC6Click(Sender: TObject);
+    procedure DBGridEh2EditButtonClick(Sender: TObject);
+    procedure BC5Click(Sender: TObject);
+    procedure BB10Click(Sender: TObject);
+    procedure BD2Click(Sender: TObject);
+    procedure BD3Click(Sender: TObject);
+    procedure BD4Click(Sender: TObject);
+    procedure BD5Click(Sender: TObject);
+    procedure BD6Click(Sender: TObject);
+    procedure DBGridEh3EditButtonClick(Sender: TObject);
+    procedure DBGridEh3GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure BB8Click(Sender: TObject);
+    procedure BB9Click(Sender: TObject);
+    procedure BB13Click(Sender: TObject);
+    procedure XuongCBChange(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+  private
+    { Private declarations }
+    procedure SetFactory;
+    procedure SetDepartment;
+    procedure GetSubSQLList;
+  public
+    { Public declarations }
+  end;
+
+var
+  CutProcessDispatch: TCutProcessDispatch;
+  NDate: TDate;
+  ZLBHSubSQL, DDBHSubSQL, GCBWBHSubSQL, SIZESubSQL, BWBHSubSQL: String;
+
+implementation
+
+uses
+  main1, CPD_Department1, CPD_ZLBH1, FunUnit, PD_PrintHDlg1, CDGC_SMDDS1,
+  CutProcessDispatch_SMDD1, CutProcessImport1, GC_Search1;
+{$R *.dfm}
+
+procedure TCutProcessDispatch.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action:=CaFree;
+end;
+
+procedure TCutProcessDispatch.FormDestroy(Sender: TObject);
+begin
+  CutProcessDispatch:=nil;
+end;
+
+procedure TCutProcessDispatch.BB1Click(Sender: TObject);
+begin
+  Panel1.Visible := true;
+end;
+
+procedure TCutProcessDispatch.SetFactory;
+begin
+  with TmpQry do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT Xuong FROM BDepartment');
+    SQL.Add('WHERE ProYn = 1 AND YN = 1 AND sumline IS NOT NULL');
+    SQL.Add('AND GXLB = ''C'' AND GSBH = ''' + main.Edit2.Text + ''' AND ISNULL(Xuong, '''') <> ''''');
+    SQL.Add('GROUP BY Xuong');
+    SQL.Add('ORDER BY Xuong ');
+    Active := true;
+
+    XuongCB.Items.Clear;
+    XuongCB.Items.Add('');
+    while not Eof do
+    begin
+      XuongCB.Items.Add(FieldByName('Xuong').AsString);
+      Next;
+    end;
+  end;
+end;
+
+procedure TCutProcessDispatch.SetDepartment;
+begin
+  with TmpQry do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT DepName FROM BDepartment');
+    SQL.Add('WHERE ProYn = 1 AND YN = 1 AND sumline IS NOT NULL AND GXLB = ''C'' AND GSBH = ''' + main.Edit2.Text + ''' AND Xuong = ''' + XuongCB.Text + '''');
+    SQL.Add('ORDER BY ID');
+    Active := true;
+    DepNameCB.Items.Clear;
+    DepNameCB.Items.Add('');
+    while not Eof do
+    begin
+      DepNameCB.Items.Add(FieldByName('DepName').AsString);
+      Next;
+    end;
+  end;
+end;
+
+procedure TCutProcessDispatch.FormCreate(Sender: TObject);
+begin
+  with TmpQry do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select getdate() as NDate ');
+    active:=true;
+    NDate:=fieldbyname('NDate').Value;
+    active:=false;
+  end;
+  SetFactory;
+  PC1.ActivePage := TS1;
+  DTP1.Date:=NDate-3;
+  DTP2.date:=NDate;
+end;
+
+procedure TCutProcessDispatch.Button1Click(Sender: TObject);
+begin
+  with CPDMaster do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select CutDispatch_GC.*, BDepartment.DepName,');
+    SQL.Add('Convert(varchar(100), (select Min(CutDispatchSS_GC.DDBH)+''...''+MAX(CutDispatchSS_GC.DDBH) from CutDispatchSS_GC where CutDispatchSS_GC.DLNO = CutDispatch_GC.DLNO), 100) AS ZLBHList');
+    SQL.Add('from CutDispatch_GC ');
+    SQL.Add('Left join BDepartment on BDepartment.ID=CutDispatch_GC.DepID ');
+    SQL.Add('where 1=1 ');
+    if XuongCB.Text<>'' then
+      SQL.Add('and BDepartment.Xuong = ''' + XuongCB.Text + '''');
+    if DepNameCB.Text<>'' then
+      SQL.Add('and BDepartment.DepName like ''%' + DepNameCB.Text + '%''');
+    if DLNOEdit.Text<>'' then
+    SQL.Add('and CutDispatch_GC.DLNO like ''%'+DLNOEdit.Text+'%'' ');
+    SQL.add('and convert(smalldatetime,convert(varchar,CutDispatch_GC.USERDATE,111)) between ');
+    SQL.add(''''+formatdatetime('yyyy/MM/dd',DTP1.Date) +''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.Date) +''' ');
+    SQL.add('and CutDispatch_GC.GSBH='+''''+main.Edit2.Text+'''');
+    if Check.Checked then
+    SQL.Add('and CutDispatch_GC.USERID='+''''+main.Edit1.Text+'''');
+    SQL.Add('order by CutDispatch_GC.DLNO desc');
+    Active:=true;
+  end;
+  BB2.Enabled:=true;
+  BB3.Enabled:=true;
+  BB4.Enabled:=true;
+  CPDDetail.Active:=true;
+  CPDDetailS.Active:=true;
+end;
+
+procedure TCutProcessDispatch.BB2Click(Sender: TObject);
+begin
+
+  with CPDMaster do
+  begin
+    RequestLive := true;
+    CachedUpdates := true;
+    Insert;
+    FieldByName('PlanDate').Value:=Date()+1;
+  end;
+  BB5.Enabled := true;
+  BB6.Enabled := true;
+  DBGridEh1.Columns[1].ButtonStyle := cbsEllipsis;
+  DBGridEh1.Columns[2].ButtonStyle := cbsEllipsis;
+
+end;
+
+procedure TCutProcessDispatch.BB3Click(Sender: TObject);
+begin
+  if (CPDMaster.FieldByName('USERID').Value = main.Edit1.Text) then
+  begin
+    if (CPDMaster.FieldByName('CFMID').Value = 'NO') AND (CPDMaster.FieldByName('CFMDate').Value <> '') then
+    begin
+      with CPDMaster do
+      begin
+        RequestLive := true;
+        CachedUpdates := true;
+        Edit;
+        FieldByName('YN').Value := 0;
+      end;
+      BB5.Enabled := true;
+      BB6.Enabled := true;
+    end
+    else begin
+      showmessage('The list has been scanned, can not delete');
+    end;
+  end
+  else begin
+    showmessage('The list is not belong to you, can not delete.');
+  end;
+end;
+
+procedure TCutProcessDispatch.BB4Click(Sender: TObject);
+begin
+
+  with CPDMaster do
+  begin
+    RequestLive := true;
+    CachedUpdates := true;
+    Edit;
+  end;
+  BB5.Enabled := true;
+  BB6.Enabled := true;
+  DBGridEh1.Columns[1].ButtonStyle := cbsEllipsis;
+  DBGridEh1.Columns[2].ButtonStyle := cbsEllipsis;
+
+end;
+
+procedure TCutProcessDispatch.BB6Click(Sender: TObject);
+begin
+  with CPDMaster do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  BB5.enabled:=false;
+  BB6.enabled:=false;
+  DBGridEh1.Columns[1].ButtonStyle := cbsnone;
+  DBGridEh1.Columns[2].ButtonStyle := cbsnone;
+
+end;
+
+procedure TCutProcessDispatch.CPDMasterAfterOpen(DataSet: TDataSet);
+begin
+  BB5.Enabled := false;
+  BB6.Enabled := false;
+  BC5.Enabled := false;
+  BC6.Enabled := false;
+  BB10.Enabled := true;
+end;
+
+procedure TCutProcessDispatch.BB5Click(Sender: TObject);
+var sYear, sMonth, DLNO: string;
+    i: integer;
+begin
+  //取Server的年月值
+  with TmpQry do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT YEAR(GETDATE()) AS FY, MONTH(GETDATE()) AS FM, GETDATE() AS NDate');
+    Active := true;
+    NDate := FieldByName('NDate').Value;
+    sYear := FieldByName('FY').AsString;
+    sMonth := FieldByName('FM').AsString;
+    Active := false;
+  end;
+  if (Length(sMonth) < 2) then
+  begin
+    sMonth := '0' + sMonth;
+  end;
+
+  try
+    CPDMaster.First;
+    for i := 1 to CPDMaster.RecordCount do
+    begin
+      case CPDMaster.UpdateStatus of
+        usInserted:
+        begin
+          if (CPDMaster.FieldByName('DepID').IsNull) then
+          begin
+            CPDMaster.Delete;
+          end
+          else begin
+            with TmpQry do    //計算領料單流水號
+            begin
+              Active := false;
+              SQL.Clear;
+              SQL.Add('SELECT DLNO FROM CutDispatch_GC WHERE DLNO LIKE '''+sYear+sMonth+'%''');
+              SQL.Add('ORDER BY DLNO');
+              Active := true;
+              if (RecordCount > 0) then
+              begin
+                Last;
+                DLNO := FieldByName('DLNO').AsString;
+                DLNO := Copy(DLNO, 7, 5);
+                DLNO := IntToStr(StrToInt(DLNO)+1);
+
+                while (Length(DLNO) < 5) do
+                begin
+                  DLNO := '0' + DLNO;
+                end;
+              end
+              else begin
+                DLNO := '00001';
+              end;
+
+              DLNO := sYear + sMonth + DLNO;
+              Active := false;
+            end;
+            CPDMaster.Edit;
+            CPDMaster.FieldByName('DLNO').Value := DLNO;
+            CPDMaster.FieldByName('GSBH').Value := main.Edit2.Text;
+            CPDMaster.FieldByName('USERID').Value := main.Edit1.Text;
+            CPDMaster.FieldByName('USERDATE').Value := Ndate;
+            CPDMaster.FieldByName('CFMID').Value := 'NO';
+            CPDMaster.FieldByName('YN').Value := 1;
+            CPDMasterUpd.Apply(ukInsert);
+          end;
+        end;
+
+        usModified:
+        begin
+          {
+          if (CPDMaster.FieldByName('USERID').Value <> main.Edit1.Text) then
+          begin
+            ShowMessage('不是你的，不要亂動。khong phai ban khong duoc tu sua');
+          end
+          else begin
+          }
+            if (CPDMaster.FieldByName('YN').value = 0) then
+            begin
+              with TmpQry do
+              begin
+                Active:=false;
+                SQL.Clear;
+                SQL.Add('DELETE FROM CutDispatchS_GC WHERE DLNO = ''' + CPDMaster.FieldByName('DLNO').AsString + ''';');
+                SQL.Add('DELETE FROM CutDispatchSS_GC WHERE DLNO = ''' + CPDMaster.FieldByName('DLNO').AsString + ''';');
+                ExecSQL();
+              end;
+              CPDMasterUpd.Apply(ukDelete);
+            end
+            else begin
+              CPDMaster.Edit;
+              CPDMaster.FieldByName('USERID').Value := main.Edit1.text;
+              CPDMaster.FieldByName('USERDATE').Value := Ndate;
+              CPDMasterUpd.Apply(ukModify);
+            end;
+          //end;
+        end;
+      end;
+
+      CPDMaster.Next;
+    end;
+
+    CPDMaster.Active := false;
+    CPDMaster.CachedUpdates := false;
+    CPDMaster.RequestLive := false;
+    CPDMaster.Active := true;
+    BB5.Enabled := false;
+    BB6.Enabled := false;
+    DBGridEh1.Columns[1].ButtonStyle := cbsNone;
+    DBGridEh1.Columns[2].ButtonStyle := cbsNone;
+  except
+    MessageDlg('Have wrong, can not save data!', mtWarning, [mbyes], 0);
+  end;
+
+end;
+
+procedure TCutProcessDispatch.DBGridEh1EditButtonClick(Sender: TObject);
+begin
+  CPD_Department := TCPD_Department.Create(self);
+  CPD_Department.Show;
+end;
+
+procedure TCutProcessDispatch.CPDDetailAfterOpen(DataSet: TDataSet);
+begin
+  BC2.Enabled := true;
+  BC3.Enabled := true;
+  BC4.Enabled := true;
+
+  if (CPDDetail.recordcount > 0) then
+  begin
+    BD2.Enabled := true;
+    BD3.Enabled := true;
+    BD4.Enabled := true;
+    BD5.Enabled := false;
+    BD6.Enabled := false;
+    //btnCutPrint.Enabled := true;
+  end
+  else begin
+    BD2.Enabled := false;
+    BD3.Enabled := false;
+    BD4.Enabled := false;
+    BD5.Enabled := false;
+    BD6.Enabled := false;
+    //btnCutPrint.Enabled := false;
+  end;
+
+  if (CPDMaster.FieldByName('CFMID').Value <> 'NO')  then
+  begin
+    BC2.Enabled := false;
+    BC3.Enabled := false;
+    BC4.Enabled := false;
+  end;
+
+  if (CPDMaster.CachedUpdates) then
+  begin
+    BC2.Enabled := false;
+    BC3.Enabled := false;
+    BC4.Enabled := false;
+    BD2.Enabled := false;
+    BD3.Enabled := false;
+    BD4.Enabled := false;
+  end;
+
+  BC5.Enabled := false;
+  BC6.Enabled := false;
+end;
+
+procedure TCutProcessDispatch.DBGridEh1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if (CPDMaster.FieldByName('YN').AsString = '0') then
+  begin
+    DBGridEh1.Canvas.Font.Color := clRed;
+  end
+  else if (CPDMaster.FieldByName('CFMID').AsString <> 'NO') then
+  begin
+    DBGridEh1.Canvas.Font.Color := clBlue;
+  end;
+end;
+
+procedure TCutProcessDispatch.PC1Change(Sender: TObject);
+begin
+  if (PC1.ActivePageIndex = 0) then
+  begin
+    Panel3.Visible := false;
+    Panel2.Visible := true;
+  end
+  else if (PC1.ActivePageIndex = 1) then
+  begin
+    Panel2.Visible := false;
+    Panel3.Visible := true;
+  end;
+end;
+
+procedure TCutProcessDispatch.DBGridEh1DblClick(Sender: TObject);
+begin
+  if (BC5.Enabled = false) then
+  begin
+    PC1.ActivePage := TS2;
+    Panel2.Visible := false;
+    Panel3.Visible := true;
+  end;
+end;
+
+procedure TCutProcessDispatch.BC2Click(Sender: TObject);
+begin
+  with CPDDetail do
+  begin
+    RequestLive := true;
+    CachedUpdates := true;
+    Insert;
+  end;
+  BC5.Enabled := true;
+  BC6.Enabled := true;
+  DBGridEh2.Columns[0].ButtonStyle := cbsEllipsis;
+end;
+
+procedure TCutProcessDispatch.BC3Click(Sender: TObject);
+begin
+    with CPDDetail do
+    begin
+      RequestLive := true;
+      CachedUpdates := true;
+      Edit;
+      FieldByName('YN').Value := 0;
+    end;
+    BC5.Enabled := true;
+    BC6.Enabled := true;
+end;
+
+procedure TCutProcessDispatch.BC4Click(Sender: TObject);
+begin
+  with CPDDetail do
+  begin
+    RequestLive := true;
+    CachedUpdates := true;
+    Edit;
+  end;
+  BC5.Enabled := true;
+  BC6.Enabled := true;
+  DBGridEh2.Columns[0].ButtonStyle := cbsEllipsis;
+end;
+
+procedure TCutProcessDispatch.BC6Click(Sender: TObject);
+begin
+  with CPDDetail do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  BC5.enabled:=false;
+  BC6.enabled:=false;
+  DBGridEh2.Columns[0].ButtonStyle := cbsnone;
+end;
+
+procedure TCutProcessDispatch.DBGridEh2EditButtonClick(Sender: TObject);
+begin
+  CPD_ZLBH := TCPD_ZLBH.Create(self);
+  CPD_ZLBH.Show;
+end;
+
+procedure TCutProcessDispatch.BC5Click(Sender: TObject);
+var i:integer;
+begin
+  try
+    CPDDetail.First;
+    for i := 1 to CPDDetail.RecordCount do
+    begin
+      case CPDDetail.UpdateStatus of
+        usInserted:
+        begin
+          if (CPDDetail.FieldByName('ZLBH').IsNull OR CPDDetail.FieldByName('GCBWBH').IsNull OR CPDDetail.FieldByName('SIZE').IsNull) then
+          begin
+            CPDDetail.Delete;
+          end
+          else begin
+            CPDDetail.Edit;
+            CPDDetail.FieldByName('DLNO').Value := CPDMaster.FieldByName('DLNO').AsString;
+            CPDDetail.FieldByName('USERID').Value := main.Edit1.Text;
+            CPDDetail.FieldByName('USERDATE').Value := Ndate;
+            CPDDetail.FieldByName('YN').Value := 1;
+            CPDDetailUpd.Apply(ukInsert);
+          end;
+        end;
+
+        usModified:
+        begin
+          if (CPDDetail.FieldByName('USERID').Value <> main.Edit1.Text) then
+          begin
+            ShowMessage('不是你的，不要亂動。khong phai ban khong duoc tu sua');
+          end
+          else begin
+            if (CPDDetail.FieldByName('YN').value = 0) then
+            begin
+              CPDDetailUpd.Apply(ukDelete);
+            end
+            else begin
+              CPDDetail.Edit;
+              CPDDetail.FieldByName('USERID').Value := main.Edit1.text;
+              CPDDetail.FieldByName('USERDATE').Value := Ndate;
+              CPDDetailUpd.Apply(ukModify);
+            end;
+          end;
+        end;
+      end;
+      CPDDetail.Next;
+    end;
+
+    CPDDetail.Active := false;
+    CPDDetail.CachedUpdates := false;
+    CPDDetail.RequestLive := false;
+    CPDDetail.Active := true;
+    BC5.enabled := false;
+    BC6.enabled := false;
+    DBGridEh1.Columns[0].ButtonStyle := cbsNone;
+  except
+    MessageDlg('Have wrong, can not save data!', mtWarning, [mbyes], 0);
+  end;
+end;
+
+procedure TCutProcessDispatch.BB10Click(Sender: TObject);
+begin
+  PD_PrintHDlg := TPD_PrintHDlg.Create(self);
+  PD_PrintHDlg.Show;
+end;
+
+procedure TCutProcessDispatch.BD2Click(Sender: TObject);
+begin
+  with CPDDetailS do
+  begin
+    RequestLive := true;
+    CachedUpdates := true;
+    First;
+    Insert;
+  end;
+
+  BD5.Enabled := true;
+  BD6.Enabled := true;
+  DBGridEh3.Columns[0].ButtonStyle := cbsEllipsis;
+end;
+
+procedure TCutProcessDispatch.BD3Click(Sender: TObject);
+begin
+  with CPDDetailS do
+  begin
+    RequestLive := true;
+    CachedUpdates := true;
+    Edit;
+    FieldByName('YN').Value := 0;
+  end;
+  BD5.Enabled := true;
+  BD6.Enabled := true;
+end;
+
+procedure TCutProcessDispatch.BD4Click(Sender: TObject);
+begin
+  with CPDDetailS do
+  begin
+    RequestLive := true;
+    CachedUpdates := true;
+    Edit;
+  end;
+  BD5.Enabled := true;
+  BD6.Enabled := true;
+  DBGridEh3.Columns[0].ButtonStyle := cbsEllipsis;
+end;
+
+procedure TCutProcessDispatch.BD5Click(Sender: TObject);
+var
+  i: integer;
+  flag: boolean;
+begin
+  flag := true;
+
+  try
+    CPDDetailS.First;
+    for i := 1 to CPDDetailS.RecordCount do
+    begin
+      case CPDDetailS.UpdateStatus of
+        usInserted:
+        begin
+          if (CPDDetailS.FieldByName('DDBH').IsNull) then
+          begin
+            CPDDetailS.Delete;
+          end
+          else begin
+            CPDDetailS.Edit;
+            CPDDetailS.FieldByName('DLNO').Value := CPDDetail.FieldByName('DLNO').AsString;
+            CPDDetailS.FieldByName('ZLBH').Value := CPDDetail.FieldByName('ZLBH').AsString;
+            CPDDetailS.FieldByName('GCBWBH').Value := CPDDetail.FieldByName('GCBWBH').AsString;
+            CPDDetailS.FieldByName('SIZE').Value := CPDDetail.FieldByName('SIZE').AsString;
+            CPDDetailS.FieldByName('BWBH').Value := CPDDetail.FieldByName('BWBH').AsString;
+            CPDDetailS.FieldByName('USERID').Value := main.Edit1.Text;
+            CPDDetailS.FieldByName('USERDATE').Value := Ndate;
+            CPDDetailS.FieldByName('YN').Value := 1;
+            CPDDetailSUpd.Apply(ukInsert);
+          end;
+        end;
+
+        usModified:
+        begin
+          if (CPDDetailS.FieldByName('USERID').Value <> main.Edit1.Text) then
+          begin
+            ShowMessage('不是你的，不要亂動。khong phai ban khong duoc tu sua');
+          end
+          else begin
+            if (CPDDetailS.FieldByName('YN').value = 0) then
+            begin         
+              GetSubSQLList;
+              flag := false;
+              CPDDetailSUpd.Apply(ukDelete);
+            end
+            else begin
+              CPDDetailS.Edit;
+              CPDDetailS.FieldByName('USERID').Value := main.Edit1.text;
+              CPDDetailS.FieldByName('USERDATE').Value := Ndate;
+              CPDDetailSUpd.Apply(ukModify);
+            end;
+          end;
+        end;
+      end;
+
+      CPDDetailS.Next;
+    end;
+
+    //更新數量
+    if (flag) then
+      GetSubSQLList;
+    with TmpQry do
+    begin
+      Active := false;
+      SQL.Clear;
+      SQL.Add('UPDATE CutDispatchSS_GC SET Qty = CutDispatchZL_GC.Qty-IsNull(CutDispatchZL_GC.DQty,0) FROM (');
+      SQL.Add('  SELECT CutDispatchZL_GC.DDBH, CutDispatchZL_GC.ZLBH, CutDispatchZL_GC.BWBH, CutDispatchZL_GC.SIZE, CutDispatchZL_GC.GCBWBH, CutDispatchZL_GC.Qty, IsNull(CutDisPatchS_GC.DQty, 0) AS DQty FROM (');
+      SQL.Add('    SELECT SMDD.DDBH, ZLBH, BWBH, SIZE, GCBWBH, SMDDS.Qty FROM CutDispatchZL_GC');
+      SQL.Add('    LEFT JOIN SMDD ON SMDD.YSBH = CutDispatchZL_GC.ZLBH AND SMDD.GXLB = ''C''');
+      SQL.Add('    LEFT JOIN SMDDS ON SMDDS.DDBH = SMDD.DDBH AND SMDDS.XXCC = CutDispatchZL_GC.SIZE');
+      SQL.Add('    WHERE 1=1 AND ZLBH IN ' + ZLBHSubSQL);
+      SQL.Add('    AND SMDD.DDBH IN ' + DDBHSubSQL);
+      SQL.Add('    AND GCBWBH IN ' + GCBWBHSubSQL);
+      SQL.Add('    AND SIZE IN ' + SIZESubSQL);
+      SQL.Add('    AND BWBH IN ' + BWBHSubSQL);
+      SQL.Add('  ) AS CutDispatchZL_GC');
+      SQL.Add('  LEFT JOIN (');
+      SQL.Add('    SELECT CutDispatchSS_GC.DDBH, CutDisPatchS_GC.ZLBH, CutDisPatchS_GC.BWBH, CutDisPatchS_GC.SIZE, CutDisPatchS_GC.GCBWBH, SUM(CutDisPatchSS_GC.Qty) AS DQty FROM CutDisPatchS_GC');
+      SQL.Add('    LEFT JOIN CutDispatchSS_GC ON CutDisPatchS_GC.DLNO = CutDispatchSS_GC.DLNO AND CutDispatchS_GC.ZLBH = CutDispatchSS_GC.ZLBH AND CutDispatchS_GC.BWBH = CutDispatchSS_GC.BWBH');
+      SQL.Add('    AND CutDispatchS_GC.SIZE = CutDispatchSS_GC.SIZE AND CutDispatchS_GC.GCBWBH = CutDispatchSS_GC.GCBWBH');
+      SQL.Add('    WHERE 1=1');
+      SQL.Add('    AND CutDisPatchS_GC.DLNO <> ''' + CPDMaster.FieldByName('DLNO').AsString + '''');
+      SQL.Add('    AND CutDisPatchS_GC.ZLBH IN ' + ZLBHSubSQL);
+      SQL.Add('    AND CutDispatchSS_GC.DDBH IN ' + DDBHSubSQL);
+      SQL.Add('    AND CutDisPatchS_GC.GCBWBH IN ' + GCBWBHSubSQL);
+      SQL.Add('    AND CutDisPatchS_GC.SIZE IN ' + SIZESubSQL);
+      SQL.Add('    AND CutDisPatchS_GC.BWBH IN ' + BWBHSubSQL);
+      SQL.Add('    GROUP BY CutDispatchSS_GC.DDBH, CutDisPatchS_GC.ZLBH, CutDisPatchS_GC.BWBH, CutDisPatchS_GC.SIZE, CutDisPatchS_GC.GCBWBH');
+      SQL.Add('  ) AS CutDispatchS_GC ON CutDispatchS_GC.ZLBH = CutDispatchZL_GC.ZLBH AND CutDispatchS_GC.DDBH = CutDispatchZL_GC.DDBH AND CutDispatchS_GC.BWBH = CutDispatchZL_GC.BWBH');
+      SQL.Add('                      AND CutDispatchS_GC.SIZE = CutDispatchZL_GC.SIZE AND CutDispatchS_GC.GCBWBH = CutDispatchZL_GC.GCBWBH');
+      SQL.Add(') AS CutDispatchZL_GC');
+      SQL.Add('WHERE CutDispatchSS_GC.ZLBH = CutDispatchZL_GC.ZLBH AND CutDispatchSS_GC.DDBH = CutDispatchZL_GC.DDBH AND CutDispatchSS_GC.BWBH = CutDispatchZL_GC.BWBH AND CutDispatchSS_GC.SIZE = CutDispatchZL_GC.SIZE AND CutDispatchSS_GC.GCBWBH = CutDispatchZL_GC.GCBWBH');
+      SQL.Add('AND CutDispatchSS_GC.DLNO = ''' + CPDMaster.FieldByName('DLNO').AsString + ''';');
+      ExecSQL;
+
+      Active := false;
+      SQL.Clear;
+      SQL.Add('UPDATE CutDispatchS_GC SET Qty = CutDispatchSS_GC.Qty FROM (');
+      SQL.Add('  SELECT DLNO, ZLBH, BWBH, SIZE, GCBWBH, SUM(Qty) AS Qty FROM CutDispatchSS_GC');
+      SQL.Add('  WHERE DLNO = ''' + CPDMaster.FieldByName('DLNO').AsString + '''');
+      SQL.Add('  GROUP BY DLNO, ZLBH, BWBH, SIZE, GCBWBH');
+      SQL.Add(') AS CutDispatchSS_GC');
+      SQL.Add('WHERE CutDispatchS_GC.DLNO = ''' + CPDMaster.FieldByName('DLNO').AsString + ''' AND CutDispatchS_GC.DLNO = CutDispatchSS_GC.DLNO AND CutDispatchS_GC.ZLBH = CutDispatchSS_GC.ZLBH AND CutDispatchS_GC.BWBH = CutDispatchSS_GC.BWBH AND CutDispatchS_GC.SIZE = CutDispatchSS_GC.SIZE AND CutDispatchS_GC.GCBWBH = CutDispatchSS_GC.GCBWBH;');
+      ExecSQL;
+    end;
+
+    CPDDetailS.Active := false;
+    CPDDetailS.CachedUpdates := false;
+    CPDDetailS.RequestLive := false;
+    CPDDetailS.Active := true;
+    CPDDetail.Active := false;
+    CPDDetail.Active := true;
+    BD5.enabled := false;
+    BD6.enabled := false;
+    DBGridEh3.Columns[0].ButtonStyle := cbsNone;
+  except
+    MessageDlg('Have wrong, can not save data!', mtWarning, [mbyes], 0);
+  end;
+end;
+
+procedure TCutProcessDispatch.BD6Click(Sender: TObject);
+begin
+  with CPDDetailS do
+  begin
+    Active := false;
+    RequestLive := false;
+    CachedUpdates := false;
+    Active := true;
+  end;
+  BD5.Enabled := false;
+  BD6.Enabled := false;
+  DBGridEh3.Columns[0].ButtonStyle := cbsNone;
+end;
+
+procedure TCutProcessDispatch.DBGridEh3EditButtonClick(Sender: TObject);
+begin
+  CDGC_SMDDS := TCDGC_SMDDS.Create(self);
+  CDGC_SMDDS.Show;
+end;
+
+procedure TCutProcessDispatch.DBGridEh3GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if (CPDDetailS.FieldByName('YN').Value = '0') then
+    DBGridEh3.Canvas.Font.Color := clRed;
+end;
+
+procedure TCutProcessDispatch.GetSubSQLList;
+var
+  ZLBHList, DDBHList, GCBWBHList, SIZEList, BWBHList: TStringList;
+  i, index: integer;
+begin
+  ZLBHList := TStringlist.Create;
+  DDBHList := TStringlist.Create;
+  GCBWBHList := TStringlist.Create;
+  SIZEList := TStringlist.Create;
+  BWBHList := TStringlist.Create;
+
+  with TmpQry do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT DISTINCT ZLBH, DDBH, BWBH, SIZE, GCBWBH FROM CutDispatchSS_GC WHERE DLNO = ''' + CPDDetail.FieldByName('DLNO').AsString + '''');
+    Active := true;
+    for i:=0 to RecordCount-1 do
+    begin
+      if (ZLBHList.Find(FieldByName('ZLBH').AsString, index) = false) then
+        ZLBHList.Add(FieldByName('ZLBH').AsString);
+
+      if (DDBHList.Find(FieldByName('DDBH').AsString, index) = false) then
+        DDBHList.Add(FieldByName('DDBH').AsString); 
+
+      if (GCBWBHList.Find(FieldByName('GCBWBH').AsString, index) = false) then
+        GCBWBHList.Add(FieldByName('GCBWBH').AsString);
+
+      if (SIZEList.Find(FieldByName('SIZE').AsString, index) = false) then
+        SIZEList.Add(FieldByName('SIZE').AsString);
+
+      if (BWBHList.Find(FieldByName('BWBH').AsString, index) = false) then
+        BWBHList.Add(FieldByName('BWBH').AsString);
+
+      Next;
+    end;
+    Active := false;
+  end;
+
+  ZLBHSubSQL := '';
+  DDBHSubSQL := '';
+  GCBWBHSubSQL := '';
+  SIZESubSQL := '';
+  BWBHSubSQL := '';
+
+  for i:=0 to ZLBHList.Count-1 do
+  begin
+    ZLBHSubSQL := ZLBHSubSQL + '''' + ZLBHList[i] + ''',';
+  end;
+  if (Length(ZLBHSubSQL) > 0) then
+    ZLBHSubSQL := ' (' + Copy(ZLBHSubSQL, 1, Length(ZLBHSubSQL)-1) + ')';
+
+  for i:=0 to DDBHList.Count-1 do
+  begin
+    DDBHSubSQL := DDBHSubSQL + '''' + DDBHList[i] + ''',';
+  end;
+  if (Length(DDBHSubSQL) > 0) then
+    DDBHSubSQL := ' (' + Copy(DDBHSubSQL, 1, Length(DDBHSubSQL)-1) + ')';
+
+  for i:=0 to GCBWBHList.Count-1 do
+  begin
+    GCBWBHSubSQL := GCBWBHSubSQL + '''' + GCBWBHList[i] + ''',';
+  end;
+  if (Length(GCBWBHSubSQL) > 0) then
+    GCBWBHSubSQL := ' (' + Copy(GCBWBHSubSQL, 1, Length(GCBWBHSubSQL)-1) + ')';
+
+  for i:=0 to SIZEList.Count-1 do
+  begin
+    SIZESubSQL := SIZESubSQL + '''' + SIZEList[i] + ''',';
+  end;
+  if (Length(SIZESubSQL) > 0) then
+    SIZESubSQL := ' (' + Copy(SIZESubSQL, 1, Length(SIZESubSQL)-1) + ')';
+
+  for i:=0 to BWBHList.Count-1 do
+  begin
+    BWBHSubSQL := BWBHSubSQL + '''' + BWBHList[i] + ''',';
+  end;
+  if (Length(BWBHSubSQL) > 0) then
+    BWBHSubSQL := ' (' + Copy(BWBHSubSQL, 1, Length(BWBHSubSQL)-1) + ')';
+
+  ZLBHList.free;
+  DDBHList.free;
+  GCBWBHList.free;
+  SIZEList.free;
+  BWBHList.free;
+end;
+
+procedure TCutProcessDispatch.BB8Click(Sender: TObject);
+begin
+  CutProcessDispatch_SMDD := TCutProcessDispatch_SMDD.Create(self);
+  CutProcessDispatch_SMDD.Show;
+end;
+
+procedure TCutProcessDispatch.BB9Click(Sender: TObject);
+begin
+  CutProcessImport := TCutProcessImport.Create(self);
+  CutProcessImport.Show;
+end;
+
+procedure TCutProcessDispatch.BB13Click(Sender: TObject);
+begin
+  if (CPDMaster.Active) then
+  begin
+    with tmpQry do
+    begin
+      Active := false;
+      SQL.Clear;
+      SQL.Add('UPDATE CutDispatch_GC SET CFMID = ''' + main.Edit1.Text + ''', CFMDate = GetDate() WHERE DLNO = ''' + CPDMaster.FieldByName('DLNO').AsString + ''';');
+      SQL.Add('UPDATE CutDispatchS_GC SET Qty = TmpQty WHERE DLNO = ''' + CPDMaster.FieldByName('DLNO').AsString + ''';');
+      ExecSQL;
+      SQL.Clear;
+      Active := false;
+    end;
+    ShowMessage('Success!');
+  end;
+end;
+
+procedure TCutProcessDispatch.XuongCBChange(Sender: TObject);
+begin
+  SetDepartment;
+end;
+
+procedure TCutProcessDispatch.BitBtn1Click(Sender: TObject);
+begin
+  GC_Search := TGC_Search.Create(self);
+  GC_Search.show;
+end;
+
+end.

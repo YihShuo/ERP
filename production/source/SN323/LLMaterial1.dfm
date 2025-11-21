@@ -1,0 +1,549 @@
+object LLMaterial: TLLMaterial
+  Left = 666
+  Top = 124
+  Width = 1252
+  Height = 527
+  Caption = 'BOM Material CLSL'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 1236
+    Height = 81
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label5: TLabel
+      Left = 320
+      Top = 18
+      Width = 30
+      Height = 16
+      Caption = 'SKU:'
+      Color = clBtnFace
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object Label1: TLabel
+      Left = 16
+      Top = 20
+      Width = 48
+      Height = 16
+      Caption = 'XieXing:'
+    end
+    object Label2: TLabel
+      Left = 184
+      Top = 20
+      Width = 53
+      Height = 16
+      Caption = 'SheHao:'
+    end
+    object Label3: TLabel
+      Left = 24
+      Top = 53
+      Width = 29
+      Height = 16
+      Caption = 'Size:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 197
+      Top = 53
+      Width = 23
+      Height = 16
+      Caption = 'Qty:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label6: TLabel
+      Left = 472
+      Top = 16
+      Width = 43
+      Height = 16
+      Caption = 'MatNo:'
+    end
+    object Label7: TLabel
+      Left = 656
+      Top = 16
+      Width = 28
+      Height = 16
+      Caption = 'DFL:'
+    end
+    object EditArticle: TEdit
+      Left = 360
+      Top = 12
+      Width = 97
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 0
+    end
+    object EditXieXing: TEdit
+      Left = 72
+      Top = 16
+      Width = 89
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 1
+    end
+    object EditSheHao: TEdit
+      Left = 240
+      Top = 16
+      Width = 57
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 2
+    end
+    object CbSize: TComboBox
+      Left = 72
+      Top = 48
+      Width = 97
+      Height = 24
+      ItemHeight = 16
+      TabOrder = 3
+      Items.Strings = (
+        '01.0'
+        '01.5'
+        '02.0'
+        '02.5'
+        '03.0'
+        '03.5'
+        '04.0'
+        '04.5'
+        '05.0'
+        '05.5'
+        '06.0'
+        '06.5'
+        '07.0'
+        '07.5'
+        '08.0'
+        '08.5'
+        '09.0'
+        '10.0'
+        '10.5'
+        '11.0'
+        '11.5'
+        '12.0'
+        '12.5'
+        '13.0'
+        '13.5'
+        ' 01.0'
+        ' 01.5'
+        ' 02.0'
+        ' 02.5'
+        ' 03.0'
+        ' 03.5'
+        ' 04.0'
+        ' 04.5'
+        ' 05.0'
+        ' 05.5'
+        ' 06.0'
+        ' 06.5'
+        ' 07.0'
+        ' 07.5'
+        ' 08.0'
+        ' 08.5'
+        ' 09.0'
+        ' 10.0'
+        ' 10.5'
+        ' 11.0'
+        ' 11.5'
+        ' 12.0'
+        ' 12.5'
+        ' 13.0'
+        ' 13.5')
+    end
+    object EditMatNo: TEdit
+      Left = 521
+      Top = 11
+      Width = 121
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 4
+    end
+    object Button1: TButton
+      Left = 832
+      Top = 40
+      Width = 81
+      Height = 33
+      Caption = 'Query'
+      TabOrder = 5
+      OnClick = Button1Click
+    end
+    object GroupBox1: TGroupBox
+      Left = 360
+      Top = 40
+      Width = 281
+      Height = 35
+      Caption = 'CalCulation'
+      TabOrder = 6
+      object RB1: TRadioButton
+        Left = 88
+        Top = 12
+        Width = 65
+        Height = 17
+        Caption = 'Action'
+        Checked = True
+        TabOrder = 0
+        TabStop = True
+      end
+      object RB2: TRadioButton
+        Left = 184
+        Top = 12
+        Width = 81
+        Height = 17
+        Caption = 'Computer'
+        TabOrder = 1
+      end
+    end
+    object BaseDate: TDateTimePicker
+      Left = 924
+      Top = 45
+      Width = 105
+      Height = 24
+      Date = 41615.484468796300000000
+      Time = 41615.484468796300000000
+      TabOrder = 7
+      Visible = False
+    end
+    object Button2: TButton
+      Left = 832
+      Top = 3
+      Width = 81
+      Height = 33
+      Caption = 'Copy'
+      TabOrder = 8
+      OnClick = Button2Click
+    end
+    object ChildMatCK: TCheckBox
+      Left = 658
+      Top = 50
+      Width = 161
+      Height = 17
+      Caption = 'show child material'
+      Checked = True
+      State = cbChecked
+      TabOrder = 9
+    end
+    object cb1: TComboBox
+      Left = 696
+      Top = 9
+      Width = 65
+      Height = 24
+      ItemHeight = 16
+      TabOrder = 10
+      Items.Strings = (
+        ''
+        'C'
+        'S'
+        'A'
+        'O'
+        'G')
+    end
+    object qtypairs: TEdit
+      Left = 240
+      Top = 48
+      Width = 57
+      Height = 24
+      TabOrder = 11
+      Text = '1'
+    end
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 81
+    Width = 1236
+    Height = 407
+    Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    object DBGridEh1: TDBGridEh
+      Left = 1
+      Top = 1
+      Width = 1234
+      Height = 405
+      Align = alClient
+      DataSource = DSLLMaterial
+      Flat = False
+      FooterColor = clWindow
+      FooterFont.Charset = DEFAULT_CHARSET
+      FooterFont.Color = clWindowText
+      FooterFont.Height = -13
+      FooterFont.Name = 'MS Sans Serif'
+      FooterFont.Style = []
+      FooterRowCount = 1
+      Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+      SumList.Active = True
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -13
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      OnDblClick = DBGridEh1DblClick
+      Columns = <
+        item
+          EditButtons = <>
+          FieldName = 'XH'
+          Footer.ValueType = fvtCount
+          Footers = <>
+        end
+        item
+          EditButtons = <>
+          FieldName = 'BWBH'
+          Footers = <>
+        end
+        item
+          EditButtons = <>
+          FieldName = 'BWMC'
+          Footers = <>
+          Width = 104
+        end
+        item
+          EditButtons = <>
+          FieldName = 'DType'
+          Footers = <>
+          Visible = False
+          Width = 40
+        end
+        item
+          EditButtons = <>
+          FieldName = 'CLBH'
+          Footers = <>
+          Width = 80
+        end
+        item
+          EditButtons = <>
+          FieldName = 'YWPM'
+          Footers = <>
+          Width = 275
+        end
+        item
+          EditButtons = <>
+          FieldName = 'ZWPM'
+          Footers = <>
+          Width = 258
+        end
+        item
+          EditButtons = <>
+          FieldName = 'DFL'
+          Footers = <>
+          Width = 30
+        end
+        item
+          EditButtons = <>
+          FieldName = 'XFL'
+          Footers = <>
+        end
+        item
+          EditButtons = <>
+          FieldName = 'DWBH'
+          Footers = <>
+        end
+        item
+          EditButtons = <>
+          FieldName = 'XTCC'
+          Footers = <>
+          Width = 30
+        end
+        item
+          Color = 8716287
+          EditButtons = <>
+          FieldName = 'CLSL'
+          Footer.ValueType = fvtSum
+          Footers = <>
+          Width = 50
+        end
+        item
+          Color = 10921727
+          EditButtons = <>
+          FieldName = 'KCQty'
+          Footers = <>
+          Width = 50
+        end>
+    end
+  end
+  object QueryLLMaterial: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'select XXZLS.XH, XXZLS.BWBH,XXZLS.BWMC,XXZLS.CLBH,xxZLS.DType,XX' +
+        'ZLS.CLMC YWPM,XXBWFLs.DFL,XXBWFLs.XFL,'
+      'xxzls.CLZW ZWPM,XXZLS.DWBH,XTBWYL1.XTCC,XTBWYL1.CLSL,KCZLS.KCQty'
+      
+        'FROM (select XXZLS.XIEXING,xxzlS.SHEHAO,XXZLS.XH, XXZLS.BWBH,BWZ' +
+        'L.ywsm BWMC,XXZLS.CLBH, '#39'As'#39' AS DType,CLZL.YWPM as CLMC, CLZL.ZW' +
+        'PM as CLZW,BWZL.zwsm  as BWZW,'
+      
+        '       CLZL.DWBH,CLZL.LYCC,LBZLS.BZ,XXZLS.BWLB,ZSZL.ZSYWJC,XXZLS' +
+        '.LOSS,XXZLS.CLSL,XXZLS.CCQQ,XXZLS.CCQZ,CLZL.CLZMLB'
+      
+        '       FROM XXZLS left join xxzl on xxzls.xiexing=xxzl.xiexing a' +
+        'nd xxzls.shehao=xxzl.shehao'
+      '       LEFT JOIN BWZL  ON XXZLS.BWBH = BWZL.bwdh'
+      '       LEFT JOIN CLZL   ON XXZLS.CLBH = CLZL.cldh'
+      
+        '       LEFT JOIN LBZLS ON SUBSTRING(XXZLS.CLBH,1,1) = LBZLS.lbdh' +
+        ' AND LBZLS.LB='#39'05'#39
+      '       LEFT JOIN ZSZL on ZSZL.ZSDH=XXZLS.CSBH'
+      '       where XXZLS.XieXing like '#39'%'#39' and XXZLS.SheHao like '#39'%'#39
+      '       and xxzl.ARTICLE like '#39'155771C%'#39
+      
+        '       GROUP BY XXZLS.XIEXING,xxzlS.SHEHAO,XXZLS.XH, XXZLS.BWBH,' +
+        'BWZL.ywsm,XXZLS.CLBH,CLZL.YWPM,CLZL.ZWPM ,BWZL.zwsm,CLZL.DWBH,CL' +
+        'ZL.LYCC,LBZLS.BZ,XXZLS.BWLB,'
+      
+        '       ZSZL.ZSYWJC,XXZLS.LOSS,XXZLS.CLSL,XXZLS.CCQQ,XXZLS.CCQZ,C' +
+        'LZL.CLZMLB'
+      '       union all'
+      
+        '       select XXZLS.XIEXING,xxzlS.SHEHAO,XXZLS.XH, XXZLS.BWBH,BW' +
+        'ZL.ywsm BWMC,clzhzl.cldh1,'#39'Ex'#39'AS DType,CLZL.YWPM as CLMC, CLZL.Z' +
+        'WPM as CLZW,BWZL.zwsm  as BWZW,'
+      
+        '       CLZL.DWBH,CLZL.LYCC,LBZLS.BZ,XXZLS.BWLB,ZSZL.ZSYWJC,XXZLS' +
+        '.LOSS,(clzhzl.syl*XXZLS.CLSL)as CLSL,XXZLS.CCQQ,XXZLS.CCQZ,CLZL.' +
+        'CLZMLB'
+      '       FROM XXZLS inner join clzhzl on clzhzl.cldh=xxzls.clbh'
+      
+        '       left join xxzl on xxzls.xiexing=xxzl.xiexing and xxzls.sh' +
+        'ehao=xxzl.shehao'
+      '       LEFT JOIN BWZL  ON XXZLS.BWBH = BWZL.bwdh'
+      '       LEFT JOIN CLZL   ON clzhzl.cldh1 = CLZL.cldh'
+      
+        '       LEFT JOIN LBZLS ON SUBSTRING(XXZLS.CLBH,1,1) = LBZLS.lbdh' +
+        ' AND LBZLS.LB='#39'05'#39
+      '       LEFT JOIN ZSZL on ZSZL.ZSDH=XXZLS.CSBH'
+      
+        '       where XXZLS.XieXing like '#39'%'#39' and XXZLS.SheHao like '#39'%'#39' an' +
+        'd xxzl.ARTICLE like '#39'155771C%'#39
+      
+        '       GROUP BY XXZLS.XIEXING,xxzlS.SHEHAO,XXZLS.XH, XXZLS.BWBH,' +
+        'BWZL.ywsm,clzhzl.cldh1,CLZL.YWPM, CLZL.ZWPM,BWZL.zwsm,CLZL.DWBH,' +
+        'CLZL.LYCC,LBZLS.BZ,XXZLS.BWLB,'
+      
+        '       ZSZL.ZSYWJC,XXZLS.LOSS,(clzhzl.syl*XXZLS.CLSL),XXZLS.CCQQ' +
+        ',XXZLS.CCQZ,CLZL.CLZMLB)XXZLS'
+      
+        'left join xxzl on xxzls.xiexing=xxzl.xiexing and xxzls.shehao=xx' +
+        'zl.shehao'
+      'Left join KCZLS on KCZLS.CLBH=XXZLS.CLBH and KCZLS.CKBH='#39'CDC'#39
+      
+        'left JOIN XTBWYL1 on XXZLS.XieXing=XTBWYL1.XieXing and XXZLS.She' +
+        'Hao=XTBWYL1.SheHao and XXZLS.BWBH=XTBWYL1.BWBH and XTBWYL1.XTCC=' +
+        #39'02.5'#39
+      
+        'left join XXBWFL on XXBWFL.BWBH=XXZLS.BWBH and XXBWFL.XieXing=XX' +
+        'ZLS.XieXing'
+      'left join XXBWFLS on XXBWFL.FLBH=XXBWFLS.FLBH'
+      'where XXZLS.XieXing like '#39'%'#39' and XXZLS.SheHao like '#39'%'#39
+      ' and XXZL.ARTICLE like '#39'155771C%'#39
+      ' and XXZLS.CLBH like '#39'%'#39
+      'order by xxzls.xh,XXZLS.DType'
+      '')
+    Left = 160
+    Top = 153
+    object QueryLLMaterialXH: TStringField
+      FieldName = 'XH'
+      FixedChar = True
+      Size = 3
+    end
+    object QueryLLMaterialBWBH: TStringField
+      FieldName = 'BWBH'
+      FixedChar = True
+      Size = 4
+    end
+    object QueryLLMaterialBWMC: TStringField
+      FieldName = 'BWMC'
+      FixedChar = True
+      Size = 40
+    end
+    object QueryLLMaterialCLBH: TStringField
+      FieldName = 'CLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object QueryLLMaterialYWPM: TStringField
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object QueryLLMaterialZWPM: TStringField
+      FieldName = 'ZWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object QueryLLMaterialDWBH: TStringField
+      FieldName = 'DWBH'
+      FixedChar = True
+      Size = 4
+    end
+    object QueryLLMaterialXTCC: TStringField
+      FieldName = 'XTCC'
+      FixedChar = True
+      Size = 6
+    end
+    object QueryLLMaterialCLSL: TFloatField
+      FieldName = 'CLSL'
+      DisplayFormat = '##,#0.0000'
+    end
+    object QueryLLMaterialKCQty: TCurrencyField
+      FieldName = 'KCQty'
+      DisplayFormat = '##,#0.00'
+    end
+    object QueryLLMaterialDFL: TStringField
+      FieldName = 'DFL'
+      FixedChar = True
+      Size = 1
+    end
+    object QueryLLMaterialXFL: TStringField
+      FieldName = 'XFL'
+      FixedChar = True
+      Size = 10
+    end
+    object QueryLLMaterialDType: TStringField
+      FieldName = 'DType'
+      FixedChar = True
+      Size = 2
+    end
+  end
+  object DSLLMaterial: TDataSource
+    DataSet = QueryLLMaterial
+    Left = 208
+    Top = 153
+  end
+end

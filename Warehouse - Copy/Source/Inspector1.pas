@@ -1,0 +1,259 @@
+unit Inspector1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DBTables, DB, StdCtrls, Buttons, ExtCtrls, Grids, DBGrids;
+
+type
+  TInspector = class(TForm)
+    DBGrid1: TDBGrid;
+    Panel3: TPanel;
+    BB1: TBitBtn;
+    BB2: TBitBtn;
+    BB3: TBitBtn;
+    BB4: TBitBtn;
+    DBGrid2: TDBGrid;
+    ScanData: TQuery;
+    ScanDataDDBH: TStringField;
+    ScanDataCTNO: TStringField;
+    ScanDataUSERDate: TDateTimeField;
+    ScanDataUSERID: TStringField;
+    ScanDataYN: TStringField;
+    DS1: TDataSource;
+    UpScan: TUpdateSQL;
+    SCSMYW: TQuery;
+    SCSMYWDDBH: TStringField;
+    SCSMYWCTNO: TStringField;
+    SCSMYWArticle: TStringField;
+    SCSMYWXieMing: TStringField;
+    DS2: TDataSource;
+    OpenDialog1: TOpenDialog;
+    Query1: TQuery;
+    BitBtn1: TBitBtn;
+    Panel1: TPanel;
+    Edit1: TEdit;
+    Button1: TButton;
+    DDZL: TQuery;
+    DDZLDDBH: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure BB3Click(Sender: TObject);
+    procedure BB1Click(Sender: TObject);
+    procedure BB4Click(Sender: TObject);
+    procedure BB2Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Inspector: TInspector;  
+  NDate:TDate;
+  Filepath:string;
+  Myfile:Textfile;
+
+implementation
+
+uses main1;
+
+{$R *.dfm}
+
+procedure TInspector.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+procedure TInspector.BB3Click(Sender: TObject);
+begin
+ScanData.delete;
+end;
+
+procedure TInspector.BB1Click(Sender: TObject);
+var
+i:integer;
+s:string;
+begin
+if opendialog1.Execute then
+  begin
+    filepath:=opendialog1.FileName;
+  end;
+if trim(filepath)='' then
+  begin
+    exit;
+  end;
+assignfile(Myfile,filepath);
+
+try
+  reset(myfile);
+except
+  showmessage('Have wrong.');
+end;
+
+try
+ScanData.Active:=true;
+i:=0;
+while not seekeof(myfile) do
+  begin
+    readln(myfile,s);
+    s:=trim(s);
+    if trim(s)<>'' then
+      begin
+        with ScanData do
+          begin
+            insert;
+            fieldbyname('DDBH').Value:=trim(copy(s,0,pos(' ',s)-1));
+            fieldbyname('CTNO').Value:=trim(copy(s,pos(' ',s),pos(',',s)-pos(' ',s)));
+            post;
+          end;
+      end;
+    inc(i);
+  end;
+closefile(myfile);
+BB2.Enabled:=true;
+BB3.Enabled:=true;
+SCSMYW.Active:=true;
+except
+  showmessage('Have wrong.');
+end;
+
+end;
+
+procedure TInspector.BB4Click(Sender: TObject);
+begin
+close;
+end;
+
+procedure TInspector.BB2Click(Sender: TObject);
+var i:integer;
+DDBH,CTNO:string;
+begin
+if not Scandata.Active then
+  begin
+    abort;
+  end;  
+if Scandata.recordcount=0 then
+  begin
+    abort;
+  end;
+with Query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select getdate() as NDate');
+    active:=true;
+    NDate:=fieldbyname('NDate').Value;
+    active:=false;
+  end;
+
+try
+    Scandata.first;
+    while not Scandata.Eof do
+      begin
+        case Scandata.updatestatus of
+          usinserted:
+            begin
+              DDBH:=Scandata.fieldbyname('DDBH').value;
+              CTNO:=Scandata.fieldbyname('CTNO').value;
+              Scandata.edit;
+              Scandata.FieldByName('USERDATE').Value:=NDate;
+              Scandata.FieldByName('USERID').Value:=main.edit1.text;
+              Scandata.FieldByName('YN').Value:='1';
+              Upscan.apply(ukinsert);
+              with query1 do
+                begin
+                  active:=false;
+                  sql.Clear;
+                  sql.add('update SCSMRK ');
+                  sql.add('set YN='+''''+'4'+'''');
+                  sql.add('where DDBH='+''''+DDBH+'''');
+                  sql.add('and CTNO='+''''+CTNO+'''');
+                  execsql;
+                end;
+            end;
+        end;
+        Scandata.delete;  
+        Scandata.first;
+      end;
+    Scandata.active:=false;
+    SCSMYW.active:=false;
+    BB2.Enabled:=false;
+    BB3.Enabled:=false;
+    if messagedlg('Keep to TXT files?',mtinformation,[mbYes,mbNo],0)=mrYes then
+      begin
+        if trim(filepath)<>'' then
+          begin
+            assignfile(Myfile,filepath);
+            append(myfile);
+            write(myfile,'Already write to database and keep.');
+            closefile(myfile);
+          end;
+      end;
+    showmessage('Succeed');
+except
+  Messagedlg('Have wrong, can not save!',mtwarning,[mbyes],0);
+end;
+
+end;
+
+procedure TInspector.BitBtn1Click(Sender: TObject);
+begin
+panel1.Visible:= true;
+DDZL.Active:=true;
+edit1.SetFocus;
+end;
+
+procedure TInspector.Button1Click(Sender: TObject);
+begin
+DDZL.active:=false;
+Panel1.Visible:=false;
+end;
+
+procedure TInspector.Edit1KeyPress(Sender: TObject; var Key: Char);
+var s:string;
+begin
+if key=#13 then
+  begin
+    s:=trim(edit1.Text);
+    if s='' then
+      begin
+        showmessage('Have wrong.');
+        abort;
+      end;
+  SCANDATA.active:=true;
+ DDZL.Active:=true;
+    try
+      if DDZL.Locate('DDBH',trim(copy(s,0,pos(' ',s)-1)),[]) then
+        begin
+          Scandata.last;
+          Scandata.append;
+          Scandata.fieldbyname('DDBH').Value:=trim(copy(s,0,pos(' ',s)-1));
+          Scandata.fieldbyname('CTNO').Value:=trim(copy(s,pos(' ',s)+1,length(s)-pos(' ',s)));
+          Scandata.post;
+          edit1.Text:='';
+          BB2.Enabled:=true;
+          BB3.Enabled:=true;
+        end
+        else
+          begin
+            edit1.text:='';
+          end;
+    except
+      edit1.text:='';
+      showmessage('Have wrong, pls check the order.');
+    end;
+  end;
+
+end;
+
+procedure TInspector.FormDestroy(Sender: TObject);
+begin
+Inspector:=nil;
+end;
+
+end.

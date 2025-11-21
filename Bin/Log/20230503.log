@@ -1,0 +1,52 @@
+if object_id('tempdb..#XXCC') is not null  
+begin   drop table #XXCC end   
+if object_id('tempdb..#CC') is not null  
+  begin   drop table #CC  end  
+select DDZL.DDBH,XXZLS3.US_Size as DDCC,XXZLS3.US_Size as BOMCC
+into #XXCC from  XXZLS3 
+left join DDZL on DDZL.XieXing=XXZLS3.XieXing
+where DDZL.DDBH=
+'JHS2309-001'
+select 7 as NO,'Quantity  ' as DDType,'825 ' as SizeType,#XXCC.BOMCC,
+ convert(varchar(6),DDZLS.Quantity) as DDCC into #CC from #XXCC 
+left join DDZLS on DDZLS.DDBH=#XXCC.DDBH and DDZLS.CC=#XXCC.DDCC
+insert #CC  select 0 as NO, 'OrderSize' as DDType,'US' as SizeType, #XXCC.BOMCC,#XXCC.DDCC from #XXCC 
+insert #CC  select 1 as NO, 'Article' as DDType,'US' as SizeType, #XXCC.BOMCC,#XXCC.BOMCC as DDCC from #XXCC
+insert #CC select  2 as NO,'LAST' as DDType,'    ' as SizeType,XXGJS.XXCC as BOMCC,XXGJS.GJCC as DDCC
+ from XXGJS  where  XXGJS.GJLB='100'and XXGJS.XieXing='HKF2311'
+insert #CC select  3 as NO,'OUTSOLE'as DDType,'    ' as SizeType,XXGJS.XXCC as BOMCC,XXGJS.GJCC as DDCC
+ from XXGJS  where XXGJS.GJLB='101'and XXGJS.XieXing='HKF2311'
+insert #CC select  4 as NO,'WEDGE'as DDType,'    ' as SizeType,XXGJS.XXCC as BOMCC,XXGJS.GJCC as DDCC
+ from XXGJS  where  XXGJS.GJLB='102'and XXGJS.XieXing='HKF2311'
+insert #CC select  5 as NO,'CUT DIE'as DDType,'    ' as SizeType,XXGJS.XXCC as BOMCC,XXGJS.GJCC as DDCC
+ from XXGJS  where  XXGJS.GJLB='200'and XXGJS.XieXing='HKF2311'
+insert #CC select  6 as NO,'TOE CAP'as DDType,'    ' as SizeType,XXGJS.XXCC as BOMCC,XXGJS.GJCC as DDCC
+from XXGJS
+left join XXZLSVNS2 on xxgjs.XieXing = XXZLSVNS2.XieXing
+where  XXZLSVNS2.Article='1129958-BCSTL' and XXGJS.GJLB='280'and XXGJS.XieXing='HKF2311'
+if object_id('tempdb..#XXCC') is not null  
+begin   drop table #XXCC end   
+if object_id('tempdb..#CC') is not null  
+  begin   drop table #CC  end  
+select DDZL.DDBH,XXZLS3.US_Size as DDCC,XXZLS3.US_Size as BOMCC
+into #XXCC from  XXZLS3 
+left join DDZL on DDZL.XieXing=XXZLS3.XieXing
+where DDZL.DDBH=
+'JHS2309-001'
+select 7 as NO,'Quantity  ' as DDType,'825 ' as SizeType,#XXCC.BOMCC,
+ convert(varchar(6),DDZLS.Quantity) as DDCC into #CC from #XXCC 
+left join DDZLS on DDZLS.DDBH=#XXCC.DDBH and DDZLS.CC=#XXCC.DDCC
+insert #CC  select 0 as NO, 'OrderSize' as DDType,'US' as SizeType, #XXCC.BOMCC,#XXCC.DDCC from #XXCC 
+insert #CC  select 1 as NO, 'Article' as DDType,'US' as SizeType, #XXCC.BOMCC,#XXCC.BOMCC as DDCC from #XXCC
+insert #CC select  2 as NO,'LAST' as DDType,'    ' as SizeType,XXGJS.XXCC as BOMCC,XXGJS.GJCC as DDCC
+ from XXGJS  where  XXGJS.GJLB='100'and XXGJS.XieXing='HKF2311'
+insert #CC select  3 as NO,'OUTSOLE'as DDType,'    ' as SizeType,XXGJS.XXCC as BOMCC,XXGJS.GJCC as DDCC
+ from XXGJS  where XXGJS.GJLB='101'and XXGJS.XieXing='HKF2311'
+insert #CC select  4 as NO,'WEDGE'as DDType,'    ' as SizeType,XXGJS.XXCC as BOMCC,XXGJS.GJCC as DDCC
+ from XXGJS  where  XXGJS.GJLB='102'and XXGJS.XieXing='HKF2311'
+insert #CC select  5 as NO,'CUT DIE'as DDType,'    ' as SizeType,XXGJS.XXCC as BOMCC,XXGJS.GJCC as DDCC
+ from XXGJS  where  XXGJS.GJLB='200'and XXGJS.XieXing='HKF2311'
+insert #CC select  6 as NO,'TOE CAP'as DDType,'    ' as SizeType,XXGJS.XXCC as BOMCC,XXGJS.GJCC as DDCC
+from XXGJS
+left join XXZLSVNS2 on xxgjs.XieXing = XXZLSVNS2.XieXing
+where  XXZLSVNS2.Article='1129958-BCSTL' and XXGJS.GJLB='280'and XXGJS.XieXing='HKF2311'

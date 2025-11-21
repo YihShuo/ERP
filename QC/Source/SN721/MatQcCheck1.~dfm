@@ -1,0 +1,2517 @@
+object MatQcCheck: TMatQcCheck
+  Left = 475
+  Top = 321
+  Width = 1425
+  Height = 630
+  Caption = 'MatQcCheck'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 75
+    Width = 1409
+    Height = 42
+    Align = alTop
+    TabOrder = 0
+    object Label11: TLabel
+      Left = 376
+      Top = 13
+      Width = 116
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Defect Name'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object btninsert: TBitBtn
+      Left = 0
+      Top = 0
+      Width = 50
+      Height = 41
+      Hint = 'Insert one New Record'
+      Caption = 'Insert'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnClick = btninsertClick
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        33333333FF33333333FF333993333333300033377F3333333777333993333333
+        300033F77FFF3333377739999993333333333777777F3333333F399999933333
+        33003777777333333377333993333333330033377F3333333377333993333333
+        3333333773333333333F333333333333330033333333F33333773333333C3333
+        330033333337FF3333773333333CC333333333FFFFF77FFF3FF33CCCCCCCCCC3
+        993337777777777F77F33CCCCCCCCCC3993337777777777377333333333CC333
+        333333333337733333FF3333333C333330003333333733333777333333333333
+        3000333333333333377733333333333333333333333333333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object btnmodify: TBitBtn
+      Left = 49
+      Top = 0
+      Width = 50
+      Height = 41
+      Hint = 'Modify Current'
+      Caption = 'Modify'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      OnClick = btnmodifyClick
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00500005000555
+        555557777F777555F55500000000555055557777777755F75555005500055055
+        555577F5777F57555555005550055555555577FF577F5FF55555500550050055
+        5555577FF77577FF555555005050110555555577F757777FF555555505099910
+        555555FF75777777FF555005550999910555577F5F77777775F5500505509990
+        3055577F75F77777575F55005055090B030555775755777575755555555550B0
+        B03055555F555757575755550555550B0B335555755555757555555555555550
+        BBB35555F55555575F555550555555550BBB55575555555575F5555555555555
+        50BB555555555555575F555555555555550B5555555555555575}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object btndelete: TBitBtn
+      Left = 98
+      Top = 0
+      Width = 50
+      Height = 41
+      Hint = 'Delete one Record'
+      Caption = 'Delete'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      OnClick = btndeleteClick
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        333333333333333333FF33333333333330003333333333333777333333333333
+        300033FFFFFF3333377739999993333333333777777F3333333F399999933333
+        3300377777733333337733333333333333003333333333333377333333333333
+        3333333333333333333F333333333333330033333F33333333773333C3333333
+        330033337F3333333377333CC3333333333333F77FFFFFFF3FF33CCCCCCCCCC3
+        993337777777777F77F33CCCCCCCCCC399333777777777737733333CC3333333
+        333333377F33333333FF3333C333333330003333733333333777333333333333
+        3000333333333333377733333333333333333333333333333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object btnsave: TBitBtn
+      Left = 147
+      Top = 0
+      Width = 50
+      Height = 41
+      Hint = 'Save Current'
+      Caption = 'Save'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      OnClick = btnsaveClick
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+        555555555555555555555555555555555555555555FF55555555555559055555
+        55555555577FF5555555555599905555555555557777F5555555555599905555
+        555555557777FF5555555559999905555555555777777F555555559999990555
+        5555557777777FF5555557990599905555555777757777F55555790555599055
+        55557775555777FF5555555555599905555555555557777F5555555555559905
+        555555555555777FF5555555555559905555555555555777FF55555555555579
+        05555555555555777FF5555555555557905555555555555777FF555555555555
+        5990555555555555577755555555555555555555555555555555}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object btncancel: TBitBtn
+      Left = 196
+      Top = 0
+      Width = 50
+      Height = 41
+      Hint = 'Cancel'
+      Caption = 'Cancel'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+      OnClick = btncancelClick
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        333333333333333333333333333333333333333FFF33FF333FFF339993370733
+        999333777FF37FF377733339993000399933333777F777F77733333399970799
+        93333333777F7377733333333999399933333333377737773333333333990993
+        3333333333737F73333333333331013333333333333777FF3333333333910193
+        333333333337773FF3333333399000993333333337377737FF33333399900099
+        93333333773777377FF333399930003999333337773777F777FF339993370733
+        9993337773337333777333333333333333333333333333333333333333333333
+        3333333333333333333333333333333333333333333333333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object btnexcel: TBitBtn
+      Left = 245
+      Top = 0
+      Width = 50
+      Height = 41
+      Hint = 'Modify Current'
+      Caption = 'Excel'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 5
+      OnClick = btnexcelClick
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033333333B333
+        333B33FF33337F3333F73BB3777BB7777BB3377FFFF77FFFF77333B000000000
+        0B3333777777777777333330FFFFFFFF07333337F33333337F333330FFFFFFFF
+        07333337F3FF3FFF7F333330F00F000F07333337F77377737F333330FFFFFFFF
+        07333FF7F3FFFF3F7FFFBBB0F0000F0F0BB37777F7777373777F3BB0FFFFFFFF
+        0BBB3777F3FF3FFF77773330F00F000003333337F773777773333330FFFF0FF0
+        33333337F3FF7F37F3333330F08F0F0B33333337F7737F77FF333330FFFF003B
+        B3333337FFFF77377FF333B000000333BB33337777777F3377FF3BB3333BB333
+        3BB33773333773333773B333333B3333333B7333333733333337}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object DBMemo1: TDBMemo
+      Left = 496
+      Top = 5
+      Width = 215
+      Height = 33
+      DataField = 'DefectName'
+      DataSource = DS_Qc
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      ScrollBars = ssVertical
+      TabOrder = 6
+    end
+    object btn_Final: TButton
+      Left = 762
+      Top = 12
+      Width = 87
+      Height = 20
+      Caption = 'Update Final'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 7
+      Visible = False
+      OnClick = btn_FinalClick
+    end
+    object btnAppForm: TBitBtn
+      Left = 294
+      Top = 0
+      Width = 57
+      Height = 41
+      Hint = 'Modify Current'
+      Caption = 'AppForm'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 8
+      OnClick = btnAppFormClick
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033333333B333
+        333B33FF33337F3333F73BB3777BB7777BB3377FFFF77FFFF77333B000000000
+        0B3333777777777777333330FFFFFFFF07333337F33333337F333330FFFFFFFF
+        07333337F3FF3FFF7F333330F00F000F07333337F77377737F333330FFFFFFFF
+        07333FF7F3FFFF3F7FFFBBB0F0000F0F0BB37777F7777373777F3BB0FFFFFFFF
+        0BBB3777F3FF3FFF77773330F00F000003333337F773777773333330FFFF0FF0
+        33333337F3FF7F37F3333330F08F0F0B33333337F7737F77FF333330FFFF003B
+        B3333337FFFF77377FF333B000000333BB33337777777F3377FF3BB3333BB333
+        3BB33773333773333773B333333B3333333B7333333733333337}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 1409
+    Height = 75
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    object Label15: TLabel
+      Left = 169
+      Top = 10
+      Width = 9
+      Height = 16
+      Caption = '~'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 288
+      Top = 6
+      Width = 55
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'PO#'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 269
+      Top = 30
+      Width = 74
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Mat ID'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 36
+      Top = 30
+      Width = 90
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Supplier Name'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label6: TLabel
+      Left = 432
+      Top = 5
+      Width = 72
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Database'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label7: TLabel
+      Left = 557
+      Top = 10
+      Width = 9
+      Height = 13
+      Caption = '~'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label8: TLabel
+      Left = 288
+      Top = 54
+      Width = 55
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'RY'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label9: TLabel
+      Left = 441
+      Top = 30
+      Width = 63
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Cust PO'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label10: TLabel
+      Left = 441
+      Top = 54
+      Width = 63
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Article'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label12: TLabel
+      Left = 8
+      Top = 54
+      Width = 118
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Lab Test Final'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label1: TLabel
+      Left = 633
+      Top = 5
+      Width = 48
+      Height = 16
+      AutoSize = False
+      Caption = 'RKNO'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object edt2: TEdit
+      Left = 345
+      Top = 26
+      Width = 84
+      Height = 24
+      Color = cl3DLight
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+    end
+    object edt1: TEdit
+      Left = 345
+      Top = 2
+      Width = 84
+      Height = 24
+      Color = cl3DLight
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+    end
+    object DTP1: TDateTimePicker
+      Left = 75
+      Top = 2
+      Width = 91
+      Height = 24
+      Date = 39284.677295636570000000
+      Format = 'yyyy/MM/dd'
+      Time = 39284.677295636570000000
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+    end
+    object DTP2: TDateTimePicker
+      Left = 181
+      Top = 2
+      Width = 89
+      Height = 24
+      Date = 39284.677664201390000000
+      Format = 'yyyy/MM/dd'
+      Time = 39284.677664201390000000
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+    end
+    object Button1: TButton
+      Left = 803
+      Top = 9
+      Width = 59
+      Height = 24
+      Caption = 'Query'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+      OnClick = Button1Click
+    end
+    object edt3: TEdit
+      Left = 128
+      Top = 26
+      Width = 141
+      Height = 24
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 5
+    end
+    object Button2: TButton
+      Left = 868
+      Top = 9
+      Width = 59
+      Height = 24
+      Caption = 'Excel'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 6
+      OnClick = Button2Click
+    end
+    object chk1: TCheckBox
+      Left = 14
+      Top = 7
+      Width = 59
+      Height = 14
+      Caption = 'Date'
+      Checked = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      State = cbChecked
+      TabOrder = 7
+    end
+    object edt6: TEdit
+      Left = 506
+      Top = 2
+      Width = 50
+      Height = 24
+      Color = cl3DLight
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 8
+    end
+    object edt7: TEdit
+      Left = 567
+      Top = 2
+      Width = 50
+      Height = 24
+      Color = cl3DLight
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 9
+    end
+    object edtRy: TEdit
+      Left = 345
+      Top = 50
+      Width = 84
+      Height = 24
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 10
+    end
+    object edtCustPo: TEdit
+      Left = 506
+      Top = 26
+      Width = 111
+      Height = 24
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 11
+    end
+    object edtArticle: TEdit
+      Left = 506
+      Top = 50
+      Width = 111
+      Height = 24
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 12
+    end
+    object GroupBox1: TGroupBox
+      Left = 644
+      Top = 33
+      Width = 302
+      Height = 34
+      TabOrder = 13
+      object chkInspection: TCheckBox
+        Left = 96
+        Top = 13
+        Width = 81
+        Height = 15
+        Caption = 'Inspection'
+        Color = clAqua
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 0
+      end
+      object chkNotesting: TCheckBox
+        Left = 7
+        Top = 13
+        Width = 90
+        Height = 15
+        Caption = 'No Testing'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 1
+      end
+      object chkpass: TCheckBox
+        Left = 184
+        Top = 13
+        Width = 50
+        Height = 15
+        Caption = 'Pass'
+        Color = clLime
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 2
+      end
+      object chkFail: TCheckBox
+        Left = 243
+        Top = 13
+        Width = 52
+        Height = 15
+        Caption = 'Fail'
+        Color = clRed
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 3
+      end
+    end
+    object cboLab_Final: TComboBox
+      Left = 128
+      Top = 50
+      Width = 141
+      Height = 24
+      Color = cl3DLight
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ItemHeight = 16
+      ParentFont = False
+      TabOrder = 14
+      Items.Strings = (
+        ''
+        'Go to Production'
+        'Return'
+        'Waiting for Purchasing')
+    end
+    object chkqc: TCheckBox
+      Left = 963
+      Top = 3
+      Width = 142
+      Height = 15
+      Caption = 'Hide QC Inspection'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 15
+      OnClick = chkqcClick
+    end
+    object chklab: TCheckBox
+      Left = 963
+      Top = 22
+      Width = 190
+      Height = 15
+      Caption = 'Hide Lab Test'
+      Checked = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      State = cbChecked
+      TabOrder = 16
+      OnClick = chklabClick
+    end
+    object chksample: TCheckBox
+      Left = 963
+      Top = 40
+      Width = 130
+      Height = 15
+      Caption = 'Sample Sent'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 17
+    end
+    object chkMine: TCheckBox
+      Left = 963
+      Top = 58
+      Width = 130
+      Height = 15
+      Caption = 'Mine'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 18
+    end
+    object edtRKNO: TEdit
+      Left = 682
+      Top = 2
+      Width = 111
+      Height = 24
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 19
+    end
+    object chkmanager: TCheckBox
+      Left = 1115
+      Top = 4
+      Width = 118
+      Height = 15
+      Caption = 'Manager Check'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 20
+    end
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Top = 117
+    Width = 1409
+    Height = 474
+    ActivePage = TabSheet1
+    Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+    object TabSheet1: TTabSheet
+      Caption = 'All'
+      object Splitter3: TSplitter
+        Left = 0
+        Top = 233
+        Width = 1401
+        Height = 2
+        Cursor = crVSplit
+        Align = alTop
+        Color = clSkyBlue
+        ParentColor = False
+      end
+      object DBGridDetail: TDBGridEh
+        Left = 0
+        Top = 0
+        Width = 1401
+        Height = 233
+        Align = alTop
+        DataSource = DS_Qc
+        Flat = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        FooterColor = clWindow
+        FooterFont.Charset = DEFAULT_CHARSET
+        FooterFont.Color = clWindowText
+        FooterFont.Height = -12
+        FooterFont.Name = 'MS Sans Serif'
+        FooterFont.Style = []
+        FooterRowCount = 1
+        FrozenCols = 5
+        OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind]
+        ParentFont = False
+        PopupMenu = Pop_All
+        SumList.Active = True
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -13
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        UseMultiTitle = True
+        VTitleMargin = 0
+        OnDrawColumnCell = DBGridDetailDrawColumnCell
+        OnGetCellParams = DBGridDetailGetCellParams
+        Columns = <
+          item
+            Color = cl3DLight
+            EditButtons = <>
+            FieldName = 'No_ID'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'SID'
+            Width = 50
+          end
+          item
+            Color = cl3DLight
+            EditButtons = <>
+            FieldName = 'RKNO'
+            Footer.FieldName = 'RKNO'
+            Footer.ValueType = fvtCount
+            Footers = <>
+            ReadOnly = True
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 75
+          end
+          item
+            ButtonStyle = cbsNone
+            Color = cl3DLight
+            EditButtons = <>
+            FieldName = 'DateInput'
+            Footers = <
+              item
+              end>
+            Title.Caption = 'Date'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Title.TitleButton = True
+            Width = 62
+          end
+          item
+            Color = cl3DLight
+            EditButtons = <>
+            FieldName = 'Hours'
+            Footers = <>
+            ReadOnly = True
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Title.TitleButton = True
+            Width = 43
+          end
+          item
+            Color = cl3DLight
+            EditButtons = <>
+            FieldName = 'LB'
+            Footers = <>
+            Width = 27
+          end
+          item
+            ButtonStyle = cbsNone
+            Color = cl3DLight
+            EditButtons = <>
+            FieldName = 'CGNO'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'PO#'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Title.TitleButton = True
+            Width = 74
+            OnEditButtonClick = DBGridDetailColumns5EditButtonClick
+          end
+          item
+            Color = cl3DLight
+            EditButtons = <>
+            FieldName = 'CLBH'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'Material|ID'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Title.TitleButton = True
+            Width = 66
+          end
+          item
+            Color = cl3DLight
+            EditButtons = <>
+            FieldName = 'MaterialName'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'Material|Name'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 122
+          end
+          item
+            Color = cl3DLight
+            EditButtons = <>
+            FieldName = 'SupplierName'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'Supplier Name'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Title.TitleButton = True
+            Width = 77
+          end
+          item
+            ButtonStyle = cbsNone
+            DisplayFormat = '#,###.#'
+            EditButtons = <>
+            FieldName = 'Qty'
+            Footer.DisplayFormat = '#,###.#'
+            Footer.FieldName = 'Qty'
+            Footer.ValueType = fvtSum
+            Footers = <>
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 50
+          end
+          item
+            EditButtons = <>
+            FieldName = 'DWBH'
+            Footers = <>
+            Width = 52
+          end
+          item
+            ButtonStyle = cbsNone
+            EditButtons = <>
+            FieldName = 'Remark'
+            Footers = <>
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 51
+          end
+          item
+            DisplayFormat = '#,##0.00'
+            EditButtons = <>
+            FieldName = 'RandomQty'
+            Footers = <>
+            Width = 76
+          end
+          item
+            DisplayFormat = '#,##0.00%'
+            EditButtons = <>
+            FieldName = 'DefectQty'
+            Footers = <>
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Tracking'
+            Footers = <>
+            Title.Caption = 'QC Inspection|Tracking A-09'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Title.TitleButton = True
+            Width = 55
+          end
+          item
+            EditButtons = <>
+            FieldName = 'SampleSent'
+            Footers = <>
+            Title.Caption = 'QC Inspection|Sample Sent'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Title.TitleButton = True
+            Width = 55
+          end
+          item
+            ButtonStyle = cbsNone
+            Color = clMoneyGreen
+            EditButtons = <>
+            FieldName = 'QC_Check'
+            Footers = <>
+            PickList.Strings = (
+              ''
+              'Fail'
+              'Pass')
+            ReadOnly = True
+            Title.Caption = 'QC Inspection|Result'
+            Title.Color = clMoneyGreen
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 42
+          end
+          item
+            ButtonStyle = cbsNone
+            Color = clMoneyGreen
+            EditButtons = <>
+            FieldName = 'QC_Reason'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'QC Inspection|Defects'
+            Title.Color = clMoneyGreen
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 65
+          end
+          item
+            Color = clMoneyGreen
+            EditButtons = <>
+            FieldName = 'Per_Defect'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'QC Inspection|Signal'
+            Title.Color = clMoneyGreen
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Visible = False
+            Width = 43
+          end
+          item
+            ButtonStyle = cbsNone
+            Color = clMoneyGreen
+            EditButtons = <>
+            FieldName = 'QC_FinishDate'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'QC Inspection|Finished Date'
+            Title.Color = clMoneyGreen
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 59
+          end
+          item
+            ButtonStyle = cbsNone
+            Color = clMoneyGreen
+            EditButtons = <>
+            FieldName = 'Settlement'
+            Footers = <>
+            PickList.Strings = (
+              ''
+              'Released'
+              'Rejected')
+            ReadOnly = True
+            Title.Caption = 'QC Inspection|Settlement'
+            Title.Color = clMoneyGreen
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 71
+          end
+          item
+            Color = clMoneyGreen
+            EditButtons = <>
+            FieldName = 'File_Name'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'QC Inspection|Report/GL'
+            Title.Color = clMoneyGreen
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 69
+          end
+          item
+            ButtonStyle = cbsNone
+            Color = clMoneyGreen
+            EditButtons = <>
+            FieldName = 'QC_Date'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'QC Inspection|User Date'
+            Title.Color = clMoneyGreen
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 65
+          end
+          item
+            Color = clMoneyGreen
+            EditButtons = <>
+            FieldName = 'QC_UserID'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'QC Inspection|UserID'
+            Title.Color = clMoneyGreen
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 46
+          end
+          item
+            ButtonStyle = cbsNone
+            EditButtons = <>
+            FieldName = 'Lab_Check'
+            Footers = <>
+            PickList.Strings = (
+              ''
+              'Fail'
+              'Pass'
+              'Limited')
+            ReadOnly = True
+            Title.Caption = 'Lab Test|Result '
+            Title.Color = 10813439
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 41
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Lab_Reason'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'Lab Test|Fail Reason'
+            Title.Color = 10813439
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 65
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Lab_Num'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'Lab Test|Database'
+            Title.Color = 10813439
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Title.TitleButton = True
+            Width = 62
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Lab_PDM_ID'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'Lab Test|PDM Report ID'
+            Title.Color = 10813439
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Title.TitleButton = True
+            Width = 49
+          end
+          item
+            EditButtons = <>
+            FieldName = 'PDM_File_Name'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'Lab Test|PDM Report File'
+            Title.Color = 10813439
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 65
+          end
+          item
+            EditButtons = <>
+            FieldName = 'File_Name_Lab'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'Lab Test|GL'
+            Title.Color = 10813439
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 57
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Lab_Result'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'Lab Test|Remark'
+            Title.Color = 10813439
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 69
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Comparision'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'Lab Test|TLSP Comparison'
+            Title.Color = 10813439
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 67
+          end
+          item
+            ButtonStyle = cbsNone
+            EditButtons = <>
+            FieldName = 'Lab_ConfirmDate'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'Lab Test|Confirmed Result'
+            Title.Color = 10813439
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 62
+          end
+          item
+            ButtonStyle = cbsNone
+            EditButtons = <>
+            FieldName = 'Lab_DateRemark'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'Lab Test|Remark Date'
+            Title.Color = 10813439
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 62
+          end
+          item
+            ButtonStyle = cbsNone
+            EditButtons = <>
+            FieldName = 'Lab_Date'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'Lab Test|User Date'
+            Title.Color = 10813439
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Visible = False
+            Width = 91
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Lab_UserID'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'Lab Test|UserID'
+            Title.Color = 10813439
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Visible = False
+            Width = 37
+          end
+          item
+            ButtonStyle = cbsNone
+            EditButtons = <>
+            FieldName = 'Final_Status'
+            Footers = <>
+            PickList.Strings = (
+              ''
+              'Fail'
+              'Pass')
+            ReadOnly = True
+            Title.Caption = 'Final Result'
+            Title.Color = clFuchsia
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 44
+          end
+          item
+            Checkboxes = True
+            EditButtons = <>
+            FieldName = 'ManagerCheck'
+            Footers = <>
+            Title.TitleButton = True
+            Width = 100
+          end
+          item
+            EditButtons = <>
+            FieldName = 'ManagerID'
+            Footers = <>
+            ReadOnly = True
+            Width = 75
+          end
+          item
+            DisplayFormat = 'yyyy/MM/dd hh:mm:ss'
+            EditButtons = <>
+            FieldName = 'ManagerCFMDate'
+            Footers = <>
+            ReadOnly = True
+            Width = 120
+          end
+          item
+            ButtonStyle = cbsNone
+            Color = cl3DLight
+            DisplayFormat = 'yyyy/MM/dd hh:mm:ss'
+            EditButtons = <>
+            FieldName = 'UserDate'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'User Date'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Title.TitleButton = True
+            Width = 120
+          end
+          item
+            Color = cl3DLight
+            EditButtons = <>
+            FieldName = 'UserID'
+            Footers = <>
+            ReadOnly = True
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -15
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 57
+          end>
+      end
+      object PageControl3: TPageControl
+        Left = 0
+        Top = 235
+        Width = 1401
+        Height = 208
+        ActivePage = TabSheet7
+        Align = alClient
+        TabOrder = 1
+        object TabSheet7: TTabSheet
+          Caption = 'Actual'
+          object Panel3: TPanel
+            Left = 0
+            Top = 0
+            Width = 1393
+            Height = 42
+            Align = alTop
+            BevelOuter = bvNone
+            TabOrder = 0
+            object btninsert1: TBitBtn
+              Left = 0
+              Top = 0
+              Width = 50
+              Height = 41
+              Hint = 'Insert one New Record'
+              Caption = 'Insert'
+              Enabled = False
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 0
+              OnClick = btninsert1Click
+              Glyph.Data = {
+                76010000424D7601000000000000760000002800000020000000100000000100
+                04000000000000010000130B0000130B00001000000000000000000000000000
+                800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+                FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+                33333333FF33333333FF333993333333300033377F3333333777333993333333
+                300033F77FFF3333377739999993333333333777777F3333333F399999933333
+                33003777777333333377333993333333330033377F3333333377333993333333
+                3333333773333333333F333333333333330033333333F33333773333333C3333
+                330033333337FF3333773333333CC333333333FFFFF77FFF3FF33CCCCCCCCCC3
+                993337777777777F77F33CCCCCCCCCC3993337777777777377333333333CC333
+                333333333337733333FF3333333C333330003333333733333777333333333333
+                3000333333333333377733333333333333333333333333333333}
+              Layout = blGlyphTop
+              NumGlyphs = 2
+            end
+            object btnmodify1: TBitBtn
+              Left = 49
+              Top = 0
+              Width = 50
+              Height = 41
+              Hint = 'Modify Current'
+              Caption = 'Modify'
+              Enabled = False
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 1
+              OnClick = btnmodify1Click
+              Glyph.Data = {
+                76010000424D7601000000000000760000002800000020000000100000000100
+                04000000000000010000120B0000120B00001000000000000000000000000000
+                800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+                FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00500005000555
+                555557777F777555F55500000000555055557777777755F75555005500055055
+                555577F5777F57555555005550055555555577FF577F5FF55555500550050055
+                5555577FF77577FF555555005050110555555577F757777FF555555505099910
+                555555FF75777777FF555005550999910555577F5F77777775F5500505509990
+                3055577F75F77777575F55005055090B030555775755777575755555555550B0
+                B03055555F555757575755550555550B0B335555755555757555555555555550
+                BBB35555F55555575F555550555555550BBB55575555555575F5555555555555
+                50BB555555555555575F555555555555550B5555555555555575}
+              Layout = blGlyphTop
+              NumGlyphs = 2
+            end
+            object btndelete1: TBitBtn
+              Left = 98
+              Top = 0
+              Width = 50
+              Height = 41
+              Hint = 'Delete one Record'
+              Caption = 'Delete'
+              Enabled = False
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 2
+              OnClick = btndelete1Click
+              Glyph.Data = {
+                76010000424D7601000000000000760000002800000020000000100000000100
+                04000000000000010000130B0000130B00001000000000000000000000000000
+                800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+                FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+                333333333333333333FF33333333333330003333333333333777333333333333
+                300033FFFFFF3333377739999993333333333777777F3333333F399999933333
+                3300377777733333337733333333333333003333333333333377333333333333
+                3333333333333333333F333333333333330033333F33333333773333C3333333
+                330033337F3333333377333CC3333333333333F77FFFFFFF3FF33CCCCCCCCCC3
+                993337777777777F77F33CCCCCCCCCC399333777777777737733333CC3333333
+                333333377F33333333FF3333C333333330003333733333333777333333333333
+                3000333333333333377733333333333333333333333333333333}
+              Layout = blGlyphTop
+              NumGlyphs = 2
+            end
+            object btnsave1: TBitBtn
+              Left = 147
+              Top = 0
+              Width = 50
+              Height = 41
+              Hint = 'Save Current'
+              Caption = 'Save'
+              Enabled = False
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 3
+              OnClick = btnsave1Click
+              Glyph.Data = {
+                76010000424D7601000000000000760000002800000020000000100000000100
+                04000000000000010000120B0000120B00001000000000000000000000000000
+                800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+                FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+                555555555555555555555555555555555555555555FF55555555555559055555
+                55555555577FF5555555555599905555555555557777F5555555555599905555
+                555555557777FF5555555559999905555555555777777F555555559999990555
+                5555557777777FF5555557990599905555555777757777F55555790555599055
+                55557775555777FF5555555555599905555555555557777F5555555555559905
+                555555555555777FF5555555555559905555555555555777FF55555555555579
+                05555555555555777FF5555555555557905555555555555777FF555555555555
+                5990555555555555577755555555555555555555555555555555}
+              Layout = blGlyphTop
+              NumGlyphs = 2
+            end
+            object btncancel1: TBitBtn
+              Left = 196
+              Top = 0
+              Width = 50
+              Height = 41
+              Hint = 'Cancel'
+              Caption = 'Cancel'
+              Enabled = False
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 4
+              OnClick = btncancel1Click
+              Glyph.Data = {
+                76010000424D7601000000000000760000002800000020000000100000000100
+                04000000000000010000130B0000130B00001000000000000000000000000000
+                800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+                FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+                333333333333333333333333333333333333333FFF33FF333FFF339993370733
+                999333777FF37FF377733339993000399933333777F777F77733333399970799
+                93333333777F7377733333333999399933333333377737773333333333990993
+                3333333333737F73333333333331013333333333333777FF3333333333910193
+                333333333337773FF3333333399000993333333337377737FF33333399900099
+                93333333773777377FF333399930003999333337773777F777FF339993370733
+                9993337773337333777333333333333333333333333333333333333333333333
+                3333333333333333333333333333333333333333333333333333}
+              Layout = blGlyphTop
+              NumGlyphs = 2
+            end
+          end
+          object DBGrid_RY: TDBGridEh
+            Left = 0
+            Top = 42
+            Width = 1393
+            Height = 135
+            Align = alClient
+            DataSource = DS_RY
+            Flat = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            FooterColor = clWindow
+            FooterFont.Charset = DEFAULT_CHARSET
+            FooterFont.Color = clWindowText
+            FooterFont.Height = -15
+            FooterFont.Name = 'MS Sans Serif'
+            FooterFont.Style = []
+            ParentFont = False
+            TabOrder = 1
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -13
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = []
+            UseMultiTitle = True
+            OnEditButtonClick = DBGrid_RYEditButtonClick
+            OnGetCellParams = DBGrid_RYGetCellParams
+            Columns = <
+              item
+                ButtonStyle = cbsNone
+                EditButtons = <>
+                FieldName = 'RY'
+                Footers = <>
+                Width = 70
+              end
+              item
+                EditButtons = <>
+                FieldName = 'Article'
+                Footers = <>
+                Width = 154
+              end
+              item
+                EditButtons = <>
+                FieldName = 'CustPO'
+                Footers = <>
+                Width = 136
+              end
+              item
+                EditButtons = <>
+                FieldName = 'Remark'
+                Footers = <>
+                Width = 222
+              end
+              item
+                EditButtons = <>
+                FieldName = 'COUNTRY'
+                Footers = <>
+                ReadOnly = True
+                Title.Caption = 'Country'
+                Width = 66
+              end
+              item
+                ButtonStyle = cbsNone
+                Color = cl3DLight
+                EditButtons = <>
+                FieldName = 'UserDate'
+                Footers = <>
+                Width = 96
+              end
+              item
+                Color = cl3DLight
+                EditButtons = <>
+                FieldName = 'UserID'
+                Footers = <>
+                Width = 44
+              end>
+          end
+        end
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Defects'
+      ImageIndex = 1
+      PopupMenu = Pop_defects
+      object Splitter1: TSplitter
+        Left = 358
+        Top = 0
+        Height = 451
+        Color = clSkyBlue
+        ParentColor = False
+      end
+      object Splitter2: TSplitter
+        Left = 729
+        Top = 0
+        Width = 2
+        Height = 451
+        Color = clSkyBlue
+        ParentColor = False
+      end
+      object Panel6: TPanel
+        Left = 0
+        Top = 0
+        Width = 358
+        Height = 451
+        Align = alLeft
+        TabOrder = 0
+        object Panel9: TPanel
+          Left = 1
+          Top = 1
+          Width = 356
+          Height = 33
+          Align = alTop
+          Caption = 'Hinh the ben ngoai (Apperance)'
+          Color = clMoneyGreen
+          TabOrder = 0
+        end
+        object DBGridEh2: TDBGridEh
+          Left = 1
+          Top = 34
+          Width = 356
+          Height = 416
+          Align = alClient
+          DataSource = DS1
+          Flat = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          FooterColor = clWindow
+          FooterFont.Charset = DEFAULT_CHARSET
+          FooterFont.Color = clWindowText
+          FooterFont.Height = -15
+          FooterFont.Name = 'MS Sans Serif'
+          FooterFont.Style = []
+          ParentFont = False
+          TabOrder = 1
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -13
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          Columns = <
+            item
+              EditButtons = <>
+              FieldName = 'CodeID'
+              Footers = <>
+              Title.Caption = 'Code'
+              Width = 33
+            end
+            item
+              EditButtons = <>
+              FieldName = 'DefectName'
+              Footers = <>
+              Title.Caption = 'Defect Name'
+              Width = 132
+            end>
+        end
+      end
+      object Panel7: TPanel
+        Left = 361
+        Top = 0
+        Width = 368
+        Height = 451
+        Align = alLeft
+        TabOrder = 1
+        object Panel10: TPanel
+          Left = 1
+          Top = 1
+          Width = 366
+          Height = 33
+          Align = alTop
+          Caption = 'Mau sac (Color)'
+          Color = clMoneyGreen
+          TabOrder = 0
+        end
+        object DBGridEh3: TDBGridEh
+          Left = 1
+          Top = 34
+          Width = 366
+          Height = 416
+          Align = alClient
+          DataSource = DS2
+          Flat = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          FooterColor = clWindow
+          FooterFont.Charset = DEFAULT_CHARSET
+          FooterFont.Color = clWindowText
+          FooterFont.Height = -15
+          FooterFont.Name = 'MS Sans Serif'
+          FooterFont.Style = []
+          ParentFont = False
+          TabOrder = 1
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -13
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          Columns = <
+            item
+              EditButtons = <>
+              FieldName = 'CodeID'
+              Footers = <>
+              Title.Caption = 'Code'
+              Width = 33
+            end
+            item
+              EditButtons = <>
+              FieldName = 'DefectName'
+              Footers = <>
+              Title.Caption = 'Defect Name'
+              Width = 132
+            end>
+        end
+      end
+      object Panel8: TPanel
+        Left = 731
+        Top = 0
+        Width = 483
+        Height = 451
+        Align = alClient
+        TabOrder = 2
+        object Panel12: TPanel
+          Left = 1
+          Top = 1
+          Width = 481
+          Height = 33
+          Align = alTop
+          Caption = 'Chat luong vat tu (Material Quality)'
+          Color = clMoneyGreen
+          TabOrder = 0
+        end
+        object DBGridEh4: TDBGridEh
+          Left = 1
+          Top = 34
+          Width = 481
+          Height = 416
+          Align = alClient
+          DataSource = DS3
+          Flat = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          FooterColor = clWindow
+          FooterFont.Charset = DEFAULT_CHARSET
+          FooterFont.Color = clWindowText
+          FooterFont.Height = -15
+          FooterFont.Name = 'MS Sans Serif'
+          FooterFont.Style = []
+          ParentFont = False
+          TabOrder = 1
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -13
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          Columns = <
+            item
+              EditButtons = <>
+              FieldName = 'CodeID'
+              Footers = <>
+              Title.Caption = 'Code'
+              Width = 33
+            end
+            item
+              EditButtons = <>
+              FieldName = 'DefectName'
+              Footers = <>
+              Title.Caption = 'Defect Name'
+              Width = 132
+            end>
+        end
+      end
+    end
+  end
+  object DS_Qc: TDataSource
+    DataSet = qry_Qc
+    Left = 176
+    Top = 272
+  end
+  object Upd_QC: TUpdateSQL
+    ModifySQL.Strings = (
+      'update MaterialQCcheck'
+      'set '
+      #9#9'ZSBH=:ZSBH,'
+      #9#9'RY=:RY,'
+      #9#9'Article=:Article,'
+      #9#9'CustPO=:CustPO,'
+      #9#9'Qty=:Qty,'
+      #9#9'Tracking=:Tracking,'
+      #9#9'QC_Check=:QC_Check,'
+      #9#9'QC_Reason=:QC_Reason,'
+      '                QC_RandomQty=:QC_RandomQty,'
+      '                QC_DefectQty=:QC_DefectQty,'
+      #9#9'QC_FinishDate=:QC_FinishDate,'
+      #9#9'Final_Status=:Final_Status,'
+      #9#9'Final_Remark=:Final_Remark,'
+      #9#9'UserDate=:UserDate,'
+      #9#9'UserID=:UserID,'
+      #9#9'Remark=:Remark,'
+      '                                Settlement=:Settlement,'
+      '                                Per_Defect=:Per_Defect,'
+      '                                DefectName=:DefectName,'
+      #9#9'CLBH=:CLBH,'
+      #9#9'CGNO=:CGNO,'
+      #9#9'DateInput=:DateInput,'
+      #9#9'LB=:LB,'
+      '                                SampleSent=:SampleSent,'
+      '                                QC_Date=:QC_Date,'
+      '                                QC_UserID=:QC_UserID,'
+      '                                ManagerCheck=:ManagerCheck, '
+      #9#9'ManagerID=:ManagerID, '
+      #9#9'ManagerCFMDate=:ManagerCFMDate'
+      'where No_ID=:No_ID')
+    InsertSQL.Strings = (
+      'INSERT INTO MaterialQCcheck '
+      '(No_ID,GSBH,CLBH,CGNO,DateInput,LB,ZSBH,RY,Article'
+      ',CustPO,Qty,UserDate,UserID,YN,Remark,Hours,RKNO,Tracking'
+      ',SampleSent,ManagerCheck,ManagerID,ManagerCFMDate)'
+      
+        'VALUES (:No_ID,:GSBH,:CLBH,:CGNO,:DateInput,:LB,:ZSBH,:RY,:Artic' +
+        'le'
+      
+        ',:CustPO,:Qty,getdate(),:UserID,:YN,:Remark,:Hours,:RKNO,:Tracki' +
+        'ng'
+      ',:SampleSent, :ManagerCheck,:ManagerID,:ManagerCFMDate)')
+    DeleteSQL.Strings = (
+      'delete from MaterialQCcheck '
+      'where NO_ID=:old_NO_ID')
+    Left = 176
+    Top = 304
+  end
+  object Pop_All: TPopupMenu
+    AutoHotkeys = maManual
+    Left = 424
+    Top = 312
+    object mnu2: TMenuItem
+      Caption = 'Download Reprot/GL'
+      Enabled = False
+      OnClick = mnu2Click
+    end
+    object mnu4: TMenuItem
+      Caption = 'Download Lab GL'
+      Enabled = False
+      OnClick = mnu4Click
+    end
+    object mnu5: TMenuItem
+      Caption = 'Download PDM Report'
+      Enabled = False
+      OnClick = mnu5Click
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    Filter = '*.*'
+    Left = 460
+    Top = 314
+  end
+  object SaveDialog1: TSaveDialog
+    Filter = '*.*'
+    Left = 492
+    Top = 314
+  end
+  object qry_Qc: TQuery
+    AfterOpen = qry_QcAfterOpen
+    AfterScroll = qry_QcAfterScroll
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select '
+      
+        '       mc.No_ID,mc.GSBH,mc.CLBH,mc.CGNO,mc.RKNO,mc.DateInput,mc.' +
+        'Hours ,mc.LB,mc.ZSBH,mc.RY,mc.Article,mc.CustPO,mc.Qty,mc.Remark' +
+        ',mc.Tracking,mc.SampleSent,'
+      
+        '       mc.QC_Check,mc.RandomQty,mc.DefectQty,mc.QC_Reason,mc.Per' +
+        '_Defect,mc.QC_FinishDate,mc.Settlement,mc.File_Name,mc.QC_Date,m' +
+        'c.QC_USERID,'
+      
+        '       mc.Lab_Check,mc.Lab_Reason,mc.Lab_Num,mc.Lab_Result,mc.De' +
+        'fectName,mc.Lab_FinishDate,mc.Lab_PDM_ID,mc.PDM_File_Name,mc.Fil' +
+        'e_Name_Lab,mc.Comparision,'
+      
+        '       mc.Lab_DateRemark,mc.Lab_ConfirmDate,mc.Lab_UserID,mc.Lab' +
+        '_Date,mc.Final_Remark,mc.Final_Status,mc.UserDate,mc.UserID,mc.Y' +
+        'N,      '
+      
+        '       clzl.YWPM as MaterialName,ZSZL.ZSYWJC as SupplierName,clz' +
+        'l.DWBH,ZSZL.ZSYWJC'
+      'from MaterialQCcheck mc'
+      'left join clzl on clzl.CLDH = mc.CLBH'
+      'left Join ZSZL on ZSZL.ZSDH =mc.ZSBH'
+      
+        'left join MaterialQCcheck_RY on mc.No_ID = MaterialQCcheck_RY.No' +
+        '_ID'
+      'where mc.GSBH='#39'VA12'#39' '
+      'and CONVERT(varchar(10),DateInput,111) between'
+      #39'2019/01/08'#39'and '#39'2019/04/08'#39
+      'and CGNO like '#39'%'#39
+      'and CLBH like '#39'%'#39
+      'and ZSYWJC like '#39'%'#39
+      'order by mc.Userdate desc,CLBH,LB asc')
+    UpdateObject = Upd_QC
+    Left = 176
+    Top = 240
+    object qry_QcNo_ID: TAutoIncField
+      FieldName = 'No_ID'
+    end
+    object qry_QcGSBH: TStringField
+      FieldName = 'GSBH'
+      FixedChar = True
+      Size = 4
+    end
+    object qry_QcCLBH: TStringField
+      FieldName = 'CLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object qry_QcCGNO: TStringField
+      FieldName = 'CGNO'
+      FixedChar = True
+      Size = 11
+    end
+    object qry_QcDateInput: TDateTimeField
+      FieldName = 'DateInput'
+    end
+    object qry_QcHours: TStringField
+      FieldName = 'Hours'
+      FixedChar = True
+      Size = 8
+    end
+    object qry_QcTime: TIntegerField
+      FieldName = 'LB'
+    end
+    object qry_QcZSBH: TStringField
+      FieldName = 'ZSBH'
+      FixedChar = True
+      Size = 6
+    end
+    object qry_QcArticle: TStringField
+      FieldName = 'Article'
+      FixedChar = True
+      Size = 500
+    end
+    object qry_QcRY: TStringField
+      FieldName = 'RY'
+      FixedChar = True
+      Size = 255
+    end
+    object qry_QcAdidasPO: TStringField
+      FieldName = 'CustPO'
+      FixedChar = True
+      Size = 500
+    end
+    object qry_QcQty: TCurrencyField
+      FieldName = 'Qty'
+      OnChange = qry_QcQtyChange
+    end
+    object qry_QcRandomQty: TCurrencyField
+      FieldName = 'RandomQty'
+    end
+    object qry_QcDefectQty: TCurrencyField
+      FieldName = 'DefectQty'
+    end
+    object qry_QcRemark: TStringField
+      FieldName = 'Remark'
+      FixedChar = True
+      Size = 100
+    end
+    object qry_QcTracking: TStringField
+      FieldName = 'Tracking'
+      OnChange = qry_QcTrackingChange
+      FixedChar = True
+      Size = 10
+    end
+    object qry_QcSampleSent: TBooleanField
+      FieldName = 'SampleSent'
+      OnChange = qry_QcTrackingChange
+    end
+    object qry_QcQC_Check: TStringField
+      FieldName = 'QC_Check'
+      OnChange = qry_QcTrackingChange
+      FixedChar = True
+      Size = 10
+    end
+    object qry_QcQC_Reason: TStringField
+      FieldName = 'QC_Reason'
+      OnChange = qry_QcTrackingChange
+      FixedChar = True
+      Size = 50
+    end
+    object qry_QcPer_Defect: TBooleanField
+      FieldName = 'Per_Defect'
+      OnChange = qry_QcTrackingChange
+    end
+    object qry_QcQC_FinishDate: TDateTimeField
+      FieldName = 'QC_FinishDate'
+      OnChange = qry_QcTrackingChange
+    end
+    object qry_QcSettlement: TStringField
+      FieldName = 'Settlement'
+      OnChange = qry_QcTrackingChange
+      FixedChar = True
+      Size = 50
+    end
+    object qry_QcFile_Name: TStringField
+      FieldName = 'File_Name'
+      FixedChar = True
+      Size = 50
+    end
+    object qry_QcQC_Date: TDateTimeField
+      FieldName = 'QC_Date'
+      DisplayFormat = 'YYYY/MM/DD'
+    end
+    object qry_QcQC_UserID: TStringField
+      FieldName = 'QC_UserID'
+      FixedChar = True
+      Size = 10
+    end
+    object qry_QcLab_Check: TStringField
+      FieldName = 'Lab_Check'
+      FixedChar = True
+      Size = 50
+    end
+    object qry_QcLab_Reason: TStringField
+      FieldName = 'Lab_Reason'
+      FixedChar = True
+      Size = 50
+    end
+    object qry_QcLab_Num: TStringField
+      FieldName = 'Lab_Num'
+      FixedChar = True
+      Size = 50
+    end
+    object qry_QcDefectName: TStringField
+      FieldName = 'DefectName'
+      FixedChar = True
+      Size = 200
+    end
+    object qry_QcLab_FinishDate: TDateTimeField
+      FieldName = 'Lab_FinishDate'
+      OnChange = qry_QcTrackingChange
+    end
+    object qry_QcLab_PDM_ID: TStringField
+      FieldName = 'Lab_PDM_ID'
+      FixedChar = True
+    end
+    object qry_QcPDM_File_Name: TStringField
+      FieldName = 'PDM_File_Name'
+      FixedChar = True
+      Size = 50
+    end
+    object qry_QcFile_Name_Lab: TStringField
+      FieldName = 'File_Name_Lab'
+      FixedChar = True
+      Size = 50
+    end
+    object qry_QcLab_Result: TStringField
+      FieldName = 'Lab_Result'
+      FixedChar = True
+      Size = 50
+    end
+    object qry_QcComparision: TStringField
+      FieldName = 'Comparision'
+      FixedChar = True
+    end
+    object qry_QcLab_DateRemark: TDateTimeField
+      FieldName = 'Lab_DateRemark'
+      DisplayFormat = 'YYYY/MM/DD'
+    end
+    object qry_QcLab_ConfirmDate: TDateTimeField
+      FieldName = 'Lab_ConfirmDate'
+    end
+    object qry_QcLab_UserID: TStringField
+      FieldName = 'Lab_UserID'
+      FixedChar = True
+      Size = 10
+    end
+    object qry_QcLab_Date: TDateTimeField
+      FieldName = 'Lab_Date'
+      DisplayFormat = 'YYYY/MM/DD'
+    end
+    object qry_QcFinal_Remark: TStringField
+      FieldName = 'Final_Remark'
+      OnChange = qry_QcTrackingChange
+      FixedChar = True
+      Size = 50
+    end
+    object qry_QcFinal_Status: TStringField
+      FieldName = 'Final_Status'
+      OnChange = qry_QcFinal_StatusChange
+      FixedChar = True
+      Size = 10
+    end
+    object qry_QcUserID: TStringField
+      FieldName = 'UserID'
+      FixedChar = True
+      Size = 10
+    end
+    object qry_QcUserDate: TDateTimeField
+      FieldName = 'UserDate'
+    end
+    object qry_QcYN: TStringField
+      FieldName = 'YN'
+      FixedChar = True
+      Size = 1
+    end
+    object qry_QcDWBH: TStringField
+      FieldName = 'DWBH'
+      FixedChar = True
+      Size = 4
+    end
+    object qry_QcSupplierName: TStringField
+      FieldName = 'SupplierName'
+      FixedChar = True
+      Size = 200
+    end
+    object qry_QcMaterialName: TStringField
+      FieldName = 'MaterialName'
+      FixedChar = True
+      Size = 200
+    end
+    object qry_QcZSYWJC: TStringField
+      FieldName = 'ZSYWJC'
+      FixedChar = True
+    end
+    object qry_QcManagerID: TStringField
+      FieldName = 'ManagerID'
+    end
+    object qry_QcManagerCFMDate: TDateTimeField
+      FieldName = 'ManagerCFMDate'
+    end
+    object qry_QcManagerCheck: TBooleanField
+      FieldName = 'ManagerCheck'
+      OnChange = qry_QcManagerCheckChange
+    end
+    object qry_QcRKNO: TStringField
+      FieldName = 'RKNO'
+      FixedChar = True
+      Size = 255
+    end
+  end
+  object qry_App: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select CodeID,DefectName'
+      'from QC_MatDefect'
+      'where Types='#39'A'#39' and GSBH=:GSBH')
+    Left = 717
+    Top = 430
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'GSBH'
+        ParamType = ptUnknown
+      end>
+    object qry_AppCodeID: TStringField
+      FieldName = 'CodeID'
+      Origin = 'DB.Qc_MatDefect.CodeID'
+      FixedChar = True
+      Size = 4
+    end
+    object qry_AppDefectName: TStringField
+      FieldName = 'DefectName'
+      Origin = 'DB.Qc_MatDefect.DefectName'
+      FixedChar = True
+      Size = 50
+    end
+  end
+  object qry_Color: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select CodeID,DefectName'
+      'from QC_MatDefect'
+      'where Types='#39'C'#39' and GSBH=:GSBH')
+    Left = 760
+    Top = 430
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'GSBH'
+        ParamType = ptUnknown
+      end>
+    object qry_ColorCodeID: TStringField
+      FieldName = 'CodeID'
+      Origin = 'DB.Qc_MatDefect.CodeID'
+      FixedChar = True
+      Size = 4
+    end
+    object qry_ColorDefectName: TStringField
+      FieldName = 'DefectName'
+      Origin = 'DB.Qc_MatDefect.DefectName'
+      FixedChar = True
+      Size = 50
+    end
+  end
+  object qry_MatQuality: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select CodeID,DefectName'
+      'from QC_MatDefect'
+      'where Types='#39'M'#39' and GSBH=:GSBH')
+    Left = 808
+    Top = 430
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'GSBH'
+        ParamType = ptUnknown
+      end>
+    object qry_MatQualityCodeID: TStringField
+      FieldName = 'CodeID'
+      Origin = 'DB.Qc_MatDefect.CodeID'
+      FixedChar = True
+      Size = 4
+    end
+    object qry_MatQualityDefectName: TStringField
+      FieldName = 'DefectName'
+      Origin = 'DB.Qc_MatDefect.DefectName'
+      FixedChar = True
+      Size = 50
+    end
+  end
+  object DS1: TDataSource
+    DataSet = qry_App
+    Left = 717
+    Top = 462
+  end
+  object DS2: TDataSource
+    DataSet = qry_Color
+    Left = 760
+    Top = 462
+  end
+  object DS3: TDataSource
+    DataSet = qry_MatQuality
+    Left = 804
+    Top = 462
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    Left = 211
+    Top = 240
+  end
+  object Pop_defects: TPopupMenu
+    AutoHotkeys = maManual
+    Left = 760
+    Top = 511
+    object Defects1: TMenuItem
+      Caption = 'Defects...'
+      OnClick = Defects1Click
+    end
+  end
+  object qry_RY: TQuery
+    DatabaseName = 'DB'
+    DataSource = DS_Qc
+    SQL.Strings = (
+      'select mr.*,lbzls.ywsm as COUNTRY'
+      'FROM MaterialQCcheck_RY mr'
+      '  LEFT JOIN DDZL do ON mr.RY=do.DDBH'
+      '  left join lbzls on do.DDGB=lbzls.lbdh and lbzls.lb='#39'13'#39
+      'where No_ID=:No_ID')
+    UpdateObject = Upd_RY
+    Left = 260
+    Top = 407
+    ParamData = <
+      item
+        DataType = ftAutoInc
+        Name = 'No_ID'
+        ParamType = ptUnknown
+        Size = 4
+      end>
+    object qry_RYNo_ID: TIntegerField
+      FieldName = 'No_ID'
+      Origin = 'DB.MaterialQCcheck_RY.No_ID'
+    end
+    object qry_RYRY: TStringField
+      FieldName = 'RY'
+      Origin = 'DB.MaterialQCcheck_RY.RY'
+      FixedChar = True
+      Size = 15
+    end
+    object qry_RYArticle: TStringField
+      FieldName = 'Article'
+      FixedChar = True
+    end
+    object qry_RYCustPO: TStringField
+      FieldName = 'CustPO'
+      FixedChar = True
+      Size = 15
+    end
+    object qry_RYRemark: TStringField
+      FieldName = 'Remark'
+      Origin = 'DB.MaterialQCcheck_RY.Remark'
+      FixedChar = True
+      Size = 50
+    end
+    object qry_RYYN: TStringField
+      FieldName = 'YN'
+      Origin = 'DB.MaterialQCcheck_RY.YN'
+      FixedChar = True
+      Size = 10
+    end
+    object qry_RYUserID: TStringField
+      FieldName = 'UserID'
+      Origin = 'DB.MaterialQCcheck_RY.UserID'
+      FixedChar = True
+      Size = 15
+    end
+    object qry_RYUserDate: TDateTimeField
+      FieldName = 'UserDate'
+      Origin = 'DB.MaterialQCcheck_RY.UserDate'
+    end
+    object qry_RYCOUNTRY: TStringField
+      FieldName = 'COUNTRY'
+      FixedChar = True
+      Size = 50
+    end
+  end
+  object DS_RY: TDataSource
+    DataSet = qry_RY
+    Left = 292
+    Top = 407
+  end
+  object Upd_RY: TUpdateSQL
+    ModifySQL.Strings = (
+      'UPDATE MaterialQCcheck_RY SET'
+      'RY=:RY'
+      ',Article=:Article'
+      ',CustPO=:CustPO'
+      ',Remark=:Remark'
+      ',UserID=:UserID'
+      ',UserDate=GETDATE()'
+      'WHERE No_ID=:No_ID AND RY=:old_RY  ')
+    InsertSQL.Strings = (
+      
+        'INSERT INTO MaterialQCcheck_RY (No_ID,RY,Article, CustPO,Remark,' +
+        'YN,UserID,UserDate)'
+      
+        '     VALUES (:No_ID,:RY,:Article, :CustPO,:Remark,:YN,:UserID,GE' +
+        'TDATE())')
+    DeleteSQL.Strings = (
+      'DELETE MaterialQCcheck_RY'
+      'WHERE No_ID=:old_No_ID AND RY=:old_RY   ')
+    Left = 324
+    Top = 407
+  end
+end

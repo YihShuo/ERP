@@ -1,0 +1,21 @@
+object Report602_det: TReport602_det
+  Left = 313
+  Top = 179
+  Width = 616
+  Height = 339
+  BorderIcons = [biSystemMenu]
+  Caption = 'Report602_det'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+end

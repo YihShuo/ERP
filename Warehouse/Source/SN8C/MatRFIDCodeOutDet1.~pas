@@ -1,0 +1,129 @@
+unit MatRFIDCodeOutDet1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, GridsEh, DBGridEh, StdCtrls, Buttons, ComCtrls,
+  ExtCtrls, Comobj;
+
+type
+  TMatRFIDCodeOutDet = class(TForm)
+    Panel5: TPanel;
+    Label2: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    DTP3: TDateTimePicker;
+    DTP4: TDateTimePicker;
+    CLBHDEdit: TEdit;
+    YWPMDEdit: TEdit;
+    BtnQry: TBitBtn;
+    BitBtn3: TBitBtn;
+    DBGridEh1: TDBGridEh;
+    DS1: TDataSource;
+    MatQryOutDet: TQuery;
+    MatQryOutDetLLDate: TDateTimeField;
+    MatQryOutDetSCBH: TStringField;
+    MatQryOutDetDFL: TStringField;
+    MatQryOutDetCLBH: TStringField;
+    MatQryOutDetywpm: TStringField;
+    MatQryOutDetdwbh: TStringField;
+    MatQryOutDetQty: TCurrencyField;
+    MatQryOutDetDepName: TStringField;
+    MatQryOutDetID: TStringField;
+    procedure BitBtn3Click(Sender: TObject);
+    procedure BtnQryClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MatRFIDCodeOutDet: TMatRFIDCodeOutDet;
+
+implementation
+  uses main1, MatRFIDCodeRtp1, FunUnit;
+{$R *.dfm}
+
+procedure TMatRFIDCodeOutDet.BitBtn3Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j:integer;
+begin
+    if  MatQryOutDet.active  then
+    begin
+      try
+        eclApp:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+      try
+          WorkBook:=eclApp.workbooks.Add;
+          for   i:=0   to   MatQryOutDet.fieldcount-1   do
+          begin
+            eclApp.Cells(1,i+1):=MatQryOutDet.fields[i].FieldName;
+          end;
+
+          MatQryOutDet.First;
+          j:=2;
+          while   not   MatQryOutDet.Eof   do
+          begin
+            for   i:=0   to  MatQryOutDet.fieldcount-1  do
+            begin
+              eclApp.Cells(j,i+1):=MatQryOutDet.Fields[i].Value;
+            end;
+            MatQryOutDet.Next;
+            inc(j);
+          end;
+          eclapp.columns.autofit;
+          showmessage('Succeed');
+          eclApp.Visible:=True;
+      except
+          on F:Exception   do
+            showmessage(F.Message);
+      end;
+    end;
+
+end;
+
+procedure TMatRFIDCodeOutDet.BtnQryClick(Sender: TObject);
+begin
+
+  with MatQryOutDet  do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select convert(smalldatetime,convert(varchar,KCLLS.SCANUSERDATE,111)) as LLDate,KCLLS.LLNO,KCLLS.SCBH,KCLLS.DFL,KCLLS.CLBH,CLZL.ywpm,CLZL.dwbh,KCLLS.Qty,BDepartment.DepName,BDepartment.ID from KCLLS');
+    SQL.Add('left join KCLL on KCLL.LLNO=KCLLS.LLNO');
+    SQL.Add('left join CLZL on CLZL.CLDH=KCLLS.CLBH');
+    SQL.Add('left join BDepartment on BDepartment.ID=KCLL.DepID');
+    SQL.Add('where KCLL.CKBH='''+main.Edit2.Text+'''  ');
+    SQL.Add('   and convert(smalldatetime,convert(varchar,KCLLS.SCANUSERDATE,111)) between ');
+    SQL.add('          '''+formatdatetime('yyyy/MM/dd',DTP3.Date) +''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP4.Date) +'''');
+    SQL.add('   and KCLLS.SCANUSERDATE is not null ');
+    if CLBHDEdit.Text<>'' then
+    SQL.Add('   and KCLLS.CLBH like '''+CLBHDEdit.Text+'%'' ');
+    if YWPMDEdit.Text<>'' then
+    SQL.Add('   and CLZL.YWPM like ''%'+YWPMDEdit.Text+'%'' ');
+    //funcObj.WriteErrorLog(sql.Text);
+    Active:=true;
+    //
+  end;
+end;
+
+procedure TMatRFIDCodeOutDet.FormCreate(Sender: TObject);
+begin
+  //
+  DTP3.Date:=MatRFIDCodeRtp.DTP3.Date;
+  DTP4.Date:=MatRFIDCodeRtp.DTP4.Date;
+  CLBHDEdit.Text:=MatRFIDCodeRtp.CLBHDEdit.Text;
+  YWPMDEdit.Text:=MatRFIDCodeRtp.YWPMDEdit.Text;
+  //
+  BtnQry.Click;  
+end;
+
+end.

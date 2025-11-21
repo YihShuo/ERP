@@ -1,0 +1,435 @@
+object MaterialSet: TMaterialSet
+  Left = 278
+  Top = 232
+  Width = 870
+  Height = 500
+  Caption = 'MaterialSet'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 16
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 862
+    Height = 97
+    Align = alTop
+    TabOrder = 0
+    object Label3: TLabel
+      Left = 160
+      Top = 24
+      Width = 51
+      Height = 16
+      Caption = 'XieMing:'
+    end
+    object Label5: TLabel
+      Left = 8
+      Top = 24
+      Width = 40
+      Height = 16
+      Caption = 'Article:'
+    end
+    object Label7: TLabel
+      Left = 8
+      Top = 64
+      Width = 37
+      Height = 16
+      Caption = 'ZLBH:'
+    end
+    object Label2: TLabel
+      Left = 384
+      Top = 24
+      Width = 38
+      Height = 16
+      Caption = 'CLBH:'
+    end
+    object Label4: TLabel
+      Left = 216
+      Top = 64
+      Width = 31
+      Height = 16
+      Caption = 'ETD:'
+    end
+    object Label6: TLabel
+      Left = 360
+      Top = 64
+      Width = 17
+      Height = 16
+      Caption = 'To'
+    end
+    object Button1: TButton
+      Left = 600
+      Top = 48
+      Width = 97
+      Height = 33
+      Caption = 'QUERY'
+      TabOrder = 0
+      OnClick = Button1Click
+    end
+    object Edit3: TEdit
+      Left = 432
+      Top = 16
+      Width = 137
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 1
+    end
+    object Edit1: TEdit
+      Left = 56
+      Top = 16
+      Width = 89
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 2
+    end
+    object Edit5: TEdit
+      Left = 64
+      Top = 56
+      Width = 129
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 3
+    end
+    object Button2: TButton
+      Left = 600
+      Top = 8
+      Width = 97
+      Height = 33
+      Caption = 'EXCEL'
+      TabOrder = 4
+      OnClick = Button2Click
+    end
+    object Edit2: TEdit
+      Left = 216
+      Top = 16
+      Width = 153
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 5
+    end
+    object CBX1: TCheckBox
+      Left = 512
+      Top = 64
+      Width = 73
+      Height = 17
+      Caption = 'Cutting'
+      Checked = True
+      State = cbChecked
+      TabOrder = 6
+    end
+    object DTP1: TDateTimePicker
+      Left = 256
+      Top = 56
+      Width = 97
+      Height = 24
+      Date = 39255.000000000000000000
+      Format = 'yyyy/MM/dd'
+      Time = 39255.000000000000000000
+      TabOrder = 7
+    end
+    object DTP2: TDateTimePicker
+      Left = 384
+      Top = 56
+      Width = 97
+      Height = 24
+      Date = 39255.000000000000000000
+      Format = 'yyyy/MM/dd'
+      Time = 39255.000000000000000000
+      TabOrder = 8
+    end
+  end
+  object DBGrid1: TDBGridEh
+    Left = 0
+    Top = 97
+    Width = 862
+    Height = 369
+    Align = alClient
+    DataSource = DataSource1
+    Flat = False
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -13
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    FrozenCols = 1
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind]
+    ReadOnly = True
+    SumList.Active = True
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    OnGetCellParams = DBGrid1GetCellParams
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'ZLBH'
+        Footers = <
+          item
+            FieldName = 'ZLBH'
+            ValueType = fvtCount
+          end>
+        Title.TitleButton = True
+        Width = 88
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Article'
+        Footers = <>
+        Title.TitleButton = True
+        Width = 78
+      end
+      item
+        EditButtons = <>
+        FieldName = 'XieMing'
+        Footers = <>
+        Title.TitleButton = True
+        Width = 173
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CLBH'
+        Footers = <>
+        Title.TitleButton = True
+        Width = 94
+      end
+      item
+        EditButtons = <>
+        FieldName = 'YWPM'
+        Footers = <>
+        Title.TitleButton = True
+        Width = 388
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DWBH'
+        Footers = <>
+        Title.TitleButton = True
+        Width = 39
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Usage'
+        Footers = <
+          item
+            FieldName = 'Usage'
+            ValueType = fvtAvg
+          end>
+        Title.TitleButton = True
+        Width = 57
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CLSL'
+        Footers = <
+          item
+            FieldName = 'CLSL'
+            ValueType = fvtSum
+          end>
+        Title.TitleButton = True
+        Width = 66
+      end
+      item
+        EditButtons = <>
+        FieldName = 'okQty'
+        Footers = <
+          item
+            FieldName = 'okQty'
+            ValueType = fvtSum
+          end>
+        Title.TitleButton = True
+        Width = 67
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DelQty'
+        Footers = <
+          item
+            FieldName = 'DelQty'
+            ValueType = fvtSum
+          end>
+        Title.TitleButton = True
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DFL'
+        Footers = <>
+        Title.TitleButton = True
+        Width = 27
+      end
+      item
+        EditButtons = <>
+        FieldName = 'LYCC'
+        Footers = <>
+        Title.TitleButton = True
+        Width = 36
+      end>
+  end
+  object DataSource1: TDataSource
+    DataSet = Query1
+    Left = 344
+    Top = 160
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'declare @p decimal(18,4)  '
+      'set @p=(select Delperson from BasData)'
+      'select OrdCL1.ZLBH,OrdCL1.CLBH,sum(OrdCL1.Usage) as Usage,'
+      
+        '        round((sum(OrdCL1.CLSL)+0.0499),1) as CLSL,OrdCL1.DFL,Or' +
+        'dCL1.YWPM,OrdCL1.DWBH,OrdCL1.LYCC,'
+      
+        '        OrdCL1.Article,OrdCL1.XieMing,OrdCL1.XieXing,OrdCL1.SheH' +
+        'ao,KCSMCL.okQty,KCSMCLok.DelQty '
+      '  from '
+      '      ( select  ZLBH,CLBH,sum(USAGE) as USAGE,case when CLTX='#39'3'#39
+      ' then sum(CLSL)*@p/100  else sum(CLSL) end as CLSL ,DFL,YWPM, '
+      '          DWBH,LYCC,Article,XieMing,XieXing,SheHao,CLTX'
+      
+        '     from (select ZLZLS2.ZLBH,ZLZLS2.CLBH,max(ZLZLS2.USAGE) as U' +
+        'SAGE,'
+      
+        '             sum(ZLZLS2.CLSL)   CLSL,isnull(XXBWFLS.DFL,'#39'N'#39') as ' +
+        'DFL'
+      
+        '             ,CLZL.YWPM,CLZL.DWBH,CLZL.LYCC,DDZL.XieXing,DDZL.Sh' +
+        'eHao,XXZL.Article,XXZL.XieMing,isnull(XXZLS.CLTX,1) as CLTX'
+      '             from ZLZLS2'
+      '             left join CLZL on ZLZLS2.CLBH=CLZL.CLDH'
+      '             left join ZLZL on ZLZL.ZLBH=ZLZLS2.ZLBH'
+      '             left join  DDZL on DDZL.DDBH=ZLZL.DDBH'
+      
+        '             left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZ' +
+        'L.SheHao=DDZL.SheHao'
+      
+        '             left join XXBWFL on ZLZLS2.BWBH=XXBWFL.BWBH and XXZ' +
+        'L.XieXing=XXBWFL.XieXing'
+      '             left join XXBWFLS on XXBWFL.FLBH=XXBWFLS.FLBH'
+      
+        '             left join XXZLS on XXZLS.XieXing=XXZL.XieXing and X' +
+        'XZLS.SheHao=XXZL.SheHao and XXZLS.BWBH=ZLZLS2.BWBH'
+      '            where ZLZLS2.ZLBH like '#39'Y0806-186%'#39
+      '                   and MJBH='#39'ZZZZZZZZZZ'#39
+      '                   and XXZL.XieMing like '#39'%%'#39
+      '                   and XXZL.Article like '#39'%'#39
+      '                   and ZLZLS2.CLBH like '#39'%'#39
+      '                   and ZLZLS2.ZLBH like '#39'Y0806-186%'#39
+      '                   and ZLZLS2.XH<>'#39'VN'#39
+      
+        '                   and convert(smalldatetime,convert(varchar,DDZ' +
+        'L.ShipDate,111)) between '
+      '                       '#39'2008/06/01'#39' and '#39'2008/06/30'#39
+      
+        '            group by ZLZLS2.ZLBH,ZLZLS2.CLBH,XXBWFLS.DFL,CLZL.YW' +
+        'PM,CLZL.DWBH,CLZL.LYCC,'
+      
+        '                 DDZL.XieXing,DDZL.SheHao,XXZL.Article,XXZL.XieM' +
+        'ing,XXZLS.CLTX ) as OrdCL'
+      '     where  (OrdCL.DFL='#39'C'#39' or OrdCL.DFL= '#39'N'#39')'
+      
+        '      group by ZLBH,CLBH,DFL,YWPM,DWBH,LYCC,Article,XieMing,XieX' +
+        'ing,SheHao,CLTX) OrdCL1'
+      
+        'left join (select ZLBH,CLBH,DFL,sum(Qty) as okQty from KCSMCL gr' +
+        'oup by ZLBH,CLBH,DFL) KCSMCL'
+      
+        '             on KCSMCL.ZLBH=OrdCL1.ZLBH and KCSMCL.CLBH=OrdCL1.C' +
+        'LBH and KCSMCL.DFL=OrdCL1.DFL'
+      
+        'left join (select ZLBH,CLBH,DFL,sum(Qty) as DelQty from KCSMCL g' +
+        'roup by ZLBH,CLBH,DFL) KCSMCLok'
+      
+        '             on KCSMCLok.ZLBH=OrdCL1.ZLBH and KCSMCLok.CLBH=OrdC' +
+        'L1.CLBH and KCSMCLok.DFL=OrdCL1.DFL'
+      
+        'group by OrdCL1.ZLBH,OrdCL1.CLBH,OrdCL1.DFL,OrdCL1.YWPM,OrdCL1.D' +
+        'WBH,'
+      
+        '              OrdCL1.LYCC,OrdCL1.Article,OrdCL1.XieMing,OrdCL1.X' +
+        'ieXing,OrdCL1.SheHao,KCSMCL.okQty,KCSMCLok.DelQty'
+      'order by OrdCL1.CLBH,OrdCL1.DFL,OrdCL1.ZLBH')
+    Left = 296
+    Top = 160
+    object Query1ZLBH: TStringField
+      FieldName = 'ZLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object Query1Article: TStringField
+      FieldName = 'Article'
+      FixedChar = True
+    end
+    object Query1XieMing: TStringField
+      FieldName = 'XieMing'
+      FixedChar = True
+      Size = 50
+    end
+    object Query1CLBH: TStringField
+      FieldName = 'CLBH'
+      FixedChar = True
+      Size = 10
+    end
+    object Query1YWPM: TStringField
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object Query1DWBH: TStringField
+      FieldName = 'DWBH'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1Usage: TFloatField
+      FieldName = 'Usage'
+      DisplayFormat = '##,#0.0000'
+    end
+    object Query1CLSL: TFloatField
+      FieldName = 'CLSL'
+      DisplayFormat = '##,#0.00'
+    end
+    object Query1okQty: TCurrencyField
+      FieldName = 'okQty'
+      DisplayFormat = '##,#0.00'
+    end
+    object Query1DelQty: TCurrencyField
+      FieldName = 'DelQty'
+      DisplayFormat = '##,#0.00'
+    end
+    object Query1DFL: TStringField
+      FieldName = 'DFL'
+      FixedChar = True
+      Size = 1
+    end
+    object Query1LYCC: TStringField
+      FieldName = 'LYCC'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object Qtemp: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select kfdh'
+      'from kfzl'
+      'order by kfdh')
+    Left = 496
+    Top = 328
+  end
+end

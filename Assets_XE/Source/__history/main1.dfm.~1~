@@ -1,0 +1,342 @@
+object main: Tmain
+  Left = 546
+  Top = 263
+  Caption = 'Asset'
+  ClientHeight = 390
+  ClientWidth = 828
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIForm
+  Menu = MainMenu1
+  OldCreateOrder = False
+  Position = poScreenCenter
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Image1: TImage
+    Left = 0
+    Top = 0
+    Width = 828
+    Height = 368
+    Align = alClient
+    AutoSize = True
+    Stretch = True
+    OnClick = Image1Click
+    ExplicitTop = -6
+  end
+  object Edit1: TEdit
+    Left = 184
+    Top = 152
+    Width = 121
+    Height = 21
+    TabOrder = 0
+    Visible = False
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 368
+    Width = 828
+    Height = 22
+    Panels = <>
+  end
+  object Edit2: TEdit
+    Left = 184
+    Top = 184
+    Width = 121
+    Height = 21
+    TabOrder = 2
+    Visible = False
+  end
+  object MainMenu1: TMainMenu
+    AutoHotkeys = maManual
+    Left = 161
+    Top = 63
+    object SN1: TMenuItem
+      Caption = 'N1 Basic'
+      object SN11: TMenuItem
+        Caption = 'N11 Equipment Classification('#35373#20633#39006#21029')'
+        OnClick = SN11Click
+      end
+      object SN12: TMenuItem
+        Caption = 'N12 Equipment List('#35373#20633#22411#37636')'
+        OnClick = SN12Click
+      end
+      object SN13: TMenuItem
+        Caption = 'N13 Equipment Supplier('#35373#20633#24288#21830')'
+        OnClick = SN13Click
+      end
+      object SN14: TMenuItem
+        Caption = 'N14 New Equipment('#25163#21205#26032#22686#35373#20633')'
+        OnClick = SN14Click
+      end
+      object SN15: TMenuItem
+        Caption = 'N15 New Department('#26032#37096#38272')'
+        OnClick = SN15Click
+      end
+      object SN16: TMenuItem
+        Caption = 'N16 Change Price Equipment('#26356#25913' Price '#35373#20633')'
+        OnClick = SN16Click
+      end
+    end
+    object SN2: TMenuItem
+      Caption = 'N2 Equipment'
+      object SN21: TMenuItem
+        Caption = 'N21 Equipment Apply('#35373#20633#21934#25818')'
+        object SN211: TMenuItem
+          Caption = 'N211 Entry Equipment('#20837#24235')'
+          OnClick = SN211Click
+        end
+        object SN212: TMenuItem
+          Caption = 'N212 Delivery Equipment('#38936#20986')'
+          OnClick = SN212Click
+        end
+        object SN213: TMenuItem
+          Caption = 'N213 Discard Equipment('#22577#24290')'
+          OnClick = SN213Click
+        end
+        object SN214: TMenuItem
+          Caption = 'N214 Lend Equipment('#20511#20986#35373#20633')'
+          object SN2141: TMenuItem
+            Caption = 'N2141 Lend Equipment('#20511#20986#35373#20633')'
+            OnClick = SN2141Click
+          end
+          object SN2142: TMenuItem
+            Caption = 'N2142 Lend Equipment('#20511#20986#35373#20633#27512#36996')'
+            OnClick = SN2142Click
+          end
+        end
+        object SN215: TMenuItem
+          Caption = 'N215 Moving Equipment('#35519#21205')'
+          OnClick = SN215Click
+        end
+        object SN216: TMenuItem
+          Caption = 'N216 Back/Return Equipment('#29694#22580#36864#24235')'
+          OnClick = SN216Click
+        end
+        object SN217: TMenuItem
+          Caption = 'N217 Purchase Equipment('#25505#36092')'
+          OnClick = SN217Click
+        end
+        object SN218: TMenuItem
+          Caption = 'N218 ApplyEquipment('#35531#36092#21934')'
+          OnClick = SN218Click
+        end
+        object SN219: TMenuItem
+          Caption = 'N219 Repair Equipment('#25925#38556#22577#20462')'
+          OnClick = SN219Click
+        end
+        object SN21A: TMenuItem
+          Caption = 'N21A Borrow Equipment('#20511#20837#35373#20633')'
+          object SN21A1: TMenuItem
+            Caption = 'N21A1 Borrow Equipment('#20511#20837#35373#20633')'
+            OnClick = SN21A1Click
+          end
+          object SN21A2: TMenuItem
+            Caption = 'N21A2 Borrow Equipment Return('#20511#20837#35373#20633#27512#36996')'
+            OnClick = SN21A2Click
+          end
+        end
+        object SN21B: TMenuItem
+          Caption = 'N21B Change DepIDMemo Equipment('#26356#25913' DepIDMemo '#35373#20633')'
+          OnClick = SN21BClick
+        end
+      end
+      object SN22: TMenuItem
+        Caption = 'N22 Entry Confirm('#20837#24235#30906#35469')'
+        OnClick = SN22Click
+      end
+      object SN23: TMenuItem
+        Caption = 'N23 Delivery Confrim('#38936#26009'/'#35519#21205'/'#20511#20986'/'#36864#24235'/'#30906#35469')'
+        OnClick = SN23Click
+        object SN231: TMenuItem
+          Caption = 'N231 Delivery Equipment Confirm'
+          OnClick = SN231Click
+        end
+        object SN232: TMenuItem
+          Caption = 'N232 Discard Equipment Confirm'
+          OnClick = SN232Click
+        end
+        object SN233: TMenuItem
+          Caption = 'N233 Lend Equipment Confirm'
+          OnClick = SN233Click
+        end
+        object SN234: TMenuItem
+          Caption = 'N234 Lend Equipment Return Confirm'
+          OnClick = SN234Click
+        end
+        object SN235: TMenuItem
+          Caption = 'N235 Moving Equipment Confirm'
+          OnClick = SN235Click
+        end
+        object SN236: TMenuItem
+          Caption = 'N236 Back/Return Equipment Confirm'
+          OnClick = SN236Click
+        end
+        object SN237: TMenuItem
+          Caption = 'N237 Repair Equipment Confirm'
+          OnClick = SN237Click
+        end
+        object SN238: TMenuItem
+          Caption = 'N238 Borrow Equipment Confirm'
+          OnClick = SN238Click
+        end
+        object SN239: TMenuItem
+          Caption = 'N239 Borrow Equipment Return Confirm'
+          OnClick = SN239Click
+        end
+        object SN23A: TMenuItem
+          Caption = 'N23A Change DepID Memo Equipment Confirm'
+          OnClick = SN23AClick
+        end
+      end
+      object SN24: TMenuItem
+        Caption = 'N24 Equipment Total List Report('#35373#20633#28165#21934#32317#34920')'
+        OnClick = SN24Click
+      end
+      object SN25: TMenuItem
+        Caption = 'N25 Deliver Total Qrcode Print'#21360#26781#30908#27161
+        OnClick = SN25Click
+      end
+      object SN26: TMenuItem
+        Caption = 'N26 Equipment Deliver Detail  '#27231#22120#35373#20633#38936#20986#26126#32048
+        OnClick = SN26Click
+      end
+      object SN27: TMenuItem
+        Caption = 'N27 Equipment Purchase Trace'
+        OnClick = SN27Click
+      end
+    end
+    object SN3: TMenuItem
+      Caption = 'N3 Account'
+      object SN31: TMenuItem
+        Caption = 'N31 Purchase Equipment Confirm('#35373#20633#36914#21475#31237')'
+        OnClick = SN31Click
+      end
+      object SN32: TMenuItem
+        Caption = 'N32 Account Equipment Confirm('#32317#26371#35336#30906#35469')'
+        OnClick = SN32Click
+      end
+      object SN33: TMenuItem
+        Caption = 'N33 Delivery Equipment Confirm('#35373#20633#38936#20986#26371#35336#30906#35469')'
+        OnClick = SN33Click
+      end
+      object SN34: TMenuItem
+        Caption = 'N34 Check  Equipment List('#21934#28165#21934')'
+        object SN341: TMenuItem
+          Caption = 'N341 Entry Check('#26376#20837#24235#21934#28165#21934')'
+          OnClick = SN341Click
+        end
+        object SN342: TMenuItem
+          Caption = 'N342 Delivery Check('#26376#38936#20986#21934#28165#21934')'
+          OnClick = SN342Click
+        end
+      end
+      object SN35: TMenuItem
+        Caption = 'N35 Adjust('#20462#27491')'
+        object SN351: TMenuItem
+          Caption = 'N351 Adjust Delivery('#20462#27491#38936#20986#21934')'
+          OnClick = SN351Click
+        end
+        object SN352: TMenuItem
+          Caption = 'N352 Adjust Entry('#20462#27491#20837#24235#21934')'
+          OnClick = SN352Click
+        end
+      end
+      object SN36: TMenuItem
+        Caption = 'N36 Account Equipment Calcuate('#32317#26371#35336#27599#26376#35336#31639')'
+        OnClick = SN36Click
+      end
+      object SN37: TMenuItem
+        Caption = 'N37 Accoutn Equipment Report('#35373#20633#28165#21934#25892#37559#22577#34920')'
+        OnClick = SN37Click
+      end
+      object SN38: TMenuItem
+        Caption = 'N38 Account Equpment Monthly VND('#35373#20633#27599#26376#25892#25552')'
+        OnClick = SN38Click
+      end
+    end
+    object SN4: TMenuItem
+      Caption = 'N4 Maintainance'
+      object SN41: TMenuItem
+        Caption = 'N41 Maintainance_Item'
+        OnClick = SN41Click
+      end
+      object SN42: TMenuItem
+        Caption = 'N42 Equipment maintenance'
+        OnClick = SN42Click
+      end
+      object SN43: TMenuItem
+        Caption = 'N43 Maintainance Works'
+        OnClick = SN43Click
+      end
+      object SN44: TMenuItem
+        Caption = 'N44 Fill In Maintainance'
+        OnClick = SN44Click
+      end
+      object SN45: TMenuItem
+        Caption = 'N45 Repair Device '
+        OnClick = SN45Click
+      end
+      object SN46: TMenuItem
+        Caption = 'N46 Oil Manage'
+        OnClick = SN46Click
+      end
+    end
+    object SN5: TMenuItem
+      Caption = 'N5 Tool'
+      object SN51: TMenuItem
+        Caption = 'N51 Production Tool Repair'
+        OnClick = SN51Click
+      end
+    end
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select *'
+      'from BLimits'
+      'where USERID=:userid'
+      'and MKID=:mkid'
+      'and GSBH=:GSBH')
+    Left = 112
+    Top = 64
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'userid'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'mkid'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'GSBH'
+        ParamType = ptUnknown
+      end>
+  end
+  object BLimitHideQry: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select FORMID,YN'
+      'from BLimit'
+      'where BLimit.MKID=:mkid'
+      '')
+    Left = 112
+    Top = 112
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'mkid'
+        ParamType = ptUnknown
+      end>
+  end
+end

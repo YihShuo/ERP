@@ -1,0 +1,1 @@
+開發RFID 不用編碼，所以重新編譯rfid_uhf_DC.apk

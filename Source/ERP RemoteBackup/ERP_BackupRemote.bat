@@ -1,0 +1,1 @@
+ERP_BackupRemote.exe "D:\Backup\LingYi@.bak"  \\192.168.23.5\f$\BackupDatabase\WF  YYYYMMDD 0

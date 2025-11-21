@@ -1,0 +1,7 @@
+    declare @weekdate nvarchar(10), @datestr nvarchar(255), @DB_DD nvarchar(255), @DB_ERP nvarchar(255), @path nvarchar(255),  @cmd_backup_data1 nvarchar(255) , @cmd_backup_data2 nvarchar(255) 
+    select @datestr = convert(nvarchar, getdate(), 112)   
+    select @DB_DD='LingYi'
+    select @path = 'D:\Backup\LingYi' 
+    select @weekdate=  datename(weekday,getdate())
+    select @cmd_backup_data1 = 'Backup database '+@DB_DD+' to disk='''+@path  + @datestr + '.bak'''
+    exec sp_executesql @cmd_backup_data1     

@@ -1,0 +1,382 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{F76AC817-0FB3-4A3C-BEB3-9762A13BB4DE}</ProjectGuid>
+			<MainSource>Sale.dpr</MainSource>
+			<Base>True</Base>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<TargetedPlatforms>1</TargetedPlatforms>
+			<AppType>Application</AppType>
+			<FrameworkType>VCL</FrameworkType>
+			<ProjectVersion>13.4</ProjectVersion>
+			<Platform Condition="'$(Platform)'==''">Win32</Platform>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+			<Base_Win64>true</Base_Win64>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+			<Base_Win32>true</Base_Win32>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UsePackage>vcl;rtl;vclx;indy;inet;xmlrtl;vclie;inetdbbde;inetdbxpress;dbrtl;dsnap;dsnapcon;vcldb;soaprtl;VclSmp;dbexpress;dbxcds;inetdb;bdertl;vcldbx;webdsnap;websnap;adortl;ibxpress;teeui;teedb;tee;dss;visualclx;visualdbclx;vclactnband;vclshlctrls;IntrawebDB_50_70;Intraweb_50_70;Rave50CLX;Rave50VCL;dclOfficeXP;$(DCC_UsePackage)</DCC_UsePackage>
+			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+			<DCC_SymbolReferenceInfo>1</DCC_SymbolReferenceInfo>
+			<DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;Bde;Data.Win;System.Win;VCLTee;$(DCC_Namespace)</DCC_Namespace>
+			<DCC_ExeOutput>../Bin</DCC_ExeOutput>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_K>false</DCC_K>
+			<DCC_N>true</DCC_N>
+			<DCC_S>false</DCC_S>
+			<VerInfo_Locale>2052</VerInfo_Locale>
+			<DCC_E>false</DCC_E>
+			<DCC_F>false</DCC_F>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base_Win64)'!=''">
+			<Icon_MainIcon>Sale_Icon.ico</Icon_MainIcon>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base_Win32)'!=''">
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<Icon_MainIcon>Sale_Icon.ico</Icon_MainIcon>
+			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+			<VerInfo_Locale>1033</VerInfo_Locale>
+			<Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="$(MainSource)">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="source\main1.pas">
+				<Form>main</Form>
+			</DCCReference>
+			<DCCReference Include="source\ulogin.pas">
+				<Form>LOGIN</Form>
+			</DCCReference>
+			<DCCReference Include="source\DM3.pas">
+				<Form>DM2</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="source\SN12\OrderList1.pas">
+				<Form>OrderList</Form>
+			</DCCReference>
+			<DCCReference Include="source\SN12\OrderPO1.pas">
+				<Form>OrderPO</Form>
+			</DCCReference>
+			<DCCReference Include="source\CarttonModel1.pas">
+				<Form>CarttonModel</Form>
+			</DCCReference>
+			<DCCReference Include="source\OrderSale1.pas">
+				<Form>OrderSale</Form>
+			</DCCReference>
+			<DCCReference Include="source\OrderSale_DD1.pas">
+				<Form>OrderSale_DD</Form>
+			</DCCReference>
+			<DCCReference Include="source\ModelBasic1.pas">
+				<Form>ModelBasic</Form>
+			</DCCReference>
+			<DCCReference Include="source\ModelBasic_CL1.pas">
+				<Form>ModelBasic_CL</Form>
+			</DCCReference>
+			<DCCReference Include="source\CartonMark1.pas">
+				<Form>CartonMark</Form>
+			</DCCReference>
+			<DCCReference Include="source\SN12\OrderMark1.pas">
+				<Form>OrderMark</Form>
+			</DCCReference>
+			<DCCReference Include="source\OrderMark_Mt1.pas">
+				<Form>OrderMark_Mt</Form>
+			</DCCReference>
+			<DCCReference Include="source\SN23\CartonOrder1.pas">
+				<Form>CartonOrder</Form>
+			</DCCReference>
+			<DCCReference Include="source\SN23\CartonOrder_CT1.pas">
+				<Form>CartonOrder_CT</Form>
+			</DCCReference>
+			<DCCReference Include="source\SN23\CartonOrder_Me1.pas">
+				<Form>CartonOrder_Me</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN23\CartonOrder_Print1.pas">
+				<Form>CartonOrder_Print</Form>
+			</DCCReference>
+			<DCCReference Include="Source\OrderMark_Mt21.pas">
+				<Form>OrderMark_Mt2</Form>
+			</DCCReference>
+			<DCCReference Include="Source\OrderMark_Mt31.pas">
+				<Form>OrderMark_Mt3</Form>
+			</DCCReference>
+			<DCCReference Include="Source\OrderMark_Mt41.pas">
+				<Form>OrderMark_Mt4</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN12\OrderpackMemo1.pas">
+				<Form>OrderpackMemo</Form>
+			</DCCReference>
+			<DCCReference Include="Source\MaterialNew1.pas">
+				<Form>MaterialNew</Form>
+			</DCCReference>
+			<DCCReference Include="Source\MaterialNew_LB1.pas">
+				<Form>MaterialNew_LB</Form>
+			</DCCReference>
+			<DCCReference Include="Source\OrderMark_Im1.pas">
+				<Form>OrderMark_Im</Form>
+			</DCCReference>
+			<DCCReference Include="Source\CartonMark_KH1.pas">
+				<Form>CartonMark_KH</Form>
+			</DCCReference>
+			<DCCReference Include="Source\MemoNew1.pas">
+				<Form>MemoNew</Form>
+			</DCCReference>
+			<DCCReference Include="Source\MemoNew_KH1.pas">
+				<Form>MemoNew_KH</Form>
+			</DCCReference>
+			<DCCReference Include="Source\OrderpackMemo_BZ1.pas">
+				<Form>OrderpackMemo_BZ</Form>
+			</DCCReference>
+			<DCCReference Include="Source\OrderpackMemo_Im1.pas">
+				<Form>OrderpackMemo_Im</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN23\OrderPack_Print1.pas">
+				<Form>OrderPack_Print</Form>
+			</DCCReference>
+			<DCCReference Include="Source\MaterialNew_ZS1.pas">
+				<Form>MaterialNew_ZS</Form>
+			</DCCReference>
+			<DCCReference Include="Source\BarPrint1.pas">
+				<Form>BarPrint</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN23\CartonOrderNW1.pas">
+				<Form>CartonOrderNW</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN23\CartonOrder_ZS1.pas">
+				<Form>CartonOrder_ZS</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN12\Orderpack_TP1.pas">
+				<Form>Orderpack_TP</Form>
+			</DCCReference>
+			<DCCReference Include="Source\PackShip1.pas">
+				<Form>PackShip</Form>
+			</DCCReference>
+			<DCCReference Include="Source\ExecInvoice1.pas">
+				<Form>ExecInvoice</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN23\CartonOrder_Memo1.pas">
+				<Form>CartonOrder_Memo</Form>
+			</DCCReference>
+			<DCCReference Include="Source\ExecShort1.pas">
+				<Form>ExecShort</Form>
+			</DCCReference>
+			<DCCReference Include="Source\ExecShort_Car1.pas">
+				<Form>ExecShort_Car</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN12\Orderpack_Label1.pas">
+				<Form>Orderpack_Label</Form>
+			</DCCReference>
+			<DCCReference Include="Source\OrderSale_NoPrice1.pas">
+				<Form>OrderSale_NoPrice</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SaleReport.pas">
+				<Form>salereportf</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN16\Customscomfirmp.pas">
+				<Form>CustomsComfirm</Form>
+			</DCCReference>
+			<DCCReference Include="Source\TraceCarton1.pas">
+				<Form>TraceCarton</Form>
+			</DCCReference>
+			<DCCReference Include="..\QC\Source\OrderAnalysisp.pas">
+				<Form>OrderAnalysis</Form>
+			</DCCReference>
+			<DCCReference Include="Source\uAutoComplete.pas"/>
+			<DCCReference Include="Source\SN25\ModelTolerP.pas">
+				<Form>ModelToler</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN26\CopyModelTolerP.pas">
+				<Form>CopyModelToler</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN25\ModelToler_DDZL.pas">
+				<Form>ModelToler_DDZLForm</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN17\ExcelImportp.pas">
+				<Form>ExcelImport</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN17\DDZLXXCCp.pas">
+				<Form>DDZLXXCC</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN18\ExcelUploadp.pas">
+				<Form>ExcelUpload</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN521\forecastorder1.pas">
+				<Form>forecastorder</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN53\ExcelBuylist1.pas">
+				<Form>ExcelBuylist</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN43\ScanOutbox1.pas">
+				<Form>ScanOutbox</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN54\SKUMOQ1.pas">
+				<Form>SKUMOQ</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN12\OrderPack_CartonPrint1.pas">
+				<Form>OrderPack_CartonPrint</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN12\OrderPack_CartonPChoice1.pas">
+				<Form>OrderPack_CartonPChoice</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN12\OrderPack_CartonPrintS1.pas">
+				<Form>OrderPack_CartonPrintS</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN12\OrderPack_CartonPrintD1.pas">
+				<Form>OrderPack_CartonPrintD</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN12\OrderPack_CartonPrintH1.pas">
+				<Form>OrderPack_CartonPrintH</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN11\OrderSale_Pack1.pas">
+				<Form>OrderSale_Pack</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN11\untClipboard.pas"/>
+			<DCCReference Include="Source\SN23\CartonOrder_PrintDet1.pas">
+				<Form>CartonOrder_PrintDet</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN522\forecastpurchase1.pas">
+				<Form>forecastpurchase</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN27\CartonXXZL1.pas">
+				<Form>CartonXXZL</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN27\CartonXXZL_CLZL1.pas">
+				<Form>CartonXXZL_CLZL</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN14\MaterialNew_ZSZL1.pas">
+				<Form>MaterialNew_ZSZL</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN28\DetailSideMark_PackingMemo1.pas">
+				<Form>DetailSideMark_PackingMemo</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN29\YWXXBox1.pas">
+				<Form>YWXXBox</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN19\OrderInformation1.pas">
+				<Form>OrderInformation</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN34\BW_CL_CS1.pas">
+				<Form>BW_CL_CS</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN34\Cond1.pas">
+				<Form>Cond</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN34\Copy1.pas">
+				<Form>Copy</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN34\Dest_BW_CL_CS1.pas">
+				<Form>Dest_BW_CL_CS</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN34\DestinationPackingBox_Label1.pas">
+				<Form>DestinationPackingBox_Label</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN35\Detail1.pas">
+				<Form>Detail</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN35\OrderCalculateSpecialBOM1.pas">
+				<Form>OrderCalculateSpecialBOM</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN1A\RTOVData1.pas">
+				<Form>RTOVData</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN1A\RTOV_Detail1.pas">
+				<Form>RTOV_Detail</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN1B\Import_Label_Usage1.pas">
+				<Form>Import_Label_Usage</Form>
+			</DCCReference>
+			<DCCReference Include="Source\SN44\UccLabel1.pas">
+				<Form>UccLabel</Form>
+			</DCCReference>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Source>
+						<Source Name="MainSource">Sale.dpr</Source>
+					</Source>
+					<Language>
+						<Language Name="RootDir">..\..\..\ERP SOURCE CODE\Sale\</Language>
+					</Language>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">2052</VersionInfo>
+						<VersionInfo Name="CodePage">936</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+				</Delphi.Personality>
+				<Platforms>
+					<Platform value="Win64">False</Platform>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+	</Project>

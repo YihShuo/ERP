@@ -1,0 +1,69 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\ERP SOURCE CODE\\RFID_soucre_code\\RFID_LYS\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{10F3A65D-35FD-438F-B35B-1F0B070E292D}|UHF\\UHF.csproj|d:\\erp source code\\rfid_soucre_code\\rfid_lys\\uhf\\r2000uartdemo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10F3A65D-35FD-438F-B35B-1F0B070E292D}|UHF\\UHF.csproj|solutionrelative:uhf\\r2000uartdemo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10F3A65D-35FD-438F-B35B-1F0B070E292D}|UHF\\UHF.csproj|D:\\ERP SOURCE CODE\\RFID_soucre_code\\RFID_LYS\\uhf\\r2000uartdemo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{10F3A65D-35FD-438F-B35B-1F0B070E292D}|UHF\\UHF.csproj|solutionrelative:uhf\\r2000uartdemo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10F3A65D-35FD-438F-B35B-1F0B070E292D}|UHF\\UHF.csproj|D:\\ERP SOURCE CODE\\RFID_soucre_code\\RFID_LYS\\uhf\\deckersfetchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10F3A65D-35FD-438F-B35B-1F0B070E292D}|UHF\\UHF.csproj|solutionrelative:uhf\\deckersfetchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 120,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DeckersFetchService.cs",
+              "DocumentMoniker": "D:\\ERP SOURCE CODE\\RFID_soucre_code\\RFID_LYS\\UHF\\DeckersFetchService.cs",
+              "RelativeDocumentMoniker": "UHF\\DeckersFetchService.cs",
+              "ToolTip": "D:\\ERP SOURCE CODE\\RFID_soucre_code\\RFID_LYS\\UHF\\DeckersFetchService.cs",
+              "RelativeToolTip": "UHF\\DeckersFetchService.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAcwGwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-17T03:59:57.674Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "R2000UartDemo.cs",
+              "DocumentMoniker": "D:\\ERP SOURCE CODE\\RFID_soucre_code\\RFID_LYS\\UHF\\R2000UartDemo.cs",
+              "RelativeDocumentMoniker": "UHF\\R2000UartDemo.cs",
+              "ToolTip": "D:\\ERP SOURCE CODE\\RFID_soucre_code\\RFID_LYS\\UHF\\R2000UartDemo.cs",
+              "RelativeToolTip": "UHF\\R2000UartDemo.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAQwCwAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-17T08:08:08.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "R2000UartDemo.cs [Design]",
+              "DocumentMoniker": "D:\\ERP SOURCE CODE\\RFID_soucre_code\\RFID_LYS\\UHF\\R2000UartDemo.cs",
+              "RelativeDocumentMoniker": "UHF\\R2000UartDemo.cs",
+              "ToolTip": "D:\\ERP SOURCE CODE\\RFID_soucre_code\\RFID_LYS\\UHF\\R2000UartDemo.cs [Design]",
+              "RelativeToolTip": "UHF\\R2000UartDemo.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-17T08:03:24.808Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

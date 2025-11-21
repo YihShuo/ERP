@@ -1,0 +1,980 @@
+unit Scanlabel1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DBTables, DB, StdCtrls, Buttons, ExtCtrls, ComCtrls, GridsEh,
+  DBGridEh, Grids, DBGrids,ShellApi;
+
+type
+  TScanLabel = class(TForm)
+    TmpQuery: TQuery;
+    workplan: TQuery;
+    WP: TDataSource;
+    WPS: TDataSource;
+    WPSS: TDataSource;
+    colorclassQry: TQuery;
+    pc1: TPageControl;
+    TabSheet1: TTabSheet;
+    Panel2: TPanel;
+    TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
+    Panel3: TPanel;
+    Button2: TButton;
+    workplanDDBH: TStringField;
+    workplanXieXing: TStringField;
+    workplanSheHao: TStringField;
+    workplanARTICLE: TStringField;
+    workplanSCRQ: TStringField;
+    workplanPairs: TFloatField;
+    StringGrid1: TStringGrid;
+    BB3: TBitBtn;
+    Panel1: TPanel;
+    Label3: TLabel;
+    CBsize1: TComboBox;
+    Label4: TLabel;
+    CBsize2: TComboBox;
+    QueryBtn: TButton;
+    Button3: TButton;
+    Label5: TLabel;
+    CBbacode: TComboBox;
+    CBsku: TComboBox;
+    WorkPlanS2: TQuery;
+    TabSheet4: TTabSheet;
+    Panel4: TPanel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    CBsize12: TComboBox;
+    CBsize22: TComboBox;
+    Button4: TButton;
+    CBbacode2: TComboBox;
+    CBsku2: TComboBox;
+    DataSource1: TDataSource;
+    Query1: TQuery;
+    Button1: TButton;
+    TabSheet5: TTabSheet;
+    Query2: TQuery;
+    DataSource2: TDataSource;
+    Panel5: TPanel;
+    Label10: TLabel;
+    Label12: TLabel;
+    EDid: TEdit;
+    Button5: TButton;
+    CBRYcolor: TComboBox;
+    GroupBox1: TGroupBox;
+    Label19: TLabel;
+    Label2: TLabel;
+    CBcolor: TComboBox;
+    EDARTICLE: TEdit;
+    Label13: TLabel;
+    Label1: TLabel;
+    EDry: TEdit;
+    DP1: TDateTimePicker;
+    Label14: TLabel;
+    Label20: TLabel;
+    Label15: TLabel;
+    DP2: TDateTimePicker;
+    EDBUYNO: TEdit;
+    Label21: TLabel;
+    UpdateSQL1: TUpdateSQL;
+    Query3: TQuery;
+    DataSource5: TDataSource;
+    UpdateSQL2: TUpdateSQL;
+    WorkPlanS: TQuery;
+    WorkPlanSCC: TStringField;
+    WorkPlanSSheHao: TStringField;
+    WorkPlanSARTICLE: TStringField;
+    WorkPlanSqty: TIntegerField;
+    WorkPlanSOUTSOLE: TStringField;
+    WorkPlanSXieXing: TStringField;
+    Label16: TLabel;
+    QueryColor: TQuery;
+    MJZLQry: TQuery;
+    MJZLQrybacord: TStringField;
+    MJZLQrysku: TStringField;
+    MJZLQrycolor: TStringField;
+    MJZLQrysize: TStringField;
+    MJZLQryOUTSOLE: TStringField;
+    MJZLQryqty: TIntegerField;
+    MJZLQryp_ok: TBooleanField;
+    Label6: TLabel;
+    Label17: TLabel;
+    CBPrintStatus: TComboBox;
+    Label18: TLabel;
+    Label22: TLabel;
+    Label11: TLabel;
+    DBGrid1: TDBGrid;
+    DBGrid2: TDBGrid;
+    DBGrid3: TDBGrid;
+    DBGrid4: TDBGrid;
+    MJZLQryXieMing: TStringField;
+    MJZLQryDDMH: TStringField;
+    Query4: TQuery;
+    Button6: TButton;
+    MJZLQryBUYNO: TStringField;
+    MJZLQryid: TStringField;
+    procedure BB1Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure pc1Change(Sender: TObject);
+    procedure BB3Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure QueryBtnClick(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure GetCombobox();
+    procedure CBbacodeExit(Sender: TObject);
+    procedure CBbacode2Exit(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    function getCodeID():string ;
+    procedure Button6Click(Sender: TObject);
+    procedure StringGrid1MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+  private
+    { Private declarations }
+    valueSelected: string;
+  public
+    { Public declarations }
+  end;
+
+var
+  ScanLabel: TScanLabel;
+
+implementation
+
+uses ProductionPlan1,LabelPrint1, main1,FunUnit;
+
+{$R *.dfm}
+
+procedure TScanLabel.BB1Click(Sender: TObject);
+begin
+  panel2.Visible:=true;
+end;
+
+procedure TScanLabel.Button1Click(Sender: TObject);
+var i: Integer;
+qty: Integer;
+begin
+  //1.建立空暫存表
+query3.Active:=false;
+  query3.SQL.Clear;
+  query3.SQL.Add('SELECT [DDBH],b.[XieXing],b.[SheHao],b.[ARTICLE],[Pairs],[DDRQ] [SCRQ],EVA AS [color],0 [CGBH],''EVA_'' + REPLACE([MDMH],''HOKA-'','''') as [DDMH], b.BUYNO FROM TB_ERP.[dbo].[DDZL] b ');
+  query3.SQL.Add('  inner join '+main.LIY_DD+'.dbo.ColorClass d on b.ARTICLE=d.sku ');
+  query3.SQL.Add(' INNER JOIN TB_ERP.[dbo].[xxzl] c on c.XieXing=b.XieXing and c.SheHao=b.SheHao where 1<>1 ');
+  //funcObj.WriteErrorLog(query3.Text);
+  query3.Active:=true;
+
+  //2.查詢訂單資料
+  if (EDARTICLE.Text<>'') AND (EDBUYNO.Text<>'')  then
+  begin
+  with Query2 do
+  begin
+    active:=false;
+    sql.Clear;
+   sql.add('SELECT [DDBH],b.[XieXing],b.[SheHao],b.[ARTICLE],[Pairs],[ShipDate] [SCRQ],(SELECT count(*) FROM TB_ERP.[dbo].[KCRKS] where CGBH=b.[DDBH]) as CGBH,''EVA_'' +REPLACE([MDMH],''HOKA-'','''') as [DDMH], EVA, b.BUYNO FROM TB_ERP.[dbo].[DDZL] b ');
+    sql.add('INNER JOIN TB_ERP.[dbo].[xxzl] c on c.XieXing=b.XieXing and c.SheHao=b.SheHao ');
+    sql.add('  inner join '+main.LIY_DD+'.dbo.ColorClass d on b.ARTICLE=d.sku ');
+    sql.add('where ([ShipDate] between '''+FormatDateTime('yyyy-mm-dd',DP1.Date)+''' and '''+FormatDateTime('yyyy-mm-dd',DP2.Date)+''') and [DDBH] not in(SELECT [ry] FROM '+main.LIY_DD+'.[dbo].[rubber01] where flag=''F'')');
+    if EDry.Text<>'' then
+    begin
+    sql.Add(' AND [DDBH] = '''+EDry.Text+'''');
+    end;
+    if EDARTICLE.Text<>'' then
+    begin
+    sql.Add(' AND b.[ARTICLE] = '''+EDARTICLE.Text+'''');
+    end;
+    if EDBUYNO.Text<>'' then
+    begin
+    sql.Add(' AND b.[BUYNO] LIKE ''' + EDBUYNO.Text + '%''');
+    end;
+    sql.Add(' order by DDBH,BUYNO');
+   // funcObj.WriteErrorLog(SQL.Text);
+    active:=true;
+  end;
+
+  //訂單資料查詢結果加入暫存表
+  Query2.First;
+  while not Query2.Eof do
+  begin
+    query3.Append;
+    query3.FieldByName('DDBH').AsString := Query2.FieldByName('DDBH').Value;
+    query3.FieldByName('XieXing').AsString := Query2.FieldByName('XieXing').Value;
+    query3.FieldByName('SheHao').AsString := Query2.FieldByName('SheHao').Value;
+    query3.FieldByName('ARTICLE').AsString := Query2.FieldByName('ARTICLE').Value;
+    query3.FieldByName('Pairs').AsInteger := Query2.FieldByName('Pairs').Value;
+    query3.FieldByName('SCRQ').AsString := FormatDateTime('yyyy/MM/dd', Query2.FieldByName('SCRQ').AsDateTime);
+    query3.FieldByName('CGBH').AsString := Query2.FieldByName('CGBH').Value;
+    query3.FieldByName('DDMH').AsString := Query2.FieldByName('DDMH').Value;
+    query3.FieldByName('color').AsString := Query2.FieldByName('EVA').Value;;
+    query3.FieldByName('BUYNO').AsString := Query2.FieldByName('BUYNO').Value;;
+    query3.Post;
+    Query2.Next;
+  end;
+
+  query3.First;
+    i:=1;
+    StringGrid1.RowCount:=query3.RecordCount+1;
+    while not query3.Eof do
+    begin
+    StringGrid1.Cells[0,i] := IntToStr(i);
+    StringGrid1.Cells[1,i] := query3.FieldByName('DDBH').Value;
+    StringGrid1.Cells[2,i] := query3.FieldByName('XieXing').Value;
+    StringGrid1.Cells[3,i] := query3.FieldByName('SheHao').Value;
+    StringGrid1.Cells[4,i] := query3.FieldByName('ARTICLE').Value;
+    StringGrid1.Cells[5,i] := query3.FieldByName('color').Value;
+    StringGrid1.Cells[6,i] := query3.FieldByName('Pairs').Value;
+    StringGrid1.Cells[7,i] := query3.FieldByName('SCRQ').Value;
+    StringGrid1.Cells[8,i] := query3.FieldByName('CGBH').Value;
+    StringGrid1.Cells[9,i] := query3.FieldByName('DDMH').Value;
+    StringGrid1.Cells[10,i]:= query3.FieldByName('BUYNO').Value;
+    qty:=qty+ query3.FieldByName('Pairs').Value;
+    query3.Next;
+    inc(i);
+    end;
+    Label21.Caption:=IntTostr(qty);
+  Query2.active:=false;
+  end
+  else
+  begin
+    showmessage('BUYNO AND ARTICLE) have must value!!!');
+  end;
+end;
+
+procedure TScanLabel.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  workplan.Active:=false;
+  workplans.Active:=false;
+  TmpQuery.Active:=false;
+  colorclassQry.Active:=false;
+  MJZLQry.Active:=false;
+  Query1.Active:=false;
+  workplans2.Active:=false;
+  action:=cafree;
+  Scanlabel:=nil;
+end;
+
+procedure TScanLabel.pc1Change(Sender: TObject);
+ var
+  Row: TDataSet;
+  i: Integer;
+  j: Integer;
+  Value1:string;
+begin
+    if pc1.ActivePageIndex=1 then
+    begin
+      if StringGrid1.RowCount>1 then
+      begin
+        for i:=1 to StringGrid1.RowCount-1 do
+        begin
+          Value1:=Value1+''''+StringGrid1.Cells[1,i]+''',';
+        end;
+        i:=Length(Value1)-1;
+        Value1:=copy(Value1,0,i);
+        with WorkPlanS do
+        begin
+          active:=false;
+          sql.Clear;
+          sql.add('SELECT [CC],(SELECT TOP (1) [GJCC] FROM [dbo].[xxgjs] where [XieXing]=b.[XieXing] and XXCC=a.CC and GJLB=''101'') [OUTSOLE],b.[XieXing]');
+          sql.add(',sum([Quantity]) Qty,b.[SheHao],b.[ARTICLE] ,''EVA_'' + REPLACE([MDMH],''HOKA-'','''') as [DDMH]  FROM TB_ERP.[dbo].[DDZLS] a ');
+          sql.add('inner join TB_ERP.[dbo].[DDZL] b on a.DDBH=b.DDBH');
+          sql.add('inner join TB_ERP.[dbo].[xxzl] c on c.XieXing=b.XieXing and c.SheHao=b.SheHao');
+          sql.add('where a.DDBH in('+valueSelected+')');
+          sql.add('group by b.[ARTICLE],b.[SheHao],b.[XieXing],[CC],[MDMH] order by [CC] ');
+          active:=true;
+        end;
+        WorkPlanS.First;
+        j:=0;
+        while not WorkPlanS.Eof do
+        begin
+          j:=j+WorkPlanS.FieldValues['qty'];
+          WorkPlanS.Next;
+        end;
+        WorkPlanS.First;
+        Label16.Caption:=IntToStr(j);
+      end;
+    end;
+    if pc1.ActivePageIndex=4 then
+    with Query2 do
+    begin
+    active:=false;
+    sql.Clear;
+
+    sql.add('SELECT [id] Pj_ID,[ry],[XieXing],[SheHao],[ARTICLE],[Pairs],[SCRQ],[Color] FROM '+main.LIY_DD+'.[dbo].[rubber01] ');
+    sql.add('where flag=''F'' and [id] LIKE '''+FormatDateTime('YYMMDD', Now)+'%''') ;
+    active:=true;
+
+    with TmpQuery do
+      begin
+        active:=false;
+        sql.Clear;
+        sql.add('SELECT [EnglishName] FROM '+main.LIY_DD+'.[dbo].[ColorClass] where EnglishName is not null');
+        active:=true;
+      end;
+      TmpQuery.First;
+      CBRYcolor.Clear;
+      CBRYcolor.Items.Add('');
+      while not TmpQuery.Eof do
+      begin
+        CBRYcolor.Items.Add(TmpQuery.FieldValues['EnglishName']);
+        TmpQuery.Next;
+      end;
+      TmpQuery.active:=false;
+    end;
+end;
+
+procedure DeleteRow(StringGrid: TStringGrid; ARow: Integer);
+var
+  i: Integer;
+begin
+  if (ARow >= 0) and (ARow < StringGrid.RowCount) then
+  begin
+    for i := ARow + 1 to StringGrid.RowCount - 1 do
+      StringGrid.Cells[0, i - 1] := StringGrid.Cells[0, i]; // Adjust 0 for desired column index
+    StringGrid.RowCount := StringGrid.RowCount - 1;
+  end;
+end;
+
+procedure TScanLabel.BB3Click(Sender: TObject);
+var
+i:Integer;
+qty:Integer;
+begin
+  qty:=StrToInt(Label21.Caption);
+  with StringGrid1 do
+  begin
+    for i := Selection.Bottom downto Selection.Top do
+    begin
+      if i>0 then
+      begin
+        query3.First;
+        query3.MoveBy(i-1);
+        qty:=qty-query3.FieldByName('Pairs').Value;
+        query3.Delete;
+      end;
+    end;
+    Label21.Caption:=IntToStr(qty);
+    query3.First;
+    i:=1;
+    StringGrid1.RowCount:=query3.RecordCount+1;
+    while not query3.Eof do
+    begin
+    StringGrid1.Cells[0,i] := IntToStr(i);
+    StringGrid1.Cells[1,i] := query3.FieldByName('DDBH').Value;
+    StringGrid1.Cells[2,i] := query3.FieldByName('XieXing').Value;
+    StringGrid1.Cells[3,i] := query3.FieldByName('SheHao').Value;
+    StringGrid1.Cells[4,i] := query3.FieldByName('ARTICLE').Value;
+    StringGrid1.Cells[5,i] := query3.FieldByName('color').Value;
+    StringGrid1.Cells[6,i] := query3.FieldByName('Pairs').Value;
+    StringGrid1.Cells[7,i] := query3.FieldByName('SCRQ').Value;
+    StringGrid1.Cells[8,i] := query3.FieldByName('CGBH').Value;
+    StringGrid1.Cells[9,i] := query3.FieldByName('DDMH').Value;
+    StringGrid1.Cells[10,i] := query3.FieldByName('BUYNO').Value;
+    query3.Next;
+    inc(i);
+    end;
+  end;
+end;
+
+procedure TScanLabel.GetCombobox();
+var i: Integer;
+begin
+with colorclassQry do
+        begin
+          active:=false;
+          sql.Clear;
+          sql.add('SELECT distinct [id_code] FROM '+main.LIY_DD+'.[dbo].[rubber01f] where p_ok=0 order by [id_code]');
+          active:=true;
+        end;
+        CBbacode.Items.Clear;
+        CBbacode.Items.Add('');
+        CBbacode2.Items.Clear;
+        CBbacode2.Items.Add('');
+        while not colorclassQry.Eof do
+        begin
+          CBbacode.Items.Add(colorclassQry.FieldByName('id_code').Value);
+          CBbacode2.Items.Add(colorclassQry.FieldByName('id_code').Value);
+          colorclassQry.Next;
+        end;
+        with colorclassQry do
+        begin
+          active:=false;
+          sql.Clear;
+          sql.add('SELECT distinct [size] FROM '+main.LIY_DD+'.[dbo].[rubber01f] order by [size]');
+          active:=true;
+        end;
+        CBsize1.Items.Clear;
+        CBsize1.Items.Add('');
+        CBsize2.Items.Clear;
+        CBsize2.Items.Add('');
+        CBsize12.Items.Clear;
+        CBsize12.Items.Add('');
+        CBsize22.Items.Clear;
+        CBsize22.Items.Add('');
+        while not colorclassQry.Eof do
+        begin
+          CBsize1.Items.Add(colorclassQry.FieldByName('size').Value);
+          CBsize2.Items.Add(colorclassQry.FieldByName('size').Value);
+          CBsize12.Items.Add(colorclassQry.FieldByName('size').Value);
+          CBsize22.Items.Add(colorclassQry.FieldByName('size').Value);
+          colorclassQry.Next;
+        end;
+        with colorclassQry do
+        begin
+          active:=false;
+          sql.Clear;
+          sql.add('SELECT distinct [sku] FROM '+main.LIY_DD+'.[dbo].[rubber01f] order by [sku]');
+          active:=true;
+        end;
+        CBsku.Items.Clear;
+        CBsku.Items.Add('');
+        CBsku2.Items.Clear;
+        CBsku2.Items.Add('');
+        while not colorclassQry.Eof do
+        begin
+          CBsku.Items.Add(colorclassQry.FieldByName('sku').Value);
+          CBsku2.Items.Add(colorclassQry.FieldByName('sku').Value);
+          colorclassQry.Next;
+        end;
+    colorclassQry.active:=false;
+
+      with TmpQuery do
+      begin
+        active:=false;
+        sql.Clear;
+        sql.add('SELECT [EnglishName] FROM '+main.LIY_DD+'.[dbo].[ColorClass] where EnglishName is not null');
+        active:=true;
+      end;
+      TmpQuery.First;
+      CBcolor.Clear;
+      CBcolor.Items.Add('');
+      while not TmpQuery.Eof do
+      begin
+        CBcolor.Items.Add(TmpQuery.FieldValues['EnglishName']);
+        TmpQuery.Next;
+      end;
+      TmpQuery.active:=false;
+
+end;
+
+procedure TScanLabel.FormCreate(Sender: TObject);
+var i: Integer;
+begin
+  pc1.ActivePageIndex:=0;
+  StringGrid1.RowCount:=1;
+  StringGrid1.ColCount:=11;
+  StringGrid1.ColWidths[1]:=100;
+  StringGrid1.ColWidths[2]:=100;
+  StringGrid1.ColWidths[3]:=80;
+  StringGrid1.ColWidths[4]:=150;
+  StringGrid1.ColWidths[5]:=100;
+  StringGrid1.ColWidths[9]:=160;
+  StringGrid1.ColWidths[10]:=100;
+  StringGrid1.Cells[1,0] :='DDBH' ;
+  StringGrid1.Cells[2,0] :='XieXing' ;
+  StringGrid1.Cells[3,0] :='SheHao' ;
+  StringGrid1.Cells[4,0] :='ARTICLE' ;
+  StringGrid1.Cells[5,0] :='Color' ;
+  StringGrid1.Cells[6,0] :='Pairs' ;
+  StringGrid1.Cells[7,0] :='SCRQ' ;
+  StringGrid1.Cells[8,0] :='CGBH' ;
+  StringGrid1.Cells[9,0] :='DDMH' ;
+  StringGrid1.Cells[10,0] :='BUYNO' ;
+  GetCombobox();
+end;
+
+function TScanLabel.getCodeID():string ;
+var
+maxid,maxid1,maxid2:string;
+index:integer;
+begin
+   //取得barcode單號
+        with TmpQuery do
+        begin
+        active:=false;
+        sql.Clear;
+        sql.add('select max([id]) id from '+main.LIY_DD+'.[dbo].[rubber01] where flag=''F''');
+        active:=true;
+        end;
+
+        maxid:=Format('%s',[VarToStr(TmpQuery.FieldByName('id').Value)]);
+        if maxid='' then
+          begin
+            maxid:=FormatDateTime('YYMMDD', Now)+'01';
+          end
+        else
+          begin
+            maxid1:=FormatDateTime('YYMMDD', Now);
+            maxid2:=Copy(maxid,1,6);
+            if maxid1=maxid2 then
+              begin
+                index:=StrToInt(Copy(maxid,7,2))+1;
+                maxid:=maxid2+Format('%.2d',[index]);
+              end
+            else
+            begin
+              maxid:=FormatDateTime('YYMMDD', Now)+'01';
+            end;
+          end;
+
+        TmpQuery.active:=false;
+        TmpQuery.sql.Clear;
+  result:= maxid;
+end;
+
+procedure TScanLabel.Button2Click(Sender: TObject);
+var
+sku:string;
+color:string;
+size:string;
+
+msg:string;
+maxid:string;
+maxid1:string;
+maxid2:string;
+Value1:string;
+SheHao:string;
+XieXing:string;
+OUTSOLE:string;
+i:Integer;
+qty:Integer;
+unitqty:Integer;
+index:Integer;
+StringArr: Array of string;
+begin
+    if StringGrid1.RowCount>1 then
+    begin
+      for i:=1 to StringGrid1.RowCount-1 do
+      begin
+        Value1:=Value1+''''+StringGrid1.Cells[1,i]+''',';
+      end;
+      Value1:=Copy(Value1, 0, Length(Value1)-1) ;
+
+      with TmpQuery do
+      begin
+        active:=false;
+        sql.Clear;
+        sql.add('SELECT [ry] FROM '+main.LIY_DD+'.[dbo].[rubber01] where flag=''F'' and [ry] in('+Value1+')');
+        active:=true;
+      end;
+    if TmpQuery.RecordCount>0 then
+    begin
+      while not TmpQuery.Eof do
+      begin
+          msg:=msg+TmpQuery.FieldByName('ry').Value+',';
+          TmpQuery.Next;
+      end;
+      showmessage('Repeat RY:'+msg);
+    end
+    else
+      begin
+      //取得單號
+        maxid:=getCodeID();
+        //建立RY - Barcode 對照表
+        if StringGrid1.RowCount > 1 then
+        begin
+          with StringGrid1.Selection do
+            begin
+             for i := Top to Bottom do
+            begin
+          TmpQuery.sql.Clear;
+           TmpQuery.sql.add('INSERT INTO '+main.LIY_DD+'.[dbo].[rubber01] ([id],[ry],[XieXing],[SheHao],[ARTICLE],[Color],[Pairs],[SCRQ],[flag],[DDMH],[BUYNO]) ');
+          TmpQuery.sql.add('Values('''+maxid+''','''+StringGrid1.Cells[1,i]+''','''+StringGrid1.Cells[2,i]+''','''+StringGrid1.Cells[3,i]+''','''+StringGrid1.Cells[4,i]+''','''+StringGrid1.Cells[5,i]+''','''+StringGrid1.Cells[6,i]+''','''+StringGrid1.Cells[7,i]+''',''F'','''+StringGrid1.Cells[9,i]+''','''+StringGrid1.Cells[10,i]+'''); ');
+         // TmpQuery.sql.add(',(SELECT TOP (1) [DDMH] FROM [dbo].[xxzl] where [XieXing]='''+StringGrid1.Cells[2,i]+''' and [SheHao]='''+StringGrid1.Cells[3,i]+''' and [ARTICLE]='''+StringGrid1.Cells[4,i]+'''));');
+          //Showmessage(TmpQuery.sql.Text);
+          TmpQuery.ExecSQL;
+          TmpQuery.sql.Clear;
+        end;
+        end;
+        end;
+
+        //產生 barcode 主檔
+        WorkPlanS.First;
+        index:=0;
+        while not WorkPlanS.Eof do
+        begin
+          sku:=WorkPlanS.FieldByName('ARTICLE').Value;
+           SheHao:=WorkPlanS.FieldByName('SheHao').Value;
+           size:=WorkPlanS.FieldByName('CC').Value;
+           qty:=WorkPlanS.FieldByName('Qty').Value;
+           XieXing:=WorkPlanS.FieldByName('XieXing').Value;
+           OUTSOLE:=WorkPlanS.FieldByName('OUTSOLE').Value;
+
+           //取得COLOR
+            color:='';
+            QueryColor.Active:=false;
+            QueryColor.SQL.Clear;
+            QueryColor.SQL.Add('SELECT [Color] FROM '+main.LIY_DD+'.[dbo].[rubber01] where id='''+maxid+''' and [ARTICLE]='''+sku+''' and [SheHao]='''+SheHao+''' and [flag]=''F''');
+            QueryColor.Active:=true;
+            QueryColor.First;
+            if not QueryColor.Eof then
+            begin
+              color:=QueryColor.FieldByName('Color').Value;
+            end;
+            QueryColor.SQL.Clear;
+            QueryColor.Active:=false;
+            //取得id
+            inc(index);
+            maxid2:=Format('%.4d',[index]);
+
+           if qty>0 then
+           begin
+            TmpQuery.active:=false;
+            TmpQuery.sql.Clear;
+            TmpQuery.sql.add('INSERT INTO '+main.LIY_DD+'.[dbo].[rubber01f]');
+            TmpQuery.sql.add('([OUTSOLE],[XieXing],[id],[id_code],[sku],[color],[size],[qty]) ');
+            TmpQuery.sql.add('VALUES('''+OUTSOLE+''','''+XieXing+''','''+maxid2+''','''+maxid+''','''+sku+''','''+color+''','''+size+''','+IntToStr(qty)+');');
+            TmpQuery.ExecSQL;
+            TmpQuery.sql.Clear;
+           end;
+           WorkPlanS.Next;
+        end;
+        CBbacode.Items.Add(maxid);
+        CBbacode.Text:=maxid;
+        CBbacode2.Items.Add(maxid);
+        CBbacode2.Text:=maxid;
+        showmessage('IS ok...') ;
+      end;
+    end;
+end;
+
+
+procedure TScanLabel.BitBtn1Click(Sender: TObject);
+begin
+  if LabelPrint<>nil then
+  begin
+    LabelPrint.show;
+    LabelPrint.windowstate:=wsNormal;
+  end else
+  begin
+    LabelPrint:=TLabelPrint.create(self);
+    LabelPrint.show;
+  end;
+end;
+
+procedure TScanLabel.Button3Click(Sender: TObject);
+var i:integer;
+    TxtFile:textfile;
+    sline:string;
+    updatsql:string;
+begin
+  if (MJZLQry.Active) and (MJZLQry.RecordCount>0) then
+  begin
+  try
+    assignfile(TxtFile,ExtractFilePath(Application.ExeName)+'EVASCAN.txt');
+    rewrite(TxtFile);
+    TmpQuery.sql.Clear;
+      MJZLQry.First;
+      i:=1;
+      while not MJZLQry.Eof do
+      begin
+          sline:='';
+          sline:=sline+inttostr(i)+',';
+          sline:=sline+MJZLQry.fieldbyname('bacord').Value+','; //條碼重複
+          sline:=sline+MJZLQry.fieldbyname('sku').AsString+',';
+          sline:=sline+MJZLQry.fieldbyname('color').AsString+',';
+          sline:=sline+MJZLQry.fieldbyname('size').AsString+',';
+          sline:=sline+MJZLQry.fieldbyname('qty').AsString +',';
+          sline:=sline+MJZLQry.fieldbyname('XieMing').AsString+',';
+         sline:=sline+MJZLQry.fieldbyname('DDMH').AsString+',';
+         sline:=sline+MJZLQry.fieldbyname('BUYNO').AsString+',';
+         sline:=sline+MJZLQry.fieldbyname('id').AsString+',';
+         // sline:=sline+MJZLQry.fieldbyname('ry').AsString;
+          append(TxtFile);
+          writeln(TxtFile, sline);
+          TmpQuery.SQL.Add('update '+main.LIY_DD+'.[dbo].[rubber01f] set p_ok=1 where p_ok=0 AND [id_code]+[id]='''+MJZLQry.fieldbyname('bacord').Value+''';');
+        MJZLQry.Next;
+        inc(i);
+      end;
+      closefile(TxtFile);
+  except
+    begin
+      closefile(TxtFile);
+    end;
+  end;
+
+    if fileexists(extractfilepath(application.ExeName)+'EVASCAN.btw') then
+    begin
+      TmpQuery.ExecSQL;
+      ShellExecute(Handle,'open',PChar(ExtractFilePath(Application.ExeName)+'EVASCAN.btw'),nil,pchar(ExtractFilePath(Application.ExeName)),SW_SHOW);
+    end else
+    begin
+      showmessage('Pls setup the program first. Abort');
+    end;
+  end;
+end;
+
+procedure TScanLabel.QueryBtnClick(Sender: TObject);
+var j:integer;
+begin
+  with MJZLQry do
+        begin
+          active:=false;
+          sql.Clear;
+          sql.add('   WITH base_data AS (   ');
+          sql.add('   SELECT ''P''+[id_code]+a.[id] bacord,[sku],a.[color],[size],[qty],[p_ok],[OUTSOLE] , Xieming,''EVA_'' +  REPLACE([MDMH],''HOKA-'','''') as [DDMH], d.BUYNO, b.id ');
+          sql.add('FROM '+main.LIY_DD+'.[dbo].[rubber01f] a');
+          sql.add('   inner join '+main.LIY_DD+'.[dbo].[rubber01]  b on a.id_code=b.id and a.sku=b.ARTICLE and b.XieXing=a.XieXing');
+          sql.add('   inner join TB_ERP.dbo.xxzl c on c.XieXing=a.XieXing');
+          sql.add('   inner join TB_ERP.dbo.DDZL d on d.DDBH=b.ry and d.XieXing=b.XieXing and d.SheHao=b.SheHao and d.ARTICLE=b.ARTICLE');
+          if CBbacode.Text<>'' then
+          begin
+            sql.add(' AND [id_code]='''+CBbacode.Text+'''');
+          end;
+          if CBsku.Text<>'' then
+          begin
+            sql.add(' AND [sku]='''+CBsku.Text+'''');
+          end;
+          if (CBsize1.Text<>'') and (CBsize2.Text<>'') then
+          begin
+            sql.add(' AND size between '''+CBsize1.Text+''' and '''+CBsize2.Text+'''');
+          end
+          else
+          begin
+          if CBsize1.Text<>'' then
+          begin
+            sql.add(' AND size between '''+CBsize1.Text+''' and '''+CBsize1.Text+'''');
+          end;
+          end;
+          if CBPrintStatus.ItemIndex=1 then
+          begin
+            sql.add(' AND [p_ok]=1 ');
+          end;
+          if CBPrintStatus.ItemIndex=2 then
+          begin
+            sql.add(' AND [p_ok]=0 ');
+          end;
+           sql.add('group by sku,a.color,size,qty,p_ok, id_code, a.id, OUTSOLE, XieMing, MDMH, d.BUYNO, b.id ), ');
+          // sql.add('order by size,sku,a.color');
+          //sql.add(' order by sku,a.color,size');
+          sql.add(' split_records AS (');
+          sql.add(' SELECT bacord, sku, color, size, p_ok, OUTSOLE, Xieming, DDMH, BUYNO,id, ');
+          sql.add(' CASE WHEN qty > 10 THEN 10 ELSE qty END as qty,');
+          sql.add(' qty as original_qty,');
+          sql.add(' 1 as split_seq,');
+          sql.add(' CASE WHEN qty > 10 THEN qty - 10 ELSE 0 END as remaining_qty');
+          sql.add(' FROM base_data ');
+          sql.add(' UNION ALL');
+          sql.add(' SELECT bacord, sku, color, size, p_ok, OUTSOLE, Xieming, DDMH, BUYNO, id,');
+          sql.add(' CASE WHEN remaining_qty > 10 THEN 10 ELSE remaining_qty END as qty,');
+          sql.add(' original_qty,');
+          sql.add(' split_seq + 1,');
+          sql.add(' CASE WHEN remaining_qty > 10 THEN remaining_qty - 10 ELSE 0 END as remaining_qty');
+          sql.add(' FROM split_records');
+          sql.add(' WHERE remaining_qty > 0 )');
+          sql.add(' SELECT bacord, sku, color, size, qty, p_ok, OUTSOLE, Xieming, DDMH, BUYNO,id  ');
+          sql.add(' FROM split_records');
+          sql.add(' ORDER BY sku, color, size, split_seq');
+          sql.add(' OPTION (MAXRECURSION 0) ');
+          funcObj.WriteErrorLog(SQL.Text);
+          active:=true;
+        end;
+        MJZLQry.First;
+        j:=0;
+        while not MJZLQry.Eof do
+        begin
+          j:=j+MJZLQry.FieldValues['qty'];
+          MJZLQry.Next;
+        end;
+        MJZLQry.First;
+        Label22.Caption:=IntToStr(j);
+end;
+
+procedure TScanLabel.Button4Click(Sender: TObject);
+begin
+  with Query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('SELECT [id_code]+[id] id_code,[sku],[color],[size],[qty] total,[s_ok] Scan_Ok,[f_ok] out_OK ');
+    sql.add('FROM '+main.LIY_DD+'.[dbo].[rubber01f] where 1=1');
+
+    (*sql.add('SELECT a.[id_code],a.[sku],[color],a.[size],sum(a.[qty]) total,');
+	  sql.add('(SELECT isnull(sum([qty]),0) FROM '+main.LIY_DD+'.[dbo].[rubber01f] b ');
+    sql.add('where b.id_code=a.id_code and b.[p_ok]=1 and b.[sku]=a.[sku] and a.[color]=b.[color] and a.[size]=b.[size]) Print_OK,');
+		sql.add('(SELECT isnull(sum([qty]),0) FROM '+main.LIY_DD+'.[dbo].[rubber01f] b ');
+    sql.add('where b.id_code=a.id_code and b.[s_ok]=1 and b.[sku]=a.[sku] and a.[color]=b.[color] and a.[size]=b.[size]) Scan_Ok ');
+    sql.add('FROM '+main.LIY_DD+'.[dbo].[rubber01f] a  where 1=1'); *)
+    if CBbacode2.text <> '' then
+    begin
+      sql.add(' and id_code='''+CBbacode2.text+'''');
+    end;
+    if CBsku2.text <> '' then
+    begin
+      sql.add(' and sku='''+CBsku2.text+'''');
+    end;
+    if (CBsize12.ItemIndex>0) and (CBsize22.ItemIndex>0) then
+    begin
+      sql.add(' AND size between '''+CBsize12.Text+''' and '''+CBsize22.Text+'''');
+    end
+    else
+    begin
+    if CBsize12.ItemIndex>0 then
+      begin
+        sql.add(' AND size between '''+CBsize12.Text+''' and '''+CBsize12.Text+'''');
+      end;
+    end;
+    sql.add(' order by [id_code],[sku],[color],[size]');
+    active:=true;
+  end;
+end;
+
+procedure TScanLabel.CBbacodeExit(Sender: TObject);
+begin
+  if CBbacode.Text<>'' then
+  begin
+    with TmpQuery do
+  begin
+  active:=false;
+  sql.Clear;
+  sql.add('SELECT distinct [size] FROM '+main.LIY_DD+'.[dbo].[rubber01f] ');
+  sql.add('where [id_code]='''+CBbacode.Text+''' order by [size]');
+  active:=true;
+  end;
+  CBsize1.Items.Clear;
+  CBsize1.Items.Add('');
+  CBsize2.Items.Clear;
+  CBsize2.Items.Add('');
+
+  while not TmpQuery.Eof do
+  begin
+  CBsize1.Items.Add(TmpQuery.FieldByName('size').Value);
+  CBsize2.Items.Add(TmpQuery.FieldByName('size').Value);
+  TmpQuery.Next;
+  end;
+
+  with TmpQuery do
+  begin
+  active:=false;
+  sql.Clear;
+  sql.add('SELECT distinct [sku] FROM '+main.LIY_DD+'.[dbo].[rubber01f] ');
+  sql.add('where [id_code]='''+CBbacode.Text+''' order by [sku]');
+  active:=true;
+  end;
+
+  CBsku.Items.Clear;
+  CBsku.Items.Add('');
+  while not TmpQuery.Eof do
+  begin
+  CBsku.Items.Add(TmpQuery.FieldByName('sku').Value);
+  TmpQuery.Next;
+  end;
+  TmpQuery.active:=false;
+  TmpQuery.sql.Clear;
+  end;
+end;
+
+procedure TScanLabel.CBbacode2Exit(Sender: TObject);
+begin
+if CBbacode2.Text<>'' then
+  begin
+    with TmpQuery do
+  begin
+  active:=false;
+  sql.Clear;
+  sql.add('SELECT distinct [size] FROM '+main.LIY_DD+'.[dbo].[rubber01f] ');
+  sql.add('where [id_code]='''+CBbacode2.Text+''' order by [size]');
+  active:=true;
+  end;
+  CBsize12.Items.Clear;
+  CBsize12.Items.Add('');
+  CBsize22.Items.Clear;
+  CBsize22.Items.Add('');
+
+  while not TmpQuery.Eof do
+  begin
+  CBsize12.Items.Add(TmpQuery.FieldByName('size').Value);
+  CBsize22.Items.Add(TmpQuery.FieldByName('size').Value);
+  TmpQuery.Next;
+  end;
+
+  with TmpQuery do
+  begin
+  active:=false;
+  sql.Clear;
+  sql.add('SELECT distinct [sku] FROM '+main.LIY_DD+'.[dbo].[rubber01f] ');
+  sql.add('where [id_code]='''+CBbacode2.Text+''' order by [sku]');
+  active:=true;
+  end;
+
+  CBsku2.Items.Clear;
+  CBsku2.Items.Add('');
+  while not TmpQuery.Eof do
+  begin
+  CBsku2.Items.Add(TmpQuery.FieldByName('sku').Value);
+  TmpQuery.Next;
+  end;
+  TmpQuery.active:=false;
+  TmpQuery.sql.Clear;
+  end;
+end;
+
+procedure TScanLabel.Button5Click(Sender: TObject);
+begin
+ with Query2 do
+    begin
+    active:=false;
+    sql.Clear;
+    sql.add('SELECT case [flag] when ''F'' then ''EVA'' else ''RB'' end flag,id Pj_ID,[ry],[XieXing],[SheHao],[ARTICLE],[Pairs],[SCRQ],[Color],isnull((SELECT sum([qty]) ');
+    sql.add('FROM '+main.LIY_DD+'.[dbo].[rubber01ps] where ry=a.ry and flag=-1),0) Out_qty FROM '+main.LIY_DD+'.[dbo].[rubber01] a where flag=''F'' ');
+    if EDid.Text<>'' then
+    begin
+      sql.Add('and [ry] LIKE '''+EDid.Text+'%'' ') ;
+    end;
+    if CBRYcolor.Text<>'' then
+    begin
+      sql.Add('and [Color]= '''+CBRYcolor.Text+'''') ;
+    end;
+    sql.add('order by [id]');
+    active:=true;
+  end;
+end;
+
+procedure TScanLabel.Button6Click(Sender: TObject);
+begin
+  try
+    with Query4 do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('DELETE FROM '+main.LIY_DD+'.[dbo].[rubber01f]  where id_code in ( select id from '+main.LIY_DD+'.[dbo].[rubber01] where ry='''+EDry.Text+''' and flag=''F'')  and s_ok=0');
+      ExecSQL;
+    end;
+     ShowMessage('Xoa du lieu thanh cong!');
+  except
+    on E: Exception do
+      ShowMessage('Xoa that bai: ' + E.Message);
+  end;
+end;
+
+
+procedure TScanLabel.StringGrid1MouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+ var
+  i, tongPairs: Integer;
+  cellValue, dsDDBH: string;
+begin
+  tongPairs := 0;
+  dsDDBH := '';
+
+  with StringGrid1.Selection do
+  begin
+    for i := Top to Bottom do
+    begin
+      cellValue := Trim(StringGrid1.Cells[6, i]);
+      if cellValue <> '' then
+        tongPairs := tongPairs + StrToIntDef(cellValue, 0);
+      dsDDBH := dsDDBH + '''' + Trim(StringGrid1.Cells[1, i]) + ''', ';
+    end;
+  end;
+
+  if dsDDBH <> '' then
+    Delete(dsDDBH, Length(dsDDBH) - 1, 2);
+  Label21.Caption := IntToStr(tongPairs);
+  valueSelected:=    dsDDBH;
+end;
+
+end.

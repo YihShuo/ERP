@@ -1,0 +1,6 @@
+AddRy1 in 'source\SN12\AddRy1.pas' {AddRy},
+Contract_Inv_Print1 in 'source\SN12\Contract_Inv_Print1.pas' {Contract_Inv_Print},
+InvoicePL1 in 'source\SN12\InvoicePL1.pas' {InvoicePL},
+Pwd1 in 'source\SN12\Pwd1.pas' {Pwd},
+QpInvoice1 in 'source\SN12\QpInvoice1.pas' {QpInvoice},
+QpPackingList1 in 'source\SN12\QpPackingList1.pas' {QpPackingList},

@@ -1,0 +1,669 @@
+unit CD_PrintH21;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, QRCtrls, QuickRpt, ExtCtrls, DB, DBTables, QRPDFFilt, grimgctrl;
+
+type
+  TCD_PrintH2 = class(TForm)
+    QuickRep1: TQuickRep;
+    PageFooterBand1: TQRBand;
+    QRLabel25: TQRLabel;
+    QRLabel23: TQRLabel;
+    QRLabel24: TQRLabel;
+    QRLabel26: TQRLabel;
+    QRLabel27: TQRLabel;
+    QRLabel28: TQRLabel;
+    ISOLAB: TQRLabel;
+    PageHeaderBand1: TQRBand;
+    QRLabel1: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRMaster: TQRBand;
+    QRLabel22: TQRLabel;
+    Q1: TQRLabel;
+    Q2: TQRLabel;
+    Q3: TQRLabel;
+    Q4: TQRLabel;
+    Q5: TQRLabel;
+    Q6: TQRLabel;
+    QRShape15: TQRShape;
+    Q7: TQRLabel;
+    QRShape16: TQRShape;
+    Q8: TQRLabel;
+    QRShape17: TQRShape;
+    Q9: TQRLabel;
+    QRShape18: TQRShape;
+    QRShape19: TQRShape;
+    Q10: TQRLabel;
+    QRShape20: TQRShape;
+    QRShape21: TQRShape;
+    QRShape22: TQRShape;
+    QRShape23: TQRShape;
+    QRShape24: TQRShape;
+    QRShape25: TQRShape;
+    QRLabel3: TQRLabel;
+    SMDDSQry: TQuery;
+    Qtemp: TQuery;
+    QRLean: TQRLabel;
+    QRDaomh: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel20: TQRLabel;
+    QRLabel19: TQRLabel;
+    QRShape8: TQRShape;
+    QRLabel17: TQRLabel;
+    QRLabel16: TQRLabel;
+    QRShape3: TQRShape;
+    QRShape4: TQRShape;
+    CLZLQry: TQuery;
+    QRDBText2: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRSubDetail: TQRSubDetail;
+    QRDBText1: TQRDBText;
+    R1: TQRDBText;
+    R2: TQRDBText;
+    R3: TQRDBText;
+    R4: TQRDBText;
+    R5: TQRDBText;
+    R6: TQRDBText;
+    R7: TQRDBText;
+    R8: TQRDBText;
+    R9: TQRDBText;
+    R10: TQRDBText;
+    QRShape33: TQRShape;
+    QRShape34: TQRShape;
+    QRShape35: TQRShape;
+    QRShape45: TQRShape;
+    QRShape46: TQRShape;
+    QRShape47: TQRShape;
+    QRShape48: TQRShape;
+    QRShape49: TQRShape;
+    QRShape50: TQRShape;
+    QRShape52: TQRShape;
+    QRShape53: TQRShape;
+    QRPDFFilter1: TQRPDFFilter;
+    QRShape1: TQRShape;
+    QRHRule1: TQRHRule;
+    DS1: TDataSource;
+    QRShape5: TQRShape;
+    QRShape6: TQRShape;
+    QRDBText3: TQRDBText;
+    QRLabel5: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRShape2: TQRShape;
+    MayQRLabel: TQRLabel;
+    QRImage1: TQRImage;
+    QRShape7: TQRShape;
+    QRShape9: TQRShape;
+    QRShape11: TQRShape;
+    QRShape12: TQRShape;
+    QRShape13: TQRShape;
+    QRShape14: TQRShape;
+    QRShape26: TQRShape;
+    QRShape27: TQRShape;
+    QRShape28: TQRShape;
+    QRShape29: TQRShape;
+    QRShape30: TQRShape;
+    QRShape31: TQRShape;
+    QRShape32: TQRShape;
+    QRShape36: TQRShape;
+    QRShape37: TQRShape;
+    QRShape38: TQRShape;
+    Q11: TQRLabel;
+    Q12: TQRLabel;
+    Q13: TQRLabel;
+    Q14: TQRLabel;
+    Q15: TQRLabel;
+    Q16: TQRLabel;
+    Q17: TQRLabel;
+    Q18: TQRLabel;
+    Q19: TQRLabel;
+    R11: TQRDBText;
+    R12: TQRDBText;
+    R13: TQRDBText;
+    R14: TQRDBText;
+    R15: TQRDBText;
+    R16: TQRDBText;
+    R17: TQRDBText;
+    R18: TQRDBText;
+    R19: TQRDBText;
+    QRImage2: TQRImage;
+    A1: TQRDBText;
+    XXCCQry: TQuery;
+    A2: TQRDBText;
+    A3: TQRDBText;
+    A4: TQRDBText;
+    A5: TQRDBText;
+    A6: TQRDBText;
+    A7: TQRDBText;
+    A8: TQRDBText;
+    A9: TQRDBText;
+    A10: TQRDBText;
+    A11: TQRDBText;
+    A12: TQRDBText;
+    A13: TQRDBText;
+    A14: TQRDBText;
+    A15: TQRDBText;
+    A16: TQRDBText;
+    A17: TQRDBText;
+    A18: TQRDBText;
+    A19: TQRDBText;
+    QRShape39: TQRShape;
+    QRShape40: TQRShape;
+    Q20: TQRLabel;
+    Q21: TQRLabel;
+    A20: TQRDBText;
+    A21: TQRDBText;
+    QRShape41: TQRShape;
+    QRShape42: TQRShape;
+    R20: TQRDBText;
+    R21: TQRDBText;
+    QRLabel11: TQRLabel;
+    T1: TQRDBText;
+    QRLean2: TQRLabel;
+    QRShape44: TQRShape;
+    QRShape51: TQRShape;
+    QRLabel12: TQRLabel;
+    QRLabel13: TQRLabel;
+    QRDBText6: TQRDBText;
+    QRShape54: TQRShape;
+    QRShape55: TQRShape;
+    Q22: TQRLabel;
+    Q23: TQRLabel;
+    A22: TQRDBText;
+    A23: TQRDBText;
+    QRShape56: TQRShape;
+    QRShape57: TQRShape;
+    QRShape58: TQRShape;
+    Q24: TQRLabel;
+    Q25: TQRLabel;
+    A24: TQRDBText;
+    A25: TQRDBText;
+    QRShape59: TQRShape;
+    QRShape60: TQRShape;
+    QRShape61: TQRShape;
+    R22: TQRDBText;
+    R23: TQRDBText;
+    R24: TQRDBText;
+    R25: TQRDBText;
+    QRShape63: TQRShape;
+    QRShape64: TQRShape;
+    Q26: TQRLabel;
+    A26: TQRDBText;
+    QRShape65: TQRShape;
+    R26: TQRDBText;
+    QUpdate: TQuery;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure Init(DLNO:string; IsRoundNum: boolean; IsShowCutNum: boolean; IsShowTotalPairs: boolean; depid: string; CustomLayers: integer);
+  end;
+
+var
+  CD_PrintH2: TCD_PrintH2;
+
+implementation
+
+uses
+  CutDispatch1,Barcode93Unit1, FunUnit;
+{$R *.dfm}
+
+procedure TCD_PrintH2.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  action:=cafree;
+end;
+
+procedure TCD_PrintH2.FormDestroy(Sender: TObject);
+begin
+  CD_PrintH2:=nil;
+end;
+
+procedure TCD_PrintH2.Init(DLNO:string; IsRoundNum: boolean; IsShowCutNum: boolean; IsShowTotalPairs: boolean; depid: string; CustomLayers: integer);
+var i,j:integer;
+    tmpQRLabel1:TQRLabel;
+    tmpQRDBText,tmpQRLabel2:TQRDBText;
+    Barcode93Obj:TBarcode93;
+    //
+    IsMatching:boolean;
+    BWBHArr:array of String;
+    SizeBWBH:TStringlist;
+    SizeLBGroup:array of TStringlist;
+    SubSQLStr1,SubSQLStr2,SubSQLStr3,SubSQLStr4:String;
+    str,str1,str2,str3,str4,BWBH:String;
+begin
+  QRLabel10.Caption:=DLNO;
+  Barcode93Obj:=TBarcode93.Create(self);
+  Barcode93Obj.ImBarCodeShow(QRImage1.Canvas,DLNO,true);
+  Barcode93Obj.ImBarCodeShow(QRImage2.Canvas,Depid,true);
+  Barcode93Obj.Free;
+
+  if (CustomLayers > 0) then
+  begin
+    QUpdate.SQL.Clear;
+    QUpdate.SQL.Add('UPDATE CutDispatch SET CustomLayers = ' + IntToStr(CustomLayers) + ' WHERE DLNO = ''' + DLNO + '''');
+    QUpdate.ExecSQL;
+    QUpdate.SQL.Clear;
+  end;
+
+  //基本資料
+  with Qtemp do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select CutDispatch.DLNO,BDepartment.DepName,XXZL.DAOMH+'' (''+DDZL.Article+'')'' as DAOMH,CutDispatch.Memo,');
+    SQL.Add('''LEAN''+right(BDepartment.sumline,2) AS LEAN from CutDispatch');
+    SQL.Add('Left join CutDispatchS on CutDispatchS.DLNO=CutDispatch.DLNO');
+    SQL.Add('Left join DDZL on DDZL.DDBH=CutDispatchS.ZLBH');
+    SQL.Add('Left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao ');
+    SQL.Add('Left join BDepartment on BDepartment.ID=CutDisPatch.DepID');
+    SQL.Add('where CutDispatch.DLNO='''+DLNO+''' ');
+    SQL.Add('Group by CutDispatch.DLNO,BDepartment.DepName,XXZL.DAOMH,DDZL.Article,CutDispatch.Memo,BDepartment.sumline ');
+    Active:=true;
+  end;
+  MayQRLabel.Caption:=Qtemp.FieldByName('Memo').AsString;
+  QRLean.Caption:=Qtemp.FieldByName('DepName').AsString;
+  QRLean2.Caption:=Qtemp.FieldByName('LEAN').AsString;
+  QRDaomh.Caption:=Qtemp.FieldByName('DAOMH').AsString;
+  //20190513 SIZE分段分類 =================================
+  with Qtemp do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select Distinct BWBH from CutDispatchS where DLNO='''+DLNO+''' ');
+    Active:=true;
+    Setlength(BWBHArr,Qtemp.RecordCount);
+    Setlength(SizeLBGroup,Qtemp.RecordCount);
+    for i:=0 to Qtemp.RecordCount-1 do
+    begin
+      BWBHArr[i]:=FieldByName('BWBH').AsString;
+      Next;
+    end;
+    Active:=false;
+  end;
+  SizeBWBH:=TStringlist.Create;
+  SizeLBGroup[0]:=TStringlist.Create;
+  SizeBWBH.Add(BWBHArr[0]);
+  SizeLBGroup[0].Add(BWBHArr[0]);
+  for i:=1 to High(BWBHArr) do
+  begin
+    IsMatching:=false;
+    for j:=0 to SizeBWBH.Count-1 do
+    begin
+      with Qtemp do
+      begin
+        Active:=false;
+        SQL.Clear;
+        SQL.Add('select Distinct CLBH,SIZE,XXCC from CutDispatchS where DLNO='''+DLNO+''' and BWBH='''+SizeBWBH.Strings[j]+''' ');
+        SQL.Add('Except ');
+        SQL.Add('select Distinct CLBH,SIZE,XXCC from CutDispatchS where DLNO='''+DLNO+''' and BWBH='''+BWBHArr[i]+'''  ');
+        Active:=true;
+        if Qtemp.RecordCount=0 then
+        begin
+          SizeLBGroup[j].Add(BWBHArr[i]);
+          IsMatching:=true;
+          Break;
+        end;
+        Active:=false;
+      end;
+    end;
+    if IsMatching=false then
+    begin
+      SizeBWBH.Add(BWBHArr[i]);
+      SizeLBGroup[j]:=TStringlist.Create;
+      SizeLBGroup[j].Add(BWBHArr[i]);
+    end;
+  end;
+  for i:=0 to High(SizeLBGroup) do
+  begin
+    str:='';
+    if SizeLBGroup[i]<>nil then
+    begin
+      for j:=0 to SizeLBGroup[i].Count-1 do
+      begin
+        str:=str+''''+SizeLBGroup[i].Strings[j]+''',';
+      end;
+      str1:=' when CutDispatchS.BWBH in ('+Copy(str,1,length(str)-1)+') then '+inttostr(i);
+      str2:=' when CS2.BWBH in ('+Copy(str,1,length(str)-1)+') then '+inttostr(i);
+      str3:=' when CD1.BWBH in ('+Copy(str,1,length(str)-1)+') then '+inttostr(i);
+      str4:=' when ZLZLS2.BWBH in ('+Copy(str,1,length(str)-1)+') then '+inttostr(i);
+      SubSQLStr1:=SubSQLStr1+str1;
+      SubSQLStr2:=SubSQLStr2+str2;
+      SubSQLStr3:=SubSQLStr3+str3;
+      SubSQLStr4:=SubSQLStr4+str4;
+    end;
+  end;
+  //產生SubSQL
+  SubSQLStr1:='(Case '+SubSQLStr1+' end)';
+  SubSQLStr2:='(Case '+SubSQLStr2+' end)';
+  SubSQLStr3:='(Case '+SubSQLStr3+' end)';
+  SubSQLStr4:='(Case '+SubSQLStr4+' end)';
+  BWBH := '';
+  for i := 0 to SizeBWBH.Count-1 do
+  begin
+    BWBH := BWBH + '''' + SizeBWBH[i] + ''',';
+  end;
+  BWBH := Copy(BWBH, 1, Length(BWBH)-1);
+  SizeBWBH.Free;
+  Setlength(BWBHArr,0);
+  Setlength(SizeLBGroup,0);
+  //====================================================================
+  //SIZE RUN
+  with Qtemp do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select Distinct SIZE from CutDispatchS where DLNO='''+DLNO+''' order by SIZE desc ');
+    Active:=true;
+    for i:=1 to Qtemp.RecordCount do
+    begin
+      //材料SIZE分段
+      tmpQRLabel1:=TQRLabel(self.FindComponent('Q'+inttostr(i)));
+      if tmpQRLabel1<>nil then
+      begin
+        tmpQRLabel1.Caption:=trim(FieldByName('SIZE').AsString);
+      end;
+      tmpQRLabel2:=TQRDBText(self.FindComponent('A'+inttostr(i)));
+      if tmpQRLabel2<>nil then
+      begin
+        tmpQRLabel2.DataField:=trim(FieldByName('SIZE').AsString);
+      end;
+      tmpQRDBText:=TQRDBText(self.FindComponent('R'+inttostr(i)));
+      if tmpQRDBText<>nil then
+      begin
+        tmpQRDBText.DataField:=FieldByName('SIZE').AsString;
+      end;
+      Next;
+    end;
+  end;
+  //材料
+  with CLZLQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select CutDispatchS.*, Material.CLSL FROM ( ');
+    if (CustomLayers = 0) then
+      SQL.Add('select DLNO, CLDH, ''(''+CLDH+'')''+YWPM AS YWPM, LEFT(BWZL, Len(BWZL)-1) AS BWZL, Layer, '+SubSQLStr1+' AS LB from (')
+    else if (CustomLayers > 0) then
+      SQL.Add('select DLNO, CLDH, ''(''+CLDH+'')''+YWPM AS YWPM, LEFT(BWZL, Len(BWZL)-1) AS BWZL, ' + IntToStr(CustomLayers) + ' AS Layer, '+SubSQLStr1+' AS LB from (');
+    SQL.Add('select CD1.DLNO,CD1.CLBH ,cast((select IsNull(BWZLVN.VWSM,BWZL.YWSM) + ''(''+BWZL.BWDH+''),'' from CutDispatchS CS2,BWZL left join BWZLVN on BWZL.BWDH=BWZLVN.BWDH ');
+    SQL.Add('       where CS2.BWBH=BWZL.bwdh and CS2.DLNO='''+DLNO+''' and CS2.CLBH=CD1.CLBH and '+SubSQLStr2+'='+SubSQLStr3+'  group by BWZL.BWDH,BWZL.YWSM,BWZLVN.VWSM for XML Path ('''')) as varchar(max))as BWZL,CutDispatchZL.Layer,CD1.BWBH   ');
+    SQL.Add('from CutDispatchS   as CD1');
+    SQL.Add('left join CutDispatchZL on CD1.ZLBH=CutDispatchZL.ZLBH and CD1.SIZE=CutDispatchZL.SIZE and CD1.BWBH=CutDispatchZL.BWBH ');
+    SQL.Add('where DLNO = ''' + DLNO + ''') AS CutDispatchS ');
+    SQL.Add('Left join CLZL on CLZL.cldh=CutDispatchS.CLBH ');
+    SQL.Add('Group by DLNO,CLDH,YWPM,BWZL,Layer,'+SubSQLStr1);
+    SQL.Add(')  CutDispatchS ');
+    SQL.Add('LEFT JOIN (');
+    SQL.Add('  SELECT CLBH, FLOOR(SUM(Qty*CLSL)) AS CLSL FROM (');
+    SQL.Add('    SELECT CutDispatchSS.DDBH, CutDispatchSS.BWBH, CutDispatchSS.CLBH, CutDispatchSS.SIZE, CutDispatchSS.Qty, xtbwyl1.CLSL FROM CutDispatchSS');
+    SQL.Add('    LEFT JOIN DDZL ON DDZL.DDBH = CutDispatchSS.ZLBH');
+    SQL.Add('    LEFT JOIN xtbwyl1 ON xtbwyl1.XieXing = DDZL.XieXing AND xtbwyl1.SheHao = DDZL.SheHao AND xtbwyl1.BWBH = CutDispatchSS.BWBH AND xtbwyl1.XTCC = CutDispatchSS.SIZE');
+    SQL.Add('    WHERE DLNO = ''' + DLNO + ''' AND CutDispatchSS.BWBH IN (' + BWBH + ')');
+    SQL.Add('  ) AS Material');
+    SQL.Add('  GROUP BY CLBH');
+    SQL.Add(') AS Material ON Material.CLBH = CutDispatchS.CLDH');
+    //funcObj.WriteErrorLog(sql.Text);
+    ShowMessage(SQL.Text);
+    Active:=true;
+  end;
+  //斬刀
+  with XXCCQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    Qtemp.First;
+    SQL.Add('select ''XXCC'' as ''ZLBH'' ');
+    while not Qtemp.Eof do
+    begin
+      SQL.Add(',Max(Case when SIZE='''+Qtemp.FieldByName('SIZE').AsString+''' then XXCC else null end) as '''+Qtemp.FieldByName('SIZE').AsString+''' ');
+      Qtemp.Next;
+    end;
+    SQL.Add('from ( ');
+    SQL.Add('Select Distinct SIZE, XXCC ');
+    SQL.Add('from CutDispatchS  ');
+    SQL.Add('where CutDispatchS.DLNO=:DLNO and CutDispatchS.CLBH=:CLDH and '+SubSQLStr1+'=:LB  ) CutDispatchS ');
+    //funcObj.WriteErrorLog(SQL.Text);
+    Active:=true;
+  end;
+  //
+  //
+  if IsRoundNum=false then
+  begin
+    //訂單明細
+    with SMDDSQry do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('select * from ( ');
+      SQL.Add('select ZLBH+''(''+Min(MinDDBH)+''-''+MAX(MaxDDBH)+'')(''+RPlanDate+'' - ''+ROrder+'') ''+sumline as ZLBH,YWSM,1 as lb');
+      Qtemp.First;
+      while not Qtemp.Eof do
+      begin
+        SQL.Add(',Max(Case when SIZE='''+Qtemp.FieldByName('SIZE').AsString+''' then Convert(varchar,Qty) else null end) as '''+Qtemp.FieldByName('SIZE').AsString+''' ');
+        Qtemp.Next;
+      end;
+      SQL.Add(',SUM(Qty) AS T1');
+      SQL.Add('from ( ');
+      SQL.Add('select CutDispatchS.ZLBH, SUBSTRING(sumline, LEN(sumline)-1, 2) AS sumline,');
+      SQL.Add('       case when CutDispatchS.ZLBH <> MAX(CutDispatchSS.DDBH) then (''T''+MIN(right(CutDispatchSS.DDBH,3))) else ''T0'' end as MinDDBH, ');
+      SQL.Add('       case when CutDispatchS.ZLBH <> MAX(CutDispatchSS.DDBH) then (''T''+Max(right(CutDispatchSS.DDBH,3))) else ''T0'' end as MaxDDBH, ');
+      SQL.Add('       case when ISNULL(MIN(SMDD.RPlanDate), '''') <> '''' then CAST(MONTH(MIN(SMDD.RPlanDate)) AS VARCHAR) + ''/'' + CAST(DAY(MIN(SMDD.RPlanDate)) AS VARCHAR) else ''X'' end AS RPlanDate,');
+      SQL.Add('       case when ISNULL(MIN(SMDD.ROrder), '''') <> '''' then CAST(MIN(SMDD.ROrder) AS VARCHAR) else ''X'' end AS ROrder,');
+      SQL.Add('       IsNull(BWZLVN.VWSM,BWZL.YWSM) as YWSM,CutDispatchS.SIZE,CutDispatchS.Qty from CutDispatchS ');
+      SQL.Add('left join BWZL on CutDispatchS.BWBH=BWZL.BWDH ');
+      SQL.Add('Left join BWZLVN on CutDispatchS.BWBH=BWZLVN.BWDH ');
+      SQL.Add('left join CutDispatchSS on CutDispatchSS.DLNO=CutDispatchS.DLNO and CutDispatchSS.ZLBH=CutDispatchS.ZLBH and CutDispatchSS.BWBH=CutDispatchS.BWBH and CutDispatchSS.SIZE=CutDispatchS.SIZE and CutDispatchSS.CLBH=CutDispatchS.CLBH ');
+      SQL.Add('left join SMDD on SMDD.DDBH = CutDispatchSS.DDBH AND SMDD.GXLB = ''C''');
+      SQL.Add('left join BDepartment ON BDepartment.ID = SMDD.DepNO');
+      SQL.Add('where CutDispatchS.DLNO=:DLNO and CutDispatchS.CLBH=:CLDH and '+SubSQLStr1+'=:LB ');
+      SQL.Add('Group by CutDispatchS.ZLBH,BWZL.YWSM,BWZLVN.VWSM,CutDispatchS.SIZE,CutDispatchS.Qty,sumline) AS CutDispatchS ');
+      SQL.Add('Group by ZLBH,YWSM,RPlanDate,ROrder,sumline');
+      //20190416 保留空白
+      {
+      SQL.Add('Union all ');
+      SQL.Add('select ZLBH+''(''+Min(MinDDBH)+''-''+MAX(MaxDDBH)+'')'' as ZLBH,YWSM,2 as lb ');
+      Qtemp.First;
+      while not Qtemp.Eof do
+      begin
+        SQL.Add(','''' as '''+Qtemp.FieldByName('SIZE').AsString+''' ');
+        Qtemp.Next;
+      end;
+      SQL.Add('from ( ');
+      SQL.Add('select CutDispatchS.ZLBH,');
+      SQL.Add('       case when CutDispatchS.ZLBH <> MAX(CutDispatchSS.DDBH) then (''T''+MIN(right(CutDispatchSS.DDBH,3))) else ''T0'' end as MinDDBH, ');
+      SQL.Add('       case when CutDispatchS.ZLBH <> MAX(CutDispatchSS.DDBH) then (''T''+Max(right(CutDispatchSS.DDBH,3))) else ''T0'' end as MaxDDBH, ');
+      SQL.Add('       IsNull(BWZLVN.VWSM,BWZL.YWSM) as YWSM,CutDispatchS.SIZE,CutDispatchS.Qty  from CutDispatchS ');
+      SQL.Add('left join BWZL on CutDispatchS.BWBH=BWZL.BWDH ');
+      SQL.Add('Left join BWZLVN on CutDispatchS.BWBH=BWZLVN.BWDH ');
+      SQL.Add('left join CutDispatchSS on CutDispatchSS.DLNO=CutDispatchS.DLNO and CutDispatchSS.ZLBH=CutDispatchS.ZLBH and CutDispatchSS.BWBH=CutDispatchS.BWBH and CutDispatchSS.SIZE=CutDispatchS.SIZE and CutDispatchSS.CLBH=CutDispatchS.CLBH ');
+      SQL.Add('where CutDispatchS.DLNO=:DLNO and CutDispatchS.CLBH=:CLDH and '+SubSQLStr1+'=:LB ');
+      SQL.Add('Group by CutDispatchS.ZLBH,BWZL.YWSM,BWZLVN.VWSM,CutDispatchS.SIZE,CutDispatchS.Qty   ) CutDispatchS ');
+      SQL.Add('Group by ZLBH,YWSM ');
+      }
+      //斬刀次數
+      if IsShowCutNum=true then
+      begin
+      SQL.Add('Union all ');
+      SQL.Add('select ZLBH,YWSM,3 as lb ');
+      Qtemp.First;
+      while not Qtemp.Eof do
+      begin
+        SQL.Add(',Max(Case when SIZE='''+Qtemp.FieldByName('SIZE').AsString+''' then Convert(varchar,Qty) else null end) as '''+Qtemp.FieldByName('SIZE').AsString+''' ');
+        Qtemp.Next;
+      end;
+      SQL.Add(',SUM(Qty) AS T1');
+      SQL.Add('from ( ');
+      SQL.Add('select ''So Luong Dao Chat (總刀數)'' as ZLBH,''Total Cutting'' as YWSM, SIZE,');
+      if (CustomLayers = 0) then
+        SQL.Add('Sum(CutNum) as Qty from CutDispatchS')
+      else if (CustomLayers > 0) then
+        SQL.Add('CEILING(Qty/' + IntToStr(CustomLayers) + '.0) AS Qty from CutDispatchS');
+      SQL.Add('where DLNO=:DLNO and CLBH=:CLDH and '+SubSQLStr1+'=:LB ');
+      if (CustomLayers = 0) then
+        SQL.Add('Group by SIZE) CutDispatchS ')
+      else if (CustomLayers > 0) then
+        SQL.Add('Group by SIZE, Qty) CutDispatchS');
+      SQL.Add('Group by ZLBH,YWSM ');
+      end;
+
+      if (IsShowTotalPairs) then
+      begin
+        SQL.Add('UNION ALL');
+        SQL.Add('SELECT ''Tong Cong Dou (總雙數)'', ''Total Pairs'', 0 AS lb');
+        Qtemp.First;
+        while not Qtemp.Eof do
+        begin
+          SQL.Add(', SUM([' + Qtemp.FieldByName('SIZE').AsString + '])');
+          Qtemp.Next;
+        end;
+        SQL.Add(', SUM(T1)');
+        SQL.Add('FROM (');
+        SQL.Add('  SELECT ZLBH+''(''+Min(MinDDBH)+''-''+MAX(MaxDDBH)+'')'' as ZLBH,YWSM');
+        Qtemp.First;
+        while not Qtemp.Eof do
+        begin
+          SQL.Add(',Max(Case when SIZE='''+Qtemp.FieldByName('SIZE').AsString+''' then Qty else null end) as '''+Qtemp.FieldByName('SIZE').AsString+''' ');
+          Qtemp.Next;
+        end;
+        Qtemp.Active:=false;
+        SQL.Add(',SUM(Qty) AS T1');
+        SQL.Add('from ( ');
+        SQL.Add('select CutDispatchS.ZLBH,');
+        SQL.Add('       case when CutDispatchS.ZLBH <> MAX(CutDispatchSS.DDBH) then (''T''+MIN(right(CutDispatchSS.DDBH,3))) else ''T0'' end as MinDDBH, ');
+        SQL.Add('       case when CutDispatchS.ZLBH <> MAX(CutDispatchSS.DDBH) then (''T''+Max(right(CutDispatchSS.DDBH,3))) else ''T0'' end as MaxDDBH, ');
+        SQL.Add('       IsNull(BWZLVN.VWSM,BWZL.YWSM) as YWSM,CutDispatchS.SIZE,CutDispatchS.Qty  from CutDispatchS ');
+        SQL.Add('left join BWZL on CutDispatchS.BWBH=BWZL.BWDH ');
+        SQL.Add('Left join BWZLVN on CutDispatchS.BWBH=BWZLVN.BWDH ');
+        SQL.Add('left join CutDispatchSS on CutDispatchSS.DLNO=CutDispatchS.DLNO and CutDispatchSS.ZLBH=CutDispatchS.ZLBH and CutDispatchSS.BWBH=CutDispatchS.BWBH and CutDispatchSS.SIZE=CutDispatchS.SIZE and CutDispatchSS.CLBH=CutDispatchS.CLBH ');
+        SQL.Add('where CutDispatchS.DLNO=:DLNO and CutDispatchS.CLBH=:CLDH and '+SubSQLStr1+'=:LB ');
+        SQL.Add('Group by CutDispatchS.ZLBH,BWZL.YWSM,BWZLVN.VWSM,CutDispatchS.SIZE,CutDispatchS.Qty   ) CutDispatchS ');
+        SQL.Add('Group by ZLBH,YWSM ');
+      end;
+      SQL.Add(') AS CutDispatchS');
+      if (IsShowTotalPairs) then
+        SQL.Add(') AS CutDispatchS');
+
+      {SQL.Add('LEFT JOIN (');
+      SQL.Add('  SELECT CEILING(SUM(Qty*CLSL)*10)/10 AS Usage, 1 AS lb FROM (');
+      SQL.Add('    SELECT CutDispatchSS.DDBH, CutDispatchSS.BWBH, CutDispatchSS.CLBH, CutDispatchSS.SIZE, CutDispatchSS.Qty, xtbwyl1.CLSL FROM CutDispatchSS');
+      SQL.Add('    LEFT JOIN DDZL ON DDZL.DDBH = CutDispatchSS.ZLBH');
+      SQL.Add('    LEFT JOIN xtbwyl1 ON xtbwyl1.XieXing = DDZL.XieXing AND xtbwyl1.SheHao = DDZL.SheHao AND xtbwyl1.BWBH = CutDispatchSS.BWBH AND xtbwyl1.XTCC = CutDispatchSS.SIZE');
+      SQL.Add('    WHERE DLNO = :DLNO AND CLBH = :CLDH AND CutDispatchSS.BWBH IN (' + BWBH + ')');
+      SQL.Add('  ) AS Material');
+      SQL.Add(') AS Material ON Material.lb = CutDispatchS.lb');}
+
+      SQL.Add('ORDER BY CutDispatchS.lb, YWSM');
+      Active:=true;
+    end;
+  end else
+  begin
+    //依迴轉數
+    with SMDDSQry do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('SELECT * FROM (');
+      SQL.Add('select DDBH+''(''+RPlanDate+'' - ''+ROrder+'') ''+sumline as ZLBH, YWSM, 1 AS LB');
+      Qtemp.First;
+      while not Qtemp.Eof do
+      begin
+        SQL.Add(',Max(Case when SIZE='''+Qtemp.FieldByName('SIZE').AsString+''' then Qty else null end) as '''+Qtemp.FieldByName('SIZE').AsString+''' ');
+        Qtemp.Next;
+      end;
+      SQL.Add(',SUM(Qty) AS T1');
+      SQL.Add('from ( ');
+      SQL.Add('Select CutDispatchSS.DDBH,CutDispatchS.SIZE,CutDispatchSS.Qty,BWZL.YWSM,SUBSTRING(sumline, LEN(sumline)-1, 2) AS sumline,');
+      SQL.Add('case when ISNULL(SMDD.RPlanDate, '''') <> '''' then CAST(MONTH(SMDD.RPlanDate) AS VARCHAR) + ''/'' + CAST(DAY(SMDD.RPlanDate) AS VARCHAR) else ''X'' end AS RPlanDate,');
+      SQL.Add('case when ISNULL(SMDD.ROrder, '''') <> '''' then CAST(SMDD.ROrder AS VARCHAR) else ''X'' end AS ROrder from CutDispatchS');
+      SQL.Add('left join BWZL on CutDispatchS.BWBH=BWZL.BWDH  ');
+      SQL.Add('left join CutDispatchSS on CutDispatchSS.DLNO=CutDispatchS.DLNO and CutDispatchSS.ZLBH=CutDispatchS.ZLBH and CutDispatchSS.BWBH=CutDispatchS.BWBH and CutDispatchSS.SIZE=CutDispatchS.SIZE and CutDispatchSS.CLBH=CutDispatchS.CLBH');
+      SQL.Add('left join SMDD on SMDD.DDBH = CutDispatchSS.DDBH AND SMDD.GXLB = ''C''');
+      SQL.Add('left join BDepartment ON BDepartment.ID = SMDD.DepNO');
+      //SQL.Add('Left join SMDDS on CutDispatchSS.DDBH=SMDDS.DDBH and CutDispatchS.SIZE=SMDDS.XXCC ');
+      SQL.Add('where CutDispatchS.DLNO=:DLNO and CutDispatchS.CLBH=:CLDH and '+SubSQLStr1+'=:LB ');
+      SQL.Add('Group by CutDispatchSS.DDBH,CutDispatchS.SIZE,CutDispatchSS.Qty,BWZL.YWSM,SMDD.RPlanDate,SMDD.ROrder,sumline) AS CutDispatchS ');
+      SQL.Add('Group by DDBH,YWSM,RPlanDate,ROrder,sumline');
+      //斬刀次數
+      if IsShowCutNum=true then
+      begin
+      SQL.Add('Union all ');
+      SQL.Add('select ZLBH, YWSM, 2 AS LB');
+      Qtemp.First;
+      while not Qtemp.Eof do
+      begin
+        SQL.Add(',Max(Case when SIZE='''+Qtemp.FieldByName('SIZE').AsString+''' then Qty else null end) as '''+Qtemp.FieldByName('SIZE').AsString+''' ');
+        Qtemp.Next;
+      end;
+      SQL.Add(',SUM(Qty) AS T1');
+      SQL.Add('from ( ');
+      SQL.Add('select ''So Chat(刀數)'' as ZLBH, SIZE, ''Total Cutting'' as YWSM,');
+      if (CustomLayers = 0) then
+        SQL.Add('Sum(CutNum) as Qty from CutDispatchS')
+      else if (CustomLayers > 0) then
+        SQL.Add('CEILING(Qty/' + IntToStr(CustomLayers) + '.0) AS Qty from CutDispatchS');
+      SQL.Add('where DLNO=:DLNO and CLBH=:CLDH and '+SubSQLStr1+'=:LB');
+      if (CustomLayers = 0) then
+        SQL.Add('Group by SIZE) CutDispatchS ')
+      else if (CustomLayers > 0) then
+        SQL.Add('Group by SIZE, Qty) CutDispatchS ');
+      SQL.Add('Group by ZLBH,YWSM');
+      end;
+
+      if (IsShowTotalPairs) then
+      begin
+        SQL.Add('UNION ALL');
+        SQL.Add('SELECT ''Tong Cong Dou (總雙數)'', ''Total Pairs'', 0 AS LB');
+        Qtemp.First;
+        while not Qtemp.Eof do
+        begin
+          SQL.Add(', SUM([' + Qtemp.FieldByName('SIZE').AsString + '])');
+          Qtemp.Next;
+        end;
+        SQL.Add(', SUM(T1)');
+        SQL.Add('FROM (');
+        SQL.Add('select DDBH as ZLBH, YWSM ');
+        Qtemp.First;
+        while not Qtemp.Eof do
+        begin
+          SQL.Add(',Max(Case when SIZE='''+Qtemp.FieldByName('SIZE').AsString+''' then Qty else null end) as '''+Qtemp.FieldByName('SIZE').AsString+''' ');
+          Qtemp.Next;
+        end;
+        SQL.Add(',SUM(Qty) AS T1');
+        SQL.Add('from ( ');
+        SQL.Add('Select CutDispatchSS.DDBH,CutDispatchS.SIZE,CutDispatchSS.Qty,BWZL.YWSM from CutDispatchS ');
+        SQL.Add('left join BWZL on CutDispatchS.BWBH=BWZL.BWDH  ');
+        SQL.Add('left join CutDispatchSS on CutDispatchSS.DLNO=CutDispatchS.DLNO and CutDispatchSS.ZLBH=CutDispatchS.ZLBH and CutDispatchSS.BWBH=CutDispatchS.BWBH and CutDispatchSS.SIZE=CutDispatchS.SIZE and CutDispatchSS.CLBH=CutDispatchS.CLBH   ');
+        //SQL.Add('Left join SMDDS on CutDispatchSS.DDBH=SMDDS.DDBH and CutDispatchS.SIZE=SMDDS.XXCC ');
+        SQL.Add('where CutDispatchS.DLNO=:DLNO and CutDispatchS.CLBH=:CLDH ');
+        SQL.Add('Group by CutDispatchSS.DDBH,CutDispatchS.SIZE,CutDispatchSS.Qty,BWZL.YWSM  ) CutDispatchS ');
+        SQL.Add('Group by DDBH,YWSM ');
+        SQL.Add(') AS CutDispatchS ');
+      end;
+      SQL.Add(') AS CutDispatchS');
+
+      {SQL.Add('LEFT JOIN (');
+      SQL.Add('  SELECT DDBH, CEILING(SUM(Qty*CLSL)*10)/10 AS Usage FROM (');
+      SQL.Add('    SELECT CutDispatchSS.DDBH, CutDispatchSS.BWBH, CutDispatchSS.CLBH, CutDispatchSS.SIZE, CutDispatchSS.Qty, xtbwyl1.CLSL FROM CutDispatchSS');
+      SQL.Add('    LEFT JOIN DDZL ON DDZL.DDBH = CutDispatchSS.ZLBH');
+      SQL.Add('    LEFT JOIN xtbwyl1 ON xtbwyl1.XieXing = DDZL.XieXing AND xtbwyl1.SheHao = DDZL.SheHao AND xtbwyl1.BWBH = CutDispatchSS.BWBH AND xtbwyl1.XTCC = CutDispatchSS.SIZE');
+      SQL.Add('    WHERE DLNO = :DLNO AND CLBH = :CLDH AND CutDispatchSS.BWBH IN (' + BWBH + ')');
+      SQL.Add('  ) AS Material');
+      SQL.Add('  GROUP BY DDBH');
+      SQL.Add(') AS Material ON Material.DDBH = CutDispatchS.ZLBH');}
+
+      SQL.Add('ORDER BY CutDispatchS.LB');
+      Active:=true;
+    end;
+  end;
+end;
+
+end.

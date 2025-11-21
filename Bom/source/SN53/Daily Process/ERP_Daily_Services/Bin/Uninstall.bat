@@ -1,0 +1,1 @@
+ERP_Daily_Services /uninstall

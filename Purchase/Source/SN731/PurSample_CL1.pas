@@ -1,0 +1,143 @@
+unit PurSample_CL1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls;
+
+type
+  TPurSample_CL = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Button1: TButton;
+    Edit2: TEdit;
+    EDIT1: TEdit;
+    Edit3: TEdit;
+    DBGrid1: TDBGrid;
+    DS1: TDataSource;
+    Query1: TQuery;
+    Query1cldh: TStringField;
+    Query1cllb: TStringField;
+    Query1ywpm: TStringField;
+    Query1dwbh: TStringField;
+    Edit4: TEdit;
+    Button2: TButton;
+    procedure EDIT1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit3KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit4KeyPress(Sender: TObject; var Key: Char);
+    procedure Button1Click(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure DBGrid1KeyPress(Sender: TObject; var Key: Char);
+    procedure Button2Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  PurSample_CL: TPurSample_CL;
+
+implementation
+
+uses PurOther1, MaterialNew1, PurOther_CL1, PurSample1;
+
+{$R *.dfm}
+
+procedure TPurSample_CL.EDIT1KeyPress(Sender: TObject; var Key: Char);
+begin
+  if key=#13 then
+    edit2.SetFocus;
+end;
+
+procedure TPurSample_CL.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin
+  if key=#13 then
+    edit3.SetFocus;
+end;
+
+procedure TPurSample_CL.Edit3KeyPress(Sender: TObject; var Key: Char);
+begin
+  if key=#13 then
+    edit4.SetFocus;
+end;
+
+procedure TPurSample_CL.Edit4KeyPress(Sender: TObject; var Key: Char);
+begin
+  if key=#13 then
+     button1Click(nil);
+end;
+
+procedure TPurSample_CL.Button1Click(Sender: TObject);
+begin
+with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select CLDH,CLLB,YWPM,DWBH from CLZL where CLDH like');
+    sql.add(''''+edit1.Text+'%'+'''');
+    sql.add('and YWPM like ');
+    sql.add(''''+'%'+edit2.Text+'%'+'''');
+    sql.add('and YWPM like ');
+    sql.add(''''+'%'+edit3.Text+'%'+'''');
+    sql.add('and YWPM like ');
+    sql.add(''''+'%'+edit4.Text+'%'+'''');
+    sql.add('and (TYJH is null or TYJH='+''''+'N'+''''+' or TYJH='+''''+''+''''+')');
+    sql.add('and YN<>'+''''+'2'+'''');
+    sql.add('order by CLDH');
+    active:=true;
+  end;
+end;
+
+procedure TPurSample_CL.DBGrid1DblClick(Sender: TObject);
+begin
+if (not query1.Active) then
+  begin
+    abort;
+  end;
+  if (Query1.recordcount<1) then
+  begin
+    abort;
+  end;
+  with PurSample.CGDet do
+  begin
+    insert;
+    fieldbyname('CLBH').value:=query1.fieldbyname('CLDH').value;
+    fieldbyname('YWPM').value:=query1.fieldbyname('YWPM').value;
+    fieldbyname('DWBH').value:=query1.fieldbyname('DWBH').value;
+    fieldbyname('XqQty').value:=0;
+    Post;
+  end;
+showmessage('Succeed');
+end;
+
+procedure TPurSample_CL.DBGrid1KeyPress(Sender: TObject; var Key: Char);
+begin
+ if key=#13 then
+   DBGrid1DblClick(nil);
+end;
+
+procedure TPurSample_CL.Button2Click(Sender: TObject);
+begin
+  MaterialNew:=TMaterialNew.create(self);
+  MaterialNew.show;
+  close;
+end;
+
+procedure TPurSample_CL.FormDestroy(Sender: TObject);
+begin
+  PurSample_CL:=nil;
+end;
+
+procedure TPurSample_CL.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  action:=cafree;
+end;
+
+end.

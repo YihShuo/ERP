@@ -1,0 +1,146 @@
+unit ApplyPhomMatNo1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, GridsEh, DBGridEh, StdCtrls, ExtCtrls;
+
+type
+  TApplyPhomMatNo = class(TForm)
+    DBGridEh1: TDBGridEh;
+    Query1: TQuery;
+    DS1: TDataSource;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Button1: TButton;
+    Edit2: TEdit;
+    EDIT1: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Query1CLDH: TStringField;
+    Query1YWPM: TStringField;
+    Query1ZWPM: TStringField;
+    Query1DWBH: TStringField;
+    Query1BJNO: TStringField;
+    Query1VNPrice: TCurrencyField;
+    Query1USPrice: TFloatField;
+    ConCombo: TComboBox;
+    Label5: TLabel;
+    tmpQry: TQuery;
+    Query1ZSDH: TStringField;
+    Query1zsywjc: TStringField;
+    procedure Button1Click(Sender: TObject);
+    procedure DBGridEh1DblClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ApplyPhomMatNo: TApplyPhomMatNo;
+
+implementation
+
+uses ApplyPhom1, FunUnit;
+
+{$R *.dfm}
+
+
+procedure TApplyPhomMatNo.Button1Click(Sender: TObject);
+begin
+  with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    //
+    SQL.Add('select CLZL.CLDH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,CGBJ.BJNO,CGBJ.VNPrice,CGBJ.USPrice,CGBJ.zsdh,zsywjc  ');
+    SQL.Add('from clzl  ');
+    SQL.Add('Left join (');
+    SQL.Add('    Select *  from (select CGBJ.BJNO,CGBJ.ZSBH,CGBJS.CLBH,CGBJS.USPrice,CGBJS.VNPrice ,CGBJS.Discount, CGBJS.SuppEx,CGBJ.EXPDATE,zszl.zsdh,ZSYWJC,');
+    SQL.Add('	     ROW_NUMBER() over (PARTITION BY CGBJS.CLBH ORDER BY CGBJ.BJNO DESC) as  rn');
+    SQL.Add('	from CGBJ');
+    SQL.Add('	Left join CGBJS on CGBJ.BJNO=CGBJS.BJNO');
+    SQL.Add('	Left join CLZL on CLZL.CLDH=CGBJS.CLBH');
+    SQL.Add(' Left join zszl on CGBJ.ZSBH=zszl.zsdh');
+    SQL.Add('	where  CGBJS.CLBH in  (Select CLBH from LastDatas union all Select CLBH from MoldData) ');
+    SQL.Add('	) CGBJ where rn=1 ) CGBJ on CGBJ.CLBH=clzl.cldh');
+    SQL.Add('where 1=1 and CLZL.CLDH in  ( ');
+    SQL.Add('   Select CLBH from ( ');
+    SQL.Add('   Select CLBH from LastDatas ');
+    if ConCombo.Text<>'' then
+    SQL.Add('   where Construction='''+ConCombo.Text+''' ');
+    SQl.Add('   Union all ');
+    SQL.Add('   Select CLBH from MoldData ');
+    if ConCombo.Text<>'' then
+    SQL.Add('   where Construction='''+ConCombo.Text+''' ');
+    SQL.Add('   ) MoldData  ');
+    SQL.Add(' ) ');
+    if Edit1.Text <> '' then
+      sql.add('and CLZL.CLDH like  '''+edit1.Text+'%'+'''');
+    if Edit2.Text <> '' then
+      sql.add('and CLZL.YWPM like ''%'+edit2.Text+'%'+'''');
+    if Edit3.Text <> '' then
+      sql.add('and CLZL.YWPM like ''%'+edit3.Text+'%'+'''');
+    if edit4.Text <> '' then
+      sql.add('and CLZL.YWPM like ''%'+edit4.Text+'%'+'''');
+    SQL.Add('and (TYJH is null or TYJH=''N'')');
+    SQL.Add('and (YN=''2'' or YN=''3'')');
+    SQL.Add('order by CLZL.CLDH');
+    //FuncObj.WriteErrorLog(sql.Text);
+    Active:=true;
+  end;
+end;
+
+procedure TApplyPhomMatNo.DBGridEh1DblClick(Sender: TObject);
+begin
+  if query1.recordcount>0 then
+  begin
+    with ApplyPhom.SGDet do
+    begin
+      Edit;
+      FieldByName('CLBH').Value:=query1.fieldbyname('CLDH').Value;
+      FieldByName('YWPM').Value:=query1.fieldbyname('YWPM').Value;
+      FieldByName('BJNO').Value:=query1.fieldbyname('BJNO').Value;
+      FieldByName('ZSDH').Value:=query1.fieldbyname('ZSDH').Value;
+      FieldByName('ZSYWJC').Value:=query1.fieldbyname('ZSYWJC').Value;
+      Insert;
+    end;
+  end;
+end;
+
+procedure TApplyPhomMatNo.FormDestroy(Sender: TObject);
+begin
+  ApplyPhomMatNo:=nil;
+end;
+
+procedure TApplyPhomMatNo.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action:=CaFree;
+end;
+
+procedure TApplyPhomMatNo.FormCreate(Sender: TObject);
+begin
+  ConCombo.Items.add('Phom›…¿Y');
+  with tmpQry do
+  begin
+    Active :=false;
+    SQL.Clear;
+    SQL.Add('Select distinct Construction from MoldData ');
+    Active:=true;
+    while not Eof do
+    begin
+      ConCombo.Items.Add(FieldByName('Construction').AsString);
+      Next;
+    end;
+    Active :=false;
+  end;  
+end;
+
+end.

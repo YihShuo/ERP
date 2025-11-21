@@ -1,0 +1,65 @@
+select ZLZLS.buyno as BuyNo,ZLZLS.ZLBH,ZLZLS.CLBH,ZLZLS.XXCC,ZLZLS.CLSL,ZLZLS.Surplus,
+ZLZLS.XieXing,ZLZLS.SheHao,ZLZLS.Article,ZLZLS.XieMing,
+isnull(CGZL.okQty,0) as okQty,isnull(CGZL.oldCLSL,0) oldCLSL,ZLZLS.UseStock
+from (select ddzl.buyno,ZLZLS2.ZLBH,ZLZLS2.CLBH,ZLZLS2.Size as XXCC,isnull(sum(ZLZLS2.CLSL),0) as CLSL,isnull(sum(ZLZLS2.Surplus),0) as Surplus,
+      DDZL.XieXing,DDZL.SheHao,XXZL.Article,XXZL.XieMing,isnull(CGKCUSE.Qty,0) as UseStock
+      from (
+         select ZLBH,BWBH,CLBH,ZMLB,SUM(CLSL) as CLSL,Sum(Surplus) as Surplus,max(userdate) as USERDATE,size 
+		      from (
+			      select zlzls2.ZLBH,zlzls2.BWBH,zlzls2.CLBH,zlzls2.ZMLB,zlzls2.CLSL,0 as Surplus,zlzls2.USERDATE,SIZE
+			      from zlzls2
+			      union all
+           select zlzls2.ZLBH,zlzls2.BWBH,zlzls2.CLBH,zlzls2.ZMLB,0 as CLSL,Surplus,YWBZPO.USERDATE as USERDATE,'ZZZZZZ' as size
+           from (
+             select YW.*,XXZLS.CLBH as BOX
+             from (
+               select YWBZPO.DDBH,YWBZPO.XH,max(YWBZPOS.DDCC) as DDCC,max(YWBZPO.USERDATE) as USERDATE,Surplus 
+               from YWBZPO
+               left join YWBZPOS on YWBZPOS.DDBH = YWBZPO.DDBH and YWBZPOS.XH = YWBZPO.XH 
+               group by YWBZPO.DDBH,YWBZPO.XH,Surplus
+             ) as YW 
+             left join DDZL on DDZL.DDBH = YW.DDBH 
+             left join XXZLS on XXZLS.XieXing = DDZL.XieXing and xxzls.SheHao = DDZL.SheHao and DDCC between XXZLS.CCQQ and XXZLS.CCQZ and XXZLS.CLBH like 'H14%'
+           ) as YWBZPO
+           left join zlzls2 on zlzls2.ZLBH = YWBZPO.DDBH and zlzls2.CLBH = YWBZPO.BOX 
+		      ) as zlzls2
+         where ZLBH like 'AL1402-002%' and CLBH like 'H140001761%'
+		      group by ZLBH,BWBH,CLBH,ZMLB,size
+      ) as ZLZLS2
+      left join DDZL on DDZL.ZLBH=ZLZLS2.ZLBH
+      left join KFZL on KFDH=DDZl.KHBH 
+      left join ZLZL on ZLZL.ZLBH=ZLZLS2.ZLBH
+      left join CGKCUSE on CGKCUSE.ZLBH=ZLZLS2.ZLBH and CGKCUSE.CLBH=ZLZLS2.CLBH 
+      left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao
+      where ZLZLS2.ZMLB='N'
+            and convert(smalldatetime,convert(varchar,DDZL.ShipDate,111)) between 
+                '2014/02/01'and '2014/02/28'
+            and KFZL.KFJC like '%%'
+            and ZLZLS2.ZLBH like 'AL1402-002%'
+            and XXZL.XieMing like '%%'
+            and ZLZLS2.CLBH='H140001761'
+            and ZLZLS2.SIZE='ZZZZZZ'
+            and ZLZLS2.CLSL<>0
+            and DDZL.GSBH='VB1'
+            and exists(select SCZL.SCBH from SCZL where SCZL.ZLBH=ZLZLS2.ZLBH )
+group by ddzl.buyno,ZLZLS2.ZLBH,ZLZLS2.CLBH,ZLZLS2.Size,ZLZLS2.ZMLB,CGKCUSE.Qty
+,DDZL.XieXing,DDZL.SheHao,XXZL.Article,XXZL.XieMing
+) ZLZLS 
+left join (select CGZLSS.CLBH,CGZLSS.ZLBH,CGZLSS.XXCC,
+           isnull(sum(CGZLSS.Qty),0) as okQty,isnull(max(CGZLSS.CLSL),0) as oldCLSL 
+           from CGZLSS 
+           left join DDZL on DDZL.ZLBH=CGZLSS.ZLBH
+           left join KFZL on KFDH=DDZl.KHBH 
+           left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao
+           where convert(smalldatetime,convert(varchar,DDZL.ShipDate,111)) between 
+                    '2014/02/01'and '2014/02/28'
+                 and KFZL.KFJC like '%%'
+                 and CGZLSS.ZLBH like 'AL1402-002%'
+                 and XXZL.XieMing like '%%'
+                 and CGZLSS.CLBH='H140001761'
+                 and CGZLSS.XXCC='ZZZZZZ'
+                 and exists(select SCZL.SCBH from SCZL where SCZL.ZLBH=CGZLSS.ZLBH )
+           group by  CGZLSS.CLBH,CGZLSS.ZLBH,CGZLSS.XXCC
+           ) CGZL on CGZL.CLBH=ZLZLS.CLBH and CGZL.ZLBH=ZLZLS.ZLBH and CGZL.XXCC=ZLZLS.XXCC
+order by zlzls.buyno,ZLZLS.ZLBH
+

@@ -1,0 +1,943 @@
+unit MatUsage1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, PrnDbgeh, Menus, DB, DBTables, GridsEh, DBGridEh, StdCtrls,
+  ComCtrls, ExtCtrls,dateutils,comobj;
+
+type
+  TMatUsage = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Edit1: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Query1: TQuery;
+    DS1: TDataSource;
+    Qtemp: TQuery;
+    PopupMenu1: TPopupMenu;
+    NN2: TMenuItem;
+    NN3: TMenuItem;
+    PrintDBGridEh1: TPrintDBGridEh;
+    Query1CLBH: TStringField;
+    Query1CLZMLB: TStringField;
+    Query1KCQty: TCurrencyField;
+    Query1CLSL: TFloatField;
+    Query1CGQty: TFloatField;
+    Query1JGQty: TCurrencyField;
+    Query1RKQty: TFloatField;
+    Query1OnQty: TFloatField;
+    Query1LLQty: TCurrencyField;
+    Query1YWPM: TStringField;
+    Query1ZWPM: TStringField;
+    Query1DWBH: TStringField;
+    Query1CQDH: TStringField;
+    DBGridEh1: TDBGridEh;
+    Query1NeedJGQty: TFloatField;
+    Query1BLQty: TFloatField;
+    Query1BLRate: TFloatField;
+    Query1StockQty: TFloatField;
+    Query1AL_LLQty: TCurrencyField;
+    Query1PreBL: TFloatField;
+    Query1Al_NowLLQty: TFloatField;
+    Query1NowBLQty: TFloatField;
+    Query1NowBLRate: TFloatField;
+    Query1KCUseQty: TCurrencyField;
+    Query1KCUseTQty: TCurrencyField;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure DBGridEh1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure Button3Click(Sender: TObject);
+    procedure Query1CalcFields(DataSet: TDataSet);
+    procedure Button2Click(Sender: TObject);
+    procedure DBGridEh1EditButtonClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MatUsage: TMatUsage;
+  NDate:TDate; 
+   ayear,amonth:string;
+
+implementation
+
+uses main1, MatUsage_SL1,FunUnit;
+
+{$R *.dfm}
+
+procedure TMatUsage.FormDestroy(Sender: TObject);
+begin
+MatUsage:=nil;
+end;
+
+procedure TMatUsage.FormClose(Sender: TObject; var Action: TCloseAction);
+begin 
+with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('  if object_id('+''''+'tempdb..#BCLZLKC'+''''+') is not null  ');
+    sql.add('begin   drop table #BCLZLKC end   ');
+    execsql;
+  end;
+action:=cafree;
+end;
+
+procedure TMatUsage.Button1Click(Sender: TObject);
+var 
+   year,month,day:word;
+   //GSBH:string;
+begin
+decodedate(NDate,Year,Month,Day);   //т畐闽计沮
+incAMonth(Year,Month,Day,-1);
+ayear:=floattostr(year);
+amonth:=floattostr(month);
+if length(amonth)=1 then
+  amonth:='0'+amonth;
+{
+with Qtemp do
+  begin
+    active:=false;
+    sql.clear;
+    sql.add('select GSBH from KCCK ');
+    sql.add('where CKBH='+''''+CBX1.text+'''');
+    active:=true;
+    GSBH:=fieldbyname('GSBH').value;
+  end;  }
+
+with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('  if object_id('+''''+'tempdb..#BCLZLKC'+''''+') is not null  ');
+    sql.add('begin   drop table #BCLZLKC end   ');
+
+    sql.Add('select CLZL.CLDH as CLBH,CLZL.CLZMLB,isnull(LastKC.LastRem,0)+isnull(RK.RKQty,0)-isnull(LL.LLQty,0)+isnull(JGRK.JGRK,0)-isnull(JGCK.JGCK,0) as KCQty');
+    sql.add('into #BCLZLKC ');
+    sql.add('from CLZL');
+                 //戳畐
+    sql.add('left join (select KCCLMONTH.CLBH,sum(KCCLMONTH.Qty) as LastRem ');
+    sql.add('           from KCCLMONTH  with (nolock) ');
+    sql.add('           left join KCCK on KCCK.CKBH=KCCLMONTH.CKBH ');
+    sql.Add('           where KCCLMONTH.KCYEAR='+''''+ayear+'''');
+    sql.add('                 and KCCLMONTH.KCMONTH='+''''+amonth+'''');
+    sql.add('                 and KCCLMONTH.CLBH like '+''''+edit1.Text+'%'+'''');
+    sql.Add('                 and KCCK.GSBH='+''''+main.edit2.Text+'''');
+    sql.add('           group by KCCLMONTH.CLBH) LastKC on LastKC.CLBH=CLZL.CLDH ');
+          //畐计秖
+    sql.add('left join (select KCRKS.CLBH,sum(KCRKS.Qty) as RKQty ');
+    sql.add('           from KCRKS with (nolock) ');
+    sql.add('           left join KCRK  with (nolock) on KCRK.RKNO=KCRKS.RKNO ');
+    sql.add('           left join KCCK on KCCK.CKBH=KCRK.CKBH ');
+    sql.add('           where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between ') ;
+    sql.add('                 '''+formatdatetime('yyyy/MM/dd',startofthemonth(NDate))+''''+' and '+''''+formatdatetime('yyyy/MM/dd',Ndate)+'''');
+    sql.add('                 and KCRKS.CLBH like '+''''+edit1.Text+'%'+'''');
+    sql.Add('                 and KCCK.GSBH='+''''+main.edit2.Text+'''');
+    sql.add('           group by KCRKS.CLBH) RK on RK.CLBH=CLZL.CLDH ');
+           //畐计秖
+    sql.add('left join (select KCLLS.CLBH,sum(KCLLS.Qty) as LLQty from KCLLS  with (nolock) ');
+    sql.add('           left join KCLL  with (nolock) on KCLL.LLNO=KCLLS.LLNO ');
+    sql.add('           left join KCCK on KCCK.CKBH=KCLL.CKBH ');
+    sql.add('           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between ')   ;
+    sql.add('                 '''+formatdatetime('yyyy/MM/dd',startofthemonth(Ndate))+''''+' and '+''''+formatdatetime('yyyy/MM/dd',Ndate)+''''  );
+    sql.add('                 and KCLLS.CLBH like '+''''+edit1.Text+'%'+'''');
+    sql.add('                 and KCLL.CFMID<>'+''''+'NO'+'''');
+    sql.Add('                 and KCCK.GSBH='+''''+main.edit2.Text+'''');
+    sql.add('           group by KCLLS.CLBH) LL on LL.CLBH=CLZL.CLDH');
+           //畐计秖
+    sql.add('left join (select JGZLS.CLBH,sum(JGZLS.Qty) as JGRK ');
+    sql.add('           from JGZLS with (nolock) ');
+    sql.add('           left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO ');
+    sql.add('           left join KCCK on KCCK.CKBH=JGZL.CKBH ');
+    sql.add('           where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between ');
+    sql.add('                  '''+formatdatetime('yyyy/MM/dd',startofthemonth(Ndate))+''''+' and '+''''+formatdatetime('yyyy/MM/dd',Ndate)+''''  );
+    sql.add('                 and JGZLS.CLBH like '+''''+edit1.Text+'%'+'''');
+    sql.add('                 and JGZL.CFMID1 <>'+''''+'NO'+'''');
+    sql.add('                 and JGZLS.ZMLB='+''''+'ZZZZZZZZZZ'+'''');
+    sql.Add('                 and KCCK.GSBH='+''''+main.edit2.Text+'''');
+    sql.add('           group by JGZLS.CLBH ) JGRK on JGRK.CLBH=CLZL.CLDH');
+            //畐计秖
+    sql.add('left join (select JGZLS.ZMLB,sum(round(JGZLS.Qty*JGZLM.Qty,2)) as JGCK ');
+    sql.add('           from JGZLS with (nolock) ');
+    sql.add('           left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO  ');
+    sql.add('           left join KCCK on KCCK.CKBH=JGZL.CKBH ');
+    sql.add('           left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty from JGZLS  with (nolock) ');
+    sql.add('                      left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO ');
+    sql.add('                      left join KCCK on KCCK.CKBH=JGZL.CKBH ');
+    sql.add('                      where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between ');
+    sql.add('                            '''+formatdatetime('yyyy/MM/dd',startofthemonth(Ndate))+''''+' and '+''''+formatdatetime('yyyy/MM/dd',Ndate)+'''');
+    // sql.add('                            and JGZL.CFMID1 <>'+''''+'NO'+'''');
+    sql.add('                            and JGZLS.ZMLB='+''''+'ZZZZZZZZZZ'+'''');
+    sql.Add('                            and KCCK.GSBH='+''''+main.edit2.Text+'''');
+    sql.add('                      ) JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM.CLBH=JGZLS.CLBH');
+    sql.add('           where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between ');
+    sql.add('                 '''+formatdatetime('yyyy/MM/dd',startofthemonth(Ndate))+''''+' and '+''''+formatdatetime('yyyy/MM/dd',Ndate)+''''  );
+    sql.add('                 and JGZLS.ZMLB like '+''''+edit1.Text+'%'+'''');
+    sql.add('                 and JGZL.CFMID1 <>'+''''+'NO'+'''');
+    sql.add('                 and JGZLS.ZMLB<>'+''''+'ZZZZZZZZZZ'+'''');
+    sql.Add('                 and KCCK.GSBH='+''''+main.edit2.Text+'''');
+    sql.add('           group by JGZLS.ZMLB ) JGCK on JGCK.ZMLB=CLZL.CLDH');
+    execsql;
+    //
+    //璸衡闽计
+    //璸衡ゼ砯璹虫羆惠―秖
+    active:=false;
+    sql.Clear;
+    sql.add('select #BCLZLKC.CLBH,#BCLZLKC.CLZMLB,#BCLZLKC.KCQty,isnull(ZLZLS2.CLSL,0) as CLSL,isnull(CGZLSS.CGQty,0) as CGQty,');
+    sql.add('       isnull(ZLJG.NeedJGQty,0) as NeedJGQty,isnull(JGZLSS.JGQty,0) as JGQty,isnull(KCRKS.RKQty,0) as RKQty,');
+    sql.add('       isnull(Onway.OnQty,0) as OnQty,isnull(KCUSE.KCUseQty,0) as KCUseQty,isnull(KCUSET.KCUseTQty,0) as KCUseTQty,');
+    sql.add('       isnull(KCLLS.LLQty,0) as LLQty,NowLLCL.Al_NowLLQty,NowLLCL.NowBLQty,LLCL.AL_LLQty,LLCL.BLQty,');
+    sql.add('       CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,CLZL.CQDH, ');
+    sql.add('       case when #BCLZLKC.CLZMLB='+''''+'Y'+'''');
+    sql.add('       then  isnull(#BCLZLKC.KCQty,0)');
+    sql.add('             +(case when isnull(ZLZLS2.CLSL,0)-isnull(ZLJG.NeedJGQty,0)-isnull(CGZLSS.CGQty,0)>0 ');
+    sql.add('                then isnull(ZLZLS2.CLSL,0)-isnull(ZLJG.NeedJGQty,0)-isnull(CGZLSS.CGQty,0) else 0 end)');
+    sql.add('             +(case when isnull(CGZLSS.CGQty,0)-(isnull(KCRKS.RKQty,0)-isnull(OnWay.OnQty,0))>0 ');
+    sql.add('                then isnull(CGZLSS.CGQty,0)-(isnull(KCRKS.RKQty,0)-isnull(OnWay.OnQty,0)) else 0 end)');
+    sql.add('             +(case when isnull(ZLJG.NeedJGQty,0)-isnull(JGZLSS.JGQty,0)-isnull(KCUSE.KCUseQty,0)>0 ');
+    sql.add('                 then isnull(ZLJG.NeedJGQty,0)-isnull(JGZLSS.JGQty,0)-isnull(KCUSE.KCUseQty,0) else 0 end)');
+    sql.add('             -(case when isnull(ZLZLS2.CLSL,0)-isnull(KCLLS.LLQty,0)>0 ');
+    sql.add('                 then isnull(ZLZLS2.CLSL,0)-isnull(KCLLS.LLQty,0) else 0 end )');
+    sql.add('             -(case when isnull(ZLZLS2.CLSL,0)-(isnull(KCLLS.LLQty,0)-isnull(NowLLCL.NowBLQty,0))>=isnull(NowLLCL.NowBLQty,0) ');
+    sql.add('                 then  isnull(NowLLCL.NowBLQty,0) ');
+    sql.add('                 else (case when isnull(ZLZLS2.CLSL,0)-(isnull(KCLLS.LLQty,0)-isnull(NowLLCL.NowBLQty,0))>0 ');
+    sql.add('                             then  isnull(ZLZLS2.CLSL,0)-(isnull(KCLLS.LLQty,0)-isnull(NowLLCL.NowBLQty,0)) else 0 end ) end) ');
+    //sql.add('             -isnull(NowLLCL.NowBLQty,0)');
+    sql.add('             -isnull(KCUSET.KCUseTQty,0)');
+    sql.add('       else isnull(#BCLZLKC.KCQty,0)');
+    sql.add('             +(case when isnull(ZLZLS2.CLSL,0)-isnull(CGZLSS.CGQty,0)-isnull(KCUSE.KCUseQty,0)>0 ');
+    sql.add('                then isnull(ZLZLS2.CLSL,0)-isnull(CGZLSS.CGQty,0)-isnull(KCUSE.KCUseQty,0) else 0 end)');
+    sql.add('             +(case when isnull(CGZLSS.CGQty,0)-(isnull(KCRKS.RKQty,0)-isnull(OnWay.OnQty,0))>0 ');
+    sql.add('                then isnull(CGZLSS.CGQty,0)-(isnull(KCRKS.RKQty,0)-isnull(OnWay.OnQty,0)) else 0 end)');
+    sql.add('             -(case when isnull(ZLZLS2.CLSL,0)-isnull(ZLJG.NeedJGQty,0)-isnull(KCLLS.LLQty,0)>0 ');
+    sql.add('                 then isnull(ZLZLS2.CLSL,0)-isnull(ZLJG.NeedJGQty,0)-isnull(KCLLS.LLQty,0) else 0 end )');
+    sql.add('             -(case when isnull(ZLJG.NeedJGQty,0)-isnull(JGZLSS.JGQty,0)>0 ');
+    sql.add('                 then isnull(ZLJG.NeedJGQty,0)-isnull(JGZLSS.JGQty,0) else 0 end)'); 
+    sql.add('             -(case when isnull(ZLZLS2.CLSL,0)-(isnull(KCLLS.LLQty,0)-isnull(NowLLCL.NowBLQty,0))>=isnull(NowLLCL.NowBLQty,0) ');
+    sql.add('                 then  isnull(NowLLCL.NowBLQty,0) ');
+    sql.add('                 else (case when isnull(ZLZLS2.CLSL,0)-(isnull(KCLLS.LLQty,0)-isnull(NowLLCL.NowBLQty,0))>0 ');
+    sql.add('                             then  isnull(ZLZLS2.CLSL,0)-(isnull(KCLLS.LLQty,0)-isnull(NowLLCL.NowBLQty,0)) else 0 end ) end) ');
+    //sql.add('             -isnull(NowLLCL.NowBLQty,0)');
+    sql.add('             -isnull(KCUSET.KCUseTQty,0)');
+    sql.add('      end as StockQty');
+    sql.add('from #BCLZLKC');
+    sql.add('left join CLZL  with (nolock) on CLZl.CLDH=#BCLZLKC.CLBH ')  ;
+    //ゼ砯璹虫羆ノ秖
+    sql.add('left join (select ZLZLS2.CLBH,sum(ZLZLS2.CLSL) as CLSL');
+    sql.add('           from ZLZLS2  with (nolock) ');
+    sql.add('           left join DDZL  with (nolock) on DDZL.ZLBH=ZLZLS2.ZLBH ');
+    sql.add('           where DDZL.YN='+''''+'1'+'''');
+    sql.add('                 and DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('                 and ZLZLS2.CLBH like '+''''+edit1.text+'%'+'''');
+    sql.add('                 and ZLZLS2.CLSL<>0');
+    sql.add('           group by ZLZLS2.CLBH) ZLZLS2 on ZLZLS2.CLBH=#BCLZLKC.CLBH ');
+    //ゼ砯璹虫潦虫羆秖
+    sql.add('left join (select CGZLSS.CLBH,sum(CGZLSS.Qty) as CGQty ');
+    sql.add('           from CGZLSS  with (nolock) ');
+    sql.add('           left join DDZL  with (nolock) on DDZL.ZLBH=CGZLSS.ZLBH ');
+    sql.add('           where DDZL.YN='+''''+'1'+'''');
+    sql.add('                 and DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('                 and CGZLSS.CLBH like '+''''+edit1.text+'%'+'''');
+    sql.add('                 and CGZLSS.Qty <>0 ')  ;
+    sql.add('           group by CGZLSS.CLBH');
+    sql.add('           union all ');
+    sql.add('           select CGHZZLS.CLBH,sum(dg_Qty) as CGQty ');
+    sql.add('           from CGHZZLS with (nolock) ');
+    //sql.add('           left join CLZL on CLZl.CLDH=CGHZZLS.CLBH ');
+    sql.add('           left join DDZL  with (nolock) on DDZL.ZLBH=CGHZZLS.ZLBH ');
+    sql.add('           where DDZL.YN='+''''+'1'+'''');
+    sql.add('                 and DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('                 and DDBH not like '+''''+'AL%'+'''');
+    sql.add('                 and CGHZZLS.CLBH like '+''''+edit1.text+'%'+'''');
+    sql.add('                 and CGHZZLS.dg_Qty<>0 ');
+    //sql.add('                 and CLZL.CWDH='+''''+'TW'+'''');
+    sql.add('           group by CGHZZLS.CLBH) CGZLSS on CGZLSS.CLBH=#BCLZLKC.CLBH ');
+    //ゼ砯璹虫惠祇癳计秖 の惠ㄓダ计秖
+    sql.add('left join (select ZLZLS2.CLBH,sum(ZLZLS2.CLSL) as NeedJGQty ');
+    sql.add('           from ZLZLS2  with (nolock) ');
+    sql.add('           left join DDZL  with (nolock) on DDZl.ZLBH=ZLZLS2.ZLBH ');
+    sql.add('           where DDZL.YN='+''''+'1'+'''');
+    sql.add('                 and DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('                 and ZLZLS2.CLSL<>0');
+    sql.add('                 and ZLZLS2.CLBH like '+''''+edit1.text+'%'+'''');
+    sql.add('                 and ZLZLS2.MJBH<>'+''''+'ZZZZZZZZZZ'+'''');
+    sql.add('           group by ZLZLS2.CLBH ');
+    sql.add('           union all ');
+    sql.add('           select ZLZLS2.CLBH,sum(ZLZLS2.CLSL) as NeedJGQty ');
+    sql.add('           from ZLZLS2  with (nolock) ');
+    sql.add('           left join DDZL  with (nolock) on DDZl.ZLBH=ZLZLS2.ZLBH ');
+    sql.add('           where DDZL.YN='+''''+'1'+'''');
+    sql.add('                 and DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('                 and ZLZLS2.CLSL<>0');
+    sql.add('                 and ZLZLS2.CLBH like '+''''+edit1.text+'%'+'''');
+    sql.add('                 and ZLZLS2.MJBH='+''''+'ZZZZZZZZZZ'+'''');
+    sql.add('                 and ZLZLS2.ZMLB='+''''+'Y'+'''');
+    sql.add('           group by ZLZLS2.CLBH    ');
+    sql.add('           )  ZLJG on ZLJG.CLBH=#BCLZLKC.CLBH ');
+    //ゼ砯璹虫虫计秖    ┪祇计秖
+    sql.add('left join (select JGZLSS.CLBH,sum(JGZLSS.Qty) as JGQty ');
+    sql.add('           from JGZLSS with (nolock)  ');
+    sql.add('           left join DDZL  with (nolock) on DDZL.ZLBH=JGZLSS.ZLBH ');
+    sql.add('           where DDZL.YN='+''''+'1'+'''');
+    sql.add('                 and DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('                 and JGZLSS.CLBH like '+''''+edit1.text+'%'+'''');
+    sql.add('                 and JGZLSS.Qty<>0');
+    sql.add('           group by JGZLSS.CLBH');
+    sql.add('           union all ');
+    sql.add('           select JGZLS.ZMLB as CLBH,sum(JGZLSS.Qty*JGZLS.Qty) as JGQty ');
+    sql.add('           from JGZLSS  with (nolock) ');
+    sql.add('           left join DDZL  with (nolock) on DDZL.ZLBH=JGZLSS.ZLBH ');
+    sql.add('           left join JGZLS  with (nolock) on JGZLS.CLBH=JGZLSS.CLBH and JGZLS.JGNO=JGZLSS.JGNO and JGZLS.ZMLB<>'+''''+'ZZZZZZZZZZ'+'''');
+    sql.add('           where DDZL.YN='+''''+'1'+'''');
+    sql.add('                 and DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('                 and JGZLS.ZMLB like '+''''+edit1.text+'%'+'''');
+    sql.add('                 and JGZLSS.Qty<>0');
+    sql.add('           group by JGZLS.ZMLB) JGZLSS on JGZLSS.CLBH=#BCLZLKC.CLBH ');
+    // 畐计秖VN潦畐秖芖枷秖
+    sql.add('left join (select KCRKS.CLBH,sum(KCRKS.Qty) as RKQty ');
+    sql.add('           from KCRKS  with (nolock) ');
+    sql.add('           left join DDZL  with (nolock) on DDZl.ZLBH=KCRKS.CGBH ');
+    sql.add('           where DDZL.YN='+''''+'1'+'''');
+    sql.add('                 and DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('                 and KCRKS.CLBH like '+''''+edit1.text+'%'+'''');
+    sql.add('                 and KCRKS.Qty<>0');
+    sql.add('           group by KCRKS.CLBH ');
+    sql.add('           union all ');
+    sql.add('           SELECT EXZLSS.CLDH as CLBH,sum(EXZLSS.CK_Qty) as RKQty');
+    sql.add('           FROM EXZLSS');
+    sql.add('           left join DDZL  with (nolock) on DDZl.ZLBH=EXZLSS.ZLBH ');
+    sql.add('           where DDZL.YN='+''''+'1'+'''');
+    sql.add('                 and DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('                 and EXZLSS.CLDH like '+''''+edit1.text+'%'+'''');
+    sql.add('                 and EXZLSS.CK_Qty<>0');
+    sql.add('           group by EXZLSS.CLDH) KCRKS on KCRKS.CLBH=#BCLZLKC.CLBH ');
+    //籓芖砯硚计秖
+    sql.add('left join (select  CLBH,sum(isnull(EXQty,0)-isnull(Qty,0)) as OnQty  ');
+    sql.add('          from (SELECT distinct exzls.cldh as CLBH,hgzls.xh,replace(hgzls.ctn,0,1)*hgzls.ck_qty as EXQty,KCRKS.Qty ');
+    sql.add('                FROM hgzls  with (nolock)  ');
+    sql.add('                LEFT OUTER JOIN   exzls  with (nolock) on   hgzls.clbh = exzls.exno + exzls.xh  ');
+    sql.add('                left outer join exzl  with (nolock) on exzl.exno=exzls.exno and  exzl.exlb = '+''''+'B'+'''');
+    sql.add('                LEFT OUTER JOIN   clzl  with (nolock) ON exzls.cldh = clzl.cldh  ');
+    sql.add('                left join exzlss  with (nolock) on exzlss.exno=exzls.exno and exzlss.xh=exzls.xh');
+    sql.add('                left join KCRK  with (nolock) on KCRK.ZSNO=hgzls.con_no');
+    sql.add('                left join KCRKS  with (nolock) on KCRKS.RKNO=KCRk.RKNO and KCRKS.CGBH=hgzls.xh');
+    sql.add('                left join DDZL with (nolock)  on DDZl.ZLBH=exzlss.zlbh ');
+    sql.add('                where convert(smalldatetime,hgzls.userdate)>getdate()-20');
+    sql.add('                      and DDZL.YN='+''''+'1'+'''');
+    sql.add('                      and DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('                      and exzls.cldh like '+''''+edit1.text+'%'+'''');
+    sql.add('                      and exzls.cldh is not null) exzls');
+    sql.add('           group by CLBH) Onway on Onway.CLBH=#BCLZLKC.CLBH ') ;
+    //烩计秖
+    sql.add('left join (select KCLLS.CLBH,sum(Qty) as LLQty ');
+    sql.add('           from KCLLS  with (nolock) ');
+    sql.add('           left join KCLL  with (nolock) on KCLL.LLNO=KCLLS.LLNO ');
+    sql.add('           left join DDZL with (nolock)  on DDZL.ZLBH=KCLLS.SCBH ');
+    sql.add('           where DDZL.YN='+''''+'1'+'''');
+    sql.add('                 and DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('                 and KCLLS.Qty<>0 ');
+    sql.add('                 and KCLLS.CLBH like '+''''+edit1.text+'%'+'''');
+    sql.add('                 and KCLL.CFMID<>'+''''+'NO'+'''');
+    sql.add('           group by KCLLS.CLBH) KCLLS on KCLLS.CLBH=#BCLZLKC.CLBH ');
+    //瞷Τ璹虫禬烩干计 /竊计
+    sql.add('left join (select ZLZLS2.CLBH, sum(ZLZLS2.CLSL) as AL_NowLLQty, sum(isnull(KCLLS.LLQty,0)-isnull(ZLZLS2.CLSL,0)) as NowBLQty ');
+    sql.add('           from (select ZLZLS2.ZLBH,ZLZLS2.CLBH,sum(ZLZLS2.CLSL) as CLSL');
+    sql.add('                 from ZLZLS2 with (nolock) ');
+    sql.add('                 left join DDZL  with (nolock) on ZLZLS2.ZLBH=DDZL.ZLBH ');
+    sql.add('                 where DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('                       and DDZL.YN='+''''+'1'+'''');
+    sql.add('                       and ZLZLS2.CLSL<>0 ');
+    sql.add('                       and ZLZLS2.CLBH like '+''''+edit1.text+'%'+'''');
+    sql.add('                       and ZLZLS2.MJBH='+''''+'ZZZZZZZZZZ'+'''');
+    sql.add('                       and convert(smalldatetime,convert(varchar,DDZL.shipDate,111))>='+''''+formatdatetime('yyyy/MM/dd',NDate-60)+'''');
+    sql.add('                 group by ZLZLS2.CLBH,ZLZLS2.ZLBH) ZLZLS2 ');
+    sql.add('           left join (select KCLLS.SCBH as ZLBH,KCLLS.CLBH,sum(KCLLS.Qty) as LLQty ');
+    sql.add('                      from KCLLS  with (nolock) ');
+    sql.add('                      left join KCLL  with (nolock) on KCLL.LLNO=KCLLS.LLNO ');
+    sql.add('                      left join DDZL  with (nolock) on DDZl.ZLBH=KCLLS.SCBH ');
+    sql.add('                      where DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('                            and DDZL.YN='+''''+'1'+'''');
+    sql.add('                            and KCLLS.Qty<>0 ');
+    sql.add('                            and KCLLS.CLBH like '+''''+edit1.text+'%'+'''');
+    sql.add('                            and KCLL.CFMID<>'+''''+'NO'+'''');
+    sql.add('                            and convert(smalldatetime,convert(varchar,DDZL.shipDate,111))>='+''''+formatdatetime('yyyy/MM/dd',NDate-60)+'''') ;
+    sql.add('                      group by KCLLS.SCBH,KCLLS.CLBH ) KCLLS on KCLLS.ZLBH=ZLZLS2.ZLBH and KCLLS.CLBH=ZLZLS2.CLBH ');
+    sql.add('           where KCLLS.LLQty>ZLZLS2.CLSL');
+    sql.add('           group by ZLZLS2.CLBH ) NowLLCL on NowLLCL.CLBH=#BCLZLKC.CLBH ');
+    //挡璹虫禬烩干计 /竊计
+    sql.add('left join (select ZLZLS2.CLBH, sum(ZLZLS2.CLSL) as AL_LLQty, sum(isnull(KCLLS.LLQty,0)-isnull(ZLZLS2.CLSL,0)) as BLQty ');
+    sql.add('           from (select ZLZLS2.ZLBH,ZLZLS2.CLBH,sum(ZLZLS2.CLSL) as CLSL');
+    sql.add('                 from ZLZLS2 with (nolock) ');
+    sql.add('                 left join DDZL  with (nolock) on ZLZLS2.ZLBH=DDZL.ZLBH ');
+    sql.add('                 where DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('                       and DDZL.YN<>'+''''+'1'+'''');
+    sql.add('                       and ZLZLS2.CLSL<>0 ');
+    sql.add('                       and ZLZLS2.CLBH like '+''''+edit1.text+'%'+'''');
+    sql.add('                       and ZLZLS2.MJBH='+''''+'ZZZZZZZZZZ'+'''');
+    sql.add('                       and convert(smalldatetime,convert(varchar,DDZL.shipDate,111))>='+''''+formatdatetime('yyyy/MM/dd',NDate-60)+'''');
+    sql.add('                 group by ZLZLS2.CLBH,ZLZLS2.ZLBH) ZLZLS2 ');
+    sql.add('           left join (select KCLLS.SCBH as ZLBH,KCLLS.CLBH,sum(KCLLS.Qty) as LLQty ');
+    sql.add('                      from KCLLS  with (nolock) ');
+    sql.add('                      left join KCLL  with (nolock) on KCLL.LLNO=KCLLS.LLNO ');
+    sql.add('                      left join DDZL  with (nolock) on DDZl.ZLBH=KCLLS.SCBH ');
+    sql.add('                      where DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('                            and DDZL.YN<>'+''''+'1'+'''');
+    sql.add('                            and KCLLS.Qty<>0 ');
+    sql.add('                            and KCLLS.CLBH like '+''''+edit1.text+'%'+'''');
+    sql.add('                            and KCLL.CFMID<>'+''''+'NO'+'''');
+    sql.add('                            and convert(smalldatetime,convert(varchar,DDZL.shipDate,111))>='+''''+formatdatetime('yyyy/MM/dd',NDate-60)+'''') ;
+    sql.add('                      group by KCLLS.SCBH,KCLLS.CLBH ) KCLLS on KCLLS.ZLBH=ZLZLS2.ZLBH and KCLLS.CLBH=ZLZLS2.CLBH ');
+    sql.add('           group by ZLZLS2.CLBH) LLCL on LLCL.CLBH=#BCLZLKC.CLBH ');
+    //畐计
+    sql.add('left join (select CGKCUSE.CLBH,sum(CGKCUSE.Qty) as KCUseQty ');
+    sql.add('           from CGKCUSE  ');
+    sql.add('           left join DDZL on DDZL.DDBH=CGKCUSE.ZLBH ');
+    sql.add('           where DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('                 and DDZL.YN='+''''+'1'+'''');
+    sql.add('           group by CGKCUSE.CLBH) KCUSE on KCUSE.CLBH=#BCLZLKC.CLBH ');   
+    //ウ计
+    sql.add('left join (select CGKCUSE.CLBHYS as CLBH,sum(CGKCUSE.Qty) as KCUseTQty ');
+    sql.add('           from CGKCUSE  ');
+    sql.add('           left join DDZL on DDZL.DDBH=CGKCUSE.ZLBH ');
+    sql.add('           where DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('                 and DDZL.YN='+''''+'1'+'''');
+    sql.add('           group by CGKCUSE.CLBHYS) KCUSET on KCUSET.CLBH=#BCLZLKC.CLBH ');
+
+    sql.add('where not (#BCLZLKC.KCQty=0 and isnull(ZLZLS2.CLSL,0)=0 and isnull(CGZLSS.CGQty,0)=0');
+    sql.add('       and isnull(ZLJG.NeedJGQty,0)=0 and isnull(JGZLSS.JGQty,0)=0 and isnull(KCRKS.RKQty,0)=0');
+    sql.add('       and isnull(Onway.OnQty,0)=0 and isnull(KCLLS.LLQty,0)=0)');
+    sql.add('       and not exists(select CLBH from KCSAFE with (nolock)where KCSAFE.CLBH=#BCLZLKC.CLBH ) ');
+    sql.add('       and #BCLZLKC.CLBH like '+''''+edit1.text+'%'+'''');
+    sql.add('order by #BCLZLKC.CLZMLB,#BCLZLKC.CLBH ');
+    active:=true;
+  end;
+end;
+
+procedure TMatUsage.FormCreate(Sender: TObject);
+begin
+
+with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select getdate() as NDate ');
+    active:=true;
+    NDate:=fieldbyname('NDate').Value;
+    active:=false;
+  end;
+end;
+
+procedure TMatUsage.DBGridEh1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+{
+if (query1.FieldByName('CLZMLB').value='Y') then
+  begin
+    dbgrideh1.canvas.brush.Color:=$00FCCBCD;
+    DBGrideh1.DefaultDrawColumnCell(Rect,DataCol,Column, State);
+  end
+  else
+    begin
+      dbgrideh1.canvas.brush.Color:=$00CEFFFF ;
+      DBGrideh1.DefaultDrawColumnCell(Rect,DataCol,Column, State);
+    end; }
+end;
+
+procedure TMatUsage.Button3Click(Sender: TObject);
+begin
+printdbgrideh1.Preview;
+end;
+
+procedure TMatUsage.Query1CalcFields(DataSet: TDataSet);
+begin
+if not query1.fieldbyname('BLQty').isnull then
+  begin
+    query1.FieldByName('BLRate').Value:=query1.FieldByName('BLQty').Value*100/query1.FieldByName('AL_LLQty').Value  ;
+    query1.FieldByName('PreBL').Value:=query1.FieldByName('CLSL').Value*query1.FieldByName('BLQty').Value/query1.FieldByName('AL_LLQty').Value;
+  end; 
+if not query1.fieldbyname('NowBLQty').isnull then
+  begin
+    query1.FieldByName('NowBLRate').Value:=query1.FieldByName('NowBLQty').Value*100/query1.FieldByName('AL_NowLLQty').Value  ;
+  end;
+
+  //惠―羆计畐计∠惠ゼ计⌒ 惠祇ゼ祇计
+  //ダ琌は
+{
+if query1.fieldbyname('CLZMLB').value='Y' then
+  begin
+  //Qty:=a+((
+    query1.fieldbyname('StockQty').value:=query1.fieldbyname('KCQty').value-query1.fieldbyname('JGQty').value-query1.fieldbyname('RKQty').value
+                                          +query1.fieldbyname('NeedJGQty').value+query1.fieldbyname('LLQty').value+query1.fieldbyname('OnQty').value;
+  end
+  else
+    begin  
+      query1.fieldbyname('StockQty').value:=query1.fieldbyname('KCQty').value+query1.fieldbyname('JGQty').value-query1.fieldbyname('RKQty').value
+                                          -query1.fieldbyname('NeedJGQty').value+query1.fieldbyname('LLQty').value+query1.fieldbyname('OnQty').value;
+    end;  }
+
+end;
+
+procedure TMatUsage.Button2Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+
+try
+  eclApp:=CreateOleObject('Excel.Application');
+  WorkBook:=CreateOleObject('Excel.Sheet');
+except
+  Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+  Exit;
+end;
+
+try
+  WorkBook:=eclApp.workbooks.Add;
+  eclApp.Cells(1,1):='NO';
+  for   i:=1   to   query1.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=query1.fields[i-1].FieldName;
+    end;
+  query1.First;
+  j:=2;
+  while   not  query1.Eof   do
+    begin
+      eclApp.Cells(j,1):=j-1;
+      for   i:=1   to   query1.fieldcount   do
+        begin
+          eclApp.Cells(j,i+1):=query1.Fields[i-1].Value;
+          eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+        end;
+      query1.Next;
+      inc(j);
+    end;
+  eclapp.columns.autofit;
+  showmessage('Succeed.');
+  eclApp.Visible:=True;
+except
+  on   F:Exception   do
+    showmessage(F.Message);
+end;
+
+
+end;
+
+procedure TMatUsage.DBGridEh1EditButtonClick(Sender: TObject);
+begin
+
+MatUsage_SL:=TMatUsage_SL.create(self);
+if dbgrideh1.selectedfield.fieldname='CLSL' then
+  begin
+    with MatUsage_SL.Query1 do
+      begin
+        active:=false;
+        sql.Clear;
+        sql.add('select ZLZLS2.ZLBH,sum(ZLZLS2.CLSL) as CLSL  ');
+        sql.add('from ZLZLS2  with (nolock)  ');
+        sql.add('left join DDZL  with (nolock) on DDZL.ZLBH=ZLZLS2.ZLBH  ');
+        sql.add('where DDZL.YN='+''''+'1'+'''');
+        sql.add('      and DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('      and ZLZLS2.CLBH=:CLBH');
+        sql.add('      and ZLZLS2.CLSL<>0');
+        sql.add('group by ZLZLS2.ZLBH');
+        sql.add('order by ZLZLS2.ZLBH');
+        active:=true;
+        matusage_SL.DBGrideh1.columns[0].width:=100;
+        matusage_SL.DBGrideh1.columns[1].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[1].width:=60;
+      end;
+  end;
+if dbgrideh1.selectedfield.fieldname='NeedJGQty' then
+  begin
+    with MatUsage_SL.Query1 do
+      begin
+        active:=false;
+        sql.Clear;
+        sql.add('select ZL.ZLBH,ZL.CLSL,JG.NeedJGQty ') ;
+        sql.add('from (select ZLZLS2.ZLBH,sum(ZLZLS2.CLSL) as CLSL  ');
+        sql.add('      from ZLZLS2  with (nolock)  ');
+        sql.add('      left join DDZL  with (nolock) on DDZL.ZLBH=ZLZLS2.ZLBH  ');
+        sql.add('      where DDZL.YN='+''''+'1'+'''');
+        sql.add('            and DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('            and ZLZLS2.CLBH=:CLBH');
+        sql.add('            and ZLZLS2.CLSL<>0');
+        sql.add('       group by ZLZLS2.ZLBH) ZL');
+        sql.add('left join (select ZLZLS2.ZLBH,sum(ZLZLS2.CLSL) as NeedJGQty  ');
+        sql.add('           from ZLZLS2  with (nolock)');
+        sql.add('           left join DDZL  with (nolock) on DDZl.ZLBH=ZLZLS2.ZLBH');
+        sql.add('           where DDZL.YN='+''''+'1'+'''');
+        sql.add('             and DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('             and ZLZLS2.CLSL<>0');
+        sql.add('             and ZLZLS2.CLBH=:CLBH');
+        sql.add('             and (ZLZLS2.MJBH<>'+''''+'ZZZZZZZZZZ'+'''');
+        sql.add('                  or (ZLZLS2.MJBH='+''''+'ZZZZZZZZZZ'+''''+' and ZLZLS2.ZMLB='+''''+'Y'+''''+') )');
+        sql.add('           group by ZLZLS2.ZLBH) JG on JG.ZLBH=ZL.ZLBH');
+        sql.add('order by ZL.ZLBH ');
+        active:=true;
+        matusage_SL.DBGrideh1.columns[0].width:=100;
+        matusage_SL.DBGrideh1.columns[1].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[1].width:=60;
+        matusage_SL.DBGrideh1.columns[2].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[2].width:=60;
+      end;
+  end;
+if dbgrideh1.selectedfield.fieldname='CGQty' then
+  begin
+    with MatUsage_SL.Query1 do
+      begin
+        active:=false;
+        sql.Clear;     
+        sql.add('select ZL.ZLBH,ZL.CLSL,CG.CGQty,CG.CGDate,KC.KCUseQty   ') ;
+        sql.add('from (select ZLZLS2.ZLBH,sum(ZLZLS2.CLSL) as CLSL  ');
+        sql.add('      from ZLZLS2  with (nolock)  ');
+        sql.add('      left join DDZL  with (nolock) on DDZL.ZLBH=ZLZLS2.ZLBH  ');
+        sql.add('      where DDZL.YN='+''''+'1'+'''');
+        sql.add('            and DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('            and ZLZLS2.CLBH=:CLBH');
+        sql.add('            and ZLZLS2.CLSL<>0');
+        sql.add('       group by ZLZLS2.ZLBH) ZL');
+        sql.add('left join (select CGZLSS.ZLBH,max(CGZL.CGDate) as CGDate,sum(CGZLSS.Qty) as CGQty   ');
+        sql.add('           from CGZLSS  with (nolock)');
+        sql.Add('           left join CGZL  with (nolock) on CGZl.CGNO=CGZLSS.CGNO');
+        sql.add('           left join DDZL  with (nolock) on DDZL.ZLBH=CGZLSS.ZLBH');
+        sql.add('           where DDZL.YN='+''''+'1'+'''');
+        sql.add('                 and DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('                 and CGZLSS.CLBH=:CLBH ');
+        sql.add('                 and CGZLSS.Qty <>0');
+        sql.add('           group by CGZLSS.ZLBH  ');
+        sql.add('           union all');
+        sql.add('           select CGHZZLS.ZLBH,max(convert(smalldatetime,CGHZZLSS.dg_Date)) as CGDate,sum(CGHZZLS.dg_Qty) as CGQty');
+        sql.add('           from CGHZZLS with (nolock)');
+        sql.Add('           left join CGHZZLSS with (nolock)  on CGHZZLS.CGHZBH=CGHZZLSS.CGHZBH and CGHZZLS.CLBH=CGHZZLSS.CLBH and CGHZZLS.DGDH=CGHZZLSS.DGDH  and CGHZZLS.Size=CGHZZLSS.Size');
+        sql.add('           left join DDZL  with (nolock) on DDZL.ZLBH=CGHZZLS.ZLBH');
+        sql.add('           where DDZL.YN='+''''+'1'+'''');
+        sql.add('                 and DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('                 and CGHZZLS.CLBH=:CLBH');
+        sql.add('                 and CGHZZLS.dg_Qty<>0');
+        sql.add('            group by CGHZZLS.ZLBH) CG on ZL.ZLBH=CG.ZLBH');
+        sql.add('left join (select CGKCUSE.ZLBH,CGKCUSE.Qty as KCUseQty,CGKCUSE.CLBHYS ');
+        sql.add('           from CGKCUSE  ');
+        sql.add('           left join DDZL on DDZL.DDBH=CGKCUSE.ZLBH ');
+        sql.add('           where DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('                 and DDZL.YN='+''''+'1'+'''');
+        sql.add('                 and CGKCUSE.CLBH=:CLBH');
+        sql.add('           ) KC on KC.ZLBH=ZL.ZLBH ');
+        sql.Add('order by ZL.ZLBH');
+        active:=true;
+        matusage_SL.DBGrideh1.columns[0].width:=100;
+        matusage_SL.DBGrideh1.columns[1].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[1].width:=60;
+        matusage_SL.DBGrideh1.columns[2].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[2].width:=60;
+      end;
+  end;
+if dbgrideh1.selectedfield.fieldname='RKQty' then
+  begin
+    with MatUsage_SL.Query1 do
+      begin
+        active:=false;
+        sql.Clear;
+        sql.add('select ZL.ZLBH,ZL.CLSL,RK.RKQty ');
+        sql.add('from (select ZLZLS2.ZLBH,sum(ZLZLS2.CLSL) as CLSL  ');
+        sql.add('      from ZLZLS2  with (nolock)  ');
+        sql.add('      left join DDZL  with (nolock) on DDZL.ZLBH=ZLZLS2.ZLBH  ');
+        sql.add('      where DDZL.YN='+''''+'1'+'''');
+        sql.add('            and DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('            and ZLZLS2.CLBH=:CLBH');
+        sql.add('            and ZLZLS2.CLSL<>0');
+        sql.add('       group by ZLZLS2.ZLBH) ZL');
+        sql.add('left join (select KCRKS.CGBH as ZLBH,sum(KCRKS.Qty) as RKQty');
+        sql.add('           from KCRKS  with (nolock)');
+        sql.add('           left join DDZL  with (nolock) on DDZl.ZLBH=KCRKS.CGBH');
+        sql.add('           where DDZL.YN='+''''+'1'+'''');
+        sql.add('                 and DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('                 and KCRKS.CLBH=:CLBH ');
+        sql.add('                 and KCRKS.Qty<>0');
+        sql.add('           group by KCRKS.CGBH ');
+        sql.add('           union all');
+        sql.add('           SELECT EXZLSS.ZLBH,sum(EXZLSS.CK_Qty) as RKQty');
+        sql.add('           FROM EXZLSS');
+        sql.add('           left join DDZL  with (nolock) on DDZl.ZLBH=EXZLSS.ZLBH ');
+        sql.add('           where DDZL.YN='+''''+'1'+'''');
+        sql.add('                 and DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('                 and EXZLSS.CLDH =:CLBH');
+        sql.add('                 and EXZLSS.CK_Qty<>0');
+        sql.add('           group by EXZLSS.ZLBH) RK on ZL.ZLBH=RK.ZLBH');
+        sql.add('order by ZL.ZLBH');
+        active:=true;
+        matusage_SL.DBGrideh1.columns[0].width:=100;
+        matusage_SL.DBGrideh1.columns[1].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[1].width:=60;
+        matusage_SL.DBGrideh1.columns[2].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[2].width:=60;
+      end;
+  end;
+if dbgrideh1.selectedfield.fieldname='JGQty' then
+  begin
+    with MatUsage_SL.Query1 do
+      begin
+        active:=false;
+        sql.Clear;
+        sql.add('select ZL.ZLBH,ZL.NeedJGQty,JG.JGQty,ZL.CLBH,ZL.MJBH ');
+        
+        sql.add('from (select ZLZLS2.ZLBH,sum(ZLZLS2.CLSL) as NeedJGQty,ZLZLS2.CLBH,ZLZLS2.MJBH  ');
+        sql.add('      from ZLZLS2  with (nolock)');
+        sql.add('      left join DDZL  with (nolock) on DDZl.ZLBH=ZLZLS2.ZLBH');
+        sql.add('      where DDZL.YN='+''''+'1'+'''');
+        sql.add('            and DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('            and ZLZLS2.CLSL<>0');
+        if query1.fieldbyname('CLZMLB').value='Y' then
+          begin
+            sql.add('            and ZLZLS2.MJBH=:CLBH');
+          end ;
+        if query1.fieldbyname('CLZMLB').value='N' then
+          begin            
+            sql.add('            and ZLZLS2.CLBH=:CLBH');
+          end ;
+        sql.add('            and (ZLZLS2.MJBH<>'+''''+'ZZZZZZZZZZ'+'''');
+        sql.add('                 or (ZLZLS2.MJBH='+''''+'ZZZZZZZZZZ'+''''+' and ZLZLS2.ZMLB='+''''+'Y'+''''+') )');
+        sql.add('       group by ZLZLS2.ZLBH,ZLZLS2.CLBH,ZLZLS2.MJBH) ZL');
+        sql.add('left join ( ');
+        if query1.fieldbyname('CLZMLB').value='Y' then
+          begin
+            sql.add('         select JGZLSS.ZLBH,JGZLSS.CLBH as MJBH,sum(JGZLSS.Qty) as JGQty ');
+            sql.add('         from JGZLSS with (nolock)');
+            sql.add('         left join DDZL  with (nolock) on DDZL.ZLBH=JGZLSS.ZLBH');
+            sql.add('         where DDZL.YN='+''''+'1'+'''');
+            sql.add('               and DDZL.GSBH='+''''+main.edit2.text+'''');
+            sql.add('               and JGZLSS.CLBH=:CLBH');
+            sql.add('               and JGZLSS.Qty<>0');
+            sql.add('         group by JGZLSS.ZLBH,JGZLSS.CLBH ) JG on ZL.ZLBH=JG.ZLBH and ZL.MJBH=JG.MJBH');
+          end;
+        if query1.fieldbyname('CLZMLB').value='N' then
+          begin
+            sql.add('         select JGZLSS.ZLBH,sum(JGZLSS.Qty*JGZLS.Qty) as JGQty,JGZLS.ZMLB as CLBH');
+            sql.add('         from JGZLSS  with (nolock)');
+            sql.add('         left join DDZL  with (nolock) on DDZL.ZLBH=JGZLSS.ZLBH');
+            sql.add('         left join JGZLS  with (nolock) on JGZLS.CLBH=JGZLSS.CLBH and JGZLS.JGNO=JGZLSS.JGNO ');
+            sql.add('                                                         and JGZLS.ZMLB<>'+''''+'ZZZZZZZZZZ'+'''');
+            sql.add('         where DDZL.YN='+''''+'1'+'''');
+            sql.add('               and DDZL.GSBH='+''''+main.edit2.text+'''');
+            sql.add('               and JGZLS.ZMLB=:CLBH');
+            sql.add('               and JGZLSS.Qty<>0   ');
+            sql.add('         group by JGZLSS.ZLBH,JGZLS.ZMLB) JG on ZL.ZLBH=JG.ZLBH and ZL.CLBH=JG.CLBH');
+            sql.add('order by ZL.ZLBH,ZL.CLBH,ZL.MJBH ');
+          end;
+        active:=true;
+        matusage_SL.DBGrideh1.columns[0].width:=100;
+        matusage_SL.DBGrideh1.columns[1].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[1].width:=60;
+        matusage_SL.DBGrideh1.columns[2].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[2].width:=60;
+      end;
+  end;
+if dbgrideh1.selectedfield.fieldname='OnQty' then
+  begin
+    with MatUsage_SL.Query1 do
+      begin
+        active:=false;
+        sql.Clear;
+        sql.add('select Con_No,sum(isnull(EXQty,0)-isnull(Qty,0)) as OnQty  ');
+        sql.add('from (SELECT distinct hgzls.Con_No,exzls.cldh as CLBH,hgzls.xh,replace(hgzls.ctn,0,1)*hgzls.ck_qty as EXQty,KCRKS.Qty');
+        sql.add('      FROM hgzls  with (nolock)  ');
+        sql.add('      LEFT OUTER JOIN   exzls  with (nolock) on   hgzls.clbh = exzls.exno + exzls.xh');
+        sql.add('      left outer join exzl  with (nolock) on exzl.exno=exzls.exno and  exzl.exlb = '+''''+'B'+'''');
+        sql.add('      LEFT OUTER JOIN   clzl  with (nolock) ON exzls.cldh = clzl.cldh');
+        sql.add('      left join exzlss  with (nolock) on exzlss.exno=exzls.exno and exzlss.xh=exzls.xh');
+        sql.add('      left join KCRK  with (nolock) on KCRK.ZSNO=hgzls.con_no');
+        sql.add('      left join KCRKS  with (nolock) on KCRKS.RKNO=KCRk.RKNO and KCRKS.CGBH=hgzls.xh');
+        sql.add('      left join DDZL with (nolock)  on DDZl.ZLBH=exzlss.zlbh');
+        sql.add('      where convert(smalldatetime,hgzls.userdate)>getdate()-20');
+        sql.add('            and DDZL.YN='+''''+'1'+'''');
+        sql.add('            and DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('            and exzls.cldh=:CLBH');
+        sql.add('            and exzls.cldh is not null) exzls');
+        sql.add('where  isnull(EXQty,0)-isnull(Qty,0)<>0');
+        sql.add('group by Con_No');
+        active:=true; 
+        matusage_SL.DBGrideh1.columns[0].width:=100;
+        matusage_SL.DBGrideh1.columns[1].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[1].width:=60;
+      end;
+  end;
+if dbgrideh1.selectedfield.fieldname='LLQty' then
+  begin
+    with MatUsage_SL.Query1 do
+      begin
+        active:=false;
+        sql.Clear;
+        sql.add('select ZL.ZLBH,ZL.CLSL,LL.LLQty ');
+        sql.add('from (select ZLZLS2.ZLBH,sum(ZLZLS2.CLSL) as CLSL  ');
+        sql.add('      from ZLZLS2  with (nolock)  ');
+        sql.add('      left join DDZL  with (nolock) on DDZL.ZLBH=ZLZLS2.ZLBH  ');
+        sql.add('      where DDZL.YN='+''''+'1'+'''');
+        sql.add('            and DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('            and ZLZLS2.CLBH=:CLBH');
+        sql.add('            and ZLZLS2.CLSL<>0');
+        sql.add('       group by ZLZLS2.ZLBH) ZL');
+        sql.add('left join (select KCLLS.SCBH,sum(Qty) as LLQty ');
+        sql.add('           from KCLLS  with (nolock) ');
+        sql.add('           left join KCLL  with (nolock) on KCLL.LLNO=KCLLS.LLNO  ');
+        sql.add('           left join DDZL with (nolock)  on DDZL.ZLBH=KCLLS.SCBH');
+        sql.add('           where DDZL.YN='+''''+'1'+'''');
+        sql.add('                 and DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('                 and KCLLS.Qty<>0');
+        sql.add('                 and KCLLS.CLBH=:CLBH');
+        sql.add('                 and KCLL.CFMID<>'+''''+'NO'+'''');
+        sql.add('           group by KCLLS.SCBH) LL on ZL.ZLBH=LL.SCBH');
+        sql.add('order by ZL.ZLBH');
+        active:=true;  
+        matusage_SL.DBGrideh1.columns[0].width:=100;
+        matusage_SL.DBGrideh1.columns[1].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[1].width:=60;
+        matusage_SL.DBGrideh1.columns[2].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[2].width:=60;
+      end;
+  end;
+if dbgrideh1.selectedfield.fieldname='KCUseQty' then
+  begin
+    with MatUsage_SL.Query1 do
+      begin
+        active:=false;
+        sql.Clear;   
+        sql.add('select ZL.ZLBH,ZL.CLSL,KC.KCUseQty ');
+        sql.add('from (select ZLZLS2.ZLBH,sum(ZLZLS2.CLSL) as CLSL  ');
+        sql.add('      from ZLZLS2  with (nolock)  ');
+        sql.add('      left join DDZL  with (nolock) on DDZL.ZLBH=ZLZLS2.ZLBH  ');
+        sql.add('      where DDZL.YN='+''''+'1'+'''');
+        sql.add('            and DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('            and ZLZLS2.CLBH=:CLBH');
+        sql.add('            and ZLZLS2.CLSL<>0');
+        sql.add('       group by ZLZLS2.ZLBH) ZL');
+        sql.add('left join (select CGKCUSE.ZLBH,CGKCUSE.Qty as KCUseQty,CGKCUSE.CLBHYS ');
+        sql.add('           from CGKCUSE  ');
+        sql.add('           left join DDZL on DDZL.DDBH=CGKCUSE.ZLBH ');
+        sql.add('           where DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('                 and DDZL.YN='+''''+'1'+'''');
+        sql.add('                 and CGKCUSE.CLBH=:CLBH');
+        sql.add('           ) KC on KC.ZLBH=ZL.ZLBH ');
+        sql.add('order by ZL.ZLBH');
+        active:=true;
+        matusage_SL.DBGrideh1.columns[0].width:=100;
+        matusage_SL.DBGrideh1.columns[1].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[1].width:=60;
+        matusage_SL.DBGrideh1.columns[2].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[2].width:=60;
+      end;
+  end;  
+if dbgrideh1.selectedfield.fieldname='KCUseTQty' then
+  begin
+    with MatUsage_SL.Query1 do
+      begin
+        active:=false;
+        sql.Clear;  
+        sql.add('select CGKCUSE.ZLBH,CGKCUSE.Qty as KCUseTQty ,CGKCUSE.CLBH');
+        sql.add('from CGKCUSE  ');
+        sql.add('left join DDZL on DDZL.DDBH=CGKCUSE.ZLBH ');
+        sql.add('where DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('      and DDZL.YN='+''''+'1'+'''');
+        sql.add('      and CGKCUSE.CLBHYS=:CLBH');
+        sql.add('order by CGKCUSE.ZLBH');
+        active:=true; 
+        matusage_SL.DBGrideh1.columns[0].width:=100;
+        matusage_SL.DBGrideh1.columns[1].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[1].width:=60;  
+        matusage_SL.DBGrideh1.columns[2].width:=100;
+      end;
+  end;
+if dbgrideh1.selectedfield.fieldname='NowBLQty' then
+  begin
+    with MatUsage_SL.Query1 do
+      begin
+        active:=false;
+        sql.Clear;
+        sql.add('select ZLZLS2.ZLBH, ZLZLS2.CLSL,KCLLS.LLQty,sum(KCLLS.LLQty-ZLZLS2.CLSL) as NowBLQty   ');
+        sql.add('from (select ZLZLS2.ZLBH,sum(ZLZLS2.CLSL) as CLSL');
+        sql.add('      from ZLZLS2 with (nolock)');
+        sql.add('      left join DDZL  with (nolock) on ZLZLS2.ZLBH=DDZL.ZLBH');
+        sql.add('      where DDZL.YN='+''''+'1'+'''');
+        sql.add('            and DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('            and ZLZLS2.CLBH=:CLBH');
+        sql.add('            and ZLZLS2.MJBH='+''''+'ZZZZZZZZZZ'+'''');
+        sql.add('            and convert(smalldatetime,convert(varchar,DDZL.shipDate,111))>=getdate()-60');
+        sql.add('      group by ZLZLS2.ZLBH) ZLZLS2');
+        sql.add('left join (select KCLLS.SCBH as ZLBH,sum(KCLLS.Qty) as LLQty');
+        sql.add('           from KCLLS  with (nolock)');
+        sql.add('           left join KCLL  with (nolock) on KCLL.LLNO=KCLLS.LLNO');
+        sql.add('           left join DDZL  with (nolock) on DDZl.ZLBH=KCLLS.SCBH');
+        sql.add('           where DDZL.YN='+''''+'1'+'''');
+        sql.add('                 and KCLLS.Qty<>0');
+        sql.add('                 and KCLLS.CLBH=:CLBH');
+        sql.add('                 and KCLL.CFMID<>'+''''+'NO'+'''');
+        sql.add('                 and convert(smalldatetime,convert(varchar,DDZL.shipDate,111))>=getdate()-60');
+        sql.add('           group by KCLLS.SCBH ) KCLLS on KCLLS.ZLBH=ZLZLS2.ZLBH  ');
+        sql.Add('where KCLLS.LLQty is not null and KCLLS.LLQty<>0   ');
+        sql.add('group by ZLZLS2.ZLBH,ZLZLS2.CLSL,KCLLS.LLQty');
+        //sql.add('having sum(KCLLS.LLQty-ZLZLS2.CLSL)<>0');
+        sql.add('order by ZLZLS2.ZLBH');
+        active:=true;
+        matusage_SL.DBGrideh1.columns[0].width:=100;
+        matusage_SL.DBGrideh1.columns[1].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[1].width:=60;
+        matusage_SL.DBGrideh1.columns[2].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[2].width:=60;
+        matusage_SL.DBGrideh1.columns[3].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[3].width:=60;
+      end;
+  end;
+if dbgrideh1.selectedfield.fieldname='BLQty' then
+  begin
+    with MatUsage_SL.Query1 do
+      begin
+        active:=false;
+        sql.Clear;
+        sql.add('select ZLZLS2.ZLBH, ZLZLS2.CLSL,KCLLS.LLQty,sum(KCLLS.LLQty-ZLZLS2.CLSL) as BLQty   ');
+        sql.add('from (select ZLZLS2.ZLBH,sum(ZLZLS2.CLSL) as CLSL');
+        sql.add('      from ZLZLS2 with (nolock)');
+        sql.add('      left join DDZL  with (nolock) on ZLZLS2.ZLBH=DDZL.ZLBH');
+        sql.add('      where DDZL.YN<>'+''''+'1'+'''');
+        sql.add('            and DDZL.GSBH='+''''+main.edit2.text+'''');
+        sql.add('            and ZLZLS2.CLBH=:CLBH');
+        sql.add('            and ZLZLS2.MJBH='+''''+'ZZZZZZZZZZ'+'''');
+        sql.add('            and convert(smalldatetime,convert(varchar,DDZL.shipDate,111))>=getdate()-60');
+        sql.add('      group by ZLZLS2.ZLBH) ZLZLS2');
+        sql.add('left join (select KCLLS.SCBH as ZLBH,sum(KCLLS.Qty) as LLQty');
+        sql.add('           from KCLLS  with (nolock)');
+        sql.add('           left join KCLL  with (nolock) on KCLL.LLNO=KCLLS.LLNO');
+        sql.add('           left join DDZL  with (nolock) on DDZl.ZLBH=KCLLS.SCBH');
+        sql.add('           where DDZL.YN<>'+''''+'1'+'''');
+        sql.add('                 and KCLLS.Qty<>0');
+        sql.add('                 and KCLLS.CLBH=:CLBH');
+        sql.add('                 and KCLL.CFMID<>'+''''+'NO'+'''');
+        sql.add('                 and convert(smalldatetime,convert(varchar,DDZL.shipDate,111))>=getdate()-60');
+        sql.add('           group by KCLLS.SCBH ) KCLLS on KCLLS.ZLBH=ZLZLS2.ZLBH  ');
+        sql.Add('where KCLLS.LLQty is not null and KCLLS.LLQty<>0   ');
+        sql.add('group by ZLZLS2.ZLBH,ZLZLS2.CLSL,KCLLS.LLQty');
+        //sql.add('having sum(KCLLS.LLQty-ZLZLS2.CLSL)<>0');
+        sql.add('order by ZLZLS2.ZLBH');
+        active:=true;   
+        matusage_SL.DBGrideh1.columns[0].width:=100;
+        matusage_SL.DBGrideh1.columns[1].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[1].width:=60;
+        matusage_SL.DBGrideh1.columns[2].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[2].width:=60;
+        matusage_SL.DBGrideh1.columns[3].displayformat:='##,#0.0';
+        matusage_SL.DBGrideh1.columns[3].width:=60;
+      end;
+  end;
+MatUsage_SL.show;
+end;
+
+end.

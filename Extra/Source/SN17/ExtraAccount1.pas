@@ -1,0 +1,255 @@
+unit ExtraAccount1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls ,comobj,
+  GridsEh, DBGridEh,EhlibBDE,dateutils, ComCtrls, inifiles;
+
+type
+  TExtraAccount = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
+    Label4: TLabel;
+    Label6: TLabel;
+    Label2: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label10: TLabel;
+    Edit2: TEdit;
+    Edit1: TEdit;
+    Button1: TButton;
+    Edit3: TEdit;
+    Button2: TButton;
+    CBX1: TComboBox;
+    CBX2: TComboBox;
+    Button3: TButton;
+    Edit5: TEdit;
+    Edit6: TEdit;
+    Edit4: TEdit;
+    CBX3: TComboBox;
+    Matsite: TQuery;
+    Query1: TQuery;
+    Query1CKBH: TStringField;
+    Query1JGNO: TStringField;
+    Query1ZSYWJC: TStringField;
+    Query1CFMDate1: TDateTimeField;
+    Query1JGLX: TStringField;
+    Query1ZMLB: TStringField;
+    Query1YWPM: TStringField;
+    Query1DWBH: TStringField;
+    Query1CWBH: TStringField;
+    Query1Qty: TFloatField;
+    Query1VNPrice: TCurrencyField;
+    Query1VNACC: TFloatField;
+    Query1BL: TCurrencyField;
+    Query1HGBH: TStringField;
+    Query1UnitC: TStringField;
+    Query1RateC: TFloatField;
+    Query1USERDATE: TDateTimeField;
+    Query1USERID: TStringField;
+    Query1YN: TStringField;
+    DataSource1: TDataSource;
+    DBGrid1: TDBGridEh;
+    PC1: TPageControl;
+    TS1: TTabSheet;
+    DBGridEh1: TDBGridEh;
+    Query1ZLBH: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+    procedure readini();
+  public
+    VNPrice_DiplayFormat:string;
+    VNPrice_Decimal:Byte;
+    { Public declarations }
+  end;
+var
+  ExtraAccount: TExtraAccount;
+
+implementation
+uses main1, FunUnit;
+{$R *.dfm}
+procedure TExtraAccount.readini();
+var MyIni :Tinifile;
+    AppDir:string;
+begin
+  //
+  VNPrice_DiplayFormat:='#,##0';
+  VNPrice_Decimal:=0;
+  AppDir:=ExtractFilePath(Application.ExeName);
+  if FileExists(AppDir+'\ComName.ini')=true then
+  begin
+    try
+      MyIni := Tinifile.Create(AppDir+'\ComName.ini');
+      VNPrice_DiplayFormat:=MyIni.ReadString('VNPrice','DiplayFormat','#,##0');
+      VNPrice_Decimal:=strtoint(MyIni.ReadString('VNPrice','Decimal','0'));
+    finally
+      MyIni.Free;
+    end;
+  end;
+  TCurrencyField(Query1.FieldByName('VNPrice')).DisplayFormat:=VNPrice_DiplayFormat;
+  TCurrencyField(Query1.FieldByName('VNACC')).DisplayFormat:=VNPrice_DiplayFormat;
+end;
+//
+procedure TExtraAccount.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=Cafree;
+end;
+
+procedure TExtraAccount.FormDestroy(Sender: TObject);
+begin
+  ExtraAccount:=nil;
+end;
+
+procedure TExtraAccount.Button2Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+  if PC1.ActivePageIndex=0 then
+  begin
+    if query1.Active then
+    begin
+      if query1.recordcount=0 then
+      begin
+        showmessage('No record.');
+        abort;
+      end;
+    end else
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+
+    try
+    WorkBook:=eclApp.workbooks.Add;
+    eclApp.Cells(1,1):='NO';
+    for i:=0 to DBGrid1.Columns.Count-1 do
+    begin
+        eclApp.Cells(1,i+2):=DBGrid1.Columns[i].Title.Caption;
+    end;
+    query1.First;
+    j:=2;
+    while   not  query1.Eof   do
+    begin
+        eclApp.Cells(j,1):=j-1;
+        for i:=0 to DBGrid1.Columns.Count-1 do
+        begin
+            eclApp.Cells[j,i+2].NumberFormatLocal:='@';
+            eclApp.Cells(j,i+2):=DBGrid1.Fields[i].Value;
+            eclApp.Cells.Cells.item[j,i+2].font.size:='8';
+        end;
+        query1.Next;
+        inc(j);
+    end;
+    eclapp.columns.autofit;
+    showmessage('Succeed.');
+    eclApp.Visible:=True;
+  except
+    on   F:Exception   do
+      showmessage(F.Message);
+    end;
+  end;
+end;
+
+procedure TExtraAccount.Button1Click(Sender: TObject);
+var sdate,edate:Tdate;
+    y,m:integer;
+begin
+  if (CBX1.text='') or (CBX2.text='')  then
+  begin
+    showmessage('You have to select the year and month first.');
+    abort;
+  end;
+  y:=strtoint(CBX1.Text);
+  m:=strtoint(CBX2.Text);
+  if (y>2999) or (y<1900) then
+  begin
+    showmessage('Pls key in right year');
+    abort;
+  end;
+  if (m=0) or (m>12) then
+  begin
+    showmessage('Pls key in right month');
+    abort;
+  end;
+  sdate:=encodedate(y,m,1);
+  edate:=endofthemonth(sdate);
+  if PC1.ActivePageIndex=0 then
+  begin
+    with query1 do
+    begin
+      active:=false;
+      sql.Clear;
+      sql.Add('select A.*,B.VNPrice, A.Qty*b.VNPrice as VNACC,b.ZMLB,C.GSBH as CKBH,CLZL.YWPM,CLZL.DWBH,ZSZL.ZSYWJC,KCZLS.CWBH,C.JGLX, CLHG.HGBH,CLHG.UnitC,CLHG.RateC,B.Qty as BL, C.CFMDate1  ');
+      sql.add('  from JGZLSS A');
+      sql.Add('       left join JGZLS B on A.JGNO=B.JGNO ');
+      sql.Add('       left join JGZL C on C.JGNO=A.JGNO ');
+      sql.add('       left join CLZL on CLZL.CLDH=B.ZMLB ');
+      sql.add('       left join CLHG on CLHG.CLBH=B.ZMLB and Year(B.USERDATE)>=2017 ');
+      sql.add('       left join ZSZL on ZSZL.ZSDH=C.ZSBH ');
+      sql.add('       left join KCZLS on KCZLS.CLBH=B.ZMLB and KCZLS.CKBH=C.CKBH');
+      sql.add('       left join KCCK on KCCK.CKBH=C.CKBH ');
+      sql.add(' where B.ZMLB like '+''''+edit1.text+'%'+'''');
+      sql.add('       and CLZL.YWPM like '+''''+'%'+edit2.text+'%'+'''');
+      sql.add('       and CLZL.YWPM like '+''''+'%'+edit3.text+'%'+'''');
+      sql.add('       and isnull(KCZLS.CWBH,'+''''+''+''''+') like '+''''+edit4.text+'%'+'''');
+      sql.add('       and B.JGNO like '+''''+edit5.text+'%'+'''');
+      sql.add('       and ZSZL.ZSYWJC like '+''''+'%'+edit6.Text+'%'+'''');
+      sql.add('       and C.YN='+''''+'5'+'''');
+      sql.add('       and KCCK.GSBH='+''''+main.edit2.Text+'''');
+      sql.add('       and Convert(smalldatetime,convert(varchar,C.CFMDate1,111)) between ');
+      sql.add(        ''''+formatdatetime('yyyy/MM/dd',sdate)+''''+' and ' +''''+formatdatetime('yyyy/MM/dd',edate)+'''');
+      if CBX3.Text<>'' then
+      begin
+        sql.Add('and KCCK.CKBH ='+''''+CBX3.text+'''');
+      end;
+      sql.add('order by B.ZMLB ,C.ZSBH,C.JGNO');
+      //memo1.text:=sql.text;
+      funcObj.WriteErrorLog(sql.Text);
+      active:=true;
+    end;
+  end;
+
+end;
+
+procedure TExtraAccount.FormCreate(Sender: TObject);
+begin
+  with MatSite do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select CKBH from KCCK ');
+    sql.add('where GSBH='+''''+main.Edit2.Text+'''');
+    sql.add('order by CKBH');
+    active:=true;
+    CBX3.Items.Clear;
+    while not eof do
+      begin
+        CBX3.Items.Add(fieldbyname('CKBH').AsString);
+        next;
+      end;
+    active:=false;
+  end;
+  readini();
+end;
+
+end.

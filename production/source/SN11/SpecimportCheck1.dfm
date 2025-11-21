@@ -1,0 +1,368 @@
+object SpecimportCheck: TSpecimportCheck
+  Left = 329
+  Top = 206
+  Width = 729
+  Height = 405
+  BorderIcons = [biSystemMenu]
+  Caption = 'SpecimportCheck'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 16
+  object pnTop: TPanel
+    Left = 0
+    Top = 0
+    Width = 713
+    Height = 57
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object lbDDBH: TLabel
+      Left = 8
+      Top = 24
+      Width = 42
+      Height = 16
+      Caption = 'DDBH:'
+    end
+    object lbXieMing: TLabel
+      Left = 152
+      Top = 24
+      Width = 51
+      Height = 16
+      Caption = 'XieMing:'
+    end
+    object lbCustomer: TLabel
+      Left = 312
+      Top = 24
+      Width = 60
+      Height = 16
+      Caption = 'Customer:'
+    end
+    object lbSKU: TLabel
+      Left = 472
+      Top = 24
+      Width = 37
+      Height = 16
+      Caption = 'SKU#:'
+    end
+    object edDDBH: TEdit
+      Left = 56
+      Top = 16
+      Width = 89
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 0
+    end
+    object edXieMing: TEdit
+      Left = 208
+      Top = 16
+      Width = 97
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 1
+    end
+    object bnQuery: TButton
+      Left = 624
+      Top = 16
+      Width = 65
+      Height = 33
+      Caption = 'QUERY'
+      TabOrder = 2
+      OnClick = bnQueryClick
+    end
+    object edCustomer: TEdit
+      Left = 376
+      Top = 16
+      Width = 81
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 3
+    end
+    object edSKU: TEdit
+      Left = 512
+      Top = 16
+      Width = 89
+      Height = 24
+      TabOrder = 4
+    end
+  end
+  object gdMain: TDBGridEh
+    Left = 0
+    Top = 57
+    Width = 713
+    Height = 309
+    Align = alClient
+    DataSource = dsMain
+    Flat = False
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -13
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'DDBH'
+        Footers = <>
+        Width = 89
+      end
+      item
+        EditButtons = <>
+        FieldName = 'XieMing'
+        Footers = <>
+        Width = 162
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ARTICLE'
+        Footers = <>
+        Width = 122
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ShipDate'
+        Footers = <>
+        Width = 70
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Pairs'
+        Footers = <>
+        Width = 59
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DDZT'
+        Footers = <>
+        Width = 33
+      end
+      item
+        EditButtons = <>
+        FieldName = 'USERDATE'
+        Footers = <>
+        Width = 84
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CQDH'
+        Footers = <>
+        Width = 44
+      end>
+  end
+  object qrMain: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'use LIY_SHOE'
+      'select DDZL.*,XXZL.XieMing,ZLZL.CQDH'
+      'from DDZL'
+      
+        'left join XXZL on XXZl.XieXing=DDZl.XieXIng and XXZl.SheHao=DDZL' +
+        '.SheHao'
+      'left join ZLZL on ZLZL.ZLBH=DDZL.ZLBH')
+    Left = 480
+    Top = 144
+    object qrMainDDBH: TStringField
+      FieldName = 'DDBH'
+      FixedChar = True
+      Size = 15
+    end
+    object qrMainXieXing: TStringField
+      FieldName = 'XieXing'
+      FixedChar = True
+      Size = 15
+    end
+    object qrMainSheHao: TStringField
+      FieldName = 'SheHao'
+      FixedChar = True
+      Size = 5
+    end
+    object qrMainARTICLE: TStringField
+      FieldName = 'ARTICLE'
+      FixedChar = True
+    end
+    object qrMainCCGB: TStringField
+      FieldName = 'CCGB'
+      FixedChar = True
+      Size = 1
+    end
+    object qrMainKHBH: TStringField
+      FieldName = 'KHBH'
+      FixedChar = True
+      Size = 4
+    end
+    object qrMainBB: TStringField
+      FieldName = 'BB'
+      FixedChar = True
+      Size = 3
+    end
+    object qrMainKHPO: TStringField
+      FieldName = 'KHPO'
+      FixedChar = True
+      Size = 25
+    end
+    object qrMainVersion: TSmallintField
+      FieldName = 'Version'
+    end
+    object qrMainTrader: TStringField
+      FieldName = 'Trader'
+      FixedChar = True
+      Size = 4
+    end
+    object qrMainTraderPO: TStringField
+      FieldName = 'TraderPO'
+      FixedChar = True
+      Size = 19
+    end
+    object qrMainDDLB: TStringField
+      FieldName = 'DDLB'
+      FixedChar = True
+      Size = 1
+    end
+    object qrMainDDZT: TStringField
+      FieldName = 'DDZT'
+      FixedChar = True
+      Size = 1
+    end
+    object qrMainCPLB: TStringField
+      FieldName = 'CPLB'
+      FixedChar = True
+      Size = 1
+    end
+    object qrMainBZFS: TStringField
+      FieldName = 'BZFS'
+      FixedChar = True
+      Size = 1
+    end
+    object qrMainDest: TStringField
+      FieldName = 'Dest'
+      FixedChar = True
+      Size = 4
+    end
+    object qrMainDDGB: TStringField
+      FieldName = 'DDGB'
+      FixedChar = True
+      Size = 4
+    end
+    object qrMainDDRQ: TStringField
+      FieldName = 'DDRQ'
+      FixedChar = True
+      Size = 8
+    end
+    object qrMainJYTJ: TStringField
+      FieldName = 'JYTJ'
+      FixedChar = True
+      Size = 4
+    end
+    object qrMainFKTJ: TStringField
+      FieldName = 'FKTJ'
+      FixedChar = True
+      Size = 4
+    end
+    object qrMainShipDate: TStringField
+      FieldName = 'ShipDate'
+      FixedChar = True
+      Size = 8
+    end
+    object qrMainPairs: TIntegerField
+      FieldName = 'Pairs'
+    end
+    object qrMainTotals: TFloatField
+      FieldName = 'Totals'
+    end
+    object qrMainZLBH: TStringField
+      FieldName = 'ZLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object qrMainGSDH: TStringField
+      FieldName = 'GSDH'
+      FixedChar = True
+      Size = 3
+    end
+    object qrMainCFNO: TStringField
+      FieldName = 'CFNO'
+      FixedChar = True
+    end
+    object qrMainUSERID: TStringField
+      FieldName = 'USERID'
+      FixedChar = True
+    end
+    object qrMainUSERDATE: TStringField
+      FieldName = 'USERDATE'
+      FixedChar = True
+      Size = 8
+    end
+    object qrMainDDCZ: TStringField
+      FieldName = 'DDCZ'
+      FixedChar = True
+    end
+    object qrMainDDPACKSM: TStringField
+      FieldName = 'DDPACKSM'
+      FixedChar = True
+      Size = 150
+    end
+    object qrMainLABELCHARGE: TFloatField
+      FieldName = 'LABELCHARGE'
+    end
+    object qrMainSC01: TStringField
+      FieldName = 'SC01'
+      FixedChar = True
+      Size = 1
+    end
+    object qrMainSC02: TStringField
+      FieldName = 'SC02'
+      FixedChar = True
+      Size = 1
+    end
+    object qrMainPUMAPO: TStringField
+      FieldName = 'PUMAPO'
+      FixedChar = True
+      Size = 25
+    end
+    object qrMainPairs1: TIntegerField
+      FieldName = 'Pairs1'
+    end
+    object qrMainbalance: TStringField
+      FieldName = 'balance'
+      FixedChar = True
+      Size = 1
+    end
+    object qrMainXieMing: TStringField
+      FieldName = 'XieMing'
+      FixedChar = True
+      Size = 50
+    end
+    object qrMainCQDH: TStringField
+      FieldName = 'CQDH'
+      FixedChar = True
+      Size = 3
+    end
+  end
+  object dsMain: TDataSource
+    DataSet = qrMain
+    Left = 512
+    Top = 144
+  end
+end

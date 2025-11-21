@@ -1,0 +1,62 @@
+unit QRCode1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, StdCtrls;
+
+type
+  TQRCodeForm = class(TForm)
+    PaintBox1: TPaintBox;
+    LabelAssetID: TLabel;
+    procedure PaintBox1Paint(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  QRCodeForm: TQRCodeForm;
+
+implementation
+
+uses DelOther_TSCD1;
+
+{$R *.dfm}
+
+procedure TQRCodeForm.PaintBox1Paint(Sender: TObject);
+var
+  Scale: Double;
+begin
+  PaintBox1.Canvas.Brush.Color := clWhite;
+  PaintBox1.Canvas.FillRect(Rect(0, 0, PaintBox1.Width, PaintBox1.Height));
+
+  if ((DelOther_TSCD.QRCodeBitmap.Width > 0) and (DelOther_TSCD.QRCodeBitmap.Height > 0)) then
+  begin
+    if (PaintBox1.Width < PaintBox1.Height) then
+    begin
+      Scale := PaintBox1.Width / DelOther_TSCD.QRCodeBitmap.Width;
+    end else
+    begin
+      Scale := PaintBox1.Height / DelOther_TSCD.QRCodeBitmap.Height;
+    end;
+    PaintBox1.Canvas.StretchDraw(Rect(0, 0, Trunc(Scale * DelOther_TSCD.QRCodeBitmap.Width), Trunc(Scale * DelOther_TSCD.QRCodeBitmap.Height)), DelOther_TSCD.QRCodeBitmap);
+  end;
+  DelOther_TSCD.QRCodeBitmap.SaveToFile('tmp.bmp');
+end;
+
+procedure TQRCodeForm.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+procedure TQRCodeForm.FormDestroy(Sender: TObject);
+begin
+ // QRCodeForm := nil;
+end;
+
+end.

@@ -1,0 +1,95 @@
+unit CD_SMDDS1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ComCtrls, ExtCtrls, GridsEh, DBGridEh, DB, DBTables;
+
+type
+  TCD_SMDDS = class(TForm)
+    DBGridEh1: TDBGridEh;
+    Panel2: TPanel;
+    Button2: TButton;
+    SMDDS: TQuery;
+    DS1: TDataSource;
+    Button1: TButton;
+    SMDDSDDBH: TStringField;
+    SMDDSZLBH: TStringField;
+    SMDDSBWBH: TStringField;
+    SMDDSSIZE: TStringField;
+    SMDDSXXCC: TStringField;
+    SMDDSCLBH: TStringField;
+    SMDDSQty: TIntegerField;
+    SMDDSDQty: TIntegerField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  CD_SMDDS: TCD_SMDDS;
+
+implementation
+  uses CutDispatch1, FunUnit;
+{$R *.dfm}
+
+procedure TCD_SMDDS.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action:=CaFree;
+end;
+
+procedure TCD_SMDDS.FormDestroy(Sender: TObject);
+begin
+  CD_SMDDS:=nil;
+end;
+
+procedure TCD_SMDDS.FormCreate(Sender: TObject);
+begin
+  SMDDS.Active:=true;
+end;
+
+procedure TCD_SMDDS.Button1Click(Sender: TObject);
+var bm:Tbookmark;
+    i:integer;
+    bookmarklist:tbookmarklistEh;
+begin
+
+  SMDDS.disablecontrols;
+  bm:=SMDDS.getbookmark;
+  bookmarklist:=DBGridEh1.selectedrows;
+  try
+      if bookmarklist.count>0 then
+      begin
+
+            for i:=0 to bookmarklist.count-1 do
+            begin
+              SMDDS.gotobookmark(pointer(bookmarklist[i]));
+              with CutDispatch.QCDDetailS do
+              begin
+                edit;
+                fieldbyname('DDBH').Value:=SMDDS.FieldByName('DDBH').AsString;
+                fieldbyname('Qty').Value:=SMDDS.FieldByName('Qty').AsString;
+                post;
+                insert;
+              end;
+            end;
+            showmessage('You have finish copy!');
+            Close;
+      end;
+  finally
+    begin
+      SMDDS.gotobookmark(bm);
+      SMDDS.freebookmark(bm);
+      SMDDS.enablecontrols;
+
+    end;
+  end;
+end;
+
+end.

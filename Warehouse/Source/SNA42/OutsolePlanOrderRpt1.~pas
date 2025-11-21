@@ -1,0 +1,699 @@
+unit OutsolePlanOrderRpt1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, GridsEh, DBGridEh, DB, DBTables, StdCtrls, ComCtrls,
+  Spin, Comobj, Menus;
+
+type
+  TOutsolePlanOrderRpt = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label5: TLabel;
+    Label3: TLabel;
+    BuyNoEdit: TEdit;
+    Button2: TButton;
+    DDBHEdit: TEdit;
+    Button3: TButton;
+    DDMHEdit: TEdit;
+    OutsoleQry: TQuery;
+    DS1: TDataSource;
+    DDZLSQry: TQuery;
+    DS3: TDataSource;
+    QTemp: TQuery;
+    Panel2: TPanel;
+    DBGridEh1: TDBGridEh;
+    Splitter1: TSplitter;
+    OutsoleSQry: TQuery;
+    DS2: TDataSource;
+    OutsoleQryDDMH: TStringField;
+    OutsoleQryPairs: TIntegerField;
+    OutsoleQryFlag1: TIntegerField;
+    Splitter2: TSplitter;
+    DBGridEh2: TDBGridEh;
+    DBGridEh3: TDBGridEh;
+    OutsoleSQryDDMH: TStringField;
+    OutsoleSQryGJCC: TStringField;
+    OutsoleSQryPairs: TIntegerField;
+    OutsoleSQryOutSoleQty: TFloatField;
+    OutsoleSQryOutsoleQty1Day: TFloatField;
+    OutsoleSQryFlag1: TIntegerField;
+    DDZLSQryBUYNO: TStringField;
+    DDZLSQryDDBH: TStringField;
+    DDZLSQryARTICLE: TStringField;
+    DDZLSQryDDZT: TStringField;
+    DDZLSQryRYTYPE: TStringField;
+    DDZLSQryCC: TStringField;
+    DDZLSQryGJCC: TStringField;
+    DDZLSQryQuantity: TIntegerField;
+    DDZLSQryDDRQ: TDateTimeField;
+    DDZLSQryDDRQ7: TDateTimeField;
+    DDZLSQryShipDate: TDateTimeField;
+    DDZLSQryDays: TIntegerField;
+    DDZLSQryDDMH: TStringField;
+    DDZLSQryDDGB: TStringField;
+    DDZLSQryYN: TStringField;
+    DDZLSQryRN: TFloatField;
+    DDZLSQryOutsoleQty: TFloatField;
+    DDZLSQryPlanDate: TDateTimeField;
+    DDZLSQrySumQty: TIntegerField;
+    DDZLSQryRDDate: TDateTimeField;
+    DDZLSQryFlag: TIntegerField;
+    DDZLSQrySumQty1: TIntegerField;
+    DDZLSQryRDDate1: TDateTimeField;
+    DDZLSQryFlag1: TIntegerField;
+    DDZLSQryProdDays: TFloatField;
+    DDZLSQryProdDays1: TFloatField;
+    OutsoleQryProdDays1: TFloatField;
+    Label4: TLabel;
+    CBX1: TComboBox;
+    PopupMenu2: TPopupMenu;
+    mnu1: TMenuItem;
+    WHCKBox: TCheckBox;
+    GroupBox1: TGroupBox;
+    Label8: TLabel;
+    SpinEdit1: TSpinEdit;
+    Label7: TLabel;
+    SpinEdit2: TSpinEdit;
+    Label6: TLabel;
+    SpinEdit3: TSpinEdit;
+    N1: TMenuItem;
+    mnu2: TMenuItem;
+    Label2: TLabel;
+    RYTypeCB: TComboBox;
+    PriorityCK: TCheckBox;
+    DDZLSQryOutsoleQty1Day: TFloatField;
+    OutsoleSQryProdDays1: TFloatField;
+    OutsoleSQryNeedQtyOutsole: TFloatField;
+    PopupMenu1: TPopupMenu;
+    Excel1: TMenuItem;
+    PopupMenu: TPopupMenu;
+    MenuItem1: TMenuItem;
+    ExcelQuery: TQuery;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure DBGridEh1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure DBGridEh3GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure mnu1Click(Sender: TObject);
+    procedure DBGridEh2GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure mnu2Click(Sender: TObject);
+    procedure Excel1Click(Sender: TObject);
+    procedure MenuItem1Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+  private
+    LastMon:string; //上個月(Month)
+    LastYear:string;//上個月(Year)
+    STLastMonDate:string; //上個月初
+    EDLastMonDate:string; //上個月底
+    //
+    LastMon2:string;//上上一個月(Month) 月結累積加總計算
+    LastYear2:string;//上上一個月(Year)
+    //
+    STDate:string; //當月月初
+    EDDate:string; //今天
+    { Private declarations }
+    procedure GetDateParam();
+    procedure ClickQuery();
+  public
+    { Public declarations }
+  end;
+
+var
+  OutsolePlanOrderRpt: TOutsolePlanOrderRpt;
+
+implementation
+  uses funUnit, main1;
+{$R *.dfm}
+//當月天數
+function   DaysOfItsMonth(ADate:   TDateTime):   Word;
+var
+   Y,M,D:Word;
+begin
+    DecodeDate(ADate,Y,M,D);
+    ADate:=EncodeDate(Y,M,1);
+    Result:=Trunc(IncMonth(ADate,1)-ADate);
+end;
+procedure TOutsolePlanOrderRpt.FormDestroy(Sender: TObject);
+begin
+  OutsolePlanOrderRpt:=nil;
+end;
+
+procedure TOutsolePlanOrderRpt.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action:=CaFree;
+end;
+
+//取得時間參數
+procedure TOutsolePlanOrderRpt.GetDateParam();
+var myYear, myMonth, myDay : Word;
+    tmpDate:TDate;
+begin
+  //取得上個月起始和結束日期
+  tmpDate:=incmonth(Date(),-1);
+  DecodeDate(tmpDate, myYear, myMonth, myDay);
+  LastMon:=Format('%.2d',[myMonth]);
+  LastYear:=Format('%.4d',[myYear]);
+  STLastMonDate:=FormatDateTime('YYYY/MM/DD', EncodeDate(myYear, myMonth, 1));  //月初日期
+  EDLastMonDate:=FormatDateTime('YYYY/MM/DD', EncodeDate(myYear, myMonth, DaysOfItsMonth(tmpDate)));//月底
+  //取得上上個月用來月結資料累積加總
+  tmpDate:=incmonth(Date(),-2);
+  DecodeDate(tmpDate, myYear, myMonth, myDay);
+  LastMon2:=Format('%.2d',[myMonth]);
+  LastYear2:=Format('%.4d',[myYear]);
+  //取得當月初和今天日期
+  DecodeDate(Date(), myYear, myMonth, myDay);
+  STDate:=FormatDateTime('YYYY/MM/DD', EncodeDate(myYear, myMonth, 1));  //月初日期
+  EDDate:=FormatDateTime('YYYY/MM/DD', Date());//基礎日
+end;
+
+procedure TOutsolePlanOrderRpt.Button2Click(Sender: TObject);
+begin
+  ClickQuery();
+end;
+
+procedure TOutsolePlanOrderRpt.ClickQuery();
+var OrderBySQL:string;
+begin
+  //
+  if ((BuyNoEdit.Text='') and (DDBHEdit.Text='')  and (WHCKBox.Checked=false) )  then
+  begin
+    showmessage('Please input BuyNO or PlanDate or DDBH');
+    Exit;
+  end;
+  GetDateParam();
+  //
+  if PriorityCK.Checked=false then
+     OrderBySQL:='PARTITION BY DDMH,GJCC  ORDER BY DDRQ,shipdate,GJCC'
+  else
+     OrderBySQL:='PARTITION BY DDMH,GJCC  ORDER BY shipdate,DDRQ,GJCC';
+  with QTemp do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('if object_id(''tempdb..#tmpDDMH'') is not null');
+    SQL.Add('begin   drop table #tmpDDMH end     ');
+    SQL.Add('Select DDZL.*,OutsoleS.DQty as OutsoleQty,OutsoleS.DQty*OutsoleS.OutsoleQty1Day as OutsoleQty1Day  into #tmpDDMH  from (');
+    SQL.Add('Select DDZL.BUYNO,DDZL.DDBH,DDZL.ARTICLE,DDZL.DDZT,DDZL.RYTYPE,DDZLS.CC,XXGJS.GJCC,DDZLS.Quantity,DDZL.DDRQ, ');
+    SQL.Add('       DateAdd(Day,'+inttostr(SpinEdit1.Value)+',DDZL.DDRQ) as DDRQ7,DDZL.ShipDate,DateDiff(Day,DDZL.DDRQ,DDZL.ShipDate) as Days,XXZL.DDMH,DDZL.DDGB,DDZL.YN,ROW_NUMBER() over ('+OrderBySQL+') as RN from DDZL');
+    SQL.Add('left join DDZLs on DDZLS.DDBH=DDZL.DDBH ');
+    SQL.Add('left join SCZLDate on SCZLDate.ZLBH=DDZL.DDBH ');
+    SQL.Add('Left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao ');
+    SQL.Add('left join XXGJS on xxgjs.XieXing=DDZL.XieXing and xxgjs.GJLB=101 and xxgjs.XXCC=DDZLs.CC ');
+    SQL.Add('Where DDZL.DDZT<>''C'' and DDZL.DDLB<>''B'' and DDZL.GSBH='''+main.Edit2.Text+''' ');
+    if BuyNOEdit.Text<>'' then
+    SQL.Add('  and DDZL.BUYNO like '''+BuyNOEdit.Text+'%'' ');
+    if DDBHEdit.Text<>'' then
+    SQL.Add('  and DDZL.DDBH like '''+DDBHEdit.Text+'%'' ');
+    if DDMHEdit.Text<>'' then
+    SQL.Add('  and XXZL.DDMH like '''+DDMHEdit.Text+'%'' ');
+    if RYTypeCB.ItemIndex=1 then
+      SQL.Add(' and IsNull(DDZL.RYTYPE,'''')<>''SLT'' ');
+    if RYTypeCB.ItemIndex=2 then
+      SQL.Add(' and IsNull(DDZL.RYTYPE,'''')=''SLT'' ');
+    if WHCKBox.Checked=true then
+    SQL.Add('  and DDZL.YN=1 and DDZL.Shipdate>GetDate()-60 ');
+    SQL.Add('    ) DDZL');
+    SQL.Add('Left join (');
+    SQL.Add('  select OutsoleS.*,IsNull(OutsoleSCBZCL.MDPM,CLZL.YWPM) as YWPM,OutsoleSCBZCL.Qty as OutsoleQty1Day from (');
+    SQL.Add('  select CLBH,SIZ,Sum(RKQty) as DQty from (');
+    SQL.Add('  select OSRK.CKBH,OSRKSS.CLBH,OSRKSS.SIZ,SUM(OSRKSS.Qty) as RKQty from OSRKSS,OSRK ');
+    SQL.Add('  where OSRKSS.RKNO=OSRK.RKNO  and OSRK.CKBH='''+CBX1.Text+''' and OSRKSS.ZLBH=''NEWL'' and convert(smalldatetime,convert(varchar,OSRK.UserDate,111)) between '''+STDate+''' and '''+EDDate+'''  ');
+    SQL.Add('  Group by OSRK.CKBH,OSRKSS.CLBH,OSRKSS.SIZ ');
+    SQL.Add('  Union All ');
+    SQL.Add('  select CKBH,CLBH,SIZ,QTY as OutsoleRem from Outsolemonth where CKBH='''+CBX1.Text+'#L'' and KCYEAR='''+LastYear+''' and KCMonth='''+LastMon+'''  ) as tmpRKTLFL ');
+    SQL.Add('  group by CKBH,CLBH,SIZ ) OutsoleS');
+    SQL.Add('  left join CLZL on CLZL.cldh=OutSoleS.CLBH');
+    SQL.Add('  left join OutsoleSCBZCL on OutsoleSCBZCL.CLDH=OutSoleS.CLBH');
+    SQL.Add(') OutsoleS on OutsoleS.YWPM=DDZL.DDMH and OutsoleS.SIZ=DDZL.GJCC ');
+    //
+    SQL.Add('if object_id(''tempdb..#tmpDDMH2'') is not null');
+    SQL.Add('begin   drop table #tmpDDMH2 end  ');
+    SQL.Add('select tmpDDMH.*,DATEADD(day,SumQty/OutsoleQty1Day,DDRQ7) as RDDate,DATEADD(day,SumQty/(OutsoleQty1Day/OutsoleQty),DDRQ7) as RDDateSD,case when DATEADD(day,SumQty/OutsoleQty1Day,DDRQ7)<=PlanDate then 1 else 0 end as Flag  into #tmpDDMH2');
+    SQL.Add('from (');
+    SQL.Add('SELECT *');
+    SQL.Add('      ,case when IsNull(a1.RYTYPE,'''')<>''SLT'' then DATEADD(day,'+inttostr(SpinEdit2.Value)+',shipdate) else  DATEADD(day,'+inttostr(SpinEdit3.Value)+',shipdate) end as PlanDate');
+    SQL.Add('      ,(select SUM(Quantity) from #tmpDDMH b1 where b1.RN<=a1.RN and b1.GJCC=a1.GJCC and a1.DDMH=b1.DDMH) as SumQty  ');
+    SQL.Add('FROM #tmpDDMH a1 ) tmpDDMH');
+    SQL.Add('order by DDRQ,PlanDate');
+    //funcObj.WriteErrorLog(sql.Text);
+    ExecSQL();
+  end;
+  //
+  with OutsoleQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select DDMH,Sum(Quantity) as Pairs,Min(Flag1) as Flag1,MAX(ProdDays1) as ProdDays1 from (');
+    SQL.Add('select tmpDDMH.*,DATEADD(day,SumQty1/OutsoleQty1Day,DDRQ7) as RDDate1,Round(SumQty1/Convert(float,OutsoleQty1Day),2) as ProdDays1,case when DATEADD(day,SumQty1/OutsoleQty1Day,DDRQ7)<=PlanDate then 1 else 0 end as Flag1 ');
+    SQL.Add('from (');
+    SQL.Add('SELECT *');
+    SQL.Add('      ,(select SUM(Quantity) from #tmpDDMH2 b1 where b1.RN<=a1.RN and b1.RDDate>=a1.DDRQ7 and b1.GJCC=a1.GJCC  and a1.DDMH=b1.DDMH) as SumQty1 ');
+    SQL.Add('FROM #tmpDDMH2 a1');
+    SQL.Add('where  1=1 ');
+    //SQL.Add(' and IsNull(a1.GJCC,'''')<>'''' and IsNull(a1.DDMH,'''')<>'''' and a1.OutsoleQty is not null and a1.OutsoleQty1Day is not null ');
+    SQL.Add(' ) tmpDDMH ) tmpDDMH');
+    SQL.Add('Group by DDMH ');
+    SQL.Add('order by MIN(Flag1),DDMH ');
+    //funcObj.WriteErrorLog(SQL.Text);
+    Active:=true;
+  end;
+  //
+  with OutsoleSQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select DDMH,GJCC,Sum(Quantity) as Pairs,OutSoleQty ,OutsoleQty1Day,MAX(ProdDays1) as ProdDays1 ,MIN(Flag1) as Flag1');
+    SQL.Add('       ,case when Round(max(SumQtySD/(OutsoleQty1Day/OutsoleQty)/Datediff(day,DDRQ7,PlanDate)),0)=0 then 1 else Round(max(SumQtySD/(OutsoleQty1Day/OutsoleQty)/Datediff(day,DDRQ7,PlanDate)),0) end as NeedQtyOutsole from (');
+    SQL.Add('select tmpDDMH.*,DATEADD(day,SumQty1/OutsoleQty1Day,DDRQ7) as RDDate1,Round(SumQty1/Convert(float,OutsoleQty1Day),2) as ProdDays1,case when DATEADD(day,SumQty1/OutsoleQty1Day,DDRQ7)<=PlanDate then 1 else 0 end as Flag1 ');
+    SQL.Add('from (');
+    SQL.Add('SELECT *');
+    SQL.Add('      ,(select SUM(Quantity) from #tmpDDMH2 b1 where b1.RN<=a1.RN and b1.RDDate>=a1.DDRQ7 and b1.GJCC=a1.GJCC  and a1.DDMH=b1.DDMH) as SumQty1 ');
+    SQl.Add('            ,(select SUM(Quantity) from #tmpDDMH2 b1 where b1.RN<=a1.RN and b1.RDDateSD>=a1.DDRQ7 and b1.GJCC=a1.GJCC  and a1.DDMH=b1.DDMH) as SumQtySD  ');
+    SQL.Add('FROM #tmpDDMH2 a1');
+    SQL.Add('where a1.DDMH=:DDMH ');
+    SQL.Add(' ) tmpDDMH ) tmpDDMH');
+    SQL.Add('Group by DDMH,GJCC,OutsoleQty1Day,OutSoleQty ');
+    SQL.Add('order by GJCC asc ');
+    //funcObj.WriteErrorLog(SQL.Text);
+    Active:=true;
+  end;
+  //
+  with DDZLSQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select tmpDDMH.*,DATEADD(day,SumQty1/OutsoleQty1Day,DDRQ7) as RDDate1,case when DATEADD(day,SumQty1/OutsoleQty1Day,DDRQ7)<=PlanDate then 1 else 0 end as Flag1,');
+    SQL.Add('       Round(SumQty/Convert(float,OutsoleQty1Day),2) as ProdDays,Round(SumQty1/Convert(float,OutsoleQty1Day),2) as ProdDays1');
+    SQL.Add('from (');
+    SQL.Add('SELECT *');
+    SQL.Add('      ,(select SUM(Quantity) from #tmpDDMH2 b1 where b1.RN<=a1.RN and b1.RDDate>=a1.DDRQ7 and b1.GJCC=a1.GJCC  and a1.DDMH=b1.DDMH) as SumQty1 ');
+    SQL.Add('FROM #tmpDDMH2 a1');
+    SQL.Add('where a1.DDMH=:DDMH and a1.GJCC=:GJCC ');
+    SQL.Add(' ) tmpDDMH');
+    SQL.Add('where 1=1');
+    SQL.Add('order by RN');
+    //funcObj.WriteErrorLog(SQL.Text);
+    Active:=true;
+  end;
+
+end;
+procedure TOutsolePlanOrderRpt.FormCreate(Sender: TObject);
+begin
+  with QTemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select CKBH from KCCK ');
+    sql.add('where GSBH='+''''+main.edit2.text+'''');
+    sql.add('order by CKBH ');
+    active:=true;
+    CBX1.items.clear;
+    while not eof do
+    begin
+      CBX1.items.add(fieldbyname('CKBH').AsString);
+      Next;
+    end;
+    CBX1.itemindex:=0;
+    active:=false;
+  end;
+
+end;
+
+procedure TOutsolePlanOrderRpt.DBGridEh1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if OutsoleQry.FieldByName('ProdDays1').AsString='' then
+  begin
+    DBGridEh1.canvas.font.color:=clBlue;
+  end;
+  if OutsoleQry.FieldByName('Flag1').AsString='0' then
+  begin
+    DBGridEh1.canvas.font.color:=clred;
+  end;
+end;
+
+procedure TOutsolePlanOrderRpt.DBGridEh3GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if DDZLSQry.FieldByName('ProdDays1').AsString='' then
+  begin
+    DBGridEh3.canvas.font.color:=clBlue;
+  end;
+  if DDZLSQry.FieldByName('Flag1').AsString='0' then
+  begin
+    DBGridEh3.canvas.font.color:=clred;
+  end;
+end;
+
+procedure TOutsolePlanOrderRpt.mnu1Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j:integer;
+begin
+
+  if DDZLSQry.Active then
+  begin
+    if OutsoleQry.recordcount=0 then
+    begin
+     showmessage('No record.');
+     abort;
+    end;
+  end else
+  begin
+    showmessage('No record.');
+    abort;
+  end;
+  //
+  try
+    eclApp:=CreateOleObject('Excel.Application');
+    WorkBook:=CreateOleObject('Excel.Sheet');
+  except
+    Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+    Exit;
+  end;
+  try
+    WorkBook:=eclApp.workbooks.Add;
+    eclApp.Cells(1,1):='NO';
+    for   i:=1   to   DDZLSQry.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=DDZLSQry.fields[i-1].FieldName;
+    end;
+    DDZLSQry.First;
+    j:=2;
+    while   not  DDZLSQry.Eof   do
+    begin
+        eclApp.Cells(j,1):=j-1;
+        for   i:=1   to   DDZLSQry.fieldcount   do
+        begin
+            eclApp.Cells(j,i+1):=DDZLSQry.Fields[i-1].Value;
+        end;
+        DDZLSQry.Next;
+        inc(j);
+    end;
+    eclapp.columns.autofit;
+    showmessage('Succeed.');
+    eclApp.Visible:=True;
+  except
+    on   F:Exception   do
+      showmessage(F.Message);
+  end;
+
+end;
+
+procedure TOutsolePlanOrderRpt.DBGridEh2GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if OutsoleSQry.FieldByName('ProdDays1').AsString='' then
+  begin
+    DBGridEh2.canvas.font.color:=clred;
+  end;
+  if OutsoleSQry.FieldByName('Flag1').AsString='0' then
+  begin
+    DBGridEh2.canvas.font.color:=clred;
+  end;  
+end;
+
+procedure TOutsolePlanOrderRpt.mnu2Click(Sender: TObject);
+begin
+  //
+  if OutsoleQry.Active=true then
+  begin
+    mnu2.Checked:=mnu2.Checked xor true;
+    if mnu2.Checked=false then
+    begin
+      with DDZLSQry do
+      begin
+        Active:=false;
+        SQL.Clear;
+        SQL.Add('select tmpDDMH.*,DATEADD(day,SumQty1/OutsoleQty1Day,DDRQ7) as RDDate1,case when DATEADD(day,SumQty1/OutsoleQty1Day,DDRQ7)<=PlanDate then 1 else 0 end as Flag1,');
+        SQL.Add('       Round(SumQty/Convert(float,OutsoleQty1Day),2) as ProdDays,Round(SumQty1/Convert(float,OutsoleQty1Day),2) as ProdDays1');
+        SQL.Add('from (');
+        SQL.Add('SELECT *');
+        SQL.Add('      ,(select SUM(Quantity) from #tmpDDMH2 b1 where b1.RN<=a1.RN and b1.RDDate>=a1.DDRQ7 and b1.GJCC=a1.GJCC  and a1.DDMH=b1.DDMH) as SumQty1 ');
+        SQL.Add('FROM #tmpDDMH2 a1');
+        SQL.Add('where a1.DDMH=:DDMH and a1.GJCC=:GJCC ');
+        SQL.Add(' ) tmpDDMH');
+        SQL.Add('where 1=1');
+        SQL.Add('order by RN');
+        //funcObj.WriteErrorLog(SQL.Text);
+        Active:=true;
+      end;
+    end else
+    begin
+      with DDZLSQry do
+      begin
+        Active:=false;
+        SQL.Clear;
+        SQL.Add('select * from (');
+        SQL.Add('select tmpDDMH.*,DATEADD(day,SumQty1/OutsoleQty1Day,DDRQ7) as RDDate1,case when DATEADD(day,SumQty1/OutsoleQty1Day,DDRQ7)<=PlanDate then 1 else 0 end as Flag1,');
+        SQL.Add('       Round(SumQty/Convert(float,OutsoleQty1Day),2) as ProdDays,Round(SumQty1/Convert(float,OutsoleQty1Day),2) as ProdDays1');
+        SQL.Add('from (');
+        SQL.Add('SELECT *');
+        SQL.Add('      ,(select SUM(Quantity) from #tmpDDMH2 b1 where b1.RN<=a1.RN and b1.RDDate>=a1.DDRQ7 and b1.GJCC=a1.GJCC  and a1.DDMH=b1.DDMH) as SumQty1 ');
+        SQL.Add('FROM #tmpDDMH2 a1');
+        SQL.Add('where a1.DDMH=:DDMH and a1.GJCC=:GJCC ');
+        SQL.Add(' ) tmpDDMH');
+        SQL.Add(') tmpDDMH where Flag1=0 ');
+        SQL.Add('order by RN');
+        //funcObj.WriteErrorLog(SQL.Text);
+        Active:=true;
+      end;
+    end;
+  end;
+end;
+
+procedure TOutsolePlanOrderRpt.Excel1Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j:integer;
+begin
+
+  if OutsoleSQry.Active then
+  begin
+    if OutsoleSQry.recordcount=0 then
+    begin
+     showmessage('No record.');
+     abort;
+    end;
+  end else
+  begin
+    showmessage('No record.');
+    abort;
+  end;
+  //
+  try
+    eclApp:=CreateOleObject('Excel.Application');
+    WorkBook:=CreateOleObject('Excel.Sheet');
+  except
+    Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+    Exit;
+  end;
+  try
+    DDZLSQry.Active:=false;
+    WorkBook:=eclApp.workbooks.Add;
+    eclApp.Cells(1,1):='NO';
+    for   i:=1   to   OutsoleSQry.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=OutsoleSQry.fields[i-1].FieldName;
+    end;
+    OutsoleSQry.First;
+    j:=2;
+    while   not  OutsoleSQry.Eof   do
+    begin
+        eclApp.Cells(j,1):=j-1;
+        for   i:=1   to   OutsoleSQry.fieldcount   do
+        begin
+            eclApp.Cells(j,i+1):=OutsoleSQry.Fields[i-1].Value;
+        end;
+        OutsoleSQry.Next;
+        inc(j);
+    end;
+    eclapp.columns.autofit;
+    showmessage('Succeed.');
+    eclApp.Visible:=True;
+    DDZLSQry.Active:=true;
+  except
+    on   F:Exception   do
+      showmessage(F.Message);
+  end;
+
+
+end;
+
+procedure TOutsolePlanOrderRpt.MenuItem1Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j:integer;
+begin
+
+  if OutsoleQry.Active then
+  begin
+    if OutsoleQry.recordcount=0 then
+    begin
+     showmessage('No record.');
+     abort;
+    end;
+  end else
+  begin
+    showmessage('No record.');
+    abort;
+  end;
+  //
+  try
+    eclApp:=CreateOleObject('Excel.Application');
+    WorkBook:=CreateOleObject('Excel.Sheet');
+  except
+    Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+    Exit;
+  end;
+  try
+    OutsoleSQry.Active:=false;
+    DDZLSQry.Active:=false;
+    WorkBook:=eclApp.workbooks.Add;
+    eclApp.Cells(1,1):='NO';
+    for   i:=1   to   OutsoleQry.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=OutsoleQry.fields[i-1].FieldName;
+    end;
+    OutsoleQry.First;
+    j:=2;
+    while   not  OutsoleQry.Eof   do
+    begin
+        eclApp.Cells(j,1):=j-1;
+        for   i:=1   to   OutsoleQry.fieldcount   do
+        begin
+            eclApp.Cells(j,i+1):=OutsoleQry.Fields[i-1].Value;
+        end;
+        OutsoleQry.Next;
+        inc(j);
+    end;
+    eclapp.columns.autofit;
+    showmessage('Succeed.');
+    eclApp.Visible:=True;
+    DDZLSQry.Active:=true;
+    OutsoleSQry.Active:=true;
+  except
+    on   F:Exception   do
+      showmessage(F.Message);
+  end;
+
+
+end;
+
+procedure TOutsolePlanOrderRpt.Button3Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j:integer;
+begin
+  if OutsoleQry.Active then
+  begin
+    if OutsoleQry.recordcount=0 then
+    begin
+     showmessage('No record.');
+     Exit;
+    end;
+  end else
+  begin
+    showmessage('No record.');
+    Exit;
+  end;
+
+  with QTemp  do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select distinct GJCC ');
+    SQL.Add('from #tmpDDMH2 where GJCC<>'''' ');
+    SQL.Add('order by GJCC ');
+    Active:=true;
+  end;
+  with ExcelQuery do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select * from (');
+    SQL.Add('Select DDZL.DDBH,DDZL.Article,DDZL.shipdate,#tmpDDMH2.DDMH,0 as ''LB''');
+    QTemp.First;
+    while not QTemp.Eof do
+    begin
+      SQL.Add('  ,Sum(case when GJCC='''+QTemp.FieldByName('GJCC').AsString+''' then Quantity end ) as '''+QTemp.FieldByName('GJCC').AsString+''' ');
+      QTemp.Next;
+    end;
+    SQL.Add('from #tmpDDMH2');
+    SQL.Add('left join DDZL on DDZL.DDBH=#tmpDDMH2.DDBH');
+    SQL.Add('Group by DDZL.DDBH,DDZL.Article,DDZL.shipdate,#tmpDDMH2.DDMH');
+    SQL.Add('union all');
+    SQL.Add('Select ''Total Pairs'' as DDBH,null as Article,null as shipdate,DDMH,1 as ''LB''');
+    QTemp.First;
+    while not QTemp.Eof do
+    begin
+      SQL.Add('  ,Sum(case when GJCC='''+QTemp.FieldByName('GJCC').AsString+''' then Quantity end ) as '''+QTemp.FieldByName('GJCC').AsString+''' ');
+      QTemp.Next;
+    end;
+    SQL.Add('from #tmpDDMH2');
+    SQL.Add('Group by #tmpDDMH2.DDMH');
+    SQL.Add('union all ');
+    SQL.Add('Select ''Output Per Day'' as DDBH,null as Article,null as shipdate,DDMH,2 as ''LB''');
+    QTemp.First;
+    while not QTemp.Eof do
+    begin
+      SQL.Add('  ,Sum(case when GJCC='''+QTemp.FieldByName('GJCC').AsString+''' then OutsoleQty1Day/OutsoleQty end ) as '''+QTemp.FieldByName('GJCC').AsString+''' ');
+      QTemp.Next;
+    end;
+    SQL.Add('from #tmpDDMH2');
+    SQL.Add('Group by #tmpDDMH2.DDMH ) Outsole');
+    SQL.Add('order by DDMH,LB,shipdate ');
+    //funcObj.WriteErrorLog(sql.Text);
+    Active:=true;
+  end;
+  //
+  //
+  try
+    eclApp:=CreateOleObject('Excel.Application');
+    WorkBook:=CreateOleObject('Excel.Sheet');
+  except
+    Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+    Exit;
+  end;
+  try
+    WorkBook:=eclApp.workbooks.Add;
+    for   i:=1   to   ExcelQuery.fieldcount   do
+    begin
+      eclApp.Cells(1,i):=ExcelQuery.fields[i-1].FieldName;
+    end;
+    ExcelQuery.First;
+    j:=2;
+    while   not  ExcelQuery.Eof   do
+    begin
+        for   i:=1   to   ExcelQuery.fieldcount   do
+        begin
+            eclApp.Cells(j,i):=ExcelQuery.Fields[i-1].Value;
+        end;
+        ExcelQuery.Next;
+        inc(j);
+
+    end;
+    //outline
+    for i:=1 to 4 do
+    begin
+      eclApp.range[eclApp.cells[1,1],eclApp.cells[j,ExcelQuery.fieldcount]].borders[i].linestyle:=1;
+    end;
+    eclapp.columns.autofit;
+    showmessage('Succeed.');
+    eclApp.Visible:=True;
+    ExcelQuery.Active:=false;
+  except
+    on   F:Exception   do
+      showmessage(F.Message);
+  end;
+  
+end;
+
+end.

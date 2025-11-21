@@ -1,0 +1,2 @@
+Select VCLID,VCLName_VN as Langeuage from BLanguage WHERE  MKID = '00' and mainForm='main'
+Select VCLID,VCLName_VN as Langeuage from BLanguage WHERE  MKID = '00' and mainForm='main'

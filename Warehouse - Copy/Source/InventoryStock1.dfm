@@ -1,0 +1,234 @@
+object InventoryStock: TInventoryStock
+  Left = 276
+  Top = 207
+  Width = 870
+  Height = 500
+  Caption = 'InventoryStock'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  PixelsPerInch = 120
+  TextHeight = 16
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 852
+    Height = 57
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -17
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 208
+      Top = 20
+      Width = 85
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Select :'
+    end
+    object Label2: TLabel
+      Left = 0
+      Top = 20
+      Width = 85
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'CLBH:'
+    end
+    object CB1: TComboBox
+      Left = 296
+      Top = 16
+      Width = 81
+      Height = 28
+      Style = csDropDownList
+      ItemHeight = 20
+      ItemIndex = 0
+      TabOrder = 0
+      Text = '1'
+      Items.Strings = (
+        '1'
+        '2'
+        '3'
+        '6'
+        '12'
+        '24')
+    end
+    object Button1: TButton
+      Left = 400
+      Top = 16
+      Width = 81
+      Height = 33
+      Caption = 'Query'
+      TabOrder = 1
+      OnClick = Button1Click
+    end
+    object Button2: TButton
+      Left = 488
+      Top = 16
+      Width = 81
+      Height = 33
+      Caption = 'Print'
+      TabOrder = 2
+      OnClick = Button2Click
+    end
+    object Button3: TButton
+      Left = 576
+      Top = 16
+      Width = 81
+      Height = 33
+      Caption = 'Excel'
+      TabOrder = 3
+      OnClick = Button3Click
+    end
+    object Edit1: TEdit
+      Left = 88
+      Top = 16
+      Width = 113
+      Height = 28
+      CharCase = ecUpperCase
+      TabOrder = 4
+    end
+  end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 57
+    Width = 852
+    Height = 396
+    Align = alClient
+    DataSource = DS1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -17
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -17
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'CLBH'
+        Width = 83
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'YWPM'
+        Width = 416
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DWBH'
+        Width = 56
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'QTY'
+        Width = 60
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CWHL'
+        Width = 63
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'VNPrice'
+        Width = 71
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'VNACC'
+        Width = 67
+        Visible = True
+      end>
+  end
+  object DS1: TDataSource
+    DataSet = Query1
+    Left = 240
+    Top = 96
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select KCCLMONTH.*,CLZL.YWPM,CLZL.DWBH from KCCLMONTH '
+      'left join CLZL on KCCLMONTH.CLBH=CLZL.CLDH '
+      'where not exists(select KCLLS.CLBH from KCLLS '
+      '          where KCLLS.CLBH=KCCLMONTH.CLBH '
+      '          and KCLLS.USERDATE>='#39'2008/04/01'#39')'
+      'and not exists(select KCRKS.CLBH from KCRKS '
+      '          where KCRKS.CLBH=KCCLMONTH.CLBH '
+      '          and KCRKS.USERDATE>='#39'2008/04/01'#39')'
+      'and not exists(select JGZLS.CLBH from JGZLS '
+      '          where JGZLS.CLBH=KCCLMONTH.CLBH '
+      '          and JGZLS.USERDATE>='#39'2008/04/01'#39')'
+      'and not exists(select CGZLS.CLBH from CGZLS '
+      '          where CGZLS.CLBH=KCCLMONTH.CLBH '
+      '          and CGZLS.USERDATE>='#39'2008/04/01'#39')'
+      'and KCCLMONTH.KCYEAR='#39'2008'#39
+      'and KCCLMONTH.KCMONTH='#39'03'#39
+      'order by KCCLMONTH.CLBH ')
+    Left = 208
+    Top = 96
+    object Query1CLBH: TStringField
+      FieldName = 'CLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object Query1YWPM: TStringField
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object Query1DWBH: TStringField
+      FieldName = 'DWBH'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1QTY: TCurrencyField
+      FieldName = 'QTY'
+      DisplayFormat = '##,#0.00'
+    end
+    object Query1CWHL: TIntegerField
+      FieldName = 'CWHL'
+      DisplayFormat = '##,#0'
+    end
+    object Query1VNPrice: TFloatField
+      FieldName = 'VNPrice'
+      DisplayFormat = '##,#0'
+    end
+    object Query1VNACC: TFloatField
+      FieldName = 'VNACC'
+      DisplayFormat = '##,#0'
+    end
+  end
+  object Query2: TQuery
+    DatabaseName = 'DB'
+    Left = 304
+    Top = 104
+  end
+end

@@ -1,0 +1,571 @@
+object DelOther_O_CL: TDelOther_O_CL
+  Left = 323
+  Top = 284
+  Width = 1164
+  Height = 470
+  BorderIcons = [biSystemMenu]
+  Caption = 'DelOther_O_CL'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Splitter1: TSplitter
+    Left = 781
+    Top = 57
+    Height = 382
+    Align = alRight
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 1156
+    Height = 57
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 9
+      Top = 19
+      Width = 76
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'MatNo:'
+    end
+    object Label2: TLabel
+      Left = 208
+      Top = 19
+      Width = 86
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'VN Name:'
+    end
+    object Label3: TLabel
+      Left = 429
+      Top = 19
+      Width = 81
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'TW Name:'
+    end
+    object Button1: TButton
+      Left = 650
+      Top = 9
+      Width = 81
+      Height = 33
+      Caption = 'Query'
+      TabOrder = 2
+      OnClick = Button1Click
+    end
+    object Edit2: TEdit
+      Left = 296
+      Top = 16
+      Width = 129
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 1
+      OnKeyPress = Edit2KeyPress
+    end
+    object EDIT1: TEdit
+      Left = 88
+      Top = 16
+      Width = 121
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 0
+      OnKeyPress = EDIT1KeyPress
+    end
+    object Edit3: TEdit
+      Left = 512
+      Top = 16
+      Width = 129
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 3
+      OnKeyPress = Edit3KeyPress
+    end
+    object CB1: TCheckBox
+      Left = 743
+      Top = 12
+      Width = 97
+      Height = 17
+      Caption = 'KCQty>0'
+      Checked = True
+      State = cbChecked
+      TabOrder = 4
+    end
+    object CB2: TCheckBox
+      Left = 743
+      Top = 32
+      Width = 226
+      Height = 17
+      Caption = 'Show Stok Depart Detail'
+      TabOrder = 5
+      OnClick = CB2Click
+    end
+  end
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 57
+    Width = 781
+    Height = 382
+    Align = alClient
+    DataSource = DS1
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -12
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    ParentFont = False
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -15
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    OnDblClick = DBGridEh1DblClick
+    OnKeyPress = DBGridEh1KeyPress
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'cldh'
+        Footers = <>
+        Title.Caption = 'MatNo'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+      end
+      item
+        EditButtons = <>
+        FieldName = 'cllb'
+        Footers = <>
+        Title.Caption = 'Class'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+      end
+      item
+        EditButtons = <>
+        FieldName = 'dwbh'
+        Footers = <>
+        Title.Caption = 'Unit'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ywpm'
+        Footers = <>
+        Title.Caption = 'MatEN'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 94
+      end
+      item
+        EditButtons = <>
+        FieldName = 'zwpm'
+        Footers = <>
+        Title.Caption = 'MatCN'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 162
+      end
+      item
+        EditButtons = <>
+        FieldName = 'tyjh'
+        Footers = <>
+        Title.Caption = 'Stop'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 51
+      end
+      item
+        Color = clMoneyGreen
+        EditButtons = <>
+        FieldName = 'KCQty'
+        Footers = <>
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+      end
+      item
+        EditButtons = <>
+        FieldName = 'UnLLQty'
+        Footers = <>
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+      end
+      item
+        Color = 11908607
+        EditButtons = <>
+        FieldName = 'AvailQty'
+        Footers = <>
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+      end>
+  end
+  object DBGridEh2: TDBGridEh
+    Left = 784
+    Top = 57
+    Width = 372
+    Height = 382
+    Align = alRight
+    DataSource = DS2
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -12
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    ParentFont = False
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -15
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Visible = False
+    OnDblClick = DBGridEh1DblClick
+    OnKeyPress = DBGridEh1KeyPress
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'CKBH'
+        Footers = <>
+        Width = 45
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DepID'
+        Footers = <>
+        Width = 61
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Qty'
+        Footers = <>
+        Width = 60
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DepName'
+        Footers = <>
+        Width = 88
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DepMemo'
+        Footers = <>
+        Width = 75
+      end>
+  end
+  object DS1: TDataSource
+    DataSet = Query1
+    Left = 424
+    Top = 128
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'select CLZL.CLDH,CLZL.CLLB,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,CLZL.TY' +
+        'JH,KCZLS.KCQty,UnKCLL.UnLLQty,(KCZLS.KCQty-IsNull(UnKCLL.UnLLQty' +
+        ',0) )as AvailQty from CLZL '
+      'left join  KCZLS on KCZLS.CLBH=CLZL.CLDh and KCZLS.CKBH='#39'VTXX'#39
+      'left join ('
+      
+        '   select KCLLS.CLBH,Sum(KCLLS.TempQty) as UnLLQty from KCLLS,KC' +
+        'LL where  KCLLS.LLNO=KCLL.LLNO and KCLL.CFMID='#39'NO'#39' and KCLL.CKBH' +
+        ' in ('#39'VTXW'#39','#39'VTXX'#39','#39'VTXY'#39','#39'VTXZ'#39') Group by KCLLS.CLBH ) UnKCLL o' +
+        'n UnKCLL.CLBH=CLZL.CLDH'
+      'where CLZL.CLDH like'#39'%'#39
+      '      and CLZL.YWPM like '#39'%%'#39
+      '      and CLZL.ZWPM like '#39'%%'#39
+      '      and ((CLZL.TYJH<>'#39'Y'#39')or (TYJH is null))'
+      '      and IsNull(KCQty,0)>0'
+      'order by CLZL.CLDH desc')
+    Left = 424
+    Top = 160
+    object Query1cldh: TStringField
+      DisplayWidth = 12
+      FieldName = 'cldh'
+      Origin = 'DB.clzl.cldh'
+      FixedChar = True
+      Size = 10
+    end
+    object Query1cllb: TStringField
+      DisplayWidth = 6
+      FieldName = 'cllb'
+      Origin = 'DB.clzl.cllb'
+      FixedChar = True
+      Size = 3
+    end
+    object Query1ywpm: TStringField
+      DisplayWidth = 229
+      FieldName = 'ywpm'
+      Origin = 'DB.clzl.ywpm'
+      FixedChar = True
+      Size = 200
+    end
+    object Query1zwpm: TStringField
+      FieldName = 'zwpm'
+      Origin = 'DB.clzl.zwpm'
+      FixedChar = True
+      Size = 200
+    end
+    object Query1dwbh: TStringField
+      DisplayWidth = 6
+      FieldName = 'dwbh'
+      Origin = 'DB.clzl.dwbh'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1KCQty: TFloatField
+      FieldName = 'KCQty'
+      DisplayFormat = '##,#0.0'
+    end
+    object Query1tyjh: TStringField
+      FieldName = 'tyjh'
+      Origin = 'DB.clzl.tyjh'
+      FixedChar = True
+      Size = 1
+    end
+    object Query1UnLLQty: TCurrencyField
+      FieldName = 'UnLLQty'
+      DisplayFormat = '##,#0.0'
+    end
+    object Query1AvailQty: TCurrencyField
+      FieldName = 'AvailQty'
+      DisplayFormat = '##,#0.0'
+    end
+  end
+  object Query2: TQuery
+    DatabaseName = 'DB'
+    DataSource = DS1
+    SQL.Strings = (
+      
+        'Select KCCLMONTH_Dep.CKBH,KCCLMONTH_Dep.CLBH,KCCLMONTH_Dep.DepID' +
+        ',Sum(KCCLMONTH_Dep.Qty) as Qty,IsNull(Bdepartment.DepName,'#39'Stock' +
+        #39') as DepName,IsNull(Bdepartment.DepMemo,'#39#24235#23384#39') as DepMemo '
+      'from ('
+      
+        'Select CKBH, CLBH, Case when Qty<0 then '#39'ZZZZZZZZZZ'#39' else DepID ' +
+        'end as DepID, Qty from ('#9' '
+      'Select CKBH, CLBH, DepID, Sum(Convert(float,Qty)) as Qty  from ('
+      'Select CKBH,CLBH,DepID,Qty,'#39'1'#39' as SB'
+      'from KCCLMONTH_BDepartment'
+      'where KCYEAR='#39'2023'#39' and KCMONTH='#39'02'#39' '
+      '      and KCCLMONTH_BDepartment.CKBH in  ('#39'VTXX'#39','#39'VTXY'#39','#39'VTXZ'#39')'
+      '      and KCCLMONTH_BDepartment.CKBH='#39'VTXX'#39' '
+      #9'     and KCCLMONTH_BDepartment.CLBH=:CLDH'
+      
+        #9'     and (KCCLMONTH_BDepartment.DepID='#39'VP01'#39' or KCCLMONTH_BDepa' +
+        'rtment.DepID='#39'ZZZZZZZZZZ'#39') '
+      'Union all'
+      
+        'Select KCRK.CKBH,KCRKS.CLBH,IsNull(SGDH.DepID,IsNull(CGZLSS.Memo' +
+        ','#39'ZZZZZZZZZZ'#39')) as DepID,Sum(IsNull(KCRKSS.Qty, KCRKS.Qty)) as Q' +
+        'ty,'#39'2'#39' as SB'
+      'from KCRK'
+      'left join KCRKS on KCRK.RKNO=KCRKS.RKNO'
+      
+        'left join KCRKSS on KCRKSS.RKNO=KCRKS.RKNO and KCRKSS.CLBH=KCRKS' +
+        '.CLBH and KCRKSS.CGBH=KCRKS.CGBH and KCRKSS.RKSB=KCRKS.RKSB'
+      'left join SGDH on SGDH.SGNO=KCRKSS.CGBH'
+      
+        'left join CGZLSS on CGZLSS.CGNO=KCRK.ZSNO and CGZLSS.ZLBH=KCRKSS' +
+        '.CGBH  and CGZLSS.CLBH=KCRKSS.CLBH and CGZLSS.XXCC=KCRKSS.SIZE a' +
+        'nd CGZLSS.Stage='#39'TVu'#39' '
+      
+        'where  Convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))' +
+        ' between '
+      #9'     '#9#39'2023/03/01'#39'and '#39'2023/03/31'#39' '
+      '        and KCRK.CKBH='#39'VTXX'#39' and KCRKS.CLBH is not null'
+      #9'       and KCRKS.CLBH=:CLDH'
+      
+        #9'       and (IsNull(SGDH.DepID,IsNull(CGZLSS.Memo,'#39'ZZZZZZZZZZ'#39'))' +
+        '='#39'VP01'#39' or IsNull(SGDH.DepID,IsNull(CGZLSS.Memo,'#39'ZZZZZZZZZZ'#39'))='#39 +
+        'ZZZZZZZZZZ'#39')'
+      '        and KCRK.CKBH in  ('#39'VTXX'#39','#39'VTXY'#39','#39'VTXZ'#39')'
+      
+        'Group by KCRK.CKBH,KCRKS.CLBH,IsNull(SGDH.DepID,IsNull(CGZLSS.Me' +
+        'mo,'#39'ZZZZZZZZZZ'#39')) '
+      'Union all'
+      
+        'Select KCLL.CKBH,KCLLS.CLBH,KCLL.DepID,Sum(-1* KCLLS.Qty) as Qty' +
+        ' ,'#39'3'#39' as SB '
+      'from KCLL'
+      'left join KCLLS on KCLL.LLNO=KCLLS.LLNO'
+      
+        'where  KCLL.CFMID<>'#39'NO'#39' and Convert(smalldatetime,convert(varcha' +
+        'r,KCLL.CFMDATE,111)) between '
+      #9'     '#9#39'2023/03/01'#39' and '#39'2023/03/31'#39' '
+      '        and KCLL.CKBH='#39'VTXX'#39' and KCLLS.CLBH is not null '
+      #9'       and KCLLS.CLBH=:CLDH'
+      '        and KCLL.CKBH in  ('#39'VTXX'#39','#39'VTXY'#39','#39'VTXZ'#39')'
+      '        and (KCLL.DepID='#39'VP01'#39' or KCLL.DepID='#39'ZZZZZZZZZZ'#39') '
+      'Group by  KCLL.CKBH,KCLLS.CLBH,KCLL.DepID  '
+      'Union all '
+      
+        'Select KCLL_Dep_DB.CKBH,KCLL_Dep_DBS.CLBH,KCLL_Dep_DBS.DepID,-1*' +
+        'Sum(KCLL_Dep_DBS.Qty) as Qty,'#39'4'#39' as SB'
+      'from KCLL_Dep_DB'
+      'left join KCLL_Dep_DBS on KCLL_Dep_DB.DBNO=KCLL_Dep_DBS.DBNO'
+      
+        'where  KCLL_Dep_DB.CFMID<>'#39'NO'#39' and Convert(smalldatetime,convert' +
+        '(varchar,KCLL_Dep_DB.CFMDATE,111)) between '
+      #9'     '#9#39'2023/03/01'#39' and '#39'2023/03/31'#39' '
+      
+        '        and KCLL_Dep_DB.CKBH='#39'VTXX'#39' and KCLL_Dep_DBS.CLBH is not' +
+        ' null'
+      #9'       and KCLL_Dep_DBS.CLBH=:CLDH'
+      '        and KCLL_Dep_DB.CKBH in  ('#39'VTXX'#39','#39'VTXY'#39','#39'VTXZ'#39')'
+      
+        '        and (KCLL_Dep_DBS.DepID='#39'VP01'#39' or KCLL_Dep_DBS.DepID='#39'ZZ' +
+        'ZZZZZZZZ'#39') '
+      'Group by KCLL_Dep_DB.CKBH,KCLL_Dep_DBS.CLBH,KCLL_Dep_DBS.DepID  '
+      'Union all '
+      
+        'Select KCLL_Dep_DB.CKBH,KCLL_Dep_DBS.CLBH,KCLL_Dep_DBS.DepID1  a' +
+        's DepID,Sum(KCLL_Dep_DBS.Qty) as Qty,'#39'5'#39' as SB'
+      'from KCLL_Dep_DB'
+      'left join KCLL_Dep_DBS on KCLL_Dep_DB.DBNO=KCLL_Dep_DBS.DBNO'
+      
+        'where  KCLL_Dep_DB.CFMID<>'#39'NO'#39' and Convert(smalldatetime,convert' +
+        '(varchar,KCLL_Dep_DB.CFMDATE,111)) between '
+      #9'     '#9#39'2023/03/01'#39' and '#39'2023/03/31'#39' '
+      
+        '        and KCLL_Dep_DB.CKBH='#39'VTXX'#39'  and KCLL_Dep_DBS.CLBH is no' +
+        't null'
+      #9'       and KCLL_Dep_DBS.CLBH=:CLDH '
+      '        and KCLL_Dep_DB.CKBH in  ('#39'VTXX'#39','#39'VTXY'#39','#39'VTXZ'#39')'
+      
+        '        and (KCLL_Dep_DBS.DepID1='#39'VP01'#39' or KCLL_Dep_DBS.DepID1='#39 +
+        'ZZZZZZZZZZ'#39') '
+      
+        'Group by KCLL_Dep_DB.CKBH,KCLL_Dep_DBS.CLBH,KCLL_Dep_DBS.DepID1 ' +
+        ' )  KCCLMONTH_Dep'
+      'Group by CKBH, CLBH, DepID ) KCCLMONTH_Dep ) KCCLMONTH_Dep  '
+      'Left join BDepartment on BDepartment.ID=KCCLMONTH_Dep.DepID'
+      
+        'Group by KCCLMONTH_Dep.CKBH,KCCLMONTH_Dep.CLBH,KCCLMONTH_Dep.Dep' +
+        'ID,Bdepartment.DepName,Bdepartment.DepMemo')
+    Left = 464
+    Top = 160
+    ParamData = <
+      item
+        DataType = ftFixedChar
+        Name = 'cldh'
+        ParamType = ptUnknown
+        Size = 11
+      end
+      item
+        DataType = ftFixedChar
+        Name = 'CLDH'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftFixedChar
+        Name = 'CLDH'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftFixedChar
+        Name = 'CLDH'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftFixedChar
+        Name = 'CLDH'
+        ParamType = ptUnknown
+      end>
+    object Query2CKBH: TStringField
+      FieldName = 'CKBH'
+      FixedChar = True
+      Size = 4
+    end
+    object Query2CLBH: TStringField
+      FieldName = 'CLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object Query2DepID: TStringField
+      FieldName = 'DepID'
+      FixedChar = True
+      Size = 50
+    end
+    object Query2Qty: TFloatField
+      FieldName = 'Qty'
+    end
+    object Query2DepName: TStringField
+      FieldName = 'DepName'
+      FixedChar = True
+      Size = 50
+    end
+    object Query2DepMemo: TStringField
+      FieldName = 'DepMemo'
+      FixedChar = True
+      Size = 50
+    end
+  end
+  object DS2: TDataSource
+    DataSet = Query2
+    Left = 464
+    Top = 128
+  end
+end

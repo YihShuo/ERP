@@ -1,0 +1,79 @@
+unit DepID1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, GridsEh, DBGridEh, StdCtrls, ExtCtrls;
+
+type
+  TDepID = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Button1: TButton;
+    Edit2: TEdit;
+    CheckBox1: TCheckBox;
+    DBGridEh1: TDBGridEh;
+    DS1: TDataSource;
+    Query1: TQuery;
+    Query1MAKE: TStringField;
+    Query1NAME: TStringField;
+    procedure Button1Click(Sender: TObject);
+    procedure DBGridEh1DblClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DepID: TDepID;
+
+implementation
+ uses main1,ScanoutO1;
+{$R *.dfm}
+
+procedure TDepID.Button1Click(Sender: TObject);
+begin
+ with query1 do
+  begin
+    active:=false;
+    sql.clear;
+    sql.Add('select make,name from MAKE');
+    sql.add('where MAKE like '+''''+edit1.Text+'%'+'''');
+    sql.add('      and Name like '+''''+'%'+edit2.Text+'%'+'''');
+    sql.Add('and DONVI=''SQ''');
+    active:=true;
+  end;
+end;
+
+procedure TDepID.DBGridEh1DblClick(Sender: TObject);
+begin
+  if query1.recordcount>0 then
+  begin
+    //±a¤JDepNO
+    ScanoutO.DepNo.active:=true;
+    if ScanoutO.DepNo.Locate('MAKE',copy(query1.FieldByName('MAKE').AsString,0,10),[]) then
+    begin
+      ScanoutO.edit4.Text:=query1.fieldbyname('MAKE').Value;
+      ScanoutO.edit2.Text:=query1.fieldbyname('Name').Value;
+    end;
+    //
+    close;
+  end;
+end;
+procedure TDepID.FormDestroy(Sender: TObject);
+begin
+  DepID := nil;
+end;
+
+procedure TDepID.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+end.

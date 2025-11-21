@@ -1,0 +1,19 @@
+object ScanToDeliver_Dep: TScanToDeliver_Dep
+  Left = 412
+  Top = 228
+  Width = 471
+  Height = 385
+  BorderIcons = [biSystemMenu]
+  Caption = 'ScanToDeliver_Dep'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+end

@@ -1,0 +1,110 @@
+Select ZLZLS2.*,'' as FlexID,'' as AWB,convert(datetime,'1900/01/01') as ShippedDate,'' as A4Comfirm,convert(datetime,'1900/01/01') as DateA4Comfirm,ZLZLS2.CGDate+ZLZLS2.ProdLeadTime as 'Request ETD' from ( 
+select  isnull(DDZL.BUYNO,0) as BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,
+        CLZL.CQDH,isnull(CGZL.CGQty,0) as CGQty,
+case when (DDZLTW.DDZT<>'C' and isnull(SCZL.IsCGZLS,'')<>'N') then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+        CGZL.YQDate,CGZL.CFMDate,CGZl.CGDate,
+        CGZL.CGNO,isnull(CGKCUSE.Qty,0) as UseStock,isnull(CGYGUSE.Qty,0) as UseYG,
+        RKZL.RKNO,RKZL.RKDate,case when ((CLZL.CQDH='TW')and (HGINV.HGQty is not null)) then HGINV.HGQty else RKZL.RKQty end as RKQty,HGINV.DOCNO,min(SCZLDate.ADate) as APlanDate,DDZL.ShipDate,
+        isnull(rkzl.usprice,CGZL.USPrice) as usprice,isnull(rkzl.vnprice,CGZL.VNPrice) as vnprice
+        ,convert(smalldatetime,ddzl.userdate,111) as indate
+        ,convert(smalldatetime,max(zlzls2.userdate),111) as cldate
+        ,convert(smalldatetime,ddzl.ddrq,111) as orderdate
+    		 ,(convert(int,max(zlzls2.userdate))-convert(int,ddzl.ddrq)) as get2com
+    		 ,(convert(int,CGZl.CGDate)-convert(int,Max(zlzls2.userdate))) as com2cg
+    		 ,(convert(int,RKZL.RKDate)-convert(int,CGZl.CGDate)) as cg2rk
+    		 ,(convert(int,CGZL.CFMDate)-convert(int,RKZL.RKDate)) as cgkpi
+        ,lbzls.ywsm,Max(zszl.ZSDH) as ZSDH,Max(zszl.zsywjc) as zsywjc
+        ,MaterialMOQ.Season,MaterialMOQ.ProdMOQ,MaterialMOQ.ProdLeadTime,MaterialMOQ.Forecast_Leadtime,MaterialMOQ.Location 
+        ,Max(BWZL.YWSM) as PartName,kfxxzl.DEVCODE as SR,CGZL.MaterialETC,lbzls_vul.ywsm as LYWSM
+from ZLZLS2 with (nolock)  
+inner join DDZl  with (nolock) on DDZl.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.DDBH  like 'JHS2602-001%' 
+left join DDZLTW with (nolock) on DDZLTW.DDBH=ZLZLS2.ZLBH
+left join SCZL with (nolock) on ZLZLS2.ZLBH = SCZL.SCBH
+left join CLZL  with (nolock) on CLZL.CLDH=ZLZLs2.CLBH 
+left join KFZL  with (nolock) on KFZl.KFDH=DDZLTW.KHBH 
+left join ZLZL  with (nolock) on ZLZL.ZLBH=ZLZLS2.ZLBH
+left join ( 
+           Select CGKCUSES.GSBH,CGKCUSES.ZLBH,CGKCUSES.CLBH,Sum(CGKCUSES.Qty) as Qty  from CGKCUSES with (nolock)
+           where CGKCUSES.GSBH='VDH'
+           Group by CGKCUSES.GSBH,CGKCUSES.ZLBH,CGKCUSES.CLBH) CGKCUSE  on CGKCUSE.ZLBH=ZLZLS2.ZLBH and CGKCUSE.CLBH=ZLZLS2.CLBH and CGKCUSE.GSBH='VDH'
+left join ( 
+           Select CGYGUSES.GSBH,CGYGUSES.ZLBH,CGYGUSES.CLBH,Sum(CGYGUSES.Qty) as Qty  from CGYGUSES with (nolock)
+           where CGYGUSES.GSBH='VDH'
+           Group by CGYGUSES.GSBH,CGYGUSES.ZLBH,CGYGUSES.CLBH) CGYGUSE  on CGYGUSE.ZLBH=ZLZLS2.ZLBH and CGYGUSE.CLBH=ZLZLS2.CLBH and CGYGUSE.GSBH='VDH'
+left join XXZL  with (nolock) on XXZl.XieXing=DDZLTW.XieXing and XXZL.SheHao=DDZLTW.SheHao
+left join KFXXZL  with (nolock) on KFXXZL.XieXing=DDZLTW.XieXing and KFXXZL.SheHao=DDZLTW.SheHao
+left join XXBWFL  with (nolock) on XXBWFL.XieXing=XXZL.XieXing and XXBWFL.BWBH=ZLZLS2.BWBH 
+left join XXBWFLS  with (nolock) on XXBWFLS.FLBH=XXBWFL.FLBH 
+left join lbzls on lbzls.lbdh=ddzl.ddgb and lbzls.lb='06' 
+left join lbzls lbzls_vul on lbzls_vul.lbdh=XXZL.XieGN and lbzls_vul.lb='03' 
+left join SCZLDate on SCZLDate.ZLBH=ZLZLS2.ZLBH 
+left join bwzl on zlzls2.bwbh=bwzl.bwdh
+left join (select CGZLSS.ZLBH,CGZLSS.CLBH,sum(CGZLSS.Qty) as CGQty,
+                  max(CGZLSS.CFMDate) as CFMDate,max(CGZL.CGDate) as CGDate,
+                  max(CGZL.CGNO) as CGNO,max(CGZLSS.YQDate) as YQDate,max(CGZLS.QUSPrice) as USPrice,max(CGZLS.QVNPrice) as VNPrice,max(CGZLSS.MaterialETC) as MaterialETC 
+           from CGZLSS with (nolock) 
+           inner join DDZL on DDZL.DDBH = CGZLSS.ZLBH and DDZL.GSBH='VDH' and DDZL.DDBH  like 'JHS2602-001%' 
+           left join CGZLS with (nolock)  on CGZLS.CGNO=CGZLSS.CGNO and CGZLS.CLBH=CGZLSS.CLBH 
+           left join  CGZL with (nolock)  on CGZl.CGNO=CGZLSS.CGNO
+           where CGZL.CGLX in ('1','2','5') and  DDZL.GSBH='VDH'  
+                 and CGZLSS.ZLBH  like 'JHS2602-001%' 
+           group by CGZLSS.ZLBH,CGZLSS.CLBH ) CGZL
+                 on CGZL.ZLBH=ZLZLS2.ZLBH and CGZL.CLBH=ZLZLS2.CLBH
+left join (select KCRKS.CGBH as ZLBH ,KCRKS.CLBH,sum(KCRKS.Qty ) as RKQty, 
+                  max(KCRKS.RKNO) as RKNO,max(KCRK.USERDate) as RKDate, 
+                  max(kcrks.usprice) as usprice,max(kcrks.vnprice) as vnprice 
+           from  KCRKS with (nolock)  
+           inner join DDZL on DDZL.DDBH=KCRKS.CGBH and DDZL.GSBH='VDH' and DDZL.DDBH  like 'JHS2602-001%' 
+           left join KCRK with (nolock)  on KCRK.RKNO=KCRKS.RKNO 
+           where DDZL.GSBH='VDH'
+           and KCRK.SFL<>'THU HOI'
+                 and KCRKS.CGBH  like 'JHS2602-001%' 
+           group by KCRKS.CGBH,KCRKS.CLBH ) RKZL
+                 on RKZL.ZLBH=ZLZLS2.ZLBH and RKZL.CLBH=ZLZLS2.CLBH 
+left join (select HG_INVS.CGBH as ZLBH ,HG_INVS.CLBH,sum(HG_INVS.Qty ) as HGQty, 
+                  max(HG_INV.DOCNO) as DOCNO,max(HG_INV.USERDate) as HGDate 
+           from  HG_INVS with (nolock) 
+           inner join DDZL on DDZL.DDBH=HG_INVS.CGBH and DDZL.GSBH='VDH' and DDZL.DDBH  like 'JHS2602-001%' 
+           left join HG_INV with (nolock)  on HG_INV.RKNO=HG_INVS.RKNO
+           where DDZL.GSBH='VDH'
+                 and HG_INVS.CGBH  like 'JHS2602-001%' 
+           group by HG_INVS.CGBH,HG_INVS.CLBH ) HGINV
+                 on HGINV.ZLBH=ZLZLS2.ZLBH and HGINV.CLBH=ZLZLS2.CLBH
+left join (select zsdh,zsywjc from zszl) zszl on ZLZLS2.CSBH=zszl.zsdh  
+left join (
+		   Select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location from (
+		   Select A.Season,A.CLBH,A.ProdMOQ,A.ProdLeadTime,A.Forecast_Leadtime,A.Location from (
+			   select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,ROW_NUMBER() over (PARTITION BY CLBH ORDER BY Substring(Season,1,2) DESC,USERDATE desc) 
+			   as  rn from 
+			  (
+			  Select Season,IsNull(CLZL_LS.JHDH,MaterialMOQ.CLBH) as CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,MaterialMOQ.USERDATE 
+			  from MaterialMOQ with (nolock)
+			  left join CLZL_LS with (nolock) on CLZL_LS.CLDH=MaterialMOQ.CLBH  and IsNull(CLZL_LS.JHDH,'')<>'' ) MaterialMOQ
+			  where 1=1
+		   ) A where A.rn=1 and A.CLBH in (select distinct CLBH from ZLZLS2,DDZL where DDZL.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' 
+                                       and ZLZLS2.ZLBH  like 'JHS2602-001%' 
+                                      and ZLZLS2.CLBH not like 'W%' and ZLZLS2.CLBH like '%' and ZLZLS2.CLSL<>0 and ZLZLS2.ZMLB='N') 
+    ) MatMOQ
+   Where CLBH not in ( select CLBH from MaterialMassMOQ where gsbh='VDH' )
+   Union all 
+   Select '' as Season,CLBH,'' as ProdMOQ,ProdLeadTime,Forecast_Leadtime,'' as Location  
+   From MaterialMassMOQ 
+			  Where 1=1 and gsbh='VDH' and CLBH like '%' 
+		) MaterialMOQ on MaterialMOQ.CLBH=ZLZLS2.CLBH 
+       where DDZL.GSBH='VDH'
+       and ZLZLS2.CLBH not like 'W%'
+       and not exists(select CLBH from KCSAFE where KCSAFE.CLBH=ZLZLS2.CLBH )
+       and ZLZLS2.ZLBH  like 'JHS2602-001%' 
+       and ZLZLS2.ZMLB='N'
+       and CLZL.CQDH='VN'
+       and ZLZLS2.CLSL<>0
+       and (XXBWFLS.DFL<>'G' or XXBWFLS.DFL is null)
+group by DDZl.BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,CLZL.ZWPM,ddzl.userdate,
+         XXZL.Article,XXZL.XieMing,DDZL.Pairs,CGKCUSE.Qty,CGYGUSE.Qty,CGZl.CGQty,CGZL.YQDate,
+         CGZL.CFMDate,CGZl.CGDate,CGZL.CGNO,RKZL.RKNO,RKZL.RKDate,RKZL.RKQty,HGINV.HGQty,HGINV.DOCNO,DDZL.ShipDate, 
+         rkzl.USPrice,rkzl.VNPrice,CGZL.USPrice,CGZL.VNPrice,ddzl.ddrq,lbzls.ywsm 
+         ,MaterialMOQ.Season,MaterialMOQ.ProdMOQ,MaterialMOQ.ProdLeadTime,MaterialMOQ.Forecast_Leadtime,MaterialMOQ.Location,SCZL.IsCGZLS,kfxxzl.DEVCODE,CGZL.MaterialETC,lbzls_vul.ywsm  
+) ZLZLS2   
+where 1=1 
+order by ZLZLS2.ZLBH,ZLZLS2.CQDH,ZLZLS2.CLBH 
+

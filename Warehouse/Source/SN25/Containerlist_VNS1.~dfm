@@ -1,0 +1,303 @@
+object Containerlist_VNS: TContainerlist_VNS
+  Left = 311
+  Top = 359
+  Width = 979
+  Height = 563
+  Caption = 'Containerlist_VNS'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 16
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 971
+    Height = 41
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 8
+      Top = 10
+      Width = 73
+      Height = 24
+      Alignment = taRightJustify
+      Caption = 'SuppID:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 217
+      Top = 10
+      Width = 98
+      Height = 22
+      Alignment = taRightJustify
+      Caption = 'CGNO:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Button1: TButton
+      Left = 480
+      Top = 5
+      Width = 89
+      Height = 33
+      Caption = 'Query'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      OnClick = Button1Click
+    end
+    object EDIT1: TEdit
+      Left = 83
+      Top = 9
+      Width = 129
+      Height = 24
+      CharCase = ecUpperCase
+      Color = 12320767
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+    end
+    object Edit2: TEdit
+      Left = 320
+      Top = 8
+      Width = 153
+      Height = 24
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 2
+    end
+    object Button2: TButton
+      Left = 579
+      Top = 5
+      Width = 89
+      Height = 33
+      Caption = 'Copy'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      OnClick = Button2Click
+    end
+  end
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 41
+    Width = 971
+    Height = 491
+    Align = alClient
+    DataSource = DS1
+    Flat = False
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -13
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+    SumList.Active = True
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    OnDblClick = DBGridEh1DblClick
+    OnDrawColumnCell = DBGridEh1DrawColumnCell
+    OnKeyPress = DBGridEh1KeyPress
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'CGNO'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CLBH'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DWBH'
+        Footers = <>
+        Width = 45
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ZLBH'
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Qty'
+        Footer.ValueType = fvtSum
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'okQty'
+        Footer.ValueType = fvtSum
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CFMDate'
+        Footers = <>
+        Width = 100
+      end
+      item
+        EditButtons = <>
+        FieldName = 'KCBH'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'YWPM'
+        Footers = <>
+        Width = 300
+      end>
+  end
+  object DS1: TDataSource
+    DataSet = Query1
+    Left = 528
+    Top = 136
+  end
+  object Query1: TQuery
+    CachedUpdates = True
+    DatabaseName = 'DB'
+    RequestLive = True
+    SQL.Strings = (
+      'select CGZLS.CGNO,CGZLS.CLBH,CGZLS.USPrice,CGZLS.VNPrice,'
+      'max(CGZLSS.CFMDate) as CFMDate,CGZL.ZSBH,CLZL.YWPM,CGZLSS.ZLBH,'
+      
+        ' isnull(sum(CGZLSS.qty),0) as Qty, CLZL.DWBH,KCZLS.KCBH,CGZLS.Qt' +
+        'y as okQty'
+      'from CGZLS'
+      'left join CLZL on CLZL.CLDH=CGZLS.CLBH'
+      'left join CGZL on CGZL.CGNO=CGZLS.CGNO'
+      'left join KCZLS on KCZLS.CLBH=CGZLS.CLBH'
+      
+        'left join CGZLSS on CGZL.CGNO=CGZLSS.CGNO and CGZLSS.CLBH=CGZLS.' +
+        'CLBH'
+      'group by CGZLS.CGNO,CGZLS.CLBH,CGZLSS.ZLBH,CGZL.ZSBH,CLZL.YWPM, '
+      'CLZL.DWBH,KCZLS.KCBH,CGZLS.Qty,CGZLS.USPrice,CGZLS.VNPrice'
+      '')
+    UpdateObject = UpdateSQL1
+    Left = 496
+    Top = 136
+    object Query1CGNO: TStringField
+      FieldName = 'CGNO'
+      FixedChar = True
+      Size = 11
+    end
+    object Query1CLBH: TStringField
+      FieldName = 'CLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object Query1YWPM: TStringField
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object Query1DWBH: TStringField
+      FieldName = 'DWBH'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1ZLBH: TStringField
+      FieldName = 'ZLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object Query1USPrice: TCurrencyField
+      FieldName = 'USPrice'
+      DisplayFormat = '##,#0.0000'
+    end
+    object Query1VNPrice: TCurrencyField
+      FieldName = 'VNPrice'
+      DisplayFormat = '##,#0'
+    end
+    object Query1Qty: TCurrencyField
+      FieldName = 'Qty'
+      DisplayFormat = '##,#0.00'
+    end
+    object Query1okQty: TCurrencyField
+      FieldName = 'okQty'
+      DisplayFormat = '##,#0.00'
+    end
+    object Query1CFMDate: TDateTimeField
+      FieldName = 'CFMDate'
+      DisplayFormat = 'yyyy/MM/dd'
+    end
+    object Query1ZSBH: TStringField
+      FieldName = 'ZSBH'
+      FixedChar = True
+      Size = 6
+    end
+    object Query1KCBH: TStringField
+      FieldName = 'KCBH'
+      FixedChar = True
+      Size = 6
+    end
+  end
+  object TmpQry: TQuery
+    DatabaseName = 'DB'
+    Left = 464
+    Top = 136
+  end
+  object UpdateSQL1: TUpdateSQL
+    Left = 496
+    Top = 168
+  end
+  object tempQ: TQuery
+    DatabaseName = 'DB'
+    DataSource = Containerlist.DS3
+    Left = 464
+    Top = 168
+  end
+end

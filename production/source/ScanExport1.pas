@@ -1,0 +1,366 @@
+unit ScanExport1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Menus, DB, DBTables, PrnDbgeh, GridsEh, DBGridEh,
+  ComCtrls, ExtCtrls,comobj;
+
+type
+  TScanExport = class(TForm)
+    Panel1: TPanel;
+    lbOrderNo: TLabel;
+    lbConNo: TLabel;
+    lbCKBH: TLabel;
+    lbTitle: TLabel;
+    lbFrom: TLabel;
+    lbTo: TLabel;
+    edOrderNo: TEdit;
+    edConNo: TEdit;
+    bnQuery: TButton;
+    dtpFrom: TDateTimePicker;
+    dtpTo: TDateTimePicker;
+    gdMain: TDBGridEh;
+    ptMain: TPrintDBGridEh;
+    qrMain: TQuery;
+    qrMainDDBH: TStringField;
+    qrMainYSBH: TStringField;
+    qrMainArticle: TStringField;
+    qrMainXieMing: TStringField;
+    qrMainCountry: TStringField;
+    qrMainKFJC: TStringField;
+    qrMainQty: TFloatField;
+    qrMainokQty: TIntegerField;
+    qrMainNowQty: TIntegerField;
+    qrMainCTS: TIntegerField;
+    qrMainokCTS: TIntegerField;
+    qrMainNowCTS: TIntegerField;
+    qrMainETD: TDateTimeField;
+    dsMain: TDataSource;
+    pmMain: TPopupMenu;
+    Excel1: TMenuItem;
+    Print1: TMenuItem;
+    Detail1: TMenuItem;
+    qrTemp: TQuery;
+    cbCKBH: TComboBox;
+    qrMainDZQty: TIntegerField;
+    qrMainVarianceQty: TFloatField;
+    qrMainVarianceCTS: TIntegerField;
+    qrMainKHPO: TStringField;
+    CB1: TCheckBox;
+    GroupBox1: TGroupBox;
+    RB2: TRadioButton;
+    RB1: TRadioButton;
+    Cbox1: TCheckBox;
+    qrMainExeDate: TDateTimeField;
+    qrMainCon_No: TStringField;
+    qrMainrgwt: TFloatField;
+    qrMainogwt: TFloatField;
+    Button1: TButton;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure Print1Click(Sender: TObject);
+    procedure Excel1Click(Sender: TObject);
+    procedure ptMainBeforePrint(Sender: TObject);
+    procedure gdMainGetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure Detail1Click(Sender: TObject);
+    procedure bnQueryClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+    procedure YWCPExport();
+    procedure DDZLExport();
+  public
+    { Public declarations }
+  end;
+
+var
+  ScanExport: TScanExport;
+
+implementation
+
+uses main1, ScanExport_Det1,FunUnit;
+
+{$R *.dfm}
+
+procedure TScanExport.FormDestroy(Sender: TObject);
+begin
+  ScanExport:=nil;
+end;
+
+procedure TScanExport.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  action:=cafree;
+end;
+
+procedure TScanExport.FormCreate(Sender: TObject);
+begin
+with qrTemp do
+  begin
+    active:=false;
+    sql.clear;
+    sql.Add('select * from KCCKCP ');
+    sql.add('order by CKBH ');
+    active:=true;
+    //CBX1.Items.Clear;
+    while not eof do
+      begin
+        cbCKBH.Items.Add(fieldbyname('CKBH').Value);
+        next;
+      end;
+    cbCKBH.ItemIndex:=0;
+    active:=false;
+    sql.Clear;
+    sql.add('select getdate() as NDate');
+    active:=true;
+    dtpFrom.date:=fieldbyname('NDate').Value-7;
+    dtpTo.date:=fieldbyname('NDate').Value-1;
+  end;
+end;
+
+procedure TScanExport.YWCPExport();
+begin
+  with qrMain do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select YWCP.DDBH,DDZL.KHPO,YWDD.YSBH,XXZL.Article,XXZL.XieMing,YWDD.ETD,LBZLS.YWSM as Country,KFZL.KFJC,');
+    sql.add('       YWDD.Qty,okYWCP.okQty,sum(YWCP.Qty) as NowQty,(YWDD.Qty-sum(YWCP.Qty)) as VarianceQty,YWBZPO.CTS,okYWCP.okCTS,');
+    sql.add('       count(YWCP.DDBH) as NowCTS,(YWBZPO.CTS-count(YWCP.DDBH)) as VarianceCTS,sum(YWDDSDZ.Qty) as DZQty,');
+    sql.Add('       MAX(YWCP.EXEDATE) as ExeDate,MAX(con_no) as Con_No,Round(Sum(YWCP.rgw),3) as rgwt,Round(Sum(YWCP.ogw),3) as ogwt ');
+    if CB1.Checked=true then
+      sql.add('from (select * from YWCP union all select * from YWCPOld) YWCP  ')
+    else
+      sql.add('from YWCP with (nolock) ');
+    sql.add('left join YWDD  with (nolock) on YWDD.DDBH=YWCP.DDBH ');
+    sql.add('left join DDZL  with (nolock) on YWDD.YSBH=DDZl.DDBH ');
+    sql.add('left join (select CartonBar,sum(Qty) as Qty from YWDDSDZ ');
+    sql.add('           group by CartonBar ) YWDDSDZ on YWDDSDZ.CartonBar=YWCP.CartonBar ');
+    sql.add('left join XXZL  with (nolock) on DDZl.XieXing=XXZl.XieXing and DDZL.SheHao=XXZL.Shehao ');
+    sql.add('left join LBZLS  with (nolock) on LBZLS.LB='+''''+'06'+''''+' and LBZLS.LBDH=DDZL.DDGB');
+    sql.add('left join KFZL  with (nolock) on KFZL.KFDH=DDZL.KHBH ');
+    sql.add('left join BDepartment  with (nolock) on BDepartment.ID=YWCP.DepNo ');
+    sql.add('left join (select YWBZPO.DDBH,sum(YWBZPO.CTS) as CTS ');
+    sql.add('           from (select distinct YWBZPOS.DDBH,YWBZPOS.XH,YWBZPOS.CTS from YWBZPOS  with (nolock) ) YWBZPO  ');
+    sql.add('           group by YWBZPO.DDBH) YWBZPO on YWCP.DDBH=YWBZPO.DDBH ');
+    sql.add('left join (select DDBH,count(DDBH) as okCTS,sum(Qty) as okQty');
+    if CB1.Checked=true then
+      sql.add('         from (select * from YWCP union all select * from YWCPOld) YWCP  ')
+    else
+      sql.add('         from YWCP with (nolock) ');
+    sql.add('           where ExeDate is not null ');
+    sql.Add('           group by DDBH ) okYWCP on okYWCP.DDBH=YWDD.DDBH ');
+    sql.Add('where DDZL.DDBH like '''+edOrderNo.Text+'%'' ');
+    sql.add('      and isnull(YWCP.CON_NO,'''') like ''%'+edConNo.text+'%'' ');
+    if cbCKBH.itemindex<>0 then
+    begin
+        sql.add('      and YWCP.CKBH like ''%'+cbCKBH.Text+'%'' ');
+    end;
+    sql.add('      and DDZL.GSBH='''+main.edit2.Text+''' ');
+    sql.add('      and convert(varchar,YWCP.Exedate,111) between ');
+    sql.add('      '''+formatdatetime('yyyy/MM/dd',dtpFrom.Date)+''' and '''+formatdatetime('yyyy/MM/dd',dtpTo.Date)+'''');
+    sql.add('group by YWCP.DDBH,DDZL.KHPO,YWDD.YSBH,XXZL.Article,XXZL.XieMing,YWDD.ETD,LBZLS.YWSM,KFZL.KFJC,');
+    sql.add('         YWDD.Qty,okYWCP.okQty,YWBZPO.CTS,okYWCP.okCTS');
+    sql.add('order by YWCP.DDBH ');
+    active:=true;
+  end;
+end;
+
+procedure TScanExport.DDZLExport();
+begin
+  with qrMain do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select YWCP.DDBH,DDZL.KHPO,YWDD.YSBH,XXZL.Article,XXZL.XieMing,YWDD.ETD,LBZLS.YWSM as Country,KFZL.KFJC,');
+    sql.add('       YWDD.Qty,okYWCP.okQty,sum(YWCP.Qty) as NowQty,(YWDD.Qty-sum(YWCP.Qty)) as VarianceQty,YWBZPO.CTS,okYWCP.okCTS,');
+    sql.add('       count(YWCP.DDBH) as NowCTS,(YWBZPO.CTS-count(YWCP.DDBH)) as VarianceCTS,sum(YWDDSDZ.Qty) as DZQty ,');
+    sql.Add('       MAX(YWCP.EXEDATE) as ExeDate,MAX(con_no) as Con_No,Round(Sum(YWCP.rgw),3) as rgwt,Round(Sum(YWCP.ogw),3) as ogwt ');
+    sql.add('from DDZL with (nolock) ');
+    sql.add('left join YWDD  with (nolock) on YWDD.YSBH=DDZL.DDBH ');
+    if CB1.Checked=true then
+      sql.add('left join(select * from YWCP union all select * from YWCPOld) YWCP on YWDD.DDBH=YWCP.DDBH ')
+    else
+      sql.add('left join YWCP on YWDD.DDBH=YWCP.DDBH ');
+    sql.add('left join (select CartonBar,sum(Qty) as Qty from YWDDSDZ ');
+    sql.add('           group by CartonBar ) YWDDSDZ on YWDDSDZ.CartonBar=YWCP.CartonBar ');
+
+    sql.add('left join XXZL  with (nolock) on DDZl.XieXing=XXZl.XieXing and DDZL.SheHao=XXZL.Shehao ');
+    sql.add('left join LBZLS  with (nolock) on LBZLS.LB='+''''+'06'+''''+' and LBZLS.LBDH=DDZL.DDGB');
+    sql.add('left join KFZL  with (nolock) on KFZL.KFDH=DDZL.KHBH ');
+    sql.add('left join BDepartment  with (nolock) on BDepartment.ID=YWCP.DepNo ');
+    sql.add('left join (select YWBZPO.DDBH,sum(YWBZPO.CTS) as CTS ');
+    sql.add('           from (select distinct YWBZPOS.DDBH,YWBZPOS.XH,YWBZPOS.CTS from YWBZPOS  with (nolock) ) YWBZPO  ');
+    sql.add('           group by YWBZPO.DDBH) YWBZPO on YWCP.DDBH=YWBZPO.DDBH ');
+    sql.add('left join (select DDBH,count(DDBH) as okCTS,sum(Qty) as okQty');
+    if CB1.Checked=true then
+      sql.add('         from (select * from YWCP union all select * from YWCPOld) YWCP  ')
+    else
+      sql.add('         from YWCP with (nolock) ');
+    sql.add('           where ExeDate is not null ');
+    sql.Add('           group by DDBH ) okYWCP on okYWCP.DDBH=YWDD.DDBH ');
+    sql.Add('where DDZL.DDBH like '''+edOrderNo.Text+'%'' ');
+    sql.add('      and isnull(YWCP.CON_NO,'''') like ''%'+edConNo.text+'%'' ');
+    if cbCKBH.itemindex<>0 then
+    begin
+        sql.add('      and YWCP.CKBH like ''%'+cbCKBH.Text+'%'' ');
+    end;
+    sql.add('      and DDZL.GSBH='''+main.edit2.Text+''' ');
+    sql.add('      and convert(varchar,DDZL.Shipdate,111) between ');
+    sql.add('      '''+formatdatetime('yyyy/MM/dd',dtpFrom.Date)+''' and '''+formatdatetime('yyyy/MM/dd',dtpTo.Date)+'''');
+    if Cbox1.Checked=true then
+    sql.add('      and DDZL.DDZT=''Y'' and DDZL.DDLB=''N'' ');
+    sql.add('group by YWCP.DDBH,DDZL.KHPO,YWDD.YSBH,XXZL.Article,XXZL.XieMing,YWDD.ETD,LBZLS.YWSM,KFZL.KFJC,');
+    sql.add('         YWDD.Qty,okYWCP.okQty,YWBZPO.CTS,okYWCP.okCTS');
+    sql.add('order by YWCP.DDBH ');
+    active:=true;
+  end;
+end;
+
+procedure TScanExport.Print1Click(Sender: TObject);
+begin
+  ptMain.Preview;
+end;
+
+procedure TScanExport.Excel1Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+
+if qrMain.Active then
+  begin
+    if qrMain.recordcount=0 then
+      begin
+        showmessage('No record.');
+        abort;
+      end;
+  end
+  else
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+
+try
+  eclApp:=CreateOleObject('Excel.Application');
+  WorkBook:=CreateOleObject('Excel.Sheet');
+except
+  Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+  Exit;
+end;
+
+try
+  WorkBook:=eclApp.workbooks.Add; 
+  eclApp.Cells(1,1):='NO';
+  for   i:=1   to   qrMain.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=qrMain.fields[i-1].FieldName;
+    end;
+  qrMain.First;
+  j:=2;
+  while   not  qrMain.Eof   do
+    begin
+      eclApp.Cells(j,1):=j-1;
+      for   i:=1   to   qrMain.fieldcount   do
+        begin
+          eclApp.Cells(j,i+1):=qrMain.Fields[i-1].Value;
+          eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+        end;
+      qrMain.Next;
+      inc(j);
+    end;
+  eclapp.columns.autofit;
+  showmessage('Succeed.');
+  eclApp.Visible:=True;
+except
+  on   F:Exception   do
+    showmessage(F.Message);
+end;
+
+
+end;
+
+procedure TScanExport.ptMainBeforePrint(Sender: TObject);
+begin
+  ptMain.SetSubstitutes(['%[TDate]',formatdatetime('yyyy/MM/dd',dtpFrom.Date)+'~~~'+formatdatetime('yyyy/MM/dd',dtpTo.Date)]);
+end;
+
+procedure TScanExport.gdMainGetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+
+  if qrMain.FieldByName('okQty').value=qrMain.FieldByName('Qty').value then
+  begin
+    gdMain.canvas.font.color:=clBlue;
+  end;
+end;
+
+procedure TScanExport.Detail1Click(Sender: TObject);
+begin
+  ScanExport_Det:=TScanExport_Det.create(self);
+  ScanExport_Det.show;
+end;
+
+procedure TScanExport.bnQueryClick(Sender: TObject);
+begin
+  if RB1.Checked=true then
+    YWCPExport()
+  else
+    DDZLExport();
+end;
+
+procedure TScanExport.Button1Click(Sender: TObject);
+begin
+  with qrMain do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select YWCPOld.DDBH,DDZL.KHPO,YWDD.YSBH,XXZL.Article,XXZL.XieMing,YWDD.ETD,LBZLS.YWSM as Country,KFZL.KFJC,');
+    sql.add('       YWDD.Qty,okYWCPOld.okQty,sum(YWCPOld.Qty) as NowQty,(YWDD.Qty-sum(YWCPOld.Qty)) as VarianceQty,YWBZPO.CTS,okYWCPOld.okCTS,');
+    sql.add('       count(YWCPOld.DDBH) as NowCTS,(YWBZPO.CTS-count(YWCPOld.DDBH)) as VarianceCTS,sum(YWDDSDZ.Qty) as DZQty,');
+    sql.Add('       MAX(YWCPOld.EXEDATE) as ExeDate,MAX(con_no) as Con_No,Round(Sum(YWCPOld.rgw),3) as rgwt,Round(Sum(YWCPOld.ogw),3) as ogwt ');
+    if CB1.Checked=true then
+      sql.add('from (select * from YWCPOld union all select * from YWCPOldOld) YWCPOld  ')
+    else
+      sql.add('from YWCPOld with (nolock) ');
+    sql.add('left join YWDD  with (nolock) on YWDD.DDBH=YWCPOld.DDBH ');
+    sql.add('left join DDZL  with (nolock) on YWDD.YSBH=DDZl.DDBH ');
+    sql.add('left join (select CartonBar,sum(Qty) as Qty from YWDDSDZ ');
+    sql.add('           group by CartonBar ) YWDDSDZ on YWDDSDZ.CartonBar=YWCPOld.CartonBar ');
+    sql.add('left join XXZL  with (nolock) on DDZl.XieXing=XXZl.XieXing and DDZL.SheHao=XXZL.Shehao ');
+    sql.add('left join LBZLS  with (nolock) on LBZLS.LB='+''''+'06'+''''+' and LBZLS.LBDH=DDZL.DDGB');
+    sql.add('left join KFZL  with (nolock) on KFZL.KFDH=DDZL.KHBH ');
+    sql.add('left join BDepartment  with (nolock) on BDepartment.ID=YWCPOld.DepNo ');
+    sql.add('left join (select YWBZPO.DDBH,sum(YWBZPO.CTS) as CTS ');
+    sql.add('           from (select distinct YWBZPOS.DDBH,YWBZPOS.XH,YWBZPOS.CTS from YWBZPOS  with (nolock) ) YWBZPO  ');
+    sql.add('           group by YWBZPO.DDBH) YWBZPO on YWCPOld.DDBH=YWBZPO.DDBH ');
+    sql.add('left join (select DDBH,count(DDBH) as okCTS,sum(Qty) as okQty');
+    if CB1.Checked=true then
+      sql.add('         from (select * from YWCPOld union all select * from YWCPOldOld) YWCPOld  ')
+    else
+      sql.add('         from YWCPOld with (nolock) ');
+    sql.add('           where ExeDate is not null ');
+    sql.Add('           group by DDBH ) okYWCPOld on okYWCPOld.DDBH=YWDD.DDBH ');
+    sql.Add('where DDZL.DDBH like '''+edOrderNo.Text+'%'' ');
+    sql.add('      and isnull(YWCPOld.CON_NO,'''') like ''%'+edConNo.text+'%'' ');
+    if cbCKBH.itemindex<>0 then
+    begin
+        sql.add('      and YWCPOld.CKBH like ''%'+cbCKBH.Text+'%'' ');
+    end;
+    sql.add('      and DDZL.GSBH='''+main.edit2.Text+''' ');
+    sql.add('      and convert(varchar,YWCPOld.Exedate,111) between ');
+    sql.add('      '''+formatdatetime('yyyy/MM/dd',dtpFrom.Date)+''' and '''+formatdatetime('yyyy/MM/dd',dtpTo.Date)+'''');
+    sql.add('group by YWCPOld.DDBH,DDZL.KHPO,YWDD.YSBH,XXZL.Article,XXZL.XieMing,YWDD.ETD,LBZLS.YWSM,KFZL.KFJC,');
+    sql.add('         YWDD.Qty,okYWCPOld.okQty,YWBZPO.CTS,okYWCPOld.okCTS');
+    sql.add('order by YWCPOld.DDBH ');
+    active:=true;
+  end;
+end;
+
+end.

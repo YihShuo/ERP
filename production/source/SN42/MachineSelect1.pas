@@ -1,0 +1,139 @@
+unit MachineSelect1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, GridsEh, DBGridEh, ExtCtrls, DB, DBTables;
+
+type
+  TMachineSelect = class(TForm)
+    Panel1: TPanel;
+    DBGridEh1: TDBGridEh;
+    Label1: TLabel;
+    TypeBox: TComboBox;
+    Label2: TLabel;
+    MachineBox: TComboBox;
+    Button1: TButton;
+    Query1: TQuery;
+    DataSource1: TDataSource;
+    QSearch: TQuery;
+    Query1ID: TStringField;
+    Query1MachineName: TStringField;
+    Query1MachineType: TStringField;
+    Query1DepNo: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure DBGridEh1DblClick(Sender: TObject);
+    procedure TypeBoxChange(Sender: TObject);
+  private
+    MachineType: array of string;
+    MachineLeanID: TStringList;
+    procedure SetLean;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MachineSelect: TMachineSelect;
+
+implementation
+
+uses main1, CutDispatch1;
+
+{$R *.dfm}
+
+procedure TMachineSelect.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+procedure TMachineSelect.FormDestroy(Sender: TObject);
+begin
+  MachineSelect := Nil;
+end;
+
+procedure TMachineSelect.FormCreate(Sender: TObject);
+begin
+  MachineLeanID := TStringList.Create;
+  SetLength(MachineType, 3);
+  MachineType[0] := 'MC';
+  MachineType[1] := 'AC';
+  MachineType[2] := 'Lectra';
+  SetLean;
+  Button1Click(Nil);
+end;
+
+procedure TMachineSelect.SetLean;
+begin
+  with QSearch do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT ID, ''LEAN'' + RIGHT(sumline, 2) AS Lean FROM BDepartment');
+    SQL.Add('WHERE ProYn = 1 AND YN = 1 AND sumline IS NOT NULL AND GXLB = ''C'' AND GSBH = ''' + main.Edit2.Text + ''' AND Xuong IS NOT NULL');
+    SQL.Add('ORDER BY Lean');
+    Active := true;
+
+    MachineLeanID.Clear;
+    MachineLeanID.Add('ALL');
+    MachineBox.Items.Clear;
+    MachineBox.Items.Add('ALL');
+    while not Eof do
+    begin
+      MachineLeanID.Add(FieldByName('ID').AsString);
+      MachineBox.Items.Add(FieldByName('Lean').AsString);
+      Next;
+    end;
+    MachineBox.Items.Add('OTHER');
+    MachineBox.ItemIndex := 0;
+  end;
+end;
+
+procedure TMachineSelect.Button1Click(Sender: TObject);
+begin
+  with Query1 do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT ID, MachineName, MachineType, DepNo FROM BMachine');
+    if (MachineBox.Text = 'OTHER') then
+      SQL.Add('WHERE MachineType = ''Leather''')
+    else
+      SQL.Add('WHERE MachineType = ''' + MachineType[TypeBox.ItemIndex] + '''');
+    if (MachineBox.ItemIndex > 0) AND (MachineBox.Text <> 'OTHER') then
+      SQL.Add('AND DepNo = ''' + MachineLeanID.Strings[MachineBox.ItemIndex] + '''');
+    SQL.Add('ORDER BY ID');
+    Active := true;
+  end;
+end;
+
+procedure TMachineSelect.DBGridEh1DblClick(Sender: TObject);
+begin
+  CutDispatch.QCDMaster.Edit;
+  CutDispatch.QCDMaster.FieldByName('DepID').Value := Query1.FieldByName('DepNo').AsString;
+  CutDispatch.QCDMaster.FieldByName('Machine').Value := Query1.FieldByName('ID').AsString;
+  CutDispatch.QCDMaster.FieldByName('MachineName').Value := Query1.FieldByName('MachineName').AsString;
+  Close;
+end;
+
+procedure TMachineSelect.TypeBoxChange(Sender: TObject);
+begin
+  if (TypeBox.ItemIndex = 0) then
+  begin
+    MachineBox.Enabled := true;
+    SetLean;
+  end
+  else begin
+    MachineBox.Items.Clear;
+    MachineBox.Items.Add('ALL');
+    MachineBox.ItemIndex := 0;
+    MachineBox.Enabled := false;
+  end;
+end;
+
+end.

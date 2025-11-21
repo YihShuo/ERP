@@ -1,0 +1,220 @@
+unit EquipmentD1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, DB, DBTables, GridsEh, DBGridEh,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
+  DBAxisGridsEh;
+
+type
+  TEquipmentD = class(TForm)
+    Panel1: TPanel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Button1: TButton;
+    YWPMEdit: TEdit;
+    ZWPMEdit: TEdit;
+    SBBHEdit: TEdit;
+    Label1: TLabel;
+    applyDepnameEdit: TEdit;
+    DBGridEh1: TDBGridEh;
+    Query1: TQuery;
+    DataSource1: TDataSource;
+    TSBHEdit: TEdit;
+    Label4: TLabel;
+    Query1TSID: TStringField;
+    Query1SBBH: TStringField;
+    Query1TSBH: TStringField;
+    Query1Status: TStringField;
+    Query1Qty: TFloatField;
+    Query1XSBH: TStringField;
+    Query1NSX: TStringField;
+    Query1InDATE: TDateTimeField;
+    Query1JDBDATE: TStringField;
+    Query1JDEDATE: TStringField;
+    Query1DepID: TStringField;
+    Query1DepID_Memo: TStringField;
+    Query1DepName: TStringField;
+    Query1LSBH: TStringField;
+    Query1QUCBH: TStringField;
+    Query1AuthCE: TBooleanField;
+    Query1YWPM: TStringField;
+    Query1ZWPM: TStringField;
+    Query1applyDepname: TStringField;
+    Button2: TButton;
+    Query1zsjc_yw: TStringField;
+    Label5: TLabel;
+    GroupBox2: TGroupBox;
+    CKLL: TCheckBox;
+    CKRK: TCheckBox;
+    CKBB: TCheckBox;
+    CKMM: TCheckBox;
+    CKHH: TCheckBox;
+    CKRR: TCheckBox;
+    CKFF: TCheckBox;
+    CKTT: TCheckBox;
+    ITcheck: TCheckBox;
+    procedure DBGridEh1DblClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  EquipmentD: TEquipmentD;
+
+implementation
+
+uses Deliver_EquipmentD1, main1, FunUnit;
+
+{$R *.dfm}
+
+
+procedure TEquipmentD.DBGridEh1DblClick(Sender: TObject);
+begin
+  if query1.recordcount>0 then
+  begin
+    with Deliver_EquipmentD.DelDet do
+    begin
+      edit;
+      FieldByName('TSID').Value:=query1.fieldbyname('TSID').Value;
+      FieldByName('DepName').Value:=query1.fieldbyname('DepName').Value;
+      FieldByName('TSBH').Value:=query1.fieldbyname('TSBH').Value;
+      FieldByName('SBBH').Value:=query1.fieldbyname('SBBH').Value;
+      FieldByName('LSBH').Value:=query1.fieldbyname('LSBH').Value;
+      FieldByName('QUCBH').Value:=query1.fieldbyname('QUCBH').Value;
+      FieldByName('ZWPM').Value:=query1.fieldbyname('ZWPM').Value;
+      FieldByName('YWPM').Value:=query1.fieldbyname('YWPM').Value;
+      FieldByName('Qty').Value:=query1.fieldbyname('Qty').Value;
+      //
+      Insert;
+    end;
+    close;
+  end;
+end;
+
+procedure TEquipmentD.Button1Click(Sender: TObject);
+var SubSQL:String;
+begin
+  //
+  with query1 do
+  begin
+    active:=false;
+    sql.clear;
+    sql.Add('select TSCD.TSID,TSCD.SBBH,TSCD.TSBH,TSCD.Status,TSCD.Qty,TSCD.XSBH,TSCD.NSX,TSCD.InDATE,TSCD.JDBDATE,TSCD.JDEDATE,IsNull(TSCD.JDTS,TSCD.DepID) as DepID,TSCD.DepID_Memo,IsNull(JDBDep.DepName,Bdep_loca.DepName) as DepName,TSCD_ZSZL.zsjc_yw, ');
+    sql.Add('       TSCD_SB.LSBH,TSCD_SB.QUCBH,TSCD_SB.AuthCE,');
+    if ITcheck.Checked then
+    Sql.Add('ISNULL(TSCD_SB.YWPM,TSCD_IT.NameVN) as YWPM,TSCD_SB.ZWPM,Bdep_appy.DepName as applyDepname ');
+    if not ITcheck.Checked then
+    Sql.Add('TSCD_SB.YWPM,TSCD_SB.ZWPM,Bdep_appy.DepName as applyDepname ');
+    sql.add('from TSCD ');
+    sql.add('left join TSCD_SB on TSCD_SB.SBBH=TSCD.SBBH ');
+    sql.add('left join TSCD_BDepartment Bdep_loca on Bdep_loca.ID=TSCD.DepID  ');
+    sql.add('left join TSCD_ZSZL on TSCD_ZSZL.ZSDH=TSCD_SB.ZSDH ');
+    sql.add('left join TSCD_KCRK on TSCD_KCRK.RKNO=TSCD.RKNO ');
+    sql.add('left join TSCD_BDepartment Bdep_appy on Bdep_appy.ID=TSCD_KCRK.DepID ');
+    sql.add('left join TSCD_BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+    SQL.Add('left join TSCD_IT on TSCD_IT.TSBH = SUBSTRING(TSCD.TSBH, 1, CHARINDEX(''0'', TSCD.TSBH) - 1)');
+    if not ITcheck.Checked then
+    sql.add('where TSCD.SBBH like '''+SBBHEdit.Text+'%'' and TSCD.LB=1');
+    if  ITcheck.Checked then
+    sql.add('where TSCD.SBBH like '''+SBBHEdit.Text+'%'' and TSCD.LB=2');
+    if TSBHEdit.Text <> '' then
+    sql.add('and TSCD.TSBH like '''+TSBHEdit.Text+'%''');
+    if YWPMEdit.Text <> '' then
+    sql.add('and  TSCD_SB.YWPM like '''+YWPMEdit.Text+'%'' ');
+    if ZWPMEdit.Text <> '' then
+    sql.add('and  TSCD_SB.ZWPM like '''+ZWPMEdit.Text+'%'' ');
+    if applyDepnameEdit.Text<>'' then
+    sql.add('and Bdep_appy.Depname like ''%'+applyDepnameEdit.Text+'%'' ');
+    //
+    if CKRK.Checked then    SubSQL:=SubSQL+'''N'',';
+    if CKLL.Checked then    SubSQL:=SubSQL+'''Y'',';
+    if CKBB.Checked then    SubSQL:=SubSQL+'''B'',';
+    if CKMM.Checked then    SubSQL:=SubSQL+'''M'',';
+    if CKHH.Checked then    SubSQL:=SubSQL+'''H'',';
+    if CKRR.Checked then    SubSQL:=SubSQL+'''R'',';
+    if CKFF.Checked then    SubSQL:=SubSQL+'''F'',';
+    if CKTT.Checked then    SubSQL:=SubSQL+'''T'',';
+    if SubSQL<>''  then
+      SQl.Add(' and TSCD.Status in ('+Copy(SubSQL,1,length(SubSQL)-1)+') ')
+    else
+      SQL.Add(' and TSCD.Status='''' ');
+    sql.add('order by TSID');
+    //FuncObj.WriteErrorLog(sql.Text);
+    Active:=true;
+  end;
+  //
+end;
+
+procedure TEquipmentD.FormDestroy(Sender: TObject);
+begin
+  EquipmentD:=nil;
+end;
+
+procedure TEquipmentD.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  action:=Cafree;
+end;
+
+procedure TEquipmentD.Button2Click(Sender: TObject);
+var i,j:integer;
+    bm:Tbookmark;
+    bookmarklist:tbookmarklistEh;
+begin
+  if (not query1.Active) then
+  begin
+    abort;
+  end;
+  if (Query1.recordcount<1) then
+  begin
+    abort;
+  end;
+  if query1.recordcount>0 then
+  begin
+    query1.disablecontrols;
+    bm:=query1.getbookmark;
+    bookmarklist:=DBGridEh1.selectedrows;
+    if bookmarklist.count=0 then DBGridEh1.SelectedRows.CurrentRowSelected:= true;
+    try
+      for i:=0 to bookmarklist.count-1 do
+      begin
+        query1.gotobookmark(pointer(bookmarklist[i]));
+        with Deliver_EquipmentD.DelDet do
+        begin
+          edit;
+          FieldByName('TSID').Value:=query1.fieldbyname('TSID').Value;
+          FieldByName('DepName').Value:=query1.fieldbyname('DepName').Value;
+          FieldByName('TSBH').Value:=query1.fieldbyname('TSBH').Value;
+          FieldByName('SBBH').Value:=query1.fieldbyname('SBBH').Value;
+          FieldByName('LSBH').Value:=query1.fieldbyname('LSBH').Value;
+          FieldByName('QUCBH').Value:=query1.fieldbyname('QUCBH').Value;
+          FieldByName('ZWPM').Value:=query1.fieldbyname('ZWPM').Value;
+          FieldByName('YWPM').Value:=query1.fieldbyname('YWPM').Value;
+          FieldByName('Qty').Value:=query1.fieldbyname('Qty').Value;
+          //
+          Insert;
+        end;
+      end;
+    finally
+      begin
+        query1.gotobookmark(bm);
+        query1.freebookmark(bm);
+        query1.enablecontrols;
+        showmessage('You have finish copy!');
+        Close;
+      end;
+    end;
+  end;
+
+end;
+
+end.

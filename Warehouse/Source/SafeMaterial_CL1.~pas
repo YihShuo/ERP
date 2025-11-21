@@ -1,0 +1,131 @@
+unit SafeMaterial_CL1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls;
+
+type
+  TSafeMaterial_CL = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Button1: TButton;
+    Edit2: TEdit;
+    EDIT1: TEdit;
+    Edit3: TEdit;
+    DBGrid1: TDBGrid;
+    DS1: TDataSource;
+    Query1: TQuery;
+    Query1cldh: TStringField;
+    Query1cllb: TStringField;
+    Query1KCBH: TStringField;
+    Query1dwbh: TStringField;
+    Query1ywpm: TStringField;
+    Query1CKBH: TStringField;
+    Query1ZWPM: TStringField;
+    procedure Button1Click(Sender: TObject);
+    procedure EDIT1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit3KeyPress(Sender: TObject; var Key: Char);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure DBGrid1KeyPress(Sender: TObject; var Key: Char);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  SafeMaterial_CL: TSafeMaterial_CL;
+
+implementation
+
+uses SafeMaterial1, MaterialArea1;
+
+{$R *.dfm}
+
+procedure TSafeMaterial_CL.Button1Click(Sender: TObject);
+begin
+with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select CLZL.CLDH,CLZL.CLLB,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,KCZLS.CKBH,KCZLS.KCBH,CLZL.LYCC,CLZL.CLZMLB ');
+    sql.add('from CLZL left join KCZLS on KCZLS.CLBH=CLZL.CLDH where CLZL.CLDH like');
+    sql.add(''''+edit1.Text+'%'+'''');
+    sql.add('and CLZL.YWPM like ');
+    sql.add(''''+'%'+edit2.Text+'%'+'''');  
+    sql.add('and CLZL.YWPM like ');
+    sql.add(''''+'%'+edit3.Text+'%'+'''');
+    sql.add('order by CLZL.CLDH');
+    active:=true;
+  end;
+end;
+
+procedure TSafeMaterial_CL.EDIT1KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+edit2.SetFocus;
+end;
+
+procedure TSafeMaterial_CL.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+edit3.SetFocus;
+end;
+
+procedure TSafeMaterial_CL.Edit3KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+  button1click(nil)
+end;
+
+procedure TSafeMaterial_CL.DBGrid1DblClick(Sender: TObject);
+begin
+if query1.recordcount>0 then
+  begin
+    if query1.fieldbyname('KCBH').isnull then
+      begin
+        MaterialArea:=TMaterialArea.create(self);
+        MaterialArea.edit1.text:=query1.fieldbyname('CLBH').value;
+        MaterialArea.show;
+        close;
+        abort;
+      end;
+    with SafeMaterial.KCSAFE do
+      begin
+        edit;
+        fieldbyname('CLBH').value:=query1.fieldbyname('CLDH').value;
+        fieldbyname('YWPM').value:=query1.fieldbyname('YWPM').value;  
+        fieldbyname('ZWPM').value:=query1.fieldbyname('ZWPM').value;
+        fieldbyname('DWBH').value:=query1.fieldbyname('DWBH').value;
+        fieldbyname('KCBH').value:=query1.fieldbyname('KCBH').value;  
+        fieldbyname('CKBH').value:=query1.fieldbyname('CKBH').value;
+      end;
+    query1.Active:=false;
+    close;
+  end;
+end;
+
+procedure TSafeMaterial_CL.DBGrid1KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+  button1Click(nil);
+end;
+
+procedure TSafeMaterial_CL.FormDestroy(Sender: TObject);
+begin
+SafeMaterial_CL:=nil;
+end;
+
+procedure TSafeMaterial_CL.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+end.

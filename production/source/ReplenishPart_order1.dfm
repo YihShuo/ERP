@@ -1,0 +1,377 @@
+object ReplenishPart_order: TReplenishPart_order
+  Left = 273
+  Top = 258
+  Width = 800
+  Height = 500
+  Caption = 'ReplenishPart_order'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 792
+    Height = 113
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label4: TLabel
+      Left = 496
+      Top = 24
+      Width = 89
+      Height = 20
+      Caption = 'Department:'
+    end
+    object Label5: TLabel
+      Left = 504
+      Top = 72
+      Width = 38
+      Height = 20
+      Caption = 'Type:'
+    end
+    object Panel2: TPanel
+      Left = 1
+      Top = 1
+      Width = 248
+      Height = 111
+      Align = alLeft
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      object Label1: TLabel
+        Left = 16
+        Top = 16
+        Width = 61
+        Height = 20
+        Caption = 'SpecNo:'
+      end
+      object Label2: TLabel
+        Left = 16
+        Top = 48
+        Width = 67
+        Height = 20
+        Caption = 'ArtName:'
+      end
+      object Edit1: TEdit
+        Left = 88
+        Top = 8
+        Width = 145
+        Height = 28
+        CharCase = ecUpperCase
+        TabOrder = 0
+      end
+      object Edit2: TEdit
+        Left = 88
+        Top = 40
+        Width = 145
+        Height = 28
+        CharCase = ecUpperCase
+        TabOrder = 1
+      end
+      object Button1: TButton
+        Left = 128
+        Top = 72
+        Width = 105
+        Height = 33
+        Caption = 'Query'
+        TabOrder = 2
+        OnClick = Button1Click
+      end
+    end
+    object Panel3: TPanel
+      Left = 249
+      Top = 1
+      Width = 232
+      Height = 111
+      Align = alLeft
+      TabOrder = 1
+      object Label3: TLabel
+        Left = 136
+        Top = 88
+        Width = 66
+        Height = 24
+        Caption = 'GXLB'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -19
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+      end
+      object CB1: TCheckBox
+        Left = 8
+        Top = 8
+        Width = 81
+        Height = 17
+        Caption = 'Cutting'
+        TabOrder = 0
+      end
+      object CB2: TCheckBox
+        Left = 8
+        Top = 40
+        Width = 97
+        Height = 17
+        Caption = 'Stitching'
+        TabOrder = 1
+      end
+      object CB3: TCheckBox
+        Left = 8
+        Top = 72
+        Width = 97
+        Height = 17
+        Caption = 'Outsole'
+        TabOrder = 2
+      end
+      object CB4: TCheckBox
+        Left = 120
+        Top = 8
+        Width = 97
+        Height = 17
+        Caption = 'Assempble'
+        TabOrder = 3
+      end
+      object CB7: TCheckBox
+        Left = 120
+        Top = 40
+        Width = 97
+        Height = 17
+        Caption = 'Lean'
+        TabOrder = 4
+      end
+    end
+    object CBX1: TComboBox
+      Left = 592
+      Top = 16
+      Width = 129
+      Height = 28
+      Style = csDropDownList
+      DropDownCount = 12
+      ItemHeight = 20
+      TabOrder = 2
+    end
+    object CBX2: TComboBox
+      Left = 552
+      Top = 64
+      Width = 121
+      Height = 28
+      Style = csDropDownList
+      ItemHeight = 20
+      ItemIndex = 0
+      TabOrder = 3
+      Text = 'Part'
+      Items.Strings = (
+        'Part')
+    end
+  end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 113
+    Width = 792
+    Height = 353
+    Align = alClient
+    DataSource = DataSource1
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -16
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    OnDblClick = DBGrid1DblClick
+    OnKeyPress = DBGrid1KeyPress
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ZLBH'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Title.Caption = 'SpecNo'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 79
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'XieXing'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Title.Caption = 'ArtNo'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 71
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'SheHao'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Title.Caption = 'Color'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 34
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Article'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 79
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ETD'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 80
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'XieMing'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Title.Caption = 'ArtName'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 162
+        Visible = True
+      end>
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'select distinct SCZL.SCBH,ZLZL.ZLBH,DDZL.XieXing,DDZL.SheHao,DDZ' +
+        'L.ShipDate as ETD,'
+      'XXZL.Article,XXZL.XieMing'
+      'from SCZL '
+      'left join ZLZL on ZLZL.ZLBH=SCZL.ZLBH'
+      'left join DDZL on DDZL.DDBH=ZLZL.DDBH'
+      
+        'left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL' +
+        '.SheHao'
+      'where SCZL.YN<>'#39'6'#39
+      'and SCZL.DDLB='#39'N'#39
+      'order by ZLZL.ZLBH ')
+    Left = 392
+    Top = 144
+    object Query1ZLBH: TStringField
+      DisplayWidth = 12
+      FieldName = 'ZLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object Query1XieXing: TStringField
+      DisplayWidth = 11
+      FieldName = 'XieXing'
+      FixedChar = True
+      Size = 15
+    end
+    object Query1SheHao: TStringField
+      DisplayWidth = 5
+      FieldName = 'SheHao'
+      FixedChar = True
+      Size = 5
+    end
+    object Query1ETD: TDateTimeField
+      DisplayWidth = 12
+      FieldName = 'ETD'
+      DisplayFormat = 'yyyy/MM/dd'
+    end
+    object Query1Article: TStringField
+      DisplayWidth = 11
+      FieldName = 'Article'
+      FixedChar = True
+    end
+    object Query1XieMing: TStringField
+      DisplayWidth = 25
+      FieldName = 'XieMing'
+      FixedChar = True
+      Size = 50
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = Query1
+    Left = 440
+    Top = 144
+  end
+  object QDep: TQuery
+    DatabaseName = 'DB'
+    Left = 512
+    Top = 48
+  end
+  object QrecNo: TQuery
+    DatabaseName = 'DB'
+    Left = 208
+    Top = 216
+  end
+end

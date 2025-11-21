@@ -1,0 +1,67 @@
+unit LabelFinished_Scan1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Grids, DBGrids, Buttons, ExtCtrls, DBTables, DB;
+
+type
+  TLabelFinished_Scan = class(TForm)
+    Panel1: TPanel;
+    BB2: TBitBtn;
+    BB3: TBitBtn;
+    BB4: TBitBtn;
+    BB5: TBitBtn;
+    BB6: TBitBtn;
+    BB7: TBitBtn;
+    BB1: TBitBtn;
+    BBT1: TBitBtn;
+    BBT2: TBitBtn;
+    BBT3: TBitBtn;
+    BBT4: TBitBtn;
+    DBGrid1: TDBGrid;
+    Panel2: TPanel;
+    DBGrid2: TDBGrid;
+    Panel3: TPanel;
+    Edit1: TEdit;
+    Query1: TQuery;
+    DataSource1: TDataSource;
+    UpdateSQL1: TUpdateSQL;
+    Table1: TTable;
+    Query2: TQuery;
+    DataSource2: TDataSource;
+    UpdateSQL2: TUpdateSQL;
+    procedure Panel3Enter(Sender: TObject);
+    procedure Panel3Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  LabelFinished_Scan: TLabelFinished_Scan;
+
+implementation
+
+{$R *.dfm}
+
+procedure TLabelFinished_Scan.Panel3Enter(Sender: TObject);
+begin
+edit1.SetFocus;
+end;
+
+procedure TLabelFinished_Scan.Panel3Click(Sender: TObject);
+begin
+edit1.SetFocus;
+end;
+
+procedure TLabelFinished_Scan.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+free;
+end;
+
+end.

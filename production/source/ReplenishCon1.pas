@@ -1,0 +1,356 @@
+unit ReplenishCon1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, GridsEh, DBGridEh, StdCtrls, ComCtrls, ExtCtrls,comobj,
+  Menus;
+
+type
+  TReplenishCon = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    DTP1: TDateTimePicker;
+    DTP2: TDateTimePicker;
+    Edit1: TEdit;
+    Panel2: TPanel;
+    DBGridEh2: TDBGridEh;
+    DBGridEh1: TDBGridEh;
+    DBGridEh3: TDBGridEh;
+    BLDet: TQuery;
+    DS3: TDataSource;
+    Updet: TUpdateSQL;
+    BLreason: TQuery;
+    BLreasonBLNO: TStringField;
+    BLreasonDepNO: TStringField;
+    BLreasonDepName: TStringField;
+    BLreasonQty: TCurrencyField;
+    BLreasonUSERDate: TDateTimeField;
+    BLreasonUSERID: TStringField;
+    BLreasonYN: TStringField;
+    BLreasonYYBH: TStringField;
+    BLreasonYWSM: TStringField;
+    BLreasonZWSM: TStringField;
+    DS2: TDataSource;
+    UpMas: TUpdateSQL;
+    DS1: TDataSource;
+    BLMas: TQuery;
+    BLMasBLNO: TStringField;
+    BLMasGSBH: TStringField;
+    BLMasZLBH: TStringField;
+    BLMasGXLB: TStringField;
+    BLMasQty: TCurrencyField;
+    BLMasBLACC: TCurrencyField;
+    BLMasBLDate: TDateTimeField;
+    BLMasUSERDate: TDateTimeField;
+    BLMasUSERID: TStringField;
+    BLMasYN: TStringField;
+    BLMasCFMDate: TDateTimeField;
+    BLMasCFMID: TStringField;
+    BLMaszlQty: TIntegerField;
+    Qtemp: TQuery;
+    BLDetBWBH: TStringField;
+    BLDetBWYW: TStringField;
+    BLDetCLBH: TStringField;
+    BLDetYWPM: TStringField;
+    BLDetDWBH: TStringField;
+    BLDetCLSL: TFloatField;
+    BLDetQty: TCurrencyField;
+    BLDetQtyOld: TCurrencyField;
+    BLDetNowPer: TFloatField;
+    BLDetOldPer: TFloatField;
+    BLDetUSPrice: TCurrencyField;
+    BLMasTotAcc: TCurrencyField;
+    CB1: TCheckBox;
+    Button4: TButton;
+    BLDetBLNO: TStringField;
+    BLMasDDACC: TFloatField;
+    BLMasTotPer: TFloatField;
+    BLMasBLPer: TFloatField;
+    BLCS: TQuery;
+    Label3: TLabel;
+    CS: TLabel;
+    Button5: TButton;
+    BLMasArticle: TStringField;
+    Label4: TLabel;
+    MergNoEdit: TEdit;
+    PopupMenu1: TPopupMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure BLDetCalcFields(DataSet: TDataSet);
+    procedure Button1Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure BLDetNewRecord(DataSet: TDataSet);
+    procedure Button2Click(Sender: TObject);
+    procedure BLMasCalcFields(DataSet: TDataSet);
+    procedure BLCSAfterOpen(DataSet: TDataSet);
+    procedure Button5Click(Sender: TObject);
+    procedure N1Click(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ReplenishCon: TReplenishCon;
+  NDate:TDate;
+
+implementation
+
+uses main1, EntryPrice1, CheckQuotation1;
+
+{$R *.dfm}
+
+procedure TReplenishCon.FormDestroy(Sender: TObject);
+begin
+  ReplenishCon:=nil;
+end;
+
+procedure TReplenishCon.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  action:=cafree;
+end;
+
+procedure TReplenishCon.FormCreate(Sender: TObject);
+begin
+
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select getdate() as NDate ');
+    active:=true;
+    Ndate:=fieldbyname('NDate').Value;
+    active:=false;
+  end;
+  DTP1.Date:=Ndate-1;
+  DTP2.Date:=Ndate;
+   if ((main.edit1.Text ='315064') or (main.edit1.Text='314204')or (main.edit1.Text='339206')or (main.edit1.Text='316503')) then
+  begin
+    Button4.Enabled:=true;
+    N1.Enabled:=true;
+    N2.Enabled:=true;
+  end;
+end;
+
+procedure TReplenishCon.BLDetCalcFields(DataSet: TDataSet);
+begin
+  with  BLDet do
+  begin
+    if fieldbyname('CLSL').Value <>0 then
+      begin
+        fieldbyname('OldPer').Value:=fieldbyname('QtyOld').Value/fieldbyname('CLSL').Value*100;
+        fieldbyname('NowPer').Value:=fieldbyname('Qty').Value/fieldbyname('CLSL').Value*100;
+      end;
+  end;
+end;
+
+procedure TReplenishCon.Button1Click(Sender: TObject);
+begin
+  {with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('update SCBL ');
+    sql.add('set CFMID='+''''+'SYSTEM'+''''+',');
+    sql.add('CFMDate='+''''+formatdatetime('yyyy/MM/dd',NDate)+'''');
+    sql.add('where BLDate<getdate()-7');
+    execsql;
+  end;}
+  with BLMas do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select SCBL.BLNO,SCBL.ZLBH,DDZL.Article,SCBL.GXLB,SCBL.GSBH,SCBL.Qty,SCBL.BLACC ');
+    sql.add('       ,SCBL.BLDate,SCBL.USERDate,SCBL.USERID,SCBL.CFMID,SCBL.CFMDate,SCBL.YN  ');
+    sql.add('       ,TotAcc.TotAcc,DDZLS.zlQty,DDZLS.DDACC   ');
+    sql.add('from (select * from SCBL     ');
+    sql.add('      where ISNULL(flowflag,'''')<>''X'' and convert(smalldatetime,convert(varchar,SCBL.BLDate,111)) between    ');
+    sql.add('            '''+formatdatetime('yyy/MM/dd',DTP1.date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.Date)+'''');
+    sql.add('            and SCBL.BLNO like '+''''+edit1.Text+'%'+'''');
+    if MergNoEdit.Text<>'' then
+    begin
+      sql.Add('          and SCBL.MergNo like '''+MergNoEdit.Text+'%''');
+    end;
+    if CB1.checked then
+      begin
+        sql.add('       and isnull(SCBL.CFMID,'+''''+''+''''+')='+''''+''+'''');
+      end;
+    sql.add('      ) SCBL  ');
+    sql.add('left join DDZL on DDZL.DDBH=SCBL.ZLBH');
+    sql.add('left join (select YWDD.YSBH as DDBH,sum(YWDDS.Qty) as zlQty,sum(YWDDS.IPrice*YWDDS.Qty) as DDACC from YWDDS ');
+    sql.add('           left join YWDD on YWDD.DDBH=YWDDS.DDBH ');
+    sql.add('           group by YWDD.YSBH) DDZLS on DDZLS.DDBH=SCBL.ZLBH ')  ;
+    sql.add('left join (select  ZLBH,sum(BLAcc) as TotAcc from SCBL');
+    sql.add('           group by ZLBH ) TotAcc on TotAcc.ZLBH=SCBL.ZLBH');
+    //sql.add('group by SCBL.BLNO,SCBL.ZLBH,SCBL.GXLB,SCBL.GSBH,SCBL.Qty,SCBL.BLACC');
+    //sql.add('         ,SCBL.BLDate,SCBL.USERDate,SCBL.USERID,SCBL.CFMID,SCBL.CFMDate,SCBL.YN,TotAcc.TotAcc');
+    sql.add('order by SCBL.BLNO DESC');
+    active:=true;
+  end;
+  BLreason.active:=true;
+  BLDet.Active:=true;
+  BLCS.active:=true;
+end;
+
+procedure TReplenishCon.Button4Click(Sender: TObject);
+var BLNO:string;
+begin
+  with BLDet do
+  begin
+    first;
+    while not eof do
+      begin
+        if fieldbyname('USPrice').IsNull then
+          begin
+            showmessage('Pls key in Price first.');
+            abort;
+          end;
+        next;
+      end;
+  end;  
+  with BLDet do
+  begin
+    first;
+    while not eof do
+      begin
+       { if updatestatus=usmodified then
+          begin  }
+            Updet.Apply(ukmodify);
+         // end;
+        next;
+      end;
+  end;
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('update SCBL ');
+    sql.add('set BLAcc=(select sum(USprice*Qty) as TotAcc from SCBLS ');
+    sql.add('           where SCBLS.BLNO='+''''+BLMas.fieldbyname('BLNO').Value+''''+')');
+    sql.add('where SCBL.BLNO='+''''+BLMas.fieldbyname('BLNO').Value+'''');
+    execsql;
+  end;
+  with BLMas do
+  begin
+    BLNO:= BLMas.fieldbyname('BLNO').Value;
+    active:=false;
+    active:=true;
+    if locate('BLNO',BLNO,[]) then
+    begin
+        showmessage('Succeed.');
+    end;
+  end;
+end;
+
+procedure TReplenishCon.BLDetNewRecord(DataSet: TDataSet);
+begin
+abort;
+end;
+
+procedure TReplenishCon.Button2Click(Sender: TObject);
+begin
+with BLMas do
+  begin
+    if fieldbyname('BLACC').value=0 then
+      begin
+        if messagedlg('The BLACC is 0 , you really want to confirm?',mtconfirmation,[mbYes,mbNo],0)=mrno then
+          begin
+            abort;
+          end;
+      end;
+    edit;
+    fieldbyname('CFMID').Value:=main.edit1.text ;
+    fieldbyname('CFMDate').Value:=NDate;
+    post;
+    UpMas.Apply(ukmodify);
+    active:=false;
+    active:=true;
+  end;
+end;
+
+procedure TReplenishCon.BLMasCalcFields(DataSet: TDataSet);
+begin
+{2013/3/26 Gary 發現補料計算應該使用領料金額為母數，目前使用訂單金額(單價*數量)
+ 列入考慮修正項目}
+with  BLMas do
+  begin
+    if fieldbyname('DDACC').Value <>0 then
+      begin
+        fieldbyname('TotPer').Value:=fieldbyname('TotACC').Value/fieldbyname('DDACC').Value*100;
+        fieldbyname('BLPer').Value:=fieldbyname('BLACC').Value/fieldbyname('DDACC').Value*100;
+      end;
+  end;
+end;
+
+procedure TReplenishCon.BLCSAfterOpen(DataSet: TDataSet);
+begin
+  CS.Caption:=inttostr(BLCS.recordcount);
+end;
+
+procedure TReplenishCon.Button5Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j:integer;
+begin
+    if  BLDet.active  then
+    begin
+      try
+        eclApp:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+      try
+         WorkBook:=eclApp.workbooks.Add;
+         for   i:=0   to   BLDet.fieldcount-1   do
+         begin
+              eclApp.Cells(1,i+1):=BLDet.fields[i].FieldName;
+         end;
+         BLDet.First;
+         j:=2;
+         while   not   BLDet.Eof   do
+         begin
+          for  i:=0  to  BLDet.fieldcount-1  do
+          begin
+            eclApp.Cells(j,i+1):=BLDet.Fields[i].Value;
+          end;
+          BLDet.Next;
+          inc(j);
+         end;
+         eclapp.columns.autofit;
+         showmessage('Succeed');
+         eclApp.Visible:=True;
+       except
+          on   F:Exception   do
+            showmessage(F.Message);
+       end;
+    end;
+
+end;
+
+
+procedure TReplenishCon.N1Click(Sender: TObject);
+begin
+  EntryPrice:=TEntryPrice.create(self);
+  EntryPrice.show;
+end;
+
+procedure TReplenishCon.N2Click(Sender: TObject);
+begin
+  CheckQuotation:=TCheckQuotation.create(self);
+  CheckQuotation.show;
+end;
+
+end.

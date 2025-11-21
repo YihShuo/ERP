@@ -1,0 +1,51 @@
+D:\Project\Luo\R2000Project\UHFDemo\Reader\bin\Debug\Reader.dll
+D:\Project\Luo\R2000Project\UHFDemo\Reader\bin\Debug\Reader.pdb
+D:\Project\Luo\R2000Project\UHFDemo\Reader\obj\Debug\ResolveAssemblyReference.cache
+D:\Project\Luo\R2000Project\UHFDemo\Reader\obj\Debug\Reader.dll
+D:\Project\Luo\R2000Project\UHFDemo\Reader\obj\Debug\Reader.pdb
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\Reader\bin\Debug\Reader.dll
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\Reader\bin\Debug\Reader.pdb
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\Reader\obj\Debug\ResolveAssemblyReference.cache
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\Reader\obj\Debug\Reader.dll
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\Reader\obj\Debug\Reader.pdb
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\Reader\bin\Debug\Reader.dll
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\Reader\bin\Debug\Reader.pdb
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\Reader\obj\Debug\ResolveAssemblyReference.cache
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\Reader\obj\Debug\Reader.dll
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\Reader\obj\Debug\Reader.pdb
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\Reader\bin\Debug\Reader.dll
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\Reader\bin\Debug\Reader.pdb
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\Reader\obj\Debug\Reader.csprojAssemblyReference.cache
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\Reader\obj\Debug\Reader.csproj.CoreCompileInputs.cache
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\Reader\obj\Debug\Reader.dll
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\Reader\obj\Debug\Reader.pdb
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\Reader\bin\Debug\Reader.dll
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\Reader\bin\Debug\Reader.pdb
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\Reader\obj\Debug\Reader.csproj.AssemblyReference.cache
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\Reader\obj\Debug\Reader.csproj.CoreCompileInputs.cache
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\Reader\obj\Debug\Reader.dll
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\Reader\obj\Debug\Reader.pdb
+D:\開發RFID\Reader\bin\Debug\Reader.dll
+D:\開發RFID\Reader\bin\Debug\Reader.pdb
+D:\開發RFID\Reader\obj\Debug\Reader.csproj.AssemblyReference.cache
+D:\開發RFID\Reader\obj\Debug\Reader.csproj.CoreCompileInputs.cache
+D:\開發RFID\Reader\obj\Debug\Reader.dll
+D:\開發RFID\Reader\obj\Debug\Reader.pdb
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\Reader\bin\Debug\Reader.dll
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\Reader\bin\Debug\Reader.pdb
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\Reader\obj\Debug\Reader.csproj.AssemblyReference.cache
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\Reader\obj\Debug\Reader.csproj.CoreCompileInputs.cache
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\Reader\obj\Debug\Reader.dll
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\Reader\obj\Debug\Reader.pdb
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\Reader\bin\Debug\Reader.dll
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\Reader\bin\Debug\Reader.pdb
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\Reader\obj\Debug\Reader.csproj.AssemblyReference.cache
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\Reader\obj\Debug\Reader.csproj.CoreCompileInputs.cache
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\Reader\obj\Debug\Reader.dll
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\Reader\obj\Debug\Reader.pdb
+C:\Users\PC\Desktop\RFID\RFID_DOOR\Reader\bin\Debug\Reader.dll
+C:\Users\PC\Desktop\RFID\RFID_DOOR\Reader\bin\Debug\Reader.pdb
+C:\Users\PC\Desktop\RFID\RFID_DOOR\Reader\obj\Debug\Reader.csproj.AssemblyReference.cache
+C:\Users\PC\Desktop\RFID\RFID_DOOR\Reader\obj\Debug\Reader.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\RFID\RFID_DOOR\Reader\obj\Debug\Reader.dll
+C:\Users\PC\Desktop\RFID\RFID_DOOR\Reader\obj\Debug\Reader.pdb

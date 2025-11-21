@@ -1,0 +1,1489 @@
+unit StockShoeMonth1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, GridsEh, DBGridEh, StdCtrls, ExtCtrls, ComCtrls,
+  DateUtils, Comobj, Menus, Buttons;
+
+type
+  TStockShoeMonth = class(TForm)
+    PC1: TPageControl;
+    TS1: TTabSheet;
+    TS2: TTabSheet;
+    Panel1: TPanel;
+    DDBHEdit: TEdit;
+    Label3: TLabel;
+    Button1: TButton;
+    DBGridEh2: TDBGridEh;
+    Query2: TQuery;
+    DS2: TDataSource;
+    Query2CKBH: TStringField;
+    Query2LastRem: TIntegerField;
+    Query2RKQty: TIntegerField;
+    Query2XHQty: TIntegerField;
+    Query2Qty: TIntegerField;
+    Query2ARTICLE: TStringField;
+    Query2Memo: TStringField;
+    Panel2: TPanel;
+    DTP: TDateTimePicker;
+    Label14: TLabel;
+    Button2: TButton;
+    Button3: TButton;
+    Label4: TLabel;
+    CBX2: TComboBox;
+    Label6: TLabel;
+    CBX3: TComboBox;
+    Label1: TLabel;
+    Edit3: TEdit;
+    Query2ShipDate: TDateTimeField;
+    Query2DDZT: TStringField;
+    DBGridEh1: TDBGridEh;
+    Query1: TQuery;
+    Query1KCYEAR: TStringField;
+    Query1KCMONTH: TStringField;
+    Query1DDBH: TStringField;
+    Query1Qty: TIntegerField;
+    Query1VNPrice: TCurrencyField;
+    Query1VNACC: TCurrencyField;
+    Query1CKBH: TStringField;
+    Query1USERID: TStringField;
+    Query1USERDATE: TDateTimeField;
+    Query1YN: TStringField;
+    Query1Memo: TStringField;
+    DS1: TDataSource;
+    Query1ARTICLE: TStringField;
+    Button4: TButton;
+    Button5: TButton;
+    EXEQry: TQuery;
+    PopupMenu1: TPopupMenu;
+    Modify1: TMenuItem;
+    Save1: TMenuItem;
+    Cancel1: TMenuItem;
+    UPDet1: TUpdateSQL;
+    PopupMenu2: TPopupMenu;
+    Modify2: TMenuItem;
+    Save2: TMenuItem;
+    Cancel2: TMenuItem;
+    UPDet2: TUpdateSQL;
+    CheckBox1: TCheckBox;
+    Query2YSBH: TStringField;
+    Query2DDBH: TStringField;
+    RYMemo1: TMenuItem;
+    Panel3: TPanel;
+    Splitter1: TSplitter;
+    PopupMenu3: TPopupMenu;
+    Excel1: TMenuItem;
+    checkRY_Memo: TCheckBox;
+    YSBHEdit: TEdit;
+    Label2: TLabel;
+    Query2Pairs: TFloatField;
+    N1: TMenuItem;
+    menu1: TMenuItem;
+    Query2TRQty: TIntegerField;
+    CheckBox2: TCheckBox;
+    TRQtyCK: TCheckBox;
+    Label5: TLabel;
+    MemoEdit: TEdit;
+    menu2: TMenuItem;
+    MergeYSBHCK: TCheckBox;
+    CheckBox3: TCheckBox;
+    DBGridEh4: TDBGridEh;
+    Query4: TQuery;
+    StringField1: TStringField;
+    Splitter2: TSplitter;
+    DS4: TDataSource;
+    Panel4: TPanel;
+    pnTop: TPanel;
+    BB1: TBitBtn;
+    BB2: TBitBtn;
+    BB3: TBitBtn;
+    BB4: TBitBtn;
+    BB5: TBitBtn;
+    btnDelAll: TBitBtn;
+    BB7: TBitBtn;
+    DBGridEh3: TDBGridEh;
+    Query3: TQuery;
+    StringField4: TStringField;
+    Query1DDBH1: TStringField;
+    IntegerField1: TIntegerField;
+    StringField5: TStringField;
+    DateTimeField1: TDateTimeField;
+    StringField6: TStringField;
+    DS3: TDataSource;
+    UpdateSQL3: TUpdateSQL;
+    QTemp: TQuery;
+    Query3KCYEAR: TStringField;
+    Query3KCMONTH: TStringField;
+    menu3: TMenuItem;
+    Query4Qty: TIntegerField;
+    Button6: TButton;
+    query_excelTBA: TQuery;
+    Query2CTS: TIntegerField;
+    Button7: TButton;
+    Query2Customer: TStringField;
+    Query2ModelName: TStringField;
+    Label7: TLabel;
+    CKBHEdit: TEdit;
+    Label8: TLabel;
+    KVBHEdit: TEdit;
+    Query2KVBH: TStringField;
+    CheckBox4: TCheckBox;
+    Query2STT: TStringField;
+    TS3: TTabSheet;
+    Panel5: TPanel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Edit1: TEdit;
+    Button8: TButton;
+    DTP1: TDateTimePicker;
+    Button9: TButton;
+    Button11: TButton;
+    Panel6: TPanel;
+    DBGridEh5: TDBGridEh;
+    Query5: TQuery;
+    DS5: TDataSource;
+    Query5DDBH: TStringField;
+    Query5CKBH: TStringField;
+    Query5Pairs: TIntegerField;
+    Query5Qty: TIntegerField;
+    Query5CTS: TIntegerField;
+    Query5ARTICLE: TStringField;
+    Query5ShipDate: TDateTimeField;
+    Query5DDZT: TStringField;
+    Button10: TButton;
+    Button12: TButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Modify1Click(Sender: TObject);
+    procedure Save1Click(Sender: TObject);
+    procedure Cancel1Click(Sender: TObject);
+    procedure Modify2Click(Sender: TObject);
+    procedure Cancel2Click(Sender: TObject);
+    procedure Save2Click(Sender: TObject);
+    procedure Excel1Click(Sender: TObject);
+    procedure checkRY_MemoClick(Sender: TObject);
+    procedure DBGridEh2GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure menu2Click(Sender: TObject);
+    procedure BB1Click(Sender: TObject);
+    procedure BB2Click(Sender: TObject);
+    procedure btnDelAllClick(Sender: TObject);
+    procedure BB3Click(Sender: TObject);
+    procedure BB4Click(Sender: TObject);
+    procedure BB5Click(Sender: TObject);
+    procedure BB7Click(Sender: TObject);
+    procedure Query2AfterOpen(DataSet: TDataSet);
+    procedure DBGridEh3DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure menu1Click(Sender: TObject);
+    procedure menu3Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
+    procedure Button8Click(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
+    procedure Button11Click(Sender: TObject);
+    procedure Button10Click(Sender: TObject);
+    procedure Button12Click(Sender: TObject);
+
+  private
+    //
+    IsHide_Warehouse_XT:String;
+    Production_N5216_CheckFactory:String;
+    AppDir:string;
+    procedure readini();////////
+    //
+    { Private declarations }
+    procedure ExportExcel(Query:TQuery);
+  public
+    //
+    VNPrice_DiplayFormat:string;
+    VNPrice_Decimal:Byte;
+    //倉庫結算位數
+    WH_Decimal:String;
+    WH_DiplayFormat:String;
+    //
+    sYear_G,sMonth_G:String;
+    { Public declarations }
+    procedure ShowRY_Memo();
+
+  end;
+
+var
+  StockShoeMonth: TStockShoeMonth;
+
+implementation
+  uses main1,StockShoeMonth_TRList1, FunUnit, untClipboard, inifiles,
+  StockShoeMonth_Print1, StockShoeMonthRe_Print1;
+{$R *.dfm}
+procedure TStockShoeMonth.readini();
+var MyIni :Tinifile;
+    AppDir:string;
+begin
+  IsHide_Warehouse_XT:='N';
+ Production_N5216_CheckFactory:='N';
+  //
+  VNPrice_DiplayFormat:='#,##0';
+  VNPrice_Decimal:=0;
+  //倉庫小位數
+  WH_Decimal:='2';
+  WH_DiplayFormat:='#,##0.00';
+  AppDir:=ExtractFilePath(Application.ExeName);
+  if FileExists(AppDir+'\ComName.ini')=true then
+  begin
+    try
+      MyIni := Tinifile.Create(AppDir+'\ComName.ini');
+      VNPrice_DiplayFormat:=MyIni.ReadString('VNPrice','DiplayFormat','#,##0');
+      VNPrice_Decimal:=strtoint(MyIni.ReadString('VNPrice','Decimal','0'));
+      //倉庫小位數
+      WH_Decimal:=MyIni.ReadString('Warehouse','Decimal','2');
+      WH_DiplayFormat:=MyIni.ReadString('Warehouse','DiplayFormat','#,##0.00');
+      //隱藏XT
+      IsHide_Warehouse_XT:=MyIni.ReadString('ERP','IsHide_Warehouse_XT','N');
+      Production_N5216_CheckFactory:=MyIni.ReadString('ERP','Production_N5216_CheckFactory','N');
+    finally
+      MyIni.Free;
+    end;
+  end;
+end;
+
+procedure TStockShoeMonth.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action:=CaFree;
+end;
+
+procedure TStockShoeMonth.FormDestroy(Sender: TObject);
+begin
+  StockShoeMonth:=nil;
+end;
+//輸出Excel
+procedure TStockShoeMonth.ExportExcel(Query:TQuery);
+var eclApp,WorkBook:olevariant;
+    i,j:integer;
+begin
+    if Query.Active then
+    begin
+      if Query.recordcount=0 then
+      begin
+        showmessage('No record.');
+        abort;
+      end;
+    end else
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+
+    try
+      WorkBook:=eclApp.workbooks.Add;
+      eclApp.Cells(1,1):='NO';
+      for   i:=1   to   query.fieldcount   do
+      begin
+          eclApp.Cells(1,i+1):=Query.fields[i-1].FieldName;
+      end;
+      Query.First;
+      j:=2;
+      while   not  Query.Eof   do
+        begin
+          eclApp.Cells(j,1):=j-1;
+          for   i:=1   to   Query.fieldcount   do
+          begin
+              eclApp.Cells(j,i+1):=Query.Fields[i-1].Value;
+          end;
+          Query.Next;
+          inc(j);
+        end;
+      eclapp.columns.autofit;
+      showmessage('Succeed.');
+      eclApp.Visible:=True;
+    except
+      on   F:Exception   do
+        showmessage(F.Message);
+    end;
+end;
+//
+procedure TStockShoeMonth.Button1Click(Sender: TObject);
+var iYear,iMonth,iDay:word;
+    sYear,sMonth,nYear,nMonth:string;
+begin
+  decodedate(DTP.Date,iYear,iMonth,iDay);   //找庫存相關的數據
+  nYear:=floattostr(iYear);
+  nMonth:=floattostr(iMonth);
+  if length(nMonth)=1 then
+    nMonth:='0'+nMonth;
+  //
+  incAMonth(iYear,iMonth,iDay,-1);
+  sYear:=floattostr(iYear);
+  sMonth:=floattostr(iMonth);
+  if length(sMonth)=1 then
+    sMonth:='0'+sMonth;
+  sYear_G:=sYear;
+  sMonth_G:=sMonth;
+  //拆單訂單明細
+  with EXEQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add(' if object_id(''tempdb..#YWCPDDTR'') is not null');
+    SQL.Add(' begin drop table #YWCPDDTR end');
+    SQL.Add('Select DDBH,DDBH1,Qty into #YWCPDDTR');
+    SQL.Add('From YWCPMONTH_DDZLTR   ');
+    SQL.Add('	where YWCPMONTH_DDZLTR.KCYEAR ='''+sYear+''' and YWCPMONTH_DDZLTR.KCMONTH = '''+sMonth+''' and YWCPMONTH_DDZLTR.DDBH in ');
+    SQL.Add('	(');
+    SQL.Add('	 Select DDBH from (');
+    SQL.Add('   Select YWCPMONTH.DDBH');
+    SQL.Add('   From YWCPMONTH   ');
+    SQL.Add('   where YWCPMONTH.KCYEAR='''+sYear+''' and YWCPMONTH.KCMONTH='''+sMonth+''' ');
+    SQL.Add('	  Union all');
+    SQL.Add('   Select YWCP.DDBH ');
+    SQL.Add('	  from (Select * from YWCP union all Select * from YWCPOld) YWCP');
+    SQL.Add('	  where convert(smalldatetime,convert(varchar,YWCP.INDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(DTP.date))+''' and '''+Formatdatetime('yyyy/MM/dd',DTP.date)+''' and IsNull(SB,'''')<>'''' ');
+    SQL.Add('	  Group by YWCP.DDBH  ) YWCP Group by DDBH');
+    SQL.Add('  )');
+    //FuncObj.WriteErrorLog(sql.Text);
+    ExecSQL();
+  end;
+  //
+  with Query2 do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('Select YWDDM.DDBH,YWDDM.YSBH,YWDDM.CKBH,IsNull(YWDD.Qty,DDZL.Pairs) as Pairs,YWDDM.LastRem,YWDDM.RKQty,YWDDM.XHQty,YWDDM.TRQty,YWDDM.Qty,');
+    SQL.Add('case when LEFT(YWDDM.DDBH,2)in (''HK'',''JH'') then ''HOKA'' ELSE ''TEVA'' END as Customer,');
+    SQL.Add('''Giay thanh pham'' as ModelName,KCCLMONTH_Order.KVBH,KCCLMONTH_Order.STT,');
+    SQL.Add('       DDZL.ShipDate,DDZL.ARTICLE,DDZL.DDZT,YWCPMemo.Memo,isnull(RK_CTS.CTS,0) - isnull(LL_CTS.CTS,0) as CTS   ');
+    SQL.Add('from (');
+    if MergeYSBHCK.Checked=true then //Ty Bach use
+    begin
+    SQL.Add(' Select YSBH as DDBH,YSBH,CKBH,Sum(LastRem) as LastRem,Sum(RKQty) as RKQty,Sum(XHQty) as XHQty,Sum(TRQty) as TRQty,Sum(Qty) as Qty from ( ');
+    end;
+    SQL.Add('  Select YWCP.DDBH,IsNull(YWDD.YSBH,YWCP.DDBH) as YSBH,Max(YWCP.CKBH) as CKBH,Sum(YWCPMonth.Qty) as LastRem,Sum(YWCPRK.Qty) as RKQty,');
+    SQL.Add('         Sum(YWCPXH.Qty) as XHQty,SUM(YWCPMONTH_DDZLTR.Qty) as TRQty,Case when SUM(YWCP.Qty) is not null and SUM(YWCPMONTH_DDZLTR.Qty) is not null then SUM(YWCP.Qty)-SUM(YWCPMONTH_DDZLTR.Qty) else SUM(YWCP.Qty) end as Qty');
+    SQL.Add('  from (');
+    SQL.Add('	Select DDBH,Max(CKBH) as CKBH, Sum(Qty) as Qty from (');
+    SQL.Add('    Select YWCPMONTH.CKBH,YWCPMONTH.DDBH,YWCPMONTH.Qty,''1'' as SB ');
+    SQL.Add('    From YWCPMONTH   ');
+    SQL.Add('    where YWCPMONTH.KCYEAR='''+sYear+'''  ');
+    SQL.Add('		and YWCPMONTH.KCMONTH='''+sMonth+''' ');
+    SQL.Add('	union all');
+    SQL.Add('	Select Max(YWCP.KCBH) as CKBH,YWCP.DDBH,Sum(YWCP.Qty) as Qty,''2'' as SB');
+    SQL.Add('	from (Select * from YWCP union all Select * from YWCPOld) YWCP');
+    SQL.Add('	where convert(smalldatetime,convert(varchar,YWCP.INDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(DTP.date))+''' and '''+Formatdatetime('yyyy/MM/dd',DTP.date)+''' and IsNull(SB,'''')<>'''' ');
+    SQL.Add('	Group by YWCP.DDBH');
+    SQL.Add('	union all');
+    SQL.Add('	Select Max(YWCP.KCBH) as CKBH,YWCP.DDBH,-1*Sum( Case when SB=''3'' then YWCP.Qty else 0 end) as Qty,''3'' as SB');
+    SQL.Add('	from (Select * from YWCP union all Select * from YWCPOld) YWCP');
+    SQL.Add('	where convert(smalldatetime,convert(varchar,YWCP.EXEDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(DTP.date))+''' and '''+Formatdatetime('yyyy/MM/dd',DTP.date)+''' and IsNull(SB,'''')<>''''');
+    SQL.Add('	Group by YWCP.DDBH  ');
+    SQL.Add('	) YWCPMONTH');
+    SQL.Add('	Group by DDBH  ) YWCP  ');
+    SQL.Add('  Left join  (');
+    SQL.Add('    Select YWCPMONTH.CKBH,YWCPMONTH.DDBH,YWCPMONTH.Qty,''1'' as SB ');
+    SQL.Add('	From YWCPMONTH   ');
+    SQL.Add('	where YWCPMONTH.KCYEAR='''+sYear+'''  ');
+    SQL.Add('		 and YWCPMONTH.KCMONTH='''+sMonth+'''  ) YWCPMonth on YWCP.DDBH=YWCPMonth.DDBH');
+    SQL.Add('  Left join  (');
+    SQL.Add('	Select Max(YWCP.KCBH) as CKBH,YWCP.DDBH,Sum(YWCP.Qty) as Qty,''2'' as SB');
+    SQL.Add('	from (Select * from YWCP union all Select * from YWCPOld) YWCP');
+    SQL.Add('	where convert(smalldatetime,convert(varchar,YWCP.INDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(DTP.date))+''' and '''+Formatdatetime('yyyy/MM/dd',DTP.date)+''' and IsNull(SB,'''')<>'''' ');
+    SQL.Add('	Group by YWCP.DDBH ) YWCPRK on YWCP.DDBH=YWCPRK.DDBH');
+    SQL.Add('  Left join  (');
+    SQL.Add('	Select Max(YWCP.KCBH) as CKBH,YWCP.DDBH,Sum( Case when SB=''3'' then YWCP.Qty else 0 end) as Qty,''5'' as SB');
+    SQL.Add('	from (Select * from YWCP union all Select * from YWCPOld) YWCP');
+    SQL.Add('	where convert(smalldatetime,convert(varchar,YWCP.EXEDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(DTP.date))+''' and '''+Formatdatetime('yyyy/MM/dd',DTP.date)+''' and IsNull(SB,'''')<>''''');
+    SQL.Add('	Group by YWCP.DDBH ) YWCPXH on YWCP.DDBH=YWCPXH.DDBH');
+    SQL.Add('   Left join (');
+    //20221126 修改
+    SQL.Add(' Select YWCPDDTR.CKBH,YWCPDDTR.DDBH, Case when IsNull(YWCP.Qty,0)<YWCPDDTR.Qty then IsNull(YWCP.Qty,0) else YWCPDDTR.Qty end as  Qty,YWCPDDTR.SB from (');
+    SQL.Add('      Select null as CKBH,#YWCPDDTR.DDBH,Sum(#YWCPDDTR.Qty) as Qty,''6'' as SB ');
+    SQL.Add('	   From #YWCPDDTR  ');
+    SQL.Add('	   Group by #YWCPDDTR.DDBH');
+    SQL.Add(') YWCPDDTR ');
+    SQL.Add('Left join (');
+    SQL.Add('  Select #YWCPDDTR.DDBH,Sum(YWCP.Qty) as Qty');
+    SQL.Add('  From (Select * from YWCP union all Select * from YWCPOld) YWCP');
+    SQL.Add('  inner join #YWCPDDTR on #YWCPDDTR.DDBH1=YWCP.DDBH');
+    SQL.Add('  where  IsNull(SB,'''')<>''''  and convert(smalldatetime,convert(varchar,YWCP.INDATE,111))<='''+Formatdatetime('yyyy/MM/dd',DTP.date)+'''   ');
+    SQL.Add('  Group by #YWCPDDTR.DDBH');
+    SQL.Add(') YWCP on YWCPDDTR.DDBH=YWCP.DDBH');
+    //============
+    SQL.Add('  ) YWCPMONTH_DDZLTR on YWCP.DDBH=YWCPMONTH_DDZLTR.DDBH');
+    SQL.Add('  Left join YWDD on YWDD.DDBH=YWCP.DDBH ');
+    SQL.Add('  Group by YWDD.YSBH,YWCP.DDBH');
+    if MergeYSBHCK.Checked=true then  //Ty Bach use
+    begin
+    SQL.Add(') YWDDM Group by YSBH,CKBH ');
+    end;
+    SQL.Add('   ) YWDDM');
+    SQL.Add('Left join YWCPMemo on YWCPMemo.DDBH=YWDDM.YSBH ');
+    SQL.Add('left join DDZL on YWDDM.YSBH=DDZL.DDBH ');
+    SQL.Add('left join YWDD on YWDDM.DDBH=YWDD.DDBH ');
+    //20230830 add column show CTS stock
+    SQL.Add('left join (  select DDBH,count(*) as CTS ');
+    SQL.Add('			        from (Select * from YWCP union all Select * from YWCPOld) YWCP ');
+    SQL.Add('       			where IsNull(SB,'''')<>''''  and convert(smalldatetime,convert(varchar,YWCP.INDATE,111))<='''+Formatdatetime('yyyy/MM/dd',DTP.date)+'''  ');
+    SQL.Add('             group by DDBH) RK_CTS  on RK_CTS.DDBH=DDZL.DDBH  ');
+    SQL.Add('left join (  select DDBH,count(*) as CTS ');
+    SQL.Add('			        from (Select * from YWCP union all Select * from YWCPOld) YWCP ');
+    SQL.Add('       			where IsNull(SB,'''')<>''''  and convert(smalldatetime,convert(varchar,YWCP.EXEDATE,111))<='''+Formatdatetime('yyyy/MM/dd',DTP.date)+'''  ');
+    SQL.Add('             group by DDBH) LL_CTS  on LL_CTS.DDBH=DDZL.DDBH  ');
+    ///
+    SQL.Add('left join KCCLMONTH_Order on YWDDM.DDBH = KCCLMONTH_Order.DDBH and KCYEAR= '''+nYear+''' and KCMONTH='''+nMonth+'''  ');
+    SQL.Add('left join kfzl on DDZL.KHBH=kfzl.kfdh ');
+    //
+    SQL.Add('where 1=1 and DDZL.GSBH='''+main.Edit2.Text+'''');
+    if DDBHEdit.Text<>'' then
+    SQL.Add('   and YWDDM.DDBH like '''+DDBHEdit.Text+'%'' ');
+    if YSBHEdit.Text<>'' then
+    SQL.Add('   and YWDDM.YSBH like '''+YSBHEdit.Text+'%'' ');
+    if CheckBox1.Checked=true then
+    SQL.Add('   and YWDDM.Qty>0 ');
+    if CheckBox3.Checked=true then
+    SQL.Add('   and YWDDM.Qty<0 ');
+    if CheckBox2.Checked=true then
+    SQL.Add('   and YWDDM.Qty is null ');
+    if TRQtyCK.Checked=true then
+    SQL.Add('   and YWDDM.DDBH in (Select DDBH  from #YWCPDDTR union all Select DDBH1  from #YWCPDDTR ) ');
+    if MemoEdit.Text<>'' then
+    SQL.Add('   and YWCPMemo.Memo like ''%'+MemoEdit.Text+'%'' ');
+    SQL.Add('Order by YWDDM.YSBH ');
+    //FuncObj.WriteErrorLog(sql.Text);
+    Active:=true;
+  end;
+end;
+
+
+procedure TStockShoeMonth.FormCreate(Sender: TObject);
+begin
+  DTP.Date:=Date();
+  DTP1.Date:=Date();
+  if checkRY_Memo.Checked=true then
+  begin
+     Panel3.Visible:=true;
+     Splitter1.Visible:=true;
+  end else
+  begin
+     Panel3.Visible:=false;
+     Splitter1.Visible:=false;
+  end;
+   //
+  AppDir:=ExtractFilePath(Application.ExeName);
+  readini();
+  PC1.ActivePage:=TS2;
+end;
+
+procedure TStockShoeMonth.Button3Click(Sender: TObject);
+begin
+  with Query1 do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add(' Select YWCPMONTH.*,DDZL.ARTICLE,YWCPMemo.Memo ');
+    SQL.Add('	From YWCPMONTH   ');
+    SQL.Add('	Left join YWCPMemo on YWCPMemo.DDBH=YWCPMONTH.DDBH ');
+    SQL.Add(' Left join YWDD on YWDD.DDBH=YWCPMONTH.DDBH ');
+    SQL.Add('	left join DDZL on YWDD.YSBH=DDZL.DDBH');
+    SQL.Add('	where YWCPMONTH.KCYEAR='''+CBX2.Text+'''  ');
+    SQL.Add('		 and YWCPMONTH.KCMONTH='''+CBX3.Text+''' ');
+    SQL.Add('    and DDZL.GSBH='''+main.Edit2.Text+'''');
+    if Edit3.Text<>'' then
+    SQL.Add('   and YWCPMONTH.DDBH like '''+Edit3.Text+'%'' ');
+    Active:=true;
+  end;
+end;
+
+procedure TStockShoeMonth.Button4Click(Sender: TObject);
+begin
+  ExportExcel(Query2);
+end;
+
+procedure TStockShoeMonth.Button2Click(Sender: TObject);
+begin
+  ExportExcel(Query1);
+end;
+
+procedure TStockShoeMonth.Button5Click(Sender: TObject);
+var iYear,iMonth,iDay:word;
+    sYear,sMonth:string;
+    sDate:TDate;
+begin
+  sDate:=encodedate(strtoint(CBX2.Text),strtoint(CBX3.Text),1);
+  DeCodedate(sDate,iYear,iMonth,iDay);   //找庫存相關的數據
+  incAMonth(iYear,iMonth,iDay,-1);
+  sYear:=floattostr(iYear);
+  sMonth:=floattostr(iMonth);
+  if length(sMonth)=1 then
+    sMonth:='0'+sMonth;
+
+  //檢查是否會計月結
+  with EXEQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('Select top 1 KCYEAR,YN from YWCPMONTH where KCYEAR='''+CBX2.Text+''' and KCMONTH='''+CBX3.Text+'''  ');
+    Active:=true;
+    if FieldByName('YN').AsString='1' then
+    begin
+      Showmessage('Account already Month Cal.:'+CBX2.Text+'/'+CBX3.Text+'，Warehosue can''t calculate & override');
+      Active:=false;
+      Exit;
+    end;
+    Active:=false;
+  end; 
+
+  //拆單訂單明細
+  with EXEQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add(' if object_id(''tempdb..#YWCPDDTR'') is not null');
+    SQL.Add(' begin drop table #YWCPDDTR end');
+    SQL.Add('Select DDBH,DDBH1,Qty into #YWCPDDTR');
+    SQL.Add('From YWCPMONTH_DDZLTR   ');
+    SQL.Add('	where YWCPMONTH_DDZLTR.KCYEAR ='''+sYear+''' and YWCPMONTH_DDZLTR.KCMONTH = '''+sMonth+''' and YWCPMONTH_DDZLTR.DDBH in ');
+    SQL.Add('	(');
+    SQL.Add('	 Select DDBH from (');
+    SQL.Add('   Select YWCPMONTH.DDBH');
+    SQL.Add('   From YWCPMONTH   ');
+    SQL.Add('   where YWCPMONTH.KCYEAR='''+sYear+''' and YWCPMONTH.KCMONTH='''+sMonth+''' ');
+    SQL.Add('	  Union all');
+    SQL.Add('   Select YWCP.DDBH ');
+    SQL.Add('	  from (Select * from YWCP union all Select * from YWCPOld) YWCP');
+    SQL.Add('	  where convert(smalldatetime,convert(varchar,YWCP.INDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(DTP.date))+''' and '''+Formatdatetime('yyyy/MM/dd',DTP.date)+''' and IsNull(SB,'''')<>'''' ');
+    SQL.Add('	  Group by YWCP.DDBH  ) YWCP Group by DDBH');
+    SQL.Add('  )');
+    ExecSQL();
+  end;
+  //
+    
+  with EXEQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add(' Delete from  YWCPMonth where KCYEAR='''+CBX2.Text+''' and KCMONTH='''+CBX3.Text+''' and DDBH in (select YWDD.DDBH from DDZL,YWDD where DDZL.DDBH=YWDD.YSBH and DDZL.GSBH='''+main.Edit2.Text+''')');
+    SQL.Add(' Insert into  YWCPMonth (KCYEAR, KCMONTH, DDBH, Qty, CKBH, UserID, UserDate, YN) ');
+    SQL.Add(' Select '''+CBX2.Text+''' as KCYEAR,'''+CBX3.Text+''' as KCMONTH,YWDDM.DDBH, YWDDM.Qty as Qty,YWDDM.CKBH ,'''+main.Edit1.Text+''' as UserID,GETDATE() as UserDate, ''2'' as YN ');
+    SQL.Add(' from (');
+    SQL.Add('  Select YWCP.DDBH,IsNull(YWDD.YSBH,YWCP.DDBH) as YSBH,Max(YWCP.CKBH) as CKBH,Case when SUM(YWCP.Qty) is not null and SUM(YWCPMONTH_DDZLTR.Qty) is not null then SUM(YWCP.Qty)-SUM(YWCPMONTH_DDZLTR.Qty) else SUM(YWCP.Qty) end as Qty');
+    SQL.Add('  from (');
+    SQL.Add('	Select DDBH,Max(CKBH) as CKBH, Sum(Qty) as Qty from (');
+    SQL.Add('    Select YWCPMONTH.CKBH,YWCPMONTH.DDBH,YWCPMONTH.Qty,''1'' as SB ');
+    SQL.Add('    From YWCPMONTH   ');
+    SQL.Add('    where YWCPMONTH.KCYEAR='''+sYear+'''  ');
+    SQL.Add('		and YWCPMONTH.KCMONTH='''+sMonth+''' ');
+    SQL.Add('	union all');
+    SQL.Add('	Select Max(YWCP.KCBH) as CKBH,YWCP.DDBH,Sum(YWCP.Qty) as Qty,''2'' as SB');
+    SQL.Add('	from (Select * from YWCP union all Select * from YWCPOld) YWCP');
+    SQL.Add('	where convert(smalldatetime,convert(varchar,YWCP.INDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(sDate))+''' and '''+Formatdatetime('yyyy/MM/dd',EndOfTheMonth(sDate))+''' and IsNull(SB,'''')<>'''' ');
+    SQL.Add('	Group by YWCP.DDBH');
+    SQL.Add('	union all');
+    SQL.Add('	Select Max(YWCP.KCBH) as CKBH,YWCP.DDBH,-1*Sum( Case when SB=''3'' then YWCP.Qty else 0 end) as Qty,''3'' as SB');
+    SQL.Add('	from (Select * from YWCP union all Select * from YWCPOld) YWCP');
+    SQL.Add('	where convert(smalldatetime,convert(varchar,YWCP.EXEDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(sDate))+''' and '''+Formatdatetime('yyyy/MM/dd',EndOfTheMonth(sDate))+''' and IsNull(SB,'''')<>''''');
+    SQL.Add('	Group by YWCP.DDBH  ');
+    SQL.Add('	) YWCPMONTH');
+    SQL.Add('	Group by DDBH  ) YWCP  ');
+    SQL.Add('  Left join (');
+    //20221126 修改
+    SQL.Add(' Select YWCPDDTR.CKBH,YWCPDDTR.DDBH, Case when IsNull(YWCP.Qty,0)<YWCPDDTR.Qty then IsNull(YWCP.Qty,0) else YWCPDDTR.Qty end as  Qty,YWCPDDTR.SB from (');
+    SQL.Add('      Select null as CKBH,#YWCPDDTR.DDBH,Sum(#YWCPDDTR.Qty) as Qty,''6'' as SB ');
+    SQL.Add('	   From #YWCPDDTR  ');
+    SQL.Add('	   Group by #YWCPDDTR.DDBH');
+    SQL.Add(') YWCPDDTR ');
+    SQL.Add('Left join (');
+    SQL.Add('  Select #YWCPDDTR.DDBH,Sum(YWCP.Qty) as Qty');
+    SQL.Add('  from (Select * from YWCP union all Select * from YWCPOld) YWCP');
+    SQL.Add('  inner join #YWCPDDTR on #YWCPDDTR.DDBH1=YWCP.DDBH');
+    SQL.Add('  where  IsNull(SB,'''')<>''''  and convert(smalldatetime,convert(varchar,YWCP.INDATE,111))<='''+Formatdatetime('yyyy/MM/dd',EndOfTheMonth(sDate))+'''   ');
+    SQL.Add('  Group by #YWCPDDTR.DDBH');
+    SQL.Add(') YWCP on YWCPDDTR.DDBH=YWCP.DDBH');
+    //============
+    SQL.Add('  ) YWCPMONTH_DDZLTR on YWCP.DDBH=YWCPMONTH_DDZLTR.DDBH	');
+    SQL.Add('  Left join YWDD on YWDD.DDBH=YWCP.DDBH ');
+    SQL.Add('  Group by YWDD.YSBH,YWCP.DDBH  ');
+    SQL.Add('  ) YWDDM');
+    SQL.Add('  left join DDZL on YWDDM.YSBH=DDZL.DDBH ');
+    SQL.Add('  where 1=1 and DDZL.GSBH='''+main.Edit2.Text+''' ');
+    SQL.Add('  and YWDDM.Qty<>0 ');
+    //FuncObj.WriteErrorLog(sql.Text);
+    ExecSQL();
+  end;
+
+  //紀錄掃描出庫/重新入庫明細
+  with EXEQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('Delete from YWCPMonth_IO where convert(smalldatetime,convert(varchar,YWCPMonth_IO.SCANDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(sDate))+''' and '''+Formatdatetime('yyyy/MM/dd',EndOfTheMonth(sDate))+''' ');
+    SQL.Add('Insert into YWCPMonth_IO');
+    SQL.Add('Select YWCP.CARTONBAR,YWCP.OUTDATE,''O'' as ''SB'','''+main.Edit1.Text+''' asUSERID,GetDate() as USERDATE,''1'' as YN ');
+    SQL.Add('from YWCP');
+    SQL.Add('where convert(smalldatetime,convert(varchar,YWCP.OUTDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(sDate))+''' and '''+Formatdatetime('yyyy/MM/dd',EndOfTheMonth(sDate))+''' and IsNull(SB,'''')<>''''');
+    SQL.Add('Insert into YWCPMonth_IO');
+    SQL.Add('Select YWCP.CARTONBAR,YWCP.REDATE,''R'' as ''SB'','''+main.Edit1.Text+''' asUSERID,GetDate() as USERDATE,''1'' as YN ');
+    SQL.Add('from YWCP');
+    SQL.Add('where Convert(smalldatetime,convert(varchar,YWCP.REDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(sDate))+''' and '''+Formatdatetime('yyyy/MM/dd',EndOfTheMonth(sDate))+''' and IsNull(SB,'''')<>''''');
+    //FuncObj.WriteErrorLog(sql.Text);
+    ExecSQL();
+  end;
+  Showmessage('Finish');
+  //
+end;
+
+procedure TStockShoeMonth.Modify1Click(Sender: TObject);
+begin
+  with Query1 do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+  Save1.Enabled:=true;
+  Cancel1.Enabled:=true;
+end;
+
+procedure TStockShoeMonth.Save1Click(Sender: TObject);
+var i:integer;
+begin
+  Query1.First;
+  for i:=0 to Query1.RecordCount-1 do
+  begin
+    case Query1.updatestatus of
+      usmodified:
+      begin
+        if Query1.FieldByName('YN').AsString ='2' then
+        begin
+          Query1.Edit;
+          Query1.FieldByName('userID').Value:=main.edit1.text;
+          Query1.FieldByName('userdate').Value:=Date;
+          UPDet1.apply(ukmodify);
+        end else
+        begin
+          showmessage('Already be Lock,can''t modify');
+        end;
+      end;
+    end;
+    Query1.Next;
+  end;
+  Query1.active:=false;
+  Query1.cachedupdates:=false;
+  Query1.requestlive:=false;
+  Query1.active:=true;
+  Save1.Enabled:=false;
+  Cancel1.Enabled:=false;
+end;
+
+procedure TStockShoeMonth.Cancel1Click(Sender: TObject);
+begin
+  with Query1 do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  Save1.Enabled:=false;
+  Cancel1.Enabled:=false;
+end;
+
+procedure TStockShoeMonth.Modify2Click(Sender: TObject);
+begin
+  with Query2 do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+  Save2.Enabled:=true;
+  Cancel2.Enabled:=true;
+end;
+
+procedure TStockShoeMonth.Cancel2Click(Sender: TObject);
+begin
+  with Query2 do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  Save2.Enabled:=false;
+  Cancel2.Enabled:=false;
+end;
+
+procedure TStockShoeMonth.Save2Click(Sender: TObject);
+var i:integer;
+begin
+  Query2.First;
+  for i:=0 to Query2.RecordCount-1 do
+  begin
+    case Query2.updatestatus of
+      usmodified:
+      begin
+        with EXEQry do
+        begin
+          Active:=false;
+          SQL.Clear;
+          SQL.Add('IF NOT EXISTS (Select DDBH from YWCPMemo where DDBH='''+Query2.FieldByName('DDBH').Value+''') ');
+          SQL.Add('Begin ');
+          SQL.Add('Insert into YWCPMemo (DDBH, Memo, USERID, USERDATE, YN)');
+          SQL.Add('Values( '''+Query2.FieldByName('DDBH').Value+''','''+Query2.FieldByName('Memo').Value+''','''+main.Edit1.Text+''',GetDate() ,1)');
+          SQL.Add('End Else ');
+          SQL.Add('Begin ');
+          SQL.Add('Update YWCPMemo Set Memo='''+Query2.FieldByName('Memo').Value+''',USERID='''+main.Edit1.Text+''',USERDATE=GetDate() where DDBH='''+Query2.FieldByName('DDBH').Value+''' ');
+          SQL.Add('End ');
+          //FuncObj.WriteErrorLog(sql.Text);
+          ExecSQL();
+        end;
+      end;
+    end;
+    Query2.Next;
+  end;
+  Query2.active:=false;
+  Query2.cachedupdates:=false;
+  Query2.requestlive:=false;
+  Query2.active:=true;
+  Save2.Enabled:=false;
+  Cancel2.Enabled:=false;
+end;
+
+procedure TStockShoeMonth.Excel1Click(Sender: TObject);
+begin
+  ExportExcel(Query3);  
+end;
+
+procedure TStockShoeMonth.ShowRY_Memo();
+begin
+  if checkRY_Memo.Checked=true then
+  begin
+     Panel3.Visible:=true;
+     Splitter1.Visible:=true;
+     if Query2.Active=true then
+     begin
+       Query3.Active:=true;
+       Query4.Active:=true;
+     end;
+  end else
+  begin
+     Panel3.Visible:=false;
+     Splitter1.Visible:=false;
+     Query3.Active:=false;
+     Query4.Active:=false;
+  end;
+end;
+procedure TStockShoeMonth.checkRY_MemoClick(Sender: TObject);
+begin
+  ShowRY_Memo();
+end;
+
+procedure TStockShoeMonth.DBGridEh2GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if Query2.FieldByName('Qty').AsString='' then
+  begin
+    DBGridEh2.canvas.font.color:=clBlue;
+  end;
+end;
+
+procedure TStockShoeMonth.menu2Click(Sender: TObject);
+var iYear,iMonth,iDay:word;
+    sYear,sMonth:string;
+begin
+  decodedate(DTP.Date,iYear,iMonth,iDay);   //找庫存相關的數據
+  incAMonth(iYear,iMonth,iDay,0);
+  sYear:=floattostr(iYear);
+  sMonth:=floattostr(iMonth);
+  if length(sMonth)=1 then
+    sMonth:='0'+sMonth;
+
+  if MessageDlg('Are you sure import Order Seperate/Dao tach don hang '+sYear+'/'+sMonth,mtCustom, [mbYes,mbNo], 0)=mrYes then
+  begin
+    with ExeQry do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('Delete from YWCPMONTH_DDZLTR ');
+      SQL.Add('where YWCPMONTH_DDZLTR.KCYEAR='''+sYear+''' and YWCPMONTH_DDZLTR.KCMONTH='''+sMonth+'''  ');
+      //funcObj.WriteErrorLog(sql.Text);
+      ExecSQL();
+      Active:=false;
+    end;
+  end;
+end;
+
+procedure TStockShoeMonth.BB1Click(Sender: TObject);
+begin
+  with Query3 do
+  begin
+    cachedupdates:=true;
+    requestlive:=true;
+    Insert;
+    fieldbyname('DDBH').Value:=StockShoeMonth.Query2.fieldbyname('DDBH').Value;
+  end;
+  bb4.enabled:=true;
+  bb5.enabled:=true;
+  bb7.Enabled:=true;  
+end;
+
+procedure TStockShoeMonth.BB2Click(Sender: TObject);
+begin
+  with Query3 do
+  begin
+    cachedupdates:=true;
+    requestlive:=true;
+    edit;
+    fieldbyname('YN').Value:=0
+  end;
+  bb4.enabled:=true;
+  bb5.enabled:=true;
+  bb7.Enabled:=true;
+end;
+
+procedure TStockShoeMonth.btnDelAllClick(Sender: TObject);
+begin
+  with Query3 do
+  begin
+    First;
+    cachedupdates:=true;
+    requestlive:=true;
+    while not Eof do
+    begin
+      edit;
+      fieldbyname('YN').Value:=0;
+      Next;
+    end;
+  end;
+  bb4.enabled:=true;
+  bb5.enabled:=true;
+  bb7.Enabled:=true;
+end;
+
+procedure TStockShoeMonth.BB3Click(Sender: TObject);
+begin
+  with Query3 do
+  begin
+    cachedupdates:=true;
+    requestlive:=true;
+    edit;
+  end;
+  bb4.enabled:=true;
+  bb5.enabled:=true;
+  bb7.Enabled:=true;
+end;
+
+procedure TStockShoeMonth.BB4Click(Sender: TObject);
+var i:integer;
+begin
+  try
+    Query3.first;
+    for i:=1 to Query3.RecordCount do
+    begin
+      case Query3.updatestatus of
+        usinserted:
+        begin
+          if (Query3.fieldbyname('DDBH').isnull) or (Query3.fieldbyname('DDBH1').isnull) then
+          begin
+            Query3.Delete;
+          end else
+          begin
+            Query3.edit;
+            if Query3.FieldByName('KCYEAR').IsNull then
+              Query3.FieldByName('KCYEAR').Value:=sYear_G;
+            if Query3.FieldByName('KCMONTH').IsNull then
+             Query3.FieldByName('KCMONTH').Value:=sMonth_G;
+            Query3.FieldByName('USERDATE').Value:=date;
+            Query3.FieldByName('USERID').Value:=main.edit1.text;
+            Query3.FieldByName('YN').Value:='1';
+            UpdateSQL3.apply(ukinsert);
+          end;
+        end;
+        usmodified:
+        begin
+          if Query3.fieldbyname('YN').Value=0 then
+          begin
+            with Qtemp do
+            begin
+              active:=false;
+              sql.Clear;
+              sql.add('insert into BDelRec ');
+              sql.add('(TableName ,TNO,CLBH,OldID,DelID,DelDate)');
+              sql.add('values ('+''''+'YWCPMONTH_DDZLTR'+''''+','''+Query3.fieldbyname('DDBH').AsString+'***'+Query3.fieldbyname('DDBH1').AsString+'''');
+              sql.add(','+''''+Query3.fieldbyname('USERDATE').AsString+''''+','+''''+Query3.fieldbyname('USERID').Value+''''+',');
+              sql.add(''''+main.Edit1.Text+''''+',getdate())');
+              ExecSQL();
+            end;
+            UpdateSQL3.Apply(ukdelete);
+          end else
+          begin
+            Query3.edit;
+            Query3.FieldByName('USERDATE').Value:=date;
+            Query3.FieldByName('USERID').Value:=main.edit1.text;
+            UpdateSQL3.apply(ukmodify);
+          end;
+        end;
+      end;
+      Query3.Next;
+    end;
+    Query3.active:=false;
+    Query3.cachedupdates:=false;
+    Query3.requestlive:=false;
+    Query3.active:=true;
+    bb4.enabled:=false;
+    bb5.enabled:=false;
+  except
+    Messagedlg('Have wrong, can not save!',mtwarning,[mbyes],0);
+  end;
+
+end;
+
+procedure TStockShoeMonth.BB5Click(Sender: TObject);
+begin
+  with Query3 do
+  begin
+    active:=false;
+    cachedupdates:=false;
+    requestlive:=false;
+    active:=true;
+  end;
+  bb4.enabled:=false;
+  bb5.enabled:=false;
+  bb7.Enabled:=false;
+end;
+
+procedure TStockShoeMonth.BB7Click(Sender: TObject);
+var
+  CbBuf: PChar;
+  BufSize: Integer;
+  Handle: THandle;
+  Text:WideString;
+  rowList,colList:TStringlist;
+  i,j:integer;
+begin
+  try
+   Query3.cachedupdates:=true;
+   Query3.requestlive:=true;
+   Text:='';
+   if Clipboard.HasFormat(CF_TEXT) then
+   begin
+    Handle := ClipBoard.GetAsHandle(CF_TEXT);
+    BufSize := GlobalSize(Handle);
+    GetMem(CbBuf, BufSize);
+    Text:=Clipboard.AsUnicodeText;
+    //
+    rowList:=TStringlist.Create;
+    rowList.Text:=Text;
+    Query3.First;
+    for i:=0 to rowList.Count-1 do
+    begin
+      colList:=funcObj.SplitString(rowList.Strings[i],'	');
+      Query3.Insert;
+      for j:=0 to colList.Count-1 do
+      begin
+        if trim(colList.Strings[j])<>'' then
+        begin
+           Query3.Fields[j].Value:=colList.Strings[j];
+        end;
+        if j>=Query3.FieldCount-1 then break;
+      end;
+      colList.Free;
+      Query3.Post;
+    end;
+    rowList.Free;
+   end;
+   BB4.Enabled:=true;
+   BB5.Enabled:=true;
+ except
+   on E:Exception do
+    Showmessage(E.Message);
+ end;
+end;
+
+procedure TStockShoeMonth.Query2AfterOpen(DataSet: TDataSet);
+begin
+  with Query3 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('SELECT * FROM YWCPMONTH_DDZLTR');
+    SQL.Add('WHERE DDBH=:DDBH ');
+  end;
+  BB1.Enabled:=true;
+  BB2.Enabled:=true;
+  BB3.Enabled:=true;
+  btnDelAll.Enabled:=true;
+  ShowRY_Memo();
+end;
+
+procedure TStockShoeMonth.DBGridEh3DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+  if Query3.FieldByName('YN').value='0' then
+  begin
+    DBGridEh3.canvas.font.color:=clred;
+    DBGridEh3.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+end;
+
+procedure TStockShoeMonth.menu1Click(Sender: TObject);
+var iYear,iMonth,iDay:word;
+    sYear,sMonth:string;
+begin
+  decodedate(DTP.Date,iYear,iMonth,iDay);   //找庫存相關的數據
+  incAMonth(iYear,iMonth,iDay,-1);
+  sYear:=floattostr(iYear);
+  sMonth:=floattostr(iMonth);
+  if length(sMonth)=1 then
+    sMonth:='0'+sMonth;
+  sYear_G:=sYear;
+  sMonth_G:=sMonth;
+  //
+  with ExeQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('Select YWDDM.DDBH ,YWCP.DDBH as DDBH1,YWCP.Qty from (');
+    SQL.Add('Select DDBH,Sum(Qty) as Qty from (');
+    SQL.Add('  Select YWCPMONTH.DDBH,YWCPMONTH.Qty');
+    SQL.Add('  From YWCPMONTH   ');
+    SQL.Add('  where YWCPMONTH.KCYEAR='''+sYear_G+''' and YWCPMONTH.KCMONTH='''+sMonth_G+''' ');
+    SQL.Add('  Union all');
+    SQL.Add('  Select YWCP.DDBH,Sum(YWCP.Qty) as Qty ');
+    SQL.Add('  From YWCP');
+    SQL.Add('  where convert(smalldatetime,convert(varchar,YWCP.INDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(DTP.date))+''' and '''+Formatdatetime('yyyy/MM/dd',DTP.date)+''' and IsNull(SB,'''')<>'''' ');
+    SQL.Add('  Group by YWCP.DDBH  ');
+    SQL.Add(') YWCP Group by DDBH  ) YWCP');
+    SQL.Add('left join YWDD on YWDD.DDBH=YWCP.DDBH');
+    SQL.Add('left join DDZLTR on YWDD.YSBH=DDZLTR.DDBH1');
+    SQL.Add('Left join YWDD YWDDM on DDZLTR.DDBH=YWDDM.YSBH ');
+    SQL.Add('where YWDDM.DDBH is not null and YWDDM.DDBH<>YWCP.DDBH');
+    //FuncObj.WriteErrorLog(sql.Text);
+    Active:=true;
+    if RecordCount>0 then
+    begin
+      if MessageDlg('Are you sure import Order Seperate/Dao tach don hang?',mtCustom, [mbYes,mbNo], 0)=mrYes then
+      begin
+        Active:=false;
+        SQL.Clear;
+        SQL.Add('Insert into YWCPMONTH_DDZLTR  ');
+        SQL.Add('Select Year(InDate) as KCYEAR,Substring(CONVERT(varchar(100), InDate, 112),5,2) as KCMONTH,YWDDM.DDBH,YWCP.DDBH as DDBH1,YWCP.Qty,'''+main.Edit1.Text+''' as UserID,GETDATE() as UserDate,''1'' as YN from (');
+        SQL.Add('Select DDBH,Sum(Qty) as Qty,Max(InDate) as InDate from (');
+        SQL.Add('  Select YWCPMONTH.DDBH,YWCPMONTH.Qty,DATEADD(m,1,Convert(smalldatetime, '''+sYear_G+'/'+sMonth_G+'/1'')) as InDate');
+        SQL.Add('  From YWCPMONTH   ');
+        SQL.Add('  where YWCPMONTH.KCYEAR='''+sYear_G+''' and YWCPMONTH.KCMONTH='''+sMonth_G+''' ');
+        SQL.Add('  Union all');
+        SQL.Add('  Select YWCP.DDBH,Sum(YWCP.Qty) as Qty,Max(InDate) as InDate   ');
+        SQL.Add('  From YWCP');
+        SQL.Add('  where convert(smalldatetime,convert(varchar,YWCP.INDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(DTP.date))+''' and '''+Formatdatetime('yyyy/MM/dd',DTP.date)+''' and IsNull(SB,'''')<>'''' ');
+        SQL.Add('  Group by YWCP.DDBH  ');
+        SQL.Add(') YWCP Group by DDBH  ) YWCP');
+        SQL.Add('left join YWDD on YWDD.DDBH=YWCP.DDBH');
+        SQL.Add('left join DDZLTR on YWDD.YSBH=DDZLTR.DDBH1');
+        SQL.Add('Left join YWDD YWDDM on DDZLTR.DDBH=YWDDM.YSBH ');
+        SQL.Add('where YWDDM.DDBH is not null and YWDDM.DDBH<>YWCP.DDBH ');
+        SQL.Add(' and not Exists (Select  DDBH from YWCPMONTH_DDZLTR  where YWCPMONTH_DDZLTR.DDBH=DDZLTR.DDBH and YWCPMONTH_DDZLTR.DDBH1=DDZLTR.DDBH1) ');
+        //funcObj.WriteErrorLog(sql.Text);
+        ExecSQL();
+      end;
+    end else
+    begin
+      Showmessage('It is no any  Order Seprate/Khong co tach don hang ');
+    end;
+    Active:=false;
+  end;
+
+end;
+
+procedure TStockShoeMonth.menu3Click(Sender: TObject);
+begin
+  StockShoeMonth_TRList:=TStockShoeMonth_TRList.Create(self);
+  StockShoeMonth_TRList.Show();
+end;
+
+procedure TStockShoeMonth.Button6Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j,k:integer;
+    ClumnWidth:array [0..20] of integer;
+    ClumnDesc:array [0..20] of string;
+    iYear,iMonth,iDay:word;
+    sYear,sMonth:string;
+begin
+    //
+    decodedate(DTP.Date,iYear,iMonth,iDay);   //找庫存相關的數據
+    incAMonth(iYear,iMonth,iDay,0);
+    sYear:=floattostr(iYear);
+    sMonth:=floattostr(iMonth);
+    if length(sMonth)=1 then
+    sMonth:='0'+sMonth;
+    //
+    //
+    with query_excelTBA do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('Select distinct YWDDM.DDBH,YWDDM.YSBH,MAX(KCLLS.SCBH )as KCLLS_SCBH,YWDDM.CKBH,IsNull(YWDD.Qty,DDZL.Pairs) as Pairs,YWDDM.LastRem,YWDDM.RKQty,YWDDM.XHQty,YWDDM.TRQty,YWDDM.Qty,');
+      SQL.Add('       DDZL.ShipDate,DDZL.ARTICLE,DDZL.DDZT,YWCPMemo.Memo, kfzl.kfjc, kfxxzl.DAOMH, MAX(BDepartment.DepName ) as DepName ');
+      SQL.Add('from (');
+      if MergeYSBHCK.Checked=true then //
+      begin
+      SQL.Add(' Select YSBH as DDBH,YSBH,CKBH,Sum(LastRem) as LastRem,Sum(RKQty) as RKQty,Sum(XHQty) as XHQty,Sum(TRQty) as TRQty,Sum(Qty) as Qty from ( ');
+      end;
+      SQL.Add('  Select YWCP.DDBH,IsNull(YWDD.YSBH,YWCP.DDBH) as YSBH,Max(YWCP.CKBH) as CKBH,Sum(YWCPMonth.Qty) as LastRem,Sum(YWCPRK.Qty) as RKQty,');
+      SQL.Add('         Sum(YWCPXH.Qty) as XHQty,SUM(YWCPMONTH_DDZLTR.Qty) as TRQty,Case when SUM(YWCP.Qty) is not null and SUM(YWCPMONTH_DDZLTR.Qty) is not null then SUM(YWCP.Qty)-SUM(YWCPMONTH_DDZLTR.Qty) else SUM(YWCP.Qty) end as Qty');
+      SQL.Add('  from (');
+      SQL.Add('	Select DDBH,Max(CKBH) as CKBH, Sum(Qty) as Qty from (');
+      SQL.Add('    Select YWCPMONTH.CKBH,YWCPMONTH.DDBH,YWCPMONTH.Qty,''1'' as SB ');
+      SQL.Add('    From YWCPMONTH   ');
+      SQL.Add('    where YWCPMONTH.KCYEAR='''+sYear_G+'''  ');
+      SQL.Add('		and YWCPMONTH.KCMONTH='''+sMonth_G+''' ');
+      SQL.Add('	union all');
+      SQL.Add('	Select Max(YWCP.KCBH) as CKBH,YWCP.DDBH,Sum(YWCP.Qty) as Qty,''2'' as SB');
+      SQL.Add('	from YWCP');
+      SQL.Add('	where convert(smalldatetime,convert(varchar,YWCP.INDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(DTP.date))+''' and '''+Formatdatetime('yyyy/MM/dd',DTP.date)+''' and IsNull(SB,'''')<>'''' ');
+      SQL.Add('	Group by YWCP.DDBH');
+      SQL.Add('	union all');
+      SQL.Add('	Select Max(YWCP.KCBH) as CKBH,YWCP.DDBH,-1*Sum( Case when SB=''3'' then YWCP.Qty else 0 end) as Qty,''3'' as SB');
+      SQL.Add('	from YWCP');
+      SQL.Add('	where convert(smalldatetime,convert(varchar,YWCP.EXEDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(DTP.date))+''' and '''+Formatdatetime('yyyy/MM/dd',DTP.date)+''' and IsNull(SB,'''')<>''''');
+      SQL.Add('	Group by YWCP.DDBH  ');
+      SQL.Add('	) YWCPMONTH');
+      SQL.Add('	Group by DDBH  ) YWCP  ');
+      SQL.Add('  Left join  (');
+      SQL.Add('    Select YWCPMONTH.CKBH,YWCPMONTH.DDBH,YWCPMONTH.Qty,''1'' as SB ');
+      SQL.Add('	From YWCPMONTH   ');
+      SQL.Add('	where YWCPMONTH.KCYEAR='''+sYear_G+'''  ');
+      SQL.Add('		 and YWCPMONTH.KCMONTH='''+sMonth_G+'''  ) YWCPMonth on YWCP.DDBH=YWCPMonth.DDBH');
+      SQL.Add('  Left join  (');
+      SQL.Add('	Select Max(YWCP.KCBH) as CKBH,YWCP.DDBH,Sum(YWCP.Qty) as Qty,''2'' as SB');
+      SQL.Add('	from YWCP');
+      SQL.Add('	where convert(smalldatetime,convert(varchar,YWCP.INDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(DTP.date))+''' and '''+Formatdatetime('yyyy/MM/dd',DTP.date)+''' and IsNull(SB,'''')<>'''' ');
+      SQL.Add('	Group by YWCP.DDBH ) YWCPRK on YWCP.DDBH=YWCPRK.DDBH');
+      SQL.Add('  Left join  (');
+      SQL.Add('	Select Max(YWCP.KCBH) as CKBH,YWCP.DDBH,Sum( Case when SB=''3'' then YWCP.Qty else 0 end) as Qty,''5'' as SB');
+      SQL.Add('	from YWCP');
+      SQL.Add('	where convert(smalldatetime,convert(varchar,YWCP.EXEDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(DTP.date))+''' and '''+Formatdatetime('yyyy/MM/dd',DTP.date)+''' and IsNull(SB,'''')<>''''');
+      SQL.Add('	Group by YWCP.DDBH ) YWCPXH on YWCP.DDBH=YWCPXH.DDBH');
+      SQL.Add('   Left join (');
+      SQL.Add(' Select YWCPDDTR.CKBH,YWCPDDTR.DDBH, Case when IsNull(YWCP.Qty,0)<YWCPDDTR.Qty then IsNull(YWCP.Qty,0) else YWCPDDTR.Qty end as  Qty,YWCPDDTR.SB from (');
+      SQL.Add('      Select null as CKBH,#YWCPDDTR.DDBH,Sum(#YWCPDDTR.Qty) as Qty,''6'' as SB ');
+      SQL.Add('	   From #YWCPDDTR  ');
+      SQL.Add('	   Group by #YWCPDDTR.DDBH');
+      SQL.Add(') YWCPDDTR ');
+      SQL.Add('Left join (');
+      SQL.Add('  Select #YWCPDDTR.DDBH,Sum(YWCP.Qty) as Qty');
+      SQL.Add('  From YWCP');
+      SQL.Add('  inner join #YWCPDDTR on #YWCPDDTR.DDBH1=YWCP.DDBH');
+      SQL.Add('  where  IsNull(SB,'''')<>''''  and convert(smalldatetime,convert(varchar,YWCP.INDATE,111))<='''+Formatdatetime('yyyy/MM/dd',DTP.date)+'''   ');
+      SQL.Add('  Group by #YWCPDDTR.DDBH');
+      SQL.Add(') YWCP on YWCPDDTR.DDBH=YWCP.DDBH');
+      //============
+      SQL.Add('  ) YWCPMONTH_DDZLTR on YWCP.DDBH=YWCPMONTH_DDZLTR.DDBH');
+      SQL.Add('  Left join YWDD on YWDD.DDBH=YWCP.DDBH ');
+      SQL.Add('  Group by YWDD.YSBH,YWCP.DDBH');
+      if MergeYSBHCK.Checked=true then  //
+      begin
+      SQL.Add(') YWDDM Group by YSBH,CKBH ');
+      end;
+      SQL.Add('   ) YWDDM');
+      SQL.Add('Left join YWCPMemo on YWCPMemo.DDBH=YWDDM.YSBH ');
+      SQL.Add('left join DDZL on YWDDM.YSBH=DDZL.DDBH ');
+      SQL.Add('left join kfzl on DDZL.KHBH = kfzl.kfdh ');///
+      SQL.Add('left join kfxxzl on kfxxzl.XieXing = ddzl.XieXing and  kfxxzl.SheHao = ddzl.SheHao');   ///
+      SQL.Add('left join ywcp on ywcp.ddbh = ddzl.ddbh '); ///
+      SQL.Add('left join BDepartment on BDepartment.ID = ywcp.DepNO '); ///
+      SQL.Add('left join YWDD on YWDDM.DDBH=YWDD.DDBH ');
+      //
+      SQL.Add('left join  (select  DDZL.DDBH,case when KCLLS.SCBH is NULL then YWCPMONTH_DDZLTR.DDBH else KCLLS.SCBH end as SCBH');
+      SQL.Add('			from DDZL');
+      SQL.Add('			left join ( select distinct KCLLS.SCBH from KCLLS where KCLLS.Qty>0 ) KCLLS');
+      SQL.Add('						on KCLLS.SCBH=DDZL.DDBH');
+      SQL.Add('						left join YWCPMONTH_DDZLTR  on YWCPMONTH_DDZLTR.DDBH1=DDZL.DDBH');
+      SQL.Add('			where DDZL.GSBH='''+main.Edit2.Text+'''');
+      SQL.Add(') as KCLLS on KCLLS.ddbh = YWDDM.DDBH ');
+      //
+      SQL.Add('where 1=1 and DDZL.GSBH='''+main.Edit2.Text+'''');
+      if DDBHEdit.Text<>'' then
+      SQL.Add('   and YWDDM.DDBH like '''+DDBHEdit.Text+'%'' ');
+      if YSBHEdit.Text<>'' then
+      SQL.Add('   and YWDDM.YSBH like '''+YSBHEdit.Text+'%'' ');
+      if CheckBox1.Checked=true then
+      SQL.Add('   and YWDDM.Qty>0 ');
+      if CheckBox3.Checked=true then
+      SQL.Add('   and YWDDM.Qty<0 ');
+      if CheckBox2.Checked=true then
+      SQL.Add('   and YWDDM.Qty is null ');
+      if TRQtyCK.Checked=true then
+      SQL.Add('   and YWDDM.DDBH in (Select DDBH  from #YWCPDDTR union all Select DDBH1  from #YWCPDDTR ) ');
+      if MemoEdit.Text<>'' then
+      SQL.Add('   and YWCPMemo.Memo like ''%'+MemoEdit.Text+'%'' ');
+      SQL.Add('Group by YWDDM.DDBH,YWDDM.YSBH,YWDDM.CKBH,IsNull(YWDD.Qty,DDZL.Pairs) ,YWDDM.LastRem,YWDDM.RKQty,YWDDM.XHQty,YWDDM.TRQty,YWDDM.Qty, DDZL.ShipDate,DDZL.ARTICLE,DDZL.DDZT,YWCPMemo.Memo, kfzl.kfjc, kfxxzl.DAOMH');
+      SQL.Add('Order by YWDDM.YSBH ');
+      Active:=true;
+    end;
+    if query_excelTBA.Active then
+    begin
+      if query_excelTBA.recordcount=0 then
+      begin
+      showmessage('No record.');
+      abort;
+      end;
+    end else
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+    //
+    if(not DirectoryExists(AppDir+'Additional\'))  then ForceDirectories(AppDir+'Additional\');
+      CopyFile(Pchar('\\'+main.ServerIP+'\liy_erp\Additional\Production_SN5216.xlsx'),Pchar(AppDir+'Additional\Production_SN5216.xlsx'),false);
+      if FileExists(AppDir+'Additional\Production_SN5216.xlsx') then
+      begin
+        try
+          eclApp:=CreateOleObject('Excel.Application');
+          eclApp.DisplayAlerts := False;
+          WorkBook:=CreateOleObject('Excel.Sheet');
+        except
+          Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+          Exit;
+        end;
+        try
+          eclApp.WorkBooks.Open(AppDir+'Additional\Production_SN5216.xlsx');
+          eclApp.WorkSheets[1].Activate;
+          eclApp.Cells(5,7):= sMonth;
+          eclApp.Cells(5,9):=sYear;
+          eclApp.Cells(5,11):=sMonth;
+          eclApp.Cells(5,13):=sYear;
+          j:=11;
+          query_excelTBA.First;
+          for i:=1 to query_excelTBA.RecordCount DO
+          begin
+            eclApp.Range[eclApp.Cells[i+14,11],eclApp.Cells[i+14,20]].interior.color:=clWhite;
+            eclApp.ActiveSheet.Rows[j].Insert(-4121);
+            eclApp.ActiveSheet.Rows[j].Font.Name:='Times New Roman';
+            eclApp.ActiveSheet.Rows[j].Font.Size := 7;
+            eclApp.ActiveSheet.Rows[j].RowHeight:=26; 
+            eclApp.Cells(j,1):=inttostr(i);
+            eclApp.Cells(j,2):=query_excelTBA.FieldByName('DDBH').Value;
+            eclApp.Cells(j,3):=' ';  // RY nhap kho ban dau
+            eclApp.Cells(j,4):=query_excelTBA.FieldByName('KCLLS_SCBH').Value;  // RY phieu xuat
+            eclApp.Cells(j,5):=query_excelTBA.FieldByName('kfjc').Value;
+            eclApp.Cells(j,6):=query_excelTBA.FieldByName('ARTICLE').Value;
+            eclApp.Cells(j,7):=query_excelTBA.FieldByName('DAOMH').Value;
+            eclApp.Cells(j,8):= query_excelTBA.FieldByName('DepName').Value;
+            eclApp.Cells(j,9):= query_excelTBA.FieldByName('Pairs').Value;
+            eclApp.Cells(j,10):= query_excelTBA.FieldByName('LastRem').Value;
+            eclApp.Cells(j,11):= '';                //Ton kho B
+            eclApp.Cells(j,12):= query_excelTBA.FieldByName('RKQty').Value;
+            eclApp.Cells(j,13):= '';                // Nhap kho B
+            eclApp.Cells[j,14].Formula:= '=SUM(J'+inttostr(j)+',K'+inttostr(j)+',L'+inttostr(j)+',M'+inttostr(j)+')';
+            eclApp.Cells[j,15].Formula:= '=I'+inttostr(j)+'- N'+inttostr(j)+'';
+            eclApp.Cells(j,16):= query_excelTBA.FieldByName('ShipDate').Value;
+            eclApp.Cells(j,17):= query_excelTBA.FieldByName('XHQty').Value;
+            eclApp.Cells(j,18):= '';   // Xuat kho B
+            eclApp.Cells[j,19].Formula:= '=SUM(Q'+inttostr(j)+',R'+inttostr(j)+')';
+            eclApp.Cells(j,20):= query_excelTBA.FieldByName('Qty').Value;
+            query_excelTBA.Next;
+            inc(j);
+            //
+            Query2.Next;
+          end;
+          eclApp.Cells[i+10,9].Formula:='=SUM(I11:I'+inttostr(i+9)+')';
+          eclApp.Cells[i+10,10].Formula:='=SUM(J11:J'+inttostr(i+9)+')';
+          eclApp.Cells[i+10,11].Formula:='=SUM(K11:K'+inttostr(i+9)+')';
+          eclApp.Cells[i+10,12].Formula:='=SUM(L11:L'+inttostr(i+9)+')';
+          eclApp.Cells[i+10,13].Formula:='=SUM(M11:M'+inttostr(i+9)+')';
+          eclApp.Cells[i+10,14].Formula:='=SUM(N11:N'+inttostr(i+9)+')';
+          eclApp.Cells[i+10,15].Formula:='=SUM(O11:O'+inttostr(i+9)+')';
+          eclApp.Cells[i+10,17].Formula:='=SUM(Q11:Q'+inttostr(i+9)+')';
+          eclApp.Cells[i+10,18].Formula:='=SUM(R11:R'+inttostr(i+9)+')';
+          eclApp.Cells[i+10,19].Formula:='=SUM(S11:S'+inttostr(i+9)+')';
+          eclApp.Cells[i+10,20].Formula:='=SUM(T11:T'+inttostr(i+9)+')';
+          eclApp.Range[eclApp.Cells[i+10,11],eclApp.Cells[i+10,20]].font.Bold:=true;
+          eclApp.Range[eclApp.Cells[i+10,11],eclApp.Cells[i+10,20]].font.Name:='Times New Roman';
+          eclApp.Range[eclApp.Cells[i+10,11],eclApp.Cells[i+10,20]].font.size:= 10;
+
+          eclapp.columns.autofit;
+          showmessage('Succeed');
+          eclApp.Visible:=True;
+        except
+          on   F:Exception   do
+          showmessage(F.Message);
+        end;
+    end;
+end;
+
+procedure TStockShoeMonth.Button7Click(Sender: TObject);
+begin
+  if ((CKBHEdit.Text = '') or (KVBHEdit.Text = '')) then
+  begin
+    showmessage('Vui long nhap xuong && so khu');
+    abort;
+  end;
+  StockShoeMonth_Print:=TStockShoeMonth_Print.Create(self);
+  StockShoeMonth_Print.Quickrep1.prepare;
+  StockShoeMonth_Print.PageN.caption:=inttostr(StockShoeMonth_Print.quickrep1.QRPrinter.pagecount);
+  StockShoeMonth_Print.Quickrep1.preview;
+  StockShoeMonth_Print.Free;
+end;
+
+procedure TStockShoeMonth.Button8Click(Sender: TObject);
+begin
+  with Query5 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('Select YWCP.DDBH,YWCP.CKBH,DDZL.Pairs,YWCP.Qty,YWCP.CTS,DDZL.ARTICLE,DDZL.ShipDate,DDZL.DDZT ');
+    sql.Add('From (   Select Max(YWCP.KCBH) as CKBH,case when ddzltr.DDBH1 is not null then ddzltr.DDBH else YWCP.DDBH end DDBH,Sum( Case when SB=''2'' then YWCP.Qty else 0 end) as Qty,''4'' as SB,count(*) as CTS ');
+    sql.Add('		      From ( Select * from YWCP union all Select * from YWCPOld) YWCP ');
+    sql.Add('             	 Left join DDZL on YWCP.DDBH=DDZL.DDBH ');
+    sql.Add('                Left join DDZLTR on ywcp.DDBH=ddzltr.DDBH1 ');
+    sql.Add('             	 Where DDZL.GSBH='''+main.Edit2.Text+''' and convert(smalldatetime,convert(varchar,YWCP.OUTDATE,111)) between '''+Formatdatetime('yyyy/MM/dd',startofthemonth(DTP1.date))+''' and '''+Formatdatetime('yyyy/MM/dd',DTP1.date)+''' and IsNull(SB,'''')=''2'' ');
+    sql.Add('                and YWCP.DDBH not in (select DDBH from DDZLTR)');
+    sql.Add('                Group by YWCP.DDBH,ddzltr.DDBH1,ddzltr.DDBH ) YWCP   ');
+    sql.Add('Left join DDZL on YWCP.DDBH=DDZL.DDBH  ');
+    sql.Add('Where DDZL.GSBH='''+main.Edit2.Text+''' ');
+    if edit1.Text <> '' then
+      sql.Add(' and YWCP.DDBH like '''+edit1.Text+'%'' ');
+    sql.Add('Order by YWCP.DDBH');  
+    //funcobj.WriteErrorLog(sql.Text);  
+    active:=true;
+  end;
+end;
+
+procedure TStockShoeMonth.Button9Click(Sender: TObject);
+begin
+  ExportExcel(Query5);
+end;
+
+procedure TStockShoeMonth.Button11Click(Sender: TObject);
+begin
+  StockShoeMonthRe_Print:=TStockShoeMonthRe_Print.Create(self);
+  StockShoeMonthRe_Print.Quickrep1.prepare;
+  StockShoeMonthRe_Print.PageN.caption:=inttostr(StockShoeMonthRe_Print.quickrep1.QRPrinter.pagecount);
+  StockShoeMonthRe_Print.Quickrep1.preview;
+  StockShoeMonthRe_Print.Free;
+end;
+
+procedure TStockShoeMonth.Button10Click(Sender: TObject);
+var   a:string;
+      eclApp,WorkBook:olevariant;
+      i,j:integer;
+begin
+  if  Query2.active  then
+    begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+    WorkBook:=eclApp.workbooks.Add;
+    eclApp.Cells(1,1):='STT';
+    eclApp.Cells(1,2):='Khach Hang';
+    eclApp.Cells(1,3):='RY';
+    eclApp.Cells(1,4):='SKU';
+    eclApp.Cells(1,5):='Ten mau ma';
+    eclApp.Cells(1,6):='So thung';
+    eclApp.Cells(1,7):='So doi';
+    eclApp.Cells(1,8):='Xuong';
+    eclApp.Cells(1,9):='Khu';
+    j:=2;
+    while   not   Query2.Eof   do
+      begin
+        for   i:=0   to  Query2.fieldcount-1  do
+        begin
+          eclApp.Cells(j,1):=Query2.FieldByName('STT').AsString;
+          eclApp.Cells(j,2):=Query2.FieldByName('Customer').AsString;
+          eclApp.Cells(j,3):=Query2.FieldByName('DDBH').AsString;
+          eclApp.Cells(j,4):=Query2.FieldByName('Article').AsString;
+          eclApp.Cells(j,5):=Query2.FieldByName('ModelName').AsString;
+          eclApp.Cells(j,6):=Query2.FieldByName('CTS').AsString;
+          eclApp.Cells(j,7):=Query2.FieldByName('Qty').AsString;
+          eclApp.Cells(j,8):=Query2.FieldByName('CKBH').AsString;
+          eclApp.Cells(j,9):=Query2.FieldByName('KVBH').AsString;
+        end;
+      Query2.Next;
+      inc(j);
+      end;
+      eclapp.columns.autofit;
+      showmessage('Succeed');
+       eclApp.Visible:=True;
+      except
+        on   F:Exception   do
+          showmessage(F.Message);
+      end;
+    end;
+end;
+
+procedure TStockShoeMonth.Button12Click(Sender: TObject);
+var   a:string;
+      eclApp,WorkBook:olevariant;
+      i,j:integer;
+begin
+  if  Query5.active  then
+    begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+    WorkBook:=eclApp.workbooks.Add;
+    eclApp.Cells(1,1):='STT';
+    eclApp.Cells(1,2):='Khach Hang';
+    eclApp.Cells(1,3):='RY';
+    eclApp.Cells(1,4):='SKU';
+    eclApp.Cells(1,5):='Ten mau ma';
+    eclApp.Cells(1,6):='So thung';
+    eclApp.Cells(1,7):='So doi';
+    eclApp.Cells(1,8):='Xuong';
+    eclApp.Cells(1,9):='So Khu';
+    j:=2;
+    while   not   Query5.Eof   do
+      begin
+        for   i:=0   to  Query5.fieldcount-1  do
+        begin
+          eclApp.Cells(j,1):=j-1;
+          eclApp.Cells(j,2):='HOKAAAAA';
+          eclApp.Cells(j,3):=Query5.FieldByName('DDBH').AsString;
+          eclApp.Cells(j,4):=Query5.FieldByName('Article').AsString;
+          eclApp.Cells(j,5):='Giay thanh pham';
+          eclApp.Cells(j,6):=Query5.FieldByName('CTS').AsString;
+          eclApp.Cells(j,7):=Query5.FieldByName('Qty').AsString;
+          eclApp.Cells(j,8):='HT';
+          eclApp.Cells(j,9):='';
+        end;
+      Query5.Next;
+      inc(j);
+      end;
+      eclapp.columns.autofit;
+      showmessage('Succeed');
+       eclApp.Visible:=True;
+      except
+        on   F:Exception   do
+          showmessage(F.Message);
+      end;
+    end;
+end;
+
+end.

@@ -1,0 +1,240 @@
+------------------------檢查CLZL原材料哪一筆沒同步
+Select * from (
+select 
+       replace(convert(varchar(8), Getdate(), 112)+convert(varchar(8), Getdate(), 114), ':','') as fdati
+	   ,'SYSTEM' as fdaus
+	   ,CLZL.cldh as fpdno
+	   ,CLZL.ywpm as fpdna
+	   ,IsNull(CLZL.dwbh,'') as fpdun
+	   ,'原料' as fiono
+from tyxuanDB.LIY_ERP.dbo.CLZL as CLZL
+where IsNull(CLZL.ywpm,'')<>'' 
+) CLZL
+left join (
+select * from (
+select fpdno,fdati,fpdna,fpdun,fiono,ROW_NUMBER() over (PARTITION BY fpdno ORDER BY fdati desc) as fsequ  from a0pdtr 
+where fiono='原料' 
+) a0pdtr
+where fsequ=1
+) a0pdtr on a0pdtr.fpdno=CLZL.fpdno collate  Chinese_Taiwan_Stroke_BIN
+where a0pdtr.fpdno is null
+-------------------------------------------------------------------------------檢查KCRKS哪一筆領料單沒同步
+Select * from (
+select 
+    replace(convert(varchar(8), Getdate(), 112)+convert(varchar(8), Getdate(), 114), ':','') as fdati
+	   ,'SYSTEM' as fdaus 
+	   ,'01' as fiono
+	   ,Convert(varchar,KCRKS.RKUSERDATE,111) as fdate
+	   ,KCRKS.RKNO as flino
+	   ,KCRKS.fsequ as fsequ
+	   ,IsNull(KCRKS.GSBH,'') as fdeno
+	   ,IsNull(KCRKS.gszwqm,'') as fdena
+	   ,IsNull(KCRKS.ZSBH,'') as fcbno
+	   ,IsNull(KCRKS.zsjc,'') as fcbna
+	   ,case when KCRKS.USPrice is not null then 'USD' else 'VND' end  as fcuno
+	   ,case when KCRKS.USPrice is not null then  KCRKS.CWHL else 1 end as frava
+	   ,IsNull(KCRKS.CGUSERID,'') as fcbo1
+	   ,IsNull(KCRKS.CGUSERNAME,'') as fcba1
+	   ,KCRKS.CLBH as fpdno
+	   ,case when KCRKS.USPrice is not null then KCRKS.USPrice else KCRKS.VNPrice end as fpdpr
+	   ,KCRKS.Qty as fbaqu
+	   ,IsNull(KCRKS.dwbh,'') as fpdu2
+	   ,case when KCRKS.USPrice is not null then KCRKS.USACC else KCRKS.VNACC  end  as fcumo
+	   ,case when KCRKS.USPrice is not null then KCRKS.VNACC else KCRKS.VNACC  end  as fsamo
+	   ,KCRKS.ZSNO as flin1
+	   ,IsNull(KCRKS.ExchACC,0) as fodmo	  
+	   ,6 as ftaxs 
+from 
+(
+select  KCRKS.*,ROW_NUMBER() over (PARTITION BY RKNO ORDER BY CLBH desc) as fsequ from (
+select KCRKS.RKNO,KCRK.GSBH,bgszl.gszwqm,KCRK.ZSBH,KCRK.ZSNO,zszl.zsjc ,KCRK.USERDATE as RKUSERDATE,
+       KCRKS.CLBH,KCRKS.CWHL,cgzl.USERID as CGUSERID,Busers.USERNAME as CGUSERNAME,CLZL.dwbh,Sum(KCRKS.Qty) as Qty,
+       Max(KCRKS.VNPrice) as VNPrice,Max(KCRKS.USPrice) as USPrice,Sum(KCRKS.VNACC) as VNACC,Sum(KCRKS.USACC) as USACC,Sum(KCRKS.ExchACC) as ExchACC
+from tyxuanDB.LIY_ERP.dbo.KCRKS KCRKS
+left join tyxuanDB.LIY_ERP.dbo.KCRK KCRK on KCRK.RKNO=KCRKS.RKNO 
+left join tyxuanDB.LIY_ERP.dbo.CLZL CLZL on CLZL.cldh=KCRKS.CLBH 
+left join tyxuanDB.LIY_ERP.dbo.bgszl bgszl on bgszl.gsdh=KCRK.GSBH 
+left join tyxuanDB.LIY_ERP.dbo.zszl zszl on zszl.zsdh=KCRK.ZSBH   
+left join tyxuanDB.LIY_ERP.dbo.cgzl cgzl on cgzl.CGNO=KCRK.ZSNO
+left join tyxuanDB.LIY_ERP.dbo.Busers Busers on Busers.USERID=cgzl.USERID
+where CLZL.cldh is not null and KCRK.YN_Date is not null
+    and convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between '2020/05/09' and '2020/05/13' 
+Group by KCRKS.RKNO,KCRK.GSBH,bgszl.gszwqm,KCRK.ZSBH,KCRK.ZSNO,zszl.zsjc,KCRK.USERDATE ,KCRKS.CLBH,CLZL.dwbh,KCRKS.CWHL,cgzl.USERID,Busers.USERNAME ) KCRKS
+) KCRKS 
+) KCRK
+left join (
+
+select flino,fdati,fsequ,fdate,fdeno,fdena,fcbno,fcbna,fpdna,fcuno,frava,fpdno,fpdpr,fbaqu,fpdu2,fcumo,fsamo from c14tr
+where c14tr.fiono='01' and exists  (
+	select fdati,flino from (select * from (
+	 select fdati,flino,fmode, ROW_NUMBER() over (PARTITION BY flino ORDER BY fdati desc) as fsequi from c14trmode where c14trmode.fiono='01' 
+	) c14trmode where fsequi=1 ) c14trmode where c14trmode.fdati=c14tr.fdati and c14trmode.flino=c14tr.flino and c14trmode.fmode<>'D' )
+   and convert(smalldatetime,convert(varchar,fdate,111))   between '2020/05/09' and '2020/05/13'
+
+) c14tr on c14tr.flino=KCRK.flino collate  Chinese_Taiwan_Stroke_BIN and c14tr.fsequ=KCRK.fsequ
+where  c14tr.flino is null  or convert(money,IsNull(KCRK.fcumo,0))<>Convert(money,IsNull(c14tr.fcumo,0)) or convert(money,IsNull(KCRK.fsamo,0))<>Convert(money,IsNull(c14tr.fsamo,0)) 
+-------------------------------------------------------------------------------檢查KCLLS哪一筆領料單沒同步
+Select * from (
+select 
+    replace(convert(varchar(8), Getdate(), 112)+convert(varchar(8), Getdate(), 114), ':','') as fdati
+	   ,'SYSTEM' as fdaus 
+	   ,'54' as fiono
+	   ,Convert(varchar,KCLLS.LLUSERDATE,111) as fdate
+	   ,KCLLS.LLNO as flino
+	   ,KCLLS.fsequ as fsequ
+	   ,IsNull(KCLLS.DepID,'') as fdeno
+	   ,IsNull(KCLLS.DepName,'') as fdena
+	   ,IsNull(KCLLS.USERID,'') as fcbo1
+	   ,IsNull(KCLLS.USERNAME,'') as fcba1
+	   ,IsNull(KCLLS.fpdn1,'') as fpdn1
+	   ,IsNull(KCLLS.fpda1,'') as fpda1
+	   ,KCLLS.CLBH as fpdno
+	   ,KCLLS.Qty as fbaqu
+	   ,IsNull(KCLLS.SCBH,'') as flin5
+from (
+select KCLLS.*,ROW_NUMBER() over (PARTITION BY LLNO ORDER BY CLBH,SCBH desc) as fsequ from (
+select KCLLS.LLNO,KCLL.DepID,BDepartment.DepName,KCLL.CFMDate as LLUSERDATE,KCLL.USERID,Busers.USERNAME,KCLLS.CLBH,Sum(KCLLS.Qty) as Qty,KCLL.SCBH,DDZL.XieXing+DDZL.SheHao as fpdn1,DDZL.ARTICLE as fpda1 
+from tyxuanDB.LIY_ERP.dbo.KCLLS KCLLS 
+left join tyxuanDB.LIY_ERP.dbo.KCLL KCLL on KCLL.LLNO=KCLLS.LLNO
+left join tyxuanDB.LIY_ERP.dbo.CLZL CLZL on CLZL.cldh=KCLLS.CLBH
+left join tyxuanDB.LIY_ERP.dbo.DDZL DDZL on DDZL.DDBH=KCLLS.SCBH
+left join tyxuanDB.LIY_ERP.dbo.BDepartment  BDepartment on BDepartment.ID=KCLL.DepID
+left join tyxuanDB.LIY_ERP.dbo.Busers Busers on Busers.USERID=KCLLS.USERID 
+where CLZL.cldh is not null and KCLL.YN_Date is not null
+      and convert(smalldatetime,convert(varchar,KCLL.CFMDate,111)) between '2020/04/01' and '2020/05/07' 
+Group by KCLLS.LLNO,KCLL.DepID,BDepartment.DepName,KCLL.CFMDate,KCLL.USERID,Busers.USERNAME,KCLLS.CLBH,KCLL.SCBH,DDZL.XieXing,DDZL.XieXing+DDZL.SheHao,DDZL.ARTICLE ) KCLLS
+) KCLLS
+) KCLL
+left join (
+select flino,fdati,fsequ,fdate,fdeno,fdena,fpdna,fpdno,fbaqu from c14tr
+where c14tr.fiono='54' and exists  (
+	select fdati,flino from (select * from (
+	 select fdati,flino,fmode, ROW_NUMBER() over (PARTITION BY flino ORDER BY fdati desc) as fsequi from c14trmode where c14trmode.fiono='54' 
+	) c14trmode where 1=1 and fsequi=1 
+	) c14trmode where c14trmode.fdati=c14tr.fdati and c14trmode.flino=c14tr.flino  and c14trmode.fmode<>'D' )
+     and convert(smalldatetime,convert(varchar,fdate,111))   between '2020/05/01' and '2020/05/08' 
+) c14tr on c14tr.flino= KCLL.flino collate  Chinese_Taiwan_Stroke_BIN and c14tr.fpdno=KCLL.fpdno collate  Chinese_Taiwan_Stroke_BIN 
+where c14tr.flino is null 
+----------------------------------------------------------------------------繳庫單哪一筆領料單沒同步
+Select * from (
+select 
+    replace(convert(varchar(8), Getdate(), 112)+convert(varchar(8), Getdate(), 114), ':','') as fdati
+	   ,'SYSTEM' as fdaus 
+	   ,'03' as fiono
+	   ,Convert(varchar,YWCP.INDATE,111) as fdate
+	   ,YWCP.DDBH as flino
+	   ,YWCP.CARTONNO as fsequ
+	   ,IsNull(YWCP.DepNO,'') as fdeno
+	   ,IsNull(YWCP.DepName,'') as fdena
+	   ,IsNull(YWCP.USERID,'') as fcbo1
+	   ,IsNull(YWCP.USERNAME,'') as fcba1
+	   ,IsNull(YWCP.fpdno,'') as fpdno
+	   ,IsNull(YWCP.fpdna,'') as fpdna
+	   ,'PRS' as fpdu2
+	   ,YWCP.Qty as fbaqu
+	   ,IsNull(YWCP.DDBH,'') as flin5
+from 
+(
+select YWCP.*,ROW_NUMBER() over (PARTITION BY DDBH ORDER BY DDBH desc) as fsequ from (
+select YWCP.DDBH,YWCP.CARTONNO,Max(YWCP.DepNO) as DepNO,Max(BDepartment.DepName) as DepName,YWCP.INDATE,Max(YWCP.USERID) as USERID,Max(Busers.USERNAME) as USERNAME,Sum(YWCP.Qty) as Qty,DDZL.Pairs,DDZL.XieXing+DDZL.SheHao as fpdno,DDZL.ARTICLE as fpdna 
+from tyxuanDB.LIY_ERP.dbo.YWCP YWCP 
+left join tyxuanDB.LIY_ERP.dbo.YWDD on YWDD.DDBH=YWCP.DDBH
+left join tyxuanDB.LIY_ERP.dbo.DDZL on DDZL.DDBH=YWDD.YSBH 
+left join tyxuanDB.LIY_ERP.dbo.BDepartment  BDepartment on BDepartment.ID=YWCP.DepNO
+left join tyxuanDB.LIY_ERP.dbo.Busers Busers on Busers.USERID=YWCP.USERID 
+where YWCP.Qty>0
+     and convert(smalldatetime,convert(varchar,YWCP.INDATE,111)) between '2020/05/01' and '2020/05/08' 
+Group by YWCP.DDBH,YWCP.CARTONNO,YWCP.INDATE,DDZL.XieXing+DDZL.SheHao,DDZL.ARTICLE ,DDZL.Pairs ) YWCP
+) YWCP
+) YWCP
+left join (
+select flino,fdati,fsequ,fdate,fdeno,fdena,fpdna,fpdno,fbaqu from c14tr
+where c14tr.fiono='03' and exists  (
+	select fdati,flino from (select * from (
+	 select fdati,flino, ROW_NUMBER() over (PARTITION BY flino ORDER BY fdati desc) as fsequi from c14trmode where c14trmode.fiono='03' and c14trmode.fmode<>'D'
+	) c14trmode where 1=1 and fsequi=1 
+	) c14trmode where c14trmode.fdati=c14tr.fdati and c14trmode.flino=c14tr.flino )
+     and convert(smalldatetime,convert(varchar,fdate,111))   between '2020/05/01' and '2020/05/08' 
+   -- and flino='Y2004-0274A' and fsequ=5
+) c14tr on c14tr.flino=YWCP.flino collate  Chinese_Taiwan_Stroke_BIN and c14tr.fsequ=YWCP.fsequ
+where  c14tr.flino is null
+----------------------------------------------------------------------------     檢查銷貨哪一筆領料單沒同步
+Select * from (
+select 
+       replace(convert(varchar(8), Getdate(), 112)+convert(varchar(8), Getdate(), 114), ':','') as fdati
+	   ,'SYSTEM' as fdaus 
+	   ,'52' as fiono
+	   ,Convert(varchar,INVOICE_D.UserDate,111) as fdate
+	   ,INVOICE_D.INV_NO as flino
+	   ,INVOICE_D.PACK_NO as fsequ
+	   ,'USD' as fcuno
+	   ,6 as ftaxs
+	   ,'VTX' as fdeno
+	   ,'億春總公司' as fdena
+	   ,INVOICE_D.UNIT_PRICE as fpdpr
+	   ,INVOICE_D.PAIRS as fbaqu
+	   ,'PRS' as fpdu2
+	   ,INVOICE_D.AMOUNT as fcumo
+	   ,IsNull(INVOICE_D.PO,'') as fcbpu
+	   ,IsNull(INVOICE_D.RYNO,'') as flin1 
+	   ,IsNull(INVOICE_D.fpdno,'') as fpdno
+	   ,IsNull(INVOICE_D.KHBH,'') as fcbno
+	   ,IsNull(INVOICE_D.kfjc,'') as fcbna 
+from (
+select INV_NO,RYNO,convert(int,PACK_NO) as PACK_NO,PO,PAIRS,UNIT_PRICE,AMOUNT,UserDate,DDZL.XieXing+DDZL.SheHao as fpdno,DDZL.KHBH,KFZL.kfjc
+from tyxuanDB.LIY_ERP.dbo.INVOICE_D INVOICE_D
+left join tyxuanDB.LIY_ERP.dbo.DDZL DDZL on DDZL.DDBH=INVOICE_D.RYNO
+left join tyxuanDB.LIY_ERP.dbo.KFZL KFZL on DDZL.KHBH=KFZL.kfdh
+where convert(smalldatetime,convert(varchar,INVOICE_D.UserDate,111)) between '2020/04/01' and '2020/05/07'
+) INVOICE_D 
+) INVOICE_D
+left join (
+select * from (
+select flino,fdati,fsequ,fdate,fdeno,fdena,fpdna,fpdno,fbaqu from c14tr
+where c14tr.fiono='52' and exists  (
+	select fdati,flino from (select * from (
+	 select fdati,flino, fmode, ROW_NUMBER() over (PARTITION BY flino ORDER BY fdati desc) as fsequi from c14trmode where c14trmode.fiono='52' 
+	) c14trmode where fsequi=1 ) c14trmode where c14trmode.fdati=c14tr.fdati and c14trmode.flino=c14tr.flino  and c14trmode.fmode<>'D' )
+   and convert(smalldatetime,convert(varchar,fdate,111))   between '2020/04/01' and '2020/05/07'
+) c14tr ) c14tr on c14tr.flino=INVOICE_D.flino collate  Chinese_Taiwan_Stroke_BIN and c14tr.fsequ=INVOICE_D.fsequ
+where  c14tr.flino is null
+
+--------------------------------日產能報表
+
+Select SCBBS.*,pr13tr.* from (
+select 
+     replace(convert(varchar(8), Getdate(), 112)+convert(varchar(8), Getdate(), 114), ':','') as fdati
+	   ,'SYSTEM' as fdaus 
+	   ,'03' as fiono
+	   ,Convert(varchar,SCBBS.SCDate,111) as fdate
+	   ,SCBBS.fsequ as fsequ
+	   ,IsNull(SCBBS.ProNo,'') as flino
+	   ,IsNull(SCBBS.DepNo,'') as fdeno
+	   ,IsNull(SCBBS.DepName,'') as fdena
+	   ,IsNull(SCBBS.GXLB,'') as fstno
+	   ,IsNull(SCBBS.SCBH,'') as frela
+	   ,SCBBS.Qty as fquan
+	   ,Convert(varchar,SCBBS.SCDate,111) as fdat1
+	   ,Convert(varchar,SCBBS.SCDate,111) as fdat2
+from 
+(
+select SCBBS.*,ROW_NUMBER() over (PARTITION BY ProNo ORDER BY GXLB desc) as fsequ from (
+select SCBBS.SCBH,SCBB.SCDate  ,SCBB.DepNo,BDepartment.DepName,SCBBS.GXLB,SCBB.ProNo,SCBBS.Qty
+from tyxuanDB.TB_ERP.dbo.SCBB SCBB
+left join tyxuanDB.TB_ERP.dbo.SCBBS SCBBS on SCBB.ProNo=SCBBS.ProNo
+left join tyxuanDB.TB_ERP.dbo.BDepartment BDepartment on BDepartment.ID=SCBB.DepNo
+where SCBBS.GXLB in ('C','S','A') 
+    and convert(smalldatetime,convert(varchar,SCBB.SCDate,111)) between '2021/03/01' and '2021/03/10' ) SCBBS
+) SCBBS 
+) SCBBS
+Left join (
+	select flino,fdati,fsequ,fdate,fdeno,fdena,fstno,fquan,frela,fdat1 from pr13tr
+	where pr13tr.fiono='03' and exists  (
+		select fdati,flino from (select * from (
+		 select fdati,flino,fmode, ROW_NUMBER() over (PARTITION BY flino ORDER BY fdati desc) as fsequi from pr13trmode where pr13trmode.fiono='03'
+		) pr13trmode where fsequi=1 ) pr13trmode where pr13trmode.fdati=pr13tr.fdati and pr13trmode.flino=pr13tr.flino  and pr13trmode.fmode<>'D' )
+	   and convert(smalldatetime,convert(varchar,fdate,111))   between '2021/03/01' and '2021/03/10'
+) pr13tr on   pr13tr.flino=SCBBS.flino collate  Chinese_Taiwan_Stroke_BIN and pr13tr.fsequ=SCBBS.fsequ
+where  pr13tr.flino is null
+
+

@@ -1,0 +1,1807 @@
+if object_id('tempdb..#RYPurchase') is not null    
+begin drop table #RYPurchase end 
+
+Select * into #RYPurchase from ( 
+select  isnull(DDZLTW.BUYNO,0) as BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,
+        CLZL.CQDH,isnull(CGZL.CGQty,0) as CGQty,
+        case when DDZLTW.DDZT<>'C' then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+        convert(varchar,CGZL.YQDate,111) as YQDate,convert(varchar,CGZL.CFMDate,111) as CFMDate,case when CLZL.CQDH='VN' then convert(varchar,CGZL.CFMDate,111) else convert(varchar,CGZL.CFMDate,111) end  as ETADate,
+        convert(varchar,CGZl.CGDate,111) as CGDate,
+        CGZL.CGNO,isnull(CGKCUSE.Qty,0) as UseStock,
+        RKZL.RKQty,RKZL.RKNO,RKZL.RKDate,min(SC.schedule_date) as APlanDate,DDZL.ShipDate      
+        ,convert(smalldatetime,ddzl.userdate,111) as indate
+        ,convert(smalldatetime,max(zlzls2.userdate),111) as cldate
+        ,convert(smalldatetime,ddzl.ddrq,111) as orderdate
+        ,lbzls.ywsm,Max(zszl.ZSDH) as ZSDH,Max(zszl.zsywjc) as zsywjc
+        ,MaterialMOQ.ProdLeadTime   
+from ZLZLS2 with (nolock)  
+inner join DDZl  with (nolock) on DDZl.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+left join DDZLTW with (nolock) on DDZLTW.DDBH=ZLZLS2.ZLBH
+left join CLZL  with (nolock) on CLZL.CLDH=ZLZLs2.CLBH 
+left join KFZL  with (nolock) on KFZl.KFDH=DDZLTW.KHBH 
+left join ZLZL  with (nolock) on ZLZL.ZLBH=ZLZLS2.ZLBH
+left join CGKCUSE  with (nolock) on CGKCUSE.ZLBH=ZLZLS2.ZLBH and CGKCUSE.CLBH=ZLZLS2.CLBH and CGKCUSE.GSBH='VDH' 
+left join XXZL  with (nolock) on XXZl.XieXing=DDZLTW.XieXing and XXZL.SheHao=DDZLTW.SheHao
+left join XXBWFL  with (nolock) on XXBWFL.XieXing=XXZL.XieXing and XXBWFL.BWBH=ZLZLS2.BWBH 
+left join XXBWFLS  with (nolock) on XXBWFLS.FLBH=XXBWFL.FLBH 
+left join lbzls on lbzls.lbdh=ddzl.ddgb and lbzls.lb='06' 
+LEFT JOIN schedule_crawler AS SC ON CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, '-', '')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX('-', REVERSE(SC.ry))) END = ZLZLS2.ZLBH
+Left join CLZLFilter on CLZLFilter.CLDH=ZLZLS2.CLBH and CLZLFilter.GSBH='VDH' 
+left join (select CGZLSS.ZLBH,CGZLSS.CLBH,sum(CGZLSS.Qty) as CGQty,
+                  max(CGZLSS.CFMDate) as CFMDate,max(CGZL.CGDate) as CGDate,
+                  max(CGZL.CGNO) as CGNO,max(CGZLSS.YQDate) as YQDate,max(CGZLS.QUSPrice) as USPrice,max(CGZLS.QVNPrice) as VNPrice 
+           from CGZLSS with (nolock) 
+           inner join DDZL on DDZL.DDBH = CGZLSS.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join CGZLS with (nolock)  on CGZLS.CGNO=CGZLSS.CGNO and CGZLS.CLBH=CGZLSS.CLBH 
+           left join  CGZL with (nolock)  on CGZl.CGNO=CGZLSS.CGNO
+           where DDZL.GSBH='VDH'
+                 and CGZLSS.ZLBH  like 'JHS2510-190%' 
+           group by CGZLSS.ZLBH,CGZLSS.CLBH 
+           union all
+           select YWDD.YSBH as ZLBH,YWBZPO.CLBH,sum(YWBZPO.Qty) as CGQty,getdate() as CFMDate,max(CGZL.CGDate) as CGDate
+                  ,max(CGZL.CGNO) as CGNO,getdate() as YQDate,0 as USPrice,0 as VNPrice
+           from (select YWBZPO.DDBH,YWBZPO.CLBH,sum(CTS) as Qty from YWBZPO,YWDD where YWBZPO.ddbh=YWDD.DDBH and YWDD.YSBH  like 'JHS2510-190%'  group by YWBZPO.DDBH,YWBZPO.CLBH
+                 union all select DDBH,CLBH,sum(CTS) as Qty from YWBZPOE where ddbh  like 'JHS2510-190%'  group by DDBH,CLBH )ywbzpo
+           left join YWDD on YWDD.DDBH=YWBZPO.DDBH
+           left join DDZL on DDZL.DDBH=YWDD.YSBH
+           left join CGZL on CGZL.CGNO=YWDD.CGNO
+           where DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           and YWDD.GSBH='VDH'
+           and DDZL.BuyNO like '%'
+           and YWBZPO.CLBH like '%'
+           group by YWDD.YSBH,YWBZPO.CLBH ) CGZL
+                 on CGZL.ZLBH=ZLZLS2.ZLBH and CGZL.CLBH=ZLZLS2.CLBH
+left join (select KCRKS.CGBH as ZLBH ,KCRKS.CLBH,sum(KCRKS.Qty ) as RKQty, 
+                  max(KCRKS.RKNO) as RKNO,max(KCRK.USERDate) as RKDate, 
+                  max(kcrks.usprice) as usprice,max(kcrks.vnprice) as vnprice 
+           from  KCRKS with (nolock)  
+           inner join DDZL on DDZL.DDBH=KCRKS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join KCRK with (nolock)  on KCRK.RKNO=KCRKS.RKNO 
+           where DDZL.GSBH='VDH'
+                 and KCRKS.CGBH  like 'JHS2510-190%' 
+           group by KCRKS.CGBH,KCRKS.CLBH ) RKZL
+                 on RKZL.ZLBH=ZLZLS2.ZLBH and RKZL.CLBH=ZLZLS2.CLBH 
+left join (select HG_INVS.CGBH as ZLBH ,HG_INVS.CLBH,sum(HG_INVS.Qty ) as HGQty, 
+                  max(HG_INV.DOCNO) as DOCNO,max(HG_INV.USERDate) as HGDate 
+           from  HG_INVS with (nolock) 
+           inner join DDZL on DDZL.DDBH=HG_INVS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join HG_INV with (nolock)  on HG_INV.RKNO=HG_INVS.RKNO
+           where DDZL.GSBH='VDH'
+                 and HG_INVS.CGBH  like 'JHS2510-190%' 
+           group by HG_INVS.CGBH,HG_INVS.CLBH ) HGINV
+                 on HGINV.ZLBH=ZLZLS2.ZLBH and HGINV.CLBH=ZLZLS2.CLBH
+left join (select zsdh,zsywjc from zszl) zszl on ZLZLS2.CSBH=zszl.zsdh  
+left join (
+		   Select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location from (
+		   Select A.Season,A.CLBH,A.ProdMOQ,A.ProdLeadTime,A.Forecast_Leadtime,A.Location from (
+			   select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,ROW_NUMBER() over (PARTITION BY CLBH ORDER BY Substring(Season,1,2) DESC,USERDATE desc) 
+			   as  rn from 
+			  (
+			  Select Season,IsNull(CLZL_LS.JHDH,MaterialMOQ.CLBH) as CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,MaterialMOQ.USERDATE 
+			  from MaterialMOQ with (nolock)
+			  left join CLZL_LS with (nolock) on CLZL_LS.CLDH=MaterialMOQ.CLBH  and IsNull(CLZL_LS.JHDH,'')<>'' ) MaterialMOQ
+			  where 1=1
+		   ) A where A.rn=1 and A.CLBH in (select distinct CLBH from ZLZLS2,DDZL where DDZL.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.Article like '%' 
+                                       and ZLZLS2.ZLBH  like 'JHS2510-190%' 
+                                       and ZLZLS2.CLBH not like 'W%' and ZLZLS2.CLBH like '%' and ZLZLS2.CLSL<>0 and ZLZLS2.ZMLB='N') 
+    ) MatMOQ
+		) MaterialMOQ on MaterialMOQ.CLBH=ZLZLS2.CLBH 
+       where DDZL.GSBH='VDH'
+       and ZLZLS2.CLBH not like 'W%'
+       and not exists(select CLBH from KCSAFE where KCSAFE.CLBH=ZLZLS2.CLBH )
+       and ZLZLS2.ZLBH  like 'JHS2510-190%' 
+       and DDZL.BuyNO like '%'
+       and ZLZLS2.ZMLB='N'
+       and ZLZLS2.CLSL<>0
+       and (XXBWFLS.DFL<>'G' or XXBWFLS.DFL is null)
+       and CLZLFilter.CLDH is null 
+       and DDZL.DDZT<>'C' 
+group by DDZlTW.BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,CLZL.ZWPM,ddzl.userdate,
+         XXZL.Article,XXZL.XieMing,DDZL.Pairs,CGKCUSE.Qty,CGZl.CGQty,CGZL.YQDate,
+         CGZL.CFMDate,CGZl.CGDate,CGZL.CGNO,RKZL.RKNO,RKZL.RKDate,RKZL.RKQty,DDZL.ShipDate, 
+         ddzl.ddrq,lbzls.ywsm 
+         ,MaterialMOQ.ProdLeadTime
+) ZLZLS2 where 1=1  
+select * from ( 
+Select #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate,null as ReadyDate1,null as ReadyDate2
+       ,Min(Case when CG_ML.ZLBH is not null then  Case when Min_EDT_ML<>'' then Max_EDT_ML else Min_EDT_ML  end   else Convert(varchar,#RYPurchase.orderdate,111) end) as ML 
+       ,Min(Case when CG_FML.ZLBH is not null then Case when Min_EDT_FML<>'' then Max_EDT_FML else Min_EDT_FML  end else Convert(varchar,#RYPurchase.orderdate,111) end) as FML 
+       ,Min(Case when CG_FGL.ZLBH is not null then  Case when Min_EDT_FGL<>'' then Max_EDT_FGL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as FGL 
+       ,Min(Case when CG_DL.ZLBH is not null then Case when Min_EDT_DL<>'' then Max_EDT_DL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as DL 
+       ,case when APlanDate is null then ShipDate-42 else APlanDate-7 end as comparedate 
+from #RYPurchase
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_ML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_ML
+   from  #RYPurchase A
+   where   (LEFT(A.CLBH,1) in ('A','C','F','K','B')  or (LEFT(A.CLBH,3)='P21' and A.dwbh<>'PRS'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_ML on  CG_ML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FML
+   from  #RYPurchase B
+   where (LEFT(B.CLBH,1) in ('E','G','I','L','M','N')  or  LEFT(B.CLBH,3)  in ('D01','D02','D11'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FML on  CG_FML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FGL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FGL
+   from  #RYPurchase C
+   where LEFT(C.CLBH,1) in ('D','H','O') and LEFT(C.CLBH,3)  not in ('D01','D02','D11')   and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FGL on  CG_FGL.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_DL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_DL
+   from  #RYPurchase D
+   where LEFT(D.CLBH,1) in ('J','P') and LEFT(D.CLBH,3) not in  ('P21')  and IsNull(UseStock,0.0)<CLSL
+   Group by  ZLBH
+) CG_DL on  CG_DL.ZLBH=#RYPurchase.ZLBH 
+Group by #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate
+) RYPurchase 
+Order by RYPurchase.APlanDate
+if object_id('tempdb..#RYPurchase') is not null    
+begin drop table #RYPurchase end 
+
+Select * into #RYPurchase from ( 
+select  isnull(DDZLTW.BUYNO,0) as BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,
+        CLZL.CQDH,isnull(CGZL.CGQty,0) as CGQty,
+        case when DDZLTW.DDZT<>'C' then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+        convert(varchar,CGZL.YQDate,111) as YQDate,convert(varchar,CGZL.CFMDate,111) as CFMDate,case when CLZL.CQDH='VN' then convert(varchar,CGZL.CFMDate,111) else convert(varchar,CGZL.CFMDate,111) end  as ETADate,
+        convert(varchar,CGZl.CGDate,111) as CGDate,
+        CGZL.CGNO,isnull(CGKCUSE.Qty,0) as UseStock,
+        RKZL.RKQty,RKZL.RKNO,RKZL.RKDate,min(SC.schedule_date) as APlanDate,DDZL.ShipDate      
+        ,convert(smalldatetime,ddzl.userdate,111) as indate
+        ,convert(smalldatetime,max(zlzls2.userdate),111) as cldate
+        ,convert(smalldatetime,ddzl.ddrq,111) as orderdate
+        ,lbzls.ywsm,Max(zszl.ZSDH) as ZSDH,Max(zszl.zsywjc) as zsywjc
+        ,MaterialMOQ.ProdLeadTime   
+from ZLZLS2 with (nolock)  
+inner join DDZl  with (nolock) on DDZl.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+left join DDZLTW with (nolock) on DDZLTW.DDBH=ZLZLS2.ZLBH
+left join CLZL  with (nolock) on CLZL.CLDH=ZLZLs2.CLBH 
+left join KFZL  with (nolock) on KFZl.KFDH=DDZLTW.KHBH 
+left join ZLZL  with (nolock) on ZLZL.ZLBH=ZLZLS2.ZLBH
+left join CGKCUSE  with (nolock) on CGKCUSE.ZLBH=ZLZLS2.ZLBH and CGKCUSE.CLBH=ZLZLS2.CLBH and CGKCUSE.GSBH='VDH' 
+left join XXZL  with (nolock) on XXZl.XieXing=DDZLTW.XieXing and XXZL.SheHao=DDZLTW.SheHao
+left join XXBWFL  with (nolock) on XXBWFL.XieXing=XXZL.XieXing and XXBWFL.BWBH=ZLZLS2.BWBH 
+left join XXBWFLS  with (nolock) on XXBWFLS.FLBH=XXBWFL.FLBH 
+left join lbzls on lbzls.lbdh=ddzl.ddgb and lbzls.lb='06' 
+LEFT JOIN schedule_crawler AS SC ON CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, '-', '')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX('-', REVERSE(SC.ry))) END = ZLZLS2.ZLBH
+Left join CLZLFilter on CLZLFilter.CLDH=ZLZLS2.CLBH and CLZLFilter.GSBH='VDH' 
+left join (select CGZLSS.ZLBH,CGZLSS.CLBH,sum(CGZLSS.Qty) as CGQty,
+                  max(CGZLSS.CFMDate) as CFMDate,max(CGZL.CGDate) as CGDate,
+                  max(CGZL.CGNO) as CGNO,max(CGZLSS.YQDate) as YQDate,max(CGZLS.QUSPrice) as USPrice,max(CGZLS.QVNPrice) as VNPrice 
+           from CGZLSS with (nolock) 
+           inner join DDZL on DDZL.DDBH = CGZLSS.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join CGZLS with (nolock)  on CGZLS.CGNO=CGZLSS.CGNO and CGZLS.CLBH=CGZLSS.CLBH 
+           left join  CGZL with (nolock)  on CGZl.CGNO=CGZLSS.CGNO
+           where DDZL.GSBH='VDH'
+                 and CGZLSS.ZLBH  like 'JHS2510-190%' 
+           group by CGZLSS.ZLBH,CGZLSS.CLBH 
+           union all
+           select YWDD.YSBH as ZLBH,YWBZPO.CLBH,sum(YWBZPO.Qty) as CGQty,getdate() as CFMDate,max(CGZL.CGDate) as CGDate
+                  ,max(CGZL.CGNO) as CGNO,getdate() as YQDate,0 as USPrice,0 as VNPrice
+           from (select YWBZPO.DDBH,YWBZPO.CLBH,sum(CTS) as Qty from YWBZPO,YWDD where YWBZPO.ddbh=YWDD.DDBH and YWDD.YSBH  like 'JHS2510-190%'  group by YWBZPO.DDBH,YWBZPO.CLBH
+                 union all select DDBH,CLBH,sum(CTS) as Qty from YWBZPOE where ddbh  like 'JHS2510-190%'  group by DDBH,CLBH )ywbzpo
+           left join YWDD on YWDD.DDBH=YWBZPO.DDBH
+           left join DDZL on DDZL.DDBH=YWDD.YSBH
+           left join CGZL on CGZL.CGNO=YWDD.CGNO
+           where DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           and YWDD.GSBH='VDH'
+           and DDZL.BuyNO like '%'
+           and YWBZPO.CLBH like '%'
+           group by YWDD.YSBH,YWBZPO.CLBH ) CGZL
+                 on CGZL.ZLBH=ZLZLS2.ZLBH and CGZL.CLBH=ZLZLS2.CLBH
+left join (select KCRKS.CGBH as ZLBH ,KCRKS.CLBH,sum(KCRKS.Qty ) as RKQty, 
+                  max(KCRKS.RKNO) as RKNO,max(KCRK.USERDate) as RKDate, 
+                  max(kcrks.usprice) as usprice,max(kcrks.vnprice) as vnprice 
+           from  KCRKS with (nolock)  
+           inner join DDZL on DDZL.DDBH=KCRKS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join KCRK with (nolock)  on KCRK.RKNO=KCRKS.RKNO 
+           where DDZL.GSBH='VDH'
+                 and KCRKS.CGBH  like 'JHS2510-190%' 
+           group by KCRKS.CGBH,KCRKS.CLBH ) RKZL
+                 on RKZL.ZLBH=ZLZLS2.ZLBH and RKZL.CLBH=ZLZLS2.CLBH 
+left join (select HG_INVS.CGBH as ZLBH ,HG_INVS.CLBH,sum(HG_INVS.Qty ) as HGQty, 
+                  max(HG_INV.DOCNO) as DOCNO,max(HG_INV.USERDate) as HGDate 
+           from  HG_INVS with (nolock) 
+           inner join DDZL on DDZL.DDBH=HG_INVS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join HG_INV with (nolock)  on HG_INV.RKNO=HG_INVS.RKNO
+           where DDZL.GSBH='VDH'
+                 and HG_INVS.CGBH  like 'JHS2510-190%' 
+           group by HG_INVS.CGBH,HG_INVS.CLBH ) HGINV
+                 on HGINV.ZLBH=ZLZLS2.ZLBH and HGINV.CLBH=ZLZLS2.CLBH
+left join (select zsdh,zsywjc from zszl) zszl on ZLZLS2.CSBH=zszl.zsdh  
+left join (
+		   Select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location from (
+		   Select A.Season,A.CLBH,A.ProdMOQ,A.ProdLeadTime,A.Forecast_Leadtime,A.Location from (
+			   select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,ROW_NUMBER() over (PARTITION BY CLBH ORDER BY Substring(Season,1,2) DESC,USERDATE desc) 
+			   as  rn from 
+			  (
+			  Select Season,IsNull(CLZL_LS.JHDH,MaterialMOQ.CLBH) as CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,MaterialMOQ.USERDATE 
+			  from MaterialMOQ with (nolock)
+			  left join CLZL_LS with (nolock) on CLZL_LS.CLDH=MaterialMOQ.CLBH  and IsNull(CLZL_LS.JHDH,'')<>'' ) MaterialMOQ
+			  where 1=1
+		   ) A where A.rn=1 and A.CLBH in (select distinct CLBH from ZLZLS2,DDZL where DDZL.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.Article like '%' 
+                                       and ZLZLS2.ZLBH  like 'JHS2510-190%' 
+                                       and ZLZLS2.CLBH not like 'W%' and ZLZLS2.CLBH like '%' and ZLZLS2.CLSL<>0 and ZLZLS2.ZMLB='N') 
+    ) MatMOQ
+		) MaterialMOQ on MaterialMOQ.CLBH=ZLZLS2.CLBH 
+       where DDZL.GSBH='VDH'
+       and ZLZLS2.CLBH not like 'W%'
+       and not exists(select CLBH from KCSAFE where KCSAFE.CLBH=ZLZLS2.CLBH )
+       and ZLZLS2.ZLBH  like 'JHS2510-190%' 
+       and DDZL.BuyNO like '%'
+       and ZLZLS2.ZMLB='N'
+       and ZLZLS2.CLSL<>0
+       and (XXBWFLS.DFL<>'G' or XXBWFLS.DFL is null)
+       and CLZLFilter.CLDH is null 
+       and DDZL.DDZT<>'C' 
+group by DDZlTW.BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,CLZL.ZWPM,ddzl.userdate,
+         XXZL.Article,XXZL.XieMing,DDZL.Pairs,CGKCUSE.Qty,CGZl.CGQty,CGZL.YQDate,
+         CGZL.CFMDate,CGZl.CGDate,CGZL.CGNO,RKZL.RKNO,RKZL.RKDate,RKZL.RKQty,DDZL.ShipDate, 
+         ddzl.ddrq,lbzls.ywsm 
+         ,MaterialMOQ.ProdLeadTime
+) ZLZLS2 where 1=1  
+select * from ( 
+Select #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate,null as ReadyDate1,null as ReadyDate2
+       ,Min(Case when CG_ML.ZLBH is not null then  Case when Min_EDT_ML<>'' then Max_EDT_ML else Min_EDT_ML  end   else Convert(varchar,#RYPurchase.orderdate,111) end) as ML 
+       ,Min(Case when CG_FML.ZLBH is not null then Case when Min_EDT_FML<>'' then Max_EDT_FML else Min_EDT_FML  end else Convert(varchar,#RYPurchase.orderdate,111) end) as FML 
+       ,Min(Case when CG_FGL.ZLBH is not null then  Case when Min_EDT_FGL<>'' then Max_EDT_FGL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as FGL 
+       ,Min(Case when CG_DL.ZLBH is not null then Case when Min_EDT_DL<>'' then Max_EDT_DL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as DL 
+       ,case when APlanDate is null then ShipDate-42 else APlanDate-7 end as comparedate 
+from #RYPurchase
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_ML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_ML
+   from  #RYPurchase A
+   where   (LEFT(A.CLBH,1) in ('A','C','F','K','B')  or (LEFT(A.CLBH,3)='P21' and A.dwbh<>'PRS'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_ML on  CG_ML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FML
+   from  #RYPurchase B
+   where (LEFT(B.CLBH,1) in ('E','G','I','L','M','N')  or  LEFT(B.CLBH,3)  in ('D01','D02','D11'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FML on  CG_FML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FGL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FGL
+   from  #RYPurchase C
+   where LEFT(C.CLBH,1) in ('D','H','O') and LEFT(C.CLBH,3)  not in ('D01','D02','D11')   and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FGL on  CG_FGL.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_DL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_DL
+   from  #RYPurchase D
+   where LEFT(D.CLBH,1) in ('J','P') and LEFT(D.CLBH,3) not in  ('P21')  and IsNull(UseStock,0.0)<CLSL
+   Group by  ZLBH
+) CG_DL on  CG_DL.ZLBH=#RYPurchase.ZLBH 
+Group by #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate
+) RYPurchase 
+Order by RYPurchase.APlanDate
+if object_id('tempdb..#RYPurchase') is not null    
+begin drop table #RYPurchase end 
+
+Select * into #RYPurchase from ( 
+select  isnull(DDZLTW.BUYNO,0) as BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,
+        CLZL.CQDH,isnull(CGZL.CGQty,0) as CGQty,
+        case when DDZLTW.DDZT<>'C' then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+        convert(varchar,CGZL.YQDate,111) as YQDate,convert(varchar,CGZL.CFMDate,111) as CFMDate,case when CLZL.CQDH='VN' then convert(varchar,CGZL.CFMDate,111) else convert(varchar,CGZL.CFMDate,111) end  as ETADate,
+        convert(varchar,CGZl.CGDate,111) as CGDate,
+        CGZL.CGNO,isnull(CGKCUSE.Qty,0) as UseStock,
+        RKZL.RKQty,RKZL.RKNO,RKZL.RKDate,min(SC.schedule_date) as APlanDate,DDZL.ShipDate      
+        ,convert(smalldatetime,ddzl.userdate,111) as indate
+        ,convert(smalldatetime,max(zlzls2.userdate),111) as cldate
+        ,convert(smalldatetime,ddzl.ddrq,111) as orderdate
+        ,lbzls.ywsm,Max(zszl.ZSDH) as ZSDH,Max(zszl.zsywjc) as zsywjc
+        ,MaterialMOQ.ProdLeadTime   
+from ZLZLS2 with (nolock)  
+inner join DDZl  with (nolock) on DDZl.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+left join DDZLTW with (nolock) on DDZLTW.DDBH=ZLZLS2.ZLBH
+left join CLZL  with (nolock) on CLZL.CLDH=ZLZLs2.CLBH 
+left join KFZL  with (nolock) on KFZl.KFDH=DDZLTW.KHBH 
+left join ZLZL  with (nolock) on ZLZL.ZLBH=ZLZLS2.ZLBH
+left join CGKCUSE  with (nolock) on CGKCUSE.ZLBH=ZLZLS2.ZLBH and CGKCUSE.CLBH=ZLZLS2.CLBH and CGKCUSE.GSBH='VDH' 
+left join XXZL  with (nolock) on XXZl.XieXing=DDZLTW.XieXing and XXZL.SheHao=DDZLTW.SheHao
+left join XXBWFL  with (nolock) on XXBWFL.XieXing=XXZL.XieXing and XXBWFL.BWBH=ZLZLS2.BWBH 
+left join XXBWFLS  with (nolock) on XXBWFLS.FLBH=XXBWFL.FLBH 
+left join lbzls on lbzls.lbdh=ddzl.ddgb and lbzls.lb='06' 
+LEFT JOIN schedule_crawler AS SC ON CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, '-', '')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX('-', REVERSE(SC.ry))) END = ZLZLS2.ZLBH
+Left join CLZLFilter on CLZLFilter.CLDH=ZLZLS2.CLBH and CLZLFilter.GSBH='VDH' 
+left join (select CGZLSS.ZLBH,CGZLSS.CLBH,sum(CGZLSS.Qty) as CGQty,
+                  max(CGZLSS.CFMDate) as CFMDate,max(CGZL.CGDate) as CGDate,
+                  max(CGZL.CGNO) as CGNO,max(CGZLSS.YQDate) as YQDate,max(CGZLS.QUSPrice) as USPrice,max(CGZLS.QVNPrice) as VNPrice 
+           from CGZLSS with (nolock) 
+           inner join DDZL on DDZL.DDBH = CGZLSS.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join CGZLS with (nolock)  on CGZLS.CGNO=CGZLSS.CGNO and CGZLS.CLBH=CGZLSS.CLBH 
+           left join  CGZL with (nolock)  on CGZl.CGNO=CGZLSS.CGNO
+           where DDZL.GSBH='VDH'
+                 and CGZLSS.ZLBH  like 'JHS2510-190%' 
+           group by CGZLSS.ZLBH,CGZLSS.CLBH 
+           union all
+           select YWDD.YSBH as ZLBH,YWBZPO.CLBH,sum(YWBZPO.Qty) as CGQty,getdate() as CFMDate,max(CGZL.CGDate) as CGDate
+                  ,max(CGZL.CGNO) as CGNO,getdate() as YQDate,0 as USPrice,0 as VNPrice
+           from (select YWBZPO.DDBH,YWBZPO.CLBH,sum(CTS) as Qty from YWBZPO,YWDD where YWBZPO.ddbh=YWDD.DDBH and YWDD.YSBH  like 'JHS2510-190%'  group by YWBZPO.DDBH,YWBZPO.CLBH
+                 union all select DDBH,CLBH,sum(CTS) as Qty from YWBZPOE where ddbh  like 'JHS2510-190%'  group by DDBH,CLBH )ywbzpo
+           left join YWDD on YWDD.DDBH=YWBZPO.DDBH
+           left join DDZL on DDZL.DDBH=YWDD.YSBH
+           left join CGZL on CGZL.CGNO=YWDD.CGNO
+           where DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           and YWDD.GSBH='VDH'
+           and DDZL.BuyNO like '%'
+           and YWBZPO.CLBH like '%'
+           group by YWDD.YSBH,YWBZPO.CLBH ) CGZL
+                 on CGZL.ZLBH=ZLZLS2.ZLBH and CGZL.CLBH=ZLZLS2.CLBH
+left join (select KCRKS.CGBH as ZLBH ,KCRKS.CLBH,sum(KCRKS.Qty ) as RKQty, 
+                  max(KCRKS.RKNO) as RKNO,max(KCRK.USERDate) as RKDate, 
+                  max(kcrks.usprice) as usprice,max(kcrks.vnprice) as vnprice 
+           from  KCRKS with (nolock)  
+           inner join DDZL on DDZL.DDBH=KCRKS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join KCRK with (nolock)  on KCRK.RKNO=KCRKS.RKNO 
+           where DDZL.GSBH='VDH'
+                 and KCRKS.CGBH  like 'JHS2510-190%' 
+           group by KCRKS.CGBH,KCRKS.CLBH ) RKZL
+                 on RKZL.ZLBH=ZLZLS2.ZLBH and RKZL.CLBH=ZLZLS2.CLBH 
+left join (select HG_INVS.CGBH as ZLBH ,HG_INVS.CLBH,sum(HG_INVS.Qty ) as HGQty, 
+                  max(HG_INV.DOCNO) as DOCNO,max(HG_INV.USERDate) as HGDate 
+           from  HG_INVS with (nolock) 
+           inner join DDZL on DDZL.DDBH=HG_INVS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join HG_INV with (nolock)  on HG_INV.RKNO=HG_INVS.RKNO
+           where DDZL.GSBH='VDH'
+                 and HG_INVS.CGBH  like 'JHS2510-190%' 
+           group by HG_INVS.CGBH,HG_INVS.CLBH ) HGINV
+                 on HGINV.ZLBH=ZLZLS2.ZLBH and HGINV.CLBH=ZLZLS2.CLBH
+left join (select zsdh,zsywjc from zszl) zszl on ZLZLS2.CSBH=zszl.zsdh  
+left join (
+		   Select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location from (
+		   Select A.Season,A.CLBH,A.ProdMOQ,A.ProdLeadTime,A.Forecast_Leadtime,A.Location from (
+			   select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,ROW_NUMBER() over (PARTITION BY CLBH ORDER BY Substring(Season,1,2) DESC,USERDATE desc) 
+			   as  rn from 
+			  (
+			  Select Season,IsNull(CLZL_LS.JHDH,MaterialMOQ.CLBH) as CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,MaterialMOQ.USERDATE 
+			  from MaterialMOQ with (nolock)
+			  left join CLZL_LS with (nolock) on CLZL_LS.CLDH=MaterialMOQ.CLBH  and IsNull(CLZL_LS.JHDH,'')<>'' ) MaterialMOQ
+			  where 1=1
+		   ) A where A.rn=1 and A.CLBH in (select distinct CLBH from ZLZLS2,DDZL where DDZL.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.Article like '%' 
+                                       and ZLZLS2.ZLBH  like 'JHS2510-190%' 
+                                       and ZLZLS2.CLBH not like 'W%' and ZLZLS2.CLBH like '%' and ZLZLS2.CLSL<>0 and ZLZLS2.ZMLB='N') 
+    ) MatMOQ
+		) MaterialMOQ on MaterialMOQ.CLBH=ZLZLS2.CLBH 
+       where DDZL.GSBH='VDH'
+       and ZLZLS2.CLBH not like 'W%'
+       and not exists(select CLBH from KCSAFE where KCSAFE.CLBH=ZLZLS2.CLBH )
+       and ZLZLS2.ZLBH  like 'JHS2510-190%' 
+       and DDZL.BuyNO like '%'
+       and ZLZLS2.ZMLB='N'
+       and ZLZLS2.CLSL<>0
+       and (XXBWFLS.DFL<>'G' or XXBWFLS.DFL is null)
+       and CLZLFilter.CLDH is null 
+       and DDZL.DDZT<>'C' 
+group by DDZlTW.BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,CLZL.ZWPM,ddzl.userdate,
+         XXZL.Article,XXZL.XieMing,DDZL.Pairs,CGKCUSE.Qty,CGZl.CGQty,CGZL.YQDate,
+         CGZL.CFMDate,CGZl.CGDate,CGZL.CGNO,RKZL.RKNO,RKZL.RKDate,RKZL.RKQty,DDZL.ShipDate, 
+         ddzl.ddrq,lbzls.ywsm 
+         ,MaterialMOQ.ProdLeadTime
+) ZLZLS2 where 1=1  
+select * from ( 
+Select #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate,null as ReadyDate1,null as ReadyDate2
+       ,Min(Case when CG_ML.ZLBH is not null then  Case when Min_EDT_ML<>'' then Max_EDT_ML else Min_EDT_ML  end   else Convert(varchar,#RYPurchase.orderdate,111) end) as ML 
+       ,Min(Case when CG_FML.ZLBH is not null then Case when Min_EDT_FML<>'' then Max_EDT_FML else Min_EDT_FML  end else Convert(varchar,#RYPurchase.orderdate,111) end) as FML 
+       ,Min(Case when CG_FGL.ZLBH is not null then  Case when Min_EDT_FGL<>'' then Max_EDT_FGL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as FGL 
+       ,Min(Case when CG_DL.ZLBH is not null then Case when Min_EDT_DL<>'' then Max_EDT_DL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as DL 
+       ,case when APlanDate is null then ShipDate-42 else APlanDate-7 end as comparedate 
+from #RYPurchase
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_ML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_ML
+   from  #RYPurchase A
+   where   (LEFT(A.CLBH,1) in ('A','C','F','K','B')  or (LEFT(A.CLBH,3)='P21' and A.dwbh<>'PRS'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_ML on  CG_ML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FML
+   from  #RYPurchase B
+   where (LEFT(B.CLBH,1) in ('E','G','I','L','M','N')  or  LEFT(B.CLBH,3)  in ('D01','D02','D11'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FML on  CG_FML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FGL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FGL
+   from  #RYPurchase C
+   where LEFT(C.CLBH,1) in ('D','H','O') and LEFT(C.CLBH,3)  not in ('D01','D02','D11')   and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FGL on  CG_FGL.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_DL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_DL
+   from  #RYPurchase D
+   where LEFT(D.CLBH,1) in ('J','P') and LEFT(D.CLBH,3) not in  ('P21')  and IsNull(UseStock,0.0)<CLSL
+   Group by  ZLBH
+) CG_DL on  CG_DL.ZLBH=#RYPurchase.ZLBH 
+Group by #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate
+) RYPurchase 
+Order by RYPurchase.APlanDate
+if object_id('tempdb..#RYPurchase') is not null    
+begin drop table #RYPurchase end 
+
+Select * into #RYPurchase from ( 
+select  isnull(DDZLTW.BUYNO,0) as BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,
+        CLZL.CQDH,isnull(CGZL.CGQty,0) as CGQty,
+        case when DDZLTW.DDZT<>'C' then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+        convert(varchar,CGZL.YQDate,111) as YQDate,convert(varchar,CGZL.CFMDate,111) as CFMDate,case when CLZL.CQDH='VN' then convert(varchar,CGZL.CFMDate,111) else convert(varchar,CGZL.CFMDate,111) end  as ETADate,
+        convert(varchar,CGZl.CGDate,111) as CGDate,
+        CGZL.CGNO,isnull(CGKCUSE.Qty,0) as UseStock,
+        RKZL.RKQty,RKZL.RKNO,RKZL.RKDate,min(SC.schedule_date) as APlanDate,DDZL.ShipDate      
+        ,convert(smalldatetime,ddzl.userdate,111) as indate
+        ,convert(smalldatetime,max(zlzls2.userdate),111) as cldate
+        ,convert(smalldatetime,ddzl.ddrq,111) as orderdate
+        ,lbzls.ywsm,Max(zszl.ZSDH) as ZSDH,Max(zszl.zsywjc) as zsywjc
+        ,MaterialMOQ.ProdLeadTime   
+from ZLZLS2 with (nolock)  
+inner join DDZl  with (nolock) on DDZl.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+left join DDZLTW with (nolock) on DDZLTW.DDBH=ZLZLS2.ZLBH
+left join CLZL  with (nolock) on CLZL.CLDH=ZLZLs2.CLBH 
+left join KFZL  with (nolock) on KFZl.KFDH=DDZLTW.KHBH 
+left join ZLZL  with (nolock) on ZLZL.ZLBH=ZLZLS2.ZLBH
+left join CGKCUSE  with (nolock) on CGKCUSE.ZLBH=ZLZLS2.ZLBH and CGKCUSE.CLBH=ZLZLS2.CLBH and CGKCUSE.GSBH='VDH' 
+left join XXZL  with (nolock) on XXZl.XieXing=DDZLTW.XieXing and XXZL.SheHao=DDZLTW.SheHao
+left join XXBWFL  with (nolock) on XXBWFL.XieXing=XXZL.XieXing and XXBWFL.BWBH=ZLZLS2.BWBH 
+left join XXBWFLS  with (nolock) on XXBWFLS.FLBH=XXBWFL.FLBH 
+left join lbzls on lbzls.lbdh=ddzl.ddgb and lbzls.lb='06' 
+LEFT JOIN schedule_crawler AS SC ON CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, '-', '')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX('-', REVERSE(SC.ry))) END = ZLZLS2.ZLBH
+Left join CLZLFilter on CLZLFilter.CLDH=ZLZLS2.CLBH and CLZLFilter.GSBH='VDH' 
+left join (select CGZLSS.ZLBH,CGZLSS.CLBH,sum(CGZLSS.Qty) as CGQty,
+                  max(CGZLSS.CFMDate) as CFMDate,max(CGZL.CGDate) as CGDate,
+                  max(CGZL.CGNO) as CGNO,max(CGZLSS.YQDate) as YQDate,max(CGZLS.QUSPrice) as USPrice,max(CGZLS.QVNPrice) as VNPrice 
+           from CGZLSS with (nolock) 
+           inner join DDZL on DDZL.DDBH = CGZLSS.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join CGZLS with (nolock)  on CGZLS.CGNO=CGZLSS.CGNO and CGZLS.CLBH=CGZLSS.CLBH 
+           left join  CGZL with (nolock)  on CGZl.CGNO=CGZLSS.CGNO
+           where DDZL.GSBH='VDH'
+                 and CGZLSS.ZLBH  like 'JHS2510-190%' 
+           group by CGZLSS.ZLBH,CGZLSS.CLBH 
+           union all
+           select YWDD.YSBH as ZLBH,YWBZPO.CLBH,sum(YWBZPO.Qty) as CGQty,getdate() as CFMDate,max(CGZL.CGDate) as CGDate
+                  ,max(CGZL.CGNO) as CGNO,getdate() as YQDate,0 as USPrice,0 as VNPrice
+           from (select YWBZPO.DDBH,YWBZPO.CLBH,sum(CTS) as Qty from YWBZPO,YWDD where YWBZPO.ddbh=YWDD.DDBH and YWDD.YSBH  like 'JHS2510-190%'  group by YWBZPO.DDBH,YWBZPO.CLBH
+                 union all select DDBH,CLBH,sum(CTS) as Qty from YWBZPOE where ddbh  like 'JHS2510-190%'  group by DDBH,CLBH )ywbzpo
+           left join YWDD on YWDD.DDBH=YWBZPO.DDBH
+           left join DDZL on DDZL.DDBH=YWDD.YSBH
+           left join CGZL on CGZL.CGNO=YWDD.CGNO
+           where DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           and YWDD.GSBH='VDH'
+           and DDZL.BuyNO like '%'
+           and YWBZPO.CLBH like '%'
+           group by YWDD.YSBH,YWBZPO.CLBH ) CGZL
+                 on CGZL.ZLBH=ZLZLS2.ZLBH and CGZL.CLBH=ZLZLS2.CLBH
+left join (select KCRKS.CGBH as ZLBH ,KCRKS.CLBH,sum(KCRKS.Qty ) as RKQty, 
+                  max(KCRKS.RKNO) as RKNO,max(KCRK.USERDate) as RKDate, 
+                  max(kcrks.usprice) as usprice,max(kcrks.vnprice) as vnprice 
+           from  KCRKS with (nolock)  
+           inner join DDZL on DDZL.DDBH=KCRKS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join KCRK with (nolock)  on KCRK.RKNO=KCRKS.RKNO 
+           where DDZL.GSBH='VDH'
+                 and KCRKS.CGBH  like 'JHS2510-190%' 
+           group by KCRKS.CGBH,KCRKS.CLBH ) RKZL
+                 on RKZL.ZLBH=ZLZLS2.ZLBH and RKZL.CLBH=ZLZLS2.CLBH 
+left join (select HG_INVS.CGBH as ZLBH ,HG_INVS.CLBH,sum(HG_INVS.Qty ) as HGQty, 
+                  max(HG_INV.DOCNO) as DOCNO,max(HG_INV.USERDate) as HGDate 
+           from  HG_INVS with (nolock) 
+           inner join DDZL on DDZL.DDBH=HG_INVS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join HG_INV with (nolock)  on HG_INV.RKNO=HG_INVS.RKNO
+           where DDZL.GSBH='VDH'
+                 and HG_INVS.CGBH  like 'JHS2510-190%' 
+           group by HG_INVS.CGBH,HG_INVS.CLBH ) HGINV
+                 on HGINV.ZLBH=ZLZLS2.ZLBH and HGINV.CLBH=ZLZLS2.CLBH
+left join (select zsdh,zsywjc from zszl) zszl on ZLZLS2.CSBH=zszl.zsdh  
+left join (
+		   Select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location from (
+		   Select A.Season,A.CLBH,A.ProdMOQ,A.ProdLeadTime,A.Forecast_Leadtime,A.Location from (
+			   select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,ROW_NUMBER() over (PARTITION BY CLBH ORDER BY Substring(Season,1,2) DESC,USERDATE desc) 
+			   as  rn from 
+			  (
+			  Select Season,IsNull(CLZL_LS.JHDH,MaterialMOQ.CLBH) as CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,MaterialMOQ.USERDATE 
+			  from MaterialMOQ with (nolock)
+			  left join CLZL_LS with (nolock) on CLZL_LS.CLDH=MaterialMOQ.CLBH  and IsNull(CLZL_LS.JHDH,'')<>'' ) MaterialMOQ
+			  where 1=1
+		   ) A where A.rn=1 and A.CLBH in (select distinct CLBH from ZLZLS2,DDZL where DDZL.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.Article like '%' 
+                                       and ZLZLS2.ZLBH  like 'JHS2510-190%' 
+                                       and ZLZLS2.CLBH not like 'W%' and ZLZLS2.CLBH like '%' and ZLZLS2.CLSL<>0 and ZLZLS2.ZMLB='N') 
+    ) MatMOQ
+		) MaterialMOQ on MaterialMOQ.CLBH=ZLZLS2.CLBH 
+       where DDZL.GSBH='VDH'
+       and ZLZLS2.CLBH not like 'W%'
+       and not exists(select CLBH from KCSAFE where KCSAFE.CLBH=ZLZLS2.CLBH )
+       and ZLZLS2.ZLBH  like 'JHS2510-190%' 
+       and DDZL.BuyNO like '%'
+       and ZLZLS2.ZMLB='N'
+       and ZLZLS2.CLSL<>0
+       and (XXBWFLS.DFL<>'G' or XXBWFLS.DFL is null)
+       and CLZLFilter.CLDH is null 
+       and DDZL.DDZT<>'C' 
+group by DDZlTW.BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,CLZL.ZWPM,ddzl.userdate,
+         XXZL.Article,XXZL.XieMing,DDZL.Pairs,CGKCUSE.Qty,CGZl.CGQty,CGZL.YQDate,
+         CGZL.CFMDate,CGZl.CGDate,CGZL.CGNO,RKZL.RKNO,RKZL.RKDate,RKZL.RKQty,DDZL.ShipDate, 
+         ddzl.ddrq,lbzls.ywsm 
+         ,MaterialMOQ.ProdLeadTime
+) ZLZLS2 where 1=1  
+select * from ( 
+Select #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate,null as ReadyDate1,null as ReadyDate2
+       ,Min(Case when CG_ML.ZLBH is not null then  Case when Min_EDT_ML<>'' then Max_EDT_ML else Min_EDT_ML  end   else Convert(varchar,#RYPurchase.orderdate,111) end) as ML 
+       ,Min(Case when CG_FML.ZLBH is not null then Case when Min_EDT_FML<>'' then Max_EDT_FML else Min_EDT_FML  end else Convert(varchar,#RYPurchase.orderdate,111) end) as FML 
+       ,Min(Case when CG_FGL.ZLBH is not null then  Case when Min_EDT_FGL<>'' then Max_EDT_FGL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as FGL 
+       ,Min(Case when CG_DL.ZLBH is not null then Case when Min_EDT_DL<>'' then Max_EDT_DL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as DL 
+       ,case when APlanDate is null then ShipDate-42 else APlanDate-7 end as comparedate 
+from #RYPurchase
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_ML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_ML
+   from  #RYPurchase A
+   where   (LEFT(A.CLBH,1) in ('A','C','F','K','B')  or (LEFT(A.CLBH,3)='P21' and A.dwbh<>'PRS'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_ML on  CG_ML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FML
+   from  #RYPurchase B
+   where (LEFT(B.CLBH,1) in ('E','G','I','L','M','N')  or  LEFT(B.CLBH,3)  in ('D01','D02','D11'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FML on  CG_FML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FGL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FGL
+   from  #RYPurchase C
+   where LEFT(C.CLBH,1) in ('D','H','O') and LEFT(C.CLBH,3)  not in ('D01','D02','D11')   and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FGL on  CG_FGL.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_DL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_DL
+   from  #RYPurchase D
+   where LEFT(D.CLBH,1) in ('J','P') and LEFT(D.CLBH,3) not in  ('P21')  and IsNull(UseStock,0.0)<CLSL
+   Group by  ZLBH
+) CG_DL on  CG_DL.ZLBH=#RYPurchase.ZLBH 
+Group by #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate
+) RYPurchase 
+Order by RYPurchase.APlanDate
+if object_id('tempdb..#RYPurchase') is not null    
+begin drop table #RYPurchase end 
+
+Select * into #RYPurchase from ( 
+select  isnull(DDZLTW.BUYNO,0) as BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,
+        CLZL.CQDH,isnull(CGZL.CGQty,0) as CGQty,
+        case when DDZLTW.DDZT<>'C' then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+        convert(varchar,CGZL.YQDate,111) as YQDate,convert(varchar,CGZL.CFMDate,111) as CFMDate,case when CLZL.CQDH='VN' then convert(varchar,CGZL.CFMDate,111) else convert(varchar,CGZL.CFMDate,111) end  as ETADate,
+        convert(varchar,CGZl.CGDate,111) as CGDate,
+        CGZL.CGNO,isnull(CGKCUSE.Qty,0) as UseStock,
+        RKZL.RKQty,RKZL.RKNO,RKZL.RKDate,min(SC.schedule_date) as APlanDate,DDZL.ShipDate      
+        ,convert(smalldatetime,ddzl.userdate,111) as indate
+        ,convert(smalldatetime,max(zlzls2.userdate),111) as cldate
+        ,convert(smalldatetime,ddzl.ddrq,111) as orderdate
+        ,lbzls.ywsm,Max(zszl.ZSDH) as ZSDH,Max(zszl.zsywjc) as zsywjc
+        ,MaterialMOQ.ProdLeadTime   
+from ZLZLS2 with (nolock)  
+inner join DDZl  with (nolock) on DDZl.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+left join DDZLTW with (nolock) on DDZLTW.DDBH=ZLZLS2.ZLBH
+left join CLZL  with (nolock) on CLZL.CLDH=ZLZLs2.CLBH 
+left join KFZL  with (nolock) on KFZl.KFDH=DDZLTW.KHBH 
+left join ZLZL  with (nolock) on ZLZL.ZLBH=ZLZLS2.ZLBH
+left join CGKCUSE  with (nolock) on CGKCUSE.ZLBH=ZLZLS2.ZLBH and CGKCUSE.CLBH=ZLZLS2.CLBH and CGKCUSE.GSBH='VDH' 
+left join XXZL  with (nolock) on XXZl.XieXing=DDZLTW.XieXing and XXZL.SheHao=DDZLTW.SheHao
+left join XXBWFL  with (nolock) on XXBWFL.XieXing=XXZL.XieXing and XXBWFL.BWBH=ZLZLS2.BWBH 
+left join XXBWFLS  with (nolock) on XXBWFLS.FLBH=XXBWFL.FLBH 
+left join lbzls on lbzls.lbdh=ddzl.ddgb and lbzls.lb='06' 
+LEFT JOIN schedule_crawler AS SC ON CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, '-', '')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX('-', REVERSE(SC.ry))) END = ZLZLS2.ZLBH
+Left join CLZLFilter on CLZLFilter.CLDH=ZLZLS2.CLBH and CLZLFilter.GSBH='VDH' 
+left join (select CGZLSS.ZLBH,CGZLSS.CLBH,sum(CGZLSS.Qty) as CGQty,
+                  max(CGZLSS.CFMDate) as CFMDate,max(CGZL.CGDate) as CGDate,
+                  max(CGZL.CGNO) as CGNO,max(CGZLSS.YQDate) as YQDate,max(CGZLS.QUSPrice) as USPrice,max(CGZLS.QVNPrice) as VNPrice 
+           from CGZLSS with (nolock) 
+           inner join DDZL on DDZL.DDBH = CGZLSS.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join CGZLS with (nolock)  on CGZLS.CGNO=CGZLSS.CGNO and CGZLS.CLBH=CGZLSS.CLBH 
+           left join  CGZL with (nolock)  on CGZl.CGNO=CGZLSS.CGNO
+           where DDZL.GSBH='VDH'
+                 and CGZLSS.ZLBH  like 'JHS2510-190%' 
+           group by CGZLSS.ZLBH,CGZLSS.CLBH 
+           union all
+           select YWDD.YSBH as ZLBH,YWBZPO.CLBH,sum(YWBZPO.Qty) as CGQty,getdate() as CFMDate,max(CGZL.CGDate) as CGDate
+                  ,max(CGZL.CGNO) as CGNO,getdate() as YQDate,0 as USPrice,0 as VNPrice
+           from (select YWBZPO.DDBH,YWBZPO.CLBH,sum(CTS) as Qty from YWBZPO,YWDD where YWBZPO.ddbh=YWDD.DDBH and YWDD.YSBH  like 'JHS2510-190%'  group by YWBZPO.DDBH,YWBZPO.CLBH
+                 union all select DDBH,CLBH,sum(CTS) as Qty from YWBZPOE where ddbh  like 'JHS2510-190%'  group by DDBH,CLBH )ywbzpo
+           left join YWDD on YWDD.DDBH=YWBZPO.DDBH
+           left join DDZL on DDZL.DDBH=YWDD.YSBH
+           left join CGZL on CGZL.CGNO=YWDD.CGNO
+           where DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           and YWDD.GSBH='VDH'
+           and DDZL.BuyNO like '%'
+           and YWBZPO.CLBH like '%'
+           group by YWDD.YSBH,YWBZPO.CLBH ) CGZL
+                 on CGZL.ZLBH=ZLZLS2.ZLBH and CGZL.CLBH=ZLZLS2.CLBH
+left join (select KCRKS.CGBH as ZLBH ,KCRKS.CLBH,sum(KCRKS.Qty ) as RKQty, 
+                  max(KCRKS.RKNO) as RKNO,max(KCRK.USERDate) as RKDate, 
+                  max(kcrks.usprice) as usprice,max(kcrks.vnprice) as vnprice 
+           from  KCRKS with (nolock)  
+           inner join DDZL on DDZL.DDBH=KCRKS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join KCRK with (nolock)  on KCRK.RKNO=KCRKS.RKNO 
+           where DDZL.GSBH='VDH'
+                 and KCRKS.CGBH  like 'JHS2510-190%' 
+           group by KCRKS.CGBH,KCRKS.CLBH ) RKZL
+                 on RKZL.ZLBH=ZLZLS2.ZLBH and RKZL.CLBH=ZLZLS2.CLBH 
+left join (select HG_INVS.CGBH as ZLBH ,HG_INVS.CLBH,sum(HG_INVS.Qty ) as HGQty, 
+                  max(HG_INV.DOCNO) as DOCNO,max(HG_INV.USERDate) as HGDate 
+           from  HG_INVS with (nolock) 
+           inner join DDZL on DDZL.DDBH=HG_INVS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join HG_INV with (nolock)  on HG_INV.RKNO=HG_INVS.RKNO
+           where DDZL.GSBH='VDH'
+                 and HG_INVS.CGBH  like 'JHS2510-190%' 
+           group by HG_INVS.CGBH,HG_INVS.CLBH ) HGINV
+                 on HGINV.ZLBH=ZLZLS2.ZLBH and HGINV.CLBH=ZLZLS2.CLBH
+left join (select zsdh,zsywjc from zszl) zszl on ZLZLS2.CSBH=zszl.zsdh  
+left join (
+		   Select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location from (
+		   Select A.Season,A.CLBH,A.ProdMOQ,A.ProdLeadTime,A.Forecast_Leadtime,A.Location from (
+			   select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,ROW_NUMBER() over (PARTITION BY CLBH ORDER BY Substring(Season,1,2) DESC,USERDATE desc) 
+			   as  rn from 
+			  (
+			  Select Season,IsNull(CLZL_LS.JHDH,MaterialMOQ.CLBH) as CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,MaterialMOQ.USERDATE 
+			  from MaterialMOQ with (nolock)
+			  left join CLZL_LS with (nolock) on CLZL_LS.CLDH=MaterialMOQ.CLBH  and IsNull(CLZL_LS.JHDH,'')<>'' ) MaterialMOQ
+			  where 1=1
+		   ) A where A.rn=1 and A.CLBH in (select distinct CLBH from ZLZLS2,DDZL where DDZL.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.Article like '%' 
+                                       and ZLZLS2.ZLBH  like 'JHS2510-190%' 
+                                       and ZLZLS2.CLBH not like 'W%' and ZLZLS2.CLBH like '%' and ZLZLS2.CLSL<>0 and ZLZLS2.ZMLB='N') 
+    ) MatMOQ
+		) MaterialMOQ on MaterialMOQ.CLBH=ZLZLS2.CLBH 
+       where DDZL.GSBH='VDH'
+       and ZLZLS2.CLBH not like 'W%'
+       and not exists(select CLBH from KCSAFE where KCSAFE.CLBH=ZLZLS2.CLBH )
+       and ZLZLS2.ZLBH  like 'JHS2510-190%' 
+       and DDZL.BuyNO like '%'
+       and ZLZLS2.ZMLB='N'
+       and ZLZLS2.CLSL<>0
+       and (XXBWFLS.DFL<>'G' or XXBWFLS.DFL is null)
+       and CLZLFilter.CLDH is null 
+       and DDZL.DDZT<>'C' 
+group by DDZlTW.BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,CLZL.ZWPM,ddzl.userdate,
+         XXZL.Article,XXZL.XieMing,DDZL.Pairs,CGKCUSE.Qty,CGZl.CGQty,CGZL.YQDate,
+         CGZL.CFMDate,CGZl.CGDate,CGZL.CGNO,RKZL.RKNO,RKZL.RKDate,RKZL.RKQty,DDZL.ShipDate, 
+         ddzl.ddrq,lbzls.ywsm 
+         ,MaterialMOQ.ProdLeadTime
+) ZLZLS2 where 1=1  
+select * from ( 
+Select #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate,null as ReadyDate1,null as ReadyDate2
+       ,Min(Case when CG_ML.ZLBH is not null then  Case when Min_EDT_ML<>'' then Max_EDT_ML else Min_EDT_ML  end   else Convert(varchar,#RYPurchase.orderdate,111) end) as ML 
+       ,Min(Case when CG_FML.ZLBH is not null then Case when Min_EDT_FML<>'' then Max_EDT_FML else Min_EDT_FML  end else Convert(varchar,#RYPurchase.orderdate,111) end) as FML 
+       ,Min(Case when CG_FGL.ZLBH is not null then  Case when Min_EDT_FGL<>'' then Max_EDT_FGL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as FGL 
+       ,Min(Case when CG_DL.ZLBH is not null then Case when Min_EDT_DL<>'' then Max_EDT_DL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as DL 
+       ,case when APlanDate is null then ShipDate-42 else APlanDate-7 end as comparedate 
+from #RYPurchase
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_ML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_ML
+   from  #RYPurchase A
+   where   (LEFT(A.CLBH,1) in ('A','C','F','K','B')  or (LEFT(A.CLBH,3)='P21' and A.dwbh<>'PRS'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_ML on  CG_ML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FML
+   from  #RYPurchase B
+   where (LEFT(B.CLBH,1) in ('E','G','I','L','M','N')  or  LEFT(B.CLBH,3)  in ('D01','D02','D11'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FML on  CG_FML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FGL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FGL
+   from  #RYPurchase C
+   where LEFT(C.CLBH,1) in ('D','H','O') and LEFT(C.CLBH,3)  not in ('D01','D02','D11')   and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FGL on  CG_FGL.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_DL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_DL
+   from  #RYPurchase D
+   where LEFT(D.CLBH,1) in ('J','P') and LEFT(D.CLBH,3) not in  ('P21')  and IsNull(UseStock,0.0)<CLSL
+   Group by  ZLBH
+) CG_DL on  CG_DL.ZLBH=#RYPurchase.ZLBH 
+Group by #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate
+) RYPurchase 
+Order by RYPurchase.APlanDate
+if object_id('tempdb..#RYPurchase') is not null    
+begin drop table #RYPurchase end 
+
+Select * into #RYPurchase from ( 
+select  isnull(DDZLTW.BUYNO,0) as BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,
+        CLZL.CQDH,isnull(CGZL.CGQty,0) as CGQty,
+        case when DDZLTW.DDZT<>'C' then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+        convert(varchar,CGZL.YQDate,111) as YQDate,convert(varchar,CGZL.CFMDate,111) as CFMDate,case when CLZL.CQDH='VN' then convert(varchar,CGZL.CFMDate,111) else convert(varchar,CGZL.CFMDate,111) end  as ETADate,
+        convert(varchar,CGZl.CGDate,111) as CGDate,
+        CGZL.CGNO,isnull(CGKCUSE.Qty,0) as UseStock,
+        RKZL.RKQty,RKZL.RKNO,RKZL.RKDate,min(SC.schedule_date) as APlanDate,DDZL.ShipDate      
+        ,convert(smalldatetime,ddzl.userdate,111) as indate
+        ,convert(smalldatetime,max(zlzls2.userdate),111) as cldate
+        ,convert(smalldatetime,ddzl.ddrq,111) as orderdate
+        ,lbzls.ywsm,Max(zszl.ZSDH) as ZSDH,Max(zszl.zsywjc) as zsywjc
+        ,MaterialMOQ.ProdLeadTime   
+from ZLZLS2 with (nolock)  
+inner join DDZl  with (nolock) on DDZl.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+left join DDZLTW with (nolock) on DDZLTW.DDBH=ZLZLS2.ZLBH
+left join CLZL  with (nolock) on CLZL.CLDH=ZLZLs2.CLBH 
+left join KFZL  with (nolock) on KFZl.KFDH=DDZLTW.KHBH 
+left join ZLZL  with (nolock) on ZLZL.ZLBH=ZLZLS2.ZLBH
+left join CGKCUSE  with (nolock) on CGKCUSE.ZLBH=ZLZLS2.ZLBH and CGKCUSE.CLBH=ZLZLS2.CLBH and CGKCUSE.GSBH='VDH' 
+left join XXZL  with (nolock) on XXZl.XieXing=DDZLTW.XieXing and XXZL.SheHao=DDZLTW.SheHao
+left join XXBWFL  with (nolock) on XXBWFL.XieXing=XXZL.XieXing and XXBWFL.BWBH=ZLZLS2.BWBH 
+left join XXBWFLS  with (nolock) on XXBWFLS.FLBH=XXBWFL.FLBH 
+left join lbzls on lbzls.lbdh=ddzl.ddgb and lbzls.lb='06' 
+LEFT JOIN schedule_crawler AS SC ON CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, '-', '')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX('-', REVERSE(SC.ry))) END = ZLZLS2.ZLBH
+Left join CLZLFilter on CLZLFilter.CLDH=ZLZLS2.CLBH and CLZLFilter.GSBH='VDH' 
+left join (select CGZLSS.ZLBH,CGZLSS.CLBH,sum(CGZLSS.Qty) as CGQty,
+                  max(CGZLSS.CFMDate) as CFMDate,max(CGZL.CGDate) as CGDate,
+                  max(CGZL.CGNO) as CGNO,max(CGZLSS.YQDate) as YQDate,max(CGZLS.QUSPrice) as USPrice,max(CGZLS.QVNPrice) as VNPrice 
+           from CGZLSS with (nolock) 
+           inner join DDZL on DDZL.DDBH = CGZLSS.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join CGZLS with (nolock)  on CGZLS.CGNO=CGZLSS.CGNO and CGZLS.CLBH=CGZLSS.CLBH 
+           left join  CGZL with (nolock)  on CGZl.CGNO=CGZLSS.CGNO
+           where DDZL.GSBH='VDH'
+                 and CGZLSS.ZLBH  like 'JHS2510-190%' 
+           group by CGZLSS.ZLBH,CGZLSS.CLBH 
+           union all
+           select YWDD.YSBH as ZLBH,YWBZPO.CLBH,sum(YWBZPO.Qty) as CGQty,getdate() as CFMDate,max(CGZL.CGDate) as CGDate
+                  ,max(CGZL.CGNO) as CGNO,getdate() as YQDate,0 as USPrice,0 as VNPrice
+           from (select YWBZPO.DDBH,YWBZPO.CLBH,sum(CTS) as Qty from YWBZPO,YWDD where YWBZPO.ddbh=YWDD.DDBH and YWDD.YSBH  like 'JHS2510-190%'  group by YWBZPO.DDBH,YWBZPO.CLBH
+                 union all select DDBH,CLBH,sum(CTS) as Qty from YWBZPOE where ddbh  like 'JHS2510-190%'  group by DDBH,CLBH )ywbzpo
+           left join YWDD on YWDD.DDBH=YWBZPO.DDBH
+           left join DDZL on DDZL.DDBH=YWDD.YSBH
+           left join CGZL on CGZL.CGNO=YWDD.CGNO
+           where DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           and YWDD.GSBH='VDH'
+           and DDZL.BuyNO like '%'
+           and YWBZPO.CLBH like '%'
+           group by YWDD.YSBH,YWBZPO.CLBH ) CGZL
+                 on CGZL.ZLBH=ZLZLS2.ZLBH and CGZL.CLBH=ZLZLS2.CLBH
+left join (select KCRKS.CGBH as ZLBH ,KCRKS.CLBH,sum(KCRKS.Qty ) as RKQty, 
+                  max(KCRKS.RKNO) as RKNO,max(KCRK.USERDate) as RKDate, 
+                  max(kcrks.usprice) as usprice,max(kcrks.vnprice) as vnprice 
+           from  KCRKS with (nolock)  
+           inner join DDZL on DDZL.DDBH=KCRKS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join KCRK with (nolock)  on KCRK.RKNO=KCRKS.RKNO 
+           where DDZL.GSBH='VDH'
+                 and KCRKS.CGBH  like 'JHS2510-190%' 
+           group by KCRKS.CGBH,KCRKS.CLBH ) RKZL
+                 on RKZL.ZLBH=ZLZLS2.ZLBH and RKZL.CLBH=ZLZLS2.CLBH 
+left join (select HG_INVS.CGBH as ZLBH ,HG_INVS.CLBH,sum(HG_INVS.Qty ) as HGQty, 
+                  max(HG_INV.DOCNO) as DOCNO,max(HG_INV.USERDate) as HGDate 
+           from  HG_INVS with (nolock) 
+           inner join DDZL on DDZL.DDBH=HG_INVS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join HG_INV with (nolock)  on HG_INV.RKNO=HG_INVS.RKNO
+           where DDZL.GSBH='VDH'
+                 and HG_INVS.CGBH  like 'JHS2510-190%' 
+           group by HG_INVS.CGBH,HG_INVS.CLBH ) HGINV
+                 on HGINV.ZLBH=ZLZLS2.ZLBH and HGINV.CLBH=ZLZLS2.CLBH
+left join (select zsdh,zsywjc from zszl) zszl on ZLZLS2.CSBH=zszl.zsdh  
+left join (
+		   Select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location from (
+		   Select A.Season,A.CLBH,A.ProdMOQ,A.ProdLeadTime,A.Forecast_Leadtime,A.Location from (
+			   select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,ROW_NUMBER() over (PARTITION BY CLBH ORDER BY Substring(Season,1,2) DESC,USERDATE desc) 
+			   as  rn from 
+			  (
+			  Select Season,IsNull(CLZL_LS.JHDH,MaterialMOQ.CLBH) as CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,MaterialMOQ.USERDATE 
+			  from MaterialMOQ with (nolock)
+			  left join CLZL_LS with (nolock) on CLZL_LS.CLDH=MaterialMOQ.CLBH  and IsNull(CLZL_LS.JHDH,'')<>'' ) MaterialMOQ
+			  where 1=1
+		   ) A where A.rn=1 and A.CLBH in (select distinct CLBH from ZLZLS2,DDZL where DDZL.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.Article like '%' 
+                                       and ZLZLS2.ZLBH  like 'JHS2510-190%' 
+                                       and ZLZLS2.CLBH not like 'W%' and ZLZLS2.CLBH like '%' and ZLZLS2.CLSL<>0 and ZLZLS2.ZMLB='N') 
+    ) MatMOQ
+		) MaterialMOQ on MaterialMOQ.CLBH=ZLZLS2.CLBH 
+       where DDZL.GSBH='VDH'
+       and ZLZLS2.CLBH not like 'W%'
+       and not exists(select CLBH from KCSAFE where KCSAFE.CLBH=ZLZLS2.CLBH )
+       and ZLZLS2.ZLBH  like 'JHS2510-190%' 
+       and DDZL.BuyNO like '%'
+       and ZLZLS2.ZMLB='N'
+       and ZLZLS2.CLSL<>0
+       and (XXBWFLS.DFL<>'G' or XXBWFLS.DFL is null)
+       and CLZLFilter.CLDH is null 
+       and DDZL.DDZT<>'C' 
+group by DDZlTW.BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,CLZL.ZWPM,ddzl.userdate,
+         XXZL.Article,XXZL.XieMing,DDZL.Pairs,CGKCUSE.Qty,CGZl.CGQty,CGZL.YQDate,
+         CGZL.CFMDate,CGZl.CGDate,CGZL.CGNO,RKZL.RKNO,RKZL.RKDate,RKZL.RKQty,DDZL.ShipDate, 
+         ddzl.ddrq,lbzls.ywsm 
+         ,MaterialMOQ.ProdLeadTime
+) ZLZLS2 where 1=1  
+select * from ( 
+Select #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate,null as ReadyDate1,null as ReadyDate2
+       ,Min(Case when CG_ML.ZLBH is not null then  Case when Min_EDT_ML<>'' then Max_EDT_ML else Min_EDT_ML  end   else Convert(varchar,#RYPurchase.orderdate,111) end) as ML 
+       ,Min(Case when CG_FML.ZLBH is not null then Case when Min_EDT_FML<>'' then Max_EDT_FML else Min_EDT_FML  end else Convert(varchar,#RYPurchase.orderdate,111) end) as FML 
+       ,Min(Case when CG_FGL.ZLBH is not null then  Case when Min_EDT_FGL<>'' then Max_EDT_FGL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as FGL 
+       ,Min(Case when CG_DL.ZLBH is not null then Case when Min_EDT_DL<>'' then Max_EDT_DL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as DL 
+       ,case when APlanDate is null then ShipDate-42 else APlanDate-7 end as comparedate 
+from #RYPurchase
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_ML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_ML
+   from  #RYPurchase A
+   where   (LEFT(A.CLBH,1) in ('A','C','F','K','B')  or (LEFT(A.CLBH,3)='P21' and A.dwbh<>'PRS'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_ML on  CG_ML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FML
+   from  #RYPurchase B
+   where (LEFT(B.CLBH,1) in ('E','G','I','L','M','N')  or  LEFT(B.CLBH,3)  in ('D01','D02','D11'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FML on  CG_FML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FGL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FGL
+   from  #RYPurchase C
+   where LEFT(C.CLBH,1) in ('D','H','O') and LEFT(C.CLBH,3)  not in ('D01','D02','D11')   and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FGL on  CG_FGL.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_DL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_DL
+   from  #RYPurchase D
+   where LEFT(D.CLBH,1) in ('J','P') and LEFT(D.CLBH,3) not in  ('P21')  and IsNull(UseStock,0.0)<CLSL
+   Group by  ZLBH
+) CG_DL on  CG_DL.ZLBH=#RYPurchase.ZLBH 
+Group by #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate
+) RYPurchase 
+Order by RYPurchase.APlanDate
+if object_id('tempdb..#RYPurchase') is not null    
+begin drop table #RYPurchase end 
+
+Select * into #RYPurchase from ( 
+select  isnull(DDZLTW.BUYNO,0) as BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,
+        CLZL.CQDH,isnull(CGZL.CGQty,0) as CGQty,
+        case when DDZLTW.DDZT<>'C' then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+        convert(varchar,CGZL.YQDate,111) as YQDate,convert(varchar,CGZL.CFMDate,111) as CFMDate,case when CLZL.CQDH='VN' then convert(varchar,CGZL.CFMDate,111) else convert(varchar,CGZL.CFMDate,111) end  as ETADate,
+        convert(varchar,CGZl.CGDate,111) as CGDate,
+        CGZL.CGNO,isnull(CGKCUSE.Qty,0) as UseStock,
+        RKZL.RKQty,RKZL.RKNO,RKZL.RKDate,min(SC.schedule_date) as APlanDate,DDZL.ShipDate      
+        ,convert(smalldatetime,ddzl.userdate,111) as indate
+        ,convert(smalldatetime,max(zlzls2.userdate),111) as cldate
+        ,convert(smalldatetime,ddzl.ddrq,111) as orderdate
+        ,lbzls.ywsm,Max(zszl.ZSDH) as ZSDH,Max(zszl.zsywjc) as zsywjc
+        ,MaterialMOQ.ProdLeadTime   
+from ZLZLS2 with (nolock)  
+inner join DDZl  with (nolock) on DDZl.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+left join DDZLTW with (nolock) on DDZLTW.DDBH=ZLZLS2.ZLBH
+left join CLZL  with (nolock) on CLZL.CLDH=ZLZLs2.CLBH 
+left join KFZL  with (nolock) on KFZl.KFDH=DDZLTW.KHBH 
+left join ZLZL  with (nolock) on ZLZL.ZLBH=ZLZLS2.ZLBH
+left join CGKCUSE  with (nolock) on CGKCUSE.ZLBH=ZLZLS2.ZLBH and CGKCUSE.CLBH=ZLZLS2.CLBH and CGKCUSE.GSBH='VDH' 
+left join XXZL  with (nolock) on XXZl.XieXing=DDZLTW.XieXing and XXZL.SheHao=DDZLTW.SheHao
+left join XXBWFL  with (nolock) on XXBWFL.XieXing=XXZL.XieXing and XXBWFL.BWBH=ZLZLS2.BWBH 
+left join XXBWFLS  with (nolock) on XXBWFLS.FLBH=XXBWFL.FLBH 
+left join lbzls on lbzls.lbdh=ddzl.ddgb and lbzls.lb='06' 
+LEFT JOIN schedule_crawler AS SC ON CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, '-', '')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX('-', REVERSE(SC.ry))) END = ZLZLS2.ZLBH
+Left join CLZLFilter on CLZLFilter.CLDH=ZLZLS2.CLBH and CLZLFilter.GSBH='VDH' 
+left join (select CGZLSS.ZLBH,CGZLSS.CLBH,sum(CGZLSS.Qty) as CGQty,
+                  max(CGZLSS.CFMDate) as CFMDate,max(CGZL.CGDate) as CGDate,
+                  max(CGZL.CGNO) as CGNO,max(CGZLSS.YQDate) as YQDate,max(CGZLS.QUSPrice) as USPrice,max(CGZLS.QVNPrice) as VNPrice 
+           from CGZLSS with (nolock) 
+           inner join DDZL on DDZL.DDBH = CGZLSS.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join CGZLS with (nolock)  on CGZLS.CGNO=CGZLSS.CGNO and CGZLS.CLBH=CGZLSS.CLBH 
+           left join  CGZL with (nolock)  on CGZl.CGNO=CGZLSS.CGNO
+           where DDZL.GSBH='VDH'
+                 and CGZLSS.ZLBH  like 'JHS2510-190%' 
+           group by CGZLSS.ZLBH,CGZLSS.CLBH 
+           union all
+           select YWDD.YSBH as ZLBH,YWBZPO.CLBH,sum(YWBZPO.Qty) as CGQty,getdate() as CFMDate,max(CGZL.CGDate) as CGDate
+                  ,max(CGZL.CGNO) as CGNO,getdate() as YQDate,0 as USPrice,0 as VNPrice
+           from (select YWBZPO.DDBH,YWBZPO.CLBH,sum(CTS) as Qty from YWBZPO,YWDD where YWBZPO.ddbh=YWDD.DDBH and YWDD.YSBH  like 'JHS2510-190%'  group by YWBZPO.DDBH,YWBZPO.CLBH
+                 union all select DDBH,CLBH,sum(CTS) as Qty from YWBZPOE where ddbh  like 'JHS2510-190%'  group by DDBH,CLBH )ywbzpo
+           left join YWDD on YWDD.DDBH=YWBZPO.DDBH
+           left join DDZL on DDZL.DDBH=YWDD.YSBH
+           left join CGZL on CGZL.CGNO=YWDD.CGNO
+           where DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           and YWDD.GSBH='VDH'
+           and DDZL.BuyNO like '%'
+           and YWBZPO.CLBH like '%'
+           group by YWDD.YSBH,YWBZPO.CLBH ) CGZL
+                 on CGZL.ZLBH=ZLZLS2.ZLBH and CGZL.CLBH=ZLZLS2.CLBH
+left join (select KCRKS.CGBH as ZLBH ,KCRKS.CLBH,sum(KCRKS.Qty ) as RKQty, 
+                  max(KCRKS.RKNO) as RKNO,max(KCRK.USERDate) as RKDate, 
+                  max(kcrks.usprice) as usprice,max(kcrks.vnprice) as vnprice 
+           from  KCRKS with (nolock)  
+           inner join DDZL on DDZL.DDBH=KCRKS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join KCRK with (nolock)  on KCRK.RKNO=KCRKS.RKNO 
+           where DDZL.GSBH='VDH'
+                 and KCRKS.CGBH  like 'JHS2510-190%' 
+           group by KCRKS.CGBH,KCRKS.CLBH ) RKZL
+                 on RKZL.ZLBH=ZLZLS2.ZLBH and RKZL.CLBH=ZLZLS2.CLBH 
+left join (select HG_INVS.CGBH as ZLBH ,HG_INVS.CLBH,sum(HG_INVS.Qty ) as HGQty, 
+                  max(HG_INV.DOCNO) as DOCNO,max(HG_INV.USERDate) as HGDate 
+           from  HG_INVS with (nolock) 
+           inner join DDZL on DDZL.DDBH=HG_INVS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join HG_INV with (nolock)  on HG_INV.RKNO=HG_INVS.RKNO
+           where DDZL.GSBH='VDH'
+                 and HG_INVS.CGBH  like 'JHS2510-190%' 
+           group by HG_INVS.CGBH,HG_INVS.CLBH ) HGINV
+                 on HGINV.ZLBH=ZLZLS2.ZLBH and HGINV.CLBH=ZLZLS2.CLBH
+left join (select zsdh,zsywjc from zszl) zszl on ZLZLS2.CSBH=zszl.zsdh  
+left join (
+		   Select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location from (
+		   Select A.Season,A.CLBH,A.ProdMOQ,A.ProdLeadTime,A.Forecast_Leadtime,A.Location from (
+			   select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,ROW_NUMBER() over (PARTITION BY CLBH ORDER BY Substring(Season,1,2) DESC,USERDATE desc) 
+			   as  rn from 
+			  (
+			  Select Season,IsNull(CLZL_LS.JHDH,MaterialMOQ.CLBH) as CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,MaterialMOQ.USERDATE 
+			  from MaterialMOQ with (nolock)
+			  left join CLZL_LS with (nolock) on CLZL_LS.CLDH=MaterialMOQ.CLBH  and IsNull(CLZL_LS.JHDH,'')<>'' ) MaterialMOQ
+			  where 1=1
+		   ) A where A.rn=1 and A.CLBH in (select distinct CLBH from ZLZLS2,DDZL where DDZL.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.Article like '%' 
+                                       and ZLZLS2.ZLBH  like 'JHS2510-190%' 
+                                       and ZLZLS2.CLBH not like 'W%' and ZLZLS2.CLBH like '%' and ZLZLS2.CLSL<>0 and ZLZLS2.ZMLB='N') 
+    ) MatMOQ
+		) MaterialMOQ on MaterialMOQ.CLBH=ZLZLS2.CLBH 
+       where DDZL.GSBH='VDH'
+       and ZLZLS2.CLBH not like 'W%'
+       and not exists(select CLBH from KCSAFE where KCSAFE.CLBH=ZLZLS2.CLBH )
+       and ZLZLS2.ZLBH  like 'JHS2510-190%' 
+       and DDZL.BuyNO like '%'
+       and ZLZLS2.ZMLB='N'
+       and ZLZLS2.CLSL<>0
+       and (XXBWFLS.DFL<>'G' or XXBWFLS.DFL is null)
+       and CLZLFilter.CLDH is null 
+       and DDZL.DDZT<>'C' 
+group by DDZlTW.BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,CLZL.ZWPM,ddzl.userdate,
+         XXZL.Article,XXZL.XieMing,DDZL.Pairs,CGKCUSE.Qty,CGZl.CGQty,CGZL.YQDate,
+         CGZL.CFMDate,CGZl.CGDate,CGZL.CGNO,RKZL.RKNO,RKZL.RKDate,RKZL.RKQty,DDZL.ShipDate, 
+         ddzl.ddrq,lbzls.ywsm 
+         ,MaterialMOQ.ProdLeadTime
+) ZLZLS2 where 1=1  
+select * from ( 
+Select #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate,null as ReadyDate1,null as ReadyDate2
+       ,Min(Case when CG_ML.ZLBH is not null then  Case when Min_EDT_ML<>'' then Max_EDT_ML else Min_EDT_ML  end   else Convert(varchar,#RYPurchase.orderdate,111) end) as ML 
+       ,Min(Case when CG_FML.ZLBH is not null then Case when Min_EDT_FML<>'' then Max_EDT_FML else Min_EDT_FML  end else Convert(varchar,#RYPurchase.orderdate,111) end) as FML 
+       ,Min(Case when CG_FGL.ZLBH is not null then  Case when Min_EDT_FGL<>'' then Max_EDT_FGL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as FGL 
+       ,Min(Case when CG_DL.ZLBH is not null then Case when Min_EDT_DL<>'' then Max_EDT_DL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as DL 
+       ,case when APlanDate is null then ShipDate-42 else APlanDate-7 end as comparedate 
+from #RYPurchase
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_ML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_ML
+   from  #RYPurchase A
+   where   (LEFT(A.CLBH,1) in ('A','C','F','K','B')  or (LEFT(A.CLBH,3)='P21' and A.dwbh<>'PRS'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_ML on  CG_ML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FML
+   from  #RYPurchase B
+   where (LEFT(B.CLBH,1) in ('E','G','I','L','M','N')  or  LEFT(B.CLBH,3)  in ('D01','D02','D11'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FML on  CG_FML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FGL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FGL
+   from  #RYPurchase C
+   where LEFT(C.CLBH,1) in ('D','H','O') and LEFT(C.CLBH,3)  not in ('D01','D02','D11')   and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FGL on  CG_FGL.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_DL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_DL
+   from  #RYPurchase D
+   where LEFT(D.CLBH,1) in ('J','P') and LEFT(D.CLBH,3) not in  ('P21')  and IsNull(UseStock,0.0)<CLSL
+   Group by  ZLBH
+) CG_DL on  CG_DL.ZLBH=#RYPurchase.ZLBH 
+Group by #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate
+) RYPurchase 
+Order by RYPurchase.APlanDate
+if object_id('tempdb..#RYPurchase') is not null    
+begin drop table #RYPurchase end 
+
+Select * into #RYPurchase from ( 
+select  isnull(DDZLTW.BUYNO,0) as BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,
+        CLZL.CQDH,isnull(CGZL.CGQty,0) as CGQty,
+        case when DDZLTW.DDZT<>'C' then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+        convert(varchar,CGZL.YQDate,111) as YQDate,convert(varchar,CGZL.CFMDate,111) as CFMDate,case when CLZL.CQDH='VN' then convert(varchar,CGZL.CFMDate,111) else convert(varchar,CGZL.CFMDate,111) end  as ETADate,
+        convert(varchar,CGZl.CGDate,111) as CGDate,
+        CGZL.CGNO,isnull(CGKCUSE.Qty,0) as UseStock,
+        RKZL.RKQty,RKZL.RKNO,RKZL.RKDate,min(SC.schedule_date) as APlanDate,DDZL.ShipDate      
+        ,convert(smalldatetime,ddzl.userdate,111) as indate
+        ,convert(smalldatetime,max(zlzls2.userdate),111) as cldate
+        ,convert(smalldatetime,ddzl.ddrq,111) as orderdate
+        ,lbzls.ywsm,Max(zszl.ZSDH) as ZSDH,Max(zszl.zsywjc) as zsywjc
+        ,MaterialMOQ.ProdLeadTime   
+from ZLZLS2 with (nolock)  
+inner join DDZl  with (nolock) on DDZl.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+left join DDZLTW with (nolock) on DDZLTW.DDBH=ZLZLS2.ZLBH
+left join CLZL  with (nolock) on CLZL.CLDH=ZLZLs2.CLBH 
+left join KFZL  with (nolock) on KFZl.KFDH=DDZLTW.KHBH 
+left join ZLZL  with (nolock) on ZLZL.ZLBH=ZLZLS2.ZLBH
+left join CGKCUSE  with (nolock) on CGKCUSE.ZLBH=ZLZLS2.ZLBH and CGKCUSE.CLBH=ZLZLS2.CLBH and CGKCUSE.GSBH='VDH' 
+left join XXZL  with (nolock) on XXZl.XieXing=DDZLTW.XieXing and XXZL.SheHao=DDZLTW.SheHao
+left join XXBWFL  with (nolock) on XXBWFL.XieXing=XXZL.XieXing and XXBWFL.BWBH=ZLZLS2.BWBH 
+left join XXBWFLS  with (nolock) on XXBWFLS.FLBH=XXBWFL.FLBH 
+left join lbzls on lbzls.lbdh=ddzl.ddgb and lbzls.lb='06' 
+LEFT JOIN schedule_crawler AS SC ON CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, '-', '')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX('-', REVERSE(SC.ry))) END = ZLZLS2.ZLBH
+Left join CLZLFilter on CLZLFilter.CLDH=ZLZLS2.CLBH and CLZLFilter.GSBH='VDH' 
+left join (select CGZLSS.ZLBH,CGZLSS.CLBH,sum(CGZLSS.Qty) as CGQty,
+                  max(CGZLSS.CFMDate) as CFMDate,max(CGZL.CGDate) as CGDate,
+                  max(CGZL.CGNO) as CGNO,max(CGZLSS.YQDate) as YQDate,max(CGZLS.QUSPrice) as USPrice,max(CGZLS.QVNPrice) as VNPrice 
+           from CGZLSS with (nolock) 
+           inner join DDZL on DDZL.DDBH = CGZLSS.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join CGZLS with (nolock)  on CGZLS.CGNO=CGZLSS.CGNO and CGZLS.CLBH=CGZLSS.CLBH 
+           left join  CGZL with (nolock)  on CGZl.CGNO=CGZLSS.CGNO
+           where DDZL.GSBH='VDH'
+                 and CGZLSS.ZLBH  like 'JHS2510-190%' 
+           group by CGZLSS.ZLBH,CGZLSS.CLBH 
+           union all
+           select YWDD.YSBH as ZLBH,YWBZPO.CLBH,sum(YWBZPO.Qty) as CGQty,getdate() as CFMDate,max(CGZL.CGDate) as CGDate
+                  ,max(CGZL.CGNO) as CGNO,getdate() as YQDate,0 as USPrice,0 as VNPrice
+           from (select YWBZPO.DDBH,YWBZPO.CLBH,sum(CTS) as Qty from YWBZPO,YWDD where YWBZPO.ddbh=YWDD.DDBH and YWDD.YSBH  like 'JHS2510-190%'  group by YWBZPO.DDBH,YWBZPO.CLBH
+                 union all select DDBH,CLBH,sum(CTS) as Qty from YWBZPOE where ddbh  like 'JHS2510-190%'  group by DDBH,CLBH )ywbzpo
+           left join YWDD on YWDD.DDBH=YWBZPO.DDBH
+           left join DDZL on DDZL.DDBH=YWDD.YSBH
+           left join CGZL on CGZL.CGNO=YWDD.CGNO
+           where DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           and YWDD.GSBH='VDH'
+           and DDZL.BuyNO like '%'
+           and YWBZPO.CLBH like '%'
+           group by YWDD.YSBH,YWBZPO.CLBH ) CGZL
+                 on CGZL.ZLBH=ZLZLS2.ZLBH and CGZL.CLBH=ZLZLS2.CLBH
+left join (select KCRKS.CGBH as ZLBH ,KCRKS.CLBH,sum(KCRKS.Qty ) as RKQty, 
+                  max(KCRKS.RKNO) as RKNO,max(KCRK.USERDate) as RKDate, 
+                  max(kcrks.usprice) as usprice,max(kcrks.vnprice) as vnprice 
+           from  KCRKS with (nolock)  
+           inner join DDZL on DDZL.DDBH=KCRKS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join KCRK with (nolock)  on KCRK.RKNO=KCRKS.RKNO 
+           where DDZL.GSBH='VDH'
+                 and KCRKS.CGBH  like 'JHS2510-190%' 
+           group by KCRKS.CGBH,KCRKS.CLBH ) RKZL
+                 on RKZL.ZLBH=ZLZLS2.ZLBH and RKZL.CLBH=ZLZLS2.CLBH 
+left join (select HG_INVS.CGBH as ZLBH ,HG_INVS.CLBH,sum(HG_INVS.Qty ) as HGQty, 
+                  max(HG_INV.DOCNO) as DOCNO,max(HG_INV.USERDate) as HGDate 
+           from  HG_INVS with (nolock) 
+           inner join DDZL on DDZL.DDBH=HG_INVS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2510-190%' and DDZL.Article like '%' 
+           left join HG_INV with (nolock)  on HG_INV.RKNO=HG_INVS.RKNO
+           where DDZL.GSBH='VDH'
+                 and HG_INVS.CGBH  like 'JHS2510-190%' 
+           group by HG_INVS.CGBH,HG_INVS.CLBH ) HGINV
+                 on HGINV.ZLBH=ZLZLS2.ZLBH and HGINV.CLBH=ZLZLS2.CLBH
+left join (select zsdh,zsywjc from zszl) zszl on ZLZLS2.CSBH=zszl.zsdh  
+left join (
+		   Select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location from (
+		   Select A.Season,A.CLBH,A.ProdMOQ,A.ProdLeadTime,A.Forecast_Leadtime,A.Location from (
+			   select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,ROW_NUMBER() over (PARTITION BY CLBH ORDER BY Substring(Season,1,2) DESC,USERDATE desc) 
+			   as  rn from 
+			  (
+			  Select Season,IsNull(CLZL_LS.JHDH,MaterialMOQ.CLBH) as CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,MaterialMOQ.USERDATE 
+			  from MaterialMOQ with (nolock)
+			  left join CLZL_LS with (nolock) on CLZL_LS.CLDH=MaterialMOQ.CLBH  and IsNull(CLZL_LS.JHDH,'')<>'' ) MaterialMOQ
+			  where 1=1
+		   ) A where A.rn=1 and A.CLBH in (select distinct CLBH from ZLZLS2,DDZL where DDZL.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.Article like '%' 
+                                       and ZLZLS2.ZLBH  like 'JHS2510-190%' 
+                                       and ZLZLS2.CLBH not like 'W%' and ZLZLS2.CLBH like '%' and ZLZLS2.CLSL<>0 and ZLZLS2.ZMLB='N') 
+    ) MatMOQ
+		) MaterialMOQ on MaterialMOQ.CLBH=ZLZLS2.CLBH 
+       where DDZL.GSBH='VDH'
+       and ZLZLS2.CLBH not like 'W%'
+       and not exists(select CLBH from KCSAFE where KCSAFE.CLBH=ZLZLS2.CLBH )
+       and ZLZLS2.ZLBH  like 'JHS2510-190%' 
+       and DDZL.BuyNO like '%'
+       and ZLZLS2.ZMLB='N'
+       and ZLZLS2.CLSL<>0
+       and (XXBWFLS.DFL<>'G' or XXBWFLS.DFL is null)
+       and CLZLFilter.CLDH is null 
+       and DDZL.DDZT<>'C' 
+group by DDZlTW.BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,CLZL.ZWPM,ddzl.userdate,
+         XXZL.Article,XXZL.XieMing,DDZL.Pairs,CGKCUSE.Qty,CGZl.CGQty,CGZL.YQDate,
+         CGZL.CFMDate,CGZl.CGDate,CGZL.CGNO,RKZL.RKNO,RKZL.RKDate,RKZL.RKQty,DDZL.ShipDate, 
+         ddzl.ddrq,lbzls.ywsm 
+         ,MaterialMOQ.ProdLeadTime
+) ZLZLS2 where 1=1  
+select * from ( 
+Select #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate,null as ReadyDate1,null as ReadyDate2
+       ,Min(Case when CG_ML.ZLBH is not null then  Case when Min_EDT_ML<>'' then Max_EDT_ML else Min_EDT_ML  end   else Convert(varchar,#RYPurchase.orderdate,111) end) as ML 
+       ,Min(Case when CG_FML.ZLBH is not null then Case when Min_EDT_FML<>'' then Max_EDT_FML else Min_EDT_FML  end else Convert(varchar,#RYPurchase.orderdate,111) end) as FML 
+       ,Min(Case when CG_FGL.ZLBH is not null then  Case when Min_EDT_FGL<>'' then Max_EDT_FGL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as FGL 
+       ,Min(Case when CG_DL.ZLBH is not null then Case when Min_EDT_DL<>'' then Max_EDT_DL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as DL 
+       ,case when APlanDate is null then ShipDate-42 else APlanDate-7 end as comparedate 
+from #RYPurchase
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_ML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_ML
+   from  #RYPurchase A
+   where   (LEFT(A.CLBH,1) in ('A','C','F','K','B')  or (LEFT(A.CLBH,3)='P21' and A.dwbh<>'PRS'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_ML on  CG_ML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FML
+   from  #RYPurchase B
+   where (LEFT(B.CLBH,1) in ('E','G','I','L','M','N')  or  LEFT(B.CLBH,3)  in ('D01','D02','D11'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FML on  CG_FML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FGL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FGL
+   from  #RYPurchase C
+   where LEFT(C.CLBH,1) in ('D','H','O') and LEFT(C.CLBH,3)  not in ('D01','D02','D11')   and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FGL on  CG_FGL.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_DL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_DL
+   from  #RYPurchase D
+   where LEFT(D.CLBH,1) in ('J','P') and LEFT(D.CLBH,3) not in  ('P21')  and IsNull(UseStock,0.0)<CLSL
+   Group by  ZLBH
+) CG_DL on  CG_DL.ZLBH=#RYPurchase.ZLBH 
+Group by #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate
+) RYPurchase 
+Order by RYPurchase.APlanDate
+if object_id('tempdb..#RYPurchase') is not null    
+begin drop table #RYPurchase end 
+
+Select * into #RYPurchase from ( 
+select  isnull(DDZLTW.BUYNO,0) as BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,
+        CLZL.CQDH,isnull(CGZL.CGQty,0) as CGQty,
+        case when DDZLTW.DDZT<>'C' then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+        convert(varchar,CGZL.YQDate,111) as YQDate,convert(varchar,CGZL.CFMDate,111) as CFMDate,case when CLZL.CQDH='VN' then convert(varchar,CGZL.CFMDate,111) else convert(varchar,CGZL.CFMDate,111) end  as ETADate,
+        convert(varchar,CGZl.CGDate,111) as CGDate,
+        CGZL.CGNO,isnull(CGKCUSE.Qty,0) as UseStock,
+        RKZL.RKQty,RKZL.RKNO,RKZL.RKDate,min(SC.schedule_date) as APlanDate,DDZL.ShipDate      
+        ,convert(smalldatetime,ddzl.userdate,111) as indate
+        ,convert(smalldatetime,max(zlzls2.userdate),111) as cldate
+        ,convert(smalldatetime,ddzl.ddrq,111) as orderdate
+        ,lbzls.ywsm,Max(zszl.ZSDH) as ZSDH,Max(zszl.zsywjc) as zsywjc
+        ,MaterialMOQ.ProdLeadTime   
+from ZLZLS2 with (nolock)  
+inner join DDZl  with (nolock) on DDZl.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2601-274%' and DDZL.Article like '%' 
+left join DDZLTW with (nolock) on DDZLTW.DDBH=ZLZLS2.ZLBH
+left join CLZL  with (nolock) on CLZL.CLDH=ZLZLs2.CLBH 
+left join KFZL  with (nolock) on KFZl.KFDH=DDZLTW.KHBH 
+left join ZLZL  with (nolock) on ZLZL.ZLBH=ZLZLS2.ZLBH
+left join CGKCUSE  with (nolock) on CGKCUSE.ZLBH=ZLZLS2.ZLBH and CGKCUSE.CLBH=ZLZLS2.CLBH and CGKCUSE.GSBH='VDH' 
+left join XXZL  with (nolock) on XXZl.XieXing=DDZLTW.XieXing and XXZL.SheHao=DDZLTW.SheHao
+left join XXBWFL  with (nolock) on XXBWFL.XieXing=XXZL.XieXing and XXBWFL.BWBH=ZLZLS2.BWBH 
+left join XXBWFLS  with (nolock) on XXBWFLS.FLBH=XXBWFL.FLBH 
+left join lbzls on lbzls.lbdh=ddzl.ddgb and lbzls.lb='06' 
+LEFT JOIN schedule_crawler AS SC ON CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, '-', '')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX('-', REVERSE(SC.ry))) END = ZLZLS2.ZLBH
+Left join CLZLFilter on CLZLFilter.CLDH=ZLZLS2.CLBH and CLZLFilter.GSBH='VDH' 
+left join (select CGZLSS.ZLBH,CGZLSS.CLBH,sum(CGZLSS.Qty) as CGQty,
+                  max(CGZLSS.CFMDate) as CFMDate,max(CGZL.CGDate) as CGDate,
+                  max(CGZL.CGNO) as CGNO,max(CGZLSS.YQDate) as YQDate,max(CGZLS.QUSPrice) as USPrice,max(CGZLS.QVNPrice) as VNPrice 
+           from CGZLSS with (nolock) 
+           inner join DDZL on DDZL.DDBH = CGZLSS.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2601-274%' and DDZL.Article like '%' 
+           left join CGZLS with (nolock)  on CGZLS.CGNO=CGZLSS.CGNO and CGZLS.CLBH=CGZLSS.CLBH 
+           left join  CGZL with (nolock)  on CGZl.CGNO=CGZLSS.CGNO
+           where DDZL.GSBH='VDH'
+                 and CGZLSS.ZLBH  like 'JHS2601-274%' 
+           group by CGZLSS.ZLBH,CGZLSS.CLBH 
+           union all
+           select YWDD.YSBH as ZLBH,YWBZPO.CLBH,sum(YWBZPO.Qty) as CGQty,getdate() as CFMDate,max(CGZL.CGDate) as CGDate
+                  ,max(CGZL.CGNO) as CGNO,getdate() as YQDate,0 as USPrice,0 as VNPrice
+           from (select YWBZPO.DDBH,YWBZPO.CLBH,sum(CTS) as Qty from YWBZPO,YWDD where YWBZPO.ddbh=YWDD.DDBH and YWDD.YSBH  like 'JHS2601-274%'  group by YWBZPO.DDBH,YWBZPO.CLBH
+                 union all select DDBH,CLBH,sum(CTS) as Qty from YWBZPOE where ddbh  like 'JHS2601-274%'  group by DDBH,CLBH )ywbzpo
+           left join YWDD on YWDD.DDBH=YWBZPO.DDBH
+           left join DDZL on DDZL.DDBH=YWDD.YSBH
+           left join CGZL on CGZL.CGNO=YWDD.CGNO
+           where DDZL.DDBH  like 'JHS2601-274%' and DDZL.Article like '%' 
+           and YWDD.GSBH='VDH'
+           and DDZL.BuyNO like '%'
+           and YWBZPO.CLBH like '%'
+           group by YWDD.YSBH,YWBZPO.CLBH ) CGZL
+                 on CGZL.ZLBH=ZLZLS2.ZLBH and CGZL.CLBH=ZLZLS2.CLBH
+left join (select KCRKS.CGBH as ZLBH ,KCRKS.CLBH,sum(KCRKS.Qty ) as RKQty, 
+                  max(KCRKS.RKNO) as RKNO,max(KCRK.USERDate) as RKDate, 
+                  max(kcrks.usprice) as usprice,max(kcrks.vnprice) as vnprice 
+           from  KCRKS with (nolock)  
+           inner join DDZL on DDZL.DDBH=KCRKS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2601-274%' and DDZL.Article like '%' 
+           left join KCRK with (nolock)  on KCRK.RKNO=KCRKS.RKNO 
+           where DDZL.GSBH='VDH'
+                 and KCRKS.CGBH  like 'JHS2601-274%' 
+           group by KCRKS.CGBH,KCRKS.CLBH ) RKZL
+                 on RKZL.ZLBH=ZLZLS2.ZLBH and RKZL.CLBH=ZLZLS2.CLBH 
+left join (select HG_INVS.CGBH as ZLBH ,HG_INVS.CLBH,sum(HG_INVS.Qty ) as HGQty, 
+                  max(HG_INV.DOCNO) as DOCNO,max(HG_INV.USERDate) as HGDate 
+           from  HG_INVS with (nolock) 
+           inner join DDZL on DDZL.DDBH=HG_INVS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.DDBH  like 'JHS2601-274%' and DDZL.Article like '%' 
+           left join HG_INV with (nolock)  on HG_INV.RKNO=HG_INVS.RKNO
+           where DDZL.GSBH='VDH'
+                 and HG_INVS.CGBH  like 'JHS2601-274%' 
+           group by HG_INVS.CGBH,HG_INVS.CLBH ) HGINV
+                 on HGINV.ZLBH=ZLZLS2.ZLBH and HGINV.CLBH=ZLZLS2.CLBH
+left join (select zsdh,zsywjc from zszl) zszl on ZLZLS2.CSBH=zszl.zsdh  
+left join (
+		   Select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location from (
+		   Select A.Season,A.CLBH,A.ProdMOQ,A.ProdLeadTime,A.Forecast_Leadtime,A.Location from (
+			   select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,ROW_NUMBER() over (PARTITION BY CLBH ORDER BY Substring(Season,1,2) DESC,USERDATE desc) 
+			   as  rn from 
+			  (
+			  Select Season,IsNull(CLZL_LS.JHDH,MaterialMOQ.CLBH) as CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,MaterialMOQ.USERDATE 
+			  from MaterialMOQ with (nolock)
+			  left join CLZL_LS with (nolock) on CLZL_LS.CLDH=MaterialMOQ.CLBH  and IsNull(CLZL_LS.JHDH,'')<>'' ) MaterialMOQ
+			  where 1=1
+		   ) A where A.rn=1 and A.CLBH in (select distinct CLBH from ZLZLS2,DDZL where DDZL.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '%' and DDZL.Article like '%' 
+                                       and ZLZLS2.ZLBH  like 'JHS2601-274%' 
+                                       and ZLZLS2.CLBH not like 'W%' and ZLZLS2.CLBH like '%' and ZLZLS2.CLSL<>0 and ZLZLS2.ZMLB='N') 
+    ) MatMOQ
+		) MaterialMOQ on MaterialMOQ.CLBH=ZLZLS2.CLBH 
+       where DDZL.GSBH='VDH'
+       and ZLZLS2.CLBH not like 'W%'
+       and not exists(select CLBH from KCSAFE where KCSAFE.CLBH=ZLZLS2.CLBH )
+       and ZLZLS2.ZLBH  like 'JHS2601-274%' 
+       and DDZL.BuyNO like '%'
+       and ZLZLS2.ZMLB='N'
+       and ZLZLS2.CLSL<>0
+       and (XXBWFLS.DFL<>'G' or XXBWFLS.DFL is null)
+       and CLZLFilter.CLDH is null 
+       and DDZL.DDZT<>'C' 
+group by DDZlTW.BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,CLZL.ZWPM,ddzl.userdate,
+         XXZL.Article,XXZL.XieMing,DDZL.Pairs,CGKCUSE.Qty,CGZl.CGQty,CGZL.YQDate,
+         CGZL.CFMDate,CGZl.CGDate,CGZL.CGNO,RKZL.RKNO,RKZL.RKDate,RKZL.RKQty,DDZL.ShipDate, 
+         ddzl.ddrq,lbzls.ywsm 
+         ,MaterialMOQ.ProdLeadTime
+) ZLZLS2 where 1=1 and ZLZLS2.CFMDate IS NOT NULL 
+select * from ( 
+Select #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate,null as ReadyDate1,null as ReadyDate2
+       ,Min(Case when CG_ML.ZLBH is not null then  Case when Min_EDT_ML<>'' then Max_EDT_ML else Min_EDT_ML  end   else Convert(varchar,#RYPurchase.orderdate,111) end) as ML 
+       ,Min(Case when CG_FML.ZLBH is not null then Case when Min_EDT_FML<>'' then Max_EDT_FML else Min_EDT_FML  end else Convert(varchar,#RYPurchase.orderdate,111) end) as FML 
+       ,Min(Case when CG_FGL.ZLBH is not null then  Case when Min_EDT_FGL<>'' then Max_EDT_FGL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as FGL 
+       ,Min(Case when CG_DL.ZLBH is not null then Case when Min_EDT_DL<>'' then Max_EDT_DL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as DL 
+       ,case when APlanDate is null then ShipDate-42 else APlanDate-7 end as comparedate 
+from #RYPurchase
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_ML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_ML
+   from  #RYPurchase A
+   where   (LEFT(A.CLBH,1) in ('A','C','F','K','B')  or (LEFT(A.CLBH,3)='P21' and A.dwbh<>'PRS'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_ML on  CG_ML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FML
+   from  #RYPurchase B
+   where (LEFT(B.CLBH,1) in ('E','G','I','L','M','N')  or  LEFT(B.CLBH,3)  in ('D01','D02','D11'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FML on  CG_FML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FGL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FGL
+   from  #RYPurchase C
+   where LEFT(C.CLBH,1) in ('D','H','O') and LEFT(C.CLBH,3)  not in ('D01','D02','D11')   and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FGL on  CG_FGL.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_DL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_DL
+   from  #RYPurchase D
+   where LEFT(D.CLBH,1) in ('J','P') and LEFT(D.CLBH,3) not in  ('P21')  and IsNull(UseStock,0.0)<CLSL
+   Group by  ZLBH
+) CG_DL on  CG_DL.ZLBH=#RYPurchase.ZLBH 
+Group by #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate
+) RYPurchase 
+Order by RYPurchase.APlanDate
+if object_id('tempdb..#RYPurchase') is not null    
+begin drop table #RYPurchase end 
+
+Select * into #RYPurchase from ( 
+select  isnull(DDZLTW.BUYNO,0) as BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,
+        CLZL.CQDH,isnull(CGZL.CGQty,0) as CGQty,
+        case when DDZLTW.DDZT<>'C' then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+        convert(varchar,CGZL.YQDate,111) as YQDate,convert(varchar,CGZL.CFMDate,111) as CFMDate,case when CLZL.CQDH='VN' then convert(varchar,CGZL.CFMDate,111) else convert(varchar,CGZL.CFMDate,111) end  as ETADate,
+        convert(varchar,CGZl.CGDate,111) as CGDate,
+        CGZL.CGNO,isnull(CGKCUSE.Qty,0) as UseStock,
+        RKZL.RKQty,RKZL.RKNO,RKZL.RKDate,min(SC.schedule_date) as APlanDate,DDZL.ShipDate      
+        ,convert(smalldatetime,ddzl.userdate,111) as indate
+        ,convert(smalldatetime,max(zlzls2.userdate),111) as cldate
+        ,convert(smalldatetime,ddzl.ddrq,111) as orderdate
+        ,lbzls.ywsm,Max(zszl.ZSDH) as ZSDH,Max(zszl.zsywjc) as zsywjc
+        ,MaterialMOQ.ProdLeadTime   
+from ZLZLS2 with (nolock)  
+inner join DDZl  with (nolock) on DDZl.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.DDBH  like '%' and DDZL.Article like '%' 
+left join DDZLTW with (nolock) on DDZLTW.DDBH=ZLZLS2.ZLBH
+left join CLZL  with (nolock) on CLZL.CLDH=ZLZLs2.CLBH 
+left join KFZL  with (nolock) on KFZl.KFDH=DDZLTW.KHBH 
+left join ZLZL  with (nolock) on ZLZL.ZLBH=ZLZLS2.ZLBH
+left join CGKCUSE  with (nolock) on CGKCUSE.ZLBH=ZLZLS2.ZLBH and CGKCUSE.CLBH=ZLZLS2.CLBH and CGKCUSE.GSBH='VDH' 
+left join XXZL  with (nolock) on XXZl.XieXing=DDZLTW.XieXing and XXZL.SheHao=DDZLTW.SheHao
+left join XXBWFL  with (nolock) on XXBWFL.XieXing=XXZL.XieXing and XXBWFL.BWBH=ZLZLS2.BWBH 
+left join XXBWFLS  with (nolock) on XXBWFLS.FLBH=XXBWFL.FLBH 
+left join lbzls on lbzls.lbdh=ddzl.ddgb and lbzls.lb='06' 
+LEFT JOIN schedule_crawler AS SC ON CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, '-', '')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX('-', REVERSE(SC.ry))) END = ZLZLS2.ZLBH
+Left join CLZLFilter on CLZLFilter.CLDH=ZLZLS2.CLBH and CLZLFilter.GSBH='VDH' 
+left join (select CGZLSS.ZLBH,CGZLSS.CLBH,sum(CGZLSS.Qty) as CGQty,
+                  max(CGZLSS.CFMDate) as CFMDate,max(CGZL.CGDate) as CGDate,
+                  max(CGZL.CGNO) as CGNO,max(CGZLSS.YQDate) as YQDate,max(CGZLS.QUSPrice) as USPrice,max(CGZLS.QVNPrice) as VNPrice 
+           from CGZLSS with (nolock) 
+           inner join DDZL on DDZL.DDBH = CGZLSS.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.DDBH  like '%' and DDZL.Article like '%' 
+           left join CGZLS with (nolock)  on CGZLS.CGNO=CGZLSS.CGNO and CGZLS.CLBH=CGZLSS.CLBH 
+           left join  CGZL with (nolock)  on CGZl.CGNO=CGZLSS.CGNO
+           where DDZL.GSBH='VDH'
+                 and CGZLSS.ZLBH  like '%' 
+           group by CGZLSS.ZLBH,CGZLSS.CLBH 
+           union all
+           select YWDD.YSBH as ZLBH,YWBZPO.CLBH,sum(YWBZPO.Qty) as CGQty,getdate() as CFMDate,max(CGZL.CGDate) as CGDate
+                  ,max(CGZL.CGNO) as CGNO,getdate() as YQDate,0 as USPrice,0 as VNPrice
+           from (select YWBZPO.DDBH,YWBZPO.CLBH,sum(CTS) as Qty from YWBZPO,YWDD where YWBZPO.ddbh=YWDD.DDBH and YWDD.YSBH  like '%'  group by YWBZPO.DDBH,YWBZPO.CLBH
+                 union all select DDBH,CLBH,sum(CTS) as Qty from YWBZPOE where ddbh  like '%'  group by DDBH,CLBH )ywbzpo
+           left join YWDD on YWDD.DDBH=YWBZPO.DDBH
+           left join DDZL on DDZL.DDBH=YWDD.YSBH
+           left join CGZL on CGZL.CGNO=YWDD.CGNO
+           where DDZL.DDBH  like '%' and DDZL.Article like '%' 
+           and YWDD.GSBH='VDH'
+           and DDZL.BuyNO like '2509%'
+           and YWBZPO.CLBH like '%'
+           group by YWDD.YSBH,YWBZPO.CLBH ) CGZL
+                 on CGZL.ZLBH=ZLZLS2.ZLBH and CGZL.CLBH=ZLZLS2.CLBH
+left join (select KCRKS.CGBH as ZLBH ,KCRKS.CLBH,sum(KCRKS.Qty ) as RKQty, 
+                  max(KCRKS.RKNO) as RKNO,max(KCRK.USERDate) as RKDate, 
+                  max(kcrks.usprice) as usprice,max(kcrks.vnprice) as vnprice 
+           from  KCRKS with (nolock)  
+           inner join DDZL on DDZL.DDBH=KCRKS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.DDBH  like '%' and DDZL.Article like '%' 
+           left join KCRK with (nolock)  on KCRK.RKNO=KCRKS.RKNO 
+           where DDZL.GSBH='VDH'
+                 and KCRKS.CGBH  like '%' 
+           group by KCRKS.CGBH,KCRKS.CLBH ) RKZL
+                 on RKZL.ZLBH=ZLZLS2.ZLBH and RKZL.CLBH=ZLZLS2.CLBH 
+left join (select HG_INVS.CGBH as ZLBH ,HG_INVS.CLBH,sum(HG_INVS.Qty ) as HGQty, 
+                  max(HG_INV.DOCNO) as DOCNO,max(HG_INV.USERDate) as HGDate 
+           from  HG_INVS with (nolock) 
+           inner join DDZL on DDZL.DDBH=HG_INVS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.DDBH  like '%' and DDZL.Article like '%' 
+           left join HG_INV with (nolock)  on HG_INV.RKNO=HG_INVS.RKNO
+           where DDZL.GSBH='VDH'
+                 and HG_INVS.CGBH  like '%' 
+           group by HG_INVS.CGBH,HG_INVS.CLBH ) HGINV
+                 on HGINV.ZLBH=ZLZLS2.ZLBH and HGINV.CLBH=ZLZLS2.CLBH
+left join (select zsdh,zsywjc from zszl) zszl on ZLZLS2.CSBH=zszl.zsdh  
+left join (
+		   Select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location from (
+		   Select A.Season,A.CLBH,A.ProdMOQ,A.ProdLeadTime,A.Forecast_Leadtime,A.Location from (
+			   select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,ROW_NUMBER() over (PARTITION BY CLBH ORDER BY Substring(Season,1,2) DESC,USERDATE desc) 
+			   as  rn from 
+			  (
+			  Select Season,IsNull(CLZL_LS.JHDH,MaterialMOQ.CLBH) as CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,MaterialMOQ.USERDATE 
+			  from MaterialMOQ with (nolock)
+			  left join CLZL_LS with (nolock) on CLZL_LS.CLDH=MaterialMOQ.CLBH  and IsNull(CLZL_LS.JHDH,'')<>'' ) MaterialMOQ
+			  where 1=1
+		   ) A where A.rn=1 and A.CLBH in (select distinct CLBH from ZLZLS2,DDZL where DDZL.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.Article like '%' 
+                                       and ZLZLS2.ZLBH  like '%' 
+                                       and ZLZLS2.CLBH not like 'W%' and ZLZLS2.CLBH like '%' and ZLZLS2.CLSL<>0 and ZLZLS2.ZMLB='N') 
+    ) MatMOQ
+		) MaterialMOQ on MaterialMOQ.CLBH=ZLZLS2.CLBH 
+       where DDZL.GSBH='VDH'
+       and ZLZLS2.CLBH not like 'W%'
+       and not exists(select CLBH from KCSAFE where KCSAFE.CLBH=ZLZLS2.CLBH )
+       and ZLZLS2.ZLBH  like '%' 
+       and DDZL.BuyNO like '2509%'
+       and ZLZLS2.ZMLB='N'
+       and ZLZLS2.CLSL<>0
+       and (XXBWFLS.DFL<>'G' or XXBWFLS.DFL is null)
+       and CLZLFilter.CLDH is null 
+       and DDZL.DDZT<>'C' 
+group by DDZlTW.BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,CLZL.ZWPM,ddzl.userdate,
+         XXZL.Article,XXZL.XieMing,DDZL.Pairs,CGKCUSE.Qty,CGZl.CGQty,CGZL.YQDate,
+         CGZL.CFMDate,CGZl.CGDate,CGZL.CGNO,RKZL.RKNO,RKZL.RKDate,RKZL.RKQty,DDZL.ShipDate, 
+         ddzl.ddrq,lbzls.ywsm 
+         ,MaterialMOQ.ProdLeadTime
+) ZLZLS2 where 1=1 and ZLZLS2.CFMDate IS NOT NULL 
+select * from ( 
+Select #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate,null as ReadyDate1,null as ReadyDate2
+       ,Min(Case when CG_ML.ZLBH is not null then  Case when Min_EDT_ML<>'' then Max_EDT_ML else Min_EDT_ML  end   else Convert(varchar,#RYPurchase.orderdate,111) end) as ML 
+       ,Min(Case when CG_FML.ZLBH is not null then Case when Min_EDT_FML<>'' then Max_EDT_FML else Min_EDT_FML  end else Convert(varchar,#RYPurchase.orderdate,111) end) as FML 
+       ,Min(Case when CG_FGL.ZLBH is not null then  Case when Min_EDT_FGL<>'' then Max_EDT_FGL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as FGL 
+       ,Min(Case when CG_DL.ZLBH is not null then Case when Min_EDT_DL<>'' then Max_EDT_DL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as DL 
+       ,case when APlanDate is null then ShipDate-42 else APlanDate-7 end as comparedate 
+from #RYPurchase
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_ML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_ML
+   from  #RYPurchase A
+   where   (LEFT(A.CLBH,1) in ('A','C','F','K','B')  or (LEFT(A.CLBH,3)='P21' and A.dwbh<>'PRS'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_ML on  CG_ML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FML
+   from  #RYPurchase B
+   where (LEFT(B.CLBH,1) in ('E','G','I','L','M','N')  or  LEFT(B.CLBH,3)  in ('D01','D02','D11'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FML on  CG_FML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FGL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FGL
+   from  #RYPurchase C
+   where LEFT(C.CLBH,1) in ('D','H','O') and LEFT(C.CLBH,3)  not in ('D01','D02','D11')   and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FGL on  CG_FGL.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_DL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_DL
+   from  #RYPurchase D
+   where LEFT(D.CLBH,1) in ('J','P') and LEFT(D.CLBH,3) not in  ('P21')  and IsNull(UseStock,0.0)<CLSL
+   Group by  ZLBH
+) CG_DL on  CG_DL.ZLBH=#RYPurchase.ZLBH 
+Group by #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate
+) RYPurchase 
+Order by RYPurchase.APlanDate
+if object_id('tempdb..#RYPurchase') is not null    
+begin drop table #RYPurchase end 
+
+Select * into #RYPurchase from ( 
+select  isnull(DDZLTW.BUYNO,0) as BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,
+        CLZL.CQDH,isnull(CGZL.CGQty,0) as CGQty,
+        case when DDZLTW.DDZT<>'C' then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+        convert(varchar,CGZL.YQDate,111) as YQDate,convert(varchar,CGZL.CFMDate,111) as CFMDate,case when CLZL.CQDH='VN' then convert(varchar,CGZL.CFMDate,111) else convert(varchar,CGZL.CFMDate,111) end  as ETADate,
+        convert(varchar,CGZl.CGDate,111) as CGDate,
+        CGZL.CGNO,isnull(CGKCUSE.Qty,0) as UseStock,
+        RKZL.RKQty,RKZL.RKNO,RKZL.RKDate,min(SC.schedule_date) as APlanDate,DDZL.ShipDate      
+        ,convert(smalldatetime,ddzl.userdate,111) as indate
+        ,convert(smalldatetime,max(zlzls2.userdate),111) as cldate
+        ,convert(smalldatetime,ddzl.ddrq,111) as orderdate
+        ,lbzls.ywsm,Max(zszl.ZSDH) as ZSDH,Max(zszl.zsywjc) as zsywjc
+        ,MaterialMOQ.ProdLeadTime   
+from ZLZLS2 with (nolock)  
+inner join DDZl  with (nolock) on DDZl.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.DDBH  like '%' and DDZL.Article like '%' 
+left join DDZLTW with (nolock) on DDZLTW.DDBH=ZLZLS2.ZLBH
+left join CLZL  with (nolock) on CLZL.CLDH=ZLZLs2.CLBH 
+left join KFZL  with (nolock) on KFZl.KFDH=DDZLTW.KHBH 
+left join ZLZL  with (nolock) on ZLZL.ZLBH=ZLZLS2.ZLBH
+left join CGKCUSE  with (nolock) on CGKCUSE.ZLBH=ZLZLS2.ZLBH and CGKCUSE.CLBH=ZLZLS2.CLBH and CGKCUSE.GSBH='VDH' 
+left join XXZL  with (nolock) on XXZl.XieXing=DDZLTW.XieXing and XXZL.SheHao=DDZLTW.SheHao
+left join XXBWFL  with (nolock) on XXBWFL.XieXing=XXZL.XieXing and XXBWFL.BWBH=ZLZLS2.BWBH 
+left join XXBWFLS  with (nolock) on XXBWFLS.FLBH=XXBWFL.FLBH 
+left join lbzls on lbzls.lbdh=ddzl.ddgb and lbzls.lb='06' 
+LEFT JOIN schedule_crawler AS SC ON CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, '-', '')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX('-', REVERSE(SC.ry))) END = ZLZLS2.ZLBH
+Left join CLZLFilter on CLZLFilter.CLDH=ZLZLS2.CLBH and CLZLFilter.GSBH='VDH' 
+left join (select CGZLSS.ZLBH,CGZLSS.CLBH,sum(CGZLSS.Qty) as CGQty,
+                  max(CGZLSS.CFMDate) as CFMDate,max(CGZL.CGDate) as CGDate,
+                  max(CGZL.CGNO) as CGNO,max(CGZLSS.YQDate) as YQDate,max(CGZLS.QUSPrice) as USPrice,max(CGZLS.QVNPrice) as VNPrice 
+           from CGZLSS with (nolock) 
+           inner join DDZL on DDZL.DDBH = CGZLSS.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.DDBH  like '%' and DDZL.Article like '%' 
+           left join CGZLS with (nolock)  on CGZLS.CGNO=CGZLSS.CGNO and CGZLS.CLBH=CGZLSS.CLBH 
+           left join  CGZL with (nolock)  on CGZl.CGNO=CGZLSS.CGNO
+           where DDZL.GSBH='VDH'
+                 and CGZLSS.ZLBH  like '%' 
+           group by CGZLSS.ZLBH,CGZLSS.CLBH 
+           union all
+           select YWDD.YSBH as ZLBH,YWBZPO.CLBH,sum(YWBZPO.Qty) as CGQty,getdate() as CFMDate,max(CGZL.CGDate) as CGDate
+                  ,max(CGZL.CGNO) as CGNO,getdate() as YQDate,0 as USPrice,0 as VNPrice
+           from (select YWBZPO.DDBH,YWBZPO.CLBH,sum(CTS) as Qty from YWBZPO,YWDD where YWBZPO.ddbh=YWDD.DDBH and YWDD.YSBH  like '%'  group by YWBZPO.DDBH,YWBZPO.CLBH
+                 union all select DDBH,CLBH,sum(CTS) as Qty from YWBZPOE where ddbh  like '%'  group by DDBH,CLBH )ywbzpo
+           left join YWDD on YWDD.DDBH=YWBZPO.DDBH
+           left join DDZL on DDZL.DDBH=YWDD.YSBH
+           left join CGZL on CGZL.CGNO=YWDD.CGNO
+           where DDZL.DDBH  like '%' and DDZL.Article like '%' 
+           and YWDD.GSBH='VDH'
+           and DDZL.BuyNO like '2509%'
+           and YWBZPO.CLBH like '%'
+           group by YWDD.YSBH,YWBZPO.CLBH ) CGZL
+                 on CGZL.ZLBH=ZLZLS2.ZLBH and CGZL.CLBH=ZLZLS2.CLBH
+left join (select KCRKS.CGBH as ZLBH ,KCRKS.CLBH,sum(KCRKS.Qty ) as RKQty, 
+                  max(KCRKS.RKNO) as RKNO,max(KCRK.USERDate) as RKDate, 
+                  max(kcrks.usprice) as usprice,max(kcrks.vnprice) as vnprice 
+           from  KCRKS with (nolock)  
+           inner join DDZL on DDZL.DDBH=KCRKS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.DDBH  like '%' and DDZL.Article like '%' 
+           left join KCRK with (nolock)  on KCRK.RKNO=KCRKS.RKNO 
+           where DDZL.GSBH='VDH'
+                 and KCRKS.CGBH  like '%' 
+           group by KCRKS.CGBH,KCRKS.CLBH ) RKZL
+                 on RKZL.ZLBH=ZLZLS2.ZLBH and RKZL.CLBH=ZLZLS2.CLBH 
+left join (select HG_INVS.CGBH as ZLBH ,HG_INVS.CLBH,sum(HG_INVS.Qty ) as HGQty, 
+                  max(HG_INV.DOCNO) as DOCNO,max(HG_INV.USERDate) as HGDate 
+           from  HG_INVS with (nolock) 
+           inner join DDZL on DDZL.DDBH=HG_INVS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.DDBH  like '%' and DDZL.Article like '%' 
+           left join HG_INV with (nolock)  on HG_INV.RKNO=HG_INVS.RKNO
+           where DDZL.GSBH='VDH'
+                 and HG_INVS.CGBH  like '%' 
+           group by HG_INVS.CGBH,HG_INVS.CLBH ) HGINV
+                 on HGINV.ZLBH=ZLZLS2.ZLBH and HGINV.CLBH=ZLZLS2.CLBH
+left join (select zsdh,zsywjc from zszl) zszl on ZLZLS2.CSBH=zszl.zsdh  
+left join (
+		   Select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location from (
+		   Select A.Season,A.CLBH,A.ProdMOQ,A.ProdLeadTime,A.Forecast_Leadtime,A.Location from (
+			   select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,ROW_NUMBER() over (PARTITION BY CLBH ORDER BY Substring(Season,1,2) DESC,USERDATE desc) 
+			   as  rn from 
+			  (
+			  Select Season,IsNull(CLZL_LS.JHDH,MaterialMOQ.CLBH) as CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,MaterialMOQ.USERDATE 
+			  from MaterialMOQ with (nolock)
+			  left join CLZL_LS with (nolock) on CLZL_LS.CLDH=MaterialMOQ.CLBH  and IsNull(CLZL_LS.JHDH,'')<>'' ) MaterialMOQ
+			  where 1=1
+		   ) A where A.rn=1 and A.CLBH in (select distinct CLBH from ZLZLS2,DDZL where DDZL.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.Article like '%' 
+                                       and ZLZLS2.ZLBH  like '%' 
+                                       and ZLZLS2.CLBH not like 'W%' and ZLZLS2.CLBH like '%' and ZLZLS2.CLSL<>0 and ZLZLS2.ZMLB='N') 
+    ) MatMOQ
+		) MaterialMOQ on MaterialMOQ.CLBH=ZLZLS2.CLBH 
+       where DDZL.GSBH='VDH'
+       and ZLZLS2.CLBH not like 'W%'
+       and not exists(select CLBH from KCSAFE where KCSAFE.CLBH=ZLZLS2.CLBH )
+       and ZLZLS2.ZLBH  like '%' 
+       and DDZL.BuyNO like '2509%'
+       and ZLZLS2.ZMLB='N'
+       and ZLZLS2.CLSL<>0
+       and (XXBWFLS.DFL<>'G' or XXBWFLS.DFL is null)
+       and CLZLFilter.CLDH is null 
+       and DDZL.DDZT<>'C' 
+group by DDZlTW.BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,CLZL.ZWPM,ddzl.userdate,
+         XXZL.Article,XXZL.XieMing,DDZL.Pairs,CGKCUSE.Qty,CGZl.CGQty,CGZL.YQDate,
+         CGZL.CFMDate,CGZl.CGDate,CGZL.CGNO,RKZL.RKNO,RKZL.RKDate,RKZL.RKQty,DDZL.ShipDate, 
+         ddzl.ddrq,lbzls.ywsm 
+         ,MaterialMOQ.ProdLeadTime
+) ZLZLS2 where 1=1 and ZLZLS2.CFMDate IS NOT NULL 
+select * from ( 
+Select #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate,null as ReadyDate1,null as ReadyDate2
+       ,Min(Case when CG_ML.ZLBH is not null then  Case when Min_EDT_ML<>'' then Max_EDT_ML else Min_EDT_ML  end   else Convert(varchar,#RYPurchase.orderdate,111) end) as ML 
+       ,Min(Case when CG_FML.ZLBH is not null then Case when Min_EDT_FML<>'' then Max_EDT_FML else Min_EDT_FML  end else Convert(varchar,#RYPurchase.orderdate,111) end) as FML 
+       ,Min(Case when CG_FGL.ZLBH is not null then  Case when Min_EDT_FGL<>'' then Max_EDT_FGL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as FGL 
+       ,Min(Case when CG_DL.ZLBH is not null then Case when Min_EDT_DL<>'' then Max_EDT_DL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as DL 
+       ,case when APlanDate is null then ShipDate-42 else APlanDate-7 end as comparedate 
+from #RYPurchase
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_ML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_ML
+   from  #RYPurchase A
+   where   (LEFT(A.CLBH,1) in ('A','C','F','K','B')  or (LEFT(A.CLBH,3)='P21' and A.dwbh<>'PRS'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_ML on  CG_ML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FML
+   from  #RYPurchase B
+   where (LEFT(B.CLBH,1) in ('E','G','I','L','M','N')  or  LEFT(B.CLBH,3)  in ('D01','D02','D11'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FML on  CG_FML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FGL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FGL
+   from  #RYPurchase C
+   where LEFT(C.CLBH,1) in ('D','H','O') and LEFT(C.CLBH,3)  not in ('D01','D02','D11')   and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FGL on  CG_FGL.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_DL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_DL
+   from  #RYPurchase D
+   where LEFT(D.CLBH,1) in ('J','P') and LEFT(D.CLBH,3) not in  ('P21')  and IsNull(UseStock,0.0)<CLSL
+   Group by  ZLBH
+) CG_DL on  CG_DL.ZLBH=#RYPurchase.ZLBH 
+Group by #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate
+) RYPurchase 
+Order by RYPurchase.APlanDate
+if object_id('tempdb..#RYPurchase') is not null    
+begin drop table #RYPurchase end 
+
+Select * into #RYPurchase from ( 
+select  isnull(DDZLTW.BUYNO,0) as BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,
+        CLZL.CQDH,isnull(CGZL.CGQty,0) as CGQty,
+        case when DDZLTW.DDZT<>'C' then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+        convert(varchar,CGZL.YQDate,111) as YQDate,convert(varchar,CGZL.CFMDate,111) as CFMDate,case when CLZL.CQDH='VN' then convert(varchar,CGZL.CFMDate,111) else convert(varchar,CGZL.CFMDate,111) end  as ETADate,
+        convert(varchar,CGZl.CGDate,111) as CGDate,
+        CGZL.CGNO,isnull(CGKCUSE.Qty,0) as UseStock,
+        RKZL.RKQty,RKZL.RKNO,RKZL.RKDate,min(SC.schedule_date) as APlanDate,DDZL.ShipDate      
+        ,convert(smalldatetime,ddzl.userdate,111) as indate
+        ,convert(smalldatetime,max(zlzls2.userdate),111) as cldate
+        ,convert(smalldatetime,ddzl.ddrq,111) as orderdate
+        ,lbzls.ywsm,Max(zszl.ZSDH) as ZSDH,Max(zszl.zsywjc) as zsywjc
+        ,MaterialMOQ.ProdLeadTime   
+from ZLZLS2 with (nolock)  
+inner join DDZl  with (nolock) on DDZl.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.DDBH  like 'JHS2601-274%' and DDZL.Article like '%' 
+left join DDZLTW with (nolock) on DDZLTW.DDBH=ZLZLS2.ZLBH
+left join CLZL  with (nolock) on CLZL.CLDH=ZLZLs2.CLBH 
+left join KFZL  with (nolock) on KFZl.KFDH=DDZLTW.KHBH 
+left join ZLZL  with (nolock) on ZLZL.ZLBH=ZLZLS2.ZLBH
+left join CGKCUSE  with (nolock) on CGKCUSE.ZLBH=ZLZLS2.ZLBH and CGKCUSE.CLBH=ZLZLS2.CLBH and CGKCUSE.GSBH='VDH' 
+left join XXZL  with (nolock) on XXZl.XieXing=DDZLTW.XieXing and XXZL.SheHao=DDZLTW.SheHao
+left join XXBWFL  with (nolock) on XXBWFL.XieXing=XXZL.XieXing and XXBWFL.BWBH=ZLZLS2.BWBH 
+left join XXBWFLS  with (nolock) on XXBWFLS.FLBH=XXBWFL.FLBH 
+left join lbzls on lbzls.lbdh=ddzl.ddgb and lbzls.lb='06' 
+LEFT JOIN schedule_crawler AS SC ON CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, '-', '')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX('-', REVERSE(SC.ry))) END = ZLZLS2.ZLBH
+Left join CLZLFilter on CLZLFilter.CLDH=ZLZLS2.CLBH and CLZLFilter.GSBH='VDH' 
+left join (select CGZLSS.ZLBH,CGZLSS.CLBH,sum(CGZLSS.Qty) as CGQty,
+                  max(CGZLSS.CFMDate) as CFMDate,max(CGZL.CGDate) as CGDate,
+                  max(CGZL.CGNO) as CGNO,max(CGZLSS.YQDate) as YQDate,max(CGZLS.QUSPrice) as USPrice,max(CGZLS.QVNPrice) as VNPrice 
+           from CGZLSS with (nolock) 
+           inner join DDZL on DDZL.DDBH = CGZLSS.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.DDBH  like 'JHS2601-274%' and DDZL.Article like '%' 
+           left join CGZLS with (nolock)  on CGZLS.CGNO=CGZLSS.CGNO and CGZLS.CLBH=CGZLSS.CLBH 
+           left join  CGZL with (nolock)  on CGZl.CGNO=CGZLSS.CGNO
+           where DDZL.GSBH='VDH'
+                 and CGZLSS.ZLBH  like 'JHS2601-274%' 
+           group by CGZLSS.ZLBH,CGZLSS.CLBH 
+           union all
+           select YWDD.YSBH as ZLBH,YWBZPO.CLBH,sum(YWBZPO.Qty) as CGQty,getdate() as CFMDate,max(CGZL.CGDate) as CGDate
+                  ,max(CGZL.CGNO) as CGNO,getdate() as YQDate,0 as USPrice,0 as VNPrice
+           from (select YWBZPO.DDBH,YWBZPO.CLBH,sum(CTS) as Qty from YWBZPO,YWDD where YWBZPO.ddbh=YWDD.DDBH and YWDD.YSBH  like 'JHS2601-274%'  group by YWBZPO.DDBH,YWBZPO.CLBH
+                 union all select DDBH,CLBH,sum(CTS) as Qty from YWBZPOE where ddbh  like 'JHS2601-274%'  group by DDBH,CLBH )ywbzpo
+           left join YWDD on YWDD.DDBH=YWBZPO.DDBH
+           left join DDZL on DDZL.DDBH=YWDD.YSBH
+           left join CGZL on CGZL.CGNO=YWDD.CGNO
+           where DDZL.DDBH  like 'JHS2601-274%' and DDZL.Article like '%' 
+           and YWDD.GSBH='VDH'
+           and DDZL.BuyNO like '2509%'
+           and YWBZPO.CLBH like '%'
+           group by YWDD.YSBH,YWBZPO.CLBH ) CGZL
+                 on CGZL.ZLBH=ZLZLS2.ZLBH and CGZL.CLBH=ZLZLS2.CLBH
+left join (select KCRKS.CGBH as ZLBH ,KCRKS.CLBH,sum(KCRKS.Qty ) as RKQty, 
+                  max(KCRKS.RKNO) as RKNO,max(KCRK.USERDate) as RKDate, 
+                  max(kcrks.usprice) as usprice,max(kcrks.vnprice) as vnprice 
+           from  KCRKS with (nolock)  
+           inner join DDZL on DDZL.DDBH=KCRKS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.DDBH  like 'JHS2601-274%' and DDZL.Article like '%' 
+           left join KCRK with (nolock)  on KCRK.RKNO=KCRKS.RKNO 
+           where DDZL.GSBH='VDH'
+                 and KCRKS.CGBH  like 'JHS2601-274%' 
+           group by KCRKS.CGBH,KCRKS.CLBH ) RKZL
+                 on RKZL.ZLBH=ZLZLS2.ZLBH and RKZL.CLBH=ZLZLS2.CLBH 
+left join (select HG_INVS.CGBH as ZLBH ,HG_INVS.CLBH,sum(HG_INVS.Qty ) as HGQty, 
+                  max(HG_INV.DOCNO) as DOCNO,max(HG_INV.USERDate) as HGDate 
+           from  HG_INVS with (nolock) 
+           inner join DDZL on DDZL.DDBH=HG_INVS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.DDBH  like 'JHS2601-274%' and DDZL.Article like '%' 
+           left join HG_INV with (nolock)  on HG_INV.RKNO=HG_INVS.RKNO
+           where DDZL.GSBH='VDH'
+                 and HG_INVS.CGBH  like 'JHS2601-274%' 
+           group by HG_INVS.CGBH,HG_INVS.CLBH ) HGINV
+                 on HGINV.ZLBH=ZLZLS2.ZLBH and HGINV.CLBH=ZLZLS2.CLBH
+left join (select zsdh,zsywjc from zszl) zszl on ZLZLS2.CSBH=zszl.zsdh  
+left join (
+		   Select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location from (
+		   Select A.Season,A.CLBH,A.ProdMOQ,A.ProdLeadTime,A.Forecast_Leadtime,A.Location from (
+			   select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,ROW_NUMBER() over (PARTITION BY CLBH ORDER BY Substring(Season,1,2) DESC,USERDATE desc) 
+			   as  rn from 
+			  (
+			  Select Season,IsNull(CLZL_LS.JHDH,MaterialMOQ.CLBH) as CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,MaterialMOQ.USERDATE 
+			  from MaterialMOQ with (nolock)
+			  left join CLZL_LS with (nolock) on CLZL_LS.CLDH=MaterialMOQ.CLBH  and IsNull(CLZL_LS.JHDH,'')<>'' ) MaterialMOQ
+			  where 1=1
+		   ) A where A.rn=1 and A.CLBH in (select distinct CLBH from ZLZLS2,DDZL where DDZL.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.Article like '%' 
+                                       and ZLZLS2.ZLBH  like 'JHS2601-274%' 
+                                       and ZLZLS2.CLBH not like 'W%' and ZLZLS2.CLBH like '%' and ZLZLS2.CLSL<>0 and ZLZLS2.ZMLB='N') 
+    ) MatMOQ
+		) MaterialMOQ on MaterialMOQ.CLBH=ZLZLS2.CLBH 
+       where DDZL.GSBH='VDH'
+       and ZLZLS2.CLBH not like 'W%'
+       and not exists(select CLBH from KCSAFE where KCSAFE.CLBH=ZLZLS2.CLBH )
+       and ZLZLS2.ZLBH  like 'JHS2601-274%' 
+       and DDZL.BuyNO like '2509%'
+       and ZLZLS2.ZMLB='N'
+       and ZLZLS2.CLSL<>0
+       and (XXBWFLS.DFL<>'G' or XXBWFLS.DFL is null)
+       and CLZLFilter.CLDH is null 
+       and DDZL.DDZT<>'C' 
+group by DDZlTW.BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,CLZL.ZWPM,ddzl.userdate,
+         XXZL.Article,XXZL.XieMing,DDZL.Pairs,CGKCUSE.Qty,CGZl.CGQty,CGZL.YQDate,
+         CGZL.CFMDate,CGZl.CGDate,CGZL.CGNO,RKZL.RKNO,RKZL.RKDate,RKZL.RKQty,DDZL.ShipDate, 
+         ddzl.ddrq,lbzls.ywsm 
+         ,MaterialMOQ.ProdLeadTime
+) ZLZLS2 where 1=1 and ZLZLS2.CFMDate IS NOT NULL 
+select * from ( 
+Select #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate,null as ReadyDate1,null as ReadyDate2
+       ,Min(Case when CG_ML.ZLBH is not null then  Case when Min_EDT_ML<>'' then Max_EDT_ML else Min_EDT_ML  end   else Convert(varchar,#RYPurchase.orderdate,111) end) as ML 
+       ,Min(Case when CG_FML.ZLBH is not null then Case when Min_EDT_FML<>'' then Max_EDT_FML else Min_EDT_FML  end else Convert(varchar,#RYPurchase.orderdate,111) end) as FML 
+       ,Min(Case when CG_FGL.ZLBH is not null then  Case when Min_EDT_FGL<>'' then Max_EDT_FGL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as FGL 
+       ,Min(Case when CG_DL.ZLBH is not null then Case when Min_EDT_DL<>'' then Max_EDT_DL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as DL 
+       ,case when APlanDate is null then ShipDate-42 else APlanDate-7 end as comparedate 
+from #RYPurchase
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_ML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_ML
+   from  #RYPurchase A
+   where   (LEFT(A.CLBH,1) in ('A','C','F','K','B')  or (LEFT(A.CLBH,3)='P21' and A.dwbh<>'PRS'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_ML on  CG_ML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FML
+   from  #RYPurchase B
+   where (LEFT(B.CLBH,1) in ('E','G','I','L','M','N')  or  LEFT(B.CLBH,3)  in ('D01','D02','D11'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FML on  CG_FML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FGL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FGL
+   from  #RYPurchase C
+   where LEFT(C.CLBH,1) in ('D','H','O') and LEFT(C.CLBH,3)  not in ('D01','D02','D11')   and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FGL on  CG_FGL.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_DL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_DL
+   from  #RYPurchase D
+   where LEFT(D.CLBH,1) in ('J','P') and LEFT(D.CLBH,3) not in  ('P21')  and IsNull(UseStock,0.0)<CLSL
+   Group by  ZLBH
+) CG_DL on  CG_DL.ZLBH=#RYPurchase.ZLBH 
+Group by #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate
+) RYPurchase 
+Order by RYPurchase.APlanDate
+if object_id('tempdb..#RYPurchase') is not null    
+begin drop table #RYPurchase end 
+
+Select * into #RYPurchase from ( 
+select  isnull(DDZLTW.BUYNO,0) as BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,
+        CLZL.CQDH,isnull(CGZL.CGQty,0) as CGQty,
+        case when DDZLTW.DDZT<>'C' then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+        convert(varchar,CGZL.YQDate,111) as YQDate,convert(varchar,CGZL.CFMDate,111) as CFMDate,case when CLZL.CQDH='VN' then convert(varchar,CGZL.CFMDate,111) else convert(varchar,CGZL.CFMDate,111) end  as ETADate,
+        convert(varchar,CGZl.CGDate,111) as CGDate,
+        CGZL.CGNO,isnull(CGKCUSE.Qty,0) as UseStock,
+        RKZL.RKQty,RKZL.RKNO,RKZL.RKDate,min(SC.schedule_date) as APlanDate,DDZL.ShipDate      
+        ,convert(smalldatetime,ddzl.userdate,111) as indate
+        ,convert(smalldatetime,max(zlzls2.userdate),111) as cldate
+        ,convert(smalldatetime,ddzl.ddrq,111) as orderdate
+        ,lbzls.ywsm,Max(zszl.ZSDH) as ZSDH,Max(zszl.zsywjc) as zsywjc
+        ,MaterialMOQ.ProdLeadTime   
+from ZLZLS2 with (nolock)  
+inner join DDZl  with (nolock) on DDZl.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.DDBH  like '%' and DDZL.Article like '%' 
+left join DDZLTW with (nolock) on DDZLTW.DDBH=ZLZLS2.ZLBH
+left join CLZL  with (nolock) on CLZL.CLDH=ZLZLs2.CLBH 
+left join KFZL  with (nolock) on KFZl.KFDH=DDZLTW.KHBH 
+left join ZLZL  with (nolock) on ZLZL.ZLBH=ZLZLS2.ZLBH
+left join CGKCUSE  with (nolock) on CGKCUSE.ZLBH=ZLZLS2.ZLBH and CGKCUSE.CLBH=ZLZLS2.CLBH and CGKCUSE.GSBH='VDH' 
+left join XXZL  with (nolock) on XXZl.XieXing=DDZLTW.XieXing and XXZL.SheHao=DDZLTW.SheHao
+left join XXBWFL  with (nolock) on XXBWFL.XieXing=XXZL.XieXing and XXBWFL.BWBH=ZLZLS2.BWBH 
+left join XXBWFLS  with (nolock) on XXBWFLS.FLBH=XXBWFL.FLBH 
+left join lbzls on lbzls.lbdh=ddzl.ddgb and lbzls.lb='06' 
+LEFT JOIN schedule_crawler AS SC ON CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, '-', '')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX('-', REVERSE(SC.ry))) END = ZLZLS2.ZLBH
+Left join CLZLFilter on CLZLFilter.CLDH=ZLZLS2.CLBH and CLZLFilter.GSBH='VDH' 
+left join (select CGZLSS.ZLBH,CGZLSS.CLBH,sum(CGZLSS.Qty) as CGQty,
+                  max(CGZLSS.CFMDate) as CFMDate,max(CGZL.CGDate) as CGDate,
+                  max(CGZL.CGNO) as CGNO,max(CGZLSS.YQDate) as YQDate,max(CGZLS.QUSPrice) as USPrice,max(CGZLS.QVNPrice) as VNPrice 
+           from CGZLSS with (nolock) 
+           inner join DDZL on DDZL.DDBH = CGZLSS.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.DDBH  like '%' and DDZL.Article like '%' 
+           left join CGZLS with (nolock)  on CGZLS.CGNO=CGZLSS.CGNO and CGZLS.CLBH=CGZLSS.CLBH 
+           left join  CGZL with (nolock)  on CGZl.CGNO=CGZLSS.CGNO
+           where DDZL.GSBH='VDH'
+                 and CGZLSS.ZLBH  like '%' 
+           group by CGZLSS.ZLBH,CGZLSS.CLBH 
+           union all
+           select YWDD.YSBH as ZLBH,YWBZPO.CLBH,sum(YWBZPO.Qty) as CGQty,getdate() as CFMDate,max(CGZL.CGDate) as CGDate
+                  ,max(CGZL.CGNO) as CGNO,getdate() as YQDate,0 as USPrice,0 as VNPrice
+           from (select YWBZPO.DDBH,YWBZPO.CLBH,sum(CTS) as Qty from YWBZPO,YWDD where YWBZPO.ddbh=YWDD.DDBH and YWDD.YSBH  like '%'  group by YWBZPO.DDBH,YWBZPO.CLBH
+                 union all select DDBH,CLBH,sum(CTS) as Qty from YWBZPOE where ddbh  like '%'  group by DDBH,CLBH )ywbzpo
+           left join YWDD on YWDD.DDBH=YWBZPO.DDBH
+           left join DDZL on DDZL.DDBH=YWDD.YSBH
+           left join CGZL on CGZL.CGNO=YWDD.CGNO
+           where DDZL.DDBH  like '%' and DDZL.Article like '%' 
+           and YWDD.GSBH='VDH'
+           and DDZL.BuyNO like '2509%'
+           and YWBZPO.CLBH like '%'
+           group by YWDD.YSBH,YWBZPO.CLBH ) CGZL
+                 on CGZL.ZLBH=ZLZLS2.ZLBH and CGZL.CLBH=ZLZLS2.CLBH
+left join (select KCRKS.CGBH as ZLBH ,KCRKS.CLBH,sum(KCRKS.Qty ) as RKQty, 
+                  max(KCRKS.RKNO) as RKNO,max(KCRK.USERDate) as RKDate, 
+                  max(kcrks.usprice) as usprice,max(kcrks.vnprice) as vnprice 
+           from  KCRKS with (nolock)  
+           inner join DDZL on DDZL.DDBH=KCRKS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.DDBH  like '%' and DDZL.Article like '%' 
+           left join KCRK with (nolock)  on KCRK.RKNO=KCRKS.RKNO 
+           where DDZL.GSBH='VDH'
+                 and KCRKS.CGBH  like '%' 
+           group by KCRKS.CGBH,KCRKS.CLBH ) RKZL
+                 on RKZL.ZLBH=ZLZLS2.ZLBH and RKZL.CLBH=ZLZLS2.CLBH 
+left join (select HG_INVS.CGBH as ZLBH ,HG_INVS.CLBH,sum(HG_INVS.Qty ) as HGQty, 
+                  max(HG_INV.DOCNO) as DOCNO,max(HG_INV.USERDate) as HGDate 
+           from  HG_INVS with (nolock) 
+           inner join DDZL on DDZL.DDBH=HG_INVS.CGBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.DDBH  like '%' and DDZL.Article like '%' 
+           left join HG_INV with (nolock)  on HG_INV.RKNO=HG_INVS.RKNO
+           where DDZL.GSBH='VDH'
+                 and HG_INVS.CGBH  like '%' 
+           group by HG_INVS.CGBH,HG_INVS.CLBH ) HGINV
+                 on HGINV.ZLBH=ZLZLS2.ZLBH and HGINV.CLBH=ZLZLS2.CLBH
+left join (select zsdh,zsywjc from zszl) zszl on ZLZLS2.CSBH=zszl.zsdh  
+left join (
+		   Select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location from (
+		   Select A.Season,A.CLBH,A.ProdMOQ,A.ProdLeadTime,A.Forecast_Leadtime,A.Location from (
+			   select Season,CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,ROW_NUMBER() over (PARTITION BY CLBH ORDER BY Substring(Season,1,2) DESC,USERDATE desc) 
+			   as  rn from 
+			  (
+			  Select Season,IsNull(CLZL_LS.JHDH,MaterialMOQ.CLBH) as CLBH,ProdMOQ,ProdLeadTime,Forecast_Leadtime,Location,MaterialMOQ.USERDATE 
+			  from MaterialMOQ with (nolock)
+			  left join CLZL_LS with (nolock) on CLZL_LS.CLDH=MaterialMOQ.CLBH  and IsNull(CLZL_LS.JHDH,'')<>'' ) MaterialMOQ
+			  where 1=1
+		   ) A where A.rn=1 and A.CLBH in (select distinct CLBH from ZLZLS2,DDZL where DDZL.DDBH=ZLZLS2.ZLBH and DDZL.GSBH='VDH' and DDZL.BUYNO like '2509%' and DDZL.Article like '%' 
+                                       and ZLZLS2.ZLBH  like '%' 
+                                       and ZLZLS2.CLBH not like 'W%' and ZLZLS2.CLBH like '%' and ZLZLS2.CLSL<>0 and ZLZLS2.ZMLB='N') 
+    ) MatMOQ
+		) MaterialMOQ on MaterialMOQ.CLBH=ZLZLS2.CLBH 
+       where DDZL.GSBH='VDH'
+       and ZLZLS2.CLBH not like 'W%'
+       and not exists(select CLBH from KCSAFE where KCSAFE.CLBH=ZLZLS2.CLBH )
+       and ZLZLS2.ZLBH  like '%' 
+       and DDZL.BuyNO like '2509%'
+       and ZLZLS2.ZMLB='N'
+       and ZLZLS2.CLSL<>0
+       and (XXBWFLS.DFL<>'G' or XXBWFLS.DFL is null)
+       and CLZLFilter.CLDH is null 
+       and DDZL.DDZT<>'C' 
+group by DDZlTW.BUYNO,ZLZLS2.ZLBH,DDZLTW.DDZT,DDZL.KHPO,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,CLZL.ZWPM,ddzl.userdate,
+         XXZL.Article,XXZL.XieMing,DDZL.Pairs,CGKCUSE.Qty,CGZl.CGQty,CGZL.YQDate,
+         CGZL.CFMDate,CGZl.CGDate,CGZL.CGNO,RKZL.RKNO,RKZL.RKDate,RKZL.RKQty,DDZL.ShipDate, 
+         ddzl.ddrq,lbzls.ywsm 
+         ,MaterialMOQ.ProdLeadTime
+) ZLZLS2 where 1=1 and ZLZLS2.CFMDate IS NOT NULL  
+select * from ( 
+Select #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate,null as ReadyDate1,null as ReadyDate2
+       ,Min(Case when CG_ML.ZLBH is not null then  Case when Min_EDT_ML<>'' then Max_EDT_ML else Min_EDT_ML  end   else Convert(varchar,#RYPurchase.orderdate,111) end) as ML 
+       ,Min(Case when CG_FML.ZLBH is not null then Case when Min_EDT_FML<>'' then Max_EDT_FML else Min_EDT_FML  end else Convert(varchar,#RYPurchase.orderdate,111) end) as FML 
+       ,Min(Case when CG_FGL.ZLBH is not null then  Case when Min_EDT_FGL<>'' then Max_EDT_FGL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as FGL 
+       ,Min(Case when CG_DL.ZLBH is not null then Case when Min_EDT_DL<>'' then Max_EDT_DL else Min_EDT_FGL  end  else Convert(varchar,#RYPurchase.orderdate,111) end) as DL 
+       ,case when APlanDate is null then ShipDate-42 else APlanDate-7 end as comparedate 
+from #RYPurchase
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_ML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_ML
+   from  #RYPurchase A
+   where   (LEFT(A.CLBH,1) in ('A','C','F','K','B')  or (LEFT(A.CLBH,3)='P21' and A.dwbh<>'PRS'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_ML on  CG_ML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FML,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FML
+   from  #RYPurchase B
+   where (LEFT(B.CLBH,1) in ('E','G','I','L','M','N')  or  LEFT(B.CLBH,3)  in ('D01','D02','D11'))  and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FML on  CG_FML.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_FGL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_FGL
+   from  #RYPurchase C
+   where LEFT(C.CLBH,1) in ('D','H','O') and LEFT(C.CLBH,3)  not in ('D01','D02','D11')   and IsNull(UseStock,0.0)<CLSL
+   Group by ZLBH
+) CG_FGL on  CG_FGL.ZLBH=#RYPurchase.ZLBH 
+left join (
+   Select ZLBH,Min(IsNull(Convert(varchar,ETADate,111),'')) as Min_EDT_DL,MAX(IsNull(Convert(varchar,ETADate,111),'')) as Max_EDT_DL
+   from  #RYPurchase D
+   where LEFT(D.CLBH,1) in ('J','P') and LEFT(D.CLBH,3) not in  ('P21')  and IsNull(UseStock,0.0)<CLSL
+   Group by  ZLBH
+) CG_DL on  CG_DL.ZLBH=#RYPurchase.ZLBH 
+Group by #RYPurchase.ZLBH,#RYPurchase.BuyNO,#RYPurchase.KHPO,#RYPurchase.XieMing,#RYPurchase.ARTICLE,#RYPurchase.Pairs,#RYPurchase.APlanDate,#RYPurchase.ShipDate
+) RYPurchase 
+Order by RYPurchase.APlanDate

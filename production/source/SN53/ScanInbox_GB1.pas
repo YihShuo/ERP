@@ -1,0 +1,114 @@
+unit ScanInbox_GB1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls, GridsEh,
+  DBGridEh;
+
+type
+  TScanInbox_GB = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Button1: TButton;
+    Edit2: TEdit;
+    DS1: TDataSource;
+    Query1: TQuery;
+    Query1lbdh: TStringField;
+    Query1zwsm: TStringField;
+    Query1ywsm: TStringField;
+    DBGridEh1: TDBGridEh;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    procedure DBGridEh1DblClick(Sender: TObject);
+    procedure DBGridEh1KeyPress(Sender: TObject; var Key: Char);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ScanInbox_GB: TScanInbox_GB;
+
+implementation
+
+uses ScanInbox1, main1;
+
+{$R *.dfm}
+
+procedure TScanInbox_GB.FormDestroy(Sender: TObject);
+begin
+ScanInbox_GB:=nil;
+end;
+
+procedure TScanInbox_GB.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+query1.active:=false;
+action:=cafree;
+end;
+
+procedure TScanInbox_GB.Button1Click(Sender: TObject);
+begin
+
+with query1 do
+  begin
+    active:=false;
+    sql.clear;
+    sql.Add('select * from LBZLS');
+    sql.add('where LBDH like '+''''+edit1.Text+'%'+'''');
+    sql.add('      and YWSM like '+''''+'%'+edit2.Text+'%'+'''');
+    sql.add('      and LB='+''''+'06'+'''');
+    sql.add('order by lbdh');
+    active:=true;
+  end;
+end;
+
+procedure TScanInbox_GB.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+  edit2.setfocus
+end;
+
+procedure TScanInbox_GB.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+button1click(nil);
+end;
+
+procedure TScanInbox_GB.DBGridEh1DblClick(Sender: TObject);
+begin
+  if query1.recordcount>0 then
+  begin
+    with ScanInBox.YWCPLH do
+      begin
+        edit;
+        FieldByName('GBBH').Value:=query1.fieldbyname('LBDH').Value;
+        FieldByName('YWSM').Value:=query1.fieldbyname('YWSM').Value;
+      end;
+    close;
+  end;
+end;
+
+procedure TScanInbox_GB.DBGridEh1KeyPress(Sender: TObject; var Key: Char);
+begin
+  if key=#13 then
+  DBGridEh1Dblclick(nil);
+end;
+
+procedure TScanInbox_GB.FormShow(Sender: TObject);
+begin
+  main.FormLanguage(Pointer(self),self.Name);
+end;
+
+end.

@@ -1,0 +1,473 @@
+unit Payabled_CL1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, DB, DBTables, Grids, DBGrids, ComCtrls,
+  dateutils, Menus,comobj,math, GridsEh, DBGridEh,iniFiles;
+
+type
+  TPayabled_CL = class(TForm)
+    DS1: TDataSource;
+    Query1: TQuery;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Edit1: TEdit;
+    Label2: TLabel;
+    Edit2: TEdit;
+    Button1: TButton;
+    Label3: TLabel;
+    DTP1: TDateTimePicker;
+    Label4: TLabel;
+    DTP2: TDateTimePicker;
+    PopupMenu1: TPopupMenu;
+    N1: TMenuItem;
+    UpdateSQL1: TUpdateSQL;
+    Label5: TLabel;
+    CB1: TComboBox;
+    Query1ZSBH: TStringField;
+    Query1DJLX: TStringField;
+    Query1CGBH: TStringField;
+    Query1DJNO: TStringField;
+    Query1CLBH: TStringField;
+    Query1DJDATE: TDateTimeField;
+    Query1Qty: TCurrencyField;
+    Query1USPrice: TCurrencyField;
+    Query1USACC: TCurrencyField;
+    Query1CostID: TStringField;
+    Query1FKZT: TStringField;
+    Query1YWPM: TStringField;
+    Query1DWBH: TStringField;
+    CWHLS: TQuery;
+    DBGrid1: TDBGridEh;
+    Button2: TButton;
+    Label6: TLabel;
+    Edit3: TEdit;
+    Query1DOCNO: TStringField;
+    Query1Memo: TStringField;
+    Label7: TLabel;
+    Edit4: TEdit;
+    Query1CWHL: TCurrencyField;
+    Query1VNPrice: TCurrencyField;
+    Query1VNACC: TCurrencyField;
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure DBGrid1KeyPress(Sender: TObject; var Key: Char);
+    procedure Query1AfterOpen(DataSet: TDataSet);
+    procedure N1Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure DBGridEh1KeyPress(Sender: TObject; var Key: Char);
+    procedure DBGridEh1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    procedure readini();
+    { Private declarations }
+  public
+    VNPrice_DiplayFormat:string;
+    VNPrice_Decimal:Byte;
+    { Public declarations }
+  end;
+
+var
+  Payabled_CL: TPayabled_CL;
+
+implementation
+
+uses PayableLit1, main1, FunUnit;
+
+{$R *.dfm}
+
+procedure TPayabled_CL.readini();
+var MyIni :Tinifile;
+    AppDir:string;
+begin
+  //
+  VNPrice_DiplayFormat:='#,##0';
+  VNPrice_Decimal:=0;
+  AppDir:=ExtractFilePath(Application.ExeName);
+  if FileExists(AppDir+'\ComName.ini')=true then
+  begin
+    try
+      MyIni := Tinifile.Create(AppDir+'\ComName.ini');
+      VNPrice_DiplayFormat:=MyIni.ReadString('VNPrice','DiplayFormat','#,##0');
+      VNPrice_Decimal:=strtoint(MyIni.ReadString('VNPrice','Decimal','0'));
+    finally
+      MyIni.Free;
+    end;
+  end;
+  TCurrencyField(Query1.FieldByName('CWHL')).DisplayFormat:=VNPrice_DiplayFormat;
+  TCurrencyField(Query1.FieldByName('VNACC')).DisplayFormat:=VNPrice_DiplayFormat;
+  TCurrencyField(Query1.FieldByName('VNPrice')).DisplayFormat:=VNPrice_DiplayFormat;
+end;
+
+procedure TPayabled_CL.Button1Click(Sender: TObject);
+var y1,m1,d1:string;
+    y,m,d:word;
+begin
+  with CWHLS do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select * from CWHLS ');
+    sql.add('order by HLYEAR,HLMONTH,HLDAY');
+    active:=true;
+  end;   
+
+  with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    if CB1.text='JG' then
+      begin
+        sql.Add('select JGZL.ZSBH,''JG'' as DJLX,''ZZZZZZZZZZ'' as CGBH,JGZLS.JGNO as DJNO,');
+        sql.add('       JGZLS.CLBH,JGZL.CFMDATE1 as DJDATE,JGZLS.Qty,JGZLS.USPrice,JGZLS.USACC,');
+        sql.add('       JGZLS.CWHL,JGZLS.VNPrice, JGZLS.VNACC,JGZLS.CostID,JGZLS.FKZT,CLZL.YWPM,CLZL.DWBH,'''' as DOCNO,JGZLS.Memo ');
+        sql.add('from JGZLS');
+        sql.add('left join JGZL on JGZL.JGNO=JGZLS.JGNO');
+        sql.add('left join CLZL on JGZLS.CLBH=CLZL.CLDH');
+        sql.add('left join ZSZL on ZSZL.ZSDH=JGZL.ZSBH ');
+        //sql.add('left join KCCK on KCCK.CKBH=JGZL.CKBH ');
+        sql.add('where convert(smalldatetime,convert(varchar,JGZL.CFMDATE1,111)) between ');
+        sql.add('             '''+formatdatetime('yyyy/MM/dd',DTP1.Date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.Date)+'''');
+        sql.add('      and JGZLS.FKZT is null ');
+        sql.add('      and JGZL.YN=''5'' ');
+        sql.add('      and JGZLS.ZMLB='''+'ZZZZZZZZZZ'+''' ');
+        if Edit4.Text<>'' then
+        sql.add('      and JGZLS.Memo like ''%'+Edit4.Text+'%'' ');
+        sql.add('      and JGZL.ZSBH like  '''+edit1.Text+'%'' ');
+        sql.add('      and ZSZL.ZSYWJC like '''+edit2.Text+'%'' ');
+        sql.add('      and JGZL.GSBH='''+main.edit2.Text+'''');
+        sql.add('order by JGZLS.JGNO,JGZLS.CLBH');
+    end;
+    if CB1.Text='RK' then
+    begin
+        sql.add('select KCRK.ZSBH,KCRKS.RKSB as DJLX,KCRKS.CGBH,KCRKS.RKNO as DJNO,');
+        sql.add('       KCRKS.CLBH,KCRK.USERDATE as DJDATE,KCRKS.Qty,KCRKS.USPrice,KCRKS.USACC,');
+        sql.add('       KCRKS.CWHL,KCRKS.VNPrice,KCRKS.VNACC,KCRKS.CostID,KCRKS.FKZT,CLZL.YWPM,CLZL.DWBH,KCRK.DOCNO,KCRK.Memo');
+        sql.add('from KCRKS');
+        sql.add('left join KCRK on KCRK.RKNO=KCRKS.RKNO');
+        sql.add('left join CLZL on KCRKS.CLBH=CLZL.CLDH');
+        sql.add('left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH ');
+        sql.add('where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between   ');
+        sql.add('             '''+formatdatetime('yyyy/MM/dd',DTP1.Date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.Date)+'''');
+        sql.add('      and KCRKS.FKZT is null ');
+        if Edit3.Text<>'' then
+        sql.add('      and KCRK.DOCNO like ''%'+Edit3.Text+'%'' ');
+        if Edit4.Text<>'' then
+        sql.add('      and KCRK.Memo like ''%'+Edit4.Text+'%'' ');
+        sql.add('      and KCRK.ZSBH like  '''+edit1.Text+'%'+'''');
+        sql.add('      and ZSZL.ZSYWJC like '''+edit2.Text+'%'+'''');
+        sql.add('      and KCRK.YN=''5'' ');
+        sql.add('      and KCRK.GSBH='''+main.edit2.Text+'''');
+        sql.Add('      and KCRK.SFL <> ''THU HOI''');
+        sql.add('order by DJNO,DJLX,CGBH,CLBH');
+    end;
+    if CB1.Text='All' then
+    begin
+        sql.Add('select JGZL.ZSBH,''JG'' as DJLX,''ZZZZZZZZZZ'' as CGBH,JGZLS.JGNO as DJNO,');
+        sql.add('       JGZLS.CLBH,JGZL.CFMDATE1 as DJDATE,JGZLS.Qty,JGZLS.USPrice,JGZLS.USACC,');
+        sql.add('       JGZLS.CWHL,JGZLS.VNPrice, JGZLS.VNACC,JGZLS.CostID,JGZLS.FKZT,CLZL.YWPM,CLZL.DWBH,'''' as DOCNO,JGZLS.Memo ');
+        sql.add('from JGZLS');
+        sql.add('left join JGZL on JGZL.JGNO=JGZLS.JGNO');
+        sql.add('left join CLZL on JGZLS.CLBH=CLZL.CLDH');
+        sql.add('left join ZSZL on ZSZL.ZSDH=JGZL.ZSBH ');
+        sql.add('where convert(smalldatetime,convert(varchar,JGZL.CFMDATE1,111)) between ');
+        sql.add('             '''+formatdatetime('yyyy/MM/dd',DTP1.Date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.Date)+'''');
+        sql.add('      and JGZLS.FKZT is null ');
+        sql.add('      and JGZL.YN=''5''');
+        sql.add('      and JGZLS.ZMLB='''+'ZZZZZZZZZZ''');
+        if Edit4.Text<>'' then
+        sql.add('      and JGZLS.Memo like ''%'+Edit4.Text+'%'' ');
+        sql.add('      and JGZL.ZSBH like  '''+edit1.Text+'%'' ');
+        sql.add('      and ZSZL.ZSYWJC like '+''''+edit2.Text+'%'' ');
+        sql.add('      and JGZL.GSBH='''+main.edit2.Text+'''');
+        sql.add(' union all');
+        sql.add('select KCRK.ZSBH,KCRKS.RKSB as DJLX,KCRKS.CGBH,KCRKS.RKNO as DJNO,');
+        sql.add('       KCRKS.CLBH,KCRK.USERDATE as DJDATE,KCRKS.Qty,KCRKS.USPrice,KCRKS.USACC,');
+        sql.add('       KCRKS.CWHL,KCRKS.VNPrice,KCRKS.VNACC,KCRKS.CostID,KCRKS.FKZT,CLZL.YWPM,CLZL.DWBH,KCRK.DOCNO,KCRK.Memo');
+        sql.add('from KCRKS');
+        sql.add('left join KCRK on KCRK.RKNO=KCRKS.RKNO');
+        sql.add('left join CLZL on KCRKS.CLBH=CLZL.CLDH');
+        sql.add('left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH ');
+        sql.add('where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between   ');
+        sql.add('             '''+formatdatetime('yyyy/MM/dd',DTP1.Date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.Date)+'''');
+        sql.add('      and  KCRKS.FKZT is null');
+        if Edit3.Text<>'' then
+        sql.add('      and KCRK.DOCNO like ''%'+Edit3.Text+'%'' ');
+        if Edit4.Text<>'' then
+        sql.add('      and KCRK.Memo like ''%'+Edit4.Text+'%'' ');
+        sql.add('      and KCRK.ZSBH like  '''+edit1.Text+'%''');
+        sql.add('      and ZSZL.ZSYWJC like '''+edit2.Text+'%''');
+        sql.add('      and KCRK.YN=''5'' ');
+        sql.add('      and KCRK.GSBH='''+main.edit2.Text+''' ');
+        sql.Add('      and KCRK.SFL <> ''THU HOI''');
+        sql.add('order by DJNO,DJLX,CGBH,CLBH');
+    end;
+    //funcObj.WriteErrorLog(sql.Text);
+    //memo1.Lines:= Sql;
+    active:=true;
+    while not eof do
+    begin
+        if (fieldbyname('CWHL').isnull and fieldbyname('VNACC').isnull)  then
+        begin
+            decodedate(fieldbyname('DJDate').Value,y,m,d);
+            if length(inttostr(m))=1 then
+              m1:='0'+inttostr(m)
+            else
+                m1:=inttostr(m);
+            if length(inttostr(d))=1 then
+              d1:='0'+inttostr(d)
+            else
+                d1:=inttostr(d);
+            y1:=inttostr(y);
+            edit;
+            if CWHLS.locate('HLYEAR;HLMONTH;HLDAY',vararrayof([y1,m1,d1]),[]) then
+              fieldbyname('CWHL').value:=CWHLS.FieldByName('CWHL').value
+            else
+                fieldbyname('CWHL').value:=0;
+            fieldbyname('VNprice').value:=round(fieldbyname('USprice').value*fieldbyname('CWHL').value);
+            fieldbyname('VNACC').value:=round(fieldbyname('USACC').value*fieldbyname('CWHL').value);
+            post;
+        end
+        //加入只有越盾為0也要換算美金
+        else
+        begin
+            if fieldbyname('VNACC').isnull then
+            begin
+              edit; //20140303 修正忘了加edit
+              fieldbyname('VNprice').value:=round(fieldbyname('USprice').value*fieldbyname('CWHL').value);
+              fieldbyname('VNACC').value:=round(fieldbyname('USACC').value*fieldbyname('CWHL').value);
+              post;
+            end;
+        end;
+       next;
+    end;
+    first;
+  end;
+
+end;
+
+procedure TPayabled_CL.FormCreate(Sender: TObject);
+begin
+  edit1.Text:=PayableLit.PayMas.fieldbyname('ZSBH').Value;
+  edit2.Text:=PayableLit.PayMas.fieldbyname('ZSYWJC').Value;
+  DTP1.Date:=startofthemonth(IncMonth(date,-1));
+  //2021工廠疫情解鎖 Weston
+  if Yearof(Date)<>2021 then
+  DTP1.MinDate:=startofthemonth(IncMonth(date,-1));  //鎖定月份,不可搜尋前個月的單
+  DTP2.Date:=endofthemonth(IncMonth(date,-1));
+  readini();
+
+  //
+end;
+
+procedure TPayabled_CL.DBGrid1KeyPress(Sender: TObject; var Key: Char);
+begin
+  if key=#13 then
+    DBGrid1dblclick(nil);
+end;
+
+procedure TPayabled_CL.Query1AfterOpen(DataSet: TDataSet);
+begin
+  if query1.recordcount>0 then
+    N1.Enabled:=true
+  else
+    N1.Enabled:=false;
+
+end;
+
+procedure TPayabled_CL.N1Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j:integer;
+begin
+
+  if query1.Active then
+  begin
+    if query1.recordcount=0 then
+    begin
+        showmessage('No record.');
+        abort;
+    end;
+  end else
+  begin
+      showmessage('No record.');
+      abort;
+  end;
+
+  try
+    eclApp:=CreateOleObject('Excel.Application');
+    WorkBook:=CreateOleObject('Excel.Sheet');
+  except
+    Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+    Exit;
+  end;
+
+  try
+    WorkBook:=eclApp.workbooks.Add;
+    eclApp.Cells(1,1):='NO';
+    for   i:=1   to   query1.fieldcount   do
+      begin
+        eclApp.Cells(1,i+1):=query1.fields[i-1].FieldName;
+      end;
+    query1.First;
+    j:=2;
+    while   not  query1.Eof   do
+      begin
+        eclApp.Cells(j,1):=j-1;
+        for   i:=1   to   query1.fieldcount   do
+          begin
+            eclApp.Cells(j,i+1):=query1.Fields[i-1].Value;
+            eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+          end;
+        query1.Next;
+        inc(j);
+      end;
+    eclapp.columns.autofit;
+    showmessage('Succeed.');
+    eclApp.Visible:=True;
+  except
+    on   F:Exception   do
+      showmessage(F.Message);
+  end;
+
+end;
+
+procedure TPayabled_CL.FormDestroy(Sender: TObject);
+begin
+ Payabled_CL:=nil;
+end;
+
+procedure TPayabled_CL.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  action:=Cafree;
+end;
+
+procedure TPayabled_CL.DBGridEh1KeyPress(Sender: TObject; var Key: Char);
+begin
+ if key=#13 then
+   DBGrid1dblclick(nil);
+end;
+
+procedure TPayabled_CL.DBGridEh1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+  if query1.FieldByName('FKZT').value='Y' then
+  begin
+    dbgrid1.canvas.font.color:=clred;
+    dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+end;
+
+procedure TPayabled_CL.DBGrid1DblClick(Sender: TObject);
+begin
+  if query1.recordcount>0 then
+  begin
+    if query1.fieldbyname('FKZT').value='Y' then
+    begin
+        showmessage('Already deliver.');
+        abort;
+      end;
+    if query1.fieldbyname('VNPrice').isnull then
+    begin
+        showmessage('Pls ask account key in exchange first.');
+        abort;
+    end;
+    with  Payablelit.PayDet do
+    begin
+        Insert;
+        fieldbyname('ZSBH').Value:=query1.fieldbyname('ZSBH').Value;
+        fieldbyname('DJNO').Value:=query1.fieldbyname('DJNO').Value;
+        fieldbyname('DJLX').Value:=query1.fieldbyname('DJLX').Value;
+        fieldbyname('CGBH').Value:=query1.fieldbyname('CGBH').Value;
+        fieldbyname('CLBH').Value:=query1.fieldbyname('CLBH').Value;
+        fieldbyname('DJDATE').Value:=query1.fieldbyname('DJDATE').Value;
+        fieldbyname('QTY').Value:=query1.fieldbyname('QTY').Value;
+        fieldbyname('USPrice').Value:=query1.fieldbyname('USPrice').Value;
+        fieldbyname('USACC').Value:=query1.fieldbyname('USACC').Value;
+        fieldbyname('USQty').Value:=query1.fieldbyname('USACC').Value;
+        fieldbyname('CWHL').Value:=query1.fieldbyname('CWHL').Value;
+        fieldbyname('VNPrice').Value:=query1.fieldbyname('VNPrice').Value;
+        fieldbyname('VNACC').Value:=query1.fieldbyname('VNACC').Value;
+        fieldbyname('VNQty').Value:=query1.fieldbyname('VNACC').Value;
+        fieldbyname('YWPM').Value:=query1.fieldbyname('YWPM').Value;
+        fieldbyname('DWBH').Value:=query1.fieldbyname('DWBH').Value;
+        fieldbyname('FKBH').Value:=Payablelit.PayMas.fieldbyname('FKBH').Value;
+        post;
+        query1.Edit;
+        query1.FieldByName('FKZT').Value:='Y';
+    end;
+  end;
+end;
+
+procedure TPayabled_CL.Button2Click(Sender: TObject);
+var bm:Tbookmark;
+    i:integer;
+    bookmarklist:tbookmarklistEh;
+begin
+  query1.disablecontrols;
+  bm:=query1.getbookmark;
+  bookmarklist:=DBGrid1.selectedrows;
+  if bookmarklist.count>0 then
+  begin
+      try
+        for i:=0 to bookmarklist.count-1 do
+        begin
+          query1.gotobookmark(pointer(bookmarklist[i]));
+          if query1.fieldbyname('FKZT').value<>'Y' then
+          begin
+            with  Payablelit.PayDet do
+            begin
+                Insert;
+                fieldbyname('ZSBH').Value:=query1.fieldbyname('ZSBH').Value;
+                fieldbyname('DJNO').Value:=query1.fieldbyname('DJNO').Value;
+                fieldbyname('DJLX').Value:=query1.fieldbyname('DJLX').Value;
+                fieldbyname('CGBH').Value:=query1.fieldbyname('CGBH').Value;
+                fieldbyname('CLBH').Value:=query1.fieldbyname('CLBH').Value;
+                fieldbyname('DJDATE').Value:=query1.fieldbyname('DJDATE').Value;
+                fieldbyname('QTY').Value:=query1.fieldbyname('QTY').Value;
+                fieldbyname('USPrice').Value:=query1.fieldbyname('USPrice').Value;
+                fieldbyname('USACC').Value:=query1.fieldbyname('USACC').Value;
+                fieldbyname('USQty').Value:=query1.fieldbyname('USACC').Value;
+                fieldbyname('CWHL').Value:=query1.fieldbyname('CWHL').Value;
+                fieldbyname('VNPrice').Value:=query1.fieldbyname('VNPrice').Value;
+                fieldbyname('VNACC').Value:=query1.fieldbyname('VNACC').Value;
+                fieldbyname('VNQty').Value:=query1.fieldbyname('VNACC').Value;
+                fieldbyname('YWPM').Value:=query1.fieldbyname('YWPM').Value;
+                fieldbyname('DWBH').Value:=query1.fieldbyname('DWBH').Value;
+                fieldbyname('FKBH').Value:=Payablelit.PayMas.fieldbyname('FKBH').Value;
+                post;
+                query1.Edit;
+                query1.FieldByName('FKZT').Value:='Y';
+            end;
+          end;
+        end;
+      finally
+        begin
+          query1.gotobookmark(bm);
+          query1.freebookmark(bm);
+          query1.enablecontrols;
+          showmessage('You have finish copy!');
+        end;
+      end;
+  end;
+end;
+
+procedure TPayabled_CL.FormShow(Sender: TObject);
+begin
+  main.FormLanguage(Pointer(self),self.Name);
+end;
+
+end.
+{procedure TPayabled_CL.DBGridEh1DblClick(Sender: TObject);
+begin
+
+end;    }
+
+

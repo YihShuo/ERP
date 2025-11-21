@@ -1,0 +1,286 @@
+unit SpecimportTW1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, StdCtrls, ExtCtrls, Grids, DBGrids, GridsEh,
+  DBGridEh;
+
+type
+  TSpecimportTW = class(TForm)
+    DBGrid1: TDBGridEh;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Button1: TButton;
+    DS1: TDataSource;
+    Query1: TQuery;
+    Label3: TLabel;
+    Edit3: TEdit;
+    Query1DDBH: TStringField;
+    Query1ARTICLE: TStringField;
+    Query1DDZT: TStringField;
+    Query1ShipDate: TDateTimeField;
+    Query1Pairs: TIntegerField;
+    Query1XieMing: TStringField;
+    Query1KFJC: TStringField;
+    Query1GSBH: TStringField;
+    CB1: TCheckBox;
+    Query1XieXing: TStringField;
+    Query1SheHao: TStringField;
+    Query1CCGB: TStringField;
+    Query1KHBH: TStringField;
+    Query1BB: TStringField;
+    Query1KHPO: TStringField;
+    Query1Version: TSmallintField;
+    Query1Trader: TStringField;
+    Query1TraderPO: TStringField;
+    Query1DDLB: TStringField;
+    Query1CPLB: TStringField;
+    Query1BZFS: TStringField;
+    Query1Dest: TStringField;
+    Query1DDGB: TStringField;
+    Query1DDRQ: TDateTimeField;
+    Query1JYTJ: TStringField;
+    Query1FKTJ: TStringField;
+    Query1Totals: TFloatField;
+    Query1ZLBH: TStringField;
+    Query1GSDH: TStringField;
+    Query1CFNO: TStringField;
+    Query1USERID: TStringField;
+    Query1USERDATE: TDateTimeField;
+    Query1DDCZ: TStringField;
+    Query1DDPACKSM: TStringField;
+    Query1LABELCHARGE: TFloatField;
+    Query1Gender: TStringField;
+    Query1YN: TStringField;
+    Query1DDGB_1: TStringField;
+    UpdateSQL1: TUpdateSQL;
+    Query1SHQR: TStringField;
+    CBX2: TCheckBox;
+    Query1BUYNO: TStringField;
+    simplecheck: TQuery;
+    simplecheckXieXing: TStringField;
+    simplecheckSheHao: TStringField;
+    simplecheckXieMing: TStringField;
+    simplecheckARTICLE: TStringField;
+    simplecheckSimpleSize: TFloatField;
+    simplecheckSignature: TStringField;
+    simplecheckSingDate: TDateTimeField;
+    simplecheckExpireDate: TDateTimeField;
+    simplecheckUSERID: TStringField;
+    simplecheckUSERDATE: TDateTimeField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure DBGrid1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure Button1Click(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure DBGrid1KeyPress(Sender: TObject; var Key: Char);
+    procedure Query1NewRecord(DataSet: TDataSet);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  SpecimportTW: TSpecimportTW;
+
+implementation
+
+uses SpecImport1, main1;
+
+{$R *.dfm}
+
+procedure TSpecimportTW.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=cafree;
+SpecImport.enabled:=true;
+end;
+
+procedure TSpecimportTW.DBGrid1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+//判定訂單狀態(未審及取消-> 紅色;正常分割訂單->黃色;正常未分割訂單->黑色
+ if query1.FieldByName('SHQR').value<>'Y' then
+  begin
+    dbgrid1.canvas.font.color:=clred;
+  end;
+ if query1.FieldByName('DDZT').value='C' then
+  begin
+    dbgrid1.canvas.font.color:=clred;
+  end;
+ if query1.FieldByName('DDZT').value='S' then
+  begin
+    dbgrid1.canvas.font.color:=clyellow;
+  end;
+//是否已經匯入
+ if not query1.FieldByName('GSBH').isnull then
+  begin
+    dbgrid1.canvas.font.color:=clLime;
+  end;
+
+end;
+
+procedure TSpecimportTW.Button1Click(Sender: TObject);
+begin
+with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select DDZLTW.*,XXZl.XieMing,KFZL.KFJC,DDZL.GSBH,lbzls.YWSM as DDGB,ZLZL.SHQR');
+    sql.add('from DDZLTW ');
+    sql.add('left join XXZL on DDZlTW.XieXing=XXZl.XieXing and DDZlTW.SheHao=XXZl.SheHao');
+    sql.add('left join kfzl on KFZl.KFDH=DDZLTW.KHBH');
+    sql.add('left join DDZL on DDZl.DDBH=DDZLTW.DDBH');
+    sql.add('left join ZLZL on DDZlTW.ZLBH=ZLZL.ZLBH ');
+    sql.add('left join LBZLS on lbzls.lb='+''''+'06'+'''');
+    sql.add('                  and lbzls.lbdh=DDZLTW.DDGB ');
+    sql.add('where DDZLTW.DDBH like '+''''+'%'+edit1.Text+'%'+'''');
+    if not CBX2.Checked then
+      begin
+        sql.add('       and Convert(smalldatetime,convert(varchar,DDZLTW.Shipdate,111)) between ');
+        sql.add('         '''+formatdatetime('yyyy/MM/dd',SpecImport.DTP1.date)+''''+' and ' +''''+
+                            formatdatetime('yyyy/MM/dd',SpecImport.DTP2.date)+'''');
+      end;
+    sql.add('       and XXZL.XieMing like '+''''+'%'+edit2.Text+'%'+'''');
+    sql.add('       and KFZL.KFJC like'+''''+'%'+edit3.Text+'%'+'''');
+    if CB1.Checked then
+      begin
+        sql.add('       and not exists(select DDBH from DDZl where DDZl.DDBH=DDZLTW.DDBH )');
+      end;
+
+    sql.add('order by DDZLTW.DDBH ');
+    //memo1.Text:=sql.text;
+    active:=true;
+  end;
+
+end;
+
+procedure TSpecimportTW.DBGrid1DblClick(Sender: TObject);
+begin
+with query1 do
+  begin
+    if not Active then
+      begin
+        abort;
+      end;
+    if recordcount=0 then
+      begin
+        abort;
+      end;
+  end;
+if  query1.FieldByName('SHQR').value<>'Y' then
+  begin
+    if messagedlg('Still holding, really import?',mtinformation,[mbYes,mbNo],0)<>mrYes then
+      begin
+        abort;
+      end;
+  end;
+if not query1.FieldByName('GSBH').isnull  then
+  begin
+    showmessage('Pls discuss with '+query1.fieldbyname('GSBH').value+' first.');
+    abort;
+  end;
+
+//檢查是否有樣品鞋
+if main.Edit2.Text='VA12' then
+begin
+  simplecheck.Active:=false;
+  simplecheck.Active:=true;
+
+  if simplecheck.Locate('xiexing;shehao',vararrayof([query1.fieldbyname('XieXing').Value,query1.fieldbyname('SheHao').Value]),[]) then
+  begin
+    if simplecheck.FieldByName('ExpireDate').value < query1.fieldbyname('ShipDate').Value then
+    begin
+      showmessage('Sample shoes is exceed of ExpireDate, RY can not be import');
+      //因為確認鞋未補上所以先不鎖
+      //abort;
+    end
+    else
+    begin
+      if simplecheck.FieldByName('ExpireDate').value-30 < query1.fieldbyname('ShipDate').Value then
+          showmessage('Sample shoes will be exceed ');
+    end;
+  end
+  else
+  begin
+    showmessage('No sample shoes, RY can not be import');
+    //因為確認鞋未補上所以先不鎖
+    //abort;
+  end;
+end;
+// 樣品鞋判斷結束
+
+with SpecImport.DDZL do
+  begin
+    edit;
+    fieldbyname('DDBH').Value:=query1.fieldbyname('DDBH').Value;
+    fieldbyname('GSBH').Value:=main.edit2.Text;
+    fieldbyname('XieXing').Value:=query1.fieldbyname('XieXing').Value;
+    fieldbyname('SheHao').Value:=query1.fieldbyname('SheHao').Value;
+    fieldbyname('Article').Value:=query1.fieldbyname('Article').Value;
+    fieldbyname('XieMing').Value:=query1.fieldbyname('XieMing').Value;
+    fieldbyname('CCGB').Value:=query1.fieldbyname('CCGB').Value;
+    fieldbyname('KHPO').Value:=query1.fieldbyname('KHPO').Value;
+    fieldbyname('DDZT').Value:=query1.fieldbyname('DDZT').Value;
+    fieldbyname('ShipDate').Value:=query1.fieldbyname('ShipDate').Value;
+    fieldbyname('Pairs').Value:=query1.fieldbyname('Pairs').Value;
+    fieldbyname('DDGB_1').Value:=query1.fieldbyname('DDGB_1').Value;
+    fieldbyname('KFJC').Value:=query1.fieldbyname('KFJC').Value;
+    fieldbyname('KHBH').Value:=query1.fieldbyname('KHBH').Value;
+    fieldbyname('BB').Value:=query1.fieldbyname('BB').Value;
+    fieldbyname('Version').Value:=query1.fieldbyname('Version').Value;
+    fieldbyname('Trader').Value:=query1.fieldbyname('Trader').Value;
+    fieldbyname('TraderPO').Value:=query1.fieldbyname('TraderPO').Value;
+    fieldbyname('DDLB').Value:=query1.fieldbyname('DDLB').Value;
+    fieldbyname('CPLB').Value:=query1.fieldbyname('CPLB').Value;
+    fieldbyname('BZFS').Value:=query1.fieldbyname('BZFS').Value;
+    fieldbyname('Dest').Value:=query1.fieldbyname('Dest').Value;
+    fieldbyname('DDGB').Value:=query1.fieldbyname('DDGB').Value;
+    fieldbyname('DDRQ').Value:=query1.fieldbyname('DDRQ').Value;
+    fieldbyname('JYTJ').Value:=query1.fieldbyname('JYTJ').Value;
+    fieldbyname('FKTJ').Value:=query1.fieldbyname('FKTJ').Value;
+    fieldbyname('Totals').Value:=query1.fieldbyname('Totals').Value;
+    fieldbyname('ZLBH').Value:=query1.fieldbyname('ZLBH').Value;
+    fieldbyname('GSDH').Value:=query1.fieldbyname('GSDH').Value;
+    fieldbyname('CFNO').Value:=query1.fieldbyname('CFNO').Value;
+    fieldbyname('USERID').Value:=main.edit1.text;
+    fieldbyname('USERDate').Value:=date;
+    fieldbyname('DDCZ').Value:=query1.fieldbyname('DDCZ').Value;
+    fieldbyname('DDPACKSM').Value:=query1.fieldbyname('DDPACKSM').Value;
+    fieldbyname('LABELCHARGE').Value:=query1.fieldbyname('LABELCHARGE').Value;
+    fieldbyname('Gender').Value:=query1.fieldbyname('Gender').Value;
+    fieldbyname('YN').Value:=query1.fieldbyname('YN').Value;
+    fieldbyname('buyno').Value:=query1.fieldbyname('buyno').Value;
+    query1.Edit;
+    query1.FieldByName('GSBH').Value:=main.Edit2.Text;
+    post;     //寫入暫存區
+    insert;   //DB增加一筆資料
+  end;
+
+end;
+
+procedure TSpecimportTW.DBGrid1KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+   DBGrid1DblClick(nil);
+end;
+
+procedure TSpecimportTW.Query1NewRecord(DataSet: TDataSet);
+begin
+abort;
+end;
+
+procedure TSpecimportTW.FormDestroy(Sender: TObject);
+begin
+SpecimportTW:=nil;
+end;
+
+end.

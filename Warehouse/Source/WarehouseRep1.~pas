@@ -1,0 +1,205 @@
+unit WarehouseRep1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, StdCtrls, ExtCtrls, ComCtrls, DB, DBTables,comobj;
+
+type
+  TWarehouseRep = class(TForm)
+    Panel1: TPanel;
+    Label3: TLabel;
+    Label6: TLabel;
+    Label5: TLabel;
+    Label1: TLabel;
+    Label8: TLabel;
+    Edit3: TEdit;
+    Edit2: TEdit;
+    Button1: TButton;
+    Edit1: TEdit;
+    Button2: TButton;
+    DBGrid2: TDBGrid;
+    Panel2: TPanel;
+    DBGrid1: TDBGrid;
+    DTP1: TDateTimePicker;
+    DTP2: TDateTimePicker;
+    DailyRep: TQuery;
+    DS1: TDataSource;
+    DDZLRep: TQuery;
+    DS2: TDataSource;
+    Panel3: TPanel;
+    DBGrid3: TDBGrid;
+    DDCC: TQuery;
+    DS3: TDataSource;
+    DailyRepUSERDate: TStringField;
+    DailyRepCTQty: TIntegerField;
+    DailyRepQty: TFloatField;
+    DDZLRepDDBH: TStringField;
+    DDZLRepQty: TFloatField;
+    DDZLRepCTQty: TIntegerField;
+    DDZLRepUSERDate: TStringField;
+    DDCCDDBH: TStringField;
+    DDCCXXCC: TStringField;
+    DDCCQty: TFloatField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit3KeyPress(Sender: TObject; var Key: Char);
+    procedure FormCreate(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure DailyRepAfterScroll(DataSet: TDataSet);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  WarehouseRep: TWarehouseRep;
+
+implementation
+
+{$R *.dfm}
+
+procedure TWarehouseRep.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+free;
+end;
+
+procedure TWarehouseRep.Button1Click(Sender: TObject);
+begin
+with DailyRep do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select convert(varchar,SCSMRK.USERDate,111) as USERDate,count(SCSMRK.CTNO) as CTQty,sum(SCSMRK.Qty) as Qty');
+    sql.add('from SCSMRK ');
+    sql.add('left join DDZL on DDZL.DDBH=SCSMRK.DDBH ');
+    sql.Add('left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao');
+    sql.add('where convert(smalldatetime,convert(varchar,SCSMRK.USERDate,111)) between ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''+' and  '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+    sql.add('and DDZL.Article like '+''''+edit1.Text+'%'+'''');
+    sql.add('and XXZL.XieMing like '+''''+'%'+edit2.Text+'%'+'''');
+    sql.add('and SCSMRK.DDBH like '+''''+edit3.text+'%'+'''');
+    sql.add('group by convert(varchar,SCSMRK.USERDATE,111) ');
+    sql.add('order by convert(varchar,SCSMRK.USERDATE,111) ');
+    active:=true;
+  end;
+{DDZLRep.Active:=true;
+DDCC.active:=true;   }
+
+end;
+
+procedure TWarehouseRep.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+edit2.SetFocus;
+end;
+
+procedure TWarehouseRep.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin 
+if key=#13 then
+edit3.SetFocus;
+end;
+
+procedure TWarehouseRep.Edit3KeyPress(Sender: TObject; var Key: Char);
+begin  
+if key=#13 then
+Button1.SetFocus;
+end;
+
+procedure TWarehouseRep.FormCreate(Sender: TObject);
+begin
+DTP1.Date:=date-7;
+DTP2.date:=Date; 
+end;
+
+procedure TWarehouseRep.Button2Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+DDCC.active:=false;
+DDZLRep.active:=false;
+if DailyRep.Active then
+  begin
+    if DailyRep.recordcount=0 then
+      begin
+        showmessage('No record.');
+        abort;
+      end;
+  end
+  else
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+
+try
+  eclApp:=CreateOleObject('Excel.Application');
+  WorkBook:=CreateOleObject('Excel.Sheet');
+except
+  Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+  Exit;
+end;
+
+try
+  WorkBook:=eclApp.workbooks.Add; 
+  eclApp.Cells(1,1):='NO';
+  for   i:=1   to   DailyRep.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=DailyRep.fields[i-1].FieldName;
+    end;
+  DailyRep.First;
+  j:=2;
+  while   not  DailyRep.Eof   do
+    begin
+      eclApp.Cells(j,1):=j-1;
+      for   i:=1   to   DailyRep.fieldcount   do
+        begin
+          eclApp.Cells(j,i+1):=DailyRep.Fields[i-1].Value;
+          eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+        end;
+      DailyRep.Next;
+      inc(j);
+    end;
+  eclapp.columns.autofit;
+  showmessage('Succeed.');
+  eclApp.Visible:=True;
+  DDCC.active:=true;
+  DDZLRep.active:=true;
+except
+  on   F:Exception   do
+    showmessage(F.Message);
+end;
+
+end;
+
+procedure TWarehouseRep.DailyRepAfterScroll(DataSet: TDataSet);
+begin
+with DDZLRep do
+  begin
+    active:=false;
+    sql.clear;
+    sql.add('select SCSMRK.DDBH,sum(SCSMRK.Qty) as Qty,count(SCSMRK.CTNO) as CTQty,');
+    sql.add('convert(varchar,SCSMRK.USERDate,111) as USERDate') ;
+    sql.add('from SCSMRK');
+    sql.add('left join DDZL on DDZL.DDBH=SCSMRK.DDBH ');
+    sql.Add('left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao');
+    sql.add('where convert(varchar,SCSMRK.USERDate,111)=:USERDate');    
+    sql.add('and DDZL.Article like '+''''+edit1.Text+'%'+'''');
+    sql.add('and XXZL.XieMing like '+''''+'%'+edit2.Text+'%'+'''');
+    sql.add('and SCSMRK.DDBH like '+''''+edit3.text+'%'+'''');
+    sql.add('group by SCSMRK.DDBH,convert(varchar,SCSMRK.USERDate,111)');
+    sql.add('order by SCSMRK.DDBH,convert(varchar,SCSMRK.USERDate,111)');
+    active:=true;
+    DDCC.active:=true;
+  end;
+
+end;
+
+end.

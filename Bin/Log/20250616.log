@@ -1,0 +1,117 @@
+select DDZLTW.*,XXZl.XieMing,KFZL.KFJC,DDZL.GSBH,lbzls.YWSM as DDGB,ZLZL.SHQR
+from DDZLTW 
+left join XXZL on DDZlTW.XieXing=XXZl.XieXing and DDZlTW.SheHao=XXZl.SheHao
+left join kfzl on KFZl.KFDH=DDZLTW.KHBH
+left join DDZL on DDZl.DDBH=DDZLTW.DDBH
+left join ZLZL on DDZlTW.ZLBH=ZLZL.ZLBH 
+left join LBZLS on lbzls.lb='06' and lbzls.lbdh=DDZLTW.DDGB 
+where DDZLTW.DDBH like '%FJTS2507-001%' 
+       and XXZL.XieMing like '%%' 
+       and KFZL.KFJC like '%%' 
+and ddzltw.ddzt <>'C'
+       and not exists(select DDBH from DDZl where DDZl.DDBH=DDZLTW.DDBH )
+order by DDZLTW.DDBH
+select DDZLTW.*,XXZl.XieMing,KFZL.KFJC,DDZL.GSBH,lbzls.YWSM as DDGB,ZLZL.SHQR
+from DDZLTW 
+left join XXZL on DDZlTW.XieXing=XXZl.XieXing and DDZlTW.SheHao=XXZl.SheHao
+left join kfzl on KFZl.KFDH=DDZLTW.KHBH
+left join DDZL on DDZl.DDBH=DDZLTW.DDBH
+left join ZLZL on DDZlTW.ZLBH=ZLZL.ZLBH 
+left join LBZLS on lbzls.lb='06' and lbzls.lbdh=DDZLTW.DDGB 
+where DDZLTW.DDBH like '%FJTS2507-001%' 
+       and XXZL.XieMing like '%%' 
+       and KFZL.KFJC like '%%' 
+and ddzltw.ddzt <>'C'
+       and not exists(select DDBH from DDZl where DDZl.DDBH=DDZLTW.DDBH )
+order by DDZLTW.DDBH
+select DDZLTW.*,XXZl.XieMing,KFZL.KFJC,DDZL.GSBH,lbzls.YWSM as DDGB,ZLZL.SHQR
+from DDZLTW 
+left join XXZL on DDZlTW.XieXing=XXZl.XieXing and DDZlTW.SheHao=XXZl.SheHao
+left join kfzl on KFZl.KFDH=DDZLTW.KHBH
+left join DDZL on DDZl.DDBH=DDZLTW.DDBH
+left join ZLZL on DDZlTW.ZLBH=ZLZL.ZLBH 
+left join LBZLS on lbzls.lb='06' and lbzls.lbdh=DDZLTW.DDGB 
+where DDZLTW.DDBH like '%FJTS2507-001%' 
+       and XXZL.XieMing like '%%' 
+       and KFZL.KFJC like '%%' 
+and ddzltw.ddzt <>'C'
+       and not exists(select DDBH from DDZl where DDZl.DDBH=DDZLTW.DDBH )
+order by DDZLTW.DDBH
+select DDZLTW.*,XXZl.XieMing,KFZL.KFJC,DDZL.GSBH,lbzls.YWSM as DDGB,ZLZL.SHQR
+from DDZLTW 
+left join XXZL on DDZlTW.XieXing=XXZl.XieXing and DDZlTW.SheHao=XXZl.SheHao
+left join kfzl on KFZl.KFDH=DDZLTW.KHBH
+left join DDZL on DDZl.DDBH=DDZLTW.DDBH
+left join ZLZL on DDZlTW.ZLBH=ZLZL.ZLBH 
+left join LBZLS on lbzls.lb='06' and lbzls.lbdh=DDZLTW.DDGB 
+where DDZLTW.DDBH like '%FJTS2507-001%' 
+       and XXZL.XieMing like '%%' 
+       and KFZL.KFJC like '%%' 
+and ddzltw.ddzt <>'C'
+       and not exists(select DDBH from DDZl where DDZl.DDBH=DDZLTW.DDBH )
+order by DDZLTW.DDBH
+select DDZLTW.*,XXZl.XieMing,KFZL.KFJC,DDZL.GSBH,lbzls.YWSM as DDGB,ZLZL.SHQR
+from DDZLTW 
+left join XXZL on DDZlTW.XieXing=XXZl.XieXing and DDZlTW.SheHao=XXZl.SheHao
+left join kfzl on KFZl.KFDH=DDZLTW.KHBH
+left join DDZL on DDZl.DDBH=DDZLTW.DDBH
+left join ZLZL on DDZlTW.ZLBH=ZLZL.ZLBH 
+left join LBZLS on lbzls.lb='06' and lbzls.lbdh=DDZLTW.DDGB 
+where DDZLTW.DDBH like '%JTS2507-001%' 
+       and XXZL.XieMing like '%%' 
+       and KFZL.KFJC like '%%' 
+and ddzltw.ddzt <>'C'
+       and not exists(select DDBH from DDZl where DDZl.DDBH=DDZLTW.DDBH )
+order by DDZLTW.DDBH
+select DDZLTW.*,XXZl.XieMing,KFZL.KFJC,DDZL.GSBH,lbzls.YWSM as DDGB,ZLZL.SHQR
+from DDZLTW 
+left join XXZL on DDZlTW.XieXing=XXZl.XieXing and DDZlTW.SheHao=XXZl.SheHao
+left join kfzl on KFZl.KFDH=DDZLTW.KHBH
+left join DDZL on DDZl.DDBH=DDZLTW.DDBH
+left join ZLZL on DDZlTW.ZLBH=ZLZL.ZLBH 
+left join LBZLS on lbzls.lb='06' and lbzls.lbdh=DDZLTW.DDGB 
+where DDZLTW.DDBH like '%JTS2507%' 
+       and XXZL.XieMing like '%%' 
+       and KFZL.KFJC like '%%' 
+and ddzltw.ddzt <>'C'
+       and not exists(select DDBH from DDZl where DDZl.DDBH=DDZLTW.DDBH )
+order by DDZLTW.DDBH
+select DDZLTW.*,XXZl.XieMing,KFZL.KFJC,DDZL.GSBH,lbzls.YWSM as DDGB,ZLZL.SHQR
+from DDZLTW 
+left join XXZL on DDZlTW.XieXing=XXZl.XieXing and DDZlTW.SheHao=XXZl.SheHao
+left join kfzl on KFZl.KFDH=DDZLTW.KHBH
+left join DDZL on DDZl.DDBH=DDZLTW.DDBH
+left join ZLZL on DDZlTW.ZLBH=ZLZL.ZLBH 
+left join LBZLS on lbzls.lb='06' and lbzls.lbdh=DDZLTW.DDGB 
+where DDZLTW.DDBH like '%JTS250%' 
+       and XXZL.XieMing like '%%' 
+       and KFZL.KFJC like '%%' 
+and ddzltw.ddzt <>'C'
+       and not exists(select DDBH from DDZl where DDZl.DDBH=DDZLTW.DDBH )
+order by DDZLTW.DDBH
+select DDZLTW.*,XXZl.XieMing,KFZL.KFJC,DDZL.GSBH,lbzls.YWSM as DDGB,ZLZL.SHQR
+from DDZLTW 
+left join XXZL on DDZlTW.XieXing=XXZl.XieXing and DDZlTW.SheHao=XXZl.SheHao
+left join kfzl on KFZl.KFDH=DDZLTW.KHBH
+left join DDZL on DDZl.DDBH=DDZLTW.DDBH
+left join ZLZL on DDZlTW.ZLBH=ZLZL.ZLBH 
+left join LBZLS on lbzls.lb='06' and lbzls.lbdh=DDZLTW.DDGB 
+where DDZLTW.DDBH like '%JTS2%' 
+       and XXZL.XieMing like '%%' 
+       and KFZL.KFJC like '%%' 
+and ddzltw.ddzt <>'C'
+       and not exists(select DDBH from DDZl where DDZl.DDBH=DDZLTW.DDBH )
+order by DDZLTW.DDBH
+select DDZLTW.*,XXZl.XieMing,KFZL.KFJC,DDZL.GSBH,lbzls.YWSM as DDGB,ZLZL.SHQR
+from DDZLTW 
+left join XXZL on DDZlTW.XieXing=XXZl.XieXing and DDZlTW.SheHao=XXZl.SheHao
+left join kfzl on KFZl.KFDH=DDZLTW.KHBH
+left join DDZL on DDZl.DDBH=DDZLTW.DDBH
+left join ZLZL on DDZlTW.ZLBH=ZLZL.ZLBH 
+left join LBZLS on lbzls.lb='06' and lbzls.lbdh=DDZLTW.DDGB 
+where DDZLTW.DDBH like '%FJTS2412-065%' 
+       and XXZL.XieMing like '%%' 
+       and KFZL.KFJC like '%%' 
+and ddzltw.ddzt <>'C'
+       and not exists(select DDBH from DDZl where DDZl.DDBH=DDZLTW.DDBH )
+order by DDZLTW.DDBH

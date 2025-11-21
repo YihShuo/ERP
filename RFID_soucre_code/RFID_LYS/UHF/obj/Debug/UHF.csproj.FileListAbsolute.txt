@@ -1,0 +1,288 @@
+D:\LeeN\UHF\UHF\bin\Debug\UHF.exe.config
+D:\LeeN\UHF\UHF\bin\Debug\UHF.exe
+D:\LeeN\UHF\UHF\bin\Debug\UHF.pdb
+D:\LeeN\UHF\UHF\obj\Debug\UHF.csproj.AssemblyReference.cache
+D:\LeeN\UHF\UHF\obj\Debug\UHF.csproj.SuggestedBindingRedirects.cache
+D:\LeeN\UHF\UHF\obj\Debug\UHF.FrmMain.resources
+D:\LeeN\UHF\UHF\obj\Debug\UHF.Properties.Resources.resources
+D:\LeeN\UHF\UHF\obj\Debug\UHF.csproj.GenerateResource.cache
+D:\LeeN\UHF\UHF\obj\Debug\UHF.csproj.CoreCompileInputs.cache
+D:\LeeN\UHF\UHF\obj\Debug\UHF.exe
+D:\LeeN\UHF\UHF\obj\Debug\UHF.pdb
+D:\LeeN\RFID_DCWH_STAR\UHF\bin\Debug\UHF.exe.config
+D:\LeeN\RFID_DCWH_STAR\UHF\bin\Debug\UHF.exe
+D:\LeeN\RFID_DCWH_STAR\UHF\bin\Debug\UHF.pdb
+D:\LeeN\RFID_DCWH_STAR\UHF\obj\Debug\UHF.csproj.AssemblyReference.cache
+D:\LeeN\RFID_DCWH_STAR\UHF\obj\Debug\UHF.csproj.SuggestedBindingRedirects.cache
+D:\LeeN\RFID_DCWH_STAR\UHF\obj\Debug\UHF.FrmMain.resources
+D:\LeeN\RFID_DCWH_STAR\UHF\obj\Debug\UHF.Properties.Resources.resources
+D:\LeeN\RFID_DCWH_STAR\UHF\obj\Debug\UHF.csproj.GenerateResource.cache
+D:\LeeN\RFID_DCWH_STAR\UHF\obj\Debug\UHF.csproj.CoreCompileInputs.cache
+D:\LeeN\RFID_DCWH_STAR\UHF\obj\Debug\UHF.exe
+D:\LeeN\RFID_DCWH_STAR\UHF\obj\Debug\UHF.pdb
+D:\LeeN\RFID_QC\UHF\bin\Debug\UHF.exe.config
+D:\LeeN\RFID_QC\UHF\bin\Debug\UHF.exe
+D:\LeeN\RFID_QC\UHF\bin\Debug\UHF.pdb
+D:\LeeN\RFID_QC\UHF\obj\Debug\UHF.csproj.AssemblyReference.cache
+D:\LeeN\RFID_QC\UHF\obj\Debug\UHF.csproj.SuggestedBindingRedirects.cache
+D:\LeeN\RFID_QC\UHF\obj\Debug\UHF.FrmMain.resources
+D:\LeeN\RFID_QC\UHF\obj\Debug\UHF.Properties.Resources.resources
+D:\LeeN\RFID_QC\UHF\obj\Debug\UHF.csproj.GenerateResource.cache
+D:\LeeN\RFID_QC\UHF\obj\Debug\UHF.csproj.CoreCompileInputs.cache
+D:\LeeN\RFID_QC\UHF\obj\Debug\UHF.exe
+D:\LeeN\RFID_QC\UHF\obj\Debug\UHF.pdb
+D:\RFID\RFID_QC\UHF\obj\Debug\UHF.csproj.AssemblyReference.cache
+D:\RFID\RFID_QC\UHF\obj\Debug\UHF.csproj.SuggestedBindingRedirects.cache
+D:\RFID\RFID_QC\UHF\obj\Debug\UHF.FrmMain.resources
+D:\RFID\RFID_QC\UHF\obj\Debug\UHF.Properties.Resources.resources
+D:\RFID\RFID_QC\UHF\obj\Debug\UHF.csproj.GenerateResource.cache
+D:\RFID\RFID_QC\UHF\obj\Debug\UHF.csproj.CoreCompileInputs.cache
+D:\RFID\RFID_QC\UHF\obj\Debug\UHF.exe
+D:\RFID\RFID_QC\UHF\obj\Debug\UHF.pdb
+D:\RFID\RFID_QC\UHF\bin\Debug\UHF.exe.config
+D:\RFID\RFID_QC\UHF\bin\Debug\UHF.exe
+D:\RFID\RFID_QC\UHF\bin\Debug\UHF.pdb
+D:\RFID\RFID_QC\UHF\bin\Debug\CustomControl.dll
+D:\RFID\RFID_QC\UHF\bin\Debug\CustomControl.pdb
+D:\RFID\RFID_QC\UHF\obj\Debug\UHF.csproj.CopyComplete
+D:\RFID\RFID_QC\UHF\bin\Debug\Reader.dll
+D:\RFID\RFID_QC\UHF\bin\Debug\Reader.pdb
+D:\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\UHF.exe.config
+D:\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\UHF.exe
+D:\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\UHF.pdb
+D:\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\CustomControl.dll
+D:\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\Reader.dll
+D:\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\CustomControl.pdb
+D:\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\Reader.pdb
+D:\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.csproj.AssemblyReference.cache
+D:\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.csproj.SuggestedBindingRedirects.cache
+D:\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.Properties.Resources.resources
+D:\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.csproj.GenerateResource.cache
+D:\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.csproj.CoreCompileInputs.cache
+D:\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.csproj.CopyComplete
+D:\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.exe
+D:\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.pdb
+D:\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.R2000UartDemo.resources
+D:\LeeN_Project\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\UHF.exe.config
+D:\LeeN_Project\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\UHF.exe
+D:\LeeN_Project\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\UHF.pdb
+D:\LeeN_Project\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\CustomControl.dll
+D:\LeeN_Project\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\Reader.dll
+D:\LeeN_Project\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\CustomControl.pdb
+D:\LeeN_Project\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\Reader.pdb
+D:\LeeN_Project\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.csproj.AssemblyReference.cache
+D:\LeeN_Project\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.csproj.SuggestedBindingRedirects.cache
+D:\LeeN_Project\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.R2000UartDemo.resources
+D:\LeeN_Project\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.Properties.Resources.resources
+D:\LeeN_Project\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.csproj.GenerateResource.cache
+D:\LeeN_Project\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.csproj.CoreCompileInputs.cache
+D:\LeeN_Project\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.csproj.CopyComplete
+D:\LeeN_Project\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.exe
+D:\LeeN_Project\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.pdb
+D:\LeeN_Project\new\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\UHF.exe.config
+D:\LeeN_Project\new\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\UHF.exe
+D:\LeeN_Project\new\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\UHF.pdb
+D:\LeeN_Project\new\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\CustomControl.dll
+D:\LeeN_Project\new\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\Reader.dll
+D:\LeeN_Project\new\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\CustomControl.pdb
+D:\LeeN_Project\new\DevelopRFIDwarehouseProgram\RFID_QC\UHF\bin\Debug\Reader.pdb
+D:\LeeN_Project\new\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.csproj.AssemblyReference.cache
+D:\LeeN_Project\new\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.csproj.SuggestedBindingRedirects.cache
+D:\LeeN_Project\new\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.R2000UartDemo.resources
+D:\LeeN_Project\new\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.Properties.Resources.resources
+D:\LeeN_Project\new\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.csproj.GenerateResource.cache
+D:\LeeN_Project\new\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.csproj.CoreCompileInputs.cache
+D:\LeeN_Project\new\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.csproj.CopyComplete
+D:\LeeN_Project\new\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.exe
+D:\LeeN_Project\new\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.pdb
+D:\LeeN_Project\DevelopRFIDwarehouseProgram\RFID_QC\UHF\obj\Debug\UHF.csproj.ResolveComReference.cache
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_QC\UHF\bin\Debug\UHF.exe.config
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_QC\UHF\bin\Debug\UHF.exe
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_QC\UHF\bin\Debug\UHF.pdb
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_QC\UHF\bin\Debug\CustomControl.dll
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_QC\UHF\bin\Debug\Reader.dll
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_QC\UHF\bin\Debug\CustomControl.pdb
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_QC\UHF\bin\Debug\Reader.pdb
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_QC\UHF\obj\Debug\UHF.csproj.ResolveComReference.cache
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_QC\UHF\obj\Debug\UHF.R2000UartDemo.resources
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_QC\UHF\obj\Debug\UHF.Properties.Resources.resources
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_QC\UHF\obj\Debug\UHF.csproj.GenerateResource.cache
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_QC\UHF\obj\Debug\UHF.exe
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_QC\UHF\obj\Debug\UHF.pdb
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_QC\UHF\obj\Debug\UHF.csprojResolveAssemblyReference.cache
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_QC\UHF\bin\Debug\UHF.exe.config
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_QC\UHF\bin\Debug\UHF.exe
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_QC\UHF\bin\Debug\UHF.pdb
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_QC\UHF\bin\Debug\CustomControl.dll
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_QC\UHF\bin\Debug\Reader.dll
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_QC\UHF\bin\Debug\CustomControl.pdb
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_QC\UHF\bin\Debug\Reader.pdb
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_QC\UHF\obj\Debug\UHF.csproj.AssemblyReference.cache
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_QC\UHF\obj\Debug\UHF.csproj.ResolveComReference.cache
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_QC\UHF\obj\Debug\UHF.R2000UartDemo.resources
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_QC\UHF\obj\Debug\UHF.Properties.Resources.resources
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_QC\UHF\obj\Debug\UHF.csproj.GenerateResource.cache
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_QC\UHF\obj\Debug\UHF.csproj.CoreCompileInputs.cache
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_QC\UHF\obj\Debug\UHF.csproj.Up2Date
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_QC\UHF\obj\Debug\UHF.exe
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_QC\UHF\obj\Debug\UHF.pdb
+C:\Users\PC\Desktop\RFID\RFID_QC\UHF\bin\Debug\UHF.exe.config
+C:\Users\PC\Desktop\RFID\RFID_QC\UHF\bin\Debug\UHF.exe
+C:\Users\PC\Desktop\RFID\RFID_QC\UHF\bin\Debug\UHF.pdb
+C:\Users\PC\Desktop\RFID\RFID_QC\UHF\bin\Debug\CustomControl.dll
+C:\Users\PC\Desktop\RFID\RFID_QC\UHF\bin\Debug\Reader.dll
+C:\Users\PC\Desktop\RFID\RFID_QC\UHF\bin\Debug\CustomControl.pdb
+C:\Users\PC\Desktop\RFID\RFID_QC\UHF\bin\Debug\Reader.pdb
+C:\Users\PC\Desktop\RFID\RFID_QC\UHF\obj\Debug\UHF.csproj.AssemblyReference.cache
+C:\Users\PC\Desktop\RFID\RFID_QC\UHF\obj\Debug\UHF.csproj.ResolveComReference.cache
+C:\Users\PC\Desktop\RFID\RFID_QC\UHF\obj\Debug\UHF.R2000UartDemo.resources
+C:\Users\PC\Desktop\RFID\RFID_QC\UHF\obj\Debug\UHF.Properties.Resources.resources
+C:\Users\PC\Desktop\RFID\RFID_QC\UHF\obj\Debug\UHF.csproj.GenerateResource.cache
+C:\Users\PC\Desktop\RFID\RFID_QC\UHF\obj\Debug\UHF.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\RFID\RFID_QC\UHF\obj\Debug\UHF.csproj.Up2Date
+C:\Users\PC\Desktop\RFID\RFID_QC\UHF\obj\Debug\UHF.exe
+C:\Users\PC\Desktop\RFID\RFID_QC\UHF\obj\Debug\UHF.pdb
+E:\RFID_LYS_Stitching\UHF\bin\Debug\UHF.exe.config
+E:\RFID_LYS_Stitching\UHF\bin\Debug\UHF.exe
+E:\RFID_LYS_Stitching\UHF\bin\Debug\UHF.pdb
+E:\RFID_LYS_Stitching\UHF\bin\Debug\CustomControl.dll
+E:\RFID_LYS_Stitching\UHF\bin\Debug\Reader.dll
+E:\RFID_LYS_Stitching\UHF\bin\Debug\CustomControl.pdb
+E:\RFID_LYS_Stitching\UHF\bin\Debug\Reader.pdb
+E:\RFID_LYS_Stitching\UHF\obj\Debug\UHF.csproj.AssemblyReference.cache
+E:\RFID_LYS_Stitching\UHF\obj\Debug\UHF.csproj.ResolveComReference.cache
+E:\RFID_LYS_Stitching\UHF\obj\Debug\UHF.R2000UartDemo.resources
+E:\RFID_LYS_Stitching\UHF\obj\Debug\UHF.Properties.Resources.resources
+E:\RFID_LYS_Stitching\UHF\obj\Debug\UHF.csproj.GenerateResource.cache
+E:\RFID_LYS_Stitching\UHF\obj\Debug\UHF.csproj.CoreCompileInputs.cache
+E:\RFID_LYS_Stitching\UHF\obj\Debug\UHF.csproj.Up2Date
+E:\RFID_LYS_Stitching\UHF\obj\Debug\UHF.exe
+E:\RFID_LYS_Stitching\UHF\obj\Debug\UHF.pdb
+E:\RFID_LYS_Stitching\UHF\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.Buffers.dll
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.IO.Pipelines.dll
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.Memory.dll
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.Numerics.Vectors.dll
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.Text.Encodings.Web.dll
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.Text.Json.dll
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.Threading.Tasks.Extensions.dll
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.ValueTuple.dll
+E:\RFID_LYS_Stitching\UHF\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.Buffers.xml
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.IO.Pipelines.xml
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.Memory.xml
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.Numerics.Vectors.xml
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.Text.Encodings.Web.xml
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.Text.Json.xml
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.Threading.Tasks.Extensions.xml
+E:\RFID_LYS_Stitching\UHF\bin\Debug\System.ValueTuple.xml
+E:\RFID_LYS\UHF\bin\Debug\UHF.exe.config
+E:\RFID_LYS\UHF\bin\Debug\UHF.exe
+E:\RFID_LYS\UHF\bin\Debug\UHF.pdb
+E:\RFID_LYS\UHF\bin\Debug\CustomControl.dll
+E:\RFID_LYS\UHF\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+E:\RFID_LYS\UHF\bin\Debug\Reader.dll
+E:\RFID_LYS\UHF\bin\Debug\System.Buffers.dll
+E:\RFID_LYS\UHF\bin\Debug\System.IO.Pipelines.dll
+E:\RFID_LYS\UHF\bin\Debug\System.Memory.dll
+E:\RFID_LYS\UHF\bin\Debug\System.Numerics.Vectors.dll
+E:\RFID_LYS\UHF\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+E:\RFID_LYS\UHF\bin\Debug\System.Text.Encodings.Web.dll
+E:\RFID_LYS\UHF\bin\Debug\System.Text.Json.dll
+E:\RFID_LYS\UHF\bin\Debug\System.Threading.Tasks.Extensions.dll
+E:\RFID_LYS\UHF\bin\Debug\System.ValueTuple.dll
+E:\RFID_LYS\UHF\bin\Debug\CustomControl.pdb
+E:\RFID_LYS\UHF\bin\Debug\Reader.pdb
+E:\RFID_LYS\UHF\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+E:\RFID_LYS\UHF\bin\Debug\System.Buffers.xml
+E:\RFID_LYS\UHF\bin\Debug\System.IO.Pipelines.xml
+E:\RFID_LYS\UHF\bin\Debug\System.Memory.xml
+E:\RFID_LYS\UHF\bin\Debug\System.Numerics.Vectors.xml
+E:\RFID_LYS\UHF\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+E:\RFID_LYS\UHF\bin\Debug\System.Text.Encodings.Web.xml
+E:\RFID_LYS\UHF\bin\Debug\System.Text.Json.xml
+E:\RFID_LYS\UHF\bin\Debug\System.Threading.Tasks.Extensions.xml
+E:\RFID_LYS\UHF\bin\Debug\System.ValueTuple.xml
+E:\RFID_LYS\UHF\obj\Debug\UHF.csproj.AssemblyReference.cache
+E:\RFID_LYS\UHF\obj\Debug\UHF.csproj.ResolveComReference.cache
+E:\RFID_LYS\UHF\obj\Debug\UHF.R2000UartDemo.resources
+E:\RFID_LYS\UHF\obj\Debug\UHF.Properties.Resources.resources
+E:\RFID_LYS\UHF\obj\Debug\UHF.csproj.GenerateResource.cache
+E:\RFID_LYS\UHF\obj\Debug\UHF.csproj.CoreCompileInputs.cache
+E:\RFID_LYS\UHF\obj\Debug\UHF.csproj.Up2Date
+E:\RFID_LYS\UHF\obj\Debug\UHF.exe
+E:\RFID_LYS\UHF\obj\Debug\UHF.pdb
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\UHF.exe.config
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\UHF.exe
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\UHF.pdb
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\CustomControl.dll
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\Reader.dll
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Buffers.dll
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.IO.Pipelines.dll
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Memory.dll
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Numerics.Vectors.dll
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Text.Encodings.Web.dll
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Text.Json.dll
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.ValueTuple.dll
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\CustomControl.pdb
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\Reader.pdb
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Buffers.xml
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.IO.Pipelines.xml
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Memory.xml
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Numerics.Vectors.xml
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Text.Encodings.Web.xml
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Text.Json.xml
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.ValueTuple.xml
+D:\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.csproj.AssemblyReference.cache
+D:\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.csproj.ResolveComReference.cache
+D:\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.R2000UartDemo.resources
+D:\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.Properties.Resources.resources
+D:\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.csproj.GenerateResource.cache
+D:\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.csproj.CoreCompileInputs.cache
+D:\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.csproj.Up2Date
+D:\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.exe
+D:\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.pdb
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\UHF.exe.config
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\UHF.exe
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\UHF.pdb
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\CustomControl.dll
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\Reader.dll
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Buffers.dll
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.IO.Pipelines.dll
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Memory.dll
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Numerics.Vectors.dll
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Text.Encodings.Web.dll
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Text.Json.dll
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.ValueTuple.dll
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\CustomControl.pdb
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\Reader.pdb
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Buffers.xml
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.IO.Pipelines.xml
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Memory.xml
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Numerics.Vectors.xml
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Text.Encodings.Web.xml
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Text.Json.xml
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\bin\Debug\System.ValueTuple.xml
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.csproj.AssemblyReference.cache
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.csproj.ResolveComReference.cache
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.R2000UartDemo.resources
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.Properties.Resources.resources
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.csproj.GenerateResource.cache
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.csproj.CoreCompileInputs.cache
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.csproj.Up2Date
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.exe
+D:\ERP SOURCE CODE\RFID_soucre_code\RFID_LYS\UHF\obj\Debug\UHF.pdb

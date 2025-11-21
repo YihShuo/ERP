@@ -1,0 +1,187 @@
+unit CD_Rotation1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, GridsEh, DBGridEh, ExtCtrls, StdCtrls, DB, DBTables;
+
+type
+  TCD_Rotation = class(TForm)
+    Panel1: TPanel;
+    DBGridEh1: TDBGridEh;
+    Label2: TLabel;
+    ZLBHEdit: TEdit;
+    Button1: TButton;
+    Query1: TQuery;
+    DS1: TDataSource;
+    Query1ZLBH: TStringField;
+    Query1BWBH: TStringField;
+    Query1YWSM: TStringField;
+    Query1ZWSM: TStringField;
+    Query1CLBH: TStringField;
+    Query1ZWPM: TStringField;
+    Query1YWPM: TStringField;
+    Query1SIZE: TStringField;
+    Query1XXCC: TStringField;
+    Query1Qty: TIntegerField;
+    Label1: TLabel;
+    BWBHEdit: TEdit;
+    Button2: TButton;
+    Label3: TLabel;
+    SIZEEdit: TEdit;
+    Query1DQty: TIntegerField;
+    CheckBox1: TCheckBox;
+    Label4: TLabel;
+    YWSMEdit: TEdit;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure DBGridEh1DblClick(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure DBGridEh1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  CD_Rotation: TCD_Rotation;
+
+implementation
+
+uses main1, CutDispatch1, FunUnit;
+
+{$R *.dfm}
+
+procedure TCD_Rotation.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+procedure TCD_Rotation.FormDestroy(Sender: TObject);
+begin
+  CD_Rotation := nil;
+end;
+
+procedure TCD_Rotation.Button1Click(Sender: TObject);
+begin
+  with Query1 do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('select * from (');
+    SQL.Add('  Select ZLBH,BWBH,SIZE,XXCC,CLBH,YWPM,ZWPM,YWSM,ZWSM,SUM(Qty) as Qty,SUM(DQty) as DQty from (');
+    SQL.Add('  Select CutDispatchZL.DDBH,CutDispatchZL.ZLBH,CutDispatchZL.BWBH,CutDispatchZL.SIZE,CutDispatchZL.XXCC,CutDispatchZL.CLBH,CutDispatchZL.Qty,IsNull(CutDisPatchS.DQty,0) as DQty,CLZL.ZWPM,CLZL.YWPM,BWZL.ZWSM,BWZL.YWSM from (');
+    SQL.Add('	Select SMDD.DDBH,ZLBH,BWBH,SIZE,CutDispatchZL.XXCC,CLBH,SMDDS.Qty from CutDispatchZL ');
+    SQL.Add('	left join SMDD on SMDD.YSBH=CutDispatchZL.ZLBH and SMDD.GXLB=''C''');
+    SQL.Add('	left join SMDDS on SMDDS.DDBH=SMDD.DDBH and SMDDS.XXCC=CutDispatchZL.SIZE ');
+    SQL.Add('	where 1=1   ');
+    if ZLBHEdit.Text<>'' then
+    SQL.Add('	 and CutDispatchZL.ZLBH like '''+ZLBHEdit.Text+'%'' ');
+    if BWBHEdit.Text<>'' then
+    SQL.Add('	 and CutDispatchZL.BWBH like '''+BWBHEdit.Text+'%'' ');
+    if SIZEEdit.Text<>'' then
+    SQL.Add('	 and CutDispatchZL.SIZE like '''+SIZEEdit.Text+'%'' ');
+    SQL.Add('	 ) CutDispatchZL');
+    SQL.Add('	 left join (');
+    SQL.Add('	  select CutDispatchSS.DDBH,CutDisPatchS.ZLBH,CutDisPatchS.BWBH,CutDisPatchS.SIZE,CutDisPatchS.CLBH,Sum(CutDisPatchSS.Qty) as DQty from CutDisPatchS');
+    SQL.Add('	  Left join  CutDispatchSS on CutDisPatchS.DLNO=CutDispatchSS.DLNO and CutDispatchS.ZLBH=CutDispatchSS.ZLBH and CutDispatchS.BWBH=CutDispatchSS.BWBH  and CutDispatchS.SIZE=CutDispatchSS.SIZE and CutDispatchS.SIZE=CutDispatchSS.SIZE');
+    SQL.Add('	  where 1=1 ');
+    if ZLBHEdit.Text<>'' then
+    SQL.Add('	 and CutDisPatchS.ZLBH like '''+ZLBHEdit.Text+'%'' ');
+    if BWBHEdit.Text<>'' then
+    SQL.Add('	 and CutDisPatchS.BWBH like '''+BWBHEdit.Text+'%'' ');
+    if SIZEEdit.Text<>'' then
+    SQL.Add('	 and CutDisPatchS.SIZE like '''+SIZEEdit.Text+'%'' ');
+    SQL.Add('	  Group by CutDispatchSS.DDBH,CutDisPatchS.ZLBH,CutDisPatchS.BWBH,CutDisPatchS.SIZE,CutDisPatchS.CLBH ');
+    SQL.Add('	 ) CutDisPatchS on CutDisPatchS.ZLBH=CutDispatchZL.ZLBH and CutDisPatchS.DDBH=CutDispatchZL.DDBH and CutDisPatchS.BWBH=CutDispatchZL.BWBH and CutDisPatchS.SIZE=CutDispatchZL.SIZE and CutDisPatchS.CLBH=CutDispatchZL.CLBH');
+    SQL.Add('	 LEFT JOIN BWZL ON BWZL.BWDH = CutDispatchZL.BWBH');
+    SQL.Add('	 LEFT JOIN CLZL ON CLZL.CLDH = CutDispatchZL.CLBH');
+    if YWSMEdit.Text<>'' then
+    SQL.Add('where BWZL.YWSM like ''%'+YWSMEdit.Text+'%'' ');
+    SQL.Add(' ) CutDispatchZL');
+    SQL.Add('	 Group by ZLBH,BWBH,SIZE,XXCC,CLBH,YWPM,ZWPM,YWSM,ZWSM');
+    SQL.Add(' ) CutDispatchZL');
+    if CheckBox1.Checked=true then
+    SQL.Add(' where Qty>DQty ');
+    //FuncObj.WriteErrorLog(sql.Text);
+    Active := true;
+  end;
+end;
+
+procedure TCD_Rotation.DBGridEh1DblClick(Sender: TObject);
+begin
+  if Query1.FieldByName('Qty').value>Query1.FieldByName('DQty').value then
+  begin
+    CutDispatch.QCDDetail.Insert;
+    CutDispatch.QCDDetail.FieldByName('ZLBH').Value := Query1.FieldByName('ZLBH').AsString;
+    CutDispatch.QCDDetail.FieldByName('BWBH').Value := Query1.FieldByName('BWBH').AsString;
+    CutDispatch.QCDDetail.FieldByName('YWSM').Value := Query1.FieldByName('YWSM').AsString;
+    CutDispatch.QCDDetail.FieldByName('SIZE').Value := Query1.FieldByName('SIZE').AsString;
+    CutDispatch.QCDDetail.FieldByName('Qty').Value := 0;//Query1.FieldByName('Qty').AsString;
+    CutDispatch.QCDDetail.FieldByName('XXCC').Value := Query1.FieldByName('XXCC').AsString;
+    CutDispatch.QCDDetail.FieldByName('CLBH').Value := Query1.FieldByName('CLBH').AsString;
+    CutDispatch.QCDDetail.FieldByName('YWPM').Value := Query1.FieldByName('YWPM').AsString;
+    CutDispatch.QCDDetail.FieldByName('CutNum').Value := 0;//Query1.FieldByName('CutNum').AsString;
+    CutDispatch.QCDDetail.FieldByName('okCutNum').Value := '0';
+    CutDispatch.QCDDetail.Post;
+    Close;
+  end else
+  begin
+    Showmessage('So luong cua phieu chat toan bo het roi ');
+  end;
+end;
+
+procedure TCD_Rotation.Button2Click(Sender: TObject);
+var
+  i: integer;
+begin
+  if (DBGridEh1.SelectedRows.Count > 0) then
+  begin
+    CutDispatch.QCDDetail.Cancel;
+    for i := 0 to DBGridEh1.SelectedRows.Count-1 do
+    begin
+      if Query1.FieldByName('Qty').value>Query1.FieldByName('DQty').value then
+      begin
+        CutDispatch.QCDDetail.Insert;
+        Query1.GotoBookmark(pointer(DBGridEh1.SelectedRows.Items[i]));
+        CutDispatch.QCDDetail.FieldByName('DLNO').Value := CutDispatch.QCDMaster.FieldByName('DLNO').AsString;
+        CutDispatch.QCDDetail.FieldByName('ZLBH').Value := Query1.FieldByName('ZLBH').AsString;
+        CutDispatch.QCDDetail.FieldByName('BWBH').Value := Query1.FieldByName('BWBH').AsString;
+        CutDispatch.QCDDetail.FieldByName('YWSM').Value := Query1.FieldByName('YWSM').AsString;
+        CutDispatch.QCDDetail.FieldByName('SIZE').Value := Query1.FieldByName('SIZE').AsString;
+        CutDispatch.QCDDetail.FieldByName('Qty').Value := 0;//Query1.FieldByName('Qty').AsString;
+        CutDispatch.QCDDetail.FieldByName('XXCC').Value := Query1.FieldByName('XXCC').AsString;
+        CutDispatch.QCDDetail.FieldByName('CLBH').Value := Query1.FieldByName('CLBH').AsString;
+        CutDispatch.QCDDetail.FieldByName('YWPM').Value := Query1.FieldByName('YWPM').AsString;
+        CutDispatch.QCDDetail.FieldByName('CutNum').Value :=0;// Query1.FieldByName('CutNum').AsString;
+        CutDispatch.QCDDetail.FieldByName('okCutNum').Value := '0';
+        CutDispatch.QCDDetail.Post;
+      end else
+      begin
+        Showmessage('So luong cua phieu chat toan bo het roi ');
+        break;
+      end;
+    end;
+    Close;
+  end
+  else begin
+    MessageDlg('Please select a data first!', mtWarning, [mbyes], 0);
+  end;
+
+end;
+
+procedure TCD_Rotation.DBGridEh1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if Query1.FieldByName('Qty').value<=Query1.FieldByName('DQty').value then
+  begin
+    DBGridEh1.canvas.font.color:=clRed;
+  end;
+end;
+
+end.

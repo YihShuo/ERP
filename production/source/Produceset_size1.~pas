@@ -1,0 +1,49 @@
+unit Produceset_size1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, Grids, DBGrids;
+
+type
+  TProduceset_size = class(TForm)
+    DBGrid1: TDBGrid;
+    Query1: TQuery;
+    DataSource1: TDataSource;
+    Query1XXCC: TStringField;
+    Query1S_Qty: TFloatField;
+    Query1O_Qty: TFloatField;
+    Query1C_Qty: TFloatField;
+    Query1A_Qty: TFloatField;
+    Query1Total_Qty: TFloatField;
+    Query1SCBH: TStringField;
+    Query1Y_Qty: TFloatField;
+    Query1Z_Qty: TFloatField;
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Produceset_size: TProduceset_size;
+
+implementation
+
+{$R *.dfm}
+
+procedure TProduceset_size.FormCreate(Sender: TObject);
+begin
+query1.active:=true;
+end;
+
+procedure TProduceset_size.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+free; 
+end;
+
+end.

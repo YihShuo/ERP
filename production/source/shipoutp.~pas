@@ -1,0 +1,253 @@
+unit shipoutp;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ExtCtrls, ComCtrls, Grids, DBGrids, Mask,
+  DBCtrls, DB, DBTables;
+
+type
+  TShipingOut = class(TForm)
+    Panel1: TPanel;
+    BB2: TBitBtn;
+    BB3: TBitBtn;
+    BB4: TBitBtn;
+    BB5: TBitBtn;
+    BB6: TBitBtn;
+    BB7: TBitBtn;
+    BB1: TBitBtn;
+    BBT1: TBitBtn;
+    BBT2: TBitBtn;
+    BBT3: TBitBtn;
+    BBT4: TBitBtn;
+    bbt5: TBitBtn;
+    pquery: TPanel;
+    Panel3: TPanel;
+    PageC: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    Button1: TButton;
+    DBGrid1: TDBGrid;
+    Panel2: TPanel;
+    DBGrid2: TDBGrid;
+    DBGrid3: TDBGrid;
+    Label1: TLabel;
+    Label2: TLabel;
+    cdt1: TDateTimePicker;
+    ywdd: TQuery;
+    ywddss: TQuery;
+    shipingoutm: TQuery;
+    dsspm: TDataSource;
+    dsyd: TDataSource;
+    dsyds: TDataSource;
+    shipingoutmshipingno: TStringField;
+    shipingoutmshipingdate: TDateTimeField;
+    shipingoutmKHBK: TStringField;
+    shipingoutmckbh: TStringField;
+    shipingoutmDest: TStringField;
+    shipingoutmotherfree: TFloatField;
+    shipingoutmshipmoney: TFloatField;
+    shipingoutmkeyinguser: TStringField;
+    shipingoutmkeyingdate: TDateTimeField;
+    shipingoutmuserdate: TDateTimeField;
+    shipingoutmuserid: TStringField;
+    ywddup: TUpdateSQL;
+    shipingmup: TUpdateSQL;
+    ywddsup: TUpdateSQL;
+    ywddDDBH: TStringField;
+    ywddGSBH: TStringField;
+    ywddETD: TDateTimeField;
+    ywddQty: TFloatField;
+    ywddKHDDBH2: TStringField;
+    ywddInspectDate: TDateTimeField;
+    ywddInspectQty: TIntegerField;
+    ywddssXXCC: TStringField;
+    ywddssQty: TIntegerField;
+    ywddssIPrice: TCurrencyField;
+    dt1: TDateTimePicker;
+    dt2: TDateTimePicker;
+    Label4: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
+    Edit1: TEdit;
+    Label6: TLabel;
+    Edit2: TEdit;
+    Qtemp: TQuery;
+    Qtempywsm: TStringField;
+    cbx1: TComboBox;
+    Label8: TLabel;
+    Label7: TLabel;
+    sno: TDBEdit;
+    sof: TDBEdit;
+    Label9: TLabel;
+    DBEdit1: TDBEdit;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure BB1Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure shipingoutmBeforeInsert(DataSet: TDataSet);
+    procedure cbx1Change(Sender: TObject);
+    procedure BB4Click(Sender: TObject);
+    procedure BB2Click(Sender: TObject);
+    procedure BB5Click(Sender: TObject);
+    procedure BB6Click(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure PageCChange(Sender: TObject);
+    procedure cdt1Change(Sender: TObject);
+    procedure DBGrid2DblClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ShipingOut: TShipingOut;
+
+implementation
+
+{$R *.dfm}
+
+procedure TShipingOut.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+//判斷是否存檔
+if shipingoutm.requestlive  then
+  begin
+    messagedlg('You have to save data  first.',mtwarning,[mbyes],0);
+    action:=canone;
+  end
+  else
+    action:=cafree;
+end;
+
+procedure TShipingOut.FormCreate(Sender: TObject);
+var i:integer;
+begin
+with Qtemp do
+  begin
+    active:=true;
+    for i:=1 to recordcount do
+      begin
+        CBX1.Items.Add(fieldbyname('ywsm').asstring);
+        next;
+      end;
+  end;    
+  CBX1.itemindex:=0;
+  DT1.date:=now()-30;
+  DT2.date:=now();
+end;
+
+procedure TShipingOut.FormDestroy(Sender: TObject);
+begin
+    shipingout:=nil;
+end;
+
+procedure TShipingOut.BB1Click(Sender: TObject);
+begin
+   pquery.Visible:=true;
+end;
+
+procedure TShipingOut.Button1Click(Sender: TObject);
+begin
+  with shipingoutm do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select shipingm.* from shipingm');
+    sql.add('left join kfzl on kfzl.kfdh=shipingm.khbk');
+    sql.add('    where convert(smalldatetime,convert(varchar,shipingDATE,111)) between');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DT1.Date) +''''+' and '+''''+formatdatetime('yyyy/MM/dd',DT2.Date) +'''');
+    if length(edit1.Text)>0 then
+      sql.add('   and shipingno>='+''''+edit1.Text+'''');
+    if length(edit2.Text)>0 then
+      sql.add('   and kfzl.kfjc>='+''''+edit2.Text+'''');
+    active:=true;
+  end;
+  pquery.Visible:=false;
+  bbt1.Enabled:=true;
+  bbt2.Enabled:=true;
+  bbt3.Enabled:=true;
+  bbt4.Enabled:=true;
+  bbt5.Enabled:=false;
+end;
+
+procedure TShipingOut.shipingoutmBeforeInsert(DataSet: TDataSet);
+begin
+//取得最大單號
+end;
+
+procedure TShipingOut.cbx1Change(Sender: TObject);
+begin
+//過慮未出貨的訂單
+end;
+
+procedure TShipingOut.BB4Click(Sender: TObject);
+begin
+//如果沒有明細就不用鎖出貨地點，如果有就必需鎖定
+end;
+
+procedure TShipingOut.BB2Click(Sender: TObject);
+begin
+  pagec.ActivePageIndex:=1;
+  shipingoutm.FieldByName('shipingdate').Value:=cdt1.date;  
+  bb5.Enabled:=true;
+  bb6.Enabled:=true;
+end;
+
+procedure TShipingOut.BB5Click(Sender: TObject);
+begin
+  bb2.Enabled:=true;
+  bb3.Enabled:=false;
+  bb4.Enabled:=false;
+  bb5.Enabled:=false;
+  bb6.Enabled:=false;
+end;
+
+procedure TShipingOut.BB6Click(Sender: TObject);
+begin
+  bb2.Enabled:=true;
+  bb3.Enabled:=false;
+  bb4.Enabled:=false;
+  bb5.Enabled:=false;
+  bb6.Enabled:=false;
+end;
+
+procedure TShipingOut.DBGrid1DblClick(Sender: TObject);
+begin
+  bb2.Enabled:=false;
+  cdt1.Date:=shipingoutm.FieldByName('shipingdate').Value;
+end;
+
+procedure TShipingOut.PageCChange(Sender: TObject);
+begin
+  if (pagec.ActivePageIndex=0) then
+  begin
+    bbt1.Enabled:=true;
+    bbt2.Enabled:=true;
+    bbt3.Enabled:=true;
+    bbt4.Enabled:=true;
+    bbt5.Enabled:=false;
+  end
+  else
+  begin
+    bbt1.Enabled:=false;
+    bbt2.Enabled:=false;
+    bbt3.Enabled:=false;
+    bbt4.Enabled:=false;
+    bbt5.Enabled:=true;
+  end;
+end;
+
+procedure TShipingOut.cdt1Change(Sender: TObject);
+begin
+  shipingoutm.FieldByName('shipingdate').Value:=cdt1.date;
+end;
+
+procedure TShipingOut.DBGrid2DblClick(Sender: TObject);
+begin
+//從YWDD中 選擇同出口國，離廠日大於等於出貨日且未設定出貨單號的RY
+end;
+
+end.

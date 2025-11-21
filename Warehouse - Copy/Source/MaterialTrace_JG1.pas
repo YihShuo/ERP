@@ -1,0 +1,44 @@
+unit MaterialTrace_JG1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, GridsEh, DBGridEh;
+
+type
+  TMaterialTrace_JG = class(TForm)
+    DBGridEh1: TDBGridEh;
+    Query1: TQuery;
+    DataSource1: TDataSource;
+    Query1CLBH: TStringField;
+    Query1TotalQty: TCurrencyField;
+    Query1ZLBH: TStringField;
+    Query1Qty: TCurrencyField;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MaterialTrace_JG: TMaterialTrace_JG;
+
+implementation
+
+{$R *.dfm}
+
+procedure TMaterialTrace_JG.FormDestroy(Sender: TObject);
+begin
+MaterialTrace_JG:=nil;
+end;
+
+procedure TMaterialTrace_JG.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+end.

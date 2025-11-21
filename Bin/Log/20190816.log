@@ -1,0 +1,11 @@
+select SMDD.*,SCGXDY.MEMO ,XXZL.DAOMH from SMDD
+left join SCGXDY on SCGXDY.GX=SMDD.GXLB and len(SCGXDY.GXLB)=1  
+left join DDZL on DDZL.DDBH=SMDD.YSBH 
+left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZl.SheHao=DDZL.SheHao 
+where SMDD.DDBH like '%'
+      and SMDD.XieMing like '%%'
+       and SMDD.SCYEAR='2019'
+       and SMDD.SCMONTH='08'
+       and SMDD.GXLB='A'
+      and (SMDD.GSBH='VDT' or isnull(DDZL.GSBH,'VDT')='VDT')
+order by SMDD.DDBH,SMDD.SCCX

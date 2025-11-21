@@ -1,0 +1,1034 @@
+unit Ontime1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DBTables, DB, Grids, DBGrids, StdCtrls, Buttons, ExtCtrls,
+  ComCtrls, DBCtrls, Mask;
+
+type
+  TOntime = class(TForm)
+    Panel1: TPanel;
+    Label4: TLabel;
+    BB2: TBitBtn;
+    BB3: TBitBtn;
+    BB4: TBitBtn;
+    BB5: TBitBtn;
+    BB6: TBitBtn;
+    BB7: TBitBtn;
+    BB1: TBitBtn;
+    BBT1: TBitBtn;
+    BBT2: TBitBtn;
+    BBT3: TBitBtn;
+    BBT4: TBitBtn;
+    bbt5: TBitBtn;
+    bbt6: TBitBtn;
+    Panel5: TPanel;
+    Label5: TLabel;
+    BD2: TBitBtn;
+    BD3: TBitBtn;
+    BD4: TBitBtn;
+    BD5: TBitBtn;
+    BD6: TBitBtn;
+    BD7: TBitBtn;
+    BDT1: TBitBtn;
+    BDT2: TBitBtn;
+    BDT3: TBitBtn;
+    BDT4: TBitBtn;
+    BDT5: TBitBtn;
+    BDT6: TBitBtn;
+    PC1: TPageControl;
+    TS1: TTabSheet;
+    DBGrid1: TDBGrid;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Label1: TLabel;
+    Label6: TLabel;
+    TS2: TTabSheet;
+    Panel6: TPanel;
+    DS2: TDataSource;
+    QRepDet: TQuery;
+    UpDet: TUpdateSQL;
+    UpMas: TUpdateSQL;
+    QRepMas: TQuery;
+    DS1: TDataSource;
+    DTP1: TDateTimePicker;
+    QRepMasSCDate: TDateTimeField;
+    QRepMasSChour: TFloatField;
+    QRepMasDepNo: TStringField;
+    QRepMasUSERID: TStringField;
+    QRepMasUSERDATE: TDateTimeField;
+    QRepMasYN: TStringField;
+    QRepMasDepName: TStringField;
+    QRepMasSCClock: TIntegerField;
+    QRepMasSCMinute: TIntegerField;
+    ListBox1: TDBLookupComboBox;
+    Button1: TButton;
+    TDep: TTable;
+    DSDep: TDataSource;
+    CBX1: TDBComboBox;
+    Panel4: TPanel;
+    DBGrid3: TDBGrid;
+    Qscbbss: TQuery;
+    DS3: TDataSource;
+    QTemp: TQuery;
+    Upscbbss: TUpdateSQL;
+    TDataNo: TTable;
+    QRepMasProNo: TStringField;
+    QRepDetProNo: TStringField;
+    QRepDetSCBH: TStringField;
+    QRepDetQty: TFloatField;
+    QRepDetUSERID: TStringField;
+    QRepDetUSERDATE: TDateTimeField;
+    QRepDetYN: TStringField;
+    QscbbssProNo: TStringField;
+    QscbbssSCBH: TStringField;
+    QscbbssXXCC: TStringField;
+    QscbbssQty: TFloatField;
+    QscbbsszlXXCC: TStringField;
+    QscbbsszlQty: TFloatField;
+    QscbbssokQty: TFloatField;
+    QscbbssoldQty: TFloatField;
+    scbbssold: TQuery;
+    DBGrid2: TDBGrid;
+    Panel7: TPanel;
+    Label2: TLabel;
+    DTP2: TBitBtn;
+    DBEdit1: TDBEdit;
+    MC1: TMonthCalendar;
+    Label3: TLabel;
+    CBX2: TDBComboBox;
+    CBX3: TDBComboBox;
+    Label7: TLabel;
+    CBX4: TDBComboBox;
+    Label8: TLabel;
+    DBEdit2: TDBEdit;
+    Label9: TLabel;
+    DBEdit3: TDBEdit;
+    BitBtn1: TBitBtn;
+    Label10: TLabel;
+    DBEdit4: TDBEdit;
+    QRepDetGXLB: TStringField;
+    QscbbssGXLB: TStringField;
+    DBX1: TDBComboBox;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure BB1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure BB2Click(Sender: TObject);
+    procedure BB3Click(Sender: TObject);
+    procedure BB4Click(Sender: TObject);
+    procedure BB5Click(Sender: TObject);
+    procedure BB6Click(Sender: TObject);
+    procedure BB7Click(Sender: TObject);
+    procedure BBT1Click(Sender: TObject);
+    procedure BBT2Click(Sender: TObject);
+    procedure BBT3Click(Sender: TObject);
+    procedure BBT4Click(Sender: TObject);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure PC1Change(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure DBGrid1KeyPress(Sender: TObject; var Key: Char);
+    procedure DBGrid1EditButtonClick(Sender: TObject);
+    procedure DBGrid1ColEnter(Sender: TObject);
+    procedure DBGrid3DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure BD4Click(Sender: TObject);
+    procedure BD2Click(Sender: TObject);
+    procedure DBGrid3Enter(Sender: TObject);
+    procedure QscbbssAfterOpen(DataSet: TDataSet);
+    procedure BD3Click(Sender: TObject);
+    procedure BD5Click(Sender: TObject);
+    procedure DBGrid3KeyPress(Sender: TObject; var Key: Char);
+    procedure BDT1Click(Sender: TObject);
+    procedure BDT2Click(Sender: TObject);
+    procedure BDT3Click(Sender: TObject);
+    procedure BDT4Click(Sender: TObject);
+    procedure BD7Click(Sender: TObject);
+    procedure BD6Click(Sender: TObject);
+    procedure DBGrid3CellClick(Column: TColumn);
+    procedure DBGrid2EditButtonClick(Sender: TObject);
+    procedure DBGrid2DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure Panel7Enter(Sender: TObject);
+    procedure DBGrid2Enter(Sender: TObject);
+    procedure DBGrid3ColEnter(Sender: TObject);
+    procedure DBEdit1Enter(Sender: TObject);
+    procedure DTP2Click(Sender: TObject);
+    procedure MC1Click(Sender: TObject);
+    procedure DBEdit3Enter(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure DBGrid1ColExit(Sender: TObject);
+    procedure QRepMasAfterOpen(DataSet: TDataSet);
+    procedure QRepDetAfterOpen(DataSet: TDataSet);
+    procedure DBGrid2ColExit(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Ontime: TOntime;
+
+implementation
+
+uses main1, OnTime_Dep1, DM3, OnTime_sczl1;
+
+{$R *.dfm}
+
+procedure TOntime.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+if BD5.enabled  then
+  begin
+    messagedlg('You have to save data Record of report first.',mtwarning,[mbyes],0);
+    PC1.ActivePage:=TS2;
+    panel5.Visible:=true;
+    panel1.Visible:=false;
+    action:=canone;
+  end
+  else
+    begin
+      if BB5.enabled then
+        begin
+          messagedlg('You have to save data Report first.',mtwarning,[mbyes],0);
+          PC1.ActivePage:=TS1;
+          panel1.Visible:=true;
+          panel5.Visible:=false;
+          action:=canone;
+        end
+          else
+            begin
+              action:=Cafree;
+            end;
+    end;
+end;
+
+procedure TOntime.BB1Click(Sender: TObject);
+begin
+Panel2.Visible:=true;
+panel5.Visible:=false; {
+Qscbbss.Active:=false;
+Qrepdet.Active:=false;
+QRepMas.Active:=false;}
+PC1.ActivePage:=TS1;
+TDep.Active:=true;
+end;
+
+procedure TOntime.FormCreate(Sender: TObject);
+var i:integer;
+begin
+with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select distinct GXLB from SCGXDY order by GXLB');
+    active:=true;
+    for i:=1 to recordcount do
+      begin
+        DBX1.Items.Add(fieldbyname('GXLB').asstring);
+        next;
+      end;
+    active:=false;
+  end;
+DM2.DBshipping.connected:=false;
+DM2.DBshipping.connected:=true;
+PC1.activepage:=TS1;
+panel5.Visible:=false;
+DTP1.date:=Date;
+end;
+
+procedure TOntime.Button1Click(Sender: TObject);
+begin
+
+with QRepMas do
+  begin
+    active:=true;
+    sql.clear;
+    sql.add('Select s.*,b.DepName from scbb s ');
+    sql.add('left join Bdepartment b on s.DepNo=b.ID');
+    sql.add('where s.SCDate =');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.date)+'''');
+    sql.add('and s.DepNo like');
+    sql.add(''''+listbox1.Text+'%'+'''');
+    sql.add('order by s.SCDate,s.SCClock');
+    active:=true;
+  end;
+    Panel2.Visible:=false;
+    TDep.active:=false;
+    QRepDet.Active:=true;
+    Qscbbss.Active:=true;
+    scbbssold.active:=true;
+    bb2.enabled:=true;
+    bb3.enabled:=true;
+    bb4.enabled:=true;
+    bb5.enabled:=false;
+    bb6.enabled:=false;
+    bb7.enabled:=true;
+    bbt1.enabled:=true;
+    bbt2.enabled:=true;
+    bbt3.enabled:=true;
+    bbt4.enabled:=true;
+    bbt5.enabled:=true;
+    bbt6.enabled:=true;
+    Bd2.Enabled:=true;
+    Bd3.Enabled:=true;
+    Bd4.Enabled:=true;
+    Bd7.Enabled:=true;
+    BDT1.Enabled:=true;
+    BDT2.Enabled:=true;
+    BDT3.Enabled:=true;
+    BDT4.Enabled:=true;
+    BDT5.Enabled:=true;
+    BDT6.Enabled:=true;
+end;
+
+procedure TOntime.BB2Click(Sender: TObject);
+begin
+
+with QRepMas do
+  begin
+    cachedupdates:=true;
+    requestlive:=true;
+    Insert;
+    QRepMas.FieldByName('SCDate').Value:=date;
+  end;
+bb5.enabled:=true;
+bb6.enabled:=true;
+dbgrid1.columns[4].ButtonStyle:=cbsEllipsis;
+PC1.activepage:=TS2;
+end;
+
+procedure TOntime.BB3Click(Sender: TObject);
+begin
+if QRepMas.FieldByName('SCDate').value<Date-1 then
+  begin
+    showmessage('You can not delete the production report 2 days ago.');
+    abort;
+  end;
+if messagedlg('Do you really want to delete this record?',mtconfirmation,[mbYes,Mbno],0)=mrYes then
+  begin
+    if QRepDet.recordcount=0 then
+      begin
+        with QRepMas do
+          begin
+            cachedupdates:=true;
+            requestlive:=true;
+            edit;
+            fieldbyname('YN').Value:='0';
+          end;
+        bb5.enabled:=true;
+        bb6.enabled:=true;
+      end
+      else
+        begin
+          messagedlg('This Record have Deatail data,can not delete!',mtwarning,[mbYes],0);
+        end;
+  end;
+end;
+
+procedure TOntime.BB4Click(Sender: TObject);
+begin
+
+if QRepMas.FieldByName('SCDate').value<Date-1 then
+  begin
+    showmessage('You can not modify the production report 2 days ago.');
+    abort;
+  end;
+
+ with QRepMas do
+  begin
+    cachedupdates:=true;
+    requestlive:=true;
+    edit;
+  end;
+bb5.enabled:=true;
+bb6.enabled:=true;
+dbgrid1.columns[4].ButtonStyle:=cbsEllipsis;
+PC1.activepage:=TS2;
+end;
+
+procedure TOntime.BB5Click(Sender: TObject);
+var i:integer;
+var a:string;
+begin
+
+TDataNo.Active:=true;
+a:=inttostr(TdataNo.fieldbyname('Meno').value+1);
+while length(a)<10 do
+  begin
+    a:='0'+a;
+  end;
+TdataNo.edit;
+TdataNo.fieldbyname('Meno').value:=strtoint(a);
+TdataNo.Post;
+try
+    QRepMas.first;
+    for i:=1 to QRepMas.RecordCount do
+      begin
+        case QRepMas.updatestatus of
+          usinserted:
+            begin
+              if QRepMas.fieldbyname('SCDate').isnull then
+                begin
+                  QRepMas.delete;
+                end
+                 else
+                   begin
+                     if QRepMas.FieldByName('SCDate').value<Date-1 then
+                       begin
+                         showmessage('You can not insert the production report 2 days ago.');
+                         abort;
+                       end;
+                     QRepMas.edit;
+                     QRepMas.FieldByName('ProNo').asstring:=a;
+                     QRepMas.FieldByName('UserID').asstring:=main.edit1.text;
+                     QRepMas.FieldByName('Userdate').Value:=date;
+                     QRepMas.FieldByName('YN').Value:='1';
+                     UpMas.apply(ukinsert);
+                   end;
+            end;
+          usmodified:
+             begin
+              if QRepMas.fieldbyname('YN').value='0'then
+                begin
+                  UpMas.apply(ukdelete);
+                end
+                else
+                  begin
+                    if DTP1.date<Date-14 then
+                      begin
+                        showmessage('You can not modify the production report 2 days ago.');
+                        abort;
+                      end;
+                    QRepMas.edit;
+                    QRepMas.FieldByName('UserID').Value:=main.edit1.text;
+                    QRepMas.FieldByName('Userdate').Value:=date;
+                    UpMas.apply(ukmodify);
+                  end;
+             end;
+        end;
+        QRepMas.next;
+      end;
+    QRepMas.active:=false;
+    QRepMas.cachedupdates:=false;
+    QRepMas.requestlive:=false;
+    QRepMas.active:=true;
+    bb5.enabled:=false;
+    bb6.enabled:=false;
+except
+    Messagedlg('Have wrong, can not save!',mtwarning,[mbyes],0);
+end;
+dbgrid1.columns[0].ButtonStyle:=cbsnone;
+end;
+
+procedure TOntime.BB6Click(Sender: TObject);
+begin
+with QRepMas do
+  begin
+    active:=false;
+    cachedupdates:=false;
+    requestlive:=false;
+    active:=true;
+  end;
+bb5.enabled:=false;
+bb6.enabled:=false;
+
+dbgrid1.columns[0].ButtonStyle:=cbsnone;
+end;
+
+procedure TOntime.BB7Click(Sender: TObject);
+begin
+close;
+end;
+
+procedure TOntime.BBT1Click(Sender: TObject);
+begin
+QrepMas.First;
+end;
+
+procedure TOntime.BBT2Click(Sender: TObject);
+begin
+QrepMas.prior;
+end;
+
+procedure TOntime.BBT3Click(Sender: TObject);
+begin
+QrepMas.next;
+end;
+
+procedure TOntime.BBT4Click(Sender: TObject);
+begin
+QrepMas.last;
+end;
+
+procedure TOntime.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+if  QRepMas.fieldbyname('YN').Value='0' then
+  begin
+    dbgrid1.canvas.font.color:=clred;
+    dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+
+if QRepMas.cachedupdates then
+  begin
+    CBX1.BringToFront;
+    if (gdfocused in state) then
+      begin
+        if (dbgrid1.SelectedField.fieldname=CBX1.datafield) then
+          begin
+            CBX1.left:=rect.left+dbgrid1.left;
+            CBX1.top:=rect.top+dbgrid1.Top;
+            CBX1.width:=rect.right-rect.left+2;
+            CBX1.height:=rect.bottom-rect.top;
+            CBX1.visible:=true;
+          end;
+      end;
+  end;
+if QRepMas.cachedupdates then
+  begin
+    CBX2.BringToFront;
+    if (gdfocused in state) then
+      begin
+        if (dbgrid1.SelectedField.fieldname=CBX2.datafield) then
+          begin
+            CBX2.left:=rect.left+dbgrid1.left;
+            CBX2.top:=rect.top+dbgrid1.Top;
+            CBX2.width:=rect.right-rect.left+2;
+            CBX2.height:=rect.bottom-rect.top;
+            CBX2.visible:=true;
+          end;
+      end;
+  end;
+end;
+
+procedure TOntime.PC1Change(Sender: TObject);
+begin
+if PC1.ActivePage=TS2 then
+  begin
+    panel1.Visible:=false;
+    panel5.Visible:=true;
+    DBGrid2.SetFocus;
+  end;
+if PC1.ActivePage=TS1 then
+  begin
+    panel1.Visible:=true;
+    panel5.Visible:=false;
+  end;
+end;
+
+procedure TOntime.DBGrid1DblClick(Sender: TObject);
+begin
+if QRepMas.Active then
+  begin
+    PC1.ActivePage:=TS2;
+    PC1Change(nil);
+  end;
+end;
+
+procedure TOntime.DBGrid1KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+  DBGrid1DblClick(nil);
+end;
+
+procedure TOntime.DBGrid1EditButtonClick(Sender: TObject);
+begin
+if dbgrid1.selectedfield.fieldname='DepNo' then
+  begin
+    OnTime_Dep:=TOnTime_Dep.create(self);
+    OnTime_Dep.show;
+  end;
+end;
+
+procedure TOntime.DBGrid1ColEnter(Sender: TObject);
+begin
+if dbgrid1.selectedfield.fieldname<>CBX1.datafield then
+  begin
+    CBX1.visible:=false;
+  end;
+end;
+
+procedure TOntime.DBGrid3DrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);      
+begin
+if not Qscbbss.FieldByName('oldQty').isnull then
+  begin
+    if Qscbbss.FieldByName('ZLQty').Value=(Qscbbss.FieldByName('okQty').Value)+Qscbbss.FieldByName('Qty').Value-Qscbbss.FieldByName('oldQty').Value   then
+      begin
+        dbgrid3.canvas.font.color:=clLime;
+        dbgrid3.defaultdrawcolumncell(rect,datacol,column,state);
+      end;
+    if Qscbbss.FieldByName('ZLQty').Value<(Qscbbss.FieldByName('okQty').Value)+Qscbbss.FieldByName('Qty').Value-Qscbbss.FieldByName('oldQty').Value   then
+      begin
+        dbgrid3.canvas.font.color:=clRed;
+        dbgrid3.defaultdrawcolumncell(rect,datacol,column,state);
+      end;
+  end
+  else
+    begin 
+      if Qscbbss.FieldByName('ZLQty').Value=(Qscbbss.FieldByName('okQty').Value)+Qscbbss.FieldByName('Qty').Value   then
+        begin
+          dbgrid3.canvas.font.color:=clLime;
+          dbgrid3.defaultdrawcolumncell(rect,datacol,column,state);
+        end;
+      if Qscbbss.FieldByName('ZLQty').Value<(Qscbbss.FieldByName('okQty').Value)+Qscbbss.FieldByName('Qty').Value   then
+        begin
+          dbgrid3.canvas.font.color:=clRed;
+          dbgrid3.defaultdrawcolumncell(rect,datacol,column,state);
+        end;
+    end;
+end;
+
+procedure TOntime.BD4Click(Sender: TObject);
+begin
+
+if QRepMas.FieldByName('SCDate').value<Date-1 then
+  begin
+    showmessage('You can not modify the production report 2 days ago.');
+    abort;
+  end;
+  
+if QRepMas.RequestLive then
+  begin
+    Showmessage('Pls save Record Master first.');
+    abort;
+  end;
+with QRepdet do
+  begin
+    cachedupdates:=true;
+    requestlive:=true;
+    edit;
+  end; 
+bd5.enabled:=true;
+bd6.enabled:=true;
+dbgrid2.columns[0].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TOntime.BD2Click(Sender: TObject);
+begin 
+if QRepMas.FieldByName('SCDate').value<Date-1 then
+  begin
+    showmessage('You can not modify the production report 2 days ago.');
+    abort;
+  end;
+  
+if QRepMas.RequestLive then
+  begin
+    Showmessage('Pls save Record Master first.');
+    abort;
+  end;
+with QRepDet do
+  begin
+    cachedupdates:=true;
+    requestlive:=true;
+    Insert;
+  end; 
+  bd5.enabled:=true;
+  bd6.enabled:=true;
+  dbgrid2.columns[0].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TOntime.DBGrid3Enter(Sender: TObject);
+begin
+if QRepDet.RequestLive then
+  begin
+    showmessage('Pls seve production order first.');
+    BD5.SetFocus;
+  end;
+end;
+
+procedure TOntime.QscbbssAfterOpen(DataSet: TDataSet);
+begin
+Qscbbss.RequestLive:=true;
+Qscbbss.CachedUpdates:=true;
+end;
+
+procedure TOntime.BD3Click(Sender: TObject);
+begin
+
+if QRepMas.FieldByName('SCDate').value<Date-1 then
+  begin
+    showmessage('You can not modify the production report 2 days ago.');
+    abort;
+  end;
+  
+if messagedlg('Do you really want to delete this record?',mtconfirmation,[mbYes,Mbno],0)=mrYes then
+  begin
+    if (messagedlg('There size detail will be delete too! Really?',mtconfirmation,[mbYes,Mbno],0)=mrYes) and (Qscbbss.RecordCount>0) then
+      begin
+      try
+        Qtemp.Active:=false;
+        Qtemp.SQL.Clear;
+        Qtemp.sql.add('delete SCBBSS ');
+        Qtemp.SQL.add('where ProNo=');
+        Qtemp.SQL.add(''''+QRepDet.fieldbyname('ProNo').Value+'''') ;
+        Qtemp.SQL.add('and SCBH=');
+        Qtemp.SQL.add(''''+QRepDet.fieldbyname('SCBH').Value+'''');
+        Qtemp.SQL.add('and GXLB=');
+        Qtemp.SQL.add(''''+ QRepDet.fieldbyname('GXLB').Value+'''');
+        QTemp.ExecSQL;
+        QTemp.Active:=false;
+        with QRepDet do
+          begin
+            cachedupdates:=true;
+            requestlive:=true;
+            edit;
+            fieldbyname('YN').Value:='0';
+          end;
+       bd5.enabled:=true;
+       bd6.enabled:=true;
+       Qscbbss.active:=false;
+       Qscbbss.active:=true;
+      except
+        messagedlg('Wrong.',mtwarning,[mbyes],0);
+      end;
+      end;
+  end;
+end;
+
+procedure TOntime.BD5Click(Sender: TObject);
+var i:integer;
+N:real;
+a:double;
+begin
+
+
+if QRepDet.RequestLive then
+  begin
+    try
+      QRepdet.first;
+      while not QRepdet.Eof do
+        begin
+          if QRepdet.FieldByName('GXLB').Isnull then
+            begin
+              showmessage('GXLB can not be empty.');
+              abort;
+            end;
+          QRepdet.next;
+        end;
+      QRepdet.First;
+      for i:=1 to QRepdet.RecordCount do
+        begin
+          case QRepdet.updatestatus of
+            usinserted:
+              begin
+                if QRepdet.fieldbyname('SCBH').isnull then
+                  begin
+                    QRepdet.delete;
+                  end
+                    else
+                      begin
+                        QRepdet.edit;
+                        QRepDet.FieldByName('ProNo').Value:=QRepMas.fieldbyname('ProNo').value;
+                        QRepDet.FieldByName('Qty').Value:=0;
+                        QRepDet.FieldByName('UserID').Value:=main.Edit1.Text;
+                        QRepdet.FieldByName('Userdate').Value:=date;
+                        QRepdet.FieldByName('YN').Value:='1';
+                        Updet.apply(ukinsert);
+                      end;
+              end;
+            usmodified:
+              begin
+                if QRepdet.fieldbyname('YN').value='0'then
+                  begin
+                    UpDet.apply(ukdelete);
+                  end
+                  else
+                    begin
+                      QRepdet.edit;
+                      QRepDet.FieldByName('UserID').Value:=main.Edit1.Text;
+                      QRepdet.fieldByName('Userdate').Value:=date;
+                      Updet.apply(ukmodify);
+                    end;
+              end;
+          end;
+          QRepdet.next;
+      end;
+      QRepdet.active:=false;
+      QRepDet.RequestLive:=false;
+      QRepdet.CachedUpdates:=false;
+      QRepdet.active:=true;
+      bd5.enabled:=false;
+      bd6.enabled:=false;
+      dbgrid2.columns[0].ButtonStyle:=cbsnone;
+    except
+      Messagedlg('Have wrong, can not save!',mtwarning,[mbyes],0);
+    end;
+  end;
+
+if not QRepDet.requestLive then
+  begin
+    try
+      a:=0;
+      Qscbbss.first;
+      for i:=1 to Qscbbss.RecordCount do
+        begin
+          if Qscbbss.updatestatus=usmodified then
+            begin
+              if not Qscbbss.FieldByName('oldQty').isnull    then
+                begin
+                  N:=Qscbbss.FieldByName('okQty').Value+Qscbbss.fieldbyname('Qty').value-Qscbbss.FieldByName('oldQty').Value ;
+                  if Qscbbss.FieldByName('zlQty').Value>=N then
+                   begin
+                     Upscbbss.apply(ukmodify);
+                   end
+                   else
+                     begin
+                       showmessage('Your total production Qty > order Qty.');
+                       abort;
+                     end;
+                end
+                  else
+                    begin
+                      if Qscbbss.FieldByName('ZLQty').Value<(Qscbbss.FieldByName('okQty').Value+Qscbbss.FieldByName('Qty').Value )  then
+                        begin
+                          showmessage('Your total production Qty > order Qty.');
+                          abort;
+                        end;
+                      Qscbbss.edit;
+                      Qscbbss.fieldbyname('ProNo').value:=QRepDet.fieldbyname('ProNo').value;
+                      Qscbbss.fieldbyname('SCBH').value:=QRepDet.fieldbyname('SCBH').value;
+                      Qscbbss.fieldbyname('GXLB').value:=QRepDet.fieldbyname('GXLB').value;
+                      Qscbbss.fieldbyname('XXCC').value:=Qscbbss.fieldbyname('ZLXXCC').value;
+                      Qscbbss.FieldByName('oldQty').Value:=Qscbbss.FieldByName('Qty').Value;
+                      Upscbbss.apply(ukinsert);
+                    end;
+            end;
+          if not Qscbbss.FieldByName('Qty').isnull then
+            begin
+              a:=a+Qscbbss.FieldByName('Qty').value;
+            end;
+          Qscbbss.next;
+      end;
+      Qscbbss.active:=false;
+      Qscbbss.active:=true;
+      with QRepDet do
+        begin
+          QRepDet.RequestLive:=true;
+          QRepDet.CachedUpdates:=true;
+          QRepDet.Edit;
+          QRepDet.FieldByName('Qty').value:=a;
+          UpDet.Apply(ukmodify);
+          QRepDet.Active:=false;
+          QRepDet.RequestLive:=false;
+          QRepDet.CachedUpdates:=false;
+          QRepDet.Active:=true;
+        end;
+      bd5.enabled:=false;
+      bd6.enabled:=false;
+      dbgrid2.columns[0].ButtonStyle:=cbsnone;
+    except
+      Messagedlg('Have wrong, can not save!',mtwarning,[mbyes],0);
+    end;
+  end;
+
+end;
+
+procedure TOntime.DBGrid3KeyPress(Sender: TObject; var Key: Char);
+begin
+if Key in ['0'..'9',#8,#46,#13]   then
+  begin
+    BD5.enabled:=true;
+    BD6.enabled:=true;
+  end;
+end;
+
+procedure TOntime.BDT1Click(Sender: TObject);
+begin
+QRepDet.first;  
+end;
+
+procedure TOntime.BDT2Click(Sender: TObject);
+begin
+QRepDet.prior;
+end;
+
+procedure TOntime.BDT3Click(Sender: TObject);
+begin
+QRepDet.next;
+end;
+
+procedure TOntime.BDT4Click(Sender: TObject);
+begin
+QRepDet.last;
+end;
+
+procedure TOntime.BD7Click(Sender: TObject);
+begin
+close;
+end;
+
+procedure TOntime.BD6Click(Sender: TObject);
+begin
+Qscbbss.Active:=false;
+QRepDet.Active:=false;
+QRepDet.RequestLive:=false;
+QRepDet.CachedUpdates:=false;
+QRepDet.Active:=true;
+Qscbbss.Active:=true;
+BD2.enabled:=true;
+BD3.enabled:=true;  
+BD4.enabled:=true;
+BD5.enabled:=false;
+BD6.enabled:=false;
+end;
+
+procedure TOntime.DBGrid3CellClick(Column: TColumn);
+begin{
+if Qscbbss.FieldByName('ZLQty').Value<(Qscbbss.FieldByName('okQty').Value)+Qscbbss.FieldByName('Qty').Value   then
+  begin
+    showmessage('Your total production Qty > order Qty');
+  end;  }
+end;
+
+procedure TOntime.DBGrid2EditButtonClick(Sender: TObject);
+begin
+if scbbssold.recordcount>0 then
+  begin
+    showmessage('Have size detail, can not delete!.');
+    abort;
+  end
+  else
+    begin
+      OnTime_sczl :=TOnTime_sczl.create(self);
+      OnTime_sczl.show;
+    end;
+end;
+
+procedure TOntime.DBGrid2DrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+if  QRepDet.fieldbyname('YN').Value='0' then
+  begin
+    dbgrid2.canvas.font.color:=clred;
+    dbgrid2.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+
+if QRepDet.cachedupdates then
+  begin
+    Dbx1.BringToFront;
+    if (gdfocused in state) then
+      begin
+        if (dbgrid2.SelectedField.fieldname=dbx1.datafield) then
+          begin
+            dbx1.left:=rect.left+dbgrid2.left;
+            dbx1.top:=rect.top+dbgrid2.Top;
+            dbx1.width:=rect.right-rect.left;
+            dbx1.height:=rect.bottom-rect.top;
+            dbx1.visible:=true;
+          end;
+      end;
+  end
+  else
+    begin
+      dbx1.Visible:=false;
+    end; 
+end;
+
+procedure TOntime.Panel7Enter(Sender: TObject);
+begin
+panel1.Visible:=true;
+panel5.Visible:=false;
+if QRepMas.FieldByName('YN').Value='0' then
+  begin
+    DBEdit1.font.color:=clred;
+  end;
+end;
+
+procedure TOntime.DBGrid2Enter(Sender: TObject);
+begin
+panel1.Visible:=false;
+panel5.Visible:=true;
+end;
+
+procedure TOntime.DBGrid3ColEnter(Sender: TObject);
+begin 
+panel1.Visible:=false;
+panel5.Visible:=true;
+end;
+
+procedure TOntime.DBEdit1Enter(Sender: TObject);
+begin
+if QRepMas.RequestLive then
+  begin
+    DTP2.visible:=true;
+  end
+  else
+    begin
+      DTP2.visible:=false;
+    end;
+end;
+
+procedure TOntime.DTP2Click(Sender: TObject);
+begin
+MC1.Visible:=true;
+MC1.Date:=QRepMas.fieldbyname('SCDate').Value;
+end;
+
+procedure TOntime.MC1Click(Sender: TObject);
+begin
+QRepMas.fieldbyname('SCDate').Value:=MC1.Date;
+MC1.Visible:=false;
+end;
+
+procedure TOntime.DBEdit3Enter(Sender: TObject);
+begin
+if QRepMas.RequestLive then
+  begin
+    Bitbtn1.Visible:=true;
+  end
+  else
+    begin
+      Bitbtn1.Visible:=false;
+    end;
+end;
+
+procedure TOntime.BitBtn1Click(Sender: TObject);
+begin 
+    OnTime_Dep:=TOnTime_Dep.create(self);
+    OnTime_Dep.show;
+end;
+
+procedure TOntime.DBGrid1ColExit(Sender: TObject);
+begin
+if DBGrid1.selectedfield.fieldname=CBX1.datafield then
+  CBX1.Visible:=false;
+if DBGrid1.selectedfield.fieldname=CBX2.datafield then
+  CBX2.Visible:=false;
+end;
+
+procedure TOntime.QRepMasAfterOpen(DataSet: TDataSet);
+begin  
+BB5.Enabled:=false;
+BB6.Enabled:=false;
+BD5.Enabled:=false;
+BD6.Enabled:=false;
+end;
+
+procedure TOntime.QRepDetAfterOpen(DataSet: TDataSet);
+begin
+BD5.Enabled:=false;
+BD6.Enabled:=false;
+end;
+
+procedure TOntime.DBGrid2ColExit(Sender: TObject);
+begin
+if DBGrid2.Selectedfield.fieldname<>DBX1.DataField then
+  begin
+    DBX1.Visible:=false;
+  end;
+end;
+
+procedure TOntime.FormDestroy(Sender: TObject);
+begin
+Ontime:=nil;
+end;
+
+end.
+
+

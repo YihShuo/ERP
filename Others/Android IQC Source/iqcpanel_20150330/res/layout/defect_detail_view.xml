@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="1dp" >
+    
+    <TextView
+        android:id="@+id/defect_value"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="1"
+        android:background="@color/ligthblue"
+        android:gravity="left"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="@dimen/littlesmalltextsize" />
+
+    <TextView
+        android:id="@+id/defect_qty"
+        android:layout_width="26dp"
+        android:layout_height="fill_parent"
+        android:layout_alignBottom="@+id/defect_value"
+        android:layout_alignTop="@+id/defect_value"
+        android:layout_marginLeft="1dp"
+        android:layout_toRightOf="@+id/defect_value"
+        android:background="@color/ligthblue"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="@dimen/littlesmalltextsize" />
+
+    <ImageView
+        android:id="@+id/imgAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/ligthblue"
+        android:layout_marginLeft="1dp"
+        android:src="@drawable/add" />
+
+    <ImageView
+        android:id="@+id/imgMin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/ligthblue"
+        android:layout_marginLeft="1dp"
+        android:src="@drawable/minus" />
+          
+</LinearLayout>

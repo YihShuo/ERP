@@ -1,0 +1,11 @@
+SET ARITHABORT ON
+select * from (
+select UserID,UserName,Email,DepID,split.Report.value('.', 'varchar(255)') as ReportID
+from (
+   select UserID,UserName,Email,DepID,cast(('<w>' + replace(IsNull(Report,''), ',','</w><w>') + '</w>') as xml) as Report
+     from Busers
+   where (Report is not null) and (Report<>'')
+) as xmlTable
+cross apply Report.nodes ('/w') as split(Report)
+) as MailList where ReportID<>'' and DepID<>''
+order by reportID, depid

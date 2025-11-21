@@ -1,0 +1,145 @@
+unit ScanStockDet_Car1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, GridsEh, DBGridEh, Menus, PrnDbgeh,comobj;
+
+type
+  TScanStockDet_Car = class(TForm)
+    DBGridEh1: TDBGridEh;
+    Query1: TQuery;
+    DS1: TDataSource;
+    Query1CARTONBAR: TStringField;
+    Query1CARTONNO: TIntegerField;
+    Query1XH: TStringField;
+    Query1Qty: TIntegerField;
+    Query1SB: TStringField;
+    Query1INDATE: TDateTimeField;
+    PrintDBGridEh1: TPrintDBGridEh;
+    PopupMenu1: TPopupMenu;
+    Print1: TMenuItem;
+    Excel1: TMenuItem;
+    Query1LastInDate: TDateTimeField;
+    Query1DZQty: TIntegerField;
+    Query1sgw: TFloatField;
+    Query1rgw: TFloatField;
+    Query1ogw: TFloatField;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure Print1Click(Sender: TObject);
+    procedure Excel1Click(Sender: TObject);
+    procedure DBGridEh1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ScanStockDet_Car: TScanStockDet_Car;
+
+implementation
+
+uses main1;
+
+{$R *.dfm}
+
+procedure TScanStockDet_Car.FormDestroy(Sender: TObject);
+begin
+ScanStockDet_Car:=nil;
+end;
+
+procedure TScanStockDet_Car.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+query1.active:=false;
+end;
+
+procedure TScanStockDet_Car.FormCreate(Sender: TObject);
+begin
+query1.Active:=true;
+end;
+
+procedure TScanStockDet_Car.Print1Click(Sender: TObject);
+begin
+PrintDBgrideh1.Preview;
+end;
+
+procedure TScanStockDet_Car.Excel1Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+
+if query1.Active then
+  begin
+    if query1.recordcount=0 then
+      begin
+        showmessage('No record.');
+        abort;
+      end;
+  end
+  else
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+
+try
+  eclApp:=CreateOleObject('Excel.Application');
+  WorkBook:=CreateOleObject('Excel.Sheet');
+except
+  Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+  Exit;
+end;
+
+try
+  WorkBook:=eclApp.workbooks.Add; 
+  eclApp.Cells(1,1):='NO';
+  for   i:=1   to   query1.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=query1.fields[i-1].FieldName;
+    end;
+  query1.First;
+  j:=2;
+  while   not  query1.Eof   do
+    begin
+      eclApp.Cells(j,1):=j-1;
+      for   i:=1   to   query1.fieldcount   do
+        begin
+          eclApp.Cells(j,i+1):=query1.Fields[i-1].Value;
+          eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+        end;
+      query1.Next;
+      inc(j);
+    end;
+  eclapp.columns.autofit;
+  showmessage('Succeed.');
+  eclApp.Visible:=True;
+except
+  on   F:Exception   do
+    showmessage(F.Message);
+end;
+
+end;
+
+procedure TScanStockDet_Car.DBGridEh1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+if not query1.FieldByName('SB').IsNull then
+        dbgrideh1.canvas.font.color:=clBlue;
+end;
+
+procedure TScanStockDet_Car.FormShow(Sender: TObject);
+begin
+  main.FormLanguage(Pointer(self),self.Name);
+end;
+
+end.

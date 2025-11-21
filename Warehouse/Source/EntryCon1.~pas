@@ -1,0 +1,226 @@
+unit EntryCon1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, Grids, DBGrids, StdCtrls, DBCtrls, Mask, Buttons,
+  ExtCtrls;
+
+type
+  TEntryCon = class(TForm)
+    Panel6: TPanel;
+    Label7: TLabel;
+    BDT1: TBitBtn;
+    BDT2: TBitBtn;
+    BDT3: TBitBtn;
+    BDT4: TBitBtn;
+    Edit1: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Panel3: TPanel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label19: TLabel;
+    Label20: TLabel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    DBEdit11: TDBEdit;
+    DBEdit12: TDBEdit;
+    DBMemo1: TDBMemo;
+    DBEdit13: TDBEdit;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    DBEdit3: TDBEdit;
+    DBEdit4: TDBEdit;
+    DBEdit5: TDBEdit;
+    DBGrid2: TDBGrid;
+    ENMas: TQuery;
+    UpMas: TUpdateSQL;
+    DS3: TDataSource;
+    ENDet: TQuery;
+    UPDet: TUpdateSQL;
+    DS4: TDataSource;
+    ENMasRKNO: TStringField;
+    ENMasZSBH: TStringField;
+    ENMasUSERID: TStringField;
+    ENMasUSERDATE: TDateTimeField;
+    ENMasCFMID: TStringField;
+    ENMasCFMDATE: TDateTimeField;
+    ENMasYN: TStringField;
+    ENMasZSYWJC: TStringField;
+    ENDetRKNO: TStringField;
+    ENDetCLBH: TStringField;
+    ENDetCGBH: TStringField;
+    ENDetRKSB: TStringField;
+    ENDetQty: TCurrencyField;
+    ENDetCWHL: TIntegerField;
+    ENDetCostID: TStringField;
+    ENDetUSERID: TStringField;
+    ENDetUSERDATE: TDateTimeField;
+    ENDetYN: TStringField;
+    ENDetYWPM: TStringField;
+    ENDetDWBH: TStringField;
+    ENDetPaQty: TFloatField;
+    ENDetUSPrice: TCurrencyField;
+    ENDetUSACC: TCurrencyField;
+    ENDetVNPrice: TFloatField;
+    ENDetVNACC: TFloatField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure ENDetAfterOpen(DataSet: TDataSet);
+    procedure BDT1Click(Sender: TObject);
+    procedure BDT2Click(Sender: TObject);
+    procedure BDT3Click(Sender: TObject);
+    procedure BDT4Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  EntryCon: TEntryCon;
+
+implementation
+
+uses main1;
+
+{$R *.dfm}
+
+procedure TEntryCon.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+free;
+end;
+
+procedure TEntryCon.Button1Click(Sender: TObject);
+begin
+with ENMas do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('  select KCRK.*,ZSZL.ZSYWJC  ');
+    sql.add('from KCRK');
+    sql.add('left join ZSZL on KCRK.ZSBH=ZSZL.ZSDH ');
+    sql.add('where RKNO='+''''+edit1.Text+'''');
+    active:=true;
+  end;
+if ENMas.recordcount>0 then
+  begin
+    ENDet.Active:=true;
+    button2.Enabled:=true;
+    button3.Enabled:=true;
+  end;
+end;
+
+procedure TEntryCon.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+  button1click(nil);
+end;
+
+procedure TEntryCon.Button2Click(Sender: TObject);
+begin
+if  ENMas.fieldbyname('YN').Value='2'   then
+  begin
+    showmessage('Pls contect with computer designer.');
+    abort;
+  end;
+
+if ENMas.FieldByName('CFMID').value='NO' then
+  begin
+    try
+    with ENDet do
+      begin
+        first;
+        while not eof do
+          begin
+            if updatestatus=usmodified then
+              begin
+                if not fieldbyname('Qty').isnull then
+                  begin
+                    UPdet.apply(ukmodify);
+                  end
+                  else
+                    begin
+                      showmessage('Qty can not be empty.');
+                      abort;
+                    end;
+              end;
+            next;
+          end;
+        active:=false;
+        active:=true;
+      end;
+     { with ENMas do
+        begin
+          edit;
+          fieldbyname('CFMID').Value:=main.edit1.text;
+          fieldbyname('CFMDATE').Value:=date;
+          UPMas.Apply(ukmodify);
+        end; }
+    except
+      showmessage('Have wrong.');
+    end;
+  end;
+end;
+
+procedure TEntryCon.Button3Click(Sender: TObject);
+begin
+if  ENMas.fieldbyname('YN').Value='2'   then
+  begin
+    showmessage('Alread account. Pls contect with computer designer.');
+    abort;
+  end;
+
+
+      with ENMas do
+        begin
+          edit;
+          fieldbyname('CFMID').Value:='NO';
+          fieldbyname('CFMDATE').Value:=date;
+          UPMas.Apply(ukmodify);
+        end;
+      ENDet.Active:=false;
+      ENDet.Active:=true;
+end;
+
+procedure TEntryCon.ENDetAfterOpen(DataSet: TDataSet);
+begin
+if ENDet.recordcount>0 then
+  begin
+    BDT1.Enabled:=true;
+    BDT2.Enabled:=true;
+    BDT3.Enabled:=true;
+    BDT4.Enabled:=true;
+  end;
+end;
+
+procedure TEntryCon.BDT1Click(Sender: TObject);
+begin
+ENDet.first;
+end;
+
+procedure TEntryCon.BDT2Click(Sender: TObject);
+begin
+ENDet.prior;
+end;
+
+procedure TEntryCon.BDT3Click(Sender: TObject);
+begin
+ENDet.next;
+end;
+
+procedure TEntryCon.BDT4Click(Sender: TObject);
+begin
+ENDet.last;
+end;
+
+end.

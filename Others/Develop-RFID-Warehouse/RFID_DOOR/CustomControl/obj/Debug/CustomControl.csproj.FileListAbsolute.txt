@@ -1,0 +1,76 @@
+D:\Project\Demo\MyControlLibrary\CustomControl\bin\Debug\CustomControl.dll
+D:\Project\Demo\MyControlLibrary\CustomControl\bin\Debug\CustomControl.pdb
+D:\Project\Demo\MyControlLibrary\CustomControl\obj\Debug\ResolveAssemblyReference.cache
+D:\Project\Demo\MyControlLibrary\CustomControl\obj\Debug\CustomControl.dll
+D:\Project\Demo\MyControlLibrary\CustomControl\obj\Debug\CustomControl.pdb
+D:\Project\Demo\MyControlLibrary\CustomControl\obj\Debug\CustomControl.IpAddressTextBox.resources
+D:\Project\Demo\MyControlLibrary\CustomControl\obj\Debug\CustomControl.csproj.GenerateResource.Cache
+D:\Project\Luo\R2000Project\UHFDemo\CustomControl\bin\Debug\CustomControl.dll
+D:\Project\Luo\R2000Project\UHFDemo\CustomControl\bin\Debug\CustomControl.pdb
+D:\Project\Luo\R2000Project\UHFDemo\CustomControl\obj\Debug\ResolveAssemblyReference.cache
+D:\Project\Luo\R2000Project\UHFDemo\CustomControl\obj\Debug\CustomControl.IpAddressTextBox.resources
+D:\Project\Luo\R2000Project\UHFDemo\CustomControl\obj\Debug\CustomControl.csproj.GenerateResource.Cache
+D:\Project\Luo\R2000Project\UHFDemo\CustomControl\obj\Debug\CustomControl.dll
+D:\Project\Luo\R2000Project\UHFDemo\CustomControl\obj\Debug\CustomControl.pdb
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\CustomControl\bin\Debug\CustomControl.dll
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\CustomControl\bin\Debug\CustomControl.pdb
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\CustomControl\obj\Debug\ResolveAssemblyReference.cache
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\CustomControl\obj\Debug\CustomControl.IpAddressTextBox.resources
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\CustomControl\obj\Debug\CustomControl.csproj.GenerateResource.Cache
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\CustomControl\obj\Debug\CustomControl.dll
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\CustomControl\obj\Debug\CustomControl.pdb
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\CustomControl\bin\Debug\CustomControl.dll
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\CustomControl\bin\Debug\CustomControl.pdb
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\CustomControl\obj\Debug\ResolveAssemblyReference.cache
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\CustomControl\obj\Debug\CustomControl.IpAddressTextBox.resources
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\CustomControl\obj\Debug\CustomControl.csproj.GenerateResource.Cache
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\CustomControl\obj\Debug\CustomControl.dll
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\CustomControl\obj\Debug\CustomControl.pdb
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\CustomControl\bin\Debug\CustomControl.dll
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\CustomControl\bin\Debug\CustomControl.pdb
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\CustomControl\obj\Debug\CustomControl.csprojAssemblyReference.cache
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\CustomControl\obj\Debug\CustomControl.IpAddressTextBox.resources
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\CustomControl\obj\Debug\CustomControl.csproj.GenerateResource.cache
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\CustomControl\obj\Debug\CustomControl.csproj.CoreCompileInputs.cache
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\CustomControl\obj\Debug\CustomControl.dll
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\CustomControl\obj\Debug\CustomControl.pdb
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\CustomControl\bin\Debug\CustomControl.dll
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\CustomControl\bin\Debug\CustomControl.pdb
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\CustomControl\obj\Debug\CustomControl.csproj.AssemblyReference.cache
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\CustomControl\obj\Debug\CustomControl.IpAddressTextBox.resources
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\CustomControl\obj\Debug\CustomControl.csproj.GenerateResource.cache
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\CustomControl\obj\Debug\CustomControl.csproj.CoreCompileInputs.cache
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\CustomControl\obj\Debug\CustomControl.dll
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\CustomControl\obj\Debug\CustomControl.pdb
+D:\開發RFID\CustomControl\bin\Debug\CustomControl.dll
+D:\開發RFID\CustomControl\bin\Debug\CustomControl.pdb
+D:\開發RFID\CustomControl\obj\Debug\CustomControl.csproj.AssemblyReference.cache
+D:\開發RFID\CustomControl\obj\Debug\CustomControl.IpAddressTextBox.resources
+D:\開發RFID\CustomControl\obj\Debug\CustomControl.csproj.GenerateResource.cache
+D:\開發RFID\CustomControl\obj\Debug\CustomControl.csproj.CoreCompileInputs.cache
+D:\開發RFID\CustomControl\obj\Debug\CustomControl.dll
+D:\開發RFID\CustomControl\obj\Debug\CustomControl.pdb
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\CustomControl\bin\Debug\CustomControl.dll
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\CustomControl\bin\Debug\CustomControl.pdb
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\CustomControl\obj\Debug\CustomControl.csproj.AssemblyReference.cache
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\CustomControl\obj\Debug\CustomControl.IpAddressTextBox.resources
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\CustomControl\obj\Debug\CustomControl.csproj.GenerateResource.cache
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\CustomControl\obj\Debug\CustomControl.csproj.CoreCompileInputs.cache
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\CustomControl\obj\Debug\CustomControl.dll
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\CustomControl\obj\Debug\CustomControl.pdb
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\CustomControl\bin\Debug\CustomControl.dll
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\CustomControl\bin\Debug\CustomControl.pdb
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\CustomControl\obj\Debug\CustomControl.csproj.AssemblyReference.cache
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\CustomControl\obj\Debug\CustomControl.IpAddressTextBox.resources
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\CustomControl\obj\Debug\CustomControl.csproj.GenerateResource.cache
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\CustomControl\obj\Debug\CustomControl.csproj.CoreCompileInputs.cache
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\CustomControl\obj\Debug\CustomControl.dll
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\CustomControl\obj\Debug\CustomControl.pdb
+C:\Users\PC\Desktop\RFID\RFID_DOOR\CustomControl\bin\Debug\CustomControl.dll
+C:\Users\PC\Desktop\RFID\RFID_DOOR\CustomControl\bin\Debug\CustomControl.pdb
+C:\Users\PC\Desktop\RFID\RFID_DOOR\CustomControl\obj\Debug\CustomControl.csproj.AssemblyReference.cache
+C:\Users\PC\Desktop\RFID\RFID_DOOR\CustomControl\obj\Debug\CustomControl.IpAddressTextBox.resources
+C:\Users\PC\Desktop\RFID\RFID_DOOR\CustomControl\obj\Debug\CustomControl.csproj.GenerateResource.cache
+C:\Users\PC\Desktop\RFID\RFID_DOOR\CustomControl\obj\Debug\CustomControl.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\RFID\RFID_DOOR\CustomControl\obj\Debug\CustomControl.dll
+C:\Users\PC\Desktop\RFID\RFID_DOOR\CustomControl\obj\Debug\CustomControl.pdb

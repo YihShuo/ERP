@@ -1,0 +1,1497 @@
+﻿unit Deliver_EquipmentD1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, StdCtrls, DBCtrls, ComCtrls, GridsEh, DBGridEh,
+  Mask, Buttons, ExtCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls,
+  DynVarsEh, EhLibVCL, DBAxisGridsEh,IniFiles,comobj;
+
+type
+  TDeliver_EquipmentD = class(TForm)
+    Panel1: TPanel;
+    Label18: TLabel;
+    BB2: TBitBtn;
+    BB3: TBitBtn;
+    BB4: TBitBtn;
+    BB5: TBitBtn;
+    BB6: TBitBtn;
+    BB7: TBitBtn;
+    BB1: TBitBtn;
+    BBT1: TBitBtn;
+    BBT2: TBitBtn;
+    BBT3: TBitBtn;
+    BBT4: TBitBtn;
+    bbt6: TBitBtn;
+    Panel6: TPanel;
+    Label17: TLabel;
+    BD2: TBitBtn;
+    BD3: TBitBtn;
+    BD4: TBitBtn;
+    BD5: TBitBtn;
+    BD6: TBitBtn;
+    BD7: TBitBtn;
+    BDT1: TBitBtn;
+    BDT2: TBitBtn;
+    BDT3: TBitBtn;
+    BDT4: TBitBtn;
+    BDT5: TBitBtn;
+    BDT6: TBitBtn;
+    PC1: TPageControl;
+    TS1: TTabSheet;
+    Panel4: TPanel;
+    Label9: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    DBEdit3: TDBEdit;
+    DBEdit5: TDBEdit;
+    DBEdit6: TDBEdit;
+    DBEdit8: TDBEdit;
+    DBEdit7: TDBEdit;
+    BBTT1: TBitBtn;
+    Panel2: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Edit1: TEdit;
+    CBX1: TComboBox;
+    Button1: TButton;
+    DTP1: TDateTimePicker;
+    DTP2: TDateTimePicker;
+    Check: TCheckBox;
+    TS2: TTabSheet;
+    Panel5: TPanel;
+    Panel3: TPanel;
+    Label7: TLabel;
+    Label6: TLabel;
+    DBEdit9: TDBEdit;
+    BBTT2: TBitBtn;
+    DBEdit13: TDBEdit;
+    MM_GBox: TGroupBox;
+    Label16: TLabel;
+    Label23: TLabel;
+    Label20: TLabel;
+    Label24: TLabel;
+    BDelRec: TQuery;
+    DelMas: TQuery;
+    DelMasLLNO: TStringField;
+    DelMasDepID: TStringField;
+    DelMasDepName: TStringField;
+    DelMasLB: TStringField;
+    DelMasUSERID: TStringField;
+    DelMasUSERDATE: TDateTimeField;
+    DelMasCFMID: TStringField;
+    DelMasCFMDATE: TDateTimeField;
+    DelMasYN: TStringField;
+    UpMas: TUpdateSQL;
+    DS1: TDataSource;
+    DS2: TDataSource;
+    Qtemp: TQuery;
+    DBGrid1: TDBGridEh;
+    SS_GBox: TGroupBox;
+    Label21: TLabel;
+    Label27: TLabel;
+    BB_GBox: TGroupBox;
+    Label36: TLabel;
+    Label37: TLabel;
+    Label5: TLabel;
+    LL_GBox: TGroupBox;
+    Label8: TLabel;
+    Label10: TLabel;
+    RR_GBox: TGroupBox;
+    Label15: TLabel;
+    Label19: TLabel;
+    DelMasGSBH: TStringField;
+    DelMasMemo: TStringField;
+    DelDet: TQuery;
+    DelDetLLNO: TStringField;
+    DelDetTSID: TStringField;
+    DelDetPARAMENT1: TStringField;
+    DelDetPARAMENT2: TStringField;
+    DelDetPARAMENT3: TStringField;
+    DelDetPARAMENT4: TStringField;
+    DelDetPARAMENT5: TStringField;
+    DelDetPARAMENT6: TStringField;
+    DelDetVALUE1: TStringField;
+    DelDetVALUE2: TStringField;
+    DelDetVALUE3: TStringField;
+    DelDetVALUE4: TStringField;
+    DelDetVALUE5: TStringField;
+    DelDetVALUE6: TStringField;
+    DelDetCOLUMN1: TStringField;
+    DelDetCOLUMN2: TStringField;
+    DelDetCOLUMN3: TStringField;
+    DelDetCOLUMN4: TStringField;
+    DelDetCOLUMN5: TStringField;
+    DelDetCOLUMN6: TStringField;
+    DelDetYWPM: TStringField;
+    DelDetZWPM: TStringField;
+    DelDetDepName: TStringField;
+    DelDetDepID_Memo: TStringField;
+    DelDetUSERID: TStringField;
+    DelDetUSERDATE: TDateTimeField;
+    DelDetYN: TStringField;
+    DelDetSBBH: TStringField;
+    DelDetQUCBH: TStringField;
+    DelDetLSBH: TStringField;
+    DelDetNSX: TStringField;
+    DelDetTSBH: TStringField;
+    DelDetQty: TFloatField;
+    DelDetDWBH: TStringField;
+    DBGrid2: TDBGridEh;
+    UPDet: TUpdateSQL;
+    BDT7: TBitBtn;
+    DD_GBox: TGroupBox;
+    Label22: TLabel;
+    Label25: TLabel;
+    Label26: TLabel;
+    DBMemo1: TDBMemo;
+    DelMasflowflag: TStringField;
+    DelDetMaintain: TBooleanField;
+    DelDetMalfunction: TBooleanField;
+    Query1: TQuery;
+    Splitter1: TSplitter;
+    DBGridEh2: TDBGridEh;
+    DSKCPK: TDataSource;
+    UpKCPK: TUpdateSQL;
+    KCPK: TQuery;
+    KCPKUserID: TStringField;
+    KCPKUserDate: TDateTimeField;
+    KCPKYN: TStringField;
+    pnl4: TPanel;
+    BE1: TBitBtn;
+    BE2: TBitBtn;
+    BE3: TBitBtn;
+    BE4: TBitBtn;
+    BE5: TBitBtn;
+    KCPKLLNO: TStringField;
+    KCPKTSID: TStringField;
+    KCPKCLBH: TStringField;
+    KCPKQty: TFloatField;
+    BDT8: TBitBtn;
+    SearchSheet: TTabSheet;
+    Panel7: TPanel;
+    Label28: TLabel;
+    Label29: TLabel;
+    Label30: TLabel;
+    Label31: TLabel;
+    tbSLLNO: TEdit;
+    btSearch: TButton;
+    dtSearch1: TDateTimePicker;
+    dtSearch2: TDateTimePicker;
+    DataSource1: TDataSource;
+    KCPKSearch: TQuery;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    FloatField1: TFloatField;
+    StringField5: TStringField;
+    DateTimeField1: TDateTimeField;
+    DBGridEh1: TDBGridEh;
+    tbSTSID: TEdit;
+    Label32: TLabel;
+    tbSName: TEdit;
+    KCPKSearchYWPM: TStringField;
+    KCPKSearchVWPM: TStringField;
+    KCPKSearchZWPM: TStringField;
+    KCPKSNO: TIntegerField;
+    Label33: TLabel;
+    cbSDPName: TComboBox;
+    BitBtn1: TBitBtn;
+    NOTSBH: TCheckBox;
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure BBTT1Click(Sender: TObject);
+    procedure BB1Click(Sender: TObject);
+    procedure BB2Click(Sender: TObject);
+    procedure BB4Click(Sender: TObject);
+    procedure BB5Click(Sender: TObject);
+    procedure BB3Click(Sender: TObject);
+    procedure BB6Click(Sender: TObject);
+    procedure BD2Click(Sender: TObject);
+    procedure BD3Click(Sender: TObject);
+    procedure BD4Click(Sender: TObject);
+    procedure BD6Click(Sender: TObject);
+    procedure BD5Click(Sender: TObject);
+    //procedure DBGrid2DblClick(Sender: TObject);
+    procedure PC1Change(Sender: TObject);
+    procedure DelDetAfterOpen(DataSet: TDataSet);
+    procedure BBTT2Click(Sender: TObject);
+    procedure DBGrid2EditButtonClick(Sender: TObject);
+    procedure DBGrid1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure DBGrid2GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure DBGrid1EditButtonClick(Sender: TObject);
+    procedure BDT5Click(Sender: TObject);
+    procedure BDT7Click(Sender: TObject);
+    procedure BO1Click(Sender: TObject);
+    procedure BE2Click(Sender: TObject);
+    procedure BE3Click(Sender: TObject);
+    procedure BE4Click(Sender: TObject);
+    procedure BE1Click(Sender: TObject);
+    procedure BE5Click(Sender: TObject);
+    procedure BDT8Click(Sender: TObject);
+    procedure bbt6Click(Sender: TObject);
+    procedure DelMasAfterOpen(DataSet: TDataSet);
+    procedure BDT6Click(Sender: TObject);
+    procedure btSearchClick(Sender: TObject);
+    procedure Label33Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure DBGridEh2Columns0UpdateData(Sender: TObject; var Text: string;
+      var Value: Variant; var UseText, Handled: Boolean);
+  private
+    LB,AssetsN219_CheckPrint,AppDir:String;
+    { Private declarations }
+    Function DelDet_LB_Check():boolean;
+    procedure Init_LB();
+    procedure DelDetAfterOpen_ColumnShow();
+    procedure DelDet_LB_Edit();
+    procedure ReadIni();
+  public
+    DepID_CD:String;
+    DepName_CD:String;
+    { Public declarations }
+  end;
+
+var
+  Deliver_EquipmentD: TDeliver_EquipmentD;
+  NDate:TDate;
+
+implementation
+
+uses main1, EquipmentD_Dep1, EquipmentD1, Deliver_EquipmentD_print1, Deliver_EquipmentD_printTW1,
+  Deliver_EquipmentD_printTB1;
+
+{$R *.dfm}
+
+procedure TDeliver_EquipmentD.ReadIni();
+var MyIni :Tinifile;
+    AppDir,ComNameCH,ComName,AssetsN219_ISO:string;
+    //
+    sline_PW,tempstr_PW:string;
+    ad_PW,i:integer;
+begin
+
+  AssetsN219_CheckPrint:='TX';
+  //
+  AppDir:=ExtractFilePath(Application.ExeName);
+  if FileExists(AppDir+'\ComName.ini')=true then
+  begin
+    try
+      MyIni := Tinifile.Create(AppDir+'\ComName.ini');
+      AssetsN219_CheckPrint:=MyIni.ReadString('ERP','AssetsN219_CheckPrint','TX');
+
+      //
+    finally
+      MyIni.Free;
+    end;
+  end;
+end;
+//
+procedure TDeliver_EquipmentD.Init_LB();
+begin
+  LB:='DDDDDDDDDD';
+  DelDet.Active:=true;
+  KCPK.Active:=true;
+end;
+procedure TDeliver_EquipmentD.Label33Click(Sender: TObject);
+begin
+
+end;
+
+//異動單 Column Show or Not
+procedure TDeliver_EquipmentD.DelDetAfterOpen_ColumnShow();
+var i,GroupBox_Left:integer;
+begin
+  //
+  GroupBox_Left:=190;
+  for i:=5 to 22 do
+  DBGrid2.Columns[i].Visible:=false;
+  DBGrid2.Columns[7].Visible:=true;
+  if NOTSBH.Checked then
+  DBgrid2.Columns[22].Visible:=true;
+  DBGrid2.Columns[7].Title.Caption:='故障原因|Nguyen do';
+  DD_GBox.Visible:=true;
+  DD_GBox.Left:=GroupBox_Left;
+  //
+end;
+//
+
+//
+procedure TDeliver_EquipmentD.DelDet_LB_Edit();
+begin
+  with DelDet do
+  begin
+    Edit;
+    //di ve ton kho
+    Post;
+  end;
+end;
+procedure TDeliver_EquipmentD.DelMasAfterOpen(DataSet: TDataSet);
+begin
+   bbt6.Enabled:=true;
+end;
+
+procedure TDeliver_EquipmentD.FormCreate(Sender: TObject);
+var i:integer;
+begin
+  dtSearch1.Date:=date;
+  dtSearch2.Date:=date;
+  cbSDPName.Items.add('');
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('SELECT distinct DepName FROM [TSCD_KCLLSS] a ');
+    sql.Add('inner join [TSCD] b on a.TSID=b.TSID ');
+    sql.Add('left join TSCD_BDepartment on TSCD_BDepartment.ID=b.DepID');
+    sql.add('order by DepName');
+    active:=true;
+    if NOT eof then
+    begin
+      cbSDPName.Items.Add(fieldbyname('DepName').asstring);
+      next;
+    end;
+    active:=false;
+    //
+  end;
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select ID,DepName from TSCD_BDepartment');
+    sql.add('where GSBH='+''''+main.Edit2.Text+'''');
+    sql.add('order by ID');
+    active:=true;
+    for i:=1 to recordcount do
+    begin
+      CBX1.Items.Add(fieldbyname('DepName').asstring);
+      next;
+    end;
+    CBX1.itemindex:=0;
+    active:=false;
+    sql.Clear;
+    sql.add('select getdate() as NDate ');
+    active:=true;
+    NDate:=fieldbyname('NDate').Value;
+    DTP1.Date:=date-3;
+    DTP2.date:=date;
+  end;
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select top 1 ID,DepName from TSCD_BDepartment where DepMemo like ''%工務%'' ');
+    active:=true;
+    DepID_CD:=FieldByName('ID').AsString;
+    DepName_CD:=FieldByName('DepName').AsString;
+    active:=false;
+    //
+  end;
+  PC1.ActivePageIndex:=0;
+  ReadIni();
+end;
+
+procedure TDeliver_EquipmentD.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  if BB5.enabled  then
+  begin
+    messagedlg('You have to save data Record of report first.',mtwarning,[mbyes],0);
+    PC1.ActivePage:=TS1;
+    panel1.Visible:=true;
+    panel6.Visible:=false;
+    action:=canone;
+  end else
+  begin
+    if BD5.enabled then
+      begin
+        messagedlg('You have to save data Report first.',mtwarning,[mbyes],0);
+        PC1.ActivePage:=TS2;
+        panel6.Visible:=true;
+        panel1.Visible:=false;
+        action:=canone;
+      end else
+      begin
+        action:=Cafree;
+      end;
+  end;
+end;
+
+procedure TDeliver_EquipmentD.FormDestroy(Sender: TObject);
+begin
+  Deliver_EquipmentD:=nil;
+end;
+
+procedure TDeliver_EquipmentD.Button1Click(Sender: TObject);
+begin
+  Init_LB();
+  with DelMas do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select TSCD_KCDD.*,BDepartment.DepName  ');
+    sql.add('from TSCD_KCDD');
+    sql.add('left join TSCD_BDepartment BDepartment on TSCD_KCDD.DepID=BDepartment.ID');
+    sql.add('where ISNULL(flowflag,'''')<>''X'' and TSCD_KCDD.LLNO like ');
+    sql.add(''''+edit1.Text+'%'+'''');
+    sql.add('and convert(smalldatetime,convert(varchar,TSCD_KCDD.USERDATE,111)) between ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+    sql.add(' and  ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP2.Date) +'''');
+    sql.add('and TSCD_KCDD.LB='''+LB+''' ');
+    sQL.Add('and TSCD_KCDD.GSBH='''+main.Edit2.Text+''' ');
+    //showmessage(text);
+    if CBX1.itemindex<>0 then
+    begin
+      sql.add('and BDepartment.DepName like ');
+      sql.add(''''+CBX1.Text+'%'+'''');
+    end;
+    if Check.Checked then
+    begin
+      sql.Add('and TSCD_KCDD.USERID='+''''+main.Edit1.Text+'''');
+    end;
+    sql.add('order by LLNO DESC');
+    //funcobj.WriteErrorLog(sql.Text);
+    active:=true;
+  end;
+  panel2.Visible:=false;
+  BB2.Enabled:=true;
+  BB3.Enabled:=true;
+  BB4.Enabled:=true;
+  BBT1.Enabled:=true;
+  BBT2.Enabled:=true;
+  BBT3.Enabled:=true;
+  check.Checked:=true;
+  BBT4.Enabled:=true;
+  BBT6.Enabled:=true;
+  //CB1.visible:=true;
+  DelDet.Active:=true;
+end;
+
+procedure TDeliver_EquipmentD.BBTT1Click(Sender: TObject);
+begin
+  EquipmentD_Dep:=TEquipmentD_Dep.Create(self);
+  EquipmentD_Dep.Show;
+end;
+
+procedure TDeliver_EquipmentD.BB1Click(Sender: TObject);
+begin
+   panel2.Visible:=true;
+end;
+
+procedure TDeliver_EquipmentD.BB2Click(Sender: TObject);
+begin
+  with DelMas do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    insert;
+  end;
+  BBTT1.Visible:=true;
+  BB5.Enabled:=true;
+  BB6.Enabled:=true;
+  DBGrid1.columns[3].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TDeliver_EquipmentD.BB4Click(Sender: TObject);
+begin
+  with DelMas do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+  BBTT1.Visible:=true;
+  BB5.Enabled:=true;
+  BB6.Enabled:=true;
+  DBGrid1.columns[3].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TDeliver_EquipmentD.BB5Click(Sender: TObject);
+var y,m,a:string;
+    i:integer;
+begin
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('select year(getdate()) as FY,month(getdate()) as FM,getdate() as NDate ');
+    active:=true;
+    y:=fieldbyname('FY').asstring;
+    m:=fieldbyname('FM').asstring;
+    NDate:=fieldbyname('NDate').Value;
+    active:=false;
+  end;
+  if length(m)<2 then
+  m:='0'+m;
+  try
+    DelDet.Active:=false;
+    DelMas.first;
+    for i:=1 to DelMas.RecordCount do
+    begin
+      case DelMas.updatestatus of
+        usinserted:
+          begin
+            if DelMas.fieldbyname('DepID').isnull then
+              begin
+                DelMas.delete;
+              end
+               else
+                 begin
+                     with Qtemp do
+                     begin
+                       active:=false;
+                       sql.Clear;
+                       sql.Add('select LLNO from TSCD_KCDD where LLNO like '+''''+y+m+'%'+'''');
+                       sql.add('order by LLNO');
+                       active:=true;
+                       if recordcount >0 then
+                       begin
+                         last;
+                         a:=fieldbyname('LLNO').AsString;
+                         a:=copy(a,7,5);
+                         a:=inttostr(strtoint(a)+1);
+                         while length(a)<5 do
+                           begin
+                             a:='0'+a;
+                           end;
+                       end
+                         else
+                           begin
+                             a:='00001';
+                           end;
+                       a :=y+m+a;
+                       active:=false;
+                     end;
+                   DelMas.edit;
+                   DelMas.fieldbyname('LLNO').Value:=a;
+                   //DelMas.fieldbyname('DepID').Value:=DelMas.fieldbyname('DepID').Value;
+                   DelMas.fieldbyname('LB').Value:=LB;
+                   DelMas.FieldByName('GSBH').Value:=main.Edit2.Text;
+                   DelMas.FieldByName('userID').Value:=main.edit1.text;
+                   DelMas.FieldByName('userdate').Value:=Ndate;
+                   DelMas.FieldByName('CFMID').Value:='NO';
+                   DelMas.FieldByName('YN').Value:='1';
+                   if (DelMas.fieldbyname('LB').Value ='') or (DelMas.fieldbyname('LB').Value =null) then
+                   begin
+                      showmessage('Chua nhap loai.');
+                      abort;
+                   end;
+                   upMas.apply(ukinsert);
+                 end;
+          end;
+        usmodified:
+           begin
+             if DelMas.FieldByName('USERID').value<>main.Edit1.Text then
+               begin
+                 showmessage('不是你的，不要亂動。khong phai ban khong duoc tu sua');
+               end
+               else
+                 begin
+                   if DelMas.fieldbyname('YN').value='0'then
+                     begin
+                         with BDelRec do
+                         begin
+                           active:=false;
+                           sql.Clear;
+                           {sql.add('insert into BDelRec ');
+                           sql.add('(TableName ,TNO,CLBH,OldID,DelID,DelDate)');
+                           sql.add('values ('+''''+'TSCD_KCDD'+''''+','+''''+DelMas.fieldbyname('LLNO').Value+'''');
+                           sql.add(','+''''+' '+''''+','+''''+DelMas.fieldbyname('USERID').Value+''''+',');
+                           sql.add(''''+main.Edit1.Text+''''+',getdate())');}
+                           SQL.Add('Update TSCD_KCDD Set flowflag=''X'' where LLNO='''+DelMas.FieldByName('LLNO').AsString+''' ');
+                           execsql;
+                           active:=false;
+                         end;
+                       //upMas.apply(ukdelete);
+                     end
+                     else
+                       begin
+                         if (DelMas.FieldByName('CFMID').value='NO')   then
+                           begin
+                             if (NDate-DelMas.FieldByName('USERDATE').value)<=3  then
+                               begin
+                                 DelMas.edit;
+                                 DelMas.FieldByName('userID').Value:=main.edit1.text;
+                                 DelMas.FieldByName('userdate').Value:=Ndate;
+                                 upMas.apply(ukmodify);
+                               end
+                               else
+                                 begin
+                                   showmessage('Date>3, can not modify.');
+                                 end;
+                           end
+                           else
+                             begin
+                               showmessage('Already confirmed, can not modify.');
+                             end;
+                       end;
+                end;
+           end;
+      end;
+     DelMas.next;
+    end;
+  DelMas.active:=false;
+  DelMas.cachedupdates:=false;
+  DelMas.requestlive:=false;
+  DelMas.active:=true;
+  DelDet.Active:=true;
+  BB5.enabled:=false;
+  BB6.enabled:=false;
+  BBTT1.Visible:=false;
+  DBGrid1.columns[3].ButtonStyle:=cbsnone;
+  showmessage('Succeed.');
+  except
+    Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+  end;
+end;
+
+
+procedure TDeliver_EquipmentD.BD2Click(Sender: TObject);
+begin
+ if DelMas.RequestLive then
+  begin
+    showmessage('Pls save Master data first.');
+    PC1.ActivePage:=TS2;
+    panel6.visible:=true;
+    panel1.visible:=false;
+    abort;
+  end;
+  with DelDet do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    insert;
+    fieldbyname('Maintain').Value := false;
+    fieldbyname('Malfunction').Value := false;
+  end;
+  BBTT2.Visible:=true;
+  BD5.Enabled:=true;
+  BD6.Enabled:=true;
+  DBGrid2.columns[1].ButtonStyle:=cbsEllipsis;
+  //
+  DelDet_LB_Edit();
+end;
+
+procedure TDeliver_EquipmentD.DBGrid2EditButtonClick(Sender: TObject);
+var Style: String;
+    i:integer;
+begin
+  if DBGrid2.selectedfield.fieldname='SBBH'  then
+  begin
+    BBTT2.Click;
+  end;
+end;
+
+procedure TDeliver_EquipmentD.BD3Click(Sender: TObject);
+begin
+  if DelMas.RequestLive then
+  begin
+    showmessage('Pls save Master data first.');
+    PC1.ActivePage:=TS2;
+    panel6.visible:=true;
+    panel1.visible:=false;
+    abort;
+  end;
+  with DelDet do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+    fieldbyname('YN').Value:='0';
+  end;
+  BBTT2.Visible:=true;
+  BD5.Enabled:=true;
+  BD6.Enabled:=true;
+  DBGrid2.columns[1].ButtonStyle:=cbsEllipsis;
+  DBGrid2.columns[5].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TDeliver_EquipmentD.BD4Click(Sender: TObject);
+begin
+  if DelMas.RequestLive then
+  begin
+    showmessage('Pls save Master data first.');
+    PC1.ActivePage:=TS2;
+    panel6.visible:=true;
+    panel1.visible:=false;
+    abort;
+  end;
+
+  with DelDet do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+  BBTT2.Visible:=true;
+  BD5.Enabled:=true;
+  BD6.Enabled:=true;
+  DBGrid2.columns[1].ButtonStyle:=cbsEllipsis;
+  //
+  DelDet_LB_Edit();
+end;
+
+
+procedure TDeliver_EquipmentD.BB3Click(Sender: TObject);
+begin
+  if DelDet.recordcount=0 then
+  begin
+    with DelMas do
+    begin
+      if fieldbyname('USERID').value=main.edit1.Text then
+      begin
+        requestlive:=true;
+        cachedupdates:=true;
+        edit;
+        fieldbyname('YN').Value:='0';
+      end else
+      begin
+        showmessage('It is not yours,can not delete.');
+      end;
+    end;
+  end else
+  begin
+      showmessage('Pls delete the Deliver Detail first.')
+  end;
+  BBTT1.Visible:=true;
+  BB5.Enabled:=true;
+  BB6.Enabled:=true;
+end;
+
+
+procedure TDeliver_EquipmentD.BB6Click(Sender: TObject);
+begin
+  with DelMas do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  bb5.enabled:=false;
+  bb6.enabled:=false;
+  BBTT1.Visible:=false;
+  DBGrid1.columns[3].ButtonStyle:=cbsnone;
+end;
+
+procedure TDeliver_EquipmentD.bbt6Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j:integer;
+begin
+  if DelMas.Active then
+  begin
+    if DelMas.recordcount=0 then
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+  end else
+  begin
+    showmessage('No record.');
+    abort;
+  end;
+
+  try
+    eclApp:=CreateOleObject('Excel.Application');
+    WorkBook:=CreateOleObject('Excel.Sheet');
+  except
+    Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+    Exit;
+  end;
+
+  try
+    WorkBook:=eclApp.workbooks.Add;
+    //eclApp.Cells(1,1):='NO';
+    for   i:=0   to   DelMas.fieldcount-1   do
+    begin
+      eclApp.Cells(1,i+1):=DelMas.fields[i].FieldName;
+    end;
+    DelMas.First;
+    j:=2;
+    while   not  DelMas.Eof   do
+      begin
+        eclApp.Cells(j,1):=j-1;
+        for   i:=0   to   DelMas.fieldcount-1   do
+        begin
+          eclApp.Cells(j,i+1):=DelMas.Fields[i].AsString;
+        end;
+        DelMas.Next;
+        inc(j);
+      end;
+    eclapp.columns.autofit;
+    showmessage('Succeed.');
+    eclApp.Visible:=True;
+  except
+    on   F:Exception   do
+      showmessage(F.Message);
+  end;
+end;
+
+procedure TDeliver_EquipmentD.BD6Click(Sender: TObject);
+begin
+  with DelDet do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  BBTT2.Visible:=false;
+  BD5.Enabled:=false;
+  BD6.Enabled:=false;
+  DBGrid2.columns[1].ButtonStyle:=cbsNone;
+  DBGrid2.columns[7].ButtonStyle:=cbsNone;
+end;
+
+
+procedure TDeliver_EquipmentD.PC1Change(Sender: TObject);
+var i:integer;
+begin
+  if PC1.ActivePage=TS2 then
+  begin
+    panel6.visible:=true;
+    panel1.visible:=false;
+    if (DelDet.Active) and (DelDet.RecordCount>0) then
+    begin
+      BE1.Enabled:=true;
+      BE2.Enabled:=true;
+      BE3.Enabled:=true;
+      BE4.Enabled:=false;
+      BE5.Enabled:=false;
+    end;
+  end else
+  begin
+    panel6.visible:=false;
+    panel1.visible:=true;
+  end;
+end;
+
+procedure TDeliver_EquipmentD.DelDetAfterOpen(DataSet: TDataSet);
+var i:integer;
+begin
+  DelDetAfterOpen_ColumnShow();
+  //
+  BD2.Enabled:=true;
+  BD3.Enabled:=true;
+  BD4.Enabled:=true;
+  BDT1.Enabled:=true;
+  BDT2.Enabled:=true;
+  BDT3.Enabled:=true;
+  BDT4.Enabled:=true;
+  //BDT5.Enabled:=true;
+  BDT6.Enabled:=true;
+  if AssetsN219_CheckPrint='TX' then
+  begin
+    BDT7.Enabled:=true;
+    BDT8.Enabled:=false;
+  end else
+  begin
+    BDT7.Enabled:=false;
+    BDT8.Enabled:=true;
+  end;
+  if (NDate-DelMas.FieldByName('USERDATE').value)>7  then
+  begin
+    BD2.Enabled:=false;
+    BD3.Enabled:=false;
+    BD4.Enabled:=false;
+  end;
+  if DelMas.FieldByName('CFMID').value<>'NO'  then
+  begin
+    BD2.Enabled:=false;
+    BD3.Enabled:=false;
+    BD4.Enabled:=false;
+  end;
+  if DelMas.FieldByName('USERID').value<>main.edit1.text  then
+  begin
+    BD2.Enabled:=false;
+    BD3.Enabled:=false;
+    BD4.Enabled:=false;
+  end;
+  if DelMas.cachedupdates  then
+  begin
+    BD2.Enabled:=false;
+    BD3.Enabled:=false;
+    BD4.Enabled:=false;
+  end;
+  BD5.Enabled:=false;
+  BD6.Enabled:=false;
+  //DeliverE.DelMas.Active:=true;
+end;
+//
+Function TDeliver_EquipmentD.DelDet_LB_Check():boolean;
+var iRes:boolean;
+begin
+  iRes:=true;
+  with DelDet do
+  begin
+    if DelMas.fieldbyname('LB').AsString ='RRRRRRRRRR' then  //歸還 di ve ton kho
+    begin
+      if ((FieldByName('VALUE1').Isnull) ) then
+      begin
+        iRes:=false;
+      end;
+    end;
+  end;
+  result:=iRes;
+end;
+
+procedure TDeliver_EquipmentD.BD5Click(Sender: TObject);
+var i:integer;
+begin
+    //Check user have key in column value
+    if DelDet_LB_Check()=false then
+    begin
+      Showmessage('Can not be empty');
+      abort;
+    end;
+    try
+    DelDet.first;
+    for i:=1 to DelDet.RecordCount do
+    begin
+      case DelDet.updatestatus of
+        usinserted:
+          begin
+            if DelMas.FieldByName('USERID').value<>main.Edit1.Text then
+              begin
+                showmessage('不是你的，不要亂動。khong phai ban khong duoc tu sua');
+              end
+              else
+                begin
+                  if DelDet.fieldbyname('TSID').isnull and not NOTSBH.Checked then
+                  begin
+                    DelDet.delete;
+                  end else
+                  begin
+                      DelDet_LB_Edit();
+                      DelDet.edit;
+                      DelDet.fieldbyname('LLNO').Value:=DelMas.fieldbyname('LLNO').Value;
+                      if NOTSBH.Checked then
+                        begin
+                         DelDet.fieldbyname('TSID').Value:='KHONG MA TS';
+                         DelDet.fieldbyname('Qty').Value:='1';
+                        end;
+                      DelDet.FieldByName('userID').Value:=main.edit1.text;
+                      DelDet.FieldByName('userdate').Value:=Ndate;
+                      DelDet.FieldByName('YN').Value:='1';
+                      upDet.apply(ukinsert);
+                      if DelDet.FieldByName('Maintain').Value = True then begin
+                        Qtemp.Active := false;
+                        Qtemp.SQL.Clear;
+                        Qtemp.SQL.Add('Update TSCD set CycleDate = GetDate()+ISNULL(TSCD.CycleDay,0) where TSID = '''+DelDet.FieldByName('TSID').AsString+'''');
+                        Qtemp.ExecSQL;
+                      end;
+                  end;
+              end;
+          end;
+        usmodified:
+           begin
+               if DelDet.FieldByName('USERID').value<>main.Edit1.Text then
+               begin
+                 showmessage('不是你，不要亂動。khong phai ban khong duoc tu sua');
+               end
+               else
+                 begin
+                    if DelDet.fieldbyname('YN').value='0'then
+                    begin
+                       if DelDet.FieldByName('Maintain').Value = True then begin
+                         Query1.Active := false;
+                         Query1.SQL.Clear;
+                         Query1.SQL.Add('Select top 1 Userdate from TSCD_KCDDS where TSID = '''+DelDet.FieldByName('TSID').AsString+''' and Maintain = 1 order by USERDATE DESC');
+                         Query1.Active := true;
+
+                         Qtemp.Active := false;
+                         Qtemp.SQL.Clear;
+                         if Query1.IsEmpty then
+                           Qtemp.SQL.Add('Update TSCD set CycleDate = NULL where TSID = '''+DelDet.FieldByName('TSID').AsString+'''')
+                         else
+                           Qtemp.SQL.Add('Update TSCD set CycleDate = '''+DelDet.FieldByName('Userdate').AsString+'''+ISNULL(TSCD.CycleDay,0) where TSID = '''+DelDet.FieldByName('TSID').AsString+'''');
+                         Qtemp.ExecSQL;
+                       end;
+
+                       with BDelRec do
+                       begin
+                         active:=false;
+                         sql.Clear;
+                         sql.add('insert into BDelRec ');
+                         sql.add('(TableName ,TNO,CLBH,OldID,DelID,DelDate)');
+                         sql.add('values ('+''''+'TSCD_KCDDS'+''''+','+''''+DelMas.fieldbyname('LLNO').Value+'''');
+                         sql.add(','+''''+' '+''''+','+''''+DelMas.fieldbyname('USERID').Value+''''+',');
+                         sql.add(''''+main.Edit1.Text+''''+',getdate())');
+                         execsql;
+                         active:=false;
+                       end;
+                       UpDet.apply(ukdelete);
+                    end
+                    else
+                     begin
+                       if (DelMas.FieldByName('CFMID').value='NO')   then
+                       begin
+                         if (NDate-DelMas.FieldByName('USERDATE').value)<=7  then
+                           begin
+                              DelDet.edit;
+                              DelDet.fieldbyname('LLNO').Value:=DelMas.fieldbyname('LLNO').Value;
+                              DelDet.FieldByName('userID').Value:=main.edit1.text;
+                              DelDet.FieldByName('userdate').Value:=Ndate;
+                              DelDet.FieldByName('YN').Value:='1';
+                              upDet.apply(ukmodify);
+                              if DelDet.FieldByName('Maintain').Value = False then begin
+                                Query1.Active := false;
+                                Query1.SQL.Clear;
+                                Query1.SQL.Add('Select top 1 Userdate from TSCD_KCDDS where TSID = '''+DelDet.FieldByName('TSID').AsString+''' and Maintain = 1 order by USERDATE DESC');
+                                Query1.Active := true;
+
+                                Qtemp.Active := false;
+                                Qtemp.SQL.Clear;
+                                if Query1.IsEmpty then
+                                  Qtemp.SQL.Add('Update TSCD set CycleDate = NULL where TSID = '''+DelDet.FieldByName('TSID').AsString+'''')
+                                else
+                                  Qtemp.SQL.Add('Update TSCD set CycleDate = '''+DelDet.FieldByName('Userdate').AsString+'''+ISNULL(TSCD.CycleDay,0) where TSID = '''+DelDet.FieldByName('TSID').AsString+'''');
+                                Qtemp.ExecSQL;
+                              end;
+                           end
+                           else
+                             begin
+                               showmessage('Date>7, can not modify.');
+                             end;
+                       end
+                       else
+                         begin
+                           showmessage('Already confirmed, can not modify.');
+                         end;
+                     end;
+
+                 end;
+            end;
+      end;
+      DelDet.next;
+    end;
+  DelDet.active:=false;
+  DelDet.cachedupdates:=false;
+  DelDet.requestlive:=false;
+  DelDet.active:=true;
+  bb6.enabled:=false;
+  BBTT2.Visible:=false;
+  BD5.Enabled:=false;
+  BD6.Enabled:=false;
+  DBGrid2.columns[1].ButtonStyle:=cbsNone;
+  DBGrid2.columns[7].ButtonStyle:=cbsNone;
+  showmessage('Succeed.');
+  except
+    Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+  end;
+end;
+
+
+procedure TDeliver_EquipmentD.BBTT2Click(Sender: TObject);
+begin
+  EquipmentD:=TEquipmentD.Create(self);
+  EquipmentD.Show;
+end;
+
+procedure TDeliver_EquipmentD.DBGrid1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if DelMas.FieldByName('YN').value='0' then
+  begin
+    DBGrid1.canvas.font.color:=clred;
+  end;
+end;
+
+procedure TDeliver_EquipmentD.DBGrid2GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if DelDet.FieldByName('YN').value='0' then
+  begin
+    DBGrid2.canvas.font.color:=clred;
+  end;
+end;
+
+procedure TDeliver_EquipmentD.DBGridEh2Columns0UpdateData(Sender: TObject;
+  var Text: string; var Value: Variant; var UseText, Handled: Boolean);
+begin
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('SELECT count(*) counts FROM [clzl] where cldh='''+Value+'''');
+    active:=true;
+    if fieldbyname('counts').AsInteger=0 then showmessage('??? Cannot find CLDH:'+Value);
+    active:=false;
+  end;
+end;
+
+procedure TDeliver_EquipmentD.DBGrid1DblClick(Sender: TObject);
+begin
+  if  DelMas.Active then
+  begin
+    if  (DelMas.recordcount>0) then
+    begin
+      PC1.ActivePage:=TS2;
+      panel1.visible:=false;
+      panel6.visible:=true;
+    end;
+  end;
+end;
+
+procedure TDeliver_EquipmentD.DBGrid1EditButtonClick(Sender: TObject);
+begin
+  if DBGrid1.selectedfield.fieldname='DepName'  then
+  begin
+    BBTT1.Click;
+  end;
+end;
+
+procedure TDeliver_EquipmentD.BDT5Click(Sender: TObject);
+begin
+  if DelDet.RequestLive then
+  begin
+    showmessage('Pls save Master data first.');
+    Abort;
+  end;
+  if DelDet.RecordCount = 0  then
+  begin
+    showmessage('Pls insert the Repair Equipment(故障報修) first');
+  end else
+  begin
+    Deliver_EquipmentD_print:=TDeliver_EquipmentD_print.Create(self);
+    Deliver_EquipmentD_print.quickrep1.prepare;
+    Deliver_EquipmentD_print.quickrep1.preview;
+    Deliver_EquipmentD_print.free;
+  end;
+end;
+
+procedure TDeliver_EquipmentD.BDT6Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j:integer;
+begin
+  if DelDet.Active then
+  begin
+    if DelDet.recordcount=0 then
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+  end else
+  begin
+    showmessage('No record.');
+    abort;
+  end;
+
+  try
+    eclApp:=CreateOleObject('Excel.Application');
+    WorkBook:=CreateOleObject('Excel.Sheet');
+  except
+    Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+    Exit;
+  end;
+
+  try
+    WorkBook:=eclApp.workbooks.Add;
+    //eclApp.Cells(1,1):='NO';
+    for   i:=0   to   DelDet.fieldcount-1   do
+    begin
+      eclApp.Cells(1,i+1):=DelDet.fields[i].FieldName;
+    end;
+    DelDet.First;
+    j:=2;
+    while   not  DelDet.Eof   do
+      begin
+        eclApp.Cells(j,1):=j-1;
+        for   i:=0   to   DelDet.fieldcount-1   do
+        begin
+          eclApp.Cells(j,i+1):=DelDet.Fields[i].AsString;
+        end;
+        DelDet.Next;
+        inc(j);
+      end;
+    eclapp.columns.autofit;
+    showmessage('Succeed.');
+    eclApp.Visible:=True;
+  except
+    on   F:Exception   do
+      showmessage(F.Message);
+  end;
+end;
+
+procedure TDeliver_EquipmentD.BDT7Click(Sender: TObject);
+begin
+  if DelDet.RequestLive then
+  begin
+    showmessage('Pls save Master data first.');
+    Abort;
+  end;
+  Deliver_EquipmentD_printTW:=TDeliver_EquipmentD_printTW.Create(self);
+  Deliver_EquipmentD_printTW.quickrep1.prepare;
+  Deliver_EquipmentD_printTW.quickrep1.preview;
+  Deliver_EquipmentD_printTW.free;
+end;
+
+procedure TDeliver_EquipmentD.BE1Click(Sender: TObject);
+begin
+  if (NOT DelDet.Active) or (DelDet.RequestLive) then
+  begin
+    showmessage('Pls save material data first.');
+    abort;
+  end;
+  with KCPK do
+  begin
+    active:=true;
+    requestlive:=true;
+    cachedupdates:=true;
+    insert;
+  end;
+  BE4.Enabled:=true;
+  BE5.Enabled:=true;
+  BD2.Enabled:=false;
+  BD3.Enabled:=false;
+  BD4.Enabled:=false;
+end;
+
+procedure TDeliver_EquipmentD.BE2Click(Sender: TObject);
+begin
+  if (DelDet.RequestLive) or (NOT DelDet.Active)then
+  begin
+    showmessage('Pls save material data first.');
+    abort;
+  end;
+  with KCPK do
+  begin
+    active:=true;
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+    fieldbyname('YN').Value:='0';
+  end;
+  BE4.Enabled:=true;
+  BE5.Enabled:=true;
+  BD2.Enabled:=false;
+  BD3.Enabled:=false;
+  BD4.Enabled:=false;
+end;
+
+procedure TDeliver_EquipmentD.BE3Click(Sender: TObject);
+begin
+  if (DelDet.RequestLive) or (NOT DelDet.Active) then
+  begin
+    showmessage('Pls save material data first.');
+    abort;
+  end;
+  with KCPK do
+  begin
+    active:=true;
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+  BE4.Enabled:=true;
+  BE5.Enabled:=true;
+  BD2.Enabled:=false;
+  BD3.Enabled:=false;
+  BD4.Enabled:=false;
+end;
+
+procedure TDeliver_EquipmentD.BE4Click(Sender: TObject);
+var i:integer;
+    Qty:real;
+begin
+  try
+    KCPK.first;
+    for i:=1 to KCPK.RecordCount do
+    begin
+      case KCPK.updatestatus of
+        usinserted:
+        begin
+          with Qtemp do
+          begin
+            active:=false;
+            SQL.Clear;
+            sql.Add('SELECT count(*) counts FROM [clzl] where cldh='''+KCPK.fieldbyname('LLNO').AsString+'''');
+            active:=true;
+            if Qtemp.fieldbyname('LLNO').AsInteger>0 then
+            begin
+               KCPK.edit;
+               KCPK.fieldbyname('LLNO').Value:=DelDet.fieldbyname('LLNO').value;
+               KCPK.fieldbyname('TSID').Value:=DelDet.fieldbyname('TSID').value;
+               KCPK.FieldByName('userID').Value:=main.edit1.text;
+               KCPK.FieldByName('userdate').Value:=date;
+               UpKCPK.apply(ukinsert);
+            end;
+          end;
+        end;
+        usmodified:
+        begin
+          if KCPK.fieldbyname('YN').value='0'then
+          begin
+            with BDelRec do
+            begin
+              active:=false;
+              sql.Clear;
+              sql.add('insert into BDelRec ');
+              sql.add('(TableName ,TNO,CLBH,OldID,DelID,DelDate)');
+              sql.add('values ('''+'KCRKSS'+''''+','+''''+KCPK.fieldbyname('SNO').AsString+'''');
+              sql.add(','+''''+KCPK.fieldbyname('CLBH').Value+''''+','+''''+KCPK.fieldbyname('USERID').Value+''''+',');
+              sql.add(''''+main.Edit1.Text+''''+',getdate())');
+              execsql;
+              active:=false;
+            end;
+            UpKCPK.apply(ukdelete);
+          end else
+          begin
+            KCPK.edit;
+            KCPK.FieldByName('userID').Value:=main.edit1.text;
+            KCPK.FieldByName('userdate').Value:=date;
+            UpKCPK.apply(ukmodify);
+          end;
+        end;
+      end;
+      KCPK.next;
+    end;
+    Query1.Active:=false;
+    KCPK.active:=false;
+    KCPK.cachedupdates:=false;
+    KCPK.requestlive:=false;
+    KCPK.active:=true;
+    KCPK.First;
+    Qty:=0;
+    while not KCPK.eof do
+    begin
+      Qty:=Qty+KCPK.fieldbyname('Qty').Value;
+      KCPK.next;
+    end;
+    BE4.Enabled:=false;
+    BE5.Enabled:=false;
+    BD2.Enabled:=true;
+    BD3.Enabled:=true;
+    BD4.Enabled:=true;
+  except
+    On E:Exception do
+    begin
+      Messagedlg('Have wrong, can not save data!'+E.Message,mtwarning,[mbyes],0);
+    end;
+  end;
+end;
+
+procedure TDeliver_EquipmentD.BE5Click(Sender: TObject);
+begin
+  with KCPK do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  BE4.Enabled:=false;
+  BE5.Enabled:=false;
+  BD2.Enabled:=true;
+  BD3.Enabled:=true;
+  BD4.Enabled:=true;
+end;
+
+procedure TDeliver_EquipmentD.BitBtn1Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j:integer;
+begin
+if (KCPKSearch.Active) and (KCPKSearch.RecordCount>0) then
+  begin
+  try
+    eclApp:=CreateOleObject('Excel.Application');
+    WorkBook:=CreateOleObject('Excel.Sheet');
+  except
+    Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+    Exit;
+  end;
+
+  try
+    WorkBook:=eclApp.workbooks.Add;
+    for   i:=0   to   KCPKSearch.fieldcount-1   do
+    begin
+      eclApp.Cells(1,i+1):=KCPKSearch.fields[i].FieldName;
+    end;
+    KCPKSearch.First;
+    j:=2;
+    while   not  KCPKSearch.Eof   do
+      begin
+        eclApp.Cells(j,1):=j-1;
+        for   i:=0   to   KCPKSearch.fieldcount-1   do
+        begin
+          eclApp.Cells(j,i+1):=KCPKSearch.Fields[i].AsString;
+        end;
+        KCPKSearch.Next;
+        inc(j);
+      end;
+    eclapp.columns.autofit;
+    showmessage('Succeed.');
+    eclApp.Visible:=True;
+  except
+    on   F:Exception   do
+      showmessage(F.Message);
+  end;
+  end;
+end;
+
+procedure TDeliver_EquipmentD.BDT8Click(Sender: TObject);
+begin
+  if DelDet.RequestLive then
+  begin
+    showmessage('Pls save Master data first.');
+    Abort;
+  end;
+  Deliver_EquipmentD_printTB:=TDeliver_EquipmentD_printTB.Create(self);
+  Deliver_EquipmentD_printTB.quickrep1.prepare;
+  Deliver_EquipmentD_printTB.quickrep1.preview;
+  Deliver_EquipmentD_printTB.free;
+end;
+
+procedure TDeliver_EquipmentD.BO1Click(Sender: TObject);
+begin
+  if DelDet.RequestLive then
+  begin
+    showmessage('Pls save material data first.');
+    abort;
+  end;
+  with KCPK do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    insert;
+    fieldbyname('YN').Value:='1';
+  end;
+  BE4.Enabled:=true;
+  BE5.Enabled:=true;
+  BD2.Enabled:=false;
+  BD3.Enabled:=false;
+  BD4.Enabled:=false;
+end;
+
+procedure TDeliver_EquipmentD.btSearchClick(Sender: TObject);
+begin
+  with KCPKSearch do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('SELECT a.[LLNO],a.[TSID],[CLBH],a.[Qty],a.[USERID],a.[USERDATE]');
+    sql.Add(',[YWPM],[ZWPM],[VWPM],DepName FROM [TSCD_KCLLSS] a ');
+    sql.Add('inner join [TSCD] b on a.TSID=b.TSID ');
+    sql.Add('inner join [TSCD_SB] c on b.SBBH=c.SBBH ');
+    sql.Add('left join TSCD_BDepartment on TSCD_BDepartment.ID=b.DepID');
+    sql.Add('where a.[USERDATE] between '''+DateToStr(dtSearch1.date)+''' and '''+DateToStr(dtSearch2.date)+'''');
+    if length(tbSLLNO.Text) >4  then sql.Add(' and a.[LLNO] like '''+tbSLLNO.Text+'%''');
+    if length(tbSTSID.Text)>4 then sql.Add(' and a.[TSID] like '''+tbSTSID.Text+'%''');
+    if length(tbSName.Text)>2 then sql.Add(' and ([YWPM] like ''%'+tbSName.Text+'%'' OR [ZWPM] like ''%'+tbSName.Text+'%'' OR [VWPM] like ''%'+tbSName.Text+'%'')');
+    //showmessage(text);
+    active:=true;
+  end;
+end;
+
+end.

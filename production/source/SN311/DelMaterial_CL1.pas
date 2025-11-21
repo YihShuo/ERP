@@ -1,0 +1,323 @@
+unit DelMaterial_CL1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Mask, DBCtrls, Grids, DBGrids, DB, DBTables, ExtCtrls,math,
+  GridsEh, DBGridEh,IniFiles;
+
+type
+  TDelMaterial_CL = class(TForm)
+    Panel1: TPanel;
+    Query1: TQuery;
+    DataSource1: TDataSource;
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    DBEdit3: TDBEdit;
+    Label3: TLabel;
+    Query1ZLBH: TStringField;
+    Query1CLBH: TStringField;
+    Query1USAGE: TFloatField;
+    Query1DFL: TStringField;
+    Query1YWPM: TStringField;
+    Query1DWBH: TStringField;
+    Query1CLSL: TFloatField;
+    Query1Qty: TCurrencyField;
+    UpdateSQL1: TUpdateSQL;
+    Query1OKPerson: TFloatField;
+    Edit1: TEdit;
+    Label4: TLabel;
+    Query1KCQty: TFloatField;
+    Query1RemQty: TFloatField;
+    CLBHEdit: TEdit;
+    Label5: TLabel;
+    YWPMEdit: TEdit;
+    Label6: TLabel;
+    QueryBtn: TButton;
+    DFLCombo: TComboBox;
+    Label7: TLabel;
+    DBGridEh1: TDBGridEh;
+    Query2: TQuery;
+    Query1NK: TCurrencyField;
+    Query1TC: TCurrencyField;
+    Query1HD: TCurrencyField;
+    Query1KD: TCurrencyField;
+    Query1GC: TCurrencyField;
+    Query1XT: TCurrencyField;
+    Query1ZZZZ: TCurrencyField;
+    procedure FormCreate(Sender: TObject);
+    procedure Query1CalcFields(DataSet: TDataSet);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Edit1Exit(Sender: TObject);
+    procedure QueryBtnClick(Sender: TObject);
+    procedure DFLComboChange(Sender: TObject);
+    procedure DBGridEh1DblClick(Sender: TObject);
+    procedure DBGridEh1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure DBGridEh1KeyPress(Sender: TObject; var Key: Char);
+    procedure FormShow(Sender: TObject);
+  private
+   mQty,nQty:integer;
+   procedure ReadIni();
+    { Private declarations }
+  public
+    Pro_CostID:string;
+    { Public declarations }
+  end;
+
+var
+  DelMaterial_CL: TDelMaterial_CL;
+
+
+implementation
+
+uses DelMaterial1, main1;
+
+{$R *.dfm}
+procedure TDelMaterial_CL.ReadIni();
+var MyIni :Tinifile;
+    AppDir:string;
+begin
+  Pro_CostID:='6211';
+  //
+  AppDir:=ExtractFilePath(Application.ExeName);
+  if FileExists(AppDir+'\ComName.ini')=true then
+  begin
+    try
+      MyIni := Tinifile.Create(AppDir+'\ComName.ini');
+      Pro_CostID:= MyIni.ReadString('ERP','Pro_CostID','');
+    finally
+      MyIni.Free;
+    end;
+  end;
+end;
+
+procedure TDelMaterial_CL.FormCreate(Sender: TObject);
+var i:integer;
+begin
+  with query2 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select distinct DFL from XXBWFLs');
+    active:=true;
+    for i:=1 to recordcount do
+    begin
+      DFLCombo.Items.Add(fieldbyname('DFL').asstring);
+      next;
+    end;
+  end;
+  edit1.Text:=inttostr(DelMaterial.SpecMas.FieldByName('Qty').Value);
+  mQty:=DelMaterial.SpecMas.FieldByName('Qty').Value;
+  QueryBtn.Click;
+  ReadIni();
+end;
+
+procedure TDelMaterial_CL.Query1CalcFields(DataSet: TDataSet);
+begin
+  with query1 do
+  begin
+     if FieldByName('CLSL').value<>0 then
+      begin
+        FieldByName('OKPerson').value:=(FieldByName('Qty').value-FieldByName('CLSL').value)/FieldByName('CLSL').value*100;
+      end;
+  end;
+end;
+
+procedure TDelMaterial_CL.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin  
+  if  not (Key in ['0'..'9',#8,#13]) then
+   Key := #0;
+end;
+
+procedure TDelMaterial_CL.FormDestroy(Sender: TObject);
+begin
+  DelMaterial_CL:=nil;
+end;
+
+procedure TDelMaterial_CL.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  action:=Cafree;
+end;
+
+procedure TDelMaterial_CL.Edit1Exit(Sender: TObject);
+begin
+  if ((edit1.text='') or (edit1.text='0')) then
+  begin
+    showmessage('Pls key in Qty.');
+    edit1.SetFocus;
+    abort;
+  end;
+  if  strtoint(edit1.Text)>DelMaterial.SpecMas.FieldByName('Qty').Value then
+  begin
+    showmessage('Pls key right Qty');
+    edit1.Text:=inttostr(DelMaterial.SpecMas.FieldByName('Qty').Value);
+    edit1.SetFocus;
+  end;
+end;
+
+procedure TDelMaterial_CL.QueryBtnClick(Sender: TObject);
+begin
+  with Query1 do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('declare @p decimal(18,4)');
+    SQL.Add('set @p=(select Delperson from BasData where GSBH='''+main.edit2.text+''')');
+    SQL.Add('');
+    SQL.Add('select OrdCL1.ZLBH,OrdCL1.CLBH,sum(OrdCL1.Usage) as Usage,');
+    SQL.Add('        round(sum(OrdCL1.CLSL),2) as CLSL,OrdCL1.DFL,OrdCL1.YWPM,OrdCL1.DWBH,OrdCL1.LYCC,');
+    SQL.Add('         isnull(KCLLS.Qty,0) as Qty,OrdCL1.Article,OrdCL1.XieMing,OrdCL1.XieXing,OrdCL1.SheHao,KCZLS.KCQty');
+    SQL.Add('         ,KCZLS.NK,KCZLS.TC,KCZLS.HD,KCZLS.KD,KCZLS.GC,KCZLS.XT,KCZLS.ZZZZ,ZLZLS2.RemQty');
+    SQL.Add('from ');
+    SQL.Add('    ( select  ZLBH,CLBH,sum(USAGE) as USAGE,case when CLTX=''1'' and LYCC<>''Y'' then sum(CLSL)*@p/100  else sum(CLSL) end as CLSL ,DFL,YWPM,');
+    SQL.Add('          DWBH,LYCC,Article,XieMing,XieXing,SheHao,CLTX');
+    SQL.Add('     from (select ZLZLS2.ZLBH,ZLZLS2.CLBH,max(ZLZLS2.USAGE) as USAGE,');
+    SQL.Add('             sum(ZLZLS2.CLSL)   CLSL ,(case when substring(xxbwfl.bwbh,1,1)=''V'' then isnull(XXzlsvn.DFL,''N'') else isnull(XXBWFLS.DFL,''N'') end) as DFL');
+    SQL.Add('             ,CLZL.YWPM,CLZL.DWBH,CLZL.LYCC,DDZL.XieXing,DDZL.SheHao,XXZL.Article,XXZL.XieMing,isnull(XXZLS.CLTX,1) as CLTX');
+    SQL.Add('             from ZLZLS2');
+    SQL.Add('             left join CLZL on ZLZLS2.CLBH=CLZL.CLDH');
+    SQL.Add('             left join ZLZL on ZLZL.ZLBH=ZLZLS2.ZLBH');
+    SQL.Add('             left join  DDZL on DDZL.DDBH=ZLZL.DDBH');
+    SQL.Add('             left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao');
+    SQL.Add('             left join XXBWFL on ZLZLS2.BWBH=XXBWFL.BWBH and XXZL.XieXing=XXBWFL.XieXing');
+    SQL.Add('             left join XXBWFLS on XXBWFL.FLBH=XXBWFLS.FLBH');
+    SQL.Add('             left join XXZLS on XXZLS.XieXing=XXZL.XieXing and XXZLS.SheHao=XXZL.SheHao and XXZLS.BWBH=ZLZLS2.BWBH');
+    SQL.Add('             left join (select XXZLSvn.xiexing,XXZLSvn.shehao,XXZLSvn.bwbh,xxbwfls.dfl from XXZLSvn');
+    SQL.Add('		            				left join xxbwfls on xxzlsvn.flbh=xxbwfls.flbh');
+    SQL.Add('					            	) as XXZLSvn on XXZLSvn.XieXing=ddzl.XieXing and XXZLSvn.SheHao=ddzl.SheHao and XXZLSvn.BWBH=ZLZLS2.BWBH');
+    SQL.Add('            where ZLZLS2.ZLBH='''+DelMaterial.SpecMas.fieldbyname('SCBH').AsString+''' ');
+    SQL.Add('                     and ZLZLS2.MJBH=''ZZZZZZZZZZ'' and ZLZLS2.CLSL>0 and ZLZLS2.CLBH not like ''W%''  ');
+    SQL.Add('                     and XXBWFL.FLBH<>''16''');
+    if CLBHEdit.Text<>'' then
+    SQL.Add('                     and ZLZLS2.CLBH like '''+CLBHEdit.Text+'%'' ');
+    if YWPMEdit.Text<>'' then
+    SQL.Add('                     and CLZL.YWPM like ''%'+YWPMEdit.Text+'%'' ');
+    SQL.Add('            group by ZLZLS2.ZLBH,ZLZLS2.CLBH,XXBWFLS.DFL,');
+    SQL.Add('                 xxzlsvn.dfl,xxbwfl.bwbh,  CLZL.YWPM,CLZL.DWBH,CLZL.LYCC,DDZL.XieXing,DDZL.SheHao,XXZL.Article,XXZL.XieMing,XXZLS.CLTX ) as OrdCL');
+    SQL.Add('      group by ZLBH,CLBH,DFL,YWPM,DWBH,LYCC,Article,XieMing,XieXing,SheHao,CLTX) OrdCL1');
+    SQL.Add('left join (select   KCLLS.SCBH, KCLLS.CLBH, sum(KCLLS.Qty) as Qty,isnull( KCLLS.DFL,''N'') as DFL');
+    SQL.Add('           from  KCLLS,KCLL  where KCLL.LLNO=KCLLS.LLNO and KCLL.SCBH<>''JJJJJJJJJJ'' and KCLL.SCBH<>''IIIIIIIIII'' and KCLL.SCBH<>''RRRRRRRRRR'' and KCLLS.SCBH='''+DelMaterial.SpecMas.fieldbyname('SCBH').AsString+''' and BLSB is null group by KCLLS.SCBH, KCLLS.CLBH,KCLLS.DFL) KCLLS');
+    SQL.Add('               on KCLLS.SCBH=OrdCL1.ZLBH and KCLLS.CLBH=OrdCL1.CLBH and OrdCL1.DFL=KCLLS.DFL');
+    SQL.Add('left join KCZLS on KCZLS.CLBH=OrdCL1.CLBH and KCZLS.CKBH='''+DelMaterial.DelMas.fieldbyname('CKBH').AsString+'''');
+    SQL.Add('left join (select ZLZLS2.CLBH,');
+    SQL.Add('             sum(ZLZLS2.CLSL)-IsNull(KCLLS.Qty,0) as RemQty ');
+    SQL.Add('           from ZLZLS2 ');
+    SQL.Add('           left join (select CLBH,Sum(IsNull(KCLLS.Qty,0)) as Qty  from KCLLS,KCLL where KCLL.LLNO=KCLLS.LLNO and KCLL.SCBH<>''JJJJJJJJJJ'' and KCLL.SCBH<>''IIIIIIIIII'' and KCLL.SCBH<>''RRRRRRRRRR'' and KCLLS.SCBH='''+DelMaterial.SpecMas.fieldbyname('SCBH').AsString+''' and IsNull(BLSB,'''')<>''Y'' Group by CLBH) KCLLS on ZLZLS2.CLBH=KCLLS.CLBH');
+    SQL.Add('           where  MJBH=''ZZZZZZZZZZ'' and ZLZLS2.ZLBH='''+DelMaterial.SpecMas.fieldbyname('SCBH').AsString+'''');
+    SQL.Add('           group by ZLZLS2.CLBH,KCLLS.Qty ) ZLZLS2 on ZLZLS2.CLBH=OrdCL1.CLBH ');
+    if DFLCombo.Text<>'' then
+    SQL.Add('where OrdCL1.DFL='''+DFLCombo.Text+''' ');
+    SQL.Add('group by OrdCL1.ZLBH,OrdCL1.CLBH,OrdCL1.DFL,OrdCL1.YWPM,OrdCL1.DWBH,');
+    SQL.Add('              OrdCL1.LYCC,OrdCL1.Article,OrdCL1.XieMing,OrdCL1.XieXing,OrdCL1.SheHao,KCLLS.Qty,KCZLS.KCQty,ZLZLS2.RemQty');
+    SQL.Add(',KCZLS.NK,KCZLS.TC,KCZLS.HD,KCZLS.KD,KCZLS.GC,KCZLS.XT,KCZLS.ZZZZ');
+    SQL.Add('order by OrdCL1.ZLBH,OrdCL1.DFL,OrdCL1.CLBH');
+    Active:=true;
+  end;
+end;
+
+procedure TDelMaterial_CL.DFLComboChange(Sender: TObject);
+begin
+  QueryBtn.Click;
+end;
+
+procedure TDelMaterial_CL.DBGridEh1DblClick(Sender: TObject);
+var zz:Boolean;
+begin
+  if (not query1.Active) then
+  begin
+    abort;
+  end;
+  if (Query1.recordcount<1) then
+  begin
+    abort;
+  end;
+  if query1.FieldByName('DFL').value='N' then
+  begin
+    showmessage('Pls contect with develop department first.');
+    abort;
+  end;
+  if query1.FieldByName('Remqty').Value<=0 then
+  begin
+    showmessage('This material already delivery!');
+    abort;
+  end;
+
+  nQty:=strtoint(edit1.Text);
+  if  Query1.FieldByName('Qty').value<(Query1.FieldByName('CLSL').value)  then
+  begin
+    with DelMaterial.DelDet do
+      begin
+        insert;
+        fieldbyname('CLBH').value:=query1.fieldbyname('CLBH').value;
+        fieldbyname('SCBH').value:=query1.fieldbyname('ZLBH').value;
+        fieldbyname('YWPM').value:=query1.fieldbyname('YWPM').value;
+        fieldbyname('DWBH').value:=query1.fieldbyname('DWBH').value;
+        if  mQty>nQty then
+          begin
+            if   ((Query1.FieldByName('CLSL').value*nQty/mQty)<(query1.fieldbyname('CLSL').value-Query1.FieldByName('Qty').value+0.1)) then
+              begin
+                fieldbyname('TempQty').value:=trunc((query1.fieldbyname('CLSL').value*nQty/mQty)*10+0.5)/10;
+              end
+              else
+                begin
+                  fieldbyname('TempQty').value:=trunc((query1.fieldbyname('CLSL').value-Query1.FieldByName('Qty').value)*10+0.5)/10;
+                end;
+          end
+          else
+            begin
+              fieldbyname('TempQty').value:=trunc((query1.fieldbyname('CLSL').value-Query1.FieldByName('Qty').value)*10+0.5)/10;
+            end;
+        //整數發料(用於一對一材料)
+        if round(query1.fieldbyname('USAGE').value)=query1.fieldbyname('USAGE').value then
+        begin
+          if (round(fieldbyname('TempQty').value) > trunc((query1.fieldbyname('CLSL').value-Query1.FieldByName('Qty').value)*10+0.5)/10) then
+            fieldbyname('TempQty').value :=  trunc((query1.fieldbyname('CLSL').value-Query1.FieldByName('Qty').value)*10+0.5)/10
+          else
+            fieldbyname('TempQty').value:=round(fieldbyname('TempQty').value);
+        end;
+        //fieldbyname('CostID').value:='621' ;
+        fieldbyname('CostID').value:=Pro_CostID;
+        fieldbyname('DFL').value:=query1.fieldbyname('DFL').value;
+        fieldbyname('CLSL').value:=query1.fieldbyname('CLSL').value;
+        post;
+      end;
+    Query1.Edit;
+    query1.fieldbyname('Qty').value:=query1.fieldbyname('Qty').value+DelMaterial.DelDet.fieldbyname('TempQty').value ;
+    showmessage('Succeed.');
+  end else
+  begin
+    showmessage('Already deliver all.');
+  end;
+end;
+
+procedure TDelMaterial_CL.DBGridEh1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+  if  Query1.FieldByName('Qty').value>=(Query1.FieldByName('CLSL').value)   then
+  begin
+    DBGridEh1.canvas.font.color:=clred;
+    DBGridEh1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+end;
+
+procedure TDelMaterial_CL.DBGridEh1KeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if key=#13 then
+  DBGridEh1dblclick(nil);
+end;
+
+procedure TDelMaterial_CL.FormShow(Sender: TObject);
+begin
+  main.FormLanguage(Pointer(self),self.Name);
+end;
+
+end.

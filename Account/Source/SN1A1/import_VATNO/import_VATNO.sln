@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "import_VATNO", "import_VATNO\import_VATNO.csproj", "{1E3B2E43-FAD5-4F05-8B3C-745542230F45}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E3B2E43-FAD5-4F05-8B3C-745542230F45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E3B2E43-FAD5-4F05-8B3C-745542230F45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E3B2E43-FAD5-4F05-8B3C-745542230F45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E3B2E43-FAD5-4F05-8B3C-745542230F45}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {37337253-7BB3-48D6-A055-7CB98ED75D44}
+	EndGlobalSection
+EndGlobal

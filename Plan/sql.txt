@@ -1,0 +1,119 @@
+select kfqm as kfqm,item as Item,
+sum(case when mm=1 then Qty else 0 end) as January,
+sum(case when mm=2 then Qty else 0 end) as February,
+sum(case when mm=3 then Qty else 0 end) as March,
+sum(case when mm=4 then Qty else 0 end ) as April,
+sum(case when mm=5 then Qty else 0 end ) as May,
+sum(case when mm=6 then Qty else 0 end ) as June,
+sum(case when mm=7 then Qty else 0 end ) as July,
+sum(case when mm=8 then Qty else 0 end ) as August,
+sum(case when mm=9 then Qty else 0 end ) as September,
+sum(case when mm=10 then Qty else 0 end ) as October,
+sum(case when mm=11 then Qty else 0 end ) as November,
+sum(case when mm=12 then Qty else 0 end ) as December,
+isnull(sum(Qty),0) as total
+from(
+ select bgszl.gszwqm,kfzl.kfqm,'訂單雙數' as Item,sum(ddzl.Pairs) as Qty,month(ddzl.ShipDate) as mm
+ from Bgszl
+ left join DDZL on DDZL.GSBH = Bgszl.gsdh
+ left join kfzl on kfzl.kfdh = DDZL.KHBH
+ where year(DDZL.ShipDate)=2014
+ group by Bgszl.gszwqm,kfzl.kfqm,month(ddzl.ShipDate)
+ union all
+ select Bgszl.gszwqm,kfzl.kfqm,'當月生產' as Item,convert(int,sum(scbbs.Qty)) as Qty,month(ddzl.ShipDate) as mm
+ from Bgszl
+ left join DDZL on DDZL.GSBH = Bgszl.gsdh
+ left join kfzl on kfzl.kfdh = DDZL.KHBH
+ left join scbbs on scbbs.SCBH = DDZL.DDBH and scbbs.GXLB='A' and month(scbbs.USERDATE)=month(ddzl.ShipDate)
+ where year(DDZL.ShipDate)=2014
+ group by Bgszl.gszwqm,kfzl.kfqm,month(ddzl.ShipDate)
+ union all
+ select bgszl.gszwqm,kfzl.kfqm,'提前生產' as Item,convert(int,sum(scbbs.Qty)-sum(case when Month(scbbs.USERDATE)=month(ddzl.shipdate) then scbbs.qty end)) as Qty,month(ShipDate) as mm
+ from Bgszl
+ left join DDZL on DDZL.GSBH = Bgszl.gsdh
+ left join kfzl on kfzl.kfdh = DDZL.KHBH
+ left join scbbs on scbbs.SCBH = DDZL.DDBH and scbbs.GXLB='A' and month(scbbs.USERDATE)<>month(ddzl.ShipDate)
+ where year(DDZL.ShipDate)=2014
+ group by Bgszl.gszwqm,kfzl.kfqm,month(ddzl.ShipDate)
+ union all
+ select bgszl.gszwqm,kfzl.kfqm,'欠數' as Item,sum(DDZL.Pairs)-isnull(sum(sc.Qty),0) as Qty,month(ddzl.ShipDate) as mm
+ from Bgszl
+ left join DDZL on DDZL.GSBH = Bgszl.gsdh
+ left join kfzl on kfzl.kfdh = DDZL.KHBH
+ left join (
+  select DDZL.DDBH,convert(int,sum(scbbs.Qty)) as Qty from DDZL
+  left join scbbs on scbbs.SCBH = DDZL.DDBH and scbbs.GXLB='A'
+  group by DDZL.DDBH
+ ) sc on sc.DDBH = DDZL.DDBH
+ where year(DDZL.ShipDate)=2014
+ group by Bgszl.gszwqm,kfzl.kfqm,month(ddzl.ShipDate)
+ union all
+ select bgszl.gszwqm,bgszl.gszwqm+'合計','訂單雙數' as Item,sum(ddzl.Pairs) as Qty,month(ddzl.ShipDate) as mm
+ from Bgszl
+ left join DDZL on DDZL.GSBH = Bgszl.gsdh
+ where year(DDZL.ShipDate)=2014
+ group by Bgszl.gszwqm,month(ddzl.ShipDate)
+ union all
+ select Bgszl.gszwqm,bgszl.gszwqm+'合計','當月生產' as Item,convert(int,sum(scbbs.Qty)) as Qty,month(ddzl.ShipDate) as mm
+ from Bgszl
+ left join DDZL on DDZL.GSBH = Bgszl.gsdh
+ left join scbbs on scbbs.SCBH = DDZL.DDBH  and scbbs.GXLB='A' and month(scbbs.USERDATE)=month(ddzl.ShipDate)
+ where year(DDZL.ShipDate)=2014
+ group by Bgszl.gszwqm,month(ddzl.ShipDate)
+ union all
+ select bgszl.gszwqm,bgszl.gszwqm+'合計','提前生產' as Item,convert(int,sum(scbbs.Qty)-sum(case when Month(scbbs.USERDATE)=month(ddzl.shipdate) then scbbs.qty end)) as Qty,month(ddzl.ShipDate) as mm
+ from Bgszl
+ left join DDZL on DDZL.GSBH = Bgszl.gsdh
+ left join scbbs on scbbs.SCBH = DDZL.DDBH and scbbs.GXLB='A'
+ where year(DDZL.ShipDate)=2014
+ group by Bgszl.gszwqm,month(ddzl.ShipDate)
+ union all
+ select bgszl.gszwqm,bgszl.gszwqm+'合計','欠數' as Item,sum(DDZL.Pairs)-isnull(sum(sc.Qty),0) as Qty,month(ddzl.ShipDate) as mm
+ from Bgszl
+ left join DDZL on DDZL.GSBH = Bgszl.gsdh
+ left join (
+  select DDZL.DDBH,convert(int,sum(scbbs.Qty)) as Qty from DDZL 
+  left join scbbs on scbbs.SCBH = DDZL.DDBH and scbbs.GXLB='A'
+  group by DDZL.DDBH
+ ) sc on sc.DDBH = DDZL.DDBH
+ where year(DDZL.ShipDate)=2014
+ group by Bgszl.gszwqm,month(ddzl.ShipDate)
+ union all
+ select '全廠合計','全廠合計','訂單雙數' as Item,sum(ddzl.Pairs) as Qty,month(ddzl.ShipDate) as mm
+ from DDZL
+ where year(DDZL.ShipDate)=2014
+ group by month(ddzl.ShipDate)
+ union all
+ select '全廠合計','全廠合計','當月生產' as Item,convert(int,sum(scbbs.Qty)) as Qty,month(ddzl.ShipDate) as mm
+ from DDZL
+ left join scbbs on scbbs.SCBH = DDZL.DDBH and scbbs.GXLB='A' and month(scbbs.USERDATE)=month(ddzl.ShipDate)
+ where year(DDZL.ShipDate)=2014
+ group by month(ddzl.ShipDate)
+ union all
+ select '全廠合計','全廠合計','提前生產' as Item,convert(int,sum(scbbs.Qty)-sum(case when Month(scbbs.USERDATE)=month(ddzl.shipdate) then scbbs.qty end)) as Qty,month(ddzl.ShipDate) as mm
+ from DDZL
+ left join scbbs on scbbs.SCBH = DDZL.DDBH and scbbs.GXLB='A' and month(scbbs.USERDATE)<>month(ddzl.ShipDate)
+ where year(DDZL.ShipDate)=2014
+ group by month(ddzl.ShipDate)
+ union all
+ select '全廠合計','全廠合計','欠數' as Item,sum(DDZL.Pairs)-isnull(sum(sc.Qty),0) as Qty,month(ddzl.ShipDate) as mm
+ from DDZL
+ left join (
+  select DDZL.DDBH,convert(int,sum(scbbs.Qty)) as Qty from DDZL 
+  left join scbbs on scbbs.SCBH = DDZL.DDBH and scbbs.GXLB='A'
+  group by DDZL.DDBH
+ ) sc on sc.DDBH = DDZL.DDBH
+ where year(DDZL.ShipDate)=2014
+ group by month(ddzl.ShipDate)
+) as ta
+group by gszwqm,kfqm,Item
+order by gszwqm,
+case when gszwqm+'合計' = kfqm then '' else kfqm end desc,
+case when item = '接單雙數' then 1 else 
+	case when item = '當月生產' then 2 else 
+	 case when item = '提前生產' then 3 else
+	  case when item = '欠數' then 4 end
+  end
+ end
+end
+

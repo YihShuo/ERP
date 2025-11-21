@@ -1,0 +1,140 @@
+unit MaterialCode_Print1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, StdCtrls, Buttons, ExtCtrls, GridsEh, DBGridEh,
+  shellAPI;
+
+type
+  TMaterialCode_Print = class(TForm)
+    DBGridEh1: TDBGridEh;
+    Panel1: TPanel;
+    DBGridEh2: TDBGridEh;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
+    Query1: TQuery;
+    DS1: TDataSource;
+    Query2: TQuery;
+    DS2: TDataSource;
+    UpdateSQL1: TUpdateSQL;
+    UpdateSQL2: TUpdateSQL;
+    Query1ZLBH: TStringField;
+    Query1CLBH: TStringField;
+    Query1DFL: TStringField;
+    Query1XH: TStringField;
+    Query1Qty: TCurrencyField;
+    Query1MATCODE: TStringField;
+    Query2ZLBH: TStringField;
+    Query2CLBH: TStringField;
+    Query2DFL: TStringField;
+    Query2XH: TStringField;
+    Query2Qty: TCurrencyField;
+    Query2MATCODE: TStringField;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MaterialCode_Print: TMaterialCode_Print;
+
+implementation
+
+{$R *.dfm}
+
+procedure TMaterialCode_Print.FormDestroy(Sender: TObject);
+begin
+MaterialCode_Print:=nil;
+end;
+
+procedure TMaterialCode_Print.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+procedure TMaterialCode_Print.FormCreate(Sender: TObject);
+begin
+query1.Active:=true;
+query2.Active:=true;
+end;
+
+procedure TMaterialCode_Print.BitBtn1Click(Sender: TObject);
+begin
+if query1.recordcount>0 then
+  begin
+    query2.Insert;
+    query2.FieldByName('ZLBH').Value:=query1.FieldByName('ZLBH').Value ;
+    query2.FieldByName('CLBH').Value:=query1.FieldByName('CLBH').Value ;
+    query2.FieldByName('DFL').Value:=query1.FieldByName('DFL').Value  ;
+    query2.FieldByName('XH').Value:=query1.FieldByName('XH').Value    ;
+    query2.FieldByName('MatCode').Value:=query1.FieldByName('MatCode').Value  ;
+    query2.Post;
+    query1.Delete;
+  end;
+end;
+
+procedure TMaterialCode_Print.BitBtn2Click(Sender: TObject);
+begin
+
+if query2.recordcount>0 then
+  begin
+    query1.Insert;
+    query1.FieldByName('ZLBH').Value:=query2.FieldByName('ZLBH').Value ;
+    query1.FieldByName('CLBH').Value:=query2.FieldByName('CLBH').Value  ;
+    query1.FieldByName('DFL').Value:=query2.FieldByName('DFL').Value  ;
+    query1.FieldByName('XH').Value:=query2.FieldByName('XH').Value   ;
+    query1.FieldByName('MatCode').Value:=query2.FieldByName('MatCode').Value;
+    query1.Post;
+    query2.Delete;
+  end;
+end;
+
+procedure TMaterialCode_Print.BitBtn3Click(Sender: TObject);
+var f:textfile;
+sline1:string;
+fl:THandle;
+begin
+if query2.recordcount=0 then
+  begin
+    abort;
+  end;
+
+if fileexists(extractfilepath(application.ExeName)+'\barcode.txt') then
+  begin
+    assignfile(f,ExtractFilePath(Application.ExeName)+'barcode.txt');
+    rewrite(f);
+    query2.first;
+    while not query2.eof do
+      begin
+        sline1:=query2.fieldbyname('MatCode').value;
+        append(f);
+        writeln(f, sline1);
+        query2.next;
+      end;
+    closefile(f);
+  end ;
+
+  
+if fileexists(extractfilepath(application.ExeName)+'cartonbar.btw') then
+  begin
+    ShellExecute(Handle,'open',PChar(ExtractFilePath(Application.ExeName)+'cartonbar.btw'),nil,pchar(ExtractFilePath(Application.ExeName)),SW_SHOW);
+    //close;
+  end
+  else
+    begin
+      showmessage('Pls setup the program first. Abort');
+    end;
+end;
+
+end.

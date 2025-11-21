@@ -1,0 +1,79 @@
+unit LLMaterial_Detail1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, GridsEh, DBGridEh;
+
+type
+  TLLMaterial_Detail = class(TForm)
+    DBGridEh1: TDBGridEh;
+    DS1: TDataSource;
+    Query1: TQuery;
+    Query1YPDH: TStringField;
+    Query1BWBH: TStringField;
+    Query1YWSM: TStringField;
+    Query1CLBH: TStringField;
+    Query1Usage: TFloatField;
+    Query1CLSL: TFloatField;
+    Query1CQDH: TStringField;
+    Query1CLMC: TStringField;
+    Query1CLYWMC: TStringField;
+    Query1dwbh: TStringField;
+    Query1clzmlb: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  LLMaterial_Detail: TLLMaterial_Detail;
+
+implementation
+  uses LLMaterialSR1,FunUnit;
+{$R *.dfm}
+
+procedure TLLMaterial_Detail.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action:=Cafree;
+end;
+
+procedure TLLMaterial_Detail.FormDestroy(Sender: TObject);
+begin
+  LLMaterial_Detail:=nil;
+end;
+
+procedure TLLMaterial_Detail.FormCreate(Sender: TObject);
+begin
+  with Query1 do
+  begin
+    Active:=false;
+    SQL.Clear;
+    if LLMaterialSR.IsYPZL_ZLZLS2=false then
+    begin
+      SQL.Add('     SELECT ypzls.YPDH ,YPZLS.BWBH,BWZL.YWSM,ypzls.CLBH ,ypzls.CLSL as Usage,CEILING(ypzls.CLSL*'+LLMaterialSR.PairsSQL+'*100)/100 as CLSL ,clzl.CQDH,clzl.zwpm AS CLMC,clzl.Ywpm AS CLYWMC ,clzl.dwbh ,clzl.clzmlb ');
+      SQL.Add('      FROM ypzls ypzls');
+      SQL.Add('      Left join ypzl on ypzl.YPDH=ypzls.YPDH');
+      SQL.Add('      left join BWZL on BWZL.BWDH=YPZLS.BWBH');
+      SQL.Add('      Left join clzl clzl ON ypzls.CLBH = clzl.cldh');
+      SQL.Add('      WHERE YPZLS.YPDH =:YPDH  and ypzls.clbh = :CLBH');
+    end else
+    begin
+      SQL.Add('     select ZLZLS2.YPDH,ZLZLS2.BWBH,BWZL.YWSM,ZLZLS2.CLBH ,ZLZLS2.Usage, ZLZLS2.CLSL ,clzl.CQDH,clzl.zwpm AS CLMC,clzl.Ywpm AS CLYWMC ,clzl.dwbh ,clzl.clzmlb ');
+      SQL.Add('      from YPZL_ZLZLS2 ZLZLS2');
+      SQL.Add('      left join BWZL on BWZL.BWDH=ZLZLS2.BWBH');
+      SQL.Add('      Left join clzl clzl ON ZLZLS2.CLBH = clzl.cldh ');
+      SQL.Add('      WHERE ZLZLS2.YPDH =:YPDH  and ZLZLS2.MJBH=''ZZZZZZZZZZ'' and ZLZLS2.clbh =:CLBH');
+    end;
+    //funcObj.WriteErrorLog(sql.Text);
+    Active:=true;
+  end;
+end;
+
+end.

@@ -1,0 +1,243 @@
+unit CutProcessDispatch_SMDD1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, ExtCtrls, GridsEh, DBGridEh, Buttons, StdCtrls,
+  ComCtrls, Dateutils;
+
+type
+  TCutProcessDispatch_SMDD = class(TForm)
+    Panel1: TPanel;
+    Label3: TLabel;
+    DDBHEdit: TEdit;
+    Label1: TLabel;
+    XuongCB: TComboBox;
+    Label2: TLabel;
+    DepNameCB: TComboBox;
+    CheckBox1: TCheckBox;
+    DTP1: TDateTimePicker;
+    Label8: TLabel;
+    DTP2: TDateTimePicker;
+    Button4: TButton;
+    AddSizeBtn: TBitBtn;
+    DBGridEh1: TDBGridEh;
+    DBGridEh2: TDBGridEh;
+    Splitter1: TSplitter;
+    DataSource1: TDataSource;
+    Query1: TQuery;
+    Query2: TQuery;
+    DataSource2: TDataSource;
+    QTemp: TQuery;
+    Query1YSBH: TStringField;
+    Query1Article: TStringField;
+    Query1XieMing: TStringField;
+    Query1Pairs: TIntegerField;
+    Query2DDBH: TStringField;
+    Query2gcbwdh: TStringField;
+    Query2ywsm: TStringField;
+    Query2zwsm: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure XuongCBChange(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure AddSizeBtnClick(Sender: TObject);
+  private
+    { Private declarations }
+    DepIDList: TStringlist;
+    procedure SetFactory;
+    procedure SetDepartment;
+  public
+    { Public declarations }  
+    DepID: String;
+    OrderList: String;
+  end;
+
+var
+  CutProcessDispatch_SMDD: TCutProcessDispatch_SMDD;
+
+implementation
+
+uses
+  main1, FunUnit, CPD_QuickDispatch1;
+
+{$R *.dfm}
+
+procedure TCutProcessDispatch_SMDD.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+procedure TCutProcessDispatch_SMDD.FormDestroy(Sender: TObject);
+begin
+  CutProcessDispatch_SMDD := Nil;
+end;
+
+procedure TCutProcessDispatch_SMDD.SetFactory;
+begin
+  with QTemp do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT Xuong FROM BDepartment');
+    SQL.Add('WHERE ProYn = 1 AND YN = 1 AND sumline IS NOT NULL');
+    SQL.Add('AND GXLB = ''C'' AND GSBH = ''' + main.Edit2.Text + ''' AND ISNULL(Xuong, '''') <> ''''');
+    SQL.Add('GROUP BY Xuong');
+    //SQL.Add('ORDER BY CONVERT(INT, REPLACE(Xuong, ''A'', ''''))');
+    SQL.Add('ORDER BY case when Xuong like ''A%'' then CONVERT(INT, REPLACE(Xuong, ''A'','''')) else  CONVERT(INT, REPLACE(Xuong, ''B'','''')) end ');
+    Active := true;
+
+    XuongCB.Items.Clear;
+    XuongCB.Items.Add('');
+    while not Eof do              
+    begin
+      XuongCB.Items.Add(FieldByName('Xuong').AsString);
+      Next;
+    end;
+  end;
+end;
+
+procedure TCutProcessDispatch_SMDD.SetDepartment;
+begin
+  with QTemp do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT ID,DepName FROM BDepartment');
+    SQL.Add('WHERE ProYn = 1 AND YN = 1 AND sumline IS NOT NULL AND GXLB = ''C'' AND GSBH = ''' + main.Edit2.Text + ''' AND Xuong = ''' + XuongCB.Text + '''');
+    SQL.Add('ORDER BY ID');
+    Active := true;
+
+    DepNameCB.Items.Clear;
+    DepNameCB.Items.Add('');
+    DepIDList.Clear;
+    DepIDList.Add('');
+
+    while not Eof do
+    begin
+      DepNameCB.Items.Add(FieldByName('DepName').AsString);
+      DepIDList.Add(FieldByName('ID').AsString);
+      Next;
+    end;
+  end;
+end;
+
+procedure TCutProcessDispatch_SMDD.FormCreate(Sender: TObject);
+begin
+  DepIDList := TStringList.Create;
+  DTP1.Date := StartOfTheWeek(IncWeek(Date, 1));
+  DTP2.Date := EndOfTheWeek(IncWeek(Date, 1));
+  SetFactory;
+end;
+
+procedure TCutProcessDispatch_SMDD.XuongCBChange(Sender: TObject);
+begin
+  SetDepartment;
+end;
+
+procedure TCutProcessDispatch_SMDD.Button4Click(Sender: TObject);
+var
+  DDBHList: TStringList;
+  DDBHSubSQL: string;
+  i: integer;
+begin
+  if ((DepNameCB.text = '') AND (DDBHEdit.Text = '')) then
+  begin
+    ShowMessage('Please select the Department first.');
+    Abort;
+  end;
+
+  if (Pos(',', DDBHEdit.Text) > 0) then
+  begin
+    DDBHList := TStringlist.Create;
+    DDBHList := funcObj.SplitString(DDBHEdit.Text, ',');
+    DDBHSubSQL := '(';
+
+    for i:=0 to DDBHLIst.Count-1 do
+    begin
+      DDBHSubSQL := DDBHSubSQL + '''' + DDBHLIst.Strings[i] + ''',';
+    end;
+
+    DDBHSubSQL := Copy(DDBHSubSQL, 1, Length(DDBHSubSQL)-1) + ')';
+    DDBHList.Free;
+  end
+  else begin
+    DDBHSubSQL := '(''' + DDBHEdit.Text + ''')';
+  end;
+
+  DepID := '';
+  if (DepNameCB.ItemIndex > -1) then
+    DepID := DepIDList.Strings[DepNameCB.ItemIndex];
+
+  Query2.Active := false;  
+  with Query1 do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT SMDD.YSBH, SMDD.Article, SMDD.XieMing, SUM(SMDD.Qty) AS Pairs FROM SMDD');
+    SQL.Add('WHERE GXLB = ''C'' AND DepNO LIKE ''' + DepID + '%''');
+
+    if (DDBHEdit.Text <> '') then
+      SQL.Add('AND SMDD.YSBH IN ' + DDBHSubSQL);
+
+    if (CheckBox1.Checked) then
+      SQL.Add('AND CONVERT(VARCHAR, SMDD.PlanDate, 111) BETWEEN ''' + FormatDateTime('yyyy/MM/dd', DTP1.Date) + ''' AND ''' + FormatDateTime('yyyy/MM/dd', DTP2.Date) + '''');
+
+    SQL.Add('GROUP BY YSBH, Article, XieMing');
+    SQL.Add('ORDER BY Article');
+    Active := true;
+  end;
+  Query2.Active := true;
+end;
+
+procedure TCutProcessDispatch_SMDD.AddSizeBtnClick(Sender: TObject);
+var
+  i: integer;
+  BMark: Tbookmark;
+  BookmarkList: TBookmarkListEh;
+begin
+  Query1.DisableControls;
+  BMark := Query1.GetBookmark;
+  BookmarkList := DBGridEh1.SelectedRows;
+  OrderList := '(';
+
+  try
+    if (DBGridEh1.SelectedRows.Count > 0) then
+    begin
+      for i:=0 to BookmarkList.Count-1 do
+      begin
+        Query1.GotoBookmark(Pointer(BookmarkList[i]));
+        OrderList := OrderList + '''' + Query1.FieldByName('YSBH').AsString + ''',';
+      end;
+      OrderList := Copy(OrderList, 1, Length(OrderList)-1) + ')';
+    end
+    else begin
+      Showmessage('Please select an ORDER.');
+    end;
+  finally
+    Query1.GotoBookmark(BMark);
+    Query1.FreeBookmark(BMark);
+    Query1.EnableControls;
+  end;
+
+  if (Length(OrderList) > 0) then
+  begin
+    if (DepNameCB.ItemIndex > -1) then
+    DepID := DepIDList.Strings[DepNameCB.ItemIndex];
+    if (CPD_QuickDispatch = Nil) then
+    begin
+      CPD_QuickDispatch := TCPD_QuickDispatch.Create(Nil);
+      CPD_QuickDispatch.Show;
+    end else
+    begin
+      CPD_QuickDispatch.Close;
+      CPD_QuickDispatch := TCPD_QuickDispatch.Create(Nil);
+      CPD_QuickDispatch.Show;
+    end;
+  end;
+end;
+
+end.

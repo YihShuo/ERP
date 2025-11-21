@@ -1,0 +1,196 @@
+unit InspectorRep1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, DB, DBTables, Grids, DBGrids, ComCtrls, StdCtrls,
+  ExtCtrls,comobj;
+
+type
+  TInspectorRep = class(TForm)
+    Panel1: TPanel;
+    Label3: TLabel;
+    Label6: TLabel;
+    Label5: TLabel;
+    Label1: TLabel;
+    Label8: TLabel;
+    Edit3: TEdit;
+    Edit2: TEdit;
+    Button1: TButton;
+    Edit1: TEdit;
+    Button2: TButton;
+    DTP1: TDateTimePicker;
+    DTP2: TDateTimePicker;
+    DBGrid1: TDBGrid;
+    SCSMYW: TQuery;
+    SCSMYWDDBH: TStringField;
+    SCSMYWXieXing: TStringField;
+    SCSMYWShehao: TStringField;
+    SCSMYWArticle: TStringField;
+    SCSMYWXieMing: TStringField;
+    SCSMYWDDQty: TIntegerField;
+    SCSMYWQty: TFloatField;
+    SCSMYWQtyLack: TIntegerField;
+    SCSMYWCTDD: TIntegerField;
+    SCSMYWCTQty: TIntegerField;
+    SCSMYWCTLack: TIntegerField;
+    SCSMYWshipdate: TDateTimeField;
+    DS1: TDataSource;
+    PopupMenu1: TPopupMenu;
+    Detail1: TMenuItem;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit3KeyPress(Sender: TObject; var Key: Char);
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure SCSMYWCalcFields(DataSet: TDataSet);
+    procedure Detail1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  InspectorRep: TInspectorRep;
+
+implementation
+
+uses InspectorRep_Det1;
+
+{$R *.dfm}
+
+procedure TInspectorRep.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+procedure TInspectorRep.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+edit2.SetFocus;
+end;
+
+procedure TInspectorRep.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+edit3.SetFocus;
+end;
+
+procedure TInspectorRep.Edit3KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+Button1.SetFocus;
+end;
+
+procedure TInspectorRep.Button1Click(Sender: TObject);
+begin
+
+with SCSMYW do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select SCSMYW.DDBH,count(SCSMYW.CTNO) as CTQty,isnull(sum(SCSMRK.Qty),0) as Qty,XXZL.XieXing,XXZL.Shehao,XXZL.Article,');
+    sql.add('XXZL.XieMing,DDZL.Pairs as DDQty,DDZL.shipdate,SCZLDate.CTQty as CTDD');
+    sql.add('from SCSMYW ');
+    sql.add('left join SCSMRK on SCSMYW.DDBH=SCSMRK.DDBH and SCSMYW.CTNO=SCSMRK.CTNO ');
+    sql.add('left join DDZL on SCSMYW.DDBH=DDZL.DDBH ');
+    sql.add('left join XXZl on XXZL.XieXing=DDZl.XieXing and XXZL.SheHao=DDZL.SheHao ');
+    sql.add('left join SCZLDate on SCZLDate.ZLBH=DDZL.ZLBH ');
+    sql.add('where SCSMYW.DDBH like '+''''+edit3.text+'%'+'''');
+    sql.add(' and XXZL.Article like '+''''+edit1.Text+'%'+'''');
+    sql.add(' and XXZL.XieMing like '+''''+'%'+edit2.Text+'%'+'''');
+    sql.add(' and Convert(smalldatetime,convert(varchar,SCSMYW.USERDate,111)) between ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.date)+'''');
+    sql.add(' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+'''');
+    sql.add('group by  SCSMYW.DDBH,XXZL.XieXing,XXZL.Shehao,XXZL.Article,XXZL.XieMing,DDZL.Pairs,DDZL.shipdate,SCZLDATE.CTQty');
+    sql.add('order by SCSMYW.DDBH ');
+    active:=true;
+  end
+end;
+
+procedure TInspectorRep.FormCreate(Sender: TObject);
+begin
+
+DTP1.Date:=Date-6;
+DTP2.Date:=date;
+end;
+
+procedure TInspectorRep.Button2Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+if SCSMYW.Active then
+  begin
+    if SCSMYW.recordcount=0 then
+      begin
+        showmessage('No record.');
+        abort;
+      end;
+  end
+  else
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+
+try
+  eclApp:=CreateOleObject('Excel.Application');
+  WorkBook:=CreateOleObject('Excel.Sheet');
+except
+  Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+  Exit;
+end;
+
+try
+  WorkBook:=eclApp.workbooks.Add; 
+  eclApp.Cells(1,1):='NO';
+  for   i:=1   to   SCSMYW.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=SCSMYW.fields[i-1].FieldName;
+    end;
+  SCSMYW.First;
+  j:=2;
+  while   not  SCSMYW.Eof   do
+    begin
+      eclApp.Cells(j,1):=j-1;
+      for   i:=1   to   SCSMYW.fieldcount   do
+        begin
+          eclApp.Cells(j,i+1):=SCSMYW.Fields[i-1].Value;
+          eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+        end;
+      SCSMYW.Next;
+      inc(j);
+    end;
+  eclapp.columns.autofit;
+  showmessage('Succeed.');
+  eclApp.Visible:=True;
+except
+  on   F:Exception   do
+    showmessage(F.Message);
+end;
+
+end;
+
+procedure TInspectorRep.SCSMYWCalcFields(DataSet: TDataSet);
+begin
+SCSMYW.FieldByName('QtyLack').Value:=SCSMYW.FieldByName('DDQty').Value-SCSMYW.FieldByName('Qty').Value;
+SCSMYW.FieldByName('CTLack').Value:=SCSMYW.FieldByName('CTDD').Value-SCSMYW.FieldByName('CTQty').Value;
+end;
+
+procedure TInspectorRep.Detail1Click(Sender: TObject);
+begin
+InspectorRep_Det:=TInspectorRep_Det.create(self);
+InspectorRep_Det.show;
+end;
+
+end.

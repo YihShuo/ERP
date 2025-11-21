@@ -1,0 +1,158 @@
+unit MatCodeList1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, StdCtrls, Grids, DBGrids, ExtCtrls,comobj;
+
+type
+  TMatCodeList = class(TForm)
+    Panel1: TPanel;
+    DBGrid1: TDBGrid;
+    Label1: TLabel;
+    Edit1: TEdit;
+    Label2: TLabel;
+    Edit2: TEdit;
+    Button1: TButton;
+    Query1: TQuery;
+    DS1: TDataSource;
+    Query1ZLBH: TStringField;
+    Query1CLBH: TStringField;
+    Query1DFL: TStringField;
+    Query1XH: TStringField;
+    Query1Qty: TCurrencyField;
+    Query1MATCODE: TStringField;
+    Query1USERDATE: TDateTimeField;
+    Query1USERID: TStringField;
+    Query1YN: TStringField;
+    Query1YWPM: TStringField;
+    Query1DWBH: TStringField;
+    Query1XieMing: TStringField;
+    Button2: TButton;
+    Button3: TButton;
+    CB1: TCheckBox;
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MatCodeList: TMatCodeList;
+
+implementation
+
+uses MatCodeList_Print1, main1;
+
+{$R *.dfm}
+
+procedure TMatCodeList.Button1Click(Sender: TObject);
+begin
+with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select KCSMCL.*,CLZL.YWPM,CLZL.DWBH,XXZl.XieMing ');
+    sql.add('from KCSMCL');
+    sql.add('left join CLZL on CLZL.CLDH=KCSMCL.CLBH');
+    sql.add('left join DDZL on DDZl.ZLBH=KCSMCL.ZLBH');
+    sql.add('left join XXZl on XXZl.XieXing=DDZl.XieXing and XXZl.SheHao=DDZl.SheHao');
+    sql.add('where KCSMCL.ZLBH like '+''''+edit1.Text+'%'+'''');
+    sql.add('      and KCSMCL.CLBH like '+''''+edit2.text+'%'+'''');
+    sql.add('      and KCSMCL.YN<>'+''''+'3'+'''');
+    sql.add('      and KCSMCL.YN<>'+''''+'4'+'''');
+    sql.add('      and DDZL.GSBH='+''''+main.edit2.Text+'''');
+    if CB1.Checked then
+      begin
+        sql.add('and KCSMCL.YN='+''''+'1'+'''');
+      end;
+    sql.add('order by KCSMCL.ZLBH,KCSMCL.CLBH ');
+    active:=true;
+  end;
+
+end;
+
+procedure TMatCodeList.Button2Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+
+if query1.Active then
+  begin
+    if query1.recordcount=0 then
+      begin
+        showmessage('No record.');
+        abort;
+      end;
+  end
+  else
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+
+try
+  eclApp:=CreateOleObject('Excel.Application');
+  WorkBook:=CreateOleObject('Excel.Sheet');
+except
+  Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+  Exit;
+end;
+
+try
+  WorkBook:=eclApp.workbooks.Add; 
+  eclApp.Cells(1,1):='NO';
+  for   i:=1   to   query1.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=query1.fields[i-1].FieldName;
+    end;
+  query1.First;
+  j:=2;
+  while   not  query1.Eof   do
+    begin
+      eclApp.Cells(j,1):=j-1;
+      for   i:=1   to   query1.fieldcount   do
+        begin
+          eclApp.Cells(j,i+1):=query1.Fields[i-1].Value;
+          eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+        end;
+      query1.Next;
+      inc(j);
+    end;
+  eclapp.columns.autofit;
+  showmessage('Succeed.');
+  eclApp.Visible:=True;
+except
+  on   F:Exception   do
+    showmessage(F.Message);
+end;
+
+end;
+
+procedure TMatCodeList.Button3Click(Sender: TObject);
+begin
+MatCodeList_Print:=TMatCodeList_Print.create(self);
+MatCodeList_Print.quickrep1.preview;
+MatCodeList_Print.free;   
+end;
+
+procedure TMatCodeList.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=Cafree;
+end;
+
+procedure TMatCodeList.FormDestroy(Sender: TObject);
+begin
+MatCodeList:=nil;
+end;
+
+end.

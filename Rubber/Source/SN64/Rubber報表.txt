@@ -1,0 +1,15 @@
+select workwhsds.*,workplan.MJBH,workplan.ColorNo from (
+select workwhsds_i.workID,workwhsds_i.Size,workwhsds_i.Qty as Qty_i,workwhsds_o.Qty as Qty_o,workwhsds_i.Qty-IsNull(workwhsds_o.Qty,0) as RemQty,workplans.Qty as Qty_plan,workplans.DDBH from (
+select WorkID,Size,Sum(Qty) as Qty from workwhsds
+where InOut='I'
+Group by WorkID,Size ) workwhsds_i
+left join (
+select WorkID,Size,Sum(Qty) as Qty from workwhsds
+where InOut='O'
+Group by WorkID,Size ) workwhsds_o on workwhsds_i.workID=workwhsds_o.workID and workwhsds_i.size=workwhsds_o.size
+left join (
+select workplans.workID,workplans.size,sum(Qty) as Qty,cast((select DDBH + ',' from workplanss  where workplanss.workID=workplans.workID group by DDBH for XML Path ('')) as varchar(max)) as DDBH from workplans
+group by workplans.workID,workplans.size ) workplans on workwhsds_i.workID=workplans.workID and workwhsds_i.size=workplans.size
+) workwhsds
+left join workplan on workplan.workID=workwhsds.workID
+where RemQty>Qty_Plan

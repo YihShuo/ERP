@@ -1,0 +1,209 @@
+object EntryMatRFIDCode_CT: TEntryMatRFIDCode_CT
+  Left = 292
+  Top = 253
+  Width = 943
+  Height = 365
+  Caption = 'EntryMatRFIDCode_CT'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 927
+    Height = 49
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 6
+      Top = 15
+      Width = 70
+      Height = 20
+      Caption = 'INVOICE:'
+    end
+    object Label2: TLabel
+      Left = 327
+      Top = 14
+      Width = 62
+      Height = 20
+      Caption = 'DOCNO:'
+    end
+    object Button1: TButton
+      Left = 548
+      Top = 7
+      Width = 89
+      Height = 33
+      Caption = 'Query'
+      TabOrder = 2
+      OnClick = Button1Click
+    end
+    object MemoEdit: TEdit
+      Left = 397
+      Top = 10
+      Width = 140
+      Height = 28
+      CharCase = ecUpperCase
+      Color = clYellow
+      TabOrder = 1
+    end
+    object INVEdit: TEdit
+      Left = 84
+      Top = 11
+      Width = 221
+      Height = 28
+      CharCase = ecUpperCase
+      Color = clYellow
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 644
+      Top = 7
+      Width = 89
+      Height = 33
+      Caption = 'Copy'
+      TabOrder = 3
+      OnClick = Button2Click
+    end
+  end
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 49
+    Width = 927
+    Height = 278
+    Align = alClient
+    DataSource = DS1
+    Flat = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -11
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghFitRowHeightToText, dghDialogFind]
+    ParentFont = False
+    ReadOnly = True
+    RowHeight = 4
+    RowLines = 1
+    SumList.Active = True
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    OnDblClick = DBGridEh1DblClick
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'CLBH'
+        Footer.FieldName = 'CLBH'
+        Footer.ValueType = fvtCount
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'YWPM'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Qty'
+        Footer.FieldName = 'Qty'
+        Footer.ValueType = fvtSum
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ZSJC'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DOCNO'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'MEMO'
+        Footers = <>
+      end>
+  end
+  object DS1: TDataSource
+    DataSet = Query1
+    Left = 296
+    Top = 120
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'select KCRKS.CLBH,CLZL.YWPM,Sum(KCRKS.Qty) as Qty,ZSZL.ZSJC,KCRK' +
+        '.DOCNO,KCRK.MEMO'
+      'from KCRKS '
+      'left join KCRK on KCRK.RKNO=KCRKS.RKNO'
+      'left join CLZL on CLZL.CLDH=KCRKS.CLBH'
+      'left join ZSZL on KCRK.ZSBH=ZSZL.ZSDH'
+      'where 1=1 '
+      '   and KCRK.DOCNO like '#39'OIA-THT-VL-180102P-2%'#39' '
+      '   and KCRK.GSBH='#39'VA12'#39' '
+      'Group by KCRKS.CLBH,CLZL.YWPM,ZSZL.ZSJC,KCRK.DOCNO,KCRK.MEMO')
+    Left = 296
+    Top = 144
+    object Query1CLBH: TStringField
+      DisplayWidth = 12
+      FieldName = 'CLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object Query1YWPM: TStringField
+      DisplayWidth = 55
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object Query1Qty: TCurrencyField
+      DisplayWidth = 10
+      FieldName = 'Qty'
+      DisplayFormat = '#0.00'
+    end
+    object Query1ZSJC: TStringField
+      DisplayWidth = 11
+      FieldName = 'ZSJC'
+      FixedChar = True
+    end
+    object Query1DOCNO: TStringField
+      DisplayWidth = 20
+      FieldName = 'DOCNO'
+      FixedChar = True
+      Size = 30
+    end
+    object Query1MEMO: TStringField
+      DisplayWidth = 15
+      FieldName = 'MEMO'
+      FixedChar = True
+      Size = 50
+    end
+  end
+end

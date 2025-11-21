@@ -1,0 +1,128 @@
+unit MaterialTrace_Print1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, QRCtrls, QuickRpt, ExtCtrls,DateUtils;
+
+type
+  TMaterialTrace_Print = class(TForm)
+    QuickRep1: TQuickRep;
+    PageHeaderBand1: TQRBand;
+    QRLabel1: TQRLabel;
+    QRDBText1: TQRDBText;
+    DetailBand1: TQRBand;
+    ColumnHeaderBand1: TQRBand;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    RKLLS: TQuery;
+    QRDBText4: TQRDBText;
+    QRLabel2: TQRLabel;
+    QRDBText5: TQRDBText;
+    QRDBText6: TQRDBText;
+    RKLLSRKNO: TStringField;
+    RKLLSUSERDATE: TDateTimeField;
+    RKLLSQty: TCurrencyField;
+    RKLLSZSBH: TStringField;
+    RKLLSCFMID: TStringField;
+    QRDBText7: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRLabel7: TQRLabel;
+    RKLLSMemo: TStringField;
+    QRDBText9: TQRDBText;
+    QRShape1: TQRShape;
+    QRShape2: TQRShape;
+    QRShape3: TQRShape;
+    QRShape4: TQRShape;
+    QRShape5: TQRShape;
+    QRBand1: TQRBand;
+    QRLabel8: TQRLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MaterialTrace_Print: TMaterialTrace_Print;
+
+implementation
+
+uses MaterialTrace1, main1;
+
+{$R *.dfm}
+
+procedure TMaterialTrace_Print.FormCreate(Sender: TObject);
+begin
+  
+with RKLLS do          //出庫數量清單
+  begin
+    active:=false;
+    sql.Clear;   
+    sql.add('select JGZL.JGNO as RKNO,JGZL.CFMDate1 as USERDATE,JGZL.ZSBH,JGZL.CFMID1 as CFMID,JGZLS.Qty,'+''''+'JGRK'+''''+' as Memo ');
+    sql.add('from JGZL,JGZLS where JGZL.JGNO=JGZLS.JGNO and JGZLS.ZMLB='+''''+'ZZZZZZZZZZ'+'''');
+    sql.add('and JGZLS.CLBH='+''''+MaterialTrace.edit1.text+'''');
+    sql.add('and JGZL.CKBH='+''''+Materialtrace.CBX1.text+'''');
+    sql.add('and (convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))  between ');
+    sql.add(''''+ formatdatetime('yyyy/MM/dd',MaterialTrace.DTP1.date)+''''+' and '+''''+ formatdatetime('yyyy/MM/dd',MaterialTrace.DTP2.date)+''''+')');
+    sql.add('union all');
+    sql.add('select JGZL.JGNO as RKNO,JGZL.CFMDate1 as USERDate,');
+    sql.add('JGZL.CFMID1 as CFMID,'+''''+'ZZZZ'+'''');
+    sql.add('as SCBH ,JGZLS.Qty*JGZLM.Qty as Qty,'+''''+'JGCK'+''''+' as Memo ');
+    sql.add('from JGZLS');
+    sql.add('left join JGZL on JGZL.JGNO=JGZLS.JGNO  ');
+    sql.add('left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty from JGZLS ');
+    sql.add('           left join JGZL on JGZL.JGNO=JGZLS.JGNO ');
+    sql.add('           where convert(smalldatetime,convert(varchar,JGZL.CFMDATE1,111)) between '+''''+ formatdatetime('yyyy/MM/dd',MaterialTrace.DTP1.date)+'''');
+    sql.add('           and '+''''+ formatdatetime('yyyy/MM/dd',MaterialTrace.DTP2.date)+'''');
+    sql.add('           and JGZLS.ZMLB='+''''+'ZZZZZZZZZZ'+'''');
+    sql.add('           and JGZL.CKBH='+''''+Materialtrace.CBX1.text+'''');
+    sql.add('           ) JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM.CLBH=JGZLS.CLBH');
+    sql.add('where convert(smalldatetime,convert(varchar,JGZL.CFMDATE1,111)) between '+''''+ formatdatetime('yyyy/MM/dd',MaterialTrace.DTP1.date)+'''');
+    sql.add(' and '+''''+ formatdatetime('yyyy/MM/dd',MaterialTrace.DTP2.date)+'''');
+    sql.add('and JGZLS.ZMLB='+''''+MaterialTrace.edit1.text+'''');
+    sql.add('and JGZL.CKBH='+''''+Materialtrace.CBX1.text+'''');
+    sql.add('and JGZLS.ZMLB<>'+''''+'ZZZZZZZZZZ'+'''');
+    sql.add('union all');
+    sql.add('select KCLL.LLNO RKNO,KCLL.CFMDATE as USERDATE,KCLLS.SCBH as ZSBH ,KCLL.CFMID,KCLLS.Qty, BDepartment.DepName as Memo');
+    sql.add('from KCLLS');
+    sql.add('left join  KCLL on KCLL.LLNO=KCLLS.LLNO');
+    sql.add('left join BDepartment on BDepartment.ID=KCLL.DepID ') ;
+    sql.add('where KCLLS.CLBH='+''''+MaterialTrace.edit1.text+'''');
+    sql.add('and KCLL.CKBH='+''''+Materialtrace.CBX1.text+'''');
+    sql.add('and (convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between '+''''+ formatdatetime('yyyy/MM/dd',MaterialTrace.DTP1.date)+'''');
+    sql.add(' and '+''''+ formatdatetime('yyyy/MM/dd',MaterialTrace.DTP2.date)+'''');
+    sql.add('or KCLL.CFMDATE is null)');
+    sql.add('union all ') ;
+    sql.add('select KCRK.RKNO,KCRK.USERDATE,KCRK.ZSBH,KCRK.CFMID ,KCRKS.Qty ,KCRK.ZSNO as Memo');
+    sql.add('from KCRKS');
+    sql.add('left join KCRK on KCRK.RKNO=KCRKS.RKNO ');
+    sql.Add('where  KCRKS.CLBH='+''''+MaterialTrace.edit1.text+'''');
+    sql.add('and KCRK.CKBH='+''''+Materialtrace.CBX1.text+'''');
+    sql.add('and convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between '+''''+ formatdatetime('yyyy/MM/dd',MaterialTrace.DTP1.date)+'''');
+    sql.add(' and '+''''+ formatdatetime('yyyy/MM/dd',MaterialTrace.DTP2.date)+'''');
+    sql.add('order by KCRK.RKNO');
+    active:=true;
+  end;
+end;
+
+procedure TMaterialTrace_Print.FormDestroy(Sender: TObject);
+begin
+MaterialTrace_Print:=nil;
+end;
+
+procedure TMaterialTrace_Print.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+end.

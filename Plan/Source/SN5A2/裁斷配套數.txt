@@ -1,0 +1,15 @@
+select DDBH,SIZE,Qty,MAX(ScanDate) as ScanDate from (
+select CutDispatchZL.*,CutDispatchS.CutNum,CutDispatchS.okCutNum,CutDispatchS.ScanDate from (
+select SMDD.DDBH,SMDD.YSBH as ZLBH,SMDDS.XXCC as SIZE,SMDDS.Qty,CutDispatchZL.BWBH,CutDispatchZL.CLBH from SMDD
+Left join SMDDS on SMDD.DDBH=SMDDS.DDBH
+Left join CutDispatchZL on CutDispatchZL.ZLBH=SMDD.YSBH and CutDispatchZL.SIZE=SMDDS.XXCC
+where SMDD.YSBH like 'Y1802-0466%' and SMDD.GXLB='C' )CutDispatchZL
+Left join (
+Select SMDDS.DDBH,CutDispatchS.ZLBH,CutDispatchS.SIZE,SMDDS.Qty,CutDispatchS.BWBH,CutDispatchS.CLBH,CutDispatchS.CutNum,CutDispatchS.okCutNum,CutDispatchS.ScanDate from CutDispatchS
+Left join CutDispatchSS on CutDispatchSS.DLNO=CutDispatchS.DLNO and CutDispatchS.ZLBH=CutDispatchSS.ZLBH and CutDispatchS.BWBH=CutDispatchSS.BWBH and CutDispatchS.SIZE=CutDispatchSS.SIZE and CutDispatchS.CLBH=CutDispatchSS.CLBH
+Left join SMDDS on SMDDS.DDBH=CutDispatchSS.DDBH and SMDDS.XXCC=CutDispatchS.SIZE
+where CutDispatchS.ZLBH like 'Y1802-0466%' ) CutDispatchS on CutDispatchZL.ZLBH=CutDispatchS.ZLBH and CutDispatchZL.DDBH=CutDispatchS.DDBH and  CutDispatchZL.SIZE=CutDispatchS.SIZE and CutDispatchZL.BWBH=CutDispatchS.BWBH and CutDispatchZL.CLBH=CutDispatchS.CLBH
+where 1=1 and  ( CutNum is null or IsNull(okCutNum,0)>=IsNull(CutNum,0)  )
+) CutDispatchZL
+where  CutDispatchZL.ScanDate is not null
+Group by DDBH,SIZE,Qty

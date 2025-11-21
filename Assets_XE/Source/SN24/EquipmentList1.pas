@@ -1,0 +1,2004 @@
+﻿unit EquipmentList1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, GridsEh, DBGridEh, StdCtrls, ComCtrls, ExtCtrls, ComObj, Excel2000,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,ShellAPI,
+  DBAxisGridsEh, Vcl.Menus;
+
+type
+  TEquipmentList = class(TForm)
+    Panel2: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label4: TLabel;
+    SBBHEdit: TEdit;
+    Button1: TButton;
+    DTP1: TDateTimePicker;
+    DTP2: TDateTimePicker;
+    TSBHEdit: TEdit;
+    TSCDQry: TQuery;
+    DS1: TDataSource;
+    TSCDQryTSID: TStringField;
+    TSCDQryTSBH: TStringField;
+    TSCDQrySBBH: TStringField;
+    TSCDQryXSBH: TStringField;
+    TSCDQryNSX: TStringField;
+    TSCDQryInDATE: TDateTimeField;
+    TSCDQryDepID: TStringField;
+    TSCDQryDepID_Memo: TStringField;
+    TSCDQryJDTS: TStringField;
+    TSCDQryJDBDATE: TStringField;
+    TSCDQryJDEDATE: TStringField;
+    TSCDQryStatus: TStringField;
+    TSCDQryUSERID: TStringField;
+    TSCDQryUSERDATE: TDateTimeField;
+    TSCDQryYN: TStringField;
+    TSCDQryCFMID_LL: TStringField;
+    TSCDQryCFMDATE_LL: TDateTimeField;
+    TSCDQryLLNO: TStringField;
+    TSCDQryCFMID_RK: TStringField;
+    TSCDQryCFMDATE_RK: TDateTimeField;
+    TSCDQryRKNO: TStringField;
+    TSCDQryYWPM: TStringField;
+    TSCDQryZWPM: TStringField;
+    TSCDQryHGPM: TStringField;
+    TSCDQryQUCBH: TStringField;
+    TSCDQryLSBH: TStringField;
+    TSCDQryZSDH: TStringField;
+    TSCDQryCQDH: TStringField;
+    TSCDQryAuthCE: TBooleanField;
+    TSCDQryMemo: TStringField;
+    TSCDQryfpdz: TStringField;
+    TSCDQrydh: TStringField;
+    TSCDQrycz: TStringField;
+    TSCDQryfzr: TStringField;
+    TSCDQryllr: TStringField;
+    TSCDQryLB1_Memo: TStringField;
+    TSCDQryLB2_Memo: TStringField;
+    TSCDQryLB3_Memo: TStringField;
+    TSCDQryZSZL_AuthCE: TBooleanField;
+    TSCDQryAuthCE_Memo: TStringField;
+    TSCDQryAuthZSDH_Memo: TStringField;
+    TSCDQryIsZSDH: TBooleanField;
+    TSCDQryZSZL_Memo: TStringField;
+    TSCDQryDWBH: TStringField;
+    InDateCB: TCheckBox;
+    Label3: TLabel;
+    YWPMEdit: TEdit;
+    Label5: TLabel;
+    ZSYWJCEdit: TEdit;
+    Button2: TButton;
+    TSCDQryDepName: TStringField;
+    TSCDQryQty: TFloatField;
+    TSCDQryUSPrice: TFloatField;
+    Qtemp: TQuery;
+    Label8: TLabel;
+    DOCNOEdit: TEdit;
+    TSCDQryDOCNO: TStringField;
+    TSCDQryAuthCompany: TBooleanField;
+    TSCDQryZSJC_YW: TStringField;
+    TSCDQryZSJC_ZW: TStringField;
+    TSCDQryAuthZSDH: TBooleanField;
+    TSCDQryVNPrice: TCurrencyField;
+    Label7: TLabel;
+    Label9: TLabel;
+    LabelEdit: TEdit;
+    TSCDQryRFID_Tag: TStringField;
+    TSCDQryLABEL_Tag: TStringField;
+    Label10: TLabel;
+    Button3: TButton;
+    TSCDQryDepMemo: TStringField;
+    Label11: TLabel;
+    TSCDQryVWPM: TStringField;
+    Label12: TLabel;
+    MemoEdit: TEdit;
+    Button4: TButton;
+    DepNMEdit: TComboBox;
+    Label13: TLabel;
+    VWPMEdit: TEdit;
+    TSCDQryJRTS: TStringField;
+    TSCDQryJRBDATE: TStringField;
+    TSCDQryJREDATE: TStringField;
+    TSCDQryLB: TStringField;
+    TSCDQryJDTSDep: TStringField;
+    TSCDQryJRTSDep: TStringField;
+    PopupMenu1: TPopupMenu;
+    Detail1: TMenuItem;
+    PC1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    DBGridEh1: TDBGridEh;
+    DBGridEh2: TDBGridEh;
+    TSCDDepQry: TQuery;
+    DS2: TDataSource;
+    TSCDDepQryDepName: TStringField;
+    TSCDDepQryDepMemo: TStringField;
+    TSCDDepQrySBBH: TStringField;
+    TSCDDepQryYWPM: TStringField;
+    TSCDDepQryZWPM: TStringField;
+    TSCDDepQryQty: TIntegerField;
+    Splitter1: TSplitter;
+    DBGridEh3: TDBGridEh;
+    TSCDDetQry: TQuery;
+    DS3: TDataSource;
+    TSCDDetQryTSID: TStringField;
+    TSCDDetQryTSBH: TStringField;
+    TSCDDetQrySBBH: TStringField;
+    TSCDDetQryQty: TFloatField;
+    TSCDDetQryXSBH: TStringField;
+    TSCDDetQryNSX: TStringField;
+    TSCDDetQryInDATE: TDateTimeField;
+    TSCDDetQryDepID: TStringField;
+    TSCDDetQryDepID_Memo: TStringField;
+    TSCDDetQryJDTS: TStringField;
+    TSCDDetQryJDBDATE: TStringField;
+    TSCDDetQryJDEDATE: TStringField;
+    TSCDDetQryJRTS: TStringField;
+    TSCDDetQryJRBDATE: TStringField;
+    TSCDDetQryJREDATE: TStringField;
+    TSCDDetQryStatus: TStringField;
+    TSCDDetQryUSERID: TStringField;
+    TSCDDetQryUSERDATE: TDateTimeField;
+    TSCDDetQryCFMID: TStringField;
+    TSCDDetQryCFMDATE: TDateTimeField;
+    TSCDDetQryYN: TStringField;
+    TSCDDetQryCFMID_LL: TStringField;
+    TSCDDetQryCFMDATE_LL: TDateTimeField;
+    TSCDDetQryLLNO: TStringField;
+    TSCDDetQryCFMID_RK: TStringField;
+    TSCDDetQryCFMDATE_RK: TDateTimeField;
+    TSCDDetQryRKNO: TStringField;
+    TSCDDetQryLB: TStringField;
+    TSCDDetQryRFID_Tag: TStringField;
+    TSCDDetQryLABEL_Tag: TStringField;
+    TSCDDetQryUSERID_Tag: TStringField;
+    TSCDDetQryUSERDATE_Tag: TDateTimeField;
+    TSCDDetQryMemo: TStringField;
+    TSCDDetQryMSBBH: TStringField;
+    TSCDDetQryYWPM: TStringField;
+    TSCDDetQryVWPM: TStringField;
+    TSCDDetQryZWPM: TStringField;
+    TSCDDetQryHGPM: TStringField;
+    TSCDDetQryQUCBH: TStringField;
+    TSCDDetQryLSBH: TStringField;
+    TSCDDetQryDWBH: TStringField;
+    TSCDDetQryZSDH: TStringField;
+    TSCDDetQryCQDH: TStringField;
+    TSCDDetQryAuthCompany: TBooleanField;
+    TSCDDetQryAuthCE: TBooleanField;
+    TSCDDetQryDepName: TStringField;
+    TSCDDetQryDepMemo: TStringField;
+    TSCDDetQryJDTSDep: TStringField;
+    TSCDDetQryJRTSDep: TStringField;
+    TSCDDetQryMYWPM: TStringField;
+    TSCDDetQryMZWPM: TStringField;
+    TSCDDetQryZDWBH: TStringField;
+    TSCDDetQryYDWBH: TStringField;
+    PopupMenu2: TPopupMenu;
+    MenuItem1: TMenuItem;
+    TSCDDepQrySFL: TStringField;
+    TSCDDepQryID: TStringField;
+    GroupBox2: TGroupBox;
+    RB2: TRadioButton;
+    RB1: TRadioButton;
+    RB3: TRadioButton;
+    Label6: TLabel;
+    TSIDEdit: TEdit;
+    Label14: TLabel;
+    VNPriceComboBox: TComboBox;
+    Button5: TButton;
+    TSCDQryMachine_Type: TStringField;
+    QueryUser: TQuery;
+    TSCDQryCycleDate_M: TDateTimeField;
+    TSCDQryCycleDate_S: TDateTimeField;
+    TSCDQryCycleDate_Y: TDateTimeField;
+    TSCDQryLeanDep: TStringField;
+    TSCDQryLeanMemo: TStringField;
+    TSCDQryLean_ID: TStringField;
+    Button6: TButton;
+    TSCDQrySTT: TFloatField;
+    TSCDQryMachine_Status: TStringField;
+    cbDpmeo: TComboBox;
+    cbN: TCheckBox;
+    cbY: TCheckBox;
+    cbB: TCheckBox;
+    cbM: TCheckBox;
+    cbH: TCheckBox;
+    cbR: TCheckBox;
+    cbF: TCheckBox;
+    cbT: TCheckBox;
+    Button7: TButton;
+    PDF_export: TCheckBox;
+    IT_KK: TButton;
+    CK2: TCheckBox;
+    CK1: TCheckBox;
+    TSCDQryLicense: TStringField;
+    RB4: TRadioButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure DBGridEh1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure DBGridEh1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure FormCreate(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Detail1Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure MenuItem1Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
+    procedure IT_KKClick(Sender: TObject);
+  private
+    NDate:TDate;
+    AppDir:string;
+    IsAdmin:boolean;
+    function CheckUserID:boolean;
+    { Private declarations }
+    procedure Export_KTList_Page1();
+    procedure Export_KTList_Page2();
+    procedure Export_TV_Page2();
+    procedure ExportExcel(Query:TQuery; SubQuery:TQuery);
+
+    procedure ReFresh_ComboboDepNM();
+    procedure ReFresh_ComboboDepMeo();
+
+  public
+    { Public declarations }
+  end;
+
+var
+  EquipmentList: TEquipmentList;
+
+implementation
+  uses main1 ,Equipment_History1, FunUnit, EquipmentList_ReportList1;
+{$R *.dfm}
+
+function TEquipmentList.CheckUserID():boolean;
+var iRes:boolean;
+    IP:string;
+begin
+  IsAdmin:=false;
+  iRes:=false;
+  with QueryUser do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('select * from Busers');
+    sql.Add('where userid='''+main.edit1.Text+'''');
+    active:=true;
+  end;
+  if QueryUser.RecordCount>0 then
+  begin
+    iRes:=true;
+    if Pos('Admin:',QueryUser.FieldByName('Report').AsString)>0 then
+    begin
+      if Pos('CreateMaterialNew',QueryUser.FieldByName('Report').AsString)>0 then
+      begin
+        IsAdmin:=true;
+      end;
+    end;
+  end;
+  result:= iRes;
+end;
+
+procedure TEquipmentList.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action:=CaFree;
+end;
+
+procedure TEquipmentList.FormDestroy(Sender: TObject);
+begin
+  EquipmentList:=nil;
+end;
+
+procedure TEquipmentList.IT_KKClick(Sender: TObject);
+begin
+  with TSCDQry do
+      begin
+          if IT_KK.Visible= true then
+        begin
+          active:=false;
+          if ((ck1.Checked= false) and (ck2.Checked=false))or ((ck1.Checked= true) and (ck2.Checked=true)) then
+            begin
+             showmessage('Vui long chon TSCD hoac CCDC');
+             abort;
+            end;
+          // bo sung phan biet thiet bi CCDC va TSCD cua IT
+      if CK1.Checked then
+          SQL.Add('delete TSCD_KK where Unit_Name = 1 ');
+      if CK2.Checked then
+          SQL.Add('delete TSCD_KK where Unit_Name is NULL ');
+        //////////////////////////////////////////////
+          sql.Add('insert into TSCD_KK');
+          SQL.Add('select STT,TSID,TSBH,SBBH,DepID,RFID_Tag,DepName,Unit_Name from #tmp');
+          active:=true;
+        end;
+      end;
+end;
+
+procedure TEquipmentList.MenuItem1Click(Sender: TObject);
+begin
+  ExportExcel(TSCDDetQry,nil);
+end;
+
+procedure TEquipmentList.Button1Click(Sender: TObject);
+var SubSQL:String;
+tmp:string;
+i:integer;
+begin
+  SubSQL:='';
+  if cbN.Checked then SubSQL:=SubSQL+'''N'',';
+  if cbY.Checked then SubSQL:=SubSQL+'''Y'',';
+  if cbB.Checked then SubSQL:=SubSQL+'''B'',';
+  if cbM.Checked then SubSQL:=SubSQL+'''M'',';
+  if cbH.Checked then SubSQL:=SubSQL+'''H'',';
+  if cbR.Checked then SubSQL:=SubSQL+'''R'',';
+  if cbF.Checked then SubSQL:=SubSQL+'''F'',';
+  if cbT.Checked then SubSQL:=SubSQL+'''T'',';
+  if length(SubSQL)>0 then
+    SubSQL:=' and TSCD.Status in ('+Copy(SubSQL,1,length(SubSQL)-1)+')'
+  else SubSQL:=' and TSCD.Status='''' ';
+  if PC1.ActivePageIndex=0 then
+  begin
+    with TSCDQry do
+    begin
+      Active:=false;
+      SQL.Clear;
+       sql.Add(' if object_id('+''''+'tempdb..#tmp'+''''+') is not null ');         //////////////////////////////    if object_id('+''''+'tempdb..#CLZLKC'+''''+') is not null
+      sql.add('begin   drop table #tmp end    ');
+      SQl.Add('Select ROW_NUMBER() OVER(ORDER BY TSCD.DepID,TSCD.Status ) AS STT,TSCD.* into #tmp from (');
+      //資產設備入庫單TSCD
+      SQL.Add('Select TSCD.*');
+      SQL.Add('       ,TSCD_SB.YWPM,TSCD_SB.VWPM,TSCD_SB.ZWPM,TSCD_SB.HGPM,TSCD_SB.QUCBH,TSCD_SB.LSBH,TSCD_SB.DWBH,TSCD_SB.ZSDH,TSCD_SB.CQDH,TSCD_SB.AuthCompany,TSCD_SB.AuthCE,TSCD_SB.Memo as SB_Memo ');
+      SQL.Add('       ,TSCD_ZSZL.ZSJC_YW,TSCD_ZSZL.ZSJC_ZW,TSCD_ZSZL.fpdz,TSCD_ZSZL.dh,TSCD_ZSZL.cz,TSCD_ZSZL.fzr,TSCD_ZSZL.llr ');
+      SQL.Add('       ,TSCD_ZSZL.LB1_Memo,TSCD_ZSZL.LB2_Memo,TSCD_ZSZL.LB3_Memo,TSCD_ZSZL.AuthCE as ZSZL_AuthCE,TSCD_ZSZL.AuthCE_Memo,TSCD_ZSZL.AuthZSDH,TSCD_ZSZL.AuthZSDH_Memo,TSCD_ZSZL.IsZSDH,TSCD_ZSZL.Memo as ZSZL_Memo ');
+      SQL.Add('       ,BDepartment.DepName,BDepartment.DepMemo ');
+      SQL.Add('       ,isnull(TSCD_KCRKS.USPrice,TSCD.USD) USPrice,isnull(TSCD_KCRKS.VNPrice,TSCD.VND) VNPrice,TSCD_KCRK.DOCNO,JDTS_Dep.DepName as JDTSDep,JRTS_Dep.DepName as JRTSDep    ');
+      SQL.Add('       ,Lean_DEP.Depname as LeanDep,Lean_Dep.Depmemo as LeanMemo');
+      SQL.Add('from TSCD');
+      SQL.Add('left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH');
+      SQL.Add('left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS.SBBH=TSCD.SBBH  ');
+      SQL.Add('left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO ');
+      SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+      SQL.Add('left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS ');
+      SQL.Add('left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS ');
+      SQL.Add('left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH');
+      SQL.Add('left join TSCD_BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+      SQL.Add('left join TSCD_BDepartment Lean_Dep on Lean_Dep.ID=TSCD.Lean_ID ');
+      SQL.Add('where TSCD.LB=1 ');
+      //SQL.add('and TSCD.Status is not null ');
+      SQL.Add('Union all ');
+      SQL.Add('Select TSCD.TSID, TSCD.TSBH, TSCD.SBBH, TSCD.Qty, TSCD.XSBH, TSCD.NSX,');
+      SQL.Add(' ISNULL(TSCD.InDATE,KCRKS.USERDATE),');
+      SQL.Add(' TSCD.DepID, TSCD.DepID_Memo, TSCD.JDTS, TSCD.JDBDATE, TSCD.JDEDATE, TSCD.JRTS, TSCD.JRBDATE, TSCD.JREDATE, TSCD.Status, TSCD.USERID, TSCD.USERDATE, TSCD.CFMID, TSCD.CFMDATE, TSCD.YN, TSCD.CFMID_LL, TSCD.CFMDATE_LL, TSCD.LLNO, ');
+      SQL.Add(' TSCD.CFMID_RK, TSCD.CFMDATE_RK, TSCD.RKNO, TSCD.LB, TSCD.RFID_Tag, TSCD.LABEL_Tag, TSCD.USERID_Tag,');
+      SQL.Add(' TSCD.USERDATE_Tag, TSCD.Memo, TSCD.MSBBH, TSCD.VND, TSCD.USD, TSCD.USERID_Price, TSCD.USERDATE_Price, TSCD.CycleDate_M, TSCD.Machine_Type, TSCD.Lean_ID, TSCD.CycleDate_S, TSCD.CycleDate_Y, ');
+      SQL.Add('      TSCD.Machine_Status, TSCD.USERID_Modify, TSCD.USERDATE_Modify, TSCD.Unit_Name,TSCD.License');
+          if RB2.Checked= true or RB4.Checked= true then            // thiet bi IT
+            begin
+            SQL.Add('       ,TSCD_IT.NameVN as YWPM,TSCD_IT.NameVN as VWPM,TSCD_IT.NameTW as zwpm');
+            end else
+            begin
+            SQL.Add('       ,CLZL.YWPM,NULL as VWPM,CLZL.zwpm');
+            end;
+
+      SQL.Add('       ,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE,null as SB_Memo');
+      SQL.Add('       ,ZSZL.zsjc,zszl.zsywjc,zszl.fpdz,zszl.dh,zszl.cz,zszl.fzr,zszl.llr');
+      SQL.Add('       ,null as LB1_Memo,null as LB2_Memo,null LB3_Memo,null as ZSZL_AuthCE,null as AuthCE_Memo,null as AuthZSDH,null as AuthZSDH_Memo,null as IsZSDH,null as ZSZL_Memo');
+      SQL.Add('       ,BDepartment.DepName,BDepartment.DepMemo  ');
+      SQL.Add('       ,KCRKS.USPrice,KCRKS.VNPrice,KCRKS.DOCNO,null as JRTS_Dep,null as JRTSDep    ');
+      SQL.Add('       ,Lean_DEP.Depname as LeanDep,Lean_Dep.Depmemo as LeanMemo  ');
+      SQL.Add('from TSCD');
+      SQL.Add('left join CLZL on CLZL.CLDH = TSCD.SBBH');
+      SQL.Add('left join KCRK  on KCRK.RKNO=TSCD.RKNO ');
+      SQL.Add('left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH ');
+      SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+      SQL.Add('left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH');
+      SQL.Add('left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+      SQL.Add('left join TSCD_BDepartment Lean_Dep on Lean_Dep.ID=TSCD.Lean_ID ');
+      SQL.Add('left join TSCD_IT on TSCD_IT.TSBH = SUBSTRING(TSCD.TSBH, 1, CHARINDEX(''0'', TSCD.TSBH) - 1)');
+      SQL.Add('where TSCD.LB in (2,3)');
+      //ERP 入庫單來源
+      SQL.Add(') TSCD where 1=1 ');
+      if TSIDEdit.Text<>'' then
+      SQL.Add('and TSCD.TSID like '''+TSIDEdit.Text+'%'' ');
+      if SBBHEdit.Text<>'' then
+      SQL.Add('and TSCD.SBBH like ''%'+SBBHEdit.Text+'%'' ');
+      if TSBHEdit.Text<>'' then
+      SQL.Add('and TSCD.TSBH like ''%'+TSBHEdit.Text+'%'' ');
+      if YWPMEdit.Text<>'' then
+         SQL.Add('and (TSCD.YWPM like ''%'+YWPMEdit.Text+'%'' OR TSCD.VWPM like ''%'+YWPMEdit.Text+'%'' OR TSCD.ZWPM like ''%'+YWPMEdit.Text+'%'')');
+      //SQL.Add('and TSCD.YWPM like ''%'+YWPMEdit.Text+'%'' ');
+      if ZSYWJCEdit.Text<>'' then
+      SQL.Add('and TSCD.zsjc_yw like ''%'+ZSYWJCEdit.Text+'%'' ');
+      if DOCNOEdit.Text<>'' then
+      SQL.Add('and TSCD.DOCNO like ''%'+DOCNOEdit.Text+'%'' ');
+      if DepNMEdit.Text<>'' then
+      SQL.Add('and TSCD.DepName = '''+DepNMEdit.Text+''' ');
+      //if DepIDMemoEdit.Text<>'' then
+      //SQL.Add('and TSCD.DepID_Memo like ''%'+DepIDMemoEdit.Text+'%'' ');
+      if cbDpmeo.Text<>'' then
+      SQL.Add('and TSCD.DepID_Memo = '''+cbDpmeo.Text+''' ');
+      if InDateCB.Checked=true then
+      begin
+        SQL.add('and convert(smalldatetime,convert(varchar,TSCD.InDate,111)) between ');
+        SQL.add(''''+formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+        SQL.add(' and  ');
+        SQL.add(''''+formatdatetime('yyyy/MM/dd',DTP2.Date) +'''');
+      end;
+
+      SQL.Add(SubSQL);
+      if RB1.Checked=true then
+        SQl.Add('and TSCD.LB=1 ');
+      if RB2.Checked=true then
+          SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''A%'' ');
+      if RB4.Checked=true then
+          SQl.Add('and TSCD.LB=3 and TSCD.Label_Tag like ''A%'' ');
+          // bo sung phan biet thiet bi CCDC va TSCD cua IT
+      if CK1.Checked then
+          SQl.Add('and Unit_Name = 1 ');
+      if CK2.Checked then
+          SQl.Add('and Unit_Name is NULL ');
+        //////////////////////////////////////////////
+      if RB3.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''B%'' ');
+      if LabelEdit.Text<>'' then
+        SQL.Add('and Label_Tag like '''+LabelEdit.Text+'%'' ');
+      if MemoEdit.Text<>'' then
+        SQL.Add('and TSCD.Memo like ''%'+MemoEdit.Text+'%'' ');
+      if VWPMEdit.Text<>'' then
+        SQL.Add('and LSBH like ''%'+VWPMEdit.Text+'%'' ');
+        //SQL.Add('and TSCD.VWPM like ''%'+VWPMEdit.Text+'%'' ');
+      if VNPriceComboBox.ItemIndex = 1 then
+        SQL.Add('and TSCD.VNPrice >= 30000000');
+      if VNPriceComboBox.ItemIndex = 2 then
+        SQL.Add('and TSCD.VNPrice < 30000000');
+      //
+      SQL.add('order by TSCD.DepID,TSCD.Status ');
+      SQL.Add('select * from #tmp');
+      //showmessage(sql.Text);
+      Active:=true;
+    end;
+  end;
+  //
+  if PC1.ActivePageIndex=1 then
+  begin
+    with TSCDDepQry do
+    begin
+      Active:=false;
+      SQL.Clear;
+      //資產設備入庫單TSCD
+      SQL.Add('Select * from ( ');
+      SQL.Add('Select SFL,ID,DepName,DepMemo,SBBH,YWPM,ZWPM,Count(LABEL_Tag) as Qty from ( ');
+      SQL.Add('Select SFL,ID,DepName,DepMemo,Case when IsNull(MSBBH,'''')='''' then SBBH else MSBBH end  as SBBH,IsNull(MYWPM,YWPM) as YWPM,IsNull(MZWPM, ZWPM) as ZWPM, LABEL_Tag from ( ');
+      SQL.Add('Select TSCD.*');
+      SQL.Add('       ,TSCD_SB.YWPM,TSCD_SB.VWPM,TSCD_SB.ZWPM,TSCD_SB.HGPM,TSCD_SB.QUCBH,TSCD_SB.LSBH,TSCD_SB.DWBH,TSCD_SB.ZSDH,TSCD_SB.CQDH,TSCD_SB.AuthCompany,TSCD_SB.AuthCE,TSCD_SB.Memo as SB_Memo ');
+      SQL.Add('       ,TSCD_ZSZL.ZSJC_YW,TSCD_ZSZL.ZSJC_ZW,TSCD_ZSZL.fpdz,TSCD_ZSZL.dh,TSCD_ZSZL.cz,TSCD_ZSZL.fzr,TSCD_ZSZL.llr ');
+      SQL.Add('       ,TSCD_ZSZL.LB1_Memo,TSCD_ZSZL.LB2_Memo,TSCD_ZSZL.LB3_Memo,TSCD_ZSZL.AuthCE as ZSZL_AuthCE,TSCD_ZSZL.AuthCE_Memo,TSCD_ZSZL.AuthZSDH,TSCD_ZSZL.AuthZSDH_Memo,TSCD_ZSZL.IsZSDH,TSCD_ZSZL.Memo as ZSZL_Memo ');
+      SQL.Add('       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo   ');
+      SQL.Add('       ,TSCD_KCRKS.USPrice,TSCD_KCRKS.VNPrice,TSCD_KCRK.DOCNO,JDTS_Dep.DepName as JDTSDep,JRTS_Dep.DepName as JRTSDep,MTSCD_SB.YWPM as MYWPM,MTSCD_SB.ZWPM as MZWPM,BDepartment.ID,BDepartment.SFL  ');
+      SQL.Add('from TSCD');
+      SQL.Add('left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH');
+      SQL.Add('left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS.SBBH=TSCD.SBBH  ');
+      SQL.Add('left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO ');
+      SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+      SQL.Add('left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS ');
+      SQL.Add('left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS ');
+      SQL.Add('left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH');
+      SQL.Add('left join TSCD_BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+      SQL.Add('left join TSCD_SB  MTSCD_SB on MTSCD_SB.SBBH = TSCD.MSBBH ');
+      SQL.Add('where TSCD.LB=1 ');
+      //SQL.add('and TSCD.Status is not null ');
+      SQL.Add('Union all ');
+      SQL.Add('Select TSCD.*');
+      SQL.Add('       ,CLZL.YWPM,NULL as VWPM,CLZL.zwpm,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE,null as SB_Memo');
+      SQL.Add('       ,ZSZL.zsjc,zszl.zsywjc,zszl.fpdz,zszl.dh,zszl.cz,zszl.fzr,zszl.llr');
+      SQL.Add('       ,null as LB1_Memo,null as LB2_Memo,null LB3_Memo,null as ZSZL_AuthCE,null as AuthCE_Memo,null as AuthZSDH,null as AuthZSDH_Memo,null as IsZSDH,null as ZSZL_Memo');
+      SQL.Add('       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  ');
+      SQL.Add('       ,KCRKS.USPrice,KCRKS.VNPrice,KCRKS.DOCNO,null as JRTS_Dep,null as JRTSDep,MCLZL.YWPM as MYWPM,MCLZL.ZWPM as MZWPM,BDepartment.ID,BDepartment.SFL  ');
+      SQL.Add('from TSCD');
+      SQL.Add('left join CLZL on CLZL.CLDH = TSCD.SBBH');
+      SQL.Add('left join KCRK  on KCRK.RKNO=TSCD.RKNO ');
+      SQL.Add('left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH ');
+      SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+      SQL.Add('left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH');
+      SQL.Add('left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+      SQL.Add('left join CLZL MCLZL on MCLZL.CLDH = TSCD.MSBBH ');
+      SQL.Add('where TSCD.LB=2');
+      //  bo sung lb 3 IT DC
+      SQL.Add('Union all ');
+      SQL.Add('Select TSCD.*');
+      SQL.Add('       ,CLZL.YWPM,NULL as VWPM,CLZL.zwpm,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE,null as SB_Memo');
+      SQL.Add('       ,ZSZL.zsjc,zszl.zsywjc,zszl.fpdz,zszl.dh,zszl.cz,zszl.fzr,zszl.llr');
+      SQL.Add('       ,null as LB1_Memo,null as LB2_Memo,null LB3_Memo,null as ZSZL_AuthCE,null as AuthCE_Memo,null as AuthZSDH,null as AuthZSDH_Memo,null as IsZSDH,null as ZSZL_Memo');
+      SQL.Add('       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  ');
+      SQL.Add('       ,KCRKS.USPrice,KCRKS.VNPrice,KCRKS.DOCNO,null as JRTS_Dep,null as JRTSDep,MCLZL.YWPM as MYWPM,MCLZL.ZWPM as MZWPM,BDepartment.ID,BDepartment.SFL  ');
+      SQL.Add('from TSCD');
+      SQL.Add('left join CLZL on CLZL.CLDH = TSCD.SBBH');
+      SQL.Add('left join KCRK  on KCRK.RKNO=TSCD.RKNO ');
+      SQL.Add('left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH ');
+      SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+      SQL.Add('left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH');
+      SQL.Add('left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+      SQL.Add('left join CLZL MCLZL on MCLZL.CLDH = TSCD.MSBBH ');
+      SQL.Add('where TSCD.LB=3');
+      //ERP 入庫單來源
+      SQL.Add(') TSCD where 1=1 ');
+      if TSIDEdit.Text<>'' then
+      SQL.Add('and TSCD.TSID like '''+TSIDEdit.Text+'%'' ');
+      if TSBHEdit.Text<>'' then
+      SQL.Add('and TSCD.TSBH like ''%'+TSBHEdit.Text+'%'' ');
+      if YWPMEdit.Text<>'' then
+      SQL.Add('and (TSCD.YWPM like ''%'+YWPMEdit.Text+'%'' OR TSCD.VWPM like ''%'+YWPMEdit.Text+'%'' OR TSCD.ZWPM like ''%'+YWPMEdit.Text+'%'')');
+      if ZSYWJCEdit.Text<>'' then
+      SQL.Add('and TSCD.zsjc_yw like ''%'+ZSYWJCEdit.Text+'%'' ');
+      if DOCNOEdit.Text<>'' then
+      SQL.Add('and TSCD.DOCNO like ''%'+DOCNOEdit.Text+'%'' ');
+      if DepNMEdit.Text<>'' then
+      SQL.Add('and TSCD.DepName = '''+DepNMEdit.Text+''' ');
+
+      if cbDpmeo.Text<>'' then
+      SQL.Add('and TSCD.DepID_Memo = '''+cbDpmeo.Text+''' ');
+
+      if InDateCB.Checked=true then
+      begin
+        SQL.add('and convert(smalldatetime,convert(varchar,TSCD.InDate,111)) between ');
+        SQL.add(''''+formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+        SQL.add(' and  ');
+        SQL.add(''''+formatdatetime('yyyy/MM/dd',DTP2.Date) +'''');
+      end;
+      SQL.Add(SubSQL);
+      if RB1.Checked=true then
+        SQl.Add('and TSCD.LB=1 ');
+      if RB2.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''A%'' ');
+      if RB3.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''B%'' ');
+      if RB4.Checked=true then
+        SQl.Add('and TSCD.LB=3 and TSCD.Label_Tag like ''A%'' ');
+      if LabelEdit.Text<>'' then
+        SQL.Add('and Label_Tag like '''+LabelEdit.Text+'%'' ');
+      if MemoEdit.Text<>'' then
+        SQL.Add('and TSCD.Memo like ''%'+MemoEdit.Text+'%'' ');
+      if VWPMEdit.Text<>'' then
+        SQL.Add('and LSBH like ''%'+VWPMEdit.Text+'%'' ');
+        //SQL.Add('and TSCD.VWPM like ''%'+VWPMEdit.Text+'%'' ');
+      if VNPriceComboBox.ItemIndex = 1 then
+        SQL.Add('and TSCD.VNPrice >= 30000000');
+      if VNPriceComboBox.ItemIndex = 2 then
+        SQL.Add('and TSCD.VNPrice <= 30000000');
+      //
+      SQL.Add('Group by SFL,ID,DepName,DepMemo,Case when IsNull(MSBBH,'''')='''' then SBBH else MSBBH end ,IsNull(MYWPM,YWPM) ,IsNull(MZWPM, ZWPM), LABEL_Tag )  TSCD where 1=1 ');
+      if SBBHEdit.Text<>'' then
+      SQL.Add('and TSCD.SBBH like ''%'+SBBHEdit.Text+'%'' ');
+      SQL.Add('Group by SFL,ID,DepName,DepMemo,SBBH,YWPM,ZWPM ) TSCD ');
+      SQL.Add('order by SFL,ID,DepName,DepMemo,YWPM,ZWPM ');
+      //funcObj.WriteErrorLog(SQL.Text);
+      Active:=true;
+      //
+    end;
+    //
+    with TSCDDetQry do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('Select CASE WHEN CHARINDEX(''-'', REVERSE(DepID_Memo)) > 0 ');
+      SQL.Add('THEN REVERSE(SUBSTRING(REVERSE(DepID_Memo), 1, CHARINDEX(''-'', REVERSE(DepID_Memo)) - 1)) ');
+      SQL.Add('ELSE '''' ');
+      SQL.Add('END AS result,* from ( ');
+      SQL.Add('Select TSCD.*');
+      SQL.Add('       ,TSCD_SB.YWPM,TSCD_SB.VWPM,TSCD_SB.ZWPM,TSCD_SB.HGPM,TSCD_SB.QUCBH,TSCD_SB.LSBH,TSCD_SB.DWBH,TSCD_SB.ZSDH,TSCD_SB.CQDH,TSCD_SB.AuthCompany,TSCD_SB.AuthCE');
+      SQL.Add('       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo   ');
+      SQL.Add('       ,JDTS_Dep.DepName as JDTSDep,JRTS_Dep.DepName as JRTSDep,IsNull(MTSCD_SB.YWPM,TSCD_SB.YWPM) as MYWPM,IsNull(MTSCD_SB.ZWPM,TSCD_SB.ZWPM) as MZWPM,lbzls.zwsm as ZDWBH,lbzls.ywsm as YDWBH   ');
+      SQL.Add('from TSCD');
+      SQL.Add('left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH');
+      SQL.Add('left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS.SBBH=TSCD.SBBH  ');
+      SQL.Add('left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO ');
+      SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+      SQL.Add('left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS ');
+      SQL.Add('left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS ');
+      SQL.Add('left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH');
+      SQL.Add('left join TSCD_BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+      SQL.Add('left join TSCD_SB  MTSCD_SB on MTSCD_SB.SBBH = TSCD.MSBBH ');
+      SQL.Add('left join lbzls on lbzls.lb=''02'' and lbzls.lbdh=IsNull(MTSCD_SB.dwbh,TSCD_SB.dwbh) ');
+      SQL.Add('where TSCD.LB=1 ');
+      //SQL.add('and TSCD.Status is not null ');
+      SQL.Add('Union all ');
+      SQL.Add('Select TSCD.*');
+      SQL.Add('       ,CLZL.YWPM,NULL as VWPM,CLZL.ZWPM,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE');
+      SQL.Add('       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  ');
+      SQL.Add('       ,null as JRTS_Dep,null as JRTSDep,IsNull(MCLZL.YWPM,CLZL.YWPM) as MYWPM,IsNull(MCLZL.ZWPM,CLZL.ZWPM) as MZWPM,lbzls.zwsm as ZDWBH,lbzls.ywsm as YDWBH  ');
+      SQL.Add('from TSCD');
+      SQL.Add('left join CLZL on CLZL.CLDH = TSCD.SBBH');
+      SQL.Add('left join KCRK  on KCRK.RKNO=TSCD.RKNO ');
+      SQL.Add('left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH ');
+      SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+      SQL.Add('left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH');
+      SQL.Add('left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+      SQL.Add('left join CLZL MCLZL on MCLZL.CLDH = TSCD.MSBBH ');
+      SQL.Add('left join lbzls on lbzls.lb=''02'' and lbzls.lbdh=IsNull(MCLZL.dwbh,CLZL.dwbh) ');
+      SQL.Add('where TSCD.LB=2');
+      // bo sung lb3
+      SQL.Add('Union all ');
+      SQL.Add('Select TSCD.*');
+      SQL.Add('       ,CLZL.YWPM,NULL as VWPM,CLZL.ZWPM,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE');
+      SQL.Add('       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  ');
+      SQL.Add('       ,null as JRTS_Dep,null as JRTSDep,IsNull(MCLZL.YWPM,CLZL.YWPM) as MYWPM,IsNull(MCLZL.ZWPM,CLZL.ZWPM) as MZWPM,lbzls.zwsm as ZDWBH,lbzls.ywsm as YDWBH  ');
+      SQL.Add('from TSCD');
+      SQL.Add('left join CLZL on CLZL.CLDH = TSCD.SBBH');
+      SQL.Add('left join KCRK  on KCRK.RKNO=TSCD.RKNO ');
+      SQL.Add('left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH ');
+      SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+      SQL.Add('left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH');
+      SQL.Add('left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+      SQL.Add('left join CLZL MCLZL on MCLZL.CLDH = TSCD.MSBBH ');
+      SQL.Add('left join lbzls on lbzls.lb=''02'' and lbzls.lbdh=IsNull(MCLZL.dwbh,CLZL.dwbh) ');
+      SQL.Add('where TSCD.LB=3');
+      //ERP 入庫單來源
+      SQL.Add(') TSCD where 1=1 ');
+      if TSIDEdit.Text<>'' then
+      SQL.Add('and TSCD.TSID like '''+TSIDEdit.Text+'%'' ');
+      if SBBHEdit.Text<>'' then
+      SQL.Add('and IsNull(TSCD.MSBBH,TSCD.SBBH) like ''%'+SBBHEdit.Text+'%'' ');
+      if TSBHEdit.Text<>'' then
+      SQL.Add('and TSCD.TSBH like ''%'+TSBHEdit.Text+'%'' ');
+      if YWPMEdit.Text<>'' then
+      SQL.Add('and (TSCD.YWPM like ''%'+YWPMEdit.Text+'%'' OR TSCD.VWPM like ''%'+YWPMEdit.Text+'%'' OR TSCD.ZWPM like ''%'+YWPMEdit.Text+'%'')');
+      //SQL.Add('and TSCD.YWPM like ''%'+YWPMEdit.Text+'%'' ');
+      if ZSYWJCEdit.Text<>'' then
+      SQL.Add('and TSCD.zsjc_yw like ''%'+ZSYWJCEdit.Text+'%'' ');
+      if DOCNOEdit.Text<>'' then
+      SQL.Add('and TSCD.DOCNO like ''%'+DOCNOEdit.Text+'%'' ');
+      if DepNMEdit.Text<>'' then
+      SQL.Add('and TSCD.DepName = '''+DepNMEdit.Text+''' ');
+      //if DepIDMemoEdit.Text<>'' then
+      //SQL.Add('and TSCD.DepID_Memo like ''%'+DepIDMemoEdit.Text+'%'' ');
+      if cbDpmeo.Text<>'' then
+      SQL.Add('and TSCD.DepID_Memo = '''+cbDpmeo.Text+''' ');
+      if InDateCB.Checked=true then
+      begin
+        SQL.add('and convert(smalldatetime,convert(varchar,TSCD.InDate,111)) between ');
+        SQL.add(''''+formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+        SQL.add(' and  ');
+        SQL.add(''''+formatdatetime('yyyy/MM/dd',DTP2.Date) +'''');
+      end;
+      SQL.Add(SubSQL);
+      if RB1.Checked=true then
+        SQl.Add('and TSCD.LB=1 ');
+      if RB2.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''A%'' ');
+      if RB3.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''B%'' ');
+      if RB4.Checked=true then
+        SQl.Add('and TSCD.LB=3 and TSCD.Label_Tag like ''A%'' ');
+      if LabelEdit.Text<>'' then
+        SQL.Add('and Label_Tag like '''+LabelEdit.Text+'%'' ');
+      if MemoEdit.Text<>'' then
+        SQL.Add('and TSCD.Memo like ''%'+MemoEdit.Text+'%'' ');
+      if VWPMEdit.Text<>'' then
+        SQL.Add('and LSBH like ''%'+VWPMEdit.Text+'%'' ');
+        //SQL.Add('and TSCD.VWPM like ''%'+VWPMEdit.Text+'%'' ');
+      SQL.Add(' and TSCD.DepName=:DepName and IsNull(MSBBH,SBBH)=:SBBH ');
+      if VNPriceComboBox.ItemIndex = 1 then
+        SQL.Add('and TSCD.VNPrice >= 30000000');
+      if VNPriceComboBox.ItemIndex = 2 then
+        SQL.Add('and TSCD.VNPrice <= 30000000');
+      SQL.Add(' order by result,Label_Tag ');
+      //FuncObj.WriteErrorLog(sql.Text);
+      //showmessage(SQL.Text);
+      Active:=true;
+    end;
+  end;
+  //
+  ReFresh_ComboboDepNM();
+  ReFresh_ComboboDepMeo();
+end;
+//
+procedure TEquipmentList.ExportExcel(Query:TQuery; SubQuery:TQuery);
+var   a:string;
+      eclApp,WorkBook:olevariant;
+      i,j:integer;
+      //
+      para:olevariant;
+begin
+  if  Query.active  then
+  begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+       if SubQuery<>nil  then SubQuery.Active:=false;
+       WorkBook:=eclApp.workbooks.Add;
+       eclapp.Cells.NumberFormatLocal:='@';
+       for   i:=0   to   Query.fieldcount-1   do
+       begin
+           eclApp.Cells(1,i+1):=Query.fields[i].FieldName;
+       end;
+       Query.First;
+       j:=2;
+
+       while   not Query.Eof   do
+       begin
+          for   i:=0  to  Query.fieldcount-1  do
+          begin
+            //
+            eclApp.Cells(j,i+1):=''''+Query.Fields[i].AsString;
+          end;
+          Query.Next;
+          inc(j);
+       end;
+       if SubQuery<>nil  then SubQuery.Active:=true;
+       eclapp.columns.autofit;
+       eclApp.Visible:=True;
+       showmessage('Succeed');
+    except
+        on   F:Exception   do
+          showmessage(F.Message);
+    end;
+  end;
+end;
+//
+procedure TEquipmentList.Button2Click(Sender: TObject);
+begin
+  if PC1.ActivePageIndex=0 then ExportExcel(TSCDQry,nil);
+  if PC1.ActivePageIndex=1 then ExportExcel(TSCDDepQry,TSCDDetQry);
+end;
+
+
+procedure TEquipmentList.Button3Click(Sender: TObject);
+begin
+  if PC1.ActivePageIndex=0 then Export_KTList_Page1();
+  if PC1.ActivePageIndex=1 then Export_KTList_Page2();
+end;
+//
+procedure TEquipmentList.Export_KTList_Page2();
+   procedure Excel_DepID_List();
+   var SubSQL:String;
+   tmp:string;
+   i:integer;
+   begin
+    with Qtemp do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('Select * from ( ');
+      SQL.Add('Select SFL,ID,DepName,DepMemo from ( ');
+      SQL.Add('Select SFL,ID,DepName,DepMemo,IsNull(MSBBH,SBBH) as SBBH,IsNull(MYWPM,YWPM) as YWPM,IsNull(MZWPM, ZWPM) as ZWPM, LABEL_Tag from ( ');
+      SQL.Add('Select TSCD.*');
+      SQL.Add('       ,TSCD_SB.YWPM,TSCD_SB.VWPM,TSCD_SB.ZWPM,TSCD_SB.HGPM,TSCD_SB.QUCBH,TSCD_SB.LSBH,TSCD_SB.DWBH,TSCD_SB.ZSDH,TSCD_SB.CQDH,TSCD_SB.AuthCompany,TSCD_SB.AuthCE,TSCD_SB.Memo as SB_Memo ');
+      SQL.Add('       ,TSCD_ZSZL.ZSJC_YW,TSCD_ZSZL.ZSJC_ZW,TSCD_ZSZL.fpdz,TSCD_ZSZL.dh,TSCD_ZSZL.cz,TSCD_ZSZL.fzr,TSCD_ZSZL.llr ');
+      SQL.Add('       ,TSCD_ZSZL.LB1_Memo,TSCD_ZSZL.LB2_Memo,TSCD_ZSZL.LB3_Memo,TSCD_ZSZL.AuthCE as ZSZL_AuthCE,TSCD_ZSZL.AuthCE_Memo,TSCD_ZSZL.AuthZSDH,TSCD_ZSZL.AuthZSDH_Memo,TSCD_ZSZL.IsZSDH,TSCD_ZSZL.Memo as ZSZL_Memo ');
+      SQL.Add('       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo   ');
+      SQL.Add('       ,TSCD_KCRKS.USPrice,TSCD_KCRKS.VNPrice,TSCD_KCRK.DOCNO,JDTS_Dep.DepName as JDTSDep,JRTS_Dep.DepName as JRTSDep,MTSCD_SB.YWPM as MYWPM,MTSCD_SB.ZWPM as MZWPM,BDepartment.ID,BDepartment.SFL ');
+      SQL.Add('from TSCD');
+      SQL.Add('left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH');
+      SQL.Add('left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS.SBBH=TSCD.SBBH  ');
+      SQL.Add('left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO ');
+      SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+      SQL.Add('left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS ');
+      SQL.Add('left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS ');
+      SQL.Add('left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH');
+      SQL.Add('left join TSCD_BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+      SQL.Add('left join TSCD_SB  MTSCD_SB on MTSCD_SB.SBBH = TSCD.MSBBH ');
+      SQL.Add('where TSCD.LB=1 ');
+      //SQL.add('and TSCD.Status is not null ');
+      SQL.Add('Union all ');
+      SQL.Add('Select TSCD.*');
+      SQL.Add('       ,CLZL.YWPM,NULL as VWPM,CLZL.zwpm,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE,null as SB_Memo');
+      SQL.Add('       ,ZSZL.zsjc,zszl.zsywjc,zszl.fpdz,zszl.dh,zszl.cz,zszl.fzr,zszl.llr');
+      SQL.Add('       ,null as LB1_Memo,null as LB2_Memo,null LB3_Memo,null as ZSZL_AuthCE,null as AuthCE_Memo,null as AuthZSDH,null as AuthZSDH_Memo,null as IsZSDH,null as ZSZL_Memo');
+      SQL.Add('       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  ');
+      SQL.Add('       ,KCRKS.USPrice,KCRKS.VNPrice,KCRKS.DOCNO,null as JRTS_Dep,null as JRTSDep,MCLZL.YWPM as MYWPM,MCLZL.ZWPM as MZWPM,BDepartment.ID,BDepartment.SFL ');
+      SQL.Add('from TSCD');
+      SQL.Add('left join CLZL on CLZL.CLDH = TSCD.SBBH');
+      SQL.Add('left join KCRK  on KCRK.RKNO=TSCD.RKNO ');
+      SQL.Add('left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH ');
+      SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+      SQL.Add('left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH');
+      SQL.Add('left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+      SQL.Add('left join CLZL MCLZL on MCLZL.CLDH = TSCD.MSBBH ');
+      SQL.Add('where TSCD.LB=2');
+       //bo sung lb3
+      SQL.Add('Union all ');
+      SQL.Add('Select TSCD.*');
+      SQL.Add('       ,CLZL.YWPM,NULL as VWPM,CLZL.zwpm,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE,null as SB_Memo');
+      SQL.Add('       ,ZSZL.zsjc,zszl.zsywjc,zszl.fpdz,zszl.dh,zszl.cz,zszl.fzr,zszl.llr');
+      SQL.Add('       ,null as LB1_Memo,null as LB2_Memo,null LB3_Memo,null as ZSZL_AuthCE,null as AuthCE_Memo,null as AuthZSDH,null as AuthZSDH_Memo,null as IsZSDH,null as ZSZL_Memo');
+      SQL.Add('       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  ');
+      SQL.Add('       ,KCRKS.USPrice,KCRKS.VNPrice,KCRKS.DOCNO,null as JRTS_Dep,null as JRTSDep,MCLZL.YWPM as MYWPM,MCLZL.ZWPM as MZWPM,BDepartment.ID,BDepartment.SFL ');
+      SQL.Add('from TSCD');
+      SQL.Add('left join CLZL on CLZL.CLDH = TSCD.SBBH');
+      SQL.Add('left join KCRK  on KCRK.RKNO=TSCD.RKNO ');
+      SQL.Add('left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH ');
+      SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+      SQL.Add('left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH');
+      SQL.Add('left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+      SQL.Add('left join CLZL MCLZL on MCLZL.CLDH = TSCD.MSBBH ');
+      SQL.Add('where TSCD.LB=3');
+      //ERP 入庫單來源
+      SQL.Add(') TSCD where 1=1 ');
+      if TSIDEdit.Text<>'' then
+      SQL.Add('and TSCD.TSID like '''+TSIDEdit.Text+'%'' ');
+      if TSBHEdit.Text<>'' then
+      SQL.Add('and TSCD.TSBH like ''%'+TSBHEdit.Text+'%'' ');
+      if YWPMEdit.Text<>'' then
+      SQL.Add('and (TSCD.YWPM like ''%'+YWPMEdit.Text+'%'' OR TSCD.VWPM like ''%'+YWPMEdit.Text+'%'' OR TSCD.ZWPM like ''%'+YWPMEdit.Text+'%'')');
+
+      if ZSYWJCEdit.Text<>'' then
+      SQL.Add('and TSCD.zsjc_yw like ''%'+ZSYWJCEdit.Text+'%'' ');
+      if DOCNOEdit.Text<>'' then
+      SQL.Add('and TSCD.DOCNO like ''%'+DOCNOEdit.Text+'%'' ');
+      if DepNMEdit.Text<>'' then
+      SQL.Add('and TSCD.DepName like ''%'+DepNMEdit.Text+'%'' ');
+
+      if cbDpmeo.Text<>'' then
+      SQL.Add('and TSCD.DepID_Memo = '''+cbDpmeo.Text+''' ');
+      if InDateCB.Checked=true then
+      begin
+        SQL.add('and convert(smalldatetime,convert(varchar,TSCD.InDate,111)) between ');
+        SQL.add(''''+formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+        SQL.add(' and  ');
+        SQL.add(''''+formatdatetime('yyyy/MM/dd',DTP2.Date) +'''');
+      end;
+
+      SubSQL:='';
+      if cbN.Checked then SubSQL:=SubSQL+'''N'',';
+      if cbY.Checked then SubSQL:=SubSQL+'''Y'',';
+      if cbB.Checked then SubSQL:=SubSQL+'''B'',';
+      if cbM.Checked then SubSQL:=SubSQL+'''M'',';
+      if cbH.Checked then SubSQL:=SubSQL+'''H'',';
+      if cbR.Checked then SubSQL:=SubSQL+'''R'',';
+      if cbF.Checked then SubSQL:=SubSQL+'''F'',';
+      if cbT.Checked then SubSQL:=SubSQL+'''T'',';
+      if length(SubSQL)>0 then
+        SubSQL:=' and TSCD.Status in ('+Copy(SubSQL,1,length(SubSQL)-1)+')'
+      else SubSQL:=' and TSCD.Status='''' ';
+      SQL.Add(SubSQL);
+      if RB1.Checked=true then
+        SQl.Add('and TSCD.LB=1 ');
+      if RB2.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''A%'' ');
+      if RB3.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''B%'' ');
+      if LabelEdit.Text<>'' then
+        SQL.Add('and Label_Tag like '''+LabelEdit.Text+'%'' ');
+      if MemoEdit.Text<>'' then
+        SQL.Add('and TSCD.Memo like ''%'+MemoEdit.Text+'%'' ');
+      if VWPMEdit.Text<>'' then
+        SQL.Add('and LSBH like ''%'+VWPMEdit.Text+'%'' ');
+        //SQL.Add('and TSCD.VWPM like ''%'+VWPMEdit.Text+'%'' ');
+      //
+      SQL.Add('Group by SFL,ID,DepName,DepMemo,IsNull(MSBBH,SBBH),IsNull(MYWPM,YWPM) ,IsNull(MZWPM, ZWPM), LABEL_Tag )  TSCD where 1=1 ');
+      if SBBHEdit.Text<>'' then
+      SQL.Add('and TSCD.SBBH like ''%'+SBBHEdit.Text+'%'' ');
+      SQL.Add('Group by SFL,ID,DepName,DepMemo ) TSCD ');
+      SQL.Add('order by SFL,ID,DepName,DepMemo ');
+      //funcObj.WriteErrorLog(SQL.Text);
+      Active:=true;
+      //
+    end;
+   end;
+var eclApp,WorkBook,WorkSheet:olevariant;
+    index,FlowID:integer;
+    i,j,k:integer;
+    Label_Tag,FlowNum,Memo, DepName:String;
+    YWPMlist,ZWPMlist:TStringlist;
+    //
+    IsBreak:boolean;
+begin
+  if  TSCDDepQry.Active  then
+  begin
+    if(not DirectoryExists(AppDir+'Additional\'))  then ForceDirectories(AppDir+'Additional\');
+    CopyFile(Pchar('\\'+main.ServerIP+'\liy_erp\Additional\Asset_SN24_KT.xls'),Pchar(AppDir+'Additional\Asset_SN24_KT.xls'),false);
+    if FileExists(AppDir+'Additional\Asset_SN24_KT.xls') then
+    begin
+      try
+        eclApp:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+      try
+          eclApp.DisplayAlerts := False;
+          eclApp.WorkBooks.Open(AppDir+'Additional\Asset_SN24_KT.xls');
+          //幾各組別幾個分頁
+          Excel_DepID_List();
+          for i:=0 to Qtemp.RecordCount-1 do
+          begin
+            WorkSheet := eclApp.WorkSheets.Add(Null,eclApp.WorkSheets[eclApp.Worksheets.Count],1,-4167);
+            WorkSheet.Name := inttostr(i); //
+          end;
+          Qtemp.First;
+          index:=2;
+          for i:=0 to Qtemp.RecordCount-1 do
+          begin
+            eclApp.workbooks[1].sheets[1].select;
+            eclApp.Range[eclApp.Cells[1,1],eclApp.Cells[12,11]].Copy;
+            eclApp.workbooks[1].sheets[i+index].select;
+            eclApp.workbooks[1].sheets[i+index].Cells[1,1].Select;
+            eclApp.ActiveSheet.Paste;
+            eclapp.workbooks[1].sheets[i+index].name:=Qtemp.FieldByName('DepName').AsString;
+            eclApp.workbooks[1].sheets[i+index].Cells(2,4):='ĐƠN VỊ: '+Qtemp.FieldByName('DepName').AsString + #13#10 +'單位: '+ Qtemp.FieldByName('DepMemo').AsString;
+            eclApp.workbooks[1].sheets[i+index].Cells(2,9):=FormatDateTime(' "Ngày日 " dd " Tháng月 " MM " Năm年 " yyyy', Now);
+            eclApp.Columns[1].ColumnWidth := 5;
+            eclApp.Columns[2].ColumnWidth := 18;
+            eclApp.Columns[3].ColumnWidth := 17;
+            eclApp.Columns[4].ColumnWidth := 17;
+            eclApp.Columns[5].ColumnWidth := 15;
+            eclApp.Columns[6].ColumnWidth := 5;
+            eclApp.Columns[7].ColumnWidth := 5;
+            eclApp.Columns[8].ColumnWidth := 10;
+            eclApp.Columns[9].ColumnWidth := 11;
+            eclApp.Columns[10].ColumnWidth := 10;
+            eclApp.Columns[11].ColumnWidth := 26;
+            eclApp.Rows[1].RowHeight := 50;
+            eclApp.Rows[2].RowHeight := 30;
+            eclApp.Rows[3].RowHeight := 40;
+            eclApp.Rows[4].RowHeight := 15;
+            eclApp.Rows[6].RowHeight := 32;
+            eclApp.Rows[10].RowHeight := 28;
+            eclApp.Rows[12].RowHeight := 28;
+            Qtemp.Next;
+            //
+          end;
+          eclApp.workbooks[1].sheets[1].Delete;
+          eclApp.workbooks[1].sheets[1].select;
+          Qtemp.Active:=false;
+          //
+          index:=1;
+          FlowID:=1;
+          TSCDDepQry.First;
+          DepName:=TSCDDepQry.FieldByName('DepName').Asstring;
+          for i:=0 to TSCDDepQry.RecordCount-1 do
+          begin
+            if (TSCDDepQry.FieldByName('SBBH').Asstring <> 'Z207000003')
+                and (TSCDDepQry.FieldByName('SBBH').Asstring <> 'Z207000005') then
+            begin
+              if (DepName<>TSCDDepQry.FieldByName('DepName').Asstring) then
+              begin
+                //分頁畫框線 outline
+                for k:=1 to 4 do
+                begin
+                  eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,1],eclapp.workbooks[1].sheets[index].cells[5+FlowID-2,11]].borders[k].linestyle:=1;
+                end;
+                //對齊
+                eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,1],eclapp.workbooks[1].sheets[index].cells[5+FlowID,1]].HorizontalAlignment :=3;//中間
+                eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,2],eclapp.workbooks[1].sheets[index].cells[5+FlowID,2]].HorizontalAlignment :=3;
+                eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,3],eclapp.workbooks[1].sheets[index].cells[5+FlowID,3]].HorizontalAlignment :=2;//靠左
+                //eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,4],eclapp.workbooks[1].sheets[index].cells[5+FlowID,4]].HorizontalAlignment :=2;
+                eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,5],eclapp.workbooks[1].sheets[index].cells[5+FlowID,5]].HorizontalAlignment :=3;
+                //eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,7],eclapp.workbooks[1].sheets[index].cells[5+FlowID,7]].HorizontalAlignment :=3;
+                //eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,8],eclapp.workbooks[1].sheets[index].cells[5+FlowID,8]].HorizontalAlignment :=3;
+                eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,11],eclapp.workbooks[1].sheets[index].cells[5+FlowID,11]].HorizontalAlignment :=3;
+                //橫向列印
+                //eclapp.workbooks[1].sheets[index].Pagesetup.FitToPagesWide:= 0;
+                eclApp.Workbooks[1].Sheets[index].PageSetup.LeftMargin := 0.64 * 2.54; // Thiết lập margin trái là 50 điểm
+                eclApp.Workbooks[1].Sheets[index].PageSetup.RightMargin := 0.64 * 2.54; // Thiết lập margin phải là 50 điểm
+                eclApp.Workbooks[1].Sheets[index].PageSetup.TopMargin := 0.64 * 2.54; // Thiết lập margin trên là 50 điểm
+                eclapp.workbooks[1].sheets[index].Pagesetup.Orientation := 2;
+                eclapp.workbooks[1].sheets[index].Pagesetup.RightFooter := 'T-DCC-131A';
+                //
+                FlowID:=1;
+                index:=index+1;//分頁+1
+                DepName:=TSCDDepQry.FieldByName('DepName').Asstring;
+              end;
+              while not TSCDDetQry.Eof do
+              begin
+                //新增一列
+                eclapp.workbooks[1].sheets[index].Rows[4+FlowID+1].Insert;
+                eclApp.workbooks[1].sheets[index].Rows[4+FlowID].RowHeight := 40;
+                //編號
+                eclapp.workbooks[1].sheets[index].Cells(4+FlowID,1):=Format('%.d',[FlowID]);
+
+                //Lay them Quy cach cua Tong Vu
+                eclapp.workbooks[1].sheets[index].Cells(4+FlowID,5):=TSCDDetQry.FieldByName('XSBH').AsString;
+
+                if Copy(TSCDDetQry.FieldByName('Label_Tag').AsString,1,1)='A' then
+                   eclapp.workbooks[1].sheets[index].Cells(4+FlowID,2):=TSCDDetQry.FieldByName('Label_Tag').AsString
+                else
+                   eclapp.workbooks[1].sheets[index].Cells(4+FlowID,2):=TSCDDetQry.FieldByName('TSBH').AsString;
+                //滑鼠鍵盤沒有編號
+                if ((TSCDDetQry.FieldByName('MZWPM').AsString='鍵盤') or (TSCDDetQry.FieldByName('MZWPM').AsString='滑鼠')) then
+                  eclapp.workbooks[1].sheets[index].Cells(4+FlowID,2):='';
+                eclapp.workbooks[1].sheets[index].Cells(4+FlowID,11):=TSCDDetQry.FieldByName('DepID_Memo').AsString;
+                eclApp.workbooks[1].sheets[index].Range[eclApp.workbooks[1].sheets[index].Cells[4+FlowID,3],eclApp.workbooks[1].sheets[index].Cells[4+FlowID,4]].merge;
+                //eclApp.workbooks[1].sheets[index].Range[eclApp.workbooks[1].sheets[index].Cells[4+FlowID,5],eclApp.workbooks[1].sheets[index].Cells[4+FlowID,6]].merge;
+                eclApp.workbooks[1].sheets[index].Range[eclApp.workbooks[1].sheets[index].Cells[4+FlowID,6],eclApp.workbooks[1].sheets[index].Cells[4+FlowID,7]].merge;
+                //電腦設備
+                if ((TSCDDetQry.FieldByName('MZWPM').AsString='電腦') ) then
+                begin
+                  eclapp.workbooks[1].sheets[index].Cells(4+FlowID,3):=TSCDDetQry.FieldByName('MZWPM').AsString+ #13#10 +TSCDDetQry.FieldByName('MYWPM').AsString;
+                  eclapp.workbooks[1].sheets[index].Cells(4+FlowID,6):=TSCDDetQry.FieldByName('ZDWBH').AsString+ #13#10 +TSCDDetQry.FieldByName('YDWBH').AsString;
+                  eclapp.workbooks[1].sheets[index].Cells(4+FlowID,8):=TSCDDetQry.FieldByName('Qty').AsString;
+                  //電腦資訊備註
+                  Memo:=TSCDDetQry.FieldByName('YWPM').AsString+' '+TSCDDetQry.FieldByName('ZWPM').AsString+#13#10;
+                  Label_Tag:=TSCDDetQry.FieldByName('Label_Tag').AsString;
+                  IsBreak:=false;
+                  repeat
+                    TSCDDetQry.Next;
+                    if Label_Tag=TSCDDetQry.FieldByName('Label_Tag').AsString then
+                    begin
+                      Memo:=Memo+TSCDDetQry.FieldByName('YWPM').AsString+' '+TSCDDetQry.FieldByName('ZWPM').AsString+#13#10;
+                    end else
+                    begin
+                      IsBreak:=true;
+                    end;
+                    if TSCDDetQry.Eof then IsBreak:=true;
+                  until IsBreak=true;
+
+                  //Xuat noi dung cot 11
+                  //eclapp.workbooks[1].sheets[index].Cells(4+FlowID,11):=trim(Memo);
+
+                  FlowID:=FlowID+1;
+                end else //非電腦設備
+                begin
+                  eclapp.workbooks[1].sheets[index].Cells(4+FlowID,3):=TSCDDetQry.FieldByName('ZWPM').AsString+ #13#10 +TSCDDetQry.FieldByName('YWPM').AsString;
+                  eclapp.workbooks[1].sheets[index].Cells(4+FlowID,6):=TSCDDetQry.FieldByName('ZDWBH').AsString+ #13#10 +TSCDDetQry.FieldByName('YDWBH').AsString;
+                  if ((TSCDDetQry.FieldByName('MZWPM').AsString='鍵盤') or (TSCDDetQry.FieldByName('MZWPM').AsString='滑鼠')) then
+                    eclapp.workbooks[1].sheets[index].Cells(4+FlowID,8):=TSCDDepQry.FieldByName('Qty').AsString
+                  else
+                    eclapp.workbooks[1].sheets[index].Cells(4+FlowID,8):=TSCDDetQry.FieldByName('Qty').AsString;
+                  FlowID:=FlowID+1;
+                  if ((TSCDDetQry.FieldByName('MZWPM').AsString='鍵盤') or (TSCDDetQry.FieldByName('MZWPM').AsString='滑鼠')) then
+                  begin
+                    break;
+                  end;
+                  TSCDDetQry.Next;
+                end;
+              end;
+            end;
+
+            TSCDDepQry.Next;
+          end;
+          //分頁畫框線 outline
+          for k:=1 to 4 do
+          begin
+            eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,1],eclapp.workbooks[1].sheets[index].cells[5+FlowID-2,11]].borders[k].linestyle:=1;
+          end;
+          //對齊
+          eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,1],eclapp.workbooks[1].sheets[index].cells[5+FlowID,1]].HorizontalAlignment :=3;//中間
+          eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,2],eclapp.workbooks[1].sheets[index].cells[5+FlowID,2]].HorizontalAlignment :=3;
+          eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,3],eclapp.workbooks[1].sheets[index].cells[5+FlowID,3]].HorizontalAlignment :=2;//靠左
+          //eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,4],eclapp.workbooks[1].sheets[index].cells[5+FlowID,4]].HorizontalAlignment :=2;
+          eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,5],eclapp.workbooks[1].sheets[index].cells[5+FlowID,5]].HorizontalAlignment :=3;
+          //eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,7],eclapp.workbooks[1].sheets[index].cells[5+FlowID,7]].HorizontalAlignment :=3;
+          //eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,8],eclapp.workbooks[1].sheets[index].cells[5+FlowID,8]].HorizontalAlignment :=3;
+          eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,11],eclapp.workbooks[1].sheets[index].cells[5+FlowID,11]].HorizontalAlignment :=3;
+          //橫向列印
+          //eclapp.Workbooks[1].Sheets[index].PageSetup.FitToPagesTall := 1;
+          eclApp.Workbooks[1].Sheets[index].PageSetup.LeftMargin := 0.64 * 2.54; // Thiết lập margin trái là 50 điểm
+          eclApp.Workbooks[1].Sheets[index].PageSetup.RightMargin := 0.64 * 2.54; // Thiết lập margin phải là 50 điểm
+          eclApp.Workbooks[1].Sheets[index].PageSetup.TopMargin := 0.64 * 2.54; // Thiết lập margin trên là 50 điểm
+          eclapp.workbooks[1].sheets[index].Pagesetup.Orientation := 2;
+          //eclapp.Workbooks[1].Sheets[index].PageSetup.FitToPagesTall := 1;
+          eclapp.workbooks[1].sheets[index].Pagesetup.RightFooter := 'T-DCC-131A';
+          //
+          showmessage('Succeed.');
+          eclApp.Visible:=True;
+          //
+        except
+          on  F:Exception   do
+          begin
+             eclApp.quit;
+             showmessage(F.Message);
+          end;
+        end;
+    end;
+  end;
+end;
+//
+//
+procedure TEquipmentList.Export_KTList_Page1();
+var eclApp,WorkBook:olevariant;
+    i,j,k:integer;
+    YWPMlist,ZWPMlist:TStringList;
+    Label_Tag,DepID_Memo,TSBH:String;
+    DepID,DepName,Depmemo,FlowNum:string;
+    Qty:real;
+    FlowID:integer;
+begin
+  if  TSCDQry.Active  then
+  begin
+    if(not DirectoryExists(AppDir+'Additional\'))  then ForceDirectories(AppDir+'Additional\');
+    CopyFile(Pchar('\\'+main.ServerIP+'\liy_erp\Additional\Asset_SN24.xls'),Pchar(AppDir+'Additional\Asset_SN24.xls'),false);
+    if FileExists(AppDir+'Additional\Asset_SN24.xls') then
+    begin
+      try
+        eclApp:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+      try
+          eclApp.DisplayAlerts := False;
+          eclApp.WorkBooks.Open(AppDir+'Additional\Asset_SN24.xls');
+          YWPMlist:=TStringlist.Create;
+          ZWPMlist:=TStringlist.Create;
+          Label_Tag:='';
+          //
+          j:=3;
+          TSCDQry.First;
+          FlowID:=0;
+          FlowNum:='';
+          for i:=0 to TSCDQry.RecordCount-1  do
+          begin
+            if (Label_Tag<>TSCDQry.FieldByName('Label_Tag').AsString) and (Label_Tag<>'') then
+            begin
+              //儲存Excel
+              Inc(FlowID);
+              FlowNum:=Format('%.2d',[FlowID]);
+              eclApp.Cells(j,1):=FlowNum;
+              eclApp.Cells(j,2):=TSBH;
+              eclApp.Cells(j,3):=trim(YWPMlist.Text);
+              eclApp.Cells(j,4):=trim(ZWPMlist.Text);
+              eclApp.Cells(j,5):=Qty;
+              eclApp.Cells(j,6):=DepID;
+              eclApp.Cells(j,7):=DepName;
+              eclApp.Cells(j,8):=DepMemo;
+              eclApp.Cells(j,9):=DepID_Memo;
+              eclApp.Cells(j,10):=Label_Tag;
+              YWPMlist.Clear;
+              ZWPMlist.Clear;
+              Label_Tag:='';
+              Inc(j);
+              //
+            end;
+            if Label_Tag='' then
+            begin
+              TSBH:=TSCDQry.FieldByName('TSBH').AsString;
+              Qty:=TSCDQry.FieldByName('Qty').Value;
+              DepID:=TSCDQry.FieldByName('DepID').AsString;
+              DepName:=TSCDQry.FieldByName('DepName').AsString;
+              DepMemo:=TSCDQry.FieldByName('DepMemo').AsString;
+              DepID_Memo:=TSCDQry.FieldByName('DepID_Memo').AsString;
+              Label_Tag:=TSCDQry.FieldByName('Label_Tag').AsString;
+            end;
+            YWPMlist.Add(TSCDQry.FieldByName('YWPM').AsString);
+            ZWPMlist.Add(TSCDQry.FieldByName('ZWPM').AsString);
+            TSCDQry.Next;
+          end;
+          if (YWPMlist.Text<>'')  and (ZWPMlist.Text<>'')and (Label_Tag<>'')  then
+          begin
+            //儲存Excel
+            Inc(FlowID);
+            FlowNum:=Format('%.2d',[FlowID]);
+            eclApp.Cells(j,1):=FlowNum;
+            eclApp.Cells(j,2):=TSBH;
+            eclApp.Cells(j,3):=trim(YWPMlist.Text);
+            eclApp.Cells(j,4):=trim(ZWPMlist.Text);
+            eclApp.Cells(j,5):=Qty;
+            eclApp.Cells(j,6):=DepID;
+            eclApp.Cells(j,7):=DepName;
+            eclApp.Cells(j,8):=DepMemo;
+            eclApp.Cells(j,9):=DepID_Memo;
+            eclApp.Cells(j,10):=Label_Tag;
+            YWPMlist.Clear;
+            ZWPMlist.Clear;
+            Label_Tag:='';
+           end;
+          YWPMlist.Free;
+          ZWPMlist.Free;
+          // outline
+          for k:=1 to 4 do
+          begin
+            eclApp.range[eclApp.cells[3,1],eclApp.cells[j,10]].borders[k].linestyle:=1;
+          end;
+          //eclApp.quit;
+          showmessage('Succeed.');
+          eclApp.Visible:=True;
+          //
+        except
+          on  F:Exception   do
+          begin
+             eclApp.quit;
+             showmessage(F.Message);
+          end;
+        end;
+    end;
+  end;
+end;
+
+procedure TEquipmentList.Button4Click(Sender: TObject);
+  //
+  function GetExcelColumnID(i:integer):string;
+  var str:string;
+  begin
+    case i of
+      1:str:='A';  2:str:='B';  3:str:='C';
+      4:str:='D';  5:str:='E';  6:str:='F';
+      7:str:='G';  8:str:='H';  9:str:='I';
+      10:str:='J';  11:str:='K';  12:str:='L';
+      13:str:='M';  14:str:='N';  15:str:='O';
+      16:str:='P';  17:str:='Q';  18:str:='R';
+      19:str:='S';  20:str:='T';  21:str:='U';
+      22:str:='V';  23:str:='W';  24:str:='X';
+      25:str:='Y';  26:str:='Z';  27:str:='AA';
+      28:str:='AB';  29:str:='AC';  30:str:='AD';
+      31:str:='AE';  32:str:='AF';  33:str:='AG';
+      34:str:='AH';  35:str:='AI';  36:str:='AJ';
+    end;
+    result:=str;
+  end;
+var eclApp,WorkBook:olevariant;
+    i,j,k:integer;
+    FlowID:integer;
+begin
+  if  TSCDQry.Active  then
+  begin
+    if(not DirectoryExists(AppDir+'Additional\'))  then ForceDirectories(AppDir+'Additional\');
+    CopyFile(Pchar('\\'+main.ServerIP+'\liy_erp\Additional\Asset_SN24_TSCD.xls'),Pchar(AppDir+'Additional\Asset_SN24_TSCD.xls'),false);
+    if FileExists(AppDir+'Additional\Asset_SN24_TSCD.xls') then
+    begin
+      try
+        eclApp:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+      try
+          eclApp.DisplayAlerts := False;
+          eclApp.WorkBooks.Open(AppDir+'Additional\Asset_SN24_TSCD.xls');
+          eclApp.WorkSheets[1].Activate;
+          //
+          j:=4;
+          TSCDQry.First;
+          //複製
+          for i:=0 to TSCDQry.RecordCount-1  do
+          begin
+            eclApp.ActiveSheet.Rows[4].Copy;
+            eclApp.ActiveSheet.Rows[5].Insert;
+          end;
+          eclApp.ActiveSheet.Rows[4].Delete;
+          for i:=0 to TSCDQry.RecordCount-1  do
+          begin
+            eclApp.ActiveSheet.Rows[j].Font.Size := 8;
+            eclApp.ActiveSheet.Rows[j].font.name := 'Arial';
+            eclApp.Cells(j,1):=inttostr(j-3);
+            eclApp.Cells(j,2):=TSCDQry.FieldByName('ZWPM').AsString;
+            //eclApp.Cells[j,2].WrapText := False;
+            eclApp.Cells(j,3):=TSCDQry.FieldByName('VWPM').AsString;
+            //eclApp.Cells[j,3].WrapText := False;
+            eclApp.Cells(j,4):=TSCDQry.FieldByName('TSBH').AsString;
+            eclApp.Cells(j,5):=TSCDQry.FieldByName('LSBH').AsString;
+            eclApp.Cells(j,6):=TSCDQry.FieldByName('XSBH').AsString;
+            eclApp.Cells(j,7):=TSCDQry.FieldByName('ZSJC_YW').AsString;
+            eclApp.Cells(j,8):=TSCDQry.FieldByName('NSX').AsString;
+            eclApp.Cells(j,9):=TSCDQry.FieldByName('InDATE').AsString;
+            eclApp.Cells(j,10):=TSCDQry.FieldByName('DepID_Memo').AsString;
+            eclApp.Cells(j,11):=TSCDQry.FieldByName('DepName').AsString;
+            eclApp.Cells(j,12):=TSCDQry.FieldByName('Qty').AsString;
+
+            // Kích hoạt tự động xuống hàng trong ô
+           eclApp.ActiveSheet.Rows[4].Copy;
+            eclApp.ActiveSheet.Rows[5].PasteSpecial(-4122); // -4122 là xlPasteFormats
+
+            // Tự động điều chỉnh chiều cao dòng dựa trên nội dung
+            eclApp.ActiveSheet.Rows[j].AutoFit;
+            //
+            TSCDQry.Next;
+            Inc(j);
+          end;
+          // Export Excel to PDF
+        // Specify the path and export as PDF
+       // eclApp.ActiveSheet.ExportAsFixedFormat(0, AppDir+'Additional\Asset_SN24_TSCD.pdf');
+       if PDF_export.Checked= true then
+        begin
+         eclApp.ActiveSheet.ExportAsFixedFormat(0, 'D:\Asset_SN24_TSCD.pdf');
+         showmessage('Succeed.');
+         ShellExecute(0, 'open', PChar('D:\Asset_SN24_TSCD.pdf'), nil, nil, SW_SHOWNORMAL);
+         end else
+         begin
+          //eclApp.quit;
+          showmessage('Succeed.');
+          eclApp.Visible:=True;
+          end;
+          //
+        except
+          on  F:Exception   do
+          begin
+             eclApp.quit;
+             showmessage(F.Message);
+          end;
+        end;
+    end;
+  end;
+
+end;
+
+procedure TEquipmentList.Button5Click(Sender: TObject);
+function GetExcelColumnID(i:integer):string;
+  var str:string;
+  begin
+    case i of
+      1:str:='A';  2:str:='B';  3:str:='C';
+      4:str:='D';  5:str:='E';  6:str:='F';
+      7:str:='G';  8:str:='H';  9:str:='I';
+      10:str:='J';  11:str:='K';  12:str:='L';
+      13:str:='M';  14:str:='N';  15:str:='O';
+      16:str:='P';  17:str:='Q';  18:str:='R';
+      19:str:='S';  20:str:='T';  21:str:='U';
+      22:str:='V';  23:str:='W';  24:str:='X';
+      25:str:='Y';  26:str:='Z';  27:str:='AA';
+      28:str:='AB';  29:str:='AC';  30:str:='AD';
+      31:str:='AE';  32:str:='AF';  33:str:='AG';
+      34:str:='AH';  35:str:='AI';  36:str:='AJ';
+    end;
+    result:=str;
+  end;
+var eclApp,WorkBook:olevariant;
+    i,j,k:integer;
+    FlowID:integer;
+begin
+  if  TSCDQry.Active  then
+  begin
+    if(not DirectoryExists(AppDir+'Additional\'))  then ForceDirectories(AppDir+'Additional\');
+    CopyFile(Pchar('\\'+main.ServerIP+'\liy_erp\Additional\Asset_SN24_CCDC.xls'),Pchar(AppDir+'Additional\Asset_SN24_CCDC.xls'),false);
+    if FileExists(AppDir+'Additional\Asset_SN24_CCDC.xls') then
+    begin
+      try
+        eclApp:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+      try
+          eclApp.DisplayAlerts := False;
+          eclApp.WorkBooks.Open(AppDir+'Additional\Asset_SN24_CCDC.xls');
+          eclApp.WorkSheets[1].Activate;
+          //
+          j:=4;
+          TSCDQry.First;
+          //複製
+          for i:=0 to TSCDQry.RecordCount-1  do
+          begin
+            eclApp.ActiveSheet.Rows[4].Copy;
+            eclApp.ActiveSheet.Rows[5].Insert;
+          end;
+          eclApp.ActiveSheet.Rows[4].Delete;
+          for i:=0 to TSCDQry.RecordCount-1  do
+          begin
+            eclApp.ActiveSheet.Rows[j].Font.Size := 8;
+            eclApp.ActiveSheet.Rows[j].font.name := 'Arial';
+            eclApp.Cells(j,1):=inttostr(j-3);
+            eclApp.Cells(j,2):=TSCDQry.FieldByName('ZWPM').AsString;
+            //eclApp.Cells[j,2].WrapText := False;
+            eclApp.Cells(j,3):=TSCDQry.FieldByName('VWPM').AsString;
+            //eclApp.Cells[j,3].WrapText := False;
+            eclApp.Cells(j,4):=TSCDQry.FieldByName('TSBH').AsString;
+            eclApp.Cells(j,5):=TSCDQry.FieldByName('LSBH').AsString;
+            eclApp.Cells(j,6):=TSCDQry.FieldByName('XSBH').AsString;
+            eclApp.Cells(j,7):=TSCDQry.FieldByName('ZSJC_YW').AsString;
+            eclApp.Cells(j,8):=TSCDQry.FieldByName('NSX').AsString;
+            eclApp.Cells(j,9):=TSCDQry.FieldByName('InDATE').AsString;
+            eclApp.Cells(j,10):=TSCDQry.FieldByName('DepID_Memo').AsString;
+            eclApp.Cells(j,11):=TSCDQry.FieldByName('DepName').AsString;
+            eclApp.Cells(j,12):=TSCDQry.FieldByName('Qty').AsString;
+            //eclApp.Cells(j,13):=TSCDQry.FieldByName('STT').AsString;
+            // Kích hoạt tự động xuống hàng trong ô
+            eclApp.ActiveSheet.Rows[4].Copy;
+            eclApp.ActiveSheet.Rows[5].PasteSpecial(-4122); // -4122 là xlPasteFormats
+
+            // Tự động điều chỉnh chiều cao dòng dựa trên nội dung
+            eclApp.ActiveSheet.Rows[j].AutoFit;
+
+            //
+            TSCDQry.Next;
+            Inc(j);
+          end;
+           // Export Excel to PDF
+        // Specify the path and export as PDF
+       // eclApp.ActiveSheet.ExportAsFixedFormat(0, AppDir+'Additional\Asset_SN24_TSCD.pdf');
+       if PDF_export.Checked= true then
+        begin
+         eclApp.ActiveSheet.ExportAsFixedFormat(0, 'D:\Asset_SN24_TSCD.pdf');
+         showmessage('Succeed.');
+         ShellExecute(0, 'open', PChar('D:\Asset_SN24_TSCD.pdf'), nil, nil, SW_SHOWNORMAL);
+         end else
+         begin
+          //eclApp.quit;
+          showmessage('Succeed.');
+          eclApp.Visible:=True;
+          end;
+          //
+        except
+          on  F:Exception   do
+          begin
+             eclApp.quit;
+             showmessage(F.Message);
+          end;
+        end;
+    end;
+  end;
+
+
+end;
+
+procedure TEquipmentList.Button6Click(Sender: TObject);
+begin
+  EquipmentList_ReportList:=TEquipmentList_ReportList.Create(self);
+  EquipmentList_ReportList.quickrep1.prepare;
+  EquipmentList_ReportList.quickrep1.preview;
+  EquipmentList_ReportList.free;
+end;
+
+procedure TEquipmentList.Button7Click(Sender: TObject);
+begin
+  if PC1.ActivePageIndex=1 then Export_TV_Page2();
+end;
+
+procedure TEquipmentList.Export_TV_Page2();
+   procedure Excel_DepID_List();
+   var SubSQL:String;
+   tmp:string;
+   i:integer;
+   begin
+    with Qtemp do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('Select * from ( ');
+      SQL.Add('Select SFL,ID,DepName,DepMemo from ( ');
+      SQL.Add('Select SFL,ID,DepName,DepMemo,IsNull(MSBBH,SBBH) as SBBH,IsNull(MYWPM,YWPM) as YWPM,IsNull(MZWPM, ZWPM) as ZWPM, LABEL_Tag from ( ');
+      SQL.Add('Select TSCD.*');
+      SQL.Add('       ,TSCD_SB.YWPM,TSCD_SB.VWPM,TSCD_SB.ZWPM,TSCD_SB.HGPM,TSCD_SB.QUCBH,TSCD_SB.LSBH,TSCD_SB.DWBH,TSCD_SB.ZSDH,TSCD_SB.CQDH,TSCD_SB.AuthCompany,TSCD_SB.AuthCE,TSCD_SB.Memo as SB_Memo ');
+      SQL.Add('       ,TSCD_ZSZL.ZSJC_YW,TSCD_ZSZL.ZSJC_ZW,TSCD_ZSZL.fpdz,TSCD_ZSZL.dh,TSCD_ZSZL.cz,TSCD_ZSZL.fzr,TSCD_ZSZL.llr ');
+      SQL.Add('       ,TSCD_ZSZL.LB1_Memo,TSCD_ZSZL.LB2_Memo,TSCD_ZSZL.LB3_Memo,TSCD_ZSZL.AuthCE as ZSZL_AuthCE,TSCD_ZSZL.AuthCE_Memo,TSCD_ZSZL.AuthZSDH,TSCD_ZSZL.AuthZSDH_Memo,TSCD_ZSZL.IsZSDH,TSCD_ZSZL.Memo as ZSZL_Memo ');
+      SQL.Add('       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo   ');
+      SQL.Add('       ,TSCD_KCRKS.USPrice,TSCD_KCRKS.VNPrice,TSCD_KCRK.DOCNO,JDTS_Dep.DepName as JDTSDep,JRTS_Dep.DepName as JRTSDep,MTSCD_SB.YWPM as MYWPM,MTSCD_SB.ZWPM as MZWPM,BDepartment.ID,BDepartment.SFL ');
+      SQL.Add('from TSCD');
+      SQL.Add('left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH');
+      SQL.Add('left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS.SBBH=TSCD.SBBH  ');
+      SQL.Add('left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO ');
+      SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+      SQL.Add('left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS ');
+      SQL.Add('left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS ');
+      SQL.Add('left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH');
+      SQL.Add('left join TSCD_BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+      SQL.Add('left join TSCD_SB  MTSCD_SB on MTSCD_SB.SBBH = TSCD.MSBBH ');
+      SQL.Add('where TSCD.LB=1 ');
+      //SQL.add('and TSCD.Status is not null ');
+      SQL.Add('Union all ');
+      SQL.Add('Select TSCD.*');
+      SQL.Add('       ,CLZL.YWPM,NULL as VWPM,CLZL.zwpm,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE,null as SB_Memo');
+      SQL.Add('       ,ZSZL.zsjc,zszl.zsywjc,zszl.fpdz,zszl.dh,zszl.cz,zszl.fzr,zszl.llr');
+      SQL.Add('       ,null as LB1_Memo,null as LB2_Memo,null LB3_Memo,null as ZSZL_AuthCE,null as AuthCE_Memo,null as AuthZSDH,null as AuthZSDH_Memo,null as IsZSDH,null as ZSZL_Memo');
+      SQL.Add('       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  ');
+      SQL.Add('       ,KCRKS.USPrice,KCRKS.VNPrice,KCRKS.DOCNO,null as JRTS_Dep,null as JRTSDep,MCLZL.YWPM as MYWPM,MCLZL.ZWPM as MZWPM,BDepartment.ID,BDepartment.SFL ');
+      SQL.Add('from TSCD');
+      SQL.Add('left join CLZL on CLZL.CLDH = TSCD.SBBH');
+      SQL.Add('left join KCRK  on KCRK.RKNO=TSCD.RKNO ');
+      SQL.Add('left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH ');
+      SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+      SQL.Add('left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH');
+      SQL.Add('left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+      SQL.Add('left join CLZL MCLZL on MCLZL.CLDH = TSCD.MSBBH ');
+      SQL.Add('where TSCD.LB=2');
+       //bo sung lb3
+      SQL.Add('Union all ');
+      SQL.Add('Select TSCD.*');
+      SQL.Add('       ,CLZL.YWPM,NULL as VWPM,CLZL.zwpm,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE,null as SB_Memo');
+      SQL.Add('       ,ZSZL.zsjc,zszl.zsywjc,zszl.fpdz,zszl.dh,zszl.cz,zszl.fzr,zszl.llr');
+      SQL.Add('       ,null as LB1_Memo,null as LB2_Memo,null LB3_Memo,null as ZSZL_AuthCE,null as AuthCE_Memo,null as AuthZSDH,null as AuthZSDH_Memo,null as IsZSDH,null as ZSZL_Memo');
+      SQL.Add('       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  ');
+      SQL.Add('       ,KCRKS.USPrice,KCRKS.VNPrice,KCRKS.DOCNO,null as JRTS_Dep,null as JRTSDep,MCLZL.YWPM as MYWPM,MCLZL.ZWPM as MZWPM,BDepartment.ID,BDepartment.SFL ');
+      SQL.Add('from TSCD');
+      SQL.Add('left join CLZL on CLZL.CLDH = TSCD.SBBH');
+      SQL.Add('left join KCRK  on KCRK.RKNO=TSCD.RKNO ');
+      SQL.Add('left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH ');
+      SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+      SQL.Add('left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH');
+      SQL.Add('left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+      SQL.Add('left join CLZL MCLZL on MCLZL.CLDH = TSCD.MSBBH ');
+      SQL.Add('where TSCD.LB=3');
+      //ERP 入庫單來源
+      SQL.Add(') TSCD where 1=1 ');
+      if TSIDEdit.Text<>'' then
+      SQL.Add('and TSCD.TSID like '''+TSIDEdit.Text+'%'' ');
+      if TSBHEdit.Text<>'' then
+      SQL.Add('and TSCD.TSBH like ''%'+TSBHEdit.Text+'%'' ');
+      if YWPMEdit.Text<>'' then
+      SQL.Add('and (TSCD.YWPM like ''%'+YWPMEdit.Text+'%'' OR TSCD.VWPM like ''%'+YWPMEdit.Text+'%'' OR TSCD.ZWPM like ''%'+YWPMEdit.Text+'%'')');
+
+      if ZSYWJCEdit.Text<>'' then
+      SQL.Add('and TSCD.zsjc_yw like ''%'+ZSYWJCEdit.Text+'%'' ');
+      if DOCNOEdit.Text<>'' then
+      SQL.Add('and TSCD.DOCNO like ''%'+DOCNOEdit.Text+'%'' ');
+      if DepNMEdit.Text<>'' then
+      SQL.Add('and TSCD.DepName like ''%'+DepNMEdit.Text+'%'' ');
+
+      if cbDpmeo.Text<>'' then
+      SQL.Add('and TSCD.DepID_Memo = '''+cbDpmeo.Text+''' ');
+      if InDateCB.Checked=true then
+      begin
+        SQL.add('and convert(smalldatetime,convert(varchar,TSCD.InDate,111)) between ');
+        SQL.add(''''+formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+        SQL.add(' and  ');
+        SQL.add(''''+formatdatetime('yyyy/MM/dd',DTP2.Date) +'''');
+      end;
+
+      SubSQL:='';
+      if cbN.Checked then SubSQL:=SubSQL+'''N'',';
+      if cbY.Checked then SubSQL:=SubSQL+'''Y'',';
+      if cbB.Checked then SubSQL:=SubSQL+'''B'',';
+      if cbM.Checked then SubSQL:=SubSQL+'''M'',';
+      if cbH.Checked then SubSQL:=SubSQL+'''H'',';
+      if cbR.Checked then SubSQL:=SubSQL+'''R'',';
+      if cbF.Checked then SubSQL:=SubSQL+'''F'',';
+      if cbT.Checked then SubSQL:=SubSQL+'''T'',';
+      if length(SubSQL)>0 then
+        SubSQL:=' and TSCD.Status in ('+Copy(SubSQL,1,length(SubSQL)-1)+')'
+      else SubSQL:=' and TSCD.Status='''' ';
+      SQL.Add(SubSQL);
+      {if RB1.Checked=true then
+        SQl.Add('and TSCD.LB=1 ');
+      if RB2.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''A%'' ');}
+      if RB3.Checked=true then
+      SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''B%'' ');
+      if RB4.Checked=true then
+      SQl.Add('and TSCD.LB=3 and TSCD.Label_Tag like ''B%'' ');
+      if LabelEdit.Text<>'' then
+        SQL.Add('and Label_Tag like '''+LabelEdit.Text+'%'' ');
+      if MemoEdit.Text<>'' then
+        SQL.Add('and TSCD.Memo like ''%'+MemoEdit.Text+'%'' ');
+      if VWPMEdit.Text<>'' then
+        SQL.Add('and LSBH like ''%'+VWPMEdit.Text+'%'' ');
+        //SQL.Add('and TSCD.VWPM like ''%'+VWPMEdit.Text+'%'' ');
+      //
+      SQL.Add('Group by SFL,ID,DepName,DepMemo,IsNull(MSBBH,SBBH),IsNull(MYWPM,YWPM) ,IsNull(MZWPM, ZWPM), LABEL_Tag )  TSCD where 1=1 ');
+      if SBBHEdit.Text<>'' then
+      SQL.Add('and TSCD.SBBH like ''%'+SBBHEdit.Text+'%'' ');
+      SQL.Add('Group by SFL,ID,DepName,DepMemo ) TSCD ');
+      SQL.Add('order by SFL,ID,DepName,DepMemo ');
+      //funcObj.WriteErrorLog(SQL.Text);
+      Active:=true;
+      //
+    end;
+   end;
+var eclApp,WorkBook,WorkSheet:olevariant;
+    index,FlowID:integer;
+    i,j,k:integer;
+    Label_Tag,FlowNum,Memo, DepName:String;
+    YWPMlist,ZWPMlist:TStringlist;
+    //
+    IsBreak:boolean;
+begin
+  if  TSCDDepQry.Active  then
+  begin
+    if(not DirectoryExists(AppDir+'Additional\'))  then ForceDirectories(AppDir+'Additional\');
+    CopyFile(Pchar('\\'+main.ServerIP+'\liy_erp\Additional\Asset_SN24_TV.xls'),Pchar(AppDir+'Additional\Asset_SN24_TV.xls'),false);
+    if FileExists(AppDir+'Additional\Asset_SN24_TV.xls') then
+    begin
+      try
+        eclApp:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+      try
+          eclApp.DisplayAlerts := False;
+          eclApp.WorkBooks.Open(AppDir+'Additional\Asset_SN24_TV.xls');
+          //幾各組別幾個分頁
+          Excel_DepID_List();
+          for i:=0 to Qtemp.RecordCount-1 do
+          begin
+            WorkSheet := eclApp.WorkSheets.Add(Null,eclApp.WorkSheets[eclApp.Worksheets.Count],1,-4167);
+            WorkSheet.Name := inttostr(i); //
+          end;
+          Qtemp.First;
+          index:=2;
+          for i:=0 to Qtemp.RecordCount-1 do
+          begin
+            eclApp.workbooks[1].sheets[1].select;
+            eclApp.Range[eclApp.Cells[1,1],eclApp.Cells[12,11]].Copy;
+            eclApp.workbooks[1].sheets[i+index].select;
+            eclApp.workbooks[1].sheets[i+index].Cells[1,1].Select;
+            eclApp.ActiveSheet.Paste;
+            eclapp.workbooks[1].sheets[i+index].name:=Qtemp.FieldByName('DepName').AsString;
+            eclApp.workbooks[1].sheets[i+index].Cells(2,4):='ĐƠN VỊ: '+Qtemp.FieldByName('DepName').AsString + #13#10 +'單位: '+ Qtemp.FieldByName('DepMemo').AsString;
+            eclApp.workbooks[1].sheets[i+index].Cells(2,9):=FormatDateTime(' "Ngày日 " dd " Tháng月 " MM " Năm年 " yyyy', Now);
+            eclApp.Columns[1].ColumnWidth := 5;
+            eclApp.Columns[2].ColumnWidth := 18;
+            eclApp.Columns[3].ColumnWidth := 17;
+            eclApp.Columns[4].ColumnWidth := 17;
+            eclApp.Columns[5].ColumnWidth := 15;
+            eclApp.Columns[6].ColumnWidth := 5;
+            eclApp.Columns[7].ColumnWidth := 5;
+            eclApp.Columns[8].ColumnWidth := 10;
+            eclApp.Columns[9].ColumnWidth := 11;
+            eclApp.Columns[10].ColumnWidth := 10;
+            eclApp.Columns[11].ColumnWidth := 26;
+            eclApp.Rows[1].RowHeight := 50;
+            eclApp.Rows[2].RowHeight := 30;
+            eclApp.Rows[3].RowHeight := 40;
+            eclApp.Rows[4].RowHeight := 15;
+            eclApp.Rows[6].RowHeight := 32;
+            eclApp.Rows[10].RowHeight := 28;
+            eclApp.Rows[12].RowHeight := 28;
+            Qtemp.Next;
+            //
+          end;
+          eclApp.workbooks[1].sheets[1].Delete;
+          eclApp.workbooks[1].sheets[1].select;
+          Qtemp.Active:=false;
+          //
+          index:=1;
+          FlowID:=1;
+          TSCDDepQry.First;
+          DepName:=TSCDDepQry.FieldByName('DepName').Asstring;
+          for i:=0 to TSCDDepQry.RecordCount-1 do
+          begin
+            if (TSCDDepQry.FieldByName('SBBH').Asstring <> 'Z207000003')
+                and (TSCDDepQry.FieldByName('SBBH').Asstring <> 'Z207000005') then
+            begin
+              if (DepName<>TSCDDepQry.FieldByName('DepName').Asstring) then
+              begin
+                //分頁畫框線 outline
+                for k:=1 to 4 do
+                begin
+                  eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,1],eclapp.workbooks[1].sheets[index].cells[5+FlowID-2,11]].borders[k].linestyle:=1;
+                end;
+                //對齊
+                eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,1],eclapp.workbooks[1].sheets[index].cells[5+FlowID,1]].HorizontalAlignment :=3;//中間
+                eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,2],eclapp.workbooks[1].sheets[index].cells[5+FlowID,2]].HorizontalAlignment :=3;
+                eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,3],eclapp.workbooks[1].sheets[index].cells[5+FlowID,3]].HorizontalAlignment :=2;//靠左
+                //eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,4],eclapp.workbooks[1].sheets[index].cells[5+FlowID,4]].HorizontalAlignment :=2;
+                eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,5],eclapp.workbooks[1].sheets[index].cells[5+FlowID,5]].HorizontalAlignment :=3;
+                //eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,7],eclapp.workbooks[1].sheets[index].cells[5+FlowID,7]].HorizontalAlignment :=3;
+                //eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,8],eclapp.workbooks[1].sheets[index].cells[5+FlowID,8]].HorizontalAlignment :=3;
+                eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,11],eclapp.workbooks[1].sheets[index].cells[5+FlowID,11]].HorizontalAlignment :=3;
+                //橫向列印
+                //eclapp.workbooks[1].sheets[index].Pagesetup.FitToPagesWide:= 0;
+                eclApp.Workbooks[1].Sheets[index].PageSetup.LeftMargin := 0.64 * 2.54; // Thiết lập margin trái là 50 điểm
+                eclApp.Workbooks[1].Sheets[index].PageSetup.RightMargin := 0.64 * 2.54; // Thiết lập margin phải là 50 điểm
+                eclApp.Workbooks[1].Sheets[index].PageSetup.TopMargin := 0.64 * 2.54; // Thiết lập margin trên là 50 điểm
+                eclapp.workbooks[1].sheets[index].Pagesetup.Orientation := 2;
+                eclapp.workbooks[1].sheets[index].Pagesetup.RightFooter := 'T-DCC-131A';
+                //
+                FlowID:=1;
+                index:=index+1;//分頁+1
+                DepName:=TSCDDepQry.FieldByName('DepName').Asstring;
+              end;
+              while not TSCDDetQry.Eof do
+              begin
+                //新增一列
+                eclapp.workbooks[1].sheets[index].Rows[4+FlowID+1].Insert;
+                eclApp.workbooks[1].sheets[index].Rows[4+FlowID].RowHeight := 40;
+                //編號
+                eclapp.workbooks[1].sheets[index].Cells(4+FlowID,1):=Format('%.d',[FlowID]);
+
+                //Lay them Quy cach cua Tong Vu
+                eclapp.workbooks[1].sheets[index].Cells(4+FlowID,5):=TSCDDetQry.FieldByName('XSBH').AsString;
+
+                //Lay theo B cua Tong Vu
+                if Copy(TSCDDetQry.FieldByName('Label_Tag').AsString,1,1)='B' then
+                   eclapp.workbooks[1].sheets[index].Cells(4+FlowID,2):=TSCDDetQry.FieldByName('Label_Tag').AsString;
+                {else
+                   eclapp.workbooks[1].sheets[index].Cells(4+FlowID,2):=TSCDDetQry.FieldByName('TSBH').AsString;}
+                //滑鼠鍵盤沒有編號
+                if ((TSCDDetQry.FieldByName('MZWPM').AsString='鍵盤') or (TSCDDetQry.FieldByName('MZWPM').AsString='滑鼠')) then
+                  eclapp.workbooks[1].sheets[index].Cells(4+FlowID,2):='';
+                eclapp.workbooks[1].sheets[index].Cells(4+FlowID,11):=TSCDDetQry.FieldByName('DepID_Memo').AsString;
+                eclApp.workbooks[1].sheets[index].Range[eclApp.workbooks[1].sheets[index].Cells[4+FlowID,3],eclApp.workbooks[1].sheets[index].Cells[4+FlowID,4]].merge;
+                //eclApp.workbooks[1].sheets[index].Range[eclApp.workbooks[1].sheets[index].Cells[4+FlowID,5],eclApp.workbooks[1].sheets[index].Cells[4+FlowID,6]].merge;
+                eclApp.workbooks[1].sheets[index].Range[eclApp.workbooks[1].sheets[index].Cells[4+FlowID,6],eclApp.workbooks[1].sheets[index].Cells[4+FlowID,7]].merge;
+                //電腦設備
+                if ((TSCDDetQry.FieldByName('MZWPM').AsString='電腦') ) then
+                begin
+                  eclapp.workbooks[1].sheets[index].Cells(4+FlowID,3):=TSCDDetQry.FieldByName('MZWPM').AsString+ #13#10 +TSCDDetQry.FieldByName('MYWPM').AsString;
+                  eclapp.workbooks[1].sheets[index].Cells(4+FlowID,6):=TSCDDetQry.FieldByName('ZDWBH').AsString+ #13#10 +TSCDDetQry.FieldByName('YDWBH').AsString;
+                  eclapp.workbooks[1].sheets[index].Cells(4+FlowID,8):=TSCDDetQry.FieldByName('Qty').AsString;
+                  //電腦資訊備註
+                  Memo:=TSCDDetQry.FieldByName('YWPM').AsString+' '+TSCDDetQry.FieldByName('ZWPM').AsString+#13#10;
+                  Label_Tag:=TSCDDetQry.FieldByName('Label_Tag').AsString;
+                  IsBreak:=false;
+                  repeat
+                    TSCDDetQry.Next;
+                    if Label_Tag=TSCDDetQry.FieldByName('Label_Tag').AsString then
+                    begin
+                      Memo:=Memo+TSCDDetQry.FieldByName('YWPM').AsString+' '+TSCDDetQry.FieldByName('ZWPM').AsString+#13#10;
+                    end else
+                    begin
+                      IsBreak:=true;
+                    end;
+                    if TSCDDetQry.Eof then IsBreak:=true;
+                  until IsBreak=true;
+
+                  //Xuat noi dung cot 11
+                  //eclapp.workbooks[1].sheets[index].Cells(4+FlowID,11):=trim(Memo);
+
+                  FlowID:=FlowID+1;
+                end else //非電腦設備
+                begin
+                  eclapp.workbooks[1].sheets[index].Cells(4+FlowID,3):=TSCDDetQry.FieldByName('ZWPM').AsString+ #13#10 +TSCDDetQry.FieldByName('YWPM').AsString;
+                  eclapp.workbooks[1].sheets[index].Cells(4+FlowID,6):=TSCDDetQry.FieldByName('ZDWBH').AsString+ #13#10 +TSCDDetQry.FieldByName('YDWBH').AsString;
+                  if ((TSCDDetQry.FieldByName('MZWPM').AsString='鍵盤') or (TSCDDetQry.FieldByName('MZWPM').AsString='滑鼠')) then
+                    eclapp.workbooks[1].sheets[index].Cells(4+FlowID,8):=TSCDDepQry.FieldByName('Qty').AsString
+                  else
+                    eclapp.workbooks[1].sheets[index].Cells(4+FlowID,8):=TSCDDetQry.FieldByName('Qty').AsString;
+                  FlowID:=FlowID+1;
+                  if ((TSCDDetQry.FieldByName('MZWPM').AsString='鍵盤') or (TSCDDetQry.FieldByName('MZWPM').AsString='滑鼠')) then
+                  begin
+                    break;
+                  end;
+                  TSCDDetQry.Next;
+                end;
+              end;
+            end;
+
+            TSCDDepQry.Next;
+          end;
+          //分頁畫框線 outline
+          for k:=1 to 4 do
+          begin
+            eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,1],eclapp.workbooks[1].sheets[index].cells[5+FlowID-2,11]].borders[k].linestyle:=1;
+          end;
+          //對齊
+          eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,1],eclapp.workbooks[1].sheets[index].cells[5+FlowID,1]].HorizontalAlignment :=3;//中間
+          eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,2],eclapp.workbooks[1].sheets[index].cells[5+FlowID,2]].HorizontalAlignment :=3;
+          eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,3],eclapp.workbooks[1].sheets[index].cells[5+FlowID,3]].HorizontalAlignment :=2;//靠左
+          //eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,4],eclapp.workbooks[1].sheets[index].cells[5+FlowID,4]].HorizontalAlignment :=2;
+          eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,5],eclapp.workbooks[1].sheets[index].cells[5+FlowID,5]].HorizontalAlignment :=3;
+          //eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,7],eclapp.workbooks[1].sheets[index].cells[5+FlowID,7]].HorizontalAlignment :=3;
+          //eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,8],eclapp.workbooks[1].sheets[index].cells[5+FlowID,8]].HorizontalAlignment :=3;
+          eclapp.workbooks[1].sheets[index].range[eclapp.workbooks[1].sheets[index].cells[5,11],eclapp.workbooks[1].sheets[index].cells[5+FlowID,11]].HorizontalAlignment :=3;
+          //橫向列印
+          //eclapp.Workbooks[1].Sheets[index].PageSetup.FitToPagesTall := 1;
+          eclApp.Workbooks[1].Sheets[index].PageSetup.LeftMargin := 0.64 * 2.54; // Thiết lập margin trái là 50 điểm
+          eclApp.Workbooks[1].Sheets[index].PageSetup.RightMargin := 0.64 * 2.54; // Thiết lập margin phải là 50 điểm
+          eclApp.Workbooks[1].Sheets[index].PageSetup.TopMargin := 0.64 * 2.54; // Thiết lập margin trên là 50 điểm
+          eclapp.workbooks[1].sheets[index].Pagesetup.Orientation := 2;
+          //eclapp.Workbooks[1].Sheets[index].PageSetup.FitToPagesTall := 1;
+          eclapp.workbooks[1].sheets[index].Pagesetup.RightFooter := 'T-DCC-131A';
+          //
+          showmessage('Succeed.');
+          eclApp.Visible:=True;
+          //
+        except
+          on  F:Exception   do
+          begin
+             eclApp.quit;
+             showmessage(F.Message);
+          end;
+        end;
+    end;
+  end;
+end;
+
+procedure TEquipmentList.DBGridEh1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if TSCDQry.FieldByName('Status').AsString='N' then
+  begin
+    DBGridEh1.canvas.font.color:=clBlue;
+  end;
+  if TSCDQry.FieldByName('Status').AsString='M' then
+  begin
+    DBGridEh1.canvas.font.color:=clGreen;
+  end;
+
+end;
+
+procedure TEquipmentList.Detail1Click(Sender: TObject);
+begin
+   Equipment_History:=TEquipment_History.Create(self);
+   Equipment_History.Show;
+end;
+
+procedure TEquipmentList.DBGridEh1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+  if TSCDQry.FieldByName('Status').AsString='B' then
+  begin
+    DBGridEh1.canvas.Brush.Color:=clBtnface;
+    DBGridEh1.DefaultDrawColumnCell(Rect,DataCol,Column,State);
+  end;
+end;
+//組別清單
+procedure TEquipmentList.ReFresh_ComboboDepNM();
+var DepNM,SubSQL,tmp:string;
+    i,index:integer;
+begin
+  //
+  index:=-1;
+  DepNM:=DepNMEdit.Text;
+  with Qtemp do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('Select  Distinct BDepartment.DepName ');
+    SQL.Add('from TSCD');
+    SQL.Add('left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH');
+    SQL.Add('left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS.SBBH=TSCD.SBBH  ');
+    SQL.Add('left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO ');
+    SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+    SQL.Add('left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS ');
+    SQL.Add('left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS ');
+    SQL.Add('left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH');
+    SQL.Add('left join TSCD_BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+    SQL.Add('where 1=1 ');
+    if TSIDEdit.Text<>'' then
+    SQL.Add('and TSCD.TSID like '''+TSIDEdit.Text+'%'' ');
+    if SBBHEdit.Text<>'' then
+    SQL.Add('and TSCD.SBBH like ''%'+SBBHEdit.Text+'%'' ');
+    if TSBHEdit.Text<>'' then
+    SQL.Add('and TSCD.TSBH like ''%'+TSBHEdit.Text+'%'' ');
+    if ZSYWJCEdit.Text<>'' then
+    SQL.Add('and TSCD.zsjc_yw like ''%'+ZSYWJCEdit.Text+'%'' ');
+    if DOCNOEdit.Text<>'' then
+    SQL.Add('and TSCD.DOCNO like ''%'+DOCNOEdit.Text+'%'' ');
+    if cbDpmeo.Text<>'' then
+      SQL.Add('and TSCD.DepID_Memo = '''+cbDpmeo.Text+''' ');
+    if InDateCB.Checked=true then
+    begin
+      SQL.add('and convert(smalldatetime,convert(varchar,TSCD.InDate,111)) between ');
+      SQL.add(''''+formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+      SQL.add(' and  ');
+      SQL.add(''''+formatdatetime('yyyy/MM/dd',DTP2.Date) +'''');
+    end;
+    //
+    SubSQL:='';
+    if cbN.Checked then SubSQL:=SubSQL+'''N'',';
+    if cbY.Checked then SubSQL:=SubSQL+'''Y'',';
+    if cbB.Checked then SubSQL:=SubSQL+'''B'',';
+    if cbM.Checked then SubSQL:=SubSQL+'''M'',';
+    if cbH.Checked then SubSQL:=SubSQL+'''H'',';
+    if cbR.Checked then SubSQL:=SubSQL+'''R'',';
+    if cbF.Checked then SubSQL:=SubSQL+'''F'',';
+    if cbT.Checked then SubSQL:=SubSQL+'''T'',';
+    if length(SubSQL)>0 then
+      SubSQL:=' and TSCD.Status in ('+Copy(SubSQL,1,length(SubSQL)-1)+')'
+    else SubSQL:=' and TSCD.Status='''' ';
+    SQL.Add(SubSQL);
+    if RB1.Checked=true then
+        SQl.Add('and TSCD.LB=1 ');
+    if RB2.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''A%'' ');
+    if RB3.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''B%'' ');
+    if LabelEdit.Text<>'' then
+      SQL.Add('and Label_Tag like '''+LabelEdit.Text+'%'' ');
+    if MemoEdit.Text<>'' then
+      SQL.Add('and TSCD.Memo like ''%'+MemoEdit.Text+'%'' ');
+    //
+    SQL.Add('Order by BDepartment.DepName ');
+    //funcObj.WriteErrorLog(SQL.Text);
+    Active:=true;
+    DepNMEdit.Items.Clear;
+    DepNMEdit.Items.Add('');
+    for i:=0 to Qtemp.RecordCount-1 do
+    begin
+      if DepNM=FieldByName('DepName').AsString then  index:=i;
+      DepNMEdit.Items.Add(FieldByName('DepName').AsString);
+      Next;
+    end;
+    Active:=false;
+  end;
+  if DepNMEdit.Items.Count>0 then
+  begin
+    DepNMEdit.ItemIndex:=index+1;
+  end;
+end;
+
+//庫存位置清單
+//20240725 mirror 庫存位置查詢欄位textBox改Combbox
+procedure TEquipmentList.ReFresh_ComboboDepMeo();
+var DepNM,SubSQL,tmp:string;
+    i,index:integer;
+begin
+  //
+  index:=-1;
+  DepNM:=cbDpmeo.Text;
+  with Qtemp do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('Select Distinct Depid_memo ');
+    SQL.Add('from TSCD');
+    SQL.Add('left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH');
+    SQL.Add('left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS.SBBH=TSCD.SBBH  ');
+    SQL.Add('left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO ');
+    SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID');
+    SQL.Add('left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS ');
+    SQL.Add('left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS ');
+    SQL.Add('left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH');
+    SQL.Add('left join TSCD_BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+    SQL.Add('where Depid_memo is not null ');
+    if TSIDEdit.Text<>'' then
+    SQL.Add('and TSCD.TSID like '''+TSIDEdit.Text+'%'' ');
+    if SBBHEdit.Text<>'' then
+    SQL.Add('and TSCD.SBBH like ''%'+SBBHEdit.Text+'%'' ');
+    if TSBHEdit.Text<>'' then
+    SQL.Add('and TSCD.TSBH like ''%'+TSBHEdit.Text+'%'' ');
+    if ZSYWJCEdit.Text<>'' then
+    SQL.Add('and TSCD.zsjc_yw like ''%'+ZSYWJCEdit.Text+'%'' ');
+    if DOCNOEdit.Text<>'' then
+    SQL.Add('and TSCD.DOCNO like ''%'+DOCNOEdit.Text+'%'' ');
+
+    if cbDpmeo.Text<>'' then
+      SQL.Add('and TSCD.DepID_Memo = '''+cbDpmeo.Text+''' ');
+    if InDateCB.Checked=true then
+    begin
+      SQL.add('and convert(smalldatetime,convert(varchar,TSCD.InDate,111)) between ');
+      SQL.add(''''+formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+      SQL.add(' and  ');
+      SQL.add(''''+formatdatetime('yyyy/MM/dd',DTP2.Date) +'''');
+    end;
+    SubSQL:='';
+    if cbN.Checked then SubSQL:=SubSQL+'''N'',';
+    if cbY.Checked then SubSQL:=SubSQL+'''Y'',';
+    if cbB.Checked then SubSQL:=SubSQL+'''B'',';
+    if cbM.Checked then SubSQL:=SubSQL+'''M'',';
+    if cbH.Checked then SubSQL:=SubSQL+'''H'',';
+    if cbR.Checked then SubSQL:=SubSQL+'''R'',';
+    if cbF.Checked then SubSQL:=SubSQL+'''F'',';
+    if cbT.Checked then SubSQL:=SubSQL+'''T'',';
+    if length(SubSQL)>0 then
+      SubSQL:=' and TSCD.Status in ('+Copy(SubSQL,1,length(SubSQL)-1)+')'
+    else SubSQL:=' and TSCD.Status='''' ';
+    SQL.Add(SubSQL);
+    if RB1.Checked=true then
+        SQl.Add('and TSCD.LB=1 ');
+    if RB2.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''A%'' ');
+    if RB3.Checked=true then
+        SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''B%'' ');
+    if LabelEdit.Text<>'' then
+      SQL.Add('and Label_Tag like '''+LabelEdit.Text+'%'' ');
+    if MemoEdit.Text<>'' then
+      SQL.Add('and TSCD.Memo like ''%'+MemoEdit.Text+'%'' ');
+    SQL.Add('Order by Depid_memo ');
+    Active:=true;
+    cbDpmeo.Items.Clear;
+    for i:=0 to Qtemp.RecordCount-1 do
+    begin
+      cbDpmeo.Items.Add(FieldByName('Depid_memo').AsString);
+      Next;
+    end;
+    Active:=false;
+  end;
+end;
+
+procedure TEquipmentList.FormCreate(Sender: TObject);
+begin
+  //
+  AppDir:=ExtractFilePath(Application.ExeName);
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select getdate() as NDate ');
+    active:=true;
+    NDate:=fieldbyname('NDate').Value;
+    DTP1.Date:= NDate-3;
+    DTP2.Date:= NDate;
+  end;
+  ReFresh_ComboboDepNM();
+  ReFresh_ComboboDepMeo();
+  CheckUserID();
+  if IsAdmin=true then Button3.Enabled:=true;
+  if IsAdmin=true then Button6.Enabled:=true;
+  if main.edit1.text ='316503' then IT_KK.Visible := true;
+
+  PC1.ActivePage:=TabSheet1;
+end;
+
+end.

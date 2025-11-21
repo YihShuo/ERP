@@ -1,0 +1,320 @@
+Select VCLID,VCLName_VN as Langeuage from BLanguage WHERE  MKID = '00' and mainForm='main'
+Select VCLID,VCLName_VN as Langeuage from BLanguage WHERE  MKID = '00' and mainForm='main'
+select ZLZLS2.ZLBH,ddzl.article,xxzl.xieming,'Assembly' as DType,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,isnull(JGZL.okQty,0) as okQty,
+case when (DDZLTW.DDZT<>'C' and isnull(SCZL.IsKCLLS,'')<>'N') then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+DDZL.Pairs,DDZLTW.DDZT,ZLZLS2.CSBH,ZSZL.ZSYWJC as BOM_Supplier,ZSZL_DEV.ZSDH_TW,ZSZL_DEV.ZSYWJC as VN_Supplier,DDZL.BUYNO,JGZL.JGdate,JGZL.CFMdate1,min(SCZLDate.ADate) as APlanDate,DDZL.Shipdate,bdepartment.depname
+from ZLZLS2
+left join (select JGZLSS.ZLBH,JGZLSS.CLBH,sum(JGZLSS.Qty) as okQty,JGZL.JGdate,JGZL.CFMdate1 from JGZLSS
+left join JGZL on JGZL.JGNO = JGZLSS.JGNO
+left join CLZL on CLZL.CLDH=JGZLSS.CLBH
+left join DDZl on DDZl.DDBH=JGZLSS.ZLBH
+left join ZLZL on ZLZL.ZLBH=JGZLSS.ZLBH
+where JGZLSS.CLBH like '%'
+and JGZLSS.ZLBH like '%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+      and convert(smalldatetime,convert(varchar,DDZL.ShipDate,111)) between '2023/11/06' and '2023/12/05'
+and DDZL.GSBH='VDK'
+group by  JGZLSS.ZLBH,JGZLSS.CLBH,JGZL.JGdate,JGZL.CFMdate1 ) JGZL on JGZL.CLBH=ZLZLS2.CLBH and JGZL.ZLBH=ZLZLS2.ZLBH
+left join CLZL on CLZL.CLDH=ZLZLs2.CLBH
+left join DDZl on DDZl.DDBH=ZLZLS2.ZLBH
+left join DDZlTW on DDZlTW.DDBH=ZLZLS2.ZLBH
+left join SCZL on SCZL.SCBH=ZLZLS2.ZLBH
+left join SCZLDate on SCZLDate.ZLBH=ZLZLS2.ZLBH
+left join bdepartment on bdepartment.id=SCZLDate.Assemble
+left join XXZL  on DDZL.XieXing=XXZL.XieXing and DDZL.SheHao=XXZL.SheHao
+left join ZLZL on ZLZL.ZLBH=ZLZLS2.ZLBH
+LEFT JOIN ZSZL ON ZLZLS2.CSBH=ZSZL.ZSDH
+Left JOIN ( SELECT ZSZL_DEV.ZSDH,ZSZL_DEV.ZSDH_TW,ZSZL.ZSYWJC as ZSYWJC
+		        FROM ZSZL LEFT JOIN ZSZL_DEV ON ZSZL.ZSDH=ZSZL_DEV.ZSDH_TW and ZSZL_DEV.GSBH='VDK') ZSZL_DEV
+on ZLZLS2.CSBH=ZSZL_DEV.ZSDH
+where ZLZLS2.CLBH like '%'
+and ZLZLS2.ZLBH like '%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+      and convert(smalldatetime,convert(varchar,DDZL.ShipDate,111)) between '2023/11/06' and '2023/12/05'
+and DDZL.GSBH='VDK'
+and ZLZLS2.ZMLB='Y'
+group by ZLZLS2.ZLBH,ddzl.article,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,JGZL.okQty,ZLZLS2.CSBH,ZSZL.ZSYWJC,ZSZL_DEV.ZSDH_TW
+,ZSZL_DEV.ZSYWJC,DDZL.BUYNO,xxzl.xieming,DDZL.Pairs,DDZLTW.DDZT,SCZL.IsKCLLS,DDZLTW.DDZT,JGZL.JGdate,JGZL.CFMdate1,DDZL.Shipdate,bdepartment.depname
+order by ZLZLS2.CLBH,ZLZLS2.ZLBH
+select ZLZLS2.ZLBH,ddzl.article,xxzl.xieming,'Assembly' as DType,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,isnull(JGZL.okQty,0) as okQty,
+case when (DDZLTW.DDZT<>'C' and isnull(SCZL.IsKCLLS,'')<>'N') then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+DDZL.Pairs,DDZLTW.DDZT,ZLZLS2.CSBH,ZSZL.ZSYWJC as BOM_Supplier,ZSZL_DEV.ZSDH_TW,ZSZL_DEV.ZSYWJC as VN_Supplier,DDZL.BUYNO,JGZL.JGdate,JGZL.CFMdate1,min(SCZLDate.ADate) as APlanDate,DDZL.Shipdate,bdepartment.depname
+from ZLZLS2
+left join (select JGZLSS.ZLBH,JGZLSS.CLBH,sum(JGZLSS.Qty) as okQty,JGZL.JGdate,JGZL.CFMdate1 from JGZLSS
+left join JGZL on JGZL.JGNO = JGZLSS.JGNO
+left join CLZL on CLZL.CLDH=JGZLSS.CLBH
+left join DDZl on DDZl.DDBH=JGZLSS.ZLBH
+left join ZLZL on ZLZL.ZLBH=JGZLSS.ZLBH
+where JGZLSS.CLBH like '%'
+and JGZLSS.ZLBH like '%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and DDZL.BUYNO like '%' 
+and DDZL.GSBH='VDK'
+group by  JGZLSS.ZLBH,JGZLSS.CLBH,JGZL.JGdate,JGZL.CFMdate1 ) JGZL on JGZL.CLBH=ZLZLS2.CLBH and JGZL.ZLBH=ZLZLS2.ZLBH
+left join CLZL on CLZL.CLDH=ZLZLs2.CLBH
+left join DDZl on DDZl.DDBH=ZLZLS2.ZLBH
+left join DDZlTW on DDZlTW.DDBH=ZLZLS2.ZLBH
+left join SCZL on SCZL.SCBH=ZLZLS2.ZLBH
+left join SCZLDate on SCZLDate.ZLBH=ZLZLS2.ZLBH
+left join bdepartment on bdepartment.id=SCZLDate.Assemble
+left join XXZL  on DDZL.XieXing=XXZL.XieXing and DDZL.SheHao=XXZL.SheHao
+left join ZLZL on ZLZL.ZLBH=ZLZLS2.ZLBH
+LEFT JOIN ZSZL ON ZLZLS2.CSBH=ZSZL.ZSDH
+Left JOIN ( SELECT ZSZL_DEV.ZSDH,ZSZL_DEV.ZSDH_TW,ZSZL.ZSYWJC as ZSYWJC
+		        FROM ZSZL LEFT JOIN ZSZL_DEV ON ZSZL.ZSDH=ZSZL_DEV.ZSDH_TW and ZSZL_DEV.GSBH='VDK') ZSZL_DEV
+on ZLZLS2.CSBH=ZSZL_DEV.ZSDH
+where ZLZLS2.CLBH like '%'
+and ZLZLS2.ZLBH like '%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and DDZL.BUYNO like '%' 
+and DDZL.GSBH='VDK'
+and ZLZLS2.ZMLB='Y'
+group by ZLZLS2.ZLBH,ddzl.article,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,JGZL.okQty,ZLZLS2.CSBH,ZSZL.ZSYWJC,ZSZL_DEV.ZSDH_TW
+,ZSZL_DEV.ZSYWJC,DDZL.BUYNO,xxzl.xieming,DDZL.Pairs,DDZLTW.DDZT,SCZL.IsKCLLS,DDZLTW.DDZT,JGZL.JGdate,JGZL.CFMdate1,DDZL.Shipdate,bdepartment.depname
+order by ZLZLS2.CLBH,ZLZLS2.ZLBH
+select EXTRA.*
+from (
+select ZLZLS2.ZLBH,ddzl.article,xxzl.xieming,(select top 1 Case when  A.MJBH<>'ZZZZZZZZZZ' then A.MJBH else ZLZLS2.MJBH end as MJBH from ZLZLS2 A where A.CLBH=ZLZLS2.MJBH and A.ZLBH=ZLZLS2.ZLBH  ) as Parent,'GiaCong' as DType,
+ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,isnull(JGZL.okQty,0) as okQty,
+case when (DDZLTW.DDZT<>'C' and isnull(SCZL.IsKCLLS,'')<>'N') then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+DDZL.Pairs,DDZLTW.DDZT,ZLZLS2.CSBH,ZSZL.ZSYWJC as BOM_Supplier,ZSZL_DEV.ZSDH_TW,ZSZL_DEV.ZSYWJC as VN_Supplier,DDZL.BUYNO
+,case when DType='Gia cong' then null else JGdate end as JGdate,case when DType='Gia cong' then null else CFMdate1 end as CFMdate1,min(SCZLDate.ADate) as APlanDate,DDZL.Shipdate,bdepartment.depname
+from ZLZLS2
+left join (select JGCK.SCBH,JGCK.CLBH,JGCK.MJBH,JGCK.DType,sum(JGCK.Qty) as okQty,JGCK.JGdate,JGCK.CFMdate1 from( 
+           select JGZLSS.ZLBH as SCBH,JGZLS.ZMLB as CLBH,JGZLS.CLBH as MJBH,'Gia cong' as DType,Sum(JGZLS.Qty*JGZLSS.Qty) as Qty,JGZL.JGdate,JGZL.CFMdate1 from JGZLS 
+           Left Join JGZLSS on JGZLS.JGNO=JGZLSS.JGNO and JGZLS.CLBH=JGZLSS.CLBH
+           Left join DDZL on DDZL.DDBH=JGZLSS.ZLBH
+           Left join JGZL on JGZL.JGNO=JGZLS.JGNO
+           where  JGZLSS.ZLBH like '%' and JGZLS.CLBH like '%'
+           and JGZL.GSBH='VDK' and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) <'2017/09/01'
+         and DDZL.BUYNO like '%' 
+           and DDZl.GSBH='VDK' and JGZLS.ZMLB<>'ZZZZZZZZZZ'
+           Group by JGZLSS.ZLBH,JGZLS.ZMLB,JGZLS.CLBH,JGZL.JGdate,JGZL.CFMdate1
+           Union all              
+           select KCLLS.SCBH, KCLLS.CLBH,KCLLS.DFL as MJBH,'Gia cong' as DType, sum(KCLLS.Qty) as okQty,'' as JGdate, '' as CFMdate1
+           from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO
+           left join DDZL on DDZL.DDBH=KCLLS.SCBH
+           left join CLZL on CLZL.CLDH=KCLLS.CLBH
+           where  KCLLS.DFL like '%'
+           and KCLLS.SCBH like '%'
+           and CLZL.YWPM like '%%'
+           and CLZL.YWPM like '%%'
+           and KCLL.GSBH='VDK' and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='2017/09/01'
+           and KCLL.SCBH='JJJJJJJJJJ'
+         and DDZL.BUYNO like '%' 
+           and DDZl.GSBH='VDK'
+           group by KCLLS.SCBH, KCLLS.CLBH,KCLLS.DFL
+            )JGCK group by JGCK.SCBH,JGCK.CLBH,JGCK.MJBH,JGCK.DType,JGCK.JGdate,JGCK.CFMdate1) JGZL on JGZL.MJBH=ZLZLS2.MJBH  and JGZL.CLBH=ZLZLS2.CLBH and JGZL.SCBH=ZLZLS2.ZLBH
+left join CLZL on CLZL.CLDH=ZLZLs2.CLBH
+left join DDZl on DDZl.DDBH=ZLZLS2.ZLBH
+left join DDZlTW on DDZlTW.DDBH=ZLZLS2.ZLBH
+left join SCZL on SCZL.SCBH=ZLZLS2.ZLBH
+left join SCZLDate on SCZLDate.ZLBH=ZLZLS2.ZLBH
+left join bdepartment on bdepartment.id=SCZLDate.Assemble
+left join XXZL  on DDZL.XieXing=XXZL.XieXing and DDZL.SheHao=XXZL.SheHao
+left join ZLZL on ZLZL.ZLBH=ZLZLS2.ZLBH
+LEFT JOIN ZSZL ON ZLZLS2.CSBH=ZSZL.ZSDH
+Left JOIN ( SELECT ZSZL_DEV.ZSDH,ZSZL_DEV.ZSDH_TW,ZSZL.ZSYWJC as ZSYWJC
+		        FROM ZSZL LEFT JOIN ZSZL_DEV ON ZSZL.ZSDH=ZSZL_DEV.ZSDH_TW and ZSZL_DEV.GSBH='VDK') ZSZL_DEV
+on ZLZLS2.CSBH=ZSZL_DEV.ZSDH
+where ZLZLS2.MJBH like '%'
+and ZLZLS2.ZLBH like '%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and ZLZLS2.MJBH <>'ZZZZZZZZZZ'
+and DDZL.BUYNO like '%' 
+and DDZL.GSBH='VDK'
+group by ZLZLS2.ZLBH,ddzl.article,ZLZLS2.CLBH,ZLZLS2.MJBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,JGZL.okQty,ZLZLS2.CSBH,ZSZL.ZSYWJC,ZSZL_DEV.ZSDH_TW,ZSZL_DEV.ZSYWJC
+,DDZL.BUYNO,xxzl.xieming,DDZL.Pairs,DDZLTW.DDZT,SCZL.IsKCLLS,DDZLTW.DDZT,JGdate,CFMdate1,DType,DDZL.Shipdate,bdepartment.depname
+) EXTRA
+where 1=1
+order by EXTRA.ZLBH,EXTRA.Parent,EXTRA.DType,EXTRA.CLBH
+select EXTRA.*
+from (
+select ZLZLS2.ZLBH,ddzl.article,xxzl.xieming,(select top 1 Case when  A.MJBH<>'ZZZZZZZZZZ' then A.MJBH else ZLZLS2.MJBH end as MJBH from ZLZLS2 A where A.CLBH=ZLZLS2.MJBH and A.ZLBH=ZLZLS2.ZLBH  ) as Parent,'GiaCong' as DType,
+ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,isnull(JGZL.okQty,0) as okQty,
+case when (DDZLTW.DDZT<>'C' and isnull(SCZL.IsKCLLS,'')<>'N') then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+DDZL.Pairs,DDZLTW.DDZT,ZLZLS2.CSBH,ZSZL.ZSYWJC as BOM_Supplier,ZSZL_DEV.ZSDH_TW,ZSZL_DEV.ZSYWJC as VN_Supplier,DDZL.BUYNO
+,case when DType='Gia cong' then null else JGdate end as JGdate,case when DType='Gia cong' then null else CFMdate1 end as CFMdate1,min(SCZLDate.ADate) as APlanDate,DDZL.Shipdate,bdepartment.depname
+from ZLZLS2
+left join (select JGCK.SCBH,JGCK.CLBH,JGCK.MJBH,JGCK.DType,sum(JGCK.Qty) as okQty,JGCK.JGdate,JGCK.CFMdate1 from( 
+           select JGZLSS.ZLBH as SCBH,JGZLS.ZMLB as CLBH,JGZLS.CLBH as MJBH,'Gia cong' as DType,Sum(JGZLS.Qty*JGZLSS.Qty) as Qty,JGZL.JGdate,JGZL.CFMdate1 from JGZLS 
+           Left Join JGZLSS on JGZLS.JGNO=JGZLSS.JGNO and JGZLS.CLBH=JGZLSS.CLBH
+           Left join DDZL on DDZL.DDBH=JGZLSS.ZLBH
+           Left join JGZL on JGZL.JGNO=JGZLS.JGNO
+           where  JGZLSS.ZLBH like '%' and JGZLS.CLBH like '%'
+           and JGZL.GSBH='VDK' and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) <'2017/09/01'
+         and DDZL.BUYNO like '%' 
+           and DDZl.GSBH='VDK' and JGZLS.ZMLB<>'ZZZZZZZZZZ'
+           Group by JGZLSS.ZLBH,JGZLS.ZMLB,JGZLS.CLBH,JGZL.JGdate,JGZL.CFMdate1
+           Union all              
+           select KCLLS.SCBH, KCLLS.CLBH,KCLLS.DFL as MJBH,'Gia cong' as DType, sum(KCLLS.Qty) as okQty,'' as JGdate, '' as CFMdate1
+           from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO
+           left join DDZL on DDZL.DDBH=KCLLS.SCBH
+           left join CLZL on CLZL.CLDH=KCLLS.CLBH
+           where  KCLLS.DFL like '%'
+           and KCLLS.SCBH like '%'
+           and CLZL.YWPM like '%%'
+           and CLZL.YWPM like '%%'
+           and KCLL.GSBH='VDK' and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='2017/09/01'
+           and KCLL.SCBH='JJJJJJJJJJ'
+         and DDZL.BUYNO like '%' 
+           and DDZl.GSBH='VDK'
+           group by KCLLS.SCBH, KCLLS.CLBH,KCLLS.DFL
+            )JGCK group by JGCK.SCBH,JGCK.CLBH,JGCK.MJBH,JGCK.DType,JGCK.JGdate,JGCK.CFMdate1) JGZL on JGZL.MJBH=ZLZLS2.MJBH  and JGZL.CLBH=ZLZLS2.CLBH and JGZL.SCBH=ZLZLS2.ZLBH
+left join CLZL on CLZL.CLDH=ZLZLs2.CLBH
+left join DDZl on DDZl.DDBH=ZLZLS2.ZLBH
+left join DDZlTW on DDZlTW.DDBH=ZLZLS2.ZLBH
+left join SCZL on SCZL.SCBH=ZLZLS2.ZLBH
+left join SCZLDate on SCZLDate.ZLBH=ZLZLS2.ZLBH
+left join bdepartment on bdepartment.id=SCZLDate.Assemble
+left join XXZL  on DDZL.XieXing=XXZL.XieXing and DDZL.SheHao=XXZL.SheHao
+left join ZLZL on ZLZL.ZLBH=ZLZLS2.ZLBH
+LEFT JOIN ZSZL ON ZLZLS2.CSBH=ZSZL.ZSDH
+Left JOIN ( SELECT ZSZL_DEV.ZSDH,ZSZL_DEV.ZSDH_TW,ZSZL.ZSYWJC as ZSYWJC
+		        FROM ZSZL LEFT JOIN ZSZL_DEV ON ZSZL.ZSDH=ZSZL_DEV.ZSDH_TW and ZSZL_DEV.GSBH='VDK') ZSZL_DEV
+on ZLZLS2.CSBH=ZSZL_DEV.ZSDH
+where ZLZLS2.MJBH like '%'
+and ZLZLS2.ZLBH like '%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and ZLZLS2.MJBH <>'ZZZZZZZZZZ'
+and DDZL.BUYNO like '%' 
+and DDZL.GSBH='VDK'
+group by ZLZLS2.ZLBH,ddzl.article,ZLZLS2.CLBH,ZLZLS2.MJBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,JGZL.okQty,ZLZLS2.CSBH,ZSZL.ZSYWJC,ZSZL_DEV.ZSDH_TW,ZSZL_DEV.ZSYWJC
+,DDZL.BUYNO,xxzl.xieming,DDZL.Pairs,DDZLTW.DDZT,SCZL.IsKCLLS,DDZLTW.DDZT,JGdate,CFMdate1,DType,DDZL.Shipdate,bdepartment.depname
+) EXTRA
+where 1=1
+order by EXTRA.ZLBH,EXTRA.Parent,EXTRA.DType,EXTRA.CLBH
+select ZLZLS2.ZLBH,ddzl.article,xxzl.xieming,'Assembly' as DType,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,isnull(JGZL.okQty,0) as okQty,
+case when (DDZLTW.DDZT<>'C' and isnull(SCZL.IsKCLLS,'')<>'N') then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+DDZL.Pairs,DDZLTW.DDZT,ZLZLS2.CSBH,ZSZL.ZSYWJC as BOM_Supplier,ZSZL_DEV.ZSDH_TW,ZSZL_DEV.ZSYWJC as VN_Supplier,DDZL.BUYNO,JGZL.JGdate,JGZL.CFMdate1,min(SCZLDate.ADate) as APlanDate,DDZL.Shipdate,bdepartment.depname
+from ZLZLS2
+left join (select JGZLSS.ZLBH,JGZLSS.CLBH,sum(JGZLSS.Qty) as okQty,JGZL.JGdate,JGZL.CFMdate1 from JGZLSS
+left join JGZL on JGZL.JGNO = JGZLSS.JGNO
+left join CLZL on CLZL.CLDH=JGZLSS.CLBH
+left join DDZl on DDZl.DDBH=JGZLSS.ZLBH
+left join ZLZL on ZLZL.ZLBH=JGZLSS.ZLBH
+where JGZLSS.CLBH like '%'
+and JGZLSS.ZLBH like '%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+      and convert(smalldatetime,convert(varchar,DDZL.ShipDate,111)) between '2008/12/01' and '2008/12/01'
+and DDZL.GSBH='VDK'
+group by  JGZLSS.ZLBH,JGZLSS.CLBH,JGZL.JGdate,JGZL.CFMdate1 ) JGZL on JGZL.CLBH=ZLZLS2.CLBH and JGZL.ZLBH=ZLZLS2.ZLBH
+left join CLZL on CLZL.CLDH=ZLZLs2.CLBH
+left join DDZl on DDZl.DDBH=ZLZLS2.ZLBH
+left join DDZlTW on DDZlTW.DDBH=ZLZLS2.ZLBH
+left join SCZL on SCZL.SCBH=ZLZLS2.ZLBH
+left join SCZLDate on SCZLDate.ZLBH=ZLZLS2.ZLBH
+left join bdepartment on bdepartment.id=SCZLDate.Assemble
+left join XXZL  on DDZL.XieXing=XXZL.XieXing and DDZL.SheHao=XXZL.SheHao
+left join ZLZL on ZLZL.ZLBH=ZLZLS2.ZLBH
+LEFT JOIN ZSZL ON ZLZLS2.CSBH=ZSZL.ZSDH
+Left JOIN ( SELECT ZSZL_DEV.ZSDH,ZSZL_DEV.ZSDH_TW,ZSZL.ZSYWJC as ZSYWJC
+		        FROM ZSZL LEFT JOIN ZSZL_DEV ON ZSZL.ZSDH=ZSZL_DEV.ZSDH_TW and ZSZL_DEV.GSBH='VDK') ZSZL_DEV
+on ZLZLS2.CSBH=ZSZL_DEV.ZSDH
+where ZLZLS2.CLBH like '%'
+and ZLZLS2.ZLBH like '%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+      and convert(smalldatetime,convert(varchar,DDZL.ShipDate,111)) between '2008/12/01' and '2008/12/01'
+and DDZL.GSBH='VDK'
+and ZLZLS2.ZMLB='Y'
+group by ZLZLS2.ZLBH,ddzl.article,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,JGZL.okQty,ZLZLS2.CSBH,ZSZL.ZSYWJC,ZSZL_DEV.ZSDH_TW
+,ZSZL_DEV.ZSYWJC,DDZL.BUYNO,xxzl.xieming,DDZL.Pairs,DDZLTW.DDZT,SCZL.IsKCLLS,DDZLTW.DDZT,JGZL.JGdate,JGZL.CFMdate1,DDZL.Shipdate,bdepartment.depname
+order by ZLZLS2.CLBH,ZLZLS2.ZLBH
+select ZLZLS2.ZLBH,ddzl.article,xxzl.xieming,'Assembly' as DType,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,isnull(JGZL.okQty,0) as okQty,
+case when (DDZLTW.DDZT<>'C' and isnull(SCZL.IsKCLLS,'')<>'N') then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+DDZL.Pairs,DDZLTW.DDZT,ZLZLS2.CSBH,ZSZL.ZSYWJC as BOM_Supplier,ZSZL_DEV.ZSDH_TW,ZSZL_DEV.ZSYWJC as VN_Supplier,DDZL.BUYNO,JGZL.JGdate,JGZL.CFMdate1,min(SCZLDate.ADate) as APlanDate,DDZL.Shipdate,bdepartment.depname
+from ZLZLS2
+left join (select JGZLSS.ZLBH,JGZLSS.CLBH,sum(JGZLSS.Qty) as okQty,JGZL.JGdate,JGZL.CFMdate1 from JGZLSS
+left join JGZL on JGZL.JGNO = JGZLSS.JGNO
+left join CLZL on CLZL.CLDH=JGZLSS.CLBH
+left join DDZl on DDZl.DDBH=JGZLSS.ZLBH
+left join ZLZL on ZLZL.ZLBH=JGZLSS.ZLBH
+where JGZLSS.CLBH like '%'
+and JGZLSS.ZLBH like '%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and DDZL.BUYNO like '%' 
+and DDZL.GSBH='VDK'
+group by  JGZLSS.ZLBH,JGZLSS.CLBH,JGZL.JGdate,JGZL.CFMdate1 ) JGZL on JGZL.CLBH=ZLZLS2.CLBH and JGZL.ZLBH=ZLZLS2.ZLBH
+left join CLZL on CLZL.CLDH=ZLZLs2.CLBH
+left join DDZl on DDZl.DDBH=ZLZLS2.ZLBH
+left join DDZlTW on DDZlTW.DDBH=ZLZLS2.ZLBH
+left join SCZL on SCZL.SCBH=ZLZLS2.ZLBH
+left join SCZLDate on SCZLDate.ZLBH=ZLZLS2.ZLBH
+left join bdepartment on bdepartment.id=SCZLDate.Assemble
+left join XXZL  on DDZL.XieXing=XXZL.XieXing and DDZL.SheHao=XXZL.SheHao
+left join ZLZL on ZLZL.ZLBH=ZLZLS2.ZLBH
+LEFT JOIN ZSZL ON ZLZLS2.CSBH=ZSZL.ZSDH
+Left JOIN ( SELECT ZSZL_DEV.ZSDH,ZSZL_DEV.ZSDH_TW,ZSZL.ZSYWJC as ZSYWJC
+		        FROM ZSZL LEFT JOIN ZSZL_DEV ON ZSZL.ZSDH=ZSZL_DEV.ZSDH_TW and ZSZL_DEV.GSBH='VDK') ZSZL_DEV
+on ZLZLS2.CSBH=ZSZL_DEV.ZSDH
+where ZLZLS2.CLBH like '%'
+and ZLZLS2.ZLBH like '%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and DDZL.BUYNO like '%' 
+and DDZL.GSBH='VDK'
+and ZLZLS2.ZMLB='Y'
+group by ZLZLS2.ZLBH,ddzl.article,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,JGZL.okQty,ZLZLS2.CSBH,ZSZL.ZSYWJC,ZSZL_DEV.ZSDH_TW
+,ZSZL_DEV.ZSYWJC,DDZL.BUYNO,xxzl.xieming,DDZL.Pairs,DDZLTW.DDZT,SCZL.IsKCLLS,DDZLTW.DDZT,JGZL.JGdate,JGZL.CFMdate1,DDZL.Shipdate,bdepartment.depname
+order by ZLZLS2.CLBH,ZLZLS2.ZLBH
+select ZLZLS2.ZLBH,ddzl.article,xxzl.xieming,'Assembly' as DType,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,isnull(JGZL.okQty,0) as okQty,
+case when (DDZLTW.DDZT<>'C' and isnull(SCZL.IsKCLLS,'')<>'N') then isnull(sum(ZLZLS2.CLSL),0) else 0 end as CLSL,
+DDZL.Pairs,DDZLTW.DDZT,ZLZLS2.CSBH,ZSZL.ZSYWJC as BOM_Supplier,ZSZL_DEV.ZSDH_TW,ZSZL_DEV.ZSYWJC as VN_Supplier,DDZL.BUYNO,JGZL.JGdate,JGZL.CFMdate1,min(SCZLDate.ADate) as APlanDate,DDZL.Shipdate,bdepartment.depname
+from ZLZLS2
+left join (select JGZLSS.ZLBH,JGZLSS.CLBH,sum(JGZLSS.Qty) as okQty,JGZL.JGdate,JGZL.CFMdate1 from JGZLSS
+left join JGZL on JGZL.JGNO = JGZLSS.JGNO
+left join CLZL on CLZL.CLDH=JGZLSS.CLBH
+left join DDZl on DDZl.DDBH=JGZLSS.ZLBH
+left join ZLZL on ZLZL.ZLBH=JGZLSS.ZLBH
+where JGZLSS.CLBH like '%'
+and JGZLSS.ZLBH like '%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and DDZL.BUYNO like '%' 
+and DDZL.GSBH='VDK'
+group by  JGZLSS.ZLBH,JGZLSS.CLBH,JGZL.JGdate,JGZL.CFMdate1 ) JGZL on JGZL.CLBH=ZLZLS2.CLBH and JGZL.ZLBH=ZLZLS2.ZLBH
+left join CLZL on CLZL.CLDH=ZLZLs2.CLBH
+left join DDZl on DDZl.DDBH=ZLZLS2.ZLBH
+left join DDZlTW on DDZlTW.DDBH=ZLZLS2.ZLBH
+left join SCZL on SCZL.SCBH=ZLZLS2.ZLBH
+left join SCZLDate on SCZLDate.ZLBH=ZLZLS2.ZLBH
+left join bdepartment on bdepartment.id=SCZLDate.Assemble
+left join XXZL  on DDZL.XieXing=XXZL.XieXing and DDZL.SheHao=XXZL.SheHao
+left join ZLZL on ZLZL.ZLBH=ZLZLS2.ZLBH
+LEFT JOIN ZSZL ON ZLZLS2.CSBH=ZSZL.ZSDH
+Left JOIN ( SELECT ZSZL_DEV.ZSDH,ZSZL_DEV.ZSDH_TW,ZSZL.ZSYWJC as ZSYWJC
+		        FROM ZSZL LEFT JOIN ZSZL_DEV ON ZSZL.ZSDH=ZSZL_DEV.ZSDH_TW and ZSZL_DEV.GSBH='VDK') ZSZL_DEV
+on ZLZLS2.CSBH=ZSZL_DEV.ZSDH
+where ZLZLS2.CLBH like '%'
+and ZLZLS2.ZLBH like '%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and DDZL.BUYNO like '%' 
+and DDZL.GSBH='VDK'
+and ZLZLS2.ZMLB='Y'
+group by ZLZLS2.ZLBH,ddzl.article,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,JGZL.okQty,ZLZLS2.CSBH,ZSZL.ZSYWJC,ZSZL_DEV.ZSDH_TW
+,ZSZL_DEV.ZSYWJC,DDZL.BUYNO,xxzl.xieming,DDZL.Pairs,DDZLTW.DDZT,SCZL.IsKCLLS,DDZLTW.DDZT,JGZL.JGdate,JGZL.CFMdate1,DDZL.Shipdate,bdepartment.depname
+order by ZLZLS2.CLBH,ZLZLS2.ZLBH

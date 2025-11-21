@@ -1,0 +1,187 @@
+unit MaterialNoDel1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, DB, DBTables, Menus,comobj, StdCtrls, ExtCtrls;
+
+type
+  TMaterialNoDel = class(TForm)
+    Query1: TQuery;
+    UpSQL1: TUpdateSQL;
+    DS1: TDataSource;
+    Query1ZLBH: TStringField;
+    Query1CLBH: TStringField;
+    Query1DFL: TStringField;
+    Query1YN: TStringField;
+    Query1Qty: TCurrencyField;
+    Query1YWPM: TStringField;
+    Query1DWBH: TStringField;
+    Query1Me: TStringField;
+    PopupMenu1: TPopupMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    Query1XH: TStringField;
+    Panel1: TPanel;
+    DBGrid1: TDBGrid;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    Label1: TLabel;
+    Label2: TLabel;
+    CB1: TCheckBox;
+    Query1SB: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure N1Click(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure Query1AfterOpen(DataSet: TDataSet);
+    procedure Button1Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MaterialNoDel: TMaterialNoDel;
+
+implementation
+
+uses main1;
+
+{$R *.dfm}
+
+procedure TMaterialNoDel.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+procedure TMaterialNoDel.N1Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+
+if query1.Active then
+  begin
+    if query1.recordcount=0 then
+      begin
+        showmessage('No record.');
+        abort;
+      end;
+  end
+  else
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+
+try
+  eclApp:=CreateOleObject('Excel.Application');
+  WorkBook:=CreateOleObject('Excel.Sheet');
+except
+  Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+  Exit;
+end;
+
+try
+  WorkBook:=eclApp.workbooks.Add;
+  eclApp.Cells(1,1):='NO';
+  for   i:=1   to   query1.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=query1.fields[i-1].FieldName;
+    end;
+  query1.First;
+  j:=2;
+  while   not  query1.Eof   do
+    begin
+      eclApp.Cells(j,1):=j-1;
+      for   i:=1   to   query1.fieldcount   do
+        begin
+          eclApp.Cells(j,i+1):=query1.Fields[i-1].Value;
+          eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+        end;
+      query1.Next;
+      inc(j);
+    end;
+  eclapp.columns.autofit;
+  showmessage('Succeed.');
+  eclApp.Visible:=True;
+except
+  on   F:Exception   do
+    showmessage(F.Message);
+end;
+
+
+end;
+
+procedure TMaterialNoDel.N2Click(Sender: TObject);
+begin
+with query1 do
+  begin
+    if recordcount>0 then
+      begin
+        requestlive:=true;
+        cachedupdates:=true;
+        edit;
+        fieldbyname('YN').Value:='4';
+        upSQL1.Apply(ukmodify);
+        active:=false;
+        requestlive:=false;
+        cachedupdates:=false;
+        active:=true;
+      end;
+  end;
+end;
+
+procedure TMaterialNoDel.Query1AfterOpen(DataSet: TDataSet);
+begin
+if query1.recordcount>0 then
+  begin
+    N1.Enabled:=true;
+    N2.Enabled:=true;
+  end
+  else
+    begin
+      N1.Enabled:=false;
+      N2.Enabled:=false;
+    end;
+end;
+
+procedure TMaterialNoDel.Button1Click(Sender: TObject);
+begin
+with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('select KCSMCL.*,CLZL.YWPM,CLZL.DWBH,DDZL.YN as Me,YWCP.SB');
+    sql.add('from KCSMCL');
+    sql.Add('left join CLZL on CLZL.CLDH=KCSMCL.CLBH');
+    sql.add('left join DDZL on DDZL.ZLBH=KCSMCL.ZLBH');  
+    sql.add('left join (select distinct YWDD.YSBH as DDBH,'+''''+'NoOk'+''''+' as SB from YWCP');
+    sql.add('           left join YWDD on YWDD.DDBH=YWCP.DDBH ');
+    sql.add('           where InDate is null ) YWCP on YWCP.DDBH=DDZL.DDBH ');
+    sql.add('where KCSMCL.ZLBH like '+''''+edit1.Text+'%'+'''');
+    sql.add('      and KCSMCL.CLBH like '+''''+edit2.Text+'%'+'''');
+    sql.add('      and KCSMCL.YN='+''''+'1'+'''');
+    sql.add('      and DDZL.GSBH='+''''+main.edit2.text+'''');
+    if CB1.Checked then
+      begin
+        sql.add('      and isnull(YWCP.SB,'+''''+'ok'+''''+')<>'+''''+'NoOK'+'''');
+      end;
+    sql.add('order by KCSMCL.CLBH,KCSMCL.ZLBH,KCSMCL.XH');
+    active:=true;
+  end;
+end;
+
+procedure TMaterialNoDel.FormDestroy(Sender: TObject);
+begin
+MaterialNoDel:=nil;
+end;
+
+end.

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView_rkno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RKNO" />
+
+    </LinearLayout>
+    <EditText
+        android:id="@+id/edData_rkno"
+        android:editable="false" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="28129999"
+        android:singleLine="true"
+        android:ems="10" >
+        <requestFocus />
+    </EditText>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView_matNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MatNo." />
+
+    </LinearLayout>
+    <EditText
+        android:id="@+id/edData_matNo"
+        android:editable="false" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="M010002798"
+        android:singleLine="true"
+        android:ems="10" >
+        <requestFocus />
+    </EditText>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView_qty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Qty" />
+
+    </LinearLayout>
+    <EditText
+        android:id="@+id/edData_qty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="88640.96"
+        android:singleLine="true"
+        android:ems="10" >
+        <requestFocus />
+    </EditText>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView_package"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Package" />
+
+    </LinearLayout>
+    <EditText
+        android:id="@+id/edData_package"
+        android:editable="false" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:singleLine="true"
+        android:ems="10" >
+        <requestFocus />
+    </EditText>            
+</LinearLayout>

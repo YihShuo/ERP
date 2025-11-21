@@ -1,0 +1,340 @@
+unit ESG_CLBH1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DBCtrls, Mask, DB, DBTables, Buttons, Grids, DBGrids,
+  ExtCtrls,comobj, Menus, GridsEh, DBGridEh,ehlibBDE, ComCtrls;
+
+type
+  TESG = class(TForm)
+    Panel1: TPanel;
+    BB2: TBitBtn;
+    BB3: TBitBtn;
+    BB4: TBitBtn;
+    BB5: TBitBtn;
+    BB6: TBitBtn;
+    BB7: TBitBtn;
+    bbt6: TBitBtn;
+    Panel3: TPanel;
+    Label1: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Edit1: TEdit;
+    Button1: TButton;
+    DTP1: TDateTimePicker;
+    DTP2: TDateTimePicker;
+    chkUserDate: TCheckBox;
+    Query1: TQuery;
+    UpSQL1: TUpdateSQL;
+    DS1: TDataSource;
+    DBGrid1: TDBGridEh;
+    Query1CGNO: TStringField;
+    Query1Address: TStringField;
+    Query1Location: TIntegerField;
+    Query1Location_station: TIntegerField;
+    Query1Length_KM: TFloatField;
+    Query1Type: TIntegerField;
+    Query1USERID: TStringField;
+    Query1USERDATE: TDateTimeField;
+    Query1YN: TIntegerField;
+    ImportExcel: TButton;
+    opendialog: TOpenDialog;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure BB2Click(Sender: TObject);
+    procedure BB4Click(Sender: TObject);
+    procedure BB3Click(Sender: TObject);
+    procedure BB6Click(Sender: TObject);
+    procedure BB5Click(Sender: TObject);
+    procedure DBGrid1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure bbt6Click(Sender: TObject);
+    procedure BB7Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure ImportExcelClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ESG: TESG;
+  NDate:TDate;
+implementation
+
+uses main1;
+
+{$R *.dfm}
+
+procedure TESG.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   action:=Cafree;
+end;
+
+procedure TESG.FormDestroy(Sender: TObject);
+begin
+  ESG:=nil;
+end;
+
+procedure TESG.Button1Click(Sender: TObject);
+begin
+  with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('select  * from CGZL_ESG');
+    sql.add('where CGNO like ');
+    sql.add(''''+edit1.Text+'%'+'''');
+    sql.add('and yn<>0');
+    if chkUserdate.Checked then
+    begin
+      sql.add('and convert(smalldatetime,convert(varchar,USERDATE,111))  between ');
+      sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.Date) +''' and  '''+formatdatetime('yyyy/MM/dd',DTP2.Date) +'''');
+    end;  
+    sql.add('order by CGNO,Location');
+    active:=true;
+  end;
+  bb2.enabled:=true;
+  bb3.enabled:=true;
+  bb4.enabled:=true;
+  bbt6.enabled:=true;
+end;
+
+procedure TESG.BB2Click(Sender: TObject);
+begin
+  with query1 do
+  begin
+    cachedupdates:=true;
+    requestlive:=true;
+    Insert;
+  end;
+  bb5.enabled:=true;
+  bb6.enabled:=true;
+end;
+
+procedure TESG.BB4Click(Sender: TObject);
+begin
+  with query1 do
+  begin
+    cachedupdates:=true;
+    requestlive:=true;
+    query1.edit;
+  end;
+  bb5.enabled:=true;
+  bb6.enabled:=true;
+end;
+
+procedure TESG.BB3Click(Sender: TObject);
+begin
+  with query1 do
+  begin
+    cachedupdates:=true;
+    requestlive:=true;
+    query1.edit;
+    fieldbyname('YN').Value:='0';
+  end;
+  bb5.enabled:=true;
+  bb6.enabled:=true;
+
+end;
+
+procedure TESG.BB6Click(Sender: TObject);
+begin
+     with query1 do
+  begin
+    active:=false;
+    cachedupdates:=false;
+    requestlive:=false;
+    active:=true;
+  end;
+  bb5.enabled:=false;
+  bb6.enabled:=false;
+end;
+
+procedure TESG.BB5Click(Sender: TObject);
+begin
+  try
+    query1.First;
+    while not query1.Eof do
+    begin
+      if Trim(query1.FieldByName('CGNO').AsString) = '' then
+      begin
+        MessageDlg('CGNO khong duoc de trong!', mtError, [mbOK], 0);
+        Exit;
+          bb5.enabled:=false;
+          bb6.enabled:=false;
+      end;
+
+      case query1.UpdateStatus of
+        usInserted:
+          begin
+            query1.Edit;
+            query1.FieldByName('userID').Value := main.edit1.Text;
+            query1.FieldByName('userdate').Value := Date;
+            upsql1.Apply(ukInsert);
+          end;
+        usModified:
+          begin
+            if query1.FieldByName('YN').Value = '0' then
+            begin
+              query1.Edit;
+              query1.FieldByName('userID').Value := main.edit1.Text;
+              upsql1.Apply(ukDelete);
+            end
+            else
+            begin
+              query1.Edit;
+              query1.FieldByName('userID').Value := main.edit1.Text;
+              upsql1.Apply(ukModify);
+            end;
+          end;
+      end;
+      query1.Next;
+    end;
+  except
+    on E: Exception do
+      MessageDlg('Loi!' + #13#10 + E.Message, mtWarning, [mbOK], 0);
+  end;
+  bb5.Enabled := False;
+  bb6.Enabled := False;
+  ImportExcel.Visible:=true;
+end;
+
+procedure TESG.DBGrid1GetCellParams(Sender: TObject; Column: TColumnEh;
+  AFont: TFont; var Background: TColor; State: TGridDrawState);
+begin
+if query1.FieldByName('YN').value='0' then
+  dbgrid1.canvas.font.color:=clred;
+end;
+
+procedure TESG.bbt6Click(Sender: TObject);
+var  eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+  begin
+  if  query1.active  then
+    begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('沒有安裝Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+        WorkBook:=eclApp.workbooks.Add;
+        for   i:=0   to   7   do
+          begin
+              eclApp.Cells(1,i+1):=query1.fields[i].FieldName;
+          end;
+
+        query1.First;
+        j:=2;
+        while   not   query1.Eof   do
+          begin
+            for   i:=0   to   7   do
+            begin
+              eclApp.Cells(j,i+1):=query1.Fields[i].Value;
+            end;
+          query1.Next;
+          inc(j);
+          end;
+      eclapp.columns.autofit;
+      showmessage('Succeed');
+      eclApp.Visible:=True;
+      except
+        on   F:Exception   do
+          showmessage(F.Message);
+      end;
+    end;
+
+end;
+procedure TESG.BB7Click(Sender: TObject);
+begin
+close;
+end;
+
+procedure TESG.FormCreate(Sender: TObject);
+var
+  NDate: TDateTime;
+begin
+  NDate := Date; // ho?c d蠼g Now n?u c?n c? gi?
+
+  DTP1.Date := NDate - 3;
+  DTP2.Date := NDate;
+end;
+
+procedure TESG.ImportExcelClick(Sender: TObject);
+const
+  EXCEL_COLS: array[0..5] of Integer = (1, 2, 3, 4, 5, 6); // A, C, E, F, H, I
+var
+  MsExcel, MsExcelWorkBook, MsExcelWorkSheet: OleVariant;
+  j: Integer;
+  FileName: string;
+  CellValue: Variant;
+begin
+  if not OpenDialog.Execute then Exit;
+  FileName := OpenDialog.FileName;
+
+  try
+    MsExcel := CreateOleObject('Excel.Application');
+    MsExcel.Visible := False;
+    MsExcelWorkBook := MsExcel.Workbooks.Open(FileName);
+    MsExcelWorkSheet := MsExcel.Workbooks[1].ActiveSheet;
+
+    with Query1 do
+  begin
+     active:=false;
+     SQL.Clear;
+     sql.add('select top 1 * from CGZL_ESG where 1=2');
+     active:=true;
+      CachedUpdates := True;
+      RequestLive := True;
+
+      j := 2; // Bat dau tu dong thu 2
+      while True do
+      begin
+        CellValue := MsExcelWorkSheet.Cells[j, 1].Value;
+        if VarIsNull(CellValue) or (Trim(CellValue) = '') then
+          Break;
+
+        Insert;
+        // lay du lieu 6 cot da mac dinh san trong excel
+        FieldByName('CGNO').Value := MsExcelWorkSheet.Cells[j, 1].Value;  // A
+        FieldByName('Address').Value := MsExcelWorkSheet.Cells[j, 2].Value;  // F
+        FieldByName('Location').Value := MsExcelWorkSheet.Cells[j, 3].Value;  // I
+        FieldByName('Location_station').Value := MsExcelWorkSheet.Cells[j, 4].Value;  // A
+        FieldByName('Length_km').Value := MsExcelWorkSheet.Cells[j, 5].Value;  // F
+        FieldByName('Type').Value := MsExcelWorkSheet.Cells[j, 6].Value;  // I
+        Post;
+        Inc(j);
+      end;
+    end;
+
+    MsExcelWorkBook.Close(False);
+    MsExcel.Quit;
+    VarClear(MsExcel);
+
+    ShowMessage('Import thanh cong ' + IntToStr(j - 2) + ' dong.');
+    bb5.Enabled:=true;
+    ImportExcel.Visible:=false;
+  except
+    on E: Exception do
+    begin
+      Application.MessageBox(PChar('Loi: ' + E.Message), '', MB_OK + MB_ICONWARNING);
+      if not VarIsEmpty(MsExcel) then
+      begin
+        MsExcelWorkBook.Close(False);
+        MsExcel.Quit;
+        VarClear(MsExcel);
+      end;
+    end;
+  end;
+end;
+
+
+end.

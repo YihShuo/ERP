@@ -1,0 +1,374 @@
+select  HG_NO,TC_NO,HD_NO,sum (CLSL) as CLSL ,sum (QTY) as QTY,sum (NK) as NK,sum (TC) as TC,sum (HD) as HD,sum (KD) as KD,sum (XT) as XT,sum (GC) as GC,sum (ZZ) as ZZ
+        ,Max(HG_HGPM) as HG_HGPM,Max(HG_Unit) as HG_Unit,Max(TC_HGPM) as TC_HGPM,Max(TC_Unit) as TC_Unit,Max(HD_HGPM) as HD_HGPM,Max(HD_Unit) as HD_Unit ,Max(TKNO) as TKNO,Max(HDNO) as HDNO
+from (
+Select HG_NO,TC_NO,HD_NO,Max(DWBH) as DWBH
+       ,Max(HG_HGPM) as HG_HGPM,Max(HG_Unit) as HG_Unit,Max(TC_HGPM) as TC_HGPM,Max(TC_Unit) as TC_Unit,Max(HD_HGPM) as HD_HGPM,Max(HD_Unit) as HD_Unit,Max(TKNO) as TKNO,Max(HDNO) as HDNO 
+       ,Round(Round(Convert(float,Sum(CLSL))/Max(Pairs),6)*IsNull((Rate_HG),1),6) as CLSL 
+       ,Round(Round(Convert(float,Sum(Qty))/Max(Pairs),6)*IsNull((Rate_HG),1),6) as Qty 
+       ,Round(Round(Convert(float,Sum(NK))/Max(Pairs),6)*IsNull((Rate_HG),1),6) as NK 
+       ,Round(Round(Convert(float,Sum(TC))/Max(Pairs),6)*IsNull((Rate_TC),1),6) as TC 
+       ,Round(Round(Convert(float,Sum(HD))/Max(Pairs),6)*IsNull((Rate_HD),1),6) as HD 
+       ,Round(Round(Convert(float,Sum(KD))/Max(Pairs),6)*IsNull((Rate_HG),1),6) as KD 
+       ,Round(Round(Convert(float,Sum(XT))/Max(Pairs),6)*IsNull((Rate_HG),1),6) as XT 
+       ,Round(Round(Convert(float,Sum(GC))/Max(Pairs),6)*IsNull((Rate_HG),1),6) as GC 
+       ,Round(Round(Convert(float,Sum(ZZ))/Max(Pairs),6)*IsNull((Rate_HG),1),6) as ZZ 
+       from (
+Select ZLZLS2.ZLBH,ZLZLS2.MJBH,ZLZLS2.Parent,ZLZLS2.DType,ZLZLS2.CLBH,ZLZLS2.CLSL,ZLZLS2.YWPM,ZLZLS2.dwbh,ZLZLS2.ARTICLE,ZLZLS2.XieMing,ZLZLS2.Pairs,ZLZLS2.CalDate,ZLZLS2.GSBH,ZLZLS2.TempQty,ZLZLS2.RKQty
+       ,ZLZLS2.NK,ZLZLS2.TC,ZLZLS2.HD,ZLZLS2.KD,ZLZLS2.XT,ZLZLS2.GC,ZLZLS2.ZZ,ZLZLS2.Qty,ZLZLS2.TKNO,ZLZLS2.HDNO
+       ,CLHG.RateC as Rate_HG,case when (ZLZLS2.NK>0)  then IsNull(CNO_NK,CLHG.HGBH)  else null end as HG_NO,CLHG.HGPM as HG_HGPM,CLHG.UnitC as HG_Unit 
+       ,CLTC.RateC as Rate_TC,case when (ZLZLS2.TC>0)  then IsNull(CNO_TC,CLTC.HGBH)  else null end as TC_NO,CLTC.HGPM as TC_HGPM,CLTC.UnitC as TC_Unit 
+       ,CLHD.RateC as Rate_HD,case when (ZLZLS2.HD>0)  then IsNull(CNO_HD,CLHD.HGBH)  else null end as HD_NO,CLHD.HGPM as HD_HGPM,CLHD.UnitC as HD_Unit 
+       ,KCRKTH.Qty as THQty from (
+select OrdCL.*,Round(KCLLS.TempQty,2) as TempQty ,case when KCLLS.CNO_NK='' then null else CNO_NK end CNO_NK,case when KCLLS.CNO_TC='' then null else CNO_TC end CNO_TC,case when KCLLS.CNO_HD='' then null else CNO_HD end CNO_HD,
+       KCLLS.RKQty,IsNull(KCLLS.NK,0) as NK,IsNull(KCLLS.TC,0) as TC,IsNull(KCLLS.HD,0) as HD,IsNull(KCLLS.KD,0) as KD,IsNull(KCLLS.XT,0) as XT,IsNull(KCLLS.GC,0) as GC,
+       IsNull(Round(KCLLS.Qty-IsNull(KCLLS.NK,0)-IsNull(KCLLS.TC,0)-IsNull(KCLLS.HD,0)-IsNull(KCLLS.KD,0)-IsNull(KCLLS.XT,0)-IsNull(KCLLS.GC,0),2),0)  as ZZ,KCLLS.Qty ,KCLLS.TKNO,KCLLS.HDNO
+from (select ZLZLS2.ZLBH,ZLZLS2.CLBH as MJBH,ZLZLS2.CLBH as Parent,'Assembly' as DType,ZLZLS2.CLBH,
+             sum(ZLZLS2.CLSL) as CLSL,CLZL.YWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,Max(ZLZLS2.USERDATE) as CalDate,DDZL.GSBH 
+      from DDZL_ZLZLS2 as ZLZLS2
+      left join CLZL on ZLZLS2.CLBH=CLZL.CLDH
+      left join ZLZL on ZLZL.ZLBH=ZLZLS2.ZLBH
+      left join  DDZL on DDZL.DDBH=ZLZL.DDBH
+      left join XXZl on XXZL.XieXing=DDZl.XieXing and XXZl.Shehao=DDZL.SheHao
+      where 1=1
+      and ZLZLS2.ZLBH = 'Y2211-0649' 
+      and ZLZLS2.CLBH like '%' 
+      and ZLZLS2.MJBH='ZZZZZZZZZZ' and ZLZLS2.CLSL>0
+      and DDZl.GSBH='VA12' 
+      group by ZLZLS2.ZLBH,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,DDZL.GSBH 
+union all 
+   select ZLZLS2.ZLBH,ZLZLS2.MJBH,(select top 1 Case when  A.MJBH<>'ZZZZZZZZZZ' then A.MJBH else ZLZLS2.MJBH end as MJBH from DDZL_ZLZLS2 as  A where A.CLBH=ZLZLS2.MJBH and A.ZLBH=ZLZLS2.ZLBH  ) as Parent,'Gia cong' as DType,ZLZLS2.CLBH,
+             sum(ZLZLS2.CLSL)   CLSL,CLZL.YWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,Max(ZLZLS2.USERDATE) as CalDate,DDZL.GSBH 
+    from DDZL_ZLZLS2 as ZLZLS2
+      left join CLZL on ZLZLS2.CLBH=CLZL.CLDH
+      left join ZLZL on ZLZL.ZLBH=ZLZLS2.ZLBH
+      left join  DDZL on DDZL.DDBH=ZLZL.DDBH
+      left join XXZl on XXZL.XieXing=DDZl.XieXing and XXZl.Shehao=DDZL.SheHao
+      where 1=1
+      and ZLZLS2.ZLBH = 'Y2211-0649' 
+      and ZLZLS2.CLBH like '%' 
+      and ZLZLS2.MJBH<>'ZZZZZZZZZZ' and ZLZLS2.CLSL>0
+      and DDZl.GSBH='VA12' 
+    group by ZLZLS2.ZLBH,ZLZLS2.MJBH,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,DDZL.GSBH 
+) OrdCL
+  left join (  
+        select SCBH,CLBH,MJBH,DType,Sum(Qty) as Qty,Sum(TempQty) as TempQty,Max(CNO_NK) as CNO_NK,Max(CNO_TC) as CNO_TC,Max(CNO_HD) as CNO_HD,Max(TKNO) as TKNO,Max(HDNO) as HDNO,Sum(RKQty) as RKQty,  
+                    Sum(NK) as NK,Sum(TC) as TC,Sum(HD) as HD,Sum(KD) as KD,Sum(XT) as XT,Sum(GC) as GC,Sum(ZZ) as ZZ from (  
+         select  KCLLS.LLNO,KCLLS.SCBH, KCLLS.CLBH,KCLLS.MJBH, KCLLS.DType, sum(KCLLS.Qty) as Qty, sum(KCLLS.TempQty) as TempQty,   
+             Sum(KCLLS.Qty) as RKQty,  
+  		        Sum(Case when KCLLS.HGLB='NK' then Qty else 0 end ) as NK,  
+  		        Sum(Case when KCLLS.HGLB='TC' then Qty else 0 end ) as TC,  
+  		        Sum(Case when KCLLS.HGLB='HD' then Qty else 0 end ) as HD,  
+  		        Sum(Case when KCLLS.HGLB='KD' then Qty else 0 end ) as KD,  
+  		        Sum(Case when KCLLS.HGLB='GC' then Qty else 0 end ) as GC,  
+  		        Sum(Case when KCLLS.HGLB='XT' then Qty else 0 end ) as XT,  
+  		        Sum(Case when KCLLS.HGLB='ZZZZ' then Qty else 0 end ) as ZZ,  
+             Max(Case when KCLLS.HGLB='NK' then case when  len(KCLLS.CNO_NK)>0 then substring(KCLLS.CNO_NK,1,len(KCLLS.CNO_NK)-1) else NULL end end) as CNO_NK,
+             Max(Case when KCLLS.HGLB='TC' then case when  len(KCLLS.CNO_TC)>0 then substring(KCLLS.CNO_TC,1,len(KCLLS.CNO_TC)-1) else NULL end end) as CNO_TC,
+             Max(Case when KCLLS.HGLB='HD' then case when  len(KCLLS.CNO_HD)>0 then substring(KCLLS.CNO_HD,1,len(KCLLS.CNO_HD)-1) else NULL end end) as CNO_HD,
+			 Max(Case when KCLLS.HGLB in ('NK','KD','TC') then KCLLS.Declaretion else null end) as TKNO,Max(Case when KCLLS.HGLB='HD' then KCLLS.DOCNO else null end) as HDNO
+  		from (  
+  		Select KCLLS.LLNO,KCLLS.SCBH, KCLLS.CLBH,case when len(KCLLS.DFL)<10 then KCLLS.CLBH else KCLLS.DFL end as MJBH,Case when len(KCLLS.DFL)<10 then 'Assembly' else 'Gia cong'  end as DType, KCLLS.Qty, KCLLS.TempQty,KCLLS.HGLB  
+           ,Cast((select CNO+',' from KCLLS A where   A.CLBH=KCLLS.CLBH and A.DFL=KCLLS.DFL and A.SCBH=KCLLS.SCBH and A.HGLB='NK' and A.Qty>0 Group by CNO for XML Path (''))  as varchar(50)) as CNO_NK 
+           ,Cast((select CNO+',' from KCLLS A where   A.CLBH=KCLLS.CLBH and A.DFL=KCLLS.DFL and A.SCBH=KCLLS.SCBH and A.HGLB='TC' and A.Qty>0 Group by CNO for XML Path (''))  as varchar(50)) as CNO_TC 
+           ,Cast((select CNO+','from KCLLS A where   A.CLBH=KCLLS.CLBH and A.DFL=KCLLS.DFL and A.SCBH=KCLLS.SCBH and A.HGLB='HD' and A.Qty>0 Group by CNO for XML Path (''))  as varchar(50)) as CNO_HD
+		   ,KCPK.Declaretion,KCRK.DOCNO
+  		from KCLLS  
+          left join KCLL on KCLL.LLNO=KCLLS.LLNO  	
+		   Left join KCPKLL on KCLLS.LLNO=KCPKLL.LLNO and KCLLS.CLBH=KCPKLL.CLBH and KCLLS.SCBH=KCPKLL.SCBH and KCLLS.DFL=KCPKLL.DFL
+		   Left join KCPK on KCPK.PKNO=KCPKLL.PKNO
+		   left join KCRK on KCRK.RKNO=KCPKLL.PKNO			  
+  	     where  KCLLS.CLBH like '%' and KCLLS.Qty>0 
+  				and KCLLS.SCBH = 'Y2211-0649'  
+  		
+           and KCLL.GSBH='VA12' and KCLL.CFMID<>'NO'   
+  		) KCLLS Group by KCLLS.LLNO,KCLLS.SCBH, KCLLS.CLBH,KCLLS.MJBH, KCLLS.DType  
+             ) KCLLS Group by SCBH,CLBH,MJBH,DType  
+            ) KCLLS on KCLLS.SCBH=OrdCL.ZLBH and KCLLS.CLBH=OrdCL.CLBH and KCLLS.DType=OrdCL.DType and KCLLS.MJBH=OrdCL.MJBH   
+where 1=1 
+Union all 
+select OrdCL.*,Round(KCLLS.TempQty,2) as TempQty ,case when KCLLS.CNO_NK='' then null else CNO_NK end CNO_NK,case when KCLLS.CNO_TC='' then null else CNO_TC end CNO_TC,case when KCLLS.CNO_HD='' then null else CNO_HD end CNO_HD,
+       KCLLS.RKQty,IsNull(KCLLS.NK,0) as NK,IsNull(KCLLS.TC,0) as TC,IsNull(KCLLS.HD,0) as HD,IsNull(KCLLS.KD,0) as KD,IsNull(KCLLS.XT,0) as XT,IsNull(KCLLS.GC,0) as GC,
+       IsNull(Round(KCLLS.Qty-IsNull(KCLLS.NK,0)-IsNull(KCLLS.TC,0)-IsNull(KCLLS.HD,0)-IsNull(KCLLS.KD,0)-IsNull(KCLLS.XT,0)-IsNull(KCLLS.GC,0),2),0)  as ZZ,KCLLS.Qty,KCLLS.TKNO,KCLLS.HDNO 
+from (select ZLZLS2.ZLBH,ZLZLS2.CLBH as MJBH,ZLZLS2.CLBH as Parent,'Assembly' as DType,ZLZLS2.CLBH,
+             sum(ZLZLS2.CLSL) as CLSL,CLZL.YWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,Max(ZLZLS2.USERDATE) as CalDate,'VGC' as GSBH 
+      from ZLZLS2_YM as ZLZLS2
+      left join CLZL on ZLZLS2.CLBH=CLZL.CLDH
+      left join ZLZL on ZLZL.ZLBH=ZLZLS2.ZLBH
+      left join  DDZL on DDZL.DDBH=ZLZL.DDBH
+      left join XXZl on XXZL.XieXing=DDZl.XieXing and XXZl.Shehao=DDZL.SheHao
+      where 1=1
+      and ZLZLS2.ZLBH  ='Y2211-0649'   
+      and ZLZLS2.CLBH like '%' 
+      and ZLZLS2.MJBH='ZZZZZZZZZZ' and ZLZLS2.CLSL>0
+      and DDZl.GSBH='VA12' 
+      group by ZLZLS2.ZLBH,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,DDZL.GSBH 
+) OrdCL
+left join (
+      select SCBH,CLBH,MJBH,DType,Sum(Qty) as Qty,Sum(TempQty) as TempQty,Max(CNO_NK) as CNO_NK,Max(CNO_TC) as CNO_TC,Max(HDNO) as HDNO,Max(TKNO) as TKNO,Max(CNO_HD) as CNO_HD,Sum(RKQty) as RKQty,
+                  Sum(NK) as NK,Sum(TC) as TC,Sum(HD) as HD,Sum(KD) as KD,Sum(XT) as XT,Sum(GC) as GC,Sum(ZZ) as ZZ from (
+                  
+      select  KCLLS.LLNO,KCLLS.SCBH, KCLLS.CLBH,case when len(KCLLS.DFL)<10 then KCLLS.CLBH else KCLLS.DFL end as MJBH,Case when len(KCLLS.DFL)<10 then 'Assembly' else 'Gia cong'  end as DType, sum(KCLLS.Qty) as Qty, sum(KCLLS.TempQty) as TempQty,
+					Sum(KCLLS.Qty) as RKQty,
+					Sum(Case when KCLLS.HGLB='NK' then KCLLS.Qty else 0 end ) as NK,
+					Sum(Case when KCLLS.HGLB='TC' then KCLLS.Qty else 0 end ) as TC,
+					Sum(Case when KCLLS.HGLB='HD' then KCLLS.Qty else 0 end ) as HD,
+					Sum(Case when KCLLS.HGLB='KD' then KCLLS.Qty else 0 end ) as KD,
+					Sum(Case when KCLLS.HGLB='GC' then KCLLS.Qty else 0 end ) as GC,
+					Sum(Case when KCLLS.HGLB='XT' then KCLLS.Qty else 0 end ) as XT,
+					Sum(Case when KCLLS.HGLB='ZZZZ' then KCLLS.Qty else 0 end ) as ZZ,
+         Max(Case when KCLLS.HGLB='NK' then KCLLS.CNO end) as CNO_NK,
+         Max(Case when KCLLS.HGLB='TC' then KCLLS.CNO end) as CNO_TC,
+         Max(Case when KCLLS.HGLB='HD' then KCLLS.CNO end) as CNO_HD,
+		 Max(Case when KCLLS.HGLB in ('NK','KD','TC') then KCPK.Declaretion else null end) as TKNO,Max(Case when KCLLS.HGLB='HD' then KCRK.DOCNO else null end) as HDNO
+
+		   from KCLLS
+            left join KCLL on KCLL.LLNO=KCLLS.LLNO	  
+		   Left join KCPKLL on KCLLS.LLNO=KCPKLL.LLNO and KCLLS.CLBH=KCPKLL.CLBH and KCLLS.SCBH=KCPKLL.SCBH and KCLLS.DFL=KCPKLL.DFL
+		   Left join KCPK on KCPK.PKNO=KCPKLL.PKNO
+		   left join KCRK on KCRK.RKNO=KCPKLL.PKNO			
+		   where  KCLLS.CLBH like '%'
+				    and KCLLS.SCBH  ='Y2211-0649'   
+           and KCLL.GSBH='VGC' and KCLL.CFMID<>'NO' 
+		   group by KCLLS.LLNO,KCLLS.SCBH,case when len(KCLLS.DFL)<10 then KCLLS.CLBH else KCLLS.DFL end,Case when len(KCLLS.DFL)<10 then 'Assembly' else 'Gia cong'  end , KCLLS.CLBH
+           ) KCLLS Group by SCBH,CLBH,MJBH,DType
+          ) KCLLS on KCLLS.SCBH=OrdCL.ZLBH and KCLLS.CLBH=OrdCL.CLBH and KCLLS.DType=OrdCL.DType and KCLLS.MJBH=OrdCL.MJBH 
+where 1=1 
+union all 
+select ZLZLS3.*,KCLLS.TempQty,KCLLS.CNO_NK,KCLLS.CNO_TC,KCLLS.CNO_HD,KCLLS.RKQty,IsNull(KCLLS.NK,0) as NK,IsNull(KCLLS.TC,0) as TC,IsNull(KCLLS.HD,0) as HD,IsNull(KCLLS.KD,0) as KD,IsNull(KCLLS.XT,0) as XT,IsNull(KCLLS.GC,0) as GC,
+       KCLLS.Qty-IsNull(KCLLS.NK,0)-IsNull(KCLLS.TC,0)-IsNull(KCLLS.HD,0)-IsNull(KCLLS.KD,0)-IsNull(KCLLS.XT,0)-IsNull(KCLLS.GC,0) as ZZ,KCLLS.Qty,KCLLS.TKNO,KCLLS.HDNO
+ from (
+select ZLZLS3.ZLBH1 as ZLBH1,right(ZLZLS3.cldhz,10) as MJBH,right(ZLZLS3.cldhz,10) as Parent,'Assembly' as DType,right(ZLZLS3.cldhz,10) as cldhz,convert(float,round(sum(ZLZLS3.TCLYL),2)) as TCLYL,
+      CLZL.ywpm,CLZL.DWBH,XXZL.Article,XXZL.XieMing,IsNull(ERP_DDZL.Pairs,max(DDZL.Pairs)) as Pairs,max(convert(varchar,cast(ZLZLS3.USERDATE as smalldatetime),111)) as CalDate,DDZL.CQDH
+FROM LIY_DD.dbo.ZLZLS3  ZLZLS3
+LEFT JOIN LIY_DD.dbo.DDZL DDZL ON ZLZLS3.DDBH = DDZL.DDBH AND DDZL.CQDH = ZLZLS3.CQDH LEFT JOIN LIY_DD.dbo.CLZL CLZL ON ZLZLS3.cldhz = CLZL.cldh 
+left join CLZL ERP_CLZL on ERP_CLZL.CLDH=Substring(ZLZLS3.cldhz,2,10)
+Left join DDZL ERP_DDZL on ERP_DDZL.DDBH=DDZL.ZLBH1 
+left join XXZL on ERP_DDZL.XieXing=xxzl.XieXing and ERP_DDZL.Shehao=xxzl.shehao 
+where ZLZLS3.TCLYL>0 and DDZL.ZLBH1='Y2211-0649' and ZLZLS3.CQDH='VR1'
+      and ZLZLS3.CLDHZ like 'A%' 
+GROUP BY  ZLZLS3.cldhz,ZLZLS3.ZLBH1,CLZL.zwpm,CLZL.ywpm,DDZL.CQDH,CLZL.DWBH,XXZL.Article, XXZL.XieMing,ERP_DDZL.Pairs ) ZLZLS3
+left join (
+           select KCLLS.SCBH,KCLLS.CLBH,round(sum(case when KCLL.CFMID<>'NO' then KCLLS.Qty else 0 end),2) as Qty,round(sum(KCLLS.TempQty),2) as TempQty,
+                  round(sum(case when KCLL.CFMID<>'NO' then KCLLS.Qty else 0 end),2) as RKQty,
+                  Sum(Case when KCLLS.HGLB='NK' then KCLLS.Qty else 0 end ) as NK,
+                  Sum(Case when KCLLS.HGLB='TC' then KCLLS.Qty else 0 end ) as TC,
+					         Sum(Case when KCLLS.HGLB='HD' then KCLLS.Qty else 0 end ) as HD,
+					         Sum(Case when KCLLS.HGLB='KD' then KCLLS.Qty else 0 end ) as KD,
+					         Sum(Case when KCLLS.HGLB='GC' then KCLLS.Qty else 0 end ) as GC,
+					         Sum(Case when KCLLS.HGLB='XT' then KCLLS.Qty else 0 end ) as XT,
+					         Sum(Case when KCLLS.HGLB='ZZZZ' then KCLLS.Qty else 0 end ) as ZZ,
+                  Max(Case when KCLLS.HGLB='NK' then KCLLS.CNO end) as CNO_NK,
+                  Max(Case when KCLLS.HGLB='TC' then KCLLS.CNO end) as CNO_TC,
+                  Max(Case when KCLLS.HGLB='HD' then KCLLS.CNO end) as CNO_HD,
+				  Max(Case when KCLLS.HGLB in ('NK','KD','TC') then KCPK.Declaretion else null end) as TKNO,Max(Case when KCLLS.HGLB='HD' then KCRK.DOCNO else null end) as HDNO
+           from KCLLS left join KCLL on KCLL.LLNO=KCLLS.LLNO    
+		   Left join KCPKLL on KCLLS.LLNO=KCPKLL.LLNO and KCLLS.CLBH=KCPKLL.CLBH and KCLLS.SCBH=KCPKLL.SCBH and KCLLS.DFL=KCPKLL.DFL
+		   Left join KCPK on KCPK.PKNO=KCPKLL.PKNO
+		   left join KCRK on KCRK.RKNO=KCPKLL.PKNO		   
+           where 1=1 
+                 and KCLL.GSBH='VR1'
+                 and KCLLS.SCBH ='Y2211-0649'  
+           group by KCLLS.SCBH,KCLLS.CLBH ) KCLLS on KCLLS.SCBH=ZLZLS3.ZLBH1 and KCLLS.CLBH=ZLZLS3.CLDHZ 
+union all 
+select ZLZLS3.*,KCLLS.TempQty,KCLLS.CNO_NK,KCLLS.CNO_TC,KCLLS.CNO_HD,KCLLS.RKQty,IsNull(KCLLS.NK,0) as NK,IsNull(KCLLS.TC,0) as TC,IsNull(KCLLS.HD,0) as HD,IsNull(KCLLS.KD,0) as KD,IsNull(KCLLS.XT,0) as XT,IsNull(KCLLS.GC,0) as GC,
+       KCLLS.Qty-IsNull(KCLLS.NK,0)-IsNull(KCLLS.TC,0)-IsNull(KCLLS.HD,0)-IsNull(KCLLS.KD,0)-IsNull(KCLLS.XT,0)-IsNull(KCLLS.GC,0) as ZZ,KCLLS.Qty,KCLLS.TKNO,KCLLS.HDNO
+ from (
+select ZLZLS3.ZLBH1 as ZLBH1,right(ZLZLS3.cldhz,10) as MJBH,right(ZLZLS3.cldhz,10) as Parent,'Assembly' as DType,right(ZLZLS3.cldhz,10) as cldhz,convert(float,round(sum(ZLZLS3.TCLYL),2)) as TCLYL,
+      CLZL.ywpm,CLZL.DWBH,XXZL.Article,XXZL.XieMing,IsNull(ERP_DDZL.Pairs,max(DDZL.Pairs)) as Pairs,max(convert(varchar,cast(ZLZLS3.USERDATE as smalldatetime),111)) as CalDate,DDZL.CQDH
+FROM LIY_DD.dbo.ZLZLS3  ZLZLS3
+LEFT JOIN LIY_DD.dbo.DDZL DDZL ON ZLZLS3.DDBH = DDZL.DDBH AND DDZL.CQDH = ZLZLS3.CQDH LEFT JOIN LIY_DD.dbo.CLZL CLZL ON ZLZLS3.cldhz = CLZL.cldh 
+left join CLZL ERP_CLZL on ERP_CLZL.CLDH=Substring(ZLZLS3.cldhz,2,10)
+Left join DDZL ERP_DDZL on ERP_DDZL.DDBH=DDZL.ZLBH1 
+left join XXZL on ERP_DDZL.XieXing=xxzl.XieXing and ERP_DDZL.Shehao=xxzl.shehao 
+where ZLZLS3.TCLYL>0 and DDZL.ZLBH1='Y2211-0649' and ZLZLS3.CQDH='VR2'
+      and ZLZLS3.CLDHZ like 'A%' 
+GROUP BY  ZLZLS3.cldhz,ZLZLS3.ZLBH1,CLZL.zwpm,CLZL.ywpm,DDZL.CQDH,CLZL.DWBH,XXZL.Article, XXZL.XieMing,ERP_DDZL.Pairs ) ZLZLS3
+left join (
+           select KCLLS.SCBH,KCLLS.CLBH,round(sum(case when KCLL.CFMID<>'NO' then KCLLS.Qty else 0 end),2) as Qty,round(sum(KCLLS.TempQty),2) as TempQty,
+                  round(sum(case when KCLL.CFMID<>'NO' then KCLLS.Qty else 0 end),2) as RKQty,
+                  Sum(Case when KCLLS.HGLB='NK' then KCLLS.Qty else 0 end ) as NK,
+                  Sum(Case when KCLLS.HGLB='TC' then KCLLS.Qty else 0 end ) as TC,
+					         Sum(Case when KCLLS.HGLB='HD' then KCLLS.Qty else 0 end ) as HD,
+					         Sum(Case when KCLLS.HGLB='KD' then KCLLS.Qty else 0 end ) as KD,
+					         Sum(Case when KCLLS.HGLB='GC' then KCLLS.Qty else 0 end ) as GC,
+					         Sum(Case when KCLLS.HGLB='XT' then KCLLS.Qty else 0 end ) as XT,
+					         Sum(Case when KCLLS.HGLB='ZZZZ' then KCLLS.Qty else 0 end ) as ZZ,
+                  Max(Case when KCLLS.HGLB='NK' then KCLLS.CNO end) as CNO_NK,
+                  Max(Case when KCLLS.HGLB='TC' then KCLLS.CNO end) as CNO_TC,
+                  Max(Case when KCLLS.HGLB='HD' then KCLLS.CNO end) as CNO_HD,
+				  Max(Case when KCLLS.HGLB in ('NK','KD','TC') then KCPK.Declaretion else null end) as TKNO,Max(Case when KCLLS.HGLB='HD' then KCRK.DOCNO else null end) as HDNO
+           from KCLLS left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+		   Left join KCPKLL on KCLLS.LLNO=KCPKLL.LLNO and KCLLS.CLBH=KCPKLL.CLBH and KCLLS.SCBH=KCPKLL.SCBH and KCLLS.DFL=KCPKLL.DFL
+		   Left join KCPK on KCPK.PKNO=KCPKLL.PKNO
+		   left join KCRK on KCRK.RKNO=KCPKLL.PKNO
+           where 1=1 
+                 and KCLL.GSBH='VR2'
+                 and KCLLS.SCBH ='Y2211-0649'  
+           group by KCLLS.SCBH,KCLLS.CLBH ) KCLLS on KCLLS.SCBH=ZLZLS3.ZLBH1 and KCLLS.CLBH=ZLZLS3.CLDHZ 
+union all 
+select ZLZLS3.*,KCLLS.TempQty,KCLLS.CNO_NK,KCLLS.CNO_TC,KCLLS.CNO_HD,KCLLS.RKQty,IsNull(KCLLS.NK,0) as NK,IsNull(KCLLS.TC,0) as TC,IsNull(KCLLS.HD,0) as HD,IsNull(KCLLS.KD,0) as KD,IsNull(KCLLS.XT,0) as XT,IsNull(KCLLS.GC,0) as GC,
+       KCLLS.Qty-IsNull(KCLLS.NK,0)-IsNull(KCLLS.TC,0)-IsNull(KCLLS.HD,0)-IsNull(KCLLS.KD,0)-IsNull(KCLLS.XT,0)-IsNull(KCLLS.GC,0) as ZZ,KCLLS.Qty,KCLLS.TKNO,KCLLS.HDNO
+ from (
+select ZLZLS3.ZLBH1 as ZLBH1,right(ZLZLS3.cldhz,10) as MJBH,right(ZLZLS3.cldhz,10) as Parent,'Assembly' as DType,right(ZLZLS3.cldhz,10) as cldhz,convert(float,round(sum(ZLZLS3.TCLYL),2)) as TCLYL,
+      CLZL.ywpm,CLZL.DWBH,XXZL.Article,XXZL.XieMing,IsNull(ERP_DDZL.Pairs,max(DDZL.Pairs)) as Pairs,max(convert(varchar,cast(ZLZLS3.USERDATE as smalldatetime),111)) as CalDate,DDZL.CQDH
+FROM LIY_DD.dbo.ZLZLS3  ZLZLS3
+LEFT JOIN LIY_DD.dbo.DDZL DDZL ON ZLZLS3.DDBH = DDZL.DDBH AND DDZL.CQDH = ZLZLS3.CQDH LEFT JOIN LIY_DD.dbo.CLZL CLZL ON ZLZLS3.cldhz = CLZL.cldh 
+left join CLZL ERP_CLZL on ERP_CLZL.CLDH=Substring(ZLZLS3.cldhz,2,10)
+Left join DDZL ERP_DDZL on ERP_DDZL.DDBH=DDZL.ZLBH1 
+left join XXZL on ERP_DDZL.XieXing=xxzl.XieXing and ERP_DDZL.Shehao=xxzl.shehao 
+where ZLZLS3.TCLYL>0 and DDZL.ZLBH1='Y2211-0649' and ZLZLS3.CQDH='VR3'
+      and ZLZLS3.CLDHZ like 'A%' 
+GROUP BY  ZLZLS3.cldhz,ZLZLS3.ZLBH1,CLZL.zwpm,CLZL.ywpm,DDZL.CQDH,CLZL.DWBH,XXZL.Article, XXZL.XieMing,ERP_DDZL.Pairs ) ZLZLS3
+left join (
+           select KCLLS.SCBH,KCLLS.CLBH,round(sum(case when KCLL.CFMID<>'NO' then KCLLS.Qty else 0 end),2) as Qty,round(sum(KCLLS.TempQty),2) as TempQty,
+                  round(sum(case when KCLL.CFMID<>'NO' then KCLLS.Qty else 0 end),2) as RKQty,
+                  Sum(Case when KCLLS.HGLB='NK' then KCLLS.Qty else 0 end ) as NK,
+                  Sum(Case when KCLLS.HGLB='TC' then KCLLS.Qty else 0 end ) as TC,
+					         Sum(Case when KCLLS.HGLB='HD' then KCLLS.Qty else 0 end ) as HD,
+					         Sum(Case when KCLLS.HGLB='KD' then KCLLS.Qty else 0 end ) as KD,
+					         Sum(Case when KCLLS.HGLB='GC' then KCLLS.Qty else 0 end ) as GC,
+					         Sum(Case when KCLLS.HGLB='XT' then KCLLS.Qty else 0 end ) as XT,
+					         Sum(Case when KCLLS.HGLB='ZZZZ' then KCLLS.Qty else 0 end ) as ZZ,
+                  Max(Case when KCLLS.HGLB='NK' then KCLLS.CNO end) as CNO_NK,
+                  Max(Case when KCLLS.HGLB='TC' then KCLLS.CNO end) as CNO_TC,
+                  Max(Case when KCLLS.HGLB='HD' then KCLLS.CNO end) as CNO_HD,
+				  Max(Case when KCLLS.HGLB in ('NK','KD','TC') then KCPK.Declaretion else null end) as TKNO,Max(Case when KCLLS.HGLB='HD' then KCRK.DOCNO else null end) as HDNO
+           from KCLLS left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+		   Left join KCPKLL on KCLLS.LLNO=KCPKLL.LLNO and KCLLS.CLBH=KCPKLL.CLBH and KCLLS.SCBH=KCPKLL.SCBH and KCLLS.DFL=KCPKLL.DFL
+		   Left join KCPK on KCPK.PKNO=KCPKLL.PKNO
+		   left join KCRK on KCRK.RKNO=KCPKLL.PKNO
+           where 1=1 
+                 and KCLL.GSBH='VR3'
+                 and KCLLS.SCBH ='Y2211-0649'  
+           group by KCLLS.SCBH,KCLLS.CLBH ) KCLLS on KCLLS.SCBH=ZLZLS3.ZLBH1 and KCLLS.CLBH=ZLZLS3.CLDHZ 
+union all
+select KCLLS.SCBH as ZLBH1,case when len(KCLLS.DFL)<10 then KCLLS.CLBH else KCLLS.DFL end  as MJBH,KCLLS.CLBH as Parent,Case when len(KCLLS.DFL)<10 then 'Assembly' else 'Gia cong'  end as DType,
+       KCLLS.CLBH as cldhz,0 as TCLYL,CLZL.YWPM,CLZL.DWBH,DDZL.Article,XXZL.XieMing,DDZL.Pairs,null as CalDate,KCLL.GSBH as CQDH,sum(KCLLS.TempQty) as TemQty
+       ,KCRKCX.CNO_NK,KCRKCX.CNO_TC,KCRKCX.CNO_HD 
+,sum(KCRKCX.RKQty) as RKQty,IsNull(sum(KCRKCX.NK),0) as NK,IsNull(sum(KCRKCX.TC),0) as TC,IsNull(sum(KCRKCX.HD),0) as HD,IsNull(sum(KCRKCX.KD),0) as KD,IsNull(sum(KCRKCX.XT),0) as XT,IsNull(sum(KCRKCX.GC),0) as GC
+       ,sum(KCLLS.Qty)-IsNull(sum(KCRKCX.NK),0)-IsNull(sum(KCRKCX.TC),0)-IsNull(sum(KCRKCX.HD),0)-IsNull(sum(KCRKCX.KD),0)-IsNull(sum(KCRKCX.XT),0)-IsNull(sum(KCRKCX.GC),0) as ZZ
+       ,sum(KCLLS.Qty) as Qty,Max(KCRKCX.TKNO) as TKNO,Max(KCRKCX.HDNO) as HDNO
+from  KCLLS
+left join DDZL on DDZL.DDBH=KCLLS.SCBH
+left join XXZL on DDZL.XieXing=xxzl.XieXing and DDZL.Shehao=xxzl.shehao
+left join CLZL on CLZL.CLDH=KCLLS.CLBH
+left join KCLL on KCLL.LLNO=KCLLS.LLNO  
+left join ( 
+          select KCLLS.LLNO,KCLLS.CLBH,KCLLS.SCBH,KCLLS.DFL,Sum(KCLLS.Qty) as RKQty,
+                  Sum(Case when KCLLS.HGLB='NK' then KCLLS.Qty else 0 end ) as NK, 
+                  Sum(Case when KCLLS.HGLB='TC' then KCLLS.Qty else 0 end ) as TC, 
+                  Sum(Case when KCLLS.HGLB='HD' then KCLLS.Qty else 0 end ) as HD, 
+                  Sum(Case when KCLLS.HGLB='KD' then KCLLS.Qty else 0 end ) as KD, 
+                  Sum(Case when KCLLS.HGLB='XT' then KCLLS.Qty else 0 end ) as XT, 
+                  Sum(Case when KCLLS.HGLB='GC' then KCLLS.Qty else 0 end ) as GC,
+                  Sum(Case when KCLLS.HGLB='ZZZZ' then KCLLS.Qty else 0 end ) as ZZ,  
+                  Max(Case when KCLLS.HGLB='NK' then KCLLS.CNO end) as CNO_NK,
+                  Max(Case when KCLLS.HGLB='TC' then KCLLS.CNO end) as CNO_TC,
+                  Max(Case when KCLLS.HGLB='HD' then KCLLS.CNO end) as CNO_HD,
+				  Max(Case when KCLLS.HGLB in ('NK','KD','TC') then KCPK.Declaretion else null end) as TKNO,Max(Case when KCLLS.HGLB='HD' then KCRK.DOCNO else null end) as HDNO
+           from KCLLS 
+		   Left join KCPKLL on KCLLS.LLNO=KCPKLL.LLNO and KCLLS.CLBH=KCPKLL.CLBH and KCLLS.SCBH=KCPKLL.SCBH and KCLLS.DFL=KCPKLL.DFL
+		   Left join KCPK on KCPK.PKNO=KCPKLL.PKNO
+		   left join KCRK on KCRK.RKNO=KCPKLL.PKNO
+           where KCLLS.SCBH = 'Y2211-0649' 
+                 and KCLLS.CLBH like '%' 
+           Group by KCLLS.LLNO,KCLLS.CLBH,KCLLS.SCBH,KCLLS.DFL 
+           ) KCRKCX on KCRKCX.LLNO=KCLLS.LLNO and KCRKCX.CLBH=KCLLS.CLBH and KCRKCX.DFL=KCLLS.DFL and KCRKCX.SCBH=KCLLS.SCBH           
+WHERE (KCLL.GSBH ='VA12') and KCLL.CFMID<>'NO' and NOT EXISTS (select CLBH from (SELECT CLBH from DDZL_ZLZLS2 as ZLZLS2 where ZLZLS2.CLSL>0 and ZLBH='Y2211-0649' Group by CLBH) ZLZLS2 where ZLZLS2.CLBH=KCLLS.CLBH) 
+   and KCLLS.SCBH = 'Y2211-0649' and KCLLS.CLBH like '%' and KCLLS.Qty>0
+group by KCLLS.SCBH,KCLLS.DFL,KCLLS.CLBH,CLZL.YWPM,CLZL.DWBH,DDZL.Article,XXZL.XieMing,DDZL.Pairs,KCLL.GSBH,KCRKCX.CNO_NK,KCRKCX.CNO_TC,KCRKCX.CNO_HD
+union all
+select KCLLS.SCBH as ZLBH1,KCLLS.CLBH as MJBH,KCLLS.CLBH as Parent,'Assembly' as DType,KCLLS.CLBH as cldhz,0 as TCLYL,CLZL.YWPM,CLZL.DWBH,DDZL.Article,XXZL.XieMing,DDZL.Pairs,null as CalDate,KCLL.GSBH as CQDH,sum(KCLLS.TempQty) as TempQty
+       ,KCRKCX.CNO_NK,KCRKCX.CNO_TC,KCRKCX.CNO_HD,sum(KCRKCX.RKQty) as RKQty,IsNull(sum(KCRKCX.NK),0) as NK,IsNull(sum(KCRKCX.TC),0) as TC,IsNull(sum(KCRKCX.HD),0) as HD,IsNull(sum(KCRKCX.KD),0) as KD 
+,IsNull(sum(KCRKCX.XT),0) as XT,IsNull(sum(KCRKCX.GC),0) as GC
+       ,sum(KCLLS.Qty)-IsNull(sum(KCRKCX.NK),0)-IsNull(sum(KCRKCX.TC),0)-IsNull(sum(KCRKCX.HD),0)-IsNull(sum(KCRKCX.KD),0)-IsNull(sum(KCRKCX.XT),0)-IsNull(sum(KCRKCX.GC),0) as ZZ
+       ,sum(KCLLS.Qty) as Qty,Max(KCRKCX.TKNO) as TKNO,Max(KCRKCX.HDNO) as HDNO
+from  KCLLS
+left join DDZL on DDZL.DDBH=KCLLS.SCBH
+left join XXZL on DDZL.XieXing=xxzl.XieXing and DDZL.Shehao=xxzl.shehao
+left join CLZL on CLZL.CLDH=KCLLS.CLBH
+left join KCLL on KCLL.LLNO=KCLLS.LLNO  
+left join ( 
+          select KCLLS.LLNO,KCLLS.CLBH,KCLLS.SCBH,KCLLS.DFL,Sum(KCLLS.Qty) as RKQty,
+                  Sum(Case when KCLLS.HGLB='NK' then KCLLS.Qty else 0 end ) as NK, 
+                  Sum(Case when KCLLS.HGLB='TC' then KCLLS.Qty else 0 end ) as TC, 
+                  Sum(Case when KCLLS.HGLB='HD' then KCLLS.Qty else 0 end ) as HD, 
+                  Sum(Case when KCLLS.HGLB='KD' then KCLLS.Qty else 0 end ) as KD, 
+                  Sum(Case when KCLLS.HGLB='XT' then KCLLS.Qty else 0 end ) as XT, 
+                  Sum(Case when KCLLS.HGLB='GC' then KCLLS.Qty else 0 end ) as GC,
+                  Sum(Case when KCLLS.HGLB='ZZZZ' then KCLLS.Qty else 0 end ) as ZZ,  
+                  Max(Case when KCLLS.HGLB='NK' then KCLLS.CNO end) as CNO_NK,
+                  Max(Case when KCLLS.HGLB='TC' then KCLLS.CNO end) as CNO_TC,
+                  Max(Case when KCLLS.HGLB='HD' then KCLLS.CNO end) as CNO_HD,
+				  Max(Case when KCLLS.HGLB in ('NK','KD','TC') then KCPK.Declaretion else null end) as TKNO,Max(Case when KCLLS.HGLB='HD' then KCRK.DOCNO else null end) as HDNO
+           from KCLLS 
+		   Left join KCPKLL on KCLLS.LLNO=KCPKLL.LLNO and KCLLS.CLBH=KCPKLL.CLBH and KCLLS.SCBH=KCPKLL.SCBH and KCLLS.DFL=KCPKLL.DFL
+		   Left join KCPK on KCPK.PKNO=KCPKLL.PKNO
+		   left join KCRK on KCRK.RKNO=KCPKLL.PKNO
+           where KCLLS.SCBH  ='Y2211-0649'  
+                 and KCLLS.CLBH like '%' 
+           Group by KCLLS.LLNO,KCLLS.CLBH,KCLLS.SCBH,KCLLS.DFL 
+           ) KCRKCX on KCRKCX.LLNO=KCLLS.LLNO and KCRKCX.CLBH=KCLLS.CLBH and KCRKCX.DFL=KCLLS.DFL and KCRKCX.SCBH=KCLLS.SCBH           
+WHERE (KCLL.GSBH ='VGC') and KCLL.CFMID<>'NO' and NOT EXISTS (select CLBH from (SELECT CLBH from ZLZLS2_YM ZLZLS2 where ZLZLS2.CLSL>0 and ZLBH  ='Y2211-0649'  Group by CLBH) ZLZLS2 where ZLZLS2.CLBH=KCLLS.CLBH) 
+   and KCLLS.SCBH  ='Y2211-0649'  and KCLLS.CLBH like '%' and KCLLS.Qty>0
+group by KCLLS.SCBH,KCLLS.DFL,KCLLS.CLBH,CLZL.YWPM,CLZL.DWBH,DDZL.Article,XXZL.XieMing,DDZL.Pairs,KCLL.GSBH,KCRKCX.CNO_NK,KCRKCX.CNO_TC,KCRKCX.CNO_HD
+union all
+select KCLLS.SCBH as ZLBH1,KCLLS.CLBH as MJBH,KCLLS.CLBH as Parent,'Assembly' as DType,KCLLS.CLBH as cldhz,0 as TCLYL,CLZL.YWPM,CLZL.DWBH,DDZL.Article,XXZL.XieMing,DDZL.Pairs,null as CalDate,KCLL.GSBH as CQDH,sum(KCLLS.TempQty) as TempQty
+       ,KCRKCX.CNO_NK,KCRKCX.CNO_TC,KCRKCX.CNO_HD,sum(KCRKCX.RKQty) as RKQty
+,IsNull(sum(KCRKCX.NK),0) as NK,IsNull(sum(KCRKCX.TC),0) as TC,IsNull(sum(KCRKCX.HD),0) as HD,IsNull(sum(KCRKCX.KD),0) as KD,IsNull(sum(KCRKCX.XT),0) as XT,IsNull(sum(KCRKCX.GC),0) as GC
+       ,sum(KCLLS.Qty)-IsNull(sum(KCRKCX.NK),0)-IsNull(sum(KCRKCX.TC),0)-IsNull(sum(KCRKCX.HD),0)-IsNull(sum(KCRKCX.KD),0)-IsNull(sum(KCRKCX.XT),0)-IsNull(sum(KCRKCX.GC),0) as ZZ
+       ,sum(KCLLS.Qty) as Qty,Max(KCRKCX.TKNO) as TKNO,Max(KCRKCX.HDNO) as HDNO
+from  KCLLS
+left join DDZL on DDZL.DDBH=KCLLS.SCBH
+left join XXZL on DDZL.XieXing=xxzl.XieXing and DDZL.Shehao=xxzl.shehao
+left join CLZL on CLZL.CLDH=KCLLS.CLBH
+left join KCLL on KCLL.LLNO=KCLLS.LLNO  
+left join ( 
+          select KCLLS.LLNO,KCLLS.CLBH,KCLLS.SCBH,KCLLS.DFL,Sum(KCLLS.Qty) as RKQty,
+                  Sum(Case when KCLLS.HGLB='NK' then KCLLS.Qty else 0 end ) as NK, 
+                  Sum(Case when KCLLS.HGLB='TC' then KCLLS.Qty else 0 end ) as TC, 
+                  Sum(Case when KCLLS.HGLB='HD' then KCLLS.Qty else 0 end ) as HD, 
+                  Sum(Case when KCLLS.HGLB='KD' then KCLLS.Qty else 0 end ) as KD, 
+                  Sum(Case when KCLLS.HGLB='XT' then KCLLS.Qty else 0 end ) as XT, 
+                  Sum(Case when KCLLS.HGLB='GC' then KCLLS.Qty else 0 end ) as GC,
+                  Sum(Case when KCLLS.HGLB='ZZZZ' then KCLLS.Qty else 0 end ) as ZZ,  
+                  Max(Case when KCLLS.HGLB='NK' then KCLLS.CNO end) as CNO_NK,
+                  Max(Case when KCLLS.HGLB='TC' then KCLLS.CNO end) as CNO_TC,
+                  Max(Case when KCLLS.HGLB='HD' then KCLLS.CNO end) as CNO_HD,
+				  Max(Case when KCLLS.HGLB in ('NK','KD','TC') then KCPK.Declaretion else null end) as TKNO,Max(Case when KCLLS.HGLB='HD' then KCRK.DOCNO else null end) as HDNO
+           from KCLLS 
+		   Left join KCPKLL on KCLLS.LLNO=KCPKLL.LLNO and KCLLS.CLBH=KCPKLL.CLBH and KCLLS.SCBH=KCPKLL.SCBH and KCLLS.DFL=KCPKLL.DFL
+		   Left join KCPK on KCPK.PKNO=KCPKLL.PKNO
+		   left join KCRK on KCRK.RKNO=KCPKLL.PKNO
+           where KCLLS.SCBH = 'Y2211-0649' 
+                 and KCLLS.CLBH like '%' 
+           Group by KCLLS.LLNO,KCLLS.CLBH,KCLLS.SCBH,KCLLS.DFL 
+           ) KCRKCX on KCRKCX.LLNO=KCLLS.LLNO and KCRKCX.CLBH=KCLLS.CLBH and KCRKCX.DFL=KCLLS.DFL and KCRKCX.SCBH=KCLLS.SCBH           
+WHERE KCLL.GSBH like 'VR%' and KCLL.CFMID<>'NO' and NOT EXISTS(SELECT *  FROM LIY_DD.dbo.ZLZLS3  ZLZLS3  WHERE ZLZLS3.TCLYL>0 and 'A'+KCLLS.CLBH=ZLZLS3.CLDHZ AND KCLLS.SCBH=ZLZLS3.ZLBH1)
+   and KCLLS.SCBH = 'Y2211-0649' and KCLLS.CLBH like '%' and KCLLS.Qty>0
+group by KCLLS.SCBH,KCLLS.DFL,KCLLS.CLBH,CLZL.YWPM,CLZL.DWBH,DDZL.Article,XXZL.XieMing,DDZL.Pairs,KCLL.GSBH,KCRKCX.CNO_NK,KCRKCX.CNO_TC,KCRKCX.CNO_HD
+  ) ZLZLS2    
+Left join CLHG on CLHG.CLBH=ZLZLS2.CLBH  
+Left join CLHD on CLHD.CLBH=ZLZLS2.CLBH  
+Left join CLTC on CLTC.CLBH=ZLZLS2.CLBH  
+Left join (
+Select KCRKS.GSBH,KCRKS.CGBH as ZLBH,Case when len(KCRKS.RKSB)<10 then KCRKS.CLBH else KCRKS.RKSB End as MJBH,Case when len(KCRKS.RKSB)<10 then 'Assembly' else 'Gia cong' End as DType ,KCRKS.CLBH, 
+       Sum(KCRKS.Qty) as Qty, 
+       Sum(Case when KCRK.HGLB='NK' then Qty else 0 end ) as NK, 
+       Sum(Case when KCRK.HGLB='TC' then Qty else 0 end ) as TC, 
+       Sum(Case when KCRK.HGLB='HD' then Qty else 0 end ) as HD, 
+       Sum(Case when KCRK.HGLB='KD' then Qty else 0 end ) as KD, 
+       Sum(Case when KCRK.HGLB='XT' then Qty else 0 end ) as XT, 
+       Sum(Case when KCRK.HGLB='GC' then Qty else 0 end ) as GC, 
+       Sum(Case when KCRK.HGLB='ZZZZ' then Qty else 0 end ) as ZZ  
+from KCRK 
+left join KCRKS on KCRK.RKNO=KCRKS.RKNO 
+where KCRK.SFL='THU HOI'  and KCRKS.CGBH='Y2211-0649' 
+Group by KCRKS.GSBH,KCRKS.CGBH,KCRKS.RKSB,KCRKS.CLBH 
+) KCRKTH on  KCRKTH.ZLBH=ZLZLS2.ZLBH and KCRKTH.CLBH=ZLZLS2.CLBH and KCRKTH.DType=ZLZLS2.DType and KCRKTH.MJBH=ZLZLS2.MJBH  and KCRKTH.GSBH=ZLZLS2.GSBH
+) ZLZLS2 where 1=1  
+and IsNull(HG_NO,'')<>'' or IsNull(TC_NO,'')<>'' or IsNull(HD_NO,'')<>'' 
+Group by ZLZLS2.HG_NO,ZLZLS2.Rate_HG,ZLZLS2.TC_NO,ZLZLS2.Rate_TC,ZLZLS2.HD_NO,ZLZLS2.Rate_HD
+  ) ZLZLS2   
+Group by ZLZLS2.HG_NO,ZLZLS2.TC_NO,ZLZLS2.HD_NO
+Order by ZLZLS2.HG_NO desc,ZLZLS2.TC_NO desc,ZLZLS2.HD_NO desc

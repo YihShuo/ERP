@@ -1,0 +1,26 @@
+select YWCP.DDBH,DDZL.KHPO,YWDD.YSBH,XXZL.Article,XXZL.XieMing,YWDD.ETD,LBZLS.YWSM as Country,KFZL.KFJC,
+       YWDD.Qty,okYWCP.okQty,sum(YWCP.Qty) as NowQty,YWBZPO.CTS,okYWCP.okCTS,count(YWCP.DDBH) as NowCTS,
+       (YWDD.Qty-okYWCP.okQty) as VarianceQty,(YWBZPO.CTS-okYWCP.okCTS) as VarianceCTS,okYWCP.TotalSGW,okYWCP.TotalRGW,okYWCP.AvgSGW,okYWCP.AvgRGW 
+from YWCP  with (nolock)
+left join YWDD  with (nolock) on YWDD.DDBH=YWCP.DDBH 
+left join DDZL  with (nolock) on YWDD.YSBH=DDZl.DDBH 
+left join XXZL  with (nolock) on DDZl.XieXing=XXZl.XieXing and DDZL.SheHao=XXZL.Shehao 
+left join LBZLS  with (nolock) on LBZLS.LB='06' and LBZLS.LBDH=DDZL.DDGB
+left join KFZL  with (nolock) on KFZL.KFDH=DDZL.KHBH 
+left join BDepartment  with (nolock) on BDepartment.ID=YWCP.DepNo 
+left join (select YWBZPO.DDBH,sum(YWBZPO.CTS) as CTS 
+           from (select distinct YWBZPOS.DDBH,YWBZPOS.XH,YWBZPOS.CTS from YWBZPOS  with (nolock) ) YWBZPO  
+           group by YWBZPO.DDBH) YWBZPO on YWCP.DDBH=YWBZPO.DDBH 
+left join (select DDBH,count(DDBH) as okCTS,sum(Qty) as okQty,Round(SUM(sgw),3) as TotalSGW,Round(AVG(sgw),3) as AvgSGW,Round(SUM(rgw),3) as TotalRGW,Round(AVG(rgw),3) as AvgRGW from YWCP with (nolock) 
+           where InDate is not null and ywcp.sb<>'2'
+           group by DDBH ) okYWCP on okYWCP.DDBH=YWDD.DDBH 
+where DDZL.DDBH like '%'
+      and BDepartment.DepName like '%%'
+      and isnull(KFZL.KFJC,'') like '%%'
+      and DDZL.GSBH='VA12'
+      and convert(varchar,YWCP.Indate,111) between 
+      '2013/12/05' and '2013/12/05'
+group by YWCP.DDBH,DDZL.KHPO,YWDD.YSBH,XXZL.Article,XXZL.XieMing,YWDD.ETD,LBZLS.YWSM,KFZL.KFJC,
+         YWDD.Qty,okYWCP.okQty,YWBZPO.CTS,okYWCP.okCTS,okYWCP.TotalSGW,okYWCP.TotalRGW,okYWCP.AvgSGW,okYWCP.AvgRGW
+order by YWCP.DDBH 
+

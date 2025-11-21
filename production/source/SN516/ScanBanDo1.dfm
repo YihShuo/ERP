@@ -1,0 +1,93 @@
+object ScanBanDo: TScanBanDo
+  Left = 337
+  Top = 155
+  Width = 826
+  Height = 450
+  Caption = 'ScanBanDo'
+  Color = clWindow
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnPaint = FormPaint
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Image: TImage
+    Left = 0
+    Top = 0
+    Width = 810
+    Height = 412
+    Align = alClient
+    PopupMenu = PopupMenu
+    Stretch = True
+  end
+  object KhoPanel: TPanel
+    Left = 8
+    Top = 8
+    Width = 113
+    Height = 41
+    Color = clAqua
+    TabOrder = 0
+    object KHO: TLabel
+      Left = 17
+      Top = 4
+      Width = 80
+      Height = 37
+      Alignment = taCenter
+      AutoSize = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -32
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+  end
+  object YWCP: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select YWCP.*,XXZL.Article,XXZL.XieMing,BDepartment.DepName,'
+      '          XXZL.XieXing,XXZL.SheHao,DDZL.DDGB'
+      'from YWCP'
+      'left join YWDD  on YWCP.DDBH=YWDD.DDBH'
+      'left join DDZL on DDZL.DDBH=YWDD.YSBH'
+      
+        'left join XXZL on XXZL.XieXing=DDZl.XieXing and XXZL.SheHao=DDZL' +
+        '.SheHao'
+      'left join BDepartment on BDepartment.ID=YWCP.DepNO'
+      'where YWCP.EXEDate is null '
+      '         and YWCP.CartonBar='#39'AAAA'#39
+      'order by  YWCP.CartonBar')
+    Left = 183
+    Top = 96
+  end
+  object PopupMenu: TPopupMenu
+    Left = 216
+    Top = 96
+    object N1OrderNo1: TMenuItem
+      Caption = 'Query Order No'
+      OnClick = N1OrderNo1Click
+    end
+    object ChangeKCBH1: TMenuItem
+      Caption = 'Change KCBH'
+      OnClick = ChangeKCBH1Click
+    end
+  end
+  object FreTimer: TTimer
+    Enabled = False
+    Interval = 300000
+    OnTimer = FreTimerTimer
+    Left = 184
+    Top = 128
+  end
+end

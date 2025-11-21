@@ -1,0 +1,45 @@
+object frm_come: Tfrm_come
+  Left = 0
+  Top = 0
+  Caption = #36001#29986#20358#28304#32173#35703
+  ClientHeight = 176
+  ClientWidth = 246
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  FormStyle = fsMDIForm
+  OldCreateOrder = False
+  Visible = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBGrid1: TDBGrid
+    Left = 32
+    Top = 8
+    Width = 176
+    Height = 120
+    DataSource = dm.dscome
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -12
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object DBNavigator1: TDBNavigator
+    Left = 16
+    Top = 134
+    Width = 200
+    Height = 25
+    DataSource = dm.dscome
+    TabOrder = 1
+  end
+end

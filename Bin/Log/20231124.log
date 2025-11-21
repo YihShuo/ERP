@@ -1,0 +1,4 @@
+Select TSCD_KCLL.DepID,TSCD_BDepartment.DepName 
+from TSCD_KCLL 
+Left join TSCD_BDepartment on TSCD_BDepartment.ID=TSCD_KCLL.DepID 
+where TSCD_KCLL.LLNO='ghi chu' and TSCD_KCLl.LB='FFFFFFFFFF'

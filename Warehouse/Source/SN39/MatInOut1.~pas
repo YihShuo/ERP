@@ -1,0 +1,375 @@
+unit MatInOut1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, DB, DBTables, Grids, DBGrids, ComCtrls, StdCtrls,
+  ExtCtrls,dateUtils, GridsEh, DBGridEh,ehlibBDE,comobj;
+
+type
+  TMatInOut = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
+    Label4: TLabel;
+    Edit2: TEdit;
+    Edit1: TEdit;
+    Button1: TButton;
+    Edit3: TEdit;
+    Button2: TButton;
+    DTP1: TDateTimePicker;
+    DBGrid1: TDBGridEh;
+    Query1: TQuery;
+    DataSource1: TDataSource;
+    query2: TQuery;
+    PopupMenu1: TPopupMenu;
+    NN1: TMenuItem;
+    NN2: TMenuItem;
+    NN3: TMenuItem;
+    Label6: TLabel;
+    DTP2: TDateTimePicker;
+    CB1: TCheckBox;
+    Query1CLDH: TStringField;
+    Query1CLLB: TStringField;
+    Query1YWPM: TStringField;
+    Query1DWBH: TStringField;
+    Query1KCBH: TStringField;
+    Query1LastRem: TCurrencyField;
+    Query1RKQty: TCurrencyField;
+    Query1LLQty: TCurrencyField;
+    Query1JGRK: TCurrencyField;
+    Query1JGCK: TCurrencyField;
+    Query1Qty: TCurrencyField;
+    Query1FLastRem: TCurrencyField;
+    Label2: TLabel;
+    CBX1: TComboBox;
+    Query1JGCKTemp: TCurrencyField;
+    Query1ZWPM: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure NN1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure NN2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MatInOut: TMatInOut;
+  NDate:TDate;
+
+implementation
+
+uses main1, MaterialTrace1;
+
+{$R *.dfm}
+
+procedure TMatInOut.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+with query2 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('  if object_id('+''''+'tempdb..#CLZLKC2'+''''+') is not null  ');
+    sql.add('begin   drop table #CLZLKC2 end   ');
+    execsql;
+  end;
+action:=cafree;
+end;
+
+procedure TMatInOut.Button1Click(Sender: TObject);
+var
+   year,month,day:word;
+   ayear,amonth:string;
+begin
+decodedate(DTP1.Date-1,Year,Month,Day);   //т畐闽计沮
+incAMonth(Year,Month,Day,-1);
+ayear:=floattostr(year);
+amonth:=floattostr(month);
+if length(amonth)=1 then
+  amonth:='0'+amonth;
+
+with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('  if object_id('+''''+'tempdb..#CLZLKC2'+''''+') is not null  ');
+    sql.add('begin   drop table #CLZLKC2 end   ');
+        //璸衡戳畐
+    sql.Add('select CLZL.CLDH,LastKC.FLastRem,RK.FRKQty,LL.FLLQty,JGRK.FJGRK,JGCK.FJGCK');
+    sql.add('into #CLZLKC2 from CLZL   with (nolock) ');
+
+    sql.add('left join (select KCCLMONTH.CLBH,KCCLMONTH.Qty as FLastRem ');
+    sql.add('           from KCCLMONTH   with (nolock) where KCCLMONTH.KCYEAR='+''''+ayear+'''');
+    sql.add('           and KCMONTH='+''''+amonth+'''');
+    sql.add('           and KCCLMONTH.CLBH like '+''''+edit1.Text+'%'+'''');
+    sql.Add('           and KCCLMONTH.CKBH='+''''+CBX1.Text+'''');
+    sql.add('           and KCCLMONTH.Qty<>0 ');
+    sql.add('           ) LastKC on LastKC.CLBH=CLZL.CLDH ');
+
+    sql.add('left join (select KCRKS.CLBH,sum(KCRKS.Qty) as FRKQty from KCRKS with (nolock) ');
+    sql.add('           left join KCRK with (nolock)  on KCRK.RKNO=KCRKS.RKNO where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))>=') ;
+    sql.add('           '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP1.date-1))+''''  );
+    sql.add('           and convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))<=');
+    sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP1.date-1)+''''  );
+    sql.add('           and KCRKS.CLBH like '+''''+edit1.Text+'%'+'''');  
+    sql.add('           and KCRKS.Qty<>0 ');
+    sql.Add('           and KCRK.CKBH='+''''+CBX1.Text+'''');
+    sql.add('           group by KCRKS.CLBH) RK on RK.CLBH=CLZL.CLDH ');
+
+    sql.add('left join (select KCLLS.CLBH,sum(KCLLS.Qty) as FLLQty from KCLLS  with (nolock) ');
+    sql.add('           left join KCLL  with (nolock) on KCLL.LLNO=KCLLS.LLNO where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>=')   ;
+    sql.add('           '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP1.date-1))+''''  );
+    sql.add('           and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))<=');
+    sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP1.date-1)+''''  );
+    sql.add('           and KCLLS.CLBH like '+''''+edit1.Text+'%'+'''');  
+    sql.add('           and KCLLS.Qty<>0 ');
+    sql.add('           and KCLL.CFMID<>'+''''+'NO'+'''');      
+    sql.Add('           and KCLL.CKBH='+''''+CBX1.Text+'''');
+    sql.add('           group by KCLLS.CLBH) LL on LL.CLBH=CLZL.CLDH');
+
+    sql.add('left join (select JGZLS.CLBH,sum(JGZLS.Qty) as FJGRK from JGZLS with (nolock) ');
+    sql.add('           left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>=');
+    sql.add('           '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP1.date-1))+''''  );
+    sql.add('           and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<=');
+    sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP1.date-1)+''''  );
+    sql.add('           and JGZLS.CLBH like '+''''+edit1.Text+'%'+'''');
+    sql.add('           and JGZLS.Qty<>0 ');
+    sql.add('           and JGZL.CFMID1 <>'+''''+'NO'+'''');
+    sql.add('           and JGZLS.ZMLB='+''''+'ZZZZZZZZZZ'+'''');  
+    sql.Add('           and JGZL.CKBH='+''''+CBX1.Text+'''');
+    sql.add('           group by JGZLS.CLBH ) JGRK on JGRK.CLBH=CLZL.CLDH');
+
+    sql.add('left join (select JGZLS.ZMLB,sum(round(convert(float,JGZLS.Qty)*convert(float,JGZLM.Qty),2)) as FJGCK from JGZLS with (nolock) ');
+    sql.add('           left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO  ');
+    sql.add('           left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty from JGZLS  with (nolock) ');
+    sql.add('                     left join JGZL with (nolock)  on JGZL.JGNO=JGZLS.JGNO where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>=');
+    sql.add('                     '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP1.date-1))+''''  );
+    sql.add('                     and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<=');
+    sql.add('                     '''+formatdatetime('yyyy/MM/dd',DTP1.date-1)+''''  );
+    sql.add('                     and JGZL.CFMID1 <>'+''''+'NO'+'''');
+    sql.add('                     and JGZLS.ZMLB='+''''+'ZZZZZZZZZZ'+'''');
+    sql.Add('                      and JGZL.CKBH='+''''+CBX1.Text+'''');
+    sql.add('                      ) JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM.CLBH=JGZLS.CLBH');
+    sql.add('           where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>=');
+    sql.add('           '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP1.date-1))+''''  );
+    sql.add('           and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<=');
+    sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP1.date-1)+''''  );
+    sql.add('           and JGZLS.ZMLB like '+''''+edit1.Text+'%'+'''');
+    sql.add('           and JGZLM.Qty<>0 ');
+    sql.add('           and JGZL.CFMID1 <>'+''''+'NO'+'''');
+    sql.add('           and JGZLS.ZMLB<>'+''''+'ZZZZZZZZZZ'+'''');    
+    sql.Add('           and JGZL.CKBH='+''''+CBX1.Text+'''');
+    sql.add('           group by JGZLS.ZMLB ) JGCK on JGCK.ZMLB=CLZL.CLDH');
+    //memo1.Text:=sql.text;
+
+    sql.add('select #CLZLKC2.FLastRem,#CLZLKC2.CLDH,CLZL.CLLB,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,KCZLS.KCBH,');
+
+    sql.add('       round(isnull(#CLZLKC2.FLastRem,0)+isnull(#CLZLKC2.FRKQty,0)-isnull(#CLZLKC2.FLLQty,0)');
+    sql.add('       +isnull(#CLZLKC2.FJGRK,0)-isnull(#CLZLKC2.FJGCK,0),2) as LastRem');
+
+    sql.add('       ,isnull(RK.RKQty,0) as RKQty,isnull(LL.LLQty,0) as LLQty,isnull(JGRK.JGRK,0) as JGRK,');
+    sql.add('       isnull(JGCK.JGCK,0) as JGCK, isnull(JGCKTemp.JGCK,0) as JGCKTemp,');
+
+    sql.add('       round(isnull(#CLZLKC2.FLastRem,0)+isnull(#CLZLKC2.FRKQty,0)-isnull(#CLZLKC2.FLLQty,0)');
+    sql.add('       +isnull(#CLZLKC2.FJGRK,0)-isnull(#CLZLKC2.FJGCK,0)+   ');
+    sql.add('       isnull(RK.RKQty,0)-isnull(LL.LLQty,0)');
+    sql.add('       +isnull(JGRK.JGRK,0)-isnull(JGCK.JGCK,0),2) as Qty');
+
+    sql.add('from #CLZLKC2 ');
+    sql.add('left join CLZL  with (nolock) on CLZl.CLDh=#CLZLKC2.CLDH ')  ;
+    sql.add('left join KCZLS  with (nolock) on KCZLS.CLBH=#CLZLKC2.CLDH and KCZLS.CKBH='+''''+CBX1.Text+'''');
+
+          //畐计秖
+    sql.add('left join (select KCRKS.CLBH,sum(KCRKS.Qty) as RKQty from KCRKS with (nolock) ');
+    sql.add('           left join KCRK  with (nolock) on KCRK.RKNO=KCRKS.RKNO where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))>=') ;
+    sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+    sql.add('           and convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))<=');
+    sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+    sql.add('           and KCRKS.CLBH like '+''''+edit1.Text+'%'+'''');
+    sql.add('           and KCRKS.Qty<>0 ');
+    sql.add('           and KCRK.CKBH='+''''+ CBX1.Text+'''');
+    sql.add('           group by KCRKS.CLBH) RK on RK.CLBH=#CLZLKC2.CLDH ');
+          //畐计秖
+    sql.add('left join (select KCLLS.CLBH,sum(KCLLS.Qty) as LLQty from KCLLS with (nolock)  ');
+    sql.add('           left join KCLL  with (nolock) on KCLL.LLNO=KCLLS.LLNO where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>=')   ;
+    sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+    sql.add('           and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))<=');
+    sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+    sql.add('           and KCLLS.CLBH like '+''''+edit1.Text+'%'+'''');
+    sql.add('           and KCLLS.Qty<>0 ');
+    sql.add('           and KCLL.CFMID<>'+''''+'NO'+'''');
+    sql.add('           and KCLL.CKBH='+''''+CBX1.Text+'''');
+    sql.add('           group by KCLLS.CLBH) LL on LL.CLBH=#CLZLKC2.CLDH');
+          //畐计秖
+    sql.add('left join (select JGZLS.CLBH,sum(JGZLS.Qty) as JGRK from JGZLS with (nolock) ');
+    sql.add('           left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>=');
+    sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+    sql.add('           and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<=');
+    sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+    sql.add('           and JGZLS.CLBH like '+''''+edit1.Text+'%'+'''');
+    sql.add('           and JGZLS.Qty<>0 ');
+    sql.add('           and JGZL.CFMID1 <>'+''''+'NO'+'''');
+    sql.add('           and JGZLS.ZMLB='+''''+'ZZZZZZZZZZ'+'''');
+    sql.add('           and JGZL.CKBH='+''''+CBX1.Text+'''');
+    sql.add('           group by JGZLS.CLBH ) JGRK on JGRK.CLBH=#CLZLKC2.CLDH');
+         //畐计秖
+    sql.add('left join (select JGZLS.ZMLB,sum(round(convert(float,JGZLS.Qty)*convert(float,JGZLM.Qty),2)) as JGCK from JGZLS with (nolock) ');
+    sql.add('           left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO  ');
+    sql.add('           left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty from JGZLS  with (nolock) ');
+    sql.add('                      left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>=');
+    sql.add('                      '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+    sql.add('                      and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<=');
+    sql.add('                      '''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+    sql.add('                      and JGZL.CFMID1 <>'+''''+'NO'+'''');
+    sql.add('                      and JGZLS.ZMLB='+''''+'ZZZZZZZZZZ'+'''');
+    sql.add('                      and JGZL.CKBH='+''''+CBX1.Text+'''');
+    sql.add('                      ) JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM.CLBH=JGZLS.CLBH');
+    sql.add('           where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>=');
+    sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+    sql.add('           and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<=');
+    sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+    sql.add('           and JGZLS.ZMLB like '+''''+edit1.Text+'%'+'''');
+    sql.add('           and JGZL.CFMID1 <>'+''''+'NO'+'''');
+    sql.add('           and JGZLS.ZMLB<>'+''''+'ZZZZZZZZZZ'+'''');
+    sql.add('           and JGZLM.Qty<>0 ');
+    sql.add('           and JGZl.CKBH='+''''+CBX1.Text+'''');
+    sql.add('           group by JGZLS.ZMLB ) JGCK on JGCK.ZMLB=#CLZLKC2.CLDH');
+
+     //ゴ虫ボ计秖
+    sql.add('left join (select JGZLS.ZMLB,sum(round(convert(float,JGZLS.Qty)*convert(float,JGZLM.Qty),2)) as JGCK from JGZLS with (nolock) ');
+    sql.add('           left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO  ');
+    sql.add('           left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty from JGZLS  with (nolock) ');
+    sql.add('                      left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO ');
+    sql.add('                      where  JGZLS.ZMLB='+''''+'ZZZZZZZZZZ'+'''');
+    sql.add('                            and JGZL.CKBH='+''''+CBX1.Text+'''');
+    sql.add('                      ) JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM.CLBH=JGZLS.CLBH');
+    sql.add('           where  JGZLS.ZMLB like '+''''+edit1.Text+'%'+'''');
+    sql.add('                  and JGZL.CFMID1 ='+''''+'NO'+'''');
+    sql.add('                  and JGZLS.ZMLB<>'+''''+'ZZZZZZZZZZ'+'''');
+    sql.add('                  and JGZLM.Qty<>0 ');
+    sql.add('                  and JGZl.CKBH='+''''+CBX1.Text+'''');
+    sql.add('           group by JGZLS.ZMLB ) JGCKTemp on JGCKTemp.ZMLB=#CLZLKC2.CLDH');
+
+
+    sql.add('  where not (#CLZLKC2.FLastRem is null  and #CLZLKC2.FRKQty is null and #CLZLKC2.FLLQty is null');
+    sql.add('        and #CLZLKC2.FJGRK is null and #CLZLKC2.FJGCK is null and RK.RKQty is null and LL.LLQty is null');
+    sql.add('        and JGRK.JGRK is null and JGCK.JGCK is null )');
+    if CB1.Checked then
+      begin
+        sql.add('and  not (RK.RKQty is null and LL.LLQty is null');
+        sql.add('        and JGRK.JGRK is null and JGCK.JGCK is null and JGCKTemp.JGCK is null)');
+      end;
+    //sql.add('and KCZLS.KCBH like '+''''+edit4.Text+'%'+'''');
+    sql.add('and #CLZLKC2.CLDH like '+''''+edit1.Text+'%'+'''');
+    sql.add('and CLZL.YWPM like '+''''+'%'+edit2.text+'%'+'''');
+    sql.add('and CLZL.YWPM like '+''''+'%'+edit3.text+'%'+'''');
+    sql.add('order by #CLZLKC2.CLDH  ');
+    //memo1.Text:=sql.text;
+    active:=true;
+  end;
+
+end;
+
+procedure TMatInOut.FormCreate(Sender: TObject);
+begin
+
+with query2 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select getdate() as NDate ');
+    active:=true;
+    NDate:=fieldbyname('NDate').Value;
+    active:=false;
+    sql.Clear;
+    sql.add('select CKBH from KCCK ');
+    sql.add('where GSBH='+''''+main.edit2.text+'''');
+    sql.add('order by CKBH ');
+    active:=true;
+    CBX1.items.clear;
+    while not eof do
+      begin
+        CBX1.items.add(fieldbyname('CKBH').AsString);
+        next;
+      end;
+    CBX1.itemindex:=0;
+    active:=false;
+  end;
+DTP1.Date:=NDate-6;
+DTP2.Date:=NDate;
+end;
+
+procedure TMatInOut.FormDestroy(Sender: TObject);
+begin
+MatInOut:=nil;
+end;
+
+procedure TMatInOut.NN1Click(Sender: TObject);
+begin
+
+MaterialTrace:=TMaterialTrace.create(self);
+MaterialTrace.edit1.Text:=query1.fieldbyname('CLDH').AsString;
+MaterialTrace.button1click(nil);
+MaterialTrace.show;
+end;
+
+procedure TMatInOut.Button2Click(Sender: TObject);
+var 
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+ begin
+  if  query1.active  then
+    begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('系统没有安装Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+        WorkBook:=eclApp.workbooks.Add;
+        for   i:=0   to   query1.fieldcount-1   do
+          begin
+              eclApp.Cells(4,i+1):=query1.fields[i].FieldName;
+              eclApp.Cells.item[1,i+1].font.size:='8';
+          end;
+
+        query1.First;
+        j:=2;
+        while   not   query1.Eof   do
+          begin
+            for   i:=0   to   query1.fieldcount-1   do
+            begin
+              eclApp.Cells(j+3,i+1):=query1.Fields[i].Value;
+              eclApp.Cells.item[j+3,i+1].font.size:='8';
+            end;
+          query1.Next;
+          inc(j);
+          end;
+     eclapp.columns.autofit;
+     showmessage('Succeed');
+      eclApp.Visible:=True;
+      except
+        on   F:Exception   do
+          showmessage(F.Message);
+      end;
+    end;
+
+
+end;
+
+procedure TMatInOut.NN2Click(Sender: TObject);
+begin
+button2click(nil);
+end;
+
+end.

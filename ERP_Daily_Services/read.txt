@@ -1,0 +1,8 @@
+慘痛經驗 可以complier 卻無反應
+ 注意 1. service啟動不起來 可能是 用複製貼上 event有事件 卻沒有reference 參考到 這種情形可以complier過
+         部會顯示錯誤
+      2. 要和新的 Form互動  一定要勾選 service form 的interactive=false
+
+      3. service application 不能建立AODquery  必須使用 use OLE2或ActiveX  在start 裡 coinitialize(nil);
+                                                                    stop     coUnitialize(nil);
+      4. service application 不能input data ???

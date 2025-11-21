@@ -1,0 +1,443 @@
+object main: Tmain
+  Left = 416
+  Top = 197
+  Width = 800
+  Height = 503
+  Caption = 'main'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIForm
+  Menu = MainMenu1
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Image1: TImage
+    Left = 0
+    Top = 0
+    Width = 784
+    Height = 444
+    Align = alClient
+    Stretch = True
+  end
+  object Edit1: TEdit
+    Left = 240
+    Top = 176
+    Width = 121
+    Height = 21
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 0
+    Visible = False
+  end
+  object Edit2: TEdit
+    Left = 240
+    Top = 208
+    Width = 121
+    Height = 21
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 1
+    Visible = False
+  end
+  object MainMenu1: TMainMenu
+    AutoHotkeys = maManual
+    Left = 96
+    Top = 88
+    object SN1: TMenuItem
+      Caption = 'N1 DataSetup'
+      Enabled = False
+      object SN11: TMenuItem
+        Caption = 'N11 QAStation'
+        OnClick = SN11Click
+      end
+      object N12DeffCode1: TMenuItem
+        Caption = 'N12 DeffCode'
+      end
+      object N13SPCSetup1: TMenuItem
+        Caption = 'N13 SPC Setup'
+      end
+      object N14DeffCodeCollate1: TMenuItem
+        Caption = 'N14 DeffCode Collate'
+      end
+      object N15ComupteSetup1: TMenuItem
+        Caption = 'N15 Comupte Setup'
+      end
+      object SN16: TMenuItem
+        Caption = 'N16 Flow Chart Interface'
+      end
+    end
+    object SN2: TMenuItem
+      Caption = 'N2 DeffInput'
+      Enabled = False
+      object SN21: TMenuItem
+        Caption = 'N21 Scan'
+      end
+      object SN23: TMenuItem
+        Caption = 'N22 Keyin'
+      end
+    end
+    object SN3: TMenuItem
+      Caption = 'N3 B.C Shoes'
+      object SN31: TMenuItem
+        Caption = 'N31 Shoes In'
+        OnClick = SN31Click
+      end
+      object SN32: TMenuItem
+        Caption = 'N32 Shoes Out'
+        OnClick = SN32Click
+      end
+      object SN33: TMenuItem
+        Caption = 'N33 Shoes Stock'
+        OnClick = SN33Click
+      end
+      object SN34: TMenuItem
+        Caption = 'N34 Lab Check'
+        Enabled = False
+      end
+      object SN35: TMenuItem
+        Caption = 'N35 Inventory'
+        OnClick = SN35Click
+      end
+      object SN36: TMenuItem
+        Caption = 'N36 Stock In'
+        OnClick = SN36Click
+      end
+      object SN37: TMenuItem
+        Caption = 'N37 Stock Out'
+        OnClick = SN37Click
+      end
+      object SN38: TMenuItem
+        Caption = 'N38 B-Grade Orders'
+        OnClick = SN38Click
+      end
+      object SN39: TMenuItem
+        Caption = 'N39 Stock Report'
+        object SN391: TMenuItem
+          Caption = 'N391 Stock In Report'
+          OnClick = SN391Click
+        end
+        object SN392: TMenuItem
+          Caption = 'N392 Stock Out Report'
+          OnClick = SN392Click
+        end
+      end
+    end
+    object SN4: TMenuItem
+      Caption = 'N4 IQC'
+      object SN41: TMenuItem
+        Caption = 'N41 Wait For Inspect'
+        OnClick = SN41Click
+      end
+      object SN42: TMenuItem
+        Caption = 'N42 Inspectted'
+        OnClick = SN42Click
+      end
+      object SN43: TMenuItem
+        Caption = 'N43 Outsole Inspection'
+        OnClick = SN43Click
+      end
+      object SN44: TMenuItem
+        Caption = 'N44 Hour Inspection/ Daily Inspection'
+        OnClick = SN44Click
+      end
+      object SN45: TMenuItem
+        Caption = 'N45 MA Defect Analysis'
+        OnClick = SN45Click
+      end
+      object SN46: TMenuItem
+        Caption = 'N46 MA Action Plan'
+        OnClick = SN46Click
+      end
+      object SN47: TMenuItem
+        Caption = 'N47 Carton Inspection Reports'
+        object SN471: TMenuItem
+          Caption = 'N471 All Inspection Report'
+          OnClick = SN471Click
+        end
+        object SN472: TMenuItem
+          Caption = 'N472 Single Inspection Report'
+          OnClick = SN472Click
+        end
+      end
+      object SN48: TMenuItem
+        Caption = 'N48 Carton inspection'
+        OnClick = SN48Click
+      end
+      object SN49: TMenuItem
+        Caption = 'N49 RY Inspection Status'
+        OnClick = SN49Click
+      end
+      object SN4A: TMenuItem
+        Caption = 'N4A Failed Cartons Input'
+        OnClick = SN4AClick
+      end
+    end
+    object SN5: TMenuItem
+      Caption = 'N5 In-Line QC'
+      object SN51: TMenuItem
+        Caption = 'N51 QC Issue'
+        OnClick = SN51Click
+      end
+      object SN52: TMenuItem
+        Caption = 'N52 Daily Data'
+        Enabled = False
+        OnClick = SN52Click
+      end
+      object SN53: TMenuItem
+        Caption = 'N53 Daily Report'
+        Enabled = False
+        OnClick = SN53Click
+      end
+      object SN54: TMenuItem
+        Caption = 'N54 Feedback on site'
+        Enabled = False
+        OnClick = SN54Click
+      end
+      object SN55: TMenuItem
+        Caption = 'N55 QC Monthly report'
+        Enabled = False
+        OnClick = SN55Click
+      end
+      object SN56: TMenuItem
+        Caption = 'N56 Andon input'
+        OnClick = SN56Click
+      end
+      object SN57: TMenuItem
+        Caption = 'N57 QC Query'
+        Enabled = False
+        OnClick = SN57Click
+      end
+      object SN58: TMenuItem
+        Caption = 'N58 Daily Total'
+        Enabled = False
+        OnClick = SN58Click
+      end
+      object SN59: TMenuItem
+        Caption = 'N59 QC New Query List'
+        Enabled = False
+        OnClick = SN59Click
+      end
+      object SN5A: TMenuItem
+        Caption = 'N5A QC Spot Check Set'
+        OnClick = SN5AClick
+      end
+      object SN5B: TMenuItem
+        Caption = 'N5B QC Defect input'
+        OnClick = SN5BClick
+      end
+      object SN5C: TMenuItem
+        Caption = 'N5C QC FGS input'
+        OnClick = SN5CClick
+      end
+      object SN5D: TMenuItem
+        Caption = 'N5D QC Confirm Shoes'
+        OnClick = SN5DClick
+      end
+      object SN5E: TMenuItem
+        Caption = 'N5E Andon Alarm Setting'
+        OnClick = SN5EClick
+      end
+      object SN5F: TMenuItem
+        Caption = 'N5F Outsole Inspection'
+        OnClick = SN5FClick
+      end
+      object SN5G: TMenuItem
+        Caption = 'N5G CBY_QC'
+        object SN5G1: TMenuItem
+          Caption = 'SN5G1 CBY_QC'
+          OnClick = SN5G1Click
+        end
+        object SN5G2: TMenuItem
+          Caption = 'SN5G2 CBY_QC_Report'
+          OnClick = SN5G2Click
+        end
+      end
+      object SN5H: TMenuItem
+        Caption = 'N5H QC end of Assembly'
+        OnClick = SN5HClick
+      end
+      object SN5I: TMenuItem
+        Caption = 'N5I QC report'
+        object SN5I1: TMenuItem
+          Caption = 'N5I1 QC scan report'
+          OnClick = SN5I1Click
+        end
+        object SN5I2: TMenuItem
+          Caption = 'N5I2 QC defect report'
+          OnClick = SN5I2Click
+        end
+        object SN5I3: TMenuItem
+          Caption = 'N5I3 QC month defect'
+          OnClick = SN5I3Click
+        end
+        object SN5I4: TMenuItem
+          Caption = 'N5I4 QC special defect'
+          Visible = False
+          OnClick = SN5I4Click
+        end
+      end
+      object SN5J: TMenuItem
+        Caption = 'N5J R_Factory_QC'
+        object SN5J1: TMenuItem
+          Caption = 'N5J1 R_Factory_QC'
+          OnClick = SN5J1Click
+        end
+        object SN5J2: TMenuItem
+          Caption = 'N5J2 R_QC_Report'
+          OnClick = SN5J2Click
+        end
+      end
+      object SN5K: TMenuItem
+        Caption = 'N5K QC Paramt Config'
+        OnClick = SN5KClick
+      end
+    end
+    object SN6: TMenuItem
+      Caption = 'N6 VOC'
+      object SN61: TMenuItem
+        Caption = 'N61 VOC Production Inupt'
+        OnClick = SN61Click
+      end
+      object SN62: TMenuItem
+        Caption = 'N62 VOC Tracking Report'
+        OnClick = SN62Click
+      end
+      object SN63: TMenuItem
+        Caption = 'N63 Cement BOM'
+        OnClick = SN63Click
+      end
+    end
+    object SN7: TMenuItem
+      Caption = 'N7 QC Lab'
+      object SN71: TMenuItem
+        Caption = 'N71 Finish Shoe Test'
+        object SN711: TMenuItem
+          Caption = 'N711 Bonding and Flexing'
+          OnClick = SN711Click
+        end
+        object SN712: TMenuItem
+          Caption = 'N712 FGS Standard Value'
+          OnClick = SN712Click
+        end
+      end
+      object SN72: TMenuItem
+        Caption = 'N72 QC Material Testing'
+        object SN721: TMenuItem
+          Caption = 'SN721 QC Material '
+          OnClick = SN721Click
+        end
+        object SN722: TMenuItem
+          Caption = 'SN722 Leather Report'
+          OnClick = SN722Click
+        end
+        object SN723: TMenuItem
+          Caption = 'SN723 Textile/Accessory Report'
+          OnClick = SN723Click
+        end
+        object SN724: TMenuItem
+          Caption = 'SN724 Mat Lab Check'
+          OnClick = SN724Click
+        end
+      end
+      object SN73: TMenuItem
+        Caption = 'N73 Test Item'
+        OnClick = SN73Click
+      end
+      object SN74: TMenuItem
+        Caption = 'N74 ShoeTest'
+        OnClick = SN74Click
+      end
+      object SN75: TMenuItem
+        Caption = 'N75 Material Test (Converse)'
+        OnClick = SN75Click
+      end
+      object SN76: TMenuItem
+        Caption = 'N76 Input Reject'
+        OnClick = SN76Click
+      end
+      object SN77: TMenuItem
+        Caption = 'N77 Claim Report'
+        OnClick = SN77Click
+      end
+      object SN78: TMenuItem
+        Caption = 'N78 Outsole Inspection Report'
+        OnClick = SN78Click
+      end
+      object SN79: TMenuItem
+        Caption = 'N79 PI List'
+        OnClick = SN79Click
+      end
+      object SN7A: TMenuItem
+        Caption = 'N7A RCA'
+        OnClick = SN7AClick
+      end
+    end
+    object SN8: TMenuItem
+      Caption = 'N8 Report'
+      object SN811: TMenuItem
+        Caption = 'N81 Outsole Inspection Report'
+        OnClick = SN811Click
+      end
+      object SN82: TMenuItem
+        Caption = 'N82 Top Issues at end of Assembling'
+        OnClick = SN82Click
+      end
+      object SN83: TMenuItem
+        Caption = 'N83 Daily Assembling Checking Report'
+        OnClick = SN83Click
+      end
+    end
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select *'
+      'from BLimits'
+      'where USERID=:userid'
+      'and MKID=:mkid'
+      'and GSBH=:GSBH')
+    Left = 64
+    Top = 88
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'userid'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'mkid'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'GSBH'
+        ParamType = ptUnknown
+      end>
+  end
+  object BLimitHideQry: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select FORMID,YN'
+      'from BLimit'
+      'where BLimit.MKID=:mkid '
+      '')
+    Left = 64
+    Top = 120
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'mkid'
+        ParamType = ptUnknown
+      end>
+  end
+end

@@ -1,0 +1,125 @@
+unit NewreplenishLR1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls;
+
+type
+  TNewreplenishLR = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Label3: TLabel;
+    Edit3: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  NewreplenishLR: TNewreplenishLR;
+
+implementation
+
+uses NewReplenish1;
+
+{$R *.dfm}
+
+procedure TNewreplenishLR.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+if not (Key in ['0'..'9',#8,#13])   then
+  begin
+    key:=#0;
+  end;
+end;
+
+procedure TNewreplenishLR.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin
+if not (Key in ['0'..'9',#8,#13] )  then
+  begin
+    key:=#0;
+  end;
+end;
+
+procedure TNewreplenishLR.Button2Click(Sender: TObject);
+begin
+edit1.Text:='';
+edit2.Text:='';
+edit3.Text:='';
+end;
+
+procedure TNewreplenishLR.Button3Click(Sender: TObject);
+begin
+close;
+end;
+
+procedure TNewreplenishLR.Button1Click(Sender: TObject);
+var i:double;
+a,b,c:string;
+begin
+a:='';
+if edit1.text='' then
+  begin
+    b:='0';
+  end
+  else
+    begin
+      b:=edit1.Text;
+      a:='L/'+b;
+    end;
+if edit2.text='' then
+  begin
+    c:='0';
+  end
+  else
+    begin
+      c:=edit2.Text;
+      a:=a+' R/'+c;
+    end;
+if not (edit3.text='') then
+  begin
+    a:=a+'  '+edit3.Text;
+  end;
+
+i:=(strtoint(b)+strtoint(c))/2;
+
+with NewReplenish.QSize do
+  begin
+    if i<>0 then
+      begin
+        edit;
+        fieldbyname('Qty').value:=i;
+        fieldbyname('Memo').value:=a;
+        NewReplenish.BD5.Enabled:=true;
+        NewReplenish.BD6.Enabled:=true;  
+      end;
+  end;
+close;
+end;
+
+procedure TNewreplenishLR.FormDestroy(Sender: TObject);
+begin
+NewreplenishLR:=nil;
+end;
+
+procedure TNewreplenishLR.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=Cafree;
+end;
+
+end.

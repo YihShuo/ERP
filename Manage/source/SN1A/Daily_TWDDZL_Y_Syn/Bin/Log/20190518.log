@@ -1,0 +1,19 @@
+Insert DDZL_Y
+select DDBH,'N',null,'SYSTEM',convert(varchar,GETDATE(),112) from ddzl
+where exists (select scbh from kcll
+                     where kcll.scbh = ddzl.ddbh
+                     and kcll.CFMID <> 'NO'
+                     and KCLL.CFMDate > GETDATE()-2
+             and GSBH  in (select GSDH from bgszl where SFL='PD' and YN=1) )
+and not exists (select ddbh from ddzl_Y where ddzl.ddbh = ddzl_Y.ddbh)        
+Update DDZL_Y set YN='N',USERID='SYSTEM',USERDATE=convert(varchar,GETDATE(),112)
+from (
+select DDBH from DDZL_Y 
+where YN='Y' and USERID<>'SYSTEM' and convert(varchar,GETDATE(),112)-3>=USERDATE  ) DDZL
+where DDZL_Y.DDBH=DDZL.DDBH
+Delete from TWDB.LIY_SHOE.dbo.DDZL_Y 
+where DDBH in (select DDBH from DDZL_Y  where USERDATE>GETDATE()-1 )
+Insert into TWDB.LIY_SHOE.dbo.DDZL_Y
+select * from DDZL_Y 
+where USERDATE>GETDATE()-1
+2019/05/18 ¤W¤È 08:41:18 Success

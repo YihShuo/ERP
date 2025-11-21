@@ -1,0 +1,211 @@
+unit DelOther_D_CL1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls, ComCtrls,
+  GridsEh, DBGridEh;
+
+type
+  TDelOther_D_CL = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Button1: TButton;
+    Edit2: TEdit;
+    EDIT1: TEdit;
+    Edit3: TEdit;
+    DS1: TDataSource;
+    Query1: TQuery;
+    Query1cldh: TStringField;
+    Query1cllb: TStringField;
+    Query1ywpm: TStringField;
+    Query1zwpm: TStringField;
+    Query1dwbh: TStringField;
+    Query1KCQty: TFloatField;
+    Query1NK: TCurrencyField;
+    Query1HD: TCurrencyField;
+    Query1KD: TCurrencyField;
+    Query1XT: TCurrencyField;
+    Query1GC: TCurrencyField;
+    Query1ZZZZ: TCurrencyField;
+    DBGridEh1: TDBGridEh;
+    Query1TC: TCurrencyField;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure EDIT1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    procedure Button1Click(Sender: TObject);
+    procedure Edit3KeyPress(Sender: TObject; var Key: Char);
+    //procedure FormCreate(Sender: TObject);
+    procedure BaseDateChange(Sender: TObject);
+    procedure DBGridEh1DblClick(Sender: TObject);
+    procedure DBGridEh1KeyPress(Sender: TObject; var Key: Char);
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+    LastMon:string;
+    LastYear:string;
+    STLastMonDate:string;
+    EDLastMonDate:string;
+    //
+    LastMon2:string;
+    LastYear2:string;
+    //
+    STDate:string;
+    EDDate:string;
+    { Private declarations }
+    procedure GetDateParam();
+  public
+    { Public declarations }
+    DevQTy:real;
+    TechQty:real;
+  end;
+
+var
+  DelOther_D_CL: TDelOther_D_CL;
+
+implementation
+
+uses main1,DelOther_D1,Fununit;
+
+{$R *.dfm}
+
+procedure TDelOther_D_CL.FormDestroy(Sender: TObject);
+begin
+  DelOther_D_CL:=nil;
+end;
+
+procedure TDelOther_D_CL.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  query1.active:=false;
+  action:=cafree;
+end;
+
+procedure TDelOther_D_CL.EDIT1KeyPress(Sender: TObject; var Key: Char);
+begin
+  if key=#13 then
+  edit2.SetFocus;
+end;
+
+procedure TDelOther_D_CL.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin
+  if key=#13 then
+  edit3.SetFocus;
+end;
+
+procedure TDelOther_D_CL.Button1Click(Sender: TObject);
+begin
+ with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('select CLZL.CLDH,CLZL.CLLB,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,KCZLS.KCQty,KCZLS.NK,KCZLS.TC,KCZLS.HD,KCZLS.KD,KCZLS.XT,KCZLS.GC,KCZLS.ZZZZ');
+    sql.Add('from clzl');
+    sql.add('left join KCZLS on KCZLS.CLBH=CLZL.CLDh and KCZLS.CKBH='+''''+DelOther_D.DelMas.fieldbyname('CKBH').value+'''');
+    sql.add('where CLZL.CLDH like'+''''+edit1.Text+'%'+'''');
+    sql.add('      and CLZL.YWPM like '+''''+'%'+edit2.Text+'%'+'''');
+    sql.add('      and CLZL.ZWPM like '+''''+'%'+edit3.Text+'%'+'''');
+    sql.add('order by CLZL.CLDH desc');
+    //funcobj.WriteErrorLog(sql.Text);
+    active:=true;
+  end;
+end;
+//
+function DaysOfItsMonth(ADate:   TDateTime):   Word;
+var
+   Y,M,D:Word;
+begin
+    DecodeDate(ADate,Y,M,D);
+    ADate:=EncodeDate(Y,M,1);
+    Result:=Trunc(IncMonth(ADate,1)-ADate);
+end;
+
+procedure TDelOther_D_CL.GetDateParam();
+var myYear, myMonth, myDay : Word;
+    tmpDate:TDate;
+begin
+  tmpDate:=incmonth(Date(),-1);
+  DecodeDate(tmpDate, myYear, myMonth, myDay);
+  LastMon:=Format('%.2d',[myMonth]);
+  LastYear:=Format('%.4d',[myYear]);
+  STLastMonDate:=FormatDateTime('YYYY/MM/DD', EncodeDate(myYear, myMonth, 1));
+  EDLastMonDate:=FormatDateTime('YYYY/MM/DD', EncodeDate(myYear, myMonth, DaysOfItsMonth(tmpDate)));
+
+  tmpDate:=incmonth(Date(),-2);
+  DecodeDate(tmpDate, myYear, myMonth, myDay);
+  LastMon2:=Format('%.2d',[myMonth]);
+  LastYear2:=Format('%.4d',[myYear]);
+
+  DecodeDate(Date(), myYear, myMonth, myDay);
+  STDate:=FormatDateTime('YYYY/MM/DD', EncodeDate(myYear, myMonth, 1));
+  EDDate:=FormatDateTime('YYYY/MM/DD', Date());
+end;
+//
+
+procedure TDelOther_D_CL.Edit3KeyPress(Sender: TObject; var Key: Char);
+begin
+  if key=#13 then
+  button1Click(nil);
+end;
+
+procedure TDelOther_D_CL.BaseDateChange(Sender: TObject);
+begin
+  GetDateParam();
+end;
+
+procedure TDelOther_D_CL.DBGridEh1DblClick(Sender: TObject);
+begin
+  if (not query1.Active) then
+  begin
+    abort;
+  end;
+  if (Query1.recordcount<1) then
+  begin
+    abort;
+  end;
+  if query1.FieldByName('KCQty').value=0 then
+  begin
+    showmessage('khong con ton kho, van can mo phieu sao?');
+  end;
+
+  with DelOther_D.DelDet do
+  begin
+    insert;
+    fieldbyname('CLBH').value:=query1.fieldbyname('CLDH').value;
+    fieldbyname('SCBH').value:='ZZZZZZZZZZ';
+    fieldbyname('YWPM').value:=query1.fieldbyname('YWPM').value;
+    //fieldbyname('ZWPM').value:=query1.fieldbyname('ZWPM').value;
+    fieldbyname('DWBH').value:=query1.fieldbyname('DWBH').value;
+    //fieldbyname('CostID').value:='627';
+    fieldbyname('DFL').value:='N';
+    post;
+   end;
+   showmessage('Succeed.');
+end;
+
+procedure TDelOther_D_CL.DBGridEh1KeyPress(Sender: TObject; var Key: Char);
+begin
+  if key=#13 then
+  DBGridEh1DblClick(nil);
+end;
+
+procedure TDelOther_D_CL.FormShow(Sender: TObject);
+begin
+  main.FormLanguage(Pointer(self),self.Name);
+end;
+
+procedure TDelOther_D_CL.FormCreate(Sender: TObject);
+begin
+  if DelOther_D.IsHide_Warehouse_XT='Y' then
+  begin
+    DBGridEh1.Columns[9].Visible:=false;
+    DBGridEh1.Columns[11].Visible:=false;
+  end;
+end;
+
+end.

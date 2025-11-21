@@ -1,0 +1,366 @@
+if object_id('tempdb..#CLZLKC') is not null  
+begin   drop table #CLZLKC end   
+select KCZLS.CKBH,KCZLS.CLBH as CLDH,LastKC.LBBH,LastKC.LastRem,RK.RKQty,LL.LLQty,JGRK.JGRK,JGCK.JGCK,JGCKTemp.JGCK as JGCKTemp into #CLZLKC  
+from KCZLS with (nolock) 
+Left join ( 
+     Select KCCLMONTH.CKBH,KCCLMONTH.CLBH,Max(KCCLMONTH.LBBH) as LBBH,Sum(KCCLMONTH.Qty) as LastRem 
+     from KCCLMONTH_HG as KCCLMONTH   with (nolock) 
+     where KCCLMONTH.KCYEAR='2025' 
+           and KCMONTH='05'
+           and KCCLMONTH.CLBH like '%' 
+        and KCCLMONTH.CKBH='VDH'
+      Group by  KCCLMONTH.CKBH,KCCLMONTH.CLBH 
+      ) LastKC  on LastKC.CLBH=KCZLS.CLBH and LastKC.CKBH=KCZLS.CKBH 
+left join (select KCRK.CKBH,KCRKS.CLBH,sum(KCRKS.Qty) as RKQty from KCRKS with (nolock)  
+           left join KCRK with (nolock)   on KCRK.RKNO=KCRKS.RKNO where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))>=
+           '2025/06/01'
+           and convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))<=
+           '2025/06/12'
+           and KCRKS.CLBH like '%'
+           and KCRK.CKBH='VDH'
+           group by KCRK.CKBH,KCRKS.CLBH) RK on RK.CLBH=KCZLS.CLBH  and RK.CKBH=KCZLS.ckbh
+left join (select KCLL.CKBH,KCLLS.CLBH,sum(KCLLS.Qty) as LLQty from KCLLS with (nolock)   
+           left join KCLL with (nolock)    on KCLL.LLNO=KCLLS.LLNO where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>=
+           '2025/06/01'
+           and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))<=
+           '2025/06/12'
+           and KCLLS.CLBH like '%' 
+           and KCLL.CFMID<>'NO'
+           and KCLL.SCBH<>'JJJJJJJJJJ'
+           and KCLL.CKBH='VDH'
+           group by KCLL.CKBH,KCLLS.CLBH) LL on LL.CLBH=KCZLS.CLBH and LL.CKBH=KCZLS.ckbh
+left join (select JGZL.CKBH,JGZLS.CLBH,sum(JGZLS.Qty) as JGRK from JGZLS with (nolock) 
+           left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>=
+           '2025/06/01'
+           and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<=
+           '2025/06/12'
+           and JGZLS.CLBH like '%' 
+           and JGZL.CFMID1 <>'NO' 
+           and JGZLS.ZMLB='ZZZZZZZZZZ' 
+           and JGZL.CKBH='VDH'
+           group by JGZL.CKBH,JGZLS.CLBH ) JGRK on JGRK.CLBH=KCZLS.CLBH and JGRK.CKBH=KCZLS.CKBH
+left join (select JGZL.CKBH,JGZLS.ZMLB,convert(money,sum(round(convert(float,JGZLS.Qty)*convert(float,JGZLM.Qty),2))) as JGCK from JGZLS with (nolock) 
+           left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO  
+           left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty from JGZLS  with (nolock) 
+                      left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO 
+                      where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>=
+                      '2025/06/01'
+                      and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<=
+                      '2025/06/12'
+                      and JGZL.CFMID1 <>'NO'
+                      and JGZLS.ZMLB='ZZZZZZZZZZ'
+                      and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<'2017/09/01'
+                   and JGZL.CKBH='VDH'
+                      ) JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM.CLBH=JGZLS.CLBH
+           where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>=
+           '2025/06/01'
+           and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<=
+           '2025/06/12'
+           and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<'2017/09/01'
+           and JGZLS.ZMLB like '%'
+           and JGZL.CFMID1 <>'NO' 
+           and JGZLS.ZMLB<>'ZZZZZZZZZZ' 
+        and JGZL.CKBH='VDH'
+        group by JGZL.CKBH,JGZLS.ZMLB 
+        union all
+        select KCLL.CKBH,KCLLS.CLBH,sum(KCLLS.Qty) as LLQty from KCLLS 
+        left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+        where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>=
+        '2025/06/01'
+        and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))<=
+        '2025/06/12'
+        and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='2017/09/01'
+        and KCLL.SCBH = 'JJJJJJJJJJ' and KCLL.CFMID<>'NO'
+        and KCLLS.CLBH like '%' 
+        and KCLL.CKBH='VDH'
+         group by KCLL.CKBH,KCLLS.CLBH
+        ) JGCK on JGCK.ZMLB=KCZLS.CLBH and JGCK.CKBH=KCZLS.ckbh
+left join (select JGZL.CKBH,JGZLS.ZMLB,convert(money,sum(round(convert(float,JGZLS.Qty)*convert(float,JGZLM.Qty),2))) as JGCK from JGZLS with (nolock) 
+           left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO  
+           left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty from JGZLS  with (nolock) 
+                      left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO 
+                      where  JGZLS.ZMLB='ZZZZZZZZZZ'
+                      and JGZL.CKBH='VDH'
+                      ) JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM.CLBH=JGZLS.CLBH
+           where  JGZLS.ZMLB like '%'
+           and JGZL.CFMID1 ='NO'
+           and JGZLS.ZMLB<>'ZZZZZZZZZZ'
+        and JGZL.CKBH='VDH'
+           group by JGZL.CKBH,JGZLS.ZMLB ) JGCKTemp on JGCKTemp.ZMLB=KCZLS.CLBH and JGCKTemp.CKBH=KCZLS.ckbh
+where  not (LastKC.LastRem is null  and RK.RKQty is null and LL.LLQty is null and JGRK.JGRK is null and JGCK.JGCK is null and JGCKTemp.JGCK is null) 
+select CLHG.HGBH,clzl.zsdh,zszl.zsqm,#CLZLKC.CLDH,IsNull(#CLZLKC.LBBH,CLLBFLS.LBBH) as LBBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,isnull(#CLZLKC.LastRem,0) as LastRem,
+       isnull(round(#CLZLKC.RKQty,2),0) as RKQty,isnull(round(#CLZLKC.LLQty,2),0) as LLQty,
+       isnull(round(#CLZLKC.JGRK,2),0) as JGRK,isnull(round(#CLZLKC.JGCK,2),0) as JGCK,
+       isnull(round(#CLZLKC.JGCKTemp,2),0) as JGCKTemp,KCZLS.KCBH,KCZLS.CKBH,KCZLS.KCBH,
+       isnull(Round(#CLZLKC.LastRem,2),0)+isnull(Round(#CLZLKC.RKQty,2),0)-isnull(Round(#CLZLKC.LLQty,2),0)+isnull(Round(#CLZLKC.JGRK,2),0)-isnull(Round(#CLZLKC.JGCK,2),0) as Qty
+from #CLZLKC 
+left join CLZL on CLZL.CLDH=#CLZLKC.CLDH
+left join zszl on zszl.zsdh=clzl.zsdh 
+left join  KCZLS on KCZLS.CLBH=#CLZLKC.CLDH  and KCZLS.CKBH=#CLZLKC.CKBH 
+left join CLLBFLS on CLLBFLS.CLBH=CLZL.CLDH and CLLBFLS.GSBH='VDH' 
+left join CLHG on CLHG.CLBH=#CLZLKC.CLDH  
+where
+ not (#CLZLKC.LastRem is null  and #CLZLKC.RKQty is null and #CLZLKC.LLQty is null 
+               and #CLZLKC.JGRK is null and #CLZLKC.JGCK is null and #CLZLKC.JGCKTemp is null) 
+ and KCZLS.CKBH='VDH' 
+and #CLZLKC.CLDH like '%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+order by #CLZLKC.CLDH
+if object_id('tempdb..#CLZLKC') is not null  
+begin   drop table #CLZLKC end   
+select KCZLS.CKBH,KCZLS.CLBH as CLDH,LastKC.LBBH,LastKC.LastRem,RK.RKQty,LL.LLQty,JGRK.JGRK,JGCK.JGCK,JGCKTemp.JGCK as JGCKTemp into #CLZLKC  
+from KCZLS with (nolock) 
+Left join ( 
+     Select KCCLMONTH.CKBH,KCCLMONTH.CLBH,Max(KCCLMONTH.LBBH) as LBBH,Sum(KCCLMONTH.Qty) as LastRem 
+     from KCCLMONTH_HG as KCCLMONTH   with (nolock) 
+     where KCCLMONTH.KCYEAR='2025' 
+           and KCMONTH='05'
+           and KCCLMONTH.CLBH like '%' 
+        and KCCLMONTH.CKBH='VDH'
+      Group by  KCCLMONTH.CKBH,KCCLMONTH.CLBH 
+      ) LastKC  on LastKC.CLBH=KCZLS.CLBH and LastKC.CKBH=KCZLS.CKBH 
+left join (select KCRK.CKBH,KCRKS.CLBH,sum(KCRKS.Qty) as RKQty from KCRKS with (nolock)  
+           left join KCRK with (nolock)   on KCRK.RKNO=KCRKS.RKNO where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))>=
+           '2025/06/01'
+           and convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))<=
+           '2025/06/12'
+           and KCRKS.CLBH like '%'
+           and KCRK.CKBH='VDH'
+           group by KCRK.CKBH,KCRKS.CLBH) RK on RK.CLBH=KCZLS.CLBH  and RK.CKBH=KCZLS.ckbh
+left join (select KCLL.CKBH,KCLLS.CLBH,sum(KCLLS.Qty) as LLQty from KCLLS with (nolock)   
+           left join KCLL with (nolock)    on KCLL.LLNO=KCLLS.LLNO where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>=
+           '2025/06/01'
+           and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))<=
+           '2025/06/12'
+           and KCLLS.CLBH like '%' 
+           and KCLL.CFMID<>'NO'
+           and KCLL.SCBH<>'JJJJJJJJJJ'
+           and KCLL.CKBH='VDH'
+           group by KCLL.CKBH,KCLLS.CLBH) LL on LL.CLBH=KCZLS.CLBH and LL.CKBH=KCZLS.ckbh
+left join (select JGZL.CKBH,JGZLS.CLBH,sum(JGZLS.Qty) as JGRK from JGZLS with (nolock) 
+           left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>=
+           '2025/06/01'
+           and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<=
+           '2025/06/12'
+           and JGZLS.CLBH like '%' 
+           and JGZL.CFMID1 <>'NO' 
+           and JGZLS.ZMLB='ZZZZZZZZZZ' 
+           and JGZL.CKBH='VDH'
+           group by JGZL.CKBH,JGZLS.CLBH ) JGRK on JGRK.CLBH=KCZLS.CLBH and JGRK.CKBH=KCZLS.CKBH
+left join (select JGZL.CKBH,JGZLS.ZMLB,convert(money,sum(round(convert(float,JGZLS.Qty)*convert(float,JGZLM.Qty),2))) as JGCK from JGZLS with (nolock) 
+           left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO  
+           left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty from JGZLS  with (nolock) 
+                      left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO 
+                      where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>=
+                      '2025/06/01'
+                      and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<=
+                      '2025/06/12'
+                      and JGZL.CFMID1 <>'NO'
+                      and JGZLS.ZMLB='ZZZZZZZZZZ'
+                      and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<'2017/09/01'
+                   and JGZL.CKBH='VDH'
+                      ) JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM.CLBH=JGZLS.CLBH
+           where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>=
+           '2025/06/01'
+           and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<=
+           '2025/06/12'
+           and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<'2017/09/01'
+           and JGZLS.ZMLB like '%'
+           and JGZL.CFMID1 <>'NO' 
+           and JGZLS.ZMLB<>'ZZZZZZZZZZ' 
+        and JGZL.CKBH='VDH'
+        group by JGZL.CKBH,JGZLS.ZMLB 
+        union all
+        select KCLL.CKBH,KCLLS.CLBH,sum(KCLLS.Qty) as LLQty from KCLLS 
+        left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+        where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>=
+        '2025/06/01'
+        and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))<=
+        '2025/06/12'
+        and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='2017/09/01'
+        and KCLL.SCBH = 'JJJJJJJJJJ' and KCLL.CFMID<>'NO'
+        and KCLLS.CLBH like '%' 
+        and KCLL.CKBH='VDH'
+         group by KCLL.CKBH,KCLLS.CLBH
+        ) JGCK on JGCK.ZMLB=KCZLS.CLBH and JGCK.CKBH=KCZLS.ckbh
+left join (select JGZL.CKBH,JGZLS.ZMLB,convert(money,sum(round(convert(float,JGZLS.Qty)*convert(float,JGZLM.Qty),2))) as JGCK from JGZLS with (nolock) 
+           left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO  
+           left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty from JGZLS  with (nolock) 
+                      left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO 
+                      where  JGZLS.ZMLB='ZZZZZZZZZZ'
+                      and JGZL.CKBH='VDH'
+                      ) JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM.CLBH=JGZLS.CLBH
+           where  JGZLS.ZMLB like '%'
+           and JGZL.CFMID1 ='NO'
+           and JGZLS.ZMLB<>'ZZZZZZZZZZ'
+        and JGZL.CKBH='VDH'
+           group by JGZL.CKBH,JGZLS.ZMLB ) JGCKTemp on JGCKTemp.ZMLB=KCZLS.CLBH and JGCKTemp.CKBH=KCZLS.ckbh
+where  not (LastKC.LastRem is null  and RK.RKQty is null and LL.LLQty is null and JGRK.JGRK is null and JGCK.JGCK is null and JGCKTemp.JGCK is null) 
+select CLHG.HGBH,clzl.zsdh,zszl.zsqm,#CLZLKC.CLDH,IsNull(#CLZLKC.LBBH,CLLBFLS.LBBH) as LBBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,isnull(#CLZLKC.LastRem,0) as LastRem,
+       isnull(round(#CLZLKC.RKQty,2),0) as RKQty,isnull(round(#CLZLKC.LLQty,2),0) as LLQty,
+       isnull(round(#CLZLKC.JGRK,2),0) as JGRK,isnull(round(#CLZLKC.JGCK,2),0) as JGCK,
+       isnull(round(#CLZLKC.JGCKTemp,2),0) as JGCKTemp,KCZLS.KCBH,KCZLS.CKBH,KCZLS.KCBH,
+       isnull(Round(#CLZLKC.LastRem,2),0)+isnull(Round(#CLZLKC.RKQty,2),0)-isnull(Round(#CLZLKC.LLQty,2),0)+isnull(Round(#CLZLKC.JGRK,2),0)-isnull(Round(#CLZLKC.JGCK,2),0) as Qty
+from #CLZLKC 
+left join CLZL on CLZL.CLDH=#CLZLKC.CLDH
+left join zszl on zszl.zsdh=clzl.zsdh 
+left join  KCZLS on KCZLS.CLBH=#CLZLKC.CLDH  and KCZLS.CKBH=#CLZLKC.CKBH 
+left join CLLBFLS on CLLBFLS.CLBH=CLZL.CLDH and CLLBFLS.GSBH='VDH' 
+left join CLHG on CLHG.CLBH=#CLZLKC.CLDH  
+where
+ not (#CLZLKC.LastRem is null  and #CLZLKC.RKQty is null and #CLZLKC.LLQty is null 
+               and #CLZLKC.JGRK is null and #CLZLKC.JGCK is null and #CLZLKC.JGCKTemp is null) 
+ and KCZLS.CKBH='VDH' 
+and #CLZLKC.CLDH like '%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and KCZLS.KCBH like 'A01%' 
+order by #CLZLKC.CLDH
+if object_id('tempdb..#CLZLKC') is not null  
+begin   drop table #CLZLKC end   
+select KCZLS.CKBH,KCZLS.CLBH as CLDH,LastKC.LBBH,LastKC.LastRem,RK.RKQty,LL.LLQty,JGRK.JGRK,JGCK.JGCK,JGCKTemp.JGCK as JGCKTemp into #CLZLKC  
+from KCZLS with (nolock) 
+Left join ( 
+     Select KCCLMONTH.CKBH,KCCLMONTH.CLBH,Max(KCCLMONTH.LBBH) as LBBH,Sum(KCCLMONTH.Qty) as LastRem 
+     from KCCLMONTH_HG as KCCLMONTH   with (nolock) 
+     where KCCLMONTH.KCYEAR='2025' 
+           and KCMONTH='05'
+           and KCCLMONTH.CLBH like '%' 
+        and KCCLMONTH.CKBH='VDH'
+      Group by  KCCLMONTH.CKBH,KCCLMONTH.CLBH 
+      ) LastKC  on LastKC.CLBH=KCZLS.CLBH and LastKC.CKBH=KCZLS.CKBH 
+left join (select KCRK.CKBH,KCRKS.CLBH,sum(KCRKS.Qty) as RKQty from KCRKS with (nolock)  
+           left join KCRK with (nolock)   on KCRK.RKNO=KCRKS.RKNO where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))>=
+           '2025/06/01'
+           and convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))<=
+           '2025/06/12'
+           and KCRKS.CLBH like '%'
+           and KCRK.CKBH='VDH'
+           group by KCRK.CKBH,KCRKS.CLBH) RK on RK.CLBH=KCZLS.CLBH  and RK.CKBH=KCZLS.ckbh
+left join (select KCLL.CKBH,KCLLS.CLBH,sum(KCLLS.Qty) as LLQty from KCLLS with (nolock)   
+           left join KCLL with (nolock)    on KCLL.LLNO=KCLLS.LLNO where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>=
+           '2025/06/01'
+           and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))<=
+           '2025/06/12'
+           and KCLLS.CLBH like '%' 
+           and KCLL.CFMID<>'NO'
+           and KCLL.SCBH<>'JJJJJJJJJJ'
+           and KCLL.CKBH='VDH'
+           group by KCLL.CKBH,KCLLS.CLBH) LL on LL.CLBH=KCZLS.CLBH and LL.CKBH=KCZLS.ckbh
+left join (select JGZL.CKBH,JGZLS.CLBH,sum(JGZLS.Qty) as JGRK from JGZLS with (nolock) 
+           left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>=
+           '2025/06/01'
+           and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<=
+           '2025/06/12'
+           and JGZLS.CLBH like '%' 
+           and JGZL.CFMID1 <>'NO' 
+           and JGZLS.ZMLB='ZZZZZZZZZZ' 
+           and JGZL.CKBH='VDH'
+           group by JGZL.CKBH,JGZLS.CLBH ) JGRK on JGRK.CLBH=KCZLS.CLBH and JGRK.CKBH=KCZLS.CKBH
+left join (select JGZL.CKBH,JGZLS.ZMLB,convert(money,sum(round(convert(float,JGZLS.Qty)*convert(float,JGZLM.Qty),2))) as JGCK from JGZLS with (nolock) 
+           left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO  
+           left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty from JGZLS  with (nolock) 
+                      left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO 
+                      where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>=
+                      '2025/06/01'
+                      and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<=
+                      '2025/06/12'
+                      and JGZL.CFMID1 <>'NO'
+                      and JGZLS.ZMLB='ZZZZZZZZZZ'
+                      and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<'2017/09/01'
+                   and JGZL.CKBH='VDH'
+                      ) JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM.CLBH=JGZLS.CLBH
+           where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>=
+           '2025/06/01'
+           and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<=
+           '2025/06/12'
+           and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<'2017/09/01'
+           and JGZLS.ZMLB like '%'
+           and JGZL.CFMID1 <>'NO' 
+           and JGZLS.ZMLB<>'ZZZZZZZZZZ' 
+        and JGZL.CKBH='VDH'
+        group by JGZL.CKBH,JGZLS.ZMLB 
+        union all
+        select KCLL.CKBH,KCLLS.CLBH,sum(KCLLS.Qty) as LLQty from KCLLS 
+        left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+        where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>=
+        '2025/06/01'
+        and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))<=
+        '2025/06/12'
+        and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='2017/09/01'
+        and KCLL.SCBH = 'JJJJJJJJJJ' and KCLL.CFMID<>'NO'
+        and KCLLS.CLBH like '%' 
+        and KCLL.CKBH='VDH'
+         group by KCLL.CKBH,KCLLS.CLBH
+        ) JGCK on JGCK.ZMLB=KCZLS.CLBH and JGCK.CKBH=KCZLS.ckbh
+left join (select JGZL.CKBH,JGZLS.ZMLB,convert(money,sum(round(convert(float,JGZLS.Qty)*convert(float,JGZLM.Qty),2))) as JGCK from JGZLS with (nolock) 
+           left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO  
+           left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty from JGZLS  with (nolock) 
+                      left join JGZL  with (nolock) on JGZL.JGNO=JGZLS.JGNO 
+                      where  JGZLS.ZMLB='ZZZZZZZZZZ'
+                      and JGZL.CKBH='VDH'
+                      ) JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM.CLBH=JGZLS.CLBH
+           where  JGZLS.ZMLB like '%'
+           and JGZL.CFMID1 ='NO'
+           and JGZLS.ZMLB<>'ZZZZZZZZZZ'
+        and JGZL.CKBH='VDH'
+           group by JGZL.CKBH,JGZLS.ZMLB ) JGCKTemp on JGCKTemp.ZMLB=KCZLS.CLBH and JGCKTemp.CKBH=KCZLS.ckbh
+where  not (LastKC.LastRem is null  and RK.RKQty is null and LL.LLQty is null and JGRK.JGRK is null and JGCK.JGCK is null and JGCKTemp.JGCK is null) 
+select CLHG.HGBH,clzl.zsdh,zszl.zsqm,#CLZLKC.CLDH,IsNull(#CLZLKC.LBBH,CLLBFLS.LBBH) as LBBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,isnull(#CLZLKC.LastRem,0) as LastRem,
+       isnull(round(#CLZLKC.RKQty,2),0) as RKQty,isnull(round(#CLZLKC.LLQty,2),0) as LLQty,
+       isnull(round(#CLZLKC.JGRK,2),0) as JGRK,isnull(round(#CLZLKC.JGCK,2),0) as JGCK,
+       isnull(round(#CLZLKC.JGCKTemp,2),0) as JGCKTemp,KCZLS.KCBH,KCZLS.CKBH,KCZLS.KCBH,
+       isnull(Round(#CLZLKC.LastRem,2),0)+isnull(Round(#CLZLKC.RKQty,2),0)-isnull(Round(#CLZLKC.LLQty,2),0)+isnull(Round(#CLZLKC.JGRK,2),0)-isnull(Round(#CLZLKC.JGCK,2),0) as Qty
+from #CLZLKC 
+left join CLZL on CLZL.CLDH=#CLZLKC.CLDH
+left join zszl on zszl.zsdh=clzl.zsdh 
+left join  KCZLS on KCZLS.CLBH=#CLZLKC.CLDH  and KCZLS.CKBH=#CLZLKC.CKBH 
+left join CLLBFLS on CLLBFLS.CLBH=CLZL.CLDH and CLLBFLS.GSBH='VDH' 
+left join CLHG on CLHG.CLBH=#CLZLKC.CLDH  
+where
+ not (#CLZLKC.LastRem is null  and #CLZLKC.RKQty is null and #CLZLKC.LLQty is null 
+               and #CLZLKC.JGRK is null and #CLZLKC.JGCK is null and #CLZLKC.JGCKTemp is null) 
+ and KCZLS.CKBH='VDH' 
+and #CLZLKC.CLDH like '%'
+and CLZL.YWPM like '%%'
+and CLZL.YWPM like '%%'
+and isnull(Round(#CLZLKC.LastRem,2),0)+isnull(Round(#CLZLKC.RKQty,2),0)-isnull(Round(#CLZLKC.LLQty,2),0)+isnull(Round(#CLZLKC.JGRK,2),0)-isnull(Round(#CLZLKC.JGCK,2),0) >0
+and KCZLS.KCBH like 'A01%' 
+order by #CLZLKC.CLDH
+select KCRK.*,ZSZL.ZSYWJC 
+from KCRK
+left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH 
+left join KCCK on KCCK.CKBH=KCRK.CKBH 
+where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between '2025/06/09'
+      and '2025/06/12'
+      and KCRK.RKNO like '%'
+      and KCCK.GSBH='VDH'
+order by KCRK.RKNO
+select KCRK.*,ZSZL.ZSYWJC 
+from KCRK
+left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH 
+left join KCCK on KCCK.CKBH=KCRK.CKBH 
+where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between '2025/06/09'
+      and '2025/06/12'
+      and KCRK.RKNO like '%'
+      and KCCK.GSBH='VDH'
+order by KCRK.RKNO
+select KCRK.*,ZSZL.ZSYWJC 
+from KCRK
+left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH 
+left join KCCK on KCCK.CKBH=KCRK.CKBH 
+where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between '2025/06/09'
+      and '2025/06/12'
+      and KCRK.RKNO like '%'
+      and KCCK.GSBH='VDH'
+order by KCRK.RKNO
+select KCRK.*,ZSZL.ZSYWJC 
+from KCRK
+left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH 
+left join KCCK on KCCK.CKBH=KCRK.CKBH 
+where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between '2025/01/09'
+      and '2025/06/12'
+      and KCRK.RKNO like '%'
+      and KCCK.GSBH='VDH'
+order by KCRK.RKNO

@@ -1,0 +1,154 @@
+define(
+	{
+		"ITEMS": [
+			{
+				"id": "copy1",
+				"type": "adkit-html",
+				"svKey": "copy1"
+			},
+			{
+				"id": "copy2",
+				"type": "adkit-html",
+				"svKey": "copy2"
+			},
+			{
+				"id": "cta",
+				"type": "adkit-html",
+				"svKey": "cta"
+			},
+			{
+				"id": "headline1",
+				"type": "adkit-html",
+				"svKey": "headline1"
+			},
+			{
+				"id": "headline2",
+				"type": "adkit-html",
+				"svKey": "headline2"
+			},
+			{
+				"id": "sub-headline",
+				"type": "adkit-html",
+				"svKey": "sub-headline"
+			},
+			{
+				"id": "disclaimerF1",
+				"type": "adkit-html",
+				"svKey": "disclaimerF1"
+			},
+			{
+				"id": "disclaimerF2",
+				"type": "adkit-html",
+				"svKey": "disclaimerF2"
+			},
+			{
+				"id": "disclaimerF3",
+				"type": "adkit-html",
+				"svKey": "disclaimerF3"
+			},
+			{
+				"id": "kv2a",
+				"type": "adkit-image",
+				"svKey": "ImgF2b"
+			},
+			{
+				"id": "kv2b",
+				"type": "adkit-image",
+				"svKey": "ImgF2a"
+			},
+			{
+				"id": "kv3",
+				"type": "adkit-image",
+				"svKey": "ImgF3"
+			}
+		],
+		"SV": {
+			"svData": [
+				{
+					"svKey": "headline1",
+					"svType": "string",
+					"value": "Amazing pictures, as always."
+				},
+				{
+					"svKey": "headline2",
+					"svType": "string",
+					"value": "Day or night."
+				},
+				{
+					"svKey": "sub-headline",
+					"svType": "string",
+					"value": "With the low light camera"
+				},
+				{
+					"svKey": "disclaimerF1",
+					"svType": "string",
+					"value": "*Disclaimer"
+				},
+				{
+					"svKey": "disclaimerF2",
+					"svType": "string",
+					"value": "*Frame2 will be here"
+				},
+				{
+					"svKey": "disclaimerF3",
+					"svType": "string",
+					"value": "*Disclaimer will be placed here"
+				},
+				{
+					"svKey": "copy1",
+					"svType": "string",
+					"value": "Upgrade to the"
+				},
+				{
+					"svKey": "copy2",
+					"svType": "string",
+					"value": "Galaxy Note8"
+				},
+				{
+					"svKey": "cta",
+					"svType": "string",
+					"value": "DISCOVER MORE"
+				},
+				{
+					"svKey": "additionalSV",
+					"svType": "string",
+					"value": ""
+				},
+				{
+					"svKey": "additional2SV",
+					"svType": "string",
+					"value": ""
+				},
+				{
+					"svKey": "ImgF2a",
+					"svType": "image",
+					"value": "1"
+				},
+				{
+					"svKey": "ImgF2b",
+					"svType": "image",
+					"value": "2"
+				},
+				{
+					"svKey": "ImgF3",
+					"svType": "image",
+					"value": "3"
+				}
+			]
+		},
+		"AdditionalAssets": [
+			{
+				"OrdinalNumber": 1,
+				"FileName": "images/kv2a.jpg"
+			},
+			{
+				"OrdinalNumber": 2,
+				"FileName": "images/kv2b.jpg"
+			},
+			{
+				"OrdinalNumber": 3,
+				"FileName": "images/kv3.jpg"
+			}
+		]
+	}
+);

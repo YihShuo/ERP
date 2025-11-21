@@ -1,0 +1,679 @@
+object MatInOut: TMatInOut
+  Left = 505
+  Top = 357
+  Width = 1071
+  Height = 499
+  Caption = 'MatInOut'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 1063
+    Height = 129
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 8
+      Top = 8
+      Width = 216
+      Height = 24
+      Caption = 'Material In and Out Trace:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 0
+      Top = 52
+      Width = 69
+      Height = 20
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'MatNo:'
+    end
+    object Label5: TLabel
+      Left = 248
+      Top = 51
+      Width = 87
+      Height = 20
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'MatName:'
+    end
+    object Label4: TLabel
+      Left = 0
+      Top = 91
+      Width = 68
+      Height = 20
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'From:'
+    end
+    object Label6: TLabel
+      Left = 192
+      Top = 92
+      Width = 18
+      Height = 20
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'To'
+    end
+    object Label2: TLabel
+      Left = 328
+      Top = 91
+      Width = 56
+      Height = 20
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'CKBH:'
+    end
+    object Edit2: TEdit
+      Left = 336
+      Top = 48
+      Width = 121
+      Height = 28
+      CharCase = ecUpperCase
+      TabOrder = 1
+    end
+    object Edit1: TEdit
+      Left = 72
+      Top = 48
+      Width = 177
+      Height = 28
+      CharCase = ecUpperCase
+      TabOrder = 0
+    end
+    object Button1: TButton
+      Left = 600
+      Top = 84
+      Width = 73
+      Height = 33
+      Caption = 'Query'
+      TabOrder = 3
+      OnClick = Button1Click
+    end
+    object Edit3: TEdit
+      Left = 464
+      Top = 48
+      Width = 113
+      Height = 28
+      CharCase = ecUpperCase
+      TabOrder = 2
+    end
+    object Button2: TButton
+      Left = 688
+      Top = 83
+      Width = 73
+      Height = 33
+      Caption = 'EXCEL'
+      TabOrder = 4
+      OnClick = Button2Click
+    end
+    object DTP1: TDateTimePicker
+      Left = 72
+      Top = 88
+      Width = 113
+      Height = 28
+      Date = 39289.406377673610000000
+      Format = 'yyyy/MM/dd'
+      Time = 39289.406377673610000000
+      TabOrder = 5
+    end
+    object DTP2: TDateTimePicker
+      Left = 216
+      Top = 88
+      Width = 113
+      Height = 28
+      Date = 39289.406377673610000000
+      Format = 'yyyy/MM/dd'
+      Time = 39289.406377673610000000
+      TabOrder = 6
+    end
+    object CB1: TCheckBox
+      Left = 512
+      Top = 93
+      Width = 73
+      Height = 17
+      Caption = 'In/Out'
+      TabOrder = 7
+    end
+    object CBX1: TComboBox
+      Left = 384
+      Top = 88
+      Width = 121
+      Height = 28
+      Style = csDropDownList
+      ItemHeight = 20
+      TabOrder = 8
+      Items.Strings = (
+        'All')
+    end
+  end
+  object DBGrid1: TDBGridEh
+    Left = 0
+    Top = 129
+    Width = 1063
+    Height = 339
+    Align = alClient
+    DataSource = DataSource1
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -11
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind]
+    ParentFont = False
+    PopupMenu = PopupMenu1
+    SumList.Active = True
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    UseMultiTitle = True
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'CLDH'
+        Footers = <>
+        Title.Caption = #26448#26009#32232#34399'|CLDH'
+        Title.TitleButton = True
+        Width = 85
+      end
+      item
+        EditButtons = <>
+        FieldName = 'YWPM'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Footers = <>
+        Title.Caption = #26448#26009#33521#25991#32232#34399'|YWPM'
+        Title.TitleButton = True
+        Width = 379
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DWBH'
+        Footers = <
+          item
+            FieldName = 'DWBH'
+            ValueType = fvtCount
+          end>
+        Title.Caption = #21934#20301'|DWBH'
+        Title.TitleButton = True
+        Width = 48
+      end
+      item
+        Color = 12582911
+        EditButtons = <>
+        FieldName = 'Qty'
+        Footers = <>
+        Title.Caption = #26399#26410#24235#23384'|Qty'
+        Title.TitleButton = True
+        Width = 70
+      end
+      item
+        EditButtons = <>
+        FieldName = 'FLastRem'
+        Footers = <
+          item
+            FieldName = 'FLastRem'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #26399#21021#26376#21021#24235#23384'|FLastRem'
+        Title.TitleButton = True
+        Width = 79
+      end
+      item
+        EditButtons = <>
+        FieldName = 'LastRem'
+        Footers = <
+          item
+            FieldName = 'LastRem'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #26399#21021#24235#23384'|LastRem'
+        Title.TitleButton = True
+        Width = 62
+      end
+      item
+        EditButtons = <>
+        FieldName = 'RKQty'
+        Footers = <
+          item
+            FieldName = 'RKQty'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #30070#26399#20837#24235'|RKQty'
+        Title.TitleButton = True
+        Width = 69
+      end
+      item
+        EditButtons = <>
+        FieldName = 'LLQty'
+        Footers = <
+          item
+            FieldName = 'LLQty'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #30070#26399#30332#26009'|LLQty'
+        Title.TitleButton = True
+      end
+      item
+        EditButtons = <>
+        FieldName = 'JGRK'
+        Footers = <
+          item
+            FieldName = 'JGRK'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #30070#26399#21152#24037#20837'|JGRK'
+        Title.TitleButton = True
+        Width = 70
+      end
+      item
+        EditButtons = <>
+        FieldName = 'JGCK'
+        Footers = <
+          item
+            FieldName = 'JGCK'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #30070#26399#21152#24037#20986'|JGCK'
+        Title.TitleButton = True
+        Width = 67
+      end
+      item
+        EditButtons = <>
+        FieldName = 'JGCKTemp'
+        Footers = <
+          item
+            FieldName = 'JGCKTemp'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #21152#24037#26410#22238#25976'|JGCKTemp'
+        Title.TitleButton = True
+        Width = 72
+      end
+      item
+        EditButtons = <>
+        FieldName = 'KCBH'
+        Footers = <>
+        Title.Caption = #36008#26550#34399'|KCBH'
+        Title.TitleButton = True
+      end>
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'if object_id('#39'tempdb..#CLZLKC2'#39') is not null  '
+      'begin   drop table #CLZLKC2 end   '
+      
+        'select CLZL.CLDH,LastKC.FLastRem,RK.FRKQty,LL.FLLQty,JGRK.FJGRK,' +
+        'JGCK.FJGCK'
+      'into #CLZLKC2 from CLZL  '
+      'left join (select KCCLMONTH.CLBH,KCCLMONTH.Qty as FLastRem '
+      '           from KCCLMONTH  where KCCLMONTH.KCYEAR='#39'2008'#39
+      '           and KCMONTH='#39'10'#39
+      '           and KCCLMONTH.CLBH like '#39'%'#39
+      '           and KCCLMONTH.CKBH='#39'VTXW'#39
+      '           and KCCLMONTH.Qty<>0 '
+      '           ) LastKC on LastKC.CLBH=CLZL.CLDH '
+      'left join (select KCRKS.CLBH,sum(KCRKS.Qty) as FRKQty from KCRKS'
+      
+        '           left join KCRK on KCRK.RKNO=KCRKS.RKNO where convert(' +
+        'smalldatetime,convert(varchar,KCRK.USERDATE,111))>='
+      '           '#39'2008/11/01'#39
+      
+        '           and convert(smalldatetime,convert(varchar,KCRK.USERDA' +
+        'TE,111))<='
+      '           '#39'2008/11/11'#39
+      '           and KCRKS.CLBH like '#39'%'#39
+      '           and KCRKS.Qty<>0 '
+      '           and KCRK.CKBH='#39'VTXW'#39
+      '           group by KCRKS.CLBH) RK on RK.CLBH=CLZL.CLDH '
+      
+        'left join (select KCLLS.CLBH,sum(KCLLS.Qty) as FLLQty from KCLLS' +
+        ' '
+      
+        '           left join KCLL on KCLL.LLNO=KCLLS.LLNO where convert(' +
+        'smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='
+      '           '#39'2008/11/01'#39
+      
+        '           and convert(smalldatetime,convert(varchar,KCLL.CFMDAT' +
+        'E,111))<='
+      '           '#39'2008/11/11'#39
+      '           and KCLLS.CLBH like '#39'%'#39
+      '           and KCLLS.Qty<>0 '
+      '           and KCLL.CFMID<>'#39'NO'#39
+      '           and KCLL.CKBH='#39'VTXW'#39
+      '           group by KCLLS.CLBH) LL on LL.CLBH=CLZL.CLDH'
+      'left join (select JGZLS.CLBH,sum(JGZLS.Qty) as FJGRK from JGZLS'
+      
+        '           left join JGZL on JGZL.JGNO=JGZLS.JGNO where convert(' +
+        'smalldatetime,convert(varchar,JGZL.CFMDate1,111))>='
+      '           '#39'2008/11/01'#39
+      
+        '           and convert(smalldatetime,convert(varchar,JGZL.CFMDat' +
+        'e1,111))<='
+      '           '#39'2008/11/11'#39
+      '           and JGZLS.CLBH like '#39'%'#39
+      '           and JGZLS.Qty<>0 '
+      '           and JGZL.CFMID1 <>'#39'NO'#39
+      '           and JGZLS.ZMLB='#39'ZZZZZZZZZZ'#39
+      '           and JGZL.CKBH='#39'VTXW'#39
+      '           group by JGZLS.CLBH ) JGRK on JGRK.CLBH=CLZL.CLDH'
+      
+        'left join (select JGZLS.ZMLB,sum(round(JGZLS.Qty*JGZLM.Qty,2)) a' +
+        's FJGCK from JGZLS'
+      '           left join JGZL on JGZL.JGNO=JGZLS.JGNO  '
+      
+        '           left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty fro' +
+        'm JGZLS '
+      
+        '                     left join JGZL on JGZL.JGNO=JGZLS.JGNO wher' +
+        'e convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>='
+      '                     '#39'2008/11/01'#39
+      
+        '                     and convert(smalldatetime,convert(varchar,J' +
+        'GZL.CFMDate1,111))<='
+      '                     '#39'2008/11/11'#39
+      '                     and JGZL.CFMID1 <>'#39'NO'#39
+      '                     and JGZLS.ZMLB='#39'ZZZZZZZZZZ'#39
+      '                      and JGZL.CKBH='#39'VTXW'#39
+      
+        '                      ) JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM' +
+        '.CLBH=JGZLS.CLBH'
+      
+        '           where convert(smalldatetime,convert(varchar,JGZL.CFMD' +
+        'ate1,111))>='
+      '           '#39'2008/11/01'#39
+      
+        '           and convert(smalldatetime,convert(varchar,JGZL.CFMDat' +
+        'e1,111))<='
+      '           '#39'2008/11/11'#39
+      '           and JGZLS.ZMLB like '#39'%'#39
+      '           and JGZLM.Qty<>0 '
+      '           and JGZL.CFMID1 <>'#39'NO'#39
+      '           and JGZLS.ZMLB<>'#39'ZZZZZZZZZZ'#39
+      '           and JGZL.CKBH='#39'VTXW'#39
+      '           group by JGZLS.ZMLB ) JGCK on JGCK.ZMLB=CLZL.CLDH'
+      
+        'select #CLZLKC2.FLastRem,#CLZLKC2.CLDH,CLZL.CLLB,CLZL.YWPM,CLZL.' +
+        'ZWPM,CLZL.DWBH,KCZLS.KCBH,'
+      
+        '       isnull(#CLZLKC2.FLastRem,0)+isnull(#CLZLKC2.FRKQty,0)-isn' +
+        'ull(#CLZLKC2.FLLQty,0)'
+      
+        '       +isnull(#CLZLKC2.FJGRK,0)-isnull(#CLZLKC2.FJGCK,0) as Las' +
+        'tRem'
+      
+        '       ,isnull(RK.RKQty,0) as RKQty,isnull(LL.LLQty,0) as LLQty,' +
+        'isnull(JGRK.JGRK,0) as JGRK,'
+      
+        '       isnull(JGCK.JGCK,0) as JGCK, isnull(JGCKTemp.JGCK,0) as J' +
+        'GCKTemp,'
+      
+        '       isnull(#CLZLKC2.FLastRem,0)+isnull(#CLZLKC2.FRKQty,0)-isn' +
+        'ull(#CLZLKC2.FLLQty,0)'
+      '       +isnull(#CLZLKC2.FJGRK,0)-isnull(#CLZLKC2.FJGCK,0)+   '
+      '       isnull(RK.RKQty,0)-isnull(LL.LLQty,0)'
+      '       +isnull(JGRK.JGRK,0)-isnull(JGCK.JGCK,0) as Qty'
+      'from #CLZLKC2 '
+      'left join CLZL on CLZl.CLDh=#CLZLKC2.CLDH '
+      
+        'left join KCZLS on KCZLS.CLBH=#CLZLKC2.CLDH and KCZLS.CKBH='#39'VTXW' +
+        #39
+      'left join (select KCRKS.CLBH,sum(KCRKS.Qty) as RKQty from KCRKS'
+      
+        '           left join KCRK on KCRK.RKNO=KCRKS.RKNO where convert(' +
+        'smalldatetime,convert(varchar,KCRK.USERDATE,111))>='
+      '           '#39'2008/11/12'#39
+      
+        '           and convert(smalldatetime,convert(varchar,KCRK.USERDA' +
+        'TE,111))<='
+      '           '#39'2008/11/18'#39
+      '           and KCRKS.CLBH like '#39'%'#39
+      '           and KCRKS.Qty<>0 '
+      '           and KCRK.CKBH='#39'VTXW'#39
+      '           group by KCRKS.CLBH) RK on RK.CLBH=#CLZLKC2.CLDH '
+      'left join (select KCLLS.CLBH,sum(KCLLS.Qty) as LLQty from KCLLS '
+      
+        '           left join KCLL on KCLL.LLNO=KCLLS.LLNO where convert(' +
+        'smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='
+      '           '#39'2008/11/12'#39
+      
+        '           and convert(smalldatetime,convert(varchar,KCLL.CFMDAT' +
+        'E,111))<='
+      '           '#39'2008/11/18'#39
+      '           and KCLLS.CLBH like '#39'%'#39
+      '           and KCLLS.Qty<>0 '
+      '           and KCLL.CFMID<>'#39'NO'#39
+      '           and KCLL.CKBH='#39'VTXW'#39
+      '           group by KCLLS.CLBH) LL on LL.CLBH=#CLZLKC2.CLDH'
+      'left join (select JGZLS.CLBH,sum(JGZLS.Qty) as JGRK from JGZLS'
+      
+        '           left join JGZL on JGZL.JGNO=JGZLS.JGNO where convert(' +
+        'smalldatetime,convert(varchar,JGZL.CFMDate1,111))>='
+      '           '#39'2008/11/12'#39
+      
+        '           and convert(smalldatetime,convert(varchar,JGZL.CFMDat' +
+        'e1,111))<='
+      '           '#39'2008/11/18'#39
+      '           and JGZLS.CLBH like '#39'%'#39
+      '           and JGZLS.Qty<>0 '
+      '           and JGZL.CFMID1 <>'#39'NO'#39
+      '           and JGZLS.ZMLB='#39'ZZZZZZZZZZ'#39
+      '           and JGZL.CKBH='#39'VTXW'#39
+      '           group by JGZLS.CLBH ) JGRK on JGRK.CLBH=#CLZLKC2.CLDH'
+      
+        'left join (select JGZLS.ZMLB,sum(round(JGZLS.Qty*JGZLM.Qty,2)) a' +
+        's JGCK from JGZLS'
+      '           left join JGZL on JGZL.JGNO=JGZLS.JGNO  '
+      
+        '           left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty fro' +
+        'm JGZLS '
+      
+        '                      left join JGZL on JGZL.JGNO=JGZLS.JGNO whe' +
+        're convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>='
+      '                      '#39'2008/11/12'#39
+      
+        '                      and convert(smalldatetime,convert(varchar,' +
+        'JGZL.CFMDate1,111))<='
+      '                      '#39'2008/11/18'#39
+      '                      and JGZL.CFMID1 <>'#39'NO'#39
+      '                      and JGZLS.ZMLB='#39'ZZZZZZZZZZ'#39
+      '                      and JGZL.CKBH='#39'VTXW'#39
+      
+        '                      ) JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM' +
+        '.CLBH=JGZLS.CLBH'
+      
+        '           where convert(smalldatetime,convert(varchar,JGZL.CFMD' +
+        'ate1,111))>='
+      '           '#39'2008/11/12'#39
+      
+        '           and convert(smalldatetime,convert(varchar,JGZL.CFMDat' +
+        'e1,111))<='
+      '           '#39'2008/11/18'#39
+      '           and JGZLS.ZMLB like '#39'%'#39
+      '           and JGZL.CFMID1 <>'#39'NO'#39
+      '           and JGZLS.ZMLB<>'#39'ZZZZZZZZZZ'#39
+      '           and JGZLM.Qty<>0 '
+      '           and JGZl.CKBH='#39'VTXW'#39
+      '           group by JGZLS.ZMLB ) JGCK on JGCK.ZMLB=#CLZLKC2.CLDH'
+      
+        'left join (select JGZLS.ZMLB,sum(round(JGZLS.Qty*JGZLM.Qty,2)) a' +
+        's JGCK from JGZLS'
+      '           left join JGZL on JGZL.JGNO=JGZLS.JGNO  '
+      
+        '           left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty fro' +
+        'm JGZLS '
+      
+        '                      left join JGZL on JGZL.JGNO=JGZLS.JGNO whe' +
+        're convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))>='
+      '                      '#39'2008/11/12'#39
+      
+        '                      and convert(smalldatetime,convert(varchar,' +
+        'JGZL.CFMDate1,111))<='
+      '                      '#39'2008/11/18'#39
+      '                      and JGZL.CFMID1 <>'#39'NO'#39
+      '                      and JGZLS.ZMLB='#39'ZZZZZZZZZZ'#39
+      '                      and JGZL.CKBH='#39'VTXW'#39
+      
+        '                      ) JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM' +
+        '.CLBH=JGZLS.CLBH'
+      
+        '           where convert(smalldatetime,convert(varchar,JGZL.CFMD' +
+        'ate1,111))>='
+      '           '#39'2008/11/12'#39
+      
+        '           and convert(smalldatetime,convert(varchar,JGZL.CFMDat' +
+        'e1,111))<='
+      '           '#39'2008/11/18'#39
+      '           and JGZLS.ZMLB like '#39'%'#39
+      '           and JGZL.CFMID1 ='#39'NO'#39
+      '           and JGZLS.ZMLB<>'#39'ZZZZZZZZZZ'#39
+      '           and JGZLM.Qty<>0 '
+      '           and JGZl.CKBH='#39'VTXW'#39
+      
+        '           group by JGZLS.ZMLB ) JGCKTemp on JGCKTemp.ZMLB=#CLZL' +
+        'KC2.CLDH'
+      
+        '  where not (#CLZLKC2.FLastRem is null  and #CLZLKC2.FRKQty is n' +
+        'ull and #CLZLKC2.FLLQty is null'
+      
+        '        and #CLZLKC2.FJGRK is null and #CLZLKC2.FJGCK is null an' +
+        'd RK.RKQty is null and LL.LLQty is null'
+      '        and JGRK.JGRK is null and JGCK.JGCK is null )'
+      'and #CLZLKC2.CLDH like '#39'%'#39
+      'and CLZL.YWPM like '#39'%%'#39
+      'and CLZL.YWPM like '#39'%%'#39
+      'order by #CLZLKC2.CLDH  ')
+    Left = 496
+    Top = 168
+    object Query1CLDH: TStringField
+      FieldName = 'CLDH'
+      FixedChar = True
+      Size = 10
+    end
+    object Query1CLLB: TStringField
+      FieldName = 'CLLB'
+      FixedChar = True
+      Size = 3
+    end
+    object Query1YWPM: TStringField
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object Query1DWBH: TStringField
+      FieldName = 'DWBH'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1KCBH: TStringField
+      FieldName = 'KCBH'
+      FixedChar = True
+      Size = 6
+    end
+    object Query1FLastRem: TCurrencyField
+      FieldName = 'FLastRem'
+      DisplayFormat = '##,#0.00'
+    end
+    object Query1LastRem: TCurrencyField
+      FieldName = 'LastRem'
+      DisplayFormat = '##,#0.00'
+    end
+    object Query1RKQty: TCurrencyField
+      FieldName = 'RKQty'
+      DisplayFormat = '##,#0.00'
+    end
+    object Query1LLQty: TCurrencyField
+      FieldName = 'LLQty'
+      DisplayFormat = '##,#0.00'
+    end
+    object Query1JGRK: TCurrencyField
+      FieldName = 'JGRK'
+      DisplayFormat = '##,#0.00'
+    end
+    object Query1JGCK: TCurrencyField
+      FieldName = 'JGCK'
+      DisplayFormat = '##,#0.00'
+    end
+    object Query1JGCKTemp: TCurrencyField
+      FieldName = 'JGCKTemp'
+      DisplayFormat = '##,#0.00'
+    end
+    object Query1Qty: TCurrencyField
+      FieldName = 'Qty'
+      DisplayFormat = '##,#0.00'
+    end
+    object Query1ZWPM: TStringField
+      FieldName = 'ZWPM'
+      FixedChar = True
+      Size = 200
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = Query1
+    Left = 536
+    Top = 160
+  end
+  object query2: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      '')
+    Left = 368
+    Top = 144
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 224
+    Top = 200
+    object NN1: TMenuItem
+      Caption = 'Detail'
+      OnClick = NN1Click
+    end
+    object NN2: TMenuItem
+      Caption = 'Excel'
+      OnClick = NN2Click
+    end
+    object NN3: TMenuItem
+      Caption = 'Print'
+    end
+  end
+end

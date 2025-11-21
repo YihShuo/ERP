@@ -1,0 +1,13 @@
+    select CutDispatchS.ScanDate,CutDispatchS.DepName,CutDispatchS.ZLBH,DDZL.ARTICLE,CutDispatchS.okCutNum,ROUND(DDZL.Pairs*CutDispatchS.PieceDQty/CutDispatchZL.PieceQty,0) as CutPairs,DDZL.Pairs from (    
+    Select Convert(varchar,CutDispatchS.ScanDate,111) as ScanDate,BDepartment.DepName,CutDispatchS.ZLBH,SUM(Qty) as PieceDQty,SUM(okCutNum) as okCutNum from CutDispatchS
+    Left JOIN CutDispatch on CutDispatchS.DLNO=CutDispatch.DLNO
+    LEFT JOIN BDepartment ON BDepartment.ID = CutDispatch.DepID
+    where Convert(varchar,CutDispatchS.ScanDate,111) between '2019/10/08' and '2019/10/16'  
+    Group by Convert(varchar,CutDispatchS.ScanDate,111),BDepartment.DepName,CutDispatchS.ZLBH )CutDispatchS
+    left join (  
+    Select CutDispatchZL.ZLBH,SUM(Qty) as PieceQty from CutDispatchZL 
+    where ZLBH in (select distinct ZLBH from CutDispatchS where  Convert(varchar,CutDispatchS.ScanDate,111) between '2019/10/08' and '2019/10/16')  
+    Group by CutDispatchZL.ZLBH 
+    ) CutDispatchZL on CutDispatchZL.ZLBH=CutDispatchS.ZLBH
+    left join DDZL on DDZL.DDBH=CutDispatchS.ZLBH
+    order by CutDispatchS.ScanDate

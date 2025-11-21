@@ -1,0 +1,636 @@
+object LLNOConfirm: TLLNOConfirm
+  Left = 243
+  Top = 319
+  Width = 1343
+  Height = 666
+  Caption = 'Entry Warehouse Confirm'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 16
+  object Splitter1: TSplitter
+    Left = 0
+    Top = 233
+    Width = 1327
+    Height = 3
+    Cursor = crVSplit
+    Align = alTop
+  end
+  object DBGrid3: TDBGridEh
+    Left = 0
+    Top = 0
+    Width = 1327
+    Height = 233
+    Align = alTop
+    DataSource = DS3
+    Flat = False
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -13
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    SumList.Active = True
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    UseMultiTitle = True
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'LLNO'
+        Footer.FieldName = 'CGNO'
+        Footer.ValueType = fvtCount
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #38936#26009#21934#34399'|LLNO'
+        Width = 91
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DepID'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #37096#38272'ID|DepID'
+        Width = 45
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DepName'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #38936#26009#37096#38272'|DepName'
+        Width = 187
+      end
+      item
+        Color = clBtnFace
+        EditButtons = <>
+        FieldName = 'GSBH'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #24288#21029'|GSBH'
+        Width = 49
+      end
+      item
+        Color = clBtnFace
+        EditButtons = <>
+        FieldName = 'USERID'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #20489#24235#20154#21729'|USERID'
+        Width = 58
+      end
+      item
+        Color = clBtnFace
+        EditButtons = <>
+        FieldName = 'USERDATE'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #20837#24235#26085#26399'|USERDATE'
+        Width = 85
+      end
+      item
+        Color = clBtnFace
+        EditButtons = <>
+        FieldName = 'LLCFMID'
+        Footers = <>
+        Title.Caption = #30906#35469'ID|CFMID'
+        Width = 60
+      end
+      item
+        Color = clBtnFace
+        EditButtons = <>
+        FieldName = 'LLCFMDate'
+        Footers = <>
+        Title.Caption = #30906#35469#26085#26399'|CFMDate'
+        Width = 80
+      end
+      item
+        Color = clBtnFace
+        EditButtons = <>
+        FieldName = 'YN'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #27161#35468'|YN'
+        Width = 50
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CFMID'
+        Footers = <>
+        Title.Caption = #20489#24235#20027#31649#23529#26680'|CFMID'
+        Width = 88
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CFMDATE'
+        Footers = <>
+        Title.Caption = #20489#24235#20027#31649#23529#26680#26085'|CFMDATE'
+        Width = 89
+      end
+      item
+        Color = clBtnFace
+        EditButtons = <>
+        FieldName = 'CFMID1'
+        Footers = <>
+        Title.Caption = #25505#36092#20027#31649#23529#26680'|CFMID'
+      end
+      item
+        Color = clBtnFace
+        EditButtons = <>
+        FieldName = 'CFMDATE1'
+        Footers = <>
+        Title.Caption = #25505#36092#20027#31649#23529#26680#26085#26399'|CFMDATE'
+        Width = 115
+      end
+      item
+        Color = clBtnFace
+        EditButtons = <>
+        FieldName = 'CFMID2'
+        Footers = <>
+        Title.Caption = #24288#20027#31649'|CFMID'
+      end
+      item
+        Color = clBtnFace
+        EditButtons = <>
+        FieldName = 'CFMDATE2'
+        Footers = <>
+        Title.Caption = #24288#20027#31649#23529#26680#26085'||CFMDATE'
+        Width = 94
+      end>
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 236
+    Width = 1327
+    Height = 63
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    object Label1: TLabel
+      Left = 0
+      Top = 25
+      Width = 35
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'From:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label5: TLabel
+      Left = 165
+      Top = 25
+      Width = 20
+      Height = 16
+      Caption = 'To:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 320
+      Top = 24
+      Width = 47
+      Height = 20
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'LLNO:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Button1: TButton
+      Left = 652
+      Top = 16
+      Width = 80
+      Height = 33
+      Caption = 'Search '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = #26032#32048#26126#39636
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnClick = Button1Click
+    end
+    object Button3: TButton
+      Left = 731
+      Top = 16
+      Width = 78
+      Height = 33
+      Caption = 'Confirm'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = #26032#32048#26126#39636
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      OnClick = Button3Click
+    end
+    object DTP1: TDateTimePicker
+      Left = 38
+      Top = 22
+      Width = 120
+      Height = 24
+      Date = 39255.000000000000000000
+      Format = 'yyyy/MM/dd'
+      Time = 39255.000000000000000000
+      TabOrder = 2
+    end
+    object DTP2: TDateTimePicker
+      Left = 194
+      Top = 22
+      Width = 120
+      Height = 24
+      Date = 39255.000000000000000000
+      Format = 'yyyy/MM/dd'
+      Time = 39255.000000000000000000
+      TabOrder = 3
+    end
+    object Edit1: TEdit
+      Left = 379
+      Top = 19
+      Width = 132
+      Height = 29
+      AutoSelect = False
+      CharCase = ecUpperCase
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'VNI-Times'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+    end
+    object Button4: TButton
+      Left = 892
+      Top = 16
+      Width = 74
+      Height = 33
+      Caption = 'Reset'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = #26032#32048#26126#39636
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 5
+      OnClick = Button4Click
+    end
+    object CheckBox1: TCheckBox
+      Left = 523
+      Top = 26
+      Width = 104
+      Height = 17
+      Caption = 'Show Confirm'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 6
+    end
+    object Button5: TButton
+      Left = 808
+      Top = 16
+      Width = 84
+      Height = 33
+      Caption = 'Confirm All'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = #26032#32048#26126#39636
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 7
+      OnClick = Button5Click
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 299
+    Width = 1327
+    Height = 328
+    Align = alClient
+    TabOrder = 2
+    object dbgrid4: TDBGridEh
+      Left = 1
+      Top = 1
+      Width = 1325
+      Height = 326
+      Align = alClient
+      DataSource = DS4
+      Flat = False
+      FooterColor = clWindow
+      FooterFont.Charset = DEFAULT_CHARSET
+      FooterFont.Color = clWindowText
+      FooterFont.Height = -13
+      FooterFont.Name = 'MS Sans Serif'
+      FooterFont.Style = []
+      FooterRowCount = 1
+      SumList.Active = True
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -13
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      UseMultiTitle = True
+      Columns = <
+        item
+          EditButtons = <>
+          FieldName = 'CLBH'
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #26448#26009#32232#34399'|CLBH'
+          Width = 91
+        end
+        item
+          EditButtons = <>
+          FieldName = 'YWPM'
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #26448#26009#21517#31281'|YWPM'
+          Width = 275
+        end
+        item
+          EditButtons = <>
+          FieldName = 'DWBH'
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #21934#20301'|DWBH'
+          Width = 46
+        end
+        item
+          EditButtons = <>
+          FieldName = 'TempQty'
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #38936#26009#37327'|TempQty'
+          Width = 60
+        end
+        item
+          EditButtons = <>
+          FieldName = 'Qty'
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #25976#37327'|Qty'
+          Width = 61
+        end
+        item
+          EditButtons = <>
+          FieldName = 'SCBH'
+          Footers = <>
+          Title.Caption = #35330#21934'|SCBH'
+          Width = 80
+        end
+        item
+          EditButtons = <>
+          FieldName = 'CNO'
+          Footers = <>
+          Title.Caption = #28023#38364#30908'|CNO'
+          Width = 50
+        end
+        item
+          EditButtons = <>
+          FieldName = 'USERID'
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #20351#29992#32773'|USERID'
+          Width = 68
+        end
+        item
+          EditButtons = <>
+          FieldName = 'USERDATE'
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #20351#29992#32773#26085#26399'|USERDate'
+          Width = 76
+        end>
+    end
+  end
+  object TmpQry: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select kfdh'
+      'from kfzl'
+      'order by kfdh')
+    Left = 244
+    Top = 127
+  end
+  object DS3: TDataSource
+    DataSet = ENMas
+    Left = 283
+    Top = 164
+  end
+  object DS4: TDataSource
+    DataSet = ENDet
+    Left = 316
+    Top = 164
+  end
+  object ENMas: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'Select  top 100 KCLL.LLNO,KCLL.GSBH,KCLL.DepID,KCLL.CKBH,BDepart' +
+        'ment.DepName,KCLL.MEMO,KCLL.USERID,KCLL.USERDATE,KCLL.CFMID,KCLL' +
+        '.CFMDATE,'
+      
+        '        KCLL_DK_CFM.CFMID,KCLL_DK_CFM.CFMDATE,KCLL_DK_CFM.CFMID1' +
+        ',KCLL_DK_CFM.CFMDATE1,KCLL_DK_CFM.CFMID2,KCLL_DK_CFM.CFMDATE2,KC' +
+        'LL.YN  '
+      'from KCLL'
+      'left join BDepartment on BDepartment.ID=KCLL.DepID'
+      'Left join KCLL_DK_CFM on KCLL_DK_CFM.LLNO=KCLL.LLNO'
+      'where  KCLL.LLNO like '#39'202208%'#39)
+    Left = 284
+    Top = 127
+    object ENMasLLNO: TStringField
+      FieldName = 'LLNO'
+      FixedChar = True
+      Size = 11
+    end
+    object ENMasDepID: TStringField
+      FieldName = 'DepID'
+      FixedChar = True
+      Size = 6
+    end
+    object ENMasDepName: TStringField
+      FieldName = 'DepName'
+      FixedChar = True
+    end
+    object ENMasGSBH: TStringField
+      FieldName = 'GSBH'
+      FixedChar = True
+      Size = 4
+    end
+    object ENMasCKBH: TStringField
+      FieldName = 'CKBH'
+      FixedChar = True
+      Size = 4
+    end
+    object ENMasUSERDATE: TDateTimeField
+      FieldName = 'USERDATE'
+      DisplayFormat = 'yyyy/MM/dd'
+    end
+    object ENMasUSERID: TStringField
+      FieldName = 'USERID'
+      FixedChar = True
+      Size = 15
+    end
+    object ENMasYN: TStringField
+      FieldName = 'YN'
+      FixedChar = True
+      Size = 1
+    end
+    object ENMasMEMO: TStringField
+      FieldName = 'MEMO'
+      FixedChar = True
+      Size = 50
+    end
+    object ENMasLLCFMID: TStringField
+      FieldName = 'LLCFMID'
+      FixedChar = True
+      Size = 15
+    end
+    object ENMasLLCFMDate: TDateTimeField
+      FieldName = 'LLCFMDate'
+      DisplayFormat = 'yyyy/MM/dd'
+    end
+    object ENMasCFMID1: TStringField
+      FieldName = 'CFMID1'
+      FixedChar = True
+      Size = 15
+    end
+    object ENMasCFMDATE: TDateTimeField
+      FieldName = 'CFMDATE'
+      DisplayFormat = 'yyyy/MM/dd'
+    end
+    object ENMasCFMID: TStringField
+      FieldName = 'CFMID'
+      FixedChar = True
+      Size = 15
+    end
+    object ENMasCFMDATE1: TDateTimeField
+      FieldName = 'CFMDATE1'
+      DisplayFormat = 'yyyy/MM/dd'
+    end
+    object ENMasCFMID2: TStringField
+      FieldName = 'CFMID2'
+      FixedChar = True
+      Size = 15
+    end
+    object ENMasCFMDATE2: TDateTimeField
+      FieldName = 'CFMDATE2'
+      DisplayFormat = 'yyyy/MM/dd'
+    end
+  end
+  object ENDet: TQuery
+    DatabaseName = 'DB'
+    DataSource = DS3
+    SQL.Strings = (
+      
+        'Select KCLLS.LLNO,KCLLS.CLBH,KCLLS.SCBH,KCLLS.CNO, KCLLS.Qty,KCL' +
+        'LS.TempQty, KCLLS.LLMemo,KCLLS.USERID,KCLLS.USERDATE, KCLLS.YN '
+      '       ,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH'
+      'From KCLLS'
+      'left join CLZL on CLZL.CLDH=KCLLS.CLBH'
+      'where KCLLS.LLNO=:LLNO'
+      'order by KCLLS.LLNO ,KCLLS.SCBH,KCLLS.CLBH')
+    Left = 316
+    Top = 127
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'LLNO'
+        ParamType = ptUnknown
+      end>
+    object ENDetLLNO: TStringField
+      FieldName = 'LLNO'
+      FixedChar = True
+      Size = 11
+    end
+    object ENDetCLBH: TStringField
+      FieldName = 'CLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object ENDetTempQty: TFloatField
+      FieldName = 'TempQty'
+    end
+    object ENDetQty: TCurrencyField
+      FieldName = 'Qty'
+      DisplayFormat = '0.00'
+    end
+    object ENDetUSERID: TStringField
+      FieldName = 'USERID'
+      FixedChar = True
+      Size = 15
+    end
+    object ENDetUSERDATE: TDateTimeField
+      FieldName = 'USERDATE'
+      DisplayFormat = 'yyyy/MM/dd'
+    end
+    object ENDetYN: TStringField
+      FieldName = 'YN'
+      FixedChar = True
+      Size = 1
+    end
+    object ENDetYWPM: TStringField
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object ENDetZWPM: TStringField
+      FieldName = 'ZWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object ENDetDWBH: TStringField
+      FieldName = 'DWBH'
+      FixedChar = True
+      Size = 4
+    end
+    object ENDetSCBH: TStringField
+      FieldName = 'SCBH'
+    end
+    object ENDetCNO: TStringField
+      FieldName = 'CNO'
+    end
+  end
+end

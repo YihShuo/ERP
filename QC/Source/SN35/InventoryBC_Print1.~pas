@@ -1,0 +1,194 @@
+unit InventoryBC_Print1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, QRCtrls, QuickRpt, ExtCtrls,iniFiles;
+
+type
+  TInventoryBC_Print = class(TForm)
+    QuickRep1: TQuickRep;
+    PageHeaderBand1: TQRBand;
+    L1: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRShape26: TQRShape;
+    QRShape27: TQRShape;
+    QRShape28: TQRShape;
+    QRShape33: TQRShape;
+    QRShape36: TQRShape;
+    QRShape37: TQRShape;
+    QRShape38: TQRShape;
+    QRShape40: TQRShape;
+    QRLabel5: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRLabel20: TQRLabel;
+    QRLabel21: TQRLabel;
+    QRLabel22: TQRLabel;
+    QRLabel1: TQRLabel;
+    QRLabel12: TQRLabel;
+    QRShape3: TQRShape;
+    QRLabel18: TQRLabel;
+    QRLabel27: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRLabel11: TQRLabel;
+    QRLabel38: TQRLabel;
+    QRLabel41: TQRLabel;
+    QRLabel42: TQRLabel;
+    QRLabel47: TQRLabel;
+    QRShape2: TQRShape;
+    QRShape5: TQRShape;
+    QRLabel48: TQRLabel;
+    QRLabel49: TQRLabel;
+    QRLabel50: TQRLabel;
+    QRLabel51: TQRLabel;
+    QRShape6: TQRShape;
+    QRShape7: TQRShape;
+    QRShape9: TQRShape;
+    QRLabel52: TQRLabel;
+    QRLabel53: TQRLabel;
+    QRLabel54: TQRLabel;
+    QRLabel55: TQRLabel;
+    QRShape16: TQRShape;
+    QRLabel9: TQRLabel;
+    QRLabel13: TQRLabel;
+    QRLabel14: TQRLabel;
+    QRLabel15: TQRLabel;
+    QRShape18: TQRShape;
+    QRShape19: TQRShape;
+    QRLabel16: TQRLabel;
+    QRLabel17: TQRLabel;
+    QRLabel23: TQRLabel;
+    QRLabel24: TQRLabel;
+    QRLabel25: TQRLabel;
+    QRLabel29: TQRLabel;
+    QRLabel30: TQRLabel;
+    QRLabel31: TQRLabel;
+    QRLabel26: TQRLabel;
+    QRLabel32: TQRLabel;
+    QRLabel33: TQRLabel;
+    QRLabel34: TQRLabel;
+    QRShape22: TQRShape;
+    QRLabel56: TQRLabel;
+    QRLabel57: TQRLabel;
+    DetailBand1: TQRBand;
+    QRShape8: TQRShape;
+    QRShape23: TQRShape;
+    QRShape1: TQRShape;
+    QRShape15: TQRShape;
+    QRShape4: TQRShape;
+    QRShape10: TQRShape;
+    QRShape11: TQRShape;
+    QRShape12: TQRShape;
+    QRShape13: TQRShape;
+    QRShape14: TQRShape;
+    QRShape17: TQRShape;
+    QRShape20: TQRShape;
+    QRShape24: TQRShape;
+    QRShape25: TQRShape;
+    QRShape29: TQRShape;
+    QRShape30: TQRShape;
+    QRSysData2: TQRSysData;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRLabel60: TQRLabel;
+    PageN: TQRLabel;
+    QRDBText4: TQRDBText;
+    SummaryBand1: TQRBand;
+    QRLabel3: TQRLabel;
+    QRLabel19: TQRLabel;
+    QRLabel28: TQRLabel;
+    QRLabel35: TQRLabel;
+    QRLabel36: TQRLabel;
+    QRLabel37: TQRLabel;
+    QRLabel39: TQRLabel;
+    QRLabel40: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRLabel44: TQRLabel;
+    QRLabel46: TQRLabel;
+    QRLabel59: TQRLabel;
+    PageFooterBand1: TQRBand;
+    QRLabel69: TQRLabel;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+    procedure ReadIni();
+  public
+    { Public declarations }
+  end;
+
+var
+  InventoryBC_Print: TInventoryBC_Print;
+
+implementation
+
+uses Inventory_BC1;
+
+{$R *.dfm}
+
+procedure TInventoryBC_Print.ReadIni();
+var MyIni :Tinifile;
+    AppDir,ComNameCH,ComName:string;
+begin
+  //
+  AppDir:=ExtractFilePath(Application.ExeName);
+  if FileExists(AppDir+'\ComName.ini')=true then
+  begin
+    try
+      MyIni := Tinifile.Create(AppDir+'\ComName.ini');
+      ComNameCH:=MyIni.ReadString('ERP','ComNameCH','億春責任有限公司');
+      ComName:=MyIni.ReadString('ERP','ComName1','CONG TY TNHH TY XUAN');
+    finally
+      MyIni.Free;
+    end;
+  end;
+  QRLabel42.Caption:=ComNameCH;
+  QRLabel41.Caption:=ComName;
+end;
+
+procedure TInventoryBC_Print.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  action:=caFree;
+end;
+
+procedure TInventoryBC_Print.FormDestroy(Sender: TObject);
+begin
+  InventoryBC_Print:=nil;
+end;
+
+
+procedure TInventoryBC_Print.FormCreate(Sender: TObject);
+var
+  sYear, sMonth, sDay, currentDateStr: string;
+begin
+  ReadIni();
+  if Assigned(Inventory_BC) and Assigned(Inventory_BC.DTP5) then
+  begin
+    sYear := FormatDateTime('yyyy', Inventory_BC.DTP5.Date);
+    sMonth := FormatDateTime('mm', Inventory_BC.DTP5.Date);
+
+    L1.Caption := 'BANG KIEM KE THANH PHAM THANG ' + sMonth + ' NAM ' + sYear;
+    QRLabel38.Caption := sYear + '年' + sMonth + '月成品盤點表';
+  end
+  else
+  begin
+    L1.Caption := 'BANG KIEM KE THANH PHAM';
+    QRLabel38.Caption := '';
+  end;
+
+  sDay := FormatDateTime('dd', Now);
+  sMonth := FormatDateTime('mm', Now);
+  sYear := FormatDateTime('yyyy', Now);
+
+  QRLabel6.Caption := 'Ngay日 ' + sDay + ' thang月 ' + sMonth + ' nam年 ' + sYear;
+end;
+
+end.

@@ -1,0 +1,24 @@
+unit test_du_lieu1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs;
+
+type
+  Ttest_du_lieu = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  test_du_lieu: Ttest_du_lieu;
+
+implementation
+
+{$R *.dfm}
+
+end.

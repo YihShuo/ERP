@@ -1,0 +1,232 @@
+unit EquipmentC1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, Data.DB, Bde.DBTables, Vcl.StdCtrls,
+  Vcl.ExtCtrls, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh;
+
+type
+  TEquipmentC = class(TForm)
+    DBGridEh1: TDBGridEh;
+    Panel1: TPanel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label1: TLabel;
+    Label4: TLabel;
+    Label6: TLabel;
+    Button1: TButton;
+    YWPMEdit: TEdit;
+    SBBHEdit: TEdit;
+    applyDepnameEdit: TEdit;
+    TSBHEdit: TEdit;
+    Button2: TButton;
+    GroupBox1: TGroupBox;
+    CKLL: TCheckBox;
+    CKRK: TCheckBox;
+    CKBB: TCheckBox;
+    CKMM: TCheckBox;
+    CKHH: TCheckBox;
+    CKRR: TCheckBox;
+    CKFF: TCheckBox;
+    CKTT: TCheckBox;
+    Label_TagEdit: TEdit;
+    GroupBox2: TGroupBox;
+    RB2: TRadioButton;
+    RB1: TRadioButton;
+    RB3: TRadioButton;
+    Query1: TQuery;
+    Query1TSID: TStringField;
+    Query1SBBH: TStringField;
+    Query1TSBH: TStringField;
+    Query1Status: TStringField;
+    Query1Qty: TFloatField;
+    Query1XSBH: TStringField;
+    Query1NSX: TStringField;
+    Query1InDATE: TDateTimeField;
+    Query1JDBDATE: TStringField;
+    Query1JDEDATE: TStringField;
+    Query1DepID: TStringField;
+    Query1DepID_Memo: TStringField;
+    Query1DepName: TStringField;
+    Query1LSBH: TStringField;
+    Query1QUCBH: TStringField;
+    Query1AuthCE: TBooleanField;
+    Query1YWPM: TStringField;
+    Query1ZWPM: TStringField;
+    Query1applyDepname: TStringField;
+    Query1zsjc_yw: TStringField;
+    Query1LB: TStringField;
+    Query1LABEL_Tag: TStringField;
+    DataSource1: TDataSource;
+    ZWPMEdit: TEdit;
+    Label5: TLabel;
+    procedure DBGridEh1DblClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  EquipmentC: TEquipmentC;
+
+implementation
+
+{$R *.dfm}
+
+uses  ChangeEquipment1;
+
+procedure TEquipmentC.Button1Click(Sender: TObject);
+var SubSQL:String;
+begin
+  //
+  with Query1 do
+  begin
+    active:=false;
+    sql.clear;
+    sql.Add('select TSCD.TSID,TSCD.SBBH,TSCD.TSBH,TSCD.Status,TSCD.Qty,TSCD.XSBH,TSCD.NSX,TSCD.InDATE,TSCD.JDBDATE,TSCD.JDEDATE,IsNull(TSCD.JDTS,TSCD.DepID) as DepID,TSCD.DepID_Memo,IsNull(JDBDep.DepName,Bdep_loca.DepName) as DepName,TSCD_ZSZL.zsjc_yw, ');
+    sql.Add('       TSCD_SB.LSBH,TSCD_SB.QUCBH,TSCD_SB.AuthCE,IsNull(TSCD_SB.YWPM,CLZL.YWPM) as YWPM,IsNull(TSCD_SB.ZWPM,CLZL.ZWPM) as ZWPM,Bdep_appy.DepName as applyDepname,TSCD.LABEL_Tag,TSCD.LB  ');
+    sql.add('from TSCD ');
+    sql.add('left join TSCD_SB on TSCD_SB.SBBH=TSCD.SBBH ');
+    sql.Add('left join CLZL on CLZL.cldh=TSCD.SBBH ');
+    sql.add('left join TSCD_BDepartment Bdep_loca on Bdep_loca.ID=TSCD.DepID  ');
+    sql.add('left join TSCD_ZSZL on TSCD_ZSZL.ZSDH=TSCD_SB.ZSDH ');
+    sql.add('left join TSCD_KCRK on TSCD_KCRK.RKNO=TSCD.RKNO ');
+    sql.add('left join TSCD_BDepartment Bdep_appy on Bdep_appy.ID=TSCD_KCRK.DepID ');
+    sql.add('left join TSCD_BDepartment JDBDep on JDBDep.ID=TSCD.JDTS ');
+    sql.add('where TSCD.SBBH like '''+SBBHEdit.Text+'%''');
+    if TSBHEdit.Text <> '' then
+    sql.add('and TSCD.TSBH like '''+TSBHEdit.Text+'%''');
+    if YWPMEdit.Text <> '' then
+    sql.add('and  IsNull(TSCD_SB.YWPM,CLZL.YWPM) like '''+YWPMEdit.Text+'%'' ');
+    if ZWPMEdit.Text <> '' then
+    sql.add('and  IsNull(TSCD_SB.ZWPM,CLZL.ZWPM) like '''+ZWPMEdit.Text+'%'' ');
+    if applyDepnameEdit.Text<>'' then
+    sql.add('and Bdep_loca.Depname like ''%'+applyDepnameEdit.Text+'%'' ');
+    if RB1.Checked=true then
+      SQl.Add('and TSCD.LB=1 ');
+    if RB2.Checked=true then
+      SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''A%'' ');
+    if RB3.Checked=true then
+      SQl.Add('and TSCD.LB=2 and TSCD.Label_Tag like ''B%'' ');
+    if Label_TagEdit.Text<>'' then
+      SQL.Add('and TSCD.Label_tag like '''+Label_TagEdit.Text+'%''  ');
+    //
+    if CKRK.Checked then    SubSQL:=SubSQL+'''N'',';
+    if CKLL.Checked then    SubSQL:=SubSQL+'''Y'',';
+    if CKBB.Checked then    SubSQL:=SubSQL+'''B'',';
+    if CKMM.Checked then    SubSQL:=SubSQL+'''M'',';
+    if CKHH.Checked then    SubSQL:=SubSQL+'''H'',';
+    if CKRR.Checked then    SubSQL:=SubSQL+'''R'',';
+    if CKFF.Checked then    SubSQL:=SubSQL+'''F'',';
+    if CKTT.Checked then    SubSQL:=SubSQL+'''T'',';
+    if SubSQL<>''  then
+      SQl.Add(' and TSCD.Status in ('+Copy(SubSQL,1,length(SubSQL)-1)+') ')
+    else
+      SQL.Add(' and TSCD.Status='''' ');
+    sql.add('order by TSID');
+    //FuncObj.WriteErrorLog(sql.Text);
+    Active:=true;
+  end;
+  //
+end;
+
+procedure TEquipmentC.Button2Click(Sender: TObject);
+var i,j:integer;
+    bm:Tbookmark;
+    bookmarklist:tbookmarklistEh;
+begin
+  if (not query1.Active) then
+  begin
+    abort;
+  end;
+  if (Query1.recordcount<1) then
+  begin
+    abort;
+  end;
+  if query1.recordcount>0 then
+  begin
+    query1.disablecontrols;
+    bm:=query1.getbookmark;
+    bookmarklist:=DBGridEh1.selectedrows;
+    if bookmarklist.count=0 then DBGridEh1.SelectedRows.CurrentRowSelected:= true;
+    try
+      for i:=0 to bookmarklist.count-1 do
+      begin
+        query1.gotobookmark(pointer(bookmarklist[i]));
+        with ChangeEquipmentC.DelDet do
+        begin
+          edit;
+          FieldByName('TSID').Value:=query1.fieldbyname('TSID').Value;
+          FieldByName('DepName').Value:=query1.fieldbyname('DepName').Value;
+          FieldByName('TSBH').Value:=query1.fieldbyname('TSBH').Value;
+          FieldByName('SBBH').Value:=query1.fieldbyname('SBBH').Value;
+          FieldByName('LSBH').Value:=query1.fieldbyname('LSBH').Value;
+          FieldByName('QUCBH').Value:=query1.fieldbyname('QUCBH').Value;
+          FieldByName('ZWPM').Value:=query1.fieldbyname('ZWPM').Value;
+          FieldByName('YWPM').Value:=query1.fieldbyname('YWPM').Value;
+          FieldByName('Qty').Value:=query1.fieldbyname('Qty').Value;
+          FieldByName('VALUE1').Value:=query1.fieldbyname('DepID_Memo').Value;
+          if (query1.FieldByName('LB').Value='2') and (Copy(query1.FieldByName('LABEL_Tag').AsString,0,1)='A') then
+            FieldByName('COLUMN6').Value:='2'
+          else FieldByName('COLUMN6').Value:='1';
+          Insert;
+        end;
+      end;
+    finally
+      begin
+        query1.gotobookmark(bm);
+        query1.freebookmark(bm);
+        query1.enablecontrols;
+        showmessage('You have finish copy!');
+        Close;
+      end;
+    end;
+  end;
+
+end;
+
+procedure TEquipmentC.DBGridEh1DblClick(Sender: TObject);
+begin
+  if query1.recordcount>0 then
+  begin
+    with ChangeEquipmentC.DelDet do
+    begin
+      edit;
+      FieldByName('TSID').Value:=query1.fieldbyname('TSID').Value;
+      FieldByName('DepName').Value:=query1.fieldbyname('DepName').Value;
+      FieldByName('TSBH').Value:=query1.fieldbyname('TSBH').Value;
+      FieldByName('SBBH').Value:=query1.fieldbyname('SBBH').Value;
+      FieldByName('LSBH').Value:=query1.fieldbyname('LSBH').Value;
+      FieldByName('QUCBH').Value:=query1.fieldbyname('QUCBH').Value;
+      FieldByName('ZWPM').Value:=query1.fieldbyname('ZWPM').Value;
+      FieldByName('YWPM').Value:=query1.fieldbyname('YWPM').Value;
+      FieldByName('Qty').Value:=query1.fieldbyname('Qty').Value;
+      FieldByName('VALUE1').Value:=query1.fieldbyname('DepID_Memo').Value;
+      if (query1.FieldByName('LB').Value='2') and (Copy(query1.FieldByName('LABEL_Tag').AsString,0,1)='A') then
+        FieldByName('COLUMN6').Value:='2'
+      else FieldByName('COLUMN6').Value:='1';
+      Insert;
+    end;
+    close;
+  end;
+end;
+
+procedure TEquipmentC.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+    action:=Cafree;
+end;
+
+procedure TEquipmentC.FormDestroy(Sender: TObject);
+begin
+   EquipmentC:=nil;
+end;
+
+end.

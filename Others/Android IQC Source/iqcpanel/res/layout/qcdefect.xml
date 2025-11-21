@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    
+    <include
+        android:id="@+id/title"
+        android:layout_alignParentRight="true"
+        layout="@layout/title" />
+     
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="116dp"
+        android:paddingTop="5px"
+        android:stretchColumns="1" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@color/green"
+            android:paddingTop="10px"
+            android:scrollbarAlwaysDrawVerticalTrack="false" >
+
+            <TextView
+                android:id="@+id/dep_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:text="Dep："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/smalltextsize" >
+
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+                <Spinner
+                    android:id="@+id/stage_spinner"
+                    android:textSize="@dimen/smalltextsize"
+                    android:layout_width="0dp"
+                    android:layout_weight="1" 
+                    android:layout_height="50dp">
+                </Spinner> 
+
+                <Spinner
+                    android:id="@+id/dep_spinner"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="50dp"
+                    android:textSize="@dimen/smalltextsize" >
+
+                </Spinner>    
+                             
+            </LinearLayout>
+          
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@color/green"
+            android:layout_marginTop="2dp"
+            android:paddingTop="10px"
+            android:scrollbarAlwaysDrawVerticalTrack="false" >
+
+            <TextView
+                android:id="@+id/ry_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:text="RY："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/smalltextsize" >
+            </TextView>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <EditText
+                    android:id="@+id/order_edit"
+                    android:layout_width="94dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:ems="10" />
+
+	            <Spinner
+	                android:id="@+id/order_spinner"
+	                android:layout_width="0dp"
+	                android:layout_height="50dp"
+	                android:layout_weight="0.07"
+	                android:textSize="@dimen/smalltextsize" >
+
+	            </Spinner>
+
+	            <Button
+	                android:id="@+id/DefectBtn"
+	                android:layout_width="0dp"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="0.10"
+	                android:text="Query" />
+
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+
+    <TableRow
+        android:id="@+id/tableRow3"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/ligthblue" >
+
+        <TextView
+                android:id="@+id/Qty_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:text=" Qty："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/smalltextsize" >
+            </TextView>   
+
+	        <EditText
+	            android:id="@+id/Qty_Edit"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:ems="10"
+	            android:inputType="number"
+	            android:editable="false"
+	            android:text="1" >
+
+            </EditText>
+
+	        <TextView
+	            android:id="@+id/NG_text"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text=" NG："
+	            android:textColor="@android:color/black"
+	            android:textSize="@dimen/smalltextsize" />
+
+            <EditText
+                android:id="@+id/NG_Edit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="number"
+                android:editable="false"
+                android:text="0" >
+
+                <requestFocus />
+            </EditText>
+         
+    </TableRow>
+   
+    <GridView
+        android:id="@+id/defect_gridView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginRight="-5dp"
+        android:background="@color/black"
+        android:horizontalSpacing="2dp"
+        android:numColumns="1"
+        android:verticalSpacing="1dp" >
+    </GridView>
+</LinearLayout>

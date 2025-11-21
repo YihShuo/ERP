@@ -1,0 +1,1401 @@
+unit MatQcCheck1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, GridsEh, DBGridEh, ComCtrls, StdCtrls, ExtCtrls, DB, DBTables,
+  Menus, Buttons, ShellAPI, ZLib, DBGridEhImpExp, comobj, Mask, DBCtrls, EhLibBDE;
+
+type
+  TMatQcCheck = class(TForm)
+    DS_Qc: TDataSource;
+    Upd_QC: TUpdateSQL;
+    Panel1: TPanel;
+    btninsert: TBitBtn;
+    btnmodify: TBitBtn;
+    btndelete: TBitBtn;
+    btnsave: TBitBtn;
+    btncancel: TBitBtn;
+    btnexcel: TBitBtn;
+    Pop_All: TPopupMenu;
+    mnu2: TMenuItem;
+    OpenDialog1: TOpenDialog;
+    SaveDialog1: TSaveDialog;
+    qry_Qc: TQuery;
+    qry_QcCLBH: TStringField;
+    qry_QcCGNO: TStringField;
+    qry_QcDateInput: TDateTimeField;
+    qry_QcTime: TIntegerField;
+    qry_QcZSBH: TStringField;
+    qry_QcArticle: TStringField;
+    qry_QcAdidasPO: TStringField;
+    qry_QcQty: TCurrencyField;
+    qry_QcLab_Check: TStringField;
+    qry_QcLab_Reason: TStringField;
+    qry_QcLab_Result: TStringField;
+    qry_QcLab_Date: TDateTimeField;
+    qry_QcLab_UserID: TStringField;
+    qry_QcLab_Num: TStringField;
+    qry_QcFinal_Status: TStringField;
+    qry_QcFinal_Remark: TStringField;
+    qry_QcUserDate: TDateTimeField;
+    qry_QcYN: TStringField;
+    qry_QcRemark: TStringField;
+    qry_QcFile_Name: TStringField;
+    qry_QcMaterialName: TStringField;
+    qry_QcSupplierName: TStringField;
+    qry_QcDWBH: TStringField;
+    qry_QcQC_FinishDate: TDateTimeField;
+    qry_QcLab_PDM_ID: TStringField;
+    qry_QcFile_Name_Lab: TStringField;
+    qry_QcLab_FinishDate: TDateTimeField;
+    qry_QcQC_Check: TStringField;
+    qry_QcQC_Reason: TStringField;
+    Panel2: TPanel;
+    Label15: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    edt2: TEdit;
+    edt1: TEdit;
+    DTP1: TDateTimePicker;
+    DTP2: TDateTimePicker;
+    Button1: TButton;
+    edt3: TEdit;
+    Button2: TButton;
+    chk1: TCheckBox;
+    edt6: TEdit;
+    edt7: TEdit;
+    edtRy: TEdit;
+    edtCustPo: TEdit;
+    edtArticle: TEdit;
+    mnu4: TMenuItem;
+    qry_QcSettlement: TStringField;
+    qry_App: TQuery;
+    qry_Color: TQuery;
+    qry_MatQuality: TQuery;
+    DS1: TDataSource;
+    DS2: TDataSource;
+    DS3: TDataSource;
+    qry_AppCodeID: TStringField;
+    qry_AppDefectName: TStringField;
+    qry_ColorCodeID: TStringField;
+    qry_ColorDefectName: TStringField;
+    qry_MatQualityCodeID: TStringField;
+    qry_MatQualityDefectName: TStringField;
+    qry_QcDefectName: TStringField;
+    Label11: TLabel;
+    qry_QcPer_Defect: TBooleanField;
+    qry_QcComparision: TStringField;
+    GroupBox1: TGroupBox;
+    chkInspection: TCheckBox;
+    chkNotesting: TCheckBox;
+    chkpass: TCheckBox;
+    chkFail: TCheckBox;
+    Label12: TLabel;
+    cboLab_Final: TComboBox;
+    qry_QcLab_ConfirmDate: TDateTimeField;
+    qry_QcLab_DateRemark: TDateTimeField;
+    qry_QcTracking: TStringField;
+    qry_QcNo_ID: TAutoIncField;
+    qry_QcSampleSent: TBooleanField;
+    qry_QcQC_Date: TDateTimeField;
+    qry_QcQC_UserID: TStringField;
+    chkqc: TCheckBox;
+    chklab: TCheckBox;
+    Query1: TQuery;
+    chksample: TCheckBox;
+    chkMine: TCheckBox;
+    qry_QcHours: TStringField;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    Panel6: TPanel;
+    Panel9: TPanel;
+    DBGridEh2: TDBGridEh;
+    Panel7: TPanel;
+    Panel10: TPanel;
+    DBGridEh3: TDBGridEh;
+    Panel8: TPanel;
+    Panel12: TPanel;
+    DBGridEh4: TDBGridEh;
+    DBGridDetail: TDBGridEh;
+    Splitter1: TSplitter;
+    Splitter2: TSplitter;
+    qry_QcUserID: TStringField;
+    DBMemo1: TDBMemo;
+    Pop_defects: TPopupMenu;
+    Defects1: TMenuItem;
+    btn_Final: TButton;
+    Splitter3: TSplitter;
+    qry_RY: TQuery;
+    DS_RY: TDataSource;
+    Upd_RY: TUpdateSQL;
+    qry_RYNo_ID: TIntegerField;
+    qry_RYRY: TStringField;
+    qry_RYRemark: TStringField;
+    qry_RYYN: TStringField;
+    qry_RYUserID: TStringField;
+    qry_RYUserDate: TDateTimeField;
+    qry_RYCOUNTRY: TStringField;
+    mnu5: TMenuItem;
+    qry_QcPDM_File_Name: TStringField;
+    PageControl3: TPageControl;
+    TabSheet7: TTabSheet;
+    Panel3: TPanel;
+    btninsert1: TBitBtn;
+    btnmodify1: TBitBtn;
+    btndelete1: TBitBtn;
+    btnsave1: TBitBtn;
+    btncancel1: TBitBtn;
+    DBGrid_RY: TDBGridEh;
+    qry_QcGSBH: TStringField;
+    qry_QcRY: TStringField;
+    qry_QcZSYWJC: TStringField;
+    qry_RYCustPO: TStringField;
+    qry_RYArticle: TStringField;
+    btnAppForm: TBitBtn;
+    qry_QcManagerID: TStringField;
+    qry_QcManagerCFMDate: TDateTimeField;
+    qry_QcManagerCheck: TBooleanField;
+    edtRKNO: TEdit;
+    Label1: TLabel;
+    chkmanager: TCheckBox;
+    qry_QcRKNO: TStringField;
+    qry_QcRandomQty: TCurrencyField;
+    qry_QcDefectQty: TCurrencyField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btninsertClick(Sender: TObject);
+    procedure btnmodifyClick(Sender: TObject);
+    procedure btndeleteClick(Sender: TObject);
+    procedure btncancelClick(Sender: TObject);
+    procedure btnsaveClick(Sender: TObject);
+    procedure DBGridDetailGetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure DBGridDetailDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+      State: TGridDrawState);
+    procedure mnu2Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure mnu4Click(Sender: TObject);
+    procedure DBGridDetailColumns13EditButtonClick(Sender: TObject;
+      var Handled: Boolean);
+    procedure qry_QcFinal_StatusChange(Sender: TField);
+    procedure btnexcelClick(Sender: TObject);
+    procedure DBGridDetailColumns10EditButtonClick(Sender: TObject;
+      var Handled: Boolean);
+    procedure qry_QcAfterOpen(DataSet: TDataSet);
+    procedure qry_QcTrackingChange(Sender: TField);
+    procedure chkqcClick(Sender: TObject);
+    procedure chklabClick(Sender: TObject);
+    procedure qry_QcRYGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
+    procedure Defects1Click(Sender: TObject);
+    procedure btn_FinalClick(Sender: TObject);
+    procedure DBGrid_RYEditButtonClick(Sender: TObject);
+    procedure DBGridDetailColumns5EditButtonClick(Sender: TObject;
+      var Handled: Boolean);
+    procedure btninsert1Click(Sender: TObject);
+    procedure btnmodify1Click(Sender: TObject);
+    procedure btncancel1Click(Sender: TObject);
+    procedure btnsave1Click(Sender: TObject);
+    procedure DBGrid_RYGetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure qry_QcAfterScroll(DataSet: TDataSet);
+    procedure btndelete1Click(Sender: TObject);
+    procedure mnu5Click(Sender: TObject);
+    procedure qry_QcQtyChange(Sender: TField);
+    procedure btnAppFormClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure qry_QcManagerCheckChange(Sender: TField);
+  private
+    AppDir:string;
+    { Private declarations }
+  public
+    GSBH_SFL:String;
+    { Public declarations }
+    flag: integer;
+  end;
+
+var
+  MatQcCheck: TMatQcCheck;
+  NDate: TDate;
+  NHour, Limit: string;
+
+implementation
+
+uses Main1, RYDetail1, QC_MatDefect1, Calculator1, RYDetail_S1, FileTransClient1, FunUnit,
+  SampleRYDetail1;
+
+{$R *.dfm}
+
+procedure TMatQcCheck.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  if (btnsave.Enabled) or (btnsave1.Enabled) then
+    begin
+      Messagedlg('You must save data first !!!', mtwarning, [mbyes], 0);
+      abort;
+    end
+  else
+    action := cafree;
+end;
+
+procedure TMatQcCheck.FormDestroy(Sender: TObject);
+begin
+  MatQcCheck := nil;
+end;
+
+procedure TMatQcCheck.Button1Click(Sender: TObject);
+begin
+
+  with query1 do
+  begin
+      active := false;
+      sql.Clear;
+      sql.add('select getdate() as NDate ,');
+      sql.add('substring(CONVERT(VARCHAR, GETDATE(), 121),12,5) AS NHour'); //---20150915 Projoe 效果等同下面註解
+      active := true;
+      NDate := fieldbyname('NDate').Value;
+      NHour := fieldbyname('NHour').Value;
+      active := false;
+      sql.Clear;
+  end;
+
+  with qry_Qc do
+    begin
+      active := false;
+      sql.Clear;
+      SQL.Add('Select ');
+      SQL.Add('       mc.No_ID,mc.GSBH,mc.CLBH,mc.CGNO,mc.RKNO,mc.DateInput,mc.Hours ,mc.LB,mc.ZSBH,mc.RY,mc.Article,mc.CustPO,mc.Qty,mc.Remark,mc.Tracking,mc.SampleSent,');
+      SQL.Add('       mc.QC_Check,mc.RandomQty,mc.DefectQty,mc.QC_Reason,mc.Per_Defect,mc.QC_FinishDate,mc.Settlement,mc.File_Name,mc.QC_Date,mc.QC_USERID,');
+      SQL.Add('       mc.Lab_Check,mc.Lab_Reason,mc.Lab_Num,mc.Lab_Result,mc.DefectName,mc.Lab_FinishDate,mc.Lab_PDM_ID,mc.PDM_File_Name,mc.File_Name_Lab,mc.Comparision,');
+      SQL.Add('       mc.Lab_DateRemark,mc.Lab_ConfirmDate,mc.Lab_UserID,mc.Lab_Date,mc.Final_Remark,mc.Final_Status,mc.UserDate,mc.UserID,mc.YN,      ');
+      SQL.Add('       clzl.YWPM as MaterialName,ZSZL.ZSYWJC as SupplierName,clzl.DWBH,ZSZL.ZSYWJC,mc.ManagerCheck,mc.ManagerID,mc.ManagerCFMDate  ');
+      sql.Add('from MaterialQCcheck mc');
+      sql.Add('left join clzl on clzl.CLDH = mc.CLBH');
+      sql.Add('left Join ZSZL on ZSZL.ZSDH =mc.ZSBH');
+      sql.Add('left join MaterialQCcheck_RY on mc.No_ID = MaterialQCcheck_RY.No_ID');
+      sql.Add('where mc.GSBH='''+main.Edit2.Text+''' ');
+      if chk1.Checked then
+      begin
+          sql.Add('and CONVERT(varchar(10),DateInput,111) between');
+          sql.add('''' + formatdatetime('yyyy/MM/dd', DTP1.date) + ''' and ''' + formatdatetime('yyyy/MM/dd', DTP2.date) + '''');
+      end;
+      sql.Add('and CGNO like ''' + edt1.Text + '%''');
+      sql.Add('and CLBH like ''' + edt2.Text + '%''');
+      sql.Add('and ZSYWJC like ''' + edt3.Text + '%''');
+      sql.Add('and RKNO like ''%' + edtRKNO.Text + '%''');
+      
+      if edtRy.Text <> '' then
+        sql.Add('and MaterialQCcheck_RY.RY like ''%' + edtRy.Text + '%''');
+      if edtArticle.Text <> '' then
+        sql.Add('and mc.Article like ''%' + edtArticle.Text + '%''');
+      if edtCustPO.Text <> '' then
+        sql.Add('and mc.CustPO like ''%' + edtCustPO.Text + '%''');
+
+      if (edt6.Text <> '') and (edt7.Text = '') then
+        sql.Add('and lab_num like ''' + edt6.Text + '%''');
+      if (edt6.Text <> '') and (edt7.Text <> '') then
+        sql.Add('and lab_num between ''' + edt6.Text + '%''and ''' + edt7.Text + '%''');
+
+      if chkNotesting.Checked then
+        sql.Add('and isnull(Lab_Check,'''') = ''''');
+
+      if chkInspection.Checked or chkpass.Checked or chkFail.Checked then
+        begin
+          sql.Add('and (1=2');
+          if chkInspection.Checked then
+            sql.Add('or isnull(Final_Status,'''') =''''');
+          if chkpass.Checked then
+            sql.Add('or Final_Status=''Pass''');
+          if chkFail.Checked then
+            sql.Add('or Final_Status=''Fail''');
+          sql.Add(')');
+        end;
+
+      if cboLab_Final.Text <> '' then
+        sql.Add('and Lab_Result like ''' + cboLab_Final.Text + '%''');
+      if chksample.Checked then
+        sql.Add('and isnull(SampleSent,0)=1 ');
+      if chkmine.Checked then
+        sql.Add('and mc.UserID=''' + main.Edit1.Text + '''');
+      if chkmanager.Checked then
+        sql.Add('and mc.ManagerCheck=''1'' ');
+        
+      SQL.Add('group by mc.No_ID,mc.GSBH,mc.CLBH,mc.CGNO,mc.RKNO,mc.DateInput,mc.Hours ,mc.LB,mc.ZSBH,mc.RY,mc.Article,mc.CustPO,mc.Qty,mc.Remark,mc.Tracking,mc.SampleSent,');
+      SQL.Add('       mc.QC_Check,mc.RandomQty,mc.DefectQty,mc.QC_Reason,mc.Per_Defect,mc.QC_FinishDate,mc.Settlement,mc.File_Name,mc.QC_Date,mc.QC_USERID,');
+      SQL.Add('       mc.Lab_Check,mc.Lab_Reason,mc.Lab_Num,mc.Lab_Result,mc.DefectName,mc.Lab_FinishDate,mc.Lab_PDM_ID,mc.PDM_File_Name,mc.File_Name_Lab,mc.Comparision,');
+      SQL.Add('       mc.Lab_DateRemark,mc.Lab_ConfirmDate,mc.Lab_UserID,mc.Lab_Date,mc.Final_Remark,mc.Final_Status,mc.UserDate,mc.UserID,mc.YN,      ');
+      SQL.Add('       clzl.YWPM,ZSZL.ZSYWJC,clzl.DWBH,ZSZL.ZSYWJC,mc.ManagerCheck,mc.ManagerID,mc.ManagerCFMDate ');
+      sql.Add('order by mc.Userdate desc,CLBH,LB asc');
+      //funcObj.WriteErrorLog(sql.Text);
+      active := true;
+    end;
+  btn_FinalClick(nil);
+end;
+
+procedure TMatQcCheck.FormCreate(Sender: TObject);
+begin
+  AppDir:=ExtractFilePath(Application.ExeName);
+  DTP1.Date := date;
+  DTP2.Date := date;
+  chklabClick(nil);
+  chkQCClick(nil);
+  with Query1 do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select SFL from bgszl where gsdh='''+main.Edit2.Text+''' ');
+    Active:=true;
+    GSBH_SFL:=FieldByName('SFL').AsString;
+    Active:=false;
+  end;
+end;
+
+procedure TMatQcCheck.btninsertClick(Sender: TObject);
+var
+  y, m, a: string;
+begin
+  y := formatdatetime('yyyy', date);
+  m := formatdatetime('mm', date);
+
+  with qry_Qc do
+  begin
+      requestlive := true;
+      cachedupdates := true;
+      insert;
+      FieldByName('DateInput').Value := formatdatetime('yyyy/mm/dd', date);
+      FieldByName('Hours').Value := Nhour;
+      fieldbyname('ManagerCheck').Value := 0;
+  end;
+  btnmodify.Enabled := false;  //
+  btndelete.Enabled := false;
+  btnsave.Enabled := true;
+  btncancel.Enabled := true;
+  DBGridDetail.FieldColumns['DateInput'].ButtonStyle := cbsAuto;
+  DBGridDetail.FieldColumns['CGNO'].ButtonStyle := cbsEllipsis;
+  //DBGridDetail.FieldColumns['Qty'].ButtonStyle:=cbsEllipsis;
+
+end;
+
+procedure TMatQcCheck.btnmodifyClick(Sender: TObject);
+begin
+  if qry_Qc.FieldByName('USERDATE').Value + 30 < date then
+    begin
+      Messagedlg('You can not modify after 30 days!!!', mtwarning, [mbyes], 0);
+      abort;
+    end;
+
+  qry_Qc.requestlive := true;
+  qry_Qc.cachedupdates := true;
+  qry_Qc.edit;
+
+  btnsave.Enabled := true;
+  btncancel.Enabled := true;
+  DBGridDetail.FieldColumns['DateInput'].ButtonStyle := cbsAuto;
+  DBGridDetail.FieldColumns['CGNO'].ButtonStyle := cbsEllipsis;
+  //DBGridDetail.FieldColumns['Qty'].ButtonStyle:=cbsEllipsis;
+
+end;
+
+procedure TMatQcCheck.btndeleteClick(Sender: TObject);
+begin
+  if (qry_Qc.FieldByName('USERID').Value <> main.edit1.Text) then
+    begin
+      Messagedlg('It is not yours,can not delete!!!', mtwarning, [mbyes], 0);
+      abort;
+    end;
+
+  if qry_Qc.FieldByName('QC_Check').AsString <> '' then
+    begin
+      Messagedlg('QC Result is existsing, you can not delete!!!', mtwarning, [mbyes], 0);
+      abort;
+    end;
+
+  if (qry_Qc.FieldByName('Lab_Num').AsString <> '') or (qry_Qc.FieldByName('Lab_Check').AsString <> '') then
+    begin
+      Messagedlg('Result lab test is existsing, you can not delete!!!', mtwarning, [mbyes], 0);
+      abort;
+    end;
+
+  if qry_Ry.RecordCount > 0 then
+    begin
+      Messagedlg('You must delete detail first!!!', mtwarning, [mbyes], 0);
+      abort;
+    end;
+
+
+  with qry_Qc do
+  begin
+      requestlive := true;
+      cachedupdates := true;
+      edit;
+      fieldbyname('YN').Value := '0';
+  end;
+  btnsave.Enabled := true;
+  btncancel.Enabled := true;
+
+end;
+
+procedure TMatQcCheck.btncancelClick(Sender: TObject);
+begin
+  with qry_Qc do
+    begin
+      active := false;
+      requestlive := false;
+      cachedupdates := false;
+      active := true;
+    end;
+  btnsave.Enabled := false;
+  btncancel.Enabled := false;
+  DBGridDetail.FieldColumns['DateInput'].ButtonStyle := cbsNone;
+  DBGridDetail.FieldColumns['CGNO'].ButtonStyle := cbsNone;
+  //DBGridDetail.FieldColumns['Qty'].ButtonStyle:=cbsNone;
+end;
+
+procedure TMatQcCheck.btnsaveClick(Sender: TObject);
+var
+  i: integer;
+  strReportID,No_ID: string;
+begin
+  qry_App.Active := false;
+  qry_Color.Active := false;
+  qry_MatQuality.Active := false;
+  qry_RY.Active := false;
+
+  try
+    qry_Qc.first;
+    for i := 1 to qry_Qc.RecordCount do
+      begin
+        case qry_Qc.updatestatus of
+          usinserted:
+            begin
+              if qry_Qc.FieldByName('RKNO').IsNull then
+              begin
+              end else
+              begin
+                //Get No_ID
+                with Query1 do
+                begin
+                  Active:=false;
+                  SQL.Clear;
+                  SQL.Add('select top 1  No_ID from MaterialQCcheck order by No_ID desc');
+                  Active:=true;
+                  if RecordCount>0 then
+                    No_ID:=inttostr(FieldByName('No_ID').AsInteger+1)
+                  else
+                    No_ID:='1';
+                  Active:=false;
+                end;
+                //
+                qry_Qc.edit;
+                qry_Qc.FieldByName('No_ID').Value:=No_ID;
+                qry_Qc.FieldByName('GSBH').Value:=main.Edit2.Text;
+                qry_Qc.fieldbyname('USERID').Value := main.edit1.text;
+                qry_Qc.fieldbyname('USERDate').Value := Ndate;
+                qry_Qc.fieldbyname('YN').Value := '1';
+                Upd_QC.Apply(ukInsert);
+              end;
+            end;
+          usmodified:
+            begin
+              if qry_Qc.fieldbyname('YN').value = '0' then
+              begin
+                Upd_QC.apply(ukdelete);
+              end
+              else
+                begin
+                  qry_Qc.edit;
+                  if (qry_Qc.FieldByName('USERID').Value = main.edit1.Text) then
+                    qry_Qc.fieldbyname('UserDate').Value := Ndate;
+                  Upd_QC.apply(ukmodify);
+                  //revise Qty in table Leather_QC N15
+                  if flag = 3 then
+                  begin
+                    if (not qry_Qc.FieldByName('Qty').IsNull) and (qry_Qc.FieldByName('Qty').Value > 0) then
+                    begin
+                      with query1 do
+                      begin
+                        Active:=false;
+                        sql.Clear;
+                        sql.Add('update Leather_QC set Qty = ''' + qry_Qc.FieldByName('Qty').AsString + '''');
+                        sql.Add('where ReportID = ''' + qry_Qc.FieldByName('No_ID').AsString + '''');
+                        execsql;
+                      end;
+                    end;
+                  end;
+                end;
+            end;
+        end;
+        qry_Qc.next;
+      end;
+    qry_Qc.active := false;
+    qry_Qc.cachedupdates := false;
+    qry_Qc.requestlive := false;
+    qry_Qc.active := true;
+    //
+    qry_App.Active := true;
+    qry_Color.Active := true;
+    qry_MatQuality.Active := true;
+    qry_RY.Active := true;
+  except
+    Messagedlg('Have wrong, can not save data!', mtwarning, [mbyes], 0);
+    Abort;
+  end;
+  btnsave.Enabled := false;
+  btncancel.Enabled := false;
+  DBGridDetail.FieldColumns['DateInput'].ButtonStyle := cbsNone;
+  DBGridDetail.FieldColumns['CGNO'].ButtonStyle := cbsNone;
+  //DBGridDetail.FieldColumns['Qty'].ButtonStyle:=cbsNone;
+
+end;
+
+procedure TMatQcCheck.DBGridDetailGetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if (qry_Qc.FieldByName('YN').Value = '0') then
+    begin
+      DBGridDetail.canvas.font.color := clRed;
+    end;
+end;
+
+procedure TMatQcCheck.DBGridDetailDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+  if (column.FieldName = 'QC_Check') and (qry_Qc.FieldByName('QC_Check').AsString = 'Fail') or
+    (column.FieldName = 'Lab_Check') and (qry_Qc.FieldByName('Lab_Check').AsString = 'Fail') or
+    (column.FieldName = 'Final_Status') and (qry_Qc.FieldByName('Final_Status').AsString = 'Fail') or
+    (column.FieldName = 'Settlement') and (qry_Qc.FieldByName('Settlement').AsString = 'Rejected') then
+    begin
+      DBGridDetail.canvas.Font.color := clred;
+    end;
+
+  if (column.FieldName = 'QC_Check') and (qry_Qc.FieldByName('QC_Check').AsString = 'Pass') or
+    (column.FieldName = 'Lab_Check') and (qry_Qc.FieldByName('Lab_Check').AsString = 'Pass') or
+    (column.FieldName = 'Final_Status') and (qry_Qc.FieldByName('Final_Status').AsString = 'Pass') or
+    (column.FieldName = 'Settlement') and (qry_Qc.FieldByName('Settlement').AsString = 'Released') then
+    begin
+      DBGridDetail.canvas.Font.color := clblue;
+    end;
+
+  if (column.FieldName = 'Settlement') and (qry_Qc.FieldByName('Settlement').AsString = 'Limited Release') then
+    begin
+      DBGridDetail.canvas.Font.color := clgreen;
+    end;
+
+  if (column.FieldName = 'Settlement') and (qry_Qc.FieldByName('Settlement').AsString = 'Limited Rejected') then
+    begin
+      DBGridDetail.canvas.Font.color := clFuchsia;
+    end;
+
+  //if column.FieldName='Final_Status'then
+  if (column.FieldName = 'RY') or (column.FieldName = 'CGNO') or (column.FieldName = 'Article') or (column.FieldName =
+    'CustPO') then
+    begin
+      if qry_Qc.FieldByName('Final_Status').AsString = 'Pass' then //Final_Status
+        DBGridDetail.canvas.Brush.Color := clLime
+      else
+        if qry_Qc.FieldByName('Final_Status').AsString = 'Fail' then
+          DBGridDetail.canvas.Brush.Color := clRed
+        else
+          DBGridDetail.canvas.Brush.Color := clAqua;
+    end;
+
+  DBGridDetail.DefaultDrawColumnCell(rect, DataCol, column, state);
+end;
+
+procedure CompressIt(var CompressedStream: TMemoryStream; const CompressionLevel: TCompressionLevel);
+var
+  SourceStream: TCompressionStream;
+  DestStream: TMemoryStream;
+  Count: int64;
+begin
+  Count := CompressedStream.Size;
+  DestStream := TMemoryStream.Create;
+  SourceStream := TCompressionStream.Create(CompressionLevel, DestStream);
+  try
+    CompressedStream.SaveToStream(SourceStream);
+    SourceStream.Free;
+    CompressedStream.Clear;
+    CompressedStream.WriteBuffer(Count, SizeOf(Count));
+    CompressedStream.CopyFrom(DestStream, 0);
+  finally
+    DestStream.Free;
+  end;
+end;
+
+procedure UnCompressit(const CompressedStream: TMemoryStream; var UnCompressedStream: TMemoryStream);
+var
+  SourceStream: TDecompressionStream;
+  DestStream: TMemoryStream;
+  Buffer: PChar;
+  Count: int64;
+begin
+  CompressedStream.ReadBuffer(Count, SizeOf(Count));
+  GetMem(Buffer, Count);
+  DestStream := TMemoryStream.Create;
+  SourceStream := TDecompressionStream.Create(CompressedStream);
+  try
+    SourceStream.ReadBuffer(Buffer^, Count);
+    DestStream.WriteBuffer(Buffer^, Count);
+    DestStream.Position := 0;
+    UnCompressedStream.LoadFromStream(DestStream);
+  finally
+    FreeMem(Buffer);
+    DestStream.Free;
+  end;
+end;
+
+procedure TMatQcCheck.mnu2Click(Sender: TObject);
+var
+   UploadObj: TFileTransClient;
+   ms: TMemoryStream;
+begin
+  if not qry_Qc.FieldByName('File_Name').IsNull then
+  begin
+    savedialog1.FileName:=qry_Qc.FieldByName('File_Name').AsString;
+    if SaveDialog1.Execute then
+    begin
+        UploadObj := TFileTransClient.Create();
+        ms := TMemoryStream.Create;
+        ms.LoadFromStream(UploadObj.down(Format('%.8d',[strtoint(qry_Qc.FieldByName('NO_ID').AsString)])+'_'+qry_Qc.fieldByName('File_Name').AsString,'QC\'+main.Edit2.Text+'\Mat\', savedialog1.FileName));
+        if ms.Size > 0 then  //fail
+        begin
+           showmessage('Download file OK')
+        end else
+        begin
+          showmessage('Download file error');
+        end;
+        UploadObj.Free;
+        ms.Free;
+    end;
+  end;
+
+end;
+
+procedure TMatQcCheck.Button2Click(Sender: TObject);
+var
+  ExpClass: TDBGridEhExportClass;
+  Ext: string;
+  tdbgh: TDBGridEh;
+begin
+  tdbgh := DBGridDetail;
+  if (tdbgh is TDBGridEh) then
+    if SaveDialog1.Execute then
+      begin
+        case SaveDialog1.FilterIndex of
+          1:
+            begin
+              ExpClass := TDBGridEhExportAsXLS;
+              Ext := 'xls';
+            end;
+          2:
+            begin
+              ExpClass := TDBGridEhExportAsCSV;
+              Ext := 'csv';
+            end;
+          3:
+            begin
+              ExpClass := TDBGridEhExportAsHTML;
+              Ext := 'htm';
+            end;
+          4:
+            begin
+              ExpClass := TDBGridEhExportAsRTF;
+              Ext := 'rtf';
+            end;
+          5:
+            begin
+              ExpClass := TDBGridEhExportAsText;
+              Ext := 'txt';
+            end;
+          else
+            ExpClass := nil;
+            Ext := '';
+        end;
+        if ExpClass <> nil then
+          begin
+            if UpperCase(Copy(SaveDialog1.FileName, Length(SaveDialog1.FileName) - 2, 3)) <> UpperCase(Ext) then
+              SaveDialog1.FileName := SaveDialog1.FileName + '.' + Ext;
+            SaveDBGridEhToExportFile(ExpClass, tdbgh, SaveDialog1.FileName, true);
+            if Application.MessageBox('Do you want to open the exported file?', 'Open file', MB_YESNO) = IDYES then
+              shellexecute(handle, 'open', pchar(SaveDialog1.FileName), nil, nil, SW_SHOWNORMAL);
+          end;
+      end;
+
+end;
+
+procedure TMatQcCheck.mnu4Click(Sender: TObject);
+var
+   UploadObj: TFileTransClient;
+   ms: TMemoryStream;
+begin
+  if not qry_Qc.FieldByName('File_Name_Lab').IsNull then
+  begin
+    savedialog1.FileName:=qry_Qc.FieldByName('File_Name_Lab').AsString;
+    if SaveDialog1.Execute then
+    begin
+        UploadObj := TFileTransClient.Create();
+        ms := TMemoryStream.Create;
+        ms.LoadFromStream(UploadObj.down(Format('%.8d',[strtoint(qry_Qc.FieldByName('NO_ID').AsString)])+'_'+qry_Qc.fieldByName('File_Name_Lab').AsString,'QC\'+main.Edit2.Text+'\Lab\', savedialog1.FileName));
+        if ms.Size > 0 then  //fail
+        begin
+           showmessage('Download file OK')
+        end else
+        begin
+          showmessage('Download file error');
+        end;
+        UploadObj.Free;
+        ms.Free;
+    end;
+  end;
+end;
+
+procedure TMatQcCheck.DBGridDetailColumns13EditButtonClick(Sender: TObject;
+  var Handled: Boolean);
+begin
+  if QC_MatDefect <> nil then
+    QC_MatDefect.show
+  else
+    begin
+      QC_MatDefect := TQC_MatDefect.Create(self);
+      QC_MatDefect.show;
+    end;
+end;
+
+procedure TMatQcCheck.qry_QcFinal_StatusChange(Sender: TField);
+begin
+  if qry_Qc.FieldByName('Final_Status').AsString <> '' then
+    begin
+      if qry_Qc.FieldByName('QC_Check').AsString = '' then
+        begin
+          Messagedlg('QC result has not already updated yet, pls update QC result first!', mtwarning, [mbyes], 0);
+          Abort;
+        end
+      else
+        begin
+          qry_Qc.fieldbyname('QC_Date').Value := Ndate;
+          qry_Qc.fieldbyname('QC_UserID').Value := main.edit1.text;
+        end;
+
+      { if qry_Qc.FieldByName('Lab_Check').AsString = ''then
+       begin
+         Messagedlg('Lab result has not already updated yet, pls update Lab result first!',mtwarning,[mbyes],0);
+         Abort;
+       end; }
+
+      DBGridDetail.Columns[28].ReadOnly := false; //Final_Remark
+    end;
+end;
+
+procedure TMatQcCheck.btnexcelClick(Sender: TObject);
+var
+  eclApp, WorkBook, xlSheet: olevariant;
+  i, j, k, m: integer;
+begin
+  if qry_Qc.Active then
+    begin
+      if qry_Qc.recordcount = 0 then
+        begin
+          Messagedlg('No record.', mtwarning, [mbyes], 0);
+          abort;
+        end;
+    end
+  else
+    begin
+      Messagedlg('No record.', mtwarning, [mbyes], 0);
+      abort;
+    end;
+
+  try
+    eclApp := CreateOleObject('Excel.Application');
+    WorkBook := CreateOleObject('Excel.Sheet');
+  except
+    Application.MessageBox('NO Microsoft   Excel', 'Microsoft   Excel', MB_OK + MB_ICONWarning);
+    Exit;
+  end;
+
+  try
+    WorkBook := eclApp.workbooks.Add;
+    xlSheet := workbook.Worksheets['sheet1'];
+    xlSheet.Name := 'Summary Report';
+    //title
+    eclapp.ActiveSheet.Range['A2:N2'].Merge;
+    eclApp.Cells(2, 1) := 'BAO CAO TONG HOP TINH HINH CHAT LUONG' + CHR(10) + 'QUALITY SUMMARY REPORT';
+
+    eclapp.ActiveSheet.Range['B4:K4'].Merge;
+    eclapp.ActiveSheet.Range['L4:U4'].Merge;
+    eclapp.ActiveSheet.Range['V4:AF4'].Merge;
+    eclapp.ActiveSheet.Range['AG4:AH4'].Merge;
+    eclApp.Cells(4, 2) := 'Information';
+    eclApp.Cells(4, 12) := 'QC Inspection';
+    eclApp.Cells(4, 22) := 'Lab Test';
+    eclApp.Cells(4, 33) := 'Final Status';
+
+    eclApp.Cells(5, 1) := 'No.';
+    eclApp.Cells(5, 2) := 'Date';
+    eclApp.Cells(5, 3) := 'RY Actual';
+    eclApp.Cells(5, 4) := 'Shipment';
+    eclApp.Cells(5, 5) := 'Article';
+    eclApp.Cells(5, 6) := 'Adidas' + chr(10) + 'PO#';
+    eclApp.Cells(5, 7) := 'Material' + chr(10) + 'ID';
+    eclApp.Cells(5, 8) := 'Material' + chr(10) + 'Name';
+    eclApp.Cells(5, 9) := 'Supplier' + chr(10) + 'Name';
+    eclApp.Cells(5, 10) := 'QTY';
+    eclApp.Cells(5, 11) := 'Remark';
+    eclApp.Cells(5, 12) := 'Tracking' + chr(10) + 'A-01';
+    eclApp.Cells(5, 13) := 'Sample' + chr(10) + 'Send';
+    eclApp.Cells(5, 14) := 'Result';
+    eclApp.Cells(5, 15) := 'Defects';
+    eclApp.Cells(5, 16) := 'Signal';
+    eclApp.Cells(5, 17) := 'Finished' + chr(10) + 'Date';
+    eclApp.Cells(5, 18) := 'Settlement';
+    eclApp.Cells(5, 19) := 'Report/GL';
+    eclApp.Cells(5, 20) := 'QC-Date';
+    eclApp.Cells(5, 21) := 'QC-UserID';
+    eclApp.Cells(5, 22) := 'Result';
+    eclApp.Cells(5, 23) := 'Fail' + chr(10) + 'Reason';
+    eclApp.Cells(5, 24) := 'Database';
+    eclApp.Cells(5, 25) := 'Report' + chr(10) + 'PDM ID';
+    eclApp.Cells(5, 26) := 'GL';
+    eclApp.Cells(5, 27) := 'Remark';
+    eclApp.Cells(5, 28) := 'TLSP' + chr(10) + 'Comparison';
+    eclApp.Cells(5, 29) := 'Confirmed' + chr(10) + 'Result';
+    eclApp.Cells(5, 30) := 'Remark' + chr(10) + 'Date';
+    eclApp.Cells(5, 31) := 'UserID';
+    eclApp.Cells(5, 32) := 'UserDate';
+    eclApp.Cells(5, 33) := 'Result';
+    eclApp.Cells(5, 34) := 'Remark';
+
+    { for i:=3 to DBGridDetail.FieldCount-3 do
+     begin
+         eclApp.Cells(5,i):=DBGridDetail.Fields[i].FieldName;
+     end;   }
+
+    qry_Qc.First;
+    j := 6;
+    k := 0;
+    while not qry_Qc.Eof do
+      begin
+        k := k + 1;
+        eclApp.Cells(j, 1) := k;
+        eclApp.Cells(j, 2) := DBGridDetail.Fields[0].Value;
+        for i := 3 to DBGridDetail.fieldcount - 3 do
+          begin
+            eclApp.Cells(j, i) := DBGridDetail.Fields[i].Value;
+
+            for m := 1 to 4 do
+              begin
+                eclapp.ActiveSheet.Cells[j - 2, i - 2].Borders[m].Weight := 2;
+                eclapp.ActiveSheet.Cells[j - 1, i - 2].Borders[m].Weight := 2;
+                eclapp.ActiveSheet.Cells[j, i - 2].Borders[m].Weight := 2;
+                eclapp.ActiveSheet.Cells[j - 2, i].Borders[m].Weight := 2;
+                eclapp.ActiveSheet.Cells[j - 1, i].Borders[m].Weight := 2;
+                eclapp.ActiveSheet.Cells[j, i].Borders[m].Weight := 2;
+              end;
+
+            eclApp.ActiveSheet.Rows[j].Font.Size := 9;
+            eclApp.ActiveSheet.Rows[j].font.name := 'Calibri';
+            eclApp.ActiveSheet.Rows[j].HorizontalAlignment := $FFFFEFF4;
+
+          end;
+        qry_Qc.Next;
+        inc(j);
+      end;
+
+    eclApp.ActiveSheet.Rows[2].Font.Size := 18;
+    eclApp.ActiveSheet.Rows[2].Font.Bold := True;
+    eclApp.ActiveSheet.Rows[2].HorizontalAlignment := $FFFFEFF4;
+    eclApp.ActiveSheet.Rows[2].font.name := 'Calibri';
+    eclapp.ActiveSheet.Rows[2].RowHeight := 43;
+
+    eclApp.ActiveSheet.Rows[4].Font.Size := 11;
+    eclApp.ActiveSheet.Rows[4].Font.Bold := True;
+    eclApp.ActiveSheet.Rows[4].HorizontalAlignment := $FFFFEFF4;
+    eclApp.ActiveSheet.Rows[4].font.name := 'Calibri';
+    eclApp.ActiveSheet.Rows[5].Font.Size := 11;
+    eclApp.ActiveSheet.Rows[5].Font.Bold := True;
+    eclApp.ActiveSheet.Rows[5].HorizontalAlignment := $FFFFEFF4;
+    eclApp.ActiveSheet.Rows[5].font.name := 'Calibri';
+
+    eclapp.ActiveSheet.Columns[20].Hidden := true;
+    eclapp.ActiveSheet.Columns[21].Hidden := true;
+    eclapp.ActiveSheet.Columns[31].Hidden := true;
+    eclapp.ActiveSheet.Columns[32].Hidden := true;
+
+    {
+    eclapp.columns.autofit;
+    eclApp.ActiveWindow.FreezePanes := False;
+    EclApp.ActiveSheet.Range['J6'].Select;
+    eclApp.ActiveWindow.FreezePanes := True;
+    }
+    showmessage('Succeed.');
+    eclApp.Visible := True;
+  except
+    on F: Exception do
+      showmessage(F.Message);
+  end;
+
+end;
+
+procedure TMatQcCheck.DBGridDetailColumns10EditButtonClick(Sender: TObject;
+  var Handled: Boolean);
+begin
+  if Calculator <> nil then
+    Calculator.show
+  else
+    begin
+      Calculator := TCalculator.create(self);
+      Calculator.show;
+    end;
+end;
+
+procedure TMatQcCheck.qry_QcAfterOpen(DataSet: TDataSet);
+begin
+  btninsert.Enabled := true;
+  if qry_Qc.RecordCount > 0 then
+    begin
+      //btnexcel.Enabled:=true;
+      mnu2.Enabled := true;
+      mnu4.Enabled := true;
+      mnu5.Enabled := true;
+    end;
+    
+  qry_App.ParamByName('GSBH').AsString:=main.Edit2.Text;
+  qry_App.Active := true;
+  qry_Color.ParamByName('GSBH').AsString:=main.Edit2.Text;
+  qry_Color.Active := true;
+  qry_MatQuality.ParamByName('GSBH').AsString:=main.Edit2.Text;
+  qry_MatQuality.Active := true;
+  qry_RY.Active := true;
+end;
+
+procedure TMatQcCheck.qry_QcTrackingChange(Sender: TField);
+begin
+  if (qry_Qc.FieldByName('Tracking').AsString <> '') or (qry_Qc.FieldByName('SampleSent').AsString <> '') or
+    (qry_Qc.FieldByName('QC_Check').AsString <> '')
+    or (qry_Qc.FieldByName('QC_Reason').AsString <> '') or (qry_Qc.FieldByName('Per_Defect').AsString <> '')
+    or (qry_Qc.FieldByName('QC_FinishDate').AsString <> '') or (qry_Qc.FieldByName('Settlement').AsString <> '')
+    or (qry_Qc.FieldByName('Final_Remark').AsString <> '') then
+    begin
+      qry_Qc.fieldbyname('QC_Date').Value := Ndate;
+      qry_Qc.fieldbyname('QC_UserID').Value := main.edit1.text;
+    end;
+end;
+
+procedure TMatQcCheck.chkqcClick(Sender: TObject);
+begin
+  DBGridDetail.FieldColumns['Tracking'].Visible := not chkQc.Checked;
+  DBGridDetail.FieldColumns['SampleSent'].Visible := not chkQc.Checked;
+  DBGridDetail.FieldColumns['QC_Check'].Visible := not chkQc.Checked;
+  DBGridDetail.FieldColumns['QC_Reason'].Visible := not chkQc.Checked;
+  //DBGridDetail.FieldColumns['Per_Defect'].Visible:=not chkQc.Checked;
+  DBGridDetail.FieldColumns['QC_FinishDate'].Visible := not chkQc.Checked;
+  DBGridDetail.FieldColumns['Settlement'].Visible := not chkQc.Checked;
+  DBGridDetail.FieldColumns['File_Name'].Visible := not chkQc.Checked;
+  DBGridDetail.FieldColumns['QC_Date'].Visible := not chkQc.Checked;
+  DBGridDetail.FieldColumns['QC_UserID'].Visible := not chkQc.Checked;
+
+
+end;
+
+procedure TMatQcCheck.chklabClick(Sender: TObject);
+begin
+  DBGridDetail.FieldColumns['Lab_Check'].Visible := not chkLab.Checked;
+  DBGridDetail.FieldColumns['Lab_Reason'].Visible := not chkLab.Checked;
+  DBGridDetail.FieldColumns['Lab_Num'].Visible := not chkLab.Checked;
+  DBGridDetail.FieldColumns['Lab_PDM_ID'].Visible := not chkLab.Checked;
+  DBGridDetail.FieldColumns['PDM_File_Name'].Visible := not chkLab.Checked;
+  DBGridDetail.FieldColumns['File_Name_Lab'].Visible := not chkLab.Checked;
+  DBGridDetail.FieldColumns['Lab_Result'].Visible := not chkLab.Checked;
+  DBGridDetail.FieldColumns['Comparision'].Visible := not chkLab.Checked;
+  DBGridDetail.FieldColumns['Lab_ConfirmDate'].Visible := not chkLab.Checked;
+  DBGridDetail.FieldColumns['Lab_DateRemark'].Visible := not chkLab.Checked;
+
+end;
+
+procedure TMatQcCheck.qry_QcRYGetText(Sender: TField; var Text: string;
+  DisplayText: Boolean);
+begin
+  Text := Copy(qry_QcRY.AsString, 1, 800);
+end;
+
+procedure TMatQcCheck.Defects1Click(Sender: TObject);
+begin
+  QC_MatDefect := TQC_MatDefect.Create(self);
+  QC_MatDefect.Show;
+end;
+
+procedure TMatQcCheck.btn_FinalClick(Sender: TObject);
+begin
+  //update Final status
+  {20151102 ruler note
+  1. QC_check=null then Final_Status = null
+  2. QC_check not null
+       (1) Tracking=1
+           (1) QC_check="Pass"
+               (1) Lab_Check="Pass" or  Lab_Result="Go to Production"  then  Final_Status = "Pass"
+               (2) Lab_Check="" or  Lab_Result="" or Lab_Result="Waiting for Purchasing" then  Final_Status = "" else Final_Status = "Fail"
+           (2) QC_check="Fail"
+               (1) Settlement="Released"
+                  (1) Lab_Check="Pass" or  Lab_Result="Go to Production" then  Final_Status = "Pass"
+                  (2) Lab_Check="Fail"   and Lab_Result="Return"  then    Final_Status = "Fail"
+                  (3) Final_Status = ""
+               (2) Settlement="Rejected"  then Final_Status = "Fail" else Final_Status = ""
+       (2) Tracking<>1
+           (1) QC_check="Pass"   then Final_Status = "Pass"
+           (2) Settlement="Released"  then Final_Status = "Pass"
+           (3) Settlement="Rejected"  then Final_Status = "Fail"
+           (3) Settlement=""  then Final_Status = ""
+
+  }
+  with Query1 do
+  begin
+    active := false;
+    sql.Clear;
+    SQL.Add('update MaterialQCcheck ');
+    SQL.Add('   set Final_Status= (select case when isnull(QC_check,'''') = '''' then null else');
+    SQL.Add('(case when Tracking = ''1'' then ');
+    SQL.Add('   (case when QC_check =''Pass'' then ');
+    SQL.Add('         (case when Lab_Check =''Pass'' or Lab_Result=''Go to Production'' then ''Pass'' ');
+    SQL.Add('             when isnull(Lab_Check,'''') = '''' or isnull(Lab_Result,'''') ='''' or Lab_Result=''Waiting for Purchasing'' then null else ''Fail'' end');
+    SQL.Add('         )');
+    SQL.Add('         when QC_check =''Fail'' then ');
+    SQL.Add('         (case when Settlement=''Released'' then ');
+    SQL.Add('                (case when Lab_Check =''Pass''or Lab_Result=''Go to Production'' then ''Pass'' ');
+    SQL.Add('                      when Lab_Check = ''Fail'' and Lab_Result = ''Return'' then ''Fail'' else null end');
+    SQL.Add('                 ) ');
+    SQL.Add('               when Settlement=''Rejected'' then ''Fail'' else null end');
+    SQL.Add('         )');
+    SQL.Add('    end)  else ');
+    SQL.Add('   (case when QC_check =''Pass'' then ''Pass'' else ');
+    SQL.Add('          (case when Settlement=''Released'' then ''Pass'' when Settlement=''Rejected'' then ''Fail'' else null end) ');
+    SQL.Add('    end)');
+    SQL.Add('end) end ');
+    SQL.Add('from MaterialQCcheck m2 where MaterialQCcheck.No_ID=m2.No_ID)');
+    if chk1.Checked then
+    begin
+      sql.Add('where CONVERT(varchar(10),DateInput,111) between');
+      sql.add('''' + formatdatetime('yyyy/MM/dd', DTP1.date) + '''' + 'and ' + '''' +
+        formatdatetime('yyyy/MM/dd', DTP2.date) + '''');
+    end;
+    execsql;
+  end;
+end;
+
+procedure TMatQcCheck.DBGrid_RYEditButtonClick(Sender: TObject);
+begin
+  RYDetail_S := TRYDetail_S.create(self);
+  RYDetail_S.show;
+end;
+
+procedure TMatQcCheck.DBGridDetailColumns5EditButtonClick(Sender: TObject;
+  var Handled: Boolean);
+begin                                     
+  if MatQcCheck.GSBH_SFL = 'DC' then
+  begin
+    if Messagedlg('Using Season/Stage or Purchase/Warehouse No. ?', mtCustom, [mbYes,mbOK], 0)=mrYes then
+    begin
+      if SampleRYDetail <> nil then
+        SampleRYDetail.show
+      else begin
+          SampleRYDetail := TSampleRYDetail.Create(self);
+          SampleRYDetail.show;
+      end;
+    end else
+    begin
+      if RYDetail <> nil then
+        RYDetail.show
+      else
+        begin
+          RYDetail := TRYDetail.Create(self);
+          RYDetail.show;
+        end;
+    end;
+  end else
+  begin
+    if RYDetail <> nil then
+      RYDetail.show
+    else
+      begin
+        RYDetail := TRYDetail.Create(self);
+        RYDetail.show;
+      end;
+  end;
+end;
+
+procedure TMatQcCheck.btninsert1Click(Sender: TObject);
+begin
+  qry_RY.RequestLive := true;
+  qry_RY.CachedUpdates := true;
+  qry_RY.insert;
+
+  btnsave1.Enabled := true;
+  btncancel1.Enabled := true;
+  DBGrid_RY.FieldColumns['RY'].ButtonStyle := cbsEllipsis;
+  flag := 1;
+end;
+
+procedure TMatQcCheck.btnmodify1Click(Sender: TObject);
+begin
+  if qry_RY.FieldByName('USERDATE').Value + 30 < date then
+    begin
+      Messagedlg('You can not modify after 30 days!!!', mtwarning, [mbyes], 0);
+      abort;
+    end;
+
+  qry_RY.RequestLive := true;
+  qry_RY.CachedUpdates := true;
+  qry_RY.edit;
+  btnsave1.Enabled := true;
+  btncancel1.Enabled := true;
+  DBGrid_RY.FieldColumns['RY'].ButtonStyle := cbsEllipsis;
+  flag := 2;
+end;
+
+procedure TMatQcCheck.btncancel1Click(Sender: TObject);
+begin
+  qry_RY.Active := false;
+  qry_RY.RequestLive := false;
+  qry_RY.CachedUpdates := false;
+  qry_RY.Active := true;
+
+  DBGrid_RY.FieldColumns['RY'].ButtonStyle := cbsNone;
+  btnsave1.Enabled := false;
+  btncancel1.Enabled := false;
+end;
+
+procedure TMatQcCheck.btnsave1Click(Sender: TObject);
+var
+  i: integer;
+begin
+  try
+    qry_RY.first;
+    for i := 1 to qry_RY.RecordCount do
+      begin
+        case qry_RY.updatestatus of
+          usinserted:
+            begin
+              qry_RY.edit;
+              qry_RY.fieldbyname('No_ID').Value := qry_QC.fieldbyname('No_ID').Value;
+              qry_RY.fieldbyname('YN').Value := '1';
+              qry_RY.fieldbyname('USERID').Value := main.edit1.text;
+              Upd_RY.Apply(ukInsert);
+            end;
+          usmodified:
+            begin
+              if qry_RY.fieldbyname('YN').value = '0' then
+                begin
+                  Upd_RY.apply(ukdelete);
+                end
+              else
+                begin
+                  qry_RY.edit;
+                  qry_RY.fieldbyname('USERID').Value := main.edit1.text;
+                  Upd_RY.apply(ukmodify);
+                end;
+            end;
+        end;
+        qry_RY.next;
+      end;
+    qry_RY.active := false;
+    qry_RY.cachedupdates := false;
+    qry_RY.requestlive := false;
+    qry_RY.active := true;
+  except
+    Messagedlg('Error, can not save data!', mtwarning, [mbyes], 0);
+    Abort;
+  end;
+  //
+  with Query1 do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('update MaterialQCcheck');
+    SQL.Add('set');
+    SQL.Add('  RY=mc.RY , Article=mc.Article,  CustPO=mc.CustPO');
+    SQL.Add('from ( ');
+    SQL.Add('select No_ID,');
+    SQL.Add('  cast((select RY + '','' from MaterialQcCheck_RY m2 where mc.No_ID=m2.No_ID and isnull(RY,'''') <> ''''group by RY for XML Path ('''')) as varchar(max)) as RY,');
+    SQL.Add('  cast((select Article + '','' from MaterialQcCheck_RY m3 where mc.No_ID=m3.No_ID and isnull(Article,'''') <> ''''group by Article for XML Path ('''')) as varchar(max))  as Article,');
+    SQL.Add('  cast((select CustPO + '','' from MaterialQcCheck_RY m4 where mc.No_ID=m4.No_ID and isnull(CustPO,'''') <> ''''group by CustPO for XML Path ('''')) as varchar(max))  as CustPO');
+    SQL.Add('from MaterialQCcheck mc');
+    SQL.Add('where No_ID='+qry_Qc.FieldByName('No_ID').AsString+' ) mc');
+    SQL.Add('where mc.No_ID=MaterialQCcheck.NO_ID ');
+    //funcObj.WriteErrorLog(sql.Text);
+    ExecSQL();
+  end;
+  btnsave1.Enabled := false;
+  btncancel1.Enabled := false;
+  DBGrid_RY.FieldColumns['RY'].ButtonStyle := cbsNone;
+
+end;
+
+procedure TMatQcCheck.DBGrid_RYGetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if qry_RY.fieldbyname('YN').value = '0' then
+    DBGrid_RY.Canvas.Font.Color := clred;
+end;
+
+procedure TMatQcCheck.qry_QcAfterScroll(DataSet: TDataSet);
+var
+  isDeff: Boolean;
+begin
+  //isDeff := (qry_Qc.FieldByName('UserID').Value = main.Edit1.Text);
+  if qry_Qc.recordcount <> 0 then
+  begin
+    isDeff :=true;
+  end  else
+  begin
+    isDeff :=false;
+  end;
+    btnmodify.Enabled := isDeff;
+    btndelete.Enabled := isDeff;
+
+    btnInsert1.Enabled := isDeff;
+    btnModify1.Enabled := isDeff;
+    btnDelete1.Enabled := isDeff;
+  {
+   if qry_Qc.FieldByName('UserID').Value <> main.Edit1.Text then
+     begin
+       btnmodify.Enabled := false;
+       btndelete.Enabled := false;
+
+       btnInsert1.Enabled := false;
+       btnModify1.Enabled := false;
+       btnDelete1.Enabled := false;
+     end
+   else
+     begin
+       btnmodify.Enabled := true;
+       btndelete.Enabled := true;
+
+       btnInsert1.Enabled := true;
+       btnModify1.Enabled := true;
+       btnDelete1.Enabled := true;
+     end;
+     }
+end;
+
+procedure TMatQcCheck.btndelete1Click(Sender: TObject);
+begin
+  if qry_RY.FieldByName('USERDATE').Value + 3 < date then
+    begin
+      Messagedlg('You can not delete after 3 days!!!', mtwarning, [mbyes], 0);
+      abort;
+    end;
+
+  with qry_RY do
+    begin
+      requestlive := true;
+      cachedupdates := true;
+      edit;
+      fieldbyname('YN').Value := '0';
+    end;
+  btnsave1.Enabled := true;
+  btncancel1.Enabled := true;
+
+end;
+
+procedure TMatQcCheck.mnu5Click(Sender: TObject);
+var
+   UploadObj: TFileTransClient;
+   ms: TMemoryStream;
+begin
+
+  if not qry_Qc.FieldByName('PDM_File_Name').IsNull then
+  begin
+    savedialog1.FileName:=qry_Qc.FieldByName('PDM_File_Name').AsString;
+    if SaveDialog1.Execute then
+    begin
+        UploadObj := TFileTransClient.Create();
+        ms := TMemoryStream.Create;
+        ms.LoadFromStream(UploadObj.down(Format('%.8d',[strtoint(qry_Qc.FieldByName('NO_ID').AsString)])+'_'+qry_Qc.fieldByName('PDM_File_Name').AsString,'QC\'+main.Edit2.Text+'\Mat\', savedialog1.FileName));
+        if ms.Size > 0 then  //fail
+        begin
+           showmessage('Download file OK')
+        end else
+        begin
+          showmessage('Download file error');
+        end;
+        UploadObj.Free;
+        ms.Free;
+    end;
+  end;
+
+end;
+
+procedure TMatQcCheck.qry_QcQtyChange(Sender: TField);
+begin
+  flag := 3;
+end;
+
+procedure TMatQcCheck.btnAppFormClick(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+begin
+   if FileExists(AppDir+'Additional\QC_SN721.xls')=false  then
+   begin
+     if(not DirectoryExists(AppDir+'Additional\'))  then ForceDirectories(AppDir+'Additional\');
+     CopyFile(Pchar('\\'+main.ServerIP+'\liy_erp\Additional\QC_SN721.xls'),Pchar(AppDir+'Additional\QC_SN721.xls'),false);
+   end;
+   if FileExists(AppDir+'Additional\QC_SN721.xls') then
+   begin
+      if  qry_Qc.active  then
+      begin
+        try
+          eclApp:=CreateOleObject('Excel.Application');
+          WorkBook:=CreateOleObject('Excel.Sheet');
+        except
+          Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+          Exit;
+        end;
+        try
+          eclApp.WorkBooks.Open(AppDir+'Additional\QC_SN721.xls');
+          eclApp.WorkSheets[1].Activate;//第一頁為主
+          eclApp.Cells(6,8):=qry_Qc.FieldByName('No_ID').Value;
+          eclApp.Cells(14,4):=qry_Qc.FieldByName('MaterialName').Value;
+          eclApp.Cells(14,8):=qry_Qc.FieldByName('CLBH').Value;
+          eclApp.Cells(16,8):=qry_Qc.FieldByName('Article').Value;
+          showmessage('Succeed');
+          eclApp.Visible:=True;
+        except
+            on   F:Exception   do
+              showmessage(F.Message);
+        end;
+      end;
+   end;
+end;
+
+procedure TMatQcCheck.FormShow(Sender: TObject);
+begin
+  main.FormLanguage(Pointer(self),self.Name);
+end;
+
+procedure TMatQcCheck.qry_QcManagerCheckChange(Sender: TField);
+begin
+  if (qry_Qc.fieldbyname('ManagerCheck').Value<>0)  then
+  begin
+     qry_Qc.fieldbyname('ManagerID').Value := main.edit1.text;
+     qry_Qc.fieldbyname('ManagerCFMDate').Value := Ndate;
+  end else
+  begin
+     qry_Qc.fieldbyname('ManagerID').Value := null;
+     qry_Qc.fieldbyname('ManagerCFMDate').Value := null;
+  end;
+end;
+
+end.
+

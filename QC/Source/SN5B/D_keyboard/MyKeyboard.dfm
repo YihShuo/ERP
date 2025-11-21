@@ -1,0 +1,195 @@
+object KeyBoardForm: TKeyBoardForm
+  Left = 600
+  Top = 190
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'KeyBoardForm'
+  ClientHeight = 324
+  ClientWidth = 196
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -32
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 37
+  object CBtn0: TColorButton
+    Left = 0
+    Top = 256
+    Width = 65
+    Height = 65
+    Caption = '0'
+    TabOrder = 0
+    OnClick = BtnNumberLockClick
+    BackColor = clWhite
+    HoverColor = clYellow
+  end
+  object CBtn1: TColorButton
+    Left = 0
+    Top = 192
+    Width = 65
+    Height = 65
+    Caption = '1'
+    TabOrder = 1
+    OnClick = BtnNumberLockClick
+    BackColor = clWhite
+    HoverColor = clYellow
+  end
+  object CBtn2: TColorButton
+    Left = 64
+    Top = 192
+    Width = 65
+    Height = 65
+    Caption = '2'
+    TabOrder = 2
+    OnClick = BtnNumberLockClick
+    BackColor = clWhite
+    HoverColor = clYellow
+  end
+  object CBtn3: TColorButton
+    Left = 128
+    Top = 192
+    Width = 65
+    Height = 65
+    Caption = '3'
+    TabOrder = 3
+    OnClick = BtnNumberLockClick
+    BackColor = clWhite
+    HoverColor = clYellow
+  end
+  object CBtn4: TColorButton
+    Left = 0
+    Top = 128
+    Width = 65
+    Height = 65
+    Caption = '4'
+    TabOrder = 4
+    OnClick = BtnNumberLockClick
+    BackColor = clWhite
+    HoverColor = clYellow
+  end
+  object CBtn5: TColorButton
+    Left = 64
+    Top = 128
+    Width = 65
+    Height = 65
+    Caption = '5'
+    TabOrder = 5
+    OnClick = BtnNumberLockClick
+    BackColor = clWhite
+    HoverColor = clYellow
+  end
+  object CBtn6: TColorButton
+    Left = 128
+    Top = 128
+    Width = 65
+    Height = 65
+    Caption = '6'
+    TabOrder = 6
+    OnClick = BtnNumberLockClick
+    BackColor = clWhite
+    HoverColor = clYellow
+  end
+  object CBtn7: TColorButton
+    Left = 0
+    Top = 64
+    Width = 65
+    Height = 65
+    Caption = '7'
+    TabOrder = 7
+    OnClick = BtnNumberLockClick
+    BackColor = clWhite
+    HoverColor = clYellow
+  end
+  object CBtn8: TColorButton
+    Left = 64
+    Top = 64
+    Width = 65
+    Height = 65
+    Caption = '8'
+    TabOrder = 8
+    OnClick = BtnNumberLockClick
+    BackColor = clWhite
+    HoverColor = clYellow
+  end
+  object CBtn9: TColorButton
+    Left = 128
+    Top = 64
+    Width = 65
+    Height = 65
+    Caption = '9'
+    TabOrder = 9
+    OnClick = BtnNumberLockClick
+    BackColor = clWhite
+    HoverColor = clYellow
+  end
+  object CBtn_Y: TColorButton
+    Left = 0
+    Top = 0
+    Width = 65
+    Height = 65
+    Caption = 'Y'
+    TabOrder = 10
+    OnClick = BtnNumberLock_UppcaseClick
+    BackColor = clWhite
+    HoverColor = clYellow
+  end
+  object CBtn_V: TColorButton
+    Left = 64
+    Top = 0
+    Width = 65
+    Height = 65
+    Caption = 'V'
+    TabOrder = 11
+    OnClick = BtnNumberLock_UppcaseClick
+    BackColor = clWhite
+    HoverColor = clYellow
+  end
+  object CBtn_1: TColorButton
+    Left = 64
+    Top = 256
+    Width = 65
+    Height = 65
+    Caption = '-'
+    TabOrder = 12
+    OnClick = BtnNumberLockClick
+    BackColor = clWhite
+    HoverColor = clYellow
+  end
+  object CBtn_2: TColorButton
+    Left = 128
+    Top = 256
+    Width = 65
+    Height = 65
+    Caption = 'Del'
+    TabOrder = 13
+    OnClick = BtnNumberLockClick
+    OnMouseDown = CBtn_2MouseDown
+    OnMouseUp = CBtn_2MouseUp
+    BackColor = clWhite
+    HoverColor = clYellow
+  end
+  object CBtn_B: TColorButton
+    Left = 128
+    Top = 0
+    Width = 65
+    Height = 65
+    Caption = 'B'
+    TabOrder = 14
+    OnClick = BtnNumberLock_UppcaseClick
+    BackColor = clWhite
+    HoverColor = clYellow
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = Timer1Timer
+    Left = 144
+    Top = 280
+  end
+end

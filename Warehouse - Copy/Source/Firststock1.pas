@@ -1,0 +1,577 @@
+unit Firststock1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Buttons, DBTables, DB, StdCtrls, Grids, DBGrids, ExtCtrls,Math, comobj,
+  DBCtrls;
+
+type
+  TFirststock = class(TForm)
+    Panel2: TPanel;
+    DBGrid1: TDBGrid;
+    Panel3: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Button1: TButton;
+    KCCLZL: TQuery;
+    DS1: TDataSource;
+    UpSQL1: TUpdateSQL;
+    Panel1: TPanel;
+    BB2: TBitBtn;
+    BB3: TBitBtn;
+    BB4: TBitBtn;
+    BB5: TBitBtn;
+    BB6: TBitBtn;
+    BB7: TBitBtn;
+    BB1: TBitBtn;
+    BBT1: TBitBtn;
+    BBT2: TBitBtn;
+    BBT3: TBitBtn;
+    BBT4: TBitBtn;
+    bbt5: TBitBtn;
+    bbt6: TBitBtn;
+    Label3: TLabel;
+    CBX1: TComboBox;
+    Label4: TLabel;
+    CBX2: TComboBox;
+    TempSql: TQuery;
+    KCCLZLCLBH: TStringField;
+    KCCLZLQTY: TCurrencyField;
+    KCCLZLUSPrice: TCurrencyField;
+    KCCLZLCWHL: TIntegerField;
+    KCCLZLUSERDATE: TDateTimeField;
+    KCCLZLUSERID: TStringField;
+    KCCLZLYN: TStringField;
+    KCCLZLYWPM: TStringField;
+    KCCLZLDWBH: TStringField;
+    KCCLZLLYCC: TStringField;
+    KCCLZLCLZMLB: TStringField;
+    KCCLZLKCBH: TStringField;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    KCCLZLRKBH: TStringField;
+    KCCLZLVNPrice: TFloatField;
+    DBX1: TDBComboBox;
+    KCCLZLCKBH: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure BB1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure BB7Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure BB2Click(Sender: TObject);
+    procedure BB3Click(Sender: TObject);
+    procedure BB4Click(Sender: TObject);
+    procedure BB6Click(Sender: TObject);
+    procedure BBT1Click(Sender: TObject);
+    procedure BBT2Click(Sender: TObject);
+    procedure BBT3Click(Sender: TObject);
+    procedure BBT4Click(Sender: TObject);
+    procedure BB5Click(Sender: TObject);
+    procedure DBGrid1EditButtonClick(Sender: TObject);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGrid1ColEnter(Sender: TObject);
+    procedure DBGrid1CellClick(Column: TColumn);
+    procedure bbt6Click(Sender: TObject);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit3KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit4KeyPress(Sender: TObject; var Key: Char);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Firststock: TFirststock;
+
+implementation
+
+uses  main1, FirstStock_CL1;
+
+{$R *.dfm}
+
+procedure TFirststock.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+procedure TFirststock.BB1Click(Sender: TObject);
+begin
+panel3.Visible:=true;
+end;
+
+procedure TFirststock.FormCreate(Sender: TObject);
+var i:integer;
+begin
+KCCLZL.active:=false;
+with tempsql do
+  begin
+    active:=false;
+    sql.clear;
+    sql.add('select LBDH from lbzls where lb='+''''+'05'+''''+'order by LBDH');
+    active:=true;
+    while not tempsql.eof do
+      begin
+        CBX1.Items.Add(fields[0].value);
+        next;
+      end;
+    active:=false;
+    sql.clear;
+    sql.add('select  KCCK.* from KCCK ');
+    sql.add('where KCCK.GSBH='+''''+main.Edit2.Text+'''');
+    active:=true; 
+    while not tempsql.eof do
+      begin
+        CBX2.Items.Add(fields[0].value);
+        next;
+      end; 
+    active:=false;
+    sql.Clear;
+    sql.add('select CKBH from KCCK');
+    sql.add('where GSBH='+''''+main.edit2.Text+'''');
+    sql.add('order by CKBH ');
+    active:=true;
+    for i:=1 to recordcount do
+      begin
+        DBX1.Items.add(fieldbyname('CKBH').asstring);
+        next;
+      end;
+  end;
+
+end;
+
+procedure TFirststock.BB7Click(Sender: TObject);
+begin
+close;
+end;
+
+procedure TFirststock.Button1Click(Sender: TObject);
+begin
+with KCCLZL do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('select  KCCLZL.*,CLZL.YWPM,CLZL.DWBH,CLZL.LYCC,CLZL.CLZMLB,KCZLS.KCBH ');
+   // sql.add(',round(KCCLZL.QTY*KCCLZL.USPrice,2) as  USACC,KCCLZL.QTY*KCCLZL.VNPrice as VNACC');
+    sql.add('from KCCLZL');
+    sql.add('left join CLZL on KCCLZL.CLBH=CLZL.CLDH');
+    sql.add('left join KCZLS on KCZLS.CLBH=KCCLZL.CLBH and KCZLS.CKBH=KCCLZL.CKBH');
+    sql.add('left join KCCK on KCCK.CKBH=KCCLZL.CKBH ')  ;
+    sql.add('where KCCLZL.CLBH like '+''''+edit1.Text+'%'+'''');
+    sql.add('and CLZL.YWPM like '+''''+'%'+edit2.Text+'%'+''''); 
+    sql.add('and CLZL.YWPM like '+''''+'%'+edit3.Text+'%'+'''');  
+    sql.add('and CLZL.YWPM like '+''''+'%'+edit4.Text+'%'+'''');
+    if CBX1.itemindex>0 then
+      begin
+        sql.add('and KCCLZL.CLBH like '+''''+CBX1.Text+'%'+'''');
+      end;
+    if CBX2.itemindex>0 then
+      begin
+        sql.add('and KCZLS.CKBH='+''''+CBX2.Text+'''');
+      end;
+
+     sql.add('and KCCK.GSBH='+ ''''+main.edit2.text+'''');
+    sql.add('order by KCCLZL.CLBH') ;
+    active:=true;
+  end;
+
+
+bb2.enabled:=true;
+bb3.enabled:=true;
+bb4.enabled:=true;
+bb5.enabled:=false;
+bb6.enabled:=false;
+bb7.enabled:=true;
+bbt1.enabled:=true;
+bbt2.enabled:=true;
+bbt3.enabled:=true;
+bbt4.enabled:=true;
+bbt5.enabled:=true;
+bbt6.enabled:=true;
+end;
+
+procedure TFirststock.BB2Click(Sender: TObject);
+begin
+with KCCLZL do
+  begin
+    cachedupdates:=true;
+    requestlive:=true;
+    Insert;
+  end;
+bb5.enabled:=true;
+bb6.enabled:=true;
+DBGrid1.Columns[0].buttonstyle:= cbsEllipsis;
+end;
+
+procedure TFirststock.BB3Click(Sender: TObject);
+begin
+if messagedlg('Do you really want to delete this data?',mtconfirmation,[MBYes,MBNo],0)=mrYes then
+  begin
+     with KCCLZL do
+       begin
+         cachedupdates:=true;
+         requestlive:=true;
+         edit;
+         fieldbyname('YN').Value:='0';
+       end;
+  end;
+
+bb5.enabled:=true;
+bb6.enabled:=true; 
+DBGrid1.Columns[0].buttonstyle:= cbsEllipsis;
+end;
+
+procedure TFirststock.BB4Click(Sender: TObject);
+begin
+with KCCLZL do
+  begin
+    cachedupdates:=true;
+    requestlive:=true;
+    KCCLZL.edit;
+  end;
+bb5.enabled:=true;
+bb6.enabled:=true; 
+DBGrid1.Columns[0].buttonstyle:= cbsEllipsis;
+end;
+
+procedure TFirststock.BB6Click(Sender: TObject);
+begin
+with KCCLZL do
+  begin
+    active:=false;
+    cachedupdates:=false;
+    requestlive:=false;
+    active:=true;
+  end;
+BB5.enabled:=false;
+BB6.Enabled:=false;
+DBGrid1.Columns[0].buttonstyle:= cbsnone;
+end;
+
+procedure TFirststock.BBT1Click(Sender: TObject);
+begin
+KCCLZL.First;
+end;
+
+procedure TFirststock.BBT2Click(Sender: TObject);
+begin
+KCCLZL.Prior;
+end;
+
+procedure TFirststock.BBT3Click(Sender: TObject);
+begin
+KCCLZL.Next;
+end;
+
+procedure TFirststock.BBT4Click(Sender: TObject);
+begin
+KCCLZL.Last;
+end;
+
+procedure TFirststock.BB5Click(Sender: TObject);
+var i:integer;
+begin
+with KCCLZL do
+  begin
+    first;
+    while not eof do
+      begin
+        if fieldbyname('Qty').IsNull then
+          begin
+             showmessage('Quantity can not be empty.');
+             abort;
+          end; {
+          else
+            begin
+              if fieldbyname('USPRICE').IsNull and  fieldbyname('VNPRICE').IsNull    then
+                begin
+                  showmessage('Price can not be empty.');
+                  abort;
+                end;
+            end;  }
+        next;
+      end;
+  end;
+
+try
+    KCCLZL.first;
+    for i:=1 to KCCLZL.RecordCount do
+      begin
+        case KCCLZL.updatestatus of
+          usinserted:
+            begin
+              if KCCLZL.fieldbyname('CLBH').isnull then
+                begin
+                  KCCLZL.delete;
+                end
+                 else
+                   begin
+                     KCCLZL.edit;
+                     KCCLZL.FieldByName('USERDATE').Value:=date;
+                     KCCLZL.FieldByName('USERID').Value:=main.edit1.text;
+                     KCCLZL.FieldByName('YN').Value:='1';
+                     upsql1.apply(ukinsert);
+                   end;
+            end;
+          usmodified:
+             begin
+              if KCCLZL.fieldbyname('YN').value='0'then
+                begin
+                  upsql1.apply(ukdelete);
+                end
+                else
+                  begin
+                    KCCLZL.edit;
+                    KCCLZL.FieldByName('USERID').Value:=main.edit1.text;
+                    KCCLZL.FieldByName('USERdate').Value:=date;
+                    upsql1.apply(ukmodify);
+                  end;
+              end;
+        end;
+        KCCLZL.next;
+      end;
+    KCCLZL.active:=false;
+    KCCLZL.cachedupdates:=false;
+    KCCLZL.requestlive:=false;
+    KCCLZL.active:=true;
+bb5.enabled:=false;
+bb6.enabled:=false;
+except
+  Messagedlg('Have wrong, can not save!',mtwarning,[mbyes],0);
+end;
+
+
+end;
+
+procedure TFirststock.DBGrid1EditButtonClick(Sender: TObject);
+begin
+FirstStock_CL:=TFirstStock_CL.Create(self);
+FirstStock_CL.Show;
+end;
+
+procedure TFirststock.DBGrid1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+if KCCLZL.cachedupdates then
+  begin
+    DBX1.BringToFront;
+    if (gdfocused in state) then
+      begin
+        if (dbgrid1.SelectedField.fieldname=DBX1.datafield) then
+          begin
+            DBX1.left:=rect.left+dbgrid1.left;
+            DBX1.top:=rect.top+dbgrid1.Top;
+            DBX1.width:=rect.right-rect.left+10;
+            DBX1.height:=rect.bottom-rect.top;
+            DBX1.visible:=true;
+          end
+          else
+            DBX1.Visible:=false;
+      end;
+  end
+  else
+    DBX1.Visible:=false;
+
+if KCCLZL.FieldByName('YN').value='0' then
+  begin
+    dbgrid1.canvas.font.color:=clred;
+    dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+end;
+
+procedure TFirststock.DBGrid1ColEnter(Sender: TObject);
+begin  {
+with KCCLZL do
+  begin
+    if requestlive then
+      begin
+        if dbgrid1.Selectedindex=6  then
+          begin
+            edit;
+            FieldByName('CWHL').value:=16100;
+          end;
+        if dbgrid1.Selectedindex=5  then
+          begin
+            if FieldByName('USACC').isnull   then
+              begin
+                if not FieldByName('USPRICE').isnull then
+                  begin
+                    if not FieldByName('Qty').isnull then
+                      begin
+                        edit;
+                        FieldByName('USACC').value:=RoundTo(FieldByName('USPRICE').value* FieldByName('Qty').value,-2);
+                      end;
+                  end;
+              end;
+          end; 
+        if dbgrid1.Selectedindex=4  then
+          begin
+            if FieldByName('USPrice').IsNull then
+              begin
+                if not FieldByName('USACC').isnull  then
+                  begin
+                    if not FieldByName('Qty').isnull  then
+                      begin
+                        edit;
+                        FieldByName('USPrice').value:=RoundTo(FieldByName('USACC').value/ FieldByName('Qty').value,-4);
+                      end;
+                  end;
+              end;
+          end;
+        if dbgrid1.Selectedindex=7 then
+          begin
+            if FieldByName('VNPrice').isnull then
+              begin
+                if not FieldByName('USPrice').isnull then
+                  begin
+                    if  not FieldByName('CWHL').isnull then
+                      begin
+                        edit;
+                        FieldByName('VNPrice').value:=RoundTo(FieldByName('USPrice').value*FieldByName('CWHL').value,0);
+                      end;
+                  end;
+              end;
+          end; 
+        if dbgrid1.Selectedindex=8  then
+          begin
+            if FieldByName('VNACC').IsNull   then
+              begin
+                if not FieldByName('VNPrice').isnull then
+                  begin
+                    if not FieldByName('Qty').isnull then
+                      begin
+                        edit;
+                        FieldByName('VNACC').value:=RoundTo(FieldByName('VNPrice').value* FieldByName('Qty').value,0);
+                      end;
+                  end;
+              end;
+          end;
+        if dbgrid1.Selectedindex=7  then
+          begin
+            if FieldByName('VNPrice').IsNull  then
+              begin
+                if FieldByName('USPrice').isnull  then
+                  begin
+                    if not FieldByName('VNACC').isnull  then
+                      begin
+                        edit;
+                        FieldByName('VNPrice').value:=RoundTo(FieldByName('VNACC').value/FieldByName('Qty').value,0);
+                      end;
+                  end;
+              end;
+          end;
+      end;
+  end;  }
+end;
+
+procedure TFirststock.DBGrid1CellClick(Column: TColumn);
+begin
+if KCCLZL.requestlive then
+  begin
+     if dbgrid1.Selectedindex=0  then
+       begin
+         dbgrid1.columns[0].ButtonStyle:=cbsEllipsis;
+       end;
+  end
+  else
+    begin
+      dbgrid1.columns[0].ButtonStyle:=cbsnone;
+    end;
+end;
+
+procedure TFirststock.bbt6Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+
+if KCCLZL.Active then
+  begin
+    if KCCLZL.recordcount=0 then
+      begin
+        showmessage('No record.');
+        abort;
+      end;
+  end
+  else
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+
+try
+  eclApp:=CreateOleObject('Excel.Application');
+  WorkBook:=CreateOleObject('Excel.Sheet');
+except
+  Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+  Exit;
+end;
+
+try
+  WorkBook:=eclApp.workbooks.Add; 
+  eclApp.Cells(1,1):='NO';
+  for   i:=1   to   KCCLZL.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=KCCLZL.fields[i-1].FieldName;
+    end;
+  KCCLZL.First;
+  j:=2;
+  while   not  KCCLZL.Eof   do
+    begin
+      eclApp.Cells(j,1):=j-1;
+      for   i:=1   to   KCCLZL.fieldcount   do
+        begin
+          eclApp.Cells(j,i+1):=KCCLZL.Fields[i-1].Value;
+          eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+        end;
+      KCCLZL.Next;
+      inc(j);
+    end;
+  eclapp.columns.autofit;
+  eclApp.Visible:=True;
+except
+  on   F:Exception   do
+    showmessage(F.Message);
+end;
+
+end;
+
+procedure TFirststock.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+  edit2.SetFocus;
+end;
+
+procedure TFirststock.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+  edit3.SetFocus;
+end;
+
+procedure TFirststock.Edit3KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+  edit4.SetFocus;
+end;
+
+procedure TFirststock.Edit4KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+  button1click(nil);
+end;
+
+procedure TFirststock.FormDestroy(Sender: TObject);
+begin
+Firststock:=nil;
+end;
+
+end.

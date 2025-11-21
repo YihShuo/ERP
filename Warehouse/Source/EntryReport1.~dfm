@@ -1,0 +1,804 @@
+object EntryReport: TEntryReport
+  Left = 371
+  Top = 412
+  Width = 1675
+  Height = 466
+  Caption = 'EntryReport'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 106
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 1659
+    Height = 66
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 0
+      Top = 12
+      Width = 96
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Date From:'
+    end
+    object Label2: TLabel
+      Left = 194
+      Top = 12
+      Width = 20
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'To'
+    end
+    object Label3: TLabel
+      Left = 315
+      Top = 13
+      Width = 57
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'CKBH:'
+    end
+    object Label4: TLabel
+      Left = 436
+      Top = 14
+      Width = 85
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'SuppName:'
+    end
+    object Label5: TLabel
+      Left = 176
+      Top = 41
+      Width = 85
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'CustomNO:'
+    end
+    object Label6: TLabel
+      Left = 7
+      Top = 41
+      Width = 64
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'MatNo:'
+    end
+    object Label7: TLabel
+      Left = 355
+      Top = 41
+      Width = 75
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'OrderNO:'
+    end
+    object Label8: TLabel
+      Left = 540
+      Top = 41
+      Width = 73
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'RKNO:'
+    end
+    object Label9: TLabel
+      Left = 618
+      Top = 14
+      Width = 78
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'INVOCE:'
+    end
+    object Label10: TLabel
+      Left = 706
+      Top = 41
+      Width = 73
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'HGLB:'
+    end
+    object Label11: TLabel
+      Left = 863
+      Top = 40
+      Width = 73
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Export:'
+    end
+    object Label12: TLabel
+      Left = 786
+      Top = 14
+      Width = 78
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'CGNO:'
+    end
+    object DTP1: TDateTimePicker
+      Left = 98
+      Top = 10
+      Width = 91
+      Height = 24
+      Date = 39879.359434490740000000
+      Format = 'yyyy/MM/dd'
+      Time = 39879.359434490740000000
+      TabOrder = 0
+    end
+    object DTP2: TDateTimePicker
+      Left = 221
+      Top = 9
+      Width = 92
+      Height = 24
+      Date = 39879.359434490740000000
+      Format = 'yyyy/MM/dd'
+      Time = 39879.359434490740000000
+      TabOrder = 1
+    end
+    object CB1: TComboBox
+      Left = 375
+      Top = 11
+      Width = 60
+      Height = 24
+      ItemHeight = 16
+      TabOrder = 2
+      Text = 'CB1'
+    end
+    object Edit1: TEdit
+      Left = 530
+      Top = 11
+      Width = 82
+      Height = 24
+      TabOrder = 3
+    end
+    object Button1: TButton
+      Left = 1007
+      Top = 36
+      Width = 61
+      Height = 27
+      Caption = 'QUERY'
+      TabOrder = 4
+      OnClick = Button1Click
+    end
+    object CNOEdit: TEdit
+      Left = 265
+      Top = 37
+      Width = 82
+      Height = 24
+      TabOrder = 5
+    end
+    object Button2: TButton
+      Left = 1007
+      Top = 5
+      Width = 61
+      Height = 27
+      Caption = 'Excel'
+      TabOrder = 6
+      OnClick = Button2Click
+    end
+    object Edit2: TEdit
+      Left = 77
+      Top = 37
+      Width = 99
+      Height = 24
+      TabOrder = 7
+    end
+    object Edit3: TEdit
+      Left = 440
+      Top = 37
+      Width = 98
+      Height = 24
+      TabOrder = 8
+    end
+    object RKNOEdit: TEdit
+      Left = 621
+      Top = 37
+      Width = 82
+      Height = 24
+      TabOrder = 9
+    end
+    object INVEdit: TEdit
+      Left = 699
+      Top = 10
+      Width = 82
+      Height = 24
+      TabOrder = 10
+    end
+    object HGLBEdit: TEdit
+      Left = 780
+      Top = 38
+      Width = 82
+      Height = 24
+      TabOrder = 11
+    end
+    object ExportEdit: TEdit
+      Left = 940
+      Top = 37
+      Width = 53
+      Height = 24
+      TabOrder = 12
+    end
+    object CGNOEdit: TEdit
+      Left = 867
+      Top = 10
+      Width = 82
+      Height = 24
+      TabOrder = 13
+    end
+  end
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 66
+    Width = 1659
+    Height = 360
+    Align = alClient
+    DataSource = DataSource1
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -12
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    ParentFont = False
+    PopupMenu = PopupMenu1
+    SumList.Active = True
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -15
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    UseMultiTitle = True
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'RKNO'
+        Footers = <>
+        Title.Caption = #20837#24235#21934#34399'|RKNO'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 89
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CLBH'
+        Footers = <>
+        Title.Caption = #26448#26009#32232#34399'|CLBH'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 79
+      end
+      item
+        EditButtons = <>
+        FieldName = 'YWPM'
+        Footers = <>
+        Title.Caption = #26448#26009#21517#31281'|YWPM'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 307
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DWBH'
+        Footers = <>
+        Title.Caption = #21934#20301'|DWBH'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 45
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CGBH'
+        Footers = <>
+        Title.Caption = #35330#21934'|CGBH'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 75
+      end
+      item
+        EditButtons = <>
+        FieldName = 'RKSB'
+        Footers = <>
+        Title.Caption = #22320#21312'|RKSB'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 39
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Qty'
+        Footer.FieldName = 'Qty'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #25976#37327'|Qty'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 65
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ZSNO'
+        Footers = <>
+        Title.Caption = #25505#36092#21934#34399'|ZSNO'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 76
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ZSDH'
+        Footers = <>
+        Title.Caption = #24288#21830'|ZSDH'
+        Width = 53
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ZSYWJC'
+        Footers = <>
+        Title.Caption = #24288#21830#21517#31281'|ZSYWJC'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 82
+      end
+      item
+        EditButtons = <>
+        FieldName = 'FKZT'
+        Footers = <>
+        Title.Caption = #29376#24907'|FKZT'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 39
+      end
+      item
+        EditButtons = <>
+        FieldName = 'GSBH'
+        Footers = <>
+        Title.Caption = #24288#21029'|GSBH'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 47
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CKBH'
+        Footers = <>
+        Title.Caption = #24235#23384'|CKBH'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 45
+      end
+      item
+        EditButtons = <>
+        FieldName = 'HGLB'
+        Footers = <>
+        Title.Caption = #39006#21029'|HGLB'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 44
+      end
+      item
+        EditButtons = <>
+        FieldName = 'USERID'
+        Footers = <>
+        Title.Caption = #20837#24235#20154#21729'|USERID'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 69
+      end
+      item
+        EditButtons = <>
+        FieldName = 'USERDATE'
+        Footers = <>
+        Title.Caption = #20837#24235#26085#26399'|USERDATE'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 77
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CFMID'
+        Footers = <>
+        Title.Caption = #25505#36092'|CFMID'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 59
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CFMDATE'
+        Footers = <>
+        Title.Caption = #25505#36092#30906#35469#26085#26399'|CFMDATE'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 78
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ZWPM'
+        Footers = <>
+        Title.Caption = #26448#26009#20013#25991'|ZWPM'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 270
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DOCNO'
+        Footers = <>
+        Title.Caption = #30332#31080'|InVoice'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 69
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CNO'
+        Footers = <>
+        Title.Caption = #28023#38364#32232#34399'|CNO'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 67
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Declaretion'
+        Footers = <>
+        Title.Caption = 'TOKHAI'
+        Width = 94
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Export'
+        Footers = <>
+        Title.Caption = #39006#21029'|Export'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 50
+      end
+      item
+        EditButtons = <>
+        FieldName = 'MEMO'
+        Footers = <>
+        Title.Caption = #20633#24536'|MEMO'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 143
+      end
+      item
+        EditButtons = <>
+        FieldName = 'USPrice'
+        Footers = <>
+        Title.Caption = #21934#20729'|USPrice'
+      end
+      item
+        EditButtons = <>
+        FieldName = 'USACC'
+        Footers = <>
+        Title.Caption = #32317#20729'|USACC'
+      end
+      item
+        EditButtons = <>
+        FieldName = 'VNPrice'
+        Footers = <>
+        Title.Caption = #36234#30462#21934#20729'|VNPrice'
+      end
+      item
+        EditButtons = <>
+        FieldName = 'VNACC'
+        Footers = <>
+        Title.Caption = #36234#30462#37329#38989'|VNACC'
+      end
+      item
+        EditButtons = <>
+        FieldName = 'RKmemo'
+        Footers = <>
+        Title.Caption = #20633#24536'|RKMEMO'
+        Width = 98
+      end>
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'select KCRKS.RKNO,KCRKS.CLBH,KCRKS.CGBH,KCRKS.Qty,KCRK.ZSNO,KCRK' +
+        'S.FKZT,KCRK.GSBH,KCRK.CKBH,KCRK.HGLB,KCRK.USERID,KCRK.USERDATE,K' +
+        'CRK.CFMID,KCRK.CFMDATE,KCRK.DOCNO,KCRKS.CNO'
+      
+        '       ,ZSZL.ZSDH,ZSZL.ZSYWJC,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,KCPK' +
+        '.Declaretion,KCPK.Export,KCRK.MEMO,KCRKS.RKSB,KCRKS.USPrice,KCRK' +
+        'S.USACC,KCRKS.VNPrice,KCRKS.VNACC,KCRKS.RKmemo'
+      'from KCRKS'
+      'left join KCRK on KCRK.RKNO=KCRKS.RKNO '
+      'left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH '
+      'left join CLZl on CLZL.CLDH=KCRKS.CLBH '
+      'left join KCPK on KCRK.RKNO=KCPK.PKNO'
+      
+        'where convert(smalldatetime,convert(varchar,KCRK.USERDate,111)) ' +
+        'between '
+      '      '#39'2018/07/23'#39' and '#39'2018/07/30'#39
+      '      and ZSZL.ZSYWJC like '#39'%%'#39
+      '      and KCRKS.CLBH like '#39'%%'#39
+      '      and KCRK.CKBH='#39'VA12'#39
+      'order by KCRKS.RKNO,KCRKS.CLBH,KCRKS.RKSB')
+    Left = 224
+    Top = 88
+    object Query1RKNO: TStringField
+      FieldName = 'RKNO'
+      FixedChar = True
+      Size = 11
+    end
+    object Query1CLBH: TStringField
+      FieldName = 'CLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object Query1YWPM: TStringField
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object Query1DWBH: TStringField
+      FieldName = 'DWBH'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1CGBH: TStringField
+      FieldName = 'CGBH'
+      FixedChar = True
+      Size = 15
+    end
+    object Query1RKSB: TStringField
+      FieldName = 'RKSB'
+      FixedChar = True
+      Size = 2
+    end
+    object Query1Qty: TCurrencyField
+      FieldName = 'Qty'
+      DisplayFormat = '#0.00'
+    end
+    object Query1ZSNO: TStringField
+      FieldName = 'ZSNO'
+      FixedChar = True
+    end
+    object Query1ZSDH: TStringField
+      FieldName = 'ZSDH'
+      FixedChar = True
+      Size = 6
+    end
+    object Query1ZSYWJC: TStringField
+      FieldName = 'ZSYWJC'
+      FixedChar = True
+    end
+    object Query1FKZT: TStringField
+      FieldName = 'FKZT'
+      FixedChar = True
+      Size = 1
+    end
+    object Query1GSBH: TStringField
+      FieldName = 'GSBH'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1CKBH: TStringField
+      FieldName = 'CKBH'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1HGLB: TStringField
+      FieldName = 'HGLB'
+      FixedChar = True
+      Size = 5
+    end
+    object Query1USERID: TStringField
+      FieldName = 'USERID'
+      FixedChar = True
+      Size = 15
+    end
+    object Query1USERDATE: TDateTimeField
+      FieldName = 'USERDATE'
+      DisplayFormat = 'YYYY/MM/DD'
+    end
+    object Query1CFMID: TStringField
+      FieldName = 'CFMID'
+      FixedChar = True
+      Size = 15
+    end
+    object Query1CFMDATE: TDateTimeField
+      FieldName = 'CFMDATE'
+      DisplayFormat = 'YYYY/MM/DD'
+    end
+    object Query1ZWPM: TStringField
+      FieldName = 'ZWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object Query1DOCNO: TStringField
+      FieldName = 'DOCNO'
+      FixedChar = True
+      Size = 30
+    end
+    object Query1CNO: TStringField
+      FieldName = 'CNO'
+      FixedChar = True
+      Size = 40
+    end
+    object Query1Declaretion: TStringField
+      FieldName = 'Declaretion'
+      FixedChar = True
+      Size = 50
+    end
+    object Query1Export: TStringField
+      FieldName = 'Export'
+      FixedChar = True
+      Size = 5
+    end
+    object Query1MEMO: TStringField
+      FieldName = 'MEMO'
+      FixedChar = True
+      Size = 50
+    end
+    object Query1USPrice: TFloatField
+      FieldName = 'USPrice'
+    end
+    object Query1USACC: TFloatField
+      FieldName = 'USACC'
+    end
+    object Query1VNPrice: TCurrencyField
+      FieldName = 'VNPrice'
+      DisplayFormat = '##,#0.00'
+    end
+    object Query1VNACC: TCurrencyField
+      FieldName = 'VNACC'
+      DisplayFormat = '##,#0.00'
+    end
+    object Query1RKmemo: TStringField
+      FieldName = 'RKmemo'
+      FixedChar = True
+      Size = 200
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = Query1
+    Left = 264
+    Top = 88
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 224
+    Top = 120
+    object Excel1: TMenuItem
+      Caption = 'Excel'
+      OnClick = Excel1Click
+    end
+    object Print1: TMenuItem
+      Caption = 'Print'
+      OnClick = Print1Click
+    end
+  end
+  object PrintDBGridEh1: TPrintDBGridEh
+    DBGridEh = DBGridEh1
+    Options = []
+    Page.BottomMargin = 0.500000000000000000
+    Page.LeftMargin = 0.500000000000000000
+    Page.RightMargin = 0.500000000000000000
+    Page.TopMargin = 0.500000000000000000
+    PageFooter.Font.Charset = DEFAULT_CHARSET
+    PageFooter.Font.Color = clWindowText
+    PageFooter.Font.Height = -11
+    PageFooter.Font.Name = 'MS Sans Serif'
+    PageFooter.Font.Style = []
+    PageHeader.CenterText.Strings = (
+      'ENTRY LIST')
+    PageHeader.Font.Charset = DEFAULT_CHARSET
+    PageHeader.Font.Color = clWindowText
+    PageHeader.Font.Height = -24
+    PageHeader.Font.Name = 'MS Sans Serif'
+    PageHeader.Font.Style = []
+    Units = MM
+    Left = 336
+    Top = 120
+  end
+  object Qtemp: TQuery
+    DatabaseName = 'DB'
+    Left = 336
+    Top = 88
+  end
+end

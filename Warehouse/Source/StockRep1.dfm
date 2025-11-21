@@ -1,0 +1,582 @@
+object StockRep: TStockRep
+  Left = 292
+  Top = 201
+  Width = 870
+  Height = 500
+  Caption = 'StockRep'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 862
+    Height = 89
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label3: TLabel
+      Left = 328
+      Top = 56
+      Width = 53
+      Height = 16
+      Caption = 'SpecNo:'
+    end
+    object Label6: TLabel
+      Left = 152
+      Top = 56
+      Width = 56
+      Height = 16
+      Caption = 'ArtName:'
+    end
+    object Label5: TLabel
+      Left = 8
+      Top = 56
+      Width = 58
+      Height = 16
+      Caption = 'ArticleNo:'
+    end
+    object Edit3: TEdit
+      Left = 384
+      Top = 48
+      Width = 81
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 0
+      OnKeyPress = Edit3KeyPress
+    end
+    object Edit2: TEdit
+      Left = 216
+      Top = 48
+      Width = 105
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 2
+      OnKeyPress = Edit2KeyPress
+    end
+    object Button1: TButton
+      Left = 584
+      Top = 40
+      Width = 73
+      Height = 33
+      Caption = 'Query'
+      TabOrder = 3
+      OnClick = Button1Click
+    end
+    object Edit1: TEdit
+      Left = 72
+      Top = 48
+      Width = 73
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 1
+      OnKeyPress = Edit1KeyPress
+    end
+    object Button2: TButton
+      Left = 672
+      Top = 40
+      Width = 73
+      Height = 33
+      Caption = 'EXCEL'
+      TabOrder = 4
+      OnClick = Button2Click
+    end
+    object CB1: TCheckBox
+      Left = 472
+      Top = 56
+      Width = 97
+      Height = 17
+      Caption = 'All Finished'
+      TabOrder = 5
+    end
+  end
+  object Panel2: TPanel
+    Left = 656
+    Top = 89
+    Width = 206
+    Height = 377
+    Align = alRight
+    TabOrder = 1
+    object DBGrid1: TDBGridEh
+      Left = 8
+      Top = 1
+      Width = 197
+      Height = 375
+      Align = alRight
+      DataSource = DS2
+      Flat = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      FooterColor = clWindow
+      FooterFont.Charset = DEFAULT_CHARSET
+      FooterFont.Color = clWindowText
+      FooterFont.Height = -11
+      FooterFont.Name = 'MS Sans Serif'
+      FooterFont.Style = []
+      ParentFont = False
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -13
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      OnGetCellParams = DBGrid1GetCellParams
+      Columns = <
+        item
+          EditButtons = <>
+          FieldName = 'DDCC'
+          Footers = <>
+          Title.Caption = 'DD'
+          Width = 37
+        end
+        item
+          EditButtons = <>
+          FieldName = 'XXCC'
+          Footers = <>
+          Title.Caption = 'XX'
+          Width = 35
+        end
+        item
+          EditButtons = <>
+          FieldName = 'DDQty'
+          Footers = <>
+          Width = 45
+        end
+        item
+          Color = 11206570
+          EditButtons = <>
+          FieldName = 'okQty'
+          Footers = <>
+          Width = 40
+        end>
+    end
+  end
+  object DBGrid2: TDBGridEh
+    Left = 0
+    Top = 89
+    Width = 656
+    Height = 377
+    Align = alClient
+    DataSource = DS1
+    Flat = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+    FooterColor = 16763080
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -11
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    FrozenCols = 1
+    ParentFont = False
+    PopupMenu = PopupMenu1
+    SumList.Active = True
+    TabOrder = 2
+    TitleFont.Charset = ANSI_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -16
+    TitleFont.Name = 'Arial'
+    TitleFont.Style = []
+    OnGetCellParams = DBGrid2GetCellParams
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'DDBH'
+        Footers = <>
+        Width = 72
+      end
+      item
+        EditButtons = <>
+        FieldName = 'XieXing'
+        Footers = <>
+        Width = 68
+      end
+      item
+        EditButtons = <>
+        FieldName = 'SheHao'
+        Footers = <>
+        Width = 31
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Article'
+        Footers = <
+          item
+            Value = 'Total:'
+            ValueType = fvtStaticText
+          end>
+        Width = 70
+      end
+      item
+        EditButtons = <>
+        FieldName = 'XieMing'
+        Footers = <
+          item
+            FieldName = 'XieMing'
+            ValueType = fvtCount
+          end>
+        Width = 161
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DDQty'
+        Footers = <
+          item
+            FieldName = 'DDQty'
+            ValueType = fvtSum
+          end>
+        Width = 58
+      end
+      item
+        Color = 11337644
+        EditButtons = <>
+        FieldName = 'okQty'
+        Footers = <
+          item
+            FieldName = 'okQty'
+            ValueType = fvtSum
+          end>
+        Width = 54
+      end
+      item
+        Color = 11908607
+        EditButtons = <>
+        FieldName = 'QtyLack'
+        Footers = <
+          item
+            FieldName = 'QtyLack'
+            ValueType = fvtSum
+          end>
+        Width = 59
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DDCT'
+        Footers = <
+          item
+            FieldName = 'DDCT'
+            ValueType = fvtSum
+          end>
+        Width = 46
+      end
+      item
+        Color = 11337644
+        EditButtons = <>
+        FieldName = 'CTQty'
+        Footers = <
+          item
+            FieldName = 'CTQty'
+            ValueType = fvtSum
+          end>
+        Width = 48
+      end
+      item
+        Color = 11927551
+        EditButtons = <>
+        FieldName = 'CTCH'
+        Footers = <
+          item
+            FieldName = 'CTCH'
+            ValueType = fvtSum
+          end>
+        Width = 47
+      end
+      item
+        Color = 11927551
+        EditButtons = <>
+        FieldName = 'CTCK'
+        Footers = <
+          item
+            FieldName = 'CTCK'
+            ValueType = fvtSum
+          end>
+        Width = 53
+      end
+      item
+        Color = 11927551
+        EditButtons = <>
+        FieldName = 'CTYH'
+        Footers = <
+          item
+            FieldName = 'CTYH'
+            ValueType = fvtSum
+          end>
+        Width = 54
+      end
+      item
+        Color = 11927551
+        EditButtons = <>
+        FieldName = 'CTKC'
+        Footers = <
+          item
+            FieldName = 'CTCK'
+            ValueType = fvtSum
+          end>
+        Width = 51
+      end
+      item
+        Color = 11908607
+        EditButtons = <>
+        FieldName = 'CTLack'
+        Footers = <
+          item
+            FieldName = 'CTLack'
+            ValueType = fvtSum
+          end>
+        Width = 57
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ShipDate'
+        Footers = <>
+        Width = 69
+      end
+      item
+        EditButtons = <>
+        FieldName = 'LastDate'
+        Footers = <>
+        Width = 74
+      end>
+  end
+  object DDZL: TQuery
+    AfterScroll = DDZLAfterScroll
+    OnCalcFields = DDZLCalcFields
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'select SCSMRK.DDBH,count(SCSMRK.CTNO) as CTQty,sum(SCSMRK.Qty) a' +
+        's okQty,'
+      
+        'XXZL.XieXing,XXZl.SheHao,XXZl.Article,XXZL.XieMing,DDZL.ShipDate' +
+        ','
+      
+        'DDZL.Pairs as DDQty,SCZLDate.CTQty as DDCT,DDZL.CCGB as DDCC,XXZ' +
+        'l.CCGB as XXCC ,'
+      'max(SCSMRK.USERDATE) as LastDate ,isnull(SCSMCH.CTCH,0) as CTCH'
+      
+        ',isnull(SCSMCK.CTCK,0) as CTCK,isnull(SCSMYH.CTYH,0) as CTYH,isn' +
+        'ull(SCSMKC.CTKC,0) as CTKC   '
+      'from SCSMRK '
+      'left join DDZL on SCSMRK.DDBH=DDZL.DDBH '
+      
+        'left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZl.SheHao=DDZl' +
+        '.SheHao '
+      'left join SCZLDate on SCZLDate.ZLBH=DDZL.ZLBH '
+      
+        'left join (select SCSMRK.DDBH,count(SCSMRK.CTNO) as CTCH from SC' +
+        'SMRK '
+      '           where SCSMRK.YN='#39'3'#39
+      '           group by SCSMRK.DDBH) SCSMCH'
+      '           on SCSMCH.DDBH=SCSMRK.DDBH '
+      
+        'left join (select SCSMRK.DDBH,count(SCSMRK.CTNO) as CTCK from SC' +
+        'SMRK '
+      '           where SCSMRK.YN='#39'2'#39
+      '           group by SCSMRK.DDBH) SCSMCK'
+      '           on SCSMCK.DDBH=SCSMRK.DDBH '
+      
+        'left join (select SCSMRK.DDBH,count(SCSMRK.CTNO) as CTYH from SC' +
+        'SMRK '
+      '           where SCSMRK.YN='#39'4'#39
+      '           group by SCSMRK.DDBH) SCSMYH'
+      '           on SCSMYH.DDBH=SCSMRK.DDBH '
+      
+        'left join (select SCSMRK.DDBH,count(SCSMRK.CTNO) as CTKC from SC' +
+        'SMRK '
+      '           where SCSMRK.YN='#39'1'#39
+      '           group by SCSMRK.DDBH) SCSMKC'
+      '           on SCSMKC.DDBH=SCSMRK.DDBH '
+      'left join (select distinct SCSMRK.DDBH from SCSMRK '
+      '           where SCSMRK.YN='#39'1'#39
+      '            ) SCSMZK on SCSMZK.DDBH=SCSMRK.DDBH'
+      'where XXZL.Article like '#39'%'#39
+      'and  SCSMKC.DDBH is not null '
+      'and XXZL.XieMing like '#39'%%'#39
+      'and SCSMRK.DDBH like '#39'%'#39
+      
+        'group by SCSMRK.DDBH,XXZL.XieXing,XXZl.SheHao,XXZl.Article,XXZL.' +
+        'XieMing,'
+      'DDZL.ShipDate,DDZL.Pairs,SCZLDate.CTQty,DDZL.CCGB,XXZL.CCGB,'
+      'SCSMCH.CTCH,SCSMCK.CTCK,SCSMYH.CTYH,SCSMKC.CTKC'
+      'order by SCSMRK.DDBH')
+    Left = 312
+    Top = 152
+    object DDZLDDBH: TStringField
+      FieldName = 'DDBH'
+      FixedChar = True
+      Size = 15
+    end
+    object DDZLXieXing: TStringField
+      FieldName = 'XieXing'
+      FixedChar = True
+      Size = 15
+    end
+    object DDZLSheHao: TStringField
+      FieldName = 'SheHao'
+      FixedChar = True
+      Size = 5
+    end
+    object DDZLArticle: TStringField
+      FieldName = 'Article'
+      FixedChar = True
+    end
+    object DDZLXieMing: TStringField
+      FieldName = 'XieMing'
+      FixedChar = True
+      Size = 50
+    end
+    object DDZLDDQty: TIntegerField
+      FieldName = 'DDQty'
+      DisplayFormat = '##,#0'
+    end
+    object DDZLokQty: TFloatField
+      FieldName = 'okQty'
+      DisplayFormat = '##,#0'
+    end
+    object DDZLQtyLack: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'QtyLack'
+      DisplayFormat = '##,#0'
+      Calculated = True
+    end
+    object DDZLDDCT: TIntegerField
+      FieldName = 'DDCT'
+      DisplayFormat = '##,#0'
+    end
+    object DDZLCTQty: TIntegerField
+      FieldName = 'CTQty'
+      DisplayFormat = '##,#0'
+    end
+    object DDZLCTLack: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'CTLack'
+      DisplayFormat = '##,#0'
+      Calculated = True
+    end
+    object DDZLCTCH: TIntegerField
+      FieldName = 'CTCH'
+      DisplayFormat = '##,#0'
+    end
+    object DDZLCTCK: TIntegerField
+      FieldName = 'CTCK'
+      DisplayFormat = '##,#0'
+    end
+    object DDZLCTYH: TIntegerField
+      FieldName = 'CTYH'
+      DisplayFormat = '##,#0'
+    end
+    object DDZLCTKC: TIntegerField
+      FieldName = 'CTKC'
+      DisplayFormat = '##,#0'
+    end
+    object DDZLShipDate: TDateTimeField
+      FieldName = 'ShipDate'
+      DisplayFormat = 'yyyy/MM/dd'
+    end
+    object DDZLDDCC: TStringField
+      FieldName = 'DDCC'
+      FixedChar = True
+      Size = 1
+    end
+    object DDZLXXCC: TStringField
+      FieldName = 'XXCC'
+      FixedChar = True
+      Size = 1
+    end
+    object DDZLLastDate: TDateTimeField
+      FieldName = 'LastDate'
+      DisplayFormat = 'yyyy/MM/dd'
+    end
+  end
+  object DS1: TDataSource
+    DataSet = DDZL
+    Left = 344
+    Top = 152
+  end
+  object CTDet: TQuery
+    DatabaseName = 'DB'
+    DataSource = DS1
+    SQL.Strings = (
+      
+        'select DDZLS.DDBH,DDZLS.CC as DDCC, DDZLS.Quantity as DDQty,XXZL' +
+        'S3.UK_Size as XXCC, isnull(sum(SCSMRKS.Qty),0) as okQty'
+      'from DDZLS '
+      'left join DDZL on DDZL.DDBH=DDZLS.DDBH'
+      
+        'left join XXZLS3 on DDZLS.CC=XXZLS3.UK_Size and XXZLS3.XieXing=D' +
+        'DZL.XieXing '
+      
+        'left join SCSMRKS on SCSMRKS.DDBH=DDZLS.DDBH and SCSMRKS.XXCC=XX' +
+        'ZLS3.UK_Size'
+      
+        'left join SCSMRK on SCSMRk.DDBH=SCSMRKS.DDBH and SCSMRK.CTNO=SCS' +
+        'MRKS.CTNO '
+      'where DDZLS.DDBH='#39'LT0805094'#39' '
+      'and DDZLS.Quantity<>0'
+      'and SCSMRK.YN='#39'1'#39
+      'group by DDZLS.DDBH,DDZLS.CC , DDZLS.Quantity,XXZLS3.UK_Size'
+      'order by DDZLS.CC ')
+    Left = 600
+    Top = 161
+    object CTDetDDBH: TStringField
+      FieldName = 'DDBH'
+      FixedChar = True
+      Size = 15
+    end
+    object CTDetDDCC: TStringField
+      FieldName = 'DDCC'
+      FixedChar = True
+      Size = 6
+    end
+    object CTDetDDQty: TIntegerField
+      FieldName = 'DDQty'
+      DisplayFormat = '##,#0'
+    end
+    object CTDetXXCC: TStringField
+      FieldName = 'XXCC'
+      FixedChar = True
+      Size = 6
+    end
+    object CTDetokQty: TFloatField
+      FieldName = 'okQty'
+      DisplayFormat = '##,#0'
+    end
+  end
+  object DS2: TDataSource
+    DataSet = CTDet
+    Left = 632
+    Top = 161
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 200
+    Top = 192
+    object Details1: TMenuItem
+      Caption = 'Details'
+      OnClick = Details1Click
+    end
+  end
+end

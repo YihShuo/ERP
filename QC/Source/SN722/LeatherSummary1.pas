@@ -1,0 +1,6133 @@
+unit LeatherSummary1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, GridsEh, DBGridEh, Buttons, StdCtrls, ComCtrls, ExtCtrls, DB,
+  DBTables,DBGridEhImpExp,ShellAPI,comobj, Mask, DBCtrls, jpeg, Menus,ZLib,
+  Themes,StrUtils, iniFiles;
+
+type
+  TLeatherSummary = class(TForm)
+    qry_Grade: TQuery;
+    DS_Grade: TDataSource;
+    Upd_Grade: TUpdateSQL;
+    qry1: TQuery;
+    qry_GradeReport: TQuery;
+    DS_GradeReport: TDataSource;
+    qry_CalGra: TQuery;
+    qry_CalGraGrade: TStringField;
+    qry_CalGraHS: TIntegerField;
+    qry_GradeReportTypeName: TStringField;
+    qry_GradeReportPO: TIntegerField;
+    qry_GradeReportZSBH: TStringField;
+    qry_GradeReportType1: TCurrencyField;
+    qry_GradeReportType2: TCurrencyField;
+    qry_GradeReportType3: TCurrencyField;
+    qry_GradeReportType4: TCurrencyField;
+    qry_GradeReportType5: TCurrencyField;
+    qry_GradeReportType6: TCurrencyField;
+    qry_GradeReportType7: TCurrencyField;
+    qry_GradeReportQty: TCurrencyField;
+    qry_GradeReportZSYWJC: TStringField;
+    qry_GradeReportRemark: TIntegerField;
+    qry_GradeReportTotalAc: TFloatField;
+    qry_GradeReportDeQty: TFloatField;
+    Panel2: TPanel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    edtMatID: TEdit;
+    edtMatName: TEdit;
+    edtSupp: TEdit;
+    chkStore: TCheckBox;
+    DTP3: TDateTimePicker;
+    DTP4: TDateTimePicker;
+    Splitter3: TSplitter;
+    qry_All: TQuery;
+    DS_All: TDataSource;
+    PageControl2: TPageControl;
+    TabSheet4: TTabSheet;
+    TabSheet5: TTabSheet;
+    TabSheet6: TTabSheet;
+    TabSheet7: TTabSheet;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    Splitter1: TSplitter;
+    Panel1: TPanel;
+    btninsert: TBitBtn;
+    btnmodify: TBitBtn;
+    btndelete: TBitBtn;
+    btnsave: TBitBtn;
+    btncancel: TBitBtn;
+    DBGrid_Grade: TDBGridEh;
+    TabSheet2: TTabSheet;
+    Panel4: TPanel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label7: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    DTP5: TDateTimePicker;
+    DTP6: TDateTimePicker;
+    chkDate: TCheckBox;
+    DBGrid_Report: TDBGridEh;
+    btnQ: TBitBtn;
+    qry_GradeNo_ID: TIntegerField;
+    qry_GradeQC_Date: TDateTimeField;
+    qry_GradeTimesRy: TIntegerField;
+    qry_GradeType1: TCurrencyField;
+    qry_GradeType2: TCurrencyField;
+    qry_GradeType3: TCurrencyField;
+    qry_GradeType4: TCurrencyField;
+    qry_GradeType5: TCurrencyField;
+    qry_GradeType6: TCurrencyField;
+    qry_GradeType7: TCurrencyField;
+    qry_GradeCode: TStringField;
+    qry_GradeXCUBU: TStringField;
+    qry_GradeReason: TStringField;
+    qry_GradeUserID: TStringField;
+    qry_GradeUserDate: TDateTimeField;
+    qry_GradeYN: TStringField;
+    qry_GradeTypeName: TStringField;
+    qry_GradeActualQty: TCurrencyField;
+    qry_GradeType1_1: TCurrencyField;
+    qry_GradeAcType1: TFloatField;
+    qry_GradePerType1: TFloatField;
+    qry_GradeType2_1: TCurrencyField;
+    qry_GradeAcType2: TFloatField;
+    qry_GradePerType2: TFloatField;
+    qry_GradeType3_1: TCurrencyField;
+    qry_GradeAcType3: TFloatField;
+    qry_GradePerType3: TFloatField;
+    qry_GradeType4_1: TCurrencyField;
+    qry_GradeAcType4: TFloatField;
+    qry_GradePerType4: TFloatField;
+    qry_GradeType5_1: TCurrencyField;
+    qry_GradeAcType5: TFloatField;
+    qry_GradePerType5: TFloatField;
+    qry_GradeType6_1: TCurrencyField;
+    qry_GradeAcType6: TFloatField;
+    qry_GradePerType6: TFloatField;
+    qry_GradeType7_1: TCurrencyField;
+    qry_GradeTotalAc: TFloatField;
+    qry_GradePerTotalAc: TFloatField;
+    Pop_All: TPopupMenu;
+    Upd_All: TUpdateSQL;
+    btnEGrading: TBitBtn;
+    Button3: TBitBtn;
+    Button4: TBitBtn;
+    Edit3: TEdit;
+    qry_soft: TQuery;
+    Upd_Soft: TUpdateSQL;
+    DS_soft: TDataSource;
+    qry_softNo_ID: TIntegerField;
+    qry_softSequence: TIntegerField;
+    qry_softNeck: TCurrencyField;
+    qry_softShoulder: TCurrencyField;
+    qry_softBack: TCurrencyField;
+    qry_softBelly: TCurrencyField;
+    qry_softButt: TCurrencyField;
+    qry_softYN: TStringField;
+    qry_softUserID: TStringField;
+    qry_softUserDate: TDateTimeField;
+    qry_softAverage: TFloatField;
+    DS_thick: TDataSource;
+    qry_thick: TQuery;
+    IntegerField1: TIntegerField;
+    IntegerField2: TIntegerField;
+    CurrencyField1: TCurrencyField;
+    CurrencyField2: TCurrencyField;
+    CurrencyField3: TCurrencyField;
+    CurrencyField4: TCurrencyField;
+    CurrencyField5: TCurrencyField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    DateTimeField1: TDateTimeField;
+    FloatField1: TFloatField;
+    Upd_thick: TUpdateSQL;
+    qry_dimen: TQuery;
+    Upd_dimen: TUpdateSQL;
+    DS_Dimen: TDataSource;
+    qry_dimenNo_ID: TIntegerField;
+    qry_dimenSequence: TIntegerField;
+    qry_dimenSupQty: TCurrencyField;
+    qry_dimenQcQty: TCurrencyField;
+    qry_dimenYN: TStringField;
+    qry_dimenUserID: TStringField;
+    qry_dimenUserDate: TDateTimeField;
+    qry_dimenTolerance: TCurrencyField;
+    qry_softResult: TStringField;
+    qry_thickResult: TStringField;
+    qry_dimenResult: TStringField;
+    TabSheet3: TTabSheet;
+    UploadReportGL1: TMenuItem;
+    DownloadReportGL1: TMenuItem;
+    DeleteReportGL1: TMenuItem;
+    OpenDialog1: TOpenDialog;
+    SaveDialog1: TSaveDialog;
+    Query1: TQuery;
+    Label14: TLabel;
+    Edit4: TEdit;
+    TabSheet9: TTabSheet;
+    pop_Grade: TPopupMenu;
+    btnUpdateGrade: TMenuItem;
+    Panel12: TPanel;
+    Label16: TLabel;
+    insert6: TBitBtn;
+    modify6: TBitBtn;
+    delete6: TBitBtn;
+    save6: TBitBtn;
+    cancel6: TBitBtn;
+    btnRpac: TBitBtn;
+    brnQPac: TBitBtn;
+    DBGrid_GradeP: TDBGridEh;
+    qry_GradeP: TQuery;
+    IntegerField3: TIntegerField;
+    IntegerField4: TIntegerField;
+    CurrencyField6: TCurrencyField;
+    CurrencyField7: TCurrencyField;
+    StringField1: TStringField;
+    StringField4: TStringField;
+    StringField5: TStringField;
+    DateTimeField2: TDateTimeField;
+    CurrencyField8: TCurrencyField;
+    StringField6: TStringField;
+    CurrencyField9: TCurrencyField;
+    StringField7: TStringField;
+    DS_GradeP: TDataSource;
+    Upd_GradeP: TUpdateSQL;
+    qry_GradePPackage: TIntegerField;
+    edtPac: TEdit;
+    qry_GradePs: TQuery;
+    qry_GradePss: TQuery;
+    qry_softInspector: TStringField;
+    qry_dimenInspector: TStringField;
+    qry_thickInspector: TStringField;
+    Panel13: TPanel;
+    Panel8: TPanel;
+    insert3: TBitBtn;
+    modify3: TBitBtn;
+    delete3: TBitBtn;
+    save3: TBitBtn;
+    cancel3: TBitBtn;
+    btnSoft: TBitBtn;
+    DBGrid_Soft: TDBGridEh;
+    Splitter4: TSplitter;
+    Panel14: TPanel;
+    Panel15: TPanel;
+    insertRS: TBitBtn;
+    modifyRS: TBitBtn;
+    deleteRS: TBitBtn;
+    saveRS: TBitBtn;
+    cancelRS: TBitBtn;
+    DBGrid_RS: TDBGridEh;
+    qry_RS: TQuery;
+    Upd_RS: TUpdateSQL;
+    DS_RS: TDataSource;
+    qry_RSID: TIntegerField;
+    qry_RSTypes: TStringField;
+    qry_RSResult: TStringField;
+    qry_RSRemark: TStringField;
+    qry_RSYN: TStringField;
+    qry_RSUserID: TStringField;
+    qry_RSUserDate: TDateTimeField;
+    qry_RT: TQuery;
+    IntegerField5: TIntegerField;
+    StringField8: TStringField;
+    StringField9: TStringField;
+    StringField10: TStringField;
+    StringField11: TStringField;
+    StringField12: TStringField;
+    DateTimeField3: TDateTimeField;
+    Upd_RT: TUpdateSQL;
+    DS_RT: TDataSource;
+    qry_RD: TQuery;
+    IntegerField6: TIntegerField;
+    StringField13: TStringField;
+    StringField14: TStringField;
+    StringField15: TStringField;
+    StringField16: TStringField;
+    StringField17: TStringField;
+    DateTimeField4: TDateTimeField;
+    Upd_RD: TUpdateSQL;
+    DS_RD: TDataSource;
+    Panel16: TPanel;
+    Panel9: TPanel;
+    insert4: TBitBtn;
+    modify4: TBitBtn;
+    delete4: TBitBtn;
+    save4: TBitBtn;
+    cancel4: TBitBtn;
+    btnthick: TBitBtn;
+    DBGrid_thick: TDBGridEh;
+    Splitter5: TSplitter;
+    Panel17: TPanel;
+    Panel18: TPanel;
+    insertRT: TBitBtn;
+    modifyRT: TBitBtn;
+    deleteRT: TBitBtn;
+    saveRT: TBitBtn;
+    cancelRT: TBitBtn;
+    DBGrid_RT: TDBGridEh;
+    Panel19: TPanel;
+    Panel10: TPanel;
+    insert5: TBitBtn;
+    modify5: TBitBtn;
+    delete5: TBitBtn;
+    save5: TBitBtn;
+    cancel5: TBitBtn;
+    btn_dimention: TBitBtn;
+    DBGrid_Dimen: TDBGridEh;
+    Splitter6: TSplitter;
+    Panel20: TPanel;
+    Panel21: TPanel;
+    insertRD: TBitBtn;
+    modifyRD: TBitBtn;
+    DeleteRD: TBitBtn;
+    SaveRD: TBitBtn;
+    cancelRD: TBitBtn;
+    DBGrid_RD: TDBGridEh;
+    Label1: TLabel;
+    Label11: TLabel;
+    Label15: TLabel;
+    btnFeedBack: TBitBtn;
+    Label17: TLabel;
+    edtGrade: TEdit;
+    btnEDaily: TBitBtn;
+    qry_GradePa: TQuery;
+    PageControl3: TPageControl;
+    TabSheet8: TTabSheet;
+    TabSheet10: TTabSheet;
+    TabSheet11: TTabSheet;
+    TabSheet12: TTabSheet;
+    Image6: TImage;
+    Panel6: TPanel;
+    InsertSD: TBitBtn;
+    ModifySD: TBitBtn;
+    DeleteSD: TBitBtn;
+    SaveSD: TBitBtn;
+    CancelSD: TBitBtn;
+    DBGrid_SD: TDBGridEh;
+    Label18: TLabel;
+    Edit5: TEdit;
+    Label19: TLabel;
+    Edit6: TEdit;
+    Label20: TLabel;
+    cboLocation: TComboBox;
+    Button2: TButton;
+    qry_SD: TQuery;
+    Upd_SD: TUpdateSQL;
+    DS_SD: TDataSource;
+    qry_SDMaterial: TStringField;
+    qry_SDZSDH: TStringField;
+    qry_SDTypes: TStringField;
+    qry_SDSoftness: TStringField;
+    qry_SDGrade: TStringField;
+    qry_SDYN: TStringField;
+    qry_SDUserID: TStringField;
+    qry_SDUserDate: TDateTimeField;
+    qry_SDzsywjc: TStringField;
+    qry_SDCountry: TStringField;
+    qry_SDSDID: TStringField;
+    Button5: TButton;
+    GroupBox1: TGroupBox;
+    chkInspection: TCheckBox;
+    chkNotesting: TCheckBox;
+    chkpass: TCheckBox;
+    chkFail: TCheckBox;
+    TabSheet13: TTabSheet;
+    Panel11: TPanel;
+    insert8: TBitBtn;
+    modify8: TBitBtn;
+    delete8: TBitBtn;
+    save8: TBitBtn;
+    cancel8: TBitBtn;
+    DBGrid_inspec: TDBGridEh;
+    qry_inspec: TQuery;
+    DS_Inspec: TDataSource;
+    Upd_Inspec: TUpdateSQL;
+    qry_inspecInspectorID: TStringField;
+    qry_inspecFullName: TStringField;
+    qry_inspecJob: TStringField;
+    qry_inspecDep: TStringField;
+    qry_inspecRemark: TStringField;
+    qry_inspecYN: TStringField;
+    qry_inspecUserID: TStringField;
+    qry_inspecUserDate: TDateTimeField;
+    Button6: TButton;
+    qry_SDDimention: TStringField;
+    qry_GradePDeCode: TStringField;
+    qry_SDSeason: TStringField;
+    Splitter2: TSplitter;
+    qry_pur: TQuery;
+    DS_pur: TDataSource;
+    qry_purCLBH: TStringField;
+    qry_purYWPM: TStringField;
+    qry_purZSBH: TStringField;
+    qry_purSkin_Size: TCurrencyField;
+    qry_purSkin_Quality: TCurrencyField;
+    qry_purSoftness_standard: TStringField;
+    qry_purSeason: TStringField;
+    Panel22: TPanel;
+    DBGridEh1: TDBGridEh;
+    Panel23: TPanel;
+    Label22: TLabel;
+    Edit7: TEdit;
+    Button7: TButton;
+    TabSheet14: TTabSheet;
+    PageControl4: TPageControl;
+    TabSheet15: TTabSheet;
+    Panel24: TPanel;
+    Label23: TLabel;
+    Label24: TLabel;
+    insert9: TBitBtn;
+    modify9: TBitBtn;
+    delete9: TBitBtn;
+    save9: TBitBtn;
+    cancel9: TBitBtn;
+    BitBtn6: TBitBtn;
+    BitBtn7: TBitBtn;
+    Edit8: TEdit;
+    Edit9: TEdit;
+    BitBtn8: TBitBtn;
+    DBGridEh2: TDBGridEh;
+    TabSheet16: TTabSheet;
+    Splitter7: TSplitter;
+    Panel25: TPanel;
+    BitBtn9: TBitBtn;
+    BitBtn10: TBitBtn;
+    BitBtn11: TBitBtn;
+    BitBtn12: TBitBtn;
+    BitBtn13: TBitBtn;
+    BitBtn15: TBitBtn;
+    DBGridEh3: TDBGridEh;
+    qry_GradePSP: TStringField;
+    qry_GradeSP: TStringField;
+    qry_GradePSPE: TQuery;
+    IntegerField7: TIntegerField;
+    IntegerField8: TIntegerField;
+    CurrencyField10: TCurrencyField;
+    CurrencyField11: TCurrencyField;
+    StringField18: TStringField;
+    StringField19: TStringField;
+    StringField20: TStringField;
+    DateTimeField5: TDateTimeField;
+    CurrencyField12: TCurrencyField;
+    StringField21: TStringField;
+    CurrencyField13: TCurrencyField;
+    StringField22: TStringField;
+    IntegerField9: TIntegerField;
+    StringField23: TStringField;
+    StringField24: TStringField;
+    DS_GradePSPE: TDataSource;
+    qry_GradePaspe: TQuery;
+    qry_GradePsspe: TQuery;
+    qry_GradePssspe: TQuery;
+    Upd_GradePspe: TUpdateSQL;
+    qry_Gradespe: TQuery;
+    IntegerField10: TIntegerField;
+    DateTimeField6: TDateTimeField;
+    IntegerField11: TIntegerField;
+    CurrencyField14: TCurrencyField;
+    CurrencyField15: TCurrencyField;
+    CurrencyField16: TCurrencyField;
+    CurrencyField17: TCurrencyField;
+    CurrencyField18: TCurrencyField;
+    CurrencyField19: TCurrencyField;
+    CurrencyField20: TCurrencyField;
+    StringField25: TStringField;
+    StringField26: TStringField;
+    StringField27: TStringField;
+    StringField28: TStringField;
+    DateTimeField7: TDateTimeField;
+    StringField29: TStringField;
+    StringField30: TStringField;
+    CurrencyField21: TCurrencyField;
+    CurrencyField22: TCurrencyField;
+    FloatField2: TFloatField;
+    FloatField3: TFloatField;
+    CurrencyField23: TCurrencyField;
+    FloatField4: TFloatField;
+    FloatField5: TFloatField;
+    CurrencyField24: TCurrencyField;
+    FloatField6: TFloatField;
+    FloatField7: TFloatField;
+    CurrencyField25: TCurrencyField;
+    FloatField8: TFloatField;
+    FloatField9: TFloatField;
+    CurrencyField26: TCurrencyField;
+    FloatField10: TFloatField;
+    FloatField11: TFloatField;
+    CurrencyField27: TCurrencyField;
+    FloatField12: TFloatField;
+    FloatField13: TFloatField;
+    CurrencyField28: TCurrencyField;
+    FloatField14: TFloatField;
+    FloatField15: TFloatField;
+    StringField31: TStringField;
+    DS_Gradespe: TDataSource;
+    Upd_GradeSpe: TUpdateSQL;
+    Qry_PasFail: TQuery;
+    PageControl5: TPageControl;
+    TabSheet17: TTabSheet;
+    TabSheet18: TTabSheet;
+    Panel7: TPanel;
+    Label21: TLabel;
+    Insert1: TBitBtn;
+    Modify1: TBitBtn;
+    Delete1: TBitBtn;
+    save1: TBitBtn;
+    cancel1: TBitBtn;
+    DBMemo1: TDBMemo;
+    DBGrid_detail: TDBGridEh;
+    qry_Detail: TQuery;
+    Upd_Detail: TUpdateSQL;
+    DS_Detail: TDataSource;
+    qry_AllNo_ID: TIntegerField;
+    qry_AllCLBH: TStringField;
+    qry_AllQty: TCurrencyField;
+    qry_AllZSBH: TStringField;
+    qry_AllTypeName: TStringField;
+    qry_AllInspecQty_Other: TCurrencyField;
+    qry_AllStandard_Grade: TStringField;
+    qry_AllStandard_Softness: TStringField;
+    qry_AllStandard_Dimention: TStringField;
+    qry_AllRemark: TStringField;
+    qry_AllYN: TStringField;
+    qry_AllUserID: TStringField;
+    qry_AllUserDate: TDateTimeField;
+    qry_AllMaterialName: TStringField;
+    qry_AllSupplierName: TStringField;
+    qry_AllStandard_Thickness: TStringField;
+    qry_AllDefectName: TStringField;
+    qry_AllQC_Check: TStringField;
+    qry_AllQC_Reason: TStringField;
+    qry_AllQC_FinishDate: TDateTimeField;
+    qry_AllSettlement: TStringField;
+    qry_AllFile_Report: TStringField;
+    DBGrid_All: TDBGridEh;
+    qry_AllDateInput: TDateTimeField;
+    qry_AllRKNO: TStringField;
+    pop_detail: TPopupMenu;
+    Modify2: TMenuItem;
+    Save2: TMenuItem;
+    Cancel2: TMenuItem;
+    Label6: TLabel;
+    editShip: TEdit;
+    Label8: TLabel;
+    edtRY: TEdit;
+    qry_AllDateCreate: TDateTimeField;
+    chkDateCreate: TCheckBox;
+    DTP1: TDateTimePicker;
+    Label27: TLabel;
+    DTP2: TDateTimePicker;
+    qry_AllQC_CFM: TStringField;
+    qry_AllQC_CFMDate: TDateTimeField;
+    btnConfirm: TButton;
+    lbl_infor: TLabel;
+    Label28: TLabel;
+    Label29: TLabel;
+    Label30: TLabel;
+    chkConfirm: TCheckBox;
+    qry_DetailNo_ID: TAutoIncField;
+    qry_DetailCLBH: TStringField;
+    qry_DetailDateInput: TDateTimeField;
+    qry_DetailZSBH: TStringField;
+    qry_DetailQty: TCurrencyField;
+    qry_DetailTracking: TStringField;
+    qry_DetailQC_Check: TStringField;
+    qry_DetailQC_Reason: TStringField;
+    qry_DetailQC_FinishDate: TDateTimeField;
+    qry_DetailFile_Name: TStringField;
+    qry_DetailSettlement: TStringField;
+    qry_DetailHours: TStringField;
+    qry_DetailSampleSent: TBooleanField;
+    qry_DetailQC_Date: TDateTimeField;
+    qry_DetailQC_UserID: TStringField;
+    qry_DetailRKNO: TStringField;
+    qry_DetailMaterialName: TStringField;
+    qry_DetailSupplierName: TStringField;
+    qry_DetailFinal_Status: TStringField;
+    qry_DetailArticle: TStringField;
+    qry_DetailCustPO: TStringField;
+    qry_DetailCGNO: TStringField;
+    qry_DetailLab_Check: TStringField;
+    Query2: TQuery;
+    qry_GradePFoot: TQuery;
+    PageControl6: TPageControl;
+    TabSheet19: TTabSheet;
+    TabSheet20: TTabSheet;
+    Image4: TImage;
+    Image5: TImage;
+    Image1: TImage;
+    Image7: TImage;
+    PageControl7: TPageControl;
+    TabSheet21: TTabSheet;
+    TabSheet22: TTabSheet;
+    Image2: TImage;
+    Image3: TImage;
+    Image8: TImage;
+    Image9: TImage;
+    Label31: TLabel;
+    DBMemo2: TDBMemo;
+    Label32: TLabel;
+    DBMemo3: TDBMemo;
+    Delete2: TMenuItem;
+    qry_DetailYN: TStringField;
+    qry_GradePRemark: TStringField;
+    qry_GradePSPERemark: TStringField;
+    Label33: TLabel;
+    Edit10: TEdit;
+    Label34: TLabel;
+    Edit11: TEdit;
+    chkMine: TCheckBox;
+    btnLeaInspec: TBitBtn;
+    qry_AllSup_CFM: TStringField;
+    Label13: TLabel;
+    DBEdit2: TDBEdit;
+    Label12: TLabel;
+    DBEdit1: TDBEdit;
+    Label25: TLabel;
+    DBEdit3: TDBEdit;
+    Label26: TLabel;
+    DBEdit4: TDBEdit;
+    qry_AllGSBH: TStringField;
+    qry_SDGSBH: TStringField;
+    qry_inspecGSBH: TStringField;
+    qry_DetailRY: TStringField;
+    Label35: TLabel;
+    EdRKNO: TEdit;
+    Label36: TLabel;
+    EdSID: TEdit;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btninsertClick(Sender: TObject);
+    procedure btnmodifyClick(Sender: TObject);
+    procedure btndeleteClick(Sender: TObject);
+    procedure btnsaveClick(Sender: TObject);
+    procedure btncancelClick(Sender: TObject);
+    procedure DBGrid_GradeGetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure DBGrid_ReportGetCellParams(Sender: TObject;
+      Column: TColumnEh; AFont: TFont; var Background: TColor;
+      State: TGridDrawState);
+    procedure btnQClick(Sender: TObject);
+    procedure qry_AllAfterOpen(DataSet: TDataSet);
+    procedure qry_GradeAfterOpen(DataSet: TDataSet);
+    procedure Modify1Click(Sender: TObject);
+    procedure Cancel1Click(Sender: TObject);
+    procedure Save1Click(Sender: TObject);
+    procedure btnEDailyClick(Sender: TObject);
+    procedure btnEGradingClick(Sender: TObject);
+    procedure insert3Click(Sender: TObject);
+    procedure modify3Click(Sender: TObject);
+    procedure cancel3Click(Sender: TObject);
+    procedure save3Click(Sender: TObject);
+    procedure delete3Click(Sender: TObject);
+    procedure btnSoftClick(Sender: TObject);
+    procedure DBGrid_SoftGetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure insert4Click(Sender: TObject);
+    procedure modify4Click(Sender: TObject);
+    procedure cancel4Click(Sender: TObject);
+    procedure save4Click(Sender: TObject);
+    procedure delete4Click(Sender: TObject);
+    procedure DBGrid_thickGetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure btnthickClick(Sender: TObject);
+    procedure DBGrid_DimenGetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure insert5Click(Sender: TObject);
+    procedure modify5Click(Sender: TObject);
+    procedure cancel5Click(Sender: TObject);
+    procedure save5Click(Sender: TObject);
+    procedure delete5Click(Sender: TObject);
+    procedure btn_dimentionClick(Sender: TObject);
+    procedure DBGrid_SoftDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure DBGrid_thickDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+      State: TGridDrawState);
+    procedure DBGrid_DimenDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+      State: TGridDrawState);
+    procedure DBGrid_detailDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure UploadReportGL1Click(Sender: TObject);
+    procedure DownloadReportGL1Click(Sender: TObject);
+    procedure DeleteReportGL1Click(Sender: TObject);
+    procedure insert6Click(Sender: TObject);
+    procedure modify6Click(Sender: TObject);
+    procedure delete6Click(Sender: TObject);
+    procedure save6Click(Sender: TObject);
+    procedure cancel6Click(Sender: TObject);
+    procedure brnQPacClick(Sender: TObject);
+    procedure qry_GradePAfterOpen(DataSet: TDataSet);
+    procedure edtPacChange(Sender: TObject);
+    procedure btnRpacClick(Sender: TObject);
+    procedure DBGrid_GradePGetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure insertRSClick(Sender: TObject);
+    procedure modifyRSClick(Sender: TObject);
+    procedure cancelRSClick(Sender: TObject);
+    procedure deleteRSClick(Sender: TObject);
+    procedure saveRSClick(Sender: TObject);
+    procedure DBGrid_RSGetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure DBGrid_RSDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure insertRTClick(Sender: TObject);
+    procedure modifyRTClick(Sender: TObject);
+    procedure deleteRTClick(Sender: TObject);
+    procedure saveRTClick(Sender: TObject);
+    procedure cancelRTClick(Sender: TObject);
+    procedure DBGrid_RTDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure DBGrid_RTGetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure DBGrid_RDDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure DBGrid_RDGetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure insertRDClick(Sender: TObject);
+    procedure modifyRDClick(Sender: TObject);
+    procedure DeleteRDClick(Sender: TObject);
+    procedure SaveRDClick(Sender: TObject);
+    procedure cancelRDClick(Sender: TObject);
+    procedure btnFeedBackClick(Sender: TObject);
+    procedure qry_SDAfterOpen(DataSet: TDataSet);
+    procedure Button2Click(Sender: TObject);
+    procedure InsertSDClick(Sender: TObject);
+    procedure ModifySDClick(Sender: TObject);
+    procedure DeleteSDClick(Sender: TObject);
+    procedure SaveSDClick(Sender: TObject);
+    procedure CancelSDClick(Sender: TObject);
+    procedure DBGrid_SDGetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure Button5Click(Sender: TObject);
+    procedure DBGrid_SDEditButtonClick(Sender: TObject);
+    procedure qry_AllQC_ReasonChange(Sender: TField);
+    procedure Button6Click(Sender: TObject);
+    procedure insert8Click(Sender: TObject);
+    procedure modify8Click(Sender: TObject);
+    procedure cancel8Click(Sender: TObject);
+    procedure save8Click(Sender: TObject);
+    procedure delete8Click(Sender: TObject);
+    procedure DBGrid_inspecGetCellParams(Sender: TObject;
+      Column: TColumnEh; AFont: TFont; var Background: TColor;
+      State: TGridDrawState);
+    procedure DBGrid_GradePColumns5EditButtonClick(Sender: TObject;
+      var Handled: Boolean);
+    procedure Button7Click(Sender: TObject);
+    procedure BitBtn7Click(Sender: TObject);
+    procedure insert9Click(Sender: TObject);
+    procedure modify9Click(Sender: TObject);
+    procedure delete9Click(Sender: TObject);
+    procedure save9Click(Sender: TObject);
+    procedure BitBtn6Click(Sender: TObject);
+    procedure qry_GradePSPEAfterOpen(DataSet: TDataSet);
+    procedure DBGridEh2GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure DBGridEh2EditButtonClick(Sender: TObject);
+    procedure cancel9Click(Sender: TObject);
+    procedure BitBtn8Click(Sender: TObject);
+    procedure BitBtn15Click(Sender: TObject);
+    procedure BitBtn10Click(Sender: TObject);
+    procedure BitBtn11Click(Sender: TObject);
+    procedure BitBtn12Click(Sender: TObject);
+    procedure BitBtn13Click(Sender: TObject);
+    procedure DBGridEh3GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure edtGradeChange(Sender: TObject);
+    procedure Edit9Change(Sender: TObject);
+    procedure qry_AllAfterScroll(DataSet: TDataSet);
+    procedure PageControl2DrawTab(Control: TCustomTabControl;
+      TabIndex: Integer; const Rect: TRect; Active: Boolean);
+    procedure qry_DetailRYGetText(Sender: TField; var Text: String;
+      DisplayText: Boolean);
+    procedure Insert1Click(Sender: TObject);
+    procedure Delete1Click(Sender: TObject);
+    procedure DBGrid_AllColumns12EditButtonDown(Sender: TObject;
+      TopButton: Boolean; var AutoRepeat, Handled: Boolean);
+    procedure DBGrid_AllColumns8EditButtonDown(Sender: TObject;
+      TopButton: Boolean; var AutoRepeat, Handled: Boolean);
+    procedure DBGrid_AllGetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure Modify2Click(Sender: TObject);
+    procedure Cancel2Click(Sender: TObject);
+    procedure Save2Click(Sender: TObject);
+    procedure qry_DetailAfterOpen(DataSet: TDataSet);
+    procedure DBGrid_AllDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure btnConfirmClick(Sender: TObject);
+    procedure DBGrid_AllColumns1EditButtonClick(Sender: TObject;
+      var Handled: Boolean);
+    procedure edtPacKeyPress(Sender: TObject; var Key: Char);
+    procedure edtGradeKeyPress(Sender: TObject; var Key: Char);
+    procedure Edit8KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit9KeyPress(Sender: TObject; var Key: Char);
+    procedure GetDataEx;
+    procedure MakeSequence(strtable,strNo:string);
+    procedure MakeSequenceGrade(strtable,strNo,strPackage,strSP:string);
+    procedure qry_softAfterOpen(DataSet: TDataSet);
+    procedure qry_thickAfterOpen(DataSet: TDataSet);
+    procedure qry_dimenAfterOpen(DataSet: TDataSet);
+    procedure DBGrid_detailGetCellParams(Sender: TObject;
+      Column: TColumnEh; AFont: TFont; var Background: TColor;
+      State: TGridDrawState);
+    procedure Delete2Click(Sender: TObject);
+    procedure PageControl5Change(Sender: TObject);
+  private
+    QCN722_ISO:String;
+    { Private declarations }
+    procedure ReadIni();
+  public
+    { Public declarations } 
+  end;
+
+var
+  LeatherSummary: TLeatherSummary;
+  NDate:TDate;
+  strArticle,strRy,strCgno:string;
+
+implementation
+
+uses Main1, QC_MatDefect1, Leather_supp1, Leather_standard1, MatQcCheck1,
+  Leather_SummaryMat1,ClsReport, FileTransClient1, FunUnit;
+
+{$R *.dfm}
+
+procedure TLeatherSummary.ReadIni();
+var MyIni :Tinifile;
+    AppDir:string;
+begin
+  QCN722_ISO:='A-KCS-QP014-03D';
+  AppDir:=ExtractFilePath(Application.ExeName);
+  if FileExists(AppDir+'\ComName.ini')=true then
+  begin
+    try
+      MyIni := Tinifile.Create(AppDir+'\ComName.ini');
+      QCN722_ISO:=MyIni.ReadString('ERP','QCN722_ISO','A-KCS-QP014-03D');
+    finally
+      MyIni.Free;
+    end;
+  end;
+end;
+
+procedure TLeatherSummary.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  action:=cafree;
+end;
+
+procedure TLeatherSummary.FormDestroy(Sender: TObject);
+begin
+    LeatherSummary:=nil;
+end;
+
+procedure TLeatherSummary.FormCreate(Sender: TObject);
+var a,b,c :word;
+begin
+    DTP1.Date:=date-1;
+    DTP2.Date:=date;
+
+    DTP3.Date:=date;
+    DTP4.Date:=date;
+
+    decodedate(date,a,b,c);
+    DTP5.Date:=encodedate(a,b,1);
+    DTP6.Date:=date;
+
+    PageControl1.ActivePageIndex :=0;
+    PageControl2.ActivePageIndex :=0;
+    with query1 do
+    begin
+      active:=false;
+      sql.Clear;
+      sql.Add('select Country from zszl_DEV where  style=''Leather'' and GSBH='''+main.Edit2.Text+''' group by Country');
+      active:=true;
+      cboLocation.Clear;
+      while not eof do
+      begin
+          cboLocation.Items.Add(query1.fieldbyName('Country').AsString);
+          next;
+      end;
+      //cboLocation.Items.Insert(0,'');
+    end;
+
+   with qry1 do
+   begin
+      active:=false;
+      sql.Clear;
+      sql.Add('select InspectorID,FullName from Leather_Inspector Group by InspectorID,FullName ');
+      active:=true;
+      DBGrid_GradeP.FieldColumns['Inspector'].PickList.Clear;
+      DBGrid_Soft.FieldColumns['Inspector'].PickList.Clear;
+      DBGrid_thick.FieldColumns['Inspector'].PickList.Clear;
+      DBGrid_Dimen.FieldColumns['Inspector'].PickList.Clear;
+      DBGridEh2.FieldColumns['Inspector'].PickList.Clear;
+      while not eof do
+      begin
+          DBGrid_GradeP.FieldColumns['Inspector'].PickList.Add((qry1.fieldbyName('FullName').AsString));
+          DBGrid_Soft.FieldColumns['Inspector'].PickList.Add((qry1.fieldbyName('FullName').AsString));
+          DBGrid_thick.FieldColumns['Inspector'].PickList.Add((qry1.fieldbyName('FullName').AsString));
+          DBGrid_Dimen.FieldColumns['Inspector'].PickList.Add((qry1.fieldbyName('FullName').AsString));
+          DBGridEh2.FieldColumns['Inspector'].PickList.Add((qry1.fieldbyName('FullName').AsString));
+          next;
+      end;
+      DBGrid_GradeP.FieldColumns['Inspector'].PickList.Insert(0,'');
+      DBGrid_Soft.FieldColumns['Inspector'].PickList.Insert(0,'');
+      DBGrid_thick.FieldColumns['Inspector'].PickList.Insert(0,'');
+      DBGrid_Dimen.FieldColumns['Inspector'].PickList.Insert(0,'');
+      DBGridEh2.FieldColumns['Inspector'].PickList.Insert(0,'');
+   end;
+   ReadIni();
+end;
+
+procedure TLeatherSummary.btninsertClick(Sender: TObject);
+begin
+    with qry_Grade do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        insert;
+        FieldByName('QC_Date').Value:=formatdatetime('yyyy/mm/dd',date);
+    end;
+
+    btnsave.Enabled:=true;
+    btncancel.Enabled:=true;
+    DBGrid_Grade.Columns[0].ButtonStyle:=cbsAuto;
+end;
+
+procedure TLeatherSummary.btnmodifyClick(Sender: TObject);
+begin
+    if (qry_Grade.FieldByName('USERID').Value <> main.edit1.Text) then
+    begin
+      Messagedlg('It is not yours,can not delete!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+    if qry_Grade.FieldByName('USERDATE').Value + 30 < date then
+    begin
+      Messagedlg('You can not modify after 30 days!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+    with qry_Grade do
+    begin
+      requestlive:=true;
+      cachedupdates:=true;
+      edit;
+    end;
+    btnsave.Enabled:=true;
+    btncancel.Enabled:=true;
+
+end;
+
+procedure TLeatherSummary.btndeleteClick(Sender: TObject);
+begin
+    if (qry_Grade.FieldByName('USERID').Value <> main.edit1.Text) then
+    begin
+      Messagedlg('It is not yours,can not delete!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+   if qry_Grade.FieldByName('USERDATE').Value + 10 < date then
+   begin
+      Messagedlg('You can not delete after 10 days!!!',mtwarning,[mbyes],0);
+      abort;
+   end;
+   with qry_Grade do
+   begin
+      requestlive:=true;
+      cachedupdates:=true;
+      edit;
+      fieldbyname('YN').Value:='0';
+   end;
+   btnsave.Enabled:=true;
+   btncancel.Enabled:=true;
+
+end;
+
+procedure TLeatherSummary.btnsaveClick(Sender: TObject);
+var i:integer;
+begin
+  try
+    qry_Grade.first;
+    for i:=1 to qry_Grade.RecordCount do
+      begin
+        case qry_Grade.updatestatus of
+          usinserted:
+            begin
+                qry_Grade.edit;
+                qry_Grade.fieldbyname('No_ID').Value:=qry_All.fieldbyname('No_ID').Value;
+                qry_Grade.fieldbyname('SP').Value:='N';
+                qry_Grade.fieldbyname('YN').Value:='1';
+                qry_Grade.fieldbyname('USERID').Value:=main.edit1.text;
+                Upd_Grade.Apply(ukInsert);
+            end;
+          usmodified:
+          begin
+             if qry_Grade.fieldbyname('YN').value='0' then
+             begin
+                Upd_Grade.apply(ukdelete);
+             end
+             else
+             begin
+                Upd_Grade.apply(ukmodify);
+             end;
+          end;
+        end;
+        qry_Grade.next;
+      end;
+      
+    qry_Grade.active:=false;
+    qry_Grade.cachedupdates:=false;
+    qry_Grade.requestlive:=false;
+    qry_Grade.active:=true;
+  except
+      Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+      Abort;
+  end;
+  btnsave.Enabled:=false;
+  btncancel.Enabled:=false;
+  DBGrid_Grade.Columns[0].ButtonStyle:=cbsNone;
+
+end;
+
+procedure TLeatherSummary.btncancelClick(Sender: TObject);
+begin
+    with qry_Grade do
+    begin
+      active:=false;
+      requestlive:=false;
+      cachedupdates:=false;
+      active:=true;
+    end;
+    btnsave.Enabled:=false;
+    btncancel.Enabled:=false;
+    DBGrid_Grade.Columns[0].ButtonStyle:=cbsNone;
+
+end;
+
+procedure TLeatherSummary.DBGrid_GradeGetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if (qry_Grade.FieldByName('YN').Value ='0') then
+  begin
+      DBGrid_Grade.canvas.font.color:=clRed;
+  end;
+end;
+
+procedure TLeatherSummary.Button3Click(Sender: TObject);
+var i:integer;
+begin
+    with qry_GradeReport do
+    begin
+        active:=false;
+        sql.Clear;
+        sql.Add('SELECT ltrim(Leather_QC.TypeName) as TypeName,count(DateInput) as PO,Leather_QC.ZSBH');
+        sql.Add('		,sum(isnull(Type1,0)) as Type1,sum(isnull(Type2,0)) as Type2,sum(isnull(Type3,0)) as Type3,sum(isnull(Type4,0)) as Type4,sum(isnull(Type5,0)) as Type5,sum(isnull(Type6,0)) as Type6,sum(isnull(Type7,0)) as Type7');
+        sql.Add('		,sum(isnull(Qty,0)) as Qty,ZSZL.ZSYWJC,null as Remark');
+        sql.Add('   ,sum(isnull(Type1,0) + isnull(Type2,0) + isnull(Type3,0) + isnull(Type4,0)+ isnull(Type5,0) + isnull(Type6,0))as TotalAc');
+        sql.Add('		,sum(isnull(Qty,0)) - sum(isnull(Type1,0) + isnull(Type2,0) + isnull(Type3,0) + isnull(Type4,0)+ isnull(Type5,0) + isnull(Type6,0)) as DeQty');
+        sql.Add('from Leather_Grade left join Leather_QC on Leather_Grade.No_ID=Leather_QC.No_ID');
+        sql.Add('					 left Join ZSZL on ZSZL.ZSDH =Leather_QC.ZSBH');
+        sql.Add('where Leather_QC.GSBH='''+main.Edit2.Text+''' ');
+        if chkDate.Checked then
+        begin
+            sql.Add('    and CONVERT(varchar(10),Leather_Grade.QC_Date,111) between');
+            sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP5.date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP6.date)+''' ');
+        end;
+        if edit1.Text<>'' then
+            sql.Add('		and TypeName like '''+edit1.Text+'%'' ');
+
+        sql.Add('		and ZSZL.ZSYWJC like '''+edit2.Text+'%'' ');
+        sql.Add('group by ltrim(Leather_QC.TypeName),Leather_QC.ZSBH,ZSZL.ZSYWJC');
+        sql.Add('order by ZSZL.ZSYWJC');
+        active:=true;
+    end;
+
+    for i:=3 to 12 do
+    begin
+        DBGrid_Report.Columns[i].DisplayFormat:='#,##0.0#';
+        DBGrid_Report.Columns[i].Footer.DisplayFormat:='#,##0.0#';
+    end;
+end;
+
+procedure TLeatherSummary.Button4Click(Sender: TObject);
+var eclApp,WorkBook,xlSheet:olevariant;
+    i,j,k,m:integer;
+begin
+     if qry_GradeReport.Active then
+     begin
+        if qry_GradeReport.recordcount=0 then
+        begin
+            Messagedlg('No record.',mtwarning,[mbyes],0);
+            abort;
+        end;
+    end
+    else
+    begin
+        Messagedlg('No record.',mtwarning,[mbyes],0);
+        abort;
+    end;
+
+  try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+  except
+      Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+  end;
+
+  try
+      WorkBook:=eclApp.workbooks.Add;
+      xlSheet := workbook.Worksheets[1];
+      xlSheet.Name:='Report Leather Month ' + formatdatetime('mm',DTP6.Date) + '-' + formatdatetime('yyyy',DTP6.Date);
+
+      //--------------------------page setup------------------------------------
+      xlSheet.PageSetup.Orientation := 2;  //Landscape
+      xlSheet.PageSetup.PaperSize := 9;  //A4
+      xlSheet.PageSetup.HeaderMargin := 0;
+      xlSheet.PageSetup.FooterMargin := 0;
+      xlSheet.PageSetup.TopMargin := 0;
+      xlSheet.PageSetup.BottomMargin := 0;
+      xlSheet.PageSetup.LeftMargin := 0.7;
+      xlSheet.PageSetup.RightMargin := 0;
+
+      //------------------------------------------------------------------------
+
+      eclapp.ActiveSheet.Range['C1:G1'].Merge;
+      eclapp.ActiveSheet.Range['C2:G2'].Merge;
+      eclapp.ActiveSheet.Range['C3:G3'].Merge;
+      eclApp.Cells(1,3):='皮料檢驗月報表' ;
+      eclApp.Cells(2,3):='Leather Inspection Report Month: '+ formatdatetime('mm',DTP6.Date) + '/' + formatdatetime('yyyy',DTP6.Date);
+      eclApp.Cells(3,3):='BAO CAO KIEM DA THANG : ' + formatdatetime('mm',DTP6.Date) + '/' + formatdatetime('yyyy',DTP6.Date);
+
+      eclApp.Cells(4,1):='STT' +chr(10)+ 'N.o';
+      eclApp.Cells(4,2):='Tong don' + chr(10) + 'PO# Total';
+      eclApp.Cells(4,3):='Xuong Cung Ung' + chr(10) + 'Supplier';
+      eclApp.Cells(4,4):='Ten vat tu' + chr(10) + 'Material Name';
+      eclApp.Cells(4,5):='So luong nhap' + chr(10) + 'Quantity';
+      eclApp.Cells(4,6):='Cap do I' + chr(10) + 'Grade I';
+      eclApp.Cells(4,7):='Cap do II' + chr(10) + 'Grade II';
+      eclApp.Cells(4,8):='Cap do III' + chr(10) + 'Grade III';
+      eclApp.Cells(4,9):='Cap do IV' + chr(10) + 'Grade IV';
+      eclApp.Cells(4,10):='Cap do V' + chr(10) + 'Grade V';
+      eclApp.Cells(4,11):='Cap do VI' + chr(10) + 'Grade VI';
+      eclApp.Cells(4,12):='Cap do VII' + chr(10) + 'Grade VII';
+      eclApp.Cells(4,13):='So luong' +chr(10)+ 'khau tru' + chr(10) + 'Deduction Qty';
+      eclApp.Cells(4,14):='So luong' +chr(10) + 'thuc dung' + chr(10) + 'Qty Using';
+      eclApp.Cells(4,15):='Ghi chu' + chr(10) + 'Remark';
+
+     qry_GradeReport.First;
+     j:=5;
+     k:=0;
+     while not qry_GradeReport.Eof do
+     begin
+        k:=k+1;
+        eclApp.Cells(j,1):=k;
+        for i:=0 to DBGrid_Report.FieldCount-1 do
+        begin
+          eclApp.Cells(j,i+2):=DBGrid_Report.Fields[i].Value;
+
+
+            for m:=1 to 4 do
+            begin
+                eclapp.ActiveSheet.Cells[j-1,i+1].Borders[m].Weight := 2;
+                eclapp.ActiveSheet.Cells[j,i+1].Borders[m].Weight := 2;
+                eclapp.ActiveSheet.Cells[j-1,i+2].Borders[m].Weight := 2;
+                eclapp.ActiveSheet.Cells[j,i+2].Borders[m].Weight := 2;
+            end;
+        end;
+
+      qry_GradeReport.Next;
+      inc(j);
+     end;
+     eclApp.Cells(j+2,3):='Director';
+     eclApp.Cells(j+2,4):='Incoming material supervisor';
+     eclApp.Cells(j+2,7):='QC Supervisor';
+     eclApp.Cells(j+2,12):='Prepared by';
+     eclApp.Cells(j+3,3):='Giam Doc';
+     eclApp.Cells(j+3,4):='Chu quan kho nguyen lieu';
+     eclApp.Cells(j+3,7):='Chu quan QC';
+     eclApp.Cells(j+3,12):='Lap bieu';
+
+     eclApp.ActiveSheet.Rows[j+6].HorizontalAlignment := -4152;
+     eclApp.ActiveSheet.Rows[j+7].HorizontalAlignment := -4152;
+     eclApp.Cells(j+6,15):='KCS-QP001-04B';
+     eclApp.Cells(j+7,15):='Document number: QIP/APP/08/00/00';
+
+     eclApp.ActiveSheet.Rows[1].Font.Size:= 18;
+     eclApp.ActiveSheet.Rows[1].Font.Bold := True;
+     eclApp.ActiveSheet.Rows[1].HorizontalAlignment := $FFFFEFF4;
+     eclApp.ActiveSheet.Rows[1].font.name:='Calibri';
+
+     eclApp.ActiveSheet.Rows[2].Font.Size:= 16;
+     eclApp.ActiveSheet.Rows[2].Font.Bold := True;
+     eclApp.ActiveSheet.Rows[2].HorizontalAlignment := $FFFFEFF4;
+     eclApp.ActiveSheet.Rows[2].font.name:='Calibri';
+
+
+     eclApp.ActiveSheet.Rows[3].Font.Size:= 16;
+     eclApp.ActiveSheet.Rows[3].Font.Bold := True;
+     eclApp.ActiveSheet.Rows[3].HorizontalAlignment := $FFFFEFF4;
+     eclApp.ActiveSheet.Rows[3].font.name:='Calibri';
+
+     eclApp.ActiveSheet.Rows[4].Font.Size:= 11;
+     eclApp.ActiveSheet.Rows[4].Font.Bold := True;
+     eclApp.ActiveSheet.Rows[4].HorizontalAlignment := $FFFFEFF4;
+     eclApp.ActiveSheet.Rows[4].font.name:='Calibri';
+     eclapp.ActiveSheet.Rows[4].RowHeight := 45;
+
+     eclApp.ActiveSheet.Rows[j+2].Font.Size:= 11;
+     eclApp.ActiveSheet.Rows[j+2].Font.Bold := True;
+     eclApp.ActiveSheet.Rows[j+2].HorizontalAlignment := $FFFFEFF4;
+     eclApp.ActiveSheet.Rows[j+2].font.name:='Calibri';
+     eclApp.ActiveSheet.Rows[j+3].Font.Size:= 11;
+     eclApp.ActiveSheet.Rows[j+3].Font.Bold := True;
+     eclApp.ActiveSheet.Rows[j+3].HorizontalAlignment := $FFFFEFF4;
+     eclApp.ActiveSheet.Rows[j+3].font.name:='Calibri';
+
+     eclApp.ActiveSheet.Rows[j+6].Font.Size:= 9;
+     eclApp.ActiveSheet.Rows[j+6].HorizontalAlignment := $FFFFEFF4;
+     eclApp.ActiveSheet.Rows[j+6].font.name:='Calibri';
+
+     eclapp.columns.autofit;
+     //eclApp.ActiveWindow.FreezePanes := False;
+     //EclApp.ActiveSheet.Range['D5'].Select;
+     //eclApp.ActiveWindow.FreezePanes := True;
+     showmessage('Succeed.');
+     eclApp.Visible:=True;
+    except
+      on   F:Exception   do
+        showmessage(F.Message);
+    end;
+
+end;
+
+procedure TLeatherSummary.DBGrid_ReportGetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if qry_GradeReport.FieldByName('DeQty').Value < 0 then
+  begin
+      DBGrid_Report.canvas.font.color:=clRed;
+  end;
+end;
+
+procedure TLeatherSummary.btnQClick(Sender: TObject);
+begin
+    with qry_all do
+    begin
+        active:=false;
+        sql.Clear;
+        sql.Add('SELECT distinct lqc.ReportID,lqc.GSBH, lqc.DateInput, lqc.CLBH, lqc.Qty, lqc.ZSBH, lqc.TypeName,lqc.InspecQty_Other, lqc.Standard_Grade, lqc.Standard_Softness');
+        sql.Add('   ,lqc.Standard_Dimention, lqc.Remark, lqc.YN, lqc.UserID, lqc.UserDate,lqc.QC_Check, lqc.QC_Reason, lqc.DefectName, lqc.QC_FinishDate,lqc.Settlement, lqc.[File_Name], lqc.No_ID,lqc.DateCreate,lqc.QC_CFM,lqc.QC_CFMDate,lqc.Sup_CFM');
+        sql.Add('   ,clzl.YWPM as MaterialName,ZSZL.ZSYWJC as SupplierName');
+        sql.Add('   ,case when isnumeric(substring(clzl.YWPM,5,3)) = 1 then left(clzl.YWPM,7) ELSE left(clzl.YWPM,3) + ''-'' + left(clzl.YWPM,3) end as Standard_Thickness');
+        sql.Add('from Leather_QC lqc left join clzl on clzl.CLDH = lqc.CLBH');
+        sql.Add('         					 left Join ZSZL on ZSZL.ZSDH =lqc.ZSBH');
+        sql.Add('                     LEFT JOIN MaterialQCcheck mq ON mq.No_ID = lqc.ReportID');
+        sql.Add('where lqc.GSBH='''+main.Edit2.Text+''' ');
+        if chkStore.Checked then
+        begin
+            sql.Add('       and CONVERT(varchar(10),lqc.DateInput,111) between');
+            sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP3.date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP4.date)+''' ');
+        end;
+        if chkDateCreate.Checked then
+        begin
+            sql.Add('       and CONVERT(varchar(10),lqc.DateCreate,111) between');
+            sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''' ');
+        end;
+        sql.Add('       and lqc.CLBH like '''+edtMatID.Text+'%'' ');
+        sql.Add('       and ZSZL.ZSYWJC like '''+edtSupp.Text+'%'' ');
+        sql.Add('       and clzl.YWPM like ''%'+edtMatName.Text+'%'' ');
+        sql.Add('       and clzl.YWPM like ''%'+Edit3.Text+'%'' ');
+        if Edit4.Text <> '' then
+            sql.Add('       and lqc.ReportID like '''+Edit4.Text+'%'' ');
+
+        if edtRY.Text <> '' then
+            sql.Add('       and mq.RY like '''+edtRY.Text+'%'' ');
+        if editShip.Text <> '' then
+            sql.Add('       and mq.CGNO like ''%'+editShip.Text+'%'' ');
+
+        if chkNotesting.Checked then
+            sql.Add('   and isnull(Lab_Check,'''') = '''' ');
+
+        if chkInspection.Checked or chkpass.Checked or chkFail.Checked then
+        begin
+            sql.Add('   and (1=2');
+            if chkInspection.Checked then
+               sql.Add('   or isnull(Final_Status,'''') ='''' ');
+            if chkpass.Checked then
+               sql.Add('   or Final_Status=''Pass'' ');
+            if chkFail.Checked then
+               sql.Add('   or Final_Status=''Fail'' ');
+            sql.Add(')');
+        end;
+
+        if chkConfirm.Checked then
+           sql.Add('   and QC_CFM is null ');
+        if chkMine.Checked then
+           sql.Add('   and lqc.UserID = '''+main.Edit1.Text+''' ');
+        sql.Add('   and mq.RKNO like ''%'+EdRKNO.Text+'%'' ');
+        sql.Add('   and lqc.ReportID like ''%'+EdSID.Text+'%'' ');
+        //FuncObj.WriteErrorLog(SQL.Text);
+        active:=true;
+    end;
+
+end;
+
+procedure TLeatherSummary.qry_AllAfterOpen(DataSet: TDataSet);
+var i:integer;
+begin
+
+     qry_Detail.Active:=true;
+     qry_Grade.Active:=true;
+
+     qry_GradePSPE.Active:=true;
+     qry_GradeSpe.Active:=true;
+     qry_soft.Active:=true;
+     qry_Thick.Active:=true;
+     qry_dimen.Active:=true;
+
+     brnQPacClick(nil);
+     
+     insert1.Enabled:=true;
+     if qry_All.RecordCount > 0 then
+     begin
+         btnFeedBack.Enabled:=true;
+         Modify1.Enabled:=true;
+         delete1.Enabled:=true;
+         //
+         UploadReportGL1.Enabled := true;
+         DownloadReportGL1.Enabled := true;
+         DeleteReportGL1.Enabled := true;
+     end;
+     
+     for i:=2 to DBGrid_Grade.FieldCount -6 do
+     begin
+        DBGrid_Grade.Columns[i].DisplayFormat:='#,##0.0#';
+        DBGrid_Grade.Columns[i].Footer.DisplayFormat:='#,##0.0#';
+     end;
+
+end;
+
+procedure TLeatherSummary.qry_GradeAfterOpen(DataSet: TDataSet);
+begin
+
+    qry_CalGra.Active:=false;
+    qry_CalGra.Active:=true;
+
+
+end;
+
+procedure TLeatherSummary.Modify1Click(Sender: TObject);
+begin
+
+    if qry_All.FieldByName('USERDATE').Value + 30 < date then
+    begin
+        Messagedlg('You can not modify after 30 days!!!',mtwarning,[mbyes],0);
+        abort;
+    end;
+
+    if qry_All.FieldByName('UserID').AsString <> main.Edit1.Text then
+    begin
+        Messagedlg('It is not yours, you can not modify or delete!',mtwarning,[mbyes],0);
+        abort;
+    end;
+    
+    with qry_All do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        edit;
+    end;
+    Modify1.Enabled:=false;
+    Save1.Enabled:=true;
+    Cancel1.Enabled:=true;
+    //DBGrid_All.FieldColumns['DateInput'].ButtonStyle:=  cbsEllipsis;
+    DBGrid_All.FieldColumns['QC_Reason'].ButtonStyle:=  cbsEllipsis;
+    DBGrid_All.FieldColumns['QC_Check'].ButtonStyle:=  cbsAuto;
+    DBGrid_All.FieldColumns['QC_FinishDate'].ButtonStyle:=  cbsAuto;
+    DBGrid_All.FieldColumns['Settlement'].ButtonStyle:=  cbsAuto;
+    DBGrid_All.FieldColumns['TypeName'].ButtonStyle:=  cbsEllipsis;
+end;
+
+procedure TLeatherSummary.Cancel1Click(Sender: TObject);
+begin
+
+    with qry_All do
+    begin
+        active:=false;
+        RequestLive:=false;
+        CachedUpdates:=false;
+        active:=true;
+    end;
+    insert1.Enabled:=true;
+    Modify1.Enabled:=true;
+    delete1.Enabled:=true;
+    Save1.Enabled:=false;
+    Cancel1.Enabled:=false;
+    DBGrid_All.FieldColumns['DateInput'].ButtonStyle:=  cbsNone;
+    DBGrid_All.FieldColumns['QC_Reason'].ButtonStyle:=  cbsNone;
+    DBGrid_All.FieldColumns['QC_Check'].ButtonStyle:=  cbsNone;
+    DBGrid_All.FieldColumns['QC_FinishDate'].ButtonStyle:=  cbsNone;
+    DBGrid_All.FieldColumns['Settlement'].ButtonStyle:=  cbsNone;
+    DBGrid_All.FieldColumns['TypeName'].ButtonStyle:=  cbsNone;
+end;
+
+procedure TLeatherSummary.Save1Click(Sender: TObject);
+var i,ID:integer;
+    j:variant; 
+begin
+  try
+    qry_Detail.Active:=false;
+    Qry_PasFail.Active:=false;
+    qry_GradeP.Active:=false;
+    qry_Grade.Active:=false;
+    qry_GradePSPE.Active:=false;
+    qry_GradeSpe.Active:=false;
+
+    qry_soft.Active:=false;
+    qry_Thick.Active:=false;
+    qry_dimen.Active:=false;
+
+    qry_RS.Active:=false;
+    qry_RD.Active:=false;
+    qry_RT.Active:=false;
+    PageControl2.Enabled:=false;
+    j:= qry_All.fieldbyName('ReportID').AsString;
+    qry_All.first;
+    for i:=1 to qry_All.RecordCount do
+      begin
+        case qry_All.updatestatus of
+          usinserted:
+          begin
+              if qry_All.FieldByName('DateInput').IsNull then
+              begin
+                  showmessage('Reveived Date can not empty.');
+                  exit;
+              end;
+              if qry_All.FieldByName('CLBH').IsNull then
+              begin
+                  showmessage('Material ID can not empty.');
+                  exit;
+              end;
+              if qry_All.FieldByName('TypeName').IsNull then
+              begin
+                  showmessage('Type Name can not empty.');
+                  exit;
+              end;
+              if qry_All.FieldByName('Standard_Grade').IsNull then
+              begin
+                  showmessage('Standard Grade can not empty.');
+                  exit;
+              end;
+              if qry_All.FieldByName('Standard_Softness').IsNull then
+              begin
+                  showmessage('Standard Softness can not empty.');
+                  exit;
+              end;
+              if qry_All.FieldByName('Standard_Dimention').IsNull then
+              begin
+                  showmessage('Standard Dimention can not empty.');
+                  exit;
+              end;
+              with Query1 do
+              begin
+                active:=false;
+                sql.Clear;
+                sql.Add('SELECT MAX(No_ID) ID FROM Leather_QC ');
+                active:=true;
+                if trim(FieldByName('ID').AsString)='' then
+                  ID:=1
+                else
+                  ID:= FieldByName('ID').Value + 1;
+              end;
+              qry_All.Edit;
+              qry_All.FieldByName('No_ID').Value:=ID;
+              qry_All.FieldByName('GSBH').Value:=main.Edit2.Text;
+              qry_All.FieldByName('DateCreate').Value:= formatdatetime('yyyy/mm/dd',date);
+              qry_All.FieldByName('YN').Value:='1';
+              qry_All.FieldByName('UserID').Value:=main.edit1.text;
+              Upd_All.apply(ukinsert);
+              //update result for talble MaterialQcCheck
+              with query1 do
+              begin
+                active:=false;
+                sql.Clear;
+                sql.Add('UPDATE MaterialQCcheck  SET');
+                sql.Add('		QC_Check= '''+qry_all.fieldByName('QC_Check').AsString+'''  ');
+                sql.Add('		,QC_Reason='''+qry_all.fieldByName('QC_Reason').AsString+'''   ');
+                sql.Add('		,DefectName='''+qry_all.fieldByName('DefectName').AsString+''' ');
+                if qry_All.FieldByName('QC_FinishDate').AsString = '' then
+                  sql.Add('		,QC_FinishDate=NULL')
+                else
+                  sql.Add('		,QC_FinishDate='''+qry_all.fieldByName('QC_FinishDate').AsString+'''');
+                sql.Add('		,Settlement='''+qry_all.fieldByName('Settlement').AsString+'''');
+                sql.Add('		,QC_Date=getdate()');
+                sql.Add('		,QC_UserID='''+main.Edit1.Text+'''');
+                sql.Add('FROM MaterialQCcheck ');
+                sql.Add('WHERE MaterialQCcheck.No_ID='+qry_all.fieldByName('ReportID').AsString+' ');
+                execsql;
+              end;
+          end;
+          usmodified:
+          begin
+              if qry_All.FieldByName('UserID').AsString <> main.Edit1.Text then
+              begin
+                  Messagedlg('It is not yours, you can not modify or delete!',mtwarning,[mbyes],0);
+                  exit;
+              end;
+              
+              if qry_All.FieldByName('USERDATE').Value + 30 < date then
+              begin
+                  Messagedlg('You can not modify  after 30 days!!!',mtwarning,[mbyes],0);
+                  exit;
+              end;
+
+              if qry_All.FieldByName('YN').Value = '0' then
+              begin
+                  with query1 do
+                  begin
+                      active:=false;
+                      sql.Clear;
+                      sql.Add('UPDATE MaterialQCcheck  SET');
+                      sql.Add('		QC_Check= NULL  ');
+                      sql.Add('		,QC_Reason=NULL');
+                      sql.Add('		,DefectName=NULL');
+                      sql.Add('		,QC_FinishDate=NULL');
+                      sql.Add('		,Settlement=NULL');
+                      sql.Add('		,QC_Date=getdate()');
+                      sql.Add('		,QC_UserID='''+main.Edit1.Text+'''');
+                      sql.Add('FROM MaterialQCcheck  ');
+                      sql.Add('WHERE MaterialQCcheck.No_ID='+qry_all.fieldByName('ReportID').AsString+' ');
+                      execsql;
+                  end;
+                  Upd_All.apply(ukdelete);
+              end
+              else
+              begin
+                  if qry_All.FieldByName('Standard_Grade').AsString = '' then
+                  begin
+                      showmessage('Standard Grade can not empty.');
+                      exit;
+                  end;
+                  if qry_All.FieldByName('Standard_Softness').AsString = '' then
+                  begin
+                      showmessage('Standard Softness can not empty.');
+                      exit;
+                  end;
+                  if qry_All.FieldByName('Standard_Dimention').AsString = '' then
+                  begin
+                      showmessage('Standard Dimention can not empty.');
+                      exit;
+                  end;
+
+                  qry_All.Edit;
+                  qry_All.FieldByName('UserID').Value:=main.edit1.text;
+                  Upd_All.apply(ukmodify);
+
+                  //update result for talble MaterialQcCheck
+
+                  with query1 do
+                  begin
+                    active:=false;
+                    sql.Clear;
+                    sql.Add('UPDATE MaterialQCcheck  SET');
+                    sql.Add('		QC_Check= '''+qry_all.fieldByName('QC_Check').AsString+'''  ');
+                    sql.Add('		,QC_Reason='''+qry_all.fieldByName('QC_Reason').AsString+'''   ');
+                    sql.Add('		,DefectName='''+qry_all.fieldByName('DefectName').AsString+''' ');
+                    if qry_All.FieldByName('QC_FinishDate').AsString = '' then
+                      sql.Add('		,QC_FinishDate=NULL')
+                    else
+                      sql.Add('		,QC_FinishDate='''+qry_all.fieldByName('QC_FinishDate').AsString+'''');
+                    sql.Add('		,Settlement='''+qry_all.fieldByName('Settlement').AsString+'''');
+                    sql.Add('		,QC_Date=getdate()');
+                    sql.Add('		,QC_UserID='''+main.Edit1.Text+'''');
+                    sql.Add('FROM MaterialQCcheck ');
+                    sql.Add('WHERE MaterialQCcheck.No_ID='+qry_all.fieldByName('ReportID').AsString+' ');
+                    execsql;
+                  end;
+              end;
+          end;
+        end;
+        qry_All.next;
+      end;
+
+      qry_All.active:=false;
+      qry_All.cachedupdates:=false;
+      qry_All.requestlive:=false;
+      qry_All.active:=true;
+      insert1.Enabled:=true;
+      Modify1.Enabled:=true;
+      delete1.Enabled:=true;
+      Save1.Enabled:=false;
+      Cancel1.Enabled:=false;
+
+      DBGrid_All.FieldColumns['DateInput'].ButtonStyle:=  cbsNone;
+      DBGrid_All.FieldColumns['QC_Reason'].ButtonStyle:=  cbsNone;
+      DBGrid_All.FieldColumns['QC_Check'].ButtonStyle:=  cbsNone;
+      DBGrid_All.FieldColumns['QC_FinishDate'].ButtonStyle:=  cbsNone;
+      DBGrid_All.FieldColumns['Settlement'].ButtonStyle:=  cbsNone;
+      DBGrid_All.FieldColumns['TypeName'].ButtonStyle:=  cbsNone;
+  except
+      Messagedlg('Error, can not save data!',mtwarning,[mbyes],0);
+      Abort;
+  end;
+
+  if j<>'' then qry_All.Locate('ReportID',j,[]);
+  qry_Detail.Active:=true;
+  Qry_PasFail.Active:=true;
+  qry_GradeP.Active:=true;
+  qry_Grade.Active:=true;
+  qry_GradePSPE.Active:=true;
+  qry_GradeSpe.Active:=true;
+
+  qry_soft.Active:=true;
+  qry_Thick.Active:=true;
+  qry_dimen.Active:=true;
+
+  qry_RS.Active:=true;
+  qry_RD.Active:=true;
+  qry_RT.Active:=true;
+  PageControl2.Enabled:=true;
+
+end;
+
+procedure TLeatherSummary.btnEDailyClick(Sender: TObject);
+var Excel,WorkBook,xlSheet:olevariant;
+    i,j,m: integer;
+begin
+     if (qry_GradeP.Active) and (qry_GradeP.recordcount=0)  then
+     begin
+         Messagedlg('No record.',mtwarning,[mbyes],0);
+         exit;
+     end ;
+
+   if edtGrade.Text = '' then
+   begin
+       Messagedlg('You must input grade first!',mtwarning,[mbyes],0);
+       edtGrade.SetFocus;
+       abort;
+       
+   end
+   else
+   begin
+      with qry1 do
+      begin
+         active:=false;
+         sql.Clear;
+
+         sql.Add('select No_ID,Grade,sum(AcQty) AcQty from Leather_GradeP');
+         sql.Add('where SP=''N'' and Grade = '''+edtGrade.Text+'''');
+         sql.Add('group by No_ID,Grade');
+         active:=true;
+     end;
+
+   end;
+
+   try
+        Excel:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+     except
+        Application.MessageBox('NO Microsoft Excel','Microsoft Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+
+
+     try
+        WorkBook:=Excel.workbooks.Add;
+        xlSheet := workbook.Worksheets[1];
+        xlSheet.Name:='Overview inspection';
+
+         //--------------------------page setup------------------------------------
+      xlSheet.PageSetup.HeaderMargin := 0;
+      xlSheet.PageSetup.FooterMargin := 0;
+      xlSheet.PageSetup.TopMargin := 0;
+      xlSheet.PageSetup.BottomMargin := 0;
+      xlSheet.PageSetup.LeftMargin := 0.7;
+      xlSheet.PageSetup.RightMargin := 0;
+
+      //------------------------------------------------------------------------
+
+        //title
+        Excel.ActiveSheet.Range['A1:H1'].Merge;
+        Excel.ActiveSheet.Range['A2:H2'].Merge;
+        Excel.Cells(1,1):='BAO CAO KIEM DA HANG NGAY';
+        Excel.Cells(2,1):='DAILY LEATHER INSPECTION REPORT';
+
+        Excel.ActiveSheet.Range['A4:B4'].Merge;
+        Excel.ActiveSheet.Range['A5:B5'].Merge;
+        Excel.ActiveSheet.Range['A6:B6'].Merge;
+        Excel.ActiveSheet.Range['A7:B7'].Merge;
+        Excel.ActiveSheet.Range['A8:B8'].Merge;
+        Excel.Cells(4,1):= 'Ngay kiem' + chr(10) + 'Data of Inspecting';
+        Excel.Cells(5,1):= 'Art no.';
+        Excel.Cells(6,1):= 'Ten vat tu/mau sac' + chr(10) + 'Material name/Color';
+        Excel.Cells(7,1):= 'Ma so vat tu' + chr(10) + 'Material code';
+        Excel.Cells(8,1):= 'RY';
+
+        Excel.Cells(4,6):= 'Xuong cung ung' + chr(10) + 'Supplier';
+        Excel.Cells(5,6):= 'So cong (PO)' + chr(10) + 'Shipment No.';
+        Excel.Cells(6,6):= 'So luong tong' + chr(10) + 'Total quantity';
+        Excel.Cells(7,6):= 'So luong kiem' + chr(10) + 'Inspected quantity';
+        Excel.Cells(8,6):= 'Cap do' + chr(10) + 'Grade';
+
+        //export data
+        Excel.ActiveSheet.Range['C4:E4'].Merge;
+        Excel.ActiveSheet.Range['C5:E5'].Merge;
+        Excel.ActiveSheet.Range['C6:E6'].Merge;
+        Excel.ActiveSheet.Range['C7:E7'].Merge;
+        Excel.ActiveSheet.Range['C8:E8'].Merge;
+        Excel.Cells(4,3):= qry_All.FieldByName('DateInput').AsString;
+        Excel.Cells(5,3):= strArticle;
+        Excel.Cells(6,3):= qry_All.FieldByName('MaterialName').AsString;
+        Excel.Cells(7,3):= qry_All.FieldByName('CLBH').AsString;
+        Excel.Cells(8,3):= strRy;
+
+        Excel.ActiveSheet.Range['G4:H4'].Merge;
+        Excel.ActiveSheet.Range['G5:H5'].Merge;
+        Excel.ActiveSheet.Range['G6:H6'].Merge;
+        Excel.ActiveSheet.Range['G7:H7'].Merge;
+        Excel.ActiveSheet.Range['G8:H8'].Merge;
+        Excel.Cells(4,7):= qry_All.FieldByName('SupplierName').AsString;
+        Excel.Cells(5,7):= strCgno;
+        Excel.Cells(6,7):= qry_All.FieldByName('Qty').Value;
+        Excel.Cells(7,7):= qry1.FieldByName('AcQty').AsString;
+        Excel.Cells(8,7):= qry1.FieldByName('Grade').AsString;
+
+        Excel.ActiveSheet.Range['C4:E8'].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Range['G4:H8'].HorizontalAlignment := $FFFFEFF4;
+
+        //table
+        Excel.ActiveSheet.Range['A9:H9'].Merge;
+
+        Excel.ActiveSheet.Range['B10:C10'].Merge;
+        Excel.ActiveSheet.Range['D10:E10'].Merge;
+        Excel.ActiveSheet.Range['G10:H10'].Merge;
+        Excel.Cells(10,1):= 'So bo' + chr(10) + 'Package No.';
+        Excel.Cells(10,2):= 'So luong thuc te' + chr(10) + 'Actual quantity';
+        Excel.Cells(10,4):= 'So luong hu' + chr(10) + 'Defective quantity';
+        Excel.Cells(10,6):= 'So luong su dung' + chr(10) + 'Usable quantity';
+        Excel.Cells(10,7):= 'Loi hu' + chr(10) + 'Defects';
+
+        Excel.ActiveSheet.Columns[2].ColumnWidth := 5;
+        Excel.ActiveSheet.Columns[7].ColumnWidth := 8;
+        Excel.ActiveSheet.Columns[8].ColumnWidth := 20;
+
+        for m:=1  to 4 do
+        begin
+          for i:=1 to 8 do   //columns
+          begin
+            for j:=4 to 8 do   //rows
+            begin
+                Excel.ActiveSheet.Cells[j,i].Borders[m].Weight := 2;
+            end;
+          end;
+        end;
+
+        qry_GradeP.First;
+        j:=11;
+        //k:=0;
+        while not qry_GradeP.Eof do
+        begin
+            Excel.ActiveSheet.Range['B'+inttostr(j)+':C'+inttostr(j)].Merge;
+            Excel.ActiveSheet.Range['D'+inttostr(j)+':E'+inttostr(j)].Merge;
+            Excel.ActiveSheet.Range['G'+inttostr(j)+':H'+inttostr(j)].Merge;
+
+            //k:=k+1;
+            //Excel.Cells(j,1):= k;
+            Excel.Cells(j,1):= qry_GradeP.FieldByName('Package').Value;
+            Excel.Cells(j,2):= qry_GradeP.FieldByName('AcQty').Value;
+            Excel.Cells(j,4):= qry_GradeP.FieldByName('DeQty').Value;
+            Excel.Cells(j,6):= qry_GradeP.FieldByName('UseQty').Value;
+            Excel.Cells(j,7):= qry_GradeP.FieldByName('Defects').Value;
+
+            for m:=1 to 4 do
+            begin
+                for i:=1 to 8 do
+                begin
+                    Excel.ActiveSheet.Cells[j-1,i].Borders[m].Weight := 2;
+                    Excel.ActiveSheet.Cells[j,i].Borders[m].Weight := 2;
+                    Excel.ActiveSheet.Cells[j+1,i].Borders[m].Weight := 2;
+                end;
+            end;
+
+            //Excel.ActiveSheet.Rows[j].Font.Size:= 11;
+            //Excel.ActiveSheet.Rows[j].font.name:='Arial';
+            Excel.ActiveSheet.Rows[j].HorizontalAlignment := $FFFFEFF4;
+            Excel.ActiveSheet.Rows[j].RowHeight := 30;
+
+            qry_GradeP.Next;
+            inc(j);
+        end;
+
+        Excel.ActiveSheet.Rows[j].RowHeight := 30;
+        Excel.ActiveSheet.Rows[j].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Range['B'+inttostr(j)+':C'+inttostr(j)].Merge;
+        Excel.ActiveSheet.Range['D'+inttostr(j)+':E'+inttostr(j)].Merge;
+        Excel.ActiveSheet.Range['G'+inttostr(j)+':H'+inttostr(j)].Merge;
+        Excel.Cells(j,1):= 'Total';
+        Excel.Cells(j,2):= '=sum('+'B11:C' + inttostr(j-1) +')';
+        Excel.Cells(j,4):= '=sum('+'D11:E' + inttostr(j-1) +')';
+        Excel.Cells(j,6):= '=sum('+'F11:F' + inttostr(j-1) +')';
+
+        Excel.Cells(j+2,1):='Phe duyet';
+        Excel.Cells(j+3,1):='Approve by :';
+        Excel.Cells(j+2,3):='Chu quan kho';
+        Excel.Cells(j+3,3):='WH Suppervisor :';
+        Excel.Cells(j+2,8):='Nguoi lap';
+        Excel.Cells(j+3,8):='Prepared by :';
+
+        Excel.ActiveSheet.Rows[j+9].HorizontalAlignment := -4152;
+        Excel.ActiveSheet.Rows[j+10].HorizontalAlignment := -4152;
+        Excel.Cells(j+9,8):='KCS-QP001-03B';
+        Excel.Cells(j+10,8):='Document number: QIP/APP/04/00/01';
+
+
+        Excel.ActiveSheet.Rows[1].Font.Size:= 18;
+        Excel.ActiveSheet.Rows[1].Font.Bold := True;
+        Excel.ActiveSheet.Rows[1].HorizontalAlignment := $FFFFEFF4;
+        //Excel.ActiveSheet.Rows[1].font.name:='Arial';
+        Excel.ActiveSheet.Rows[1].RowHeight := 30;
+        Excel.ActiveSheet.Rows[2].Font.Size:= 18;
+        Excel.ActiveSheet.Rows[2].Font.Bold := True;
+        Excel.ActiveSheet.Rows[2].HorizontalAlignment := $FFFFEFF4;
+        //Excel.ActiveSheet.Rows[2].font.name:='Arial';
+        Excel.ActiveSheet.Rows[4].RowHeight := 30;
+        Excel.ActiveSheet.Rows[5].RowHeight := 30;
+        Excel.ActiveSheet.Rows[6].RowHeight := 30;
+        Excel.ActiveSheet.Rows[7].RowHeight := 30;
+        Excel.ActiveSheet.Rows[8].RowHeight := 30;
+        Excel.ActiveSheet.Rows[9].RowHeight := 7.5;
+
+        //Excel.ActiveSheet.Rows[10].Font.Size:= 11;
+        Excel.ActiveSheet.Rows[10].HorizontalAlignment := $FFFFEFF4;
+        //Excel.ActiveSheet.Rows[10].font.name:='Arial';
+        Excel.ActiveSheet.Rows[10].RowHeight := 35;
+
+        Excel.columns.autofit;
+        showmessage('Succeed.');
+        Excel.Visible:=True;
+
+      except
+        Application.MessageBox('NO Microsoft Excel','Microsoft Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+
+end;
+
+procedure TLeatherSummary.btnEGradingClick(Sender: TObject);
+begin
+    ClsReport.GradeReport(qry_All,qry_Detail,qry_Grade,qry_RS,qry_RT,qry_RD,lbl_infor,false);
+end;
+
+procedure TLeatherSummary.insert3Click(Sender: TObject);
+begin
+  if (qry_All.FieldByName('InspecQty_Other').IsNull) or (qry_All.FieldByName('InspecQty_Other').AsString= '') then
+  begin
+      showmessage('Inspected qty can not empty.!!!');
+      abort;
+  end;
+  if (qry_All.FieldByName('Standard_Softness').IsNull) or (qry_All.FieldByName('Standard_Softness').AsString= '') then
+  begin
+      showmessage('Standard softness can not empty.!!!');
+      abort;
+  end;
+
+    with qry_Soft do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        insert;
+    end;
+    save3.Enabled:=true;
+    cancel3.Enabled:=true;
+    DBGrid_Soft.FieldColumns['Result'].ButtonStyle:=cbsAuto;
+end;
+
+procedure TLeatherSummary.modify3Click(Sender: TObject);
+begin
+    with qry_Soft do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        edit;
+    end;
+    save3.Enabled:=true;
+    cancel3.Enabled:=true;
+    DBGrid_Soft.FieldColumns['Result'].ButtonStyle:=cbsAuto;
+end;
+
+procedure TLeatherSummary.cancel3Click(Sender: TObject);
+begin
+    with qry_Soft do
+    begin
+        active:=true;
+        RequestLive:=false;
+        CachedUpdates:=false;
+        active:=true;
+    end;
+    save3.Enabled:=false;
+    cancel3.Enabled:=false;
+    DBGrid_Soft.FieldColumns['Result'].ButtonStyle:=cbsNone;
+end;
+
+procedure TLeatherSummary.MakeSequence(strtable,strNo:string);
+begin
+    //update again sequence no when delete
+    with qry1 do
+    begin
+        active:=false;
+        sql.Clear;
+        sql.Add('DECLARE @id INT');
+        sql.Add('SET @id = 0');
+        sql.Add('UPDATE ' +strtable);
+        sql.Add('SET @id = Sequence = @id + 1');
+        sql.Add('WHERE No_ID='''+strNo+''' ');
+        execsql;
+    end;
+end;
+
+procedure TLeatherSummary.MakeSequenceGrade(strtable,strNo,strPackage,strSP:string);
+begin
+    //update again sequence no when delete
+    with qry1 do
+    begin
+        active:=false;
+        sql.Clear;
+        sql.Add('DECLARE @id INT');
+        sql.Add('SET @id = 0');
+        sql.Add('UPDATE ' +strtable);
+        sql.Add('SET @id = Sequence = @id + 1');
+        sql.Add('WHERE No_ID='''+strNo+''' ');
+        sql.Add('     and Package='''+strPackage+''' ');
+        sql.Add('     and SP='''+strSP+''' ');
+        execsql;
+    end;
+end;
+
+
+procedure TLeatherSummary.save3Click(Sender: TObject);
+var i,a1:integer;
+begin
+  try
+    qry_Soft.first;
+    for i:=1 to qry_Soft.RecordCount do
+      begin
+        case qry_Soft.updatestatus of
+          usinserted:
+            begin
+                with qry1 do
+                begin
+                    active:=false;
+                    sql.Clear;
+                    sql.Add('select max(sequence)sequence from Leather_Softness');
+                    sql.Add('where No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' ' );
+                    sql.Add('group by No_ID');
+                    active:=true;
+                    if qry1.FieldByName('sequence').IsNull then
+                        a1:= 1
+                    else
+                        a1:= qry1.FieldByName('sequence').Value + 1;
+                end;
+
+                qry_Soft.edit;
+                qry_Soft.fieldbyname('No_ID').Value:=qry_All.fieldbyname('No_ID').Value;
+                qry_Soft.fieldbyname('sequence').Value:= a1;
+                qry_Soft.fieldbyname('YN').Value:='1';
+                qry_Soft.fieldbyname('USERID').Value:=main.edit1.text;
+                Upd_Soft.Apply(ukInsert);
+            end;
+          usmodified:
+          begin
+             if qry_Soft.fieldbyname('YN').value='0' then
+             begin
+                Upd_Soft.apply(ukdelete);
+
+                MakeSequence('Leather_Softness',qry_All.fieldbyname('No_ID').AsString);
+
+             end
+             else
+             begin
+                Upd_Soft.apply(ukmodify);
+             end;
+          end;
+        end;
+        qry_Soft.next;
+      end;
+      
+    qry_Soft.active:=false;
+    qry_Soft.cachedupdates:=false;
+    qry_Soft.requestlive:=false;
+    qry_Soft.active:=true;
+    DBGrid_Soft.FieldColumns['Result'].ButtonStyle:=cbsNone;
+  except
+      Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+      Abort;
+  end;
+  save3.Enabled:=false;
+  cancel3.Enabled:=false;
+
+end;
+
+procedure TLeatherSummary.delete3Click(Sender: TObject);
+begin
+    if (qry_Soft.FieldByName('USERID').Value <> main.edit1.Text) then
+    begin
+      Messagedlg('It is not yours,can not delete!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+   if qry_Soft.FieldByName('USERDATE').Value + 30 < date then
+   begin
+      Messagedlg('You can not delete after 30 days!!!',mtwarning,[mbyes],0);
+      abort;
+   end;
+
+   if messagedlg('Do you really want to delete this record?',mtconfirmation,[mbYes,Mbno],0)=mrYes then
+   begin
+           with qry_Soft do
+           begin
+              requestlive:=true;
+              cachedupdates:=true;
+              edit;
+              fieldbyname('YN').Value:='0';
+           end;
+           save3.Enabled:=true;
+           cancel3.Enabled:=true;
+
+   end;
+end;
+
+procedure TLeatherSummary.btnSoftClick(Sender: TObject);
+var Excel,WorkBook,xlSheet:olevariant;
+    i,j,m:integer;
+begin
+     if (qry_Soft.Active) and (qry_Soft.recordcount=0)  then
+     begin
+         Messagedlg('No record.',mtwarning,[mbyes],0);
+         exit;
+     end ;
+
+     try
+        Excel:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+     except
+        Application.MessageBox('NO Microsoft Excel','Microsoft Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+
+
+     try
+        WorkBook:=Excel.workbooks.Add;
+        xlSheet := workbook.Worksheets['sheet1'];
+        xlSheet.Name:='Softness';
+
+        //title
+        Excel.ActiveSheet.Range['A1:H1'].Merge;
+        Excel.ActiveSheet.Range['A2:H2'].Merge;
+        Excel.Cells(1,1):='BAO CAO DO MEM DA';
+        Excel.Cells(2,1):='DAILY REPORT FOR LEATHER SOFTNESS MEASURING';
+
+        Excel.ActiveSheet.Range['A4:B4'].Merge;
+        Excel.ActiveSheet.Range['A5:B5'].Merge;
+        Excel.ActiveSheet.Range['A6:B6'].Merge;
+        Excel.ActiveSheet.Range['A7:B7'].Merge;
+        Excel.ActiveSheet.Range['A8:B8'].Merge;
+        Excel.Cells(4,1):= 'Ngay kiem' + chr(10) + 'Data of Inspecting';
+        Excel.Cells(5,1):= 'Art no.';
+        Excel.Cells(6,1):= 'Ten vat tu/mau sac' + chr(10) + 'Material name/Color';
+        Excel.Cells(7,1):= 'Ma so vat tu' + chr(10) + 'Material code';
+        Excel.Cells(8,1):= 'RY';
+
+        Excel.Cells(4,6):= 'Xuong cung ung' + chr(10) + 'Supplier';
+        Excel.Cells(5,6):= 'So cong (PO)' + chr(10) + 'Shipment No.';
+        Excel.Cells(6,6):= 'So luong tong' + chr(10) + 'Total quantity';
+        Excel.Cells(7,6):= 'So luong kiem' + chr(10) + 'Inspected quantity';
+        Excel.Cells(8,6):= 'Tieu chuan' + chr(10) + 'Standard';
+
+        //export data
+        Excel.ActiveSheet.Range['C4:E4'].Merge;
+        Excel.ActiveSheet.Range['C5:E5'].Merge;
+        Excel.ActiveSheet.Range['C6:E6'].Merge;
+        Excel.ActiveSheet.Range['C7:E7'].Merge;
+        Excel.ActiveSheet.Range['C8:E8'].Merge;
+        Excel.Cells(4,3):= qry_All.FieldByName('DateInput').AsString;
+        Excel.Cells(5,3):= strArticle;
+        Excel.Cells(6,3):= qry_All.FieldByName('MaterialName').AsString;
+        Excel.Cells(7,3):= qry_All.FieldByName('CLBH').AsString;
+        Excel.Cells(8,3):= strRy;
+
+        Excel.ActiveSheet.Range['G4:H4'].Merge;
+        Excel.ActiveSheet.Range['G5:H5'].Merge;
+        Excel.ActiveSheet.Range['G6:H6'].Merge;
+        Excel.ActiveSheet.Range['G7:H7'].Merge;
+        Excel.ActiveSheet.Range['G8:H8'].Merge;
+        Excel.Cells(4,7):= qry_All.FieldByName('SupplierName').AsString;
+        Excel.Cells(5,7):= strCgno;
+        Excel.Cells(6,7):= qry_All.FieldByName('Qty').Value;
+        Excel.Cells(7,7):= qry_All.FieldByName('InspecQty_Other').AsString;
+        Excel.Cells(8,7):= qry_All.FieldByName('Standard_Softness').AsString;
+
+        Excel.ActiveSheet.Range['C4:E8'].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Range['G4:H8'].HorizontalAlignment := $FFFFEFF4;
+
+        //table
+        Excel.ActiveSheet.Range['A9:H9'].Merge;
+
+        Excel.Cells(10,1):= 'So thu tu' + chr(10) + 'Sequence';
+        Excel.Cells(10,2):= 'Phan co' + chr(10) + 'Neck';
+        Excel.Cells(10,3):= 'Phan vai' + chr(10) + 'Shoulder';
+        Excel.Cells(10,4):= 'Phan lung' + chr(10) + 'Back';
+        Excel.Cells(10,5):= 'Phan bung' + chr(10) + 'Belly';
+        Excel.Cells(10,6):= 'Phan mong' + chr(10) + 'Butt';
+        Excel.Cells(10,7):= 'Trung binh' + chr(10) + 'Average';
+        Excel.Cells(10,8):= 'Ket qua' + chr(10) + 'Result';
+
+        for m:=1  to 4 do
+        begin
+          for i:=1 to 8 do   //columns
+          begin
+            for j:=4 to 8 do   //rows
+            begin
+                Excel.ActiveSheet.Cells[j,i].Borders[m].Weight := 2;
+            end;
+          end;
+        end;
+
+        qry_Soft.First;
+        j:=11;
+        while not qry_Soft.Eof do
+        begin
+            for i:=0 to DBGrid_Soft.FieldCount - 4 do
+            begin
+                Excel.Cells(j,i+1):= DBGrid_Soft.Fields[i].Value;
+            end;
+
+
+            for m:=1 to 4 do
+            begin
+                for i:=1 to 8 do
+                begin
+                    Excel.ActiveSheet.Cells[j-1,i].Borders[m].Weight := 2;
+                    Excel.ActiveSheet.Cells[j,i].Borders[m].Weight := 2;
+                    Excel.ActiveSheet.Cells[j+1,i].Borders[m].Weight := 2;
+                    Excel.ActiveSheet.Cells[j+2,i].Borders[m].Weight := 2;
+                end;
+            end;
+
+            Excel.ActiveSheet.Rows[j].Font.Size:= 11;
+            //Excel.ActiveSheet.Rows[j].font.name:='Arial';
+            Excel.ActiveSheet.Rows[j].HorizontalAlignment := $FFFFEFF4;
+            Excel.ActiveSheet.Rows[j].RowHeight := 30;
+
+            qry_Soft.Next;
+            inc(j);
+        end;
+
+        Excel.ActiveSheet.Range['A'+ inttostr(j) + ':A' + inttostr(j+1) ].Merge;
+        Excel.ActiveSheet.Range['B'+ inttostr(j) + ':B' + inttostr(j+1) ].Merge;
+        Excel.ActiveSheet.Range['C'+ inttostr(j) + ':H' + inttostr(j+1) ].Merge;
+        Excel.Cells(j,1):='Ket qua cuoi cung/' + chr(10) + 'Final Result';
+
+        //Excel.Cells(j,2):='PASS : ' + chr(254);
+        //Excel.Cells(j+1,2):='FAIL : ' + chr(254);
+        Excel.Cells(j,2):= qry_RS.FieldByName('Result').AsString;
+        Excel.Cells(j,3):='Ghi chu/Remark : ' + qry_RS.FieldByName('Remark').AsString;
+
+        Excel.ActiveSheet.Rows[j].RowHeight := 30;
+        Excel.ActiveSheet.Rows[j+1].RowHeight := 30;
+        Excel.ActiveSheet.Range['A'+ inttostr(j) + ':B' + inttostr(j+1) ].HorizontalAlignment:= $FFFFEFF4;
+        Excel.ActiveSheet.Range['A'+ inttostr(j) + ':B' + inttostr(j+1) ].VerticalAlignment:= $FFFFEFF4;
+        Excel.ActiveSheet.Range['C'+ inttostr(j) + ':H' + inttostr(j+1) ].VerticalAlignment:= -4160;
+
+        Excel.Cells(j+4,1):='Phe duyet';
+        Excel.Cells(j+5,1):='Approve by :';
+        Excel.Cells(j+4,3):='Chu quan kho';
+        Excel.Cells(j+5,3):='WH Suppervisor :';
+        Excel.Cells(j+4,8):='Nguoi lap';
+        Excel.Cells(j+5,8):='Prepared by :';
+
+        Excel.ActiveSheet.Rows[j+9].HorizontalAlignment := -4152;
+        Excel.ActiveSheet.Rows[j+10].HorizontalAlignment := -4152;
+        Excel.Cells(j+9,8):='KCS-QP001-22C';
+        Excel.Cells(j+10,8):='Document number: QIP/APP/79/00/02';
+
+
+        Excel.ActiveSheet.Rows[1].Font.Size:= 18;
+        Excel.ActiveSheet.Rows[1].Font.Bold := True;
+        Excel.ActiveSheet.Rows[1].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Rows[1].font.name:='Arial';
+        Excel.ActiveSheet.Rows[1].RowHeight := 30;
+        Excel.ActiveSheet.Rows[2].Font.Size:= 18;
+        Excel.ActiveSheet.Rows[2].Font.Bold := True;
+        Excel.ActiveSheet.Rows[2].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Rows[2].font.name:='Arial';
+        Excel.ActiveSheet.Rows[4].RowHeight := 30;
+        Excel.ActiveSheet.Rows[5].RowHeight := 30;
+        Excel.ActiveSheet.Rows[6].RowHeight := 30;
+        Excel.ActiveSheet.Rows[7].RowHeight := 30;
+        Excel.ActiveSheet.Rows[8].RowHeight := 30;
+        Excel.ActiveSheet.Rows[9].RowHeight := 7.5;
+
+        Excel.ActiveSheet.Rows[10].Font.Size:= 11;
+        Excel.ActiveSheet.Rows[10].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Rows[10].RowHeight := 35;
+
+        Excel.columns.autofit;
+        showmessage('Succeed.');
+        Excel.Visible:=True;
+     except
+        Application.MessageBox('NO Microsoft Excel','Microsoft Excel',MB_OK+MB_ICONWarning);
+        Exit;
+    end;
+
+end;
+
+procedure TLeatherSummary.DBGrid_SoftGetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+    if qry_Soft.FieldByName('YN').Value ='0' then
+  begin
+      DBGrid_Soft.canvas.font.color:=clRed;
+  end;
+end;
+
+procedure TLeatherSummary.insert4Click(Sender: TObject);
+begin
+  if (qry_All.FieldByName('InspecQty_Other').IsNull) or (qry_All.FieldByName('InspecQty_Other').AsString= '') then
+  begin
+      showmessage('Inspected qty can not empty.!!!');
+      abort;
+  end;
+  if (qry_All.FieldByName('Standard_Thickness').IsNull) or (qry_All.FieldByName('Standard_Thickness').AsString= '') then
+  begin
+      showmessage('Standard thickness can not empty.!!!');
+      abort;
+  end;
+
+    with qry_thick do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        insert;
+    end;
+    save4.Enabled:=true;
+    cancel4.Enabled:=true;
+    DBGrid_thick.FieldColumns['Result'].ButtonStyle:=cbsAuto;
+end;
+
+procedure TLeatherSummary.modify4Click(Sender: TObject);
+begin
+    with qry_thick do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        edit;
+    end;
+    save4.Enabled:=true;
+    cancel4.Enabled:=true;
+    DBGrid_thick.FieldColumns['Result'].ButtonStyle:=cbsAuto;
+end;
+
+procedure TLeatherSummary.cancel4Click(Sender: TObject);
+begin
+    with qry_thick do
+    begin
+        active:=false;
+        RequestLive:=false;
+        CachedUpdates:=false;
+        active:=true;
+    end;
+    save4.Enabled:=false;
+    cancel4.Enabled:=false;
+    DBGrid_thick.FieldColumns['Result'].ButtonStyle:=cbsNone;
+end;
+
+procedure TLeatherSummary.save4Click(Sender: TObject);
+var i,a1:integer;
+begin
+  try
+    qry_thick.first;
+    for i:=1 to qry_thick.RecordCount do
+      begin
+        case qry_thick.updatestatus of
+          usinserted:
+            begin
+                with qry1 do
+                begin
+                    active:=false;
+                    sql.Clear;
+                    sql.Add('select max(sequence)sequence from Leather_Thickness');
+                    sql.Add('where No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' ' );
+                    sql.Add('group by No_ID');
+                    active:=true;
+                    if qry1.FieldByName('sequence').IsNull then
+                        a1:= 1
+                    else
+                        a1:= qry1.FieldByName('sequence').Value + 1;
+                end;
+
+                qry_thick.edit;
+                qry_thick.fieldbyname('No_ID').Value:=qry_All.fieldbyname('No_ID').Value;
+                qry_thick.fieldbyname('sequence').Value:= a1;
+                qry_thick.fieldbyname('YN').Value:='1';
+                qry_thick.fieldbyname('USERID').Value:=main.edit1.text;
+                Upd_thick.Apply(ukInsert);
+            end;
+          usmodified:
+          begin
+             if qry_thick.fieldbyname('YN').value='0' then
+             begin
+                Upd_thick.apply(ukdelete);
+
+                MakeSequence('Leather_Thickness',qry_All.fieldbyname('No_ID').AsString);
+             end
+             else
+             begin
+                Upd_thick.apply(ukmodify);
+             end;
+          end;
+        end;
+        qry_thick.next;
+      end;
+      
+    qry_thick.active:=false;
+    qry_thick.cachedupdates:=false;
+    qry_thick.requestlive:=false;
+    qry_thick.active:=true;
+
+  except
+      Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+      Abort;
+  end;
+  save4.Enabled:=false;
+  cancel4.Enabled:=false;
+  DBGrid_thick.FieldColumns['Result'].ButtonStyle:=cbsNone;
+end;
+
+procedure TLeatherSummary.delete4Click(Sender: TObject);
+begin
+    if (qry_thick.FieldByName('USERID').Value <> main.edit1.Text) then
+    begin
+      Messagedlg('It is not yours,can not delete!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+   if qry_thick.FieldByName('USERDATE').Value + 30 < date then
+   begin
+      Messagedlg('You can not delete after 30 days!!!',mtwarning,[mbyes],0);
+      abort;
+   end;
+
+   if messagedlg('Do you really want to delete this record?',mtconfirmation,[mbYes,Mbno],0)=mrYes then
+   begin
+           with qry_thick do
+           begin
+              requestlive:=true;
+              cachedupdates:=true;
+              edit;
+              fieldbyname('YN').Value:='0';
+           end;
+           save4.Enabled:=true;
+           cancel4.Enabled:=true;
+
+   end;
+end;
+
+procedure TLeatherSummary.DBGrid_thickGetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if qry_thick.FieldByName('YN').Value ='0' then
+  begin
+      DBGrid_thick.canvas.font.color:=clRed;
+  end;
+end;
+
+procedure TLeatherSummary.btnthickClick(Sender: TObject);
+var Excel,WorkBook,xlSheet:olevariant;
+    i,j,m:integer;
+begin
+     if (qry_thick.Active) and (qry_thick.recordcount=0)  then
+     begin
+         Messagedlg('No record.',mtwarning,[mbyes],0);
+         exit;
+     end ;
+
+     try
+        Excel:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+     except
+        Application.MessageBox('NO Microsoft Excel','Microsoft Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+
+
+     try
+        WorkBook:=Excel.workbooks.Add;
+        xlSheet := workbook.Worksheets['sheet1'];
+        xlSheet.Name:='Thickness';
+
+        //title
+        Excel.ActiveSheet.Range['A1:H1'].Merge;
+        Excel.ActiveSheet.Range['A2:H2'].Merge;
+        Excel.Cells(1,1):='BAO CAO DO DAY DA';
+        Excel.Cells(2,1):='DAILY REPORT FOR LEATHER THICKNESS MEASURING';
+
+        Excel.ActiveSheet.Range['A4:B4'].Merge;
+        Excel.ActiveSheet.Range['A5:B5'].Merge;
+        Excel.ActiveSheet.Range['A6:B6'].Merge;
+        Excel.ActiveSheet.Range['A7:B7'].Merge;
+        Excel.ActiveSheet.Range['A8:B8'].Merge;
+        Excel.Cells(4,1):= 'Ngay kiem' + chr(10) + 'Data of Inspecting';
+        Excel.Cells(5,1):= 'Art no.';
+        Excel.Cells(6,1):= 'Ten vat tu/mau sac' + chr(10) + 'Material name/Color';
+        Excel.Cells(7,1):= 'Ma so vat tu' + chr(10) + 'Material code';
+        Excel.Cells(8,1):= 'RY';
+
+        Excel.Cells(4,6):= 'Xuong cung ung' + chr(10) + 'Supplier';
+        Excel.Cells(5,6):= 'So cong (PO)' + chr(10) + 'Shipment No.';
+        Excel.Cells(6,6):= 'So luong tong' + chr(10) + 'Total quantity';
+        Excel.Cells(7,6):= 'So luong kiem' + chr(10) + 'Inspected quantity';
+        Excel.Cells(8,6):= 'Tieu chuan' + chr(10) + 'Standard';
+
+        //export data
+        Excel.ActiveSheet.Range['C4:E4'].Merge;
+        Excel.ActiveSheet.Range['C5:E5'].Merge;
+        Excel.ActiveSheet.Range['C6:E6'].Merge;
+        Excel.ActiveSheet.Range['C7:E7'].Merge;
+        Excel.ActiveSheet.Range['C8:E8'].Merge;
+        Excel.Cells(4,3):= qry_All.FieldByName('DateInput').AsString;
+        Excel.Cells(5,3):= strArticle;
+        Excel.Cells(6,3):= qry_All.FieldByName('MaterialName').AsString;
+        Excel.Cells(7,3):= qry_All.FieldByName('CLBH').AsString;
+        Excel.Cells(8,3):= strRy;
+
+        Excel.ActiveSheet.Range['G4:H4'].Merge;
+        Excel.ActiveSheet.Range['G5:H5'].Merge;
+        Excel.ActiveSheet.Range['G6:H6'].Merge;
+        Excel.ActiveSheet.Range['G7:H7'].Merge;
+        Excel.ActiveSheet.Range['G8:H8'].Merge;
+        Excel.Cells(4,7):= qry_All.FieldByName('SupplierName').AsString;
+        Excel.Cells(5,7):= strCgno;
+        Excel.Cells(6,7):= qry_All.FieldByName('Qty').Value;
+        Excel.Cells(7,7):= qry_All.FieldByName('InspecQty_Other').AsString;
+        Excel.Cells(8,7):= qry_All.FieldByName('Standard_Thickness').AsString;
+
+        Excel.ActiveSheet.Range['C4:E8'].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Range['G4:H8'].HorizontalAlignment := $FFFFEFF4;
+
+        //table
+        Excel.ActiveSheet.Range['A9:H9'].Merge;
+
+        Excel.Cells(10,1):= 'So thu tu' + chr(10) + 'Sequence';
+        Excel.Cells(10,2):= 'Phan co' + chr(10) + 'Neck';
+        Excel.Cells(10,3):= 'Phan vai' + chr(10) + 'Shoulder';
+        Excel.Cells(10,4):= 'Phan lung' + chr(10) + 'Back';
+        Excel.Cells(10,5):= 'Phan bung' + chr(10) + 'Belly';
+        Excel.Cells(10,6):= 'Phan mong' + chr(10) + 'Butt';
+        Excel.Cells(10,7):= 'Trung binh' + chr(10) + 'Average';
+        Excel.Cells(10,8):= 'Ket qua' + chr(10) + 'Result';
+
+        for m:=1  to 4 do
+        begin
+          for i:=1 to 8 do   //columns
+          begin
+            for j:=4 to 8 do   //rows
+            begin
+                Excel.ActiveSheet.Cells[j,i].Borders[m].Weight := 2;
+            end;
+          end;
+        end;
+
+        qry_thick.First;
+        j:=11;
+        while not qry_thick.Eof do
+        begin
+            for i:=0 to DBGrid_thick.FieldCount - 4 do
+            begin
+                Excel.Cells(j,i+1):= DBGrid_thick.Fields[i].Value;
+            end;
+
+
+            for m:=1 to 4 do
+            begin
+                for i:=1 to 8 do
+                begin
+                    Excel.ActiveSheet.Cells[j-1,i].Borders[m].Weight := 2;
+                    Excel.ActiveSheet.Cells[j,i].Borders[m].Weight := 2;
+                    Excel.ActiveSheet.Cells[j+1,i].Borders[m].Weight := 2;
+                    Excel.ActiveSheet.Cells[j+2,i].Borders[m].Weight := 2;
+                end;
+            end;
+
+            Excel.ActiveSheet.Rows[j].Font.Size:= 11;
+            //Excel.ActiveSheet.Rows[j].font.name:='Arial';
+            Excel.ActiveSheet.Rows[j].HorizontalAlignment := $FFFFEFF4;
+            Excel.ActiveSheet.Rows[j].RowHeight := 30;
+
+            qry_thick.Next;
+            inc(j);
+        end;
+
+        Excel.ActiveSheet.Range['A'+ inttostr(j) + ':A' + inttostr(j+1) ].Merge;
+        Excel.ActiveSheet.Range['B'+ inttostr(j) + ':B' + inttostr(j+1) ].Merge;
+        Excel.ActiveSheet.Range['C'+ inttostr(j) + ':H' + inttostr(j+1) ].Merge;
+        Excel.Cells(j,1):='Ket qua cuoi cung/' + chr(10) + 'Final Result';
+        //Excel.Cells(j,2):='PASS : ' + chr(254);
+        //Excel.Cells(j+1,2):='FAIL : ' + chr(254);
+        Excel.Cells(j,2):= qry_RT.FieldByName('Result').AsString;
+        Excel.Cells(j,3):='Ghi chu/Remark : ' + qry_RT.FieldByName('Remark').AsString;
+        Excel.ActiveSheet.Rows[j].RowHeight := 30;
+        Excel.ActiveSheet.Rows[j+1].RowHeight := 30;
+        Excel.ActiveSheet.Range['A'+ inttostr(j) + ':B' + inttostr(j+1) ].HorizontalAlignment:= $FFFFEFF4;
+        Excel.ActiveSheet.Range['A'+ inttostr(j) + ':B' + inttostr(j+1) ].VerticalAlignment:= $FFFFEFF4;
+        Excel.ActiveSheet.Range['C'+ inttostr(j) + ':H' + inttostr(j+1) ].VerticalAlignment:= -4160;
+
+        Excel.Cells(j+4,1):='Phe duyet';
+        Excel.Cells(j+5,1):='Approve by :';
+        Excel.Cells(j+4,3):='Chu quan kho';
+        Excel.Cells(j+5,3):='WH Suppervisor :';
+        Excel.Cells(j+4,8):='Nguoi lap';
+        Excel.Cells(j+5,8):='Prepared by :';
+
+        Excel.ActiveSheet.Rows[j+9].HorizontalAlignment := -4152;
+        Excel.Cells(j+9,8):='Document Number: QIP/APP/06/00/02';
+
+
+        Excel.ActiveSheet.Rows[1].Font.Size:= 18;
+        Excel.ActiveSheet.Rows[1].Font.Bold := True;
+        Excel.ActiveSheet.Rows[1].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Rows[1].font.name:='Arial';
+        Excel.ActiveSheet.Rows[1].RowHeight := 30;
+        Excel.ActiveSheet.Rows[2].Font.Size:= 18;
+        Excel.ActiveSheet.Rows[2].Font.Bold := True;
+        Excel.ActiveSheet.Rows[2].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Rows[2].font.name:='Arial';
+        Excel.ActiveSheet.Rows[4].RowHeight := 30;
+        Excel.ActiveSheet.Rows[5].RowHeight := 30;
+        Excel.ActiveSheet.Rows[6].RowHeight := 30;
+        Excel.ActiveSheet.Rows[7].RowHeight := 30;
+        Excel.ActiveSheet.Rows[8].RowHeight := 30;
+        Excel.ActiveSheet.Rows[9].RowHeight := 7.5;
+
+        Excel.ActiveSheet.Rows[10].Font.Size:= 11;
+        Excel.ActiveSheet.Rows[10].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Rows[10].RowHeight := 35;
+
+        Excel.columns.autofit;
+        showmessage('Succeed.');
+        Excel.Visible:=True;
+     except
+        Application.MessageBox('NO Microsoft Excel','Microsoft Excel',MB_OK+MB_ICONWarning);
+        Exit;
+    end;
+
+    
+end;
+
+procedure TLeatherSummary.DBGrid_DimenGetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if qry_dimen.FieldByName('YN').Value ='0' then
+  begin
+      DBGrid_Dimen.canvas.font.color:=clRed;
+  end;
+end;
+
+procedure TLeatherSummary.insert5Click(Sender: TObject);
+begin
+  if (qry_All.FieldByName('InspecQty_Other').IsNull) or (qry_All.FieldByName('InspecQty_Other').AsString= '') then
+  begin
+      showmessage('Inspected qty can not empty.!!!');
+      abort;
+  end;
+  if (qry_All.FieldByName('Standard_Dimention').IsNull) or (qry_All.FieldByName('Standard_Dimention').AsString= '') then
+  begin
+      showmessage('Standard dimention can not empty.!!!');
+      abort;
+  end;
+
+   with qry_dimen do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        insert;
+    end;
+    save5.Enabled:=true;
+    cancel5.Enabled:=true;
+    DBGrid_Dimen.FieldColumns['Result'].ButtonStyle:=cbsAuto;
+end;
+
+procedure TLeatherSummary.modify5Click(Sender: TObject);
+begin
+    with qry_dimen do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        edit;
+    end;
+    save5.Enabled:=true;
+    cancel5.Enabled:=true;
+    DBGrid_Dimen.FieldColumns['Result'].ButtonStyle:=cbsAuto;
+end;
+
+procedure TLeatherSummary.cancel5Click(Sender: TObject);
+begin
+    with qry_dimen do
+    begin
+        active:=false;
+        RequestLive:=true;
+        CachedUpdates:=true;
+        active:=true;
+    end;
+    save5.Enabled:=false;
+    cancel5.Enabled:=false;
+    DBGrid_Dimen.FieldColumns['Result'].ButtonStyle:=cbsNone;
+end;
+
+procedure TLeatherSummary.save5Click(Sender: TObject);
+var i,a1:integer;
+begin
+  try
+    qry_dimen.first;
+    for i:=1 to qry_dimen.RecordCount do
+      begin
+        case qry_dimen.updatestatus of
+          usinserted:
+            begin
+                with qry1 do
+                begin
+                    active:=false;
+                    sql.Clear;
+                    sql.Add('select max(sequence)sequence from Leather_Dimention');
+                    sql.Add('where No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' ' );
+                    sql.Add('group by No_ID');
+                    active:=true;
+                    if qry1.FieldByName('sequence').IsNull then
+                        a1:= 1
+                    else
+                        a1:= qry1.FieldByName('sequence').Value + 1;
+                end;
+
+                qry_dimen.edit;
+                qry_dimen.fieldbyname('No_ID').Value:=qry_All.fieldbyname('No_ID').Value;
+                qry_dimen.fieldbyname('sequence').Value:= a1;
+                qry_dimen.fieldbyname('YN').Value:='1';
+                qry_dimen.fieldbyname('USERID').Value:=main.edit1.text;
+                Upd_dimen.Apply(ukInsert);
+            end;
+          usmodified:
+          begin
+             if qry_dimen.fieldbyname('YN').value='0' then
+             begin
+                Upd_dimen.apply(ukdelete);
+
+                MakeSequence('Leather_Dimention',qry_All.fieldbyname('No_ID').AsString);
+             end
+             else
+             begin
+                Upd_dimen.apply(ukmodify);
+             end;
+          end;
+        end;
+        qry_dimen.next;
+      end;
+
+    qry_dimen.active:=false;
+    qry_dimen.cachedupdates:=false;
+    qry_dimen.requestlive:=false;
+    qry_dimen.active:=true;
+  except
+      Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+      Abort;
+  end;
+  save5.Enabled:=false;
+  cancel5.Enabled:=false;
+  DBGrid_Dimen.FieldColumns['Result'].ButtonStyle:=cbsNone;
+
+end;
+
+procedure TLeatherSummary.delete5Click(Sender: TObject);
+begin
+    if (qry_dimen.FieldByName('USERID').Value <> main.edit1.Text) then
+    begin
+      Messagedlg('It is not yours,can not delete!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+   if qry_dimen.FieldByName('USERDATE').Value + 30 < date then
+   begin
+      Messagedlg('You can not delete after 30 days!!!',mtwarning,[mbyes],0);
+      abort;
+   end;
+
+   if messagedlg('Do you really want to delete this record?',mtconfirmation,[mbYes,Mbno],0)=mrYes then
+   begin
+           with qry_dimen do
+           begin
+              requestlive:=true;
+              cachedupdates:=true;
+              edit;
+              fieldbyname('YN').Value:='0';
+           end;
+           save5.Enabled:=true;
+           cancel5.Enabled:=true;
+
+   end;
+end;
+
+procedure TLeatherSummary.btn_dimentionClick(Sender: TObject);
+var Excel,WorkBook,xlSheet:olevariant;
+    i,j,m:integer;
+begin
+     if (qry_dimen.Active) and (qry_dimen.recordcount=0)  then
+     begin
+         Messagedlg('No record.',mtwarning,[mbyes],0);
+         exit;
+     end ;
+
+     try
+        Excel:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+     except
+        Application.MessageBox('NO Microsoft Excel','Microsoft Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+
+
+     try
+        WorkBook:=Excel.workbooks.Add;
+        xlSheet := workbook.Worksheets['sheet1'];
+        xlSheet.Name:='Dimension';
+
+        //title
+        Excel.ActiveSheet.Range['A1:H1'].Merge;
+        Excel.ActiveSheet.Range['A2:H2'].Merge;
+        Excel.Cells(1,1):='BAO CAO DO KICH THUOC DA';
+        Excel.Cells(2,1):='DAILY REPORT MEASURING LEATHER';
+
+        Excel.ActiveSheet.Range['A4:B4'].Merge;
+        Excel.ActiveSheet.Range['A5:B5'].Merge;
+        Excel.ActiveSheet.Range['A6:B6'].Merge;
+        Excel.ActiveSheet.Range['A7:B7'].Merge;
+        Excel.ActiveSheet.Range['A8:B8'].Merge;
+        Excel.Cells(4,1):= 'Ngay kiem' + chr(10) + 'Data of Inspecting';
+        Excel.Cells(5,1):= 'Art no.';
+        Excel.Cells(6,1):= 'Ten vat tu/mau sac' + chr(10) + 'Material name/Color';
+        Excel.Cells(7,1):= 'Ma so vat tu' + chr(10) + 'Material code';
+        Excel.Cells(8,1):= 'RY';
+
+        Excel.Cells(4,6):= 'Xuong cung ung' + chr(10) + 'Supplier';
+        Excel.Cells(5,6):= 'So cong (PO)' + chr(10) + 'Shipment No.';
+        Excel.Cells(6,6):= 'So luong tong' + chr(10) + 'Total quantity';
+        Excel.Cells(7,6):= 'So luong kiem' + chr(10) + 'Inspected quantity';
+        Excel.Cells(8,6):= 'Tieu chuan kich thuoc' + chr(10) + 'Standard size skin';
+
+        //export data
+        Excel.ActiveSheet.Range['C4:E4'].Merge;
+        Excel.ActiveSheet.Range['C5:E5'].Merge;
+        Excel.ActiveSheet.Range['C6:E6'].Merge;
+        Excel.ActiveSheet.Range['C7:E7'].Merge;
+        Excel.ActiveSheet.Range['C8:E8'].Merge;
+        Excel.Cells(4,3):= qry_All.FieldByName('DateInput').AsString;
+        Excel.Cells(5,3):= strArticle;
+        Excel.Cells(6,3):= qry_All.FieldByName('MaterialName').AsString;
+        Excel.Cells(7,3):= qry_All.FieldByName('CLBH').AsString;
+        Excel.Cells(8,3):= strRy;
+
+        Excel.ActiveSheet.Range['G4:H4'].Merge;
+        Excel.ActiveSheet.Range['G5:H5'].Merge;
+        Excel.ActiveSheet.Range['G6:H6'].Merge;
+        Excel.ActiveSheet.Range['G7:H7'].Merge;
+        Excel.ActiveSheet.Range['G8:H8'].Merge;
+        Excel.Cells(4,7):= qry_All.FieldByName('SupplierName').AsString;
+        Excel.Cells(5,7):= strCgno;
+        Excel.Cells(6,7):= qry_All.FieldByName('Qty').Value;
+        Excel.Cells(7,7):= qry_All.FieldByName('InspecQty_Other').AsString;
+        Excel.Cells(8,7):= qry_All.FieldByName('Standard_Dimention').AsString;
+
+        Excel.ActiveSheet.Range['C4:E8'].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Range['G4:H8'].HorizontalAlignment := $FFFFEFF4;
+
+        //table
+        Excel.ActiveSheet.Range['A9:H9'].Merge;
+
+        Excel.ActiveSheet.Range['B10:C10'].Merge;
+        Excel.ActiveSheet.Range['D10:E10'].Merge;
+        Excel.ActiveSheet.Range['G10:H10'].Merge;
+        Excel.Cells(10,1):= 'So thu tu' + chr(10) + 'Sequence';
+        Excel.Cells(10,2):= 'Ket qua tu xuong cung ung' + chr(10) + 'Supplier''s recording';
+        Excel.Cells(10,4):= 'Ket qua QC' + chr(10) + 'QC Result';
+        Excel.Cells(10,6):= 'Chenh lech cho phep' + chr(10) + 'Allowable tolerance';
+        Excel.Cells(10,7):= 'Ket qua' + chr(10) + 'Result';
+
+        for m:=1  to 4 do
+        begin
+          for i:=1 to 8 do   //columns
+          begin
+            for j:=4 to 8 do   //rows
+            begin
+                Excel.ActiveSheet.Cells[j,i].Borders[m].Weight := 2;
+            end;
+          end;
+        end;
+
+        qry_dimen.First;
+        j:=11;
+        while not qry_dimen.Eof do
+        begin
+            Excel.ActiveSheet.Range['B'+inttostr(j)+':C'+inttostr(j)].Merge;
+            Excel.ActiveSheet.Range['D'+inttostr(j)+':E'+inttostr(j)].Merge;
+            Excel.ActiveSheet.Range['G'+inttostr(j)+':H'+inttostr(j)].Merge;
+
+            Excel.Cells(j,1):= qry_dimen.FieldByName('Sequence').Value;
+            Excel.Cells(j,2):= qry_dimen.FieldByName('SupQty').Value;
+            Excel.Cells(j,4):= qry_dimen.FieldByName('QcQty').Value;
+            Excel.Cells(j,6):= qry_dimen.FieldByName('Tolerance').Value;
+            Excel.Cells(j,7):= qry_dimen.FieldByName('Result').Value;
+
+            for m:=1 to 4 do
+            begin
+                for i:=1 to 8 do
+                begin
+                    Excel.ActiveSheet.Cells[j-1,i].Borders[m].Weight := 2;
+                    Excel.ActiveSheet.Cells[j,i].Borders[m].Weight := 2;
+                    Excel.ActiveSheet.Cells[j+1,i].Borders[m].Weight := 2;
+                    Excel.ActiveSheet.Cells[j+2,i].Borders[m].Weight := 2;
+                end;
+            end;
+
+            Excel.ActiveSheet.Rows[j].Font.Size:= 11;
+            Excel.ActiveSheet.Rows[j].font.name:='Arial';
+            Excel.ActiveSheet.Rows[j].HorizontalAlignment := $FFFFEFF4;
+            Excel.ActiveSheet.Rows[j].RowHeight := 30;
+
+            qry_dimen.Next;
+            inc(j);
+        end;
+
+        Excel.ActiveSheet.Range['A'+ inttostr(j) + ':A' + inttostr(j+1) ].Merge;
+        Excel.ActiveSheet.Range['B'+ inttostr(j) + ':B' + inttostr(j+1) ].Merge;
+        Excel.ActiveSheet.Range['C'+ inttostr(j) + ':H' + inttostr(j+1) ].Merge;
+        Excel.Cells(j,1):='Ket qua cuoi cung/' + chr(10) + 'Final Result';
+        //Excel.Cells(j,2):='PASS : ' + chr(254);
+        //Excel.Cells(j+1,2):='FAIL : ' + chr(254);
+
+        Excel.Cells(j,2):= qry_RD.FieldByName('Result').AsString;
+        Excel.Cells(j,3):='Ghi chu/Remark : ' + qry_RD.FieldByName('Remark').AsString;
+        Excel.ActiveSheet.Rows[j].RowHeight := 30;
+        Excel.ActiveSheet.Rows[j+1].RowHeight := 30;
+        Excel.ActiveSheet.Range['A'+ inttostr(j) + ':B' + inttostr(j+1) ].HorizontalAlignment:= $FFFFEFF4;
+        Excel.ActiveSheet.Range['A'+ inttostr(j) + ':B' + inttostr(j+1) ].VerticalAlignment:= $FFFFEFF4;
+        Excel.ActiveSheet.Range['C'+ inttostr(j) + ':H' + inttostr(j+1) ].VerticalAlignment:= -4160;
+
+        Excel.Cells(j+4,1):='Phe duyet';
+        Excel.Cells(j+5,1):='Approve by :';
+        Excel.Cells(j+4,3):='Chu quan kho';
+        Excel.Cells(j+5,3):='WH Suppervisor :';
+        Excel.Cells(j+4,8):='Nguoi lap';
+        Excel.Cells(j+5,8):='Prepared by :';
+
+        Excel.ActiveSheet.Rows[j+9].HorizontalAlignment := -4152;
+        Excel.Cells(j+9,8):='Document Number: QIP/APP/30/00/01';
+
+        Excel.ActiveSheet.Rows[1].Font.Size:= 18;
+        Excel.ActiveSheet.Rows[1].Font.Bold := True;
+        Excel.ActiveSheet.Rows[1].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Rows[1].font.name:='Arial';
+        Excel.ActiveSheet.Rows[1].RowHeight := 30;
+        Excel.ActiveSheet.Rows[2].Font.Size:= 18;
+        Excel.ActiveSheet.Rows[2].Font.Bold := True;
+        Excel.ActiveSheet.Rows[2].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Rows[2].font.name:='Arial';
+        Excel.ActiveSheet.Rows[4].RowHeight := 30;
+        Excel.ActiveSheet.Rows[5].RowHeight := 30;
+        Excel.ActiveSheet.Rows[6].RowHeight := 30;
+        Excel.ActiveSheet.Rows[7].RowHeight := 30;
+        Excel.ActiveSheet.Rows[8].RowHeight := 30;
+        Excel.ActiveSheet.Rows[9].RowHeight := 7.5;
+
+        Excel.ActiveSheet.Rows[10].Font.Size:= 11;
+        Excel.ActiveSheet.Rows[10].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Rows[10].font.name:='Arial';
+        Excel.ActiveSheet.Rows[10].RowHeight := 35;
+
+        Excel.columns.autofit;
+        showmessage('Succeed.');
+        Excel.Visible:=True;
+
+    except
+        Application.MessageBox('NO Microsoft Excel','Microsoft Excel',MB_OK+MB_ICONWarning);
+        Exit;
+    end;
+end;
+
+procedure TLeatherSummary.DBGrid_SoftDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+    if (Column.FieldName='Result') and (qry_soft.FieldByName('Result').AsString='Pass') then
+        DBGrid_Soft.Canvas.Font.Color:=clblue;
+    if (Column.FieldName='Result') and (qry_soft.FieldByName('Result').AsString='Fail') then
+        DBGrid_Soft.Canvas.Font.Color:=clred;
+
+    DBGrid_Soft.DefaultDrawColumnCell(Rect,DataCol,Column,State);
+end;
+
+procedure TLeatherSummary.DBGrid_thickDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+    if (Column.FieldName='Result') and (qry_thick.FieldByName('Result').AsString='Pass') then
+        DBGrid_thick.Canvas.Font.Color:=clblue;
+    if (Column.FieldName='Result') and (qry_thick.FieldByName('Result').AsString='Fail') then
+        DBGrid_thick.Canvas.Font.Color:=clred;
+
+    DBGrid_thick.DefaultDrawColumnCell(Rect,DataCol,Column,State);
+end;
+
+procedure TLeatherSummary.DBGrid_DimenDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+    if (Column.FieldName='Result') and (qry_dimen.FieldByName('Result').AsString='Pass') then
+        DBGrid_Dimen.Canvas.Font.Color:=clblue;
+    if (Column.FieldName='Result') and (qry_dimen.FieldByName('Result').AsString='Fail') then
+        DBGrid_Dimen.Canvas.Font.Color:=clred;
+
+    DBGrid_Dimen.DefaultDrawColumnCell(Rect,DataCol,Column,State);
+end;
+
+procedure TLeatherSummary.DBGrid_detailDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+    if (column.FieldName='QC_Check') and (qry_detail.FieldByName('QC_Check').AsString='Fail') or
+     (column.FieldName='Settlement') and (qry_detail.FieldByName('Settlement').AsString='Rejected') or
+     (column.FieldName='Lab_Check') and (qry_detail.FieldByName('Lab_Check').AsString='Fail') or
+     (column.FieldName='Final_Status') and (qry_detail.FieldByName('Final_Status').AsString='Fail') then
+    begin
+        DBGrid_detail.canvas.Font.color:=clred;
+    end;
+
+   if (column.FieldName='QC_Check') and (qry_detail.FieldByName('QC_Check').AsString='Pass') or
+      (column.FieldName='Settlement') and (qry_detail.FieldByName('Settlement').AsString='Released') or
+      (column.FieldName='Lab_Check') and (qry_detail.FieldByName('Lab_Check').AsString='Pass') or
+      (column.FieldName='Final_Status') and (qry_detail.FieldByName('Final_Status').AsString='Pass') then
+    begin
+        DBGrid_detail.canvas.Font.color:=clblue;
+    end;
+
+    if (column.FieldName='Settlement') and (qry_detail.FieldByName('Settlement').AsString='Limited Release') then
+    begin
+        DBGrid_detail.canvas.Font.color:=clgreen;
+    end;
+
+    if (column.FieldName='Settlement') and (qry_detail.FieldByName('Settlement').AsString='Limited Rejected') then
+    begin
+        DBGrid_detail.canvas.Font.color:=clFuchsia;
+    end;
+
+    if (column.FieldName='RY') or (column.FieldName='CGNO') or (column.FieldName='Article') or (column.FieldName='CustPO') then
+    begin
+        if qry_Detail.FieldByName('Final_Status').AsString='Pass' then
+            DBGrid_detail.canvas.Brush.Color:= clLime
+        else if qry_detail.FieldByName('Final_Status').AsString='Fail' then
+            DBGrid_detail.canvas.Brush.Color:= clRed
+        else
+            DBGrid_detail.canvas.Brush.Color:= clAqua;
+    end;
+
+     DBGrid_detail.DefaultDrawColumnCell(rect,DataCol,column,state);
+
+end;
+
+procedure CompressIt(var CompressedStream: TMemoryStream; const CompressionLevel: TCompressionLevel);
+var
+   SourceStream: TCompressionStream;
+   DestStream: TMemoryStream;
+   Count: int64;
+begin
+   Count := CompressedStream.Size;
+   DestStream := TMemoryStream.Create;
+   SourceStream := TCompressionStream.Create(CompressionLevel, DestStream);
+   try
+      CompressedStream.SaveToStream(SourceStream);
+      SourceStream.Free;
+      CompressedStream.Clear;
+      CompressedStream.WriteBuffer(Count, SizeOf(Count));
+      CompressedStream.CopyFrom(DestStream, 0);
+   finally
+      DestStream.Free;
+   end;
+end;
+
+procedure UnCompressit(const CompressedStream: TMemoryStream; var UnCompressedStream: TMemoryStream);
+var
+   SourceStream: TDecompressionStream;
+   DestStream: TMemoryStream;
+   Buffer: PChar;
+   Count: int64;
+begin
+   CompressedStream.ReadBuffer(Count, SizeOf(Count));
+   GetMem(Buffer, Count);
+   DestStream := TMemoryStream.Create;
+   SourceStream := TDecompressionStream.Create(CompressedStream);
+   try
+      SourceStream.ReadBuffer(Buffer^, Count);
+      DestStream.WriteBuffer(Buffer^, Count);
+      DestStream.Position := 0;
+      UnCompressedStream.LoadFromStream(DestStream);
+   finally
+      FreeMem(Buffer);
+      DestStream.Free;
+   end;
+end;
+
+procedure TLeatherSummary.UploadReportGL1Click(Sender: TObject);
+var
+   UploadObj: TFileTransClient;
+   SaveFN,Response,FileString:String;
+   IsActionUpload:boolean;
+begin
+  if qry_all.Active=false then exit;
+  if qry_all.fieldByName('ReportID').AsString<>'' then
+  begin
+    if OpenDialog1.Execute then
+    begin
+      if OpenDialog1.FileName<>'' then
+      begin
+        UploadObj := TFileTransClient.Create();
+        //上傳
+        SaveFN:=ExtractFileName(OpenDialog1.FileName);
+        FileString := UploadObj.List('QC\' + main.Edit2.Text + '\Mat\');
+        IsActionUpload:=true;
+        // check file exists
+        if Pos(SaveFN, FileString) > 0 then
+        begin
+          if MessageDlg('Override Mat File', mtCustom, [mbYes,mbNo], 0) = mrNo then
+          begin
+            IsActionUpload:=false;
+            ShowMessage('File name exists!');
+          end;
+        end;
+        if IsActionUpload=true then
+        begin
+          //先檢查是否擋案存在 先刪除
+          if qry_all.fieldByName('File_Name').AsString<>'' then
+             Response := UploadObj.delete(qry_all.fieldByName('File_Name').AsString,'QC\'+main.Edit2.Text+'\Mat\', false);
+          Response := UploadObj.put(OpenDialog1.FileName,SaveFN,'QC\'+main.Edit2.Text+'\Mat\', false);
+          if pos(',', Response) > 0 then  //fail
+          begin
+             showmessage(Response);
+          end else
+          begin
+            with query1 do
+            begin
+              active:=false;
+              sql.Clear;
+              SQL.Add('update MaterialQCCheck set File_Name='''+ExtractFileName(OpenDialog1.FileName)+''' ,QC_UserID='''+main.edit1.text+''',QC_Date=GetDate() ');
+              sql.Add('FROM MaterialQCcheck ');
+              sql.Add('WHERE MaterialQCcheck.No_ID='+qry_all.fieldByName('ReportID').AsString+' ');
+              SQL.Add('update Leather_QC set File_Name='''+ExtractFileName(OpenDialog1.FileName)+''' ,UserID='''+main.edit1.text+''',UserDate=GetDate() ');
+              sql.Add('FROM Leather_QC ');
+              sql.Add('WHERE Leather_QC.No_ID='+qry_all.fieldByName('No_ID').AsString+' ');
+              //funcObj.WriteErrorLog(sql.Text);
+              ExecSQL;
+            end;
+            showmessage(Response);
+          end;
+          qry_All.Active:=FALSE;
+          qry_All.Active:=TRUE;
+          qry_detail.Active:=FALSE;
+          qry_detail.Active:=TRUE;
+        end;
+        UploadObj.Free;
+
+      end;
+    end;
+  end;
+
+end;
+
+procedure TLeatherSummary.DownloadReportGL1Click(Sender: TObject);
+  function GetFileName(oFile,sFile:String):string;
+  begin
+    result:=ChangeFileExt(ExtractFileName(sFile),'')+ExtractFileExt(oFile);
+  end;
+var
+   UploadObj: TFileTransClient;
+   ms: TMemoryStream;
+begin
+  if not qry_All.FieldByName('File_Name').IsNull then
+  begin
+    savedialog1.FileName:=qry_all.fieldByName('File_Name').AsString;
+    if SaveDialog1.Execute then
+    begin
+        UploadObj := TFileTransClient.Create();
+        ms := TMemoryStream.Create;
+        ms.LoadFromStream(UploadObj.down(qry_all.fieldByName('File_Name').AsString,'QC\'+main.Edit2.Text+'\Mat\', GetFileName(qry_all.fieldByName('File_Name').AsString,savedialog1.FileName) ));
+        if ms.Size > 0 then  //fail
+        begin
+           showmessage('Download file OK')
+        end else
+        begin
+          showmessage('Download file error');
+        end;
+        UploadObj.Free;
+        ms.Free;
+    end;
+  end;
+
+end;
+
+procedure TLeatherSummary.DeleteReportGL1Click(Sender: TObject);
+var
+   UploadObj: TFileTransClient;
+   SaveFN,Response:String;
+begin
+     if not qry_All.FieldByName('File_Name').IsNull then
+     begin
+         if messagedlg('You want to delete guarantee letter?',mtconfirmation,[mbYes,MbNo],0)=mrYes then
+         begin
+            UploadObj := TFileTransClient.Create();
+            //先檢查是否擋案存在 先刪除
+            if qry_all.fieldByName('File_Name').AsString<>'' then
+               Response := UploadObj.delete(qry_all.fieldByName('File_Name').AsString,'QC\'+main.Edit2.Text+'\Mat\', false);
+            //刪除
+            if pos(',', Response) > 0 then  //fail
+            begin
+               showmessage(Response);
+            end else
+            begin
+              with query1 do
+              begin
+                active:=false;
+                sql.Clear;
+                SQL.Add('update MaterialQCCheck set File_Name=null ,QC_UserID='''+main.edit1.text+''',QC_Date=GetDate() ');
+                sql.Add('FROM MaterialQCcheck ');
+                sql.Add('WHERE MaterialQCcheck.No_ID='+qry_all.fieldByName('ReportID').AsString+' ');
+                SQL.Add('update Leather_QC set File_Name=null ,UserID='''+main.edit1.text+''',UserDate=GetDate() ');
+                sql.Add('FROM Leather_QC ');
+                sql.Add('WHERE Leather_QC.No_ID='+qry_all.fieldByName('No_ID').AsString+' ');
+                //funcObj.WriteErrorLog(sql.Text);
+                ExecSQL;
+              end;
+              showmessage(Response);
+            end;
+            UploadObj.Free;
+            qry_All.Active:=FALSE;
+            qry_All.Active:=TRUE;
+            qry_detail.Active:=FALSE;
+            qry_detail.Active:=TRUE;
+         end;
+     end;
+end;
+
+procedure TLeatherSummary.insert6Click(Sender: TObject);
+begin
+  if (qry_All.FieldByName('TypeName').IsNull) or (qry_All.FieldByName('TypeName').AsString= '') then
+  begin
+      showmessage('Type name can not empty.!!!');
+      abort;
+  end;
+  if (qry_All.FieldByName('Standard_Grade').IsNull) or (qry_All.FieldByName('Standard_Grade').AsString= '') then
+  begin
+      showmessage('Standard Grade can not empty.!!!');
+      abort;
+  end;
+
+   with qry_GradeP do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        insert;
+        if edtPac.Text <> '' then
+        begin
+            qry_GradeP.FieldByName('Package').AsString := edtPac.Text;
+
+        end
+        else
+        begin
+            Messagedlg('You must input package first!!!',mtwarning,[mbyes],0);
+            edtPac.SetFocus;
+            abort;
+        end;
+    end;
+    save6.Enabled:=true;
+    cancel6.Enabled:=true;
+    DBGrid_GradeP.FieldColumns['DeCode'].ButtonStyle := cbsEllipsis;
+end;
+
+procedure TLeatherSummary.modify6Click(Sender: TObject);
+begin
+    with qry_GradeP do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        edit;
+    end;
+    save6.Enabled:=true;
+    cancel6.Enabled:=true;
+    DBGrid_GradeP.FieldColumns['DeCode'].ButtonStyle := cbsEllipsis;
+end;
+
+procedure TLeatherSummary.delete6Click(Sender: TObject);
+begin
+    if (qry_GradeP.FieldByName('USERID').Value <> main.edit1.Text) then
+    begin
+      Messagedlg('It is not yours,can not delete!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+   if qry_GradeP.FieldByName('USERDATE').Value + 30 < date then
+   begin
+      Messagedlg('You can not delete after 30 days!!!',mtwarning,[mbyes],0);
+      abort;
+   end;
+   with qry_GradeP do
+   begin
+      requestlive:=true;
+      cachedupdates:=true;
+      edit;
+      fieldbyname('YN').Value:='0';
+   end;
+   save6.Enabled:=true;
+   cancel6.Enabled:=true;
+
+end;
+
+procedure TLeatherSummary.save6Click(Sender: TObject);
+var i,a1:integer;
+begin
+  try
+    qry_GradeP.first;
+    for i:=1 to qry_GradeP.RecordCount do
+      begin
+        case qry_GradeP.updatestatus of
+          usinserted:
+            begin
+                with qry1 do
+                begin
+                    active:=false;
+                    sql.Clear;
+                    sql.Add('select max(sequence)sequence from Leather_GradeP');
+                    sql.Add('where SP=''N'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' ' );
+                    sql.Add('       and Package='''+edtPac.Text+''' ');
+                    sql.Add('group by No_ID,Package');
+                    active:=true;
+                    if qry1.FieldByName('sequence').IsNull then
+                        a1:= 1
+                    else
+                        a1:= qry1.FieldByName('sequence').Value + 1;
+                end;
+
+                qry_GradeP.edit;
+                qry_GradeP.fieldbyname('No_ID').Value:=qry_All.fieldbyname('No_ID').Value;
+                qry_GradeP.fieldbyname('sequence').Value:= a1;
+                qry_GradeP.fieldbyname('Package').Value:= edtPac.Text;
+                qry_GradeP.fieldbyname('SP').Value:= 'N';
+                qry_GradeP.fieldbyname('YN').Value:='1';
+                qry_GradeP.fieldbyname('USERID').Value:=main.edit1.text;
+                Upd_GradeP.Apply(ukInsert);
+            end;
+          usmodified:
+          begin
+             if qry_GradeP.fieldbyname('YN').value='0' then
+             begin
+                Upd_GradeP.apply(ukdelete);
+
+                MakeSequenceGrade('Leather_GradeP',qry_All.fieldbyname('No_ID').AsString,qry_GradeP.fieldbyname('Package').AsString,'N')
+
+              end
+             else
+             begin
+                Upd_GradeP.apply(ukmodify);
+             end;
+          end;
+        end;
+        qry_GradeP.next;
+      end;
+      
+    
+  except
+      Messagedlg('Error, can not save data!',mtwarning,[mbyes],0);
+      Abort;
+  end;
+
+    //update Final_Status from final_Resrult
+    with qry1 do
+    begin
+        active:=false;
+        sql.Clear;
+        sql.Add('update Leather_GradeP set Grade=(');
+	  		sql.Add('						select Grade from (                                                           ');
+		  	sql.Add('						select No_ID,Sequence,Package,case when Per_Use between 96 and 100 then ''I''');
+			  sql.Add('										when Per_Use between 91 and 95 then ''II''');
+  			sql.Add('										when Per_Use between 86 and 90 then ''III''');
+	  		sql.Add('										when Per_Use between 81 and 85 then ''IV''');
+		  	sql.Add('										when Per_Use between 76 and 80 then ''V''');
+			  sql.Add('										when Per_Use between 71 and 75 then ''VI''');
+  			sql.Add('										else ''VII'' end as Grade');
+	  		sql.Add('						from (');
+		  	sql.Add('						select Leather_GradeP.*,round((isnull(AcQty,0)-isnull(DeQty,0))/isnull(AcQty,0)*100,0) as Per_Use');
+			  sql.Add('						from Leather_GradeP where SP=''N'' ');
+  			sql.Add('						)a )aa where aa.No_ID=Leather_GradeP.No_ID and aa.Sequence=Leather_GradeP.Sequence and aa.Package=Leather_GradeP.Package)');
+        sql.Add('where SP=''N'' and No_ID='''+qry_All.fieldbyname('No_ID').AsString+'''');
+        execsql;
+
+         //update Grading Report
+         active:=false;
+         sql.Clear;
+         sql.add('select * from Leather_Grade');
+         sql.Add('where SP=''N'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' ' );
+         //sql.Add('      and QC_Date =''' +qry_All.fieldbyname('DateInput').AsString +''' ' );
+         active:=true;
+         if RecordCount = 0 then
+         begin
+             active:=false;
+             sql.Clear;
+             sql.Add('INSERT INTO Leather_Grade (No_ID,SP,QC_Date,Type1,Type2,Type3,Type4,Type5,Type6,Type7,UserID,UserDate,YN,Reason)');
+             sql.Add('select Leather_GradeP.No_ID,SP,DateInput,isnull(sum(case Grade when ''I'' then AcQty else null end),0) as ''I''');
+			       sql.Add('                        ,isnull(sum(case Grade when ''II'' then AcQty else null end),0) as ''II''');
+        	 	 sql.Add('                        ,isnull(sum(case Grade when ''III'' then AcQty else null end),0) as ''III''');
+		      	 sql.Add('                        ,isnull(sum(case Grade when ''IV'' then AcQty else null end),0) as ''IV''');
+   			     sql.Add('                        ,isnull(sum(case Grade when ''V'' then AcQty else null end),0) as ''V''');
+    		  	 sql.Add('                        ,isnull(sum(case Grade when ''VI'' then AcQty else null end),0) as ''VI''');
+		    	   sql.Add('                        ,isnull(sum(case Grade when ''VII'' then AcQty else null end),0) as ''VII''');
+             sql.Add(' ,'''+main.Edit1.Text+''' ');
+             sql.Add(' ,getdate() ');
+             sql.Add(' ,''1'' ');
+             sql.Add(' ,cast((select p2.Defects + '','' from Leather_GradeP P2');
+             sql.Add('  		where P2.No_ID=Leather_GradeP.No_ID and P2.SP=Leather_GradeP.SP and isnull(p2.Defects,'''') <> '''' group by p2.Defects for XML Path ('''')) as varchar(1000)) as Defects');
+			       sql.Add('from Leather_GradeP');
+		    	   sql.Add('    left join Leather_QC on Leather_QC.No_ID= Leather_GradeP.No_ID');
+             sql.Add('where SP=''N'' and Leather_GradeP.No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' ' );
+			       sql.Add('group by Leather_GradeP.No_ID,SP,DateInput');
+             execsql;
+             showmessage('Success!!!');
+         end
+         else
+         begin
+             if (qry_Grade.FieldByName('UserDate').Value + 30 > date) and (not qry_Grade.FieldByName('UserDate').IsNull) then
+             begin
+                 active:=false;
+                 sql.Clear;
+                 sql.Add('update Leather_Grade set');
+                 sql.Add('Type1 = isnull((select sum(AcQty) from Leather_GradeP where SP=''N'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' and Grade=''I''),0)');
+                 sql.Add(',Type2= isnull((select sum(AcQty) from Leather_GradeP where SP=''N'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' and Grade=''II''),0)');
+                 sql.Add(',Type3= isnull((select sum(AcQty) from Leather_GradeP where SP=''N'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' and Grade=''III''),0)');
+                 sql.Add(',Type4= isnull((select sum(AcQty) from Leather_GradeP where SP=''N'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' and Grade=''IV''),0)');
+                 sql.Add(',Type5= isnull((select sum(AcQty) from Leather_GradeP where SP=''N'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' and Grade=''V''),0)');
+                 sql.Add(',Type6= isnull((select sum(AcQty) from Leather_GradeP where SP=''N'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' and Grade=''VI''),0)');
+                 sql.Add(',Type7= isnull((select sum(AcQty) from Leather_GradeP where SP=''N'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' and Grade=''VII''),0)');
+                 sql.Add(',UserID='''+main.Edit1.Text+''' ');
+                 sql.Add(',UserDate=getdate()');
+                 sql.Add(',Reason=(select cast((select p2.Defects + '','' from Leather_GradeP P2');
+     						 sql.Add('            where No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' and SP=''N'' and isnull(p2.Defects,'''') <> '''' group by p2.Defects for XML Path ('''')) as varchar(1000)) as Defects) ');
+                 sql.Add('where SP=''N'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' ' );
+                 execsql;
+                 showmessage('Success!!!');
+             end
+             else
+             begin
+                 messagedlg('You can not update data after 30 days.',mtWarning,[mbYes],0);
+                 exit;
+             end;
+         end;
+     qry_Grade.Active:=false;
+     qry_Grade.Active:=true;
+  end;
+
+  qry_GradeP.active:=false;
+  qry_GradeP.cachedupdates:=false;
+  qry_GradeP.requestlive:=false;
+  qry_GradeP.active:=true;
+
+  save6.Enabled:=false;
+  cancel6.Enabled:=false;
+  DBGrid_GradeP.FieldColumns['DeCode'].ButtonStyle := cbsNone;
+
+end;
+
+procedure TLeatherSummary.cancel6Click(Sender: TObject);
+begin
+   with qry_GradeP do
+    begin
+        active:=false;
+        RequestLive:=false;
+        CachedUpdates:=false;
+        active:=true;
+    end;
+    save6.Enabled:=false;
+    cancel6.Enabled:=false;
+    DBGrid_GradeP.FieldColumns['DeCode'].ButtonStyle := cbsNone;
+end;
+
+procedure TLeatherSummary.brnQPacClick(Sender: TObject);
+begin
+    with qry_GradeP do
+    begin
+        active:=false;
+        sql.Clear;
+        sql.Add('select Leather_GradeP.No_ID, Leather_GradeP.Sequence, Leather_GradeP.Package,');
+        sql.Add('   Leather_GradeP.SP, isnull(Leather_GradeP.AcQty,0)AcQty,isnull(Leather_GradeP.DeQty,0)DeQty,');
+        sql.Add('   Leather_GradeP.Defects, Leather_GradeP.YN, Leather_GradeP.UserID,');
+        sql.Add('   Leather_GradeP.UserDate, Leather_GradeP.Inspector, Leather_GradeP.DeCode,Leather_GradeP.Grade,Leather_GradeP.Remark');
+        sql.Add('		,isnull(Leather_GradeP.AcQty,0) - isnull(Leather_GradeP.DeQty,0) as UseQty');
+        sql.Add('   ,case when isnull(Leather_GradeP.AcQty,0)=0 then 0 else ');
+        sql.Add('		     round((isnull(Leather_GradeP.AcQty,0)- isnull(Leather_GradeP.DeQty,0))/isnull(Leather_GradeP.AcQty,0)*100,0)  end Per_Use');
+        sql.Add('from Leather_GradeP');
+        sql.Add('where Leather_GradeP.SP=''N'' and Leather_GradeP.No_ID=:No_ID');
+        if edtPac.Text <> '' then
+            sql.Add('   and Leather_GradeP.Package = '''+edtPac.text +''' ');
+        if edtGrade.Text <> '' then
+            sql.Add('   and Leather_GradeP.Grade = '''+edtGrade.text +''' ');
+        if edit10.Text <> '' then
+            sql.Add('   and Leather_GradeP.DeCode like ''%'+edit10.text +'%'' ');
+        active:=true;
+    end;
+
+   
+end;
+
+procedure TLeatherSummary.qry_GradePAfterOpen(DataSet: TDataSet);
+begin
+   if qry_GradeP.RecordCount > 0 then
+   begin
+       brnQPac.Enabled:=true;
+       btnRpac.Enabled:=true;
+       btnEDaily.Enabled:=true;
+       btnUpdateGrade.Enabled:=true;
+
+     if upperCase(edtGrade.Text) = 'VII' then
+     begin
+        with qry_GradePFoot do
+        begin
+            active:=false;
+            sql.Clear;
+            sql.Add('SELECT No_ID,SUM(ISNULL(AcQty,0)) AS AcQty ,SUM(ISNULL(DeQty,0)) AS DeQty,SUM(ISNULL(UseQty,0)) AS UseQty,COUNT(*) AS Package');
+            sql.Add('FROM (');
+            sql.Add('SELECT No_ID,Package,Sequence,AcQty,DeQty,isnull(AcQty,0) - isnull(DeQty,0) as UseQty');
+            sql.Add('	,round((isnull(AcQty,0) - isnull(DeQty,0))/isnull(AcQty,0)*100,0) as Per_Use');
+            sql.Add('FROM Leather_GradeP');
+            sql.Add('WHERE SP=''N'' AND Grade = ''VII'' AND No_ID=:No_ID');
+            if edtPac.Text <> '' then
+                sql.Add('   and Leather_GradeP.Package = '''+edtPac.text +''' ');
+            if edit10.Text <> '' then
+                sql.Add('   and Leather_GradeP.DeCode like ''%'+edit10.text +'%'' ');
+
+            sql.Add(')aa');
+            sql.Add('GROUP BY No_ID');
+            active:=true;
+        end;
+     end
+     else
+     begin
+        with qry_GradePFoot do
+        begin
+            active:=false;
+            sql.Clear;
+            sql.Add('select  ');
+            sql.Add('   sum(isnull(Leather_GradeP.AcQty,0) - isnull(Grade7.AcQty,0)) AcQty,sum(isnull(Leather_GradeP.DeQty,0) - isnull(Grade7.DeQty,0))DeQty');
+            sql.Add('		,sum((isnull(Leather_GradeP.AcQty,0) - isnull(Grade7.AcQty,0)) - (isnull(Leather_GradeP.DeQty,0) - isnull(Grade7.DeQty,0))) as UseQty');
+            sql.Add('   ,COUNT(Leather_GradeP.No_ID)-COUNT(Grade7.No_ID)AS Package');
+           {
+            sql.Add('   ,case when sum((isnull(Leather_GradeP.AcQty,0) - isnull(Grade7.AcQty,0)))=0 then 0 else ');
+            sql.Add('		     round((sum(isnull(Leather_GradeP.AcQty,0) - isnull(Grade7.AcQty,0)) - sum(isnull(Leather_GradeP.DeQty,0) - isnull(Grade7.DeQty,0)))/sum(isnull(Leather_GradeP.AcQty,0) - isnull(Grade7.AcQty,0))*100,0)  end Per_Use');
+            }
+            sql.Add('from Leather_GradeP');
+            sql.Add('LEFT JOIN (  SELECT No_ID,Package,Sequence,Grade,AcQty,DeQty');
+            sql.Add('						  FROM Leather_GradeP WHERE SP=''N'' AND Grade = ''VII'' AND No_ID=:No_ID ');
+            sql.Add('          )Grade7 ON Grade7.No_ID=Leather_GradeP.No_ID AND Grade7.Package = Leather_GradeP.Package');
+            sql.Add('									AND Grade7.Sequence = Leather_GradeP.Sequence AND Grade7.Grade = Leather_GradeP.Grade');
+            sql.Add('where Leather_GradeP.SP=''N'' and Leather_GradeP.No_ID=:No_ID');
+            if edtPac.Text <> '' then
+                sql.Add('   and Leather_GradeP.Package = '''+edtPac.text +''' ');
+            if edtGrade.Text <> '' then
+                sql.Add('   and Leather_GradeP.Grade = '''+edtGrade.text +''' ');
+            if edit10.Text <> '' then
+                sql.Add('   and Leather_GradeP.DeCode like ''%'+edit10.text +'%'' ');
+
+            active:=true;
+        end;
+    end;
+
+    if trim(qry_GradePFoot.fieldbyname('AcQty').AsString)='' then
+      DBGrid_GradeP.FieldColumns['AcQty'].Footer.Value:='0'
+    else
+      DBGrid_GradeP.FieldColumns['AcQty'].Footer.Value:=qry_GradePFoot.fieldbyname('AcQty').Value;
+
+    if trim(qry_GradePFoot.fieldbyname('DeQty').AsString)='' then
+      DBGrid_GradeP.FieldColumns['DeQty'].Footer.Value:='0'
+    else
+      DBGrid_GradeP.FieldColumns['DeQty'].Footer.Value:=qry_GradePFoot.fieldbyname('DeQty').Value;
+
+    if trim(qry_GradePFoot.fieldbyname('UseQty').AsString)='' then
+      DBGrid_GradeP.FieldColumns['UseQty'].Footer.Value:='0'
+    else
+      DBGrid_GradeP.FieldColumns['UseQty'].Footer.Value:=qry_GradePFoot.fieldbyname('UseQty').Value;
+    if trim(qry_GradePFoot.fieldbyname('Package').AsString)='' then
+      DBGrid_GradeP.FieldColumns['Package'].Footer.Value:='0'
+    else
+      DBGrid_GradeP.FieldColumns['Package'].Footer.Value:=qry_GradePFoot.fieldbyname('Package').Value;
+    {
+    if trim(qry_GradePFoot.fieldbyname('Per_Use').AsString)='' then
+      DBGrid_GradeP.FieldColumns['Per_Use'].Footer.Value:='0'
+    else
+    DBGrid_GradeP.FieldColumns['Per_Use'].Footer.Value:=Qry_Total.fieldbyname('Per_Use').Value;
+    }
+   end;
+end;
+
+procedure TLeatherSummary.edtPacChange(Sender: TObject);
+begin
+   if edtPac.Text <> '' then
+      brnQPac.Enabled:=true;
+end;
+
+procedure TLeatherSummary.btnRpacClick(Sender: TObject);
+var Excel,WorkBook,xlSheet:olevariant;
+    i,j,k,m:integer;
+begin
+
+     if (qry_GradeP.Active) and (qry_GradeP.recordcount=0)  then
+     begin
+         Messagedlg('No record.',mtwarning,[mbyes],0);
+         abort;
+     end;
+
+     with qry_GradePa do
+      begin
+        active:=false;
+        sql.Clear;
+
+        sql.Add('select p1.No_ID,p1.package,sum(AcQty)AcQty,sum(DeQty) as DeQty,sum(UseQty) as UseQty');
+        sql.Add('	,cast((select p2.Defects + '','' from Leather_GradeP P2');
+        sql.Add('		where P2.No_ID=p1.No_ID and P2.Package=p1.Package and isnull(p2.Defects,'''') <> '''' group by p2.Defects for XML Path ('''')) as varchar(1000)) as Defects');
+        sql.Add('from (select Leather_GradeP.*,isnull(AcQty,0)-isnull(DeQty,0) as UseQty from Leather_GradeP) p1');
+        sql.Add('where SP=''N'' and No_ID='''+qry_All.fieldbyname('No_ID').AsString+'''');
+        sql.Add('group by p1.No_ID,p1.package');
+        sql.Add('order by p1.No_ID,p1.package');
+        active:=true;
+      end;
+
+     with qry_GradePs do
+     begin
+        active:=false;
+        sql.Clear;
+        sql.Add('select No_ID,sum(AcQty) AcQty from Leather_GradeP ');
+        sql.Add('where SP=''N'' and No_ID='''+qry_All.fieldbyname('No_ID').AsString+'''');
+        sql.Add('group by No_ID');
+        active:=true;
+     end;
+
+     with qry_GradePss do
+      begin
+        active:=false;
+        sql.Clear;
+        sql.Add('select distinct cast((select p2.Grade + '',''');
+        sql.Add('                   from Leather_GradeP P2');
+        sql.Add('                   where P2.No_ID=p1.No_ID and p2.Grade <> '''' ');
+        sql.Add('                   group by p2.Grade for XML Path ('''')) as varchar(20)) as Grade');
+        sql.Add('from Leather_GradeP p1');
+        sql.Add('where SP=''N'' and No_ID='''+qry_All.fieldbyname('No_ID').AsString+'''');
+        active:=true;
+      end;
+
+
+     try
+        Excel:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+     except
+        Application.MessageBox('NO Microsoft Excel','Microsoft Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+
+
+     try
+        WorkBook:=Excel.workbooks.Add;
+        xlSheet := workbook.Worksheets[1];
+        xlSheet.Name:='Overview inspection';
+
+        //--------------------------page setup------------------------------------
+      xlSheet.PageSetup.HeaderMargin := 0;
+      xlSheet.PageSetup.FooterMargin := 0;
+      xlSheet.PageSetup.TopMargin := 0;
+      xlSheet.PageSetup.BottomMargin := 0;
+      xlSheet.PageSetup.LeftMargin := 0.7;
+      xlSheet.PageSetup.RightMargin := 0;
+
+      //------------------------------------------------------------------------
+
+        //title
+        Excel.ActiveSheet.Range['A1:H1'].Merge;
+        Excel.ActiveSheet.Range['A2:H2'].Merge;
+        Excel.Cells(1,1):='BAO CAO KIEM DA HANG NGAY';
+        Excel.Cells(2,1):='DAILY LEATHER INSPECTION REPORT';
+
+        Excel.ActiveSheet.Range['A4:B4'].Merge;
+        Excel.ActiveSheet.Range['A5:B5'].Merge;
+        Excel.ActiveSheet.Range['A6:B6'].Merge;
+        Excel.ActiveSheet.Range['A7:B7'].Merge;
+        Excel.ActiveSheet.Range['A8:B8'].Merge;
+        Excel.Cells(4,1):= 'Ngay kiem' + chr(10) + 'Data of Inspecting';
+        Excel.Cells(5,1):= 'Art no.';
+        Excel.Cells(6,1):= 'Ten vat tu/mau sac' + chr(10) + 'Material name/Color';
+        Excel.Cells(7,1):= 'Ma so vat tu' + chr(10) + 'Material code';
+        Excel.Cells(8,1):= 'RY';
+
+        Excel.Cells(4,6):= 'Xuong cung ung' + chr(10) + 'Supplier';
+        Excel.Cells(5,6):= 'So cong (PO)' + chr(10) + 'Shipment No.';
+        Excel.Cells(6,6):= 'So luong tong' + chr(10) + 'Total quantity';
+        Excel.Cells(7,6):= 'So luong kiem' + chr(10) + 'Inspected quantity';
+        Excel.Cells(8,6):= 'Cap do' + chr(10) + 'Grade';
+
+        //export data
+        Excel.ActiveSheet.Range['C4:E4'].Merge;
+        Excel.ActiveSheet.Range['C5:E5'].Merge;
+        Excel.ActiveSheet.Range['C6:E6'].Merge;
+        Excel.ActiveSheet.Range['C7:E7'].Merge;
+        Excel.ActiveSheet.Range['C8:E8'].Merge;
+        Excel.Cells(4,3):= qry_All.FieldByName('DateInput').AsString;
+        Excel.Cells(5,3):= strArticle;
+        Excel.Cells(6,3):= qry_All.FieldByName('MaterialName').AsString;
+        Excel.Cells(7,3):= qry_All.FieldByName('CLBH').AsString;
+        Excel.Cells(8,3):= strRY;
+
+        Excel.ActiveSheet.Range['G4:H4'].Merge;
+        Excel.ActiveSheet.Range['G5:H5'].Merge;
+        Excel.ActiveSheet.Range['G6:H6'].Merge;
+        Excel.ActiveSheet.Range['G7:H7'].Merge;
+        Excel.ActiveSheet.Range['G8:H8'].Merge;
+        Excel.Cells(4,7):= qry_All.FieldByName('SupplierName').AsString;
+        Excel.Cells(5,7):= strCgno;
+        Excel.Cells(6,7):= qry_All.FieldByName('Qty').Value;
+        Excel.Cells(7,7):= qry_GradePs.FieldByName('AcQty').AsString;
+        Excel.Cells(8,7):= qry_GradePss.FieldByName('Grade').AsString;
+
+        Excel.ActiveSheet.Range['C4:E8'].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Range['G4:H8'].HorizontalAlignment := $FFFFEFF4;
+
+        //table
+        Excel.ActiveSheet.Range['A9:H9'].Merge;
+
+        Excel.ActiveSheet.Range['B10:C10'].Merge;
+        Excel.ActiveSheet.Range['D10:E10'].Merge;
+        Excel.ActiveSheet.Range['G10:H10'].Merge;
+        Excel.Cells(10,1):= 'So bo' + chr(10) + 'Package no.';
+        Excel.Cells(10,2):= 'So luong thuc te' + chr(10) + 'Actual quantity';
+        Excel.Cells(10,4):= 'So luong hu' + chr(10) + 'Defective quantity';
+        Excel.Cells(10,6):= 'So luong su dung' + chr(10) + 'Usable quantity';
+        Excel.Cells(10,7):= 'Loi hu' + chr(10) + 'Defects';
+
+        Excel.ActiveSheet.Columns[2].ColumnWidth := 5;
+        Excel.ActiveSheet.Columns[7].ColumnWidth := 8;
+        Excel.ActiveSheet.Columns[8].ColumnWidth := 20;
+
+        for m:=1  to 4 do
+        begin
+          for i:=1 to 8 do   //columns
+          begin
+            for j:=4 to 8 do   //rows
+            begin
+                Excel.ActiveSheet.Cells[j,i].Borders[m].Weight := 2;
+            end;
+          end;
+        end;
+
+        qry_GradePa.First;
+        j:=11;
+        k:=0;
+        while not qry_GradePa.Eof do
+        begin
+            Excel.ActiveSheet.Range['B'+inttostr(j)+':C'+inttostr(j)].Merge;
+            Excel.ActiveSheet.Range['D'+inttostr(j)+':E'+inttostr(j)].Merge;
+            Excel.ActiveSheet.Range['G'+inttostr(j)+':H'+inttostr(j)].Merge;
+
+            k:=k+1;
+            Excel.Cells(j,1):= k;
+            //Excel.Cells(j,1):= qry_GradeP.FieldByName('Sequence').Value;
+            Excel.Cells(j,2):= qry_GradePa.FieldByName('AcQty').Value;
+            Excel.Cells(j,4):= qry_GradePa.FieldByName('DeQty').Value;
+            Excel.Cells(j,6):= qry_GradePa.FieldByName('UseQty').Value;
+            Excel.Cells(j,7):= qry_GradePa.FieldByName('Defects').Value;
+
+            for m:=1 to 4 do
+            begin
+                for i:=1 to 8 do
+                begin
+                    Excel.ActiveSheet.Cells[j-1,i].Borders[m].Weight := 2;
+                    Excel.ActiveSheet.Cells[j,i].Borders[m].Weight := 2;
+                    Excel.ActiveSheet.Cells[j+1,i].Borders[m].Weight := 2;
+                end;
+            end;
+
+            //Excel.ActiveSheet.Rows[j].Font.Size:= 11;
+            //Excel.ActiveSheet.Rows[j].font.name:='Arial';
+            Excel.ActiveSheet.Rows[j].HorizontalAlignment := $FFFFEFF4;
+            Excel.ActiveSheet.Rows[j].RowHeight := 30;
+
+            qry_GradePa.Next;
+            inc(j);
+        end;
+
+        Excel.ActiveSheet.Rows[j].RowHeight := 30;
+        Excel.ActiveSheet.Rows[j].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Range['B'+inttostr(j)+':C'+inttostr(j)].Merge;
+        Excel.ActiveSheet.Range['D'+inttostr(j)+':E'+inttostr(j)].Merge;
+        Excel.ActiveSheet.Range['G'+inttostr(j)+':H'+inttostr(j)].Merge;
+        Excel.Cells(j,1):= 'Total';
+        Excel.Cells(j,2):= '=sum('+'B11:C' + inttostr(j-1) +')';
+        Excel.Cells(j,4):= '=sum('+'D11:E' + inttostr(j-1) +')';
+        Excel.Cells(j,6):= '=sum('+'F11:F' + inttostr(j-1) +')';
+
+        {Excel.Cells(j+2,1):='Phe duyet';
+        Excel.Cells(j+3,1):='Approve by :';
+        Excel.Cells(j+2,3):='Chu quan kho';
+        Excel.Cells(j+3,3):='WH Suppervisor :';
+        Excel.Cells(j+2,8):='Nguoi lap';
+        Excel.Cells(j+3,8):='Prepared by :';}
+
+        Excel.ActiveSheet.Rows[j+2].HorizontalAlignment := -4152;
+        Excel.ActiveSheet.Rows[j+10].HorizontalAlignment := -4152;
+        Excel.Cells(j+2,8):=QCN722_ISO;
+
+
+        Excel.ActiveSheet.Rows[1].Font.Size:= 18;
+        Excel.ActiveSheet.Rows[1].Font.Bold := True;
+        Excel.ActiveSheet.Rows[1].HorizontalAlignment := $FFFFEFF4;
+        //Excel.ActiveSheet.Rows[1].font.name:='Arial';
+        Excel.ActiveSheet.Rows[1].RowHeight := 30;
+        Excel.ActiveSheet.Rows[2].Font.Size:= 18;
+        Excel.ActiveSheet.Rows[2].Font.Bold := True;
+        Excel.ActiveSheet.Rows[2].HorizontalAlignment := $FFFFEFF4;
+        //Excel.ActiveSheet.Rows[2].font.name:='Arial';
+        Excel.ActiveSheet.Rows[4].RowHeight := 30;
+        Excel.ActiveSheet.Rows[5].RowHeight := 30;
+        Excel.ActiveSheet.Rows[6].RowHeight := 30;
+        Excel.ActiveSheet.Rows[7].RowHeight := 30;
+        Excel.ActiveSheet.Rows[8].RowHeight := 30;
+        Excel.ActiveSheet.Rows[9].RowHeight := 7.5;
+
+        //Excel.ActiveSheet.Rows[10].Font.Size:= 11;
+        Excel.ActiveSheet.Rows[10].HorizontalAlignment := $FFFFEFF4;
+        //Excel.ActiveSheet.Rows[10].font.name:='Arial';
+        Excel.ActiveSheet.Rows[10].RowHeight := 35;
+
+        Excel.columns.autofit;
+        showmessage('Succeed.');
+        Excel.Visible:=True;
+
+    except
+        Application.MessageBox('NO Microsoft Excel','Microsoft Excel',MB_OK+MB_ICONWarning);
+        Exit;
+    end;
+
+end;
+
+procedure TLeatherSummary.DBGrid_GradePGetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if qry_GradeP.FieldByName('YN').Value ='0' then
+  begin
+      DBGrid_GradeP.canvas.font.color:=clRed;
+  end;
+end;
+
+procedure TLeatherSummary.insertRSClick(Sender: TObject);
+begin
+    with qry_RS do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        insert;
+    end;
+    saveRS.Enabled:=true;
+    cancelRS.Enabled:=true;
+    DBGrid_RS.FieldColumns['Result'].ButtonStyle:=cbsAuto;
+end;
+
+procedure TLeatherSummary.modifyRSClick(Sender: TObject);
+begin
+    with qry_RS do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        edit;
+    end;
+    saveRS.Enabled:=true;
+    cancelRS.Enabled:=true;
+    DBGrid_RS.FieldColumns['Result'].ButtonStyle:=cbsAuto;
+end;
+
+procedure TLeatherSummary.cancelRSClick(Sender: TObject);
+begin
+   with qry_RS do
+    begin
+        active:=false;
+        RequestLive:=false;
+        CachedUpdates:=false;
+        active:=true;
+    end;
+    saveRS.Enabled:=false;
+    cancelRS.Enabled:=false;
+    DBGrid_RS.FieldColumns['Result'].ButtonStyle:=cbsNone;
+end;
+
+procedure TLeatherSummary.deleteRSClick(Sender: TObject);
+begin
+    if (qry_RS.FieldByName('USERID').Value <> main.edit1.Text) then
+    begin
+      Messagedlg('It is not yours,can not delete!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+   if qry_RS.FieldByName('USERDATE').Value + 30 < date then
+   begin
+      Messagedlg('You can not delete after 30 days!!!',mtwarning,[mbyes],0);
+      abort;
+   end;
+
+   if messagedlg('Do you really want to delete this record?',mtconfirmation,[mbYes,Mbno],0)=mrYes then
+   begin
+               with qry_RS do
+               begin
+                  requestlive:=true;
+                  cachedupdates:=true;
+                  edit;
+                  fieldbyname('YN').Value:='0';
+               end;
+               saveRS.Enabled:=true;
+               cancelRS.Enabled:=true;
+   end;
+end;
+
+procedure TLeatherSummary.saveRSClick(Sender: TObject);
+var i:integer;
+    j:variant;
+begin
+  try
+    qry_RS.first;
+    for i:=1 to qry_RS.RecordCount do
+      begin
+        case qry_RS.updatestatus of
+          usinserted:
+            begin
+                qry_RS.edit;
+                qry_RS.fieldbyname('ID').Value:=qry_All.fieldbyname('No_ID').Value;
+                qry_RS.fieldbyname('Types').Value:='S';
+                qry_RS.fieldbyname('YN').Value:='1';
+                qry_RS.fieldbyname('USERID').Value:=main.edit1.text;
+                Upd_RS.Apply(ukInsert);
+            end;
+          usmodified:
+          begin
+             if qry_RS.fieldbyname('YN').value='0' then
+             begin
+                Upd_RS.apply(ukdelete);
+             end
+             else
+             begin
+                Upd_RS.apply(ukmodify);
+             end;
+          end;
+        end;
+        qry_RS.next;
+      end;
+      
+    qry_RS.active:=false;
+    qry_RS.cachedupdates:=false;
+    qry_RS.requestlive:=false;
+    qry_RS.active:=true;
+    DBGrid_RS.FieldColumns['Result'].ButtonStyle:=cbsNone;
+  except
+      Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+      Abort;
+  end;
+  saveRS.Enabled:=false;
+  cancelRS.Enabled:=false;
+
+  //update inspection result when is Fail
+  if qry_RS.FieldByName('Result').AsString = 'Fail' then
+  begin
+      with qry1 do
+      begin
+          active:=false;
+          sql.Clear;
+          sql.Add('update Leather_QC set');
+          sql.Add('	  QC_Check = ''Fail'' ');
+          if qry_All.fieldbyname('QC_Reason').AsString = '' then
+              sql.Add('	  ,QC_Reason = ''M-03'' ')
+          else
+              sql.Add('	  ,QC_Reason = '''+ qry_All.fieldbyname('QC_Reason').AsString + ''' + '',M-03'' ');
+
+          if qry_All.fieldbyname('DefectName').AsString = '' then
+              sql.Add('   ,DefectName=''sai do mem - wrong softness'' ')
+          else
+              sql.Add('	  ,DefectName = '''+ qry_All.fieldbyname('DefectName').AsString + ''' + '',sai do mem - wrong softness'' ');
+
+          sql.Add('where No_ID='''+qry_All.fieldbyname('No_ID').AsString+''' ');
+          execsql;
+      end;
+      j:= qry_All.fieldbyname('No_ID').AsString;
+      qry_All.Active:=false;
+      qry_All.Active:=true;
+      if j<>'' then qry_All.Locate('No_ID',j,[]);
+  end;
+
+
+end;
+
+procedure TLeatherSummary.DBGrid_RSGetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+      if qry_RS.FieldByName('YN').Value ='0' then
+  begin
+      DBGrid_RS.canvas.font.color:=clRed;
+  end;
+end;
+
+procedure TLeatherSummary.DBGrid_RSDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+    if (Column.FieldName='Result') and (qry_RS.FieldByName('Result').AsString='Pass') then
+        DBGrid_RS.Canvas.Font.Color:=clblue;
+    if (Column.FieldName='Result') and (qry_RS.FieldByName('Result').AsString='Fail') then
+        DBGrid_RS.Canvas.Font.Color:=clred;
+
+    DBGrid_RS.DefaultDrawColumnCell(Rect,DataCol,Column,State);
+end;
+
+procedure TLeatherSummary.insertRTClick(Sender: TObject);
+begin
+    with qry_RT do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        insert;
+    end;
+    saveRT.Enabled:=true;
+    cancelRT.Enabled:=true;
+    DBGrid_RT.FieldColumns['Result'].ButtonStyle:=cbsAuto;
+end;
+
+procedure TLeatherSummary.modifyRTClick(Sender: TObject);
+begin
+   with qry_RT do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        edit;
+    end;
+    saveRT.Enabled:=true;
+    cancelRT.Enabled:=true;
+    DBGrid_RT.FieldColumns['Result'].ButtonStyle:=cbsAuto;
+end;
+
+procedure TLeatherSummary.deleteRTClick(Sender: TObject);
+begin
+    if (qry_RT.FieldByName('USERID').Value <> main.edit1.Text) then
+    begin
+      Messagedlg('It is not yours,can not delete!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+   if qry_RT.FieldByName('USERDATE').Value + 30 < date then
+   begin
+      Messagedlg('You can not delete after 30 days!!!',mtwarning,[mbyes],0);
+      abort;
+   end;
+
+   if messagedlg('Do you really want to delete this record?',mtconfirmation,[mbYes,Mbno],0)=mrYes then
+   begin
+           with qry_RT do
+           begin
+              requestlive:=true;
+              cachedupdates:=true;
+              edit;
+              fieldbyname('YN').Value:='0';
+           end;
+           saveRT.Enabled:=true;
+           cancelRT.Enabled:=true;
+   end;
+end;
+
+procedure TLeatherSummary.saveRTClick(Sender: TObject);
+var i:integer;
+  j :variant;
+begin
+  try
+    qry_RT.first;
+    for i:=1 to qry_RT.RecordCount do
+      begin
+        case qry_RT.updatestatus of
+          usinserted:
+            begin
+                qry_RT.edit;
+                qry_RT.fieldbyname('ID').Value:=qry_All.fieldbyname('No_ID').Value;
+                qry_RT.fieldbyname('Types').Value:='T';
+                qry_RT.fieldbyname('YN').Value:='1';
+                qry_RT.fieldbyname('USERID').Value:=main.edit1.text;
+                Upd_RT.Apply(ukInsert);
+            end;
+          usmodified:
+          begin
+             if qry_RT.fieldbyname('YN').value='0' then
+             begin
+                Upd_RT.apply(ukdelete);
+             end
+             else
+             begin
+                Upd_RT.apply(ukmodify);
+             end;
+          end;
+        end;
+        qry_RT.next;
+      end;
+      
+    qry_RT.active:=false;
+    qry_RT.cachedupdates:=false;
+    qry_RT.requestlive:=false;
+    qry_RT.active:=true;
+    DBGrid_RT.FieldColumns['Result'].ButtonStyle:=cbsNone;
+  except
+      Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+      Abort;
+  end;
+  saveRT.Enabled:=false;
+  cancelRT.Enabled:=false;
+
+  //update inspection result when is Fail
+  if qry_RT.FieldByName('Result').AsString = 'Fail' then
+  begin
+      with qry1 do
+      begin
+          active:=false;
+          sql.Clear;
+          sql.Add('update Leather_QC set');
+          sql.Add('	  QC_Check = ''Fail'' ');
+          if qry_All.fieldbyname('QC_Reason').AsString = '' then
+              sql.Add('	  ,QC_Reason = ''M-04'' ')
+          else
+              sql.Add('	  ,QC_Reason = '''+ qry_All.fieldbyname('QC_Reason').AsString + ''' + '',M-04'' ');
+
+          if qry_All.fieldbyname('DefectName').AsString = '' then
+              sql.Add('   ,DefectName=''sai do day - wrong thickness'' ')
+          else
+              sql.Add('	  ,DefectName = '''+ qry_All.fieldbyname('DefectName').AsString + ''' + '',sai do day - wrong thickness'' ');
+
+          sql.Add('where No_ID='''+qry_All.fieldbyname('No_ID').AsString+''' ');
+          execsql;
+      end;
+      j:= qry_All.fieldbyname('No_ID').AsString;
+      qry_All.Active:=false;
+      qry_All.Active:=true;
+      if j<>'' then qry_All.Locate('No_ID',j,[]);
+  end;
+
+end;
+
+procedure TLeatherSummary.cancelRTClick(Sender: TObject);
+begin
+   with qry_RT do
+    begin
+        active:=false;
+        RequestLive:=false;
+        CachedUpdates:=false;
+        active:=true;
+    end;
+    saveRT.Enabled:=false;
+    cancelRT.Enabled:=false;
+    DBGrid_RT.FieldColumns['Result'].ButtonStyle:=cbsNone;
+end;
+
+procedure TLeatherSummary.DBGrid_RTDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+    if (Column.FieldName='Result') and (qry_RT.FieldByName('Result').AsString='Pass') then
+        DBGrid_RT.Canvas.Font.Color:=clblue;
+    if (Column.FieldName='Result') and (qry_RT.FieldByName('Result').AsString='Fail') then
+        DBGrid_RT.Canvas.Font.Color:=clred;
+
+    DBGrid_RT.DefaultDrawColumnCell(Rect,DataCol,Column,State);
+end;
+
+procedure TLeatherSummary.DBGrid_RTGetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if qry_RT.FieldByName('YN').Value ='0' then
+  begin
+      DBGrid_RT.canvas.font.color:=clRed;
+  end;
+end;
+
+procedure TLeatherSummary.DBGrid_RDDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+    if (Column.FieldName='Result') and (qry_RD.FieldByName('Result').AsString='Pass') then
+        DBGrid_RD.Canvas.Font.Color:=clblue;
+    if (Column.FieldName='Result') and (qry_RD.FieldByName('Result').AsString='Fail') then
+        DBGrid_RD.Canvas.Font.Color:=clred;
+
+    DBGrid_RD.DefaultDrawColumnCell(Rect,DataCol,Column,State);
+end;
+
+procedure TLeatherSummary.DBGrid_RDGetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if qry_RD.FieldByName('YN').Value ='0' then
+  begin
+      DBGrid_RD.canvas.font.color:=clRed;
+  end;
+end;
+
+procedure TLeatherSummary.insertRDClick(Sender: TObject);
+begin
+    with qry_RD do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        insert;
+    end;
+    saveRD.Enabled:=true;
+    cancelRD.Enabled:=true;
+    DBGrid_RD.FieldColumns['Result'].ButtonStyle:=cbsAuto;
+end;
+
+procedure TLeatherSummary.modifyRDClick(Sender: TObject);
+begin
+    with qry_RD do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        edit;
+    end;
+    saveRD.Enabled:=true;
+    cancelRD.Enabled:=true;
+    DBGrid_RD.FieldColumns['Result'].ButtonStyle:=cbsAuto;
+end;
+
+procedure TLeatherSummary.DeleteRDClick(Sender: TObject);
+begin
+    if (qry_RD.FieldByName('USERID').Value <> main.edit1.Text) then
+    begin
+      Messagedlg('It is not yours,can not delete!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+   if qry_RD.FieldByName('USERDATE').Value + 30 < date then
+   begin
+      Messagedlg('You can not delete after 30 days!!!',mtwarning,[mbyes],0);
+      abort;
+   end;
+
+   if messagedlg('Do you really want to delete this record?',mtconfirmation,[mbYes,Mbno],0)=mrYes then
+   begin
+           with qry_RD do
+           begin
+              requestlive:=true;
+              cachedupdates:=true;
+              edit;
+              fieldbyname('YN').Value:='0';
+           end;
+           saveRD.Enabled:=true;
+           cancelRD.Enabled:=true;
+   end;
+end;
+
+procedure TLeatherSummary.SaveRDClick(Sender: TObject);
+var i:integer;
+    j:variant;
+begin
+  try
+    qry_RD.first;
+    for i:=1 to qry_RD.RecordCount do
+      begin
+        case qry_RD.updatestatus of
+          usinserted:
+            begin
+                qry_RD.edit;
+                qry_RD.fieldbyname('ID').Value:=qry_All.fieldbyname('No_ID').Value;
+                qry_RD.fieldbyname('Types').Value:='D';
+                qry_RD.fieldbyname('YN').Value:='1';
+                qry_RD.fieldbyname('USERID').Value:=main.edit1.text;
+                Upd_RD.Apply(ukInsert);
+            end;
+          usmodified:
+          begin
+             if qry_RD.fieldbyname('YN').value='0' then
+             begin
+                Upd_RD.apply(ukdelete);
+             end
+             else
+             begin
+                Upd_RD.apply(ukmodify);
+             end;
+          end;
+        end;
+        qry_RD.next;
+      end;
+      
+    qry_RD.active:=false;
+    qry_RD.cachedupdates:=false;
+    qry_RD.requestlive:=false;
+    qry_RD.active:=true;
+    DBGrid_RD.FieldColumns['Result'].ButtonStyle:=cbsNone;
+  except
+      Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+      Abort;
+  end;
+  saveRD.Enabled:=false;
+  cancelRD.Enabled:=false;
+
+  //update inspection result when is Fail
+  if qry_RD.FieldByName('Result').AsString = 'Fail' then
+  begin
+      with qry1 do
+      begin
+          active:=false;
+          sql.Clear;
+          sql.Add('update Leather_QC set');
+          sql.Add('	  QC_Check = ''Fail'' ');
+          if qry_All.fieldbyname('QC_Reason').AsString = '' then
+              sql.Add('	  ,QC_Reason = ''M-02'' ')
+          else
+              sql.Add('	  ,QC_Reason = '''+ qry_All.fieldbyname('QC_Reason').AsString + ''' + '',M-02'' ');
+
+          if qry_All.fieldbyname('DefectName').AsString = '' then
+              sql.Add('   ,DefectName=''sai quy cach - wrong specification'' ')
+          else
+              sql.Add('	  ,DefectName = '''+ qry_All.fieldbyname('DefectName').AsString + ''' + '',sai quy cach - wrong specification'' ');
+
+          sql.Add('where No_ID='''+qry_All.fieldbyname('No_ID').AsString+''' ');
+          execsql;
+      end;
+      j:= qry_All.fieldbyname('No_ID').AsString;
+      qry_All.Active:=false;
+      qry_All.Active:=true;
+      if j<>'' then qry_All.Locate('No_ID',j,[]);
+  end;
+
+end;
+
+procedure TLeatherSummary.cancelRDClick(Sender: TObject);
+begin
+    with qry_RD do
+    begin
+        active:=false;
+        RequestLive:=false;
+        CachedUpdates:=false;
+        active:=true;
+    end;
+    saveRD.Enabled:=false;
+    cancelRD.Enabled:=false;
+    DBGrid_RD.FieldColumns['Result'].ButtonStyle:=cbsNone;
+end;
+
+procedure TLeatherSummary.btnFeedBackClick(Sender: TObject);
+begin
+    ClsReport.FeedBackReport_Leather(qry_All);
+end;
+
+procedure TLeatherSummary.qry_SDAfterOpen(DataSet: TDataSet);
+begin
+   //qry_pur.Active:=true;
+   //if (main.Edit1.Text = '24679') or (main.Edit1.Text = '23455') then
+
+   insertSD.Enabled:=true;
+   if qry_SD.RecordCount > 0 then
+   begin
+      modifySD.Enabled:=true;
+      deleteSD.Enabled:=true;
+   end;
+end;
+
+procedure TLeatherSummary.Button2Click(Sender: TObject);
+begin
+    with qry_SD do
+    begin
+        active:=false;
+        sql.clear;
+        sql.Add('select Leather_Standard.*,zsywjc,zszl_dev.Country');
+        sql.Add('from Leather_Standard left join zszl on zszl.ZSDH=Leather_Standard.ZSDH');
+        sql.Add('     left join zszl_dev on zszl_dev.ZSDH=zszl.ZSDH and zszl_dev.GSBH='''+main.Edit2.Text+''' ');
+        sql.Add('where Leather_Standard.GSBH='''+main.Edit2.Text+''' ');
+        if edit5.Text <> '' then
+            sql.Add('       and material like ''%'+edit5.Text+'%'' ');
+        if edit6.Text <> '' then
+            sql.Add('       and zsywjc like ''%'+edit6.Text+'%'' ');
+        if cboLocation.Text <> '' then
+            sql.Add('       and zszl_dev.Country = '''+cboLocation.Text+''' ');
+
+        sql.Add('order by Leather_Standard.UserDate desc');
+        active:=true;
+    end;
+end;
+
+procedure TLeatherSummary.InsertSDClick(Sender: TObject);
+begin
+    with qry_SD do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        insert;
+    end;
+    saveSD.Enabled:=true;
+    cancelSD.Enabled:=true;
+    DBGrid_SD.FieldColumns['zsywjc'].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TLeatherSummary.ModifySDClick(Sender: TObject);
+begin
+    if (qry_SD.FieldByName('USERID').Value <> main.edit1.Text) then
+    begin
+      Messagedlg('It is not yours,can not modify!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+    with qry_SD do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        edit;
+    end;
+    saveSD.Enabled:=true;
+    cancelSD.Enabled:=true;
+    DBGrid_SD.FieldColumns['zsywjc'].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TLeatherSummary.DeleteSDClick(Sender: TObject);
+begin
+    if (qry_SD.FieldByName('USERID').Value <> main.edit1.Text) then
+    begin
+      Messagedlg('It is not yours,can not delete!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+   if qry_SD.FieldByName('USERDATE').Value + 30 < date then
+   begin
+      Messagedlg('You can not delete after 30 days!!!',mtwarning,[mbyes],0);
+      abort;
+   end;
+
+   if messagedlg('Do you really want to delete this record?',mtconfirmation,[mbYes,Mbno],0)=mrYes then
+   begin
+        with qry_SD do
+        begin
+           requestlive:=true;
+           cachedupdates:=true;
+           edit;
+           fieldbyname('YN').Value:='0';
+        end;
+        saveSD.Enabled:=true;
+        cancelSD.Enabled:=true;
+   end;
+end;
+
+procedure TLeatherSummary.SaveSDClick(Sender: TObject);
+var i:integer;
+    a:string;
+begin
+  try
+    qry_SD.first;
+    for i:=1 to qry_SD.RecordCount do
+      begin
+        case qry_SD.updatestatus of
+          usinserted:
+            begin
+                with qry1 do
+                begin
+                  active:=false;
+                  sql.Clear;
+                  sql.Add('select top 1 SDID from Leather_Standard where SDID like ''S0000%'' order by SDID desc');
+                  active:=true;
+                  if recordcount >0 then
+                  begin
+                      last;
+                      a:=fieldbyname('SDID').AsString;
+                      a:=copy(a,2,8);
+                      a:=inttostr(strtoint(a)+1);
+                      while length(a)<8 do
+                      begin
+                         a:='0'+a;
+                      end;
+                   end
+                   else
+                   begin
+                       a:='000000001';
+                   end;
+                end;
+                a :='S' + a;
+
+                if qry_SD.fieldbyname('season').IsNull then
+                begin
+                    showmessage('Season can not empty!');
+                    exit;
+                end;
+                if qry_SD.fieldbyname('Material').IsNull then
+                begin
+                    showmessage('Material can not empty!');
+                    exit;
+                end;
+
+                qry_SD.edit;
+                qry_SD.fieldbyname('SDID').Value:= a;
+                qry_SD.fieldbyname('GSBH').Value:= main.Edit2.Text;
+                qry_SD.fieldbyname('season').Value:= UpperCase(qry_SD.fieldbyname('season').Value);
+                qry_SD.fieldbyname('YN').Value:='1';
+                qry_SD.fieldbyname('USERID').Value:=main.edit1.text;
+                Upd_SD.Apply(ukInsert);
+            end;
+          usmodified:
+          begin
+             if qry_SD.fieldbyname('YN').value='0' then
+             begin
+                Upd_SD.apply(ukdelete);
+             end
+             else
+             begin
+                if (qry_SD.FieldByName('USERID').Value <> main.edit1.Text) then
+                begin
+                    Messagedlg('It is not yours,can not modify!!!',mtwarning,[mbyes],0);
+                    exit;
+                end
+                else
+                begin
+                    qry_SD.edit;
+                    qry_SD.fieldbyname('USERID').Value:=main.edit1.text;
+                    Upd_SD.apply(ukmodify);
+                end;
+             end;
+          end;
+        end;
+        qry_SD.next;
+      end;
+
+    qry_SD.active:=false;
+    qry_SD.cachedupdates:=false;
+    qry_SD.requestlive:=false;
+    qry_SD.active:=true;
+    DBGrid_SD.FieldColumns['zsywjc'].ButtonStyle:=cbsNone;
+  except
+      Messagedlg('Error, can not save data!',mtwarning,[mbyes],0);
+      Abort;
+  end;
+  saveSD.Enabled:=false;
+  cancelSD.Enabled:=false;
+
+end;
+
+procedure TLeatherSummary.CancelSDClick(Sender: TObject);
+begin
+    with qry_SD do
+    begin
+        active:=false;
+        RequestLive:=true;
+        CachedUpdates:=true;
+        active:=true;
+    end;
+    saveSD.Enabled:=false;
+    cancelSD.Enabled:=false;
+    DBGrid_SD.FieldColumns['zsywjc'].ButtonStyle:=cbsNone;
+end;
+
+procedure TLeatherSummary.DBGrid_SDGetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+    if (qry_SD.FieldByName('YN').Value ='0') then
+  begin
+      DBGrid_SD.canvas.font.color:=clRed;
+  end;
+end;
+
+procedure TLeatherSummary.Button5Click(Sender: TObject);
+var
+  ExpClass:TDBGridEhExportClass;
+  Ext:String;
+  tdbgh : TDBGridEh;
+begin
+  tdbgh := DBGrid_SD;
+  if (tdbgh is TDBGridEh) then
+    if SaveDialog1.Execute then
+    begin
+      case SaveDialog1.FilterIndex of
+        1: begin ExpClass := TDBGridEhExportAsXLS; Ext := 'xls'; end;
+        2: begin ExpClass := TDBGridEhExportAsCSV; Ext := 'csv'; end;
+        3: begin ExpClass := TDBGridEhExportAsHTML; Ext := 'htm'; end;
+        4: begin ExpClass := TDBGridEhExportAsRTF; Ext := 'rtf'; end;
+        5: begin ExpClass := TDBGridEhExportAsText; Ext := 'txt'; end;
+      else
+        ExpClass := nil; Ext := '';
+      end;
+      if ExpClass <> nil then
+      begin
+        if UpperCase(Copy(SaveDialog1.FileName,Length(SaveDialog1.FileName)-2,3)) <> UpperCase(Ext) then
+          SaveDialog1.FileName := SaveDialog1.FileName + '.' + Ext;
+        SaveDBGridEhToExportFile(ExpClass,tdbgh,SaveDialog1.FileName,true);
+        if Application.MessageBox('Do you want to open the exported file?','Open file',MB_YESNO) = IDYES then
+          shellexecute(handle,'open',pchar(SaveDialog1.FileName),nil,nil,SW_SHOWNORMAL);
+      end;
+    end;
+
+end;
+
+procedure TLeatherSummary.DBGrid_SDEditButtonClick(Sender: TObject);
+begin
+     if Leather_supp <> nil then
+        Leather_supp.show
+     else
+     begin
+        Leather_supp:=TLeather_supp.create(self);
+        Leather_supp.show;
+     end;
+end;
+
+procedure TLeatherSummary.qry_AllQC_ReasonChange(Sender: TField);
+begin
+    if qry_All.FieldByName('QC_Reason').AsString = '' then
+    begin
+        qry_All.Edit;
+        qry_All.fieldbyname('DefectName').AsString := '' ;
+    end;
+end;
+
+procedure TLeatherSummary.Button6Click(Sender: TObject);
+begin
+  with qry_Inspec do
+  begin
+    active:=false;
+    SQL.Clear;
+    SQL.Add('select * from Leather_Inspector  where GSBH='''+main.Edit2.Text+''' ');
+    active:=true;
+  end;
+
+  insert8.Enabled:=true;
+  delete8.Enabled:=true;
+  modify8.Enabled:=true;
+
+end;
+
+procedure TLeatherSummary.insert8Click(Sender: TObject);
+begin
+    with qry_Inspec do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        insert;
+    end;
+    save8.Enabled:=true;
+    cancel8.Enabled:=true;
+end;
+
+procedure TLeatherSummary.modify8Click(Sender: TObject);
+begin
+    with qry_Inspec do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        edit;
+    end;
+    save8.Enabled:=true;
+    cancel8.Enabled:=true;
+end;
+
+procedure TLeatherSummary.cancel8Click(Sender: TObject);
+begin
+   with qry_Inspec do
+    begin
+        active:=false;
+        RequestLive:=false;
+        CachedUpdates:=false;
+        active:=true;
+    end;
+    save8.Enabled:=false;
+    cancel8.Enabled:=false;
+end;
+
+procedure TLeatherSummary.save8Click(Sender: TObject);
+var i:integer;
+begin
+  try
+    qry_Inspec.first;
+    for i:=1 to qry_Inspec.RecordCount do
+      begin
+        case qry_Inspec.updatestatus of
+          usinserted:
+            begin
+                qry_Inspec.edit;
+                qry_Inspec.fieldbyname('GSBH').Value:=main.Edit2.Text;
+                qry_Inspec.fieldbyname('YN').Value:='1';
+                qry_Inspec.fieldbyname('USERID').Value:=main.edit1.text;
+                Upd_Inspec.Apply(ukInsert);
+            end;
+          usmodified:
+          begin
+             if qry_Inspec.fieldbyname('YN').value='0' then
+             begin
+                Upd_Inspec.apply(ukdelete);
+             end
+             else
+             begin
+                qry_Inspec.edit;
+                qry_Inspec.fieldbyname('USERID').Value:=main.edit1.text;
+                Upd_Inspec.apply(ukmodify);
+             end;
+          end;
+        end;
+        qry_Inspec.next;
+      end;
+
+    qry_Inspec.active:=false;
+    qry_Inspec.cachedupdates:=false;
+    qry_Inspec.requestlive:=false;
+    qry_Inspec.active:=true;
+  except
+      Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+      Abort;
+  end;
+  save8.Enabled:=false;
+  cancel8.Enabled:=false;
+
+end;
+
+procedure TLeatherSummary.delete8Click(Sender: TObject);
+begin
+    if (qry_Inspec.FieldByName('USERID').Value <> main.edit1.Text) then
+    begin
+      Messagedlg('It is not yours,can not delete!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+   if qry_Inspec.FieldByName('USERDATE').Value + 30 < date then
+   begin
+      Messagedlg('You can not delete after 30 days!!!',mtwarning,[mbyes],0);
+      abort;
+   end;
+
+   if messagedlg('Do you really want to delete this record?',mtconfirmation,[mbYes,Mbno],0)=mrYes then
+   begin
+           with qry_Inspec do
+           begin
+              requestlive:=true;
+              cachedupdates:=true;
+              edit;
+              fieldbyname('YN').Value:='0';
+           end;
+           save8.Enabled:=true;
+           cancel8.Enabled:=true;
+
+   end;
+end;
+
+procedure TLeatherSummary.DBGrid_inspecGetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if qry_Inspec.FieldByName('YN').Value ='0' then
+  begin
+      DBGrid_Inspec.canvas.font.color:=clRed;
+  end;
+end;
+
+procedure TLeatherSummary.DBGrid_GradePColumns5EditButtonClick(
+  Sender: TObject; var Handled: Boolean);
+begin
+   QC_MatDefect:=TQC_MatDefect.create(self);
+   QC_MatDefect.show;
+end;
+
+procedure TLeatherSummary.Button7Click(Sender: TObject);
+begin
+      with qry_pur do
+      begin
+        active:=false;
+        sql.Clear;
+        sql.Add('select distinct Season,CLBH,clzl.YWPM,ZSBH,Skin_Size,Skin_Quality,Softness_standard');
+        sql.Add('from MaterialMOQ left join clzl on clzl.CLDH = MaterialMOQ.CLBH');
+        sql.Add('where left(CLBH,1)=''F'' ');
+        sql.Add('       and clzl.YWPM like ''%'+qry_SD.fieldbyName('Material').AsString+'%'' ');
+        sql.Add('       and Season like '''+edit7.Text+'%'' ');
+        sql.Add('order by Season desc');
+        Active:=true;
+      end;
+
+end;
+
+procedure TLeatherSummary.BitBtn7Click(Sender: TObject);
+begin
+    with qry_GradePspe do
+    begin
+        active:=false;
+        sql.Clear;
+        sql.Add('select Leather_GradeP.*,isnull(AcQty,0)-isnull(DeQty,0) as UseQty,round((isnull(AcQty,0)-isnull(DeQty,0))/isnull(AcQty,0)*100,0) as Per_Use');
+        sql.Add('from Leather_GradeP');
+        sql.Add('Where SP=''P'' and No_ID=:No_ID ');
+
+        if Edit8.Text <> '' then
+            sql.Add('   and Package = '''+Edit8.text +''' ');
+        if Edit9.Text <> '' then
+            sql.Add('   and Grade = '''+Edit9.text +''' ');
+        if edit11.Text <> '' then
+            sql.Add('   and DeCode like ''%'+edit11.text +'%'' ');
+
+        active:=true;
+    end;
+end;
+
+procedure TLeatherSummary.insert9Click(Sender: TObject);
+begin
+  if (qry_All.FieldByName('TypeName').IsNull) or (qry_All.FieldByName('TypeName').AsString= '') then
+  begin
+      showmessage('Type name can not empty.!!!');
+      abort;
+  end;
+  if (qry_All.FieldByName('Standard_Grade').IsNull) or (qry_All.FieldByName('Standard_Grade').AsString= '') then
+  begin
+      showmessage('Standard Grade can not empty.!!!');
+      abort;
+  end;
+
+   with qry_GradePspe do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        insert;
+        if Edit8.Text <> '' then
+            qry_GradePspe.FieldByName('Package').AsString := Edit8.Text
+        else
+        begin
+            Messagedlg('You must input package first!!!',mtwarning,[mbyes],0);
+            Edit8.SetFocus;
+        end;
+    end;
+    save9.Enabled:=true;
+    cancel9.Enabled:=true;
+    DBGridEh2.FieldColumns['DeCode'].ButtonStyle := cbsEllipsis;
+end;
+
+procedure TLeatherSummary.modify9Click(Sender: TObject);
+begin
+    with qry_GradePspe do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        edit;
+    end;
+    save9.Enabled:=true;
+    cancel9.Enabled:=true;
+    DBGridEh2.FieldColumns['DeCode'].ButtonStyle := cbsEllipsis;
+end;
+
+procedure TLeatherSummary.delete9Click(Sender: TObject);
+begin
+    if (qry_GradePspe.FieldByName('USERID').Value <> main.edit1.Text) then
+    begin
+      Messagedlg('It is not yours,can not delete!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+   if qry_GradePspe.FieldByName('USERDATE').Value + 30 < date then
+   begin
+      Messagedlg('You can not delete after 30 days!!!',mtwarning,[mbyes],0);
+      abort;
+   end;
+   //
+   with qry_GradePspe do
+   begin
+      requestlive:=true;
+      cachedupdates:=true;
+      edit;
+      fieldbyname('YN').Value:='0';
+   end;
+   save9.Enabled:=true;
+   cancel9.Enabled:=true;
+
+end;
+
+procedure TLeatherSummary.save9Click(Sender: TObject);
+var i,a1:integer;
+begin
+  try
+    qry_GradePspe.first;
+    for i:=1 to qry_GradePspe.RecordCount do
+      begin
+        case qry_GradePspe.updatestatus of
+          usinserted:
+            begin
+                with qry1 do
+                begin
+                    active:=false;
+                    sql.Clear;
+                    sql.Add('select max(sequence)sequence from Leather_GradeP');
+                    sql.Add('where SP=''P'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' ' );
+                    sql.Add('       and Package='''+Edit8.Text+''' ');
+                    sql.Add('group by No_ID,Package');
+                    active:=true;
+                    if qry1.FieldByName('sequence').IsNull then
+                        a1:= 1
+                    else
+                        a1:= qry1.FieldByName('sequence').Value + 1;
+                end;
+
+                qry_GradePspe.edit;
+                qry_GradePspe.fieldbyname('No_ID').Value:=qry_All.fieldbyname('No_ID').Value;
+                qry_GradePspe.fieldbyname('sequence').Value:= a1;
+                qry_GradePspe.fieldbyname('Package').Value:= Edit8.Text;
+                qry_GradePspe.fieldbyname('SP').Value:= 'P';
+                qry_GradePspe.fieldbyname('YN').Value:='1';
+                qry_GradePspe.fieldbyname('USERID').Value:=main.edit1.text;
+                Upd_GradePspe.Apply(ukInsert);
+            end;
+          usmodified:
+          begin
+             if qry_GradePspe.fieldbyname('YN').value='0' then
+             begin
+                Upd_GradePspe.apply(ukdelete);
+
+                MakeSequenceGrade('Leather_GradeP',qry_All.fieldbyname('No_ID').AsString,qry_GradePspe.fieldbyname('Package').AsString,'P');
+             end
+             else
+             begin
+                Upd_GradePspe.apply(ukmodify);
+             end;
+          end;
+        end;
+        qry_GradePspe.next;
+      end;
+      
+
+  except
+      Messagedlg('Error, can not save data!',mtwarning,[mbyes],0);
+      Abort;
+  end;
+
+    //update Final_Status from final_Resrult
+    with qry1 do
+    begin
+        active:=false;
+        sql.Clear;
+        sql.Add('update Leather_GradeP set Grade=(');
+	  		sql.Add('						select Grade from (                                                           ');
+		  	sql.Add('						select No_ID,Sequence,Package,case when Per_Use between 96 and 100 then ''I''');
+			  sql.Add('										when Per_Use between 91 and 95 then ''II''');
+  			sql.Add('										when Per_Use between 86 and 90 then ''III''');
+	  		sql.Add('										when Per_Use between 81 and 85 then ''IV''');
+		  	sql.Add('										when Per_Use between 76 and 80 then ''V''');
+			  sql.Add('										when Per_Use between 71 and 75 then ''VI''');
+  			sql.Add('										else ''VII'' end as Grade');
+	  		sql.Add('						from (');
+		  	sql.Add('						select Leather_GradeP.*,round((isnull(AcQty,0)-isnull(DeQty,0))/isnull(AcQty,0)*100,0) as Per_Use');
+			  sql.Add('						from Leather_GradeP where SP=''P'' ');
+  			sql.Add('						)a )aa where aa.No_ID=Leather_GradeP.No_ID and aa.Sequence=Leather_GradeP.Sequence and aa.Package=Leather_GradeP.Package)');
+        sql.Add('where SP=''P'' and No_ID='''+qry_All.fieldbyname('No_ID').AsString+'''');
+        execsql;
+
+         //update Grading Report
+         active:=false;
+         sql.Clear;
+         sql.add('select * from Leather_Grade');
+         sql.Add('where SP=''P'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' ' );
+         //sql.Add('      and QC_Date =''' +qry_All.fieldbyname('DateInput').AsString +''' ' );
+         active:=true;
+         if RecordCount = 0 then
+         begin
+             active:=false;
+             sql.Clear;
+             sql.Add('INSERT INTO Leather_Grade (No_ID,SP,QC_Date,Type1,Type2,Type3,Type4,Type5,Type6,Type7,UserID,UserDate,YN,Reason)');
+             sql.Add('select Leather_GradeP.No_ID,SP,DateInput,isnull(sum(case Grade when ''I'' then AcQty else null end),0) as ''I''');
+			       sql.Add('                        ,isnull(sum(case Grade when ''II'' then AcQty else null end),0) as ''II''');
+        	 	 sql.Add('                        ,isnull(sum(case Grade when ''III'' then AcQty else null end),0) as ''III''');
+		      	 sql.Add('                        ,isnull(sum(case Grade when ''IV'' then AcQty else null end),0) as ''IV''');
+   			     sql.Add('                        ,isnull(sum(case Grade when ''V'' then AcQty else null end),0) as ''V''');
+    		  	 sql.Add('                        ,isnull(sum(case Grade when ''VI'' then AcQty else null end),0) as ''VI''');
+		    	   sql.Add('                        ,isnull(sum(case Grade when ''VII'' then AcQty else null end),0) as ''VII''');
+             sql.Add(' ,'''+main.Edit1.Text+''' ');
+             sql.Add(' ,getdate() ');
+             sql.Add(' ,''1'' ');
+             sql.Add(' ,cast((select p2.Defects + '','' from Leather_GradeP P2');
+             sql.Add('  		where P2.No_ID=Leather_GradeP.No_ID and P2.SP=Leather_GradeP.SP and isnull(p2.Defects,'''') <> '''' group by p2.Defects for XML Path ('''')) as varchar(1000)) as Defects');
+			       sql.Add('from Leather_GradeP');
+		    	   sql.Add('    left join Leather_QC on Leather_QC.No_ID= Leather_GradeP.No_ID');
+             sql.Add('where SP=''P'' and Leather_GradeP.No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' ' );
+			       sql.Add('group by Leather_GradeP.No_ID,SP,DateInput');
+             execsql;
+             showmessage('Success!!!');
+         end
+         else
+         begin
+             if (qry_Grade.FieldByName('UserDate').Value + 30 > date) and (not qry_Grade.FieldByName('UserDate').IsNull) then
+             begin
+                 active:=false;
+                 sql.Clear;
+                 sql.Add('update Leather_Grade set');
+
+                 sql.Add('Type1 = isnull((select sum(AcQty) from Leather_GradeP where SP=''P'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' and Grade=''I''),0)');
+                 sql.Add(',Type2= isnull((select sum(AcQty) from Leather_GradeP where SP=''P'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' and Grade=''II''),0)');
+                 sql.Add(',Type3= isnull((select sum(AcQty) from Leather_GradeP where SP=''P'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' and Grade=''III''),0)');
+                 sql.Add(',Type4= isnull((select sum(AcQty) from Leather_GradeP where SP=''P'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' and Grade=''IV''),0)');
+                 sql.Add(',Type5= isnull((select sum(AcQty) from Leather_GradeP where SP=''P'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' and Grade=''V''),0)');
+                 sql.Add(',Type6= isnull((select sum(AcQty) from Leather_GradeP where SP=''P'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' and Grade=''VI''),0)');
+                 sql.Add(',Type7= isnull((select sum(AcQty) from Leather_GradeP where SP=''P'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' and Grade=''VII''),0)');
+                 sql.Add(',UserID='''+main.Edit1.Text+''' ');
+                 sql.Add(',UserDate=getdate()');
+                 sql.Add(',Reason=(select cast((select p2.Defects + '','' from Leather_GradeP P2');
+     						 sql.Add('            where No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' and SP=''P'' and isnull(p2.Defects,'''') <> '''' group by p2.Defects for XML Path ('''')) as varchar(1000)) as Defects) ');
+                 sql.Add('where SP=''P'' and No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' ' );
+                 execsql;
+                 showmessage('Success!!!');
+             end
+             else
+             begin
+                 messagedlg('You can not update data after 30 days.',mtWarning,[mbYes],0);
+                 exit;
+             end;
+         end;
+     qry_GradeSpe.Active:=false;
+     qry_GradeSpe.Active:=true;
+  end;
+
+  qry_GradePspe.active:=false;
+  qry_GradePspe.cachedupdates:=false;
+  qry_GradePspe.requestlive:=false;
+  qry_GradePspe.active:=true;
+
+  save9.Enabled:=false;
+  cancel9.Enabled:=false;
+  DBGridEh2.FieldColumns['DeCode'].ButtonStyle := cbsNone;
+
+end;
+
+procedure TLeatherSummary.GetDataEx;
+begin
+    //get all article,RY,CGNo
+     strArticle:='';
+     strRy:='';
+     strCgno:='';
+     qry_detail.First;
+     while not qry_detail.Eof do
+     begin
+         strArticle:=strArticle + qry_detail.fieldByName('Article').AsString + ',';
+         strRy:=strRy + qry_detail.fieldByName('Ry').AsString + ',';
+         strCgno:=strCgno + qry_detail.fieldByName('CGNO').AsString + ',';
+         qry_detail.Next;
+     end;
+     strArticle:=LeftStr(strArticle,length(strArticle)-1);
+     strRy:=LeftStr(strRy,length(strRy)-1);
+     strCgno:=LeftStr(strCgno,length(strCgno)-1);
+end;
+
+procedure TLeatherSummary.BitBtn6Click(Sender: TObject);
+var Excel,WorkBook,xlSheet:olevariant;
+    i,j,k,m:integer;
+begin
+
+     if (qry_GradePspe.Active) and (qry_GradePspe.recordcount=0)  then
+     begin
+         Messagedlg('No record.',mtwarning,[mbyes],0);
+         exit;
+     end ;
+
+     with qry_GradePaspe do
+      begin
+        active:=false;
+        sql.Clear;
+
+        sql.Add('select p1.No_ID,p1.package,sum(AcQty)AcQty,sum(DeQty) as DeQty,sum(UseQty) as UseQty');
+        sql.Add('	,cast((select p2.Defects + '','' from Leather_GradeP P2');
+        sql.Add('		where P2.No_ID=p1.No_ID and P2.Package=p1.Package and isnull(p2.Defects,'''') <> '''' group by p2.Defects for XML Path ('''')) as varchar(1000)) as Defects');
+        sql.Add('from (select Leather_GradeP.*,isnull(AcQty,0)-isnull(DeQty,0) as UseQty from Leather_GradeP) p1');
+        sql.Add('where SP=''P'' and No_ID='''+qry_All.fieldbyname('No_ID').AsString+'''');
+        sql.Add('group by p1.No_ID,p1.package');
+        active:=true;
+      end;
+
+     with qry_GradePsspe do
+     begin
+        active:=false;
+        sql.Clear;
+        sql.Add('select No_ID,sum(AcQty) AcQty from Leather_GradeP ');
+        sql.Add('where SP=''P'' and No_ID='''+qry_All.fieldbyname('No_ID').AsString+'''');
+        sql.Add('group by No_ID');
+        active:=true;
+     end;
+
+     with qry_GradePssspe do
+      begin
+        active:=false;
+        sql.Clear;
+        sql.Add('select distinct cast((select p2.Grade + '',''');
+        sql.Add('                   from Leather_GradeP P2');
+        sql.Add('                   where P2.No_ID=p1.No_ID and p2.Grade <> '''' ');
+        sql.Add('                   group by p2.Grade for XML Path ('''')) as varchar(20)) as Grade');
+        sql.Add('from Leather_GradeP p1');
+        sql.Add('where SP=''P'' and No_ID='''+qry_All.fieldbyname('No_ID').AsString+'''');
+        active:=true;
+      end;
+
+
+
+     try
+        Excel:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+     except
+        Application.MessageBox('NO Microsoft Excel','Microsoft Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+
+
+     try
+        WorkBook:=Excel.workbooks.Add;
+        xlSheet := workbook.Worksheets['sheet1'];
+        xlSheet.Name:='Overview inspection';
+
+        //--------------------------page setup------------------------------------
+      xlSheet.PageSetup.HeaderMargin := 0;
+      xlSheet.PageSetup.FooterMargin := 0;
+      xlSheet.PageSetup.TopMargin := 0;
+      xlSheet.PageSetup.BottomMargin := 0;
+      xlSheet.PageSetup.LeftMargin := 0.7;
+      xlSheet.PageSetup.RightMargin := 0;
+
+      //------------------------------------------------------------------------
+
+        //title
+        Excel.ActiveSheet.Range['A1:H1'].Merge;
+        Excel.ActiveSheet.Range['A2:H2'].Merge;
+        Excel.Cells(1,1):='BAO CAO KIEM DA HANG NGAY';
+        Excel.Cells(2,1):='DAILY LEATHER INSPECTION REPORT';
+
+        Excel.ActiveSheet.Range['A4:B4'].Merge;
+        Excel.ActiveSheet.Range['A5:B5'].Merge;
+        Excel.ActiveSheet.Range['A6:B6'].Merge;
+        Excel.ActiveSheet.Range['A7:B7'].Merge;
+        Excel.ActiveSheet.Range['A8:B8'].Merge;
+        Excel.Cells(4,1):= 'Ngay kiem' + chr(10) + 'Data of Inspecting';
+        Excel.Cells(5,1):= 'Art no.';
+        Excel.Cells(6,1):= 'Ten vat tu/mau sac' + chr(10) + 'Material name/Color';
+        Excel.Cells(7,1):= 'Ma so vat tu' + chr(10) + 'Material code';
+        Excel.Cells(8,1):= 'RY';
+
+        Excel.Cells(4,6):= 'Xuong cung ung' + chr(10) + 'Supplier';
+        Excel.Cells(5,6):= 'So cong (PO)' + chr(10) + 'Shipment No.';
+        Excel.Cells(6,6):= 'So luong tong' + chr(10) + 'Total quantity';
+        Excel.Cells(7,6):= 'So luong kiem' + chr(10) + 'Inspected quantity';
+        Excel.Cells(8,6):= 'Cap do' + chr(10) + 'Grade';
+
+        //export data
+        Excel.ActiveSheet.Range['C4:E4'].Merge;
+        Excel.ActiveSheet.Range['C5:E5'].Merge;
+        Excel.ActiveSheet.Range['C6:E6'].Merge;
+        Excel.ActiveSheet.Range['C7:E7'].Merge;
+        Excel.ActiveSheet.Range['C8:E8'].Merge;
+        Excel.Cells(4,3):= qry_All.FieldByName('DateInput').AsString;
+        Excel.Cells(5,3):= strArticle;
+        Excel.Cells(6,3):= qry_All.FieldByName('MaterialName').AsString;
+        Excel.Cells(7,3):= qry_All.FieldByName('CLBH').AsString;
+        Excel.Cells(8,3):= strRy;
+
+        Excel.ActiveSheet.Range['G4:H4'].Merge;
+        Excel.ActiveSheet.Range['G5:H5'].Merge;
+        Excel.ActiveSheet.Range['G6:H6'].Merge;
+        Excel.ActiveSheet.Range['G7:H7'].Merge;
+        Excel.ActiveSheet.Range['G8:H8'].Merge;
+        Excel.Cells(4,7):= qry_All.FieldByName('SupplierName').AsString;
+        Excel.Cells(5,7):= strCgno;
+        Excel.Cells(6,7):= qry_All.FieldByName('Qty').Value;
+        Excel.Cells(7,7):= qry_GradePsspe.FieldByName('AcQty').AsString;
+        Excel.Cells(8,7):= qry_GradePssspe.FieldByName('Grade').AsString;
+
+        Excel.ActiveSheet.Range['C4:E8'].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Range['G4:H8'].HorizontalAlignment := $FFFFEFF4;
+
+        //table
+        Excel.ActiveSheet.Range['A9:H9'].Merge;
+
+        Excel.ActiveSheet.Range['B10:C10'].Merge;
+        Excel.ActiveSheet.Range['D10:E10'].Merge;
+        Excel.ActiveSheet.Range['G10:H10'].Merge;
+        Excel.Cells(10,1):= 'So bo' + chr(10) + 'Package No.';
+        Excel.Cells(10,2):= 'So luong thuc te' + chr(10) + 'Actual quantity';
+        Excel.Cells(10,4):= 'So luong hu' + chr(10) + 'Defective quantity';
+        Excel.Cells(10,6):= 'So luong su dung' + chr(10) + 'Usable quantity';
+        Excel.Cells(10,7):= 'Loi hu' + chr(10) + 'Defects';
+
+        Excel.ActiveSheet.Columns[2].ColumnWidth := 5;
+        Excel.ActiveSheet.Columns[7].ColumnWidth := 8;
+        Excel.ActiveSheet.Columns[8].ColumnWidth := 20;
+
+        for m:=1  to 4 do
+        begin
+          for i:=1 to 8 do   //columns
+          begin
+            for j:=4 to 8 do   //rows
+            begin
+                Excel.ActiveSheet.Cells[j,i].Borders[m].Weight := 2;
+            end;
+          end;
+        end;
+
+        qry_GradePaspe.First;
+        j:=11;
+        k:=0;
+        while not qry_GradePaspe.Eof do
+        begin
+            Excel.ActiveSheet.Range['B'+inttostr(j)+':C'+inttostr(j)].Merge;
+            Excel.ActiveSheet.Range['D'+inttostr(j)+':E'+inttostr(j)].Merge;
+            Excel.ActiveSheet.Range['G'+inttostr(j)+':H'+inttostr(j)].Merge;
+
+            k:=k+1;
+            Excel.Cells(j,1):= k;
+            //Excel.Cells(j,1):= qry_GradePaspe.FieldByName('Sequence').Value;
+            Excel.Cells(j,2):= qry_GradePaspe.FieldByName('AcQty').Value;
+            Excel.Cells(j,4):= qry_GradePaspe.FieldByName('DeQty').Value;
+            Excel.Cells(j,6):= qry_GradePaspe.FieldByName('UseQty').Value;
+            Excel.Cells(j,7):= qry_GradePaspe.FieldByName('Defects').Value;
+
+            for m:=1 to 4 do
+            begin
+                for i:=1 to 8 do
+                begin
+                    Excel.ActiveSheet.Cells[j-1,i].Borders[m].Weight := 2;
+                    Excel.ActiveSheet.Cells[j,i].Borders[m].Weight := 2;
+                    Excel.ActiveSheet.Cells[j+1,i].Borders[m].Weight := 2;
+                end;
+            end;
+
+            //Excel.ActiveSheet.Rows[j].Font.Size:= 11;
+            //Excel.ActiveSheet.Rows[j].font.name:='Arial';
+            Excel.ActiveSheet.Rows[j].HorizontalAlignment := $FFFFEFF4;
+            Excel.ActiveSheet.Rows[j].RowHeight := 30;
+
+            qry_GradePaspe.Next;
+            inc(j);
+        end;
+
+        Excel.ActiveSheet.Rows[j].RowHeight := 30;
+        Excel.ActiveSheet.Rows[j].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Range['B'+inttostr(j)+':C'+inttostr(j)].Merge;
+        Excel.ActiveSheet.Range['D'+inttostr(j)+':E'+inttostr(j)].Merge;
+        Excel.ActiveSheet.Range['G'+inttostr(j)+':H'+inttostr(j)].Merge;
+        Excel.Cells(j,1):= 'Total';
+        Excel.Cells(j,2):= '=sum('+'B11:C' + inttostr(j-1) +')';
+        Excel.Cells(j,4):= '=sum('+'D11:E' + inttostr(j-1) +')';
+        Excel.Cells(j,6):= '=sum('+'F11:F' + inttostr(j-1) +')';
+
+        Excel.Cells(j+2,1):='Phe duyet';
+        Excel.Cells(j+3,1):='Approve by :';
+        Excel.Cells(j+2,3):='Chu quan kho';
+        Excel.Cells(j+3,3):='WH Suppervisor :';
+        Excel.Cells(j+2,8):='Nguoi lap';
+        Excel.Cells(j+3,8):='Prepared by :';
+
+        Excel.ActiveSheet.Rows[j+9].HorizontalAlignment := -4152;
+        Excel.ActiveSheet.Rows[j+10].HorizontalAlignment := -4152;
+        Excel.Cells(j+9,8):='KCS-QP001-03B';
+        Excel.Cells(j+10,8):='Document number: QIP/APP/04/00/01';
+
+
+        Excel.ActiveSheet.Rows[1].Font.Size:= 18;
+        Excel.ActiveSheet.Rows[1].Font.Bold := True;
+        Excel.ActiveSheet.Rows[1].HorizontalAlignment := $FFFFEFF4;
+        //Excel.ActiveSheet.Rows[1].font.name:='Arial';
+        Excel.ActiveSheet.Rows[1].RowHeight := 30;
+        Excel.ActiveSheet.Rows[2].Font.Size:= 18;
+        Excel.ActiveSheet.Rows[2].Font.Bold := True;
+        Excel.ActiveSheet.Rows[2].HorizontalAlignment := $FFFFEFF4;
+        //Excel.ActiveSheet.Rows[2].font.name:='Arial';
+        Excel.ActiveSheet.Rows[4].RowHeight := 30;
+        Excel.ActiveSheet.Rows[5].RowHeight := 30;
+        Excel.ActiveSheet.Rows[6].RowHeight := 30;
+        Excel.ActiveSheet.Rows[7].RowHeight := 30;
+        Excel.ActiveSheet.Rows[8].RowHeight := 30;
+        Excel.ActiveSheet.Rows[9].RowHeight := 7.5;
+
+        Excel.ActiveSheet.Rows[10].Font.Size:= 11;
+        Excel.ActiveSheet.Rows[10].HorizontalAlignment := $FFFFEFF4;
+        //Excel.ActiveSheet.Rows[10].font.name:='Arial';
+        Excel.ActiveSheet.Rows[10].RowHeight := 35;
+
+        Excel.columns.autofit;
+        showmessage('Succeed.');
+        Excel.Visible:=True;
+
+    except
+        Application.MessageBox('NO Microsoft Excel','Microsoft Excel',MB_OK+MB_ICONWarning);
+        Exit;
+    end;
+
+end;
+
+procedure TLeatherSummary.qry_GradePSPEAfterOpen(DataSet: TDataSet);
+begin
+    if qry_GradePspe.RecordCount > 0 then
+   begin
+       BitBtn7.Enabled:=true;
+       BitBtn6.Enabled:=true;
+       BitBtn8.Enabled:=true;
+   end;
+end;
+
+procedure TLeatherSummary.DBGridEh2GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+    if qry_GradePspe.FieldByName('YN').Value ='0' then
+  begin
+      DBGridEh2.canvas.font.color:=clRed;
+  end;
+end;
+
+procedure TLeatherSummary.DBGridEh2EditButtonClick(Sender: TObject);
+begin
+   QC_MatDefect:=TQC_MatDefect.create(self);
+   QC_MatDefect.show;
+end;
+
+procedure TLeatherSummary.cancel9Click(Sender: TObject);
+begin
+   with qry_GradePspe do
+    begin
+        active:=false;
+        RequestLive:=false;
+        CachedUpdates:=false;
+        active:=true;
+    end;
+    save9.Enabled:=false;
+    cancel9.Enabled:=false;
+    DBGridEh2.FieldColumns['DeCode'].ButtonStyle := cbsNone;
+end;
+
+procedure TLeatherSummary.BitBtn8Click(Sender: TObject);
+var Excel,WorkBook,xlSheet:olevariant;
+    i,j,m: integer;
+begin
+     if (qry_GradePspe.Active) and (qry_GradePspe.recordcount=0)  then
+     begin
+         Messagedlg('No record.',mtwarning,[mbyes],0);
+         exit;
+     end ;
+
+   if Edit9.Text = '' then
+   begin
+       Messagedlg('You must input grade first!',mtwarning,[mbyes],0);
+       Edit9.SetFocus;
+       abort;
+       
+   end
+   else
+   begin
+      with qry1 do
+      begin
+         active:=false;
+         sql.Clear;
+
+         sql.Add('select No_ID,Grade,sum(AcQty) AcQty from Leather_GradeP');
+         sql.Add('where SP=''P'' and Grade = '''+Edit9.Text+'''');
+         sql.Add('group by No_ID,Grade');
+         active:=true;
+     end;
+
+   end;
+
+   try
+        Excel:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+     except
+        Application.MessageBox('NO Microsoft Excel','Microsoft Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+
+
+     try
+        WorkBook:=Excel.workbooks.Add;
+        xlSheet := workbook.Worksheets['sheet1'];
+        xlSheet.Name:='Overview inspection';
+
+         //--------------------------page setup------------------------------------
+      xlSheet.PageSetup.HeaderMargin := 0;
+      xlSheet.PageSetup.FooterMargin := 0;
+      xlSheet.PageSetup.TopMargin := 0;
+      xlSheet.PageSetup.BottomMargin := 0;
+      xlSheet.PageSetup.LeftMargin := 0.7;
+      xlSheet.PageSetup.RightMargin := 0;
+
+      //------------------------------------------------------------------------
+
+        //title
+        Excel.ActiveSheet.Range['A1:H1'].Merge;
+        Excel.ActiveSheet.Range['A2:H2'].Merge;
+        Excel.Cells(1,1):='BAO CAO KIEM DA HANG NGAY';
+        Excel.Cells(2,1):='DAILY LEATHER INSPECTION REPORT';
+
+        Excel.ActiveSheet.Range['A4:B4'].Merge;
+        Excel.ActiveSheet.Range['A5:B5'].Merge;
+        Excel.ActiveSheet.Range['A6:B6'].Merge;
+        Excel.ActiveSheet.Range['A7:B7'].Merge;
+        Excel.ActiveSheet.Range['A8:B8'].Merge;
+        Excel.Cells(4,1):= 'Ngay kiem' + chr(10) + 'Data of Inspecting';
+        Excel.Cells(5,1):= 'Art no.';
+        Excel.Cells(6,1):= 'Ten vat tu/mau sac' + chr(10) + 'Material name/Color';
+        Excel.Cells(7,1):= 'Ma so vat tu' + chr(10) + 'Material code';
+        Excel.Cells(8,1):= 'RY';
+
+        Excel.Cells(4,6):= 'Xuong cung ung' + chr(10) + 'Supplier';
+        Excel.Cells(5,6):= 'So cong (PO)' + chr(10) + 'Shipment No.';
+        Excel.Cells(6,6):= 'So luong tong' + chr(10) + 'Total quantity';
+        Excel.Cells(7,6):= 'So luong kiem' + chr(10) + 'Inspected quantity';
+        Excel.Cells(8,6):= 'Cap do' + chr(10) + 'Grade';
+
+        //export data
+        Excel.ActiveSheet.Range['C4:E4'].Merge;
+        Excel.ActiveSheet.Range['C5:E5'].Merge;
+        Excel.ActiveSheet.Range['C6:E6'].Merge;
+        Excel.ActiveSheet.Range['C7:E7'].Merge;
+        Excel.ActiveSheet.Range['C8:E8'].Merge;
+        Excel.Cells(4,3):= qry_All.FieldByName('DateInput').AsString;
+        Excel.Cells(5,3):= strArticle;
+        Excel.Cells(6,3):= qry_All.FieldByName('MaterialName').AsString;
+        Excel.Cells(7,3):= qry_All.FieldByName('CLBH').AsString;
+        Excel.Cells(8,3):= strRy;
+
+        Excel.ActiveSheet.Range['G4:H4'].Merge;
+        Excel.ActiveSheet.Range['G5:H5'].Merge;
+        Excel.ActiveSheet.Range['G6:H6'].Merge;
+        Excel.ActiveSheet.Range['G7:H7'].Merge;
+        Excel.ActiveSheet.Range['G8:H8'].Merge;
+        Excel.Cells(4,7):= qry_All.FieldByName('SupplierName').AsString;
+        Excel.Cells(5,7):= strCgno;
+        Excel.Cells(6,7):= qry_All.FieldByName('Qty').Value;
+        Excel.Cells(7,7):= qry1.FieldByName('AcQty').AsString;
+        Excel.Cells(8,7):= qry1.FieldByName('Grade').AsString;
+
+        Excel.ActiveSheet.Range['C4:E8'].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Range['G4:H8'].HorizontalAlignment := $FFFFEFF4;
+
+        //table
+        Excel.ActiveSheet.Range['A9:H9'].Merge;
+
+        Excel.ActiveSheet.Range['B10:C10'].Merge;
+        Excel.ActiveSheet.Range['D10:E10'].Merge;
+        Excel.ActiveSheet.Range['G10:H10'].Merge;
+        Excel.Cells(10,1):= 'So bo' + chr(10) + 'Package No.';
+        Excel.Cells(10,2):= 'So luong thuc te' + chr(10) + 'Actual quantity';
+        Excel.Cells(10,4):= 'So luong hu' + chr(10) + 'Defective quantity';
+        Excel.Cells(10,6):= 'So luong su dung' + chr(10) + 'Usable quantity';
+        Excel.Cells(10,7):= 'Loi hu' + chr(10) + 'Defects';
+
+        Excel.ActiveSheet.Columns[2].ColumnWidth := 5;
+        Excel.ActiveSheet.Columns[7].ColumnWidth := 8;
+        Excel.ActiveSheet.Columns[8].ColumnWidth := 20;
+
+        for m:=1  to 4 do
+        begin
+          for i:=1 to 8 do   //columns
+          begin
+            for j:=4 to 8 do   //rows
+            begin
+                Excel.ActiveSheet.Cells[j,i].Borders[m].Weight := 2;
+            end;
+          end;
+        end;
+
+        qry_GradePspe.First;
+        j:=11;
+        //k:=0;
+        while not qry_GradePspe.Eof do
+        begin
+            Excel.ActiveSheet.Range['B'+inttostr(j)+':C'+inttostr(j)].Merge;
+            Excel.ActiveSheet.Range['D'+inttostr(j)+':E'+inttostr(j)].Merge;
+            Excel.ActiveSheet.Range['G'+inttostr(j)+':H'+inttostr(j)].Merge;
+
+            //k:=k+1;
+            //Excel.Cells(j,1):= k;
+            Excel.Cells(j,1):= qry_GradePspe.FieldByName('Package').Value;
+            Excel.Cells(j,2):= qry_GradePspe.FieldByName('AcQty').Value;
+            Excel.Cells(j,4):= qry_GradePspe.FieldByName('DeQty').Value;
+            Excel.Cells(j,6):= qry_GradePspe.FieldByName('UseQty').Value;
+            Excel.Cells(j,7):= qry_GradePspe.FieldByName('Defects').Value;
+
+            for m:=1 to 4 do
+            begin
+                for i:=1 to 8 do
+                begin
+                    Excel.ActiveSheet.Cells[j-1,i].Borders[m].Weight := 2;
+                    Excel.ActiveSheet.Cells[j,i].Borders[m].Weight := 2;
+                    Excel.ActiveSheet.Cells[j+1,i].Borders[m].Weight := 2;
+                end;
+            end;
+
+            //Excel.ActiveSheet.Rows[j].Font.Size:= 11;
+            //Excel.ActiveSheet.Rows[j].font.name:='Arial';
+            Excel.ActiveSheet.Rows[j].HorizontalAlignment := $FFFFEFF4;
+            Excel.ActiveSheet.Rows[j].RowHeight := 30;
+
+            qry_GradePspe.Next;
+            inc(j);
+        end;
+
+        Excel.ActiveSheet.Rows[j].RowHeight := 30;
+        Excel.ActiveSheet.Rows[j].HorizontalAlignment := $FFFFEFF4;
+        Excel.ActiveSheet.Range['B'+inttostr(j)+':C'+inttostr(j)].Merge;
+        Excel.ActiveSheet.Range['D'+inttostr(j)+':E'+inttostr(j)].Merge;
+        Excel.ActiveSheet.Range['G'+inttostr(j)+':H'+inttostr(j)].Merge;
+        Excel.Cells(j,1):= 'Total';
+        Excel.Cells(j,2):= '=sum('+'B11:C' + inttostr(j-1) +')';
+        Excel.Cells(j,4):= '=sum('+'D11:E' + inttostr(j-1) +')';
+        Excel.Cells(j,6):= '=sum('+'F11:F' + inttostr(j-1) +')';
+
+        Excel.Cells(j+2,1):='Phe duyet';
+        Excel.Cells(j+3,1):='Approve by :';
+        Excel.Cells(j+2,3):='Chu quan kho';
+        Excel.Cells(j+3,3):='WH Suppervisor :';
+        Excel.Cells(j+2,8):='Nguoi lap';
+        Excel.Cells(j+3,8):='Prepared by :';
+
+        Excel.ActiveSheet.Rows[j+9].HorizontalAlignment := -4152;
+        Excel.ActiveSheet.Rows[j+10].HorizontalAlignment := -4152;
+        Excel.Cells(j+9,8):='KCS-QP001-03B';
+        Excel.Cells(j+10,8):='Document number: QIP/APP/04/00/01';
+
+
+        Excel.ActiveSheet.Rows[1].Font.Size:= 18;
+        Excel.ActiveSheet.Rows[1].Font.Bold := True;
+        Excel.ActiveSheet.Rows[1].HorizontalAlignment := $FFFFEFF4;
+        //Excel.ActiveSheet.Rows[1].font.name:='Arial';
+        Excel.ActiveSheet.Rows[1].RowHeight := 30;
+        Excel.ActiveSheet.Rows[2].Font.Size:= 18;
+        Excel.ActiveSheet.Rows[2].Font.Bold := True;
+        Excel.ActiveSheet.Rows[2].HorizontalAlignment := $FFFFEFF4;
+        //Excel.ActiveSheet.Rows[2].font.name:='Arial';
+        Excel.ActiveSheet.Rows[4].RowHeight := 30;
+        Excel.ActiveSheet.Rows[5].RowHeight := 30;
+        Excel.ActiveSheet.Rows[6].RowHeight := 30;
+        Excel.ActiveSheet.Rows[7].RowHeight := 30;
+        Excel.ActiveSheet.Rows[8].RowHeight := 30;
+        Excel.ActiveSheet.Rows[9].RowHeight := 7.5;
+
+        Excel.ActiveSheet.Rows[10].Font.Size:= 11;
+        Excel.ActiveSheet.Rows[10].HorizontalAlignment := $FFFFEFF4;
+        //Excel.ActiveSheet.Rows[10].font.name:='Arial';
+        Excel.ActiveSheet.Rows[10].RowHeight := 35;
+
+        Excel.columns.autofit;
+        showmessage('Succeed.');
+        Excel.Visible:=True;
+
+      except
+        Application.MessageBox('NO Microsoft Excel','Microsoft Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+
+end;
+
+procedure TLeatherSummary.BitBtn15Click(Sender: TObject);
+var Excel:olevariant;
+begin
+     if (qry_GradeSpe.Active) and (qry_GradeSpe.recordcount=0)  then
+     begin
+         Messagedlg('No record.',mtwarning,[mbyes],0);
+         exit;
+     end ;
+
+     try
+        Excel:=CreateOleObject('Excel.Application');
+        Excel.Visible:=True;
+
+        Excel.Workbooks.Open(GetCurrentDir+'\QIP Report\Leather Grading inspection reports.xls');
+
+        Excel.Cells(2,8):= 'No.: ' + qry_All.FieldByName('ReportID').AsString;
+        Excel.Cells(3,8):= 'Date print : ' + formatdatetime('dd/mm/yyyy hh:mm:ss',now);
+
+        Excel.Cells(4,3):= qry_All.FieldByName('DateInput').AsString;
+        Excel.Cells(5,3):= strArticle;
+        Excel.Cells(6,3):= qry_All.FieldByName('MaterialName').AsString;
+        Excel.Cells(7,3):= qry_All.FieldByName('CLBH').AsString;
+        Excel.Cells(8,3):= strRy;
+
+        Excel.Cells(4,7):= qry_All.FieldByName('SupplierName').AsString;
+        Excel.Cells(5,7):= strCgno;
+        Excel.Cells(6,7):= qry_All.FieldByName('Qty').Value;
+        Excel.Cells(7,7):= qry_GradeSpe.FieldByName('ActualQty').AsString;
+        Excel.Cells(8,7):= qry_All.FieldByName('Standard_Grade').AsString;
+
+        //export detail
+        Excel.Cells(11,2):= qry_GradeSpe.FieldByName('Type1').AsString;
+        Excel.Cells(12,2):= qry_GradeSpe.FieldByName('Type2').AsString;
+        Excel.Cells(13,2):= qry_GradeSpe.FieldByName('Type3').AsString;
+        Excel.Cells(14,2):= qry_GradeSpe.FieldByName('Type4').AsString;
+        Excel.Cells(15,2):= qry_GradeSpe.FieldByName('Type5').AsString;
+        Excel.Cells(16,2):= qry_GradeSpe.FieldByName('Type6').AsString;
+        Excel.Cells(17,2):= qry_GradeSpe.FieldByName('Type7').AsString;
+
+        Excel.Cells(11,6):= qry_GradeSpe.FieldByName('AcType1').AsString;
+        Excel.Cells(12,6):= qry_GradeSpe.FieldByName('AcType2').AsString;
+        Excel.Cells(13,6):= qry_GradeSpe.FieldByName('AcType3').AsString;
+        Excel.Cells(14,6):= qry_GradeSpe.FieldByName('AcType4').AsString;
+        Excel.Cells(15,6):= qry_GradeSpe.FieldByName('AcType5').AsString;
+        Excel.Cells(16,6):= qry_GradeSpe.FieldByName('AcType6').AsString;
+
+        Excel.Cells(11,6):= qry_GradeSpe.FieldByName('AcType1').AsString;
+        Excel.Cells(12,6):= qry_GradeSpe.FieldByName('AcType2').AsString;
+        Excel.Cells(13,6):= qry_GradeSpe.FieldByName('AcType3').AsString;
+        Excel.Cells(14,6):= qry_GradeSpe.FieldByName('AcType4').AsString;
+        Excel.Cells(15,6):= qry_GradeSpe.FieldByName('AcType5').AsString;
+        Excel.Cells(16,6):= qry_GradeSpe.FieldByName('AcType6').AsString;
+
+        Excel.Cells(11,8):= qry_GradeSpe.FieldByName('PerType1').Value /100;
+        Excel.Cells(12,8):= qry_GradeSpe.FieldByName('PerType2').Value /100;
+        Excel.Cells(13,8):= qry_GradeSpe.FieldByName('PerType3').Value /100;
+        Excel.Cells(14,8):= qry_GradeSpe.FieldByName('PerType4').Value /100;
+        Excel.Cells(15,8):= qry_GradeSpe.FieldByName('PerType5').Value /100;
+        Excel.Cells(16,8):= qry_GradeSpe.FieldByName('PerType6').Value /100;
+
+        //Excel.ActiveSheet.Range['H12:H19'].NumberFormat := '##.##%';
+
+        Excel.Cells(20,4):= qry_GradeSpe.FieldByName('Reason').AsString;
+        Excel.Cells(20,8):= 'Skin Size : ' + lbl_infor.Caption;
+
+        //Result softness,thickness,thickness
+        Excel.Cells(21,3):= qry_RS.FieldByName('Result').AsString;
+        Excel.Cells(21,7):= qry_RT.FieldByName('Result').AsString;
+        Excel.Cells(21,9):= qry_RD.FieldByName('Result').AsString;
+
+
+     except
+        Application.MessageBox('NO Microsoft Excel','Microsoft Excel',MB_OK+MB_ICONWarning);
+        Exit;
+    end;
+
+end;
+
+procedure TLeatherSummary.BitBtn10Click(Sender: TObject);
+begin
+    if (qry_GradeSpe.FieldByName('USERID').Value <> main.edit1.Text) then
+    begin
+      Messagedlg('It is not yours,can not delete!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+    if qry_GradeSpe.FieldByName('USERDATE').Value + 30 < date then
+    begin
+      Messagedlg('You can not modify after 30 days!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+    with qry_GradeSpe do
+    begin
+      requestlive:=true;
+      cachedupdates:=true;
+      edit;
+    end;
+    BitBtn12.Enabled:=true;
+    BitBtn13.Enabled:=true;
+end;
+
+procedure TLeatherSummary.BitBtn11Click(Sender: TObject);
+begin
+    if (qry_GradeSpe.FieldByName('USERID').Value <> main.edit1.Text) then
+    begin
+      Messagedlg('It is not yours,can not delete!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+   if qry_GradeSpe.FieldByName('USERDATE').Value + 10 < date then
+   begin
+      Messagedlg('You can not delete after 10 days!!!',mtwarning,[mbyes],0);
+      abort;
+   end;
+   with qry_GradeSpe do
+   begin
+      requestlive:=true;
+      cachedupdates:=true;
+      edit;
+      fieldbyname('YN').Value:='0';
+   end;
+   BitBtn12.Enabled:=true;
+   BitBtn13.Enabled:=true;
+
+end;
+
+procedure TLeatherSummary.BitBtn12Click(Sender: TObject);
+var i:integer;
+begin
+  try
+    qry_GradeSpe.first;
+    for i:=1 to qry_GradeSpe.RecordCount do
+      begin
+        case qry_GradeSpe.updatestatus of
+          usinserted:
+            begin
+                qry_GradeSpe.edit;
+                qry_GradeSpe.fieldbyname('No_ID').Value:=qry_All.fieldbyname('No_ID').Value;
+                qry_GradeSpe.fieldbyname('SP').Value:='P';
+                qry_GradeSpe.fieldbyname('YN').Value:='1';
+                qry_GradeSpe.fieldbyname('USERID').Value:=main.edit1.text;
+                Upd_GradeSpe.Apply(ukInsert);
+            end;
+          usmodified:
+          begin
+             if qry_GradeSpe.fieldbyname('YN').value='0' then
+             begin
+                Upd_GradeSpe.apply(ukdelete);
+             end
+             else
+             begin
+                Upd_GradeSpe.apply(ukmodify);
+             end;
+          end;
+        end;
+        qry_GradeSpe.next;
+      end;
+      
+    qry_GradeSpe.active:=false;
+    qry_GradeSpe.cachedupdates:=false;
+    qry_GradeSpe.requestlive:=false;
+    qry_GradeSpe.active:=true;
+  except
+      Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+      Abort;
+  end;
+  BitBtn12.Enabled:=false;
+  BitBtn13.Enabled:=false;
+  DBGridEh3.Columns[0].ButtonStyle:=cbsNone;
+
+end;
+
+procedure TLeatherSummary.BitBtn13Click(Sender: TObject);
+begin
+    with qry_GradeSpe do
+    begin
+      active:=false;
+      requestlive:=false;
+      cachedupdates:=false;
+      active:=true;
+    end;
+    BitBtn12.Enabled:=false;
+    BitBtn13.Enabled:=false;
+    DBGridEh3.Columns[0].ButtonStyle:=cbsNone;
+end;
+
+procedure TLeatherSummary.DBGridEh3GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+    if (qry_GradeSpe.FieldByName('YN').Value ='0') then
+  begin
+      DBGridEh3.canvas.font.color:=clRed;
+  end;
+end;
+
+procedure TLeatherSummary.edtGradeChange(Sender: TObject);
+begin
+    if edtGrade.Text <> '' then
+      brnQPac.OnClick(nil);
+end;
+
+procedure TLeatherSummary.Edit9Change(Sender: TObject);
+begin
+    if Edit9.Text <> '' then
+      BitBtn7.OnClick(nil);
+end;
+
+procedure TLeatherSummary.qry_AllAfterScroll(DataSet: TDataSet);
+
+begin
+  if (qry_All.Active) and (qry_All.RecordCount>0) then
+  begin
+    Qry_PasFail.Active:=true;
+    lbl_infor.Caption:='Result : ' +floattostr(Qry_PasFail.FieldByName('Pass').Value) + '% Pass and ' + floattostr(Qry_PasFail.FieldByName('Fail').Value) + '% Fail';
+
+    if not qry_All.FieldByName('Sup_CFM').IsNull then
+        btnLeaInspec.Enabled:=true
+    else
+        btnLeaInspec.Enabled:=false;
+
+    btnConfirm.Enabled:=false;
+    btnmodify.Enabled:=false;
+    //Grade
+    insert6.Enabled:=false;
+    modify6.Enabled:=false;
+    delete6.Enabled:=false;
+
+    //softness result
+    insert3.Enabled:=false;
+    modify3.Enabled:=false;
+    delete3.Enabled:=false;
+    insertRS.Enabled:=false;
+    modifyRS.Enabled:=false;
+    deleteRS.Enabled:=false;
+
+    //thickness
+    insert4.Enabled:=false;
+    modify4.Enabled:=false;
+    delete4.Enabled:=false;
+    insertRT.Enabled:=false;
+    modifyRT.Enabled:=false;
+    deleteRT.Enabled:=false;
+
+    //dimension
+    insert5.Enabled:=false;
+    modify5.Enabled:=false;
+    delete5.Enabled:=false;
+    insertRD.Enabled:=false;
+    modifyRD.Enabled:=false;
+    deleteRD.Enabled:=false;
+
+    insert9.Enabled:=false;
+    modify9.Enabled:=false;
+    delete9.Enabled:=false;
+
+    BitBtn10.Enabled:=false;
+    BitBtn11.Enabled:=false;
+
+    //Result
+    qry_RS.Active:=true;
+    qry_RT.Active:=true;
+    qry_RD.Active:=true;
+
+   if qry_All.FieldByName('UserID').AsString = main.Edit1.Text then
+   begin
+       if qry_All.FieldByName('QC_CFM').IsNull then
+       begin
+            if qry_All.FieldByName('Standard_Softness').AsString <> 'N/A' then
+            begin
+                //softness result
+                insert3.Enabled:=true;
+                modify3.Enabled:=true;
+                delete3.Enabled:=true;
+                insertRS.Enabled:=true;
+                modifyRS.Enabled:=true;
+                deleteRS.Enabled:=true;
+            end;
+            if qry_All.FieldByName('Standard_Thickness').AsString <> 'N/A' then
+            begin
+                //thickness
+                insert4.Enabled:=true;
+                modify4.Enabled:=true;
+                delete4.Enabled:=true;
+                insertRT.Enabled:=true;
+                modifyRT.Enabled:=true;
+                deleteRT.Enabled:=true;
+            end;
+            if qry_All.FieldByName('Standard_Dimention').AsString <> 'N/A' then
+            begin
+                //dimension
+                insert5.Enabled:=true;
+                modify5.Enabled:=true;
+                delete5.Enabled:=true;
+                insertRD.Enabled:=true;
+                modifyRD.Enabled:=true;
+                deleteRD.Enabled:=true;
+            end;
+
+            btnConfirm.Enabled:=true;
+            btnmodify.Enabled:=true;
+            //Grade
+            insert6.Enabled:=true;
+            modify6.Enabled:=true;
+            delete6.Enabled:=true;
+
+            insert9.Enabled:=true;
+            modify9.Enabled:=true;
+            delete9.Enabled:=true;
+
+            BitBtn10.Enabled:=true;
+            BitBtn11.Enabled:=true;
+
+            //Result
+            {
+            qry_RS.Active:=true;
+            qry_RT.Active:=true;
+            qry_RD.Active:=true;
+            }
+       end;
+   end;
+
+    brnQPacClick(nil);
+  end;
+end;
+
+procedure TLeatherSummary.PageControl2DrawTab(Control: TCustomTabControl;
+  TabIndex: Integer; const Rect: TRect; Active: Boolean);
+var
+  AText: string;
+  ARect: TRect;
+begin
+  with Control.Canvas do
+  begin
+    ARect:=Control.TabRect(TabIndex);
+    Control.Canvas.Brush.Style := bsClear;
+    if Active then
+    begin
+      Font.Color:=clBlue;
+      //Brush.Color :=$005555FF;
+      ThemeServices.DrawElement(Control.Canvas.Handle, ThemeServices.GetElementDetails(ttTabItemHot), ARect);
+    end else
+    begin
+       ThemeServices.DrawElement(Control.Canvas.Handle, ThemeServices.GetElementDetails(ttTabItemNormal), ARect);
+       ARect.Top := ARect.Top + 6;
+    end;
+    AText := TPageControl(Control).Pages[TabIndex].Caption;
+    DrawText(Control.Canvas.Handle, PChar(AText), -1,ARect, DT_CENTER or DT_SINGLELINE);
+  end;
+
+end;
+
+procedure TLeatherSummary.qry_DetailRYGetText(Sender: TField;
+  var Text: String; DisplayText: Boolean);
+begin
+    Text := Copy(qry_DetailRY.AsString, 1, 800);
+end;
+
+procedure TLeatherSummary.Insert1Click(Sender: TObject);
+begin
+    
+    qry_All.RequestLive:=true;
+    qry_All.CachedUpdates:=true;
+    qry_All.insert;  
+
+    insert1.Enabled:=false;
+    Save1.Enabled:=true;
+    Cancel1.Enabled:=true;
+    DBGrid_All.FieldColumns['DateInput'].ButtonStyle:=  cbsEllipsis;
+    DBGrid_All.FieldColumns['QC_Reason'].ButtonStyle:=  cbsEllipsis;
+    DBGrid_All.FieldColumns['QC_Check'].ButtonStyle:=  cbsAuto;
+    DBGrid_All.FieldColumns['QC_FinishDate'].ButtonStyle:=  cbsAuto;
+    DBGrid_All.FieldColumns['Settlement'].ButtonStyle:=  cbsAuto;
+    DBGrid_All.FieldColumns['TypeName'].ButtonStyle:=  cbsEllipsis; 
+end;
+
+procedure TLeatherSummary.Delete1Click(Sender: TObject);
+begin
+   if qry_All.FieldByName('QC_Check').AsString <> '' then
+    begin
+        Messagedlg('Insepection result is existsing, you can not delete it!!!',mtwarning,[mbyes],0);
+        abort;
+    end;
+
+    if (qry_GradeP.RecordCount > 0) or (qry_soft.RecordCount > 0) or (qry_thick.RecordCount > 0) or (qry_dimen.RecordCount > 0) then
+    begin
+       Messagedlg('You must delete detail first!!!',mtwarning,[mbyes],0);
+       abort;
+    end;
+
+    qry_all.CachedUpdates:=true;
+    qry_all.RequestLive:=true;
+    qry_all.Edit;
+    qry_all.FieldByName('YN').Value :='0';
+
+    Save1.Enabled:=true;
+    Cancel1.Enabled:=true;
+
+end;
+
+procedure TLeatherSummary.DBGrid_AllColumns12EditButtonDown(
+  Sender: TObject; TopButton: Boolean; var AutoRepeat, Handled: Boolean);
+begin
+   Leather_standard:=TLeather_standard.create(self);
+   Leather_standard.show;
+end;
+
+procedure TLeatherSummary.DBGrid_AllColumns8EditButtonDown(Sender: TObject;
+  TopButton: Boolean; var AutoRepeat, Handled: Boolean);
+begin
+    QC_MatDefect:=TQC_MatDefect.create(self);
+    QC_MatDefect.show;
+end;
+
+procedure TLeatherSummary.DBGrid_AllGetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+
+   if qry_all.FieldByName('YN').Value ='0' then
+      DBGrid_All.Canvas.Font.Color:=clred;
+
+   if not qry_all.FieldByName('QC_CFM').IsNull then
+      DBGrid_All.Canvas.Font.Color:=clblue;
+end;
+
+procedure TLeatherSummary.Modify2Click(Sender: TObject);
+begin
+    with qry_detail do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        edit;
+    end;
+    Modify2.Enabled:=false;
+    Save2.Enabled:=true;
+    Cancel2.Enabled:=true;
+end;
+
+procedure TLeatherSummary.Cancel2Click(Sender: TObject);
+begin
+    with qry_detail do
+    begin
+        active:=false;
+        RequestLive:=false;
+        CachedUpdates:=false;
+        active:=true;
+    end;
+    Modify2.Enabled:=true;
+    Save2.Enabled:=false;
+    Cancel2.Enabled:=false;
+end;
+
+procedure TLeatherSummary.Save2Click(Sender: TObject);
+var i:integer;
+    j:variant;
+begin
+  try
+    j:= qry_detail.fieldbyName('No_ID').AsString;
+    qry_detail.first;
+    for i:=1 to qry_detail.RecordCount do
+      begin
+        case qry_detail.updatestatus of
+          usmodified:
+          begin
+              {
+              if qry_All.FieldByName('UserID').AsString <> main.Edit1.Text then
+              begin
+                  Messagedlg('It is not yours, you can not modify!',mtwarning,[mbyes],0);
+                  exit;
+              end;
+
+              if qry_All.FieldByName('USERDATE').Value + 3 < date then
+              begin
+                  Messagedlg('You can not modify  after 3 days!!!',mtwarning,[mbyes],0);
+                  exit;
+              end;
+              }
+
+              if qry_detail.FieldByName('YN').Value = '0' then
+                 Upd_detail.apply(ukdelete)
+              else
+              begin
+                qry_detail.Edit;
+                qry_detail.FieldByName('QC_UserID').Value:=main.edit1.text;
+                Upd_detail.apply(ukmodify);
+              end;
+
+          end;
+        end;
+        qry_detail.next;
+      end;
+
+      qry_detail.active:=false;
+      qry_detail.cachedupdates:=false;
+      qry_detail.requestlive:=false;
+      qry_detail.active:=true;
+
+      Modify2.Enabled:=true;
+      Save2.Enabled:=false;
+      Cancel2.Enabled:=false;
+
+  except
+      Messagedlg('Error, can not save data!',mtwarning,[mbyes],0);
+      Abort;
+  end;
+
+  if j<>'' then qry_detail.Locate('No_ID',j,[]);
+
+end;
+
+procedure TLeatherSummary.qry_DetailAfterOpen(DataSet: TDataSet);
+begin
+    if qry_Detail.RecordCount > 0  then
+    begin
+
+        if main.Edit1.Text = '23455' then
+            delete2.Enabled:=true;
+        //modify2.Enabled:=true;
+
+        GetDataEx;
+    end;
+end;
+
+procedure TLeatherSummary.DBGrid_AllDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+    if (column.FieldName='QC_Check') and (qry_All.FieldByName('QC_Check').AsString='Fail') or
+     (column.FieldName='Settlement') and (qry_All.FieldByName('Settlement').AsString='Rejected') then
+    begin
+        DBGrid_All.canvas.Font.color:=clred;
+    end;
+
+   if (column.FieldName='QC_Check') and (qry_All.FieldByName('QC_Check').AsString='Pass') or
+      (column.FieldName='Settlement') and (qry_All.FieldByName('Settlement').AsString='Released') then
+    begin
+        DBGrid_All.canvas.Font.color:=clblue;
+    end;
+
+    if (column.FieldName='Settlement') and (qry_detail.FieldByName('Settlement').AsString='Limited Release') then
+    begin
+        DBGrid_All.canvas.Font.color:=clgreen;
+    end;
+
+    if (column.FieldName='Settlement') and (qry_detail.FieldByName('Settlement').AsString='Limited Rejected') then
+    begin
+        DBGrid_All.canvas.Font.color:=clFuchsia;
+    end;
+
+    DBGrid_All.DefaultDrawColumnCell(rect,DataCol,column,state);
+end;
+
+procedure TLeatherSummary.btnConfirmClick(Sender: TObject);
+var j:variant;
+begin
+   if qry_GradeP.RecordCount = 0 then
+   begin
+      showmessage('Grading report can not empty.');
+      abort;
+   end;
+   if qry_Grade.RecordCount = 0 then
+   begin
+      showmessage('Leather inspection report can not empty.');
+      abort;
+   end;
+   if (qry_soft.RecordCount = 0) and (qry_All.FieldByName('Standard_Softness').AsString <> 'N/A') then
+   begin
+      showmessage('Softness report can not empty.');
+      abort;
+   end;
+   if (qry_thick.RecordCount = 0) and (qry_All.FieldByName('Standard_Thickness').AsString <> 'N/A') then
+   begin
+      showmessage('Thickness report can not empty.');
+      abort;
+   end;
+   if (qry_dimen.RecordCount = 0) and (qry_All.FieldByName('Standard_Dimention').AsString <> 'N/A') then
+   begin
+      showmessage('Dimension inspection report can not empty.');
+      abort;
+   end;
+
+   if messagedlg('Are you sure to confirm this report???',mtwarning,[mbyes,mbNo],0) = mryes then
+   begin
+       j:= qry_All.FieldByName('ReportID').AsString;
+
+       with query1 do
+       begin
+          active:=false;
+          sql.Clear;
+          sql.Add('update Leather_QC set');
+          sql.Add('       QC_CFM = '''+main.Edit1.Text+''' ');
+          sql.Add('       ,QC_CFMDate = getdate()');
+          sql.Add('where ReportID = '''+qry_All.FieldByName('ReportID').AsString+''' ');
+          execsql;
+       end;
+       qry_All.Active:=false;
+       qry_All.Active:=true;
+
+       if j<> '' then qry_All.Locate('ReportID',j,[]);
+   end;
+end;
+
+procedure TLeatherSummary.DBGrid_AllColumns1EditButtonClick(
+  Sender: TObject; var Handled: Boolean);
+begin
+    Leather_SummaryMat:=TLeather_SummaryMat.create(self);
+    Leather_SummaryMat.show;  
+end;
+
+procedure TLeatherSummary.edtPacKeyPress(Sender: TObject; var Key: Char);
+begin
+    if key=#13 then
+       brnQPacClick(nil);
+end;
+
+procedure TLeatherSummary.edtGradeKeyPress(Sender: TObject; var Key: Char);
+begin
+    if key=#13 then
+       brnQPacClick(nil);
+end;
+
+procedure TLeatherSummary.Edit8KeyPress(Sender: TObject; var Key: Char);
+begin
+   if key=#13 then
+       BitBtn7Click(nil);
+end;
+
+procedure TLeatherSummary.Edit9KeyPress(Sender: TObject; var Key: Char);
+begin
+    if key=#13 then
+       BitBtn7Click(nil);
+end;
+
+procedure TLeatherSummary.qry_softAfterOpen(DataSet: TDataSet);
+begin
+     if qry_soft.RecordCount > 0 then
+         btnSoft.Enabled:=true;
+end;
+
+procedure TLeatherSummary.qry_thickAfterOpen(DataSet: TDataSet);
+begin
+      if qry_thick.RecordCount > 0 then
+         btnthick.Enabled:=true;
+end;
+
+procedure TLeatherSummary.qry_dimenAfterOpen(DataSet: TDataSet);
+begin
+     if qry_dimen.RecordCount > 0 then
+         btn_dimention.Enabled:=true;
+end;
+
+procedure TLeatherSummary.DBGrid_detailGetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+   if qry_detail.FieldByName('YN').Value = '0' then
+      DBGrid_detail.Canvas.Font.Color :=clred;
+end;
+
+procedure TLeatherSummary.Delete2Click(Sender: TObject);
+begin
+    with qry_detail do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        edit;
+        qry_detail.FieldByName('YN').Value := '0';
+    end;
+    Modify2.Enabled:=false;
+    Save2.Enabled:=true;
+    Cancel2.Enabled:=true;
+end;
+
+procedure TLeatherSummary.PageControl5Change(Sender: TObject);
+begin
+  if (Qry_All.RequestLive) and (PageControl5.TabIndex=1) then
+  begin
+    showmessage('Pls, save datat first.');
+    PageControl5.TabIndex:=0;
+    abort;
+  end;
+end;
+
+end.

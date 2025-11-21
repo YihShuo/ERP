@@ -1,0 +1,120 @@
+Select VCLID,VCLName_VN as Langeuage from BLanguage WHERE  MKID = '00' and mainForm='main'
+select CGBJ.* ,ZSZL.ZSYWJC,ZSZl.PayVN,IsNull(ZSZLTW.zsywjc,ZSZL.zsywjc) as zsywjctw   
+from CGBJ
+left join ZSZL on CGBJ.ZSBH=ZSZL.ZSDH
+Left join ZSZL_DEV on ZSZL_DEV.zsdh=ZSZL.zsdh and ZSZL_DEV.GSBH='VDH' 
+Left join ZSZL ZSZLTW on ZSZLTW.zsdh=ZSZL_DEV.Zsdh_TW  
+where CGBJ.BJNO like '%' 
+  and CGBJ.ZSBH like '%' 
+  and ZSZL.ZSYWJC like '%%' 
+and convert(smalldatetime,convert(varchar,CGBJ.USERDATE,111)) between 
+'2023/11/15' and  '2023/11/18'
+and CGBJ.GSBH='VDH'
+order by CGBJ.BJNO DESC
+select CGBJ.* ,ZSZL.ZSYWJC,ZSZl.PayVN,IsNull(ZSZLTW.zsywjc,ZSZL.zsywjc) as zsywjctw   
+from CGBJ
+left join ZSZL on CGBJ.ZSBH=ZSZL.ZSDH
+Left join ZSZL_DEV on ZSZL_DEV.zsdh=ZSZL.zsdh and ZSZL_DEV.GSBH='VDH' 
+Left join ZSZL ZSZLTW on ZSZLTW.zsdh=ZSZL_DEV.Zsdh_TW  
+where CGBJ.BJNO like '%' 
+  and CGBJ.ZSBH like '%' 
+  and ZSZL.ZSYWJC like '%%' 
+and convert(smalldatetime,convert(varchar,CGBJ.USERDATE,111)) between 
+'2023/11/15' and  '2023/11/18'
+and CGBJ.GSBH='VDH'
+order by CGBJ.BJNO DESC
+select CGBJ.* ,ZSZL.ZSYWJC,ZSZl.PayVN,IsNull(ZSZLTW.zsywjc,ZSZL.zsywjc) as zsywjctw   
+from CGBJ
+left join ZSZL on CGBJ.ZSBH=ZSZL.ZSDH
+Left join ZSZL_DEV on ZSZL_DEV.zsdh=ZSZL.zsdh and ZSZL_DEV.GSBH='VDH' 
+Left join ZSZL ZSZLTW on ZSZLTW.zsdh=ZSZL_DEV.Zsdh_TW  
+where CGBJ.BJNO like '20230804970%' 
+  and CGBJ.ZSBH like '%' 
+  and ZSZL.ZSYWJC like '%%' 
+and convert(smalldatetime,convert(varchar,CGBJ.USERDATE,111)) between 
+'2023/11/15' and  '2023/11/18'
+and CGBJ.GSBH='VDH'
+order by CGBJ.BJNO DESC
+select CGBJ.* ,ZSZL.ZSYWJC,ZSZl.PayVN,IsNull(ZSZLTW.zsywjc,ZSZL.zsywjc) as zsywjctw   
+from CGBJ
+left join ZSZL on CGBJ.ZSBH=ZSZL.ZSDH
+Left join ZSZL_DEV on ZSZL_DEV.zsdh=ZSZL.zsdh and ZSZL_DEV.GSBH='VDH' 
+Left join ZSZL ZSZLTW on ZSZLTW.zsdh=ZSZL_DEV.Zsdh_TW  
+where CGBJ.BJNO like '20230804970%' 
+  and CGBJ.ZSBH like '%' 
+  and ZSZL.ZSYWJC like '%%' 
+and CGBJ.GSBH='VDH'
+order by CGBJ.BJNO DESC
+select CGBJ.* ,ZSZL.ZSYWJC,ZSZl.PayVN,IsNull(ZSZLTW.zsywjc,ZSZL.zsywjc) as zsywjctw   
+from CGBJ
+left join ZSZL on CGBJ.ZSBH=ZSZL.ZSDH
+Left join ZSZL_DEV on ZSZL_DEV.zsdh=ZSZL.zsdh and ZSZL_DEV.GSBH='VDH' 
+Left join ZSZL ZSZLTW on ZSZLTW.zsdh=ZSZL_DEV.Zsdh_TW  
+where CGBJ.BJNO like '20230700751%' 
+  and CGBJ.ZSBH like '%' 
+  and ZSZL.ZSYWJC like '%%' 
+and CGBJ.GSBH='VDH'
+order by CGBJ.BJNO DESC
+select CGBJ.* ,ZSZL.ZSYWJC,ZSZl.PayVN,IsNull(ZSZLTW.zsywjc,ZSZL.zsywjc) as zsywjctw   
+from CGBJ
+left join ZSZL on CGBJ.ZSBH=ZSZL.ZSDH
+Left join ZSZL_DEV on ZSZL_DEV.zsdh=ZSZL.zsdh and ZSZL_DEV.GSBH='VDH' 
+Left join ZSZL ZSZLTW on ZSZLTW.zsdh=ZSZL_DEV.Zsdh_TW  
+where CGBJ.BJNO like '%' 
+  and CGBJ.ZSBH like 'va107%' 
+  and ZSZL.ZSYWJC like '%%' 
+and CGBJ.GSBH='VDH'
+order by CGBJ.BJNO DESC
+select CGBJ.* ,ZSZL.ZSYWJC,ZSZl.PayVN,IsNull(ZSZLTW.zsywjc,ZSZL.zsywjc) as zsywjctw   
+from CGBJ
+left join ZSZL on CGBJ.ZSBH=ZSZL.ZSDH
+Left join ZSZL_DEV on ZSZL_DEV.zsdh=ZSZL.zsdh and ZSZL_DEV.GSBH='VDH' 
+Left join ZSZL ZSZLTW on ZSZLTW.zsdh=ZSZL_DEV.Zsdh_TW  
+where CGBJ.BJNO like '%' 
+  and CGBJ.ZSBH like 'a366%' 
+  and ZSZL.ZSYWJC like '%%' 
+and CGBJ.GSBH='VDH'
+order by CGBJ.BJNO DESC
+select CGBJ.* ,ZSZL.ZSYWJC,ZSZl.PayVN,IsNull(ZSZLTW.zsywjc,ZSZL.zsywjc) as zsywjctw   
+from CGBJ
+left join ZSZL on CGBJ.ZSBH=ZSZL.ZSDH
+Left join ZSZL_DEV on ZSZL_DEV.zsdh=ZSZL.zsdh and ZSZL_DEV.GSBH='VDH' 
+Left join ZSZL ZSZLTW on ZSZLTW.zsdh=ZSZL_DEV.Zsdh_TW  
+where CGBJ.BJNO like '%' 
+  and CGBJ.ZSBH like 'va107%' 
+  and ZSZL.ZSYWJC like '%%' 
+and CGBJ.GSBH='VDH'
+order by CGBJ.BJNO DESC
+select CGBJ.* ,ZSZL.ZSYWJC,ZSZl.PayVN,IsNull(ZSZLTW.zsywjc,ZSZL.zsywjc) as zsywjctw   
+from CGBJ
+left join ZSZL on CGBJ.ZSBH=ZSZL.ZSDH
+Left join ZSZL_DEV on ZSZL_DEV.zsdh=ZSZL.zsdh and ZSZL_DEV.GSBH='VDH' 
+Left join ZSZL ZSZLTW on ZSZLTW.zsdh=ZSZL_DEV.Zsdh_TW  
+where CGBJ.BJNO like '%' 
+  and CGBJ.ZSBH like 'a366%' 
+  and ZSZL.ZSYWJC like '%%' 
+and convert(smalldatetime,convert(varchar,CGBJ.USERDATE,111)) between 
+'2023/11/15' and  '2023/11/18'
+and CGBJ.GSBH='VDH'
+order by CGBJ.BJNO DESC
+select CGBJ.* ,ZSZL.ZSYWJC,ZSZl.PayVN,IsNull(ZSZLTW.zsywjc,ZSZL.zsywjc) as zsywjctw   
+from CGBJ
+left join ZSZL on CGBJ.ZSBH=ZSZL.ZSDH
+Left join ZSZL_DEV on ZSZL_DEV.zsdh=ZSZL.zsdh and ZSZL_DEV.GSBH='VDH' 
+Left join ZSZL ZSZLTW on ZSZLTW.zsdh=ZSZL_DEV.Zsdh_TW  
+where CGBJ.BJNO like '%' 
+  and CGBJ.ZSBH like '%' 
+  and ZSZL.ZSYWJC like '%%' 
+and CGBJ.GSBH='VDH'
+order by CGBJ.BJNO DESC
+select CGBJ.* ,ZSZL.ZSYWJC,ZSZl.PayVN,IsNull(ZSZLTW.zsywjc,ZSZL.zsywjc) as zsywjctw   
+from CGBJ
+left join ZSZL on CGBJ.ZSBH=ZSZL.ZSDH
+Left join ZSZL_DEV on ZSZL_DEV.zsdh=ZSZL.zsdh and ZSZL_DEV.GSBH='VDH' 
+Left join ZSZL ZSZLTW on ZSZLTW.zsdh=ZSZL_DEV.Zsdh_TW  
+where CGBJ.BJNO like '%' 
+  and CGBJ.ZSBH like '%' 
+  and ZSZL.ZSYWJC like '%%' 
+and CGBJ.GSBH='VDH'
+and  CGBJ.UserID='316503' 
+order by CGBJ.BJNO DESC

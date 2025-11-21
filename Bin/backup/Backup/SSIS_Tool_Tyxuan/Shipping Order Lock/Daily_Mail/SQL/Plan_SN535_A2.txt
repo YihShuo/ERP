@@ -1,0 +1,137 @@
+--//[1] Create Linkserver
+if  not exists(select *  from   master..sysservers  where  srvname= 'HumanDB') 
+Exec sp_addlinkedserver
+   @server='HumanDB', --//linkserver name.
+   @srvproduct='', --//一般描述
+   @provider='SQLOLEDB', --//OLEDB Provider name, check BOL for more providers
+   @datasrc=' 192.168.23.12', --//遠端Server Name  192.168.11.100\sql2k8
+   @catalog='P0104-TYXUAN' --//default database for linkserver
+
+--//[2]Add linked server login
+Exec sp_addlinkedsrvlogin
+@useself='false', --//false=使用遠端使用者/密碼登入
+ --//true=使用本地端使用者/密碼連線遠端SERVER                        
+@rmtsrvname='HumanDB', --//Linked server name
+@rmtuser='hrms' , --//遠端登入使用者
+@rmtpassword='123456' --//遠端登入使用者密碼
+set ansi_nulls on 
+set ansi_warnings on 
+if object_id('tempdb..#HumData') is not null
+ begin   drop table #HumData end
+ SELECT tk_ngay=CONVERT(nvarchar(10), dateadd(d,-1,GETDATE()), 21),st_nhanvien.dv_ma,dv_ten,
+        dv_dilam=SUM(case when CC_GIOBINHTHUONG=8 then 1 else 0 end) into #HumData
+ FROM HumanDB.[P0104-TYXUAN].dbo.ST_GIOQUETTHE ST_GIOQUETTHE
+ inner join HumanDB.[P0104-TYXUAN].dbo.st_nhanvien st_nhanvien on st_nhanvien.nv_ma=ST_GIOQUETTHE.nv_ma
+ inner join HumanDB.[P0104-TYXUAN].dbo.ST_CONGVIEC ST_CONGVIEC on ST_NHANVIEN.CV_MA = ST_CONGVIEC.CV_MA
+ inner join HumanDB.[P0104-TYXUAN].dbo.ST_DONVI ST_DONVI on ST_NHANVIEN.DV_MA = ST_DONVI.DV_MA 
+ where qt_ngay= CONVERT(nvarchar(10), dateadd(d,-1,GETDATE()), 21) and X_MA_ in ('A1','A2') and ST_CONGVIEC.CV_MA like 'a%'
+ group by st_nhanvien.dv_ma,dv_ten
+
+if object_id('tempdb..#Scbbdata') is not null
+ begin   drop table #Scbbdata end
+ select SL.*,LKMT.QtyMT,LKTT.QtyTT
+ into #Scbbdata
+ from (select convert(varchar,SCBB.SCDate,111) as SCDate ,SCBB.DepNo,SCBBS.GXLB,BDepartment.DepName,isnull(sum(Convert(float,SCBBS.Qty)),0) as Qty,isnull(SCBZCL.Qty,0) as bzQty,
+ Convert(float,SCRL.SCGS) as SCGS,RSCQ.SDGS,isnull(sum(SCBBS.Qty),0)/SCRL.SCGS  as AvgQty
+ from SCBB
+ left join SCBBS on  SCBB.ProNo=SCBBS.ProNo
+ left join BDepartment on BDepartment.ID=SCBB.DepNo
+ left join SCBZCL on SCBZCL.BZDate=SCBB.SCDate and SCBZCL.DepNo=SCBB.DepNo
+ left join DDZL on DDZl.DDBH=SCBBS.SCBH
+ left join SCXXCL on SCXXCL.XieXing=DDZL.XieXing and SCXXCL.GXLB=SCBBS.GXLB and SCXXCL.BZLB=SCBBS.BZLB
+ left join SCRL on convert(varchar,convert(smalldatetime,SCRL.SCYEAR+'/'+SCRL.SCMONTH+'/'+SCRL.SCDay))=convert(varchar,SCBB.SCDate)
+ and SCRL.DepNO=SCBB.DepNO
+ left join  RSCQ on convert(varchar,RSCQ.RSDate,111)=convert(varchar,SCBB.SCDate,111) and RSCQ.DepNo=SCBB.DepNo
+ where  convert(smalldatetime,convert(varchar,SCBB.SCDate,111)) 
+ between  (convert(smalldatetime,convert(varchar,GETDATE(),111))-1) and (convert(smalldatetime,convert(varchar,GETDATE(),111))-1)
+ and SCBB.GSBH=:GSBH
+ and BDepartment.DepName like '%A2%'
+ and (SCBBS.GXLB='A' or SCBBS.GXLB='C' or SCBBS.GXLB='S')
+ Group by convert(varchar,SCBB.SCDate,111) ,SCBB.DepNo,SCBBS.GXLB,BDepartment.DepName ,SCBZCL.Qty,RSCQ.SDGS,SCRL.SCGS) SL
+ left join (select SCBB.DepNo,SCBBS.GXLB,BDepartment.DepName,isnull(sum(Convert(float,SCBBS.Qty)),0) as QtyTT
+ from SCBB
+ left join SCBBS on  SCBB.ProNo=SCBBS.ProNo
+ left join BDepartment on BDepartment.ID=SCBB.DepNo
+ left join DDZL on DDZl.DDBH=SCBBS.SCBH
+ left join SCXXCL on SCXXCL.XieXing=DDZL.XieXing and SCXXCL.GXLB=SCBBS.GXLB and SCXXCL.BZLB=SCBBS.BZLB
+ left join SCRL on convert(varchar,convert(smalldatetime,SCRL.SCYEAR+'/'+SCRL.SCMONTH+'/'+SCRL.SCDay))=convert(varchar,SCBB.SCDate)
+ and SCRL.DepNO=SCBB.DepNO
+ left join  RSCQ on convert(varchar,RSCQ.RSDate,111)=convert(varchar,SCBB.SCDate,111) and RSCQ.DepNo=SCBB.DepNo
+ where  convert(smalldatetime,convert(varchar,SCBB.SCDate,111))
+ between  (convert(smalldatetime,convert(varchar,dateadd(dd,-datepart(dd,getdate())+1,getdate()) ,111))) and (convert(smalldatetime,convert(varchar,GETDATE(),111))-1)
+ and SCBB.GSBH=:GSBH
+ and BDepartment.DepName like '%A2%'
+ and (SCBBS.GXLB='A' or SCBBS.GXLB='C' or SCBBS.GXLB='S')
+ Group by SCBB.DepNo,SCBBS.GXLB,BDepartment.DepName ) LKTT on LKTT.DepNo=SL.DepNo and LKTT.GXLB=SL.GXLB
+ left join( select SCBZCL.Depno,Bdepartment.GXLB,Bdepartment.Depname,isnull(sum(qty),0) as QtyMT
+	from SCBZCL left join bdepartment on SCBZCL.Depno=Bdepartment.id
+	where convert(smalldatetime,convert(varchar,SCBZCL.bzdate,111)) 
+ between  (convert(smalldatetime,convert(varchar,dateadd(dd,-datepart(dd,getdate())+1,getdate()) ,111))) and (convert(smalldatetime,convert(varchar,GETDATE(),111))-1)
+ and bdepartment.GSBH=:GSBH
+ and BDepartment.DepName like '%A2%'
+ and (bdepartment.GXLB='A' or bdepartment.GXLB='C' or bdepartment.GXLB='S')
+ group by SCBZCL.Depno,Bdepartment.GXLB,Bdepartment.Depname )LKMT on LKMT.DepNo=SL.DepNo and LKMT.GXLB=SL.GXLB
+select DepName as '單位',dv_dilam as '刷卡上班人數',SCGS as '上班時間',RY1 as '訂單1',RY2 as '訂單2',RY3 as '訂單3',RY4 as '訂單4',RY5 as '訂單5',RY6 as '訂單6',RY7 as '訂單7',RY8 as '訂單8' ,RY9 as '訂單9',RY10 as '訂單10',
+       Qty1 as '產量1',Qty2 as '產量2',Qty3 as '產量3',Qty4 as '產量4',Qty5 as '產量5',Qty6 as '產量6',Qty7 as '產量7',Qty8 as '產量8',Qty9 as '產量9',Qty10 as '產量10' ,
+       BzQty as '目標產量',Qty as '實際產量',LackQty as 'DELAY',Rate as '達成率' ,QtyMT as '累計目標產量',QtyTT as '累計實際產量',RateLK as '累計達成率',AvgQty as '平均一小時雙數',Substring('2016/08/30',6,5) as '生產日' 
+from (select SCBB.SCDate,SCBB.GXLB ,SCBB.DepNo ,SCBB.DepName ,#HumData.dv_dilam ,SCBB.Qty ,SCBB.bzQty ,SCBB.Qty-SCBB.BzQty as LackQty,
+             (case when SCBB.bzQty <> 0 then Convert(varchar,round(SCBB.Qty/convert(float,SCBB.BzQty)*100,0))+'%' end) Rate,SCGS,round(AvgQty,0) as AvgQty,
+             SCBB.QtyMT,SCBB.QtyTT,(case when SCBB.QtyMT <> 0 then Convert(varchar,round(SCBB.QtyTT/convert(float,SCBB.QtyMT)*100,0))+'%' end) RateLK,
+             RYList.RY1,RYList.RY2,RYList.RY3,RYList.RY4,RYList.RY5,RYList.RY6,RYList.RY7,RYList.RY8,RYList.RY9,RYList.RY10,RYList.Qty1,RYList.Qty2,RYList.Qty3,RYList.Qty4,RYList.Qty5,RYList.Qty6,RYList.Qty7,RYList.Qty8,RYList.Qty9,RYList.Qty10
+      from (select * from #Scbbdata where #Scbbdata.GXLB='C'
+            Union all
+            select SCDate ,'zTotal' as DepNo,'C' as GXLB,'zTotal' as  DepName,isnull(sum(Qty),0) as Qty,isnull(sum(bzQty),0) as bzQty,null as SCGS,null as SDGS,isnull(sum(Qty),0)/isnull(sum(SCGS),0)  as AvgQty
+            ,isnull(sum(QtyMT),0) as QtyMT,isnull(sum(QtyTT),0) as QtyTT
+            from #Scbbdata where #Scbbdata.GXLB='C'
+            Group by SCDate
+            Union all
+            select * from #Scbbdata where #Scbbdata.GXLB='S'
+            Union all
+            select SCDate ,'zTotal' as DepNo,'S' as GXLB,'zTotal' as  DepName,isnull(sum(Qty),0) as Qty,isnull(sum(bzQty),0) as bzQty,null as SCGS,null as SDGS,isnull(sum(Qty),0)/isnull(sum(SCGS),0)  as AvgQty
+            ,isnull(sum(QtyMT),0) as QtyMT,isnull(sum(QtyTT),0) as QtyTT
+            from #Scbbdata where #Scbbdata.GXLB='S'
+            Group by SCDate
+            Union all
+            select * from #Scbbdata where #Scbbdata.GXLB='A'
+            Union all
+            select SCDate ,'zTotal' as DepNo,'A' as GXLB,'zTotal' as  DepName,isnull(sum(Qty),0) as Qty,isnull(sum(bzQty),0) as bzQty,null as SCGS,null as SDGS,isnull(sum(Qty),0)/isnull(sum(SCGS),0)  as AvgQty
+            ,isnull(sum(QtyMT),0) as QtyMT,isnull(sum(QtyTT),0) as QtyTT
+            from #Scbbdata where #Scbbdata.GXLB='A'
+            Group by SCDate ) SCBB
+      left join (
+                 select SCDate,DepNo,
+                        Max(Case when RYNo=1 then SCBH end) as RY1,
+                        Max(Case when RYNo=2 then SCBH end) as RY2,
+                        Max(Case when RYNo=3 then SCBH end) as RY3,
+                        Max(Case when RYNo=4 then SCBH end) as RY4,
+                        Max(Case when RYNo=5 then SCBH end) as RY5,
+                        Max(Case when RYNo=6 then SCBH end) as RY6,
+                        Max(Case when RYNo=7 then SCBH end) as RY7,
+                        Max(Case when RYNo=8 then SCBH end) as RY8,
+                        Max(Case when RYNo=9 then SCBH end) as RY9,
+                        Max(Case when RYNo=10 then SCBH end) as RY10,
+                        Max(Case when RYNo=1 then Convert(float,Qty) end) as Qty1,
+                        Max(Case when RYNo=2 then Convert(float,Qty) end) as Qty2,
+                        Max(Case when RYNo=3 then Convert(float,Qty) end) as Qty3,
+                        Max(Case when RYNo=4 then Convert(float,Qty) end) as Qty4,
+                        Max(Case when RYNo=5 then Convert(float,Qty) end) as Qty5,
+                        Max(Case when RYNo=6 then Convert(float,Qty) end) as Qty6,
+                        Max(Case when RYNo=7 then Convert(float,Qty) end) as Qty7,
+                        Max(Case when RYNo=8 then Convert(float,Qty) end) as Qty8,
+                        Max(Case when RYNo=9 then Convert(float,Qty) end) as Qty9,
+                        Max(Case when RYNo=10 then Convert(float,Qty) end) as Qty10
+                 from (select *,ROW_NUMBER() over (PARTITION BY SCDATE,DepNo ORDER BY SCDATE,DepNo,SCBH Asc) as  RYNo
+                       from (select convert(varchar,SCBB.SCDate,111) as SCDate ,SCBB.DepNo,SCBBS.SCBH,isnull(sum(Convert(float,SCBBS.Qty)),0)  as Qty
+                             from SCBB
+                             left join SCBBS on  SCBB.ProNo=SCBBS.ProNo
+                             left join  RSCQ on convert(varchar,RSCQ.RSDate,111)=convert(varchar,SCBB.SCDate,111) and RSCQ.DepNo=SCBB.DepNo
+                             where  convert(smalldatetime,convert(varchar,SCBB.SCDate,111)) 
+                              between  (convert(smalldatetime,convert(varchar,GETDATE(),111))-1) and (convert(smalldatetime,convert(varchar,GETDATE(),111))-1)
+                             and SCBB.GSBH=:GSBH
+                             and (SCBBS.GXLB='A' or SCBBS.GXLB='S' or SCBBS.GXLB='C' )
+                             Group by convert(varchar,SCBB.SCDate,111)  ,SCBB.DepNo,SCBBS.SCBH ) SCBBS ) SCBBS
+                       Group by   SCDate,DepNo  ) RYList on RYList.SCDate=SCBB.SCDate and RYList.DepNo=SCBB.DepNO 
+                 left join BDepartment on BDepartment.ID = SCBB.DepNo
+                 left join #HumData  on #HumData.dv_ma COLLATE DATABASE_DEFAULT =BDepartment.ID_HRM COLLATE DATABASE_DEFAULT
+     ) Scbbs
+   order by GXLB,DepName

@@ -1,0 +1,39 @@
+unit BOMMaterial1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, DB, DBTables, StdCtrls, Grids, DBGrids, Spin;
+
+type
+  TBOMMaterial = class(TForm)
+    Panel1: TPanel;
+    BOMGrid: TDBGrid;
+    BOMQry: TQuery;
+    DS: TDataSource;
+    Label5: TLabel;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Label2: TLabel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Edit1: TEdit;
+    ComboBox1: TComboBox;
+    Label4: TLabel;
+    SpinEdit1: TSpinEdit;
+    BtnQry: TButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BOMMaterial: TBOMMaterial;
+
+implementation
+
+{$R *.dfm}
+
+end.

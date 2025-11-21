@@ -1,0 +1,360 @@
+object main: Tmain
+  Left = 735
+  Top = 124
+  Width = 736
+  Height = 406
+  Caption = 'BOM'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIForm
+  Menu = MainMenu1
+  OldCreateOrder = False
+  Position = poScreenCenter
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Image1: TImage
+    Left = 0
+    Top = 0
+    Width = 720
+    Height = 325
+    Align = alClient
+    AutoSize = True
+    Stretch = True
+  end
+  object Edit1: TEdit
+    Left = 240
+    Top = 176
+    Width = 121
+    Height = 21
+    TabOrder = 0
+    Visible = False
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 325
+    Width = 720
+    Height = 22
+    Panels = <>
+  end
+  object Edit2: TEdit
+    Left = 240
+    Top = 208
+    Width = 121
+    Height = 21
+    TabOrder = 2
+    Visible = False
+  end
+  object MainMenu1: TMainMenu
+    AutoHotkeys = maManual
+    AutoLineReduction = maManual
+    Left = 96
+    Top = 88
+    object SN1: TMenuItem
+      Caption = 'N1 Set'
+      object SN11: TMenuItem
+        Caption = 'N11 Material Check'
+        Enabled = False
+      end
+      object SN12: TMenuItem
+        Caption = 'N12 Material Type List'
+        Enabled = False
+        object SN121: TMenuItem
+          Caption = 'N121 Material Type'
+        end
+        object SN122: TMenuItem
+          Caption = 'N122 Type Special'
+        end
+        object SN123: TMenuItem
+          Caption = 'N123 TypeDeatail'
+        end
+      end
+      object SN13: TMenuItem
+        Caption = 'N13 Shoe Parts RSL Set'
+        OnClick = SN13Click
+      end
+      object SN14: TMenuItem
+        Caption = 'N14 SKU Mapping Set'
+        OnClick = SN14Click
+      end
+      object SN15: TMenuItem
+        Caption = 'N15 BOM Audit Check'
+        OnClick = SN15Click
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object SN10: TMenuItem
+        Caption = 'Exit'
+        OnClick = SN10Click
+      end
+    end
+    object SN2: TMenuItem
+      AutoHotkeys = maManual
+      Caption = 'N2 Document'
+      object SN21: TMenuItem
+        Caption = 'N21 Model Section Code '#22411#39636#21508#24037#27573#20998#39006#20195#34399
+        OnClick = SN21Click
+      end
+      object SN22: TMenuItem
+        Caption = 'N22 SOP Document '#35009#26039#37096#20214
+        OnClick = SN22Click
+      end
+      object SN23: TMenuItem
+        Caption = 'N23 SOP Process Job '#21152#24037#38917#30446
+        OnClick = SN23Click
+      end
+      object SN24: TMenuItem
+        Caption = 'N24 SOP Process Flow '#35009#29255#21152#24037#27969#31243
+        OnClick = SN24Click
+      end
+      object SN25: TMenuItem
+        Caption = 'N25 SOP Process IE Capacity '#35009#26039#22411#39636'IE'#27161#28310#24037#26178#20154#25976
+        OnClick = SN25Click
+      end
+    end
+    object SN3: TMenuItem
+      Caption = 'N3 BOM'
+      object SN31: TMenuItem
+        Caption = 'N31 BOM'
+        OnClick = SN31Click
+      end
+      object SN32: TMenuItem
+        Caption = 'N32 VN BOM'
+        object SN321: TMenuItem
+          Caption = 'N321 VN BOM'
+          OnClick = SN321Click
+        end
+        object SN322: TMenuItem
+          Caption = 'N322 INK BOM'
+          OnClick = SN322Click
+        end
+        object SN323: TMenuItem
+          Caption = 'N323 Import VNBOM'
+          OnClick = SN323Click
+        end
+      end
+      object SN33: TMenuItem
+        Caption = 'N33 PART TYPE'
+        OnClick = SN33Click
+      end
+      object SN34: TMenuItem
+        Caption = 'N34 No Type Serach'
+        Enabled = False
+        OnClick = SN34Click
+      end
+      object SN35: TMenuItem
+        Caption = 'N35 RSL in Bom'
+        OnClick = SN35Click
+      end
+      object SN36: TMenuItem
+        Caption = 'N36 BOM Quote Usage'
+        OnClick = SN36Click
+      end
+      object SN37: TMenuItem
+        Caption = 'N37 Bom Information'
+        OnClick = SN37Click
+      end
+      object SN38: TMenuItem
+        Caption = 'N38 BOM Costing'
+        object SN381: TMenuItem
+          Caption = 'N381 Spec Costing'
+          OnClick = SN381Click
+        end
+        object SN382: TMenuItem
+          Caption = 'N382 Packing/Label Costing'
+          OnClick = SN382Click
+        end
+        object SN383: TMenuItem
+          Caption = 'N383 TW Material Costing'
+          OnClick = SN383Click
+        end
+        object SN384: TMenuItem
+          Caption = 'N384 Spec Costing Temporary Price'
+          OnClick = SN384Click
+        end
+        object SN385: TMenuItem
+          Caption = 'N385 CostingPriceList'
+          OnClick = SN385Click
+        end
+        object SN386: TMenuItem
+          Caption = 'N386 CBD'
+          OnClick = SN386Click
+        end
+        object SN387: TMenuItem
+          Caption = 'N387 CostingPriceList LYS'
+          OnClick = SN387Click
+        end
+      end
+      object SN39: TMenuItem
+        Caption = 'N39 Model Status'
+        OnClick = SN39Click
+      end
+      object SN3A: TMenuItem
+        Caption = 'N3A VD3 A3A Special BOM'
+        OnClick = SN3AClick
+      end
+      object SN3B: TMenuItem
+        Caption = 'N3B SKU Price BUYNO'
+        OnClick = SN3BClick
+      end
+      object SN3C: TMenuItem
+        Caption = 'N3C BOM OrderList'
+        OnClick = SN3CClick
+      end
+    end
+    object SN4: TMenuItem
+      Caption = 'N4 Material'
+      object SN41: TMenuItem
+        Caption = 'N41 Material New'
+        OnClick = SN41Click
+      end
+      object SN42: TMenuItem
+        Caption = 'N42Part New'
+        OnClick = SN42Click
+      end
+      object SN43: TMenuItem
+        Caption = 'N43 Material Classification'
+        OnClick = SN43Click
+      end
+      object SN44: TMenuItem
+        Caption = 'N44 material List'
+        OnClick = SN44Click
+      end
+      object SN45: TMenuItem
+        Caption = 'N45 Smaple Room Tools'
+        OnClick = SN45Click
+      end
+      object SN46: TMenuItem
+        Caption = 'N46 Material RSL'
+        OnClick = SN46Click
+      end
+      object SN47: TMenuItem
+        Caption = 'N47 SET RSL'
+        object SN471: TMenuItem
+          Caption = 'N471 Set RSL For SKU '
+          OnClick = SN471Click
+        end
+        object SN472: TMenuItem
+          Caption = 'N472 Set RSL For Mat'
+          OnClick = SN472Click
+        end
+      end
+      object SN48: TMenuItem
+        Caption = 'N48 RSL Confirm'
+        OnClick = SN48Click
+      end
+      object SN49: TMenuItem
+        Caption = 'N49 Material RSL for Chemical/Carton'
+        OnClick = SN49Click
+      end
+      object SN4A: TMenuItem
+        Caption = 'N4A BOM Material Manufacturer'
+        OnClick = SN4AClick
+      end
+    end
+    object SN5: TMenuItem
+      Caption = 'N5 Prodcution'
+      object SN51: TMenuItem
+        Caption = 'N51 Sample Shoes Log'
+        OnClick = SN51Click
+      end
+      object SN52: TMenuItem
+        Caption = 'N52 Bom of Shipping-(Stop)'
+        Visible = False
+        OnClick = SN52Click
+      end
+      object SN53: TMenuItem
+        Caption = 'N53 Order Proudction BOM'
+        OnClick = SN53Click
+      end
+      object SN54: TMenuItem
+        Caption = 'N54 Bom Revise Usage'
+        OnClick = SN54Click
+      end
+      object SN55: TMenuItem
+        Caption = 'N55 INK Revise Usae'
+        OnClick = SN55Click
+      end
+    end
+    object SN6: TMenuItem
+      Caption = 'N6 Khuon In'
+      object SN61: TMenuItem
+        Caption = 'N61 Order Khuon In '
+        OnClick = SN61Click
+      end
+      object SN62: TMenuItem
+        Caption = 'N62 Order Detail Khuon In'
+        OnClick = SN62Click
+      end
+      object SN63: TMenuItem
+        Caption = 'N63 Khuon In In Warehouse'
+        OnClick = SN63Click
+      end
+      object SN64: TMenuItem
+        Caption = 'N64 Khuon In Out Warehouse'
+        OnClick = SN64Click
+      end
+      object SN65: TMenuItem
+        Caption = 'N65 Khuon In Monthly Stock Report'
+        OnClick = SN65Click
+      end
+      object SN66: TMenuItem
+        Caption = 'N66 Khuon In Phieu Xuat'
+        OnClick = SN66Click
+      end
+    end
+    object SN7: TMenuItem
+      Caption = 'Help'
+    end
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select *'
+      'from BLimits'
+      'where USERID=:userid'
+      'and MKID=:mkid'
+      'and GSBH=:GSBH')
+    Left = 64
+    Top = 88
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'userid'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'mkid'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'GSBH'
+        ParamType = ptUnknown
+      end>
+  end
+  object BLimitHideQry: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select FORMID,YN'
+      'from BLimit'
+      'where BLimit.MKID=:mkid '
+      '')
+    Left = 64
+    Top = 120
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'mkid'
+        ParamType = ptUnknown
+      end>
+  end
+end

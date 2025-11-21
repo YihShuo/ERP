@@ -1,0 +1,102 @@
+unit DelOther_KI_SCBH1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls;
+
+type
+  TDelOther_KI_SCBH = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Edit1: TEdit;
+    Button1: TButton;
+    DBGridEh1: TDBGrid;
+    DDZL: TQuery;
+    DS1: TDataSource;
+    DDZLDDBH: TStringField;
+    DDZLArticle: TStringField;
+    DDZLQuantity: TIntegerField;
+    DDZLDienTich: TFloatField;
+    DDZLUSERID: TStringField;
+    DDZLUSERDATE: TDateTimeField;
+    DDZLSB: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure DBGridEh1DblClick(Sender: TObject);
+    procedure DBGridEh1KeyPress(Sender: TObject; var Key: Char);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DelOther_KI_SCBH: TDelOther_KI_SCBH;
+
+implementation
+
+uses main1, DelOther_KI1;
+
+{$R *.dfm}
+
+procedure TDelOther_KI_SCBH.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  action:=cafree;
+end;
+
+procedure TDelOther_KI_SCBH.FormDestroy(Sender: TObject);
+begin
+  DelOther_KI_SCBH:=nil;
+end;
+
+procedure TDelOther_KI_SCBH.Button1Click(Sender: TObject);
+begin
+  with DDZL do
+  begin
+    active:=false;
+    SQL.Clear;
+    SQL.Add('  select DDZL.DDBH,DDZL.Article, DDZL.Quantity,DDZL.DienTich,DDZL.USERID,DDZL.USERDATE,DDZL.YN as SB   ');
+    SQL.Add('  from KHUONIN_DDZL DDZL   ');
+    SQL.Add('  where DDZL.DDBH like '''+edit1.Text+'%'+''' ');
+    SQL.Add('  and DDZL.YN=''1''  ');
+    SQL.Add('  and GSBH='''+main.Edit2.Text+'''  ');
+    SQL.Add('  order by DDZL.DDBH  ');
+    active:=true;
+  end;
+end;
+
+procedure TDelOther_KI_SCBH.DBGridEh1DblClick(Sender: TObject);
+begin
+  if DDZl.Active then
+  begin
+    if DDZL.recordcount>0 then
+      begin   
+        if DDZL.FieldByName('SB').value='5' then
+          begin
+            showmessage('Already Shipping out.');
+            abort;
+          end;
+        DelOther_KI.DelDet.Edit;
+        DelOther_KI.DelDet.fieldbyname('SCBH').value:=DDZL.fieldbyname('DDBH').value;
+      end;
+  end;
+  close;
+end;
+
+procedure TDelOther_KI_SCBH.DBGridEh1KeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if key=#13 then DBGridEh1DblClick(nil);
+end;
+
+procedure TDelOther_KI_SCBH.FormShow(Sender: TObject);
+begin
+  main.FormLanguage(Pointer(self),self.Name);
+end;
+
+end.

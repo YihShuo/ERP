@@ -1,0 +1,162 @@
+object ArticlePic: TArticlePic
+  Left = 87
+  Top = 157
+  Width = 1280
+  Height = 530
+  Caption = 'Article Picture'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  OnResize = FormResize
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Image1: TImage
+    Left = 0
+    Top = 80
+    Width = 640
+    Height = 412
+    Align = alLeft
+    Stretch = True
+  end
+  object Image2: TImage
+    Left = 640
+    Top = 80
+    Width = 624
+    Height = 412
+    HelpType = htKeyword
+    Align = alClient
+    Stretch = True
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 1264
+    Height = 80
+    Align = alTop
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 8
+      Top = 16
+      Width = 100
+      Height = 20
+      Caption = 'Order Number'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -17
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 36
+      Top = 47
+      Width = 75
+      Height = 20
+      Caption = 'Article NO '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -17
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 255
+      Top = 47
+      Width = 55
+      Height = 20
+      Caption = 'XieXing'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -17
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Edit1: TEdit
+      Left = 112
+      Top = 15
+      Width = 121
+      Height = 21
+      TabOrder = 0
+    end
+    object Button1: TButton
+      Left = 455
+      Top = 46
+      Width = 75
+      Height = 25
+      Caption = 'Query'
+      TabOrder = 1
+      OnClick = Button1Click
+    end
+    object Edit2: TEdit
+      Left = 112
+      Top = 46
+      Width = 121
+      Height = 21
+      TabOrder = 2
+    end
+    object Edit3: TEdit
+      Left = 319
+      Top = 46
+      Width = 121
+      Height = 21
+      TabOrder = 3
+    end
+    object CB1: TCheckBox
+      Left = 248
+      Top = 16
+      Width = 249
+      Height = 17
+      Caption = 'Search In Six Months Data'
+      Checked = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -17
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      State = cbChecked
+      TabOrder = 4
+    end
+    object Edit4: TEdit
+      Left = 592
+      Top = 24
+      Width = 121
+      Height = 21
+      TabOrder = 5
+      Text = 'Edit4'
+      Visible = False
+    end
+    object Edit5: TEdit
+      Left = 592
+      Top = 48
+      Width = 121
+      Height = 21
+      TabOrder = 6
+      Text = 'Edit5'
+      Visible = False
+      OnChange = Edit5Change
+    end
+  end
+  object Timer2: TTimer
+    Enabled = False
+    Interval = 5000
+    OnTimer = Timer2Timer
+    Left = 816
+    Top = 200
+  end
+  object Timer1: TTimer
+    Enabled = False
+    OnTimer = Timer1Timer
+    Left = 248
+    Top = 232
+  end
+end

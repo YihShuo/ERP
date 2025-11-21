@@ -1,0 +1,315 @@
+Select VCLID,VCLName_VN as Langeuage from BLanguage WHERE  MKID = '00' and mainForm='main'
+Select * from (
+Select TSCD.*
+       ,TSCD_SB.YWPM,TSCD_SB.VWPM,TSCD_SB.ZWPM,TSCD_SB.HGPM,TSCD_SB.QUCBH,TSCD_SB.LSBH,TSCD_SB.DWBH,TSCD_SB.ZSDH,TSCD_SB.CQDH,TSCD_SB.AuthCompany,TSCD_SB.AuthCE,TSCD_SB.Memo as SB_Memo 
+       ,TSCD_ZSZL.ZSJC_YW,TSCD_ZSZL.ZSJC_ZW,TSCD_ZSZL.fpdz,TSCD_ZSZL.dh,TSCD_ZSZL.cz,TSCD_ZSZL.fzr,TSCD_ZSZL.llr 
+       ,TSCD_ZSZL.LB1_Memo,TSCD_ZSZL.LB2_Memo,TSCD_ZSZL.LB3_Memo,TSCD_ZSZL.AuthCE as ZSZL_AuthCE,TSCD_ZSZL.AuthCE_Memo,TSCD_ZSZL.AuthZSDH,TSCD_ZSZL.AuthZSDH_Memo,TSCD_ZSZL.IsZSDH,TSCD_ZSZL.Memo as ZSZL_Memo 
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo   
+       ,TSCD_KCRKS.USPrice,TSCD_KCRKS.VNPrice,TSCD_KCRK.DOCNO,JDTS_Dep.DepName as JDTSDep,JRTS_Dep.DepName as JRTSDep    
+from TSCD
+left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH
+left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS.SBBH=TSCD.SBBH  
+left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS 
+left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS 
+left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=1 
+Union all 
+Select TSCD.*
+       ,CLZL.YWPM,NULL as VWPM,CLZL.zwpm,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE,null as SB_Memo
+       ,ZSZL.zsjc,zszl.zsywjc,zszl.fpdz,zszl.dh,zszl.cz,zszl.fzr,zszl.llr
+       ,null as LB1_Memo,null as LB2_Memo,null LB3_Memo,null as ZSZL_AuthCE,null as AuthCE_Memo,null as AuthZSDH,null as AuthZSDH_Memo,null as IsZSDH,null as ZSZL_Memo
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  
+       ,KCRKS.USPrice,KCRKS.VNPrice,KCRKS.DOCNO,null as JRTS_Dep,null as JRTSDep    
+from TSCD
+left join CLZL on CLZL.CLDH = TSCD.SBBH
+left join KCRK  on KCRK.RKNO=TSCD.RKNO 
+left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=2
+) TSCD where 1=1 
+and TSCD.Memo like '%IT%' 
+order by TSCD.Label_Tag,TSCD.TSBH,TSCD.YWPM,TSCD.Status
+Select * from (
+Select TSCD.*
+       ,TSCD_SB.YWPM,TSCD_SB.VWPM,TSCD_SB.ZWPM,TSCD_SB.HGPM,TSCD_SB.QUCBH,TSCD_SB.LSBH,TSCD_SB.DWBH,TSCD_SB.ZSDH,TSCD_SB.CQDH,TSCD_SB.AuthCompany,TSCD_SB.AuthCE,TSCD_SB.Memo as SB_Memo 
+       ,TSCD_ZSZL.ZSJC_YW,TSCD_ZSZL.ZSJC_ZW,TSCD_ZSZL.fpdz,TSCD_ZSZL.dh,TSCD_ZSZL.cz,TSCD_ZSZL.fzr,TSCD_ZSZL.llr 
+       ,TSCD_ZSZL.LB1_Memo,TSCD_ZSZL.LB2_Memo,TSCD_ZSZL.LB3_Memo,TSCD_ZSZL.AuthCE as ZSZL_AuthCE,TSCD_ZSZL.AuthCE_Memo,TSCD_ZSZL.AuthZSDH,TSCD_ZSZL.AuthZSDH_Memo,TSCD_ZSZL.IsZSDH,TSCD_ZSZL.Memo as ZSZL_Memo 
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo   
+       ,TSCD_KCRKS.USPrice,TSCD_KCRKS.VNPrice,TSCD_KCRK.DOCNO,JDTS_Dep.DepName as JDTSDep,JRTS_Dep.DepName as JRTSDep    
+from TSCD
+left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH
+left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS.SBBH=TSCD.SBBH  
+left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS 
+left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS 
+left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=1 
+Union all 
+Select TSCD.*
+       ,CLZL.YWPM,NULL as VWPM,CLZL.zwpm,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE,null as SB_Memo
+       ,ZSZL.zsjc,zszl.zsywjc,zszl.fpdz,zszl.dh,zszl.cz,zszl.fzr,zszl.llr
+       ,null as LB1_Memo,null as LB2_Memo,null LB3_Memo,null as ZSZL_AuthCE,null as AuthCE_Memo,null as AuthZSDH,null as AuthZSDH_Memo,null as IsZSDH,null as ZSZL_Memo
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  
+       ,KCRKS.USPrice,KCRKS.VNPrice,KCRKS.DOCNO,null as JRTS_Dep,null as JRTSDep    
+from TSCD
+left join CLZL on CLZL.CLDH = TSCD.SBBH
+left join KCRK  on KCRK.RKNO=TSCD.RKNO 
+left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=2
+) TSCD where 1=1 
+and TSCD.SBBH like '%A000100020%' 
+order by TSCD.Label_Tag,TSCD.TSBH,TSCD.YWPM,TSCD.Status
+Select * from (
+Select TSCD.*
+       ,TSCD_SB.YWPM,TSCD_SB.VWPM,TSCD_SB.ZWPM,TSCD_SB.HGPM,TSCD_SB.QUCBH,TSCD_SB.LSBH,TSCD_SB.DWBH,TSCD_SB.ZSDH,TSCD_SB.CQDH,TSCD_SB.AuthCompany,TSCD_SB.AuthCE,TSCD_SB.Memo as SB_Memo 
+       ,TSCD_ZSZL.ZSJC_YW,TSCD_ZSZL.ZSJC_ZW,TSCD_ZSZL.fpdz,TSCD_ZSZL.dh,TSCD_ZSZL.cz,TSCD_ZSZL.fzr,TSCD_ZSZL.llr 
+       ,TSCD_ZSZL.LB1_Memo,TSCD_ZSZL.LB2_Memo,TSCD_ZSZL.LB3_Memo,TSCD_ZSZL.AuthCE as ZSZL_AuthCE,TSCD_ZSZL.AuthCE_Memo,TSCD_ZSZL.AuthZSDH,TSCD_ZSZL.AuthZSDH_Memo,TSCD_ZSZL.IsZSDH,TSCD_ZSZL.Memo as ZSZL_Memo 
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo   
+       ,TSCD_KCRKS.USPrice,TSCD_KCRKS.VNPrice,TSCD_KCRK.DOCNO,JDTS_Dep.DepName as JDTSDep,JRTS_Dep.DepName as JRTSDep    
+from TSCD
+left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH
+left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS.SBBH=TSCD.SBBH  
+left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS 
+left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS 
+left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=1 
+Union all 
+Select TSCD.*
+       ,CLZL.YWPM,NULL as VWPM,CLZL.zwpm,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE,null as SB_Memo
+       ,ZSZL.zsjc,zszl.zsywjc,zszl.fpdz,zszl.dh,zszl.cz,zszl.fzr,zszl.llr
+       ,null as LB1_Memo,null as LB2_Memo,null LB3_Memo,null as ZSZL_AuthCE,null as AuthCE_Memo,null as AuthZSDH,null as AuthZSDH_Memo,null as IsZSDH,null as ZSZL_Memo
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  
+       ,KCRKS.USPrice,KCRKS.VNPrice,KCRKS.DOCNO,null as JRTS_Dep,null as JRTSDep    
+from TSCD
+left join CLZL on CLZL.CLDH = TSCD.SBBH
+left join KCRK  on KCRK.RKNO=TSCD.RKNO 
+left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=2
+) TSCD where 1=1 
+and TSCD.TSBH like '%CHAT0001%' 
+order by TSCD.Label_Tag,TSCD.TSBH,TSCD.YWPM,TSCD.Status
+Select * from (
+Select TSCD.*
+       ,TSCD_SB.YWPM,TSCD_SB.VWPM,TSCD_SB.ZWPM,TSCD_SB.HGPM,TSCD_SB.QUCBH,TSCD_SB.LSBH,TSCD_SB.DWBH,TSCD_SB.ZSDH,TSCD_SB.CQDH,TSCD_SB.AuthCompany,TSCD_SB.AuthCE,TSCD_SB.Memo as SB_Memo 
+       ,TSCD_ZSZL.ZSJC_YW,TSCD_ZSZL.ZSJC_ZW,TSCD_ZSZL.fpdz,TSCD_ZSZL.dh,TSCD_ZSZL.cz,TSCD_ZSZL.fzr,TSCD_ZSZL.llr 
+       ,TSCD_ZSZL.LB1_Memo,TSCD_ZSZL.LB2_Memo,TSCD_ZSZL.LB3_Memo,TSCD_ZSZL.AuthCE as ZSZL_AuthCE,TSCD_ZSZL.AuthCE_Memo,TSCD_ZSZL.AuthZSDH,TSCD_ZSZL.AuthZSDH_Memo,TSCD_ZSZL.IsZSDH,TSCD_ZSZL.Memo as ZSZL_Memo 
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo   
+       ,TSCD_KCRKS.USPrice,TSCD_KCRKS.VNPrice,TSCD_KCRK.DOCNO,JDTS_Dep.DepName as JDTSDep,JRTS_Dep.DepName as JRTSDep    
+from TSCD
+left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH
+left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS.SBBH=TSCD.SBBH  
+left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS 
+left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS 
+left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=1 
+Union all 
+Select TSCD.*
+       ,CLZL.YWPM,NULL as VWPM,CLZL.zwpm,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE,null as SB_Memo
+       ,ZSZL.zsjc,zszl.zsywjc,zszl.fpdz,zszl.dh,zszl.cz,zszl.fzr,zszl.llr
+       ,null as LB1_Memo,null as LB2_Memo,null LB3_Memo,null as ZSZL_AuthCE,null as AuthCE_Memo,null as AuthZSDH,null as AuthZSDH_Memo,null as IsZSDH,null as ZSZL_Memo
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  
+       ,KCRKS.USPrice,KCRKS.VNPrice,KCRKS.DOCNO,null as JRTS_Dep,null as JRTSDep    
+from TSCD
+left join CLZL on CLZL.CLDH = TSCD.SBBH
+left join KCRK  on KCRK.RKNO=TSCD.RKNO 
+left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=2
+) TSCD where 1=1 
+and TSCD.TSBH like '%CHAT0001%' 
+order by TSCD.Label_Tag,TSCD.TSBH,TSCD.YWPM,TSCD.Status
+Select * from (
+Select TSCD.*
+       ,TSCD_SB.YWPM,TSCD_SB.VWPM,TSCD_SB.ZWPM,TSCD_SB.HGPM,TSCD_SB.QUCBH,TSCD_SB.LSBH,TSCD_SB.DWBH,TSCD_SB.ZSDH,TSCD_SB.CQDH,TSCD_SB.AuthCompany,TSCD_SB.AuthCE,TSCD_SB.Memo as SB_Memo 
+       ,TSCD_ZSZL.ZSJC_YW,TSCD_ZSZL.ZSJC_ZW,TSCD_ZSZL.fpdz,TSCD_ZSZL.dh,TSCD_ZSZL.cz,TSCD_ZSZL.fzr,TSCD_ZSZL.llr 
+       ,TSCD_ZSZL.LB1_Memo,TSCD_ZSZL.LB2_Memo,TSCD_ZSZL.LB3_Memo,TSCD_ZSZL.AuthCE as ZSZL_AuthCE,TSCD_ZSZL.AuthCE_Memo,TSCD_ZSZL.AuthZSDH,TSCD_ZSZL.AuthZSDH_Memo,TSCD_ZSZL.IsZSDH,TSCD_ZSZL.Memo as ZSZL_Memo 
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo   
+       ,TSCD_KCRKS.USPrice,TSCD_KCRKS.VNPrice,TSCD_KCRK.DOCNO,JDTS_Dep.DepName as JDTSDep,JRTS_Dep.DepName as JRTSDep    
+from TSCD
+left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH
+left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS.SBBH=TSCD.SBBH  
+left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS 
+left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS 
+left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=1 
+Union all 
+Select TSCD.*
+       ,CLZL.YWPM,NULL as VWPM,CLZL.zwpm,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE,null as SB_Memo
+       ,ZSZL.zsjc,zszl.zsywjc,zszl.fpdz,zszl.dh,zszl.cz,zszl.fzr,zszl.llr
+       ,null as LB1_Memo,null as LB2_Memo,null LB3_Memo,null as ZSZL_AuthCE,null as AuthCE_Memo,null as AuthZSDH,null as AuthZSDH_Memo,null as IsZSDH,null as ZSZL_Memo
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  
+       ,KCRKS.USPrice,KCRKS.VNPrice,KCRKS.DOCNO,null as JRTS_Dep,null as JRTSDep    
+from TSCD
+left join CLZL on CLZL.CLDH = TSCD.SBBH
+left join KCRK  on KCRK.RKNO=TSCD.RKNO 
+left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=2
+) TSCD where 1=1 
+and TSCD.TSBH like '%CHAT0001%' 
+order by TSCD.Label_Tag,TSCD.TSBH,TSCD.YWPM,TSCD.Status
+Select * from (
+Select TSCD.*
+       ,TSCD_SB.YWPM,TSCD_SB.VWPM,TSCD_SB.ZWPM,TSCD_SB.HGPM,TSCD_SB.QUCBH,TSCD_SB.LSBH,TSCD_SB.DWBH,TSCD_SB.ZSDH,TSCD_SB.CQDH,TSCD_SB.AuthCompany,TSCD_SB.AuthCE,TSCD_SB.Memo as SB_Memo 
+       ,TSCD_ZSZL.ZSJC_YW,TSCD_ZSZL.ZSJC_ZW,TSCD_ZSZL.fpdz,TSCD_ZSZL.dh,TSCD_ZSZL.cz,TSCD_ZSZL.fzr,TSCD_ZSZL.llr 
+       ,TSCD_ZSZL.LB1_Memo,TSCD_ZSZL.LB2_Memo,TSCD_ZSZL.LB3_Memo,TSCD_ZSZL.AuthCE as ZSZL_AuthCE,TSCD_ZSZL.AuthCE_Memo,TSCD_ZSZL.AuthZSDH,TSCD_ZSZL.AuthZSDH_Memo,TSCD_ZSZL.IsZSDH,TSCD_ZSZL.Memo as ZSZL_Memo 
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo   
+       ,TSCD_KCRKS.USPrice,TSCD_KCRKS.VNPrice,TSCD_KCRK.DOCNO,JDTS_Dep.DepName as JDTSDep,JRTS_Dep.DepName as JRTSDep    
+from TSCD
+left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH
+left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS.SBBH=TSCD.SBBH  
+left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS 
+left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS 
+left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=1 
+Union all 
+Select TSCD.*
+       ,CLZL.YWPM,NULL as VWPM,CLZL.zwpm,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE,null as SB_Memo
+       ,ZSZL.zsjc,zszl.zsywjc,zszl.fpdz,zszl.dh,zszl.cz,zszl.fzr,zszl.llr
+       ,null as LB1_Memo,null as LB2_Memo,null LB3_Memo,null as ZSZL_AuthCE,null as AuthCE_Memo,null as AuthZSDH,null as AuthZSDH_Memo,null as IsZSDH,null as ZSZL_Memo
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  
+       ,KCRKS.USPrice,KCRKS.VNPrice,KCRKS.DOCNO,null as JRTS_Dep,null as JRTSDep    
+from TSCD
+left join CLZL on CLZL.CLDH = TSCD.SBBH
+left join KCRK  on KCRK.RKNO=TSCD.RKNO 
+left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=2
+) TSCD where 1=1 
+and TSCD.TSBH like '%CHAT0001%' 
+order by TSCD.Label_Tag,TSCD.TSBH,TSCD.YWPM,TSCD.Status
+Select * from (
+Select TSCD.*
+       ,TSCD_SB.YWPM,TSCD_SB.VWPM,TSCD_SB.ZWPM,TSCD_SB.HGPM,TSCD_SB.QUCBH,TSCD_SB.LSBH,TSCD_SB.DWBH,TSCD_SB.ZSDH,TSCD_SB.CQDH,TSCD_SB.AuthCompany,TSCD_SB.AuthCE,TSCD_SB.Memo as SB_Memo 
+       ,TSCD_ZSZL.ZSJC_YW,TSCD_ZSZL.ZSJC_ZW,TSCD_ZSZL.fpdz,TSCD_ZSZL.dh,TSCD_ZSZL.cz,TSCD_ZSZL.fzr,TSCD_ZSZL.llr 
+       ,TSCD_ZSZL.LB1_Memo,TSCD_ZSZL.LB2_Memo,TSCD_ZSZL.LB3_Memo,TSCD_ZSZL.AuthCE as ZSZL_AuthCE,TSCD_ZSZL.AuthCE_Memo,TSCD_ZSZL.AuthZSDH,TSCD_ZSZL.AuthZSDH_Memo,TSCD_ZSZL.IsZSDH,TSCD_ZSZL.Memo as ZSZL_Memo 
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo   
+       ,TSCD_KCRKS.USPrice,TSCD_KCRKS.VNPrice,TSCD_KCRK.DOCNO,JDTS_Dep.DepName as JDTSDep,JRTS_Dep.DepName as JRTSDep    
+from TSCD
+left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH
+left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS.SBBH=TSCD.SBBH  
+left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS 
+left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS 
+left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=1 
+Union all 
+Select TSCD.*
+       ,CLZL.YWPM,NULL as VWPM,CLZL.zwpm,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE,null as SB_Memo
+       ,ZSZL.zsjc,zszl.zsywjc,zszl.fpdz,zszl.dh,zszl.cz,zszl.fzr,zszl.llr
+       ,null as LB1_Memo,null as LB2_Memo,null LB3_Memo,null as ZSZL_AuthCE,null as AuthCE_Memo,null as AuthZSDH,null as AuthZSDH_Memo,null as IsZSDH,null as ZSZL_Memo
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  
+       ,KCRKS.USPrice,KCRKS.VNPrice,KCRKS.DOCNO,null as JRTS_Dep,null as JRTSDep    
+from TSCD
+left join CLZL on CLZL.CLDH = TSCD.SBBH
+left join KCRK  on KCRK.RKNO=TSCD.RKNO 
+left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=2
+) TSCD where 1=1 
+and TSCD.TSBH like '%CHAT0001%' 
+order by TSCD.Label_Tag,TSCD.TSBH,TSCD.YWPM,TSCD.Status
+Select * from (
+Select TSCD.*
+       ,TSCD_SB.YWPM,TSCD_SB.VWPM,TSCD_SB.ZWPM,TSCD_SB.HGPM,TSCD_SB.QUCBH,TSCD_SB.LSBH,TSCD_SB.DWBH,TSCD_SB.ZSDH,TSCD_SB.CQDH,TSCD_SB.AuthCompany,TSCD_SB.AuthCE,TSCD_SB.Memo as SB_Memo 
+       ,TSCD_ZSZL.ZSJC_YW,TSCD_ZSZL.ZSJC_ZW,TSCD_ZSZL.fpdz,TSCD_ZSZL.dh,TSCD_ZSZL.cz,TSCD_ZSZL.fzr,TSCD_ZSZL.llr 
+       ,TSCD_ZSZL.LB1_Memo,TSCD_ZSZL.LB2_Memo,TSCD_ZSZL.LB3_Memo,TSCD_ZSZL.AuthCE as ZSZL_AuthCE,TSCD_ZSZL.AuthCE_Memo,TSCD_ZSZL.AuthZSDH,TSCD_ZSZL.AuthZSDH_Memo,TSCD_ZSZL.IsZSDH,TSCD_ZSZL.Memo as ZSZL_Memo 
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo   
+       ,TSCD_KCRKS.USPrice,TSCD_KCRKS.VNPrice,TSCD_KCRK.DOCNO,JDTS_Dep.DepName as JDTSDep,JRTS_Dep.DepName as JRTSDep    
+from TSCD
+left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH
+left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS.SBBH=TSCD.SBBH  
+left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS 
+left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS 
+left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=1 
+Union all 
+Select TSCD.*
+       ,CLZL.YWPM,NULL as VWPM,CLZL.zwpm,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE,null as SB_Memo
+       ,ZSZL.zsjc,zszl.zsywjc,zszl.fpdz,zszl.dh,zszl.cz,zszl.fzr,zszl.llr
+       ,null as LB1_Memo,null as LB2_Memo,null LB3_Memo,null as ZSZL_AuthCE,null as AuthCE_Memo,null as AuthZSDH,null as AuthZSDH_Memo,null as IsZSDH,null as ZSZL_Memo
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  
+       ,KCRKS.USPrice,KCRKS.VNPrice,KCRKS.DOCNO,null as JRTS_Dep,null as JRTSDep    
+from TSCD
+left join CLZL on CLZL.CLDH = TSCD.SBBH
+left join KCRK  on KCRK.RKNO=TSCD.RKNO 
+left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=2
+) TSCD where 1=1 
+and TSCD.TSBH like '%CHAT0001%' 
+order by TSCD.Label_Tag,TSCD.TSBH,TSCD.YWPM,TSCD.Status
+Select * from (
+Select TSCD.*
+       ,TSCD_SB.YWPM,TSCD_SB.VWPM,TSCD_SB.ZWPM,TSCD_SB.HGPM,TSCD_SB.QUCBH,TSCD_SB.LSBH,TSCD_SB.DWBH,TSCD_SB.ZSDH,TSCD_SB.CQDH,TSCD_SB.AuthCompany,TSCD_SB.AuthCE,TSCD_SB.Memo as SB_Memo 
+       ,TSCD_ZSZL.ZSJC_YW,TSCD_ZSZL.ZSJC_ZW,TSCD_ZSZL.fpdz,TSCD_ZSZL.dh,TSCD_ZSZL.cz,TSCD_ZSZL.fzr,TSCD_ZSZL.llr 
+       ,TSCD_ZSZL.LB1_Memo,TSCD_ZSZL.LB2_Memo,TSCD_ZSZL.LB3_Memo,TSCD_ZSZL.AuthCE as ZSZL_AuthCE,TSCD_ZSZL.AuthCE_Memo,TSCD_ZSZL.AuthZSDH,TSCD_ZSZL.AuthZSDH_Memo,TSCD_ZSZL.IsZSDH,TSCD_ZSZL.Memo as ZSZL_Memo 
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo   
+       ,TSCD_KCRKS.USPrice,TSCD_KCRKS.VNPrice,TSCD_KCRK.DOCNO,JDTS_Dep.DepName as JDTSDep,JRTS_Dep.DepName as JRTSDep    
+from TSCD
+left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH
+left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS.SBBH=TSCD.SBBH  
+left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS 
+left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS 
+left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=1 
+Union all 
+Select TSCD.*
+       ,CLZL.YWPM,NULL as VWPM,CLZL.zwpm,null as HGPM,null as QUCBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompany,null as AuthCE,null as SB_Memo
+       ,ZSZL.zsjc,zszl.zsywjc,zszl.fpdz,zszl.dh,zszl.cz,zszl.fzr,zszl.llr
+       ,null as LB1_Memo,null as LB2_Memo,null LB3_Memo,null as ZSZL_AuthCE,null as AuthCE_Memo,null as AuthZSDH,null as AuthZSDH_Memo,null as IsZSDH,null as ZSZL_Memo
+       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,IsNull(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  
+       ,KCRKS.USPrice,KCRKS.VNPrice,KCRKS.DOCNO,null as JRTS_Dep,null as JRTSDep    
+from TSCD
+left join CLZL on CLZL.CLDH = TSCD.SBBH
+left join KCRK  on KCRK.RKNO=TSCD.RKNO 
+left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH 
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.DepID
+left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH
+left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS 
+where TSCD.LB=2
+) TSCD where 1=1 
+order by TSCD.Label_Tag,TSCD.TSBH,TSCD.YWPM,TSCD.Status

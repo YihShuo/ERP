@@ -1,0 +1,20 @@
+object DM2: TDM2
+  OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  Left = 634
+  Top = 499
+  Height = 249
+  Width = 309
+  object DBshipping: TDatabase
+    AliasName = 'LIY_ERP'
+    DatabaseName = 'DB'
+    Params.Strings = (
+      'USER NAME=tyxuan'
+      'password=jack'
+      '')
+    SessionName = 'Default'
+    OnLogin = DBshippingLogin
+    Left = 104
+    Top = 16
+  end
+end

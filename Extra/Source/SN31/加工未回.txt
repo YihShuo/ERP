@@ -1,0 +1,60 @@
+--
+Select  CKBH,CLBH, Case when (Sum(LLQty)- Sum(Case when CFMID1<>'NO' then Round(JGQty*Rate,2) else 0 end))>=0 then Sum(LLQty)- Sum(Case when CFMID1<>'NO' then Round(JGQty*Rate,2) else 0 end) else 0 end  as Qty,
+        Sum(LLQty) as LLQty, Sum(Case when CFMID1<>'NO' then Round(JGQty*Rate,2) else 0 end) as JGRK
+from (
+Select KCLL.LLNO,KCLL.CKBH,KCLL.CLBH,KCLL.DFL,KCLL.LLQty,JGZL.JGNO,JGZLSCon.Qty as Rate,JGZLSMon.Qty as Qty1,Round(JGZLSMon.Qty,2) as JGQty,JGZL.CFMID1,JGZL.CFMDate1
+from (
+Select KCLL.LLNO,KCLL.CKBH,KCLLS.CLBH,KCLLS.DFL,KCLL.JGNO,Sum(KCLLS.Qty) as LLQty
+from KCLL
+left join KCLLS on KCLLS.LLNO=KCLL.LLNO
+where KCLL.SCBH='JJJJJJJJJJ' and KCLL.CFMID<>'NO' and KCLLS.Qty>0
+      and convert(smalldatetime,convert(varchar,KCLL.CFMDate,111)) between '2022/06/01' and '2022/06/30'
+      --and KCLLS.CLBH='K020059252'
+      --and KCLL.JGNO='20220600069'
+Group by KCLL.LLNO,KCLL.CKBH,KCLLS.CLBH,KCLLS.DFL,KCLL.JGNO ) KCLL
+left join JGZL on JGZL.JGNO=KCLL.JGNO
+left join JGZLS JGZLSCon on JGZLSCon.JGNO=JGZL.JGNO and JGZLSCon.CLBH=KCLL.DFL and JGZLSCon.ZMLB=KCLL.CLBH and JGZLSCon.ZMLB<>'ZZZZZZZZZZ'
+Left join JGZLS JGZLSMon on JGZLSMon.JGNO=JGZL.JGNO and JGZLSMon.CLBH=KCLL.DFL  and JGZLSMon.ZMLB='ZZZZZZZZZZ'
+) JGZLCK 
+Group by  CKBH,CLBH
+
+
+----------------------------------------------------------
+Select KCZLS.CKBH,KCZLS.CLBH,CLZL.zwpm,CLZL.dwbh,IsNull(JGZLMonth.LastQty,0.0)+IsNull(JGZL_CK.CKQty,0.0)-IsNull(JGZL_RK.RKQty,0.0) as Qty
+       ,IsNull(JGZLMonth.LastQty,0.0) as LastQty,IsNull(JGZL_CK.CKQty,0.0) as CKQty ,IsNull(JGZL_RK.RKQty,0.0) as RKQty
+from KCZLS
+left join CLZL on CLZL.cldh=KCZLS.CLBH
+left join (
+	Select CKBH,CLBH,Qty as LastQty
+	from JGZLMonth
+	where JGYear='2022' and JGMonth='05' and JGZLMonth.CKBH in (Select CKBH from KCCK where GSBH='B07U')
+) JGZLMonth on JGZLMonth.CKBH=KCZLS.CKBH and JGZLMonth.CLBH=KCZLS.CLBH
+left join (
+	Select CKBH, CLBH, SUM(Qty) as CKQty from (
+	Select JGZL.CKBH,JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty,JGZL.CFMDate1 as RKCFMDate,KCLL.CFMDate as LLCFMDate
+	from JGZLS
+	left join JGZL on JGZL.JGNO=JGZLS.JGNO
+	left join KCLL on KCLL.JGNO=JGZL.JGNO
+	where 1=1 --and JGZL.JGNO='20220500173' 
+		  and JGZLS.ZMLB='ZZZZZZZZZZ' and JGZL.GSBH='B07U'
+		  and Exists (Select LLNO from KCLLS where  KCLL.LLNO=KCLLS.LLNO and KCLLS.Qty>0 )   
+		  and KCLL.CFMID<>'NO' 
+		  and convert(smalldatetime,convert(varchar,KCLL.CFMDate,111)) between 
+						 '2022/06/01' and '2022/06/30' 
+	) JGZL_CK 
+Group by CKBH, CLBH ) JGZL_CK on JGZL_CK.CKBH=KCZLS.CKBH and JGZL_CK.CLBH=KCZLS.CLBH
+Left join (
+Select CKBH, CLBH, SUM(Qty) as RKQty  from (
+Select JGZL.CKBH,JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty,JGZL.CFMDate1 as RKCFMDate
+from JGZLS
+left join JGZL on JGZL.JGNO=JGZLS.JGNO
+--left join KCLL on KCLL.JGNO=JGZL.JGNO
+where 1=1 --and JGZL.JGNO='20220500173' 
+      and JGZLS.ZMLB='ZZZZZZZZZZ'  and JGZL.GSBH='B07U'
+      --and Exists (Select LLNO from KCLLS where  KCLL.LLNO=KCLLS.LLNO and KCLLS.Qty>0)   
+      and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between 
+					 '2022/06/01' and '2022/06/30' 
+) JGZL_RK 
+Group by CKBH, CLBH	 ) JGZL_RK	on JGZL_RK.CKBH=KCZLS.CKBH and JGZL_RK.CLBH=KCZLS.CLBH	
+where CLZL.clzmlb='Y' and  KCZLS.CKBH in ('7UA1','7UA2','7US1') --  in (Select CKBH from KCCK where GSBH='B07U')		
+     and (JGZLMonth.LastQty>0 or JGZL_RK.RKQty>0 or JGZL_CK.CKQty>0 )  

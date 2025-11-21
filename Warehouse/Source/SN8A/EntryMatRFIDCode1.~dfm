@@ -1,0 +1,2857 @@
+object EntryMatRFIDCode: TEntryMatRFIDCode
+  Left = 195
+  Top = 127
+  Width = 1186
+  Height = 577
+  Caption = 'EntryMatRFIDCode'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 1170
+    Height = 65
+    Align = alTop
+    TabOrder = 0
+    object Label18: TLabel
+      Left = 712
+      Top = 32
+      Width = 74
+      Height = 24
+      Caption = 'Master'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -19
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold, fsItalic]
+      ParentFont = False
+    end
+    object BB2: TBitBtn
+      Left = 56
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Insert one New Record'
+      Caption = 'Insert'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      OnClick = BB2Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        33333333FF33333333FF333993333333300033377F3333333777333993333333
+        300033F77FFF3333377739999993333333333777777F3333333F399999933333
+        33003777777333333377333993333333330033377F3333333377333993333333
+        3333333773333333333F333333333333330033333333F33333773333333C3333
+        330033333337FF3333773333333CC333333333FFFFF77FFF3FF33CCCCCCCCCC3
+        993337777777777F77F33CCCCCCCCCC3993337777777777377333333333CC333
+        333333333337733333FF3333333C333330003333333733333777333333333333
+        3000333333333333377733333333333333333333333333333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BB3: TBitBtn
+      Left = 104
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Delete one Record'
+      Caption = 'Delete'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      OnClick = BB3Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        333333333333333333FF33333333333330003333333333333777333333333333
+        300033FFFFFF3333377739999993333333333777777F3333333F399999933333
+        3300377777733333337733333333333333003333333333333377333333333333
+        3333333333333333333F333333333333330033333F33333333773333C3333333
+        330033337F3333333377333CC3333333333333F77FFFFFFF3FF33CCCCCCCCCC3
+        993337777777777F77F33CCCCCCCCCC399333777777777737733333CC3333333
+        333333377F33333333FF3333C333333330003333733333333777333333333333
+        3000333333333333377733333333333333333333333333333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BB4: TBitBtn
+      Left = 152
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Modify Current'
+      Caption = 'Modify'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      OnClick = BB4Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00500005000555
+        555557777F777555F55500000000555055557777777755F75555005500055055
+        555577F5777F57555555005550055555555577FF577F5FF55555500550050055
+        5555577FF77577FF555555005050110555555577F757777FF555555505099910
+        555555FF75777777FF555005550999910555577F5F77777775F5500505509990
+        3055577F75F77777575F55005055090B030555775755777575755555555550B0
+        B03055555F555757575755550555550B0B335555755555757555555555555550
+        BBB35555F55555575F555550555555550BBB55575555555575F5555555555555
+        50BB555555555555575F555555555555550B5555555555555575}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BB5: TBitBtn
+      Left = 200
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Save Current'
+      Caption = 'Save'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+      OnClick = BB5Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+        555555555555555555555555555555555555555555FF55555555555559055555
+        55555555577FF5555555555599905555555555557777F5555555555599905555
+        555555557777FF5555555559999905555555555777777F555555559999990555
+        5555557777777FF5555557990599905555555777757777F55555790555599055
+        55557775555777FF5555555555599905555555555557777F5555555555559905
+        555555555555777FF5555555555559905555555555555777FF55555555555579
+        05555555555555777FF5555555555557905555555555555777FF555555555555
+        5990555555555555577755555555555555555555555555555555}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BB6: TBitBtn
+      Left = 248
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Cancel'
+      Caption = 'Cancel'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 5
+      OnClick = BB6Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        333333333333333333333333333333333333333FFF33FF333FFF339993370733
+        999333777FF37FF377733339993000399933333777F777F77733333399970799
+        93333333777F7377733333333999399933333333377737773333333333990993
+        3333333333737F73333333333331013333333333333777FF3333333333910193
+        333333333337773FF3333333399000993333333337377737FF33333399900099
+        93333333773777377FF333399930003999333337773777F777FF339993370733
+        9993337773337333777333333333333333333333333333333333333333333333
+        3333333333333333333333333333333333333333333333333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BB7: TBitBtn
+      Left = 296
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Exit Current Form'
+      Caption = 'Exit'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 6
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033BBBBBBBBBB
+        BB33337777777777777F33BB00BBBBBBBB33337F77333333F37F33BB0BBBBBB0
+        BB33337F73F33337FF7F33BBB0BBBB000B33337F37FF3377737F33BBB00BB00B
+        BB33337F377F3773337F33BBBB0B00BBBB33337F337F7733337F33BBBB000BBB
+        BB33337F33777F33337F33EEEE000EEEEE33337F3F777FFF337F33EE0E80000E
+        EE33337F73F77773337F33EEE0800EEEEE33337F37377F33337F33EEEE000EEE
+        EE33337F33777F33337F33EEEEE00EEEEE33337F33377FF3337F33EEEEEE00EE
+        EE33337F333377F3337F33EEEEEE00EEEE33337F33337733337F33EEEEEEEEEE
+        EE33337FFFFFFFFFFF7F33EEEEEEEEEEEE333377777777777773}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BB1: TBitBtn
+      Left = 8
+      Top = 8
+      Width = 49
+      Height = 49
+      Caption = 'Query'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BB1Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        333333333333333FF3FF3333333333CC30003333333333773777333333333C33
+        3000333FF33337F33777339933333C3333333377F33337F3333F339933333C33
+        33003377333337F33377333333333C333300333F333337F33377339333333C33
+        3333337FF3333733333F33993333C33333003377FF33733333773339933C3333
+        330033377FF73F33337733339933C33333333FF377F373F3333F993399333C33
+        330077F377F337F33377993399333C33330077FF773337F33377399993333C33
+        33333777733337F333FF333333333C33300033333333373FF7773333333333CC
+        3000333333333377377733333333333333333333333333333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BBT1: TBitBtn
+      Left = 368
+      Top = 8
+      Width = 49
+      Height = 49
+      Caption = 'First'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 7
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        333333333333333333FF3333333333333744333333333333F773333333333337
+        44473333333333F777F3333333333744444333333333F7733733333333374444
+        4433333333F77333733333333744444447333333F7733337F333333744444444
+        433333F77333333733333744444444443333377FFFFFFF7FFFFF999999999999
+        9999733777777777777333CCCCCCCCCC33333773FF333373F3333333CCCCCCCC
+        C333333773FF3337F333333333CCCCCCC33333333773FF373F3333333333CCCC
+        CC333333333773FF73F33333333333CCCCC3333333333773F7F3333333333333
+        CCC333333333333777FF33333333333333CC3333333333333773}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BBT2: TBitBtn
+      Left = 416
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Insert one New Record'
+      Caption = 'Prior'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 8
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        3333333333333333333333333333333333333333333333333333333333333333
+        3333333333333FF3333333333333003333333333333F77F33333333333009033
+        333333333F7737F333333333009990333333333F773337FFFFFF330099999000
+        00003F773333377777770099999999999990773FF33333FFFFF7330099999000
+        000033773FF33777777733330099903333333333773FF7F33333333333009033
+        33333333337737F3333333333333003333333333333377333333333333333333
+        3333333333333333333333333333333333333333333333333333333333333333
+        3333333333333333333333333333333333333333333333333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BBT3: TBitBtn
+      Left = 464
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Delete one Record'
+      Caption = 'Next'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 9
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        3333333333333333333333333333333333333333333333333333333333333333
+        3333333333333333333333333333333333333333333FF3333333333333003333
+        3333333333773FF3333333333309003333333333337F773FF333333333099900
+        33333FFFFF7F33773FF30000000999990033777777733333773F099999999999
+        99007FFFFFFF33333F7700000009999900337777777F333F7733333333099900
+        33333333337F3F77333333333309003333333333337F77333333333333003333
+        3333333333773333333333333333333333333333333333333333333333333333
+        3333333333333333333333333333333333333333333333333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BBT4: TBitBtn
+      Left = 512
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Modify Current'
+      Caption = 'Last'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 10
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        33333FF3333333333333447333333333333377FFF33333333333744473333333
+        333337773FF3333333333444447333333333373F773FF3333333334444447333
+        33333373F3773FF3333333744444447333333337F333773FF333333444444444
+        733333373F3333773FF333334444444444733FFF7FFFFFFF77FF999999999999
+        999977777777777733773333CCCCCCCCCC3333337333333F7733333CCCCCCCCC
+        33333337F3333F773333333CCCCCCC3333333337333F7733333333CCCCCC3333
+        333333733F77333333333CCCCC333333333337FF7733333333333CCC33333333
+        33333777333333333333CC333333333333337733333333333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object bbt6: TBitBtn
+      Left = 584
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Modify Current'
+      Caption = 'Excel'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 11
+      OnClick = bbt6Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033333333B333
+        333B33FF33337F3333F73BB3777BB7777BB3377FFFF77FFFF77333B000000000
+        0B3333777777777777333330FFFFFFFF07333337F33333337F333330FFFFFFFF
+        07333337F3FF3FFF7F333330F00F000F07333337F77377737F333330FFFFFFFF
+        07333FF7F3FFFF3F7FFFBBB0F0000F0F0BB37777F7777373777F3BB0FFFFFFFF
+        0BBB3777F3FF3FFF77773330F00F000003333337F773777773333330FFFF0FF0
+        33333337F3FF7F37F3333330F08F0F0B33333337F7737F77FF333330FFFF003B
+        B3333337FFFF77377FF333B000000333BB33337777777F3377FF3BB3333BB333
+        3BB33773333773333773B333333B3333333B7333333733333337}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+  end
+  object PC1: TPageControl
+    Left = 0
+    Top = 130
+    Width = 1170
+    Height = 408
+    ActivePage = TS1
+    Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    OnChange = PC1Change
+    object TS1: TTabSheet
+      Caption = 'SCMas'
+      object Panel2: TPanel
+        Left = 0
+        Top = 0
+        Width = 1162
+        Height = 73
+        Align = alTop
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        object Label2: TLabel
+          Left = 3
+          Top = 44
+          Width = 52
+          Height = 16
+          Caption = 'DOCNO:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label3: TLabel
+          Left = 208
+          Top = 11
+          Width = 34
+          Height = 16
+          Caption = 'From:'
+        end
+        object Label4: TLabel
+          Left = 343
+          Top = 13
+          Width = 20
+          Height = 16
+          Caption = 'To:'
+        end
+        object Label7: TLabel
+          Left = 294
+          Top = 44
+          Width = 44
+          Height = 16
+          Caption = 'MEMO:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label1: TLabel
+          Left = 15
+          Top = 12
+          Width = 41
+          Height = 16
+          Caption = 'SCNO:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object INVEdit: TEdit
+          Left = 59
+          Top = 39
+          Width = 230
+          Height = 24
+          AutoSelect = False
+          CharCase = ecUpperCase
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+        end
+        object DTP1: TDateTimePicker
+          Left = 246
+          Top = 8
+          Width = 97
+          Height = 24
+          Date = 43101.000000000000000000
+          Format = 'yyyy/MM/dd'
+          Time = 43101.000000000000000000
+          TabOrder = 1
+        end
+        object DTP2: TDateTimePicker
+          Left = 366
+          Top = 7
+          Width = 97
+          Height = 24
+          Date = 43122.000000000000000000
+          Format = 'yyyy/MM/dd'
+          Time = 43122.000000000000000000
+          TabOrder = 2
+        end
+        object Check: TCheckBox
+          Left = 470
+          Top = 13
+          Width = 67
+          Height = 17
+          Caption = 'Mine'
+          Checked = True
+          State = cbChecked
+          TabOrder = 3
+        end
+        object BitBtn2: TBitBtn
+          Left = 528
+          Top = 11
+          Width = 58
+          Height = 49
+          Caption = 'Query'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 4
+          OnClick = BitBtn2Click
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000130B0000130B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+            333333333333333FF3FF3333333333CC30003333333333773777333333333C33
+            3000333FF33337F33777339933333C3333333377F33337F3333F339933333C33
+            33003377333337F33377333333333C333300333F333337F33377339333333C33
+            3333337FF3333733333F33993333C33333003377FF33733333773339933C3333
+            330033377FF73F33337733339933C33333333FF377F373F3333F993399333C33
+            330077F377F337F33377993399333C33330077FF773337F33377399993333C33
+            33333777733337F333FF333333333C33300033333333373FF7773333333333CC
+            3000333333333377377733333333333333333333333333333333}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+        end
+        object MemoEdit: TEdit
+          Left = 349
+          Top = 40
+          Width = 116
+          Height = 24
+          AutoSelect = False
+          CharCase = ecUpperCase
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 5
+        end
+        object SCNOEdit: TEdit
+          Left = 59
+          Top = 7
+          Width = 134
+          Height = 24
+          AutoSelect = False
+          CharCase = ecUpperCase
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 6
+        end
+      end
+      object DBGridEh1: TDBGridEh
+        Left = 0
+        Top = 113
+        Width = 1162
+        Height = 264
+        Align = alClient
+        DataSource = DS1
+        Flat = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        FooterColor = clWindow
+        FooterFont.Charset = DEFAULT_CHARSET
+        FooterFont.Color = clWindowText
+        FooterFont.Height = -13
+        FooterFont.Name = 'MS Sans Serif'
+        FooterFont.Style = []
+        FooterRowCount = 1
+        ParentFont = False
+        SumList.Active = True
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -13
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        UseMultiTitle = True
+        OnDblClick = DBGridEh1DblClick
+        OnGetCellParams = DBGridEh1GetCellParams
+        Columns = <
+          item
+            EditButtons = <>
+            FieldName = 'SCNO'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = #25475#25551#20837#24235'|SCNO'
+            Width = 96
+          end
+          item
+            EditButtons = <>
+            FieldName = 'DOCNO'
+            Footers = <>
+            Title.Caption = #36008#27331'INV|DOCNO'
+          end
+          item
+            EditButtons = <>
+            FieldName = 'MEMO'
+            Footers = <>
+            Title.Caption = #20633#35387'|MEMO'
+          end
+          item
+            EditButtons = <>
+            FieldName = 'USERDATE'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = #20351#29992#32773#26085#26399'|USERDATE'
+            Width = 112
+          end
+          item
+            EditButtons = <>
+            FieldName = 'USERID'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = #20351#29992#32773'ID|USERID'
+          end
+          item
+            EditButtons = <>
+            FieldName = 'CKBH'
+            Footers = <>
+            Title.Caption = #20489#24235'|CKBH'
+            Width = 46
+          end>
+      end
+      object Panel7: TPanel
+        Left = 0
+        Top = 73
+        Width = 1162
+        Height = 40
+        Align = alTop
+        TabOrder = 2
+        object Label11: TLabel
+          Left = 17
+          Top = 13
+          Width = 52
+          Height = 16
+          Caption = 'DOCNO:'
+        end
+        object Label12: TLabel
+          Left = 263
+          Top = 12
+          Width = 44
+          Height = 16
+          Caption = 'MEMO:'
+        end
+        object DBEdit5: TDBEdit
+          Left = 72
+          Top = 8
+          Width = 185
+          Height = 24
+          CharCase = ecUpperCase
+          DataField = 'DOCNO'
+          DataSource = DS1
+          TabOrder = 0
+        end
+        object DBEdit6: TDBEdit
+          Left = 320
+          Top = 8
+          Width = 153
+          Height = 24
+          CharCase = ecUpperCase
+          DataField = 'MEMO'
+          DataSource = DS1
+          TabOrder = 1
+        end
+      end
+    end
+    object TS2: TTabSheet
+      Caption = 'SCDet'
+      ImageIndex = 1
+      object Splitter1: TSplitter
+        Left = 737
+        Top = 0
+        Width = 5
+        Height = 377
+        Color = clMedGray
+        ParentColor = False
+      end
+      object Panel5: TPanel
+        Left = 0
+        Top = 0
+        Width = 737
+        Height = 377
+        Align = alLeft
+        Caption = 'Panel5'
+        TabOrder = 0
+        object DBGridEh2: TDBGridEh
+          Left = 1
+          Top = 1
+          Width = 735
+          Height = 375
+          Align = alClient
+          DataSource = DS2
+          Flat = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          FooterColor = clWindow
+          FooterFont.Charset = DEFAULT_CHARSET
+          FooterFont.Color = clWindowText
+          FooterFont.Height = -13
+          FooterFont.Name = 'MS Sans Serif'
+          FooterFont.Style = []
+          FooterRowCount = 1
+          ParentFont = False
+          SumList.Active = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -13
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          UseMultiTitle = True
+          OnEditButtonClick = DBGridEh2EditButtonClick
+          OnGetCellParams = DBGridEh2GetCellParams
+          Columns = <
+            item
+              EditButtons = <>
+              FieldName = 'CLBH'
+              Footer.FieldName = 'CLBH'
+              Footer.ValueType = fvtCount
+              Footers = <>
+              ReadOnly = True
+              Title.Caption = #26448#26009#32232#34399'|MatNo'
+              Width = 83
+            end
+            item
+              EditButtons = <>
+              FieldName = 'YWPM'
+              Footers = <>
+              ReadOnly = True
+              Title.Caption = #26448#26009#21517#31281'|MatNM'
+              Width = 394
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Qty'
+              Footer.FieldName = 'Qty'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = #20837#24235#25976#37327'|Qty'
+              Width = 65
+            end
+            item
+              Color = clBtnFace
+              EditButtons = <>
+              FieldName = 'PackQty'
+              Footers = <>
+              Title.Caption = #21253#35037'|PackQty'
+              Width = 68
+            end
+            item
+              EditButtons = <>
+              FieldName = 'CGNO'
+              Footers = <>
+              Title.Caption = #25505#36092#21934#34399'|CGNO'
+              Width = 93
+            end>
+        end
+      end
+      object Panel3: TPanel
+        Left = 742
+        Top = 0
+        Width = 420
+        Height = 377
+        Align = alClient
+        Caption = 'Panel3'
+        TabOrder = 1
+        object DBGridEh3: TDBGridEh
+          Left = 1
+          Top = 49
+          Width = 418
+          Height = 327
+          Align = alClient
+          Color = clAqua
+          DataSource = DS3
+          Flat = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          FooterColor = clWindow
+          FooterFont.Charset = DEFAULT_CHARSET
+          FooterFont.Color = clWindowText
+          FooterFont.Height = -13
+          FooterFont.Name = 'MS Sans Serif'
+          FooterFont.Style = []
+          FooterRowCount = 1
+          ParentFont = False
+          SumList.Active = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -13
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          UseMultiTitle = True
+          OnGetCellParams = DBGridEh3GetCellParams
+          OnKeyUp = DBGridEh3KeyUp
+          Columns = <
+            item
+              Color = clWindow
+              EditButtons = <>
+              FieldName = 'Qty'
+              Footer.FieldName = 'Qty'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = #25976#37327'|Qty'
+              Width = 94
+            end
+            item
+              Color = clWindow
+              EditButtons = <>
+              FieldName = 'TAGID'
+              Footers = <>
+              Title.Caption = #27161#31844#32232#34399'|TAGID'
+            end
+            item
+              Color = clBtnFace
+              EditButtons = <>
+              FieldName = 'CLBH'
+              Footers = <>
+              ReadOnly = True
+              Title.Caption = #26448#26009#32232#34399'|MatNO'
+              Width = 90
+            end
+            item
+              Color = clBtnFace
+              EditButtons = <>
+              FieldName = 'Pack'
+              Footers = <>
+              ReadOnly = True
+              Title.Caption = #21253#35037'|Pack'
+              Width = 52
+            end
+            item
+              Color = clBtnFace
+              EditButtons = <>
+              FieldName = 'Memo_RY'
+              Footers = <>
+              ReadOnly = True
+              Title.Caption = #35330#21934#37002#34399'|ZLBH'
+              Width = 100
+            end
+            item
+              Color = clBtnFace
+              EditButtons = <>
+              FieldName = 'Memo_Article'
+              Footers = <>
+              ReadOnly = True
+              Title.Caption = 'SKU#|Article'
+              Width = 100
+            end>
+        end
+        object Panel4: TPanel
+          Left = 1
+          Top = 1
+          Width = 418
+          Height = 48
+          Align = alTop
+          TabOrder = 1
+          object ImageNO: TImage
+            Left = 365
+            Top = -1
+            Width = 49
+            Height = 49
+            Picture.Data = {
+              07544269746D617036300000424D363000000000000036000000280000004000
+              0000400000000100180000000000003000000000000000000000000000000000
+              0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE2E2F7A7A7E87A7ADD5757D44040CE34
+              34CB3333CB3D3DCD5353D37373DB9F9FE6D7D7F4FFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFF9797E43838CC0000B80000B70000B80000B90000BA0000BA00
+              00BA0000BA0000BA0000BA0000BA0000B90000B70000B62929C88787E0F5F5FC
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC7C7
+              F03838CC0000B50000B90000BB0000BB0000BA0000B80000B70000BE0000C300
+              00C50000C60000C30000BF0000B80000B80000B90000BB0000BB0000B90000B5
+              2222C6AFAFEAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC5C5F01111C20000
+              B60000BB0000BB0000B80000BD0000D00000DF0000EB0000F50000F50000F500
+              00F40000F40000F50000F50000F50000ED0000E10000D20000C00000B70000BB
+              0000BB0000B70000BDA7A7E8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFE2B2BC90000B60000BC0000
+              BA0000B90000D00000E90000F60000F30000F20000F10000F00000F00000F000
+              00F00000F00000F00000F00000F00000F00000F20000F30000F60000ED0000D4
+              0000BB0000B90000BC0000B70E0EC1E3E3F7FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9B9BE50000B60000BB0000BB0000B90000
+              D80000F40000F40000F10000F00000F00000F00000F00000F00000F00000F000
+              00F00000F00000F00000F00000F00000F00000F00000F00000F00000F10000F3
+              0000F50000DD0000BC0000BA0000BC0000B47171DAFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFF3E3ECD0000B60000BC0000B70000D00000F40000
+              F30000F00000F00000F00000F00000F00000F00000F00000F00000F00000F000
+              00F00000F00000F00000F00000F00000F00000F00000F00000F00000F00000F0
+              0000F00000F20000F60000D70000B70000BC0000B81818C4FFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFF0D0DC10000B90000BB0000BC0000E90000F50000F00000
+              F00000F00000F00000F00000EF0000EF0000EF0000EF0000EF0000EF0000EF00
+              00EF0000EF0000F00000F00000F00000F00000F00000F00000F00000F00000F0
+              0000F00000F00000F00000F40000EF0000C10000BA0000BB0000BAF5F5FCFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFF0000BD0000BB0000B90000C70000F40000F10000F00000F00000
+              EF0000EF0000EF0101EF0202EF0303F00303F00404F00404F00404F00404F003
+              03F00202EF0202EF0101EF0000EF0000EF0000F00000F00000F00000F00000F0
+              0000F00000F00000F00000F00000F10000F60000CF0000B80000BC0000B7EBEB
+              FAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFF0000BD0000BB0000B80000CF0000F70000F00000EF0000EF0101EF0303
+              F00404F00505F00606F00707F10808F10808F10808F10909F10909F10808F108
+              08F10707F10707F10606F00505F00303F00202EF0000EF0000EF0000F00000F0
+              0000F00000F00000F00000F00000F00000F00000F60000DA0000B70000BC0000
+              B7F6F6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              1414C30000BB0000B80000D20000F70000F00101EF0303F00505F00606F00808
+              F10909F10A0AF00B0BF00C0CF00D0DF00D0DF00D0DF10D0DF10D0DF10D0DF00D
+              0DF00C0CF00B0BF00A0AF00909F10808F10606F10505F00303EF0000EF0000F0
+              0000F00000F00000F00000F00000F00000F00000F00000F50000DE0000B70000
+              BC0000BAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4F4FD2
+              0000B90000BA0000CE0000F70101EF0404F00606F00808F10A0AF10B0BF00D0D
+              F00E0EF10F0FF11010F11111F11111F21212F21212F21212F21212F21212F211
+              11F21010F11010F10F0FF10D0DF00C0CF00A0AF00909F10505F10000F00000EF
+              0000EF0000F00000F00000F00000F00000F00000F00000F00000F50000DA0000
+              B80000BB1C1CC5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB1B1EB0000B5
+              0000BB0000C50101F60404F00707F10909F10B0BF00D0DF00F0FF11010F11212
+              F21313F21414F21515F11616F11616F11717F11717F11717F11717F11616F116
+              16F11515F11414F21313F21212F21010F10D0DF10000EF0000F02929F21D1DF2
+              0000EE0000EE0000EF0000F00000F00000F00000F00000F00000F00000F60000
+              CF0000BA0000B87777DCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000B70000BC
+              0000BA0404F30707F10909F10B0BF00E0EF11010F11212F21414F21515F11717
+              F11818F21919F21A1AF21B1BF21B1BF21C1CF31C1CF31C1CF31B1BF31B1BF21A
+              1AF21919F21818F21717F11616F11111F10000F1B1B1FAFFFFFFFFFFFFFFFFFF
+              FFFFFF9A9AF80000EE0000EF0000F00000F00000F00000F00000F00000F00000
+              F60000C10000BC0000B5E8E8F9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4A4AD00000BA0000B7
+              0404E60909F30B0BF00E0EF11010F11313F21515F11717F11919F21A1AF21C1C
+              F31C1CF31919F21A1AF21F1FF22020F22020F22020F22020F22020F22020F21F
+              1FF21E1EF31D1DF31B1BF31919F20000F0F1F1FEFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFF0000EF0000EF0000F00000F00000F00000F00000F00000
+              F10000EE0000B70000BC1414C3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE4E4F80000B50000BB0101CB
+              0B0BF70D0DF11010F11313F21515F11717F11A1AF21C1CF31D1DF31F1FF21E1E
+              F20B0BF14343F44141F40F0FF21414F22121F32525F32525F32525F32424F323
+              23F32222F32121F22020F21010F28888F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFF1F1FE0000EE0000EF0000F00000F00000F00000F00000
+              F00000F40000D60000BA0000B7AEAEEAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3434CB0000BB0000B70C0CF1
+              0F0FF21212F21515F11818F11A1AF21C1CF31F1FF22121F22222F32222F31E1E
+              F3FDFDFEFFFFFFFFFFFFFFFFFFB8B8FB3535F41616F22828F32929F32929F428
+              28F42626F42525F42323F30000F1FBFBFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFF4A4AF40000EF0000F00000F00000F00000F00000
+              F00000F00000F50000BC0000BC0202BEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEDEDFA0000B50000BB0505D21212F6
+              1414F21717F11919F21C1CF31F1FF22121F22323F32525F32727F41A1AF3C0C0
+              FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB2B2FB1C1CF32626F42D2DF42C
+              2CF32B2BF32929F31414F39B9BFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFF8888F80000EF0000EF0000F00000F00000F00000
+              F00000F00000F20000DC0000B90000B7B7B7ECFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6060D60000BA0000B71212F21515F2
+              1818F21B1BF31E1EF32121F22424F32626F42828F42A2AF32C2CF42929F44848
+              F6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4D4DF62222F430
+              30F52F2FF42828F43B3BF4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFF0000EF0505F10303EF0000F00000F00000F00000
+              F00000F00000F00000F50000BB0000BB2A2AC8FFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000B80000BB0404CA1818F71A1AF2
+              1D1DF32020F22323F32626F42828F42B2BF32D2DF42F2FF43131F53333F52A2A
+              F44949F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7676F829
+              29F43333F41414F3EBEBFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFF3434F30303F00909F10505F00101EF0000F00000F00000
+              F00000F00000F00000F30000D40000BB0000B5FCFCFEFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFC1C1EF0000B70000B91111E31C1CF51E1EF3
+              2121F22525F32828F42A2AF32D2DF43030F53232F53434F43636F43838F53939
+              F52F2FF55A5AF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF29
+              29F41919F39494F9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFF9B9BF90000F00E0EF10B0BF00707F10303EF0000F00000F00000
+              F00000F00000F00000F10000EC0000B70000B98D8DE1FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFF6262D70000BA0000B81E1EF81F1FF32323F3
+              2626F42929F32C2CF32F2FF43232F53535F43737F53939F53B3BF63D3DF63E3E
+              F54040F53232F57777F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEE
+              EEFEB1B1FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFEFEFFE0000F01414F11111F20D0DF00909F10505F00101EF0000F00000
+              F00000F00000F00000F00000F60000C00000BA2F2FC9FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFF1010C20000BA0606C92323F82424F32727F4
+              2B2BF32E2EF43131F53434F43737F43939F53C3CF63E3EF54040F54242F64343
+              F64545F64646F73131F6ACACFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFF1E1EF21616F21717F11313F20F0FF10B0BF00606F10202EF0000F00000
+              F00000F00000F00000F00000F30000D20000BB0000B7FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFF0000B50000BA1111D92626F62828F42B2BF3
+              2F2FF43232F53636F43838F53B3BF63E3EF54141F54343F64545F74747F74848
+              F64A4AF64A4AF64B4BF73232F5ECECFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              5F5FF61313F21D1DF31919F11515F11010F20C0CF00808F10404EF0000F00000
+              F00000F00000F00000F00000F20000E10000B90000B7DBDBF5FFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFD3D3F40000B70000B91B1BE62A2AF62C2CF33030F5
+              3333F43737F43A3AF63D3DF64040F54343F64545F74848F74A4AF64C4CF74D4D
+              F74F4FF74F4FF85050F84C4CF75454F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB1B1FB
+              0D0DF22222F21E1EF31A1AF31616F11212F20E0EF00909F10505F00000EF0000
+              F00000F00000F00000F00000F00000EE0000B80000B9A1A1E7FFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFA6A6E80000B80000B82626F12D2DF43030F53434F4
+              3838F53B3BF63F3FF54242F64545F74848F74A4AF64D4DF74F4FF85151F85252
+              F75454F75454F75555F75555F74545F7B6B6FBFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3F3FE1212F2
+              2727F32424F32020F21C1CF31818F11313F20F0FF10B0BF00606F10101EF0000
+              F00000F00000F00000F00000F00000F60000B90000BA7373DBFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF8484DF0000B90000B73030F93131F53434F43838F5
+              3C3CF64040F54343F64646F74A4AF64D4DF74F4FF85151F85454F75656F85757
+              F85858F85959F85A5AF95A5AF95858F95050F8FFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3333F52929F4
+              2A2AF32626F42222F21D1DF31919F11515F11010F20C0CF00707F10202EF0000
+              F00000F00000F00000F00000F00000F50000C00000BA5151D2FFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF6C6CD90000B90000BB3535FB3434F43838F53C3CF6
+              4040F54444F64747F74B4BF64E4EF75151F85454F75656F85959F85B5BF95C5C
+              F95D5DF85E5EF85F5FF85F5FF85E5EF84646F8E9E9FEFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7878F82727F43030F5
+              2C2CF32727F42323F21F1FF31A1AF31616F11111F20C0CF00808F10303EF0000
+              F00000F00000F00000F00000F00000F40000C50000BA3A3ACCFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF6060D60000BA0000BE3939FB3838F53C3CF64040F5
+              4444F74848F64C4CF74F4FF85353F75656F75959F85B5BF95E5EF86060F86161
+              F96262F96363F96363F96363F95D5DF97676FAFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCECEFC2020F43535F43131F5
+              2D2DF32828F42424F31F1FF21B1BF31717F11212F20E0EF00808F10404EF0000
+              F00000F00000F00000F00000F00000F40000C70000BA2E2EC9FFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF5F5FD60000BA0000BE3D3DFB3C3CF64040F54444F7
+              4848F64C4CF75050F85454F75757F85A5AF95D5DF86060F86262F96464FA6666
+              FA6767F96868F96868F96767F95454F9F9F9FEFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3131F53939F63737F43232F5
+              2E2EF42A2AF32525F42121F21B1BF31818F11313F20D0DF00909F10505EF0000
+              F00000F00000F00000F00000F00000F40000C80000BA2C2CC9FFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF6868D80000B90000BC4242FC4040F54444F64848F6
+              4C4CF75050F85454F75858F85C5CF95F5FF86262F96565FA6767F96969F96B6B
+              FA6C6CFA6D6DFA6D6DFA5858F9D7D7FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7575F93737F53C3CF63838F43333F4
+              2F2FF52B2BF32525F42121F21D1DF31717F11313F20F0FF00A0AF10404EF0000
+              F00000F00000F00000F00000F00000F40000C60000BA3636CBFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF7C7CDD0000B90000B74545FC4343F64747F74C4CF6
+              5050F85454F75858F85C5CF96060F86363FA6767FA6A6AF96C6CFA6E6EFB7070
+              FB7171FB7272FA5F5FFAC6C6FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5757F73D3DF53E3EF63939F63434F4
+              2F2FF52B2BF32727F42222F21C1CF31818F11414F20F0FF00A0AF10404EF0000
+              F00000F00000F00000F00000F00000F50000C20000BA4A4AD0FFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF9B9BE50000B90000B74141F64747F74B4BF64F4FF8
+              5454F75858F85C5CF96060F86464FA6868F96B6BFA6E6EFB7171FB7373FA7575
+              FB7676FB6565FBC2C2FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB2B2FB3434F63E3EF53A3AF63434F4
+              3131F52C2CF32727F42222F21C1CF31919F11414F20F0FF00A0AF10404EF0000
+              F00000F00000F00000F00000F00000F60000BA0000BA6969D8FFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFC6C6F00000B80000B83838EC4C4CF84E4EF85353F7
+              5757F85C5CF96060F86464FA6868F96C6CFA7070FB7373FA7676FB7878FB7A7A
+              FC6C6CFBC0C0FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3737F63D3DF53939F63535F4
+              3131F52C2CF32727F42222F21C1CF31919F11414F20F0FF00A0AF10404EF0000
+              F00000F00000F00000F00000F00000F10000B70000B99494E3FFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFF0000B50000B92A2ADF5050FA5151F85656F7
+              5B5BF95F5FF86363FA6868F96C6CFA7070FB7474FA7777FB7B7BFC7D7DFB7373
+              FBB6B6FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB9B9FB2B2BF53B3BF63636F4
+              3131F52C2CF32727F42222F21D1DF31717F11313F20E0EF00909F10404EF0000
+              F00000F00000F00000F00000F10000E50000B90000B7C9C9F1FFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFF0000BC0000BA1616CF5555FD5454F75959F9
+              5E5EF86262F96767FA6B6BFA7070FB7474FA7878FC7C7CFB7F7FFC7B7BFC9F9F
+              FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5858F73333F53535F4
+              3030F52C2CF32727F42222F21D1DF31818F11313F20E0EF00909F10303EF0000
+              F00000F00000F00000F00000F30000D70000BA0000B5FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFF4B4BD10000BA0000BB5C5CFF5757F85C5CF9
+              6060F86565FA6A6AF96F6FFB7373FA7878FC7C7CFB8080FC8181FD8E8EFDFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDB
+              DBFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2626F43333F4
+              2F2FF52A2AF32525F42121F21C1CF31717F11212F20D0DF00808F10303EF0000
+              F00000F00000F00000F00000F50000C50000BB1717C3FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFA5A5E80000B80000B74747EE5B5BFA5E5EF8
+              6363FA6868F96D6DFA7272FA7676FB7B7BFC8080FC8484FD7D7DFCFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD3D3FD41
+              41F8BEBEFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC6C6FC1B1BF3
+              2F2FF52A2AF32525F42020F21B1BF31616F11111F20C0CF00707F10202EF0000
+              F00000F00000F00000F00000F10000B70000BA7272DBFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000B50000BA2121D46262FD6060F8
+              6565FA6A6AF96F6FFB7474FA7979FC7E7EFB8383FD8484FCA4A4FDFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7FE5757F964
+              64FA4C4CF8F9F9FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F6FF7
+              2323F42929F32424F41F1FF21A1AF31515F11010F20B0BF00606F10101EF0000
+              F00000F00000F00000F20000DB0000BA0000B6DDDDF6FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3D3DCD0000BB0000B86565FE6262FA
+              6767F96C6CFA7171FB7676FB7B7BFC8080FB8585FD8888FC9999FEFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7474FB6666F964
+              64FA5A5AF86868F9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              2222F32626F32323F21E1EF31919F11414F20F0FF10A0AF10505F00000EF0000
+              F00000F00000F00000F60000C00000BB0707BFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC5C5F00000B60000B93636DF6969FD
+              6868F96D6DFB7272FA7777FC7C7CFB8181FD8686FC8C8CFD8686FDE3E3FEFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB2B2FC6262FA6868F963
+              63FA5E5EF84A4AF8A6A6FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              BABAFB1313F32222F21D1DF31818F11212F20D0DF00808F10303EF0000F00000
+              F00000F00000F10000E50000B80000B98F8FE2FFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0A0AC00000BB0000BB6E6EFF
+              6A6AFA6E6EFB7373FA7878FC7D7DFB8282FD8787FC8B8BFD8F8FFE8787FDE8E8
+              FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBEBFE5E5EFA6B6BF96666FA61
+              61F95C5CF95757F83B3BF6D6D6FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFF2929F41C1CF21B1BF31616F11111F20C0CF00707F10202EF0000F00000
+              F00000F00000F60000C30000BC0000B8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB4B4EC0000B70000B93232DB
+              7272FE6F6FFB7373FA7777FC7D7DFB8181FD8686FD8A8AFC8D8DFE8E8EFE8181
+              FDB6B6FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6969FA6C6CFB6969F96464FA5F
+              5FF85A5AF95555F75050F83939F69E9EFAFFFFFEFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFF9D9DF91010F21919F21414F10F0FF10A0AF00505F10000EF0000F00000
+              F00000F20000E10000B80000B97C7CDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1515C30000BC0000B6
+              6868F97171FC7272FA7777FC7C7CFC8080FB8484FD8787FD8989FC8A8AFD8A8A
+              FD8181FC7979FCB0B0FDF0F0FEDFDFFE6B6BFA6D6DFB6B6BFA6666FA6262F95D
+              5DF85858F85353F74E4EF84949F63939F62727F48686F9FFFFFFFFFFFFFFFFFF
+              FFFFFFAFAFFA0D0DF21818F11313F20D0DF00808F10303EF0000F00000F00000
+              F00000F40000BB0000BC0000BAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE5E5F80000B50000BC
+              0A0AC37C7CFF7272FB7676FB7A7AFC7E7EFB8181FC8383FD8585FD8585FD8585
+              FD8383FD8080FC7777FB6D6DFB6A6AFA7070FA6D6DFA6868F96464FA5F5FF85A
+              5AF95656F75151F84C4CF64747F74242F63D3DF62D2DF41D1DF36E6EF7ABABFA
+              8282F80B0BF11A1AF31616F11111F20C0CF00707F10101EF0000F00000F00000
+              F60000CC0000BB0000B6B0B0EBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6C6CD90000B8
+              0000B82E2ED77D7DFF7474FA7777FC7B7BFC7D7DFB7F7FFB8080FC8181FC8080
+              FC7E7EFB7C7CFC7979FC7575FB7171FB6D6DFA6969F96565FA6060F85C5CF957
+              57F85353F74E4EF74949F64444F73F3FF53B3BF63636F43030F52323F31818F3
+              1717F21D1DF31818F11313F20E0EF10A0AF10404F00000EF0000F00000F40000
+              DE0000B70000BA3333CBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0F0FC2
+              0000BB0000B64A4AE77B7BFF7575FA7777FB7979FC7B7BFC7C7CFB7C7CFC7B7B
+              FC7979FC7777FB7474FA7171FB6D6DFA6969F96565FA6161F95D5DF85858F854
+              54F74F4FF84B4BF64646F74141F53D3DF63838F53333F52E2EF42929F32525F3
+              2020F21B1BF31616F11111F20C0CF00707F10202EF0000F00000F20000E90000
+              B70000BC0000B9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              0000B80000BC0000B55555ED7A7AFF7474FA7575FB7777FB7777FB7777FB7676
+              FB7474FA7272FA6F6FFB6C6CFA6969F96565FA6161F95D5DF85959F95555F751
+              51F84C4CF74848F74343F63E3EF53A3AF63535F43030F52C2CF32727F42222F2
+              1D1DF31818F11313F20F0FF10A0AF10505F00000EF0000F20000EC0000B80000
+              BD0000B5E1E1F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              E3E3F80000B50000BD0000B55151EB7A7AFF7171FB7272FA7272FA7272FA7171
+              FB6F6FFB6D6DFA6B6BFA6868F96464FA6161F95D5DF85959F95555F75151F84D
+              4DF74949F64444F74040F53B3BF63737F43232F52D2DF42929F42424F31F1FF2
+              1B1BF31616F11111F20C0CF00707F10202EF0000F30000EB0000B90000BD0000
+              B4B5B5ECFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFD1D1F30000B50000BD0000B53C3CDF7B7BFF6E6EFB6D6DFA6D6DFA6C6C
+              FA6A6AF96868F96666FA6363F96060F85D5DF95959F95555F75151F84D4DF749
+              49F64545F74141F53C3CF63838F53333F42F2FF42A2AF32626F42121F21C1CF3
+              1818F11313F20E0EF00909F10404F00000F50000E30000B70000BD0000B4A1A1
+              E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFD8D8F40000B60000BC0000B71919CC7272FF6D6DFC6868F96767
+              FA6565FA6363F96161F95E5EF85B5BF95858F85555F75151F84D4DF74A4AF645
+              45F74141F63D3DF63939F53535F43030F52C2CF32727F42323F21E1EF31919F2
+              1515F11010F10B0BF00707F20101F60000D20000B70000BD0000B4ABABE9FFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFF3F3FC0000BC0000BA0000BA0000BB4B4BEB7070FF6464
+              FB6060F95E5EF85C5CF95A5AF95757F85454F75050F84D4DF74949F64545F742
+              42F63D3DF63939F53535F43131F52D2DF32828F42424F31F1FF21B1BF31616F1
+              1212F20D0DF10909F60303EA0000BF0000BA0000BB0000B7D1D1F3FFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3838CC0000B60000BC0000B70F0FC75353
+              F26666FF5D5DFB5858F85555F75252F84F4FF84C4CF74848F64545F74141F53D
+              3DF63A3AF53636F43131F52D2DF42929F32525F32020F21C1CF31717F11313F3
+              0F0FF60909EF0101CC0000B70000BC0000B81515C3FFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFABABE90000B80000B90000BB0000
+              B60E0EC83E3EE85C5CFE5656FC5050FA4B4BF74848F74444F64141F53D3DF639
+              39F53636F43232F52E2EF42929F32525F42121F31E1EF51A1AF51616F80C0CE8
+              0303CB0000B70000BB0000BA0000B68686E0FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6666D80000B50000
+              BA0000BB0000B80000BA1A1AD13333E54646F74B4BFD4545FB4141FA3C3CF938
+              38F83434F83030F82D2DF82929F92525F91E1EF51313E50808D30000BD0000B8
+              0000BB0000BA0000B54747D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6C6C
+              D90000B80000B80000BA0000BA0000B90000B60000BD0B0BC81313D11717D618
+              18D81616D81212D60D0DD10707C90000BF0000B70000B90000BB0000BB0000B8
+              0000B65353D3F1F1FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFAEAEEA4040CE0000B70000B70000B90000BA0000BA0000BA0000BA00
+              00BA0000BA0000BA0000BA0000BA0000BA0000B90000B70000B62F2FCA9B9BE5
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFD2D2F38B8BE15252D22424C70101BE0000B800
+              00B50000B50000B80000BD1D1DC54949D08181DEC5C5F0FFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFF}
+            Stretch = True
+            Visible = False
+          end
+          object ImageOK: TImage
+            Left = 365
+            Top = 0
+            Width = 49
+            Height = 49
+            Picture.Data = {
+              07544269746D6170F6300000424DF63000000000000036000000280000004000
+              0000410000000100180000000000C03000000000000000000000000000000000
+              0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE0031
+              BE0031BE0031BE0031BE00ADE59AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFF31BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE0031
+              BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE00FFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FF31BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE0031
+              BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE00
+              31BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1FBEE31BE0031BE
+              0031BE0031BE0031BE0031BE0031C30038F00038F00038F00038F00038F00038
+              F00038F00038F00038F00038F00038F00038F00031BE0031BE0031BE0031BE00
+              31BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE0031BE
+              0031BE0038F00038F00038F00038F00038F00038F00038F00038F00038F00038
+              F00038F00038F00038F00038F00038F00038F00038F00038F00038F00031BE00
+              31BE0031BE0031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE0031BE0031BE0038F0
+              0038F00038F00038F00038F00038F00038F00038F00038F00038F00038F00038
+              F00038F00038F00038F00038F00038F00038F00038F00038F00038F00038F000
+              38F00031BE0031BE0031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE0031BE0038F00038F00038F0
+              0038F00038F00038F00038F00038F00038F00038F00038F00038F00038F00038
+              F00038F00038F00038F00038F00038F00038F00038F00038F00038F00038F000
+              38F00038F00038F00031BE0031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFF31BE0031BE0031BE0031BE0038F00038F00038F00038F0
+              0038F00038F00038F00038F00038F00038F00038F00038F00038F00038F00038
+              F00038F00038F00038F00038F00038F00038F00038F00038F00038F00038F000
+              38F00038F00038F00038F00038F00031BE0031BE0031BE0031BE00FFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFF31BE0031BE0031BE0033C70038F00038F00038F00038F00038F0
+              0038F00039F0013AF0023AF0033BF0033BF0043BF0043BF0043BF0043BF0043B
+              F0043AF0033AF00239F00138F00038F00038F00038F00038F00038F00038F000
+              38F00038F00038F00038F00038F00038F00031BE0031BE0031BE0031BE00FFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFF31BE0031BE0031BE0038F00038F00038F00038F00039F0013AF0023BF0
+              043CF0053DF1063EF1073EF1083FF1083FF1093FF1093FF10993F7743FF1093F
+              F1083EF1083DF1073DF1063CF0053BF0033AF00238F00038F00038F00038F000
+              38F00038F00038F00038F00038F00038F00038F00031BE0031BE0031BE0031BE
+              00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              31BE0031BE0031BE0038F00038F00038F0003AF0023BF0043DF1063EF1073FF1
+              0940F10A41F10B42F10C42F10D43F10D43F10EFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFF42F10C41F10B40F10A3FF1093EF1083DF1063CF0043AF00338F00138F000
+              38F00038F00038F00038F00038F00038F00038F00038F00031BE0031BE0031BE
+              0038C009FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE00
+              31BE0031BE0038F00038F0013AF0033CF0053EF1073FF10940F10B42F10C43F1
+              0E44F10F45F21045F21146F21146F21247F212FFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFF43F10E42F10D41F10C40F10A3FF1083DF1063BF0043AF002
+              38F00038F00038F00038F00038F00038F00038F00038F00038F00031BE0031BE
+              0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE00
+              31BE0037EA003AF0033CF1053EF10840F10A42F10C43F10E44F21046F21147F2
+              1348F21449F21549F2164AF2164AF217F2FEEFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFF45F21043F10E42F10C40F10A3EF1083DF106
+              3BF00339F00138F00038F00038F00038F00038F00038F00038F00038F00031BE
+              0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE00
+              31BE003CF1053EF10840F10A42F10D44F10F45F21147F21348F2154AF2164BF2
+              184CF2194DF31A4DF31B4EF31B4EF31CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF46F21245F21043F10E41F10C3FF109
+              3DF1073BF00439F00138F00038F00038F00038F00038F00038F00038F00038F0
+              0031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE00
+              3EF10740F10A42F10C44F10F46F21148F21449F2164BF2184CF2194DF31B4FF3
+              1C50F31E50F31F51F32052F3206EF546FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF49F21648F21446F21244F10F42F10D
+              40F10A3EF1073BF00439F00138F00038F00038F00038F00038F00038F00038F0
+              0031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE003FF109
+              41F10C44F10F46F21148F2144AF2164BF2194DF31B4FF31D50F31E51F32053F3
+              2254F32354F32455F42555F425FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4CF21A4BF21849F21547F21345F210
+              43F10D40F10A3EF1073BF00439F00138F00038F00038F00038F00038F00038F0
+              0038F00031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE0043F10D
+              45F21047F2134AF2164CF2194EF31B4FF31E51F32053F32254F32455F42557F4
+              2758F42858F42959F42AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4FF31E4EF31B4CF2194AF21647F213
+              45F21143F10E40F10A3EF1073BF00438F00038F00038F00038F00038F00038F0
+              0038F00038F00031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0044F10F46F212
+              49F2154BF2184DF31B4FF31D51F32053F32255F42457F42658F42859F42A5AF4
+              2B5BF42D5CF42EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF52F32150F31F4EF31C4CF2194AF217
+              47F21445F21042F10D40F10A3DF1063AF00338F00038F00038F00038F00038F0
+              0038F00038F00031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE0047F2134AF217
+              4CF21A4FF31D51F32053F32255F42557F42759F4295AF42B5CF42D5DF52F5EF5
+              305FF532FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF95F87753F32251F31F4FF31D4CF21A
+              4AF21747F21345F21042F10C3FF1093CF10539F00138F00038F00038F00038F0
+              0038F00038F00038F00031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0048F2144BF2184EF31B
+              50F31E53F32155F42457F42759F42A5BF42C5DF42E5EF53060F53261F53462F5
+              35FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC5FBB556F42653F32351F3204FF31D
+              4CF21949F21647F21244F10F41F10B3EF1073BF00438F00038F00038F00038F0
+              0038F00038F00038F00031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE004CF2194EF31C51F320
+              54F32356F42658F4295BF42C5DF42E5FF53161F53362F53564F53765F539FFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9DF88158F42956F42653F32251F31F
+              4EF31C4BF21849F21546F21143F10D40F1093CF10639F00238F00038F00038F0
+              0038F00038F00038F00031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE004FF31D52F32155F324
+              57F4275AF42B5CF42E5FF53161F53363F53664F53866F63AFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5DF52F5BF42C58F42956F42553F322
+              50F31F4DF31B4AF21747F21344F10F41F10B3EF1073BF00338F00038F00038F0
+              0038F00038F00038F00038F00031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0045E01352F32155F42558F429
+              5BF42C5DF52F60F53262F53564F53867F63B68F63DFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF60F5325DF52F5AF42B58F42855F425
+              52F3214FF31D4CF21949F21546F21143F10D3FF1093CF00539F00138F00038F0
+              0038F00038F00038F00038F00031BE0031BE0047C51BFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0053F32256F42559F4295CF42D
+              5EF53061F53463F53766F63A68F63D6AF63FFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF62F5355FF5315CF42E5AF42A57F427
+              54F32351F31F4EF31B4AF21747F21344F10F41F10B3DF1063AF00238F00038F0
+              0038F00038F00038F00038F00031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFD7F2CD31BE0031BE0056F42659F42A5CF42E5FF531
+              62F53565F53867F63B6AF63FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF64F53761F5345EF5305BF42D59F429
+              56F42552F3214FF31D4CF21948F21545F21142F10C3EF1083BF00438F00038F0
+              0038F00038F00038F00038F00031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE0059F42A5CF42E5FF53262F536
+              65F63968F63D6BF640FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF66F63A63F53660F5335DF52F5AF42B
+              57F42754F32350F31F4DF31B4AF21646F21243F10D3FF1093CF00538F00038F0
+              0038F00038F00038F00038F00035DE0031BE0031BE00FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE005CF42E60F53263F53666F63A
+              69F63DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF68F63C65F53962F5355FF5315CF42D
+              58F42955F42552F3204EF31C4BF21747F21344F10F40F10A3CF10639F00138F0
+              0038F00038F00038F00038F00038F00031BE0031BE00FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE005FF53263F53666F63A69F63E
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA5FB8A81F95CC1FCAFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF67F63B63F53760F5335DF52F
+              5AF42A56F42653F3224FF31D4CF21948F21444F10F41F10B3DF10639F00238F0
+              0038F00038F00038F00038F00038F00031BE0031BE00FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE0062F53666F63A69F63E6CF642
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFF86FA6386F96284F96083F95EFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF68F63D65F53861F5345EF530
+              5BF42C57F42754F32350F31E4CF21A49F21545F21041F10C3EF1073AF00238F0
+              0038F00038F00038F00038F00038F00031BE0031BE00FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE0065F63969F63D6CF6426FF746
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFF8BFA688AFA6789FA6687FA6485F962FFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF69F63E66F63A62F5355FF531
+              5BF42D58F42854F32451F31F4DF31A49F21645F21142F10C3EF1083AF00338F0
+              0038F00038F00038F00038F00038F00031BE0031BE00FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE0068F63D6CF6416FF74572F74A
+              76F84EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFF8FFB6D8EFB6D8DFA6B8CFA6A8AFA6888FA65FFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6AF63F67F63B63F53660F532
+              5CF42E58F42955F42451F3204DF31B49F21646F21142F10C3EF1083AF00338F0
+              0038F00038F00038F00038F00038F00031BE0031BE00FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE006BF6406EF74572F74975F74D
+              79F8527CF856FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFF93FB7292FB7292FB7191FB708FFB6E8DFA6B8BFA6888FA65FFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF68F63C64F53760F533
+              5DF42E59F42A55F42551F3204EF31B4AF21646F21142F10D3EF1083AF00338F0
+              0038F00038F00038F00038F00038F00031BE0031BE00FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE006DF74371F74875F74C78F851
+              7CF8557FF95A82F95EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FF96FB7796FC7796FB7695FB7594FB7392FB7190FB6E8DFA6B8AFA68FFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF68F63D64F53861F533
+              5DF52F59F42A55F42552F3204EF31B4AF21646F21242F10D3EF1083AF00338F0
+              0038F00038F00038F00038F00038F00031BE0031BE00FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF33BF0331BE0031BE0070F74674F74B77F8507BF854
+              7FF95982F95D85F96289FA668CFA6AFFFFFFFFFFFFFFFFFFFFFFFF98FC7999FC
+              7B9AFC7C9AFC7C9AFC7B98FC7997FC7794FB7492FB718FFB6E8CFA6A89FA66FF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF65F53861F534
+              5DF52F59F42A55F42552F3204EF31B4AF21646F21142F10C3EF1083AF00338F0
+              0038F00038F00038F00038F00031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0072F74976F84E7AF8537EF858
+              81F95C85F96188FA658CFA6A8FFB6E92FB7295FB7598FC799AFC7C9CFC7E9DFC
+              809EFC819EFC809DFC7F9BFC7D99FC7B97FC7794FB7491FB708DFA6C8AFA67FF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF65F53861F534
+              5DF52F59F42A55F42551F3204DF31B4AF21646F21142F10C3EF1073AF00238F0
+              0038F00038F00038F00038F00031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0074F74C78F8517CF85680F95B
+              84F95F87FA648BFA698FFB6D92FB7195FB7698FC7A9BFC7D9EFC80A0FD83A1FD
+              85A2FD85A1FD85A0FD839EFC809BFC7D99FC7A95FB7692FB718EFB6D8BFA6887
+              FA64FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF61F534
+              5DF52F59F42A55F42551F3204DF31B49F21645F21141F10C3DF10739F00238F0
+              0038F00038F00038F00038F00031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE007AF8537EF95882F95D
+              86FA628AFA678EFA6C91FB7095FB7598FC799CFC7E9FFD82A2FD85A4FD88A5FD
+              8AA6FD8AA5FD89A3FD87A0FD839DFC809AFC7B96FC7793FB728FFB6E8BFA6988
+              FA6484F960FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              5DF42E59F42955F32451F31F4DF31A49F21545F21041F10B3DF10639F00138F0
+              0038F00038F00038F00038F00031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE007CF85680F95B84F960
+              88FA658CFA6A90FB6F94FB7397FC789BFC7D9FFD81A2FD86A5FD8AA8FE8DA9FE
+              8FA9FE8FA8FE8DA5FD89A2FD859EFC819BFC7D97FC7893FB738FFB6E8BFA6988
+              FA6484F96080F95BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFF58F42854F32350F31E4CF21948F21444F10F40F10A3CF10538F00038F0
+              0038F00038F00038F00031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE007EF85882F95D86F962
+              8AFA678EFA6C92FB7196FB7699FC7B9DFC80A1FD84A5FD89A8FE8EABFE91ADFE
+              93ACFE92AAFE8FA6FD8BA3FD869FFD829BFC7D97FC7893FB738FFB6E8BFA6987
+              FA6483F95F7FF95A7BF855FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFF53F3224FF31D4BF21847F21343F10E3FF1093BF00438F00038F0
+              0038F00038F00038F00031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE0083F95F87FA64
+              8BFA698FFB6E93FB7397FC789BFC7D9FFD82A3FD87A7FE8CABFE91AFFE96B1FF
+              98AEFE95AAFE90A7FD8BA3FD869FFD819BFC7C97FC7793FB728FFB6D8AFA6886
+              FA6383F95E7FF9597BF85477F84FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFF4EF31C4AF21746F21242F10D3EF1083AF00338F00038F0
+              0038F00038F00038F00031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF81D76331BE0031BE0084F96088FA65
+              8CFA6A90FB6F94FB7498FC799CFC7EA0FD83A4FD88A8FE8DACFE92B0FF97B1FF
+              98ADFE94A9FE8FA6FD8AA2FD859EFC809AFC7B96FB7691FB718DFA6C89FA6785
+              F96282F95D7EF85879F85375F74D71F748FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFF4DF21B45F21141F10C3DF10739F00238F00038F0
+              0038F00038F00031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE0089FA66
+              8DFA6B91FB7095FB7599FC7A9DFC7FA0FD84A4FD88A8FE8DABFE91ADFE94ADFE
+              94ABFE90A7FE8CA4FD88A0FD839CFC7E98FC7994FB7490FB6F8CFA6A88FA6584
+              F96080F95B7CF85678F85174F74C70F7476CF642FFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF40F10A3CF00538F00038F00038F0
+              0038F00038F00031BE0031BE009DE086FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE0089FA66
+              8DFA6B91FB7095FB7599FC7A9CFC7EA0FD83A3FD87A6FD8BA9FE8EAAFE8FA9FE
+              8EA7FE8CA4FD88A1FD849DFC809AFC7B96FB7692FB728EFB6D8AFA6886FA6382
+              F95E7FF9597BF85477F84F73F74A6FF7456BF64067F63BA7F98DFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3BF00338F00038F00038F0
+              0038F00031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE00
+              8DFA6B91FB7094FB7598FC799BFC7D9FFD81A1FD85A4FD88A5FD8AA6FD8AA5FD
+              89A3FD87A1FD849EFC809BFC7C97FC7894FB7390FB6F8CFA6A88FA6584F96081
+              F95B7DF85779F85275F74D71F7486DF64369F63E65F53961F5345DF52FFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF38F00038F00038F0
+              0038F00031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFE31BE0031BE00
+              4FD12390FB6F94FB7397FC789AFC7B9DFC7F9FFD82A1FD84A2FD86A2FD86A1FD
+              85A0FD839DFC809BFC7C98FC7994FB7491FB708DFA6C8AFA6786FA6282F95E7E
+              F9597BF85477F84F73F74A6FF7466BF64167F63C63F5375FF5325BF42D58F428
+              54F323FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF38F00038F00038F0
+              0031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE00
+              31BE008FFB6E92FB7295FB7698FC799AFC7C9CFC7E9EFC809EFC819EFC819DFC
+              809CFC7E9AFC7B97FC7894FB7491FB718EFA6C8BFA6887FA6483F95F80F95B7C
+              F85679F85175F74D71F7486DF64369F63E65F63961F5345EF52F5AF42A56F426
+              52F3214EF31C4AF21746F212FFFFFFFFFFFFFFFFFF38F00038F00038F00031BE
+              0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE00
+              31BE0031BE0090FB6F93FB7395FB7697FC7899FC7A9AFC7C9AFC7C9AFC7C99FC
+              7B98FC7996FB7694FB7391FB708EFA6C8BFA6888FA6484F96081F95C7DF8577A
+              F85376F84E72F74A6FF7456BF64067F63B63F5365FF5325BF42D58F42854F323
+              50F31E4CF21948F21444F10F40F10A3CF10538F00038F00038F00031BE0031BE
+              0031BE008EDB73FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              31BE0031BE0031BE0091FB7093FB7295FB7596FB7697FC7797FC7796FC7795FB
+              7694FB7492FB7290FB6F8EFA6C8BFA6888FA6585F96181F95C7EF9587BF85477
+              F84F74F74B70F7476CF64269F63D65F53861F5345DF52F59F42A56F42552F321
+              4EF31C4AF21746F21242F10D3EF1083BF00338F00038F00031BE0031BE0031BE
+              0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              EAF8E531BE0031BE0031BE0090FB6F91FB7192FB7293FB7393FB7392FB7291FB
+              7190FB6F8EFB6D8CFA6A8AFA6787FA6484F96081F95C7EF9587BF85478F85074
+              F74C71F7486DF6436AF63F66F63A62F5355FF5315BF42C57F42753F32250F31E
+              4CF21948F21444F10F40F10A3CF10639F00138F00031BE0031BE0031BE0031BE
+              00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFF53C92A31BE0031BE0031BE008EFA6C8FFB6D8FFB6E8FFB6E8EFB6D8DFA
+              6C8CFA6A8AFA6888FA6586FA6284F95F81F95C7EF9587BF85478F85075F74C71
+              F7486EF7446BF64067F63B63F53760F5325CF42D58F42955F32451F31F4DF31B
+              4AF21646F21142F10D3EF1083AF00338F00031BE0031BE0031BE0031BE00FFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFF41C31431BE0031BE0031BE008BFA698BFA698BFA698BFA688AFA
+              6788FA6587FA6385F96183F95E80F95B7EF8587BF85478F85075F74D72F7496E
+              F7446BF64068F63C64F53861F5335DF52F5AF42A56F42652F3214FF31C4BF218
+              47F21344F10F40F10A3CF00538F00031BE0031BE0031BE0031BE00FFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE0031BE0087FA6487FA6386F9
+              6284F96083F95E81F95C7FF9597CF8567AF85377F85074F74C71F7486EF7446B
+              F64068F63D65F53861F5345EF5305AF42B57F42753F32250F31E4CF21949F215
+              45F21041F10C3DF10737E40131BE0031BE0031BE0031BE00FFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE0031BE0031BE0082F9
+              5D80F95B7FF9597DF8577BF85479F85276F84E74F74B71F7486EF7446BF64068
+              F63C65F53962F5355EF5305BF42C58F42854F32351F31F4DF31A49F21646F212
+              42F10D3FF10831BE0031BE0031BE0031BE00FDFEFDFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE0031BE0031BE
+              0031BE007BF85479F85277F85075F74D73F74A70F7476EF7436BF64068F63C65
+              F53862F5355FF5315BF42D58F42855F42451F3204EF31C4AF21747F21343F10E
+              31BE0031BE0031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE
+              0031BE0031BE0031BE0037C30771F7486FF7456DF6426AF63F67F63C64F53861
+              F5345FF5315BF42D58F42955F42552F3204EF31C4BF21831BE0031BE0031BE00
+              31BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE
+              0031BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE003A
+              C90A32C00131BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE00
+              31BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFF83D86531BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE0031
+              BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE0031BE00FFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF31BE0031BE0031BE0031BE0031BE0031
+              BE0031BE0031BE0031BE0031BE0031BE00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFF}
+            Stretch = True
+            Visible = False
+          end
+          object BO1: TBitBtn
+            Left = 0
+            Top = -1
+            Width = 41
+            Height = 49
+            Hint = 'Insert one New Record'
+            Caption = 'Insert'
+            Enabled = False
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 0
+            OnClick = BO1Click
+            Glyph.Data = {
+              76010000424D7601000000000000760000002800000020000000100000000100
+              04000000000000010000130B0000130B00001000000000000000000000000000
+              800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+              FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+              33333333FF33333333FF333993333333300033377F3333333777333993333333
+              300033F77FFF3333377739999993333333333777777F3333333F399999933333
+              33003777777333333377333993333333330033377F3333333377333993333333
+              3333333773333333333F333333333333330033333333F33333773333333C3333
+              330033333337FF3333773333333CC333333333FFFFF77FFF3FF33CCCCCCCCCC3
+              993337777777777F77F33CCCCCCCCCC3993337777777777377333333333CC333
+              333333333337733333FF3333333C333330003333333733333777333333333333
+              3000333333333333377733333333333333333333333333333333}
+            Layout = blGlyphTop
+            NumGlyphs = 2
+          end
+          object BO2: TBitBtn
+            Left = 40
+            Top = -1
+            Width = 41
+            Height = 49
+            Hint = 'Delete one Record'
+            Caption = 'Delete'
+            Enabled = False
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 1
+            OnClick = BO2Click
+            Glyph.Data = {
+              76010000424D7601000000000000760000002800000020000000100000000100
+              04000000000000010000130B0000130B00001000000000000000000000000000
+              800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+              FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+              333333333333333333FF33333333333330003333333333333777333333333333
+              300033FFFFFF3333377739999993333333333777777F3333333F399999933333
+              3300377777733333337733333333333333003333333333333377333333333333
+              3333333333333333333F333333333333330033333F33333333773333C3333333
+              330033337F3333333377333CC3333333333333F77FFFFFFF3FF33CCCCCCCCCC3
+              993337777777777F77F33CCCCCCCCCC399333777777777737733333CC3333333
+              333333377F33333333FF3333C333333330003333733333333777333333333333
+              3000333333333333377733333333333333333333333333333333}
+            Layout = blGlyphTop
+            NumGlyphs = 2
+          end
+          object BO3: TBitBtn
+            Left = 80
+            Top = -1
+            Width = 41
+            Height = 49
+            Hint = 'Modify Current'
+            Caption = 'Modify'
+            Enabled = False
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 2
+            OnClick = BO3Click
+            Glyph.Data = {
+              76010000424D7601000000000000760000002800000020000000100000000100
+              04000000000000010000120B0000120B00001000000000000000000000000000
+              800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+              FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00500005000555
+              555557777F777555F55500000000555055557777777755F75555005500055055
+              555577F5777F57555555005550055555555577FF577F5FF55555500550050055
+              5555577FF77577FF555555005050110555555577F757777FF555555505099910
+              555555FF75777777FF555005550999910555577F5F77777775F5500505509990
+              3055577F75F77777575F55005055090B030555775755777575755555555550B0
+              B03055555F555757575755550555550B0B335555755555757555555555555550
+              BBB35555F55555575F555550555555550BBB55575555555575F5555555555555
+              50BB555555555555575F555555555555550B5555555555555575}
+            Layout = blGlyphTop
+            NumGlyphs = 2
+          end
+          object BO4: TBitBtn
+            Left = 120
+            Top = -1
+            Width = 41
+            Height = 49
+            Hint = 'Save Current'
+            Caption = 'Save'
+            Enabled = False
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 3
+            OnClick = BO4Click
+            Glyph.Data = {
+              76010000424D7601000000000000760000002800000020000000100000000100
+              04000000000000010000120B0000120B00001000000000000000000000000000
+              800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+              FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+              555555555555555555555555555555555555555555FF55555555555559055555
+              55555555577FF5555555555599905555555555557777F5555555555599905555
+              555555557777FF5555555559999905555555555777777F555555559999990555
+              5555557777777FF5555557990599905555555777757777F55555790555599055
+              55557775555777FF5555555555599905555555555557777F5555555555559905
+              555555555555777FF5555555555559905555555555555777FF55555555555579
+              05555555555555777FF5555555555557905555555555555777FF555555555555
+              5990555555555555577755555555555555555555555555555555}
+            Layout = blGlyphTop
+            NumGlyphs = 2
+          end
+          object BO5: TBitBtn
+            Left = 160
+            Top = -1
+            Width = 41
+            Height = 49
+            Hint = 'Cancel'
+            Caption = 'Cancel'
+            Enabled = False
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 4
+            OnClick = BO5Click
+            Glyph.Data = {
+              76010000424D7601000000000000760000002800000020000000100000000100
+              04000000000000010000130B0000130B00001000000000000000000000000000
+              800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+              FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+              333333333333333333333333333333333333333FFF33FF333FFF339993370733
+              999333777FF37FF377733339993000399933333777F777F77733333399970799
+              93333333777F7377733333333999399933333333377737773333333333990993
+              3333333333737F73333333333331013333333333333777FF3333333333910193
+              333333333337773FF3333333399000993333333337377737FF33333399900099
+              93333333773777377FF333399930003999333337773777F777FF339993370733
+              9993337773337333777333333333333333333333333333333333333333333333
+              3333333333333333333333333333333333333333333333333333}
+            Layout = blGlyphTop
+            NumGlyphs = 2
+          end
+          object BO6: TBitBtn
+            Left = 250
+            Top = -1
+            Width = 41
+            Height = 49
+            Hint = 'Cancel'
+            Caption = 'RFID'
+            Enabled = False
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 5
+            OnClick = BO6Click
+            Glyph.Data = {
+              F6060000424DF606000000000000360000002800000018000000180000000100
+              180000000000C0060000C40E0000C40E00000000000000000000E6D4BEB68141
+              BC8B4FBC8B4FBC8B4FBC8B4FBC8B4FBC8B4FBC8B4FBC8B4FBC8B4FBC8B4FBC8B
+              4FBC8B4FBC8B4FBC8B4FBB894CB98547B98547B98547B98547B98547B6803FE4
+              D0B9B27A37F5EFE7D9BE9CDBC1A1DBC1A1DBC1A1DBC1A1DBC1A1DBC1A1DBC1A1
+              DBC1A1DBC1A1DBC1A1DBC1A1DBC1A1DABF9EE7D5C0FBF8F4F5EEE5F5EEE5F5EE
+              E5F5EFE6F7F1EBAE732CB88547D7BA96DCC2A3D7BA97D5B691D5B691D5B691D5
+              B691D5B691D5B691D5B691D5B691D5B691D5B691D5B691D6B995C49965E0C9AD
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB07732B88548D8BB98D0AE85CFAB81DCC3
+              A4DBC1A1DBC1A1DBC1A1DBC1A1DBC1A1DBC1A1DBC1A1DBC1A1DBC1A1DBC1A1DD
+              C5A7C29660CCA679D4B590FFFFFFFFFFFFFFFFFFFFFFFFB07732B88548D9BD9B
+              C79D6ADFC8ADC29660C9A273C9A272C9A272C9A272C9A272C9A272C9A272C9A2
+              72C9A272C9A272CAA374C59A67C1945ED4B48ECBA577FFFFFFFFFFFFFFFFFFB0
+              7732B88548D9BD9BC9A171C89F6DD7BA97C8A170C9A273C9A273C9A273C9A273
+              C9A273C9A273C9A273C9A273C9A273CAA476C1945DC59A67C1945CDBC1A1C397
+              61FFFFFFFFFFFFB07732B88548D9BD9BC9A171CBA476C1965FD8BC9AC59A66C6
+              9C69C69C69C69C69C69C69C69C69C69C69C69C69C79E6CBB894DCAA374C39661
+              C59B68C0925BE1CBB1BD8D52FFFFFFB07832B88548D9BD9BC9A171CBA476C49A
+              66C89F6EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFC59B68C89F6EC49965C59B68C1945DDDC5A7D8BB98B57F3DB88548D9BD9B
+              C9A171CBA476C49A66C8A170FFFFFFFFFFFFE8D7C3EADBC9EADBC9EADBC9EADB
+              C9E9D8C5F8F4EEFFFFFFFFFFFFC59B68C79E6CC9A171C8A170C89E6DDAC09FB5
+              7F3EB88548D9BD9BC9A171CBA476C49A66C8A170FFFFFFFBFAF89A4F00A3600E
+              A3600EA3600EA3600EA35F0DA05A05EEE2D4FFFFFFFFFFFFC69C6ACFAD82C297
+              61CAA273DBC0A0B57F3EB88548D9BD9BC9A171CBA476C49A66C8A170FFFFFFFD
+              FCFBA15C09AA6B20A76515A86719A8681AA76515A96B1F9C5300FDFCFBFFFFFF
+              C89F6ECFAB80C39862CAA273DBC0A0B57F3EB88548D9BD9BC9A171CBA476C49A
+              66C8A170FFFFFFFDFCFBA15B07AE732BD4C0A7C39E71BD935FD1BBA0AB6E24A1
+              5C08FAF7F4FFFFFFC79F6DCFAB80C39862CAA273DBC0A0B57F3EB88548D9BD9B
+              C9A171CBA476C49A66C8A170FFFFFFFDFCFBA15C08AC7026C6A57CBB8E57BF96
+              64C6A47AA96A1DA15C09FAF8F5FFFFFFC79F6DCFAB80C39862CAA273DBC0A0B5
+              7F3EB88548D9BD9BC9A171CBA476C49A66C8A170FFFFFFFDFCFBA15C09AA6C20
+              A86618A8681ABC915BAB6E24AA6B20A25D0AFAF8F5FFFFFFC79F6DCFAB80C398
+              62CAA273DBC0A0B57F3EB88548D9BD9BC9A171CBA476C49A66C8A170FFFFFFFB
+              FAF89A4F00A35F0EA35F0EA35F0DA15C08A35E0CA35F0E9A5000F9F6F1FFFFFF
+              C79F6DCFAB80C39862CAA273DBC0A0B57F3EB88548D9BD9BC9A171CBA476C49A
+              66C8A170FFFFFFFFFFFFE9D9C6EBDDCCEBDDCCEBDDCCEBDDCCEBDDCCEBDDCCE9
+              D9C6FFFFFFFFFFFFC79F6DCFAB80C39862CAA273DBC0A0B57F3EB88548D9BD9B
+              C9A171CBA476C49A66C8A06FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC79E6DCFAB80C39862CAA273DBC0A0B5
+              7F3EB88548D9BD9BC9A171CBA476C29762D3B38DCFAB80CFAB81CFAB81CFAB81
+              CFAB81CFAB81CFAB81CFAB81CFAB81CFAB81CFAB81CFAB81D1AF86CEAA7FC398
+              62CAA273DBC0A0B57F3EB88548D9BD9BC9A171C9A06FD2B189CAA373C1935BC1
+              945DC1945DC1945DC1945DC1945DC1945DC1945DC1945DC1945DC1945DC1935B
+              CAA374D3B38DC1955ECAA273DBC0A0B57F3EB88548D9BD9BC79D6BDBC1A1C396
+              61C9A272CAA273CAA273CAA273CAA273CAA273CAA273CAA273CAA273CAA273CA
+              A273CAA273CAA273C9A171C79F6DD1B087C89E6DDBC0A0B57F3EB88548D8BB98
+              D2B189CCA77AD9BE9DD8BC99D8BC99D8BC99D8BC99D8BC99D8BC99D8BC99D8BC
+              99D8BC99D8BC99D8BC99D8BC99D8BC99D8BC99D9BD9BCEAB80D2B188D9BE9DB5
+              7F3EB88547D7BA96DBC2A2DBC0A0D8BB99D8BC99D8BC99D8BC99D8BC99D8BC99
+              D8BC99D8BC99D8BC99D8BC99D8BC99D8BC99D8BC99D8BC99D8BC99D8BB99DABF
+              9FDDC5A8D8BC9AB57F3EB27A37F4EDE4D8BB99D9BE9CD9BE9DD9BE9DD9BE9DD9
+              BE9DD9BE9DD9BE9DD9BE9DD9BE9DD9BE9DD9BE9DD9BE9DD9BE9DD9BE9DD9BE9D
+              D9BE9DD9BE9DD9BE9CD7BA97F7F2ECAF742DE6D5BFB88344BD8D53BD8D53BD8D
+              53BD8D53BD8D53BD8D53BD8D53BD8D53BD8D53BD8D53BD8D53BD8D53BD8D53BD
+              8D53BD8D53BD8D53BD8D53BD8D53BD8D53BD8D53B88344E4D1BA}
+            Layout = blGlyphTop
+          end
+          object BO7: TBitBtn
+            Left = 200
+            Top = 0
+            Width = 43
+            Height = 48
+            Hint = 'Modify Current'
+            Caption = 'Excel'
+            Enabled = False
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 6
+            OnClick = BO7Click
+            Glyph.Data = {
+              76010000424D7601000000000000760000002800000020000000100000000100
+              04000000000000010000130B0000130B00001000000000000000000000000000
+              800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+              FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033333333B333
+              333B33FF33337F3333F73BB3777BB7777BB3377FFFF77FFFF77333B000000000
+              0B3333777777777777333330FFFFFFFF07333337F33333337F333330FFFFFFFF
+              07333337F3FF3FFF7F333330F00F000F07333337F77377737F333330FFFFFFFF
+              07333FF7F3FFFF3F7FFFBBB0F0000F0F0BB37777F7777373777F3BB0FFFFFFFF
+              0BBB3777F3FF3FFF77773330F00F000003333337F773777773333330FFFF0FF0
+              33333337F3FF7F37F3333330F08F0F0B33333337F7737F77FF333330FFFF003B
+              B3333337FFFF77377FF333B000000333BB33337777777F3377FF3BB3333BB333
+              3BB33773333773333773B333333B3333333B7333333733333337}
+            Layout = blGlyphTop
+            NumGlyphs = 2
+          end
+          object BitBtn4: TBitBtn
+            Left = 292
+            Top = -1
+            Width = 69
+            Height = 49
+            Hint = 'Modify Current'
+            Caption = 'Print Label'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 7
+            OnClick = BitBtn3Click
+            Glyph.Data = {
+              76010000424D7601000000000000760000002800000020000000100000000100
+              04000000000000010000120B0000120B00001000000000000000000000000000
+              800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+              FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00300000000000
+              0003377777777777777308888888888888807F33333333333337088888888888
+              88807FFFFFFFFFFFFFF7000000000000000077777777777777770F8F8F8F8F8F
+              8F807F333333333333F708F8F8F8F8F8F9F07F333333333337370F8F8F8F8F8F
+              8F807FFFFFFFFFFFFFF7000000000000000077777777777777773330FFFFFFFF
+              03333337F3FFFF3F7F333330F0000F0F03333337F77773737F333330FFFFFFFF
+              03333337F3FF3FFF7F333330F00F000003333337F773777773333330FFFF0FF0
+              33333337F3F37F3733333330F08F0F0333333337F7337F7333333330FFFF0033
+              33333337FFFF7733333333300000033333333337777773333333}
+            Layout = blGlyphTop
+            NumGlyphs = 2
+          end
+        end
+      end
+    end
+  end
+  object Panel6: TPanel
+    Left = 0
+    Top = 65
+    Width = 1170
+    Height = 65
+    Align = alTop
+    TabOrder = 2
+    Visible = False
+    object Label17: TLabel
+      Left = 830
+      Top = 32
+      Width = 64
+      Height = 24
+      Caption = 'Detail'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clLime
+      Font.Height = -19
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold, fsItalic]
+      ParentFont = False
+    end
+    object BD2: TBitBtn
+      Left = 56
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Insert one New Record'
+      Caption = 'Insert'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BD2Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        33333333FF33333333FF333993333333300033377F3333333777333993333333
+        300033F77FFF3333377739999993333333333777777F3333333F399999933333
+        33003777777333333377333993333333330033377F3333333377333993333333
+        3333333773333333333F333333333333330033333333F33333773333333C3333
+        330033333337FF3333773333333CC333333333FFFFF77FFF3FF33CCCCCCCCCC3
+        993337777777777F77F33CCCCCCCCCC3993337777777777377333333333CC333
+        333333333337733333FF3333333C333330003333333733333777333333333333
+        3000333333333333377733333333333333333333333333333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BD3: TBitBtn
+      Left = 104
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Delete one Record'
+      Caption = 'Delete'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      OnClick = BD3Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        333333333333333333FF33333333333330003333333333333777333333333333
+        300033FFFFFF3333377739999993333333333777777F3333333F399999933333
+        3300377777733333337733333333333333003333333333333377333333333333
+        3333333333333333333F333333333333330033333F33333333773333C3333333
+        330033337F3333333377333CC3333333333333F77FFFFFFF3FF33CCCCCCCCCC3
+        993337777777777F77F33CCCCCCCCCC399333777777777737733333CC3333333
+        333333377F33333333FF3333C333333330003333733333333777333333333333
+        3000333333333333377733333333333333333333333333333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BD4: TBitBtn
+      Left = 152
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Modify Current'
+      Caption = 'Modify'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      OnClick = BD4Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00500005000555
+        555557777F777555F55500000000555055557777777755F75555005500055055
+        555577F5777F57555555005550055555555577FF577F5FF55555500550050055
+        5555577FF77577FF555555005050110555555577F757777FF555555505099910
+        555555FF75777777FF555005550999910555577F5F77777775F5500505509990
+        3055577F75F77777575F55005055090B030555775755777575755555555550B0
+        B03055555F555757575755550555550B0B335555755555757555555555555550
+        BBB35555F55555575F555550555555550BBB55575555555575F5555555555555
+        50BB555555555555575F555555555555550B5555555555555575}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BD5: TBitBtn
+      Left = 200
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Save Current'
+      Caption = 'Save'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      OnClick = BD5Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+        555555555555555555555555555555555555555555FF55555555555559055555
+        55555555577FF5555555555599905555555555557777F5555555555599905555
+        555555557777FF5555555559999905555555555777777F555555559999990555
+        5555557777777FF5555557990599905555555777757777F55555790555599055
+        55557775555777FF5555555555599905555555555557777F5555555555559905
+        555555555555777FF5555555555559905555555555555777FF55555555555579
+        05555555555555777FF5555555555557905555555555555777FF555555555555
+        5990555555555555577755555555555555555555555555555555}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BD6: TBitBtn
+      Left = 248
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Cancel'
+      Caption = 'Cancel'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+      OnClick = BD6Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        333333333333333333333333333333333333333FFF33FF333FFF339993370733
+        999333777FF37FF377733339993000399933333777F777F77733333399970799
+        93333333777F7377733333333999399933333333377737773333333333990993
+        3333333333737F73333333333331013333333333333777FF3333333333910193
+        333333333337773FF3333333399000993333333337377737FF33333399900099
+        93333333773777377FF333399930003999333337773777F777FF339993370733
+        9993337773337333777333333333333333333333333333333333333333333333
+        3333333333333333333333333333333333333333333333333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BD7: TBitBtn
+      Left = 296
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Exit Current Form'
+      Caption = 'Exit'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 5
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033BBBBBBBBBB
+        BB33337777777777777F33BB00BBBBBBBB33337F77333333F37F33BB0BBBBBB0
+        BB33337F73F33337FF7F33BBB0BBBB000B33337F37FF3377737F33BBB00BB00B
+        BB33337F377F3773337F33BBBB0B00BBBB33337F337F7733337F33BBBB000BBB
+        BB33337F33777F33337F33EEEE000EEEEE33337F3F777FFF337F33EE0E80000E
+        EE33337F73F77773337F33EEE0800EEEEE33337F37377F33337F33EEEE000EEE
+        EE33337F33777F33337F33EEEEE00EEEEE33337F33377FF3337F33EEEEEE00EE
+        EE33337F333377F3337F33EEEEEE00EEEE33337F33337733337F33EEEEEEEEEE
+        EE33337FFFFFFFFFFF7F33EEEEEEEEEEEE333377777777777773}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BDT1: TBitBtn
+      Left = 368
+      Top = 8
+      Width = 49
+      Height = 49
+      Caption = 'First'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 6
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        333333333333333333FF3333333333333744333333333333F773333333333337
+        44473333333333F777F3333333333744444333333333F7733733333333374444
+        4433333333F77333733333333744444447333333F7733337F333333744444444
+        433333F77333333733333744444444443333377FFFFFFF7FFFFF999999999999
+        9999733777777777777333CCCCCCCCCC33333773FF333373F3333333CCCCCCCC
+        C333333773FF3337F333333333CCCCCCC33333333773FF373F3333333333CCCC
+        CC333333333773FF73F33333333333CCCCC3333333333773F7F3333333333333
+        CCC333333333333777FF33333333333333CC3333333333333773}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BDT2: TBitBtn
+      Left = 416
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Insert one New Record'
+      Caption = 'Prior'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 7
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        3333333333333333333333333333333333333333333333333333333333333333
+        3333333333333FF3333333333333003333333333333F77F33333333333009033
+        333333333F7737F333333333009990333333333F773337FFFFFF330099999000
+        00003F773333377777770099999999999990773FF33333FFFFF7330099999000
+        000033773FF33777777733330099903333333333773FF7F33333333333009033
+        33333333337737F3333333333333003333333333333377333333333333333333
+        3333333333333333333333333333333333333333333333333333333333333333
+        3333333333333333333333333333333333333333333333333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BDT3: TBitBtn
+      Left = 464
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Delete one Record'
+      Caption = 'Next'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 8
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        3333333333333333333333333333333333333333333333333333333333333333
+        3333333333333333333333333333333333333333333FF3333333333333003333
+        3333333333773FF3333333333309003333333333337F773FF333333333099900
+        33333FFFFF7F33773FF30000000999990033777777733333773F099999999999
+        99007FFFFFFF33333F7700000009999900337777777F333F7733333333099900
+        33333333337F3F77333333333309003333333333337F77333333333333003333
+        3333333333773333333333333333333333333333333333333333333333333333
+        3333333333333333333333333333333333333333333333333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BDT4: TBitBtn
+      Left = 512
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Modify Current'
+      Caption = 'Last'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 9
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        33333FF3333333333333447333333333333377FFF33333333333744473333333
+        333337773FF3333333333444447333333333373F773FF3333333334444447333
+        33333373F3773FF3333333744444447333333337F333773FF333333444444444
+        733333373F3333773FF333334444444444733FFF7FFFFFFF77FF999999999999
+        999977777777777733773333CCCCCCCCCC3333337333333F7733333CCCCCCCCC
+        33333337F3333F773333333CCCCCCC3333333337333F7733333333CCCCCC3333
+        333333733F77333333333CCCCC333333333337FF7733333333333CCC33333333
+        33333777333333333333CC333333333333337733333333333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BDT5: TBitBtn
+      Left = 584
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Modify Current'
+      Caption = 'Print'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 10
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00300000000000
+        0003377777777777777308888888888888807F33333333333337088888888888
+        88807FFFFFFFFFFFFFF7000000000000000077777777777777770F8F8F8F8F8F
+        8F807F333333333333F708F8F8F8F8F8F9F07F333333333337370F8F8F8F8F8F
+        8F807FFFFFFFFFFFFFF7000000000000000077777777777777773330FFFFFFFF
+        03333337F3FFFF3F7F333330F0000F0F03333337F77773737F333330FFFFFFFF
+        03333337F3FF3FFF7F333330F00F000003333337F773777773333330FFFF0FF0
+        33333337F3F37F3733333330F08F0F0333333337F7337F7333333330FFFF0033
+        33333337FFFF7733333333300000033333333337777773333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BDT6: TBitBtn
+      Left = 632
+      Top = 8
+      Width = 49
+      Height = 49
+      Hint = 'Modify Current'
+      Caption = 'Excel'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 11
+      OnClick = BDT6Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033333333B333
+        333B33FF33337F3333F73BB3777BB7777BB3377FFFF77FFFF77333B000000000
+        0B3333777777777777333330FFFFFFFF07333337F33333337F333330FFFFFFFF
+        07333337F3FF3FFF7F333330F00F000F07333337F77377737F333330FFFFFFFF
+        07333FF7F3FFFF3F7FFFBBB0F0000F0F0BB37777F7777373777F3BB0FFFFFFFF
+        0BBB3777F3FF3FFF77773330F00F000003333337F773777773333330FFFF0FF0
+        33333337F3FF7F37F3333330F08F0F0B33333337F7737F77FF333330FFFF003B
+        B3333337FFFF77377FF333B000000333BB33337777777F3377FF3BB3333BB333
+        3BB33773333773333773B333333B3333333B7333333733333337}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BitBtn1: TBitBtn
+      Left = 687
+      Top = 7
+      Width = 49
+      Height = 49
+      Hint = 'Modify Current'
+      Caption = 'PO'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 12
+      OnClick = BitBtn1Click
+      Glyph.Data = {
+        36030000424D3603000000000000360000002800000010000000100000000100
+        18000000000000030000C40E0000C40E000000000000000000008C8C8C838383
+        848484848484828282848484808080FFFFFF6C6C6CFFFFFF6F6F6FFFFFFF6A6A
+        6AFFFFFF6E6E6EE8E8E80000004B4B4B5353535F5F5F5D5D5D505050000000DB
+        DBDB4C4C4C5858584949495252524747475656563A3A3AD6D6D6000000E5E5E5
+        9595958B8B8B888888FFFFFF000000DEDEDE8282824C4C4C6363634E4E4E7171
+        71494949545454F1F1F1000000EDEDED000000000000000000ECECEC000000E4
+        E4E44E4E4E6565655151516565654B4B4B6767673D3D3DDCDCDC000000E9E9E9
+        000000000000000000EEEEEE000000E0E0E08686864747476666664C4C4C6B6B
+        6B4B4B4B545454F2F2F2000000EFEFEF5757576B6B6B5D5D5DFAFAFA000000E2
+        E2E25454546666665050506464644A4A4A676767444444D2D2D2000000606060
+        8A8A8A878787878787868686000000DFDFDF7F7F7F3737376464643E3E3E6565
+        653F3F3F525252EBEBEB7D7D7D5A5A5A5C5C5C5858585959595C5C5C5F5F5FE4
+        E4E4434343FFFFFF474747FFFFFF424242FFFFFF434343DBDBDB8E8E8E878787
+        888888888888868686888888848484FFFFFF8282827979798787877A7A7A8686
+        867A7A7A848484FEFEFE0000004B4B4B5353535F5F5F5D5D5D505050000000E6
+        E6E60000004B4B4B5353535F5F5F5D5D5D505050000000CFCFCF000000E5E5E5
+        9595958B8B8B888888FFFFFF000000EDEDED000000E5E5E59595958B8B8B8888
+        88FFFFFF000000D6D6D6000000EDEDED000000000000000000ECECEC000000F0
+        F0F0000000EDEDED000000000000000000ECECEC000000D8D8D8000000E9E9E9
+        000000000000000000EEEEEE000000F0F0F0000000E9E9E90000000000000000
+        00EEEEEE000000D8D8D8000000EFEFEF5757576B6B6B5D5D5DFAFAFA000000EE
+        EEEE000000EFEFEF5757576B6B6B5D5D5DFAFAFA000000D7D7D7000000606060
+        8A8A8A878787878787868686000000EEEEEE0000006060608A8A8A8787878787
+        87868686000000D6D6D67E7E7E5D5D5D6060605C5C5C5D5D5D606060636363E6
+        E6E67373735D5D5D6060605C5C5C5D5D5D606060636363DBDBDB}
+      Layout = blGlyphTop
+    end
+  end
+  object DS1: TDataSource
+    DataSet = KCRKRF
+    Left = 404
+    Top = 292
+  end
+  object KCRKRF: TQuery
+    AfterOpen = KCRKRFAfterOpen
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select * from KCRKScan_RF')
+    UpdateObject = UpdKCRKRF
+    Left = 403
+    Top = 324
+    object KCRKRFSCNO: TStringField
+      FieldName = 'SCNO'
+      Origin = 'DB.KCRKScan_RF.SCNO'
+      FixedChar = True
+      Size = 11
+    end
+    object KCRKRFGSBH: TStringField
+      FieldName = 'GSBH'
+      Origin = 'DB.KCRKScan_RF.GSBH'
+      FixedChar = True
+      Size = 4
+    end
+    object KCRKRFCKBH: TStringField
+      FieldName = 'CKBH'
+      Origin = 'DB.KCRKScan_RF.CKBH'
+      FixedChar = True
+      Size = 4
+    end
+    object KCRKRFDOCNO: TStringField
+      FieldName = 'DOCNO'
+      Origin = 'DB.KCRKScan_RF.DOCNO'
+      FixedChar = True
+      Size = 30
+    end
+    object KCRKRFMEMO: TStringField
+      FieldName = 'MEMO'
+      Origin = 'DB.KCRKScan_RF.MEMO'
+      FixedChar = True
+      Size = 30
+    end
+    object KCRKRFUSERDATE: TDateTimeField
+      FieldName = 'USERDATE'
+      Origin = 'DB.KCRKScan_RF.USERDATE'
+    end
+    object KCRKRFUSERID: TStringField
+      FieldName = 'USERID'
+      Origin = 'DB.KCRKScan_RF.USERID'
+      FixedChar = True
+      Size = 10
+    end
+    object KCRKRFYN: TStringField
+      FieldName = 'YN'
+      Origin = 'DB.KCRKScan_RF.YN'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object UpdKCRKRFS: TUpdateSQL
+    ModifySQL.Strings = (
+      'Update'
+      '   KCRKScan_RFS'
+      'Set'
+      '   Qty =:Qty,'
+      '   PackQty =:PackQty,'
+      '   USERID =:USERID,'
+      '   USERDATE =:USERDATE,'
+      '   YN =:YN,'
+      '   CGNO =:CGNO'
+      'where'
+      '   SCNO = :OLD_SCNO  and'
+      '   CLBH = :OLD_CLBH')
+    InsertSQL.Strings = (
+      'Insert into KCRKScan_RFS'
+      '    (SCNO , CLBH,  Qty, PackQty, USERID, USERDATE, YN, CGNO)'
+      'Values'
+      
+        '    (:SCNO , :CLBH,  :Qty, :PackQty, :USERID, :USERDATE, :YN, :C' +
+        'GNO)')
+    DeleteSQL.Strings = (
+      'Delete'
+      'From'
+      '   KCRKScan_RFS'
+      'where'
+      '   SCNO = :OLD_SCNO  and'
+      '   CLBH = :OLD_CLBH')
+    Left = 467
+    Top = 356
+  end
+  object tmpQry: TQuery
+    DatabaseName = 'DB'
+    Left = 348
+    Top = 324
+  end
+  object KCRKRFS: TQuery
+    AfterOpen = KCRKRFSAfterOpen
+    DatabaseName = 'DB'
+    DataSource = DS1
+    SQL.Strings = (
+      'select KCRKScan_RFS.*,CLZL.YWPM from KCRKScan_RFS'
+      'Left join CLZL on KCRKScan_RFS.CLBH=CLZL.CLDH'
+      'where SCNO=:SCNO ')
+    UpdateObject = UpdKCRKRFS
+    Left = 468
+    Top = 324
+    ParamData = <
+      item
+        DataType = ftFixedChar
+        Name = 'SCNO'
+        ParamType = ptUnknown
+        Size = 12
+      end>
+    object KCRKRFSSCNO: TStringField
+      FieldName = 'SCNO'
+      FixedChar = True
+      Size = 11
+    end
+    object KCRKRFSCLBH: TStringField
+      FieldName = 'CLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object KCRKRFSQty: TFloatField
+      FieldName = 'Qty'
+    end
+    object KCRKRFSUSERDATE: TDateTimeField
+      FieldName = 'USERDATE'
+    end
+    object KCRKRFSUSERID: TStringField
+      FieldName = 'USERID'
+      FixedChar = True
+      Size = 10
+    end
+    object KCRKRFSYN: TStringField
+      FieldName = 'YN'
+      FixedChar = True
+      Size = 1
+    end
+    object KCRKRFSYWPM: TStringField
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object KCRKRFSPackQty: TFloatField
+      FieldName = 'PackQty'
+    end
+    object KCRKRFSCGNO: TStringField
+      FieldName = 'CGNO'
+      FixedChar = True
+    end
+  end
+  object DS2: TDataSource
+    DataSet = KCRKRFS
+    Left = 468
+    Top = 292
+  end
+  object DS3: TDataSource
+    DataSet = KCRKRFSS
+    Left = 530
+    Top = 292
+  end
+  object KCRKRFSS: TQuery
+    AfterOpen = KCRKRFSSAfterOpen
+    AfterScroll = KCRKRFSSAfterScroll
+    DatabaseName = 'DB'
+    DataSource = DS2
+    SQL.Strings = (
+      'select * from KCRKSCan_RFSS'
+      'where SCNO=:SCNO and CLBH=:CLBH')
+    UpdateObject = UpdKCRKFSS
+    Left = 530
+    Top = 324
+    ParamData = <
+      item
+        DataType = ftFixedChar
+        Name = 'SCNO'
+        ParamType = ptUnknown
+        Size = 12
+      end
+      item
+        DataType = ftFixedChar
+        Name = 'CLBH'
+        ParamType = ptUnknown
+        Size = 16
+      end>
+    object KCRKRFSSSCNO: TStringField
+      FieldName = 'SCNO'
+      Origin = 'DB.KCRKSCan_RFS.SCNO'
+      FixedChar = True
+      Size = 11
+    end
+    object KCRKRFSSCLBH: TStringField
+      FieldName = 'CLBH'
+      Origin = 'DB.KCRKSCan_RFS.CLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object KCRKRFSSPack: TIntegerField
+      FieldName = 'Pack'
+      Origin = 'DB.KCRKSCan_RFS.Pack'
+    end
+    object KCRKRFSSQty: TFloatField
+      FieldName = 'Qty'
+      Origin = 'DB.KCRKSCan_RFS.Qty'
+    end
+    object KCRKRFSSTAGID: TIntegerField
+      FieldName = 'TAGID'
+      Origin = 'DB.KCRKSCan_RFSS.TAGID'
+    end
+    object KCRKRFSSUSERDATE: TDateTimeField
+      FieldName = 'USERDATE'
+      Origin = 'DB.KCRKSCan_RFS.USERDATE'
+    end
+    object KCRKRFSSUSERID: TStringField
+      FieldName = 'USERID'
+      Origin = 'DB.KCRKSCan_RFS.USERID'
+      FixedChar = True
+      Size = 10
+    end
+    object KCRKRFSSYN: TStringField
+      FieldName = 'YN'
+      Origin = 'DB.KCRKSCan_RFS.YN'
+      FixedChar = True
+      Size = 1
+    end
+    object KCRKRFSSMemo_RY: TStringField
+      FieldName = 'Memo_RY'
+      Origin = 'DB.KCRKScan_RFSS.Memo_RY'
+      FixedChar = True
+      Size = 255
+    end
+    object KCRKRFSSMemo_Article: TStringField
+      FieldName = 'Memo_Article'
+      Origin = 'DB.KCRKScan_RFSS.Memo_Article'
+      FixedChar = True
+      Size = 255
+    end
+  end
+  object UpdKCRKFSS: TUpdateSQL
+    ModifySQL.Strings = (
+      'Update'
+      '   KCRKScan_RFSS'
+      'Set'
+      '   Qty=:Qty,'
+      '   TAGID=:TAGID,'
+      '   USERID =:USERID,'
+      '   USERDATE =:USERDATE,'
+      '   YN =:YN,'
+      '   Memo_RY =:Memo_RY,'
+      '   Memo_Article =:Memo_Article'
+      'where'
+      '   SCNO = :OLD_SCNO  and'
+      '   CLBH = :OLD_CLBH  and'
+      '   Pack =:OLD_Pack ')
+    InsertSQL.Strings = (
+      'Insert into KCRKScan_RFSS'
+      
+        '    (SCNO , CLBH, Pack , Qty, TAGID, USERID, USERDATE, YN, Memo_' +
+        'RY, Memo_Article)'
+      'Values'
+      
+        '    (:SCNO , :CLBH, :Pack , :Qty, :TAGID, :USERID, :USERDATE, :Y' +
+        'N,  :Memo_RY, :Memo_Article)')
+    DeleteSQL.Strings = (
+      'Delete'
+      'From'
+      '   KCRKScan_RFSS'
+      'where'
+      '   SCNO = :OLD_SCNO  and'
+      '   CLBH = :OLD_CLBH  and'
+      '   Pack =:OLD_Pack ')
+    Left = 529
+    Top = 356
+  end
+  object ServerSocket: TServerSocket
+    Active = False
+    Port = 9978
+    ServerType = stNonBlocking
+    OnClientConnect = ServerSocketClientConnect
+    OnClientDisconnect = ServerSocketClientDisconnect
+    OnClientRead = ServerSocketClientRead
+    OnClientError = ServerSocketClientError
+    Left = 581
+    Top = 326
+  end
+  object UpdKCRKRF: TUpdateSQL
+    ModifySQL.Strings = (
+      'Update'
+      '   KCRKScan_RF'
+      'Set'
+      '   CKBH =:CKBH,'
+      '   DOCNO =:DOCNO,'
+      '   MEMO =:MEMO,'
+      '   USERID =:USERID,'
+      '   USERDATE =:USERDATE,'
+      '   YN =:YN'
+      'where'
+      '   SCNO = :OLD_SCNO')
+    InsertSQL.Strings = (
+      'Insert into KCRKScan_RF'
+      '    (SCNO , GSBH, CKBH,  DOCNO, MEMO, USERID, USERDATE, YN)'
+      'Values'
+      
+        '    (:SCNO , :GSBH, :CKBH,  :DOCNO, :MEMO, :USERID, :USERDATE, :' +
+        'YN)')
+    DeleteSQL.Strings = (
+      'Delete From'
+      '   KCRKScan_RF'
+      'where'
+      '   SCNO = :OLD_SCNO')
+    Left = 403
+    Top = 356
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    DataSource = DS1
+    SQL.Strings = (
+      
+        'select KCRKScan_RFSS.SCNO,KCRKScan_RFSS.CLBH,CLZL.YWPM,ZSZL.ZSYW' +
+        'JC,KCRKScan_RFS.CGNO,KCRKScan_RFSS.Memo_RY,KCRKScan_RFSS.Memo_Ar' +
+        'ticle,KCRKScan_RFSS.Qty,KCRKScan_RFSS.Pack,KCRKScan_RF.Memo,CLZL' +
+        '.DWBH'
+      'from KCRKScan_RF'
+      'left join KCRKScan_RFS on KCRKScan_RFS.SCNO = KCRKScan_RF.SCNO'
+      
+        'left join KCRKScan_RFSS on KCRKScan_RFSS.SCNO = KCRKScan_RFS.SCN' +
+        'O and KCRKScan_RFSS.CLBH = KCRKScan_RFS.CLBH'
+      'left join CGZL on KCRKScan_RFS.CGNO = CGZL.CGNO'
+      'left join ZSZL on CGZL.ZSBH = ZSZL.ZSDH'
+      'left join CLZL on KCRKScan_RFSS.CLBH = CLZL.CLDH'
+      'where KCRKScan_RFSS.SCNO=:SCNO')
+    Left = 348
+    Top = 365
+    ParamData = <
+      item
+        DataType = ftFixedChar
+        Name = 'SCNO'
+        ParamType = ptUnknown
+        Size = 12
+      end>
+    object Query1SCNO: TStringField
+      FieldName = 'SCNO'
+      FixedChar = True
+      Size = 11
+    end
+    object Query1CLBH: TStringField
+      FieldName = 'CLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object Query1YWPM: TStringField
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object Query1ZSYWJC: TStringField
+      FieldName = 'ZSYWJC'
+      FixedChar = True
+    end
+    object Query1CGNO: TStringField
+      FieldName = 'CGNO'
+      FixedChar = True
+    end
+    object Query1Memo_RY: TStringField
+      FieldName = 'Memo_RY'
+      FixedChar = True
+      Size = 255
+    end
+    object Query1Memo_Article: TStringField
+      FieldName = 'Memo_Article'
+      FixedChar = True
+      Size = 255
+    end
+    object Query1Qty: TFloatField
+      FieldName = 'Qty'
+    end
+    object Query1Pack: TIntegerField
+      FieldName = 'Pack'
+    end
+    object Query1Memo: TStringField
+      FieldName = 'Memo'
+      FixedChar = True
+      Size = 30
+    end
+    object Query1DWBH: TStringField
+      FieldName = 'DWBH'
+      FixedChar = True
+      Size = 4
+    end
+  end
+end

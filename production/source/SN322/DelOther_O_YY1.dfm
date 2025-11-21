@@ -1,0 +1,185 @@
+object DelOther_O_YY: TDelOther_O_YY
+  Left = 658
+  Top = 376
+  Width = 498
+  Height = 395
+  BorderIcons = [biSystemMenu]
+  Caption = 'DelOther_O_YY'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 490
+    Height = 49
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 0
+      Top = 17
+      Width = 72
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'YYBH:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 147
+      Top = 18
+      Width = 85
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'YWSM:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Edit1: TEdit
+      Left = 72
+      Top = 14
+      Width = 73
+      Height = 26
+      CharCase = ecUpperCase
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'VNI-Times'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnKeyPress = Edit1KeyPress
+    end
+    object Button1: TButton
+      Left = 376
+      Top = 9
+      Width = 89
+      Height = 33
+      Caption = 'Query'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      OnClick = Button1Click
+    end
+    object Edit2: TEdit
+      Left = 236
+      Top = 13
+      Width = 129
+      Height = 28
+      CharCase = ecUpperCase
+      TabOrder = 2
+      OnKeyPress = Edit2KeyPress
+    end
+  end
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 49
+    Width = 490
+    Height = 315
+    Align = alClient
+    DataSource = DS1
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -12
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    ParentFont = False
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -15
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    OnDblClick = DBGridEh1DblClick
+    OnKeyPress = DBGridEh1KeyPress
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'YYBH'
+        Footers = <>
+        Width = 63
+      end
+      item
+        EditButtons = <>
+        FieldName = 'YWSM'
+        Footers = <>
+        Width = 161
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ZWSM'
+        Footers = <>
+        Width = 195
+      end>
+  end
+  object DS1: TDataSource
+    DataSet = Query1
+    Left = 424
+    Top = 128
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select *'
+      'from SCBLYY'
+      'order by YYBH')
+    Left = 424
+    Top = 160
+    object Query1YYBH: TStringField
+      FieldName = 'YYBH'
+      Origin = 'DB.SCBLYY.YYBH'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1YWSM: TStringField
+      FieldName = 'YWSM'
+      Origin = 'DB.SCBLYY.YWSM'
+      FixedChar = True
+      Size = 50
+    end
+    object Query1ZWSM: TStringField
+      FieldName = 'ZWSM'
+      Origin = 'DB.SCBLYY.ZWSM'
+      FixedChar = True
+      Size = 50
+    end
+  end
+end

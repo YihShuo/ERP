@@ -1,0 +1,1702 @@
+unit MaterialTrace1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls, ComCtrls,DateUtils,
+  DBCtrls, Menus, GridsEh, DBGridEh, Comobj, IniFiles, Printers;
+
+type
+  TMaterialTrace = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label4: TLabel;
+    Label6: TLabel;
+    Label15: TLabel;
+    Label17: TLabel;
+    Edit1: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    DBGrid2: TDBGridEh;
+    DBGrid1: TDBGridEh;
+    KCRK: TQuery;
+    DS1: TDataSource;
+    KCLL: TQuery;
+    DS2: TDataSource;
+    KCRKRKNO: TStringField;
+    KCRKUSERDATE: TDateTimeField;
+    KCRKQty: TCurrencyField;
+    KCLLLLNO: TStringField;
+    KCLLQty: TCurrencyField;
+    KCLLSCBH: TStringField;
+    DTP1: TDateTimePicker;
+    Label3: TLabel;
+    Material: TQuery;
+    UpSQL1: TUpdateSQL;
+    DS3: TDataSource;
+    DBText1: TDBText;
+    DBText2: TDBText;
+    DBText3: TDBText;
+    DBText4: TDBText;
+    DBText5: TDBText;
+    KCLLCFMID: TStringField;
+    KCRKCFMID: TStringField;
+    KCRKZSBH: TStringField;
+    KCLLCFMDATE: TDateTimeField;
+    DTP2: TDateTimePicker;
+    Label5: TLabel;
+    KCLLMemo: TStringField;
+    KCRKMemo: TStringField;
+    Label7: TLabel;
+    CBX1: TComboBox;
+    Query1: TQuery;
+    PopupMenu1: TPopupMenu;
+    EXCEL1: TMenuItem;
+    PopupMenu2: TPopupMenu;
+    EXCEL2: TMenuItem;
+    JGDet1: TMenuItem;
+    JGDet2: TMenuItem;
+    Button3: TButton;
+    KCRKInvoice: TStringField;
+    CB2: TCheckBox;
+    CGNOEdit: TEdit;
+    Label8: TLabel;
+    Label9: TLabel;
+    InvEdit: TEdit;
+    KCRKPaperNo: TStringField;
+    CB3: TCheckBox;
+    KCRKZLBH: TStringField;
+    Splitter1: TSplitter;
+    Data: TQuery;
+    Button4: TButton;
+    Button5: TButton;
+    Query2: TQuery;
+    PrintDialog1: TPrintDialog;
+    Splitter2: TSplitter;
+    DBGridEh1: TDBGridEh;
+    DS4: TDataSource;
+    Query2CLBH: TStringField;
+    Panel2: TPanel;
+    DTP3: TDateTimePicker;
+    Label10: TLabel;
+    Button6: TButton;
+    Button7: TButton;
+    Button8: TButton;
+    Query2KCBH: TStringField;
+    Label11: TLabel;
+    Edit2: TEdit;
+    Button9: TButton;
+    Query3: TQuery;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    Query3EntryDate: TDateTimeField;
+    Query3DeliverDate: TDateTimeField;
+    DBGridEh2: TDBGridEh;
+    Button10: TButton;
+    Query3QTY: TCurrencyField;
+    Query3NK: TCurrencyField;
+    Query3KD: TCurrencyField;
+    Query3HD: TCurrencyField;
+    Query3TC: TCurrencyField;
+    Query3GC: TCurrencyField;
+    Query3XT: TCurrencyField;
+    Query3ZZZZ: TCurrencyField;
+    Query3CKBH: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure EXCEL2Click(Sender: TObject);
+    procedure EXCEL1Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure JGDet1Click(Sender: TObject);
+    procedure JGDet2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure Button8Click(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
+    procedure Button10Click(Sender: TObject);
+  private
+    GSBH_SFL:String;
+    AppDir:String;
+    //倉庫結算位數
+    WH_Decimal:String;
+    WH_DiplayFormat:String;
+    { Private declarations }
+    procedure ReadIni();
+  public
+    { Public declarations }
+  end;
+
+var
+  MaterialTrace: TMaterialTrace;
+
+implementation
+
+uses MaterialTrace_Print1, main1, MaterialTrace_JG1, MaterialTrace_JGA1, FunUnit;
+
+{$R *.dfm}
+
+procedure TMaterialTrace.ReadIni();
+var MyIni :Tinifile;
+    AppDir:string;
+begin
+  //倉庫小位數
+  WH_Decimal:='2';
+  WH_DiplayFormat:='#,##0.00';
+  AppDir:=ExtractFilePath(Application.ExeName);
+  if FileExists(AppDir+'\ComName.ini')=true then
+  begin
+    try
+      MyIni := Tinifile.Create(AppDir+'\ComName.ini');
+      //倉庫小位數
+      WH_Decimal:=MyIni.ReadString('Warehouse','Decimal','2');
+      WH_DiplayFormat:=MyIni.ReadString('Warehouse','DiplayFormat','#,##0.00');
+    finally
+      MyIni.Free;
+    end;
+  end;
+  TCurrencyField(KCRK.FieldByName('Qty')).DisplayFormat:=WH_DiplayFormat;
+  TCurrencyField(KCLL.FieldByName('Qty')).DisplayFormat:=WH_DiplayFormat;
+
+end;
+
+procedure TMaterialTrace.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  free;
+end;
+
+procedure TMaterialTrace.Button1Click(Sender: TObject);
+var year,month,day:word;
+    ayear,amonth:string;
+begin
+  decodedate(DTP1.Date,Year,Month,Day);   //找庫存相關的數據
+  incAMonth(Year,Month,Day,-1);
+  ayear:=floattostr(year);
+  amonth:=floattostr(month);
+  if length(amonth)=1 then
+  amonth:='0'+amonth;
+  with KCLL do          //出庫數量清單
+  begin
+    active:=false;
+    sql.Clear;
+    if CB2.Checked then
+    begin
+    sql.add('select * from (');
+    end;
+    sql.add('select * from ( select * from ( select JGZL.JGNO as LLNO,JGZL.CFMDate1 as CFMDate,');
+    //20160521 round 2 numeric for Qty
+    sql.add('JGZL.CFMID1 as CFMID,round(convert(float,JGZLS.Qty)*convert(float,JGZLM.Qty),'+WH_Decimal+') as Qty');
+    //
+    sql.add(',cast((select JGZLSS.ZLBH+''( ''+Convert(varchar,JGZLSS.Qty)+'' )'' + '','' from JGZLSS  where JGZLSS.JGNO=JGZLS.JGNO and JGZLSS.CLBH=JGZLS.CLBH for XML Path ('''')) as varchar(500))  as SCBH ');
+    sql.add(', '+''''+'JG'+''''+' as Memo ' );
+    sql.add('from JGZLS  ');
+    sql.add('left join JGZL on JGZL.JGNO=JGZLS.JGNO  ');
+    sql.add('left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty from JGZLS ');
+    sql.add('          left join JGZL on JGZL.JGNO=JGZLS.JGNO where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between ');
+    sql.add('          '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+   // sql.add('          and JGZL.CFMDate1 is not null');
+    sql.add('          and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<''2017/09/01'''); //2017/09/01 sua gia cong vat tu
+    sql.add('          and JGZLS.ZMLB='+''''+'ZZZZZZZZZZ'+'''');
+
+    //sql.add('          and JGZL.CKBH='+''''+CBX1.text+'''');
+
+    if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+    begin
+      SQL.Add('and JGZL.CKBH='''+CBX1.Text+''' ');
+    end else
+    if CBX1.text = 'ALL Without CBY' then
+    begin
+      sql.add('and JGZL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+    end else
+    if CBX1.text = 'ALL' then
+      sql.add('and JGZL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+    sql.add('          ) JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM.CLBH=JGZLS.CLBH');
+    sql.add('where JGZL.CFMDate1>='+''''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+    sql.add('          and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<''2017/09/01'''); //2017/09/01 sua gia cong vat tu
+    //  sql.add('and JGZL.CFMDate1 is not null');
+    sql.add('and JGZLS.ZMLB='+''''+edit1.Text+'''');
+    //  sql.add('and JGZLS.clbh='+''''+edit1.Text+'''');
+    //sql.Add('and JGZL.CKBH='''+CBX1.text+''' '); //20140319 weston JG資料修正
+
+    if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+    begin
+      SQL.Add('and JGZL.CKBH='''+CBX1.Text+''' ');
+    end else
+    if CBX1.text = 'ALL Without CBY' then
+    begin
+      sql.add('and JGZL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+    end else
+    if CBX1.text = 'ALL' then
+      sql.add('and JGZL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+
+    sql.add('and JGZLS.ZMLB <>'+''''+'ZZZZZZZZZZ'+'''');  //2017/09/01 sua gia cong vat tu
+    //2017/09/01 sua gia cong vat tu
+    sql.add('union all');
+    sql.add('select KCLL.LLNO,KCLL.CFMDATE,KCLL.CFMID,KCLLS.Qty,KCLLS.SCBH, BDepartment.DepName as Memo');
+    sql.add('from KCLLS');
+    sql.add('left join KCLL on KCLL.LLNO=KCLLS.LLNO ');
+    sql.add('left join BDepartment on BDepartment.ID=KCLL.DepID ');
+    sql.add('where  KCLLS.CLBH='+''''+edit1.Text+'''');
+    //sql.add('and KCLL.CKBH='+''''+CBX1.text+'''');
+
+    if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+    begin
+      SQL.Add('and KCLL.CKBH='''+CBX1.Text+''' ');
+    end else
+    if CBX1.text = 'ALL Without CBY' then
+    begin
+      sql.add('and KCLL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+    end else
+    if CBX1.text = 'ALL' then
+      sql.add('and KCLL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+    sql.add('and (convert(smalldatetime,convert(varchar,KCLL.CFMDate,111)) between ');
+    sql.add('     '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+    sql.add('and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+    //2017/09/01 sua gia cong vat tu
+    sql.Add('and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>=''2017/09/01''');
+    sql.add('and KCLL.SCBH = ''JJJJJJJJJJ'')');
+    sql.add(') JGCK ');
+    sql.add('union all');
+    sql.add('select KCLL.LLNO,KCLL.CFMDATE,KCLL.CFMID,KCLLS.Qty,KCLLS.SCBH, BDepartment.DepName as Memo');
+    sql.add('from KCLLS');
+    sql.add('left join KCLL on KCLL.LLNO=KCLLS.LLNO ');
+    sql.add('left join BDepartment on BDepartment.ID=KCLL.DepID ') ;
+    sql.add('where  KCLLS.CLBH='+''''+edit1.Text+'''');
+    //sql.add('and KCLL.CKBH='+''''+CBX1.text+'''');
+
+    if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+    begin
+      SQL.Add('and KCLL.CKBH='''+CBX1.Text+''' ');
+    end else
+    if CBX1.text = 'ALL Without CBY' then
+    begin
+      sql.add('and KCLL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+    end else
+    if CBX1.text = 'ALL' then
+      sql.add('and KCLL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+    sql.add('and KCLL.SCBH <> ''JJJJJJJJJJ''');
+    sql.add('and (convert(smalldatetime,convert(varchar,KCLL.CFMDate,111)) between ');
+    sql.add('     '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+    sql.add('and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+    if  CB3.Checked then
+    begin
+      sql.Add(')');
+    end else
+    begin
+      sql.add('or KCLL.CFMDATE is null)');
+    end;
+    sql.add(') JGCK ');
+    //
+    if not CB2.Checked then
+    begin
+      sql.Add('order by JGCK.CFMDate');
+    end;
+    if CB2.Checked then
+    begin
+      sql.add('union all');
+      sql.add('select KCLL_2014.LLNO,KCLL_2014.CFMDATE,KCLL_2014.CFMID,KCLLS_2014.Qty,KCLLS_2014.SCBH, BDepartment.DepName as Memo');
+      sql.add('from KCLLS_2014');
+      sql.add('left join KCLL_2014 on KCLL_2014.LLNO=KCLLS_2014.LLNO ');
+      sql.add('left join BDepartment on BDepartment.ID=KCLL_2014.DepID ') ;
+      sql.add('where  KCLLS_2014.CLBH='+''''+edit1.Text+'''');
+      //sql.add('and KCLL_2014.CKBH='+''''+CBX1.text+'''');
+
+      if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+      begin
+        SQL.Add('and KCLL_2014.CKBH='''+CBX1.Text+''' ');
+      end else
+      if CBX1.text = 'ALL Without CBY' then
+      begin
+        sql.add('and KCLL_2014.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+      end else
+      if CBX1.text = 'ALL' then
+        sql.add('and KCLL_2014.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+      sql.add('and (convert(smalldatetime,convert(varchar,KCLL_2014.CFMDate,111)) between ');
+      sql.add('     '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+      sql.add('     and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+      if  CB3.Checked then
+      begin
+        sql.Add(')');
+      end else
+      begin
+        sql.add('or KCLL_2014.CFMDATE is null)');
+      end;
+      sql.add(') JGCK ');
+      sql.add('order by JGCK.CFMDate');
+    end;
+    funcobj.WriteErrorLog(sql.Text);
+    active:=true;
+  end;
+  with KCRK do     //入庫數量清單
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select JGZL.JGNO as RKNO,JGZL.CFMDate1 as USERDATE,JGZL.ZSBH,JGZL.CFMID1 as CFMID,JGZLS.Qty,');
+    sql.add(''''+'JG'+''''+' as Memo,'''' as Invoice,'''' as PaperNo ');
+    sql.add(' ,cast((select JGZLSS.ZLBH+''( ''+Convert(varchar,JGZLSS.Qty)+'' )'' + '','' from JGZLSS  where JGZLSS.JGNO=JGZLS.JGNO and JGZLSS.CLBH=JGZLS.CLBH for XML Path ('''')) as varchar(500))  as ZLBH ');
+    sql.add('from JGZL,JGZLS ');
+    sql.add('where JGZL.JGNO=JGZLS.JGNO and JGZLS.ZMLB='+''''+'ZZZZZZZZZZ'+'''');
+    sql.add('and JGZLS.CLBH='+''''+edit1.Text+'''');
+    sql.add('and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+    sql.add(' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+    //sql.add('and JGZL.CKBH='+''''+CBX1.text+'''');
+
+    if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+    begin
+      SQL.Add('and JGZL.CKBH='''+CBX1.Text+''' ');
+    end else
+    if CBX1.text = 'ALL Without CBY' then
+    begin
+      sql.add('and JGZL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+    end else
+    if CBX1.text = 'ALL' then
+      sql.add('and JGZL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+    sql.add('union all');
+    sql.add('select KCRK.RKNO,KCRK.USERDATE,KCRK.ZSBH,KCRK.CFMID ,KCRKS.Qty,KCRK.ZSNO as Memo,kcrk.docno as Invoice,KCRK.Memo as PaperNo,KCRKS.CGBH as ZLBH ');
+    sql.add('from KCRKS');
+    sql.Add('inner join KCRK on KCRK.RKNO=KCRKS.RKNO');
+    sql.add('where KCRKS.CLBH='+''''+edit1.Text+'''');
+    sql.add('and convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+    sql.add(' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+    //sql.add('and KCRK.CKBH='+''''+CBX1.text+'''');
+    if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+    begin
+      SQL.Add('and KCRK.CKBH='''+CBX1.Text+''' ');
+    end else
+    if CBX1.text = 'ALL Without CBY' then
+    begin
+      sql.add('and KCRK.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+    end else
+    if CBX1.text = 'ALL' then
+      sql.add('and KCRK.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+    if CGNOEdit.Text<>'' then
+      sql.add('and KCRK.ZSNO='''+CGNOEdit.Text+''' ');
+    if INVEdit.Text<>'' then
+      sql.add('and KCRK.DOCNO='''+INVEdit.Text+''' ');
+    //
+    if not CB2.Checked then
+    begin
+      sql.Add('order by kcrk.USERDATE');
+    end;
+    if CB2.Checked then
+    begin
+      sql.add('union all');
+      sql.add('select * from ( ');
+      sql.add('select KCRK_2014.RKNO,KCRK_2014.USERDATE,KCRK_2014.ZSBH,KCRK_2014.CFMID ,KCRKS_2014.Qty,KCRK_2014.ZSNO as Memo,KCRK_2014.docno as Invoice,KCRK_2014.memo as PaperNo,KCRKS_2014.CGBH as ZLBH  ');
+      sql.add('from KCRKS_2014');
+      sql.Add('inner join KCRK_2014 on KCRK_2014.RKNO=KCRKS_2014.RKNO');
+      sql.add('where KCRKS_2014.CLBH='+''''+edit1.Text+'''');
+      sql.add('and convert(smalldatetime,convert(varchar,KCRK_2014.USERDATE,111)) between ');
+      sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+      sql.add(' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+      //sql.add('and KCRK_2014.CKBH='+''''+CBX1.text+'''');
+
+      if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+      begin
+        SQL.Add('and KCRK_2014.CKBH='''+CBX1.Text+''' ');
+      end else
+      if CBX1.text = 'ALL Without CBY' then
+      begin
+        sql.add('and KCRK_2014.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+      end else
+      if CBX1.text = 'ALL' then
+        sql.add('and KCRK_2014.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+
+      if CGNOEdit.Text<>'' then
+         sql.add('and KCRK_2014.ZSNO='''+CGNOEdit.Text+''' ');
+      if INVEdit.Text<>'' then
+         sql.add('and KCRK_2014.DOCNO='''+INVEdit.Text+''' ');
+      sql.add(')  KCRK ');
+      sql.add('order by KCRK.USERDATE');
+    end;
+    funcobj.WriteErrorLog(sql.Text);
+    active:=true;
+  end;
+  //材料名稱及庫存數量的更新
+  with material do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select CLZL.CLDH,CLZL.YWPM,CLZL.DWBH,1000.00 as Remainder, ');
+    sql.add(' 1000.00 as RKQty,1000.00 as LLQty,1000.00 as NeedQty,1000.00 as OnQty ');
+    sql.add('from CLZL  where CLDH='+''''+edit1.Text+'''');
+    active:=true;
+  end;
+end;
+
+procedure TMaterialTrace.FormCreate(Sender: TObject);
+begin
+  AppDir:=ExtractFilePath(Application.ExeName);
+  DTP1.date:=startofthemonth(Date);
+  DTP2.date:=date;
+  DTP3.date:=startofthemonth(Date);
+  with query1 do
+  begin
+    active:=false;
+    sql.clear;
+    sql.add('select CKBH from KCCK where GSBH='+''''+main.Edit2.Text+'''');
+    active:=true;
+    while not eof do
+    begin
+      CBX1.Items.Add(fields[0].value);
+      next;
+    end;
+    if CBX1.text='' then
+    begin
+      CBX1.ItemIndex:=0;
+    end;
+    CBX1.items.add('ALL');
+    if (main.Edit2.Text = 'CDC') then
+      CBX1.items.add('ALL Without CBY');
+    active:=false;
+  end;
+  with query1 do
+  begin
+    Active:=false;
+    sql.Clear;
+    sql.add('select SFL from Bgszl where GSDH='''+main.Edit2.Text+''' ');
+    active:=true;
+    GSBH_SFL:=FieldByName('SFL').AsString;
+    Active:=false;
+  end;
+  material.Active:=false;
+  KCLL.Active:=false;
+  KCRK.Active:=false;
+  ReadIni();
+end;
+
+procedure TMaterialTrace.Button2Click(Sender: TObject);
+begin
+  MaterialTrace_Print:=TMaterialTrace_Print.create(self);
+  if GSBH_SFL='TM' then
+    MaterialTrace_Print.QRLabel8.Enabled:=True;
+
+  MaterialTrace_Print.quickrep1.preview;
+  MaterialTrace_Print.free;
+end;
+
+procedure TMaterialTrace.EXCEL2Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j:integer;
+begin
+
+  if KCRK.Active then
+  begin
+    if KCRK.recordcount=0 then
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+  end else
+  begin
+    showmessage('No record.');
+    abort;
+  end;
+
+  try
+    eclApp:=CreateOleObject('Excel.Application');
+    WorkBook:=CreateOleObject('Excel.Sheet');
+  except
+    Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+    Exit;
+  end;
+
+  try
+    WorkBook:=eclApp.workbooks.Add;
+    eclApp.Cells(1,1):='NO';
+    for   i:=1   to   KCRK.fieldcount   do
+      begin
+        eclApp.Cells(1,i+1):=KCRK.fields[i-1].FieldName;
+      end;
+    KCRK.First;
+    j:=2;
+    while   not  KCRK.Eof   do
+    begin
+        eclApp.Cells(j,1):=j-1;
+        for   i:=1   to   KCRK.fieldcount   do
+        begin
+            eclApp.Cells(j,i+1):=KCRK.Fields[i-1].Value;
+            eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+        end;
+        KCRK.Next;
+        inc(j);
+    end;
+    eclapp.columns.autofit;
+    showmessage('Succeed.');
+    eclApp.Visible:=True;
+  except
+    on   F:Exception   do
+      showmessage(F.Message);
+  end;
+
+
+end;
+
+procedure TMaterialTrace.EXCEL1Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j:integer;
+begin
+
+  if KCLL.Active then
+  begin
+    if KCLL.recordcount=0 then
+    begin
+        showmessage('No record.');
+        abort;
+    end;
+  end else
+  begin
+    showmessage('No record.');
+    abort;
+  end;
+
+  try
+    eclApp:=CreateOleObject('Excel.Application');
+    WorkBook:=CreateOleObject('Excel.Sheet');
+  except
+    Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+    Exit;
+  end;
+
+  try
+    WorkBook:=eclApp.workbooks.Add;
+    eclApp.Cells(1,1):='NO';
+    for   i:=1   to   KCLL.fieldcount   do
+      begin
+        eclApp.Cells(1,i+1):=KCLL.fields[i-1].FieldName;
+      end;
+    KCLL.First;
+    j:=2;
+    while   not  KCLL.Eof   do
+      begin
+        eclApp.Cells(j,1):=j-1;
+        for   i:=1   to   KCLL.fieldcount   do
+          begin
+            eclApp.Cells(j,i+1):=KCLL.Fields[i-1].Value;
+            eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+          end;
+        KCLL.Next;
+        inc(j);
+      end;
+    eclapp.columns.autofit;
+    showmessage('Succeed.');
+    eclApp.Visible:=True;
+  except
+    on   F:Exception   do
+      showmessage(F.Message);
+  end;
+
+
+end;
+
+procedure TMaterialTrace.FormDestroy(Sender: TObject);
+begin
+  MaterialTrace:=nil;
+end;
+
+procedure TMaterialTrace.JGDet1Click(Sender: TObject);
+begin
+  if KCLL.FieldByName('Memo').value='JG' then
+  begin
+    MaterialTrace_JG:=TMaterialTrace_JG.create(self);
+    with MaterialTrace_JG.query1 do
+      begin
+        active:=false;
+        sql.clear;
+        sql.add('select JGZLS.CLBH,JGZLS.Qty as TotalQty,JGZLSS.ZLBH,JGZLSS.Qty ');
+        sql.add('from JGZLS ');
+        sql.add('left join JGZLSS on JGZLS.JGNO=JGZLSS.JGNO ');
+        sql.add('where JGZLS.JGNO='+''''+ KCLL.FieldByName('LLNO').value+'''');
+        sql.add('      and JGZLS.ZMLB='+''''+ edit1.Text+'''');
+        sql.add('order by   JGZLS.CLBH,JGZLSS.ZLBH ');
+        active:=true;
+      end;
+    MaterialTrace_JG.show;
+  end;
+end;
+
+procedure TMaterialTrace.JGDet2Click(Sender: TObject);
+begin 
+  if KCRK.FieldByName('Memo').value='JG' then
+  begin
+    MaterialTrace_JGA:=TMaterialTrace_JGA.create(self);
+    with MaterialTrace_JGA.query1 do
+      begin
+        active:=false;
+        sql.clear;
+        sql.add('select JGZLS.CLBH,JGZLS.Qty as TotalQty,JGZLSS.ZLBH,JGZLSS.Qty ');
+        sql.add('from JGZLS ');
+        sql.add('left join JGZLSS on JGZLS.JGNO=JGZLSS.JGNO ');
+        sql.add('where JGZLS.JGNO='+''''+ KCRK.FieldByName('RKNO').value+'''');
+        sql.add('      and JGZLS.CLBH='+''''+ edit1.Text+'''');
+        sql.add('order by   JGZLS.CLBH,JGZLSS.ZLBH ');
+        active:=true;
+      end;
+    MaterialTrace_JGA.show;
+  end;
+end;
+
+procedure TMaterialTrace.Button3Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j:integer;
+begin
+
+  if query3.Active then
+  begin
+    if query3.recordcount=0 then
+    begin
+        showmessage('No record.');
+        abort;
+    end;
+  end
+  else
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+
+  try
+    eclApp:=CreateOleObject('Excel.Application');
+    WorkBook:=CreateOleObject('Excel.Sheet');
+  except
+    Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+    Exit;
+  end;
+
+  try
+    WorkBook:=eclApp.workbooks.Add;
+    eclApp.Cells(1,1):='NO';
+    for   i:=1   to   query3.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=query3.fields[i-1].FieldName;
+    end;
+  query3.First;
+  j:=2;
+  while   not  query3.Eof   do
+  begin
+      eclApp.Cells(j,1):=j-1;
+      for   i:=1   to   query3.fieldcount   do
+      begin
+          eclApp.Cells(j,i+1):=query3.Fields[i-1].Value;
+          eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+      end;
+      query3.Next;
+      inc(j);
+  end;
+  eclapp.columns.autofit;
+  showmessage('Succeed.');
+  eclApp.Visible:=True;
+  except
+    on   F:Exception   do
+      showmessage(F.Message);
+  end;
+end;
+
+procedure TMaterialTrace.FormShow(Sender: TObject);
+begin
+  main.FormLanguage(Pointer(self),self.Name);
+end;
+
+procedure TMaterialTrace.Button4Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j,k,s,NameSheets,ValuesSheets,excelsheet,excelcount,Mon:integer;
+    DataRow,ExcelRow,Nhap,Xuat:integer;
+    Nxuat,Nnhap,CLBHTT:string;
+    stockqty:real;
+begin
+   if(not DirectoryExists(AppDir+'Additional\'))  then ForceDirectories(AppDir+'Additional\');
+   CopyFile(Pchar('\\'+main.ServerIP+'\liy_erp\Additional\Warehouse_SN33.xls'),Pchar(AppDir+'Additional\Warehouse_SN33.xls'),false);
+   if FileExists(AppDir+'Additional\Warehouse_SN33.xls') then
+   begin
+      try
+        eclApp:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+      try
+        eclApp.WorkBooks.Open(AppDir+'Additional\Warehouse_SN33.xls');
+//        Excelall := eclApp.WorkBooks.Open(AppDir+'Additional\Warehouse_SN33.xls');
+        with Query1 do
+        begin
+          active:=false;
+          sql.Clear;
+          sql.add('select isnull(sum(QTY),0)');
+          sql.add('from KCCLMONTH where 1 = 1');
+          if (CBX1.Text <> 'ALL') and (CBX1.text <> 'ALL Without CBY') then
+            sql.add('and CKBH = '''+CBX1.Text+'''')
+          else if CBX1.text = 'ALL Without CBY' then
+            sql.add('and CKBH in (''CDC'',''CDT'',''BYC'',''BYT'')');
+
+          sql.add('and CLBH = '''+Edit1.Text+'''');
+          sql.add('and KCYear = '''+copy(formatdatetime('YYYY/MM/DD',DTP1.Date-15),1,4)+'''');
+          sql.add('and KCMonth = '''+copy(formatdatetime('YYYY/MM/DD',DTP1.Date-15),6,2)+'''');
+          active:=true;
+          stockqty:=Query1.Fields[0].Value;
+        end;
+        with Data do
+        begin
+          active:=false;
+          sql.Clear;
+          if CB2.Checked then
+          begin
+          sql.add('select CFMDate,LLNO,Qty from (');
+          end;
+          sql.add('select CFMDate,LLNO,Qty from ( select * from ( select JGZL.JGNO as LLNO,JGZL.CFMDate1 as CFMDate,');
+          //20160521 round 2 numeric for Qty
+          sql.add('JGZL.CFMID1 as CFMID,round(convert(float,JGZLS.Qty)*convert(float,JGZLM.Qty),'+WH_Decimal+') as Qty');
+          //
+          sql.add(',cast((select JGZLSS.ZLBH+''( ''+Convert(varchar,JGZLSS.Qty)+'' )'' + '','' from JGZLSS  where JGZLSS.JGNO=JGZLS.JGNO and JGZLSS.CLBH=JGZLS.CLBH for XML Path ('''')) as varchar(500))  as SCBH ');
+          sql.add(', '+''''+'JG'+''''+' as Memo ' );
+          sql.add('from JGZLS  ');
+          sql.add('left join JGZL on JGZL.JGNO=JGZLS.JGNO  ');
+          sql.add('left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty from JGZLS ');
+          sql.add('          left join JGZL on JGZL.JGNO=JGZLS.JGNO where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between ');
+          sql.add('          '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+         // sql.add('          and JGZL.CFMDate1 is not null');
+          sql.add('          and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<''2017/09/01'''); //2017/09/01 sua gia cong vat tu
+          sql.add('          and JGZLS.ZMLB='+''''+'ZZZZZZZZZZ'+'''');
+
+          if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+          begin
+            SQL.Add('and JGZL.CKBH='''+CBX1.Text+''' ');
+          end else
+          if CBX1.text = 'ALL Without CBY' then
+          begin
+            sql.add('and JGZL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+          end else
+          if CBX1.text = 'ALL' then
+            sql.add('and JGZL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+
+          sql.add('          ) JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM.CLBH=JGZLS.CLBH');
+          sql.add('where JGZL.CFMDate1>='+''''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+          sql.add('          and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<''2017/09/01'''); //2017/09/01 sua gia cong vat tu
+
+          sql.add('and JGZLS.ZMLB='+''''+edit1.Text+'''');
+          //  sql.add('and JGZLS.clbh='+''''+edit1.Text+'''');
+          //sql.Add('and JGZL.CKBH='''+CBX1.text+''' '); //20140319 weston JG資料修正
+          if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+          begin
+            SQL.Add('and JGZL.CKBH='''+CBX1.Text+''' ');
+          end else
+          if CBX1.text = 'ALL Without CBY' then
+          begin
+            sql.add('and JGZL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+          end else
+          if CBX1.text = 'ALL' then
+            sql.add('and JGZL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+          sql.add('and JGZLS.ZMLB <>'+''''+'ZZZZZZZZZZ'+'''');  //2017/09/01 sua gia cong vat tu
+          //2017/09/01 sua gia cong vat tu
+          sql.add('union all');
+          sql.add('select KCLL.LLNO,KCLL.CFMDATE,KCLL.CFMID,KCLLS.Qty,KCLLS.SCBH, BDepartment.DepName as Memo');
+          sql.add('from KCLLS');
+          sql.add('left join KCLL on KCLL.LLNO=KCLLS.LLNO ');
+          sql.add('left join BDepartment on BDepartment.ID=KCLL.DepID ');
+          sql.add('where  KCLLS.CLBH='+''''+edit1.Text+'''');
+          //sql.add('and KCLL.CKBH='+''''+CBX1.text+'''');
+          if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+          begin
+            SQL.Add('and KCLL.CKBH='''+CBX1.Text+''' ');
+          end else
+          if CBX1.text = 'ALL Without CBY' then
+          begin
+            sql.add('and KCLL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+          end else
+          if CBX1.text = 'ALL' then
+            sql.add('and KCLL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+          sql.add('and (convert(smalldatetime,convert(varchar,KCLL.CFMDate,111)) between ');
+          sql.add('     '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+          sql.add('and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+          //2017/09/01 sua gia cong vat tu
+          sql.Add('and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>=''2017/09/01''');
+          sql.add('and KCLL.SCBH = ''JJJJJJJJJJ'')');
+          sql.add(') JGCK ');
+          sql.add('union all');
+          sql.add('select KCLL.LLNO,KCLL.CFMDATE,KCLL.CFMID,KCLLS.Qty,KCLLS.SCBH, BDepartment.DepName as Memo');
+          sql.add('from KCLLS');
+          sql.add('left join KCLL on KCLL.LLNO=KCLLS.LLNO ');
+          sql.add('left join BDepartment on BDepartment.ID=KCLL.DepID ') ;
+          sql.add('where  KCLLS.CLBH='+''''+edit1.Text+'''');
+          //sql.add('and KCLL.CKBH='+''''+CBX1.text+'''');
+          if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+          begin
+            SQL.Add('and KCLL.CKBH='''+CBX1.Text+''' ');
+          end else
+          if CBX1.text = 'ALL Without CBY' then
+          begin
+            sql.add('and KCLL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+          end else
+          if CBX1.text = 'ALL' then
+            sql.add('and KCLL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+          sql.add('and KCLL.SCBH <> ''JJJJJJJJJJ''');
+          sql.add('and (convert(smalldatetime,convert(varchar,KCLL.CFMDate,111)) between ');
+          sql.add('     '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+          sql.add('and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+          if  CB3.Checked then
+          begin
+            sql.Add(')');
+          end else
+          begin
+            sql.add('or KCLL.CFMDATE is null)');
+          end;
+          sql.add(') JGCK ');
+          //
+          if CB2.Checked then
+          begin
+            sql.add('union all');
+            sql.add('select KCLL_2014.CFMDATE,KCLL_2014.LLNO,KCLLS_2014.Qty');
+            sql.add('from KCLLS_2014');
+            sql.add('left join KCLL_2014 on KCLL_2014.LLNO=KCLLS_2014.LLNO ');
+            sql.add('left join BDepartment on BDepartment.ID=KCLL_2014.DepID ') ;
+            sql.add('where  KCLLS_2014.CLBH='+''''+edit1.Text+'''');
+            //sql.add('and KCLL_2014.CKBH='+''''+CBX1.text+'''');
+            if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+            begin
+              SQL.Add('and KCLL_2014.CKBH='''+CBX1.Text+''' ');
+            end else
+            if CBX1.text = 'ALL Without CBY' then
+            begin
+              sql.add('and KCLL_2014.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+            end else
+            if CBX1.text = 'ALL' then
+              sql.add('and KCLL_2014.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+
+
+
+            sql.add('and (convert(smalldatetime,convert(varchar,KCLL_2014.CFMDate,111)) between ');
+            sql.add('     '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+            sql.add('     and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+            if  CB3.Checked then
+            begin
+              sql.Add(')');
+            end else
+            begin
+              sql.add('or KCLL_2014.CFMDATE is null)');
+            end;
+            sql.add(') JGCK ');
+            //sql.add('order by JGCK.CFMDate');
+          end;
+          sql.add('union all');
+          sql.add('select JGZL.CFMDate1 as USERDATE,JGZL.JGNO as RKNO,JGZLS.Qty');
+          //sql.add(''''+'JG'+''''+' as Memo,'''' as Invoice,'''' as PaperNo ');
+          //sql.add(' ,cast((select JGZLSS.ZLBH+''( ''+Convert(varchar,JGZLSS.Qty)+'' )'' + '','' from JGZLSS  where JGZLSS.JGNO=JGZLS.JGNO and JGZLSS.CLBH=JGZLS.CLBH for XML Path ('''')) as varchar(500))  as ZLBH ');
+          sql.add('from JGZL,JGZLS ');
+          sql.add('where JGZL.JGNO=JGZLS.JGNO and JGZLS.ZMLB='+''''+'ZZZZZZZZZZ'+'''');
+          sql.add('and JGZLS.CLBH='+''''+edit1.Text+'''');
+          sql.add('and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between ');
+          sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+          sql.add(' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+          //sql.add('and JGZL.CKBH='+''''+CBX1.text+'''');
+          if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+          begin
+            SQL.Add('and JGZL.CKBH ='''+CBX1.Text+''' ');
+          end else
+          if CBX1.text = 'ALL Without CBY' then
+          begin
+            sql.add('and JGZL.CKBH  in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+          end else
+          if CBX1.text = 'ALL' then
+            sql.add('and JGZL.CKBH  in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+
+          sql.add('union all');
+          sql.add('select KCRK.USERDATE,KCRK.RKNO,KCRKS.Qty');
+          sql.add('from KCRKS');
+          sql.Add('inner join KCRK on KCRK.RKNO=KCRKS.RKNO');
+          sql.add('where KCRKS.CLBH='+''''+edit1.Text+'''');
+          sql.add('and convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between ');
+          sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+          sql.add(' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+          //sql.add('and KCRK.CKBH='+''''+CBX1.text+'''');
+
+          if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+          begin
+            SQL.Add('and KCRK.CKBH ='''+CBX1.Text+''' ');
+          end else
+          if CBX1.text = 'ALL Without CBY' then
+          begin
+            sql.add('and KCRK.CKBH  in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+          end else
+          if CBX1.text = 'ALL' then
+            sql.add('and KCRK.CKBH  in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+
+          if CGNOEdit.Text<>'' then
+            sql.add('and KCRK.ZSNO='''+CGNOEdit.Text+''' ');
+          if INVEdit.Text<>'' then
+            sql.add('and KCRK.DOCNO='''+INVEdit.Text+''' ');
+          //
+          if not CB2.Checked then
+            sql.add('order by JGCK.CFMDate');
+          if CB2.Checked then
+          begin
+            sql.add('union all');
+            sql.add('select USERDATE,RKNO,Qty from ( ');
+            sql.add('select KCRK_2014.RKNO,KCRK_2014.USERDATE,KCRK_2014.ZSBH,KCRK_2014.CFMID ,KCRKS_2014.Qty,KCRK_2014.ZSNO as Memo,KCRK_2014.docno as Invoice,KCRK_2014.memo as PaperNo,KCRKS_2014.CGBH as ZLBH  ');
+            sql.add('from KCRKS_2014');
+            sql.Add('inner join KCRK_2014 on KCRK_2014.RKNO=KCRKS_2014.RKNO');
+            sql.add('where KCRKS_2014.CLBH='+''''+edit1.Text+'''');
+            sql.add('and convert(smalldatetime,convert(varchar,KCRK_2014.USERDATE,111)) between ');
+            sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''  );
+            sql.add(' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+            //sql.add('and KCRK_2014.CKBH='+''''+CBX1.text+'''');
+            if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+            begin
+              SQL.Add('and KCRK_2014.CKBH ='''+CBX1.Text+''' ');
+            end else
+            if CBX1.text = 'ALL Without CBY' then
+            begin
+              sql.add('and KCRK_2014.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+            end else
+            if CBX1.text = 'ALL' then
+              sql.add('and KCRK_2014.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+
+
+            if CGNOEdit.Text<>'' then
+               sql.add('and KCRK_2014.ZSNO='''+CGNOEdit.Text+''' ');
+            if INVEdit.Text<>'' then
+               sql.add('and KCRK_2014.DOCNO='''+INVEdit.Text+''' ');
+            sql.add(')  KCRK ');
+            sql.add('order by JGCK.CFMDate');
+          end;
+          //funcobj.WriteErrorLog(sql.Text);
+          active:=true;
+        end;
+        with Query1 do
+        begin
+          active:=false;
+          sql.Clear;
+          sql.add('select CLZL.CLDH,CLZL.YWPM,CLZL.DWBH,KCZLS.KCBH');
+          sql.add('from CLZL left join KCZLS on CLZL.CLDH = KCZLS.CLBH where CLZL.CLDH='+''''+edit1.Text+'''');
+          if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+          begin
+            SQL.Add('and KCZLS.CKBH ='''+CBX1.Text+''' ');
+          end else
+          if CBX1.text = 'ALL Without CBY' then
+          begin
+            sql.add('and KCZLS.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+          end else
+          if CBX1.text = 'ALL' then
+            sql.add('and KCZLS.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+
+          active:=true;
+        end;
+        eclApp.Cells(2,1):='Ten hang 品名: '+ Query1.FieldByName('CLDH').AsString;
+        eclApp.Cells(2,3):='Don vi tinh 計算單位: '+ Query1.FieldByName('DWBH').AsString;
+        eclApp.Cells(2,5):= 'Qui cach 規格: ' +copy(Query1.FieldByName('YWPM').AsString,1,4);
+        eclApp.Cells(2,7):= 'Ma ke 貨架號碼: ' +Query1.FieldByName('KCBH').AsString;
+        eclApp.Cells(5,6):= 'LastMonth Qty: ' +floattostr(stockqty);
+        Nhap:=6;
+        Xuat:=6;
+        k:=1;
+        i:=1;
+        KCLL.First;
+        KCRK.First;
+        while  not  Data.Eof   do
+        begin
+           if (KCLL.FieldByName('CFMdate').Value = NULL) then
+           begin
+              eclApp.Cells(Xuat,3):=KCLL.Fields[0].Value;
+              eclApp.Cells(Xuat,5):=KCLL.Fields[3].Value;
+              stockqty := stockqty - KCLL.fieldbyname('qty').Value;
+              eclApp.Cells(Xuat,6):=floattostr(stockqty);
+              KCLL.Next;
+              i:=i+1;
+           end else
+           if (formatdatetime('YYYY/MM/DD',KCRK.FieldByName('USERDATE').Value) > formatdatetime('YYYY/MM/DD',KCLL.FieldByName('CFMdate').Value))  and (i<=KCLL.RecordCount) then
+           begin
+              eclApp.Cells(Xuat,2):=formatdatetime('YYYY/MM/DD',KCLL.Fields[2].Value);
+              eclApp.Cells(Xuat,3):=KCLL.Fields[0].Value;
+              eclApp.Cells(Xuat,5):=KCLL.Fields[3].Value;
+              stockqty := stockqty - KCLL.fieldbyname('qty').Value;
+              eclApp.Cells(Xuat,6):=floattostr(stockqty);
+              KCLL.Next;
+              i:=i+1;
+           end else
+           if (formatdatetime('YYYY/MM/DD',KCRK.FieldByName('USERDATE').Value) <= formatdatetime('YYYY/MM/DD',KCLL.FieldByName('CFMdate').Value)) and (k<=KCRK.RecordCount) then
+           begin
+              eclApp.Cells(Nhap,1):=formatdatetime('YYYY/MM/DD',KCRK.Fields[1].Value);
+              eclApp.Cells(Nhap,3):=KCRK.Fields[0].Value;
+              eclApp.Cells(Nhap,4):=KCRK.Fields[2].Value;
+              stockqty := stockqty + KCRK.fieldbyname('qty').Value;
+              eclApp.Cells(Nhap,6):=floattostr(stockqty);
+              KCRK.Next;
+              k:=k+1;
+           end;
+           if (formatdatetime('YYYY/MM/DD',Data.FieldByName('CFMdate').Value) = formatdatetime('YYYY/MM/DD',KCRK.FieldByName('USERDATE').Value)) and
+           (formatdatetime('YYYY/MM/DD',KCRK.FieldByName('USERDATE').Value) > formatdatetime('YYYY/MM/DD',KCLL.FieldByName('CFMdate').Value)) then
+           begin
+              eclApp.Cells(Nhap,1):=formatdatetime('YYYY/MM/DD',KCRK.Fields[1].Value);
+              eclApp.Cells(Nhap,3):=KCRK.Fields[0].Value;
+              eclApp.Cells(Nhap,4):=KCRK.Fields[2].Value;
+              stockqty := stockqty + KCRK.fieldbyname('qty').Value;
+              eclApp.Cells(Nhap,6):=floattostr(stockqty);
+              KCRK.Next;
+              k:=k+1;
+           end else
+           if (formatdatetime('YYYY/MM/DD',Data.FieldByName('CFMdate').Value) = formatdatetime('YYYY/MM/DD',KCLL.FieldByName('CFMdate').Value)) and
+           (formatdatetime('YYYY/MM/DD',KCLL.FieldByName('CFMdate').Value) >= formatdatetime('YYYY/MM/DD',KCRK.FieldByName('USERDATE').Value)) then
+           begin
+              eclApp.Cells(Xuat,2):=formatdatetime('YYYY/MM/DD',KCLL.Fields[2].Value);
+              eclApp.Cells(Xuat,3):=KCLL.Fields[0].Value;
+              eclApp.Cells(Xuat,5):=KCLL.Fields[3].Value;
+              stockqty := stockqty - KCLL.fieldbyname('qty').Value;
+              eclApp.Cells(Xuat,6):=floattostr(stockqty);
+              KCLL.Next;
+              i:=i+1;
+           end;
+           Xuat:=Xuat+1;
+           Nhap:=Nhap+1;
+           Data.Next;
+        end;
+        for k:=1 to 4 do
+        begin
+          eclApp.range[eclApp.cells[5,1],eclApp.cells[Xuat-1,7]].borders[k].linestyle:=1;
+        end;
+          Showmessage('Succeed.');
+          eclApp.Visible:=True;
+      except
+       on   F:Exception   do
+       showmessage(F.Message);
+      end;
+   end;
+end;
+
+procedure TMaterialTrace.Button5Click(Sender: TObject);
+begin
+  Panel2.Visible := not Panel2.Visible;
+  Ds4.DataSet := Query2;
+  DBGrideh2.Visible := false;
+end;
+
+procedure TMaterialTrace.Button7Click(Sender: TObject);
+begin
+  Panel2.Visible := not Panel2.Visible;
+end;
+
+procedure TMaterialTrace.Button6Click(Sender: TObject);
+var PrinterIndex,i: Integer;
+  PrinterName: string;
+begin
+  Panel2.Visible := not Panel2.Visible;
+  if (PrintDialog1.Execute) then
+  begin
+    PrinterName := Printers.Printer.Printers[Printers.Printer.PrinterIndex];
+    PrinterIndex := Printers.Printer.Printers.IndexOf(PrinterName);
+  end
+  else
+    Exit;
+  i := 0;
+  if messagedlg('From start ?',mtconfirmation,[MBYes,MBNo],0)=mrYes then begin
+    Query2.Active := false;
+    Query2.SQL.Clear;
+    Query2.SQL.Add('select * from (');
+    Query2.SQL.Add('select KCCLMONTH.CLBH,KCZLS.KCBH from KCCLMONTH');
+    if (CBX1.Text <> 'ALL') and (CBX1.text <> 'ALL Without CBY') then
+      Query2.SQL.Add('left join KCZLS on KCCLMONTH.CLBH = KCZLS.CLBH and KCZLS.CKBH = '''+CBX1.Text+'''')
+    else if CBX1.text = 'ALL Without CBY' then
+      Query2.sql.add('left join KCZLS on KCCLMONTH.CLBH = KCZLS.CLBH and KCZLS.CKBH in (''CDC'',''CDT'',''BYC'',''BYT'')');
+    Query2.SQL.Add('where 1=1 and QTY > 0');
+    Query2.sql.add('and KCYear = '''+copy(formatdatetime('YYYY/MM/DD',startofthemonth(DTP3.Date)-1),1,4)+'''');
+    Query2.sql.add('and KCMonth = '''+copy(formatdatetime('YYYY/MM/DD',startofthemonth(DTP3.Date)-1),6,2)+'''');
+    if (CBX1.Text <> 'ALL') and (CBX1.text <> 'ALL Without CBY') then
+      Query2.sql.add('and KCCLMONTH.CKBH = '''+CBX1.Text+'''')
+    else if CBX1.text = 'ALL Without CBY' then
+      Query2.sql.add('and KCCLMONTH.CKBH in (''CDC'',''CDT'',''BYC'',''BYT'')')
+    else if CBX1.text = 'ALL' then
+      Query3.sql.add('left join KCZLS on KCCLMONTH.CLBH = KCZLS.CLBH and KCZLS.CKBH in (Select CKBH from KCCK where GSBH = '''+main.Edit2.Text+''')');
+    if Edit2.Text <> '' then
+      Query2.sql.add('and kczls.KCBH like '''+Edit2.Text+'%''');
+    if Edit1.Text <> '' then
+      Query2.sql.add('and KCCLMONTH.CLBH like '''+Edit1.Text+'%''');
+    Query2.SQL.Add('union  ');
+    Query2.SQL.Add('select KCRKS.CLBH,KCZLS.KCBH from KCRKS  ');
+    Query2.SQL.Add('left join KCRK on KCRK.RKNO = KCRKS.RKNO  ');
+    if (CBX1.Text <> 'ALL') and (CBX1.text <> 'ALL Without CBY') then
+      Query2.SQL.Add('left join KCZLS on KCRKS.CLBH = KCZLS.CLBH and KCZLS.CKBH = '''+CBX1.Text+'''')
+    else if CBX1.text = 'ALL Without CBY' then
+      Query2.sql.add('left join KCZLS on KCRKS.CLBH = KCZLS.CLBH and KCZLS.CKBH in (''CDC'',''CDT'',''BYC'',''BYT'')');
+    Query2.SQL.Add('where KCRKS.USERDATE between '''+formatdatetime('YYYY/MM/01',DTP3.Date)+''' and '''+formatdatetime('YYYY/MM/DD',Endofthemonth(DTP3.Date))+''' ');
+    if (CBX1.Text <> 'ALL') and (CBX1.text <> 'ALL Without CBY') then
+      Query2.sql.add('and KCRK.CKBH = '''+CBX1.Text+'''')
+    else if CBX1.text = 'ALL Without CBY' then
+      Query2.sql.add('and KCRK.CKBH in (''CDC'',''CDT'',''BYC'',''BYT'')')
+    else if CBX1.text = 'ALL' then
+      Query3.sql.add('left join KCZLS on KCCLMONTH.CLBH = KCZLS.CLBH and KCZLS.CKBH in (Select CKBH from KCCK where GSBH = '''+main.Edit2.Text+''')');
+    if Edit2.Text <> '' then
+      Query2.sql.add('and kczls.KCBH like '''+Edit2.Text+'%''');
+    if Edit1.Text <> '' then
+      Query2.sql.add('and KCRKS.CLBH like '''+Edit1.Text+'%''');
+    Query2.sql.add(')KCLL');
+    Query2.SQL.Add('group by CLBH,KCBH');
+    Query2.SQL.Add('order by CLBH');
+    Query2.Active := true;
+//    showmessage(Query2.SQL.Text);
+//    exit;
+  end
+  else
+    if not Query2.Active then begin
+      showmessage('There is no data !');
+      exit;
+    end;
+  while not Query2.Eof do begin
+//    i := i +1;
+//    if i = 5 then begin
+      Edit1.Text := Query2.Fields[0].AsString;
+      Button8.Click;
+//      exit;
+//    end;
+    Query2.Next;
+  end;
+end;
+
+procedure TMaterialTrace.Button8Click(Sender: TObject);
+var year,month,day:word;
+    ayear,amonth:string;
+    eclApp,WorkBook:olevariant;
+    i,j,k,s,t,NameSheets,ValuesSheets,excelsheet,excelcount,Mon:integer;
+    DataRow,ExcelRow,Nhap,Xuat:integer;
+    Nxuat,Nnhap,CLBHTT,KCRKDATE:string;
+    stockqty:real;
+begin
+  decodedate(DTP3.Date,Year,Month,Day);   //找庫存相關的數據
+  ayear:=floattostr(year);
+  amonth:=floattostr(month);
+  if length(amonth)=1 then
+  amonth:='0'+amonth;
+  with KCLL do          //出庫數量清單
+  begin
+    active:=false;
+    sql.Clear;
+    if CB2.Checked then
+    begin
+    sql.add('select JGCK.LLNO,JGCK.CFMDate,JGCK.CFMID,SUM(QTY) as QTY,JGCK.SCBH,JGCK.Memo from (');
+    end;
+    sql.add('select JGCK.LLNO,JGCK.CFMDate,JGCK.CFMID,SUM(QTY) as QTY,JGCK.SCBH,JGCK.Memo from ( select * from ( select '''' as LLNO,JGZL.CFMDate1 as CFMDate,');
+    //20160521 round 2 numeric for Qty
+    sql.add(''''' as CFMID,sum(round(convert(float,JGZLS.Qty)*convert(float,JGZLM.Qty),'+WH_Decimal+')) as Qty');
+    //
+    sql.add(','''' as SCBH ');
+    sql.add(', '''' as Memo ' );
+    sql.add('from JGZLS  ');
+    sql.add('left join JGZL on JGZL.JGNO=JGZLS.JGNO  ');
+    sql.add('left join (select JGZLS.JGNO,JGZLS.CLBH,JGZLS.Qty from JGZLS ');
+    sql.add('          left join JGZL on JGZL.JGNO=JGZLS.JGNO where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between ');
+    sql.add('          '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP3.Date))+''''+' and '+''''+formatdatetime('yyyy/MM/dd',endofthemonth(DTP3.Date))+''''  );
+   // sql.add('          and JGZL.CFMDate1 is not null');
+    sql.add('          and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<''2017/09/01'''); //2017/09/01 sua gia cong vat tu
+    sql.add('          and JGZLS.ZMLB='+''''+'ZZZZZZZZZZ'+'''');
+
+    //sql.add('          and JGZL.CKBH='+''''+CBX1.text+'''');
+
+    if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+    begin
+      SQL.Add('and JGZL.CKBH='''+CBX1.Text+''' ');
+    end else
+    if CBX1.text = 'ALL Without CBY' then
+    begin
+      sql.add('and JGZL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+    end else
+    if CBX1.text = 'ALL' then
+      sql.add('and JGZL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+    sql.add('          ) JGZLM on JGZLM.JGNO=JGZLS.JGNO and JGZLM.CLBH=JGZLS.CLBH');
+    sql.add('where JGZL.CFMDate1>='+''''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP3.Date))+''''  );
+    sql.add('          and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111))<''2017/09/01'''); //2017/09/01 sua gia cong vat tu
+    //  sql.add('and JGZL.CFMDate1 is not null');
+    sql.add('and JGZLS.ZMLB='+''''+edit1.Text+'''');
+    //  sql.add('and JGZLS.clbh='+''''+edit1.Text+'''');
+    //sql.Add('and JGZL.CKBH='''+CBX1.text+''' '); //20140319 weston JG資料修正
+
+    if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+    begin
+      SQL.Add('and JGZL.CKBH='''+CBX1.Text+''' ');
+    end else
+    if CBX1.text = 'ALL Without CBY' then
+    begin
+      sql.add('and JGZL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+    end else
+    if CBX1.text = 'ALL' then
+      sql.add('and JGZL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+
+    sql.add('and JGZLS.ZMLB <>'+''''+'ZZZZZZZZZZ'+'''');  //2017/09/01 sua gia cong vat tu
+    sql.add('group by JGZL.CFMDate1');
+    //2017/09/01 sua gia cong vat tu
+    sql.add('union all');
+    sql.add('select '''' as LLNO,convert(char(10),KCLL.CFMDATE,111) as CFMDate,'''' as CFMID,sum(KCLLS.Qty) as QTY,'''' as SCBH, '''' as Memo');
+    sql.add('from KCLLS');
+    sql.add('left join KCLL on KCLL.LLNO=KCLLS.LLNO ');
+    sql.add('left join BDepartment on BDepartment.ID=KCLL.DepID ');
+    sql.add('where  KCLLS.CLBH='+''''+edit1.Text+'''');
+    //sql.add('and KCLL.CKBH='+''''+CBX1.text+'''');
+
+    if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+    begin
+      SQL.Add('and KCLL.CKBH='''+CBX1.Text+''' ');
+    end else
+    if CBX1.text = 'ALL Without CBY' then
+    begin
+      sql.add('and KCLL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+    end else
+    if CBX1.text = 'ALL' then
+      sql.add('and KCLL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+    sql.add('and (convert(smalldatetime,convert(varchar,KCLL.CFMDate,111)) between ');
+    sql.add('     '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP3.Date))+''''  );
+    sql.add('and '+''''+formatdatetime('yyyy/MM/dd',endofthemonth(DTP3.Date))+''''  );
+    //2017/09/01 sua gia cong vat tu
+    sql.Add('and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>=''2017/09/01''');
+    sql.add('and KCLL.SCBH = ''JJJJJJJJJJ'')');
+    sql.add('group by convert(char(10),KCLL.CFMDATE,111)');
+
+    sql.add(') JGCK ');
+    sql.add('union all');
+    sql.add('select '''' as LLNO,convert(char(10),KCLL.CFMDATE,111) as CFMDate,'''' as CFMID,sum(KCLLS.Qty) as QTY,'''' as SCBH, '''' as Memo');
+    sql.add('from KCLLS');
+    sql.add('left join KCLL on KCLL.LLNO=KCLLS.LLNO ');
+    sql.add('left join BDepartment on BDepartment.ID=KCLL.DepID ') ;
+    sql.add('where  KCLLS.CLBH='+''''+edit1.Text+'''');
+    //sql.add('and KCLL.CKBH='+''''+CBX1.text+'''');
+
+    if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+    begin
+      SQL.Add('and KCLL.CKBH='''+CBX1.Text+''' ');
+    end else
+    if CBX1.text = 'ALL Without CBY' then
+    begin
+      sql.add('and KCLL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+    end else
+    if CBX1.text = 'ALL' then
+      sql.add('and KCLL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+    sql.add('and KCLL.SCBH <> ''JJJJJJJJJJ''');
+    sql.add('and (convert(smalldatetime,convert(varchar,KCLL.CFMDate,111)) between ');
+    sql.add('     '''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP3.Date))+''''  );
+    sql.add('and '+''''+formatdatetime('yyyy/MM/dd',endofthemonth(DTP3.Date))+''''  );
+    if  CB3.Checked then
+    begin
+      sql.Add(')');
+    end else
+    begin
+      sql.add('or KCLL.CFMDATE is null)');
+    end;
+    sql.add('group by convert(char(10),KCLL.CFMDATE,111)');
+    sql.add(') JGCK ');
+    sql.add('group by JGCK.CFMDate,JGCK.LLNO,JGCK.CFMID,JGCK.SCBH,JGCK.Memo');
+    //
+    if not CB2.Checked then
+    begin
+      sql.Add('order by JGCK.CFMDate');
+    end;
+    funcobj.WriteErrorLog(sql.Text);
+    active:=true;
+  end;
+  with KCRK do     //入庫數量清單
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select JGZL.JGNO as RKNO,convert(char(10),JGZL.CFMDate1,111) as USERDATE,JGZL.ZSBH,JGZL.CFMID1 as CFMID,JGZLS.Qty,');
+    sql.add(''''+'JG'+''''+' as Memo,'''' as Invoice,'''' as PaperNo ');
+    sql.add(' ,cast((select JGZLSS.ZLBH+''( ''+Convert(varchar,JGZLSS.Qty)+'' )'' + '','' from JGZLSS  where JGZLSS.JGNO=JGZLS.JGNO and JGZLSS.CLBH=JGZLS.CLBH for XML Path ('''')) as varchar(500))  as ZLBH ');
+    sql.add('from JGZL,JGZLS ');
+    sql.add('where JGZL.JGNO=JGZLS.JGNO and JGZLS.ZMLB='+''''+'ZZZZZZZZZZ'+'''');
+    sql.add('and JGZLS.CLBH='+''''+edit1.Text+'''');
+    sql.add('and convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP3.Date))+''''  );
+    sql.add(' and '+''''+formatdatetime('yyyy/MM/dd',endofthemonth(DTP3.Date))+''''  );
+    //sql.add('and JGZL.CKBH='+''''+CBX1.text+'''');
+
+    if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+    begin
+      SQL.Add('and JGZL.CKBH='''+CBX1.Text+''' ');
+    end else
+    if CBX1.text = 'ALL Without CBY' then
+    begin
+      sql.add('and JGZL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+    end else
+    if CBX1.text = 'ALL' then
+      sql.add('and JGZL.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+    sql.add('union all');
+    sql.add('select KCRK.RKNO,convert(smalldatetime,convert(char(10),KCRK.USERDATE,111)) as USERDATE,KCRK.ZSBH,KCRK.CFMID ,KCRKS.Qty,KCRK.ZSNO as Memo,kcrk.docno as Invoice,KCRK.Memo as PaperNo,KCRKS.CGBH as ZLBH ');
+    sql.add('from KCRKS');
+    sql.Add('inner join KCRK on KCRK.RKNO=KCRKS.RKNO');
+    sql.add('where KCRKS.CLBH='+''''+edit1.Text+'''');
+    sql.add('and convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP3.Date))+''''  );
+    sql.add(' and '+''''+formatdatetime('yyyy/MM/dd',endofthemonth(DTP3.Date))+''''  );
+    //sql.add('and KCRK.CKBH='+''''+CBX1.text+'''');
+    if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+    begin
+      SQL.Add('and KCRK.CKBH='''+CBX1.Text+''' ');
+    end else
+    if CBX1.text = 'ALL Without CBY' then
+    begin
+      sql.add('and KCRK.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+    end else
+    if CBX1.text = 'ALL' then
+      sql.add('and KCRK.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+    if CGNOEdit.Text<>'' then
+      sql.add('and KCRK.ZSNO='''+CGNOEdit.Text+''' ');
+    if INVEdit.Text<>'' then
+      sql.add('and KCRK.DOCNO='''+INVEdit.Text+''' ');
+    //
+    if not CB2.Checked then
+    begin
+      sql.Add('order by kcrk.USERDATE');
+    end;
+    if CB2.Checked then
+    begin
+      sql.add('union all');
+      sql.add('select * from ( ');
+      sql.add('select KCRK_2014.RKNO,convert(smalldatetime,convert(char(10),KCRK_2014.USERDATE,111)) as USERDATE,KCRK_2014.ZSBH,KCRK_2014.CFMID ,KCRKS_2014.Qty,KCRK_2014.ZSNO as Memo,KCRK_2014.docno as Invoice,KCRK_2014.memo as PaperNo,KCRKS_2014.CGBH as ZLBH  ');
+      sql.add('from KCRKS_2014');
+      sql.Add('inner join KCRK_2014 on KCRK_2014.RKNO=KCRKS_2014.RKNO');
+      sql.add('where KCRKS_2014.CLBH='+''''+edit1.Text+'''');
+      sql.add('and convert(smalldatetime,convert(varchar,KCRK_2014.USERDATE,111)) between ');
+      sql.add(''''+formatdatetime('yyyy/MM/dd',startofthemonth(DTP3.Date))+''''  );
+      sql.add(' and '+''''+formatdatetime('yyyy/MM/dd',endofthemonth(DTP3.Date))+''''  );
+      //sql.add('and KCRK_2014.CKBH='+''''+CBX1.text+'''');
+
+      if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+      begin
+        SQL.Add('and KCRK_2014.CKBH='''+CBX1.Text+''' ');
+      end else
+      if CBX1.text = 'ALL Without CBY' then
+      begin
+        sql.add('and KCRK_2014.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+      end else
+      if CBX1.text = 'ALL' then
+        sql.add('and KCRK_2014.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+
+      if CGNOEdit.Text<>'' then
+         sql.add('and KCRK_2014.ZSNO='''+CGNOEdit.Text+''' ');
+      if INVEdit.Text<>'' then
+         sql.add('and KCRK_2014.DOCNO='''+INVEdit.Text+''' ');
+      sql.add(')  KCRK ');
+      sql.add('order by USERDATE');
+    end;
+    funcobj.WriteErrorLog(sql.Text);
+    active:=true;
+  end;
+
+  //列印
+   if(not DirectoryExists(AppDir+'Additional\'))  then ForceDirectories(AppDir+'Additional\');
+   CopyFile(Pchar('\\'+main.ServerIP+'\liy_erp\Additional\Warehouse_SN33.xls'),Pchar(AppDir+'Additional\Warehouse_SN33.xls'),false);
+   if FileExists(AppDir+'Additional\Warehouse_SN33.xls') then
+   begin
+      try
+        eclApp:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+      try
+        eclApp.WorkBooks.Open(AppDir+'Additional\Warehouse_SN33.xls');
+//        Excelall := eclApp.WorkBooks.Open(AppDir+'Additional\Warehouse_SN33.xls');
+        with Query1 do
+        begin
+          active:=false;
+          sql.Clear;
+          sql.add('select isnull(sum(QTY),0)');
+          sql.add('from KCCLMONTH where 1 = 1');
+          if (CBX1.Text <> 'ALL') and (CBX1.text <> 'ALL Without CBY') then
+            sql.add('and CKBH = '''+CBX1.Text+'''')
+          else if CBX1.text = 'ALL Without CBY' then
+            sql.add('and CKBH in (''CDC'',''CDT'',''BYC'',''BYT'')');
+
+          sql.add('and CLBH = '''+Edit1.Text+'''');
+          sql.add('and KCYear = '''+copy(formatdatetime('YYYY/MM/DD',DTP1.Date-15),1,4)+'''');
+          sql.add('and KCMonth = '''+copy(formatdatetime('YYYY/MM/DD',DTP1.Date-15),6,2)+'''');
+          active:=true;
+          stockqty:=Query1.Fields[0].Value;
+        end;
+        with Query1 do
+        begin
+          active:=false;
+          sql.Clear;
+          sql.add('select CLZL.CLDH,CLZL.YWPM,CLZL.DWBH,KCZLS.KCBH,CLZL.YWPM');
+          sql.add('from CLZL left join KCZLS on CLZL.CLDH = KCZLS.CLBH where CLZL.CLDH='+''''+edit1.Text+'''');
+          if (CBX1.text<>'ALL') and (CBX1.text <> 'ALL Without CBY') then
+          begin
+            SQL.Add('and KCZLS.CKBH ='''+CBX1.Text+''' ');
+          end else
+          if CBX1.text = 'ALL Without CBY' then
+          begin
+            sql.add('and KCZLS.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+'''and CKBH <> ''CBY'')');
+          end else
+          if CBX1.text = 'ALL' then
+            sql.add('and KCZLS.CKBH in (select CKBH from KCCK where GSBH='''+main.Edit2.Text+''')');
+
+          active:=true;
+        end;
+        eclApp.Cells(2,1):='Ten hang 品名: '+ Query1.FieldByName('CLDH').AsString+'                    ' +Query1.FieldByName('YWPM').AsString ;
+        eclApp.Cells(2,3):='Don vi tinh 計算單位: '+ Query1.FieldByName('DWBH').AsString;
+//        eclApp.Cells(2,5):= 'Qui cach 規格: ' +copy(Query1.FieldByName('YWPM').AsString,1,4);
+        eclApp.Cells(2,5):= 'Thang kiem ke 盤點月份: ' +ayear +'/'+amonth;
+        eclApp.Cells(2,7):= 'Ma ke 貨架號碼: ' +Query1.FieldByName('KCBH').AsString;
+        eclApp.Cells(5,6):= 'LastMonth Qty: ' +floattostr(stockqty);
+        Nhap:=6;
+        Xuat:=6;
+        k:=1;
+        i:=1;
+        t:=1;
+        KCLL.First;
+        KCRK.First;
+        while not KCLL.Eof do begin
+           if (KCLL.FieldByName('CFMdate').Value = NULL) then           //領料未確認
+           begin
+              eclApp.Cells(Xuat,5):=KCLL.Fields[3].Value;
+              stockqty := stockqty - KCLL.fieldbyname('qty').Value;
+              eclApp.Cells(Xuat,6):=floattostr(stockqty);
+           end else
+//           if (formatdatetime('YYYY/MM/DD',KCRK.FieldByName('USERDATE').Value) > formatdatetime('YYYY/MM/DD',KCLL.FieldByName('CFMdate').Value))  and (i<=KCLL.RecordCount) then
+           if (formatdatetime('YYYY/MM/DD',KCRK.FieldByName('USERDATE').Value) > formatdatetime('YYYY/MM/DD',KCLL.FieldByName('CFMdate').Value))  then   //入庫日大於領料日
+           begin
+              eclApp.Cells(Xuat,2):=formatdatetime('YYYY/MM/DD',KCLL.Fields[2].Value);
+              eclApp.Cells(Xuat,5):=KCLL.Fields[3].Value;
+              stockqty := stockqty - KCLL.fieldbyname('qty').Value;
+              eclApp.Cells(Xuat,6):=floattostr(stockqty);
+              t := t + 1;
+           end else
+           if (formatdatetime('YYYY/MM/DD',KCRK.FieldByName('USERDATE').Value) <= formatdatetime('YYYY/MM/DD',KCLL.FieldByName('CFMdate').Value)) then    //入庫日小於領料日，跑回圈把入庫小於領料的先填，i紀錄跑到地幾筆入庫單
+           begin
+              for k := i to KCRK.RecordCount do begin
+                KCRKDATE := formatdatetime('YYYY/MM/DD',KCRK.Fields[1].Value);
+                if (formatdatetime('YYYY/MM/DD',KCRK.FieldByName('USERDATE').Value) <= formatdatetime('YYYY/MM/DD',KCLL.FieldByName('CFMdate').Value)) then begin
+                  eclApp.Cells(Nhap,1):=formatdatetime('YYYY/MM/DD',KCRK.Fields[1].Value);
+                  eclApp.Cells(Nhap,3):=KCRK.Fields[0].Value;
+                  eclApp.Cells(Nhap,4):=KCRK.Fields[2].Value;
+                  stockqty := stockqty + KCRK.fieldbyname('qty').Value;
+                  eclApp.Cells(Nhap,6):=floattostr(stockqty);
+                end
+                else
+                  break;
+                 Xuat:=Xuat+1;
+                 Nhap:=Nhap+1;
+                 KCRK.Next;
+                i := i + 1;
+              end;
+           end;
+           if (KCRKDATE = formatdatetime('YYYY/MM/DD',KCLL.FieldByName('CFMdate').Value)) then begin    //上述情況入庫單填完後，再判斷是否要填領料單
+              eclApp.Cells(Xuat,2):=formatdatetime('YYYY/MM/DD',KCLL.Fields[2].Value);
+              eclApp.Cells(Xuat,5):=KCLL.Fields[3].Value;
+              stockqty := stockqty - KCLL.fieldbyname('qty').Value;
+              eclApp.Cells(Xuat,6):=floattostr(stockqty);
+              t := t + 1;
+           end else
+           if (KCRKDATE <> formatdatetime('YYYY/MM/DD',KCLL.FieldByName('CFMdate').Value)) and (t = 1) then
+           begin
+              eclApp.Cells(Xuat,2):=formatdatetime('YYYY/MM/DD',KCLL.Fields[2].Value);
+              eclApp.Cells(Xuat,5):=KCLL.Fields[3].Value;
+              stockqty := stockqty - KCLL.fieldbyname('qty').Value;
+              eclApp.Cells(Xuat,6):=floattostr(stockqty);
+           end;
+           Xuat:=Xuat+1;
+           Nhap:=Nhap+1;
+           t := 1;
+
+           KCLL.Next;
+        end;
+
+        if i < KCRK.RecordCount then
+        begin
+          for k := i to KCRK.RecordCount do begin
+            eclApp.Cells(Nhap,1):=formatdatetime('YYYY/MM/DD',KCRK.Fields[1].Value);
+            eclApp.Cells(Nhap,3):=KCRK.Fields[0].Value;
+            eclApp.Cells(Nhap,4):=KCRK.Fields[2].Value;
+            stockqty := stockqty + KCRK.fieldbyname('qty').Value;
+            eclApp.Cells(Nhap,6):=floattostr(stockqty);
+            Xuat:=Xuat+1;
+            Nhap:=Nhap+1;
+            KCRK.Next;
+          end;
+        end;
+
+        if (KCLL.RecordCount = 0) and (KCRK.RecordCount = 0) then begin
+          eclApp.Cells(Xuat,6):=floattostr(stockqty);
+          for k:=1 to 4 do
+          begin
+            eclApp.range[eclApp.cells[5,1],eclApp.cells[Xuat,7]].borders[k].linestyle:=1;
+          end;
+        end
+        else begin
+          for k:=1 to 4 do
+          begin
+            eclApp.range[eclApp.cells[5,1],eclApp.cells[Xuat-1,7]].borders[k].linestyle:=1;
+          end;
+        end;
+//        eclApp.Visible:=True;
+
+          eclApp.ActiveSheet.PrintOut;
+          if not varIsEmpty(eclApp) then begin
+            eclApp.DisplayAlerts := False;
+            eclApp.Quit;
+          end;
+
+      except
+       on   F:Exception   do
+       showmessage(F.Message);
+      end;
+   end;
+end;
+
+procedure TMaterialTrace.Button9Click(Sender: TObject);
+begin
+  Ds4.DataSet := Query3;
+  DBGrideh2.Visible := True;
+    Query3.Active := false;
+    Query3.SQL.Clear;
+    Query3.SQL.Add('select CLBH,KCBH,QTY,CKBH,(select MAX(userdate) from KCRKS where CLBH = KCLL.CLBH) as EntryDate,');
+    Query3.SQL.Add('(select MAX(userdate) from KCLLS where CLBH = KCLL.CLBH) as DeliverDate,');
+    Query3.SQL.Add('(select top 1 QTY from KCCLMONTH_HGBH where HGLB = ''NK'' and CLBH = KCLL.CLBH and KCYEAR = KCLL.KCYEAR and KCMONTH = KCLL.KCMONTH and CKBH = KCLL.CKBH) as ''NK'', ');
+    Query3.SQL.Add('(select top 1 QTY from KCCLMONTH_HGBH where HGLB = ''KD'' and CLBH = KCLL.CLBH and KCYEAR = KCLL.KCYEAR and KCMONTH = KCLL.KCMONTH and CKBH = KCLL.CKBH) as ''KD'', ');
+    Query3.SQL.Add('(select top 1 QTY from KCCLMONTH_HGBH where HGLB = ''HD'' and CLBH = KCLL.CLBH and KCYEAR = KCLL.KCYEAR and KCMONTH = KCLL.KCMONTH and CKBH = KCLL.CKBH) as ''HD'', ');
+    Query3.SQL.Add('(select top 1 QTY from KCCLMONTH_HGBH where HGLB = ''TC'' and CLBH = KCLL.CLBH and KCYEAR = KCLL.KCYEAR and KCMONTH = KCLL.KCMONTH and CKBH = KCLL.CKBH) as ''TC'', ');
+    Query3.SQL.Add('(select top 1 QTY from KCCLMONTH_HGBH where HGLB = ''GC'' and CLBH = KCLL.CLBH and KCYEAR = KCLL.KCYEAR and KCMONTH = KCLL.KCMONTH and CKBH = KCLL.CKBH) as ''GC'', ');
+    Query3.SQL.Add('(select top 1 QTY from KCCLMONTH_HGBH where HGLB = ''XT'' and CLBH = KCLL.CLBH and KCYEAR = KCLL.KCYEAR and KCMONTH = KCLL.KCMONTH and CKBH = KCLL.CKBH) as ''XT'', ');
+    Query3.SQL.Add('(select top 1 QTY from KCCLMONTH_HGBH where HGLB = ''ZZZZ'' and CLBH = KCLL.CLBH and KCYEAR = KCLL.KCYEAR and KCMONTH = KCLL.KCMONTH and CKBH = KCLL.CKBH) as ''ZZZZ'' ');
+    Query3.SQL.Add('from (');
+    Query3.SQL.Add('select KCCLMONTH.CLBH,KCZLS.KCBH,QTY,KCYEAR,KCMONTH,KCCLMONTH.CKBH from KCCLMONTH');
+    if (CBX1.Text <> 'ALL') and (CBX1.text <> 'ALL Without CBY') then
+      Query3.SQL.Add('left join KCZLS on KCCLMONTH.CLBH = KCZLS.CLBH and KCZLS.CKBH = '''+CBX1.Text+'''')
+    else if CBX1.text = 'ALL Without CBY' then
+      Query3.sql.add('left join KCZLS on KCCLMONTH.CLBH = KCZLS.CLBH and KCZLS.CKBH in (''CDC'',''CDT'',''BYC'',''BYT'') and KCCLMONTH.CKBH = KCZLS.CKBH')
+    else if CBX1.text = 'ALL' then
+      Query3.sql.add('left join KCZLS on KCCLMONTH.CLBH = KCZLS.CLBH and KCZLS.CKBH in (Select CKBH from KCCK where GSBH = '''+main.Edit2.Text+''') and KCCLMONTH.CKBH = KCZLS.CKBH');
+    Query3.SQL.Add('where 1=1 and QTY > 0');
+    Query3.sql.add('and KCYear = '''+copy(formatdatetime('YYYY/MM/DD',startofthemonth(DTP3.Date)-1),1,4)+'''');
+    Query3.sql.add('and KCMonth = '''+copy(formatdatetime('YYYY/MM/DD',startofthemonth(DTP3.Date)-1),6,2)+'''');
+    Query3.sql.add('and KCCLMONTH.CLBH not in  (select CLBH from KCRKS where convert(smalldatetime,convert(varchar,USERDATE,111)) between ');
+    Query3.sql.add('     '''+formatdatetime('yyyy/MM/dd',DTP1.date-180)+''''  );
+    Query3.sql.add('and '+''''+formatdatetime('yyyy/MM/dd',DTP1.date)+''')'  );
+    Query3.sql.add('and KCCLMONTH.CLBH not in  (select CLBH from KCLLS where convert(smalldatetime,convert(varchar,USERDATE,111)) between ');
+    Query3.sql.add('     '''+formatdatetime('yyyy/MM/dd',DTP1.date-180)+''''  );
+    Query3.sql.add('and '+''''+formatdatetime('yyyy/MM/dd',DTP1.date)+''')'  );
+
+    if (CBX1.Text <> 'ALL') and (CBX1.text <> 'ALL Without CBY') then
+      Query3.sql.add('and KCCLMONTH.CKBH = '''+CBX1.Text+'''')
+    else if CBX1.text = 'ALL Without CBY' then
+      Query3.sql.add('and KCCLMONTH.CKBH in (''CDC'',''CDT'',''BYC'',''BYT'')')
+    else if CBX1.text = 'ALL' then
+      Query3.sql.add('left join KCZLS on KCCLMONTH.CLBH = KCZLS.CLBH and KCZLS.CKBH in (Select CKBH from KCCK where GSBH = '''+main.Edit2.Text+''')');
+    if Edit2.Text <> '' then
+      Query3.sql.add('and kczls.KCBH like '''+Edit2.Text+'%''');
+    if Edit1.Text <> '' then
+      Query3.sql.add('and KCCLMONTH.CLBH like '''+Edit1.Text+'%''');
+    Query3.SQL.Add(')KCLL');
+    Query3.SQL.Add('order by CLBH');
+    //showmessage(Query3.SQL.Text);
+    Query3.Active := true;
+end;
+
+procedure TMaterialTrace.Button10Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j,L,R:integer;
+begin
+
+  //檢查左表是否存在及有無資料，不存在離開
+  if KCRK.Active then
+  begin
+    if KCRK.recordcount=0 then
+    begin
+      showmessage('KCRK No record.');
+      L:=1;
+    end
+  end
+  else
+    begin
+    showmessage('KCRK No record.');
+    abort;
+  end;
+
+  //檢查右表是否存在及有無資料，不存在離開
+  if KCLL.Active then
+  begin
+    if KCLL.recordcount=0 then
+    begin
+       showmessage('KCLL No record.');
+       R:=1;
+    end
+  end
+  else
+    begin
+      showmessage('KCLL No record.');
+      abort;
+  end;
+  //啟動excel
+  try
+    eclApp:=CreateOleObject('Excel.Application');
+    WorkBook:=CreateOleObject('Excel.Sheet');
+  except
+    Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+    Exit;
+  end;
+
+  try
+    WorkBook:=eclApp.workbooks.Add;
+    //輸出左表
+    if L<>1 then
+    begin
+      eclApp.Cells(1,1):='NO';
+      for   i:=1   to   KCRK.fieldcount   do
+        begin
+          eclApp.Cells(1,i+1):=KCRK.fields[i-1].FieldName;
+        end;
+      KCRK.First;
+      j:=2;
+      while   not  KCRK.Eof   do
+        begin
+          eclApp.Cells(j,1):=j-1;
+          for   i:=1   to   KCRK.fieldcount   do
+            begin
+              eclApp.Cells(j,i+1):=KCRK.Fields[i-1].Value;
+              eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+            end;
+          KCRK.Next;
+          inc(j);
+        end;
+        eclApp.Cells(j,2):='Total';
+        eclApp.Cells(j,4):='=sum(D2..D'+inttostr(j-1)+')';
+    end;
+    //輸出右表
+    if R<>1 then
+    begin
+      eclApp.Cells(1,9):='NO';
+      for   i:=1   to   KCLL.fieldcount   do
+      begin
+          eclApp.Cells(1,i+9):=KCLL.fields[i-1].FieldName;
+      end;
+      KCLL.First;
+      j:=2;
+      while   not  KCLL.Eof   do
+      begin
+          eclApp.Cells(j,9):=j-1;
+          for   i:=1   to   KCLL.fieldcount   do
+          begin
+              eclApp.Cells(j,i+9):=KCLL.Fields[i-1].Value;
+              eclApp.Cells.Cells.item[j,i+9].font.size:='8';
+          end;
+          KCLL.Next;
+          inc(j);
+      end;
+      eclApp.Cells(j,10):='Total';
+      eclApp.Cells(j,13):='=sum(M2..M'+inttostr(j-1)+')';
+    end;
+
+    eclapp.columns.autofit;
+    showmessage('Succeed.');
+    eclApp.Visible:=True;
+  except
+    on   F:Exception   do
+      showmessage(F.Message);
+  end;
+end;
+
+end.

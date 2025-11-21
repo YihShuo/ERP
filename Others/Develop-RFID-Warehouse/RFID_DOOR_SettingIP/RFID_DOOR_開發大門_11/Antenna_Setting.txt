@@ -1,0 +1,8 @@
+Ant1:1
+Ant2:1
+Ant3:1
+Ant4:1
+Ant5:0
+Ant6:1
+Ant7:1
+Ant8:0

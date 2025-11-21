@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)http://www.usb-drivers.org/ft232r-usb-uart-driver.html -->
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class=" js no-touch csstransforms csstransforms3d csstransitions svg"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="http://www.usb-drivers.org/xmlrpc.php">
+<title>FT232R USB UART Driver | USB Driver</title>
+<meta property="og:title" content="FT232R USB UART Driver - USB Driver">
+<meta property="og:type" content="article">
+<meta property="og:description" content="The FT232R USB driver is a bit of a complicated install. The screenshots below will give you directi">
+<meta property="og:url" content="http://www.usb-drivers.org/ft232r-usb-uart-driver.html">
+<meta property="og:site_name" content="USB Driver">
+
+<!-- All in One SEO Pack 2.4.3 by Michael Torbert of Semper Fi Web Design[221,269] -->
+<link rel="author" href="https://plus.google.com/104754233352688427757">
+<meta name="keywords" content="ft232r usb uart driver,driver,usb driver,usb to serial">
+
+<link rel="canonical" href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html">
+<!-- /all in one seo pack -->
+<link rel="dns-prefetch" href="http://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="http://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="USB Driver » Feed" href="http://www.usb-drivers.org/feed">
+<link rel="alternate" type="application/rss+xml" title="USB Driver » Comments Feed" href="http://www.usb-drivers.org/comments/feed">
+<link rel="alternate" type="application/rss+xml" title="USB Driver » FT232R USB UART Driver Comments Feed" href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html/feed">
+<!-- This site uses the Google Analytics by MonsterInsights plugin v6.2.6 - Using Analytics tracking - https://www.monsterinsights.com/ -->
+<script src="./FT232R USB UART Driver _ USB Driver_files/cb=gapi.loaded_1" async=""></script><script src="./FT232R USB UART Driver _ USB Driver_files/cb=gapi(1).loaded_0" async=""></script><script src="./FT232R USB UART Driver _ USB Driver_files/ca-pub-2754123919285346.js.download"></script><script src="./FT232R USB UART Driver _ USB Driver_files/ca-pub-2754123919285346.js.download"></script><script async="" src="./FT232R USB UART Driver _ USB Driver_files/analytics.js.download"></script><script type="text/javascript" data-cfasync="false">
+		var disableStr = 'ga-disable-UA-22778637-19';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+	__gaTracker('create', 'UA-22778637-19', 'auto');
+	__gaTracker('set', 'forceSSL', true);
+	__gaTracker('send','pageview');
+</script>
+<!-- / Google Analytics by MonsterInsights -->
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.usb-drivers.org\/wp-includes\/js\/wp-emoji-release.min.js"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./FT232R USB UART Driver _ USB Driver_files/wp-emoji-release.min.js.download" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="gdsr_style_main-css" href="./FT232R USB UART Driver _ USB Driver_files/gdsr.css.php" type="text/css" media="all">
+<link rel="stylesheet" id="gdsr_style_xtra-css" href="./FT232R USB UART Driver _ USB Driver_files/rating.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-pagenavi-css" href="./FT232R USB UART Driver _ USB Driver_files/pagenavi-css.css" type="text/css" media="all">
+<link rel="stylesheet" id="tie-style-css" href="./FT232R USB UART Driver _ USB Driver_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="tie-ilightbox-skin-css" href="./FT232R USB UART Driver _ USB Driver_files/skin.css" type="text/css" media="all">
+<link rel="stylesheet" id="Droid+Sans-css" href="./FT232R USB UART Driver _ USB Driver_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="gp-css" href="./FT232R USB UART Driver _ USB Driver_files/style(1).css" type="text/css" media="all">
+<script type="text/javascript" src="./FT232R USB UART Driver _ USB Driver_files/jquery.js.download"></script>
+<script type="text/javascript" src="./FT232R USB UART Driver _ USB Driver_files/jquery-migrate.min.js.download"></script>
+<script type="text/javascript" src="./FT232R USB UART Driver _ USB Driver_files/gdsr.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","is_debug_mode":"false","download_extensions":"doc,exe,js,pdf,ppt,tgz,zip,xls","inbound_paths":"","home_url":"http:\/\/www.usb-drivers.org","track_download_as":"event","internal_label":"int","hash_tracking":"false"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./FT232R USB UART Driver _ USB Driver_files/frontend.min.js.download"></script>
+<link rel="https://api.w.org/" href="http://www.usb-drivers.org/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.usb-drivers.org/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.usb-drivers.org/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="HTC MTP Device Driver Win 7" href="http://www.usb-drivers.org/htc-mtp-device-driver-win-7.html">
+<link rel="next" title="Realtek RTL8187L Driver" href="http://www.usb-drivers.org/realtek-rtl8187l-driver.html">
+
+<link rel="shortlink" href="http://www.usb-drivers.org/?p=1867">
+<link rel="alternate" type="application/json+oembed" href="http://www.usb-drivers.org/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.usb-drivers.org%2Fft232r-usb-uart-driver.html">
+<link rel="alternate" type="text/xml+oembed" href="http://www.usb-drivers.org/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.usb-drivers.org%2Fft232r-usb-uart-driver.html&amp;format=xml">
+<script type="text/javascript">
+//<![CDATA[
+var gdsr_cnst_nonce = "61ec86aab3";
+var gdsr_cnst_ajax = "http://www.usb-drivers.org/wp-content/plugins/gd-star-rating/ajax.php";
+var gdsr_cnst_button = 1;
+var gdsr_cnst_cache = 0;
+// ]]>
+</script>
+<!--[if IE]><style type="text/css">.ratemulti .starsbar .gdcurrent { -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"; filter: alpha(opacity=70); }</style><![endif]-->
+<link rel="shortcut icon" href="http://www.usb-drivers.org/wp-content/themes/sahifa/favicon.ico" title="Favicon">
+<!--[if IE]>
+<script type="text/javascript">jQuery(document).ready(function (){ jQuery(".menu-item").has("ul").children("a").attr("aria-haspopup", "true");});</script>
+<![endif]-->
+<!--[if lt IE 9]>
+<script src="http://www.usb-drivers.org/wp-content/themes/sahifa/js/html5.js"></script>
+<script src="http://www.usb-drivers.org/wp-content/themes/sahifa/js/selectivizr-min.js"></script>
+<![endif]-->
+<!--[if IE 9]>
+<link rel="stylesheet" type="text/css" media="all" href="http://www.usb-drivers.org/wp-content/themes/sahifa/css/ie9.css" />
+<![endif]-->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" media="all" href="http://www.usb-drivers.org/wp-content/themes/sahifa/css/ie8.css" />
+<![endif]-->
+<!--[if IE 7]>
+<link rel="stylesheet" type="text/css" media="all" href="http://www.usb-drivers.org/wp-content/themes/sahifa/css/ie7.css" />
+<![endif]-->
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<style type="text/css" media="screen">
+
+
+</style>
+
+		<script type="text/javascript">
+			/* <![CDATA[ */
+				var sf_position = '0';
+				var sf_templates = "<a href=\"{search_url_escaped}\">View All Results<\/a>";
+				var sf_input = '.search-live';
+				jQuery(document).ready(function(){
+					jQuery(sf_input).ajaxyLiveSearch({"expand":false,"searchUrl":"http:\/\/www.usb-drivers.org\/?s=%s","text":"Search","delay":500,"iwidth":180,"width":315,"ajaxUrl":"http:\/\/www.usb-drivers.org\/wp-admin\/admin-ajax.php","rtl":0});
+					jQuery(".live-search_ajaxy-selective-input").keyup(function() {
+						var width = jQuery(this).val().length * 8;
+						if(width < 50) {
+							width = 50;
+						}
+						jQuery(this).width(width);
+					});
+					jQuery(".live-search_ajaxy-selective-search").click(function() {
+						jQuery(this).find(".live-search_ajaxy-selective-input").focus();
+					});
+					jQuery(".live-search_ajaxy-selective-close").click(function() {
+						jQuery(this).parent().remove();
+					});
+				});
+			/* ]]> */
+		</script>
+		<script async="" src="./FT232R USB UART Driver _ USB Driver_files/adsbygoogle.js.download"></script><script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-2754123919285346",
+    enable_page_level_ads: true
+  });
+</script><link rel="preload" href="./FT232R USB UART Driver _ USB Driver_files/integrator.js.download" as="script"><script type="text/javascript" src="./FT232R USB UART Driver _ USB Driver_files/integrator.js.download"></script><link rel="preload" href="./FT232R USB UART Driver _ USB Driver_files/integrator.js(1).download" as="script"><script type="text/javascript" src="./FT232R USB UART Driver _ USB Driver_files/integrator.js(1).download"></script><style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style><script src="chrome-extension://jhffgcfmcckgmioipfnmbannkpncfipo/util.js"></script><script src="chrome-extension://jhffgcfmcckgmioipfnmbannkpncfipo/pagejs.js"></script></head>
+
+
+
+
+
+
+
+
+
+
+
+
+<body id="top" class="post-template-default single single-post postid-1867 single-format-standard lazy-enabled">
+
+<div class="wrapper-outer">
+
+	<div class="background-cover"></div>
+
+	<aside id="slide-out">
+	
+			<div class="search-mobile">
+			<form method="get" id="searchform-mobile" action="http://www.usb-drivers.org/">
+				<button class="search-button" type="submit" value="Search"><i class="fa fa-search"></i></button>	
+				<input type="text" id="s-mobile" name="s" title="Search" value="Search" onfocus="if (this.value == &#39;Search&#39;) {this.value = &#39;&#39;;}" onblur="if (this.value == &#39;&#39;) {this.value = &#39;Search&#39;;}">
+			</form>
+		</div><!-- .search-mobile /-->
+		
+		
+		<div id="mobile-menu"><div class="main-menu"><ul id="menu-a2" class="menu"><li id="menu-item-1211" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1211"><a href="http://www.usb-drivers.org/">Home</a></li>
+<li id="menu-item-1140" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1140"><a href="http://www.usb-drivers.org/category/usb-driver/acer-usb-driver">Acer</a></li>
+<li id="menu-item-1141" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1141"><a href="http://www.usb-drivers.org/category/usb-driver/acorp">Acorp</a></li>
+<li id="menu-item-1142" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1142"><a href="http://www.usb-drivers.org/category/usb-driver/benq">Benq</a></li>
+<li id="menu-item-1263" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1263"><a href="http://www.usb-drivers.org/category/usb-driver/d-link">D-Link</a></li>
+<li id="menu-item-1143" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1143"><a href="http://www.usb-drivers.org/category/usb-driver/genius">Genius</a></li>
+<li id="menu-item-1144" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1144"><a href="http://www.usb-drivers.org/category/usb-driver/longshine">Longshine</a></li>
+<li id="menu-item-1145" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1145"><a href="http://www.usb-drivers.org/category/usb-driver/memorex">Memorex</a></li>
+<li id="menu-item-1238" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1238"><a href="http://www.usb-drivers.org/category/usb-driver/motorola">Motorola</a></li>
+<li id="menu-item-1148" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1148"><a href="http://www.usb-drivers.org/category/usb-driver/panasonic">Panasonic</a></li>
+<li id="menu-item-1454" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1454"><a href="http://www.usb-drivers.org/category/usb-driver/samsung">Samsung</a></li>
+<li id="menu-item-1149" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1149"><a href="http://www.usb-drivers.org/category/usb-driver/smc">SMC</a></li>
+<li id="menu-item-1150" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1150"><a href="http://www.usb-drivers.org/category/usb-driver/surecom">Surecom</a></li>
+<li id="menu-item-1151" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1151"><a href="http://www.usb-drivers.org/category/usb-driver/umax">Umax</a></li>
+<li id="menu-item-1152" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1152"><a href="http://www.usb-drivers.org/category/usb-driver/visioneer">Visioneer</a></li>
+</ul></div></div>
+	</aside><!-- #slide-out /-->
+
+		<div id="wrapper" class="boxed">
+		<div class="inner-wrapper">
+
+		<header id="theme-header" class="theme-header full-logo">
+						<div id="top-nav" class="top-nav">
+				<div class="container">
+
+								
+				<div class="top-menu"><ul id="menu-a7" class="menu"><li id="menu-item-2850" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2850"><a href="http://www.usb-drivers.org/category/usb-driver/dell-usb-driver">Dell</a></li>
+<li id="menu-item-2583" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2583"><a href="http://www.usb-drivers.org/category/usb-driver/realtek-usb-driver">Realtek</a></li>
+<li id="menu-item-2584" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2584"><a href="http://www.usb-drivers.org/category/usb-driver/xerox">Xerox</a></li>
+<li id="menu-item-2585" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2585"><a href="http://www.usb-drivers.org/category/bluetooth">Bluetooth</a></li>
+<li id="menu-item-2586" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2586"><a href="http://www.usb-drivers.org/category/usb-driver/sony">Sony</a></li>
+<li id="menu-item-2587" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-2587"><a href="http://www.usb-drivers.org/category/usb-to-serial">USB to Serial</a></li>
+<li id="menu-item-3084" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3084"><a href="http://www.usb-drivers.org/category/rs232">RS232</a></li>
+</ul></div>
+						<div class="search-block">
+						<form method="get" id="searchform-header" action="http://www.usb-drivers.org/">
+							<button class="search-button" type="submit" value="Search"><i class="fa fa-search"></i></button>	
+							<input class="search-live" type="text" id="s-header" name="s" title="Search" value="Search" onfocus="if (this.value == &#39;Search&#39;) {this.value = &#39;&#39;;}" onblur="if (this.value == &#39;&#39;) {this.value = &#39;Search&#39;;}" autocomplete="off">
+						</form>
+					</div><!-- .search-block /-->
+			<div class="social-icons">
+		<a class="ttip-none" title="Rss" href="http://www.usb-drivers.org/feed" target="_blank"><i class="fa fa-rss"></i></a>
+			</div>
+
+		
+	
+				</div><!-- .container /-->
+			</div><!-- .top-menu /-->
+			
+		<div class="header-content">
+		
+					<a id="slide-out-open" class="slide-out-open" href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html#"><span></span></a>
+				
+			<div class="logo" style=" margin-top:15px; margin-bottom:15px;">
+			<h2>								<a title="USB Driver" href="http://www.usb-drivers.org/">
+					<img src="./FT232R USB UART Driver _ USB Driver_files/usb-drivers.jpg" alt="USB Driver"><strong>USB Driver USB Driver Software</strong>
+				</a>
+			</h2>			</div><!-- .logo /-->
+						<div class="clear"></div>
+			
+		</div>	
+													<nav id="main-nav" class="fixed-enabled fixed-nav-appear">
+				<div class="container">
+				
+				
+					<div class="main-menu"><ul id="menu-a2" class="menu"><li id="menu-item-1211" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1211"><a href="http://www.usb-drivers.org/">Home</a></li>
+<li id="menu-item-1140" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1140"><a href="http://www.usb-drivers.org/category/usb-driver/acer-usb-driver">Acer</a></li>
+<li id="menu-item-1141" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1141"><a href="http://www.usb-drivers.org/category/usb-driver/acorp">Acorp</a></li>
+<li id="menu-item-1142" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1142"><a href="http://www.usb-drivers.org/category/usb-driver/benq">Benq</a></li>
+<li id="menu-item-1263" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1263"><a href="http://www.usb-drivers.org/category/usb-driver/d-link">D-Link</a></li>
+<li id="menu-item-1143" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1143"><a href="http://www.usb-drivers.org/category/usb-driver/genius">Genius</a></li>
+<li id="menu-item-1144" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1144"><a href="http://www.usb-drivers.org/category/usb-driver/longshine">Longshine</a></li>
+<li id="menu-item-1145" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1145"><a href="http://www.usb-drivers.org/category/usb-driver/memorex">Memorex</a></li>
+<li id="menu-item-1238" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1238"><a href="http://www.usb-drivers.org/category/usb-driver/motorola">Motorola</a></li>
+<li id="menu-item-1148" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1148"><a href="http://www.usb-drivers.org/category/usb-driver/panasonic">Panasonic</a></li>
+<li id="menu-item-1454" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1454"><a href="http://www.usb-drivers.org/category/usb-driver/samsung">Samsung</a></li>
+<li id="menu-item-1149" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1149"><a href="http://www.usb-drivers.org/category/usb-driver/smc">SMC</a></li>
+<li id="menu-item-1150" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1150"><a href="http://www.usb-drivers.org/category/usb-driver/surecom">Surecom</a></li>
+<li id="menu-item-1151" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1151"><a href="http://www.usb-drivers.org/category/usb-driver/umax">Umax</a></li>
+<li id="menu-item-1152" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1152"><a href="http://www.usb-drivers.org/category/usb-driver/visioneer">Visioneer</a></li>
+</ul></div>										<a href="http://www.usb-drivers.org/?tierand=1" class="random-article ttip" original-title="Random Article"><i class="fa fa-random"></i></a>
+					
+					
+				</div>
+			</nav><!-- .main-nav /-->
+					</header><!-- #header /-->
+	
+		
+	
+	
+	<div id="main-content" class="container">
+	
+	
+	
+	
+	
+	<div class="content">
+
+		
+		<div xmlns:v="http://rdf.data-vocabulary.org/#" id="crumbs"><span typeof="v:Breadcrumb"><a rel="v:url" property="v:title" class="crumbs-home" href="http://www.usb-drivers.org/">Home</a></span> <span class="delimiter">/</span> <span typeof="v:Breadcrumb"><a rel="v:url" property="v:title" href="http://www.usb-drivers.org/category/usb-to-serial">USB to Serial</a></span> <span class="delimiter">/</span> <span class="current">FT232R USB UART Driver</span></div>
+		
+
+		
+		<article class="post-listing post-1867 post type-post status-publish format-standard  category-usb-to-serial tag-driver tag-usb-driver-2" id="the-post">
+			
+			<div class="post-inner">
+
+							<h1 class="name post-title entry-title"><span itemprop="name">FT232R USB UART Driver</span></h1>
+
+						
+<p class="post-meta">
+		
+	<span class="post-meta-author"><i class="fa fa-user"></i><a href="http://www.usb-drivers.org/author/admin" title="">Tracey Brown </a></span>
+	
+		
+	<span class="tie-date"><i class="fa fa-clock-o"></i>April 24, 2017</span>	
+	<span class="post-cats"><i class="fa fa-folder"></i><a href="http://www.usb-drivers.org/category/usb-to-serial" rel="category tag">USB to Serial</a></span>
+	
+</p>
+<div class="clear"></div>
+			
+				<div class="entry">
+					
+					
+					<!-- Quick Adsense WordPress Plugin: http://quickadsense.com/ -->
+<div style="float:none;margin:10px 0 10px 0;text-align:center;">
+<script type="text/javascript">
+    google_ad_client = "ca-pub-2754123919285346";
+    google_ad_slot = "7629797683";
+    google_ad_width = 728;
+    google_ad_height = 90;
+</script>
+<!-- USB Driver- Full Banner Top -->
+<script type="text/javascript" src="./FT232R USB UART Driver _ USB Driver_files/show_ads.js.download">
+</script><ins id="aswift_1_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent;"><ins id="aswift_1_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent;"><iframe width="728" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;width:728px;height:90px;" src="./FT232R USB UART Driver _ USB Driver_files/saved_resource.html"></iframe></ins></ins>
+</div>
+<p style="text-align: justify;"><img class="alignleft size-full wp-image-879 tie-appear" src="./FT232R USB UART Driver _ USB Driver_files/usb.gif" alt="USB Driver" width="75" height="50">The FT232R USB driver is a bit of a complicated install. The screenshots below will give you direction with regards to installing the driver the correct way. This means that you first have to uninstall the driver, disconnect from the internet and then install the driver again. The FT232R USB drivers below need to be extracted to an area on your computer you can find.</p>
+<p><span id="more-1867"></span></p>
+<p><strong>Step 1:</strong></p>
+<p style="text-align: justify;">Download the driver file and extract it to your hard driver where you can find it</p>
+<p><a title="FT232R USB UART Driver" href="http://www.usb-drivers.org/wp-content/uploads/2014/12/CDM-2.08.28-WHQL-Certified1.zip"><span style="color: #3366ff;"><strong>FT232R USB UART Driver Download</strong></span></a></p>
+<p><strong>Step 2:</strong></p>
+<p style="text-align: justify;">You first need to uninstall the incorrect drivers on your computer. In Windows, go to <b>Control Panel</b> then to <b>Device Manager</b></p>
+<p>&nbsp;<img class="size-full wp-image-1869 alignnone tie-appear" src="./FT232R USB UART Driver _ USB Driver_files/a1.png" alt="a1" width="804" height="709" srcset="http://www.usb-drivers.org/wp-content/uploads/2014/12/a1.png 804w, http://www.usb-drivers.org/wp-content/uploads/2014/12/a1-300x265.png 300w" sizes="(max-width: 804px) 100vw, 804px"></p>
+<p>Now press the delete button on your computer and it will ask for confirmation.</p>
+<p><img class="size-full wp-image-1870 alignnone tie-appear" src="./FT232R USB UART Driver _ USB Driver_files/a2.png" alt="a2" width="814" height="711" srcset="http://www.usb-drivers.org/wp-content/uploads/2014/12/a2.png 814w, http://www.usb-drivers.org/wp-content/uploads/2014/12/a2-300x262.png 300w" sizes="(max-width: 814px) 100vw, 814px"></p>
+<p>Collapse the Ports menu and now click on the USB controller at the bottom of the list.</p>
+<p><img class="size-full wp-image-1871 alignnone tie-appear" src="./FT232R USB UART Driver _ USB Driver_files/a3.png" alt="a3" width="806" height="711" srcset="http://www.usb-drivers.org/wp-content/uploads/2014/12/a3.png 806w, http://www.usb-drivers.org/wp-content/uploads/2014/12/a3-300x265.png 300w" sizes="(max-width: 806px) 100vw, 806px"></p>
+<p>Now you need to uninstall the existing USB Serial Convertor.</p>
+<p><img class="size-full wp-image-1872 alignnone tie-appear" src="./FT232R USB UART Driver _ USB Driver_files/a5.png" alt="a5" width="821" height="819" srcset="http://www.usb-drivers.org/wp-content/uploads/2014/12/a5.png 821w, http://www.usb-drivers.org/wp-content/uploads/2014/12/a5-150x150.png 150w, http://www.usb-drivers.org/wp-content/uploads/2014/12/a5-300x300.png 300w" sizes="(max-width: 821px) 100vw, 821px"></p>
+<p><span style="font-size: small;">Disconnect the USB cable from your PC to KMX1 or KMX2</span></p>
+<p align="left"><span style="font-size: small;">reconnect the USB cable from your PC to KMX1 or KMX2<br>
+</span></p>
+<p align="left"><span style="font-size: small;">A new yellow flagged item will appear <b>FT232R USB UART</b></span></p>
+<p align="left"><span style="font-size: small;">Right Click on<b> </b><b>FT232R USB UART</b></span></p>
+<p align="left"><span style="font-size: small;">Select<b> Update Driver Software</b></span></p>
+<p>&nbsp;</p>
+<p><img class="size-full wp-image-1873 alignnone tie-appear" src="./FT232R USB UART Driver _ USB Driver_files/a6.png" alt="a6" width="807" height="709" srcset="http://www.usb-drivers.org/wp-content/uploads/2014/12/a6.png 807w, http://www.usb-drivers.org/wp-content/uploads/2014/12/a6-300x264.png 300w" sizes="(max-width: 807px) 100vw, 807px"></p>
+<p>Now you need to find where you extracted the drivers from the file you downloaded above and point the software to the directory.</p>
+<p><img class="size-full wp-image-1874 alignnone tie-appear" src="./FT232R USB UART Driver _ USB Driver_files/a7.png" alt="a7" width="819" height="719" srcset="http://www.usb-drivers.org/wp-content/uploads/2014/12/a7.png 819w, http://www.usb-drivers.org/wp-content/uploads/2014/12/a7-300x263.png 300w" sizes="(max-width: 819px) 100vw, 819px"></p>
+<p><span style="font-family: trebuchet ms,arial,helvetica;">The driver software for <b>USB Serial Converter</b> has been installed</span></p>
+<p><img class=" size-full wp-image-1875 alignnone" src="./FT232R USB UART Driver _ USB Driver_files/a8.png" alt="a8" width="805" height="711" srcset="http://www.usb-drivers.org/wp-content/uploads/2014/12/a8.png 805w, http://www.usb-drivers.org/wp-content/uploads/2014/12/a8-300x265.png 300w" sizes="(max-width: 805px) 100vw, 805px"></p>
+<p>The USB Serial Convertor is now installed. Next you have to install the port. If you are old enough to remember software modems then you will recall that it was done in the same manner.</p>
+<p><img class=" size-full wp-image-1876 alignnone" src="./FT232R USB UART Driver _ USB Driver_files/a9.png" alt="a9" width="811" height="709" srcset="http://www.usb-drivers.org/wp-content/uploads/2014/12/a9.png 811w, http://www.usb-drivers.org/wp-content/uploads/2014/12/a9-300x262.png 300w" sizes="(max-width: 811px) 100vw, 811px"></p>
+<p><span style="font-size: small;">The yellow flagged item will have changed name to <b>USB Serial Port</b></span></p>
+<p align="left"><span style="font-size: small;">Right Click on<b> USB Serial Port<br>
+</b>Select<b> Update Driver Software</b></span></p>
+<p>&nbsp;</p>
+<p><img class=" size-full wp-image-1877 alignnone" src="./FT232R USB UART Driver _ USB Driver_files/a10.png" alt="a10" width="811" height="707" srcset="http://www.usb-drivers.org/wp-content/uploads/2014/12/a10.png 811w, http://www.usb-drivers.org/wp-content/uploads/2014/12/a10-300x262.png 300w" sizes="(max-width: 811px) 100vw, 811px"></p>
+<p>The driver software for the Port is in the same directory where you had the other drivers which you had just installed.</p>
+<p><img class=" size-full wp-image-1878 alignnone" src="./FT232R USB UART Driver _ USB Driver_files/a11.png" alt="a11" width="807" height="703" srcset="http://www.usb-drivers.org/wp-content/uploads/2014/12/a11.png 807w, http://www.usb-drivers.org/wp-content/uploads/2014/12/a11-300x261.png 300w" sizes="(max-width: 807px) 100vw, 807px"></p>
+<p>The Serial Port will now install and that will be the final installation. There should be no yellow flags any more.</p>
+<p><img class=" size-full wp-image-1879 alignnone" src="./FT232R USB UART Driver _ USB Driver_files/a12.png" alt="a12" width="811" height="703" srcset="http://www.usb-drivers.org/wp-content/uploads/2014/12/a12.png 811w, http://www.usb-drivers.org/wp-content/uploads/2014/12/a12-300x260.png 300w" sizes="(max-width: 811px) 100vw, 811px"></p>
+<p>Done!</p>
+<h4>See the updated version and <a href="http://www.usb-drivers.org/ft232r-and-ft245r-usb-uart-drivers.html">UART driver</a> <em><strong><a href="http://www.usb-drivers.org/ft232r-and-ft245r-usb-uart-drivers.html">here</a>.</strong></em></h4>
+<p>&nbsp;</p>
+<p><img class="alignnone  wp-image-2311" src="./FT232R USB UART Driver _ USB Driver_files/300shadow.png" alt="" width="700" height="28"></p>
+<div style="display: none">VN:F [1.9.22_1171]</div><div class="ratingblock "><div class="ratingheader "></div><div class="ratingstars "><div id="article_rater_1867" class="ratepost gdsr-oxygen gdsr-size-24"><div class="starsbar gdsr-size-24"><div class="gdouter gdheight"><div id="gdr_vote_a1867" style="width: 218.887966805px;" class="gdinner gdheight"></div><div id="gdr_stars_a1867" class="gdsr_rating_as"><a id="gdsrX1867X10X0XaXarticle_rater_1867Xarticle_loader_1867X10X24" title="10 / 10" class="s10" rel="nofollow"></a><a id="gdsrX1867X9X0XaXarticle_rater_1867Xarticle_loader_1867X10X24" title="9 / 10" class="s9" rel="nofollow"></a><a id="gdsrX1867X8X0XaXarticle_rater_1867Xarticle_loader_1867X10X24" title="8 / 10" class="s8" rel="nofollow"></a><a id="gdsrX1867X7X0XaXarticle_rater_1867Xarticle_loader_1867X10X24" title="7 / 10" class="s7" rel="nofollow"></a><a id="gdsrX1867X6X0XaXarticle_rater_1867Xarticle_loader_1867X10X24" title="6 / 10" class="s6" rel="nofollow"></a><a id="gdsrX1867X5X0XaXarticle_rater_1867Xarticle_loader_1867X10X24" title="5 / 10" class="s5" rel="nofollow"></a><a id="gdsrX1867X4X0XaXarticle_rater_1867Xarticle_loader_1867X10X24" title="4 / 10" class="s4" rel="nofollow"></a><a id="gdsrX1867X3X0XaXarticle_rater_1867Xarticle_loader_1867X10X24" title="3 / 10" class="s3" rel="nofollow"></a><a id="gdsrX1867X2X0XaXarticle_rater_1867Xarticle_loader_1867X10X24" title="2 / 10" class="s2" rel="nofollow"></a><a id="gdsrX1867X1X0XaXarticle_rater_1867Xarticle_loader_1867X10X24" title="1 / 10" class="s1" rel="nofollow"></a></div></div></div></div><div id="article_loader_1867" style="display: none; width: 240px " class="ratingloaderarticle"><div class="loader flower " style="height: 24px"><div class="loaderinner" style="padding-top: 2px">please wait...</div></div></div></div><div class="ratingtext "><div id="gdr_text_a1867">Rating: 9.1/<strong>10</strong> (241 votes cast)</div></div></div><div style="display: none">VN:F [1.9.22_1171]</div><div class="thumblock "><div id="gdsr_thumb_1867_a_up" class="gdt-size-20 gdthumb gdup"><a id="gdsrX1867XupXaX25X20XY" class="gdt-starrating" rel="nofollow"></a></div><div id="gdsr_thumb_1867_a_loader_up" style="display: none; width: 20px " class="ratingloader loadup"><div class="loader flower thumb" style="width: 20px; height: 20px;"></div></div><div id="gdsr_thumb_1867_a_dw" class="gdt-size-20 gdthumb gddw"><a id="gdsrX1867XdwXaX25X20XY" class="gdt-starrating" rel="nofollow"></a></div><div id="gdsr_thumb_1867_a_loader_dw" style="display: none; width: 20px " class="ratingloader loaddw"><div class="loader flower thumb" style="width: 20px; height: 20px;"></div></div><div class="ratingtext "><div id="gdsr_thumb_text_1867_a" class="gdt-size-20 gdthumbtext">Rating: <strong>+90</strong> (from 102 votes)</div></div><div class="raterclear"></div></div><span class="hreview-aggregate"><span class="item"><span class="fn">FT232R USB UART Driver</span></span>, <span class="rating"><span class="average">9.1</span> out of <span class="best">10</span> based on <span class="votes">241</span> ratings <span class="summary"></span></span></span><div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 38px; height: 24px;"><iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 38px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 24px;" tabindex="0" vspace="0" width="100%" id="I0_1513934395723" name="I0_1513934395723" src="./FT232R USB UART Driver _ USB Driver_files/fastbutton.html" data-gapiattached="true" title="G+"></iframe></div>
+<div style="font-size:0px;height:0px;line-height:0px;margin:0;padding:0;clear:both"></div><h4>Incoming Search Terms:</h4><ul><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="ft232r usb uart driver">ft232r usb uart driver</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="FT232R USB UART">FT232R USB UART</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="FT232R DRIVER">FT232R DRIVER</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="ft232r usb uart driver download">ft232r usb uart driver download</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="ft232r usb uart driver windows 7">ft232r usb uart driver windows 7</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="driver FT232R USB UART">driver FT232R USB UART</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="ft232r usb">ft232r usb</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="ft232r usb uart drivers">ft232r usb uart drivers</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="ft232r usb driver">ft232r usb driver</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="ft232 usb uart driver">ft232 usb uart driver</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="FT232R USB UART ドライバ">FT232R USB UART ドライバ</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="ft232 driver">ft232 driver</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="ft232rl driver">ft232rl driver</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="ft232r usb uart treiber">ft232r usb uart treiber</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="ft232 usb uart">ft232 usb uart</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="ft232r usb uart download">ft232r usb uart download</a></li></ul><div class="similarity"><h2>Related Posts</h2><ul><li><a href="http://www.usb-drivers.org/acorp-cv-usb.html">ACORP CV USB </a> (1.000)</li><li><a href="http://www.usb-drivers.org/bluesoleil-bluetooth-driver.html">BlueSoleil Bluetooth Driver</a> (1.000)</li><li><a href="http://www.usb-drivers.org/accton-ew3301-driver.html">Accton EW3301 Driver</a> (1.000)</li><li><a href="http://www.usb-drivers.org/asus-wl-161-usb-pen-driver.html">ASUS WL-161 USB Pen Driver</a> (1.000)</li><li><a href="http://www.usb-drivers.org/vimicro-usb-pc-camera-driver.html">VIMICRO USB PC Camera Driver</a> (1.000)</li></ul></div><!-- Tag -->					
+									</div><!-- .entry /-->
+
+
+								<div class="clear"></div>
+			</div><!-- .post-inner -->
+
+			<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"NewsArticle","dateCreated":"2017-04-24T08:55:42+00:00","datePublished":"2017-04-24T08:55:42+00:00","dateModified":"2017-09-30T00:12:41+00:00","headline":"FT232R USB UART Driver","name":"FT232R USB UART Driver","keywords":"driver,usb driver","url":"http:\/\/www.usb-drivers.org\/ft232r-usb-uart-driver.html","description":"The FT232R USB driver is a bit of a complicated install. The screenshots below will give you direction with regards to installing the driver the correct way. This means that you first have to uninstal","copyrightYear":"2017","publisher":{"@id":"#Publisher","@type":"Organization","name":"USB Driver","logo":{"@type":"ImageObject","url":"http:\/\/www.usb-drivers.org\/wp-content\/uploads\/2015\/07\/usb-drivers.jpg"}},"sourceOrganization":{"@id":"#Publisher"},"copyrightHolder":{"@id":"#Publisher"},"mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/www.usb-drivers.org\/ft232r-usb-uart-driver.html"},"author":{"@type":"Person","name":"Tracey Brown","url":"http:\/\/www.usb-drivers.org\/author\/admin"},"articleSection":"USB to Serial","articleBody":"The FT232R USB driver is a bit of a complicated install. The screenshots below will give you direction with regards to installing the driver the correct way. This means that you first have to uninstall the driver, disconnect from the internet and then install the driver again. The FT232R USB drivers below need to be extracted to an area on your computer you can find.\r\n\r\n\r\nStep 1:\r\nDownload the driver file and extract it to your hard driver where you can find it\r\nFT232R USB UART Driver Download\r\n\r\nStep 2:\r\nYou first need to uninstall the incorrect drivers on your computer. In Windows, go to Control Panel then to Device Manager\r\n\u00a0\r\n\r\nNow press the delete button on your computer and it will ask for confirmation.\r\n\r\n\r\n\r\nCollapse the Ports menu and now click on the USB controller at the bottom of the list.\r\n\r\n\r\n\r\nNow you need to uninstall the existing USB Serial Convertor.\r\n\r\n\r\n\r\nDisconnect the USB cable from your PC to KMX1 or KMX2\r\nreconnect the USB cable from your PC to KMX1 or KMX2\r\n\r\nA new yellow flagged item will appear FT232R USB UART\r\nRight Click on FT232R USB UART\r\nSelect Update Driver Software\r\n&nbsp;\r\n\r\n\r\n\r\nNow you need to find where you extracted the drivers from the file you downloaded above and point the software to the directory.\r\n\r\n\r\n\r\nThe driver software for USB Serial Converter has been installed\r\n\r\n\r\n\r\nThe USB Serial Convertor is now installed. Next you have to install the port. If you are old enough to remember software modems then you will recall that it was done in the same manner.\r\n\r\n\r\n\r\nThe yellow flagged item will have changed name to USB Serial Port\r\nRight Click on USB Serial Port\r\nSelect Update Driver Software\r\n&nbsp;\r\n\r\n\r\n\r\nThe driver software for the Port is in the same directory where you had the other drivers which you had just installed.\r\n\r\n\r\n\r\nThe Serial Port will now install and that will be the final installation. There should be no yellow flags any more.\r\n\r\n\r\n\r\nDone!\r\nSee the updated version and UART driver here.\r\n&nbsp;\r\n\r\n"}</script>
+		</article><!-- .post-listing -->
+		<p class="post-tag">Tags <a href="http://www.usb-drivers.org/tag/driver" rel="tag">driver</a> <a href="http://www.usb-drivers.org/tag/usb-driver-2" rel="tag">usb driver</a></p>
+
+		
+				<section id="author-box">
+			<div class="block-head">
+				<h3>About Tracey Brown </h3><div class="stripe-line"></div>
+			</div>
+			<div class="post-listing">
+				<div class="author-bio">
+	<div class="author-avatar">
+		<img alt="" src="./FT232R USB UART Driver _ USB Driver_files/d9db5c0ceb4f9afda2a916d97b9bc0ae" srcset="http://1.gravatar.com/avatar/d9db5c0ceb4f9afda2a916d97b9bc0ae?s=180&amp;r=g 2x" class="avatar avatar-90 photo" height="90" width="90">	</div><!-- #author-avatar -->
+			<div class="author-description">
+						<p>I develop websites and content for websites related to high tech from around the world. See more pages and content about technology such as USB and other IT developments around the world. You can follow the other websites as well and search this website for more information on mobile phones and other USB components.</p>
+		</div><!-- #author-description -->
+			<div class="author-social flat-social">
+						<a class="social-site" target="_blank" href="http://www.usb-drivers.org/"><i class="fa fa-home"></i></a>
+																																</div>
+		<div class="clear"></div>
+</div>
+				</div>
+		</section><!-- #author-box -->
+		
+
+				<div class="post-navigation">
+			<div class="post-previous"><a href="http://www.usb-drivers.org/htc-mtp-device-driver-win-7.html" rel="prev"><span>Previous</span> HTC MTP Device Driver Win 7</a></div>
+			<div class="post-next"><a href="http://www.usb-drivers.org/realtek-rtl8187l-driver.html" rel="next"><span>Next</span> Realtek RTL8187L Driver</a></div>
+		</div><!-- .post-navigation -->
+		
+		
+		
+		
+				
+<div id="comments">
+
+	
+	<div id="comments-box">
+		<div class="block-head">
+			<h3 id="comments-title">6 comments </h3><div class="stripe-line"></div>
+		</div>
+		<div class="post-listing">
+
+			
+					
+		 
+
+			
+					
+					
+		<div id="pings" class="commentlist">
+		
+			<ol class="pinglist">	<li class="comment pingback">
+		<p>Pingback: <a href="http://www.usb-drivers.org/prolific-usb-to-serial-driver.html" rel="external nofollow" class="url">Prolific USB to Serial Driver | USB Driver</a></p>
+</li><!-- #comment-## -->
+	<li class="comment pingback">
+		<p>Pingback: <a href="http://www.usb-drivers.org/gigaware-usb-to-serial-driver.html" rel="external nofollow" class="url">Gigaware USB to Serial Driver | USB Driver</a></p>
+</li><!-- #comment-## -->
+	<li class="comment pingback">
+		<p>Pingback: <a href="http://www.usb-drivers.org/bafo-usb-to-serial-driver.html" rel="external nofollow" class="url">Bafo USB to Serial Driver | USB Driver</a></p>
+</li><!-- #comment-## -->
+	<li class="comment pingback">
+		<p>Pingback: <a href="http://www.usb-drivers.org/aten-usb-to-serial-driver.html" rel="external nofollow" class="url">Aten USB to Serial Driver | USB Driver</a></p>
+</li><!-- #comment-## -->
+	<li class="comment pingback">
+		<p>Pingback: <a href="http://www.usb-drivers.org/ftdi-usb-linux.html" rel="external nofollow" class="url">FTDI USB Linux | USB Driver</a></p>
+</li><!-- #comment-## -->
+	<li class="comment pingback">
+		<p>Pingback: <a href="http://www.usb-drivers.org/prolific-usb-to-serial-comm-port-driver.html" rel="external nofollow" class="url">Prolific USB to Serial Comm Port Driver | USB Driver</a></p>
+</li><!-- #comment-## -->
+</ol>
+			
+		</div>
+			
+			
+		</div>
+	</div><!-- #comments-box -->
+			
+
+<div class="clear"></div>
+
+
+</div><!-- #comments -->
+
+	</div><!-- .content -->
+<aside id="sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+	<div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static; top: 50px; left: 1022.5px;">
+<div id="search-2" class="widget widget_search"><div class="widget-top"><h4>Search</h4><div class="stripe-line"></div></div>
+						<div class="widget-container"><form role="search" method="get" class="search-form" action="http://www.usb-drivers.org/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search …" value="" name="s">
+				</label>
+				<input type="submit" class="search-submit" value="Search">
+			</form></div></div><!-- .widget /-->		<div id="recent-posts-5" class="widget widget_recent_entries">		<div class="widget-top"><h4>Recent Posts</h4><div class="stripe-line"></div></div>
+						<div class="widget-container">		<ul>
+											<li>
+					<a href="http://www.usb-drivers.org/ssd-problems.html">SSD Problems</a>
+									</li>
+											<li>
+					<a href="http://www.usb-drivers.org/ft231x-full-speed-usb-to-full-uart.html">FT231X – Full Speed USB to Full UART</a>
+									</li>
+											<li>
+					<a href="http://www.usb-drivers.org/ft230x-full-speed-usb-to-basic-uart.html">FT230X – Full Speed USB to Basic UART</a>
+									</li>
+											<li>
+					<a href="http://www.usb-drivers.org/ft232r-and-ft245r-usb-uart-drivers.html">FT232R and FT245R USB UART Drivers</a>
+									</li>
+											<li>
+					<a href="http://www.usb-drivers.org/rs232-physical-properties.html">RS232 Physical Properties</a>
+									</li>
+											<li>
+					<a href="http://www.usb-drivers.org/rs232-cable-pinout.html">RS232 Cable Pinout</a>
+									</li>
+											<li>
+					<a href="http://www.usb-drivers.org/install-adb-interface-driver-xperia.html">Install ADB interface driver Xperia</a>
+									</li>
+											<li>
+					<a href="http://www.usb-drivers.org/intel-ssd-optimise-button-greyed-out.html">Intel SSD Optimise Button Greyed Out</a>
+									</li>
+											<li>
+					<a href="http://www.usb-drivers.org/enable-trim-on-your-windows-10-pc.html">Enable TRIM on your Windows 10 PC</a>
+									</li>
+					</ul>
+		</div></div><!-- .widget /--><div id="enhancedtextwidget-2" class="widget widget_text enhanced-text-widget"><div class="widget-top"><h4> </h4><div class="stripe-line"></div></div>
+						<div class="widget-container"><div class="textwidget widget-text"><script type="text/javascript">
+    google_ad_client = "ca-pub-2754123919285346";
+    google_ad_slot = "5978315419";
+    google_ad_width = 300;
+    google_ad_height = 250;
+</script>
+<!-- USB Drivers - Side Top -->
+<script type="text/javascript" src="./FT232R USB UART Driver _ USB Driver_files/show_ads.js.download">
+</script><ins id="aswift_2_expand" style="display:inline-table;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent;"><ins id="aswift_2_anchor" style="display:block;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent;"><iframe width="300" height="250" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;width:300px;height:250px;" src="./FT232R USB UART Driver _ USB Driver_files/saved_resource(1).html"></iframe></ins></ins></div></div></div><!-- .widget /--><div id="recent-search-terms" class="widget widget_recent_terms"><div class="widget-top"><h4>Recent Search Terms</h4><div class="stripe-line"></div></div>
+						<div class="widget-container"><ul><li><a href="http://www.usb-drivers.org/intex-webcam-night-vision-driver.html" title="intex webcam it-305wc driver download">intex webcam it-305wc driver download</a></li><li><a href="http://www.usb-drivers.org/genius-colorpage-vivid-3x.html" title="دانلود درایور جنیوس vivid 3xe">دانلود درایور جنیوس vivid 3xe</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="ft232r usb">ft232r usb</a></li><li><a href="http://www.usb-drivers.org/samsung-mobile-phone-usb-driver.html" title="samsung 1200y usb driver download">samsung 1200y usb driver download</a></li><li><a href="http://www.usb-drivers.org/realtek-rtl8187-wireless-usb-2-0-driver.html" title="driver rtl81887">driver rtl81887</a></li><li><a href="http://www.usb-drivers.org/usb-2-0-pc-camera-driver.html" title="free download usb camera driver">free download usb camera driver</a></li><li><a href="http://www.usb-drivers.org/xperia-m2-driver.html" title="xperia m2 d2305 usb driver for windows">xperia m2 d2305 usb driver for windows</a></li><li><a href="http://www.usb-drivers.org/via-labs-vl805-usb-3-0-controller-driver.html" title="vl805 windows 10 driver">vl805 windows 10 driver</a></li><li><a href="http://www.usb-drivers.org/usb-3-0-driver-for-windows-7.html" title="usb 3 0 driver for windows 7 32 bit">usb 3 0 driver for windows 7 32 bit</a></li></ul></div></div><!-- .widget /--><div id="text-html-widget-2" class="widget text-html"><div class="widget-top"><h4> </h4><div class="stripe-line"></div></div>
+						<div class="widget-container"><div><script async="" src="./FT232R USB UART Driver _ USB Driver_files/adsbygoogle.js.download"></script>
+<!-- USB - Side Expandable Adpaters -->
+<ins class="adsbygoogle" style="display: block; height: 600px;" data-ad-client="ca-pub-2754123919285346" data-ad-slot="2973042974" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_3_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:290px;background-color:transparent;"><ins id="aswift_3_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:290px;background-color:transparent;"><iframe width="290" height="600" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;width:290px;height:600px;" src="./FT232R USB UART Driver _ USB Driver_files/saved_resource(2).html"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+				</div><div class="clear"></div></div></div><!-- .widget /--><div id="popular-search-terms" class="widget widget_popular_terms"><div class="widget-top"><h4>Popular Search Terms</h4><div class="stripe-line"></div></div>
+						<div class="widget-container"><ul><li><a href="http://www.usb-drivers.org/samsung-mobile-phone-usb-driver.html" title="samsung usb driver">samsung usb driver</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="ft232r usb uart driver">ft232r usb uart driver</a></li><li><a href="http://www.usb-drivers.org/ft232r-usb-uart-driver.html" title="FT232R USB UART">FT232R USB UART</a></li><li><a href="http://www.usb-drivers.org/realtek-rtl8187-wireless-usb-2-0-driver.html" title="RTL8187">RTL8187</a></li><li><a href="http://www.usb-drivers.org/samsung-mobile-phone-usb-driver.html" title="SAMSUNG USB DRIVERS">SAMSUNG USB DRIVERS</a></li><li><a href="http://www.usb-drivers.org/htc-mtp-device-driver-win-7.html" title="HTC USB driver">HTC USB driver</a></li><li><a href="http://www.usb-drivers.org/samsung-android-usb-device-driver.html" title="samsung android usb device">samsung android usb device</a></li><li><a href="http://www.usb-drivers.org/samsung-mobile-phone-usb-driver.html" title="samsung usb driver for mobile phones">samsung usb driver for mobile phones</a></li><li><a href="http://www.usb-drivers.org/samsung-android-usb-device-driver.html" title="rndis driver">rndis driver</a></li></ul></div></div><!-- .widget /--><div id="random-search-terms" class="widget pk_widget_random_terms"><div class="widget-top"><h4>Random Search Terms</h4><div class="stripe-line"></div></div>
+						<div class="widget-container"><ul><li><a href="http://www.usb-drivers.org/samsung-mobile-phone-usb-driver.html" title="Usb driver for samsung download">Usb driver for samsung download</a></li><li><a href="http://www.usb-drivers.org/sony-xperia-x-drivers-xa-and-x-performance-included.html" title="download mtp usb device sony c1905">download mtp usb device sony c1905</a></li><li><a href="http://www.usb-drivers.org/xperia-m2-driver.html" title="sony xperia m2 usb driver windows 7">sony xperia m2 usb driver windows 7</a></li><li><a href="http://www.usb-drivers.org/xperia-m2-driver.html" title="driver sony experia m2">driver sony experia m2</a></li><li><a href="http://www.usb-drivers.org/samsung-mobile-phone-usb-driver.html" title="Download samsung driver exe">Download samsung driver exe</a></li><li><a href="http://www.usb-drivers.org/realtek-rtl8192cu-wireless-driver.html" title="rtl8188ee 11bgn wlan">rtl8188ee 11bgn wlan</a></li><li><a href="http://www.usb-drivers.org/usb-3-0-driver-for-windows-7.html" title="universal serial bus (usb) controller driver windows 7 32 bit acer">universal serial bus (usb) controller driver windows 7 32 bit acer</a></li><li><a href="http://www.usb-drivers.org/usb-3-0-driver-for-windows-7.html" title="driper usb windows7 ultimate">driper usb windows7 ultimate</a></li><li><a href="http://www.usb-drivers.org/realtek-card-reader-driver-for-windows-8.html" title="windows 8 card reader driver">windows 8 card reader driver</a></li></ul></div></div><!-- .widget /--><div id="nav_menu-5" class="widget widget_nav_menu"><div class="widget-top"><h4>Website Links</h4><div class="stripe-line"></div></div>
+						<div class="widget-container"><div class="menu-a3-container"><ul id="menu-a3" class="menu"><li id="menu-item-1350" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1350"><a href="http://www.codeccodecs.com/">Download Codecs</a></li>
+<li id="menu-item-1351" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1351"><a href="http://www.driver-wireless.com/">Wireless Drivers</a></li>
+<li id="menu-item-1352" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1352"><a href="http://www.quoteinsure.net/">Insurance Online</a></li>
+<li id="menu-item-1353" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1353"><a href="http://www.thai-consulate.net/">Thai Embassy</a></li>
+<li id="menu-item-1356" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1356"><a href="http://www.manual-owner.com/">Mobile Manuals</a></li>
+<li id="menu-item-1412" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1412"><a href="http://www.codec-download.org/">Codecs</a></li>
+<li id="menu-item-1758" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1758"><a href="http://www.thai-visas.com/">Thailand Immigration</a></li>
+<li id="menu-item-1820" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1820"><a href="http://www.dogfood-reviews.net/">Purina Dog Chow</a></li>
+</ul></div></div></div><!-- .widget /-->	</div><!-- .theiaStickySidebar /-->
+</aside><!-- #sidebar /-->	<div class="clear"></div>
+</div><!-- .container /-->
+
+<footer id="theme-footer">
+	<div id="footer-widget-area" class="footer-3c">
+
+	
+	
+
+	
+		
+	</div><!-- #footer-widget-area -->
+	<div class="clear"></div>
+</footer><!-- .Footer /-->
+				
+<div class="clear"></div>
+<div class="footer-bottom">
+	<div class="container">
+		<div class="alignright">
+					</div>
+				
+		<div class="alignleft">
+			© Copyright 2017, All Rights Reserved		</div>
+		<div class="clear"></div>
+	</div><!-- .Container -->
+</div><!-- .Footer bottom -->
+
+</div><!-- .inner-Wrapper -->
+</div><!-- #Wrapper -->
+</div><ins class="adsbygoogle" data-adsbygoogle-status="done" style="display: none; width: auto; height: auto;"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><ins id="aswift_0_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><iframe width="0" height="0" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;width:0px;height:0px;" src="./FT232R USB UART Driver _ USB Driver_files/saved_resource(3).html"></iframe></ins></ins></ins><!-- .Wrapper-outer -->
+	<div id="topcontrol" class="fa fa-angle-up" title="Scroll To Top" style="bottom: -100px;"></div>
+<div id="fb-root"></div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var tie = {"mobile_menu_active":"true","mobile_menu_top":"","lightbox_all":"","lightbox_gallery":"","woocommerce_lightbox":"","lightbox_skin":"dark","lightbox_thumb":"vertical","lightbox_arrows":"","sticky_sidebar":"1","is_singular":"1","SmothScroll":"true","reading_indicator":"","lang_no_results":"No Results","lang_results_found":"Results Found"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./FT232R USB UART Driver _ USB Driver_files/tie-scripts.js.download"></script>
+<script type="text/javascript" src="./FT232R USB UART Driver _ USB Driver_files/ilightbox.packed.js.download"></script>
+<script type="text/javascript" src="./FT232R USB UART Driver _ USB Driver_files/wp-embed.min.js.download"></script>
+<script type="text/javascript" src="./FT232R USB UART Driver _ USB Driver_files/search.js.download"></script>
+<script type="text/javascript" src="./FT232R USB UART Driver _ USB Driver_files/plusone.js.download" gapi_processed="true"></script>
+<div id="live-search_sb" class="live-search_sb" style="position:absolute;display:none;width:315px;z-index:9999"><div class="live-search_sb_cont"><div class="live-search_sb_top"></div><div id="live-search_results" style="width:100%"><div id="live-search_val"></div><div id="live-search_more"></div></div><div class="live-search_sb_bottom"></div></div></div><iframe name="oauth2relay269152992" id="oauth2relay269152992" src="./FT232R USB UART Driver _ USB Driver_files/postmessageRelay.html" tabindex="-1" aria-hidden="true" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe></body></html>

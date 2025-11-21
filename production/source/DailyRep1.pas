@@ -1,0 +1,251 @@
+unit DailyRep1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls,OleServer ,
+  DBCtrls, ComCtrls,comobj;
+
+type
+  TDailyRep = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    CBX1: TComboBox;
+    Edit2: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    DBGrid1: TDBGrid;
+    Query1: TQuery;
+    DataSource1: TDataSource;
+    PopupMenu1: TPopupMenu;
+    NN1: TMenuItem;
+    NN2: TMenuItem;
+    NN3: TMenuItem;
+    Label4: TLabel;
+    DTP1: TDateTimePicker;
+    DTP2: TDateTimePicker;
+    Label5: TLabel;
+    ListBox1: TDBLookupComboBox;
+    TDep: TTable;
+    DSDep: TDataSource;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    scbbs: TQuery;
+    DS2: TDataSource;
+    DBGrid2: TDBGrid;
+    DBGrid3: TDBGrid;
+    SCBBSS: TQuery;
+    DS3: TDataSource;
+    Query1SCDate: TDateTimeField;
+    Query1DepNo: TStringField;
+    Query1DepName: TStringField;
+    Query1Qty: TFloatField;
+    SaveDialog1: TSaveDialog;
+    Query1bzQty: TIntegerField;
+    SCBBSSXXCC: TStringField;
+    SCBBSSQty: TFloatField;
+    Image1: TImage;
+    Query1person: TIntegerField;
+    Query1Lack_Qty: TIntegerField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure DBGrid1TitleClick(Column: TColumn);
+    procedure Query1CalcFields(DataSet: TDataSet);
+    procedure Query1BeforeOpen(DataSet: TDataSet);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DailyRep: TDailyRep;
+
+implementation
+
+{$R *.dfm}
+
+procedure TDailyRep.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+procedure TDailyRep.FormCreate(Sender: TObject);
+begin
+DTP1.Date:=date-7;
+DTP2.date:=date;
+TDep.active:=true;
+end;
+
+procedure TDailyRep.Button1Click(Sender: TObject);
+begin
+with Query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select SCBB.SCDate ,SCBB.DepNo,BDepartment.DepName, isnull(sum(SCBBS.Qty),0) as Qty,isnull(SCBZCL.Qty,0) as bzQty');
+    sql.add('from SCBB left join SCBBS on  SCBB.ProNo=SCBBS.ProNo');
+    sql.add('left join BDepartment on BDepartment.ID=SCBB.DepNo  ');
+    sql.add('left join SCBZCL on SCBZCL.BZDate=SCBB.SCDate and SCBZCL.DepNo=SCBB.DepNo');
+    sql.add('where  SCBB.SCDate between ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+    sql.add('and '+ ''''+formatdatetime('yyyy/MM/dd',DTP2.Date)+'''');
+    IF CBX1.itemindex>0 then
+      begin
+        SQL.ADD('AND SCBBS.GXLB = ');
+        sql.add(''''+CBX1.Text+'''');
+      end;
+    sql.add('and SCBB.DepNo like ');
+    sql.add(''''+Listbox1.Text+'%'+'''');                
+    sql.add('and SCBBS.SCBH like ');
+    sql.add(''''+edit2.text+'%'+'''');
+    sql.add('Group by SCBB.SCDate ,SCBB.DepNo,BDepartment.DepName ,SCBZCL.Qty');
+    sql.add('union all ');
+    sql.add('select '+''''+formatdatetime('yyyy/MM/dd',DTP2.Date)+''''+' as SCDate ,SCBB.DepNo,'+''''+'Total'+''''+' as DepName, isnull(sum(SCBBS.Qty),0) as Qty,isnull(SCBZCLA.Qty,0) as bzQty');
+    sql.add('from SCBB left join SCBBS on  SCBB.ProNo=SCBBS.ProNo');
+    sql.add('left join BDepartment on BDepartment.ID=SCBB.DepNo  ');
+    sql.add('left join (select sum(SCBZCL.Qty) as Qty,SCBZCL.DepNo from SCBZCL where SCBZCL.BZDate between');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+    sql.add('and '+ ''''+formatdatetime('yyyy/MM/dd',DTP2.Date)+'''');
+    sql.add('group by SCBZCL.DepNo ) SCBZCLA ');
+    sql.add(' on SCBZCLA.DepNo=SCBB.DepNo');
+    sql.add('where  SCBB.SCDate between ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+    sql.add('and '+ ''''+formatdatetime('yyyy/MM/dd',DTP2.Date)+'''');
+    IF CBX1.itemindex>0 then
+      begin
+        SQL.ADD('AND SCBBS.GXLB = ');
+        sql.add(''''+CBX1.Text+'''');
+      end;
+    sql.add('and SCBB.DepNo like ');
+    sql.add(''''+Listbox1.Text+'%'+'''');
+    sql.add('and SCBBS.SCBH like ');
+    sql.add(''''+edit2.text+'%'+'''');
+    sql.add('Group by SCBB.DepNo,BDepartment.DepName ,SCBZCLA.Qty');
+    sql.add('Order by  SCBB.DepNo,SCBB.SCDate ,BDepartment.DepName,SCBZCLA.Qty ');
+    active:=true;
+  end;
+scbbs.active:=true;
+scbbss.Active:=true;
+end;
+
+procedure TDailyRep.Button2Click(Sender: TObject);
+var   a:string;
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+  begin
+  if  query1.active  then
+    begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('No Mcrosoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+        WorkBook:=eclApp.workbooks.Add;
+        for   i:=0   to   query1.fieldCount-1   do
+          begin
+              eclApp.Cells(1,i+1):=query1.fields[i].FieldName;
+          end;
+        query1.First;
+        j:=2;
+        while   not   query1.Eof   do
+          begin
+            for   i:=0   to   query1.FieldCount-1   do
+              begin
+                eclApp.Cells(j,i+1):=query1.Fields[i].Value;
+              end;
+            query1.Next;
+            inc(j);
+          end;
+      eclapp.columns.autofit;
+      showmessage('Succeed');
+      eclApp.Visible:=True;
+      except
+        on   F:Exception   do
+          showmessage(F.Message);
+      end;
+    end;
+
+end;
+
+procedure TDailyRep.DBGrid1TitleClick(Column: TColumn);
+var
+ temp, title: string;
+ las:integer;
+begin
+if (not Query1.Active) or Query1.RequestLive then
+  begin
+    abort;
+  end;
+ temp := Column.FieldName;
+ if temp='SCDate' then
+   begin
+     Query1.Close;
+     las:=pos('Order',Query1.SQL.Text);
+     Query1.SQL.text:=copy(Query1.SQL.text,1,las-1)+'Order by SCBB.SCDate ,SCBB.DepNo,BDepartment.DepName,SCBZCL.Qty';
+     Query1.Active:=true;
+   end;
+  if temp='DepNo' then
+   begin
+     Query1.Close;
+     las:=pos('Order',Query1.SQL.Text);
+     Query1.SQL.text:=copy(Query1.SQL.text,1,las-1)+' Order by SCBB.DepNo,SCBB.SCDate';
+     Query1.Active:=true;
+   end;
+
+end;
+
+procedure TDailyRep.Query1CalcFields(DataSet: TDataSet);
+begin
+with query1 do
+  begin
+    if FieldByName('bzQty').value<>0 then
+      begin
+        FieldByName('person').value:=FieldByName('Qty').value/FieldByName('bzQty').value*100;
+      end;
+    FieldByName('Lack_Qty').value:=FieldByName('Qty').value-FieldByName('bzQty').value;
+  end;
+end;
+
+procedure TDailyRep.Query1BeforeOpen(DataSet: TDataSet);
+var NewField:TField;
+begin
+
+end;
+
+procedure TDailyRep.DBGrid1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+if query1.FieldByName('DepName').value='Total' then
+  begin
+    //dbgrid1.canvas.font.color:=clRed;
+    dbgrid1.canvas.font.style:=[fsitalic,fsbold];
+    dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+if query1.FieldByName('Person').value>=100 then
+  begin
+    dbgrid1.canvas.font.color:=clLime;
+    //dbgrid1.canvas.font.style:=[fsitalic];
+    dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+end;
+
+procedure TDailyRep.FormDestroy(Sender: TObject);
+begin
+DailyRep:=nil;
+end;
+
+end.

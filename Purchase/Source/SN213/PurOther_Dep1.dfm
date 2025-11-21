@@ -1,0 +1,154 @@
+object PurOther_Dep: TPurOther_Dep
+  Left = 369
+  Top = 135
+  Width = 483
+  Height = 480
+  Caption = 'PurOther_Dep'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 467
+    Height = 73
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 16
+      Top = 32
+      Width = 51
+      Height = 20
+      Caption = 'DepID:'
+    end
+    object Label2: TLabel
+      Left = 152
+      Top = 32
+      Width = 76
+      Height = 20
+      Caption = 'DepName:'
+    end
+    object Edit1: TEdit
+      Left = 72
+      Top = 24
+      Width = 73
+      Height = 26
+      CharCase = ecUpperCase
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'VNI-Times'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+    end
+    object Button1: TButton
+      Left = 373
+      Top = 21
+      Width = 73
+      Height = 33
+      Caption = 'Query'
+      TabOrder = 1
+      OnClick = Button1Click
+    end
+    object Edit2: TEdit
+      Left = 232
+      Top = 24
+      Width = 113
+      Height = 28
+      CharCase = ecUpperCase
+      TabOrder = 2
+    end
+  end
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 73
+    Width = 467
+    Height = 369
+    Align = alClient
+    DataSource = DataSource1
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -11
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    ParentFont = False
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    OnDblClick = DBGridEh1DblClick
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'ID'
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DepName'
+        Footers = <>
+        Width = 150
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DepMemo'
+        Footers = <>
+        Width = 150
+      end>
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'Select*'
+      'From BDepartment'
+      'Order by ID')
+    Left = 304
+    Top = 160
+    object Query1ID: TStringField
+      FieldName = 'ID'
+      Origin = 'DB.BDepartment.ID'
+      FixedChar = True
+      Size = 10
+    end
+    object Query1DepName: TStringField
+      FieldName = 'DepName'
+      Origin = 'DB.BDepartment.DepName'
+      FixedChar = True
+      Size = 50
+    end
+    object Query1DepMemo: TStringField
+      FieldName = 'DepMemo'
+      Origin = 'DB.BDepartment.DepMemo'
+      FixedChar = True
+      Size = 50
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = Query1
+    Left = 344
+    Top = 168
+  end
+end

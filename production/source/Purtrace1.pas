@@ -1,0 +1,293 @@
+unit Purtrace1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, GridsEh, DBGridEh, StdCtrls, ExtCtrls,ehlibBDE,
+  comobj, PrnDbgeh;
+
+type
+  TPurtrace = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label3: TLabel;
+    Button1: TButton;
+    Edit2: TEdit;
+    EDIT1: TEdit;
+    Edit4: TEdit;
+    Edit5: TEdit;
+    Edit6: TEdit;
+    CheckBox1: TCheckBox;
+    Button2: TButton;
+    Edit3: TEdit;
+    DBGridEh1: TDBGridEh;
+    Query1: TQuery;
+    DataSource1: TDataSource;
+    Query1ZLBH: TStringField;
+    Query1CLBH: TStringField;
+    Query1YWPM: TStringField;
+    Query1ZWPM: TStringField;
+    Query1DWBH: TStringField;
+    Query1Article: TStringField;
+    Query1XieMing: TStringField;
+    Query1Pairs: TIntegerField;
+    Query1CQDH: TStringField;
+    Query1CGQty: TCurrencyField;
+    Query1CLSL: TFloatField;
+    Query1YQDate: TDateTimeField;
+    Query1CFMDate: TDateTimeField;
+    Query1CGDate: TDateTimeField;
+    Query1CGNO: TStringField;
+    Query1UseStock: TCurrencyField;
+    Query1RKNO: TStringField;
+    Query1RKDate: TDateTimeField;
+    Query1RKQty: TCurrencyField;
+    Query1ShipDate: TDateTimeField;
+    PrintDBGridEh1: TPrintDBGridEh;
+    Button3: TButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure DBGridEh1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure Button3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Purtrace: TPurtrace;
+
+implementation
+
+uses main1;
+
+{$R *.dfm}
+
+procedure TPurtrace.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+procedure TPurtrace.FormDestroy(Sender: TObject);
+begin
+Purtrace:=nil;
+end;
+
+procedure TPurtrace.Button2Click(Sender: TObject);
+var   a:string;
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+ begin
+  if  query1.active  then
+    begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+        WorkBook:=eclApp.workbooks.Add;
+        for   i:=0   to   query1.fieldcount-1   do
+          begin
+              eclApp.Cells(1,i+1):=query1.fields[i].FieldName;
+          end;
+
+        query1.First;
+        j:=2;
+        while   not   query1.Eof   do
+          begin
+            for   i:=0   to  query1.fieldcount-1  do
+            begin
+              eclApp.Cells(j,i+1):=query1.Fields[i].Value;
+            end;
+          query1.Next;
+          inc(j);
+          end;
+      eclapp.columns.autofit;
+       eclApp.Visible:=True;  
+       showmessage('Succeed');
+      except
+        on   F:Exception   do
+          showmessage(F.Message);
+      end;
+    end;
+
+end;
+
+procedure TPurtrace.Button1Click(Sender: TObject);
+begin
+
+if ((length(edit1.Text)<3) and (length(edit5.Text)<3)) then
+  begin
+    showmessage('Pls setup condition first!');
+    abort;
+  end;
+with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    if  checkbox1.Checked then
+      begin
+        sql.add(' select ZLZLS2.ZLBH,ZLZLS2.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZl.DWBH,XXZL.Article,XXZl.XieMing,DDZL.Pairs,');
+        sql.add('        CLZl.CQDH,isnull(CGTW.CGQty,0) as CGQty,isnull(sum(ZLZLS2.CLSL),0) as CLSL,CGTW.YQDate,CGTW.CFMDate,');
+        sql.add('        CGTW.CGDate,CGTW.CGNO,isnull(CGKCUSE.Qty,0) as UseStock,CGTW.RKNO,CGTW.RKDate,CGTW.RKQty,DDZL.Shipdate')  ;
+        sql.add('from ZLZLS2 with (nolock) ');
+        //台灣出貨材料
+        sql.add('left join (select CGHZZLS.ZLBH,CGHZZLS.CLBH,sum(CGHZZLS.st_Qty+CGHZZLS.dg_Qty) as CGQty,  ');
+        sql.add('                  sum(CGHZZLS.Ex_Qty) as RKQty, max(convert(smalldatetime,CGHZZLSS.ZD_Date)) as YQDate,');
+        sql.add('                  max(convert(smalldatetime,(case when hf_Date='+''''+'ZZZZZZZZ'+''''+' then null else hf_Date end))) as CFMDate,');
+        sql.add('                  max(convert(smalldatetime,CGHZZLSS.dg_Date)) as CGDate,CGHZZLSS.DGDH as CGNO,CONZL.CON_Date as RKDate,CONZL.CON_NO as RKNO ');
+        sql.add('           from CGHZZLS with (nolock) ');
+        sql.add('           left join CGHZZLSS  with (nolock) on CGHZZLS.CGHZBH=CGHZZLSS.CGHZBH and CGHZZLS.CLBH=CGHZZLSS.CLBH ');
+        sql.add('           left join CLZL  with (nolock) on CLZL.CLDH=CGHZZLSS.CLBH         ');
+        //加上出貨資料
+        sql.add('           LEFT JOIN (SELECT EXZLSS.ZLBH,EXZLSS.CLDH,EXZLSS.SIZE,');
+        sql.add('                   max(HGZL.CON_DATE) as Con_Date,max(HGZL.SHLB) as SHLB,max(EXZL.CON_NO) as CON_NO FROM EXZLSS');
+        sql.add('                   LEFT JOIN EXZL  with (nolock) ON EXZLSS.EXNO=EXZL.EXNO  ');
+        sql.add('                   LEFT JOIN HGZL  with (nolock) ON EXZL.CON_NO=HGZL.CON_NO');
+        sql.add('                   where EXZLSS.CLDH like '+''''+edit1.Text+'%'+'''');
+        sql.add('                         and EXZLSS.ZLBH like '+''''+edit5.Text+'%'+'''');
+        sql.add('                  GROUP BY EXZLSS.ZLBH,EXZLSS.CLDH,EXZLSS.SIZE)');
+        sql.add('                 AS CONZL  ON CGHZZLS.clbh   = CONZL.cldh  AND CGHZZLS.ZLBH   = CONZL.ZLBH  AND CGHZZLS.size   = CONZL.size');
+
+        sql.add('           where CGHZZLS.CLBH like '+''''+edit1.Text+'%'+'''');
+       // sql.add('                 and CGHZZLSS.hf_Date<>'+''''+'ZZZZZZZZ'+'''');
+        sql.add('                 and CGHZZLS.ZLBH like '+''''+edit5.Text+'%'+'''');
+        sql.add('                 and CLZL.CQDH='+''''+'TW'+'''');
+        sql.add('           group by CGHZZLS.ZLBH,CGHZZLS.CLBH,CGHZZLSS.CGHZBH ,CONZL.CON_Date,CONZL.CON_NO,CGHZZLSS.DGDH) CGTW') ;
+        sql.add('     on CGTW.ZLBH=ZLZLS2.ZLBH and CGTW.CLBH=ZLZLS2.CLBH   ');
+
+        sql.add('left join CLZL  with (nolock) on CLZL.CLDH=ZLZLs2.CLBH');
+        sql.add('left join DDZl  with (nolock) on DDZl.ZLBH=ZLZLS2.ZLBH');
+        sql.add('left join KFZL  with (nolock) on KFZl.KFDH=DDZl.KHBH ');
+        sql.add('left join ZLZL  with (nolock) on ZLZL.ZLBH=ZLZLS2.ZLBH');
+        sql.add('left join CGKCUSE  with (nolock) on CGKCUSE.ZLBH=ZLZLS2.ZLBH and CGKCUSE.CLBH=ZLZLS2.CLBH');
+        sql.add('left join XXZL  with (nolock) on XXZl.XieXing=DDZl.XieXing and XXZL.SheHao=DDZl.SheHao');
+        sql.add('where ZLZLS2.CLBH like '+''''+edit1.Text+'%'+'''');
+        sql.add('      and ZLZLS2.ZLBH like '+''''+edit5.Text+'%'+'''');
+        sql.add('      and CLZL.YWPM like '+''''+'%'+edit2.Text+'%'+'''');
+        //sql.add('       and CLZL.YWPM like '+''''+'%'+edit3.Text+'%'+'''');
+        //sql.add('       and CLZL.YWPM like '+''''+'%'+edit4.Text+'%'+'''');
+        sql.add('      and XXZl.XieMing like '+''''+'%'+edit6.text+'%'+'''');
+        {sql.add('        and convert(smalldatetime,convert(varchar,DDZL.ShipDate,111)) between ' );
+        sql.add('         '''+formatdatetime('yyyy/MM/dd',sdate) +''''+'and '+''''+formatdatetime('yyyy/MM/dd',edate) +'''');
+        sql.add('         and DDZL.DDZT='+''''+'Y'+'''');
+        //sql.add('       and ZLZL.CQDH='+''''+'LTY'+''''); }
+        sql.add('      and XXZL.Article like '+''''+edit3.text+'%'+'''');
+        sql.add('      and DDZL.GSBH='+''''+main.edit2.Text+'''');
+        sql.add('      and KFZL.KFJC like '+''''+'%'+edit4.Text+'%'+'''');
+        sql.add('      and ZLZLS2.ZMLB='+''''+'N'+'''');  //只針對子材料
+        sql.add('      and ZLZLS2.CLSL<>0');//數量不等於0
+        sql.add('      and CLZL.CQDH='+''''+'TW'+'''');
+        sql.add('group by ZLZLS2.ZLBH,ZLZLS2.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZl.DWBH,XXZL.Article,XXZl.XieMing,DDZL.Pairs,');
+        sql.add('        CLZl.CQDH,CGTW.CGQty,CGTW.YQDate,CGTW.CFMDate,');
+        sql.add('        CGTW.CGDate,CGTW.CGNO,CGKCUSE.Qty,CGTW.RKNO,CGTW.RKDate,CGTW.RKQty,DDZL.Shipdate')  ;
+
+        sql.add('union all');
+      end;
+    sql.add('select  ZLZLS2.ZLBH,ZLZLS2.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,XXZL.Article,XXZL.XieMing,DDZL.Pairs,');
+    sql.add('        CLZL.CQDH,isnull(CGZL.CGQty,0) as CGQty,');
+    sql.add('        isnull(sum(ZLZLS2.CLSL),0) as CLSL,CGZL.YQDate,CGZL.CFMDate,CGZl.CGDate,');
+    sql.add('        CGZL.CGNO,isnull(CGKCUSE.Qty,0) as UseStock,');
+    sql.add('        RKZL.RKNO,RKZL.RKDate,isnull(RKZL.RKQty,0) as RKQty,DDZL.ShipDate ');
+    sql.add('from ZLZLS2  with (nolock) ');
+    sql.add('left join CLZL  with (nolock) on CLZL.CLDH=ZLZLs2.CLBH');
+    sql.add('left join DDZl  with (nolock) on DDZl.ZLBH=ZLZLS2.ZLBH');
+    sql.add('left join KFZL  with (nolock) on KFZl.KFDH=DDZl.KHBH ');
+    sql.add('left join ZLZL  with (nolock) on ZLZL.ZLBH=ZLZLS2.ZLBH');
+    sql.add('left join SCZL  with (nolock) on SCZL.ZLBH=ZLZL.ZLBH ');
+    sql.add('left join CGKCUSE  with (nolock) on CGKCUSE.ZLBH=ZLZLS2.ZLBH and CGKCUSE.CLBH=ZLZLS2.CLBH');
+    sql.add('left join XXZL  with (nolock) on XXZl.XieXing=DDZl.XieXing and XXZL.SheHao=DDZl.SheHao');
+    sql.add('left join XXBWFL  with (nolock) on XXBWFL.XieXing=XXZL.XieXing and XXBWFL.BWBH=ZLZLS2.BWBH ');
+    sql.add('left join XXBWFLS  with (nolock) on XXBWFLS.FLBH=XXBWFL.FLBH ');
+            //加載采購相關的數量及日期等數據
+    sql.add('left join (select CGZLSS.ZLBH,CGZLSS.CLBH,sum(CGZLSS.Qty) as CGQty,');
+    sql.add('                  max(CGZLSS.CFMDate) as CFMDate,max(CGZL.CGDate) as CGDate,');
+    sql.add('                  max(CGZL.CGNO) as CGNO,max(CGZLSS.YQDate) as YQDate ');
+    sql.add('           from CGZLSS with (nolock) ');
+    sql.add('           left join CGZL  with (nolock) on CGZl.CGNO=CGZLSS.CGNO');
+    sql.add('           where CGZLSS.CLBH like '+''''+edit1.Text+'%'+'''');
+    sql.add('                 and CGZLSS.ZLBH like '+''''+edit5.Text+'%'+'''');
+    sql.add('           group by CGZLSS.ZLBH,CGZLSS.CLBH ) CGZL');
+    sql.add('                 on CGZL.ZLBH=ZLZLS2.ZLBH and CGZL.CLBH=ZLZLS2.CLBH');
+          //加載入庫相關的數量及日期等數據
+    sql.add('left join (select KCRKS.CGBH as ZLBH ,KCRKS.CLBH,sum(KCRKS.Qty ) as RKQty, ');
+    sql.add('                  max(KCRKS.RKNO) as RKNO,max(KCRK.USERDate) as RKDate ');
+    sql.add('           from  KCRKS with (nolock) ');
+    sql.add('           left join KCRK  with (nolock) on KCRK.RKNO=KCRKS.RKNO ');
+    sql.add('           where KCRKS.CLBH like '+''''+edit1.Text+'%'+'''');
+    sql.add('                 and KCRKS.CGBH like '+''''+edit5.Text+'%'+'''');
+    sql.add('           group by KCRKS.CGBH,KCRKS.CLBH ) RKZL');
+    sql.add('                 on RKZL.ZLBH=ZLZLS2.ZLBH and RKZL.CLBH=ZLZLS2.CLBH ');
+
+    sql.add('where ZLZLS2.CLBH like '+''''+edit1.Text+'%'+'''');
+    //不要買安全庫存類的材料
+    sql.add('       and ZLZLS2.CLBH not like '+''''+'W%'+'''');
+    sql.add('       and not exists(select CLBH from KCSAFE where KCSAFE.CLBH=ZLZLS2.CLBH )');
+    //sql.add('       and ZLZLS2.XH<>'+''''+'VN'+'''');
+    sql.add('       and ZLZLS2.ZLBH like '+''''+edit5.Text+'%'+'''');
+    sql.add('       and CLZL.YWPM like '+''''+'%'+edit2.Text+'%'+'''');
+    sql.add('       and XXZl.XieMing like '+''''+'%'+edit6.text+'%'+'''');
+    sql.add('       and XXZL.Article like '+''''+edit3.text+'%'+'''');
+    sql.add('       and DDZL.GSBH='+''''+main.edit2.Text+'''');
+    sql.add('       and KFZL.KFJC like '+''''+'%'+edit4.Text+'%'+'''');
+    sql.add('       and ZLZLS2.ZMLB='+''''+'N'+'''');
+    sql.add('       and CLZL.CQDH='+''''+'VN'+'''');
+    sql.add('       and SCZL.SCBH=SCZl.ZLBH ');
+    sql.add('       and SCZL.SCBH is not null ');
+    sql.add('       and ZLZLS2.CLSL<>0') ;
+    //加上不要開發材料分類到無需領料的部分
+    sql.add('       and (XXBWFLS.DFL<>'+''''+'G'+''''+' or XXBWFLS.DFL is null)');
+    sql.add('group by ZLZLS2.ZLBH,ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,CLZL.ZWPM,');
+    sql.add('         XXZL.Article,XXZL.XieMing,DDZL.Pairs,CGKCUSE.Qty,CGZl.CGQty,CGZL.YQDate,');
+    sql.add('         CGZL.CFMDate,CGZl.CGDate,CGZL.CGNO,RKZL.RKNO,RKZL.RKDate,RKZL.RKQty,DDZL.ShipDate');
+    sql.add('order by ZLZLS2.ZLBH,CLZL.CQDH,ZLZLS2.CLBH');
+    active:=true;
+  end;
+end;
+
+procedure TPurtrace.DBGridEh1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+
+if Query1.FieldByName('CLSL').value=Query1.FieldByName('RKQty').value+Query1.FieldByName('UseStock').value then
+  begin
+        dbgrideh1.canvas.font.color:=clBlue;
+       // dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+if (((query1.FieldByName('RKQty').value>0) or (Query1.FieldByName('UseStock').value>0))
+                    and (query1.FieldByName('CLSL').value>(query1.FieldByName('RKQty').value+Query1.FieldByName('UseStock').value))) then
+  begin
+    if ((Query1.FieldByName('RKQty').value<>0) or (Query1.FieldByName('UseStock').value<>0)) then
+      begin
+        dbgrideh1.canvas.font.color:=clred;
+        //dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+      end;
+  end;
+if Query1.FieldByName('CLSL').value<Query1.FieldByName('RKQty').value+Query1.FieldByName('UseStock').value then
+  begin
+        dbgrideh1.canvas.font.color:=clgreen;
+       // dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+end;
+
+procedure TPurtrace.Button3Click(Sender: TObject);
+begin
+
+printdbgrideh1.Preview;
+end;
+
+end.

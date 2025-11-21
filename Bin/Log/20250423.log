@@ -1,0 +1,1738 @@
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/224347276)*100,4) as Per,CAST(Sum(Acc)/25551 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/01/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/224347276)*100,4) as Per,CAST(Sum(Acc)/25551 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/01/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/224347276)*100,4) as Per,CAST(Sum(Acc)/25551 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/01/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/224347276)*100,4) as Per,CAST(Sum(Acc)/25551 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/01/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%DT_IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/100)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%總計(不含C廠)%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/100)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%總計(不含C廠)%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/10010189)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and BDepartment.DepMemo like '%IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/122000)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and SGDH.LB='01' 
+    and BDepartment.DepMemo like '%IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/122000)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and SGDH.LB='01' 
+    and BDepartment.DepMemo like '%IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/122000)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and SGDH.LB='01' 
+    and BDepartment.DepMemo like '%IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/122000)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and SGDH.LB='01' 
+    and BDepartment.DepMemo like '%IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/122000)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and SGDH.LB='01' 
+    and BDepartment.DepMemo like '%IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/122000)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and SGDH.LB='01' 
+    and BDepartment.DepMemo like '%IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/122000)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and SGDH.LB='01' 
+    and BDepartment.DepMemo like '%IT%' 
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/122000)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+    and SGDH.LB='01' 
+    and BDepartment.DepMemo like '%IT%' 
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+) SGDH  Order by Per asc
+Select * from (
+	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+	Group by Xuong, DepID, DepMemo  
+	Union all 
+	Select 'Total' as Xuong, 'Total' as DepID, 'Total' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/698203841)*100,4) as Per,CAST(Sum(Acc)/25820 as decimal(10,2)) as USACC from (
+	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, 
+		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, 
+		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, 
+		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, 
+		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong
+	from SGDHS 
+	left join SGDH on SGDH.SGNO=SGDHS.SGNO 
+	left join CLZL on CLZL.CLDH = SGDHS.CLBH 
+	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO 
+	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH 
+	left join BDepartment on BDepartment.ID=SGDH.DepID 
+	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB='02' 
+	left join CWHLS on CWHLS.HLDAY='01' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) 
+	where SGDH.CFMID<>'NO' and SGDH.CFMID1<>'NO' 
+		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between
+          '2025/04/01'and '2025/04/30'
+	) SGDH
+) SGDH  Order by Per asc

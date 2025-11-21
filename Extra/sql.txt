@@ -1,0 +1,33 @@
+select  ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,isnull(JGZL.okQty,0) as okQty,
+sum(ZLZLS2.CLSL) as CLSL
+from ZLZLS2
+left join (select JGZLSS.CLBH,sum(JGZLSS.Qty) as okQty from JGZLSS
+          left join CLZL on CLZL.CLDH=JGZLSS.CLBH
+          left join DDZl on DDZl.ZLBH=JGZLSS.ZLBH
+          left join KFZL on KFZl.KFDH=DDZL.KHBH 
+          left join ZLZL on ZLZL.ZLBH=JGZLSS.ZLBH
+          where JGZLSS.CLBH like '%'
+          and JGZLSS.ZLBH like 'ALR1405-008%'
+          and CLZL.YWPM like '%%'
+          and convert(smalldatetime,convert(varchar,DDZL.ShipDate,111)) between 
+          '2014/05/01' and '2014/05/31'
+          and DDZL.GSBH='VB1'
+          and KFZL.KFJC like '%%'
+          and exists(select SCZL.SCBH from SCZL where SCZL.ZLBH=ZLZL.ZLBH )
+          group by  JGZLSS.CLBH ) JGZL on JGZL.CLBh=ZLZLS2.CLBH
+left join CLZL on CLZL.CLDH=ZLZLs2.CLBH
+left join DDZl on DDZl.ZLBH=ZLZLS2.ZLBH
+left join KFZL on KFZl.KFDH=DDZL.KHBH 
+left join ZLZL on ZLZL.ZLBH=ZLZLS2.ZLBH
+where ZLZLS2.CLBH like '%'
+and ZLZLS2.ZLBH like 'ALR1405-008%'
+and CLZL.YWPM like '%%'
+and convert(smalldatetime,convert(varchar,DDZL.ShipDate,111)) between 
+'2014/05/01'and '2014/05/31'
+and DDZL.GSBH='VB1'
+and KFZL.KFJC like '%%'
+and exists(select SCZL.SCBH from SCZL where SCZL.ZLBH=ZLZL.ZLBH )
+and ZLZLS2.ZMLB='Y'
+group by ZLZLS2.CLBH,CLZL.YWPM,CLZL.DWBH,CLZL.CQDH,JGZL.okQty
+order by ZLZLS2.CLBH
+

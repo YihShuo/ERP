@@ -1,0 +1,185 @@
+object main: Tmain
+  Left = 923
+  Top = 24
+  Width = 852
+  Height = 515
+  Caption = 'Salary'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIForm
+  Menu = MainMenu1
+  OldCreateOrder = False
+  Position = poScreenCenter
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Image1: TImage
+    Left = 0
+    Top = 0
+    Width = 836
+    Height = 434
+    Align = alClient
+    AutoSize = True
+    Stretch = True
+  end
+  object Edit1: TEdit
+    Left = 184
+    Top = 152
+    Width = 121
+    Height = 21
+    TabOrder = 0
+    Visible = False
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 434
+    Width = 836
+    Height = 22
+    Panels = <>
+  end
+  object Edit2: TEdit
+    Left = 184
+    Top = 184
+    Width = 121
+    Height = 21
+    TabOrder = 2
+    Visible = False
+  end
+  object MainMenu1: TMainMenu
+    Left = 152
+    Top = 64
+    object SN1: TMenuItem
+      Caption = 'Basic'
+      object SN11: TMenuItem
+        Caption = 'Copany'
+        OnClick = SN11Click
+      end
+      object SN12: TMenuItem
+        Caption = 'Department'
+        OnClick = SN12Click
+      end
+      object SN13: TMenuItem
+        Caption = 'Worker'
+        OnClick = SN13Click
+      end
+      object SN14: TMenuItem
+        Caption = 'DepChange'
+        OnClick = SN14Click
+      end
+      object SN15: TMenuItem
+        Caption = 'Worker Import'
+        OnClick = SN15Click
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object SN16: TMenuItem
+        Caption = 'Exit'
+        OnClick = SN16Click
+      end
+    end
+    object SN2: TMenuItem
+      Caption = 'Standard'
+      object SN21: TMenuItem
+        Caption = 'Individual'
+        OnClick = SN21Click
+      end
+      object SN22: TMenuItem
+        Caption = 'Insurance'
+        OnClick = SN22Click
+      end
+    end
+    object SN3: TMenuItem
+      Caption = 'Medical'
+      object SN31: TMenuItem
+        Caption = 'Medicine'
+        OnClick = SN31Click
+      end
+      object SN32: TMenuItem
+        Caption = 'Record'
+        OnClick = SN32Click
+      end
+    end
+    object SN4: TMenuItem
+      Caption = 'Attendance'
+      object SN41: TMenuItem
+        Caption = 'No Attendance'
+      end
+      object SN42: TMenuItem
+        Caption = 'Department Attendance'
+        OnClick = SN42Click
+      end
+      object test1: TMenuItem
+        Caption = 'test'
+        OnClick = test1Click
+      end
+      object ngay221: TMenuItem
+        Caption = 'ngay 22'
+        OnClick = ngay221Click
+      end
+    end
+    object Salary1: TMenuItem
+      Caption = 'Salary'
+      Enabled = False
+    end
+    object SN6: TMenuItem
+      Caption = 'Assess'
+      Enabled = False
+      object SN51: TMenuItem
+        Caption = 'BOM'
+      end
+      object SN52: TMenuItem
+        Caption = 'Order'
+      end
+      object N3: TMenuItem
+        Caption = '-'
+      end
+      object SN53: TMenuItem
+        Caption = 'Query'
+        Enabled = False
+        object SN531: TMenuItem
+          Caption = 'ORDER ERP'
+        end
+        object SN532: TMenuItem
+          Caption = 'BOM ERP'
+        end
+      end
+    end
+    object SN7: TMenuItem
+      Caption = 'Help'
+    end
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select *'
+      'from BLimits'
+      'where USERID=:userid'
+      'and MKID=:mkid'
+      'and GSBH=:GSBH')
+    Left = 64
+    Top = 88
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'userid'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'mkid'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'GSBH'
+        ParamType = ptUnknown
+      end>
+  end
+end

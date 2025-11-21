@@ -1,0 +1,36 @@
+  with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    SQL.Add('select KCRK.RKNO,KCRK.GSBH,KCRK.CKBH,KCRK.ZSNO,KCRK.USERDATE,KCRK.CFMDATE,KCRKS.CLBH,KCRKS.Qty,KCRKS.USPrice,KCRKS.USACC,KCRKS.CWHL,KCRKS.VNPrice,');
+    SQL.Add('       KCRKS.VNAcc,KCRKS.ExchAcc,KCRKS.CGBH,KCRKS.RKSB,KCRKS.CostID,KCRKS.DOCNO,KCRKS.invno,IsNull(KCRKS.CNO,CLZL_HAIQUAN.CNO) as CNO ');
+    SQL.Add('       ,CLZL.YWPM,CLZL.DWBH,ZSZL.ZSYWJC,KCZLS.CWBH, CLZL_HAIQUAN.UnitC, CLZL_HAIQUAN.RateC  ');
+    sql.add('from (select * from KCRKS union all select * from KCRKS_2014)KCRKS');
+    sql.add('left join (select * from KCRK union all select * from KCRK_2014)KCRK on KCRK.RKNO=KCRKS.RKNO');
+    sql.add('left join CLZL on CLZL.CLDH=KCRKS.CLBH');
+    sql.Add('left join CLZL_HAIQUAN on CLZL_HAIQUAN.CLDH=KCRKS.CLBH');
+    sql.add('left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH');
+    sql.add('left join KCZLS on KCZLS.CLBH=KCRKS.CLBH and KCZLS.CKBH=KCRK.CKBH ');
+    sql.add('left join KCCK on KCCK.CKBH=KCRK.CKBH ');
+    sql.Add('where Convert(smalldatetime,convert(varchar,KCRK.USERDate,111)) between ');
+    sql.add('      '''+formatdatetime('yyyy/MM/dd',sdate)+''''+' and ' +''''+formatdatetime('yyyy/MM/dd',edate)+'''');
+    if CBX3.Text<>'' then
+    begin
+      sql.Add('and KCCK.CKBH ='+''''+CBX3.text+'''');
+    end;
+    sql.add('      and KCRKS.CLBH like '+''''+edit1.text+'%'+'''');
+    sql.add('      and CLZL.YWPM like '+''''+'%'+edit2.text+'%'+'''');
+    sql.add('      and CLZL.YWPM like '+''''+'%'+edit3.text+'%'+'''');
+    sql.add('      and isnull(KCZLS.CWBH,'+''''+''+''''+') like '+''''+edit4.text+'%'+'''');
+    sql.add('      and KCRKS.CostID like '+''''+edit7.text+'%'+'''');
+    sql.add('      and KCRKS.RKNO like '+''''+edit5.text+'%'+'''');
+    sql.add('      and ZSZL.ZSYWJC like '+''''+'%'+edit6.Text+'%'+'''');
+    sql.add('      and KCRK.YN='+''''+'5'+'''');
+    sql.add('      and KCCK.GSBH='+''''+main.edit2.Text+'''');
+    if cbInvoice.Text<>'' then
+    begin
+      sql.Add('and KCRK.DOCNO like '+''''+cbInvoice.text+'%''');
+    end;
+    funcObj.WriteErrorLog(sql.Text);
+    active:=true;
+  end;

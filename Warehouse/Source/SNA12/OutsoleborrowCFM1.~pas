@@ -1,0 +1,456 @@
+unit OutsoleborrowCFM1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ComCtrls, ExtCtrls, Grids, DBGrids, DB, DBTables, dateutils,
+  Menus,Comobj;
+
+type
+  TOutsoleborrowCFM = class(TForm)
+    dbgrd1: TDBGrid;
+    pnl1: TPanel;
+    lbl1: TLabel;
+    lbl2: TLabel;
+    btn1: TButton;
+    btn2: TButton;
+    btn3: TButton;
+    dtpDTP1: TDateTimePicker;
+    dtpDTP2: TDateTimePicker;
+    edt1: TEdit;
+    dbgrd2: TDBGrid;
+    dsDS3: TDataSource;
+    qryDelMas: TQuery;
+    updtsqlUpMas: TUpdateSQL;
+    TDelMasLLNO: TStringField;
+    TDelMasGSBH: TStringField;
+    TDelMasCKBH: TStringField;
+    TDelMasDepID: TStringField;
+    dtmfldDelMasUSERDATE: TDateTimeField;
+    TDelMasUSERID: TStringField;
+    dtmfldDelMasCFMDate: TDateTimeField;
+    TDelMasCFMID: TStringField;
+    TDelMasSB: TStringField;
+    TDelMasYN: TStringField;
+    intgrfldDelMasPMARK: TIntegerField;
+    TDelMasDepName: TStringField;
+    qryDelDet: TQuery;
+    updtsql1: TUpdateSQL;
+    ds1: TDataSource;
+    qry2: TQuery;
+    qryDelMasPlanDate: TDateTimeField;
+    CB1: TCheckBox;
+    qryDelMasMEMO: TStringField;
+    Query1: TQuery;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    StringField4: TStringField;
+    CurrencyField1: TCurrencyField;
+    DateTimeField1: TDateTimeField;
+    StringField5: TStringField;
+    StringField6: TStringField;
+    StringField7: TStringField;
+    StringField8: TStringField;
+    StringField9: TStringField;
+    StringField10: TStringField;
+    FloatField1: TFloatField;
+    PopupMenu1: TPopupMenu;
+    Qtyrevise1: TMenuItem;
+    btn4: TButton;
+    procedure btn1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btn2Click(Sender: TObject);
+    procedure btn3Click(Sender: TObject);
+    procedure Qtyrevise1Click(Sender: TObject);
+    procedure btn4Click(Sender: TObject);
+  private
+    ayear,amonth:string;
+    DepIDList:TStringlist;
+    { Private declarations }
+    procedure CalculateOutsoleStock();
+  public
+    { Public declarations }
+  end;
+
+var
+  OutsoleborrowCFM: TOutsoleborrowCFM;
+
+implementation
+
+uses main1,FunUnit;
+
+{$R *.dfm}
+procedure TOutsoleborrowCFM.CalculateOutsoleStock();
+var year,month,day:word;
+    i:integer;
+    ayear,amonth:string;
+begin
+  decodedate(Date,Year,Month,Day);   //§ä®w¦s¬ÛÃöªº¼Æ¾Ú
+  incAMonth(Year,Month,Day,-1);
+  ayear:=floattostr(year);
+  amonth:=floattostr(month);
+  if length(amonth)=1 then
+    amonth:='0'+amonth;
+  //
+  with qry2 do
+  begin
+     Active:=false;
+    sql.Clear;
+    sql.add('  if object_id('+''''+'tempdb..#CLZLKC_Outsole'+''''+') is not null  ');
+    sql.add('begin   drop table #CLZLKC_Outsole end   ');
+    SQL.Add('select NowKC.CKBH,NowKC.CLBH,NowKC.SIZ,IsNull(NowKC.NowRKQty,0)-IsNull(LL.LLQty,0) as Qty,OutsoleKC.OutsoleRem,RK.RKQty,LL.LLQty into #CLZLKC_Outsole from (');
+    SQL.Add('  select CKBH,CLBH,SIZ,Sum(RKQty) as NowRKQty from (');
+    SQL.Add('  select OSRK.CKBH,OSRKSS.CLBH,OSRKSS.SIZ,SUM(OSRKSS.Qty) as RKQty from OSRKSS,OSRK ');
+    SQL.Add('  where OSRKSS.RKNO=OSRK.RKNO  and OSRK.CKBH='''+main.Edit2.Text+''' and convert(smalldatetime,convert(varchar,OSRK.UserDate,111)) between '''+formatdatetime('yyyy/MM/dd',startofthemonth(Date))+''' and '''+formatdatetime('yyyy/MM/dd',Date)+''' ');
+    SQL.Add('  Group by OSRK.CKBH,OSRKSS.CLBH,OSRKSS.SIZ ');
+    SQL.Add('  Union All ');
+    SQL.Add('  select CKBH,CLBH,SIZ,QTY as OutsoleRem from Outsolemonth where CKBH='''+main.Edit2.Text+''' and KCYEAR='''+ayear+''' and KCMonth='''+amonth+''' ) as tmpRKTLFL ');
+    SQL.Add('  group by CKBH,CLBH,SIZ ) as NowKC');
+    SQL.Add('left join ( ');
+    SQL.Add('   select CKBH,CLBH,SIZ,QTY as OutsoleRem from Outsolemonth where CKBH='''+main.Edit2.Text+''' and KCYEAR='''+ayear+''' and KCMonth='''+amonth+''' ) as OutsoleKC on NowKC.CKBH=OutsoleKC.CKBH and NowKC.CLBH=OutsoleKC.CLBH and NowKC.SIZ=OutsoleKC.SIZ');
+    SQL.Add('left join ( ');
+    SQL.Add('  select OSRK.CKBH,OSRKSS.CLBH,OSRKSS.SIZ,SUM(OSRKSS.Qty) as RKQty from OSRKSS,OSRK ');
+    SQL.Add('  where OSRKSS.RKNO=OSRK.RKNO  and OSRK.CKBH='''+main.Edit2.Text+''' and convert(smalldatetime,convert(varchar,OSRK.UserDate,111)) between '''+formatdatetime('yyyy/MM/dd',startofthemonth(Date))+''' and '''+formatdatetime('yyyy/MM/dd',Date)+''' ');
+    SQL.Add('  Group by OSRK.CKBH,OSRKSS.CLBH,OSRKSS.SIZ  ) RK on NowKC.CKBH=RK.CKBH and NowKC.CLBH=RK.CLBH and NowKC.SIZ=RK.SIZ');
+    SQL.Add('left join ( ');
+    SQL.Add('   select OSLL.CKBH,OSLLSS.CLBH,OSLLSS.SIZ,SUM(OSLLSS.Qty) as LLQty from OSLLSS,OSLL ');
+    SQL.Add('   where OSLLSS.LLNO=OSLL.LLNO  and LTLL.CFMID<>''NO'' and OSLL.CKBH='''+main.Edit2.Text+''' and convert(smalldatetime,convert(varchar,OSLL.CFMDate,111)) between '''+formatdatetime('yyyy/MM/dd',startofthemonth(Date))+''' and '''+formatdatetime('yyyy/MM/dd',Date)+''' ');
+    SQL.Add('   Group by OSLL.CKBH,OSLLSS.CLBH,OSLLSS.SIZ ) LL on NowKC.CKBH=LL.CKBH and NowKC.CLBH=LL.CLBH and NowKC.SIZ=LL.SIZ');
+    //funcObj.WriteErrorLog(sql.Text);
+    ExecSQL();
+  end;
+  //
+end;
+//
+procedure TOutsoleborrowCFM.btn1Click(Sender: TObject);
+var i:integer;
+begin
+
+  CalculateOutsoleStock();
+  //
+  with qryDelMas do
+  begin
+    Active:=false;
+    sql.Clear;
+    sql.add('select OSLL.*,BDepartment.DepName ');
+    sql.add('from OSLL ');
+    sql.add('left join BDepartment on OSLL.DepID=BDepartment.ID  ');
+    sql.add('left join KCCK on KCCK.CKBH=OSLL.CKBH ');
+    sql.add('where OSLL.SB=''L'' ');
+    if CB1.Checked=false then
+    sql.add('and OSLL.YN=''1''  ');
+    sql.add('and convert(smalldatetime,convert(varchar,OSLL.USERDATE,111)) between '+''''+formatdatetime('yyyy/MM/dd',dtpDTP1.date )+'''');
+    sql.add('and '+''''+formatdatetime('yyyy/MM/dd',dtpDTP2.date )+'''');
+    sql.add('and OSLL.LLNO like '+''''+edt1.Text+'%'+'''');
+    sql.add('and OSLL.GSBH='+''''+main.Edit2.Text+'''');
+    sql.add('order by OSLL.LLNO  ');
+    //funcObj.WriteErrorLog(sql.Text);
+    active:=true;
+  end;
+  //
+
+  with  qryDelDet do
+  begin
+    //
+    Active:=false;
+    sql.Clear;
+    sql.Add('select OSLLSS.LLNO,OSLLSS.CLBH,CLZL.YWPM,CLZL.DWBH,OSLLSS.ZLBH,OSLLSS.SIZ,LTLLSS.Qty,#CLZLKC_Outsole.Qty as KCQty ');
+    if DepIDList.Count>0 then
+    begin
+      for i:=0 to DepIDList.Count-1 do
+      begin
+        sql.add(','+DepIDList.Strings[i]+' ');
+      end;
+    end;
+    sql.Add('from OSLLSS');
+    sql.Add('left join CLZL on OSLLSS.CLBH=CLZL.CLDH ');
+    sql.Add('left join #CLZLKC_Outsole on #CLZLKC_Outsole.CLBH=OSLLSS.CLBH and  #CLZLKC_Outsole.SIZ=OSLLSS.SIZ ');
+    if DepIDList.Count>0 then
+    begin
+    sql.add('left join (');
+    sql.add('select CLBH,SIZ ');
+      for i:=0 to DepIDList.Count-1 do
+      begin
+        sql.add(',Max(case when DepID='''+DepIDList.Strings[i]+''' then Qty end) as '+DepIDList.Strings[i]+' ');
+      end;
+    sql.add('from #CLZLKC_OutsoleOut ');
+    sql.Add('Group by CLBH,SIZ ) Outsole_out on Outsole_out.CLBH=OSLLSS.CLBH and Outsole_out.SIZ=OSLLSS.SIZ  ');
+    end;
+    sql.Add('where OSLLSS.LLNO=:LLNO ');
+    sql.Add('order by OSLLSS.Siz ');
+    //funcObj.WriteErrorLog(sql.Text);
+    active:=true;
+  end;
+
+  //qryDelDet.Active:=true;
+  //
+end;
+
+procedure TOutsoleborrowCFM.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  DepIDList.Free;
+  free;
+end;
+
+procedure TOutsoleborrowCFM.FormDestroy(Sender: TObject);
+begin
+  OutsoleborrowCFM:=nil;
+end;
+
+procedure TOutsoleborrowCFM.FormCreate(Sender: TObject);
+var year,month,day:word;
+    i:integer;
+begin
+  decodedate(Date,Year,Month,Day);   //§ä®w¦s¬ÛÃöªº¼Æ¾Ú
+  incAMonth(Year,Month,Day,-1);
+  ayear:=floattostr(year);
+  amonth:=floattostr(month);
+  if length(amonth)=1 then
+    amonth:='0'+amonth;
+  //
+  with qry2 do
+  begin
+    Active:=false;
+    sql.Clear;
+    sql.add('  if object_id('+''''+'tempdb..#CLZLKC_OutsoleOut'+''''+') is not null  ');
+    sql.add('begin   drop table #CLZLKC_OutsoleOut end   ');
+    sql.add('select NowKC.DepID,NowKC.CLBH,NowKC.SIZ,IsNull(NowKC.NowLLQty,0)-IsNull(RK.RKQty,0) as Qty into #CLZLKC_OutsoleOut  from ( ');
+    sql.add('select DepID,CLBH,SIZ,Sum(LLQty) as NowLLQty from (');
+    sql.add('select OSLL.DepID,OSLLSS.CLBH,OSLLSS.SIZ,SUM(OSLLSS.Qty) as LLQty from OSLLSS,OSLL ');
+    sql.add('where OSLLSS.LLNO=OSLL.LLNO  and OSLL.CFMID<>''NO'' and OSLL.CKBH='''+main.Edit2.Text+''' and convert(smalldatetime,convert(varchar,OSLL.CFMDate,111)) between '''+formatdatetime('yyyy/MM/dd',startofthemonth(Date))+''' and '''+formatdatetime('yyyy/MM/dd',Date)+'''  ');
+    sql.add('Group by OSLL.DepID,OSLLSS.CLBH,OSLLSS.SIZ ');
+    sql.add('Union All ');
+    sql.add('select DepID,CLBH,SIZ,QTY as OutsoleRem from Outsolemonth_Out where CKBH='''+main.Edit2.Text+''' and  KCYEAR='''+ayear+''' and KCMonth='''+amonth+''') as tmpRKTLFL ');
+    sql.add('group by DepID,CLBH,SIZ ) as NowKC ');
+    sql.add('left join ( select OSRK.DepID,OSRKSS.CLBH,OSRKSS.SIZ,SUM(OSRKSS.Qty) as RKQty from OSRKSS,OSRK  ');
+    sql.add('where OSRKSS.RKNO=OSRK.RKNO  and OSRK.CKBH='''+main.Edit2.Text+''' and OSRKSS.ZLBH=''Outsole'' and convert(smalldatetime,convert(varchar,OSRK.UserDate,111)) between '''+formatdatetime('yyyy/MM/dd',startofthemonth(Date))+''' and '''+formatdatetime('yyyy/MM/dd',Date)+''' ');
+    sql.add('Group by OSRK.DepID,OSRKSS.CLBH,OSRKSS.SIZ )  RK on NowKC.DepID=RK.DepID and NowKC.CLBH=RK.CLBH and NowKC.SIZ=RK.SIZ ');
+    sql.add('where  IsNull(NowKC.NowLLQty,0)-IsNull(RK.RKQty,0) >0 ');
+    //funcObj.WriteErrorLog(sql.Text);
+    ExecSQL();
+  end;
+  //
+  DepIDList:=TStringlist.Create;
+  with qry2 do
+  begin
+    Active:=false;
+    sql.clear;
+    sql.add('select * from ( select distinct DepID  from #CLZLKC_OutsoleOut ) A order by substring(DepID,1,1),len(DepID) ');
+    Active:=true;
+    if RecordCount>0 then
+    begin
+      for i:=0 to RecordCount-1 do
+      begin
+        DepIDList.Add(FieldByName('DepID').AsString);
+        dbgrd2.Columns[6+i].FieldName:=DepIDList.Strings[i];
+        dbgrd2.Columns[6+i].Visible:=true;
+        dbgrd2.Columns[6+i].Width:=30;
+        qry2.Next;
+      end;
+    end;
+    Active:=false;
+  end;
+  dtpDTP1.Date:=date-7;
+  dtpDTP2.Date:=date;
+  dbgrd2.Columns[4].ReadOnly:=false;
+end;
+
+procedure TOutsoleborrowCFM.btn2Click(Sender: TObject);
+begin
+
+  CalculateOutsoleStock();
+  //
+  if qryDelDet.RecordCount>0 then //·í¦³LTLLSS²Ä¤T¼h®É,ÀË¬dLTLLSS
+  begin
+    qryDelDet.first; //ÀË¬d§÷®Æ®w¦ì¬O§_¿é¤J¡A¨S¦³«h­n¥ý¿é¤J®w¦ì
+    while not qryDelDet.eof do
+    begin
+        //---------------------------------------------
+        with qry2 do
+        begin //
+          active:=false;
+          SQL.Clear;
+          SQL.add('select CLBH,SIZ,Qty ');
+          SQL.add(' from #CLZLKC_Outsole   ');
+          SQL.add(' where #CLZLKC_Outsole.CLBH='''+qryDelDet.fieldbyname('CLBH').AsString+''' and #CLZLKC_Outsole.SIZ='''+qryDelDet.fieldbyname('SIZ').AsString+''' ');
+          Active:=true;
+        end;  //
+        //-----------------------------------------------------
+        //®Ú¥»¨S¦³³o­ÓÝÉÀY
+        IF qry2.Eof THEN
+        begin
+          showmessage('Pls Check no any stock in warehouse.');
+          abort;
+        end;
+
+        //§PÂ_ »â®Æ³æ¼Æ¶q > ®w¦s¼Æ¶q
+        IF qryDelDet.fieldbyname('QTY').value > qry2.fieldbyname('Qty').value THEN
+        begin
+          showmessage(qryDelDet.fieldbyname('QTY').AsString+'>'+qry2.fieldbyname('qty').AsString+' stock not enought'  );
+          abort;
+        end;
+        qryDelDet.next;
+      end; //
+    //-------------------------------------------------------------
+  end;
+    //--------------------------------------------------------------
+
+  Edt1.Text:='';
+  try
+     if qryDelDet.RecordCount>0 then  //»â®Æ³æ¨­.ÝÉÀY¤Ø¤o¼Æ¶qÀÉÈýŒÓ•r
+     begin
+       //ÀË¬d¦³¨S¦³¶ñ¤J»â®Æ¼Æ¶q
+       qryDelDet.First;
+       while not qryDelDet.eof do
+         //ÀË¬d
+         begin
+            if qryDelDet.updatestatus=usmodified then
+              begin
+                if not qryDelDet.fieldbyname('Qty').isnull then
+                begin
+                    updtsql1.apply(ukmodify);
+                end else
+                begin
+                    showmessage('Qty can not be empty.');
+                    abort;
+                end;
+              end;
+            qryDelDet.next;
+         end;
+
+       //¼ÒÀY-Á`­p»â®Æ¼Æ-¼g¤J»â®Æ³æ©ú²Ó
+       with qry2 do
+       begin
+           active:=false;
+           sql.Clear;
+           sql.add('UPDATE OSLLS ');
+           sql.add('set LLQTY=ISNULL((select isnull(SUM(QTY),0) AS SQTY ');
+           sql.add('                   from OSLLSS');
+           sql.add('                   WHERE OSLLSS.LLNO=OSLLS.LLNO AND OSLLSS.CLBH=OSLLS.CLBH  ');
+           sql.add('                         and OSLLSS.LLNO='+''''+qryDelMas.FieldByName('LLNO').Value+''''+'');
+           sql.add('                   GROUP BY LLNO,CLBH),0) ');
+           sql.add('where OSLLS.LLNO='+''''+qryDelMas.FieldByName('LLNO').Value+'''' );
+           execsql;
+           close;
+       end;
+       
+     end;
+
+   with qryDelMas do       //»â®Æ³æÀY
+   begin
+       edit;
+       fieldbyname('CFMID').Value:=main.edit1.text;
+       fieldbyname('CFMDATE').Value:=date();
+       fieldbyname('YN').Value:='5';
+       updtsqlUpMas.Apply(ukmodify);
+       active:=false;
+       active:=true;
+   end;
+
+   showmessage('Succeed.');
+
+ except
+   showmessage('Have wrong.');
+ end;
+
+end;
+
+procedure TOutsoleborrowCFM.btn3Click(Sender: TObject);
+begin
+  qryDelDet.Active:=false;
+  qryDelMas.Active:=false;
+
+  qryDelMas.Active:=true;
+  qryDelDet.Active:=true;
+end;
+
+procedure TOutsoleborrowCFM.Qtyrevise1Click(Sender: TObject);
+begin
+  if qryDelDet.Active=true then
+  begin
+    qryDelDet.First;
+    while not qryDelDet.Eof do
+    begin
+      if qryDelDet.FieldByName(qryDelMas.FieldByName('DepID').AsString).AsString<>'' then
+      begin
+        if qryDelDet.FieldByName(qryDelMas.FieldByName('DepID').AsString).Value>=qryDelDet.FieldByName('Qty').Value then
+        begin
+          qryDelDet.Edit;
+          qryDelDet.FieldByName('Qty').Value:=0;
+          qryDelDet.Post;
+        end else
+        begin
+          qryDelDet.Edit;
+          qryDelDet.FieldByName('Qty').Value:=qryDelDet.FieldByName('Qty').Value-qryDelDet.FieldByName(qryDelMas.FieldByName('DepID').AsString).Value;
+          qryDelDet.Post;
+          {
+          //¼È®É¤£¥Î
+          if qryDelDet.FieldByName('Qty').Value>qryDelDet.FieldByName('KCQty').Value  then
+            qryDelDet.FieldByName('Qty').Value:=qryDelDet.FieldByName('KCQty').Value;
+          }
+        end;
+      end else
+      begin
+          {
+          //¼È®É¤£¥Î
+          qryDelDet.Edit;
+          if qryDelDet.FieldByName('Qty').Value>qryDelDet.FieldByName('KCQty').Value  then
+            qryDelDet.FieldByName('Qty').Value:=qryDelDet.FieldByName('KCQty').Value;
+          qryDelDet.Post;
+          }
+      end;
+      qryDelDet.Next;
+    end;
+  end;
+end;
+
+procedure TOutsoleborrowCFM.btn4Click(Sender: TObject);
+var eclApp,WorkBook:olevariant;
+    i,j:integer;
+begin
+    if  qryDelDet.active  then
+    begin
+      try
+        eclApp:=CreateOleObject('Excel.Application');
+        WorkBook:=CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+        Exit;
+      end;
+      try
+          WorkBook:=eclApp.workbooks.Add;
+          for   i:=0   to   qryDelDet.fieldcount-1   do
+          begin
+            eclApp.Cells(1,i+1):=qryDelDet.fields[i].FieldName;
+          end;
+          eclApp.Cells(1,i+1):=qryDelMas.fieldByName('DepID').FieldName;
+          eclApp.Cells(1,i+2):=qryDelMas.fieldByName('PlanDate').FieldName;
+          qryDelDet.First;
+          j:=2;
+          while   not   qryDelDet.Eof   do
+          begin
+            for   i:=0   to  qryDelDet.fieldcount-1  do
+            begin
+                eclApp.Cells(j,i+1):=qryDelDet.Fields[i].Value;
+            end;
+            eclApp.Cells(j,i+1):=qryDelMas.fieldByName('DepID').Value;
+            eclApp.Cells(j,i+2):=qryDelMas.fieldByName('PlanDate').Value;
+            qryDelDet.Next;
+            inc(j);
+          end;
+         eclapp.columns.autofit;
+         showmessage('Succeed');
+         eclApp.Visible:=True;
+      except
+          on   F:Exception   do
+            showmessage(F.Message);
+      end;
+    end;
+end;
+
+end.

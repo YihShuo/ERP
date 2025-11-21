@@ -1,0 +1,100 @@
+Select top 2 * 
+From KCCLMONTH_HG 
+Where KCYEAR='2022' and KCMONTH='11'  and HGLB in ('HD','NK','KD') 
+  and CKBH in ('CDC','CDT','BYC','BYT','CBY','SDC','SDT','SRC','VA12','VTXW')
+Select top 1000 KCRKS.RKNO,KCRKS.CLBH,Sum(Qty) as Qty,KCRK.UserDate 
+From KCRK
+Left join KCRKS on KCRK.RKNO=KCRKS.RKNO
+where  KCRK.CKBH='BYC' and  HGLB='NK' and Convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))<='2022/11/30'  
+      and KCRKS.CLBH='A010009132'
+Group by KCRKS.RKNO,KCRKS.CLBH,KCRK.UserDate 
+order by KCRK.USERDATE desc
+Insert into KCPKRK1 (KCYEAR,KCMONTH,RKNO, CLBH, Qty ,UserID, UserDate, YN) 
+Values 
+ ('2022','11','20210108021',A010009132,14.26,'21191',GetDate(),'1')
+Select top 1000 KCRKS.RKNO,KCRKS.CLBH,Sum(Qty) as Qty,KCRK.UserDate 
+From KCRK
+Left join KCRKS on KCRK.RKNO=KCRKS.RKNO
+where  KCRK.CKBH='BYC' and  HGLB='NK' and Convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))<='2022/11/30'  
+      and KCRKS.CLBH='A010009233'
+Group by KCRKS.RKNO,KCRKS.CLBH,KCRK.UserDate 
+order by KCRK.USERDATE desc
+Insert into KCPKRK1 (KCYEAR,KCMONTH,RKNO, CLBH, Qty ,UserID, UserDate, YN) 
+Values 
+ ('2022','11','20210108021',A010009233,14.48,'21191',GetDate(),'1')
+Select top 2 * 
+From KCCLMONTH_HG 
+Where KCYEAR='2022' and KCMONTH='11'  and HGLB in ('HD','NK','KD') 
+  and CKBH in ('CDC','CDT','BYC','BYT','CBY','SDC','SDT','SRC','VA12','VTXW')
+Select top 1000 KCRKS.RKNO,KCRKS.CLBH,Sum(Qty) as Qty,KCRK.UserDate 
+From KCRK
+Left join KCRKS on KCRK.RKNO=KCRKS.RKNO
+where  KCRK.CKBH='BYC' and  HGLB='NK' and Convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))<='2022/11/30'  
+      and KCRKS.CLBH='A010009132'
+Group by KCRKS.RKNO,KCRKS.CLBH,KCRK.UserDate 
+order by KCRK.USERDATE desc
+Insert into KCPKRK1 (KCYEAR,KCMONTH,RKNO, CLBH, Qty ,UserID, UserDate, YN) 
+Values 
+ ('2022','11','20210108021',A010009132,14.26,'21191',GetDate(),'1')
+Select top 2 * 
+From KCCLMONTH_HG 
+Where KCYEAR='2022' and KCMONTH='11'  and HGLB in ('HD','NK','KD') 
+  and CKBH in ('CDC','CDT','BYC','BYT','CBY','SDC','SDT','SRC','VA12','VTXW')
+Select top 1000 KCRKS.RKNO,KCRKS.CLBH,Sum(Qty) as Qty,KCRK.UserDate 
+From KCRK
+Left join KCRKS on KCRK.RKNO=KCRKS.RKNO
+where  KCRK.CKBH='BYC' and  HGLB='NK' and Convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))<='2022/11/30'  
+      and KCRKS.CLBH='A010009132'
+Group by KCRKS.RKNO,KCRKS.CLBH,KCRK.UserDate 
+order by KCRK.USERDATE desc
+Insert into KCPKRK1 (KCYEAR,KCMONTH,RKNO, CLBH, Qty ,UserID, UserDate, YN) 
+Values 
+ ('2022','11','20210108021',A010009132,14.26,'21191',GetDate(),'1')
+Select top 2 * 
+From KCCLMONTH_HG 
+Where KCYEAR='2022' and KCMONTH='11'  and HGLB in ('HD','NK','KD') 
+  and CKBH in ('CDC','CDT','BYC','BYT','CBY','SDC','SDT','SRC','VA12','VTXW')
+Select top 1000 KCRKS.RKNO,KCRKS.CLBH,Sum(Qty) as Qty,KCRK.UserDate 
+From KCRK
+Left join KCRKS on KCRK.RKNO=KCRKS.RKNO
+where  KCRK.CKBH='BYC' and  HGLB='NK' and Convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))<='2022/11/30'  
+      and KCRKS.CLBH='A010009132'
+Group by KCRKS.RKNO,KCRKS.CLBH,KCRK.UserDate 
+order by KCRK.USERDATE desc
+Insert into KCPKRK1 (KCYEAR,KCMONTH,RKNO, CLBH, Qty ,UserID, UserDate, YN) 
+Values 
+ ('2022','11','20210108021','A010009132',14.26,'21191',GetDate(),'1')
+Select top 1000 KCRKS.RKNO,KCRKS.CLBH,Sum(Qty) as Qty,KCRK.UserDate 
+From KCRK
+Left join KCRKS on KCRK.RKNO=KCRKS.RKNO
+where  KCRK.CKBH='BYC' and  HGLB='NK' and Convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))<='2022/11/30'  
+      and KCRKS.CLBH='A010009233'
+Group by KCRKS.RKNO,KCRKS.CLBH,KCRK.UserDate 
+order by KCRK.USERDATE desc
+Insert into KCPKRK1 (KCYEAR,KCMONTH,RKNO, CLBH, Qty ,UserID, UserDate, YN) 
+Values 
+ ('2022','11','20210108021','A010009233',14.48,'21191',GetDate(),'1')
+Select top 2 * 
+From KCCLMONTH_HG 
+Where KCYEAR='2022' and KCMONTH='11'  and HGLB in ('HD','NK','KD') 
+  and CKBH in ('CDC','CDT','BYC','BYT','CBY','SDC','SDT','SRC','VA12','VTXW')
+Select top 1000 KCRKS.RKNO,KCRKS.CLBH,Sum(Qty) as Qty,KCRK.UserDate 
+From KCRK
+Left join KCRKS on KCRK.RKNO=KCRKS.RKNO
+where  KCRK.CKBH='BYC' and  HGLB='NK' and Convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))<='2022/11/30'  
+      and KCRKS.CLBH='A010009132'
+Group by KCRKS.RKNO,KCRKS.CLBH,KCRK.UserDate 
+order by KCRK.USERDATE desc
+Insert into KCPKRK1 (KCYEAR,KCMONTH,RKNO, CLBH, Qty ,UserID, UserDate, YN) 
+Values 
+ ('2022','11','20210108021','A010009132',14.26,'21191',GetDate(),'1')
+Select top 1000 KCRKS.RKNO,KCRKS.CLBH,Sum(Qty) as Qty,KCRK.UserDate 
+From KCRK
+Left join KCRKS on KCRK.RKNO=KCRKS.RKNO
+where  KCRK.CKBH='BYC' and  HGLB='NK' and Convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))<='2022/11/30'  
+      and KCRKS.CLBH='A010009233'
+Group by KCRKS.RKNO,KCRKS.CLBH,KCRK.UserDate 
+order by KCRK.USERDATE desc
+Insert into KCPKRK1 (KCYEAR,KCMONTH,RKNO, CLBH, Qty ,UserID, UserDate, YN) 
+Values 
+ ('2022','11','20210108021','A010009233',14.48,'21191',GetDate(),'1')

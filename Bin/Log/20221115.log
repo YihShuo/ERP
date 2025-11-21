@@ -1,0 +1,238 @@
+Select ZSZL.zsdh,zsqm,ZSYWJC,ZSZL_DEV.SamplePurchaser from ZSZL 
+Left join ZSZL_DEV on ZSZL_DEV.ZSDH=ZSZL.ZSDH and ZSZL_DEV.GSBH='VDK' 
+where ZSZL.zsdh<>'' and YN=1 
+and ZSZL.ZSDH like '%%'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select 
+kfxxzl.xieming,
+isnull(XXZLKF.imgnamecfm,'') as imgnamecfm,
+isnull(KFXXZL.FD,'') as FD,
+isnull(KFXXZL.YSSM,'') as YSSM,
+isnull(kfxxzl.kflx,'') as kflx,
+isnull(kfxxzl.XTMH,'') as XTMH,
+isnull(kfxxzl.DDMH,'') as DDMH,
+isnull(kfxxzl.XieMing,'') as XieMing,
+isnull(xxzl.article,'') as article,
+isnull(kfxxzl.devcode,'') as devcode,
+isnull(xxzlkf.CTS,'') as CTS,
+isnull(xxzlkf.NA,'') as NA,
+isnull(KFXXZL.GENDER,'') as GENDER,
+isnull(xxzlkf.SS,'') as SS,
+isnull(ypzl.subtype,'') as subtype,
+isnull(ypzl.ProductionLocation,'')  as ProductionLocation, 
+CFM.* from CFM
+left join  kfxxzl on CFM.xiexing=kfxxzl.xiexing and CFM.shehao=kfxxzl.shehao
+left join  xxzl on CFM.xiexing=xxzl.xiexing and CFM.shehao=xxzl.shehao
+left join  (select xiexing,shehao,kfjd,subtype,ProductionLocation from ypzl group by xiexing,shehao,kfjd,subtype,ProductionLocation)ypzl on CFM.xiexing=ypzl.xiexing and CFM.shehao=ypzl.shehao
+left join  xxzlkf on CFM.xiexing=xxzlkf.xiexing and CFM.shehao=xxzlkf.shehao
+left join Fdgroups on Fdgroups.fdname=kfxxzl.FD
+left join kfzl_GS on kfzl_GS.KHBH=kfxxzl.KHDH
+where kfxxzl.jijie like '%%'
+and (xxzlkf.dropped <>'1' or xxzlkf.dropped is null)
+and (xxzlkf.transfer <>'1' or xxzlkf.transfer is null)
+and kfxxzl.devcode <>''
+ and kfxxzl.xieming not like '%NULLIFY%' 
+ and kfxxzl.xieming not like '%NULIFY%' 
+and ypzl.kfjd ='CFM' 
+and kfzl_GS.GSBH= 'VDK'
+select 
+kfxxzl.xieming,
+isnull(XXZLKF.imgnamecfm,'') as imgnamecfm,
+isnull(KFXXZL.FD,'') as FD,
+isnull(KFXXZL.YSSM,'') as YSSM,
+isnull(kfxxzl.kflx,'') as kflx,
+isnull(kfxxzl.XTMH,'') as XTMH,
+isnull(kfxxzl.DDMH,'') as DDMH,
+isnull(kfxxzl.XieMing,'') as XieMing,
+isnull(xxzl.article,'') as article,
+isnull(kfxxzl.devcode,'') as devcode,
+isnull(xxzlkf.CTS,'') as CTS,
+isnull(xxzlkf.NA,'') as NA,
+isnull(KFXXZL.GENDER,'') as GENDER,
+isnull(xxzlkf.SS,'') as SS,
+isnull(ypzl.subtype,'') as subtype,
+isnull(ypzl.ProductionLocation,'')  as ProductionLocation, 
+CFM.* from CFM
+left join  kfxxzl on CFM.xiexing=kfxxzl.xiexing and CFM.shehao=kfxxzl.shehao
+left join  xxzl on CFM.xiexing=xxzl.xiexing and CFM.shehao=xxzl.shehao
+left join  (select xiexing,shehao,kfjd,subtype,ProductionLocation from ypzl group by xiexing,shehao,kfjd,subtype,ProductionLocation)ypzl on CFM.xiexing=ypzl.xiexing and CFM.shehao=ypzl.shehao
+left join  xxzlkf on CFM.xiexing=xxzlkf.xiexing and CFM.shehao=xxzlkf.shehao
+left join Fdgroups on Fdgroups.fdname=kfxxzl.FD
+left join kfzl_GS on kfzl_GS.KHBH=kfxxzl.KHDH
+where kfxxzl.jijie like '%%'
+and (xxzlkf.dropped <>'1' or xxzlkf.dropped is null)
+and (xxzlkf.transfer <>'1' or xxzlkf.transfer is null)
+and kfxxzl.devcode <>''
+ and kfxxzl.xieming not like '%NULLIFY%' 
+ and kfxxzl.xieming not like '%NULIFY%' 
+and ypzl.kfjd ='CFM' 
+and kfzl_GS.GSBH= 'VDK'

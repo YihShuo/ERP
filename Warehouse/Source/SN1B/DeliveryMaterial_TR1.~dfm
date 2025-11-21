@@ -1,0 +1,588 @@
+object DeliveryMaterial_TR: TDeliveryMaterial_TR
+  Left = 347
+  Top = 253
+  Width = 1043
+  Height = 498
+  Caption = 'DeliveryMaterial_TR'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 1027
+    Height = 81
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label2: TLabel
+      Left = 4
+      Top = 19
+      Width = 43
+      Height = 16
+      Caption = 'MatNo:'
+    end
+    object Label3: TLabel
+      Left = 168
+      Top = 19
+      Width = 62
+      Height = 16
+      Caption = 'MatName:'
+    end
+    object Label5: TLabel
+      Left = 6
+      Top = 49
+      Width = 40
+      Height = 16
+      Caption = 'SCBH:'
+    end
+    object Label9: TLabel
+      Left = 465
+      Top = 18
+      Width = 38
+      Height = 16
+      Caption = 'Xuong'
+    end
+    object Button1: TButton
+      Left = 483
+      Top = 42
+      Width = 81
+      Height = 33
+      Caption = 'QUERY'
+      TabOrder = 4
+      OnClick = Button1Click
+    end
+    object Edit1: TEdit
+      Left = 48
+      Top = 16
+      Width = 105
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 0
+    end
+    object Edit2: TEdit
+      Left = 232
+      Top = 16
+      Width = 105
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 1
+    end
+    object Edit3: TEdit
+      Left = 344
+      Top = 16
+      Width = 105
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 2
+    end
+    object Edit4: TEdit
+      Left = 48
+      Top = 48
+      Width = 105
+      Height = 24
+      CharCase = ecUpperCase
+      Color = clYellow
+      TabOrder = 3
+    end
+    object Button2: TButton
+      Left = 577
+      Top = 41
+      Width = 81
+      Height = 33
+      Caption = 'EXCEL'
+      TabOrder = 5
+    end
+    object CQDHCombo: TComboBox
+      Left = 510
+      Top = 14
+      Width = 67
+      Height = 24
+      Style = csDropDownList
+      ItemHeight = 16
+      ItemIndex = 0
+      TabOrder = 6
+      Text = 'VR%'
+      Items.Strings = (
+        'VR%'
+        'VR1'
+        'VR2'
+        'VR3')
+    end
+  end
+  object DBGrid1: TDBGridEh
+    Left = 0
+    Top = 81
+    Width = 1027
+    Height = 379
+    Align = alClient
+    DataSource = DataSource1
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -11
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind]
+    ParentFont = False
+    PopupMenu = PopupMenu1
+    SumList.Active = True
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    UseMultiTitle = True
+    OnGetCellParams = DBGrid1GetCellParams
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'ZLBH1'
+        Footer.ValueType = fvtCount
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #35330#21934#32232#34399'|ZLBH'
+        Width = 81
+      end
+      item
+        EditButtons = <>
+        FieldName = 'cldhz'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #26448#26009#32232#34399'|Material ID'
+        Width = 86
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ywpm'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #26448#26009#21517#31281'|English name'
+        Width = 220
+      end
+      item
+        EditButtons = <>
+        FieldName = 'zwpm'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #20013#25991#21517#31281'|TW name'
+        Width = 150
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DWBH'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #21934#20301'|DWBH'
+        Width = 45
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CQDH'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #24288#21029'|CQDH'
+        Width = 57
+      end
+      item
+        Color = clYellow
+        EditButtons = <>
+        FieldName = 'TCLYL'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #29992#37327'|TCLYL'
+        Width = 60
+      end
+      item
+        EditButtons = <>
+        Footers = <>
+        Title.Caption = #29992#37327'|A'
+        Visible = False
+        Width = 60
+      end
+      item
+        EditButtons = <>
+        Footers = <>
+        Title.Caption = #29992#37327'|B'
+        Visible = False
+        Width = 53
+      end
+      item
+        EditButtons = <>
+        Footers = <>
+        Title.Caption = #29992#37327'|C'
+        Visible = False
+      end
+      item
+        EditButtons = <>
+        Footers = <>
+        Title.Caption = #29992#37327'|D'
+        Visible = False
+        Width = 69
+      end
+      item
+        EditButtons = <>
+        Footers = <>
+        Title.Caption = #29992#37327'|E'
+        Visible = False
+        Width = 98
+      end
+      item
+        EditButtons = <>
+        Footers = <>
+        Title.Caption = #29992#37327'|F'
+        Visible = False
+        Width = 58
+      end
+      item
+        EditButtons = <>
+        Footers = <>
+        Title.Caption = #29992#37327'|G'
+        Visible = False
+        Width = 115
+      end
+      item
+        EditButtons = <>
+        Footers = <>
+        Visible = False
+      end
+      item
+        EditButtons = <>
+        Footers = <>
+        Visible = False
+      end
+      item
+        EditButtons = <>
+        Footers = <>
+        Visible = False
+      end
+      item
+        EditButtons = <>
+        Footers = <>
+        Visible = False
+      end
+      item
+        EditButtons = <>
+        Footers = <>
+        Visible = False
+      end
+      item
+        EditButtons = <>
+        Footers = <>
+        Visible = False
+      end
+      item
+        EditButtons = <>
+        Footers = <>
+        Visible = False
+      end
+      item
+        EditButtons = <>
+        Footers = <>
+        Visible = False
+      end>
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select ZLZLS3.*'
+      
+        '       ,case when order1.ZLBH1='#39'Y1806-0637A'#39' then order1.TCLYL e' +
+        'nd as '#39'Y1806-0637A'#39' '
+      
+        '       ,case when order2.ZLBH1='#39'Y1806-0637B'#39' then order2.TCLYL e' +
+        'nd as '#39'Y1806-0637B'#39
+      
+        '       ,case when order3.ZLBH1='#39'Y1806-0637C'#39' then order3.TCLYL e' +
+        'nd as '#39'Y1806-0637C'#39'  '
+      'from ('
+      'Select * from ('
+      
+        'SELECT max(ZLZLS3.cldh) as cldh,max(ZLZLS3.DDBH) as DDBH,right(Z' +
+        'LZLS3.cldhz,10) as cldhz,DDZL.ZLBH1 as ZLBH1,Convert(float,round' +
+        '(sum(ZLZLS3.TCLYL),2)) as TCLYL,'
+      'CLZL.zwpm,CLZL.ywpm,CLZL.DWBH,DDZL.CQDH'
+      'FROM LIY_DD.dbo.ZLZLS3  ZLZLS3'
+      
+        'LEFT JOIN LIY_DD.dbo.DDZL DDZL ON ZLZLS3.DDBH = DDZL.DDBH AND  D' +
+        'DZL.CQDH = ZLZLS3.CQDH'
+      'LEFT JOIN LIY_DD.dbo.CLZL CLZL ON ZLZLS3.cldhz = CLZL.cldh'
+      'where  DDZL.CQDH like '#39'VR%'#39
+      'and DDZL.ZLBH1 = '#39'Y1806-0637'#39' '
+      
+        'GROUP BY  ZLZLS3.cldhz ,DDZL.ZLBH1,CLZL.zwpm,CLZL.ywpm,DDZL.CQDH' +
+        ' ,CLZL.DWBH'
+      ') ZLZLS3'
+      'union all'
+      
+        'select Null as cldh,Null as DDBH,KCLLS.CLBH as cldhz,KCLLS.SCBH ' +
+        'as ZLBH1,0 as TCLYL,CLZL.ZWPM,CLZL.YWPM,CLZL.DWBH,KCLL.GSBH as C' +
+        'QDH'
+      'from  KCLLS'
+      'left join DDZL on DDZL.DDBH=KCLLS.SCBH'
+      'left join CLZL on CLZL.CLDH=KCLLS.CLBH'
+      'left join KCLL on KCLL.LLNO=KCLLS.LLNO  '
+      
+        'WHERE KCLL.GSBH like '#39'VR%'#39' and NOT EXISTS(SELECT *  FROM LIY_DD.' +
+        'dbo.ZLZLS3  ZLZLS3  WHERE ZLZLS3.TCLYL>0 and '#39'A'#39'+KCLLS.CLBH=ZLZL' +
+        'S3.CLDHZ AND KCLLS.SCBH=ZLZLS3.ZLBH1 '
+      'and KCLL.GSBH=ZLZLS3.CQDH)'
+      
+        '   and KCLLS.SCBH = '#39'Y1806-0637'#39' and KCLLS.CLBH like '#39'%'#39' and KCL' +
+        'LS.Qty>0'
+      
+        'Group by  KCLLS.CLBH,KCLLS.SCBH,CLZL.ZWPM,CLZL.YWPM,KCLL.GSBH,CL' +
+        'ZL.DWBH'
+      ' ) ZLZLS3'
+      ' left join ('
+      '    Select * from('
+      
+        #9'SELECT right(ZLZLS3.cldhz,10) as cldhz,DDZL.ZLBH1 as ZLBH1,Conv' +
+        'ert(float,round(sum(ZLZLS3.TCLYL),2)) as TCLYL,DDZL.CQDH'
+      #9'FROM LIY_DD.dbo.ZLZLS3  ZLZLS3'
+      
+        #9'LEFT JOIN LIY_DD.dbo.DDZL DDZL ON ZLZLS3.DDBH = DDZL.DDBH AND  ' +
+        'DDZL.CQDH = ZLZLS3.CQDH '
+      #9'where  DDZL.CQDH like '#39'VR%'#39
+      #9'and DDZL.ZLBH1 = '#39'Y1806-0637A'#39' and ZLZLS3.TCLYL>0'
+      #9'GROUP BY  ZLZLS3.cldhz ,DDZL.ZLBH1,DDZL.CQDH '
+      '   ) ZLZLS3 '
+      
+        ' ) order1 on ZLZLS3.cldhz=order1.cldhz and ZLZLS3.CQDH=order1.CQ' +
+        'DH'
+      '  left join ('
+      '    Select * from('
+      
+        #9'SELECT right(ZLZLS3.cldhz,10) as cldhz,DDZL.ZLBH1 as ZLBH1,Conv' +
+        'ert(float,round(sum(ZLZLS3.TCLYL),2)) as TCLYL,DDZL.CQDH'
+      #9'FROM LIY_DD.dbo.ZLZLS3  ZLZLS3'
+      
+        #9'LEFT JOIN LIY_DD.dbo.DDZL DDZL ON ZLZLS3.DDBH = DDZL.DDBH AND  ' +
+        'DDZL.CQDH = ZLZLS3.CQDH '
+      #9'where  DDZL.CQDH like '#39'VR%'#39
+      #9'and DDZL.ZLBH1 = '#39'Y1806-0637B'#39' and ZLZLS3.TCLYL>0'
+      #9'GROUP BY  ZLZLS3.cldhz ,DDZL.ZLBH1,DDZL.CQDH '
+      '   ) ZLZLS3 '
+      
+        ' ) order2 on ZLZLS3.cldhz=order2.cldhz and ZLZLS3.CQDH=order2.CQ' +
+        'DH'
+      '  left join ('
+      '    Select * from('
+      
+        #9'SELECT right(ZLZLS3.cldhz,10) as cldhz,DDZL.ZLBH1 as ZLBH1,Conv' +
+        'ert(float,round(sum(ZLZLS3.TCLYL),2)) as TCLYL,DDZL.CQDH'
+      #9'FROM LIY_DD.dbo.ZLZLS3  ZLZLS3'
+      
+        #9'LEFT JOIN LIY_DD.dbo.DDZL DDZL ON ZLZLS3.DDBH = DDZL.DDBH AND  ' +
+        'DDZL.CQDH = ZLZLS3.CQDH '
+      #9'where  DDZL.CQDH like '#39'VR%'#39
+      #9'and DDZL.ZLBH1 = '#39'Y1806-0637C'#39' and ZLZLS3.TCLYL>0'
+      #9'GROUP BY  ZLZLS3.cldhz ,DDZL.ZLBH1,DDZL.CQDH '
+      '   ) ZLZLS3 '
+      
+        ' ) order3 on ZLZLS3.cldhz=order3.cldhz and ZLZLS3.CQDH=order3.CQ' +
+        'DH'
+      'order by ZLZLS3.CQDH,ZLZLS3.ZLBH1,ZLZLS3.cldhz   ')
+    UpdateObject = UpMas
+    Left = 296
+    Top = 160
+  end
+  object DataSource1: TDataSource
+    DataSet = Query1
+    Left = 328
+    Top = 160
+  end
+  object UpMas: TUpdateSQL
+    ModifySQL.Strings = (
+      'update LIY_DD.dbo.ZLZLS3'
+      'set'
+      '  TCLYL = :TCLYL,'
+      '  USERDATE = :USERDATE,'
+      '  USERID = :USERID'
+      'where'
+      '  cldh = :OLD_cldh'
+      '  AND cldhz = :OLD_cldhz'
+      '  AND DDBH = :OLD_DDBH'
+      '  AND CQDH = :OLD_CQDH')
+    InsertSQL.Strings = (
+      'insert into LIY_DD.dbo.ZLZLS3'
+      '  (cldh, cldhz, DDBH, ZLBH1, TCLYL, USERDATE, USERID )'
+      'values'
+      '  (:cldh, :cldhz, :DDBH, :ZLBH1, :TCLYL, :USERDATE, :USERID )')
+    DeleteSQL.Strings = (
+      'delete from LIY_DD.dbo.ZLZLS3'
+      'where'
+      '  cldh = :OLD_cldh'
+      '  AND cldhz = :OLD_cldhz'
+      '  AND DDBH = :OLD_DDBH'
+      '  AND CQDH = :OLD_CQDH')
+    Left = 296
+    Top = 192
+  end
+  object TempQry: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'select ZLZLS3.*,KCLLS.TempQty/TCLYL_M*TCLYL as TempQty,KCLLS.CNO' +
+        ',KCLLS.RKQty/TCLYL_M*TCLYL as RKQty,IsNull(KCLLS.NK/TCLYL_M*TCLY' +
+        'L,0) as NK,IsNull(KCLLS.HD/TCLYL_M*TCLYL,0) as HD,IsNull(KCLLS.K' +
+        'D/TCLYL_M*TCLYL,0) as KD,'
+      
+        '       IsNull(KCLLS.XT/TCLYL_M*TCLYL,0) as XT,IsNull(KCLLS.GC/TC' +
+        'LYL_M*TCLYL,0) as GC,'
+      
+        '       KCLLS.Qty/TCLYL_M*TCLYL-IsNull(KCLLS.NK/TCLYL_M*TCLYL,0)-' +
+        'IsNull(KCLLS.HD/TCLYL_M*TCLYL,0)-IsNull(KCLLS.KD/TCLYL_M*TCLYL,0' +
+        ')-IsNull(KCLLS.XT/TCLYL_M*TCLYL,0)-IsNull(KCLLS.GC/TCLYL_M*TCLYL' +
+        ',0) as ZZ,KCLLS.Qty/TCLYL_M*TCLYL as Qty'
+      ' from ('
+      
+        'select DDZL.ZLBH1 as ZLBH1,right(ZLZLS3.cldhz,10) as MJBH,right(' +
+        'ZLZLS3.cldhz,10) as Parent,'#39'Assembly'#39' as DType,right(ZLZLS3.cldh' +
+        'z,10) as cldhz,round(sum(ZLZLS3.TCLYL),2) as TCLYL,'
+      
+        '      CLZL.ywpm,CLZL.DWBH,XXZL.Article,XXZL.XieMing,ERP_DDZL.Pai' +
+        'rs,max(convert(varchar,cast(ZLZLS3.USERDATE as smalldatetime),11' +
+        '1)) as CalDate,DDZL.CQDH'
+      'FROM LIY_DD.dbo.ZLZLS3  ZLZLS3'
+      
+        'LEFT JOIN LIY_DD.dbo.DDZL DDZL ON ZLZLS3.DDBH = DDZL.DDBH AND DD' +
+        'ZL.CQDH = ZLZLS3.CQDH LEFT JOIN LIY_DD.dbo.CLZL CLZL ON ZLZLS3.c' +
+        'ldhz = CLZL.cldh '
+      
+        'LEFT JOIN LIY_DD.dbo.CLZLSL CLZLSL ON ZLZLS3.cldh = CLZLSL.cldh ' +
+        'and ZLZLS3.cldhz=CLZLSL.cldhz '
+      
+        'left join CLZL ERP_CLZL on ERP_CLZL.CLDH=Substring(ZLZLS3.cldhz,' +
+        '2,10)'
+      'Left join DDZL ERP_DDZL on ERP_DDZL.DDBH=DDZL.ZLBH1 '
+      
+        'left join XXZL on ERP_DDZL.XieXing=xxzl.XieXing and ERP_DDZL.She' +
+        'hao=xxzl.shehao '
+      
+        'where ZLZLS3.TCLYL>0 and ZLZLS3.ZLBH1='#39'Y1712-0570A'#39' and ZLZLS3.C' +
+        'QDH='#39'VR3'#39
+      '      and ZLZLS3.CLDHZ like '#39'AW105000018%'#39' '
+      
+        'GROUP BY  ZLZLS3.cldhz,DDZL.ZLBH1,CLZL.zwpm,CLZL.ywpm,DDZL.CQDH,' +
+        'CLZL.DWBH,XXZL.Article, XXZL.XieMing,ERP_DDZL.Pairs ) ZLZLS3'
+      'left join ('
+      
+        '           select KCLLS.SCBH,KCLLS.CLBH,round(sum(KCLLS.Qty),2) ' +
+        'as Qty,round(sum(KCLLS.TempQty),2) as TempQty,'
+      
+        '                  Max(KCLLS.CNO) as CNO,round(sum(KCLLS.Qty),2) ' +
+        'as RKQty,'
+      
+        '                  '#9#9#9#9#9'Sum(Case when KCLLS.HGLB='#39'NK'#39' then Qty el' +
+        'se 0 end ) as NK,'
+      
+        #9#9#9#9#9'         Sum(Case when KCLLS.HGLB='#39'HD'#39' then Qty else 0 end ' +
+        ') as HD,'
+      
+        #9#9#9#9#9'         Sum(Case when KCLLS.HGLB='#39'KD'#39' then Qty else 0 end ' +
+        ') as KD,'
+      
+        #9#9#9#9#9'         Sum(Case when KCLLS.HGLB='#39'GC'#39' then Qty else 0 end ' +
+        ') as GC,'
+      
+        #9#9#9#9#9'         Sum(Case when KCLLS.HGLB='#39'XT'#39' then Qty else 0 end ' +
+        ') as XT,'
+      
+        #9#9#9#9#9'         Sum(Case when KCLLS.HGLB='#39'ZZZZ'#39' then Qty else 0 en' +
+        'd ) as ZZ'
+      
+        '           from KCLLS left join KCLL on KCLL.LLNO=KCLLS.LLNO    ' +
+        '   '
+      '           where KCLL.USERDate>getdate()-360'
+      '                 and KCLL.GSBH='#39'VR3'#39
+      '                 and KCLLS.SCBH ='#39'Y1712-0570'#39'  '
+      
+        '           group by KCLLS.SCBH,KCLLS.CLBH ) KCLLS on  KCLLS.CLBH' +
+        '=ZLZLS3.CLDHZ '
+      'left join ('
+      
+        'select DDZL.ZLBH1 as ZLBH1,right(ZLZLS3.cldhz,10) as MJBH,right(' +
+        'ZLZLS3.cldhz,10) as Parent,'#39'Assembly'#39' as DType,right(ZLZLS3.cldh' +
+        'z,10) as cldhz,round(sum(ZLZLS3.TCLYL),2) as TCLYL_M,'
+      '       DDZL.CQDH'
+      'FROM LIY_DD.dbo.ZLZLS3  ZLZLS3'
+      
+        'LEFT JOIN LIY_DD.dbo.DDZL DDZL ON ZLZLS3.DDBH = DDZL.DDBH AND DD' +
+        'ZL.CQDH = ZLZLS3.CQDH LEFT JOIN LIY_DD.dbo.CLZL CLZL ON ZLZLS3.c' +
+        'ldhz = CLZL.cldh '
+      
+        'LEFT JOIN LIY_DD.dbo.CLZLSL CLZLSL ON ZLZLS3.cldh = CLZLSL.cldh ' +
+        'and ZLZLS3.cldhz=CLZLSL.cldhz '
+      
+        'left join CLZL ERP_CLZL on ERP_CLZL.CLDH=Substring(ZLZLS3.cldhz,' +
+        '2,10)'
+      'Left join DDZL ERP_DDZL on ERP_DDZL.DDBH=DDZL.ZLBH1 '
+      
+        'left join XXZL on ERP_DDZL.XieXing=xxzl.XieXing and ERP_DDZL.She' +
+        'hao=xxzl.shehao '
+      
+        'where ZLZLS3.TCLYL>0 and ZLZLS3.ZLBH1='#39'Y1712-0570'#39' and ZLZLS3.CQ' +
+        'DH='#39'VR3'#39
+      '      and ZLZLS3.CLDHZ like '#39'AW105000018%'#39' '
+      
+        'GROUP BY  ZLZLS3.cldhz,DDZL.ZLBH1,DDZL.CQDH ) ZLZLS3_M on  ZLZLS' +
+        '3.MJBH=ZLZLS3_M.MJBH and  ZLZLS3.Parent=ZLZLS3_M.Parent  and  ZL' +
+        'ZLS3.DType=ZLZLS3_M.DType and  ZLZLS3.cldhz=ZLZLS3_M.cldhz and  ' +
+        'ZLZLS3.CQDH=ZLZLS3_M.CQDH  ')
+    Left = 264
+    Top = 160
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 264
+    Top = 192
+    object Modify1: TMenuItem
+      Caption = 'Modify'
+      OnClick = Modify1Click
+    end
+    object Save1: TMenuItem
+      Caption = 'Save'
+      Enabled = False
+      OnClick = Save1Click
+    end
+    object Cancel1: TMenuItem
+      Caption = 'Cancel'
+      Enabled = False
+      OnClick = Cancel1Click
+    end
+    object N2: TMenuItem
+      Caption = '-'
+    end
+    object Set1: TMenuItem
+      Caption = 'CLSL=Qty'
+      Enabled = False
+      OnClick = Set1Click
+    end
+  end
+end

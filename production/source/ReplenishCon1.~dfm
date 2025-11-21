@@ -1,0 +1,1062 @@
+object ReplenishCon: TReplenishCon
+  Left = 439
+  Top = 194
+  Width = 1267
+  Height = 742
+  Caption = 'ReplenishCon'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 16
+  object Panel1: TPanel
+    Left = 0
+    Top = 180
+    Width = 1251
+    Height = 73
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 122
+      Top = 29
+      Width = 22
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'TO'
+    end
+    object Label2: TLabel
+      Left = 256
+      Top = 15
+      Width = 78
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'BLNO:'
+    end
+    object Label3: TLabel
+      Left = 763
+      Top = 7
+      Width = 97
+      Height = 16
+      Alignment = taCenter
+      AutoSize = False
+      Caption = '????:'
+    end
+    object CS: TLabel
+      Left = 792
+      Top = 34
+      Width = 57
+      Height = 29
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'CS'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -24
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 256
+      Top = 44
+      Width = 79
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'MergNO:'
+    end
+    object Button1: TButton
+      Left = 448
+      Top = 32
+      Width = 81
+      Height = 33
+      Caption = 'Search '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnClick = Button1Click
+    end
+    object Button2: TButton
+      Left = 632
+      Top = 32
+      Width = 73
+      Height = 33
+      Caption = 'Confirm'
+      TabOrder = 3
+      OnClick = Button2Click
+    end
+    object Button3: TButton
+      Left = 712
+      Top = 32
+      Width = 73
+      Height = 33
+      Caption = 'Cancel'
+      TabOrder = 4
+    end
+    object DTP1: TDateTimePicker
+      Left = 11
+      Top = 24
+      Width = 105
+      Height = 24
+      Date = 39284.677295636570000000
+      Format = 'yyyy/MM/dd'
+      Time = 39284.677295636570000000
+      TabOrder = 5
+    end
+    object DTP2: TDateTimePicker
+      Left = 150
+      Top = 25
+      Width = 105
+      Height = 25
+      Date = 39284.677664201390000000
+      Format = 'yyyy/MM/dd'
+      Time = 39284.677664201390000000
+      TabOrder = 6
+    end
+    object Edit1: TEdit
+      Left = 337
+      Top = 8
+      Width = 102
+      Height = 24
+      TabOrder = 0
+    end
+    object CB1: TCheckBox
+      Left = 450
+      Top = 8
+      Width = 137
+      Height = 17
+      Caption = 'Not Confirmed'
+      Checked = True
+      State = cbChecked
+      TabOrder = 7
+    end
+    object Button4: TButton
+      Left = 536
+      Top = 32
+      Width = 89
+      Height = 33
+      Caption = 'Calculate'
+      Enabled = False
+      TabOrder = 2
+      OnClick = Button4Click
+    end
+    object Button5: TButton
+      Left = 848
+      Top = 32
+      Width = 75
+      Height = 33
+      Caption = 'Excel'
+      TabOrder = 8
+      OnClick = Button5Click
+    end
+    object MergNoEdit: TEdit
+      Left = 337
+      Top = 41
+      Width = 102
+      Height = 24
+      TabOrder = 9
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 1251
+    Height = 180
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    object DBGridEh2: TDBGridEh
+      Left = 1
+      Top = 1
+      Width = 771
+      Height = 178
+      Align = alClient
+      DataSource = DS1
+      Flat = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      FooterColor = clWindow
+      FooterFont.Charset = DEFAULT_CHARSET
+      FooterFont.Color = clWindowText
+      FooterFont.Height = -13
+      FooterFont.Name = 'MS Sans Serif'
+      FooterFont.Style = []
+      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind]
+      ParentFont = False
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -16
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      UseMultiTitle = True
+      Columns = <
+        item
+          EditButtons = <>
+          FieldName = 'BLNO'
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #35036#26009#21934#34399'|BLNO'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Title.TitleButton = True
+          Width = 91
+        end
+        item
+          EditButtons = <>
+          FieldName = 'GSBH'
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #24288#21029'|GSBH'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Title.TitleButton = True
+          Width = 49
+        end
+        item
+          EditButtons = <>
+          FieldName = 'ZLBH'
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #35330#21934#32232#34399'|ZLBH'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Title.TitleButton = True
+          Width = 102
+        end
+        item
+          EditButtons = <>
+          FieldName = 'Article'
+          Footers = <>
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Width = 120
+        end
+        item
+          EditButtons = <>
+          FieldName = 'GXLB'
+          Footers = <>
+          Title.Caption = #24037#27573'|GXLB'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Title.TitleButton = True
+          Width = 63
+        end
+        item
+          EditButtons = <>
+          FieldName = 'zlQty'
+          Footers = <>
+          Title.Caption = #38617#25976'|zlQty'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Title.TitleButton = True
+          Width = 54
+        end
+        item
+          EditButtons = <>
+          FieldName = 'DDACC'
+          Footers = <>
+          Title.Caption = #35330#21934#32317#37329#38989'|DDACC'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Width = 86
+        end
+        item
+          EditButtons = <>
+          FieldName = 'Qty'
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #35036#26009#25976#37327'|Qty'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Title.TitleButton = True
+          Width = 73
+        end
+        item
+          EditButtons = <>
+          FieldName = 'BLACC'
+          Footers = <>
+          Title.Caption = #35036#26009#37329#38989'|BLACC'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Title.TitleButton = True
+          Width = 70
+        end
+        item
+          Color = 16772332
+          EditButtons = <>
+          FieldName = 'BLPer'
+          Footers = <>
+          Title.Caption = #37329#38989#27604#29575'|BLPer'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Title.TitleButton = True
+          Width = 78
+        end
+        item
+          EditButtons = <>
+          FieldName = 'TotAcc'
+          Footers = <>
+          Title.Caption = #35330#21934#32317#35036#26009'|TotAcc'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Title.TitleButton = True
+          Width = 87
+        end
+        item
+          Color = 16772332
+          EditButtons = <>
+          FieldName = 'TotPer'
+          Footers = <>
+          Title.Caption = #35330#21934#32317#27604#29575'|TotPer'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Title.TitleButton = True
+          Width = 85
+        end
+        item
+          EditButtons = <>
+          FieldName = 'BLDate'
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #35036#26009#26085#26399'|BLDate'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Title.TitleButton = True
+          Width = 68
+        end
+        item
+          EditButtons = <>
+          FieldName = 'CFMDate'
+          Footers = <>
+          Title.Caption = #30906#35469#26085#26399'|CFMDate'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Title.TitleButton = True
+          Width = 74
+        end
+        item
+          EditButtons = <>
+          FieldName = 'CFMID'
+          Footers = <>
+          Title.Caption = #30906#35469'ID|CFMID'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Title.TitleButton = True
+          Width = 57
+        end>
+    end
+    object DBGridEh1: TDBGridEh
+      Left = 772
+      Top = 1
+      Width = 478
+      Height = 178
+      Align = alRight
+      DataSource = DS2
+      Flat = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      FooterColor = clWindow
+      FooterFont.Charset = DEFAULT_CHARSET
+      FooterFont.Color = clWindowText
+      FooterFont.Height = -16
+      FooterFont.Name = 'MS Sans Serif'
+      FooterFont.Style = []
+      ParentFont = False
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -16
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      UseMultiTitle = True
+      Columns = <
+        item
+          EditButtons = <>
+          FieldName = 'DepName'
+          Footers = <>
+          Title.Caption = 'Lean'#32218#21029'|DepName'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Width = 79
+        end
+        item
+          Color = 11796479
+          EditButtons = <>
+          FieldName = 'Qty'
+          Footers = <>
+          Title.Caption = #35036#26009#38617#25976'|Qty'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Width = 73
+        end
+        item
+          EditButtons = <>
+          FieldName = 'YWSM'
+          Footers = <>
+          Title.Caption = #35036#26009#33521#25991'|YWSM'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Width = 163
+        end
+        item
+          EditButtons = <>
+          FieldName = 'ZWSM'
+          Footers = <>
+          Title.Caption = #35036#26009#20013#25991'|ZWSM'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = []
+          Width = 139
+        end>
+    end
+  end
+  object DBGridEh3: TDBGridEh
+    Left = 0
+    Top = 253
+    Width = 1251
+    Height = 450
+    Align = alClient
+    DataSource = DS3
+    Flat = False
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -13
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    PopupMenu = PopupMenu1
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    UseMultiTitle = True
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'BWBH'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #37096#20301#32232#34399'|BWBH'
+        Width = 56
+      end
+      item
+        EditButtons = <>
+        FieldName = 'BWYW'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #37096#20301#35498#26126'|BWYW'
+        Width = 151
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CLBH'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #26009#34399'|CLBH'
+        Width = 86
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DWBH'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #21934#20301'|DWBH'
+        Width = 42
+      end
+      item
+        Color = 11796479
+        EditButtons = <>
+        FieldName = 'USPrice'
+        Footers = <>
+        Title.Caption = #32654#37329#21934#20729'|USPrice'
+        Width = 55
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CLSL'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #29992#37327'|CLSL'
+        Width = 51
+      end
+      item
+        EditButtons = <>
+        FieldName = 'QtyOld'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #35330#21934#32317#25976#37327'|TotQty'
+        Width = 72
+      end
+      item
+        Color = 16770790
+        EditButtons = <>
+        FieldName = 'OldPer'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #35330#21934#32317#27604#29575'|TotPer'
+        Width = 71
+      end
+      item
+        Color = 11796479
+        EditButtons = <>
+        FieldName = 'Qty'
+        Footers = <>
+        Title.Caption = #25976#37327'|Qty'
+        Width = 50
+      end
+      item
+        Color = 16770790
+        EditButtons = <>
+        FieldName = 'NowPer'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #27604#29575'|NowPer'
+        Width = 52
+      end
+      item
+        EditButtons = <>
+        FieldName = 'YWPM'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #26448#26009#25551#36848'|YWPM'
+        Width = 435
+      end>
+  end
+  object BLDet: TQuery
+    CachedUpdates = True
+    OnCalcFields = BLDetCalcFields
+    OnNewRecord = BLDetNewRecord
+    DatabaseName = 'DB'
+    DataSource = DS1
+    RequestLive = True
+    SQL.Strings = (
+      
+        'select SCBLS.BLNO,SCBLS.BWBH,BWZL.YWSM as BWYW,SCBLS.CLBH,CLZL.Y' +
+        'WPM,CLZL.DWBH'
+      
+        '         ,OrdCL.CLSL,SCBLS.Qty ,BLOld.QtyOld,case when SCBLS.USP' +
+        'rice is null then CWDJ.USPrice else SCBLS.USPrice end USPrice'
+      'from  SCBLS '
+      'left join SCBL on SCBL.BLNO=SCBLS.BLNO'
+      
+        'left join (select max(DJYEAR+case when len(DJMONTH)=1 then '#39'0'#39'+d' +
+        'jmonth else djmonth end ) as maxdate ,CLBH'
+      '              from CWDJ'
+      '              where USPrice is not null'
+      '              group by  CLBH) cwdj2 on  CWDJ2.CLBH=SCBLS.CLBH'
+      'left join CWDJ on CWDJ.DJYEAR=substring(CWDJ2.maxdate,1,4)'
+      
+        '             and CWDJ.DJMONTH=(case when substring(cwdj2.maxdate' +
+        ',5,1)='#39'0'#39' then substring(cwdj2.maxdate,6,1) else substring(cwdj2' +
+        '.maxdate,5,2) end)'
+      '              and CWDJ.CLBH=CWDJ2.CLBH'
+      
+        'left join   (select ZLZLS2.BWBH,ZLZLS2.CLBH,sum(ZLZLS2.CLSL) as ' +
+        'CLSL'
+      '        from ZLZLS2'
+      '        where ZLZLS2.ZLBH=:ZLBH'
+      '              and  ZLZLS2.MJBH='#39'ZZZZZZZZZZ'#39
+      
+        '        group by ZLZLS2.BWBH,ZLZLS2.CLBH) OrdCL  on SCBLS.BWBH=O' +
+        'rdCL.BWBH and SCBLS.CLBH=OrdCL.CLBH'
+      'left join BWZL on BWZL.BWDH=SCBLS.BWBH'
+      'left join CLZL on CLZL.CLDH=SCBLS.CLBH'
+      
+        'left join (select SCBLS.BWBH,SCBLS.CLBH,sum(SCBLS.Qty) as QtyOld' +
+        ' from SCBLS'
+      '             left join SCBL on SCBL.BLNO=SCBLS.BLNO '
+      '             where SCBL.ZLBH=:ZLBH '
+      
+        '             group by  SCBLS.BWBH,SCBLS.CLBH) BLOld on BLOld.BWB' +
+        'H=SCBLS.BWBH  and BLOld.CLBH=SCBLS.CLBH'
+      'where SCBLS.BLNO=:BLNO and  SCBLS.MJBH='#39'ZZZZZZZZZZ'#39
+      'order by SCBLS.BWBH,SCBLS.CLBH')
+    UpdateObject = Updet
+    Left = 384
+    Top = 308
+    ParamData = <
+      item
+        DataType = ftFixedChar
+        Name = 'ZLBH'
+        ParamType = ptUnknown
+        Size = 16
+      end
+      item
+        DataType = ftFixedChar
+        Name = 'ZLBH'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftFixedChar
+        Name = 'BLNO'
+        ParamType = ptUnknown
+        Size = 12
+      end>
+    object BLDetBLNO: TStringField
+      FieldName = 'BLNO'
+      FixedChar = True
+      Size = 11
+    end
+    object BLDetBWBH: TStringField
+      FieldName = 'BWBH'
+      FixedChar = True
+      Size = 4
+    end
+    object BLDetBWYW: TStringField
+      FieldName = 'BWYW'
+      FixedChar = True
+      Size = 30
+    end
+    object BLDetCLBH: TStringField
+      FieldName = 'CLBH'
+      FixedChar = True
+      Size = 10
+    end
+    object BLDetYWPM: TStringField
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object BLDetDWBH: TStringField
+      FieldName = 'DWBH'
+      FixedChar = True
+      Size = 4
+    end
+    object BLDetCLSL: TFloatField
+      FieldName = 'CLSL'
+      DisplayFormat = '##,#0.0'
+    end
+    object BLDetQty: TCurrencyField
+      FieldName = 'Qty'
+      DisplayFormat = '##,#0.0'
+    end
+    object BLDetQtyOld: TCurrencyField
+      FieldName = 'QtyOld'
+      DisplayFormat = '##,#0.0'
+    end
+    object BLDetNowPer: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'NowPer'
+      DisplayFormat = '##,#0.00%'
+      Calculated = True
+    end
+    object BLDetOldPer: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'OldPer'
+      DisplayFormat = '##,#0.00%'
+      Calculated = True
+    end
+    object BLDetUSPrice: TCurrencyField
+      FieldName = 'USPrice'
+      DisplayFormat = '##,#0.0000'
+    end
+  end
+  object DS3: TDataSource
+    DataSet = BLDet
+    Left = 420
+    Top = 308
+  end
+  object Updet: TUpdateSQL
+    ModifySQL.Strings = (
+      'update SCBLS'
+      'set'
+      '  Qty = :Qty,'
+      '  USPrice = :USPrice'
+      'where'
+      '  BLNO = :OLD_BLNO and'
+      '  BWBH = :OLD_BWBH and'
+      '  CLBH = :OLD_CLBH')
+    InsertSQL.Strings = (
+      'insert into SCBLS'
+      '  (Qty, USPrice)'
+      'values'
+      '  (:Qty, :USPrice)')
+    DeleteSQL.Strings = (
+      'delete from SCBLS'
+      'where'
+      '  BLNO = :OLD_BLNO and'
+      '  BWBH = :OLD_BWBH')
+    Left = 460
+    Top = 308
+  end
+  object BLreason: TQuery
+    DatabaseName = 'DB'
+    DataSource = DS1
+    SQL.Strings = (
+      'select SCBLYYS.*,BDepartment.DepName,SCBLYY.YWSM,SCBLYY.ZWSM'
+      'from SCBLYYS'
+      'left join SCBLYY on SCBLYY.YYBH=SCBLYYS.YYBH'
+      'left join BDepartment on BDepartment.ID=SCBLYYS.DepNO'
+      'where SCBLYYS.BLNO=:BLNO'
+      'order by SCBLYYS.YYBH'
+      '')
+    Left = 540
+    Top = 280
+    ParamData = <
+      item
+        DataType = ftFixedChar
+        Name = 'BLNO'
+        ParamType = ptUnknown
+        Size = 12
+      end>
+    object BLreasonBLNO: TStringField
+      FieldName = 'BLNO'
+      FixedChar = True
+      Size = 11
+    end
+    object BLreasonDepNO: TStringField
+      FieldName = 'DepNO'
+      FixedChar = True
+      Size = 10
+    end
+    object BLreasonDepName: TStringField
+      FieldName = 'DepName'
+      FixedChar = True
+      Size = 50
+    end
+    object BLreasonQty: TCurrencyField
+      FieldName = 'Qty'
+      DisplayFormat = '##,#0.0'
+    end
+    object BLreasonUSERDate: TDateTimeField
+      FieldName = 'USERDate'
+    end
+    object BLreasonUSERID: TStringField
+      FieldName = 'USERID'
+      FixedChar = True
+    end
+    object BLreasonYN: TStringField
+      FieldName = 'YN'
+      FixedChar = True
+      Size = 1
+    end
+    object BLreasonYYBH: TStringField
+      FieldName = 'YYBH'
+      FixedChar = True
+      Size = 4
+    end
+    object BLreasonYWSM: TStringField
+      FieldName = 'YWSM'
+      FixedChar = True
+      Size = 50
+    end
+    object BLreasonZWSM: TStringField
+      FieldName = 'ZWSM'
+      FixedChar = True
+      Size = 50
+    end
+  end
+  object DS2: TDataSource
+    DataSet = BLreason
+    Left = 580
+    Top = 280
+  end
+  object UpMas: TUpdateSQL
+    ModifySQL.Strings = (
+      'update SCBL'
+      'set'
+      '  BLNO = :BLNO,'
+      '  ZLBH = :ZLBH,'
+      '  GXLB = :GXLB,'
+      '  GSBH = :GSBH,'
+      '  Qty = :Qty,'
+      '  BLACC = :BLACC,'
+      '  BLDate = :BLDate,'
+      '  USERDate = :USERDate,'
+      '  USERID = :USERID,'
+      '  CFMDate = :CFMDate,'
+      '  CFMID = :CFMID,'
+      '  YN = :YN'
+      'where'
+      '  BLNO = :OLD_BLNO')
+    InsertSQL.Strings = (
+      'insert into SCBL'
+      
+        '  (BLNO, ZLBH, GXLB, GSBH, Qty, BLACC, BLDate, USERDate, USERID,' +
+        ' CFMDate, '
+      '   CFMID, YN)'
+      'values'
+      
+        '  (:BLNO, :ZLBH, :GXLB, :GSBH, :Qty, :BLACC, :BLDate, :USERDate,' +
+        ' :USERID, '
+      '   :CFMDate, :CFMID, :YN)')
+    DeleteSQL.Strings = (
+      'delete from SCBL'
+      'where'
+      '  BLNO = :OLD_BLNO')
+    Left = 308
+    Top = 288
+  end
+  object DS1: TDataSource
+    DataSet = BLMas
+    Left = 268
+    Top = 304
+  end
+  object BLMas: TQuery
+    CachedUpdates = True
+    OnCalcFields = BLMasCalcFields
+    DatabaseName = 'DB'
+    RequestLive = True
+    SQL.Strings = (
+      
+        'select SCBL.*,DDZL.Pairs as zlQty,DDZL.Article,TotAcc.TotAcc,DDZ' +
+        'L.DDACC from SCBL'
+      
+        'left join (select DDZL.ZLBH,sum(Quantity) as Pairs,DDZL.Article,' +
+        'sum(DDZLS.IPrice*DDZLS.Quantity) as DDACC'
+      '           from DDZLS left join DDZL on DDZL.DDBH=DDZLS.DDBH'
+      
+        '           group by DDZL.ZLBH,DDZL.Article )DDZL on DDZL.ZLBH=SC' +
+        'BL.ZLBH'
+      'left join (select  ZLBH,sum(BLAcc) as TotAcc from SCBL'
+      '           group by ZLBH ) TotAcc on TotAcc.ZLBH=SCBL.ZLBH'
+      
+        'where convert(smalldatetime,convert(varchar,SCBL.BLDate,111)) be' +
+        'tween'
+      '      '#39'2009/10/18'#39' and '#39'2009/10/19'#39
+      '      and SCBL.ZLBH like '#39'%'#39
+      '       and isnull(SCBL.CFMID,'#39#39')='#39#39
+      'order by SCBL.BLNO DESC')
+    UpdateObject = UpMas
+    Left = 228
+    Top = 296
+    object BLMasBLNO: TStringField
+      FieldName = 'BLNO'
+      Origin = 'DB.SCBL.BLNO'
+      FixedChar = True
+      Size = 11
+    end
+    object BLMasGSBH: TStringField
+      FieldName = 'GSBH'
+      Origin = 'DB.SCBL.GSBH'
+      FixedChar = True
+      Size = 4
+    end
+    object BLMasZLBH: TStringField
+      FieldName = 'ZLBH'
+      Origin = 'DB.SCBL.ZLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object BLMasGXLB: TStringField
+      FieldName = 'GXLB'
+      Origin = 'DB.SCBL.GXLB'
+      FixedChar = True
+      Size = 1
+    end
+    object BLMasQty: TCurrencyField
+      FieldName = 'Qty'
+      Origin = 'DB.SCBL.Qty'
+      DisplayFormat = '##,#0.0'
+    end
+    object BLMasDDACC: TFloatField
+      FieldName = 'DDACC'
+      DisplayFormat = '##,#0.00'
+    end
+    object BLMasBLACC: TCurrencyField
+      FieldName = 'BLACC'
+      Origin = 'DB.SCBL.BLACC'
+      DisplayFormat = '##,#0.00'
+    end
+    object BLMasTotAcc: TCurrencyField
+      FieldName = 'TotAcc'
+      DisplayFormat = '##,#0.00'
+    end
+    object BLMasBLDate: TDateTimeField
+      FieldName = 'BLDate'
+      Origin = 'DB.SCBL.BLDate'
+      DisplayFormat = 'yyyy/MM/dd'
+    end
+    object BLMasUSERDate: TDateTimeField
+      FieldName = 'USERDate'
+      Origin = 'DB.SCBL.USERDate'
+    end
+    object BLMasUSERID: TStringField
+      FieldName = 'USERID'
+      Origin = 'DB.SCBL.USERID'
+      FixedChar = True
+    end
+    object BLMasYN: TStringField
+      FieldName = 'YN'
+      Origin = 'DB.SCBL.YN'
+      FixedChar = True
+      Size = 1
+    end
+    object BLMasCFMDate: TDateTimeField
+      FieldName = 'CFMDate'
+      Origin = 'DB.SCBL.CFMDate'
+      DisplayFormat = 'yyyy/MM/dd'
+    end
+    object BLMasCFMID: TStringField
+      FieldName = 'CFMID'
+      Origin = 'DB.SCBL.CFMID'
+      FixedChar = True
+    end
+    object BLMaszlQty: TIntegerField
+      FieldName = 'zlQty'
+      Origin = 'DB.DDZL.Pairs'
+      DisplayFormat = '##,#0'
+    end
+    object BLMasTotPer: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'TotPer'
+      DisplayFormat = '##,#0.00%'
+      Calculated = True
+    end
+    object BLMasBLPer: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'BLPer'
+      DisplayFormat = '##,#0.00%'
+      Calculated = True
+    end
+    object BLMasArticle: TStringField
+      FieldName = 'Article'
+      FixedChar = True
+    end
+  end
+  object Qtemp: TQuery
+    DatabaseName = 'DB'
+    Left = 96
+    Top = 272
+  end
+  object BLCS: TQuery
+    AfterOpen = BLCSAfterOpen
+    DatabaseName = 'DB'
+    DataSource = DS1
+    SQL.Strings = (
+      'select BLNO'
+      'from SCBL'
+      'where ZLBH=:ZLBH'
+      'and GXLB=:GXLB')
+    Left = 232
+    Top = 328
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ZLBH'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'GXLB'
+        ParamType = ptUnknown
+      end>
+  end
+  object PopupMenu1: TPopupMenu
+    AutoHotkeys = maManual
+    Left = 440
+    Top = 368
+    object N1: TMenuItem
+      Caption = 'Entry Price '#30475#20837#24235#20729
+      Enabled = False
+      OnClick = N1Click
+    end
+    object N2: TMenuItem
+      Caption = 'Check Quotation '#30475#26448#26009#22577#20729
+      Enabled = False
+    end
+  end
+end

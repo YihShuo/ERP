@@ -1,0 +1,29 @@
+if object_id('tempdb..#CLZLKC_Last') is not null  
+begin   drop table #CLZLKC_Last end   
+select NowKC.CKBH,NowKC.CLBH,NowKC.SIZ,IsNull(NowKC.NowRKQty,0)-IsNull(LL.LLQty,0) as Qty,LastKC.LastRem,RK.RKQty,LL.LLQty into #CLZLKC_Last from (
+  select CKBH,CLBH,SIZ,Sum(RKQty) as NowRKQty from (
+  select LTRK.CKBH,LTRKSS.CLBH,LTRKSS.SIZ,SUM(LTRKSS.Qty) as RKQty from LTRKSS,LTRK 
+  where LTRKSS.RKNO=LTRK.RKNO and isnull(LTRK.flowflag,'') <>'X' and LTRK.SFL in ('1','2') and LTRK.CKBH in (Select CKBH from LastKCCK where LB='01' and GSBH='VDH') and convert(smalldatetime,convert(varchar,LTRK.UserDate,111)) between '2025/10/01' and '2025/10/30' 
+  Group by LTRK.CKBH,LTRKSS.CLBH,LTRKSS.SIZ 
+  Union All 
+  select CKBH,CLBH,SIZ,QTY as LastRem from Lastmonth where KCYEAR='2025' and KCMonth='09'  and CKBH in (Select CKBH from LastKCCK where LB='01' and GSBH='VDH')  
+  and CKBH not like '%#L' 
+  ) as tmpRKTLFL 
+  group by CKBH,CLBH,SIZ ) as NowKC
+left join ( 
+   select CKBH,CLBH,SIZ,QTY as LastRem from Lastmonth where KCYEAR='2025' and KCMonth='09'  and CKBH in (Select CKBH from LastKCCK where LB='01' and GSBH='VDH')  
+   ) as LastKC on NowKC.CKBH=LastKC.CKBH and NowKC.CLBH=LastKC.CLBH and NowKC.SIZ=LastKC.SIZ
+left join ( 
+  select LTRK.CKBH,LTRKSS.CLBH,LTRKSS.SIZ,SUM(LTRKSS.Qty) as RKQty from LTRKSS,LTRK 
+  where LTRKSS.RKNO=LTRK.RKNO and isnull(LTRK.flowflag,'') <>'X' and LTRK.SFL in ('1','2') and LTRK.CKBH in (Select CKBH from LastKCCK where LB='01' and GSBH='VDH') and convert(smalldatetime,convert(varchar,LTRK.UserDate,111)) between '2025/10/01' and '2025/10/30' 
+  Group by LTRK.CKBH,LTRKSS.CLBH,LTRKSS.SIZ  ) RK on NowKC.CKBH=RK.CKBH and NowKC.CLBH=RK.CLBH and NowKC.SIZ=RK.SIZ
+left join ( 
+   select LTLL.CKBH,LTLLSS.CLBH,LTLLSS.SIZ,SUM(LTLLSS.Qty) as LLQty from LTLLSS,LTLL 
+   where LTLLSS.LLNO=LTLL.LLNO and isnull(LTLL.flowflag,'') <>'X' and LTLL.CFMID<>'NO' and LTLL.SFL in ('1','2','3','4') and LTLL.CKBH in (Select CKBH from LastKCCK where LB='01' and GSBH='VDH')   and convert(smalldatetime,convert(varchar,LTLL.CFMDate,111)) between '2025/10/01' and '2025/10/30' 
+   Group by LTLL.CKBH,LTLLSS.CLBH,LTLLSS.SIZ ) LL on NowKC.CKBH=LL.CKBH and NowKC.CLBH=LL.CLBH and NowKC.SIZ=LL.SIZ
+select #CLZLKC_Last.CLBH,CLZL.YWPM, SUM(Qty) as Total,
+     CLZL.CQDH,CLZL.DWBH 
+from #CLZLKC_Last  
+left join CLZL on CLZL.cldh=#CLZLKC_Last.CLBH  where 1=1 
+Group by #CLZLKC_Last.CLBH,CLZL.YWPM,CLZL.CQDH,CLZL.DWBH 
+HAVING SUM(Qty) > 0

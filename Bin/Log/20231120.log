@@ -1,0 +1,784 @@
+Select VCLID,VCLName_VN as Langeuage from BLanguage WHERE  MKID = '00' and mainForm='Password'
+Select VCLID,VCLName_VN as Langeuage from BLanguage WHERE  MKID = '00' and mainForm='main'
+Select VCLID,VCLName_VN as Langeuage from BLanguage WHERE  MKID = '00' and mainForm='Password'
+Select VCLID,VCLName_VN as Langeuage from BLanguage WHERE  MKID = '00' and mainForm='main'
+if object_id('tempdb..#tmpKCCLMonthHG') is not null 
+begin   drop table #tmpKCCLMonthHG end   
+select CKBH,CLBH,HGLB,CNO,Sum(LastRem) as LastRem,Sum(RKQty) as RKQty,Sum(LLQty) as LLQty,Sum(JGRK) as JGRK, Sum(JGCK) as JGCK,
+       Round(isnull(round(Sum(LastRem),2),0)+isnull(round(Sum(RKQty),2),0)-isnull(round(Sum(LLQty),2),0)+isnull(round(Sum(JGRK),2),0)-isnull(round(Sum(JGCK),2),0),2)  as Qty
+into #tmpKCCLMonthHG  from (
+select * from (
+select KCCLMONTH.CKBH,KCCLMONTH.CLBH,KCCLMONTH.HGLB,KCCLMONTH.CNO,KCCLMONTH.Qty as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,0 as JGCK
+           from KCCLMONTH_HGBH KCCLMONTH   
+           where KCCLMONTH.KCYEAR='2023'  and KCMONTH='10' and CLBH like 'J030034381%'  
+            and KCCLMONTH.CKBH='VDH'
+           ) LastKC
+Union all   
+select * from (
+select KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end  as CNO,0 as LastRem,sum(KCRKS.Qty) as RKQty,0 as LLQty,0 as JGRK,0 as JGCK from KCRKS
+           left join KCRK on KCRK.RKNO=KCRKS.RKNO 
+           where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between 
+                 '2023/11/01' and '2023/11/20'
+           and KCRKS.CLBH like 'J030034381%'    
+            and KCRK.CKBH='VDH'
+           group by KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end ) RK        
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,sum(KCLLS.Qty) as LLQty,0 as JGRK,0 as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/20'
+           and KCLL.SCBH<>'JJJJJJJJJJ' and KCLL.CFMID<>'NO' and KCLLS.Qty>0 and KCLLS.CLBH like 'J030034381%'   
+            and KCLL.CKBH='VDH'
+           group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) LL    
+union all 
+select * from (                                         
+select JGZL.CKBH,JGZLS.CLBH,'GC' as HGLB,'ZZZZ' as CNO,0 as LastRem,0 as RKQty,0 as LLQty,sum(JGZLS.Qty) as JGRK,0 as JGCK from JGZLS
+           left join JGZL on JGZL.JGNO=JGZLS.JGNO 
+          where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between 
+                 '2023/11/01' and '2023/11/20'
+                 and JGZL.CFMID1<>'NO' and JGZLS.CLBH like 'J030034381%' 
+                 and JGZLS.ZMLB='ZZZZZZZZZZ' and JGZLS.Qty>0 
+            and JGZL.CKBH='VDH'
+           group by JGZL.CKBH,JGZLS.CLBH ) JGRK
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH as ZMLB,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,sum(KCLLS.Qty) as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/20' 
+           and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='2017/09/01'
+           and KCLL.SCBH='JJJJJJJJJJ' and KCLLS.Qty>0 and KCLL.CFMID<>'NO' and KCLLS.CLBH like 'J030034381%' 
+            and KCLL.CKBH='VDH'
+           Group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) JGCK
+) KCZLS
+where 1=1 and CLBH like 'J030034381%'  
+Group by CKBH,CLBH,HGLB,CNO     
+Select * from (
+select KCRK.*,CLZL_LS.JHDH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,KCZLS.KCBH,KCZL.KCMC,IsNull(CLLBFLS.LBBH,'A') as LBBH from (
+select CKBH,CLBH as CLDH,case when CNO='ZZZZ' then '' else CNO end as CNO,Sum(Qty) as Qty, 
+       Sum(Case when HGLB='NK' then Qty else 0 end ) as NK,
+       Sum(Case when HGLB='TC' then Qty else 0 end ) as TC,
+       Sum(Case when HGLB='HD' then Qty else 0 end ) as HD,
+       Sum(Case when HGLB='KD' then Qty else 0 end ) as KD,
+       Sum(Case when HGLB='XT' then Qty else 0 end ) as XT,
+       Sum(Case when HGLB='GC' then Qty else 0 end ) as GC,
+       Sum(Case when HGLB='ZZ' then Qty else 0 end ) as ZZ,
+       Sum(Case when HGLB='NK1' then Qty else 0 end ) as NK1,
+       Sum(Case when HGLB='TC1' then Qty else 0 end ) as TC1,
+       Sum(Case when HGLB='HD1' then Qty else 0 end ) as HD1,
+       Sum(Case when HGLB='KD1' then Qty else 0 end ) as KD1,
+       Sum(Case when HGLB='H11' then Qty else 0 end ) as H11
+from (select * from #tmpKCCLMonthHG ) KCZLS
+where 1=1 and CLBH not like 'Adjusting%' 
+      and KCZLS.HGLB<>'XT' 
+Group by CKBH,CLBH,CNO  ) KCRK
+Left join CLZL_LS on CLZL_LS.CLDH=KCRK.CLDH
+Left join CLZL on CLZL.CLDH=KCRK.CLDH
+left join KCZLS on KCZLS.CLBH=KCRK.CLDH and KCZLS.CKBH=KCRK.CKBH  
+left join KCZL on KCZL.KCBH=KCZLS.KCBH and KCZLS.CKBH=KCZL.CKBH  
+left join CLLBFLS on CLLBFLS.CLBH=CLZL.CLDH and CLLBFLS.GSBH='VDH' 
+where 1=1  and KCRK.Qty<>0 
+) KCRK order by KCRK.KCBH,KCRK.CLDH,KCRK.CNO
+if object_id('tempdb..#tmpKCCLMonthHG') is not null 
+begin   drop table #tmpKCCLMonthHG end   
+select CKBH,CLBH,HGLB,CNO,Sum(LastRem) as LastRem,Sum(RKQty) as RKQty,Sum(LLQty) as LLQty,Sum(JGRK) as JGRK, Sum(JGCK) as JGCK,
+       Round(isnull(round(Sum(LastRem),2),0)+isnull(round(Sum(RKQty),2),0)-isnull(round(Sum(LLQty),2),0)+isnull(round(Sum(JGRK),2),0)-isnull(round(Sum(JGCK),2),0),2)  as Qty
+into #tmpKCCLMonthHG  from (
+select * from (
+select KCCLMONTH.CKBH,KCCLMONTH.CLBH,KCCLMONTH.HGLB,KCCLMONTH.CNO,KCCLMONTH.Qty as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,0 as JGCK
+           from KCCLMONTH_HGBH KCCLMONTH   
+           where KCCLMONTH.KCYEAR='2023'  and KCMONTH='10' and CLBH like 'J030034381%'  
+            and KCCLMONTH.CKBH='VDH'
+           ) LastKC
+Union all   
+select * from (
+select KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end  as CNO,0 as LastRem,sum(KCRKS.Qty) as RKQty,0 as LLQty,0 as JGRK,0 as JGCK from KCRKS
+           left join KCRK on KCRK.RKNO=KCRKS.RKNO 
+           where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between 
+                 '2023/11/01' and '2023/11/20'
+           and KCRKS.CLBH like 'J030034381%'    
+            and KCRK.CKBH='VDH'
+           group by KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end ) RK        
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,sum(KCLLS.Qty) as LLQty,0 as JGRK,0 as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/20'
+           and KCLL.SCBH<>'JJJJJJJJJJ' and KCLL.CFMID<>'NO' and KCLLS.Qty>0 and KCLLS.CLBH like 'J030034381%'   
+            and KCLL.CKBH='VDH'
+           group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) LL    
+union all 
+select * from (                                         
+select JGZL.CKBH,JGZLS.CLBH,'GC' as HGLB,'ZZZZ' as CNO,0 as LastRem,0 as RKQty,0 as LLQty,sum(JGZLS.Qty) as JGRK,0 as JGCK from JGZLS
+           left join JGZL on JGZL.JGNO=JGZLS.JGNO 
+          where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between 
+                 '2023/11/01' and '2023/11/20'
+                 and JGZL.CFMID1<>'NO' and JGZLS.CLBH like 'J030034381%' 
+                 and JGZLS.ZMLB='ZZZZZZZZZZ' and JGZLS.Qty>0 
+            and JGZL.CKBH='VDH'
+           group by JGZL.CKBH,JGZLS.CLBH ) JGRK
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH as ZMLB,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,sum(KCLLS.Qty) as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/20' 
+           and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='2017/09/01'
+           and KCLL.SCBH='JJJJJJJJJJ' and KCLLS.Qty>0 and KCLL.CFMID<>'NO' and KCLLS.CLBH like 'J030034381%' 
+            and KCLL.CKBH='VDH'
+           Group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) JGCK
+) KCZLS
+where 1=1 and CLBH like 'J030034381%'  
+Group by CKBH,CLBH,HGLB,CNO     
+Select * from (
+select KCRK.*,CLZL_LS.JHDH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,KCZLS.KCBH,KCZL.KCMC,IsNull(CLLBFLS.LBBH,'A') as LBBH from (
+select CKBH,CLBH as CLDH,case when CNO='ZZZZ' then '' else CNO end as CNO,Sum(Qty) as Qty, 
+       Sum(Case when HGLB='NK' then Qty else 0 end ) as NK,
+       Sum(Case when HGLB='TC' then Qty else 0 end ) as TC,
+       Sum(Case when HGLB='HD' then Qty else 0 end ) as HD,
+       Sum(Case when HGLB='KD' then Qty else 0 end ) as KD,
+       Sum(Case when HGLB='XT' then Qty else 0 end ) as XT,
+       Sum(Case when HGLB='GC' then Qty else 0 end ) as GC,
+       Sum(Case when HGLB='ZZ' then Qty else 0 end ) as ZZ,
+       Sum(Case when HGLB='NK1' then Qty else 0 end ) as NK1,
+       Sum(Case when HGLB='TC1' then Qty else 0 end ) as TC1,
+       Sum(Case when HGLB='HD1' then Qty else 0 end ) as HD1,
+       Sum(Case when HGLB='KD1' then Qty else 0 end ) as KD1,
+       Sum(Case when HGLB='H11' then Qty else 0 end ) as H11
+from (select * from #tmpKCCLMonthHG ) KCZLS
+where 1=1 and CLBH not like 'Adjusting%' 
+      and KCZLS.HGLB<>'XT' 
+Group by CKBH,CLBH,CNO  ) KCRK
+Left join CLZL_LS on CLZL_LS.CLDH=KCRK.CLDH
+Left join CLZL on CLZL.CLDH=KCRK.CLDH
+left join KCZLS on KCZLS.CLBH=KCRK.CLDH and KCZLS.CKBH=KCRK.CKBH  
+left join KCZL on KCZL.KCBH=KCZLS.KCBH and KCZLS.CKBH=KCZL.CKBH  
+left join CLLBFLS on CLLBFLS.CLBH=CLZL.CLDH and CLLBFLS.GSBH='VDH' 
+where 1=1  and KCRK.Qty<>0 
+) KCRK order by KCRK.KCBH,KCRK.CLDH,KCRK.CNO
+if object_id('tempdb..#tmpKCCLMonthHG') is not null 
+begin   drop table #tmpKCCLMonthHG end   
+select CKBH,CLBH,HGLB,CNO,Sum(LastRem) as LastRem,Sum(RKQty) as RKQty,Sum(LLQty) as LLQty,Sum(JGRK) as JGRK, Sum(JGCK) as JGCK,
+       Round(isnull(round(Sum(LastRem),2),0)+isnull(round(Sum(RKQty),2),0)-isnull(round(Sum(LLQty),2),0)+isnull(round(Sum(JGRK),2),0)-isnull(round(Sum(JGCK),2),0),2)  as Qty
+into #tmpKCCLMonthHG  from (
+select * from (
+select KCCLMONTH.CKBH,KCCLMONTH.CLBH,KCCLMONTH.HGLB,KCCLMONTH.CNO,KCCLMONTH.Qty as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,0 as JGCK
+           from KCCLMONTH_HGBH KCCLMONTH   
+           where KCCLMONTH.KCYEAR='2023'  and KCMONTH='10' and CLBH like 'J030034381%'  
+            and KCCLMONTH.CKBH='VDH'
+           ) LastKC
+Union all   
+select * from (
+select KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end  as CNO,0 as LastRem,sum(KCRKS.Qty) as RKQty,0 as LLQty,0 as JGRK,0 as JGCK from KCRKS
+           left join KCRK on KCRK.RKNO=KCRKS.RKNO 
+           where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between 
+                 '2023/11/01' and '2023/11/20'
+           and KCRKS.CLBH like 'J030034381%'    
+            and KCRK.CKBH='VDH'
+           group by KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end ) RK        
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,sum(KCLLS.Qty) as LLQty,0 as JGRK,0 as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/20'
+           and KCLL.SCBH<>'JJJJJJJJJJ' and KCLL.CFMID<>'NO' and KCLLS.Qty>0 and KCLLS.CLBH like 'J030034381%'   
+            and KCLL.CKBH='VDH'
+           group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) LL    
+union all 
+select * from (                                         
+select JGZL.CKBH,JGZLS.CLBH,'GC' as HGLB,'ZZZZ' as CNO,0 as LastRem,0 as RKQty,0 as LLQty,sum(JGZLS.Qty) as JGRK,0 as JGCK from JGZLS
+           left join JGZL on JGZL.JGNO=JGZLS.JGNO 
+          where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between 
+                 '2023/11/01' and '2023/11/20'
+                 and JGZL.CFMID1<>'NO' and JGZLS.CLBH like 'J030034381%' 
+                 and JGZLS.ZMLB='ZZZZZZZZZZ' and JGZLS.Qty>0 
+            and JGZL.CKBH='VDH'
+           group by JGZL.CKBH,JGZLS.CLBH ) JGRK
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH as ZMLB,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,sum(KCLLS.Qty) as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/20' 
+           and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='2017/09/01'
+           and KCLL.SCBH='JJJJJJJJJJ' and KCLLS.Qty>0 and KCLL.CFMID<>'NO' and KCLLS.CLBH like 'J030034381%' 
+            and KCLL.CKBH='VDH'
+           Group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) JGCK
+) KCZLS
+where 1=1 and CLBH like 'J030034381%'  
+Group by CKBH,CLBH,HGLB,CNO     
+Select * from (
+select KCRK.*,CLZL_LS.JHDH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,KCZLS.KCBH,KCZL.KCMC,IsNull(CLLBFLS.LBBH,'A') as LBBH from (
+select CKBH,CLBH as CLDH,case when CNO='ZZZZ' then '' else CNO end as CNO,Sum(Qty) as Qty, 
+       Sum(Case when HGLB='NK' then Qty else 0 end ) as NK,
+       Sum(Case when HGLB='TC' then Qty else 0 end ) as TC,
+       Sum(Case when HGLB='HD' then Qty else 0 end ) as HD,
+       Sum(Case when HGLB='KD' then Qty else 0 end ) as KD,
+       Sum(Case when HGLB='XT' then Qty else 0 end ) as XT,
+       Sum(Case when HGLB='GC' then Qty else 0 end ) as GC,
+       Sum(Case when HGLB='ZZ' then Qty else 0 end ) as ZZ,
+       Sum(Case when HGLB='NK1' then Qty else 0 end ) as NK1,
+       Sum(Case when HGLB='TC1' then Qty else 0 end ) as TC1,
+       Sum(Case when HGLB='HD1' then Qty else 0 end ) as HD1,
+       Sum(Case when HGLB='KD1' then Qty else 0 end ) as KD1,
+       Sum(Case when HGLB='H11' then Qty else 0 end ) as H11
+from (select * from #tmpKCCLMonthHG ) KCZLS
+where 1=1 and CLBH not like 'Adjusting%' 
+      and KCZLS.HGLB<>'XT' 
+Group by CKBH,CLBH,CNO  ) KCRK
+Left join CLZL_LS on CLZL_LS.CLDH=KCRK.CLDH
+Left join CLZL on CLZL.CLDH=KCRK.CLDH
+left join KCZLS on KCZLS.CLBH=KCRK.CLDH and KCZLS.CKBH=KCRK.CKBH  
+left join KCZL on KCZL.KCBH=KCZLS.KCBH and KCZLS.CKBH=KCZL.CKBH  
+left join CLLBFLS on CLLBFLS.CLBH=CLZL.CLDH and CLLBFLS.GSBH='VDH' 
+where 1=1  and KCRK.Qty<>0 
+) KCRK order by KCRK.KCBH,KCRK.CLDH,KCRK.CNO
+if object_id('tempdb..#tmpKCCLMonthHG') is not null 
+begin   drop table #tmpKCCLMonthHG end   
+select CKBH,CLBH,HGLB,CNO,Sum(LastRem) as LastRem,Sum(RKQty) as RKQty,Sum(LLQty) as LLQty,Sum(JGRK) as JGRK, Sum(JGCK) as JGCK,
+       Round(isnull(round(Sum(LastRem),2),0)+isnull(round(Sum(RKQty),2),0)-isnull(round(Sum(LLQty),2),0)+isnull(round(Sum(JGRK),2),0)-isnull(round(Sum(JGCK),2),0),2)  as Qty
+into #tmpKCCLMonthHG  from (
+select * from (
+select KCCLMONTH.CKBH,KCCLMONTH.CLBH,KCCLMONTH.HGLB,KCCLMONTH.CNO,KCCLMONTH.Qty as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,0 as JGCK
+           from KCCLMONTH_HGBH KCCLMONTH   
+           where KCCLMONTH.KCYEAR='2023'  and KCMONTH='10' and CLBH like 'J030034381%'  
+            and KCCLMONTH.CKBH='VDH'
+           ) LastKC
+Union all   
+select * from (
+select KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end  as CNO,0 as LastRem,sum(KCRKS.Qty) as RKQty,0 as LLQty,0 as JGRK,0 as JGCK from KCRKS
+           left join KCRK on KCRK.RKNO=KCRKS.RKNO 
+           where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between 
+                 '2023/11/01' and '2023/11/20'
+           and KCRKS.CLBH like 'J030034381%'    
+            and KCRK.CKBH='VDH'
+           group by KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end ) RK        
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,sum(KCLLS.Qty) as LLQty,0 as JGRK,0 as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/20'
+           and KCLL.SCBH<>'JJJJJJJJJJ' and KCLL.CFMID<>'NO' and KCLLS.Qty>0 and KCLLS.CLBH like 'J030034381%'   
+            and KCLL.CKBH='VDH'
+           group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) LL    
+union all 
+select * from (                                         
+select JGZL.CKBH,JGZLS.CLBH,'GC' as HGLB,'ZZZZ' as CNO,0 as LastRem,0 as RKQty,0 as LLQty,sum(JGZLS.Qty) as JGRK,0 as JGCK from JGZLS
+           left join JGZL on JGZL.JGNO=JGZLS.JGNO 
+          where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between 
+                 '2023/11/01' and '2023/11/20'
+                 and JGZL.CFMID1<>'NO' and JGZLS.CLBH like 'J030034381%' 
+                 and JGZLS.ZMLB='ZZZZZZZZZZ' and JGZLS.Qty>0 
+            and JGZL.CKBH='VDH'
+           group by JGZL.CKBH,JGZLS.CLBH ) JGRK
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH as ZMLB,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,sum(KCLLS.Qty) as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/20' 
+           and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='2017/09/01'
+           and KCLL.SCBH='JJJJJJJJJJ' and KCLLS.Qty>0 and KCLL.CFMID<>'NO' and KCLLS.CLBH like 'J030034381%' 
+            and KCLL.CKBH='VDH'
+           Group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) JGCK
+) KCZLS
+where 1=1 and CLBH like 'J030034381%'  
+Group by CKBH,CLBH,HGLB,CNO     
+Select * from (
+select KCRK.*,CLZL_LS.JHDH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,KCZLS.KCBH,KCZL.KCMC,IsNull(CLLBFLS.LBBH,'A') as LBBH from (
+select CKBH,CLBH as CLDH,case when CNO='ZZZZ' then '' else CNO end as CNO,Sum(Qty) as Qty, 
+       Sum(Case when HGLB='NK' then Qty else 0 end ) as NK,
+       Sum(Case when HGLB='TC' then Qty else 0 end ) as TC,
+       Sum(Case when HGLB='HD' then Qty else 0 end ) as HD,
+       Sum(Case when HGLB='KD' then Qty else 0 end ) as KD,
+       Sum(Case when HGLB='XT' then Qty else 0 end ) as XT,
+       Sum(Case when HGLB='GC' then Qty else 0 end ) as GC,
+       Sum(Case when HGLB='ZZ' then Qty else 0 end ) as ZZ,
+       Sum(Case when HGLB='NK1' then Qty else 0 end ) as NK1,
+       Sum(Case when HGLB='TC1' then Qty else 0 end ) as TC1,
+       Sum(Case when HGLB='HD1' then Qty else 0 end ) as HD1,
+       Sum(Case when HGLB='KD1' then Qty else 0 end ) as KD1,
+       Sum(Case when HGLB='H11' then Qty else 0 end ) as H11
+from (select * from #tmpKCCLMonthHG ) KCZLS
+where 1=1 and CLBH not like 'Adjusting%' 
+      and KCZLS.HGLB<>'XT' 
+Group by CKBH,CLBH,CNO  ) KCRK
+Left join CLZL_LS on CLZL_LS.CLDH=KCRK.CLDH
+Left join CLZL on CLZL.CLDH=KCRK.CLDH
+left join KCZLS on KCZLS.CLBH=KCRK.CLDH and KCZLS.CKBH=KCRK.CKBH  
+left join KCZL on KCZL.KCBH=KCZLS.KCBH and KCZLS.CKBH=KCZL.CKBH  
+left join CLLBFLS on CLLBFLS.CLBH=CLZL.CLDH and CLLBFLS.GSBH='VDH' 
+where 1=1  and KCRK.Qty<>0 
+) KCRK order by KCRK.KCBH,KCRK.CLDH,KCRK.CNO
+if object_id('tempdb..#tmpKCCLMonthHG') is not null 
+begin   drop table #tmpKCCLMonthHG end   
+select CKBH,CLBH,HGLB,CNO,Sum(LastRem) as LastRem,Sum(RKQty) as RKQty,Sum(LLQty) as LLQty,Sum(JGRK) as JGRK, Sum(JGCK) as JGCK,
+       Round(isnull(round(Sum(LastRem),2),0)+isnull(round(Sum(RKQty),2),0)-isnull(round(Sum(LLQty),2),0)+isnull(round(Sum(JGRK),2),0)-isnull(round(Sum(JGCK),2),0),2)  as Qty
+into #tmpKCCLMonthHG  from (
+select * from (
+select KCCLMONTH.CKBH,KCCLMONTH.CLBH,KCCLMONTH.HGLB,KCCLMONTH.CNO,KCCLMONTH.Qty as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,0 as JGCK
+           from KCCLMONTH_HGBH KCCLMONTH   
+           where KCCLMONTH.KCYEAR='2023'  and KCMONTH='10' and CLBH like 'J030034381%'  
+            and KCCLMONTH.CKBH='VDH'
+           ) LastKC
+Union all   
+select * from (
+select KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end  as CNO,0 as LastRem,sum(KCRKS.Qty) as RKQty,0 as LLQty,0 as JGRK,0 as JGCK from KCRKS
+           left join KCRK on KCRK.RKNO=KCRKS.RKNO 
+           where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between 
+                 '2023/11/01' and '2023/11/20'
+           and KCRKS.CLBH like 'J030034381%'    
+            and KCRK.CKBH='VDH'
+           group by KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end ) RK        
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,sum(KCLLS.Qty) as LLQty,0 as JGRK,0 as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/20'
+           and KCLL.SCBH<>'JJJJJJJJJJ' and KCLL.CFMID<>'NO' and KCLLS.Qty>0 and KCLLS.CLBH like 'J030034381%'   
+            and KCLL.CKBH='VDH'
+           group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) LL    
+union all 
+select * from (                                         
+select JGZL.CKBH,JGZLS.CLBH,'GC' as HGLB,'ZZZZ' as CNO,0 as LastRem,0 as RKQty,0 as LLQty,sum(JGZLS.Qty) as JGRK,0 as JGCK from JGZLS
+           left join JGZL on JGZL.JGNO=JGZLS.JGNO 
+          where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between 
+                 '2023/11/01' and '2023/11/20'
+                 and JGZL.CFMID1<>'NO' and JGZLS.CLBH like 'J030034381%' 
+                 and JGZLS.ZMLB='ZZZZZZZZZZ' and JGZLS.Qty>0 
+            and JGZL.CKBH='VDH'
+           group by JGZL.CKBH,JGZLS.CLBH ) JGRK
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH as ZMLB,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,sum(KCLLS.Qty) as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/20' 
+           and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='2017/09/01'
+           and KCLL.SCBH='JJJJJJJJJJ' and KCLLS.Qty>0 and KCLL.CFMID<>'NO' and KCLLS.CLBH like 'J030034381%' 
+            and KCLL.CKBH='VDH'
+           Group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) JGCK
+) KCZLS
+where 1=1 and CLBH like 'J030034381%'  
+Group by CKBH,CLBH,HGLB,CNO     
+Select * from (
+select KCRK.*,CLZL_LS.JHDH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,KCZLS.KCBH,KCZL.KCMC,IsNull(CLLBFLS.LBBH,'A') as LBBH from (
+select CKBH,CLBH as CLDH,case when CNO='ZZZZ' then '' else CNO end as CNO,Sum(Qty) as Qty, 
+       Sum(Case when HGLB='NK' then Qty else 0 end ) as NK,
+       Sum(Case when HGLB='TC' then Qty else 0 end ) as TC,
+       Sum(Case when HGLB='HD' then Qty else 0 end ) as HD,
+       Sum(Case when HGLB='KD' then Qty else 0 end ) as KD,
+       Sum(Case when HGLB='XT' then Qty else 0 end ) as XT,
+       Sum(Case when HGLB='GC' then Qty else 0 end ) as GC,
+       Sum(Case when HGLB='ZZ' then Qty else 0 end ) as ZZ,
+       Sum(Case when HGLB='NK1' then Qty else 0 end ) as NK1,
+       Sum(Case when HGLB='TC1' then Qty else 0 end ) as TC1,
+       Sum(Case when HGLB='HD1' then Qty else 0 end ) as HD1,
+       Sum(Case when HGLB='KD1' then Qty else 0 end ) as KD1,
+       Sum(Case when HGLB='H11' then Qty else 0 end ) as H11
+from (select * from #tmpKCCLMonthHG ) KCZLS
+where 1=1 and CLBH not like 'Adjusting%' 
+      and KCZLS.HGLB<>'XT' 
+Group by CKBH,CLBH,CNO  ) KCRK
+Left join CLZL_LS on CLZL_LS.CLDH=KCRK.CLDH
+Left join CLZL on CLZL.CLDH=KCRK.CLDH
+left join KCZLS on KCZLS.CLBH=KCRK.CLDH and KCZLS.CKBH=KCRK.CKBH  
+left join KCZL on KCZL.KCBH=KCZLS.KCBH and KCZLS.CKBH=KCZL.CKBH  
+left join CLLBFLS on CLLBFLS.CLBH=CLZL.CLDH and CLLBFLS.GSBH='VDH' 
+where 1=1  and KCRK.Qty<>0 
+) KCRK order by KCRK.KCBH,KCRK.CLDH,KCRK.CNO
+if object_id('tempdb..#tmpKCCLMonthHG') is not null 
+begin   drop table #tmpKCCLMonthHG end   
+select CKBH,CLBH,HGLB,CNO,Sum(LastRem) as LastRem,Sum(RKQty) as RKQty,Sum(LLQty) as LLQty,Sum(JGRK) as JGRK, Sum(JGCK) as JGCK,
+       Round(isnull(round(Sum(LastRem),2),0)+isnull(round(Sum(RKQty),2),0)-isnull(round(Sum(LLQty),2),0)+isnull(round(Sum(JGRK),2),0)-isnull(round(Sum(JGCK),2),0),2)  as Qty
+into #tmpKCCLMonthHG  from (
+select * from (
+select KCCLMONTH.CKBH,KCCLMONTH.CLBH,KCCLMONTH.HGLB,KCCLMONTH.CNO,KCCLMONTH.Qty as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,0 as JGCK
+           from KCCLMONTH_HGBH KCCLMONTH   
+           where KCCLMONTH.KCYEAR='2023'  and KCMONTH='10' and CLBH like 'J030034381%'  
+            and KCCLMONTH.CKBH='VDH'
+           ) LastKC
+Union all   
+select * from (
+select KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end  as CNO,0 as LastRem,sum(KCRKS.Qty) as RKQty,0 as LLQty,0 as JGRK,0 as JGCK from KCRKS
+           left join KCRK on KCRK.RKNO=KCRKS.RKNO 
+           where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between 
+                 '2023/11/01' and '2023/11/20'
+           and KCRKS.CLBH like 'J030034381%'    
+            and KCRK.CKBH='VDH'
+           group by KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end ) RK        
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,sum(KCLLS.Qty) as LLQty,0 as JGRK,0 as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/20'
+           and KCLL.SCBH<>'JJJJJJJJJJ' and KCLL.CFMID<>'NO' and KCLLS.Qty>0 and KCLLS.CLBH like 'J030034381%'   
+            and KCLL.CKBH='VDH'
+           group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) LL    
+union all 
+select * from (                                         
+select JGZL.CKBH,JGZLS.CLBH,'GC' as HGLB,'ZZZZ' as CNO,0 as LastRem,0 as RKQty,0 as LLQty,sum(JGZLS.Qty) as JGRK,0 as JGCK from JGZLS
+           left join JGZL on JGZL.JGNO=JGZLS.JGNO 
+          where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between 
+                 '2023/11/01' and '2023/11/20'
+                 and JGZL.CFMID1<>'NO' and JGZLS.CLBH like 'J030034381%' 
+                 and JGZLS.ZMLB='ZZZZZZZZZZ' and JGZLS.Qty>0 
+            and JGZL.CKBH='VDH'
+           group by JGZL.CKBH,JGZLS.CLBH ) JGRK
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH as ZMLB,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,sum(KCLLS.Qty) as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/20' 
+           and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='2017/09/01'
+           and KCLL.SCBH='JJJJJJJJJJ' and KCLLS.Qty>0 and KCLL.CFMID<>'NO' and KCLLS.CLBH like 'J030034381%' 
+            and KCLL.CKBH='VDH'
+           Group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) JGCK
+) KCZLS
+where 1=1 and CLBH like 'J030034381%'  
+Group by CKBH,CLBH,HGLB,CNO     
+Select * from (
+select KCRK.*,CLZL_LS.JHDH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,KCZLS.KCBH,KCZL.KCMC,IsNull(CLLBFLS.LBBH,'A') as LBBH from (
+select CKBH,CLBH as CLDH,case when CNO='ZZZZ' then '' else CNO end as CNO,Sum(Qty) as Qty, 
+       Sum(Case when HGLB='NK' then Qty else 0 end ) as NK,
+       Sum(Case when HGLB='TC' then Qty else 0 end ) as TC,
+       Sum(Case when HGLB='HD' then Qty else 0 end ) as HD,
+       Sum(Case when HGLB='KD' then Qty else 0 end ) as KD,
+       Sum(Case when HGLB='XT' then Qty else 0 end ) as XT,
+       Sum(Case when HGLB='GC' then Qty else 0 end ) as GC,
+       Sum(Case when HGLB='ZZ' then Qty else 0 end ) as ZZ,
+       Sum(Case when HGLB='NK1' then Qty else 0 end ) as NK1,
+       Sum(Case when HGLB='TC1' then Qty else 0 end ) as TC1,
+       Sum(Case when HGLB='HD1' then Qty else 0 end ) as HD1,
+       Sum(Case when HGLB='KD1' then Qty else 0 end ) as KD1,
+       Sum(Case when HGLB='H11' then Qty else 0 end ) as H11
+from (select * from #tmpKCCLMonthHG ) KCZLS
+where 1=1 and CLBH not like 'Adjusting%' 
+      and KCZLS.HGLB<>'XT' 
+Group by CKBH,CLBH,CNO  ) KCRK
+Left join CLZL_LS on CLZL_LS.CLDH=KCRK.CLDH
+Left join CLZL on CLZL.CLDH=KCRK.CLDH
+left join KCZLS on KCZLS.CLBH=KCRK.CLDH and KCZLS.CKBH=KCRK.CKBH  
+left join KCZL on KCZL.KCBH=KCZLS.KCBH and KCZLS.CKBH=KCZL.CKBH  
+left join CLLBFLS on CLLBFLS.CLBH=CLZL.CLDH and CLLBFLS.GSBH='VDH' 
+where 1=1  and KCRK.Qty<>0 
+) KCRK order by KCRK.KCBH,KCRK.CLDH,KCRK.CNO
+if object_id('tempdb..#tmpKCCLMonthHG') is not null 
+begin   drop table #tmpKCCLMonthHG end   
+select CKBH,CLBH,HGLB,CNO,Sum(LastRem) as LastRem,Sum(RKQty) as RKQty,Sum(LLQty) as LLQty,Sum(JGRK) as JGRK, Sum(JGCK) as JGCK,
+       Round(isnull(round(Sum(LastRem),2),0)+isnull(round(Sum(RKQty),2),0)-isnull(round(Sum(LLQty),2),0)+isnull(round(Sum(JGRK),2),0)-isnull(round(Sum(JGCK),2),0),2)  as Qty
+into #tmpKCCLMonthHG  from (
+select * from (
+select KCCLMONTH.CKBH,KCCLMONTH.CLBH,KCCLMONTH.HGLB,KCCLMONTH.CNO,KCCLMONTH.Qty as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,0 as JGCK
+           from KCCLMONTH_HGBH KCCLMONTH   
+           where KCCLMONTH.KCYEAR='2023'  and KCMONTH='10' and CLBH like 'J030034381%'  
+            and KCCLMONTH.CKBH='VDH'
+           ) LastKC
+Union all   
+select * from (
+select KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end  as CNO,0 as LastRem,sum(KCRKS.Qty) as RKQty,0 as LLQty,0 as JGRK,0 as JGCK from KCRKS
+           left join KCRK on KCRK.RKNO=KCRKS.RKNO 
+           where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between 
+                 '2023/11/01' and '2023/11/20'
+           and KCRKS.CLBH like 'J030034381%'    
+            and KCRK.CKBH='VDH'
+           group by KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end ) RK        
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,sum(KCLLS.Qty) as LLQty,0 as JGRK,0 as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/20'
+           and KCLL.SCBH<>'JJJJJJJJJJ' and KCLL.CFMID<>'NO' and KCLLS.Qty>0 and KCLLS.CLBH like 'J030034381%'   
+            and KCLL.CKBH='VDH'
+           group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) LL    
+union all 
+select * from (                                         
+select JGZL.CKBH,JGZLS.CLBH,'GC' as HGLB,'ZZZZ' as CNO,0 as LastRem,0 as RKQty,0 as LLQty,sum(JGZLS.Qty) as JGRK,0 as JGCK from JGZLS
+           left join JGZL on JGZL.JGNO=JGZLS.JGNO 
+          where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between 
+                 '2023/11/01' and '2023/11/20'
+                 and JGZL.CFMID1<>'NO' and JGZLS.CLBH like 'J030034381%' 
+                 and JGZLS.ZMLB='ZZZZZZZZZZ' and JGZLS.Qty>0 
+            and JGZL.CKBH='VDH'
+           group by JGZL.CKBH,JGZLS.CLBH ) JGRK
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH as ZMLB,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,sum(KCLLS.Qty) as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/20' 
+           and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='2017/09/01'
+           and KCLL.SCBH='JJJJJJJJJJ' and KCLLS.Qty>0 and KCLL.CFMID<>'NO' and KCLLS.CLBH like 'J030034381%' 
+            and KCLL.CKBH='VDH'
+           Group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) JGCK
+) KCZLS
+where 1=1 and CLBH like 'J030034381%'  
+Group by CKBH,CLBH,HGLB,CNO     
+Select * from (
+select KCRK.*,CLZL_LS.JHDH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,KCZLS.KCBH,KCZL.KCMC,IsNull(CLLBFLS.LBBH,'A') as LBBH from (
+select CKBH,CLBH as CLDH,case when CNO='ZZZZ' then '' else CNO end as CNO,Sum(Qty) as Qty, 
+       Sum(Case when HGLB='NK' then Qty else 0 end ) as NK,
+       Sum(Case when HGLB='TC' then Qty else 0 end ) as TC,
+       Sum(Case when HGLB='HD' then Qty else 0 end ) as HD,
+       Sum(Case when HGLB='KD' then Qty else 0 end ) as KD,
+       Sum(Case when HGLB='XT' then Qty else 0 end ) as XT,
+       Sum(Case when HGLB='GC' then Qty else 0 end ) as GC,
+       Sum(Case when HGLB='ZZ' then Qty else 0 end ) as ZZ,
+       Sum(Case when HGLB='NK1' then Qty else 0 end ) as NK1,
+       Sum(Case when HGLB='TC1' then Qty else 0 end ) as TC1,
+       Sum(Case when HGLB='HD1' then Qty else 0 end ) as HD1,
+       Sum(Case when HGLB='KD1' then Qty else 0 end ) as KD1,
+       Sum(Case when HGLB='H11' then Qty else 0 end ) as H11
+from (select * from #tmpKCCLMonthHG ) KCZLS
+where 1=1 and CLBH not like 'Adjusting%' 
+      and KCZLS.HGLB<>'XT' 
+Group by CKBH,CLBH,CNO  ) KCRK
+Left join CLZL_LS on CLZL_LS.CLDH=KCRK.CLDH
+Left join CLZL on CLZL.CLDH=KCRK.CLDH
+left join KCZLS on KCZLS.CLBH=KCRK.CLDH and KCZLS.CKBH=KCRK.CKBH  
+left join KCZL on KCZL.KCBH=KCZLS.KCBH and KCZLS.CKBH=KCZL.CKBH  
+left join CLLBFLS on CLLBFLS.CLBH=CLZL.CLDH and CLLBFLS.GSBH='VDH' 
+where 1=1  and KCRK.Qty<>0 
+) KCRK order by KCRK.KCBH,KCRK.CLDH,KCRK.CNO
+if object_id('tempdb..#tmpKCCLMonthHG') is not null 
+begin   drop table #tmpKCCLMonthHG end   
+select CKBH,CLBH,HGLB,CNO,Sum(LastRem) as LastRem,Sum(RKQty) as RKQty,Sum(LLQty) as LLQty,Sum(JGRK) as JGRK, Sum(JGCK) as JGCK,
+       Round(isnull(round(Sum(LastRem),2),0)+isnull(round(Sum(RKQty),2),0)-isnull(round(Sum(LLQty),2),0)+isnull(round(Sum(JGRK),2),0)-isnull(round(Sum(JGCK),2),0),2)  as Qty
+into #tmpKCCLMonthHG  from (
+select * from (
+select KCCLMONTH.CKBH,KCCLMONTH.CLBH,KCCLMONTH.HGLB,KCCLMONTH.CNO,KCCLMONTH.Qty as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,0 as JGCK
+           from KCCLMONTH_HGBH KCCLMONTH   
+           where KCCLMONTH.KCYEAR='2023'  and KCMONTH='10' and CLBH like 'J030034381%'  
+            and KCCLMONTH.CKBH='VDH'
+           ) LastKC
+Union all   
+select * from (
+select KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end  as CNO,0 as LastRem,sum(KCRKS.Qty) as RKQty,0 as LLQty,0 as JGRK,0 as JGCK from KCRKS
+           left join KCRK on KCRK.RKNO=KCRKS.RKNO 
+           where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between 
+                 '2023/11/01' and '2023/11/20'
+           and KCRKS.CLBH like 'J030034381%'    
+            and KCRK.CKBH='VDH'
+           group by KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end ) RK        
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,sum(KCLLS.Qty) as LLQty,0 as JGRK,0 as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/20'
+           and KCLL.SCBH<>'JJJJJJJJJJ' and KCLL.CFMID<>'NO' and KCLLS.Qty>0 and KCLLS.CLBH like 'J030034381%'   
+            and KCLL.CKBH='VDH'
+           group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) LL    
+union all 
+select * from (                                         
+select JGZL.CKBH,JGZLS.CLBH,'GC' as HGLB,'ZZZZ' as CNO,0 as LastRem,0 as RKQty,0 as LLQty,sum(JGZLS.Qty) as JGRK,0 as JGCK from JGZLS
+           left join JGZL on JGZL.JGNO=JGZLS.JGNO 
+          where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between 
+                 '2023/11/01' and '2023/11/20'
+                 and JGZL.CFMID1<>'NO' and JGZLS.CLBH like 'J030034381%' 
+                 and JGZLS.ZMLB='ZZZZZZZZZZ' and JGZLS.Qty>0 
+            and JGZL.CKBH='VDH'
+           group by JGZL.CKBH,JGZLS.CLBH ) JGRK
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH as ZMLB,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,sum(KCLLS.Qty) as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/20' 
+           and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='2017/09/01'
+           and KCLL.SCBH='JJJJJJJJJJ' and KCLLS.Qty>0 and KCLL.CFMID<>'NO' and KCLLS.CLBH like 'J030034381%' 
+            and KCLL.CKBH='VDH'
+           Group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) JGCK
+) KCZLS
+where 1=1 and CLBH like 'J030034381%'  
+Group by CKBH,CLBH,HGLB,CNO     
+Select * from (
+select KCRK.*,CLZL_LS.JHDH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,KCZLS.KCBH,KCZL.KCMC,IsNull(CLLBFLS.LBBH,'A') as LBBH from (
+select CKBH,CLBH as CLDH,case when CNO='ZZZZ' then '' else CNO end as CNO,Sum(Qty) as Qty, 
+       Sum(Case when HGLB='NK' then Qty else 0 end ) as NK,
+       Sum(Case when HGLB='TC' then Qty else 0 end ) as TC,
+       Sum(Case when HGLB='HD' then Qty else 0 end ) as HD,
+       Sum(Case when HGLB='KD' then Qty else 0 end ) as KD,
+       Sum(Case when HGLB='XT' then Qty else 0 end ) as XT,
+       Sum(Case when HGLB='GC' then Qty else 0 end ) as GC,
+       Sum(Case when HGLB='ZZ' then Qty else 0 end ) as ZZ,
+       Sum(Case when HGLB='NK1' then Qty else 0 end ) as NK1,
+       Sum(Case when HGLB='TC1' then Qty else 0 end ) as TC1,
+       Sum(Case when HGLB='HD1' then Qty else 0 end ) as HD1,
+       Sum(Case when HGLB='KD1' then Qty else 0 end ) as KD1,
+       Sum(Case when HGLB='H11' then Qty else 0 end ) as H11
+from (select * from #tmpKCCLMonthHG ) KCZLS
+where 1=1 and CLBH not like 'Adjusting%' 
+      and KCZLS.HGLB<>'XT' 
+Group by CKBH,CLBH,CNO  ) KCRK
+Left join CLZL_LS on CLZL_LS.CLDH=KCRK.CLDH
+Left join CLZL on CLZL.CLDH=KCRK.CLDH
+left join KCZLS on KCZLS.CLBH=KCRK.CLDH and KCZLS.CKBH=KCRK.CKBH  
+left join KCZL on KCZL.KCBH=KCZLS.KCBH and KCZLS.CKBH=KCZL.CKBH  
+left join CLLBFLS on CLLBFLS.CLBH=CLZL.CLDH and CLLBFLS.GSBH='VDH' 
+where 1=1  and KCRK.Qty<>0 
+) KCRK order by KCRK.KCBH,KCRK.CLDH,KCRK.CNO
+if object_id('tempdb..#tmpKCCLMonthHG') is not null 
+begin   drop table #tmpKCCLMonthHG end   
+select CKBH,CLBH,HGLB,CNO,Sum(LastRem) as LastRem,Sum(RKQty) as RKQty,Sum(LLQty) as LLQty,Sum(JGRK) as JGRK, Sum(JGCK) as JGCK,
+       Round(isnull(round(Sum(LastRem),2),0)+isnull(round(Sum(RKQty),2),0)-isnull(round(Sum(LLQty),2),0)+isnull(round(Sum(JGRK),2),0)-isnull(round(Sum(JGCK),2),0),2)  as Qty
+into #tmpKCCLMonthHG  from (
+select * from (
+select KCCLMONTH.CKBH,KCCLMONTH.CLBH,KCCLMONTH.HGLB,KCCLMONTH.CNO,KCCLMONTH.Qty as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,0 as JGCK
+           from KCCLMONTH_HGBH KCCLMONTH   
+           where KCCLMONTH.KCYEAR='2023'  and KCMONTH='10' and CLBH like 'J030034381%'  
+            and KCCLMONTH.CKBH='VDH'
+           ) LastKC
+Union all   
+select * from (
+select KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end  as CNO,0 as LastRem,sum(KCRKS.Qty) as RKQty,0 as LLQty,0 as JGRK,0 as JGCK from KCRKS
+           left join KCRK on KCRK.RKNO=KCRKS.RKNO 
+           where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between 
+                 '2023/11/01' and '2023/11/06'
+           and KCRKS.CLBH like 'J030034381%'    
+            and KCRK.CKBH='VDH'
+           group by KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end ) RK        
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,sum(KCLLS.Qty) as LLQty,0 as JGRK,0 as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/06'
+           and KCLL.SCBH<>'JJJJJJJJJJ' and KCLL.CFMID<>'NO' and KCLLS.Qty>0 and KCLLS.CLBH like 'J030034381%'   
+            and KCLL.CKBH='VDH'
+           group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) LL    
+union all 
+select * from (                                         
+select JGZL.CKBH,JGZLS.CLBH,'GC' as HGLB,'ZZZZ' as CNO,0 as LastRem,0 as RKQty,0 as LLQty,sum(JGZLS.Qty) as JGRK,0 as JGCK from JGZLS
+           left join JGZL on JGZL.JGNO=JGZLS.JGNO 
+          where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between 
+                 '2023/11/01' and '2023/11/06'
+                 and JGZL.CFMID1<>'NO' and JGZLS.CLBH like 'J030034381%' 
+                 and JGZLS.ZMLB='ZZZZZZZZZZ' and JGZLS.Qty>0 
+            and JGZL.CKBH='VDH'
+           group by JGZL.CKBH,JGZLS.CLBH ) JGRK
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH as ZMLB,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,sum(KCLLS.Qty) as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/11/01' and '2023/11/06' 
+           and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='2017/09/01'
+           and KCLL.SCBH='JJJJJJJJJJ' and KCLLS.Qty>0 and KCLL.CFMID<>'NO' and KCLLS.CLBH like 'J030034381%' 
+            and KCLL.CKBH='VDH'
+           Group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) JGCK
+) KCZLS
+where 1=1 and CLBH like 'J030034381%'  
+Group by CKBH,CLBH,HGLB,CNO     
+Select * from (
+select KCRK.*,CLZL_LS.JHDH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,KCZLS.KCBH,KCZL.KCMC,IsNull(CLLBFLS.LBBH,'A') as LBBH from (
+select CKBH,CLBH as CLDH,case when CNO='ZZZZ' then '' else CNO end as CNO,Sum(Qty) as Qty, 
+       Sum(Case when HGLB='NK' then Qty else 0 end ) as NK,
+       Sum(Case when HGLB='TC' then Qty else 0 end ) as TC,
+       Sum(Case when HGLB='HD' then Qty else 0 end ) as HD,
+       Sum(Case when HGLB='KD' then Qty else 0 end ) as KD,
+       Sum(Case when HGLB='XT' then Qty else 0 end ) as XT,
+       Sum(Case when HGLB='GC' then Qty else 0 end ) as GC,
+       Sum(Case when HGLB='ZZ' then Qty else 0 end ) as ZZ,
+       Sum(Case when HGLB='NK1' then Qty else 0 end ) as NK1,
+       Sum(Case when HGLB='TC1' then Qty else 0 end ) as TC1,
+       Sum(Case when HGLB='HD1' then Qty else 0 end ) as HD1,
+       Sum(Case when HGLB='KD1' then Qty else 0 end ) as KD1,
+       Sum(Case when HGLB='H11' then Qty else 0 end ) as H11
+from (select * from #tmpKCCLMonthHG ) KCZLS
+where 1=1 and CLBH not like 'Adjusting%' 
+      and KCZLS.HGLB<>'XT' 
+Group by CKBH,CLBH,CNO  ) KCRK
+Left join CLZL_LS on CLZL_LS.CLDH=KCRK.CLDH
+Left join CLZL on CLZL.CLDH=KCRK.CLDH
+left join KCZLS on KCZLS.CLBH=KCRK.CLDH and KCZLS.CKBH=KCRK.CKBH  
+left join KCZL on KCZL.KCBH=KCZLS.KCBH and KCZLS.CKBH=KCZL.CKBH  
+left join CLLBFLS on CLLBFLS.CLBH=CLZL.CLDH and CLLBFLS.GSBH='VDH' 
+where 1=1  and KCRK.Qty<>0 
+) KCRK order by KCRK.KCBH,KCRK.CLDH,KCRK.CNO
+if object_id('tempdb..#tmpKCCLMonthHG') is not null 
+begin   drop table #tmpKCCLMonthHG end   
+select CKBH,CLBH,HGLB,CNO,Sum(LastRem) as LastRem,Sum(RKQty) as RKQty,Sum(LLQty) as LLQty,Sum(JGRK) as JGRK, Sum(JGCK) as JGCK,
+       Round(isnull(round(Sum(LastRem),2),0)+isnull(round(Sum(RKQty),2),0)-isnull(round(Sum(LLQty),2),0)+isnull(round(Sum(JGRK),2),0)-isnull(round(Sum(JGCK),2),0),2)  as Qty
+into #tmpKCCLMonthHG  from (
+select * from (
+select KCCLMONTH.CKBH,KCCLMONTH.CLBH,KCCLMONTH.HGLB,KCCLMONTH.CNO,KCCLMONTH.Qty as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,0 as JGCK
+           from KCCLMONTH_HGBH KCCLMONTH   
+           where KCCLMONTH.KCYEAR='2023'  and KCMONTH='09' and CLBH like 'J030034381%'  
+            and KCCLMONTH.CKBH='VDH'
+           ) LastKC
+Union all   
+select * from (
+select KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end  as CNO,0 as LastRem,sum(KCRKS.Qty) as RKQty,0 as LLQty,0 as JGRK,0 as JGCK from KCRKS
+           left join KCRK on KCRK.RKNO=KCRKS.RKNO 
+           where convert(smalldatetime,convert(varchar,KCRK.USERDATE,111)) between 
+                 '2023/10/01' and '2023/10/31'
+           and KCRKS.CLBH like 'J030034381%'    
+            and KCRK.CKBH='VDH'
+           group by KCRK.CKBH,KCRKS.CLBH,KCRK.HGLB,case when (IsNull(KCRKS.CNO,'')='' or left(KCRK.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCRKS.CNO end ) RK        
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,sum(KCLLS.Qty) as LLQty,0 as JGRK,0 as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/10/01' and '2023/10/31'
+           and KCLL.SCBH<>'JJJJJJJJJJ' and KCLL.CFMID<>'NO' and KCLLS.Qty>0 and KCLLS.CLBH like 'J030034381%'   
+            and KCLL.CKBH='VDH'
+           group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) LL    
+union all 
+select * from (                                         
+select JGZL.CKBH,JGZLS.CLBH,'GC' as HGLB,'ZZZZ' as CNO,0 as LastRem,0 as RKQty,0 as LLQty,sum(JGZLS.Qty) as JGRK,0 as JGCK from JGZLS
+           left join JGZL on JGZL.JGNO=JGZLS.JGNO 
+          where convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between 
+                 '2023/10/01' and '2023/10/31'
+                 and JGZL.CFMID1<>'NO' and JGZLS.CLBH like 'J030034381%' 
+                 and JGZLS.ZMLB='ZZZZZZZZZZ' and JGZLS.Qty>0 
+            and JGZL.CKBH='VDH'
+           group by JGZL.CKBH,JGZLS.CLBH ) JGRK
+union all
+select * from (
+select KCLL.CKBH,KCLLS.CLBH as ZMLB,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end as CNO,0 as LastRem,0 as RKQty,0 as LLQty,0 as JGRK,sum(KCLLS.Qty) as JGCK from KCLLS 
+           left join KCLL on KCLL.LLNO=KCLLS.LLNO 
+           where convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111)) between 
+                 '2023/10/01' and '2023/10/31' 
+           and convert(smalldatetime,convert(varchar,KCLL.CFMDATE,111))>='2017/09/01'
+           and KCLL.SCBH='JJJJJJJJJJ' and KCLLS.Qty>0 and KCLL.CFMID<>'NO' and KCLLS.CLBH like 'J030034381%' 
+            and KCLL.CKBH='VDH'
+           Group by KCLL.CKBH,KCLLS.CLBH,KCLLS.HGLB,case when (IsNull(KCLLS.CNO,'')='' or left(KCLLS.HGLB,2) not in ('NK','TC','HD','KD')) then 'ZZZZ' else KCLLS.CNO end ) JGCK
+) KCZLS
+where 1=1 and CLBH like 'J030034381%'  
+Group by CKBH,CLBH,HGLB,CNO     
+Select * from (
+select KCRK.*,CLZL_LS.JHDH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,KCZLS.KCBH,KCZL.KCMC,IsNull(CLLBFLS.LBBH,'A') as LBBH from (
+select CKBH,CLBH as CLDH,case when CNO='ZZZZ' then '' else CNO end as CNO,Sum(Qty) as Qty, 
+       Sum(Case when HGLB='NK' then Qty else 0 end ) as NK,
+       Sum(Case when HGLB='TC' then Qty else 0 end ) as TC,
+       Sum(Case when HGLB='HD' then Qty else 0 end ) as HD,
+       Sum(Case when HGLB='KD' then Qty else 0 end ) as KD,
+       Sum(Case when HGLB='XT' then Qty else 0 end ) as XT,
+       Sum(Case when HGLB='GC' then Qty else 0 end ) as GC,
+       Sum(Case when HGLB='ZZ' then Qty else 0 end ) as ZZ,
+       Sum(Case when HGLB='NK1' then Qty else 0 end ) as NK1,
+       Sum(Case when HGLB='TC1' then Qty else 0 end ) as TC1,
+       Sum(Case when HGLB='HD1' then Qty else 0 end ) as HD1,
+       Sum(Case when HGLB='KD1' then Qty else 0 end ) as KD1,
+       Sum(Case when HGLB='H11' then Qty else 0 end ) as H11
+from (select * from #tmpKCCLMonthHG ) KCZLS
+where 1=1 and CLBH not like 'Adjusting%' 
+      and KCZLS.HGLB<>'XT' 
+Group by CKBH,CLBH,CNO  ) KCRK
+Left join CLZL_LS on CLZL_LS.CLDH=KCRK.CLDH
+Left join CLZL on CLZL.CLDH=KCRK.CLDH
+left join KCZLS on KCZLS.CLBH=KCRK.CLDH and KCZLS.CKBH=KCRK.CKBH  
+left join KCZL on KCZL.KCBH=KCZLS.KCBH and KCZLS.CKBH=KCZL.CKBH  
+left join CLLBFLS on CLLBFLS.CLBH=CLZL.CLDH and CLLBFLS.GSBH='VDH' 
+where 1=1  and KCRK.Qty<>0 
+) KCRK order by KCRK.KCBH,KCRK.CLDH,KCRK.CNO

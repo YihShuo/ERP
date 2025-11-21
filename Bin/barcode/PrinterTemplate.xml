@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<Seagull_Template_Database Ver="1.0">
+<Template Name="SAPscript-ITF">
+<TagValues>
+<Value Name="Header"/>
+<Value Name="Footer"/>
+<Value Name="StartLine">/ </Value>
+<Value Name="EndLine"/>
+<Value Name="StartFieldDelimiter">&amp;</Value>
+<Value Name="EndFieldDelimiter">&amp;</Value>
+<Value Name="StartPrintCode"/>
+<Value Name="EndPrintCode"/>
+</TagValues>
+<TranslationTable>
+<Replace Value="&amp;">&lt;(&gt;&amp;&lt;)&gt;</Replace>
+</TranslationTable>
+</Template>
+<Template Name="Datamax Passport Form">
+<TagValues>
+<Value Name="Header"/>
+<Value Name="Footer"/>
+<Value Name="StartLine"/>
+<Value Name="EndLine"/>
+<Value Name="StartFieldDelimiter">@V</Value>
+<Value Name="EndFieldDelimiter"/>
+<Value Name="StartPrintCode"></Value>
+<Value Name="EndPrintCode"></Value>
+</TagValues>
+<TranslationTable>
+</TranslationTable>
+</Template>
+</Seagull_Template_Database>

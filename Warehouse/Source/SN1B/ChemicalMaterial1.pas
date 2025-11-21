@@ -1,0 +1,725 @@
+unit ChemicalMaterial1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, DB, DBTables, GridsEh, DBGridEh, StdCtrls, ExtCtrls,
+  ComCtrls,comobj,math, Grids, DBGrids, Buttons;
+
+type
+  TChemicalMaterial = class(TForm)
+    Panel1: TPanel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Button1: TButton;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Button2: TButton;
+    Edit5: TEdit;
+    DBGrid1: TDBGridEh;
+    DataSource1: TDataSource;
+    Query1: TQuery;
+    PopupMenu1: TPopupMenu;
+    Detail1: TMenuItem;
+    Label1: TLabel;
+    DTP1: TDateTimePicker;
+    Label4: TLabel;
+    DTP2: TDateTimePicker;
+    Query1cldhz: TStringField;
+    Query1ZLBH1: TStringField;
+    Query1TCLYL: TFloatField;
+    Query1zwpm: TStringField;
+    Query1ywpm: TStringField;
+    Query1CQDH: TStringField;
+    Query1Qty: TCurrencyField;
+    Query1TempQty: TCurrencyField;
+    Query1DWBH: TStringField;
+    Query1Article: TStringField;
+    Query1XieMing: TStringField;
+    Query1Person: TFloatField;
+    Label7: TLabel;
+    CB1: TComboBox;
+    Query1CalDate: TStringField;
+    PerCombo: TComboBox;
+    Label8: TLabel;
+    DTP3: TDateTimePicker;
+    CK1: TCheckBox;
+    Query1Pairs: TFloatField;
+    CQDHCombo: TComboBox;
+    Label9: TLabel;
+    CB2: TCheckBox;
+    UpMas: TUpdateSQL;
+    N1: TMenuItem;
+    Modify1: TMenuItem;
+    Save1: TMenuItem;
+    Cancel1: TMenuItem;
+    Query1cldh: TStringField;
+    Query1DDBH: TStringField;
+    TempQry: TQuery;
+    ExeQry: TQuery;
+    N2: TMenuItem;
+    Set1: TMenuItem;
+    DDBH_MLab: TLabel;
+    Button3: TBitBtn;
+    Query1THQty: TCurrencyField;
+    Set2: TMenuItem;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Query1CalcFields(DataSet: TDataSet);
+    procedure Button2Click(Sender: TObject);
+    procedure Detail1Click(Sender: TObject);
+    procedure DBGrid1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure Modify1Click(Sender: TObject);
+    procedure Cancel1Click(Sender: TObject);
+    procedure Save1Click(Sender: TObject);
+    procedure Set1Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Set2Click(Sender: TObject);
+  private
+    { Private declarations }
+    procedure ShowZLZLS3();
+    procedure ShowZLZLS3_Sep(DDBH_M:string;SepCount:String);
+
+  public
+    { Public declarations }
+    procedure UpdateLIY_DD_ZLZLS3(Diff:Double;CLDHZ:String;ZLBH1:String;CQDH:string);
+  end;
+
+var
+  ChemicalMaterial: TChemicalMaterial;
+
+implementation
+
+uses main1, DeliverChemicalDetail1, DeliveryMaterial_TR1, FunUnit;
+
+{$R *.dfm}
+
+procedure TChemicalMaterial.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  action:=cafree;
+end;
+
+procedure TChemicalMaterial.FormDestroy(Sender: TObject);
+begin
+  ChemicalMaterial:=nil;
+end;
+
+procedure TChemicalMaterial.FormCreate(Sender: TObject);
+begin
+  //
+  with TempQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select bgszl.GSDH from bgszl ');
+    SQL.Add('inner join (select DFL from bgszl where GSDH='''+main.Edit2.Text+''') bgszls on bgszls.DFL=bgszl.DFL ');
+    SQL.Add('where SFL=''RB'' ');
+    Active:=true;
+    CQDHCombo.Clear;
+    if RecordCount>0 then
+    begin
+      CQDHCombo.Items.add(Copy(FieldByName('GSDH').AsString,1,2)+'%');
+      while Not TempQry.Eof do
+      begin
+        CQDHCombo.Items.add(FieldByName('GSDH').AsString);
+        Next;
+      end;
+      CQDHCombo.ItemIndex:=0;
+    end;
+    Active:=false;
+    //
+  end;
+  DTP1.Date:=now-60;
+  DTP2.Date:=now+30;
+  DTP3.Date:=now-1;
+
+end;
+
+procedure TChemicalMaterial.Query1CalcFields(DataSet: TDataSet);
+begin
+  with query1 do
+  begin
+     if FieldByName('TCLYL').value<>0 then
+      begin
+        FieldByName('Person').value:=RoundTo(FieldByName('Qty').value/FieldByName('TCLYL').value*100,-1);
+      end;
+  end;
+end;
+//顯示拆單
+procedure TChemicalMaterial.ShowZLZLS3_Sep(DDBH_M:string;SepCount:String);
+begin
+  //
+  if Edit4.Text='' then
+  begin
+    Showmessage('Xin nhap RY#');
+    Exit;
+  end;
+  //
+  // /TCLYL_M*TCLYL       /TCLYL_M*TCLYL
+  with query1 do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select cldh,DDBH,cldhz,ZLBH1,TCLYL,zwpm,ywpm,CQDH,DWBH,Article,XieMing,Pairs,CalDate,THQty ');
+    //SQL.Add(',0 as Qty,0 as TempQty');
+    SQL.Add(',case when TCLYL_M is not null then Qty/TCLYL_M*TCLYL else 0 end as Qty,case when TCLYL_M is not null then TempQty/TCLYL_M*TCLYL else 0 end as TempQty ');
+    SQL.Add('from ( ');
+    SQL.Add('Select ZLZLS3.*,ZLZLS3_M.TCLYL_M from(');  //
+    SQL.Add('SELECT max(ZLZLS3.cldh) as cldh,max(ZLZLS3.DDBH) as DDBH,right(ZLZLS3.cldhz,10) as cldhz,ZLZLS3.ZLBH1 as ZLBH1,Convert(float,round(sum(ZLZLS3.TCLYL),2)) as TCLYL,');
+    SQL.Add('CLZL.zwpm,CLZL.ywpm,ZLZLS3.CQDH ,isnull(KCLLS.Qty,0) as Qty,isnull(KCLLS.TempQty,0) as TempQty,CLZL.DWBH,');
+    SQL.Add('case when Substring(ZLZLS3.ZLBH1,4,1)=''V''  then YPZL.Article else XXZL.Article end as Article,');
+    SQL.Add('case when Substring(ZLZLS3.ZLBH1,4,1)=''V'' then YPZL_XXZL.XieMing else XXZL.XieMing end as XieMing,');
+    SQL.Add('case when Substring(ZLZLS3.ZLBH1,4,1)=''V'' then YPZL.Quantity else ERP_DDZL.Pairs end as Pairs,');
+    SQL.Add('Max(ZLZLS3.USERDATE) as CalDate,isnull(KCRKS.Qty,0) as THQty');
+    SQL.Add('FROM '+main.LIY_DD+'.dbo.ZLZLS3  ZLZLS3');
+    SQL.Add('LEFT JOIN '+main.LIY_DD+'.dbo.DDZL DDZL ON ZLZLS3.DDBH = DDZL.DDBH AND  DDZL.CQDH = ZLZLS3.CQDH');
+    SQL.Add('LEFT JOIN '+main.LIY_DD+'.dbo.CLZL CLZL ON ZLZLS3.cldhz = CLZL.cldh');
+    SQL.Add('LEFT JOIN '+main.LIY_DD+'.dbo.CLZLSL CLZLSL ON ZLZLS3.cldh = CLZLSL.cldh  and ZLZLS3.cldhz=CLZLSL.cldhz');
+    SQL.Add('and  CLZLSL.cldh=CLZL.cldh');
+    SQL.Add('left join (select KCLL.GSBH,KCLLS.SCBH,KCLLS.CLBH,round(sum(case when KCLL.CFMID<>''NO'' then KCLLS.Qty else 0 end),2) as Qty,round(sum(KCLLS.TempQty),2) as TempQty');
+    SQL.Add('           from KCLLS left join KCLL on KCLL.LLNO=KCLLS.LLNO');
+    SQL.Add('           where KCLL.USERDate>getdate()-270 ');
+    SQL.Add('           and KCLL.GSBH like '''+CQDHCombo.Text+'''');
+    SQL.Add('           and KCLLS.SCBH = '''+DDBH_M+'''  ');
+    SQL.Add('           group by KCLL.GSBH,KCLLS.SCBH,KCLLS.CLBH) KCLLS');
+    SQL.Add('     on  ''A''+KCLLS.CLBH=CLZL.CLDH and KCLLS.GSBH=ZLZLS3.CQDH ');
+    SQL.Add('left join CLZL ERP_CLZL on ERP_CLZL.CLDH=Substring(ZLZLS3.cldhz,2,10)');
+    SQL.Add('Left join DDZL ERP_DDZL on ERP_DDZL.DDBH=DDZL.ZLBH1 ');
+    //20201120 add THQty
+    sql.Add('left join ( select KCRKS.GSBH,KCRKS.CGBH, KCRKS.CLBH,round(sum( case when KCRK.CFMID<>''NO'' then KCRKS.Qty else 0 end),2) as Qty from KCRKS');
+    sql.Add('           left join KCRK on KCRKS.RKNO=KCRK.RKNO');
+    sql.Add('           where KCRKS.CGBH='''+Edit4.Text+'''  and KCRKS.GSBH like '''+CQDHCombo.Text+''' and KCRK.SFL=''THU HOI''');
+    sql.Add('           group by KCRKS.GSBH,KCRKS.CGBH, KCRKS.CLBH ) KCRKS on KCRKS.CGBH=ZLZLS3.ZLBH1 and ''A''+KCRKS.CLBH=CLZL.CLDH and KCRKS.GSBH=ZLZLS3.CQDH');
+    SQL.Add('left join XXZL on ERP_DDZL.XieXing=xxzl.XieXing and ERP_DDZL.Shehao=xxzl.shehao');
+    SQL.Add('and Substring(ZLZLS3.ZLBH1,4,1)<>''V''');
+    SQL.Add('left join YPZL on DDZL.ZLBH1=YPZL.YPDH  and Substring(ZLZLS3.ZLBH1,4,1)=''V''');
+    SQL.Add('left join XXZL YPZL_XXZL on  YPZL_XXZL.XieXing=YPZL.XieXing and YPZL_XXZL.Shehao=YPZL.shehao and Substring(DDZL.ZLBH1,4,1)=''V''');   
+    SQL.Add('');
+    SQL.Add('where  ZLZLS3.CQDH like '''+CQDHCombo.Text+''' ');   // ZLZLS3.TCLYL>0 and
+    if CB1.ItemIndex=1 then
+      sql.Add('and DDZL.DDLB=''N'' ');//正單
+    if CB1.ItemIndex=2 then
+      sql.Add('and DDZL.DDLB=''B'' ');//補單
+    if edit1.Text<>'' then
+      sql.Add('and ZLZLS3.cldhz like '+''''+'%'+edit1.Text+'%'+'''');
+    if edit2.Text<>'' then
+      sql.add('and CLZL.YWPM like '+''''+'%'+edit2.Text+'%'+'''');
+    if edit3.Text<>'' then
+      sql.add('and CLZL.YWPM like '+''''+'%'+edit3.Text+'%'+'''');
+    if CB2.Checked=true then
+    begin
+      sql.add('AND DDZL.SCRQ>='+''''+formatdatetime('yyyyMMdd',DTP1.date)+'''');
+      sql.add('AND DDZL.SCRQ<='+''''+formatdatetime('yyyyMMdd',DTP2.date)+'''');
+    end;
+    if edit4.Text<>'' then
+      sql.Add('and ZLZLS3.ZLBH1 = '''+edit4.Text+''' ');
+    if CK1.Checked=true then
+    begin
+       sql.Add('and DDZL.DDBH in (');
+       sql.add('                  select DDZL.DDBH ');
+       sql.Add('                  from (');
+       sql.Add('                        select YWDD.YSBH as DDBH,Sum(YWCP.Qty) as Qty');   //20190722 YWCP.DDBH=YWDD.DDBH
+       sql.Add('                        from YWCP left join YWDD on YWCP.DDBH=YWDD.DDBH');
+       sql.Add('                        where (YWCP.SB=1 or YWCP.SB=3))');
+       sql.Add('                        Group by YWDD.YSBH');
+       sql.Add('                        having Max(convert(varchar,YWCP.LastInDate,111))='+''''+formatdatetime('yyyy/MM/dd',DTP3.date)+'''');
+       sql.Add('                        ) YWCP');
+       sql.Add('                  Left join '+main.LIY_DD+'.DBO.DDZL DDZL on DDZL.DDBH=YWCP.DDBH ') ;
+       sql.Add('                  where YWCP.Qty>=DDZL.Pairs');
+       sql.Add('                  and  DDZL.ZLBH1 = '''+edit4.Text+''' ');
+       sql.add('                  and  DDZL.CQDH like '''+CQDHCombo.Text+'''');
+       if CB2.Checked=true then
+       begin
+         sql.add('                  AND DDZL.SCRQ>='+''''+formatdatetime('yyyyMMdd',DTP1.date)+'''');
+         sql.add('                  AND DDZL.SCRQ<='+''''+formatdatetime('yyyyMMdd',DTP2.date)+'''');
+       end;
+       sql.Add('                  Group by DDZL.DDBH)');
+    end;
+    SQL.Add('GROUP BY  ZLZLS3.cldhz ,ZLZLS3.ZLBH1,CLZL.zwpm,CLZL.ywpm,ZLZLS3.CQDH,KCLLS.Qty,KCLLS.TempQty ,CLZL.DWBH,');
+    SQL.Add('case when Substring(ZLZLS3.ZLBH1,4,1)=''V'' then YPZL.Article else XXZL.Article end,');
+    SQL.Add('case when Substring(ZLZLS3.ZLBH1,4,1)=''V'' then YPZL_XXZL.XieMing else XXZL.XieMing end,');
+    SQL.Add('case when Substring(ZLZLS3.ZLBH1,4,1)=''V'' then YPZL.Quantity else ERP_DDZL.Pairs  end, KCRKS.Qty');
+    //
+    if PerCombo.ItemIndex=1 then
+      sql.add('where ISNULL(Qty / NULLIF(TCLYL, 0), 0)>1.00')
+    else  if PerCombo.ItemIndex=2 then
+      sql.add('where ISNULL(Qty / NULLIF(TCLYL, 0), 0)<1')
+    else  if PerCombo.ItemIndex=3 then
+      sql.add('where (ISNULL(Qty / NULLIF(TCLYL, 0), 0)>1.00 or ISNULL(Qty / NULLIF(TCLYL, 0), 0)<1)');
+
+    SQL.Add(')ZLZLS3');
+    SQL.Add('');
+
+    SQL.Add('left join (');
+    SQL.Add('     select DDZL.ZLBH1 as ZLBH1,right(ZLZLS3.cldhz,10) as cldhz,DDZL.CQDH,Convert(float,round(sum(ZLZLS3.TCLYL),2)) as TCLYL_M');
+    SQL.Add('   FROM '+main.LIY_DD+'.dbo.ZLZLS3  ZLZLS3');
+    SQL.Add('   LEFT JOIN '+main.LIY_DD+'.dbo.DDZL DDZL ON ZLZLS3.DDBH = DDZL.DDBH AND DDZL.CQDH = ZLZLS3.CQDH LEFT JOIN '+main.LIY_DD+'.dbo.CLZL CLZL ON ZLZLS3.cldhz = CLZL.cldh ');
+    SQL.Add('   LEFT JOIN '+main.LIY_DD+'.dbo.CLZLSL CLZLSL ON ZLZLS3.cldh = CLZLSL.cldh and ZLZLS3.cldhz=CLZLSL.cldhz ');
+    SQL.Add('   left join CLZL ERP_CLZL on ERP_CLZL.CLDH=Substring(ZLZLS3.cldhz,2,10)');
+    SQL.Add('   Left join DDZL ERP_DDZL on ERP_DDZL.DDBH=DDZL.ZLBH1 ');
+    SQL.Add('   left join XXZL on ERP_DDZL.XieXing=xxzl.XieXing and ERP_DDZL.Shehao=xxzl.shehao ');
+    SQL.Add('   where ZLZLS3.TCLYL>0 and ZLZLS3.ZLBH1='''+DDBH_M+''' and ZLZLS3.CQDH like '''+CQDHCombo.Text+''' ');
+    SQL.Add('          and ZLZLS3.CLDHZ like ''%'' ');
+    SQL.Add('   GROUP BY  ZLZLS3.cldhz,DDZL.ZLBH1,DDZL.CQDH ) ZLZLS3_M on  ZLZLS3.cldhz=ZLZLS3_M.cldhz and   ZLZLS3.CQDH=ZLZLS3_M.CQDH ');
+    //
+    SQL.Add(') ZLZLS3');
+    SQL.Add('');
+    SQL.Add('union all');
+    SQL.Add('select Null as cldh,Null as DDBH,KCLLS.CLBH as cldhz,KCLLS.SCBH as ZLBH1,0 as TCLYL,CLZL.ZWPM,CLZL.YWPM,KCLL.GSBH as CQDH,CLZL.DWBH,DDZL.Article,');
+    SQL.Add('       case when Substring(KCLLS.SCBH,4,1)=''V'' then YPZL_XXZL.XieMing else XXZL.XieMing end as XieMing,DDZL.Pairs,null as CalDate,Sum(case when KCLL.CFMID<>''NO'' then KCLLS.Qty else 0 end)/'+SepCount+' as Qty,Sum(KCLLS.TempQty)/'+SepCount+' as TempQty,isnull(KCRKS.Qty,0) as THQty ');
+    SQL.Add('from  KCLLS');
+    SQL.Add('left join DDZL on DDZL.DDBH=KCLLS.SCBH');
+    SQL.Add('left join XXZL on DDZL.XieXing=xxzl.XieXing and DDZL.Shehao=xxzl.shehao');
+    SQL.Add('left join YPZL on KCLLS.SCBH=YPZL.YPDH  and Substring(KCLLS.SCBH,4,1)=''V''');
+    SQL.Add('left join XXZL YPZL_XXZL on  YPZL_XXZL.XieXing=YPZL.XieXing and YPZL_XXZL.Shehao=YPZL.shehao and Substring(KCLLS.SCBH,4,1)=''V''');
+    SQL.Add('left join CLZL on CLZL.CLDH=KCLLS.CLBH');
+    SQL.Add('left join KCLL on KCLL.LLNO=KCLLS.LLNO  ');
+     //20201120 add THQty
+    sql.Add('left join (select KCRKS.GSBH,KCRKS.CGBH, KCRKS.CLBH,round(sum( case when KCRK.CFMID<>''NO'' then KCRKS.Qty else 0 end),2) as Qty from KCRKS');
+    sql.Add('           left join KCRK on KCRKS.RKNO=KCRK.RKNO');
+    sql.Add('           where KCRKS.CGBH='''+Edit4.Text+''' and KCRKS.GSBH like '''+CQDHCombo.Text+''' and KCRK.SFL=''THU HOI''');
+    sql.Add('           group by KCRKS.GSBH,KCRKS.CGBH, KCRKS.CLBH ) KCRKS on KCRKS.CGBH=kclls.SCBH and ''A''+KCRKS.CLBH=CLZL.CLDH and KCRKS.GSBH=kcll.GSBH');
+    SQL.Add('WHERE KCLL.GSBH like '''+CQDHCombo.Text+'''  and NOT EXISTS(SELECT *  FROM '+main.LIY_DD+'.dbo.ZLZLS3  ZLZLS3  WHERE ZLZLS3.TCLYL>0 and ''A''+KCLLS.CLBH=ZLZLS3.CLDHZ AND KCLLS.SCBH=ZLZLS3.ZLBH1 and KCLL.GSBH=ZLZLS3.CQDH)');
+    SQL.Add('   and KCLLS.SCBH = '''+DDBH_M+''' and KCLLS.CLBH like '''+Edit1.Text+'%'' and KCLLS.Qty>0');
+    SQL.Add('Group by  KCLLS.CLBH,KCLLS.SCBH,CLZL.ZWPM,CLZL.YWPM,KCLL.GSBH,CLZL.DWBH,DDZL.Article,case when Substring(KCLLS.SCBH,4,1)=''V'' then YPZL_XXZL.XieMing else XXZL.XieMing end,DDZL.Pairs ,KCRKS.Qty  ');
+    //funcObj.WriteErrorLog(sql.Text);
+    Active:=true;
+  end;
+  //
+end;
+procedure TChemicalMaterial.ShowZLZLS3();
+begin
+  //
+  if Edit4.Text='' then
+  begin
+    Showmessage('Xin nhap RY#');
+    Exit;
+  end;
+  //
+  with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('Select cldh,DDBH,cldhz,ZLBH1,TCLYL,zwpm,ywpm,CQDH,Qty,TempQty,DWBH,Article,XieMing,case when Substring(ZLBH1,1,3)=''CBY'' then PairCBY else Pairs end as Pairs, CalDate,THQty ');
+    sql.Add('from(');
+    sql.Add('SELECT max(ZLZLS3.cldh) as cldh,max(ZLZLS3.DDBH) as DDBH,right(ZLZLS3.cldhz,10) as cldhz,ZLZLS3.ZLBH1 as ZLBH1,Convert(float,round(sum(ZLZLS3.TCLYL),2)) as TCLYL,');
+    sql.Add('CLZL.zwpm,CLZL.ywpm,ZLZLS3.CQDH ,isnull(KCLLS.Qty,0) as Qty,isnull(KCLLS.TempQty,0) as TempQty,CLZL.DWBH,');
+    //20170623
+    sql.Add('case when Substring(ZLZLS3.ZLBH1,4,1)=''V'' then YPZL.Article else XXZL.Article end as Article,');
+    sql.Add('case when Substring(ZLZLS3.ZLBH1,4,1)=''V'' then YPZL_XXZL.XieMing else XXZL.XieMing end as XieMing,');
+    sql.Add('case when Substring(ZLZLS3.ZLBH1,4,1)=''V'' then YPZL.Quantity else ERP_DDZL.Pairs end as Pairs,');
+    sql.Add('Max(ZLZLS3.USERDATE) as CalDate,isnull(KCRKS.Qty,0) as THQty, ( select SUM(CBY_Orders.total * CBY_Orders.itemNumber) AS Pairs from CBY_Orders where MasterOrder='''+Edit4.Text+''') as PairCBY');
+    //
+    sql.Add('FROM '+main.LIY_DD+'.dbo.ZLZLS3  ZLZLS3');
+    //20170513
+    sql.Add('LEFT JOIN '+main.LIY_DD+'.dbo.DDZL DDZL ON ZLZLS3.DDBH = DDZL.DDBH AND  DDZL.CQDH = ZLZLS3.CQDH');
+    sql.Add('LEFT JOIN '+main.LIY_DD+'.dbo.CLZL CLZL ON ZLZLS3.cldhz = CLZL.cldh');
+    sql.Add('LEFT JOIN '+main.LIY_DD+'.dbo.CLZLSL CLZLSL ON ZLZLS3.cldh = CLZLSL.cldh  and ZLZLS3.cldhz=CLZLSL.cldhz');
+    //
+    //20171004
+    sql.Add('and  CLZLSL.cldh=CLZL.cldh');
+    //
+    sql.Add('left join (select KCLL.GSBH,KCLLS.SCBH,KCLLS.CLBH,round(sum( case when KCLL.CFMID<>''NO'' then KCLLS.Qty else 0 end),2) as Qty,round(sum(KCLLS.TempQty),2) as TempQty');
+    sql.Add('           from KCLLS left join KCLL on KCLL.LLNO=KCLLS.LLNO');
+    sql.Add('           where KCLL.USERDate>getdate()-270 ');
+    if CB1.ItemIndex=1 then
+      sql.Add('         and KCLLS.BLSB=''N'' ');
+    if CB1.ItemIndex=2 then
+      sql.Add('         and KCLLS.BLSB=''Y'' ');
+    sql.Add('           and KCLL.GSBH like '''+CQDHCombo.Text+'''');
+    sql.add('           and KCLLS.SCBH = '''+Edit4.Text+''' ');
+    sql.add('           group by KCLL.GSBH,KCLLS.SCBH,KCLLS.CLBH) KCLLS');
+    sql.add('     on KCLLS.SCBH=ZLZLS3.ZLBH1 and '+''''+'A'+''''+'+KCLLS.CLBH=CLZL.CLDH and KCLLS.GSBH=ZLZLS3.CQDH');
+    //20170513
+    sql.Add('left join CLZL ERP_CLZL on ERP_CLZL.CLDH=Substring(ZLZLS3.cldhz,2,10)');
+    //
+    sql.add('Left join DDZL ERP_DDZL on ERP_DDZL.DDBH=DDZL.ZLBH1 ');
+    //20201120 add THQty
+    sql.Add('left join ( select KCRKS.GSBH,KCRKS.CGBH, KCRKS.CLBH,round(sum( case when KCRK.CFMID<>''NO'' then KCRKS.Qty else 0 end),2) as Qty from KCRKS');
+    sql.Add('           left join KCRK on KCRKS.RKNO=KCRK.RKNO');
+    sql.Add('           where KCRKS.CGBH='''+Edit4.Text+'''  and KCRKS.GSBH like '''+CQDHCombo.Text+''' and KCRK.SFL=''THU HOI''');
+    sql.Add('           group by KCRKS.GSBH,KCRKS.CGBH, KCRKS.CLBH ) KCRKS on KCRKS.CGBH=ZLZLS3.ZLBH1 and ''A''+KCRKS.CLBH=CLZL.CLDH and KCRKS.GSBH=ZLZLS3.CQDH');
+    sql.add('left join XXZL on ERP_DDZL.XieXing=xxzl.XieXing and ERP_DDZL.Shehao=xxzl.shehao');
+    //20170623
+    sql.Add('and Substring(DDZL.ZLBH1,4,1)<>''V''');
+    sql.Add('left join YPZL on DDZL.ZLBH1=YPZL.YPDH  and Substring(DDZL.ZLBH1,4,1)=''V''');
+    sql.Add('left join XXZL YPZL_XXZL on  YPZL_XXZL.XieXing=YPZL.XieXing and YPZL_XXZL.Shehao=YPZL.shehao and Substring(DDZL.ZLBH1,4,1)=''V''');
+    //
+    sql.add('where  ZLZLS3.CQDH like '''+CQDHCombo.Text+'''');
+    if CB1.ItemIndex=1 then
+      sql.Add('and DDZL.DDLB=''N'' ');//正單
+    if CB1.ItemIndex=2 then
+      sql.Add('and DDZL.DDLB=''B'' ');//補單
+    if edit1.Text<>'' then
+      sql.Add('and ZLZLS3.cldhz like '+''''+'%'+edit1.Text+'%'+'''');
+    if edit2.Text<>'' then
+      sql.add('and CLZL.YWPM like '+''''+'%'+edit2.Text+'%'+'''');
+    if edit3.Text<>'' then
+      sql.add('and CLZL.YWPM like '+''''+'%'+edit3.Text+'%'+'''');
+    if CB2.Checked=true then
+    begin
+      sql.add('AND DDZL.SCRQ>='+''''+formatdatetime('yyyyMMdd',DTP1.date)+'''');
+      sql.add('AND DDZL.SCRQ<='+''''+formatdatetime('yyyyMMdd',DTP2.date)+'''');
+    end;
+    if edit4.Text<>'' then
+      sql.Add('and ZLZLS3.ZLBH1 = '''+edit4.Text+''' ');
+    if CK1.Checked=true then
+    begin
+       sql.Add('and DDZL.DDBH in (');
+       sql.add('                  select DDZL.DDBH ');
+       sql.Add('                  from (');
+       sql.Add('                        select YWDD.YSBH as DDBH,Sum(YWCP.Qty) as Qty');  //20190722 YWCP.DDBH=YWDD.DDBH
+       sql.Add('                        from YWCP left join YWDD on YWCP.DDBH=YWDD.DDBH');
+       sql.Add('                        where (YWCP.SB=1 or YWCP.SB=3)');
+       sql.Add('                        Group by YWDD.YSBH');
+       sql.Add('                        having Max(convert(varchar,YWCP.LastInDate,111))='+''''+formatdatetime('yyyy/MM/dd',DTP3.date)+'''');
+       sql.Add('                        ) YWCP');
+       sql.Add('                  Left join '+main.LIY_DD+'.DBO.DDZL DDZL on DDZL.DDBH=YWCP.DDBH ') ;
+       sql.Add('                  where YWCP.Qty>=DDZL.Pairs');
+       sql.Add('                  and DDZL.ZLBH1 = '''+edit4.Text+''' ');
+       sql.add('                  and  DDZL.CQDH like '''+CQDHCombo.Text+'''');
+       if CB2.Checked=true then
+       begin
+         sql.add('                  AND DDZL.SCRQ>='+''''+formatdatetime('yyyyMMdd',DTP1.date)+'''');
+         sql.add('                  AND DDZL.SCRQ<='+''''+formatdatetime('yyyyMMdd',DTP2.date)+'''');
+       end;
+       sql.Add('                  Group by DDZL.DDBH)');
+    end;
+    sql.add('GROUP BY  ZLZLS3.cldhz ,ZLZLS3.ZLBH1,CLZL.zwpm,CLZL.ywpm,ZLZLS3.CQDH,KCLLS.Qty,KCLLS.TempQty ,CLZL.DWBH,');
+    //20170623
+    sql.Add('case when Substring(ZLZLS3.ZLBH1,4,1)=''V'' then YPZL.Article else XXZL.Article end,');
+    sql.Add('case when Substring(ZLZLS3.ZLBH1,4,1)=''V'' then YPZL_XXZL.XieMing else XXZL.XieMing end,');
+    sql.Add('case when Substring(ZLZLS3.ZLBH1,4,1)=''V'' then YPZL.Quantity else ERP_DDZL.Pairs  end,KCRKS.Qty');
+    sql.Add(')ZLZLS3');
+    //
+    if PerCombo.ItemIndex=1 then
+      sql.add('where ISNULL(Qty / NULLIF(TCLYL, 0), 0)>1.00')
+    else  if PerCombo.ItemIndex=2 then
+      sql.add('where ISNULL(Qty / NULLIF(TCLYL, 0), 0)<1')
+    else  if PerCombo.ItemIndex=3 then
+      sql.add('where (ISNULL(Qty / NULLIF(TCLYL, 0), 0)>1.00 or ISNULL(Qty / NULLIF(TCLYL, 0), 0)<1)');
+
+    //沒有再制令表裡面
+    SQL.Add('union all');
+    SQL.Add('select Null as cldh,Null as DDBH,KCLLS.CLBH as cldhz,KCLLS.SCBH as ZLBH1,0 as TCLYL,CLZL.ZWPM,CLZL.YWPM,KCLL.GSBH as CQDH,Sum(case when KCLL.CFMID<>''NO'' then KCLLS.Qty else 0 end) as Qty,Sum(KCLLS.TempQty) as TempQty,CLZL.DWBH,DDZL.Article,');
+    SQL.Add('       case when Substring(KCLLS.SCBH,4,1)=''V'' then YPZL_XXZL.XieMing else XXZL.XieMing end as XieMing,DDZL.Pairs,null as CalDate,isnull(KCRKS.Qty,0) as THQty');
+    SQL.Add('from  KCLLS');
+    SQL.Add('left join DDZL on DDZL.DDBH=KCLLS.SCBH');
+    SQL.Add('left join XXZL on DDZL.XieXing=xxzl.XieXing and DDZL.Shehao=xxzl.shehao');
+    SQL.Add('left join YPZL on KCLLS.SCBH=YPZL.YPDH  and Substring(KCLLS.SCBH,4,1)=''V''');
+    SQL.Add('left join XXZL YPZL_XXZL on  YPZL_XXZL.XieXing=YPZL.XieXing and YPZL_XXZL.Shehao=YPZL.shehao and Substring(KCLLS.SCBH,4,1)=''V''');
+    SQL.Add('left join CLZL on CLZL.CLDH=KCLLS.CLBH');
+    SQL.Add('left join KCLL on KCLL.LLNO=KCLLS.LLNO  ');
+    //20201120 add THQty
+    sql.Add('left join (select KCRKS.GSBH,KCRKS.CGBH, KCRKS.CLBH,round(sum( case when KCRK.CFMID<>''NO'' then KCRKS.Qty else 0 end),2) as Qty from KCRKS');
+    sql.Add('           left join KCRK on KCRKS.RKNO=KCRK.RKNO');
+    sql.Add('           where KCRKS.CGBH='''+Edit4.Text+''' and KCRKS.GSBH like '''+CQDHCombo.Text+''' and KCRK.SFL=''THU HOI''');
+    sql.Add('           group by KCRKS.GSBH,KCRKS.CGBH, KCRKS.CLBH ) KCRKS on KCRKS.CGBH=kclls.SCBH and ''A''+KCRKS.CLBH=CLZL.CLDH and KCRKS.GSBH=kcll.GSBH');
+    SQL.Add('WHERE KCLL.GSBH like '''+CQDHCombo.Text+'''  and NOT EXISTS(SELECT *  FROM '+main.LIY_DD+'.dbo.ZLZLS3  ZLZLS3  WHERE ZLZLS3.TCLYL>0 and ''A''+KCLLS.CLBH=ZLZLS3.CLDHZ AND KCLLS.SCBH=ZLZLS3.ZLBH1 and KCLL.GSBH=ZLZLS3.CQDH)');
+    SQL.Add('   and KCLLS.SCBH = '''+Edit4.Text+''' and KCLLS.CLBH like '''+Edit1.Text+'%'' and KCLLS.Qty>0');
+    SQL.Add('Group by  KCLLS.CLBH,KCLLS.SCBH,CLZL.ZWPM,CLZL.YWPM,KCLL.GSBH,CLZL.DWBH,DDZL.Article,case when Substring(KCLLS.SCBH,4,1)=''V'' then YPZL_XXZL.XieMing else XXZL.XieMing end,DDZL.Pairs,KCRKS.Qty   ');
+    sql.add('order by CQDH,ZLBH1,cldhz ');
+    //funcObj.WriteErrorLog(sql.Text);
+    active:=true;
+  end;
+end;
+procedure TChemicalMaterial.Button2Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+  if query1.Active then
+    begin
+      if query1.recordcount=0 then
+        begin
+          showmessage('No record.');
+          abort;
+        end;
+    end
+    else
+      begin
+        showmessage('No record.');
+        abort;
+      end;
+
+  try
+    eclApp:=CreateOleObject('Excel.Application');
+    WorkBook:=CreateOleObject('Excel.Sheet');
+  except
+    Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+    Exit;
+  end;
+
+  try
+    WorkBook:=eclApp.workbooks.Add;
+    eclApp.Cells(1,1):='NO';
+    for   i:=1   to   query1.fieldcount   do
+      begin
+        eclApp.Cells(1,i+1):=query1.fields[i-1].FieldName;
+      end;
+    query1.First;
+    j:=2;
+    while   not  query1.Eof   do
+      begin
+        eclApp.Cells(j,1):=j-1;
+        for   i:=1   to   query1.fieldcount   do
+          begin
+            eclApp.Cells(j,i+1):=query1.Fields[i-1].Value;
+            eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+          end;
+        query1.Next;
+        inc(j);
+      end;
+    eclapp.columns.autofit;
+    showmessage('Succeed.');
+    eclApp.Visible:=True;
+  except
+    on   F:Exception   do
+      showmessage(F.Message);
+  end;
+
+end;
+
+procedure TChemicalMaterial.Detail1Click(Sender: TObject);
+begin
+  DeliverChemicalDetail:=TDeliverChemicalDetail.create(self);
+  DeliverChemicalDetail.show;
+end;
+
+procedure TChemicalMaterial.DBGrid1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if  Query1.FieldByName('Qty').value>(Query1.FieldByName('TCLYL').value)   then
+  begin
+    DBGrid1.canvas.font.color:=clred;
+    //dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end
+end;
+
+procedure TChemicalMaterial.Modify1Click(Sender: TObject);
+begin
+  with Query1 do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+  Save1.Enabled:=true;
+  Cancel1.Enabled:=true;
+  Set1.Enabled:=true;
+  Set2.Enabled:=true;
+end;
+
+procedure TChemicalMaterial.Cancel1Click(Sender: TObject);
+begin
+  with Query1 do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  Save1.Enabled:=false;
+  Cancel1.Enabled:=false;
+  Set1.Enabled:=false;
+  Set2.Enabled:=false;
+end;
+//
+procedure TChemicalMaterial.UpdateLIY_DD_ZLZLS3(Diff:Double;CLDHZ:String;ZLBH1:String;CQDH:string);
+var i:integer;
+begin
+   //
+   try
+     with TempQry do
+     begin
+       Active:=false;
+       SQL.Clear;
+       SQL.Add('select * from '+main.LIY_DD+'.dbo.ZLZLS3 ZLZLS3 where CLDHZ=''A'+CLDHZ+''' and ZLBH1='''+ZLBH1+''' and CQDH='''+CQDH+''' order by TCLYL desc ');
+       Active:=true;
+       if RecordCount>0 then
+       begin
+         for i:=0 to RecordCount-1 do
+         begin
+           if RoundTo(TempQry.FieldByName('TCLYL').Value+Diff,-2)>=0 then
+           begin
+              //更新
+              ExeQry.Active:=false;
+              ExeQry.SQL.Clear;
+              ExeQry.SQL.Add('Update '+main.LIY_DD+'.dbo.ZLZLS3 Set TCLYL='+floattostr(RoundTo(TempQry.FieldByName('TCLYL').Value+Diff,-2))+',UserID='''+main.Edit1.Text+''',USERDATE='''+FormatDateTime('YYYYMMDD HH:NN:SS',Now())+''' ');
+              ExeQry.SQL.Add('where CLDH='''+FieldByName('CLDH').AsString+''' and CLDHZ='''+FieldByName('CLDHZ').AsString+''' and DDBH='''+FieldByName('DDBH').AsString+''' ');
+              ExeQry.SQL.Add('and CQDH='''+FieldByName('CQDH').AsString+''' ');
+              ExeQry.ExecSQL();
+              //
+              break;
+           end else
+           begin
+              //更新
+              ExeQry.Active:=false;
+              ExeQry.SQL.Clear;
+              ExeQry.SQL.Add('Update '+main.LIY_DD+'.dbo.ZLZLS3 Set TCLYL=0,UserID='''+main.Edit1.Text+''',USERDATE='''+FormatDateTime('YYYYMMDD HH:NN:SS',Now())+''' ');
+              ExeQry.SQL.Add('where CLDH='''+FieldByName('CLDH').AsString+''' and CLDHZ='''+FieldByName('CLDHZ').AsString+''' and DDBH='''+FieldByName('DDBH').AsString+''' ');
+              ExeQry.SQL.Add('and CQDH='''+FieldByName('CQDH').AsString+''' ');
+              ExeQry.ExecSQL();
+              Diff:=RoundTo(TempQry.FieldByName('TCLYL').Value+Diff,-2);
+           end;
+           Next;
+         end;
+       end else
+       begin
+          //更新
+          ExeQry.Active:=false;
+          ExeQry.SQL.Clear;
+          ExeQry.SQL.Add('Insert into '+main.LIY_DD+'.dbo.ZLZLS3  ');
+          ExeQry.SQL.Add('(cldh, cldhz, DDBH, ZLBH1, TCLYL, CQDH, USERID, USERDATE)');
+          ExeQry.SQL.Add('Values ');
+          ExeQry.SQL.Add('(''ZZZZ'',''A'+CLDHZ+''','''+ZLBH1+''', ');
+          ExeQry.SQL.Add(' '''+ZLBH1+''','+floattostr(Diff)+','''+CQDH+''','''+main.Edit1.Text+''','''+FormatDateTime('YYYYMMDD HH:NN:SS',Now())+''')');
+          ExeQry.ExecSQL();
+       end;
+       Active:=false;
+       ExeQry.Active:=false;
+     end;
+   except
+     on E:Exception do
+     begin
+       Showmessage(E.Message);
+     end;
+   end;
+   //
+end;
+//
+procedure TChemicalMaterial.Save1Click(Sender: TObject);
+var y,m,a:string;
+    i:integer;
+    Diff:double;
+begin
+  //
+  try
+    Query1.first;
+    for i:=1 to Query1.RecordCount do
+    begin
+        case Query1.updatestatus of
+          usmodified:
+          begin
+            if Query1.FieldByName('TCLYL').Value<>Query1.FieldByName('TCLYL').OldValue then
+            begin
+               //Diff:=strtofloat(FormatFloat('#,##0.00', RoundTo(Query1.FieldByName('Qty').Value,-2)-(RoundTo(Query1.FieldByName('TCLYL').OldValue,-2)-RoundTo(Query1.FieldByName('TCLYL').Value,-2)) ));
+               Diff:=strtofloat(FormatFloat('###0.00', (RoundTo(Query1.FieldByName('TCLYL').Value,-2)-RoundTo(Query1.FieldByName('TCLYL').OldValue,-2)) ));
+               UpdateLIY_DD_ZLZLS3(Diff,Query1.FieldByName('CLDHZ').AsString,Query1.FieldByName('ZLBH1').AsString,Query1.FieldByName('CQDH').AsString)
+            end;
+          end;
+       end;
+       Query1.next;
+    end;
+    with Query1 do
+    begin
+      active:=false;
+      requestlive:=false;
+      cachedupdates:=false;
+      active:=true;
+    end;
+    Save1.Enabled:=false;
+    Cancel1.Enabled:=false;
+    Set1.Enabled:=false;
+    Set2.Enabled:=false;
+    showmessage('Succeed.');
+  except
+    Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+  end;
+  //
+end;
+
+procedure TChemicalMaterial.Set1Click(Sender: TObject);
+var i:integer;
+begin
+  //
+  if Query1.Active=true then
+  begin
+    Query1.First;
+    for i:=0 to Query1.RecordCount-1 do
+    begin
+      Query1.Edit;
+      Query1.FieldByName('TCLYL').Value:=Query1.fieldbyname('Qty').Value; //FormatFloat(Query1.FieldByName('Qty').Value;
+      Query1.Post;
+      Query1.Next;
+    end;
+  end;
+  //
+end;
+
+procedure TChemicalMaterial.Button1Click(Sender: TObject);
+var DDBH_M,SepCount:String;
+begin
+  //
+  DDBH_M:='';
+  with TempQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select DDZLTR_M.DDBH,Count(DDZLTR_C.DDBH1) as SepCount from ( ');
+    SQL.Add('Select DDBH from DDZLTR where DDBH1='''+Edit4.Text+''' Group by DDBH ) DDZLTR_M ');
+    SQL.Add('inner join DDZLTR as DDZLTR_C on DDZLTR_M.DDBH=DDZLTR_C.DDBH ');
+    SQL.Add('Group by DDZLTR_M.DDBH ');
+    Active:=true;
+    if RecordCount>0 then
+    begin
+      DDBH_M:=FieldByName('DDBH').AsString;
+      SepCount:=FieldByName('SepCount').AsString;
+    end;
+    Active:=false;
+  end;
+  DDBH_MLab.Caption:=DDBH_M;  
+  if DDBH_M='' then
+  begin
+    ShowZLZLS3();
+  end else
+  begin
+    ShowZLZLS3_Sep(DDBH_M,SepCount);
+
+  end;
+
+end;
+
+procedure TChemicalMaterial.Button3Click(Sender: TObject);
+begin
+   if DeliveryMaterial_TR <> nil then
+   begin
+      DeliveryMaterial_TR.show;
+      DeliveryMaterial_TR.windowstate := wsmaximized;
+   end else
+   begin
+     DeliveryMaterial_TR:=TDeliveryMaterial_TR.Create(self);
+     DeliveryMaterial_TR.Show;
+   end;
+end;
+
+procedure TChemicalMaterial.Set2Click(Sender: TObject);
+var i:integer;
+begin
+ //
+  if Query1.Active=true then
+  begin
+    Query1.First;
+    for i:=0 to Query1.RecordCount-1 do
+    begin
+      Query1.Edit;
+      Query1.FieldByName('TCLYL').Value:=Query1.fieldbyname('Qty').Value-Query1.fieldbyname('THQty').Value; 
+      Query1.Post;
+      Query1.Next;
+    end;
+  end;
+  //
+end;
+
+end.

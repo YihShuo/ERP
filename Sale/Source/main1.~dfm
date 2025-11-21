@@ -1,0 +1,252 @@
+object main: Tmain
+  Left = 350
+  Top = 191
+  Width = 831
+  Height = 474
+  Caption = 'main'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIForm
+  Menu = MainMenu1
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Image1: TImage
+    Left = 0
+    Top = 0
+    Width = 815
+    Height = 386
+    Align = alClient
+    AutoSize = True
+    Stretch = True
+  end
+  object Edit1: TEdit
+    Left = 240
+    Top = 176
+    Width = 121
+    Height = 21
+    TabOrder = 0
+    Visible = False
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 386
+    Width = 815
+    Height = 30
+    Panels = <>
+  end
+  object Edit2: TEdit
+    Left = 240
+    Top = 216
+    Width = 121
+    Height = 21
+    TabOrder = 2
+    Visible = False
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select *'
+      'from BLimits'
+      'where USERID=:userid'
+      'and MKID=:mkid'
+      'and GSBH=:GSBH')
+    Left = 64
+    Top = 88
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'userid'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'mkid'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'GSBH'
+        ParamType = ptUnknown
+      end>
+  end
+  object MainMenu1: TMainMenu
+    AutoHotkeys = maManual
+    Left = 96
+    Top = 88
+    object SN1: TMenuItem
+      Caption = 'N1 Order'
+      object SN11: TMenuItem
+        Caption = 'N11 Order Shipping'
+        OnClick = SN11Click
+      end
+      object SN12: TMenuItem
+        Caption = 'N12 Order Packing PO'
+        OnClick = SN12Click
+      end
+      object SN13: TMenuItem
+        Caption = 'N13 Carton Side Mark'
+        OnClick = SN13Click
+      end
+      object SN14: TMenuItem
+        Caption = 'N14 Carton New'
+        OnClick = N14Click
+      end
+      object SN15: TMenuItem
+        Caption = 'N15 Packing Memo'
+        OnClick = SN15Click
+      end
+      object SN16: TMenuItem
+        Caption = 'N16 Customs Comfirm'
+        OnClick = SN16Click
+      end
+      object SN17: TMenuItem
+        Caption = 'N17 Excel Order Import '
+        OnClick = SN17Click
+      end
+      object SN18: TMenuItem
+        Caption = 'N18 Excel Order Upload TW'
+        OnClick = SN18Click
+      end
+      object SN19: TMenuItem
+        Caption = 'N19 Order Information'
+        OnClick = SN19Click
+      end
+      object SN1A: TMenuItem
+        Caption = 'N1A RTOV Data'
+        OnClick = SN1AClick
+      end
+      object SN1B: TMenuItem
+        Caption = 'N1B Import Label Usage'
+        OnClick = SN1BClick
+      end
+    end
+    object SN2: TMenuItem
+      Caption = 'N2 Carton'
+      object SN21: TMenuItem
+        Caption = 'N21 Carton Model'
+        OnClick = SN21Click
+      end
+      object SN22: TMenuItem
+        Caption = 'N22 Model Basic'
+        OnClick = SN22Click
+      end
+      object SN23: TMenuItem
+        Caption = 'N23 Carton Order'
+        OnClick = SN23Click
+      end
+      object SN24: TMenuItem
+        Caption = 'N24 Trace Carton'
+        OnClick = SN24Click
+      end
+      object SN25: TMenuItem
+        Caption = 'N25 Model Basic(New)'
+        OnClick = SN25Click
+      end
+      object SN26: TMenuItem
+        Caption = 'N26 Copy Model Basic'
+        OnClick = SN26Click
+      end
+      object SN27: TMenuItem
+        Caption = 'N27 Carton Article Size Run'
+        OnClick = SN27Click
+      end
+      object SN28: TMenuItem
+        Caption = 'N28 Detail SideMark && PackingMemo'
+        OnClick = SN28Click
+      end
+      object SN29: TMenuItem
+        Caption = 'N29 Shoe Box Weight'
+        OnClick = SN29Click
+      end
+    end
+    object SN3: TMenuItem
+      Caption = 'N3 Packing'
+      object SN31: TMenuItem
+        Caption = 'N31 Packing Print'
+        OnClick = SN31Click
+      end
+      object SN32: TMenuItem
+        Caption = 'N32 Export Invoice'
+        OnClick = SN32Click
+      end
+      object SN33: TMenuItem
+        Caption = 'N33 Be Short Shipping'
+        OnClick = SN33Click
+      end
+      object SN34: TMenuItem
+        Caption = 'N34 Destination Packing Box && Label'
+        OnClick = SN34Click
+      end
+      object SN35: TMenuItem
+        Caption = 'N35 Order Calculate Special BOM'
+        OnClick = SN35Click
+      end
+    end
+    object SN4: TMenuItem
+      Caption = 'N4 Warehouse'
+      object SN41: TMenuItem
+        Caption = 'N41 Print Label '
+        OnClick = SN41Click
+      end
+      object SN42: TMenuItem
+        Caption = 'N42 Sale Report'
+        OnClick = SN42Click
+      end
+      object SN43: TMenuItem
+        Caption = 'N43 LPN BarCode'
+        OnClick = SN43Click
+      end
+    end
+    object SN5: TMenuItem
+      Caption = 'N5 Analysis'
+      object SN51: TMenuItem
+        Caption = 'N51 Order Analysis'
+        OnClick = SN51Click
+      end
+      object SN52: TMenuItem
+        Caption = 'N52 Forecast Order'
+        object SN521: TMenuItem
+          Caption = 'N521 Forecast Order - Sample'
+          OnClick = SN521Click
+        end
+        object SN522: TMenuItem
+          Caption = 'N522 Forecast Order- BOM'
+          OnClick = SN522Click
+        end
+      end
+      object SN53: TMenuItem
+        Caption = 'N53 Import Buylist'
+        OnClick = SN53Click
+      end
+      object SN54: TMenuItem
+        Caption = 'N54 SKUMOQ'
+        OnClick = SN54Click
+      end
+    end
+  end
+  object BLimitHideQry: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select FORMID,YN'
+      'from BLimit'
+      'where BLimit.MKID=:mkid'
+      '')
+    Left = 64
+    Top = 120
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'mkid'
+        ParamType = ptUnknown
+      end>
+  end
+end

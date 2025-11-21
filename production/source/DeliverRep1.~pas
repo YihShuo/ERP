@@ -1,0 +1,260 @@
+unit DeliverRep1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ComCtrls, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls,
+  Menus, GridsEh, DBGridEh,comobj, PrnDbgeh;
+
+type
+  TDeliverRep = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    DBGrid1: TDBGridEh;
+    Query1: TQuery;
+    DataSource1: TDataSource;
+    Label3: TLabel;
+    DTP1: TDateTimePicker;
+    Label4: TLabel;
+    DTP2: TDateTimePicker;
+    Query1LLNO: TStringField;
+    Query1CLBH: TStringField;
+    Query1SCBH: TStringField;
+    Query1DFL: TStringField;
+    Query1TempQty: TCurrencyField;
+    Query1Qty: TCurrencyField;
+    Query1YYBH: TStringField;
+    Query1YWSM: TStringField;
+    Query1BLSB: TStringField;
+    Query1MEMO: TStringField;
+    Query1YWPM: TStringField;
+    Query1DWBH: TStringField;
+    Query1USERDate: TDateTimeField;
+    Query1CFMDate: TDateTimeField;
+    Query1DepName: TStringField;
+    PopupMenu1: TPopupMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    UpdateSQL1: TUpdateSQL;
+    Query1GSBH: TStringField;
+    Query1CKBH: TStringField;
+    Query1ZWPM: TStringField;
+    Query1ZWSM: TStringField;
+    CheckBox1: TCheckBox;
+    Print1: TMenuItem;
+    PrintDBGridEh1: TPrintDBGridEh;
+    Qtemp: TQuery;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure N1Click(Sender: TObject);
+    procedure N3Click(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Print1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DeliverRep: TDeliverRep;
+  NDate:TDate;
+
+implementation
+
+uses main1;
+
+{$R *.dfm}
+
+procedure TDeliverRep.FormDestroy(Sender: TObject);
+begin
+DeliverRep:=nil;
+
+end;
+
+procedure TDeliverRep.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+procedure TDeliverRep.Button1Click(Sender: TObject);
+begin
+with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select KCLLS.LLNO,KCLLS.CLBH,KCLLS.SCBH,KCLLS.DFL,KCLLS.TempQty,ZWPM,');
+    sql.add('       KCLLS.Qty,KCLLS.YYBH,SCBLYY.YWSM,SCBLYY.ZWSM,KCLLS.BLSB,KCLLS.MEMO,CLZL.YWPM,CLZL.DWBH,');
+    sql.add('       KCLL.USERDate,KCLL.CFMDate,Bdepartment.DepName,KCLL.GSBH,KCLL.CKBH ');
+    sql.add('from KCLLS');
+    sql.add('left join KCLL on KCLL.LLNO=KCLLS.LLNO ');
+    sql.add('left join SCBLYY on SCBLYY.YYBH=KCLLS.YYBH ');
+    sql.add('left join CLZL on CLZL.CLDH=KCLLS.CLBH');
+    sql.add('left join BDepartment on BDepartment.ID=KCLL.DepID');
+    sql.add('where KCLLS.LLNO like'+''''+edit1.Text+'%'+'''');
+    sql.add('      and KCLLS.CLBH like '+''''+edit2.Text+'%'+'''');
+    sql.add('      and KCLLS.YYBH is not null');
+    sql.add('      and KCLL.GSBH='+''''+main.edit2.Text+'''');
+    //sql.add('      and KCLL.SCBH<>'+''''+'XXXXXXXXXX'+'''');
+    sql.add('      and KCLLS.Qty<>0');
+    sql.add('      and convert(smalldatetime,convert(varchar,KCLL.USERDate,111)) between ');
+    sql.add('      '''+formatdatetime('yyyy/MM/dd',DTP1.Date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.Date)+'''');
+    sql.add('      and not exists(select KCZLS.CLBH from KCZLS ');
+    sql.add('                     left join KCCK on KCCK.CKBH=KCZLS.CKBH ');
+    sql.add('                     where KCZLS.CLBH=KCLLS.CLBH ');
+    sql.add('                           and KCZLS.CLBH not like '+''''+'W%'+'''');
+    sql.add('                           and KCCK.GSBH='+''''+'VTX'+''''+')');
+    if checkbox1.Checked then
+      begin
+        sql.add('       and KCLL.CFMID<>'+''''+'NO'+'''');
+      end;
+    sql.add('order by KCLLS.LLNO,KCLLS.CLBH,KCLLS.SCBH');
+    active:=true;
+  end;
+if query1.recordcount>0 then
+  begin
+    N1.Enabled:=true;
+    //N2.Enabled:=true;
+    //N3.Enabled:=true;
+  end
+  else
+    begin 
+      N1.Enabled:=false;
+      N2.Enabled:=false;
+      N3.Enabled:=false;
+    end;
+
+
+
+end;
+
+procedure TDeliverRep.FormCreate(Sender: TObject);
+begin  
+with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select getdate() as NDate ');
+    active:=true;
+    NDate:=fieldbyname('NDate').Value;
+    active:=false;
+    DTP1.Date:=NDate-7;
+    DTP2.Date:=NDate-1;
+  end;
+end;
+
+procedure TDeliverRep.N1Click(Sender: TObject);
+begin
+with query1 do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    N2.Enabled:=true;
+    N3.Enabled:=true;
+  end;
+end;
+
+procedure TDeliverRep.N3Click(Sender: TObject);
+begin  
+with query1 do
+  begin
+    active:=false;
+    requestlive:=true;
+    cachedupdates:=true;
+    active:=true;
+    N2.Enabled:=false;
+    N3.Enabled:=false;
+  end;
+
+end;
+
+procedure TDeliverRep.N2Click(Sender: TObject);
+begin
+with query1 do
+  begin
+    first;
+    while not eof do
+      begin
+        if query1.updatestatus=usmodified then
+          begin
+            if fieldbyname('CFMDate').value<formatdatetime('yyyy/MM/dd',NDate-1) then
+              begin
+                showmessage('More than 1 day,ccan not modify.');
+              end
+              else
+                begin
+                  updateSQL1.apply(ukmodify);
+                end;
+          end;
+        next;
+      end;
+    active:=false;
+    requestlive:=false ;
+    cachedupdates:=false;
+    active:=true;
+    N2.Enabled:=false;
+    N3.enabled:=false;
+  end;
+end;
+
+procedure TDeliverRep.Button2Click(Sender: TObject);
+var   a:string;
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+ begin
+  if  Query1.active  then
+    begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+        WorkBook:=eclApp.workbooks.Add;
+        for   i:=0   to   Query1.fieldcount-1   do
+          begin
+              eclApp.Cells(1,i+1):=Query1.fields[i].FieldName;
+          end;
+
+        Query1.First;
+        j:=2;
+        while   not   Query1.Eof   do
+          begin
+            for   i:=0   to  Query1.fieldcount-1  do
+            begin
+              eclApp.Cells(j,i+1):=Query1.Fields[i].Value;
+            end;
+          Query1.Next;
+          inc(j);
+          end;
+       eclapp.columns.autofit;
+       eclApp.Visible:=True;
+       showmessage('Succeed');
+      except
+        on   F:Exception   do
+          showmessage(F.Message);
+      end;
+    end;
+
+
+end;
+
+procedure TDeliverRep.Print1Click(Sender: TObject);
+begin
+PrintDbgrideh1.preview;
+end;
+
+end.

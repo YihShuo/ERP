@@ -1,0 +1,355 @@
+object MA_Inspection_RY: TMA_Inspection_RY
+  Left = 504
+  Top = 340
+  Width = 784
+  Height = 470
+  Caption = 'MA_Inspection_RY'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 768
+    Height = 63
+    Align = alTop
+    Color = clBlack
+    TabOrder = 0
+    object imgClose: TImage
+      Left = 734
+      Top = 15
+      Width = 30
+      Height = 29
+      Align = alCustom
+      Anchors = [akTop, akRight]
+      Picture.Data = {
+        0A544A504547496D6167650D070000FFD8FFE000104A46494600010101007800
+        780000FFE1005A4578696600004D4D002A000000080005030100050000000100
+        00004A0303000100000001000000005110000100000001010000005111000400
+        0000010000127451120004000000010000127400000000000186A00000B18FFF
+        DB00430002010102010102020202020202020305030303030306040403050706
+        07070706070708090B0908080A0807070A0D0A0A0B0C0C0C0C07090E0F0D0C0E
+        0B0C0C0CFFDB004301020202030303060303060C0807080C0C0C0C0C0C0C0C0C
+        0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
+        0C0C0C0C0C0C0C0C0CFFC00011080023002303012200021101031101FFC4001F
+        0000010501010101010100000000000000000102030405060708090A0BFFC400
+        B5100002010303020403050504040000017D0102030004110512213141061351
+        6107227114328191A1082342B1C11552D1F02433627282090A161718191A2526
+        2728292A3435363738393A434445464748494A535455565758595A6364656667
+        68696A737475767778797A838485868788898A92939495969798999AA2A3A4A5
+        A6A7A8A9AAB2B3B4B5B6B7B8B9BAC2C3C4C5C6C7C8C9CAD2D3D4D5D6D7D8D9DA
+        E1E2E3E4E5E6E7E8E9EAF1F2F3F4F5F6F7F8F9FAFFC4001F0100030101010101
+        010101010000000000000102030405060708090A0BFFC400B511000201020404
+        0304070504040001027700010203110405213106124151076171132232810814
+        4291A1B1C109233352F0156272D10A162434E125F11718191A262728292A3536
+        3738393A434445464748494A535455565758595A636465666768696A73747576
+        7778797A82838485868788898A92939495969798999AA2A3A4A5A6A7A8A9AAB2
+        B3B4B5B6B7B8B9BAC2C3C4C5C6C7C8C9CAD2D3D4D5D6D7D8D9DAE2E3E4E5E6E7
+        E8E9EAF2F3F4F5F6F7F8F9FAFFDA000C03010002110311003F00FC72FF00827E
+        FF00C13AFE297FC14BBE3B5BF80FE17E86DA85E2A89F52D46E098B4FD12DF383
+        3DCCB82117A80A32CE785563C57DA9FB1FFF00C1106E3F66DFF83817E0E7ECE5
+        FB4059F87FC61A27882CEE7C48F1E9B7723D8EAF6B169BA85C421B84902FDA6C
+        4A3C6C06E08472AC33FA81F00B5CD17FE0DE0FF8370F4CF88DA7F8720FF8599E
+        2BD16C7589A1D46D82CD79AFEA88AD6F0DD01E5C8D15A2C9868B706096F22821
+        98B57E56FF00C1BF9FB4C78F3F6AEFF838ABE0EF8E3E2678BB5AF18F8A3557D7
+        FCFD4754B932B80741D50AC518FBB144ACE42451858D01DAAAA302819F5F7FC1
+        DC7FF04C4F813FB2A7ECB3F0F7E257C32F86FE1DF00789AFBC570F86AF0E836E
+        6C6CEEECDACEF6E06FB68C883CC12443F7A1048C0E19885503E06FF828B7FC1B
+        8BFB437FC1377E08DA7C43F125AE83E2CF0B281FDB175E1B9A5BA3E1E638C1B9
+        568D488C93B7CC5DC80E01232B9FD71FF83D82551FF04E2F8669B97CC6F8936E
+        42E7920697A8E4E3DB23F31EB5C37FC1AAFF00F057EF147EDA361E2BFD9A7E36
+        6A9278EEEAC7456BCF0F5F6AE8B7135E696A91DBDCE9D70767EFD5432B87999A
+        4612C8A4B2AA85047F39B457D1DFF0573FD8F34EFD81BFE0A45F16BE13E8B34D
+        2E85E17D6049A489726486C6EA08AF2DA266624BB470DC4685C9CB942D819C02
+        803F763FE0AC9E1397FE0A77FF0006B57803E217862DAD756D47C1DA1687E39B
+        8B6D2EE43436B258DAC967AAA8258E56D525BEDC8CDB97ECEC0E5D769FE6BFC0
+        7E3DD6FE16F8CF4BF11786F56D4343D7B45B94BBB0D42C67682E2D2643957475
+        20AB03DC57EBB7FC1B25FF0005E5D17F6257B8F80FF19B515B5F85BE20BC33E8
+        3ABCD18687C3977331F3A39CE33F65998AB163C46FB98FCAEC57E90FDBB3FE0D
+        0EF077ED49E2C5F895FB2DFC47F0AF87BC31E2F71A8268B765AEF448D24CB196
+        C2EADF79F258905622A554676B85DA8003F0E7F69CFDB9FE307ED9D3E9727C55
+        F88DE2CF1E7F62875B05D5EF9A78ED37E37145FBA09C0C9C64E057E9C7FC198D
+        FB32788BC71FB7DF8B3E29A59C91F84BC0BE199F4C9AF195824D7D78F188A043
+        8C31114733B0072A36647CE2BABF865FF0649FC58BFF001AD947E31F8C1E01D3
+        3C3A589BCB8D22D2EAF2F1463811C72244849381F338C0C9E7A57D55FB75FF00
+        C147BE007FC1B89FB15DD7ECEBFB39B69FA97C5D6B791CC6185E4B617B3048E5
+        D4F559D701AECA0DC90F61146BB238846A403F1E3FE0E38F89FA5FC5EFF82D67
+        C78D6347BCB5BEB18754B2D2BCEB6944B1996CB4CB4B299770246565B77523B1
+        523A8A2BE2BD6358BBF10EAD75A86A175717D7D7D33DC5CDCDC48659AE247259
+        9DD9892CCCC4924924924D14015EBD23E0AFED95F17FF66BD2AE6C7E1CFC56F8
+        91E01B1BC93CEB8B7F0E789AF74A8A77C01B9D60910336154648CE147A514500
+        75DAD7FC151BF69AF12695358EA3FB457C76D42C6E9764D6F73E3ED5658A55F4
+        6569C823D88AF0A77691CB312CCC72493C93451400945145007FFFD9}
+      Stretch = True
+    end
+    object Label1: TLabel
+      Left = 19
+      Top = 11
+      Width = 35
+      Height = 35
+      Caption = 'RY'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -27
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = True
+    end
+    object Label2: TLabel
+      Left = 483
+      Top = 21
+      Width = 65
+      Height = 25
+      Caption = 'CHINA'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -20
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = True
+    end
+    object edtRY: TEdit
+      Left = 81
+      Top = 7
+      Width = 271
+      Height = 42
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -27
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+    end
+    object pnlQuery: TPanel
+      Left = 353
+      Top = 6
+      Width = 73
+      Height = 43
+      Caption = 'Query'
+      Color = clGray
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -21
+      Font.Name = #24494#36575#27491#40657#39636
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnClick = pnlQueryClick
+    end
+    object CheckBox1: TCheckBox
+      Left = 464
+      Top = 24
+      Width = 15
+      Height = 23
+      Caption = 'CHINA'
+      TabOrder = 2
+    end
+  end
+  object gdDepRyList: TDBGrid
+    Left = 0
+    Top = 63
+    Width = 768
+    Height = 368
+    Align = alClient
+    Color = clGradientInactiveCaption
+    DataSource = ds
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = #24494#36575#27491#40657#39636
+    Font.Style = [fsBold]
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+    ParentFont = False
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clAqua
+    TitleFont.Height = -13
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    OnDblClick = gdDepRyListDblClick
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'DepNo'
+        Title.Color = clAqua
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -27
+        Title.Font.Name = 'Arial'
+        Title.Font.Style = [fsItalic]
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'DepName'
+        Title.Color = clAqua
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -27
+        Title.Font.Name = 'Arial'
+        Title.Font.Style = [fsItalic]
+        Width = 164
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'SCBH'
+        Title.Caption = 'RY'
+        Title.Color = clAqua
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -27
+        Title.Font.Name = 'Arial'
+        Title.Font.Style = [fsItalic]
+        Width = 136
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Pairs'
+        Title.Color = clAqua
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -27
+        Title.Font.Name = 'Arial'
+        Title.Font.Style = [fsItalic]
+        Width = 77
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Production_Qty'
+        Title.Caption = 'Pro_Qty'
+        Title.Color = clAqua
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -27
+        Title.Font.Name = 'Arial'
+        Title.Font.Style = [fsItalic]
+        Width = 136
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'LotSize'
+        Title.Color = clAqua
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -27
+        Title.Font.Name = 'Arial'
+        Title.Font.Style = [fsItalic]
+        Width = 100
+        Visible = True
+      end
+      item
+        Alignment = taRightJustify
+        Expanded = False
+        FieldName = 'ShipDate'
+        Title.Color = clAqua
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -27
+        Title.Font.Name = 'Arial'
+        Title.Font.Style = [fsItalic]
+        Width = 118
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Qty'
+        Title.Color = clAqua
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -27
+        Title.Font.Name = 'Arial'
+        Title.Font.Style = [fsItalic]
+        Width = 51
+        Visible = True
+      end>
+  end
+  object Qry: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'Select WOPR.DepNO,BDepartment.DepName,WOPR.SCBH,sum(WOPR.Qty) as' +
+        ' Qty,DDZL.Pairs,sum(WOPR.Qty+WOPR.NGQty) as Production_Qty,WOPR_' +
+        'MA.LotSize,DDZL.ShipDate'
+      #9'from WOPR'
+      #9'left join BDepartment on BDepartment.ID=WOPR.DepNO'
+      #9'left join ddzl on ddzl.ddbh=WOPR.SCBH'
+      
+        #9'left join (select WOPR_MA.SCBH,WOPR_MA.DepNo,sum (WOPR_MA.PrdQt' +
+        'y) as LotSize from WOPR_MA where WOPR_MA.GXLB='#39'DI'#39' group by WOPR' +
+        '_MA.SCBH,WOPR_MA.DepNo) '
+      
+        #9'          WOPR_MA on WOPR_MA.SCBH=WOPR.SCBH and WOPR.DepNo=WOPR' +
+        '_MA.DepNo'
+      #9'where   WOPR.DepNO='#39'A01030310'#39' and WOPR.GXLB='#39'AR'#39' '
+      '       and WOPR.SCBH='#39'Y2311-0090'#39' '
+      
+        ' and WOPR.SCBH in (select DDBH from YWCP where ((YWCP.SB<>'#39'3'#39') o' +
+        'r  (Convert(smalldatetime,'#39'2023/10/31'#39')-YWCP.EXEDATE=1)))'
+      
+        #9'Group by WOPR.DepNO,BDepartment.DepName,WOPR.SCBH,DDZL.Pairs,DD' +
+        'ZL.ShipDate ,WOPR_MA.LotSize'
+      ' Order by WOPR.SCBH'
+      '')
+    Left = 166
+    Top = 175
+    object QryDepNo: TStringField
+      FieldName = 'DepNo'
+      FixedChar = True
+      Size = 10
+    end
+    object QryDepName: TStringField
+      FieldName = 'DepName'
+      FixedChar = True
+      Size = 50
+    end
+    object QrySCBH: TStringField
+      FieldName = 'SCBH'
+      FixedChar = True
+    end
+    object QryQty: TIntegerField
+      FieldName = 'Qty'
+    end
+    object QryPairs: TIntegerField
+      FieldName = 'Pairs'
+    end
+    object QryShipDate: TDateTimeField
+      FieldName = 'ShipDate'
+    end
+    object QryProduction_Qty: TIntegerField
+      FieldName = 'Production_Qty'
+    end
+    object QryLotSize: TIntegerField
+      FieldName = 'LotSize'
+    end
+  end
+  object ds: TDataSource
+    DataSet = Qry
+    Left = 165
+    Top = 208
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    Left = 214
+    Top = 175
+  end
+  object Query2: TQuery
+    DatabaseName = 'DB'
+    Left = 254
+    Top = 175
+  end
+end

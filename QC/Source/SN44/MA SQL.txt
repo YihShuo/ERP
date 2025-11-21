@@ -1,0 +1,7 @@
+Select WOPR_MA.SCDate, WOPR_MA.SCBH, DDZL.ARTICLE, DDZL.Pairs, WOPR_MA.PrdQty,WOPR_MA.InsQty ,WOPR_MA.DefQty,
+       100*Round(1.00*WOPR_MA.DefQty/ WOPR_MA.InsQty,2) as DefectRate,
+       Case when WOPR_MA.Result='P' then 'Pass' else 'Fail' end  as Result,BDepartment.DepName,BDepartment.Xuong
+From WOPR_MA
+left join DDZL on DDZL.DDBH=WOPR_MA.SCBH 
+left join BDepartment on BDepartment.ID=WOPR_MA.DepNo
+where WOPR_MA.GXLB='HI' 

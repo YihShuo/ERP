@@ -1,0 +1,2060 @@
+unit TotalApplyReport1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, StdCtrls, DBCtrls, GridsEh, DBGridEh, ComCtrls,
+  Mask, Buttons, ExtCtrls, Comobj, IniFiles, dateutils, TeEngine, Series,
+  TeeProcs, Chart, DbChart;
+
+type
+  TTotalApplyReport = class(TForm)
+    Panel1: TPanel;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    LBCombo: TComboBox;
+    Button3: TButton;
+    DepEdit: TEdit;
+    Label1: TLabel;
+    NDepEdit: TEdit;
+    Label5: TLabel;
+    SGDet: TQuery;
+    SGDetXH: TFloatField;
+    SGDetSGNO: TStringField;
+    SGDetDepID: TStringField;
+    SGDetDepMemo: TStringField;
+    SGDetLB: TStringField;
+    SGDetCLBH: TStringField;
+    SGDetYWPM: TStringField;
+    SGDetZWPM: TStringField;
+    SGDetdwbh: TStringField;
+    SGDetPrice2: TCurrencyField;
+    SGDetUSPrice: TFloatField;
+    SGDetCWHL: TCurrencyField;
+    SGDetQty: TFloatField;
+    SGDetACC2: TCurrencyField;
+    SGDetACCUS: TFloatField;
+    SGDetMemo: TStringField;
+    SGDetUSERID: TStringField;
+    SGDetSGDate: TDateTimeField;
+    SGDetPrice: TCurrencyField;
+    SGDetACC: TCurrencyField;
+    DS1: TDataSource;
+    qry_Print: TQuery;
+    qry_PrintXH: TFloatField;
+    qry_PrintYWPM: TStringField;
+    qry_PrintZWPM: TStringField;
+    qry_Printdwbh: TStringField;
+    qry_PrintPrice: TCurrencyField;
+    qry_PrintQty: TFloatField;
+    qry_PrintACC: TCurrencyField;
+    qry_PrintMemo: TStringField;
+    QTemp: TQuery;
+    qry_PrintCLBH: TStringField;
+    qry_PrintBJNO: TStringField;
+    LBName: TLabel;
+    DTP2: TDateTimePicker;
+    Label4: TLabel;
+    DTP1: TDateTimePicker;
+    Label6: TLabel;
+    SGDetXuong: TStringField;
+    PC1: TPageControl;
+    TS1: TTabSheet;
+    TS2: TTabSheet;
+    DBGridEh1: TDBGridEh;
+    DBGridEh2: TDBGridEh;
+    Splitter1: TSplitter;
+    DBGridEh3: TDBGridEh;
+    SGDetSt1Qry: TQuery;
+    DS2: TDataSource;
+    SGDetSt1QryXuong: TStringField;
+    SGDetSt1QryVNACC: TFloatField;
+    SGDetSt1QryPer: TFloatField;
+    SGDetSt2Qry: TQuery;
+    DS3: TDataSource;
+    SGDetSt2QryDepMemo: TStringField;
+    SGDetSt2QryVNACC: TFloatField;
+    SGDetSt2QryPer: TFloatField;
+    Label7: TLabel;
+    DepMemoEdit: TEdit;
+    Label8: TLabel;
+    XuongEdit: TEdit;
+    Label9: TLabel;
+    CFMIDEdit: TEdit;
+    SGDetCHKID: TStringField;
+    SGDetCHKDate: TDateTimeField;
+    SGDetCFMID: TStringField;
+    SGDetCFMDate: TDateTimeField;
+    SGDetCFMID1: TStringField;
+    SGDetCFMDate1: TDateTimeField;
+    Label10: TLabel;
+    CHKIDEdit: TEdit;
+    Label11: TLabel;
+    CFMID1Edit: TEdit;
+    CheckBox1: TCheckBox;
+    Label3: TLabel;
+    NXuongEdit: TEdit;
+    Label12: TLabel;
+    SGDetSt1QryUSACC: TFloatField;
+    SGDetSt2QryUSACC: TFloatField;
+    Panel2: TPanel;
+    Label13: TLabel;
+    SGDetSt2QryXuong: TStringField;
+    SGDetSt2QryDepID: TStringField;
+    Splitter2: TSplitter;
+    TabSheet1: TTabSheet;
+    DS4: TDataSource;
+    SGDetSt3Qry: TQuery;
+    SGDetSt3QryDEPNAME: TStringField;
+    SGDetSt3QryBudget: TIntegerField;
+    SGDetSt3Qrythismonth: TFloatField;
+    SGDetSt3QryStatus: TStringField;
+    DS5: TDataSource;
+    SGDetSt4Qry: TQuery;
+    StringField1: TStringField;
+    IntegerField1: TIntegerField;
+    StringField2: TStringField;
+    SGDetSt4Qrythisseason: TFloatField;
+    SGDetSt4Qrybalance: TFloatField;
+    Label14: TLabel;
+    ScrollBox1: TScrollBox;
+    DBGridEh4: TDBGridEh;
+    Label15: TLabel;
+    DBGridEh5: TDBGridEh;
+    DBGridEh6: TDBGridEh;
+    Label18: TLabel;
+    DS6: TDataSource;
+    SGDetSt5Qry: TQuery;
+    StringField3: TStringField;
+    FloatField3: TFloatField;
+    IntegerField2: TIntegerField;
+    StringField4: TStringField;
+    CheckBox2: TCheckBox;
+    CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure DepEditKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure NDepEditKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure qry_PrintCalcFields(DataSet: TDataSet);
+    procedure LBComboChange(Sender: TObject);
+    procedure DBGridEh2DblClick(Sender: TObject);
+    procedure DBGridEh3DblClick(Sender: TObject);
+    procedure SGDetSt3QryCalcFields(DataSet: TDataSet);
+    procedure DBGridEh4DblClick(Sender: TObject);
+    procedure DBGridEh4DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure DBGridEh5DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure SGDetSt4QryCalcFields(DataSet: TDataSet);
+    procedure DBGridEh6DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure Label1DblClick(Sender: TObject);
+    procedure DBGridEh6DblClick(Sender: TObject);
+  private
+    AppDir: string;
+    PurchaseN226_ISO_01: string;
+    PurchaseN226_ISO_02: string;
+    { Private declarations }
+    procedure ReadIni();
+    function GetMutiDepIDSubSQL(Str: string): string;
+    procedure DepEditPaste();
+    procedure NDepEditPaste();
+    procedure XuongEditPaste();
+    procedure NXuongEditPaste();
+    function GetMutiXuongSubSQL(Str: string): string;
+    //
+    procedure DetailQuery();
+    procedure StaticsQuery();
+    procedure Statics_NewQuery();
+  public
+    VNPrice_DiplayFormat: string;
+    VNPrice_Decimal: Byte;
+    { Public declarations }
+  end;
+
+var
+  TotalApplyReport: TTotalApplyReport;
+  Dep, NDep, Xuong, NXuong: string;
+
+implementation
+
+uses TotalApplyReport_Print1, main1, FunUnit, untClipboard;
+
+{$R *.dfm}
+
+procedure TTotalApplyReport.ReadIni();
+var
+  MyIni: Tinifile;
+  AppDir: string;
+begin
+  //
+  VNPrice_DiplayFormat := '#,##0';
+  VNPrice_Decimal := 0;
+  PurchaseN226_ISO_01 := 'T-KH-WI001-01C';
+  PurchaseN226_ISO_02 := 'T-KH-WI001-02C';
+  AppDir := ExtractFilePath(Application.ExeName);
+  if FileExists(AppDir + '\ComName.ini') = true then
+  begin
+    try
+      MyIni := Tinifile.Create(AppDir + '\ComName.ini');
+      VNPrice_DiplayFormat := MyIni.ReadString('VNPrice', 'DiplayFormat', '#,##0');
+      VNPrice_Decimal := strtoint(MyIni.ReadString('VNPrice', 'Decimal', '0'));
+      PurchaseN226_ISO_01 := MyIni.ReadString('ERP', 'PurchaseN226_ISO_01', '');
+      PurchaseN226_ISO_02 := MyIni.ReadString('ERP', 'PurchaseN226_ISO_02', '');
+    finally
+      MyIni.Free;
+    end;
+  end;
+  TCurrencyField(qry_Print.FieldByName('Price')).DisplayFormat := VNPrice_DiplayFormat;
+  TCurrencyField(qry_Print.FieldByName('ACC')).DisplayFormat := VNPrice_DiplayFormat;
+  TCurrencyField(SGDet.FieldByName('Price')).DisplayFormat := VNPrice_DiplayFormat;
+  TCurrencyField(SGDet.FieldByName('ACC')).DisplayFormat := VNPrice_DiplayFormat;
+  TCurrencyField(SGDet.FieldByName('CWHL')).DisplayFormat := VNPrice_DiplayFormat;
+end;
+
+procedure TTotalApplyReport.FormDestroy(Sender: TObject);
+begin
+  TotalApplyReport := nil;
+end;
+
+procedure TTotalApplyReport.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action := CaFree;
+end;
+
+procedure TTotalApplyReport.FormCreate(Sender: TObject);
+begin
+  AppDir := ExtractFilePath(Application.ExeName);
+  DTP1.Date := startofthemonth(date);
+  DTP2.date := endofthemonth(date);
+  LBComboChange(sender);
+  ReadIni();
+  TS2.Visible := false;
+  TS2.Destroy;
+  if (main.Edit2.Text = 'VA12') or (main.Edit2.Text = 'VR1') then
+  begin
+    if main.Edit1.Text <> '51288' then
+    begin
+      Button2.Visible := false;
+      Button3.Visible := false;
+    end;
+  end;
+end;
+
+//
+procedure TTotalApplyReport.DetailQuery();
+begin
+  Dep := GetMutiDepIDSubSQL(DepEdit.Text);
+  NDep := GetMutiDepIDSubSQL(NDepEdit.Text);
+  Xuong := GetMutiXuongSubSQL(XuongEdit.Text);
+  NXuong := GetMutiXuongSubSQL(NXuongEdit.Text);
+  with SGDet do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('select ROW_NUMBER() OVER(ORDER BY SGDH.SGNO DESC) AS XH, SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, ');
+    SQL.Add('       CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, ');
+    SQL.Add('       case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, ');
+    SQL.Add('       CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, ');
+    SQL.Add('       isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong, ');
+    SQL.Add('       SGDH.CHKID,SGDH.CHKDate,SGDH.CFMID,SGDH.CFMDate,SGDH.CFMID1,SGDH.CFMDate1 ');
+    SQL.Add('from SGDHS ');
+    SQL.Add('left join SGDH on SGDH.SGNO=SGDHS.SGNO ');
+    SQL.Add('left join CLZL on CLZL.CLDH = SGDHS.CLBH ');
+    SQL.Add('left join CGBJ on CGBJ.BJNO=SGDHS.BJNO ');
+    SQL.Add('left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH ');
+    SQL.Add('left join BDepartment on BDepartment.ID=SGDH.DepID ');
+    SQL.Add('left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB=''02'' ');
+    SQL.Add('left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(SGDH.SGDate) and CWHLS.HLYEAR=YEAR(SGDH.SGDate) ');
+    SQL.Add('where 1=1 and isnull(SGDH.flowflag,'''') <> ''X'' ');
+    if CheckBox1.Checked = true then
+      SQL.Add('      and SGDH.CHKID<>''NO'' and SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' ');
+    if CheckBox3.Checked = true then
+      SQL.Add('      and isnull(SGDH.Budget_chk,0) = 1 ');
+    {    if CHKIDEdit.Text<>'' then
+        SQL.Add(' and SGDH.CHKID like '''+CHKIDEdit.Text+'%'' ');
+        if CFMIDEdit.Text<>'' then
+        SQL.Add(' and SGDH.CFMID like '''+CFMIDEdit.Text+'%'' ');
+        if CFMID1Edit.Text<>'' then
+        SQL.Add(' and SGDH.CFMID1 like '''+CFMID1Edit.Text+'%'' ');  }
+    SQL.Add('      and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+    sql.add('          ''' + formatdatetime('yyyy/MM/dd', DTP1.Date) + '''' + 'and ' + '''' + formatdatetime('yyyy/MM/dd',
+      DTP2.Date) + '''');
+    if Edit1.Text <> '' then
+      SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+    if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+      SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+    else if LBCombo.Text = 'not 03' then
+      SQL.Add('    and SGDH.LB <> ''03'' ');
+    {    if XuongEdit.Text<>'' then
+          SQL.Add('    and IsNull(BDepartment.Xuong,BDepartment.GSBH)  '+Xuong );
+        if NXuongEdit.Text<>'' then
+          SQL.Add('    and IsNull(BDepartment.Xuong,BDepartment.GSBH) not '+NXuong );   }
+    if DepMemoEdit.Text <> '' then
+      SQL.Add('    and BDepartment.DepMemo like ''%' + DepMemoEdit.Text + '%'' ');
+    if Dep <> '' then
+      SQL.Add('    and SGDH.DepID ' + Dep);
+    if NDep <> '' then
+      SQL.Add('    and SGDH.DepID not ' + NDep);
+    SQL.Add('order by SGDHS.SGNO DESC');
+    //funcObj.WriteErrorLog(sql.Text);
+    //showmessage(SQL.Text);
+    Active := true;
+  end;
+  with qry_Print do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('select ROW_NUMBER() OVER(ORDER BY ywpm) AS XH, SGDHS.CLBH, SGDHS.BJNO, ywpm, zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, Price, Qty, Price*Qty as ACC ');
+    SQL.Add('from (select SGDHS.CLBH, SGDHS.BJNO, sum(SGDHS.Qty) as Qty, case when max(SGDHS.USPrice) is null then max(SGDHS.VNPrice) ');
+    SQL.Add('             else max(CWHLS.CWHL)*max(SGDHS.USPrice) end as Price ');
+    SQL.Add('      from SGDHS ');
+    SQL.Add('      left join SGDH on SGDH.SGNO=SGDHS.SGNO ');
+    SQL.Add('      left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(SGDH.SGDate) and CWHLS.HLYEAR=YEAR(SGDH.SGDate) ');
+    SQL.Add('      where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO''  and isnull(SGDH.flowflag,'''') <> ''X'' ');
+    SQL.Add('            and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+    sql.add('                ''' + formatdatetime('yyyy/MM/dd', DTP1.Date) + '''' + 'and ' + '''' + formatdatetime('yyyy/MM/dd',
+      DTP2.Date) + '''');
+    if Edit1.Text <> '' then
+      SQL.Add('          and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+    if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+      SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+    else if LBCombo.Text = 'not 03' then
+      SQL.Add('    and SGDH.LB <> ''03'' ');
+    if Dep <> '' then
+      SQL.Add('          and SGDH.DepID ' + Dep);
+    if NDep <> '' then
+      SQL.Add('          and SGDH.DepID not ' + NDep);
+    SQL.Add('      group by SGDHS.CLBH,SGDHS.BJNO) SGDHS ');
+    SQL.Add('left join CLZL on CLZL.CLDH = SGDHS.CLBH ');
+    SQL.Add('left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB=''02'' ');
+    SQL.Add('ORDER BY ywpm');
+    Active := true;
+  end;
+end;
+
+procedure TTotalApplyReport.StaticsQuery();
+var
+  VNACC, CWHL: string;
+begin
+  VNACC := '100';
+  with QTemp do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('select CAST(CWHL as int) as CWHL from CWHLS where CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=' + formatdatetime('MM',
+      DTP1.Date) + ' and CWHLS.HLYEAR=' + formatdatetime('YYYY', DTP1.Date) + ' ');
+    Active := true;
+    if isEmpty then
+    begin
+      Active := false;
+      SQL.Clear;
+      if formatdatetime('MM', DTP1.Date - 1) <> '12' then
+        SQL.Add('select CAST(CWHL as int) as CWHL from CWHLS where CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=' + formatdatetime('MM',
+          DTP1.Date - 1) + ' and CWHLS.HLYEAR=' + formatdatetime('YYYY', DTP1.Date) + ' ')
+      else
+        SQL.Add('select CAST(CWHL as int) as CWHL from CWHLS where CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=' + formatdatetime('MM',
+          DTP1.Date - 1) + ' and CWHLS.HLYEAR=' + formatdatetime('YYYY', DTP1.Date - 1) + ' ');
+      Active := true;
+      CWHL := fields[0].AsString;
+    end
+    else
+      CWHL := fields[0].AsString;
+  end;
+  Label13.Caption := formatdatetime('YYYY/MM/DD', DTP1.Date) + '匯率 : ' + CWHL;
+
+  with QTemp do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('	Select Sum(Acc) as VNACC from (');
+    SQL.Add('	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, ');
+    SQL.Add('		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, ');
+    SQL.Add('		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, ');
+    SQL.Add('		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, ');
+    SQL.Add('		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong ');
+    SQL.Add('	from SGDHS ');
+    SQL.Add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO ');
+    SQL.Add('	left join CLZL on CLZL.CLDH = SGDHS.CLBH ');
+    SQL.Add('	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO ');
+    SQL.Add('	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH ');
+    SQL.Add('	left join BDepartment on BDepartment.ID=SGDH.DepID ');
+    SQL.Add('	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB=''02'' ');
+    SQL.Add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) ');
+    SQL.Add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' ');
+    SQL.Add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+    SQL.add('          ''' + formatdatetime('yyyy/MM/dd', DTP1.Date) + '''' + 'and ' + '''' + formatdatetime('yyyy/MM/dd',
+      DTP2.Date) + '''');
+    if Edit1.Text <> '' then
+      SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+    if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+      SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+    else if LBCombo.Text = 'not 03' then
+      SQL.Add('    and SGDH.LB <> ''03'' ');
+    //    if XuongEdit.Text<>'' then
+    //      SQL.Add('    and IsNull(BDepartment.Xuong,BDepartment.GSBH) = '''+XuongEdit.Text+''' ');
+    if DepMemoEdit.Text <> '' then
+      SQL.Add('    and BDepartment.DepMemo like ''%' + DepMemoEdit.Text + '%'' ');
+    if Dep <> '' then
+      SQL.Add('    and SGDH.DepID ' + Dep);
+    if NDep <> '' then
+      SQL.Add('    and SGDH.DepID not ' + NDep);
+    SQL.Add('	) SGDH');
+    //FuncObj.WriteErrorLog(sql.Text);
+    Active := true;
+    if RecordCount > 0 then
+    begin
+      if FieldByName('VNACC').AsString <> '' then
+        VNACC := FieldByName('VNACC').AsString;
+    end;
+    Active := false;
+  end;
+  //
+  with SGDetSt1Qry do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('Select * from (');
+    SQL.Add('	Select Xuong , Sum(Acc) as VNACC, Round((Sum(Acc)/' + VNACC + ')*100,4) as Per,CAST(Sum(Acc)/' + CWHL +
+      ' as decimal(10,2)) as USACC from (');
+    SQL.Add('	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, ');
+    SQL.Add('		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, ');
+    SQL.Add('		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, ');
+    SQL.Add('		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, ');
+    SQL.Add('		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong');
+    SQL.Add('	from SGDHS ');
+    SQL.Add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO ');
+    SQL.Add('	left join CLZL on CLZL.CLDH = SGDHS.CLBH ');
+    SQL.Add('	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO ');
+    SQL.Add('	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH ');
+    SQL.Add('	left join BDepartment on BDepartment.ID=SGDH.DepID ');
+    SQL.Add('	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB=''02'' ');
+    SQL.Add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) ');
+    SQL.Add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' ');
+    SQL.Add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+    SQL.add('          ''' + formatdatetime('yyyy/MM/dd', DTP1.Date) + '''' + 'and ' + '''' + formatdatetime('yyyy/MM/dd',
+      DTP2.Date) + '''');
+    if Edit1.Text <> '' then
+      SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+    if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+      SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+    else if LBCombo.Text = 'not 03' then
+      SQL.Add('    and SGDH.LB <> ''03'' ');
+    //     if XuongEdit.Text<>'' then
+    //       SQL.Add('    and IsNull(BDepartment.Xuong,BDepartment.GSBH) = '''+XuongEdit.Text+''' ');
+    if DepMemoEdit.Text <> '' then
+      SQL.Add('    and BDepartment.DepMemo like ''%' + DepMemoEdit.Text + '%'' ');
+    if Dep <> '' then
+      SQL.Add('    and SGDH.DepID ' + Dep);
+    if NDep <> '' then
+      SQL.Add('    and SGDH.DepID not ' + NDep);
+    SQL.Add('	) SGDH');
+    SQL.Add('	Group by Xuong  ');
+    SQL.Add('	Union all ');
+    SQL.Add('	Select ''Total'' as Xuong, Sum(Acc) as VNACC, Round((Sum(Acc)/' + VNACC + ')*100,4) as Per,CAST(Sum(Acc)/' + CWHL +
+      ' as decimal(10,2)) as USACC from (');
+    SQL.Add('	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, ');
+    SQL.Add('		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, ');
+    SQL.Add('		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, ');
+    SQL.Add('		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, ');
+    SQL.Add('		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong');
+    SQL.Add('	from SGDHS ');
+    SQL.Add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO ');
+    SQL.Add('	left join CLZL on CLZL.CLDH = SGDHS.CLBH ');
+    SQL.Add('	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO ');
+    SQL.Add('	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH ');
+    SQL.Add('	left join BDepartment on BDepartment.ID=SGDH.DepID ');
+    SQL.Add('	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB=''02'' ');
+    SQL.Add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) ');
+    SQL.Add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' ');
+    SQL.Add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+    SQL.add('          ''' + formatdatetime('yyyy/MM/dd', DTP1.Date) + '''' + 'and ' + '''' + formatdatetime('yyyy/MM/dd',
+      DTP2.Date) + '''');
+    if Edit1.Text <> '' then
+      SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+    if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+      SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+    else if LBCombo.Text = 'not 03' then
+      SQL.Add('    and SGDH.LB <> ''03'' ');
+    //    if XuongEdit.Text<>'' then
+    //      SQL.Add('    and IsNull(BDepartment.Xuong,BDepartment.GSBH) = '''+XuongEdit.Text+''' ');
+    if DepMemoEdit.Text <> '' then
+      SQL.Add('    and BDepartment.DepMemo like ''%' + DepMemoEdit.Text + '%'' ');
+    if Dep <> '' then
+      SQL.Add('    and SGDH.DepID ' + Dep);
+    if NDep <> '' then
+      SQL.Add('    and SGDH.DepID not ' + NDep);
+    SQL.Add('	) SGDH');
+    SQL.Add(') SGDH  Order by Per asc');
+    //funcObj.WriteErrorLog(sql.Text);
+    //showmessage(SQL.Text);
+    Active := true;
+  end;
+  with SGDetSt2Qry do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('Select * from (');
+    SQL.Add('	Select Xuong, DepID, DepMemo , Sum(Acc) as VNACC, Round((Sum(Acc)/' + VNACC + ')*100,4) as Per,CAST(Sum(Acc)/' +
+      CWHL + ' as decimal(10,2)) as USACC from (');
+    SQL.Add('	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, ');
+    SQL.Add('		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, ');
+    SQL.Add('		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, ');
+    SQL.Add('		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, ');
+    SQL.Add('		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong');
+    SQL.Add('	from SGDHS ');
+    SQL.Add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO ');
+    SQL.Add('	left join CLZL on CLZL.CLDH = SGDHS.CLBH ');
+    SQL.Add('	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO ');
+    SQL.Add('	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH ');
+    SQL.Add('	left join BDepartment on BDepartment.ID=SGDH.DepID ');
+    SQL.Add('	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB=''02'' ');
+    SQL.Add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) ');
+    SQL.Add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' ');
+    SQL.Add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+    SQL.add('          ''' + formatdatetime('yyyy/MM/dd', DTP1.Date) + '''' + 'and ' + '''' + formatdatetime('yyyy/MM/dd',
+      DTP2.Date) + '''');
+    if Edit1.Text <> '' then
+      SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+    if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+      SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+    else if LBCombo.Text = 'not 03' then
+      SQL.Add('    and SGDH.LB <> ''03'' ');
+    //     if XuongEdit.Text<>'' then
+    //      SQL.Add('    and IsNull(BDepartment.Xuong,BDepartment.GSBH) = '''+XuongEdit.Text+''' ');
+    if DepMemoEdit.Text <> '' then
+      SQL.Add('    and BDepartment.DepMemo like ''%' + DepMemoEdit.Text + '%'' ');
+    if Dep <> '' then
+      SQL.Add('    and SGDH.DepID ' + Dep);
+    if NDep <> '' then
+      SQL.Add('    and SGDH.DepID not ' + NDep);
+    SQL.Add('	) SGDH');
+    SQL.Add('	Group by Xuong, DepID, DepMemo  ');
+    SQL.Add('	Union all ');
+    SQL.Add('	Select ''Total'' as Xuong, ''Total'' as DepID, ''Total'' as DepMemo, Sum(Acc) as VNACC, Round((Sum(Acc)/' + VNACC +
+      ')*100,4) as Per,CAST(Sum(Acc)/' + CWHL + ' as decimal(10,2)) as USACC from (');
+    SQL.Add('	select SGDHS.SGNO, SGDH.DepID, BDepartment.DepMemo, SGDH.LB, SGDHS.CLBH, ');
+    SQL.Add('		   CLZL.ywpm, clzl.zwpm, CLZL.dwbh+LBZLS.zwsm as dwbh, ');
+    SQL.Add('		   case when SGDHS.USPrice is null then SGDHS.VNPrice else CWHLS.CWHL*SGDHS.USPrice end as Price, SGDHS.USPrice, ');
+    SQL.Add('		   CWHLS.CWHL, SGDHS.Qty, case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else CWHLS.CWHL*SGDHS.USPrice*Qty end as ACC, ');
+    SQL.Add('		   isnull(SGDHS.USPrice*Qty,0) as ACCUS, SGDHS.Memo, SGDH.USERID, SGDH.SGDate, SGDHS.VNPrice, isnull(SGDHS.VNPrice,0)*Qty as ACCVN,IsNull(BDepartment.Xuong,BDepartment.GSBH) as Xuong');
+    SQL.Add('	from SGDHS ');
+    SQL.Add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO ');
+    SQL.Add('	left join CLZL on CLZL.CLDH = SGDHS.CLBH ');
+    SQL.Add('	left join CGBJ on CGBJ.BJNO=SGDHS.BJNO ');
+    SQL.Add('	left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH ');
+    SQL.Add('	left join BDepartment on BDepartment.ID=SGDH.DepID ');
+    SQL.Add('	left join LBZLS on LBZLS.LBDH=CLZL.dwbh and LBZLS.LB=''02'' ');
+    SQL.Add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE()) ');
+    SQL.Add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' ');
+    SQL.Add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+    SQL.add('          ''' + formatdatetime('yyyy/MM/dd', DTP1.Date) + '''' + 'and ' + '''' + formatdatetime('yyyy/MM/dd',
+      DTP2.Date) + '''');
+    if Edit1.Text <> '' then
+      SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+    if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+      SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+    else if LBCombo.Text = 'not 03' then
+      SQL.Add('    and SGDH.LB <> ''03'' ');
+    //     if XuongEdit.Text<>'' then
+    //      SQL.Add('    and IsNull(BDepartment.Xuong,BDepartment.GSBH) = '''+XuongEdit.Text+''' ');
+    if DepMemoEdit.Text <> '' then
+      SQL.Add('    and BDepartment.DepMemo like ''%' + DepMemoEdit.Text + '%'' ');
+    if Dep <> '' then
+      SQL.Add('    and SGDH.DepID ' + Dep);
+    if NDep <> '' then
+      SQL.Add('    and SGDH.DepID not ' + NDep);
+    SQL.Add('	) SGDH');
+    SQL.Add(') SGDH  Order by Per asc');
+    funcObj.WriteErrorLog(sql.Text);
+    Active := true;
+  end;
+end;
+
+procedure TTotalApplyReport.Button1Click(Sender: TObject);
+begin
+  if PC1.ActivePageIndex = 0 then
+    DetailQuery();
+  if PC1.ActivePageIndex = 1 then
+    StaticsQuery();
+  if PC1.ActivePage.Caption = 'Statistics_New' then
+    Statics_NewQuery();
+
+end;
+
+procedure TTotalApplyReport.Button2Click(Sender: TObject);
+var
+  iDay, iMonth, iYear: Word;
+begin
+  DecodeDate(DTP2.Date, iYear, iMonth, iDay);
+  TotalApplyReport_Print := TTotalApplyReport_Print.Create(self);
+  TotalApplyReport_Print.L6.Caption := IntToStr(iMonth);
+  TotalApplyReport_Print.L8.Caption := IntToStr(iYear);
+  TotalApplyReport_Print.L15.Caption := DateToStr(Date());
+  if LBCombo.Text = '01' then
+  begin
+    TotalApplyReport_Print.L10.Caption := 'BANG CHI TIET DU TINH DAT MUA VAN PHONG PHAM CAC DON VI THANG ' + IntToStr(iMonth) +
+      ' NAM ' + IntToStr(iYear);
+    TotalApplyReport_Print.L16.Caption := PurchaseN226_ISO_01;
+    TotalApplyReport_Print.L20.Caption := PurchaseN226_ISO_01;
+    TotalApplyReport_Print.QRLabel6.Caption := '月單位辦公用品請購明細預算表';
+  end
+  else
+  begin
+    TotalApplyReport_Print.L10.Caption := 'BANG CHI TIET DU TINH DAT MUA CCDC THUONG NGAY THANG ' + IntToStr(iMonth) + ' NAM ' +
+      IntToStr(iYear);
+    TotalApplyReport_Print.L16.Caption := PurchaseN226_ISO_02;
+    TotalApplyReport_Print.L20.Caption := PurchaseN226_ISO_02;
+    TotalApplyReport_Print.QRLabel6.Caption := '月五金日雜請購明細預算表';
+  end;
+  TotalApplyReport_Print.quickrep1.prepare;
+  TotalApplyReport_Print.Qpage1.caption := inttostr(TotalApplyReport_Print.quickrep1.QRPrinter.pagecount);
+  TotalApplyReport_Print.quickrep1.preview;
+  TotalApplyReport_Print.Free;
+end;
+
+procedure TTotalApplyReport.Button3Click(Sender: TObject);
+var
+  eclApp, WorkBook: olevariant;
+  i, j: integer;
+begin
+  if PC1.ActivePageIndex = 0 then
+  begin
+    if SGDet.active then
+    begin
+      try
+        eclApp := CreateOleObject('Excel.Application');
+        WorkBook := CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel', 'Microsoft   Excel', MB_OK + MB_ICONWarning);
+        Exit;
+      end;
+      try
+        WorkBook := eclApp.workbooks.Add;
+        for i := 0 to SGDet.fieldcount - 1 do
+        begin
+          if SGDet.fields[i].FieldName = 'Price' then
+            eclApp.Cells(1, i + 1) := 'VNPrice'
+          else if SGDet.fields[i].FieldName = 'ACC' then
+            eclApp.Cells(1, i + 1) := 'ACCVN'
+          else
+            eclApp.Cells(1, i + 1) := SGDet.fields[i].FieldName;
+        end;
+
+        SGDet.First;
+        j := 2;
+        while not SGDet.Eof do
+        begin
+          for i := 0 to SGDet.fieldcount - 1 do
+          begin
+            eclApp.Cells(j, i + 1) := SGDet.Fields[i].Value;
+          end;
+          SGDet.Next;
+          inc(j);
+        end;
+        eclapp.columns.autofit;
+        showmessage('Succeed');
+        eclApp.Visible := True;
+      except
+        on F: Exception do
+          showmessage(F.Message);
+      end;
+    end;
+    {  end else if PC1.ActivePageIndex=1 then
+      begin
+        if  SGDetSt1Qry.active  then
+        begin
+          try
+            eclApp:=CreateOleObject('Excel.Application');
+            WorkBook:=CreateOleObject('Excel.Sheet');
+          except
+            Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+            Exit;
+          end;
+          try
+            WorkBook:=eclApp.workbooks.Add;
+            //Stastics 統計報表一
+            for   i:=0   to   SGDetSt1Qry.fieldcount-1   do
+            begin
+               eclApp.Cells(1,i+1):=SGDetSt1Qry.fields[i].FieldName;
+            end;
+
+            SGDetSt1Qry.First;
+            j:=2;
+            while   not   SGDetSt1Qry.Eof   do
+            begin
+              for   i:=0   to  SGDetSt1Qry.fieldcount-1  do
+              begin
+                eclApp.Cells(j,i+1):=SGDetSt1Qry.Fields[i].Value;
+              end;
+              SGDetSt1Qry.Next;
+              inc(j);
+            end;
+            //Stastics 統計報表二
+            for   i:=0   to   SGDetSt2Qry.fieldcount-1   do
+            begin
+               eclApp.Cells(1,4+i+1):=SGDetSt2Qry.fields[i].FieldName;
+            end;
+            SGDetSt2Qry.First;
+            j:=2;
+            while   not   SGDetSt2Qry.Eof   do
+            begin
+              for   i:=0   to  SGDetSt2Qry.fieldcount-1  do
+              begin
+                eclApp.Cells(j,4+i+1):=SGDetSt2Qry.Fields[i].Value;
+              end;
+              SGDetSt2Qry.Next;
+              inc(j);
+            end;
+            //
+            eclapp.columns.autofit;
+            showmessage('Succeed');
+            eclApp.Visible:=True;
+          except
+            on   F:Exception   do
+              showmessage(F.Message);
+          end;
+        end;     }
+  end
+  else if PC1.ActivePage.Caption = 'Statistics_New' then
+  begin
+    //月份
+    if SGDetSt3Qry.active then
+    begin
+      try
+        eclApp := CreateOleObject('Excel.Application');
+        WorkBook := CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel', 'Microsoft   Excel', MB_OK + MB_ICONWarning);
+        Exit;
+      end;
+      try
+        WorkBook := eclApp.workbooks.Add;
+        //Stastics 統計報表一
+
+        eclApp.Cells(1, 1) := '部門名稱';
+        //        eclApp.Cells(1,2):= formatdatetime('MM',IncMonth(DTP1.Date , -2)) + '月費用';
+        //        eclApp.Cells(1,3):= formatdatetime('MM',IncMonth(DTP1.Date , -1)) + '月費用';
+        eclApp.Cells(1, 2) := formatdatetime('MM', DTP1.Date) + '月費用';
+        eclApp.Cells(1, 3) := '預算';
+        //        eclApp.Cells(1,5):='增/減金額';
+        eclApp.Cells(1, 4) := '使用率%';
+
+        SGDetSt3Qry.First;
+        j := 2;
+        while not SGDetSt3Qry.Eof do
+        begin
+          for i := 0 to SGDetSt3Qry.fieldcount - 1 do
+          begin
+            eclApp.Cells(j, i + 1) := SGDetSt3Qry.Fields[i].Value;
+          end;
+          SGDetSt3Qry.Next;
+          inc(j);
+        end;
+        //
+        eclapp.columns.autofit;
+        showmessage('Succeed');
+        eclApp.Visible := True;
+      except
+        on F: Exception do
+          showmessage(F.Message);
+      end;
+    end;
+    //季別
+    if SGDetSt4Qry.active then
+    begin
+      try
+        eclApp := CreateOleObject('Excel.Application');
+        WorkBook := CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel', 'Microsoft   Excel', MB_OK + MB_ICONWarning);
+        Exit;
+      end;
+      try
+        WorkBook := eclApp.workbooks.Add;
+        //Stastics 統計報表一
+
+        eclApp.Cells(1, 1) := '部門名稱';
+        eclApp.Cells(1, 2) := '上季費用';
+        eclApp.Cells(1, 3) := '本季費用';
+        eclApp.Cells(1, 4) := '預算';
+        eclApp.Cells(1, 5) := '增/減金額';
+        eclApp.Cells(1, 6) := '增/減%';
+
+        SGDetSt4Qry.First;
+        j := 2;
+        while not SGDetSt4Qry.Eof do
+        begin
+          for i := 0 to SGDetSt4Qry.fieldcount - 1 do
+          begin
+            eclApp.Cells(j, i + 1) := SGDetSt4Qry.Fields[i].Value;
+          end;
+          SGDetSt4Qry.Next;
+          inc(j);
+        end;
+        //
+        eclapp.columns.autofit;
+        showmessage('Succeed');
+        eclApp.Visible := True;
+      except
+        on F: Exception do
+          showmessage(F.Message);
+      end;
+    end;
+
+    //資本支出
+    if SGDetSt5Qry.active then
+    begin
+      try
+        eclApp := CreateOleObject('Excel.Application');
+        WorkBook := CreateOleObject('Excel.Sheet');
+      except
+        Application.MessageBox('No Microsoft   Excel', 'Microsoft   Excel', MB_OK + MB_ICONWarning);
+        Exit;
+      end;
+      try
+        WorkBook := eclApp.workbooks.Add;
+        //Stastics 統計報表一
+
+        eclApp.Cells(1, 1) := '部門名稱';
+        eclApp.Cells(1, 2) := '資本支出費用';
+        eclApp.Cells(1, 3) := '預算';
+        eclApp.Cells(1, 4) := '使用預算%';
+
+        SGDetSt5Qry.First;
+        j := 2;
+        while not SGDetSt5Qry.Eof do
+        begin
+          for i := 0 to SGDetSt5Qry.fieldcount - 1 do
+          begin
+            eclApp.Cells(j, i + 1) := SGDetSt5Qry.Fields[i].Value;
+          end;
+          SGDetSt5Qry.Next;
+          inc(j);
+        end;
+        //
+        eclapp.columns.autofit;
+        showmessage('Succeed');
+        eclApp.Visible := True;
+      except
+        on F: Exception do
+          showmessage(F.Message);
+      end;
+    end;
+  end;
+
+end;
+
+function TTotalApplyReport.GetMutiDepIDSubSQL(Str: string): string;
+var
+  tmpList: TStringlist;
+  i: integer;
+  tmResult, TotalStr: string;
+begin
+  if Str = '' then
+  begin
+    Result := '';
+  end
+  else if Pos(',', Str) > 0 then
+  begin
+    tmpList := TStringlist.Create;
+    tmpList := FuncObj.SplitString(Str, ',');
+    TotalStr := '';
+    for i := 0 to tmpList.Count - 1 do
+    begin
+      tmpList.Strings[i] := Trim(tmpList.Strings[i]);
+      TotalStr := TotalStr + '''' + tmpList.Strings[i] + ''',';
+    end;
+    tmResult := ' in (' + Copy(TotalStr, 1, length(TotalStr) - 1) + ')';
+    //BDE TQuery 不能太長所以改用暫存
+    Result := tmResult;
+    tmpList.Free;
+  end
+  else
+  begin
+    Result := ' in(''' + Str + ''') ';
+  end;
+end;
+
+function TTotalApplyReport.GetMutiXuongSubSQL(Str: string): string;
+var
+  tmpList: TStringlist;
+  i: integer;
+  tmResult, TotalStr: string;
+begin
+  if Str = '' then
+  begin
+    Result := '';
+  end
+  else if Pos(',', Str) > 0 then
+  begin
+    tmpList := TStringlist.Create;
+    tmpList := FuncObj.SplitString(Str, ',');
+    TotalStr := '';
+    for i := 0 to tmpList.Count - 1 do
+    begin
+      tmpList.Strings[i] := Trim(tmpList.Strings[i]);
+      TotalStr := TotalStr + '''' + tmpList.Strings[i] + ''',';
+    end;
+    tmResult := ' in (' + Copy(TotalStr, 1, length(TotalStr) - 1) + ')';
+    //BDE TQuery 不能太長所以改用暫存
+    Result := tmResult;
+    tmpList.Free;
+  end
+  else
+  begin
+    Result := ' in(''' + Str + ''') ';
+  end;
+end;
+
+procedure TTotalApplyReport.DepEditKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (ssCtrl in Shift) and (key = 86) then
+  begin
+    DepEditPaste();
+  end;
+end;
+
+procedure TTotalApplyReport.NDepEditKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (ssCtrl in Shift) and (key = 86) then
+  begin
+    NDepEditPaste();
+  end;
+end;
+
+procedure TTotalApplyReport.DepEditPaste();
+var
+  CbBuf: PChar;
+  BufSize: Integer;
+  Handle: THandle;
+  Text: WideString;
+  i: integer;
+  rowList: TStringlist;
+  TotalDep: string;
+begin
+  try
+    Text := '';
+    if Clipboard.HasFormat(CF_TEXT) then
+    begin
+      Handle := ClipBoard.GetAsHandle(CF_TEXT);
+      BufSize := GlobalSize(Handle);
+      GetMem(CbBuf, BufSize);
+      Text := Clipboard.AsUnicodeText;
+      //
+      rowList := TStringlist.Create;
+      rowList.Text := Text;
+      TotalDep := '';
+      for i := 0 to rowList.Count - 1 do
+      begin
+        TotalDep := TotalDep + rowList.Strings[i] + ',';
+      end;
+      rowList.Free;
+      if length(TotalDep) > 0 then
+      begin
+        DepEdit.Text := Copy(TotalDep, 1, length(TotalDep) - 1);
+      end;
+    end;
+  except
+    on E: Exception do
+      Showmessage(E.Message);
+  end;
+end;
+
+procedure TTotalApplyReport.NDepEditPaste();
+var
+  CbBuf: PChar;
+  BufSize: Integer;
+  Handle: THandle;
+  Text: WideString;
+  i: integer;
+  rowList: TStringlist;
+  TotalDep: string;
+begin
+  try
+    Text := '';
+    if Clipboard.HasFormat(CF_TEXT) then
+    begin
+      Handle := ClipBoard.GetAsHandle(CF_TEXT);
+      BufSize := GlobalSize(Handle);
+      GetMem(CbBuf, BufSize);
+      Text := Clipboard.AsUnicodeText;
+      //
+      rowList := TStringlist.Create;
+      rowList.Text := Text;
+      TotalDep := '';
+      for i := 0 to rowList.Count - 1 do
+      begin
+        TotalDep := TotalDep + rowList.Strings[i] + ',';
+      end;
+      rowList.Free;
+      if length(TotalDep) > 0 then
+      begin
+        NDepEdit.Text := Copy(TotalDep, 1, length(TotalDep) - 1);
+      end;
+    end;
+  except
+    on E: Exception do
+      Showmessage(E.Message);
+  end;
+end;
+
+procedure TTotalApplyReport.XuongEditPaste();
+var
+  CbBuf: PChar;
+  BufSize: Integer;
+  Handle: THandle;
+  Text: WideString;
+  i: integer;
+  rowList: TStringlist;
+  TotalDep: string;
+begin
+  try
+    Text := '';
+    if Clipboard.HasFormat(CF_TEXT) then
+    begin
+      Handle := ClipBoard.GetAsHandle(CF_TEXT);
+      BufSize := GlobalSize(Handle);
+      GetMem(CbBuf, BufSize);
+      Text := Clipboard.AsUnicodeText;
+      //
+      rowList := TStringlist.Create;
+      rowList.Text := Text;
+      TotalDep := '';
+      for i := 0 to rowList.Count - 1 do
+      begin
+        TotalDep := TotalDep + rowList.Strings[i] + ',';
+      end;
+      rowList.Free;
+      if length(TotalDep) > 0 then
+      begin
+        XuongEdit.Text := Copy(TotalDep, 1, length(TotalDep) - 1);
+      end;
+    end;
+  except
+    on E: Exception do
+      Showmessage(E.Message);
+  end;
+end;
+
+procedure TTotalApplyReport.NXuongEditPaste();
+var
+  CbBuf: PChar;
+  BufSize: Integer;
+  Handle: THandle;
+  Text: WideString;
+  i: integer;
+  rowList: TStringlist;
+  TotalDep: string;
+begin
+  try
+    Text := '';
+    if Clipboard.HasFormat(CF_TEXT) then
+    begin
+      Handle := ClipBoard.GetAsHandle(CF_TEXT);
+      BufSize := GlobalSize(Handle);
+      GetMem(CbBuf, BufSize);
+      Text := Clipboard.AsUnicodeText;
+      //
+      rowList := TStringlist.Create;
+      rowList.Text := Text;
+      TotalDep := '';
+      for i := 0 to rowList.Count - 1 do
+      begin
+        TotalDep := TotalDep + rowList.Strings[i] + ',';
+      end;
+      rowList.Free;
+      if length(TotalDep) > 0 then
+      begin
+        NXuongEdit.Text := Copy(TotalDep, 1, length(TotalDep) - 1);
+      end;
+    end;
+  except
+    on E: Exception do
+      Showmessage(E.Message);
+  end;
+end;
+
+procedure TTotalApplyReport.qry_PrintCalcFields(DataSet: TDataSet);
+var
+  Memo: string;
+begin
+  Memo := '';
+  with qry_Print do
+  begin
+    with QTemp do
+    begin
+      Active := false;
+      SQL.Clear;
+      SQL.Add('select SGDHS.Memo from SGDHS');
+      SQL.Add('left join SGDH on SGDH.SGNO=SGDHS.SGNO ');
+      SQL.Add('where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' ');
+      SQL.Add('      and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+      sql.add('          ''' + formatdatetime('yyyy/MM/dd', DTP1.Date) + '''' + 'and ' + '''' + formatdatetime('yyyy/MM/dd',
+        DTP2.Date) + '''');
+      if Edit1.Text <> '' then
+        SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+      if LBCombo.Text <> '' then
+        SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ');
+      if Dep <> '' then
+        SQL.Add('    and SGDH.DepID ' + Dep);
+      if NDep <> '' then
+        SQL.Add('    and SGDH.DepID not ' + NDep);
+      SQL.Add('    and SGDHS.CLBH=''' + qry_Print.FieldByName('CLBH').AsString + ''' ');
+      SQL.Add('    and SGDHS.BJNO=''' + qry_Print.FieldByName('BJNO').AsString + ''' ');
+      Active := true;
+      while not eof do
+      begin
+        if FieldByName('Memo').AsString <> '' then
+          Memo := Memo + FieldByName('Memo').AsString + ', ';
+        Next;
+      end;
+      Active := false;
+    end;
+    FieldByName('Memo').value := Copy(Memo, 1, length(Memo) - 2);
+  end;
+end;
+
+procedure TTotalApplyReport.LBComboChange(Sender: TObject);
+begin
+  if LBCombo.Text = '' then
+    LBName.Caption := '全部';
+  if LBCombo.Text = '01' then
+    LBName.Caption := '每月辦公室請購明細';
+  if LBCombo.Text = '02' then
+    LBName.Caption := '預算買五金日雜';
+  if LBCombo.Text = '03' then
+    LBName.Caption := '請購單(預算外)';
+  if LBCombo.Text = '04' then
+    LBName.Caption := '機器零件';
+  if LBCombo.Text = '09' then
+    LBName.Caption := '生產模製具';
+  if LBCombo.Text = 'not 03' then
+    LBName.Caption := '不包含03類(預算內總計)';
+end;
+
+procedure TTotalApplyReport.DBGridEh2DblClick(Sender: TObject);
+begin
+  if SGDetSt2Qry.Active = true then
+  begin
+    XuongEdit.Text := '';
+    DepEdit.Text := SGDetSt2Qry.FieldByName('DepID').AsString;
+    PC1.ActivePageIndex := 0;
+    Button1.Click;
+  end;
+end;
+
+procedure TTotalApplyReport.DBGridEh3DblClick(Sender: TObject);
+begin
+  if SGDetSt1Qry.Active = true then
+  begin
+    DepMemoEdit.Text := '';
+    XuongEdit.Text := SGDetSt1Qry.FieldByName('Xuong').AsString;
+    PC1.ActivePageIndex := 0;
+    Button1.Click;
+  end;
+end;
+
+procedure TTotalApplyReport.Statics_NewQuery();
+var
+  VNACC, CWHL, yyyy, mm, SQLText: string;
+  i, j, k: Integer;
+begin
+  VNACC := '100';
+  with QTemp do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('select CAST(CWHL as int) as CWHL from CWHLS where CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=' + formatdatetime('MM',
+      DTP1.Date) + ' and CWHLS.HLYEAR=' + formatdatetime('YYYY', DTP1.Date) + ' ');
+    Active := true;
+    if isEmpty then
+    begin
+      Active := false;
+      SQL.Clear;
+      if formatdatetime('MM', DTP1.Date - 1) <> '12' then
+        SQL.Add('select CAST(CWHL as int) as CWHL from CWHLS where CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=' + formatdatetime('MM',
+          DTP1.Date - 1) + ' and CWHLS.HLYEAR=' + formatdatetime('YYYY', DTP1.Date) + ' ')
+      else
+        SQL.Add('select CAST(CWHL as int) as CWHL from CWHLS where CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=' + formatdatetime('MM',
+          DTP1.Date - 1) + ' and CWHLS.HLYEAR=' + formatdatetime('YYYY', DTP1.Date - 1) + ' ');
+      Active := true;
+      CWHL := fields[0].AsString;
+    end
+    else
+      CWHL := fields[0].AsString;
+  end;
+  Label14.Caption := formatdatetime('YYYY/MM/DD', DTP1.Date) + '匯率 : ' + CWHL;
+  yyyy := formatdatetime('yyyy', DTP1.Date);
+  mm := formatdatetime('MM', DTP1.Date);
+  j := strtoint(mm);
+  k := strtoint(formatdatetime('MM', DTP2.Date));
+  SQLText := '(';
+  for i := j to k do
+  begin
+    if Length(inttostr(i)) = 1 then
+      SQLText := SQLText + '''0' + inttostr(i) + ''','
+    else
+      SQLText := SQLText + '''' + inttostr(i) + ''',';
+  end;
+  SQLText := copy(SQLText, 1, Length(SQLText) - 1) + ')';
+  //   DBGridEh4.Columns[1].Title.Caption := formatdatetime('MM',IncMonth(DTP1.Date,-2)) + '月費用|Last Month';
+  //   DBGridEh4.Columns[2].Title.Caption := formatdatetime('MM',IncMonth(DTP1.Date,-1)) + '月費用|Last Month';
+  //   DBGridEh4.Columns[3].Title.Caption := formatdatetime('MM',DTP1.Date) + '月費用|This Month';
+  if j = k then
+    DBGridEh4.Columns[1].Title.Caption := mm + '月費用|This Month'
+  else
+    DBGridEh4.Columns[1].Title.Caption := formatdatetime('MM', DTP1.Date) + '~' + formatdatetime('MM', DTP2.Date) + '月費用';
+  //查詢有多少部門分類
+  with QTemp do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('select distinct left(DepMemo,2) from SGDH_Budget order by left(DepMemo,2)');
+    Active := true;
+  end;
+  QTemp.First;
+
+  //月份對比
+  if CheckBox3.Checked = False then
+  begin
+    with SGDetSt3Qry do
+    begin
+      Active := false;
+      SQL.Clear;
+      //鞋廠
+      while not QTemp.Eof do
+      begin
+        //       SQL.Add('Select BDepartment.DEPMEMO as DEPNAME,isnull((Select  CAST(Sum(Acc)/'+CWHL+' as decimal(10,2)) as USACC from (');
+        SQL.Add('Select BDepartment.DEPMEMO as DEPNAME,');
+        SQL.Add('isnull((select CAST(Sum(Acc)/' + CWHL + ' as decimal(10,2)) as USACC from (');
+        SQL.Add('	select SGDHS.SGNO, SGDH.DepID,  case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else '+CWHL+'*SGDHS.USPrice*Qty end as ACC');
+        SQL.Add('	from SGDHS');
+        SQL.Add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO');
+//        SQL.Add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE())');
+        if checkbox4.Checked = false then
+          SQL.Add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Budget_chk,0) <> 1 and isnull(Customer_Account,0) <> 1 and isnull(Uniform,0) <> 1')
+        else
+          SQL.Add('	where SGDH.CHKID<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Budget_chk,0) <> 1 and isnull(Customer_Account,0) <> 1 and isnull(Uniform,0) <> 1');
+        SQL.Add('	and SGDH.DepID = BDepart.SGDH_ID');
+        SQL.Add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+        SQL.Add('          ''' + formatdatetime('yyyy/MM/dd', DTP1.Date) + ''' and ''' + formatdatetime('yyyy/MM/dd', DTP2.Date) +
+          '''');
+        if Edit1.Text <> '' then
+          SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+        if LBCombo.Text = '' then
+          SQL.Add('and SGDH.LB not in (''05'') ')
+        else if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+          SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+        else if LBCombo.Text = 'not 03' then
+          SQL.Add('    and SGDH.LB <> ''03'' ');
+        if DepMemoEdit.Text <> '' then
+          SQL.Add('    and BDepartment.DepMemo like ''%' + DepMemoEdit.Text + '%'' ');
+        if DepEdit.Text <> '' then
+          SQL.Add('    and SGDH.DepID = ''' + DepEdit.Text + '''');
+        SQL.Add('		  ) SGDH');
+        SQL.Add('),0) as thismonth');
+
+        if LBCombo.Text = '' then
+          SQL.Add('  ,isnull((select sum(Budget) from SGDH_Budget where ID in (BDepart.SGDH_ID) and SGDH_Budget.YM = ''' + yyyy +
+            ''' and SGDH_Budget.Season in ' + SQLText + '),0) as BUDGET')
+            //         SQL.Add('	,SGDH_Budget.Budget ')
+            //       else if LBCombo.Text = '03' then
+            //         SQL.Add('  ,(select sum(Budget_S) from SGDH_Budget where ID in (BDepart.SGDH_ID) and SGDH_Budget.YM = '''+yyyy+''' and SGDH_Budget.Season in '+SQLText+') as BUDGET')
+            //         SQL.Add('	,SGDH_Budget.Budget_S as Budget')
+        else
+          SQL.Add('  ,isnull((select sum(Budget_B) from SGDH_Budget where ID in (BDepart.SGDH_ID) and SGDH_Budget.YM = ''' + yyyy +
+            ''' and SGDH_Budget.Season in ' + SQLText + '),0) as BUDGET');
+        //         SQL.Add('	,SGDH_Budget.Budget_B as Budget');
+        SQL.Add('from');
+        SQL.Add('(select distinct SGDH_ID from BDepartment');
+        SQL.Add('where SGDH_CLASS like ''' + QTemp.Fields[0].AsString + '%'' and yn=1');
+        //       SQL.Add('where SGDH_CLASS like ''01%''');
+        SQL.Add(') BDepart');
+        //       SQL.Add('left join SGDH_Budget on SGDH_Budget.ID = BDepart.SGDH_ID and SGDH_Budget.YM = '''+yyyy+''' and SGDH_Budget.Season = '''+mm+'''');
+        SQL.Add('left join BDepartment on BDepartment.ID = BDepart.SGDH_ID ');
+        ///////////////////////////////////////YSSSSSSSSSSSSSSS
+        {SQL.add('Union all ');
+        //       SQL.add('select substring(SGDH_CLASS,3,100)+''統計'' as DEPNAME,isnull((	Select  CAST(Sum(Acc)/'+CWHL+' as decimal(10,2)) as USACC');
+        SQL.add('select substring(SGDH_CLASS,3,100)+''統計'' as DEPNAME,');
+        SQL.add('  isnull((	Select  CAST(Sum(Acc)/' + CWHL + ' as decimal(10,2)) as USACC');
+        SQL.add('	 from (');
+        SQL.add('	select SGDHS.SGNO, SGDH.DepID,  case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else '+CWHL+'*SGDHS.USPrice*Qty end as ACC,BDepartment.SGDH_CLASS as DEPMEMO');
+        SQL.add('	from SGDHS');
+        SQL.add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO');
+//        SQL.add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE())');
+        SQL.add('	left join BDepartment on BDepartment.ID=SGDH.DepID');
+        if checkbox4.Checked = false then
+          SQL.Add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Budget_chk,0) <> 1 and isnull(Customer_Account,0) <> 1 and isnull(Uniform,0) <> 1')
+        else
+          SQL.Add('	where SGDH.CHKID<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Budget_chk,0) <> 1 and isnull(Customer_Account,0) <> 1 and isnull(Uniform,0) <> 1');
+        SQL.add('	and BDepartment.SGDH_CLASS like ''' + QTemp.Fields[0].AsString + '%''');
+        SQL.add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+        SQL.add('          ''' + formatdatetime('yyyy/MM/dd', DTP1.Date) + ''' and ''' + formatdatetime('yyyy/MM/dd', DTP2.Date) +
+          '''');
+        if Edit1.Text <> '' then
+          SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+        if LBCombo.Text = '' then
+          SQL.Add('and SGDH.LB not in (''05'') ')
+        else if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+          SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+        else if LBCombo.Text = 'not 03' then
+          SQL.Add('    and SGDH.LB <> ''03'' ');
+        SQL.add('		  ) SGDH');
+        SQL.add('	Group by DEPMEMO ),0) as thismonth ');
+
+        if LBCombo.Text = '' then
+          SQL.add('	,isnull((select sum(Budget) from SGDH_Budget where depmemo like ''' + QTemp.Fields[0].AsString + '%'' and YM = ''' +
+            yyyy + ''' and season in ' + SQLText + '),0) as Budget')
+            //         SQL.add('	,(select sum(Budget) from SGDH_Budget where depmemo like ''01%'' and YM = '''+yyyy+''' and season = '''+mm+''') as Budget')
+            //       else if LBCombo.Text = '03' then
+            //         SQL.add('	,(select sum(Budget_S) from SGDH_Budget where depmemo like '''+QTemp.Fields[0].AsString+'%'' and YM = '''+yyyy+''' and season in '+SQLText+') as Budget')
+            //         SQL.add('	,(select sum(Budget_S) from SGDH_Budget where depmemo like ''01%'' and YM = '''+yyyy+''' and season = '''+mm+''') as Budget')
+        else
+          SQL.add('	,isnull((select sum(Budget_B) from SGDH_Budget where depmemo like ''' + QTemp.Fields[0].AsString + '%'' and YM = '''
+            + yyyy + ''' and season in ' + SQLText + '),0) as Budget');
+        //         SQL.add('	,(select sum(Budget_B) from SGDH_Budget where depmemo like ''01%'' and YM = '''+yyyy+''' and season = '''+mm+''') as Budget');
+        SQL.add('from');
+        SQL.add('(select distinct SGDH_CLASS from BDepartment');
+        //       SQL.add('where SGDH_CLASS like ''01%''');
+        SQL.Add('where SGDH_CLASS like ''' + QTemp.Fields[0].AsString + '%''');
+        SQL.add(') BDepart');     }
+        ////////////////////////////////////////////////////////////////////////////||||||||||||||||
+        SQL.add('Union all ');
+        //       SQL.add('	Select top 1 NULL as DEPNAME,NULL as ''2mago'',NULL as lastmonth,NULL as thismonth,Null as Budget from BDepartment');
+        SQL.add('	Select top 1 NULL as DEPNAME,NULL as thismonth,Null as Budget from BDepartment');
+        SQL.add('Union all ');
+        QTemp.Next;
+      end;
+
+      //總計
+      //     SQL.add('Union all ');
+      SQL.add('select ''總計(不含C廠)'' as DEPNAME,');
+      SQL.add('isnull((	Select  CAST(Sum(Acc)/' + CWHL + ' as decimal(10,2)) as USACC');
+      SQL.add('	 from (');
+      SQL.add('	select SGDHS.SGNO, SGDH.DepID,  case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else '+CWHL+'*SGDHS.USPrice*Qty end as ACC');
+      SQL.add('	from SGDHS');
+      SQL.add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO');
+      SQL.add('	left join BDepartment on BDepartment.ID=SGDH.DepID');
+//      SQL.add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE())');
+      if checkbox4.Checked = false then
+        SQL.Add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Budget_chk,0) <> 1 and isnull(Customer_Account,0) <> 1 and isnull(Uniform,0) <> 1')
+      else
+        SQL.Add('	where SGDH.CHKID<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Budget_chk,0) <> 1 and isnull(Customer_Account,0) <> 1 and isnull(Uniform,0) <> 1');
+      SQL.add('		  and ((BDepartment.SGDH_CLASS not like ''06%'') and (BDepartment.SGDH_CLASS is not Null))');
+      SQL.add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+      SQL.add('          ''' + formatdatetime('yyyy/MM/dd', DTP1.Date) + ''' and ''' + formatdatetime('yyyy/MM/dd', DTP2.Date) +
+        '''');
+      if Edit1.Text <> '' then
+        SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+      if LBCombo.Text = '' then
+        SQL.Add('and SGDH.LB not in (''05'') ')
+      else if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+        SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+      else if LBCombo.Text = 'not 03' then
+        SQL.Add('    and SGDH.LB <> ''03'' ');
+      SQL.add('		  ) SGDH ),0) as thismonth,');
+      if LBCombo.Text = '' then
+        SQL.add('		  isnull((select sum(Budget) from SGDH_Budget where depmemo not like ''06%'' and YM = ''' + yyyy + ''' and season in ' + SQLText + '),0) as Budget')
+          //     else if LBCombo.Text = '03' then
+          //       SQL.add('		  (select sum(Budget_S) from SGDH_Budget where YM = '''+yyyy+''' and season in '+SQLText+') as Budget')
+      else
+        SQL.add('		  (select sum(Budget_B) from SGDH_Budget where YM = ''' + yyyy + ''' and season in ' + SQLText +
+          ') as Budget');
+
+      SQL.add('Union all ');
+      //     SQL.add('	Select top 1 NULL as DEPNAME,NULL as ''2mago'',NULL as lastmonth,NULL as thismonth,Null as Budget from BDepartment');
+      SQL.add('	Select top 1 NULL as DEPNAME,NULL as thismonth,Null as Budget from BDepartment');
+      //客戶授權
+      SQL.add('Union all ');
+      //     SQL.Add('Select BDepartment.DEPMEMO+''(客戶授權)'' as DEPNAME,isnull((Select  CAST(Sum(Acc)/'+CWHL+' as decimal(10,2)) as USACC from (');
+      SQL.Add('Select BDepartment.DEPMEMO+''(客戶授權)'' as DEPNAME,');
+      SQL.Add('isnull((select CAST(Sum(Acc)/' + CWHL + ' as decimal(10,2)) as USACC from (');
+      SQL.Add('	select SGDHS.SGNO, SGDH.DepID,  case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else '+CWHL+'*SGDHS.USPrice*Qty end as ACC');
+      SQL.Add('	from SGDHS');
+      SQL.Add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO');
+      SQL.Add(' left join BDepartment on BDepartment.ID=SGDH.DepID');
+//      SQL.Add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE())');
+      if checkbox4.Checked = false then
+        SQL.Add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Customer_Account,0) = 1')
+      else
+        SQL.Add('	where SGDH.CHKID<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Customer_Account,0) = 1');
+      SQL.Add('	and SGDH.DepID = BDepart.SGDH_ID');
+      SQL.Add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+      SQL.Add('          ''' + formatdatetime('yyyy/MM/dd', DTP1.Date) + ''' and ''' + formatdatetime('yyyy/MM/dd', DTP2.Date) +
+        '''');
+      if Edit1.Text <> '' then
+        SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+      if LBCombo.Text = '' then
+        SQL.Add('and SGDH.LB not in (''05'') ')
+      else if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+        SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+      else if LBCombo.Text = 'not 03' then
+        SQL.Add('    and SGDH.LB <> ''03'' ');
+      if DepMemoEdit.Text <> '' then
+        SQL.Add('    and BDepartment.DepMemo like ''%' + DepMemoEdit.Text + '%'' ');
+      if DepEdit.Text <> '' then
+        SQL.Add('    and SGDH.DepID = ''' + DepEdit.Text + '''');
+      SQL.Add('		  ) SGDH');
+      SQL.Add('),0) as thismonth');
+
+      //
+      SQL.Add('	,0 as Budget');
+      SQL.Add('from');
+      SQL.Add('(select SGDH_ID from BDepartment');
+      SQL.Add('where ID = ''A120159''');
+      SQL.Add(') BDepart');
+      //     SQL.Add('left join SGDH_Budget on SGDH_Budget.ID = BDepart.SGDH_ID and SGDH_Budget.YM = '''+yyyy+''' and SGDH_Budget.Season = '''+mm+'''');
+      SQL.Add('left join BDepartment on BDepartment.ID = BDepart.SGDH_ID ');
+
+      //制服採購
+      SQL.add('Union all ');
+      SQL.Add('Select ''制服採購'' as DEPNAME,');
+      SQL.Add('isnull((select CAST(Sum(Acc)/' + CWHL + ' as decimal(10,2)) as USACC from (');
+      SQL.Add('	select SGDHS.SGNO, SGDH.DepID,  case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else '+CWHL+'*SGDHS.USPrice*Qty end as ACC');
+      SQL.Add('	from SGDHS');
+      SQL.Add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO');
+      SQL.Add(' left join BDepartment on BDepartment.ID=SGDH.DepID');
+//      SQL.Add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE())');
+      if checkbox4.Checked = false then
+        SQL.Add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Uniform,0) = 1')
+      else
+        SQL.Add('	where SGDH.CHKID<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Uniform,0) = 1');
+      SQL.Add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+      SQL.Add('          ''' + formatdatetime('yyyy/MM/dd', DTP1.Date) + ''' and ''' + formatdatetime('yyyy/MM/dd', DTP2.Date) +
+        '''');
+      if Edit1.Text <> '' then
+        SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+      if LBCombo.Text = '' then
+        SQL.Add('and SGDH.LB not in (''05'') ')
+      else if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+        SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+      else if LBCombo.Text = 'not 03' then
+        SQL.Add('    and SGDH.LB <> ''03'' ');
+      if DepMemoEdit.Text <> '' then
+        SQL.Add('    and BDepartment.DepMemo like ''%' + DepMemoEdit.Text + '%'' ');
+      if DepEdit.Text <> '' then
+        SQL.Add('    and SGDH.DepID = ''' + DepEdit.Text + '''');
+      SQL.Add('		  ) SGDH');
+      SQL.Add('),0) as thismonth');
+
+      //
+
+      SQL.Add('	,0 as Budget');
+      //funcObj.WriteErrorLog(sql.Text);   }
+      //showmessage(SQL.Text);
+      //exit;
+      Active := true;
+    end;
+  end;
+
+  //分季對比
+  if CheckBox2.Checked = true then
+  begin
+    with SGDetSt4Qry do
+    begin
+      Active := false;
+      SQL.Clear;
+      //鞋廠
+      while not QTemp.Eof do
+      begin
+        SQL.Add('Select BDepartment.DEPMEMO as DEPNAME,isnull((Select  CAST(Sum(Acc)/' + CWHL +
+          ' as decimal(10,2)) as USACC from (');
+        SQL.Add('	select SGDHS.SGNO, SGDH.DepID,  case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else '+CWHL+'*SGDHS.USPrice*Qty end as ACC');
+        SQL.Add('	from SGDHS');
+        SQL.Add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO');
+//        SQL.Add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE())');
+        SQL.Add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Budget_chk,0) <> 1 and isnull(Customer_Account,0) <> 1 and isnull(Uniform,0) <> 1');
+        SQL.Add('	and SGDH.DepID = BDepart.SGDH_ID');
+        SQL.Add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+
+        SQL.Add('          ''' + formatdatetime('yyyy/mm/dd', DTP1.date) + ''' and ''' + formatdatetime('yyyy/mm/dd', DTP2.date) +
+          '''');
+
+        if Edit1.Text <> '' then
+          SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+        if LBCombo.Text = '' then
+          SQL.Add('and SGDH.LB not in (''05'') ')
+        else if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+          SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+        else if LBCombo.Text = 'not 03' then
+          SQL.Add('    and SGDH.LB <> ''03'' ');
+        if DepMemoEdit.Text <> '' then
+          SQL.Add('    and BDepartment.DepMemo like ''%' + DepMemoEdit.Text + '%'' ');
+        if DepEdit.Text <> '' then
+          SQL.Add('    and SGDH.DepID = ''' + DepEdit.Text + '''');
+        SQL.Add('		  ) SGDH');
+        SQL.Add('),0) as thisseason');
+
+        SQLText := '(';
+        for i := j to k do
+        begin
+          if Length(inttostr(i)) = 1 then
+            SQLText := SQLText + '''0' + inttostr(i) + ''','
+          else
+            SQLText := SQLText + '''' + inttostr(i) + ''',';
+        end;
+        SQLText := copy(SQLText, 1, Length(SQLText) - 1) + ')';
+
+        if LBCombo.Text = '' then
+        begin
+          SQL.Add('  ,(select sum(Budget) from SGDH_Budget where ID in (BDepart.SGDH_ID) and SGDH_Budget.YM = ''' + yyyy +
+            ''' and SGDH_Budget.Season in ' + SQLText + ') as BUDGET')
+        end
+        else
+        begin
+          SQL.Add('  ,(select sum(Budget_B) from SGDH_Budget where ID in (BDepart.SGDH_ID) and SGDH_Budget.YM = ''' + yyyy +
+            ''' and SGDH_Budget.Season in ' + SQLText + ') as BUDGET')
+        end;
+        SQL.Add('from');
+        SQL.Add('(select distinct SGDH_ID from BDepartment');
+        SQL.Add('where SGDH_CLASS like ''01%''');
+        SQL.Add(') BDepart');
+        //       SQL.Add('left join SGDH_Budget on SGDH_Budget.ID = BDepart.SGDH_ID and SGDH_Budget.YM = '''+yyyy+''' and SGDH_Budget.Season = '''+mm+'''');
+        SQL.Add('left join BDepartment on BDepartment.ID = BDepart.SGDH_ID ');
+
+        SQL.add('Union all ');
+        SQL.add('select substring(SGDH_CLASS,3,100)+''統計'' as DEPNAME,isnull((	Select  CAST(Sum(Acc)/' + CWHL +
+          ' as decimal(10,2)) as USACC');
+        SQL.add('	 from (');
+        SQL.add('	select SGDHS.SGNO, SGDH.DepID,  case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else '+CWHL+'*SGDHS.USPrice*Qty end as ACC,BDepartment.SGDH_CLASS as DEPMEMO');
+        SQL.add('	from SGDHS');
+        SQL.add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO');
+//        SQL.add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE())');
+        SQL.add('	left join BDepartment on BDepartment.ID=SGDH.DepID');
+        SQL.add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Budget_chk,0) <> 1 and isnull(Customer_Account,0) <> 1 and isnull(Uniform,0) <> 1');
+        SQL.add('	and BDepartment.SGDH_CLASS like ''01%''');
+        SQL.add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+
+        if (mm = '01') or (mm = '02') or (mm = '03') then
+          SQL.Add('          ''' + formatdatetime('yyyy/10/01', Incyear(DTP1.date, -1)) + ''' and ''' +
+            formatdatetime('yyyy/12/31', Incyear(DTP1.date, -1)) + '''')
+        else if (mm = '04') or (mm = '05') or (mm = '06') then
+          SQL.Add('          ''' + formatdatetime('yyyy/01/01', DTP1.date) + ''' and ''' + formatdatetime('yyyy/03/31', DTP1.date)
+            + '''')
+        else if (mm = '07') or (mm = '08') or (mm = '09') then
+          SQL.Add('          ''' + formatdatetime('yyyy/04/01', DTP1.date) + ''' and ''' + formatdatetime('yyyy/06/30', DTP1.date)
+            + '''')
+        else if (mm = '10') or (mm = '11') or (mm = '12') then
+          SQL.Add('          ''' + formatdatetime('yyyy/07/01', DTP1.date) + ''' and ''' + formatdatetime('yyyy/09/30', DTP1.date)
+            + '''');
+
+        if Edit1.Text <> '' then
+          SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+        if LBCombo.Text = '' then
+          SQL.Add('and SGDH.LB not in (''05'') ')
+        else if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+          SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+        else if LBCombo.Text = 'not 03' then
+          SQL.Add('    and SGDH.LB <> ''03'' ');
+        SQL.add('		  ) SGDH');
+        SQL.add('	Group by DEPMEMO ),0) as lastseason,');
+        SQL.add('  isnull((	Select  CAST(Sum(Acc)/' + CWHL + ' as decimal(10,2)) as USACC');
+        SQL.add('	 from (');
+        SQL.add('	select SGDHS.SGNO, SGDH.DepID,  case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else '+CWHL+'*SGDHS.USPrice*Qty end as ACC,BDepartment.SGDH_CLASS as DEPMEMO');
+        SQL.add('	from SGDHS');
+        SQL.add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO');
+//        SQL.add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE())');
+        SQL.add('	left join BDepartment on BDepartment.ID=SGDH.DepID');
+        SQL.add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Budget_chk,0) <> 1 and isnull(Customer_Account,0) <> 1 and isnull(Uniform,0) <> 1');
+        SQL.add('	and BDepartment.SGDH_CLASS like ''01%''');
+        SQL.add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+
+        if (mm = '01') or (mm = '02') or (mm = '03') then
+          SQL.Add('          ''' + formatdatetime('yyyy/01/01', DTP1.date) + ''' and ''' + formatdatetime('yyyy/03/31', DTP1.date)
+            + '''')
+        else if (mm = '04') or (mm = '05') or (mm = '06') then
+          SQL.Add('          ''' + formatdatetime('yyyy/04/01', DTP1.date) + ''' and ''' + formatdatetime('yyyy/06/30', DTP1.date)
+            + '''')
+        else if (mm = '07') or (mm = '08') or (mm = '09') then
+          SQL.Add('          ''' + formatdatetime('yyyy/07/01', DTP1.date) + ''' and ''' + formatdatetime('yyyy/09/30', DTP1.date)
+            + '''')
+        else if (mm = '10') or (mm = '11') or (mm = '12') then
+          SQL.Add('          ''' + formatdatetime('yyyy/10/01', DTP1.date) + ''' and ''' + formatdatetime('yyyy/12/31', DTP1.date)
+            + '''');
+
+        if Edit1.Text <> '' then
+          SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+        if LBCombo.Text = '' then
+          SQL.Add('and SGDH.LB not in (''05'') ')
+        else if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+          SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+        else if LBCombo.Text = 'not 03' then
+          SQL.Add('    and SGDH.LB <> ''03'' ');
+        SQL.add('		  ) SGDH');
+        SQL.add('	Group by DEPMEMO ),0) as thisseason ');
+
+        if LBCombo.Text = '' then
+        begin
+          if (mm = '01') or (mm = '02') or (mm = '03') then
+//            SQL.Add('  ,(select sum(Budget) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = ''' + yyyy +
+//              ''' and SGDH_Budget.Season in (''01'',''02'',''03'')) as BUDGET')
+            SQL.Add('  ,isnull((select sum(Budget) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = ''' + yyyy +
+              ''' and SGDH_Budget.Season in (''01'',''02'',''03'')),0) as BUDGET')
+          else if (mm = '04') or (mm = '05') or (mm = '06') then
+//            SQL.Add('  ,(select sum(Budget) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = ''' + yyyy +
+//              ''' and SGDH_Budget.Season in (''04'',''05'',''06'')) as BUDGET')
+            SQL.Add('  ,isnull((select sum(Budget) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = ''' + yyyy +
+              ''' and SGDH_Budget.Season in (''04'',''05'',''06'')),0) as BUDGET')
+          else if (mm = '07') or (mm = '08') or (mm = '09') then
+//            SQL.Add('  ,(select sum(Budget) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = ''' + yyyy +
+//              ''' and SGDH_Budget.Season in (''07'',''08'',''09'')) as BUDGET')
+            SQL.Add('  ,isnull((select sum(Budget) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = ''' + yyyy +
+              ''' and SGDH_Budget.Season in (''07'',''08'',''09'')),0) as BUDGET')
+          else if (mm = '10') or (mm = '11') or (mm = '12') then
+//            SQL.Add('  ,(select sum(Budget) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = ''' + yyyy +
+//              ''' and SGDH_Budget.Season in (''10'',''11'',''12'')) as BUDGET')
+            SQL.Add('  ,isnull((select sum(Budget) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = ''' + yyyy +
+              ''' and SGDH_Budget.Season in (''10'',''11'',''12'')),0) as BUDGET')
+        end
+          {       else if LBCombo.Text = '03' then begin
+                   if (mm = '01') or (mm = '02') or (mm = '03') then
+                     SQL.Add('  ,(select sum(Budget_S) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = '''+yyyy+''' and SGDH_Budget.Season in (''01'',''02'',''03'')) as BUDGET')
+                   else if (mm = '04') or (mm = '05') or (mm = '06') then
+                     SQL.Add('  ,(select sum(Budget_S) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = '''+yyyy+''' and SGDH_Budget.Season in (''04'',''05'',''06'')) as BUDGET')
+                   else if (mm = '07') or (mm = '08') or (mm = '09') then
+                     SQL.Add('  ,(select sum(Budget_S) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = '''+yyyy+''' and SGDH_Budget.Season in (''07'',''08'',''09'')) as BUDGET')
+                   else if (mm = '10') or (mm = '11') or (mm = '12') then
+                     SQL.Add('  ,(select sum(Budget_S) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = '''+yyyy+''' and SGDH_Budget.Season in (''10'',''11'',''12'')) as BUDGET')
+                 end           }
+        else
+        begin
+          if (mm = '01') or (mm = '02') or (mm = '03') then
+//            SQL.Add('  ,(select sum(Budget_B) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = ''' + yyyy +
+//             ''' and SGDH_Budget.Season in (''01'',''02'',''03'')) as BUDGET')
+            SQL.Add('  ,isnull((select sum(Budget_B) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = ''' + yyyy +
+              ''' and SGDH_Budget.Season in (''01'',''02'',''03'')),0) as BUDGET')
+          else if (mm = '04') or (mm = '05') or (mm = '06') then
+//            SQL.Add('  ,(select sum(Budget_B) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = ''' + yyyy +
+//              ''' and SGDH_Budget.Season in (''04'',''05'',''06'')) as BUDGET')
+            SQL.Add('  ,isnull((select sum(Budget_B) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = ''' + yyyy +
+              ''' and SGDH_Budget.Season in (''04'',''05'',''06'')),0) as BUDGET')
+          else if (mm = '07') or (mm = '08') or (mm = '09') then
+//            SQL.Add('  ,(select sum(Budget_B) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = ''' + yyyy +
+//              ''' and SGDH_Budget.Season in (''07'',''08'',''09'')) as BUDGET')
+            SQL.Add('  ,isnull((select sum(Budget_B) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = ''' + yyyy +
+              ''' and SGDH_Budget.Season in (''07'',''08'',''09'')),0) as BUDGET')
+          else if (mm = '10') or (mm = '11') or (mm = '12') then
+//            SQL.Add('  ,(select sum(Budget_B) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = ''' + yyyy +
+//              ''' and SGDH_Budget.Season in (''10'',''11'',''12'')) as BUDGET')
+            SQL.Add('  ,isnull((select sum(Budget_B) from SGDH_Budget where depmemo like ''01%'' and SGDH_Budget.YM = ''' + yyyy +
+              ''' and SGDH_Budget.Season in (''10'',''11'',''12'')),0) as BUDGET')
+        end;
+
+        SQL.add('from');
+        SQL.add('(select distinct SGDH_CLASS from BDepartment');
+        SQL.add('where SGDH_CLASS like ''01%''');
+        SQL.add(') BDepart');
+
+//        SQL.add('Union all ');
+//        SQL.add('	Select top 1 NULL as DEPNAME,NULL as lastseason,NULL as thisseason,Null as Budget from BDepartment');
+        SQL.add('Union all ');
+        QTemp.Next;
+      end;
+
+      //總計
+      //     SQL.add('Union all ');
+      SQL.add('select ''總計'' as DEPNAME,');
+      SQL.add('isnull((	Select  CAST(Sum(Acc)/' + CWHL + ' as decimal(10,2)) as USACC from (');
+      SQL.add('	select SGDHS.SGNO, SGDH.DepID,  case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else '+CWHL+'*SGDHS.USPrice*Qty end as ACC');
+      SQL.add('	from SGDHS');
+      SQL.add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO');
+//      SQL.add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE())');
+      SQL.add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Budget_chk,0) <> 1 and isnull(Customer_Account,0) <> 1 and isnull(Uniform,0) <> 1');
+      SQL.add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+
+      if (mm = '01') or (mm = '02') or (mm = '03') then
+        SQL.Add('          ''' + formatdatetime('yyyy/10/01', Incyear(DTP1.date, -1)) + ''' and ''' +
+          formatdatetime('yyyy/12/31', Incyear(DTP1.date, -1)) + '''')
+      else if (mm = '04') or (mm = '05') or (mm = '06') then
+        SQL.Add('          ''' + formatdatetime('yyyy/01/01', DTP1.date) + ''' and ''' + formatdatetime('yyyy/03/31', DTP1.date) +
+          '''')
+      else if (mm = '07') or (mm = '08') or (mm = '09') then
+        SQL.Add('          ''' + formatdatetime('yyyy/04/01', DTP1.date) + ''' and ''' + formatdatetime('yyyy/06/30', DTP1.date) +
+          '''')
+      else if (mm = '10') or (mm = '11') or (mm = '12') then
+        SQL.Add('          ''' + formatdatetime('yyyy/07/01', DTP1.date) + ''' and ''' + formatdatetime('yyyy/09/30', DTP1.date) +
+          '''');
+
+      if Edit1.Text <> '' then
+        SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+      if LBCombo.Text = '' then
+        SQL.Add('and SGDH.LB not in (''05'') ')
+      else if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+        SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+      else if LBCombo.Text = 'not 03' then
+        SQL.Add('    and SGDH.LB <> ''03'' ');
+      SQL.add('		  ) SGDH ),0) as lastseason,');
+      SQL.add('isnull((	Select  CAST(Sum(Acc)/' + CWHL + ' as decimal(10,2)) as USACC');
+      SQL.add('	 from (');
+      SQL.add('	select SGDHS.SGNO, SGDH.DepID,  case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else '+CWHL+'*SGDHS.USPrice*Qty end as ACC');
+      SQL.add('	from SGDHS');
+      SQL.add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO');
+//      SQL.add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE())');
+      SQL.add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Budget_chk,0) <> 1 and isnull(Customer_Account,0) <> 1 and isnull(Uniform,0) <> 1');
+      SQL.add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+
+      if (mm = '01') or (mm = '02') or (mm = '03') then
+        SQL.Add('          ''' + formatdatetime('yyyy/01/01', DTP1.date) + ''' and ''' + formatdatetime('yyyy/03/31', DTP1.date) +
+          '''')
+      else if (mm = '04') or (mm = '05') or (mm = '06') then
+        SQL.Add('          ''' + formatdatetime('yyyy/04/01', DTP1.date) + ''' and ''' + formatdatetime('yyyy/06/30', DTP1.date) +
+          '''')
+      else if (mm = '07') or (mm = '08') or (mm = '09') then
+        SQL.Add('          ''' + formatdatetime('yyyy/07/01', DTP1.date) + ''' and ''' + formatdatetime('yyyy/09/30', DTP1.date) +
+          '''')
+      else if (mm = '10') or (mm = '11') or (mm = '12') then
+        SQL.Add('          ''' + formatdatetime('yyyy/10/01', DTP1.date) + ''' and ''' + formatdatetime('yyyy/12/31', DTP1.date) +
+          '''');
+
+      if Edit1.Text <> '' then
+        SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+      if LBCombo.Text = '' then
+        SQL.Add('and SGDH.LB not in (''05'') ')
+      else if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+        SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+      else if LBCombo.Text = 'not 03' then
+        SQL.Add('    and SGDH.LB <> ''03'' ');
+      SQL.add('		  ) SGDH ),0) as thisseason');
+      if LBCombo.Text = '' then
+      begin
+        if (mm = '01') or (mm = '02') or (mm = '03') then
+//          SQL.Add('  ,(select sum(Budget) from SGDH_Budget where SGDH_Budget.YM = ''' + yyyy +
+//            ''' and SGDH_Budget.Season in (''01'',''02'',''03'')) as BUDGET')
+          SQL.Add('  ,isnull((select sum(Budget) from SGDH_Budget where SGDH_Budget.YM = ''' + yyyy +
+            ''' and SGDH_Budget.Season in (''01'',''02'',''03'')),0) as BUDGET')
+        else if (mm = '04') or (mm = '05') or (mm = '06') then
+//          SQL.Add('  ,(select sum(Budget) from SGDH_Budget where SGDH_Budget.YM = ''' + yyyy +
+//            ''' and SGDH_Budget.Season in (''04'',''05'',''06'')) as BUDGET')
+          SQL.Add('  ,isnull((select sum(Budget) from SGDH_Budget where SGDH_Budget.YM = ''' + yyyy +
+            ''' and SGDH_Budget.Season in (''04'',''05'',''06'')),0) as BUDGET')
+        else if (mm = '07') or (mm = '08') or (mm = '09') then
+//          SQL.Add('  ,(select sum(Budget) from SGDH_Budget where SGDH_Budget.YM = ''' + yyyy +
+//            ''' and SGDH_Budget.Season in (''07'',''08'',''09'')) as BUDGET')
+          SQL.Add('  ,isnull((select sum(Budget) from SGDH_Budget where SGDH_Budget.YM = ''' + yyyy +
+            ''' and SGDH_Budget.Season in (''07'',''08'',''09'')),0) as BUDGET')
+        else if (mm = '10') or (mm = '11') or (mm = '12') then
+//          SQL.Add('  ,(select sum(Budget) from SGDH_Budget where SGDH_Budget.YM = ''' + yyyy +
+//           ''' and SGDH_Budget.Season in (''10'',''11'',''12'')) as BUDGET')
+          SQL.Add('  ,isnull((select sum(Budget) from SGDH_Budget where SGDH_Budget.YM = ''' + yyyy +
+            ''' and SGDH_Budget.Season in (''10'',''11'',''12'')),0) as BUDGET')
+      end
+      else
+      begin
+        if (mm = '01') or (mm = '02') or (mm = '03') then
+//          SQL.Add('  ,(select sum(Budget_B) from SGDH_Budget where SGDH_Budget.YM = ''' + yyyy +
+//            ''' and SGDH_Budget.Season in (''01'',''02'',''03'')) as BUDGET')
+          SQL.Add('  ,isnull((select sum(Budget_B) from SGDH_Budget where SGDH_Budget.YM = ''' + yyyy +
+            ''' and SGDH_Budget.Season in (''01'',''02'',''03'')),0) as BUDGET')
+        else if (mm = '04') or (mm = '05') or (mm = '06') then
+//          SQL.Add('  ,isnull((select sum(Budget_B) from SGDH_Budget where SGDH_Budget.YM = ''' + yyyy +
+//            ''' and SGDH_Budget.Season in (''04'',''05'',''06'')),0) as BUDGET')
+          SQL.Add('  ,(select sum(Budget_B) from SGDH_Budget where SGDH_Budget.YM = ''' + yyyy +
+            ''' and SGDH_Budget.Season in (''04'',''05'',''06'')) as BUDGET')
+        else if (mm = '07') or (mm = '08') or (mm = '09') then
+//          SQL.Add('  ,(select sum(Budget_B) from SGDH_Budget where SGDH_Budget.YM = ''' + yyyy +
+//            ''' and SGDH_Budget.Season in (''07'',''08'',''09'')) as BUDGET')
+          SQL.Add('  ,isnull((select sum(Budget_B) from SGDH_Budget where SGDH_Budget.YM = ''' + yyyy +
+            ''' and SGDH_Budget.Season in (''07'',''08'',''09'')),0) as BUDGET')
+        else if (mm = '10') or (mm = '11') or (mm = '12') then
+//         SQL.Add('  ,(select sum(Budget_B) from SGDH_Budget where SGDH_Budget.YM = ''' + yyyy +
+//            ''' and SGDH_Budget.Season in (''10'',''11'',''12'')) as BUDGET')
+          SQL.Add('  ,isnull((select sum(Budget_B) from SGDH_Budget where SGDH_Budget.YM = ''' + yyyy +
+            ''' and SGDH_Budget.Season in (''10'',''11'',''12'')),0) as BUDGET')
+      end;
+
+      //funcObj.WriteErrorLog(sql.Text);   }
+      //showmessage(SQL.Text);
+      Active := true;
+    end;
+  end;
+
+  //資本支出
+  if CheckBox3.Checked = true then
+  begin
+    with SGDetSt5Qry do
+    begin
+      Active := false;
+      SQL.Clear;
+      //鞋廠
+      while not QTemp.Eof do
+      begin
+        SQL.Add('Select BDepartment.DEPMEMO as DEPNAME,');
+        SQL.Add('isnull((select CAST(Sum(Acc)/' + CWHL + ' as decimal(10,2)) as USACC from (');
+        SQL.Add('	select SGDHS.SGNO, SGDH.DepID,  case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else '+CWHL+'*SGDHS.USPrice*Qty end as ACC');
+        SQL.Add('	from SGDHS');
+        SQL.Add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO');
+//        SQL.Add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE())');
+        SQL.Add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Budget_chk,0) = 1');
+        SQL.Add('	and SGDH.DepID = BDepart.SGDH_ID');
+        SQL.Add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+        SQL.Add('          ''' + formatdatetime('yyyy/mm/dd', DTP1.Date) + ''' and ''' + formatdatetime('yyyy/mm/dd', DTP2.Date) + '''');
+{        if mm > '06' then
+          SQL.Add('          ''' + formatdatetime('yyyy/07/01', DTP1.Date) + ''' and ''' + formatdatetime('yyyy/12/31', DTP2.Date)
+            + '''')
+        else
+          SQL.Add('          ''' + formatdatetime('yyyy/01/01', DTP1.Date) + ''' and ''' + formatdatetime('yyyy/06/30', DTP2.Date)
+            + '''');  }
+        if Edit1.Text <> '' then
+          SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+        if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+          SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+        else if LBCombo.Text = 'not 03' then
+          SQL.Add('    and SGDH.LB <> ''03'' ');
+        if DepMemoEdit.Text <> '' then
+          SQL.Add('    and BDepartment.DepMemo like ''%' + DepMemoEdit.Text + '%'' ');
+        if DepEdit.Text <> '' then
+          SQL.Add('    and SGDH.DepID = ''' + DepEdit.Text + '''');
+        SQL.Add('		  ) SGDH');
+        SQL.Add('),0) as thismonth');
+        SQL.Add('	,SGDH_Capex.Budget ');
+        SQL.Add('from');
+        SQL.Add('(select distinct SGDH_ID from BDepartment');
+        SQL.Add('where SGDH_CLASS like ''' + QTemp.Fields[0].AsString + '%''');
+        SQL.Add(') BDepart');
+        SQL.Add('left join SGDH_Capex on SGDH_Capex.ID = BDepart.SGDH_ID and SGDH_Capex.YM = ''' + yyyy +
+          ''' and SGDH_Capex.Season = '''+mm+'''');
+{        if mm > '06' then
+          SQL.Add('left join SGDH_Capex on SGDH_Capex.ID = BDepart.SGDH_ID and SGDH_Capex.YM = ''' + yyyy +
+            ''' and SGDH_Capex.Season = ''02''')
+        else
+          SQL.Add('left join SGDH_Capex on SGDH_Capex.ID = BDepart.SGDH_ID and SGDH_Capex.YM = ''' + yyyy +
+            ''' and SGDH_Capex.Season = ''01''');  }
+        SQL.Add('left join BDepartment on BDepartment.ID = BDepart.SGDH_ID ');
+
+        SQL.add('Union all ');
+        SQL.add('select substring(SGDH_CLASS,3,100)+''統計'' as DEPNAME,');
+        SQL.add('  isnull((	Select  CAST(Sum(Acc)/' + CWHL + ' as decimal(10,2)) as USACC');
+        SQL.add('	 from (');
+        SQL.add('	select SGDHS.SGNO, SGDH.DepID,  case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else '+CWHL+'*SGDHS.USPrice*Qty end as ACC,BDepartment.SGDH_CLASS as DEPMEMO');
+        SQL.add('	from SGDHS');
+        SQL.add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO');
+//        SQL.add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE())');
+        SQL.add('	left join BDepartment on BDepartment.ID=SGDH.DepID');
+        SQL.add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Budget_chk,0) = 1');
+        SQL.add('	and BDepartment.SGDH_CLASS like ''' + QTemp.Fields[0].AsString + '%''');
+        SQL.add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+        SQL.Add('          ''' + formatdatetime('yyyy/mm/dd', DTP1.Date) + ''' and ''' + formatdatetime('yyyy/mm/dd', DTP2.Date) + '''');
+{        if mm > '06' then
+          SQL.Add('          ''' + formatdatetime('yyyy/07/01', DTP1.Date) + ''' and ''' + formatdatetime('yyyy/12/31', DTP2.Date)
+            + '''')
+        else
+          SQL.Add('          ''' + formatdatetime('yyyy/01/01', DTP1.Date) + ''' and ''' + formatdatetime('yyyy/06/30', DTP2.Date)
+            + ''''); }
+        if Edit1.Text <> '' then
+          SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+        if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+          SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+        else if LBCombo.Text = 'not 03' then
+          SQL.Add('    and SGDH.LB <> ''03'' ');
+        SQL.add('		  ) SGDH');
+        SQL.add('	Group by DEPMEMO ),0) as thismonth ');
+        SQL.add('	,isnull((select sum(Budget) from SGDH_Capex where depmemo like ''01%'' and YM = ''' + yyyy +
+          ''' and season = '''+mm+'''),0) as Budget');
+{        if mm > '06' then
+          SQL.add('	,(select sum(Budget) from SGDH_Capex where depmemo like ''01%'' and YM = ''' + yyyy +
+            ''' and season = ''02'') as Budget')
+        else
+          SQL.add('	,(select sum(Budget) from SGDH_Capex where depmemo like ''01%'' and YM = ''' + yyyy +
+            ''' and season = ''01'') as Budget');  }
+        SQL.add('from');
+        SQL.add('(select distinct SGDH_CLASS from BDepartment');
+        SQL.add('where SGDH_CLASS like ''' + QTemp.Fields[0].AsString + '%''');
+        SQL.add(') BDepart');
+
+//        SQL.add('Union all ');
+//        SQL.add('	Select top 1 NULL as DEPNAME,NULL as thismonth,Null as Budget from BDepartment');
+        SQL.add('Union all ');
+        QTemp.Next;
+      end;
+
+      //總計
+      //     SQL.add('Union all ');
+      SQL.add('select ''總計'' as DEPNAME,');
+      SQL.add('isnull((	Select  CAST(Sum(Acc)/' + CWHL + ' as decimal(10,2)) as USACC');
+      SQL.add('	 from (');
+      SQL.add('	select SGDHS.SGNO, SGDH.DepID,  case when SGDHS.USPrice is null then SGDHS.VNPrice*Qty else '+CWHL+'*SGDHS.USPrice*Qty end as ACC');
+      SQL.add('	from SGDHS');
+      SQL.add('	left join SGDH on SGDH.SGNO=SGDHS.SGNO');
+//      SQL.add('	left join CWHLS on CWHLS.HLDAY=''01'' and CWHLS.HLMONTH=MONTH(GETDATE()) and CWHLS.HLYEAR=YEAR(GETDATE())');
+      SQL.add('	where SGDH.CFMID<>''NO'' and SGDH.CFMID1<>''NO'' and isnull(SGDH.flowflag,'''') <> ''X'' and isnull(Budget_chk,0) = 1');
+      SQL.add('		  and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between');
+      SQL.Add('          ''' + formatdatetime('yyyy/mm/dd', DTP1.Date) + ''' and ''' + formatdatetime('yyyy/mm/dd', DTP2.Date) + '''');
+{      if mm > '06' then
+        SQL.Add('          ''' + formatdatetime('yyyy/07/01', DTP1.Date) + ''' and ''' + formatdatetime('yyyy/12/31', DTP2.Date) +
+          '''')
+      else
+        SQL.Add('          ''' + formatdatetime('yyyy/01/01', DTP1.Date) + ''' and ''' + formatdatetime('yyyy/06/30', DTP2.Date) +
+          '''');                                                                                                                  }
+      if Edit1.Text <> '' then
+        SQL.Add('    and SGDHS.SGNO like ''' + Edit1.Text + '%'' ');
+      if (LBCombo.Text <> '') and (LBCombo.Text <> 'not 03') then
+        SQL.Add('    and SGDH.LB=''' + LBCombo.Text + ''' ')
+      else if LBCombo.Text = 'not 03' then
+        SQL.Add('    and SGDH.LB <> ''03'' ');
+      SQL.add('		  ) SGDH ),0) as thismonth,');
+      SQL.add('	isnull((select sum(Budget) from SGDH_Capex where YM = ''' + yyyy + ''' and season = '''+mm+'''),0) as Budget');
+{      if mm > '06' then
+        SQL.add('	(select sum(Budget) from SGDH_Capex where YM = ''' + yyyy + ''' and season = ''02'') as Budget')
+      else
+        SQL.add('	(select sum(Budget) from SGDH_Capex where YM = ''' + yyyy + ''' and season = ''01'') as Budget');    }
+
+      //funcObj.WriteErrorLog(sql.Text);   }
+      //showmessage(SQL.Text);
+      Active := true;
+    end;
+  end;
+end;
+
+procedure TTotalApplyReport.SGDetSt3QryCalcFields(DataSet: TDataSet);
+begin
+  //  if (SGDetSt3Qry.fieldbyname('lastmonth').Value <> null) and (SGDetSt3Qry.fieldbyname('thismonth').Value <> null) and (SGDetSt3Qry.fieldbyname('lastmonth').Value <> 0) then
+  //    SGDetSt3Qry.FieldByName('Status').Value := FormatFloat('#0.00', 100 * (SGDetSt3Qry.fieldbyname('thismonth').Value - SGDetSt3Qry.fieldbyname('lastmonth').Value) / SGDetSt3Qry.fieldbyname('lastmonth').Value)+'%'
+  //  else if (SGDetSt3Qry.fieldbyname('lastmonth').Value = 0) and (SGDetSt3Qry.fieldbyname('thismonth').Value = 0) then
+  //    SGDetSt3Qry.FieldByName('Status').Value := '0%';
+  //  SGDetSt3Qry.FieldByName('Balance').Value := SGDetSt3Qry.fieldbyname('thismonth').Value - SGDetSt3Qry.fieldbyname('lastmonth').Value;
+  if (SGDetSt3Qry.fieldbyname('DEPNAME').Value <> NULL) and ((pos('客戶授權', SGDetSt3Qry.fieldbyname('DEPNAME').Value) > 1) or
+    (pos('制服採購', SGDetSt3Qry.fieldbyname('DEPNAME').Value) > 1)) then
+    SGDetSt3Qry.FieldByName('Status').Value := NULL
+  else if (SGDetSt3Qry.fieldbyname('thismonth').Value <> null) and (SGDetSt3Qry.fieldbyname('Budget').Value <> 0) then
+    SGDetSt3Qry.FieldByName('Status').Value := FormatFloat('#0.00', 100 * (SGDetSt3Qry.fieldbyname('thismonth').Value) /
+      SGDetSt3Qry.fieldbyname('Budget').Value) + '%'
+  else if (SGDetSt3Qry.fieldbyname('thismonth').Value = 0) then
+    SGDetSt3Qry.FieldByName('Status').Value := '0%';
+end;
+
+procedure TTotalApplyReport.DBGridEh4DblClick(Sender: TObject);
+begin
+  if SGDetSt3Qry.Active = true then
+  begin
+    XuongEdit.Text := '';
+    DepMemoEdit.Text := SGDetSt3Qry.FieldByName('DEPNAME').AsString;
+    PC1.ActivePageIndex := 0;
+    Button1.Click;
+  end;
+end;
+
+procedure TTotalApplyReport.DBGridEh4DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+  if SGDetSt3Qry.FieldByName('Budget').Value = null then
+  else if (pos('客戶授權', SGDetSt3Qry.FieldByName('DepName').asstring) > 0) or (pos('制服採購', SGDetSt3Qry.FieldByName('DepName').Value)
+    > 0) then
+  else if (SGDetSt3Qry.FieldByName('ThisMonth').Value > SGDetSt3Qry.FieldByName('Budget').Value) then
+    DBGridEh4.Canvas.Font.Color := clred
+  else
+    DBGridEh4.Canvas.Font.Color := clBlack;
+  //  if (DataCol = 3) or (DataCol = 4) or (DataCol = 5) then
+  if (DataCol = 1) or (DataCol = 2) or (DataCol = 3) then
+    DBGridEh4.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+
+  {  if SGDetSt3Qry.FieldByName('Balance').Value <> NULL then begin
+      if SGDetSt3Qry.FieldByName('Balance').Value = 0 then
+      else if (copy(SGDetSt3Qry.FieldByName('Balance').Value,1,1) <> '-') then
+        DBGridEh4.Canvas.Font.Color := clred
+      else
+        DBGridEh4.Canvas.Font.Color:=clGreen;
+    end;
+    if (DataCol = 4) then
+       DBGridEh4.DefaultDrawColumnCell(Rect,DataCol,Column,State);}
+
+  {  if SGDetSt3Qry.FieldByName('Status').Value <> NULL then begin
+      if SGDetSt3Qry.FieldByName('ThisMonth').Value = SGDetSt3Qry.FieldByName('Budget').Value then
+      else if (copy(SGDetSt3Qry.FieldByName('Status').Value,1,1) <> '-') then
+        DBGridEh4.Canvas.Font.Color := clred
+      else
+        DBGridEh4.Canvas.Font.Color:=clGreen;
+    end;
+    if (DataCol = 5) then
+       DBGridEh4.DefaultDrawColumnCell(Rect,DataCol,Column,State);}
+end;
+
+procedure TTotalApplyReport.DBGridEh5DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+  if SGDetSt4Qry.FieldByName('ThisSeason').Value > SGDetSt4Qry.FieldByName('Budget').Value then
+    DBGridEh5.Canvas.Font.Color := clred
+  else
+    DBGridEh5.Canvas.Font.Color := clBlack;
+  if (DataCol = 3) or (DataCol = 2) then
+    DBGridEh5.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+
+  if SGDetSt4Qry.FieldByName('Balance').Value <> NULL then
+  begin
+    if SGDetSt4Qry.FieldByName('Balance').Value = '0' then
+    else if (copy(SGDetSt4Qry.FieldByName('Balance').Value, 1, 1) <> '-') then
+      DBGridEh5.Canvas.Font.Color := clred
+    else
+      DBGridEh5.Canvas.Font.Color := clGreen;
+  end;
+  if (DataCol = 4) then
+    DBGridEh5.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+
+  if SGDetSt4Qry.FieldByName('Status').Value <> NULL then
+  begin
+    if SGDetSt4Qry.FieldByName('Balance').Value = '0' then
+    else if (copy(SGDetSt4Qry.FieldByName('Status').Value, 1, 1) <> '-') then
+      DBGridEh5.Canvas.Font.Color := clred
+    else
+      DBGridEh5.Canvas.Font.Color := clGreen;
+  end;
+  if (DataCol = 5) then
+    DBGridEh5.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
+procedure TTotalApplyReport.SGDetSt4QryCalcFields(DataSet: TDataSet);
+begin
+  if (SGDetSt4Qry.fieldbyname('lastseason').Value <> null) and (SGDetSt4Qry.fieldbyname('thisseason').Value <> null) and
+    (SGDetSt4Qry.fieldbyname('lastseason').Value <> 0) then
+    SGDetSt4Qry.FieldByName('Status').Value := FormatFloat('#0.00', 100 * (SGDetSt4Qry.fieldbyname('thisseason').Value -
+      SGDetSt4Qry.fieldbyname('lastseason').Value) / SGDetSt4Qry.fieldbyname('lastseason').Value) + '%'
+  else if (SGDetSt4Qry.fieldbyname('lastseason').Value = 0) and (SGDetSt4Qry.fieldbyname('thisseason').Value = 0) then
+    SGDetSt4Qry.FieldByName('Status').Value := '0%';
+  SGDetSt4Qry.FieldByName('Balance').Value := SGDetSt4Qry.fieldbyname('thisseason').Value -
+    SGDetSt4Qry.fieldbyname('lastseason').Value;
+end;
+
+procedure TTotalApplyReport.DBGridEh6DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+  if SGDetSt5Qry.FieldByName('ThisMonth').Value > SGDetSt5Qry.FieldByName('Budget').Value then
+    DBGridEh6.Canvas.Font.Color := clred
+  else
+    DBGridEh6.Canvas.Font.Color := clBlack;
+  if (DataCol = 1) or (DataCol = 2) or (DataCol = 3) then
+    DBGridEh6.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
+procedure TTotalApplyReport.Label1DblClick(Sender: TObject);
+begin
+  CheckBox4.Visible := not CheckBox4.Visible;
+end;
+
+procedure TTotalApplyReport.DBGridEh6DblClick(Sender: TObject);
+begin
+  if SGDetSt5Qry.Active = true then
+  begin
+    XuongEdit.Text := '';
+    DepMemoEdit.Text := SGDetSt5Qry.FieldByName('DEPNAME').AsString;
+    PC1.ActivePageIndex := 0;
+    Button1.Click;
+  end;
+end;
+
+end.

@@ -1,0 +1,129 @@
+unit CD_MatCLSLRpt1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, QuickRpt, QRCtrls, ExtCtrls, DB, DBTables;
+
+type
+  TCD_MatCLSLRpt = class(TForm)
+    QuickRep1: TQuickRep;
+    PageFooterBand1: TQRBand;
+    QRLabel25: TQRLabel;
+    QRLabel23: TQRLabel;
+    QRLabel24: TQRLabel;
+    QRLabel26: TQRLabel;
+    QRLabel27: TQRLabel;
+    QRLabel28: TQRLabel;
+    ISOLAB: TQRLabel;
+    PageHeaderBand1: TQRBand;
+    QRLabel1: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLean: TQRLabel;
+    QRDaomh: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRLabel10: TQRLabel;
+    MayQRLabel: TQRLabel;
+    QRMaster: TQRBand;
+    QRShape4: TQRShape;
+    QRShape25: TQRShape;
+    QRLabel20: TQRLabel;
+    QRLabel19: TQRLabel;
+    QRShape8: TQRShape;
+    QRLabel17: TQRLabel;
+    QRLabel16: TQRLabel;
+    QRShape3: TQRShape;
+    QRDBText2: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRShape5: TQRShape;
+    QRSubDetail: TQRSubDetail;
+    QRShape1: TQRShape;
+    QRDBText1: TQRDBText;
+    QRShape33: TQRShape;
+    QRShape34: TQRShape;
+    QRDBText5: TQRDBText;
+    QRShape2: TQRShape;
+    QRDBText3: TQRDBText;
+    Qtemp: TQuery;
+    CLZLQry: TQuery;
+    DS1: TDataSource;
+    SMDDSQry: TQuery;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure Init(DLNO:string);
+  end;
+
+var
+  CD_MatCLSLRpt: TCD_MatCLSLRpt;
+
+implementation
+  uses FunUnit;
+{$R *.dfm}
+
+procedure TCD_MatCLSLRpt.Init(DLNO:string);
+begin
+  QRLabel10.Caption:=DLNO;
+  //基本資料
+  with Qtemp do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select CutDispatch.DLNO,BDepartment.DepName,XXZL.DAOMH+'' (''+DDZL.Article+'')'' as DAOMH,CutDispatch.Memo from CutDispatch');
+    SQL.Add('Left join CutDispatchS on CutDispatchS.DLNO=CutDispatch.DLNO');
+    SQL.Add('Left join DDZL on DDZL.DDBH=CutDispatchS.ZLBH');
+    SQL.Add('Left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao ');
+    SQL.Add('Left join BDepartment on BDepartment.ID=CutDisPatch.DepID');
+    SQL.Add('where CutDispatch.DLNO='''+DLNO+''' ');
+    SQL.Add('Group by CutDispatch.DLNO,BDepartment.DepName,XXZL.DAOMH,DDZL.Article,CutDispatch.Memo ');
+    Active:=true;
+  end;
+  MayQRLabel.Caption:=Qtemp.FieldByName('Memo').AsString;
+  QRLean.Caption:=Qtemp.FieldByName('DepName').AsString;
+  QRDaomh.Caption:=Qtemp.FieldByName('DAOMH').AsString;
+  Qtemp.Active:=false;
+  //
+  with CLZLQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select DLNO,CLBH,''(''+CLBH+'')''+YWPM as YWPM,BWZL from (');
+    SQL.Add('select CD1.DLNO,CD1.CLBH, ');
+    SQL.Add('          cast((select IsNull(BWZLVN.VWSM,BWZL.YWSM) + ''(''+BWZL.BWDH+''),'' from CutDispatchS CS2,BWZL left join BWZLVN on BWZL.BWDH=BWZLVN.BWDH ');
+    SQL.Add('            where CS2.BWBH=BWZL.bwdh and CS2.DLNO='''+DLNO+''' and CS2.CLBH=CD1.CLBH    Group by BWZL.BWDH,BWZL.YWSM,BWZLVN.VWSM for XML Path (''''))  as varchar(max)) as BWZL   ');
+    SQL.Add('from CutDispatchS as CD1');
+    SQL.Add('where DLNO='''+DLNO+''' ) CutDispatchS ');
+    SQL.Add('Left join CLZL on CLZL.cldh=CutDispatchS.CLBH ');
+    SQL.Add('Group by DLNO,CLBH,YWPM,BWZL');
+    //funcObj.WriteErrorLog(sql.Text);
+    Active:=true;
+  end;
+
+  with SMDDSQry do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('Select CutDispatchs.ZLBH ,BDepartment.DepName as LeanStitch,Sum(ZLZLS2.CLSL) as CLSL from (');
+    SQL.Add('select CutDispatchs.ZLBH,CutDispatchs.BWBH,CutDispatchs.CLBH,SMDD.DepNo,min(SMDD.PlanDate) as PlanDate from CutDispatch');
+    SQL.Add('left join CutDispatchs on CutDispatch.DLNO=CutDispatchs.DLNO ');
+    SQL.Add('left join CutDispatchSS on CutDispatchSS.DLNO=CutDispatchS.DLNO and CutDispatchSS.ZLBH=CutDispatchs.ZLBH and CutDispatchSS.BWBH=CutDispatchs.BWBH and CutDispatchSS.CLBH=CutDispatchs.CLBH and CutDispatchSS.SIZE=CutDispatchs.SIZE');
+    SQL.Add('left join SMDD on SMDD.DDBH=CutDispatchSS.DDBH and SMDD.GXLB=''S'' ');
+    SQL.Add('where CutDispatchs.DLNO='''+DLNO+''' and CutDispatchs.CLBH=:CLBH ');
+    SQL.Add('Group by CutDispatchs.ZLBH,CutDispatchs.BWBH,CutDispatchs.CLBH,SMDD.DepNo ) CutDispatchs ');
+    SQL.Add('left join ZLZLS2 on CutDispatchs.ZLBH=ZLZLS2.ZLBH and CutDispatchs.BWBH=ZLZLS2.BWBH and CutDispatchs.CLBH=ZLZLS2.CLBH ');
+    SQL.Add('left join BDepartment on BDepartment.ID=CutDispatchs.DepNo');
+    SQL.Add('Group by CutDispatchs.ZLBH ,BDepartment.DepName ');
+    funcObj.WriteErrorLog(sql.Text);
+    Active:=true;
+  end;
+end;
+
+end.

@@ -1,0 +1,446 @@
+object MaterialScan: TMaterialScan
+  Left = 320
+  Top = 192
+  Width = 832
+  Height = 500
+  Caption = 'MaterialScan'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 16
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 824
+    Height = 153
+    Align = alTop
+    TabOrder = 0
+    object Panel2: TPanel
+      Left = 1
+      Top = 1
+      Width = 822
+      Height = 151
+      Align = alClient
+      BevelOuter = bvNone
+      Color = 14737600
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      object Label2: TLabel
+        Left = 16
+        Top = 8
+        Width = 143
+        Height = 20
+        Caption = 'PRODUCTION Unit:'
+      end
+      object Label5: TLabel
+        Left = 8
+        Top = 112
+        Width = 145
+        Height = 24
+        AutoSize = False
+        Caption = 'SCAN BARCODE:'
+      end
+      object Edit1: TEdit
+        Left = 24
+        Top = 40
+        Width = 113
+        Height = 28
+        ReadOnly = True
+        TabOrder = 0
+        OnDblClick = Edit1DblClick
+      end
+      object Edit4: TEdit
+        Left = 656
+        Top = 80
+        Width = 121
+        Height = 63
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        CharCase = ecUpperCase
+        Color = 14737600
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -48
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 1
+      end
+      object Edit5: TEdit
+        Left = 168
+        Top = 48
+        Width = 49
+        Height = 28
+        TabOrder = 2
+        Visible = False
+      end
+      object BitBtn1: TBitBtn
+        Left = 136
+        Top = 40
+        Width = 17
+        Height = 28
+        Caption = '...'
+        TabOrder = 3
+        OnClick = BitBtn1Click
+      end
+      object Button1: TButton
+        Left = 264
+        Top = 16
+        Width = 97
+        Height = 41
+        Caption = 'Upload'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -16
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 4
+        OnClick = Button1Click
+      end
+      object Button2: TButton
+        Left = 392
+        Top = 16
+        Width = 97
+        Height = 41
+        Caption = 'Clear'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -16
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 5
+        OnClick = Button2Click
+      end
+      object Button3: TButton
+        Left = 520
+        Top = 16
+        Width = 89
+        Height = 41
+        Caption = 'Exit'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -16
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 6
+        OnClick = Button3Click
+      end
+      object Edit3: TEdit
+        Left = 152
+        Top = 80
+        Width = 489
+        Height = 60
+        AutoSize = False
+        CharCase = ecUpperCase
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -32
+        Font.Name = 'Arial Narrow'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 7
+        OnEnter = Edit3Enter
+        OnKeyPress = Edit3KeyPress
+      end
+    end
+  end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 153
+    Width = 824
+    Height = 313
+    Align = alClient
+    DataSource = DS1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+    PopupMenu = PopupMenu1
+    ReadOnly = True
+    TabOrder = 1
+    TitleFont.Charset = ANSI_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'Arial'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'DepName'
+        Width = 66
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ZLBH'
+        Width = 80
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CLBH'
+        Width = 90
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DFL'
+        Width = 24
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'XH'
+        Width = 25
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Qty'
+        Width = 55
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'MATCODE'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Width = 203
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'YWPM'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Width = 318
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DWBH'
+        Width = 41
+        Visible = True
+      end>
+  end
+  object KCSM: TQuery
+    CachedUpdates = True
+    DatabaseName = 'DB'
+    RequestLive = True
+    SQL.Strings = (
+      'select KCSMCL.*,CLZL.YWPM,CLZL.DWBH,BDepartment.DepName'
+      'from KCSMCL '
+      'left join CLZL on CLZL.CLDH=KCSMCL.CLBH'
+      'left join BDepartment on BDepartment.ID=KCSMCL.DepID'
+      'where KCSMCL.CLBH='#39'AAAAAA'#39)
+    UpdateObject = UpKCSM
+    Left = 80
+    Top = 232
+    object KCSMZLBH: TStringField
+      FieldName = 'ZLBH'
+      Size = 15
+    end
+    object KCSMCLBH: TStringField
+      FieldName = 'CLBH'
+      Size = 15
+    end
+    object KCSMQty: TFloatField
+      FieldName = 'Qty'
+    end
+    object KCSMXH: TStringField
+      FieldName = 'XH'
+      Size = 2
+    end
+    object KCSMDFL: TStringField
+      FieldName = 'DFL'
+      FixedChar = True
+      Size = 1
+    end
+    object KCSMMATCODE: TStringField
+      FieldName = 'MATCODE'
+      FixedChar = True
+      Size = 45
+    end
+    object KCSMDepID: TStringField
+      FieldName = 'DepID'
+      FixedChar = True
+      Size = 10
+    end
+    object KCSMDepName: TStringField
+      FieldName = 'DepName'
+      FixedChar = True
+      Size = 50
+    end
+    object KCSMUSERDATE: TDateTimeField
+      FieldName = 'USERDATE'
+    end
+    object KCSMUSERID: TStringField
+      FieldName = 'USERID'
+      FixedChar = True
+      Size = 15
+    end
+    object KCSMUSERDATE2: TDateTimeField
+      FieldName = 'USERDATE2'
+    end
+    object KCSMUSERID2: TStringField
+      FieldName = 'USERID2'
+      FixedChar = True
+      Size = 50
+    end
+    object KCSMYN: TStringField
+      FieldName = 'YN'
+      FixedChar = True
+      Size = 1
+    end
+    object KCSMYWPM: TStringField
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object KCSMDWBH: TStringField
+      FieldName = 'DWBH'
+      FixedChar = True
+      Size = 4
+    end
+  end
+  object UpKCSM: TUpdateSQL
+    ModifySQL.Strings = (
+      'update KCSMCL'
+      'set'
+      '  USRDATE2 = :USRDATE2,'
+      '  USERID2 = :USERID2,'
+      '  YN = :YN'
+      'where'
+      '  ZLBH = :OLD_ZLBH and'
+      '  CLBH = :OLD_CLBH and'
+      '  DFL = :OLD_DFL and'
+      '  XH = :OLD_XH')
+    InsertSQL.Strings = (
+      'insert into KCSMCL'
+      '  (USRDATE2, USERID2, YN)'
+      'values'
+      '  (:USRDATE2, :USERID2, :YN)')
+    DeleteSQL.Strings = (
+      'delete from KCSMCL'
+      'where'
+      '  ZLBH = :OLD_ZLBH and'
+      '  CLBH = :OLD_CLBH and'
+      '  DFL = :OLD_DFL and'
+      '  XH = :OLD_XH')
+    Left = 112
+    Top = 232
+  end
+  object DS1: TDataSource
+    DataSet = KCSM
+    Left = 144
+    Top = 232
+  end
+  object KCSMCL: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select KCSMCL.*,CLZL.YWPM,CLZL.DWBH'
+      'from KCSMCL '
+      'left join CLZL on CLZL.CLDH=KCSMCL.CLBH'
+      'where KCSMCL.YN='#39'1'#39)
+    Left = 200
+    Top = 240
+    object KCSMCLZLBH: TStringField
+      FieldName = 'ZLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object KCSMCLCLBH: TStringField
+      FieldName = 'CLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object KCSMCLDFL: TStringField
+      FieldName = 'DFL'
+      FixedChar = True
+      Size = 1
+    end
+    object KCSMCLXH: TStringField
+      FieldName = 'XH'
+      FixedChar = True
+      Size = 2
+    end
+    object KCSMCLQty: TCurrencyField
+      FieldName = 'Qty'
+    end
+    object KCSMCLMATCODE: TStringField
+      FieldName = 'MATCODE'
+      FixedChar = True
+      Size = 45
+    end
+    object KCSMCLDepID: TStringField
+      FieldName = 'DepID'
+      FixedChar = True
+      Size = 10
+    end
+    object KCSMCLUSERDATE: TDateTimeField
+      FieldName = 'USERDATE'
+    end
+    object KCSMCLUSERID: TStringField
+      FieldName = 'USERID'
+      FixedChar = True
+      Size = 15
+    end
+    object KCSMCLYN: TStringField
+      FieldName = 'YN'
+      FixedChar = True
+      Size = 1
+    end
+    object KCSMCLYWPM: TStringField
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object KCSMCLDWBH: TStringField
+      FieldName = 'DWBH'
+      FixedChar = True
+      Size = 4
+    end
+  end
+  object Qtemp: TQuery
+    DatabaseName = 'DB'
+    Left = 240
+    Top = 240
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 320
+    Top = 248
+    object Delete1: TMenuItem
+      Caption = 'Delete'
+      OnClick = Delete1Click
+    end
+  end
+end

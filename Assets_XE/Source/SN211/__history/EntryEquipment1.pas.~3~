@@ -1,0 +1,1849 @@
+unit EntryEquipment1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,funUnit,
+  Dialogs, DB, DBTables, StdCtrls, Mask, DBCtrls, GridsEh, DBGridEh,
+  ComCtrls, Buttons, ExtCtrls, IdBaseComponent, IdComponent,
+  IdTCPConnection, IdTCPClient, IdTime, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, EhLibVCL, DBAxisGridsEh;
+
+type
+  TEntryEquipment = class(TForm)
+    Panel1: TPanel;
+    Label18: TLabel;
+    bbInsert: TBitBtn;
+    bbDelete: TBitBtn;
+    bbModify: TBitBtn;
+    bbSave: TBitBtn;
+    bbCancel: TBitBtn;
+    bbExit: TBitBtn;
+    bbQuery: TBitBtn;
+    bbFirst: TBitBtn;
+    bbPrior: TBitBtn;
+    bbNext: TBitBtn;
+    bbLast: TBitBtn;
+    bbExcel: TBitBtn;
+    Panel2: TPanel;
+    bdInsert: TBitBtn;
+    bdDelete: TBitBtn;
+    bdModify: TBitBtn;
+    bdSave: TBitBtn;
+    bdCancel: TBitBtn;
+    bdExit: TBitBtn;
+    bdFirst: TBitBtn;
+    bdPrior: TBitBtn;
+    bdNext: TBitBtn;
+    bdLast: TBitBtn;
+    bdPrint: TBitBtn;
+    bdExcel: TBitBtn;
+    PC1: TPageControl;
+    TS1: TTabSheet;
+    TS2: TTabSheet;
+    TS_DelDet: TPanel;
+    Panel3: TPanel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    edtRKNO: TEdit;
+    btnQuery: TButton;
+    CheckMine: TCheckBox;
+    Panel5: TPanel;
+    Label7: TLabel;
+    Label6: TLabel;
+    dbeRKNO: TDBEdit;
+    dbeSBBH: TDBEdit;
+    DBGrid2: TDBGridEh;
+    EnMas: TQuery;
+    UpMas: TUpdateSQL;
+    DS1: TDataSource;
+    UPDet: TUpdateSQL;
+    EnDet: TQuery;
+    DS2: TDataSource;
+    Qtemp: TQuery;
+    EnMasRKNO: TStringField;
+    EnMasDOCNO: TStringField;
+    EnMasUSERID: TStringField;
+    EnMasUSERDATE: TDateTimeField;
+    EnMasCFMID: TStringField;
+    EnMasCFMDATE: TDateTimeField;
+    EnMasYN: TStringField;
+    BDelRec: TQuery;
+    DTP1: TDateTimePicker;
+    DTP2: TDateTimePicker;
+    Label12: TLabel;
+    Label14: TLabel;
+    dbeZWPM: TDBEdit;
+    dbeYWPM: TDBEdit;
+    Panel4: TPanel;
+    Label9: TLabel;
+    Label11: TLabel;
+    Label2: TLabel;
+    dbe_DOCNO: TDBEdit;
+    dbe_RKNO: TDBEdit;
+    dbe_USERDATE: TDBEdit;
+    bbtSBBH: TBitBtn;
+    DBGrid1: TDBGridEh;
+    EnMasLB: TStringField;
+    EnMasDepID: TStringField;
+    EnMasDepName: TStringField;
+    EnMasZSBH: TStringField;
+    DepIDBtn: TBitBtn;
+    Label5: TLabel;
+    DBEdit1: TDBEdit;
+    ZSBHBtn: TBitBtn;
+    EnMasZSNO: TStringField;
+    EnMasZSJC_YW: TStringField;
+    EnMasGSBH: TStringField;
+    Panel6: TPanel;
+    Panel7: TPanel;
+    BO1: TBitBtn;
+    BO2: TBitBtn;
+    BO5: TBitBtn;
+    BO3: TBitBtn;
+    BO4: TBitBtn;
+    DBGrid3: TDBGridEh;
+    TSCDQry: TQuery;
+    DS3: TDataSource;
+    TSCDQryRKNO: TStringField;
+    TSCDQryTSID: TStringField;
+    TSCDQryTSBH: TStringField;
+    TSCDQrySBBH: TStringField;
+    TSCDQryNSX: TStringField;
+    TSCDQryInDATE: TDateTimeField;
+    TSCDQryDepID: TStringField;
+    TSCDQryDepName: TStringField;
+    TSCDQryDepID_Memo: TStringField;
+    TSCDQryUSERID: TStringField;
+    TSCDQryUSERDATE: TDateTimeField;
+    TSCDQryYN: TStringField;
+    TSCDQryYWPM: TStringField;
+    TSCDQryZWPM: TStringField;
+    TSCDQryZSDH: TStringField;
+    TSCDQryZSJC_YW: TStringField;
+    TSCDQryLSBH: TStringField;
+    TSCDQryQUCBH: TStringField;
+    TSCDQryQty: TFloatField;
+    TSCDQryCFMID: TStringField;
+    TSCDQryCFMID_LL: TStringField;
+    TSCDQryCFMID_RK: TStringField;
+    TSCDQryLB: TStringField;
+    UpdTSCD: TUpdateSQL;
+    EnDetRKNO: TStringField;
+    EnDetSBBH: TStringField;
+    EnDetUSERID: TStringField;
+    EnDetUSERDATE: TDateTimeField;
+    EnDetYN: TStringField;
+    EnDetYWPM: TStringField;
+    EnDetZWPM: TStringField;
+    EnDetLSBH: TStringField;
+    EnDetQUCBH: TStringField;
+    EnDetQty: TFloatField;
+    EnDetVNPrice: TCurrencyField;
+    EnDetUSPrice: TFloatField;
+    TSCDQryStatus: TStringField;
+    EnMasHDNO: TStringField;
+    EnMasDOCDate: TDateTimeField;
+    EnMasHDDate: TDateTimeField;
+    EnMasSOHIEU: TStringField;
+    DBGridEh2: TDBGridEh;
+    Splitter2: TSplitter;
+    Panel8: TPanel;
+    btInsert: TBitBtn;
+    btDelete: TBitBtn;
+    btModify: TBitBtn;
+    btSave: TBitBtn;
+    btCancel: TBitBtn;
+    KCPK: TQuery;
+    KCPKPKNO: TStringField;
+    KCPKDeclaretion: TStringField;
+    KCPKExport: TStringField;
+    KCPKUserID: TStringField;
+    KCPKUserDate: TDateTimeField;
+    KCPKYN: TStringField;
+    UpKCPK: TUpdateSQL;
+    DSKCPK: TDataSource;
+    KCPKTKDate: TDateTimeField;
+    EnDetVWPM: TStringField;
+    Panel9: TPanel;
+    BE1: TBitBtn;
+    BE2: TBitBtn;
+    BE3: TBitBtn;
+    BE4: TBitBtn;
+    BE5: TBitBtn;
+    DBGrid4: TDBGridEh;
+    btnImport: TBitBtn;
+    EnDetS: TQuery;
+    EnDetSRKNO: TStringField;
+    EnDetSSBBH: TStringField;
+    EnDetSSBBH1: TStringField;
+    EnDetSQty: TFloatField;
+    EnDetSVNPrice: TCurrencyField;
+    EnDetSUSPrice: TFloatField;
+    EnDetSUSERID: TStringField;
+    EnDetSUSERDATE: TDateTimeField;
+    EnDetSYN: TStringField;
+    DS4: TDataSource;
+    UpDetS: TUpdateSQL;
+    EnDetSVWPM: TStringField;
+    EnMasZSJC_ZW: TStringField;
+    EnMasflowflag: TStringField;
+    TSCDQryXSBH: TStringField;
+    TSCDQryUnit_Name: TStringField;
+    Label8: TLabel;
+    GroupBox2: TGroupBox;
+    RB2: TRadioButton;
+    RB1: TRadioButton;
+    RB3: TRadioButton;
+    RB4: TRadioButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnQueryClick(Sender: TObject);
+    procedure bbQueryClick(Sender: TObject);
+    procedure bbCancelClick(Sender: TObject);
+    procedure bbInsertClick(Sender: TObject);
+    procedure bbSaveClick(Sender: TObject);
+    procedure bbModifyClick(Sender: TObject);
+    procedure bbDeleteClick(Sender: TObject);
+    procedure DBGrid1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure DBGrid2GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure PC1Change(Sender: TObject);
+    procedure bdInsertClick(Sender: TObject);
+    procedure DBGrid2Columns2EditButtonClick(Sender: TObject;
+      var Handled: Boolean);
+    procedure bdCancelClick(Sender: TObject);
+    procedure bdSaveClick(Sender: TObject);
+    procedure bdDeleteClick(Sender: TObject);
+    procedure bdModifyClick(Sender: TObject);
+    procedure bbtSBBHClick(Sender: TObject);
+    procedure EnMasAfterOpen(DataSet: TDataSet);
+    procedure EnDetAfterOpen(DataSet: TDataSet);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure DBGrid1EditButtonClick(Sender: TObject);
+    procedure DepIDBtnClick(Sender: TObject);
+    procedure ZSBHBtnClick(Sender: TObject);
+    procedure EnMasZSNOSetText(Sender: TField; const Text: String);
+    procedure bdPrintClick(Sender: TObject);
+    procedure TSCDQryAfterOpen(DataSet: TDataSet);
+    procedure BO1Click(Sender: TObject);
+    procedure BO5Click(Sender: TObject);
+    procedure BO4Click(Sender: TObject);
+    procedure BO3Click(Sender: TObject);
+    procedure DBGrid3EditButtonClick(Sender: TObject);
+    procedure BO2Click(Sender: TObject);
+    procedure EnMasAfterScroll(DataSet: TDataSet);
+    procedure btInsertClick(Sender: TObject);
+    procedure btDeleteClick(Sender: TObject);
+    procedure btModifyClick(Sender: TObject);
+    procedure btSaveClick(Sender: TObject);
+    procedure btCancelClick(Sender: TObject);
+    procedure BE1Click(Sender: TObject);
+    procedure BE2Click(Sender: TObject);
+    procedure BE3Click(Sender: TObject);
+    procedure BE4Click(Sender: TObject);
+    procedure BE5Click(Sender: TObject);
+    procedure EnDetSAfterOpen(DataSet: TDataSet);
+    procedure btnImportClick(Sender: TObject);
+    procedure DBGrid4GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure DBGrid4EditButtonClick(Sender: TObject);
+  private
+    NDate:TDate;
+    sYear,sMonth,TSID: string;
+    LB:String;
+    //
+    DepID_CD:String;  //工務
+    DepName_CD:String;
+    { Private declarations }
+    procedure Init_LB();
+    procedure DelDetAfterOpen_ColumnShow();
+    procedure DelDet_LB_Edit();
+    procedure InsertTSCD(Qty:double);
+    function CheckTSBH_IsExists(TSBH:String;TSID:string):boolean;
+  public
+    { Public declarations }
+  end;
+
+var
+  EntryEquipment: TEntryEquipment;
+
+
+implementation
+
+uses main1 , Equipment_SBBH1, EquipmentDepName1, EntryEquipmentSupplier1,
+     Equipment_CGZL1, EntryEquipment_print1,EntryEquipment_LBChild1;
+
+{$R *.dfm}
+//
+procedure TEntryEquipment.Init_LB();
+begin
+  //
+  LB:='';
+  if self.Hint='SN211' then
+  begin
+    LB:='NNNNNNNNNN';
+  end;
+  //
+end;
+//異動單 Column Show or Not
+procedure TEntryEquipment.DelDetAfterOpen_ColumnShow();
+begin
+end;
+procedure TEntryEquipment.DelDet_LB_Edit();
+begin
+end;
+//===============================================================
+procedure TEntryEquipment.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  if bbSave.enabled then
+  begin
+    messagedlg('You have to save data Equipment of Entry Equipment first.',mtwarning,[mbyes],0);
+    PC1.ActivePage:=TS1;
+    panel1.Visible:=true;
+    panel2.Visible:=false;
+    action:=canone;
+  end else
+  begin
+    if bdSave.enabled then
+    begin
+      messagedlg('You have to save data Equipment first.',mtwarning,[mbyes],0);
+      PC1.ActivePage:=TS2;
+      panel2.Visible:=true;
+      panel1.Visible:=false;
+      action:=canone;
+    end else
+    begin
+      action:=Cafree;
+    end;
+  end;
+end;
+
+procedure TEntryEquipment.FormDestroy(Sender: TObject);
+begin
+    EntryEquipment:=nil;
+end;
+
+procedure TEntryEquipment.FormCreate(Sender: TObject);
+begin
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select getdate() as NDate ');
+    active:=true;
+    NDate:=fieldbyname('NDate').Value;
+    DTP1.Date:= NDate-3;
+    DTP2.Date:= NDate;
+  end;
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select top 1 ID,DepName from TSCD_BDepartment where DepMemo like ''%工務部%'' ');
+    active:=true;
+    DepID_CD:=FieldByName('ID').AsString;
+    DepName_CD:=FieldByName('DepName').AsString;
+    active:=false;
+    //
+  end;
+  PC1.ActivePageIndex:=0;
+end;
+
+procedure TEntryEquipment.btCancelClick(Sender: TObject);
+begin
+  with KCPK do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  btSave.enabled:=false;
+  btCancel.enabled:=false;
+end;
+
+procedure TEntryEquipment.btDeleteClick(Sender: TObject);
+begin
+  if EnMas.RequestLive  then
+  begin
+    showmessage('Pls save data first.');
+    abort;
+  end;
+  with KCPK do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+    fieldbyname('YN').Value:='0';
+  end;
+  btSave.Enabled:=true;
+  btCancel.Enabled:=true;
+end;
+
+procedure TEntryEquipment.btInsertClick(Sender: TObject);
+begin
+  if EnMas.RequestLive  then
+  begin
+    showmessage('Pls save data first.');
+    abort;
+  end;
+  with KCPK do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    insert;
+  end;
+  btSave.Enabled:=true;
+  btCancel.Enabled:=true;
+end;
+
+procedure TEntryEquipment.btModifyClick(Sender: TObject);
+begin
+  if EnMas.RequestLive  then
+  begin
+    showmessage('Pls save data first.');
+    abort;
+  end;
+  with KCPK do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+  btSave.Enabled:=true;
+  btCancel.Enabled:=true;
+end;
+
+procedure TEntryEquipment.btnImportClick(Sender: TObject);
+begin
+  if ENMas.RequestLive then
+  begin
+    showmessage('Pls save Master data first.');
+    PC1.ActivePage:=TS1;
+    panel2.visible:=false;
+    panel1.visible:=true;
+    abort;
+  end;
+  if ENDet.RequestLive then
+  begin
+    showmessage('Pls save Detail data first.');
+    abort;
+  end;
+
+  with ENDetS do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    insert;
+  end;
+
+  with Qtemp do
+  begin
+    Active:=false;
+    sql.Clear;
+    SQL.Add('select TSCD_CLZHZL.SBBH,TSCD_CLZHZL.SBBH1,TSCD_CLZHZL.Qty,TSCD_SB.QVNPrice,TSCD_SB.QUSPrice,TSCD_SB.VWPM  ');
+    SQL.Add('from TSCD_CLZHZL  ');
+    SQL.Add('left join TSCD_SB on TSCD_SB.SBBH=TSCD_CLZHZL.SBBH1  ');
+    SQL.Add('where TSCD_CLZHZL.SBBH='''+EnDet.FieldByName('SBBH').AsString+'''  ');
+    SQL.Add('order by TSCD_CLZHZL.SBBH,TSCD_CLZHZL.SBBH1 ');
+    active:=true;
+  end;
+
+  if Qtemp.RecordCount>0 then
+  begin
+    while not Qtemp.eof do
+      begin
+        ENDetS.insert;
+        ENDetS.Edit;
+        ENDetS.fieldbyname('SBBH1').Value:=Qtemp.FieldByName('SBBH1').Value;
+        ENDetS.fieldbyname('Qty').Value:=Qtemp.FieldByName('Qty').Value;
+        ENDetS.fieldbyname('VNPrice').Value:=Qtemp.FieldByName('QVNPrice').Value;
+        ENDetS.fieldbyname('USPrice').Value:=Qtemp.FieldByName('QUSPrice').Value;
+        ENDetS.fieldbyname('VWPM').Value:=Qtemp.FieldByName('VWPM').Value;
+        Qtemp.next;
+      end;
+  end;
+
+  BE2.Enabled:=false;
+  BE3.Enabled:=false;
+  BE4.Enabled:=true;
+  BE5.Enabled:=true;
+end;
+
+procedure TEntryEquipment.btnQueryClick(Sender: TObject);
+begin
+  //
+  Init_LB();
+  with EnMas do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select TSCD_KCRK.*,BDepartment.DepName,TSCD_ZSZL.ZSJC_YW,TSCD_ZSZL.ZSJC_ZW ');
+    sql.add('from TSCD_KCRK');
+    sql.add('left join  TSCD_BDepartment BDepartment on BDepartment.ID=TSCD_KCRK.DepID ');
+    sql.add('left join TSCD_ZSZL on TSCD_ZSZL.zsdh=TSCD_KCRK.ZSBH ');
+    sql.add('where ISNULL(flowflag,'''')<>''X'' and TSCD_KCRK.RKNO like '''+edtRKNO.Text+'%'+''' ');
+    sql.add('and convert(smalldatetime,convert(varchar,TSCD_KCRK.USERDATE,111)) between ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+    sql.add(' and ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP2.Date) +'''');
+    if CheckMine.Checked then
+    begin
+      sql.Add('and TSCD_KCRK.USERID='+''''+main.Edit1.Text+'''');
+    end;
+    sql.add('and TSCD_KCRK.LB='''+LB+''' ');
+    SQL.Add('and TSCD_KCRK.GSBH='''+main.Edit2.Text+''' ');
+    sql.add('order by RKNO DESC');
+
+    //showmessage(text);
+    //funcobj.WriteErrorLog(sql.Text);
+    active:=true;
+  end;
+  EnDet.Active:=true;
+  TSCDQry.Active:=true;
+  EnDetS.Active:=true;
+end;
+
+procedure TEntryEquipment.btSaveClick(Sender: TObject);
+var i: integer;
+begin
+  try
+    KCPK.first;
+    for i:=1 to KCPK.RecordCount do
+    begin
+      case KCPK.updatestatus of
+        usinserted:
+        begin
+          if KCPK.fieldbyname('Declaretion').isnull then
+            begin
+              KCPK.delete;
+            end else
+            begin
+             KCPK.edit;
+             KCPK.fieldbyname('PKNO').Value:=ENMas.fieldbyname('RKNO').Value;
+             KCPK.FieldByName('userID').Value:=main.edit1.text;
+             KCPK.FieldByName('userdate').Value:=Ndate;
+             KCPK.FieldByName('YN').Value:='1';
+             upKCPK.apply(ukinsert);
+           end;
+        end;
+        usmodified:
+        begin
+          if KCPK.fieldbyname('YN').value='0' then
+          begin
+             upKCPK.apply(ukdelete);
+          end else
+          begin
+            if (NDate-KCPK.FieldByName('userdate').Value<=60)  then
+            begin
+              if  KCPK.FieldByName('userID').Value=main.Edit1.Text then
+              begin
+                KCPK.edit;
+                KCPK.FieldByName('userID').Value:=main.edit1.text;
+                KCPK.FieldByName('userdate').Value:=Ndate;
+                upKCPK.apply(ukmodify);
+              end else
+              begin
+                showmessage('It is not yours, can not modify.');
+              end;
+            end else
+            begin
+              showmessage('Date > 60, can not modify.');
+            end;
+          end;
+        end;
+      end;
+      KCPK.next;
+    end;
+    KCPK.active:=false;
+    KCPK.cachedupdates:=false;
+    KCPK.requestlive:=false;
+    KCPK.active:=true;
+    btSave.enabled:=false;
+    btCancel.enabled:=false;
+    showmessage('Succeed.');
+  except
+    Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+  end;
+
+end;
+
+procedure TEntryEquipment.bbQueryClick(Sender: TObject);
+begin
+  panel3.Visible:=true;
+end;
+
+procedure TEntryEquipment.bbCancelClick(Sender: TObject);
+begin
+  with EnMas do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  bbInsert.Enabled:=true;
+  bbDelete.Enabled:=true;
+  bbModify.Enabled:=true;
+  bbSave.Enabled:=false;
+  bbCancel.Enabled:=false;
+  DBGrid1.columns[2].ButtonStyle:=cbsnone;
+  DBGrid1.columns[10].ButtonStyle:=cbsnone;
+  ZSBHBtn.Visible:=false;
+  DepIDBtn.Visible:=false;
+end;
+
+procedure TEntryEquipment.bbInsertClick(Sender: TObject);
+begin
+  with EnMas do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    Insert;
+  end;
+  bbSave.Enabled:=true;
+  bbCancel.Enabled:=true;
+  DBGrid1.columns[2].ButtonStyle:=cbsEllipsis;
+  DBGrid1.columns[10].ButtonStyle:=cbsEllipsis;
+  ZSBHBtn.Visible:=true;
+  DepIDBtn.Visible:=true;
+end;
+
+procedure TEntryEquipment.bbSaveClick(Sender: TObject);
+var y,m,RKNO:string;
+    i:integer;
+begin
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('select year(getdate()) as FY,month(getdate()) as FM,getdate() as NDate ');
+    active:=true;
+    y:=fieldbyname('FY').asstring;
+    m:=fieldbyname('FM').asstring;
+    NDate:=fieldbyname('NDate').Value;
+    active:=false;
+  end;
+  if length(m)<2 then
+    m:='0'+m;
+  try
+    EnDet.Active:=false;
+    EnMas.first;
+    for i:=1 to EnMas.RecordCount do
+    begin
+      case EnMas.updatestatus of
+        usinserted:
+        begin
+          with Qtemp do
+          begin
+            active:=false;
+            sql.Clear;
+            sql.Add('select RKNO from TSCD_KCRK where RKNO like '+''''+y+m+'%'+'''');
+            sql.add('order by RKNO');
+            active:=true;
+
+            if recordcount >0 then
+            begin
+              last;
+              RKNO:=fieldbyname('RKNO').AsString;
+              RKNO:=copy(RKNO,7,5);
+              RKNO:=inttostr(strtoint(RKNO)+1);
+              while length(RKNO)<5 do
+              begin
+                RKNO:='0'+RKNO;
+              end;
+            end else
+            begin
+              RKNO:='00001';
+            end;
+            RKNO:=y+m+RKNO;
+            active:=false;
+          end;
+          EnMas.edit;
+          EnMas.fieldbyname('RKNO').Value:=RKNO;
+          EnMas.fieldbyname('LB').Value:=LB;
+          if EnMas.fieldbyname('ZSNO').AsString='' then  EnMas.fieldbyname('ZSNO').Value:='ZZZZZZZZZZ';
+          EnMas.FieldByName('GSBH').Value:=main.Edit2.Text;
+          EnMas.FieldByName('userID').Value:=main.edit1.text;
+          //EnMas.FieldByName('userdate').Value:=NDate;
+          if EnMas.fieldbyname('userdate').AsString='' then  EnMas.fieldbyname('userdate').Value:= NDate;
+          EnMas.FieldByName('CFMID').Value:='NO';
+          EnMas.FieldByName('YN').Value:='1';
+          upMas.apply(ukinsert);
+        end;
+        usmodified:
+        begin
+          if EnMas.FieldByName('USERID').value<>main.Edit1.Text then
+          begin
+            showmessage('不是你的，不要亂動。khong phai ban khong duoc tu sua');
+          end else
+          begin
+            if EnMas.fieldbyname('YN').value='0' then
+            begin
+              with BDelRec do
+              begin
+              active:=false;
+                sql.Clear;
+                {sql.add('insert into BDelRec ');
+                sql.add('(TableName ,TNO,CLBH,OldID,DelID,DelDate)');
+                sql.add('values ('+''''+'TSCD_KCRK'+''''+','+''''+EnMas.fieldbyname('RKNO').Value+'''');
+                sql.add(','+''''+' '+''''+','+''''+EnMas.fieldbyname('USERID').Value+''''+',');
+                sql.add(''''+main.Edit1.Text+''''+',getdate())'); }
+                SQL.Add('Update TSCD_KCRK Set flowflag=''X'' where RKNO='''+EnMas.FieldByName('RKNO').AsString+''' ');
+                execsql;
+                active:=false;
+              end;
+              //upMas.apply(ukdelete);
+            end else
+            begin
+              if (EnMas.FieldByName('CFMID').value='NO')   then
+              begin
+                if (NDate-EnMas.FieldByName('USERDATE').value)<=30  then
+                begin
+                  EnMas.edit;
+                  EnMas.FieldByName('userID').Value:=main.edit1.text;
+                  EnMas.FieldByName('userdate').Value:=Ndate;
+                  upMas.apply(ukmodify);
+                end else
+                begin
+                  showmessage('Date>30, can not modify.');
+                end;
+              end else
+              begin
+                showmessage('Already confirmed, can not modify.');
+              end;
+            end;
+          end;
+        end;
+      end;
+      EnMas.next;
+    end;
+  EnMas.active:=false;
+  EnMas.cachedupdates:=false;
+  EnMas.requestlive:=false;
+  EnMas.active:=true;
+  EnDet.Active:=true;
+  bbSave.enabled:=false;
+  bbCancel.enabled:=false;
+  bbModify.enabled:=true;
+  bbDelete.enabled:=true;
+  bbInsert.enabled:=true;
+  //
+  DBGrid1.columns[2].ButtonStyle:=cbsnone;
+  DBGrid1.columns[6].ButtonStyle:=cbsnone;
+  ZSBHBtn.Visible:=false;
+  DepIDBtn.Visible:=false;
+  showmessage('Succeed.');
+  except
+    Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+  end;
+end;
+
+procedure TEntryEquipment.bbModifyClick(Sender: TObject);
+begin
+  with EnMas do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+  bbSave.Enabled:=true;
+  bbCancel.Enabled:=true;
+  DBGrid1.columns[2].ButtonStyle:=cbsEllipsis;
+  DBGrid1.columns[10].ButtonStyle:=cbsEllipsis;
+  ZSBHBtn.Visible:=true;
+  DepIDBtn.Visible:=true;
+end;
+
+procedure TEntryEquipment.bbDeleteClick(Sender: TObject);
+begin
+  if (EnDet.recordcount = 0) and (KCPK.RecordCount=0) then
+  begin
+    with EnMas do
+    begin
+      if fieldbyname('USERID').value=main.edit1.Text then
+      begin
+        requestlive:=true;
+        cachedupdates:=true;
+        edit;
+        fieldbyname('YN').Value:='0';
+      end else
+        showmessage('It is not yours,can not delete.');
+    end;
+  end else
+  begin
+    showmessage('Pls delete the Equipment Detail first.')
+  end;
+  bbSave.Enabled:=true;
+  bbCancel.Enabled:=true;
+end;
+
+procedure TEntryEquipment.DBGrid1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if EnMas.FieldByName('YN').value='0' then
+  begin
+    DBGrid1.canvas.font.color:=clred;
+  end;
+end;
+
+procedure TEntryEquipment.DBGrid2GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if EnDet.FieldByName('YN').value='0' then
+  begin
+    DBGrid2.canvas.font.color:=clred;
+  end;
+end;
+
+procedure TEntryEquipment.PC1Change(Sender: TObject);
+begin
+  if PC1.ActivePage=TS1 then
+  begin
+    panel1.visible:=true;
+    panel2.visible:=false;
+  end else
+  begin
+    panel1.visible:=false;
+    panel2.visible:=true;
+  end;
+end;
+
+procedure TEntryEquipment.bdInsertClick(Sender: TObject);
+begin
+  //
+  with EnDet do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    insert;
+  end;
+  DBGrid2.columns[0].ButtonStyle:=cbsEllipsis;
+  bdSave.Enabled:=true;
+  bdCancel.Enabled:=true;
+  bbtSBBH.Visible:=true;
+  //
+end;
+
+procedure TEntryEquipment.DBGrid2Columns2EditButtonClick(Sender: TObject;
+  var Handled: Boolean);
+begin
+  bbtSBBH.Click;
+end;
+
+procedure TEntryEquipment.bdCancelClick(Sender: TObject);
+begin
+  with EnDet do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  bdInsert.Enabled:=true;
+  bdDelete.Enabled:=true;
+  bdModify.Enabled:=true;
+  bdSave.Enabled:=false;
+  bdCancel.Enabled:=false;
+  bbtSBBH.Visible:=false;
+  DBGrid2.columns[0].ButtonStyle:=cbsNone;
+  DBGrid2.columns[8].ButtonStyle:=cbsNone;
+  DBGrid2.columns[9].ButtonStyle:=cbsNone;
+end;
+
+procedure TEntryEquipment.bdSaveClick(Sender: TObject);
+var i:integer;
+begin
+  //
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('select year(getdate()) as FY,month(getdate()) as FM,getdate() as NDate ');
+    active:=true;
+    sYear:=fieldbyname('FY').asstring;
+    sMonth:=fieldbyname('FM').asstring;
+    NDate:=fieldbyname('NDate').Value;
+    active:=false;
+  end;
+  if length(sMonth)<2 then
+    sMonth:='0'+sMonth;
+  //
+  try
+    EnDet.first;
+    for i:=1 to EnDet.RecordCount do
+    begin
+      case EnDet.updatestatus of
+        usinserted:
+        begin
+          if EnMas.FieldByName('USERID').value<>main.Edit1.Text then
+          begin
+            showmessage('不是你的，不要亂動。khong phai ban khong duoc tu sua');
+          end else
+          begin
+            if EnDet.fieldbyname('SBBH').isnull then
+            begin
+              EnDet.delete;
+            end else
+            begin
+              EnDet.edit;
+              EnDet.fieldbyname('RKNO').Value:=EnMas.fieldbyname('RKNO').Value;
+              EnDet.FieldByName('userID').Value:=main.edit1.text;
+              EnDet.FieldByName('userdate').Value:=Ndate;
+              EnDet.FieldByName('YN').Value:='1';
+              upDet.apply(ukinsert);
+            end;
+          end;
+        end;
+        usmodified:
+        begin
+          if EnDet.FieldByName('USERID').value<>main.Edit1.Text then
+          begin
+            showmessage('不是你，不要亂動。khong phai ban khong duoc tu sua');
+          end else
+          begin
+            if EnDet.fieldbyname('YN').value='0'then
+            begin
+              if EnMas.fieldbyname('CFMID').value='NO' then
+              begin
+                with BDelRec do
+                begin
+                  active:=false;
+                  sql.Clear;
+                  sql.add('insert into BDelRec ');
+                  sql.add('(TableName ,TNO,CLBH,OldID,DelID,DelDate)');
+                  sql.add('values ('+''''+'TSCD_KCRKS'+''''+','+''''+EnMas.fieldbyname('RKNO').Value+'''');
+                  sql.add(','+''''+' '+''''+','+''''+EnMas.fieldbyname('USERID').Value+''''+',');
+                  sql.add(''''+main.Edit1.Text+''''+',getdate())');
+                  execsql;
+                  active:=false;
+                end;
+                UpDet.apply(ukdelete);
+              end else
+              begin
+                showmessage('Already confirmed, can not delete.');
+                abort;
+              end;
+              end else
+              begin
+                if (EnMas.FieldByName('CFMID').value='NO') then
+                begin
+                  if (NDate-EnMas.FieldByName('USERDATE').value)<=30 then
+                  begin
+                    EnDet.edit;
+                    EnDet.FieldByName('userID').Value:=main.edit1.text;
+                    EnDet.FieldByName('userdate').Value:=Ndate;
+                    upDet.apply(ukmodify);
+                    //
+                  end else
+                  begin
+                    showmessage('Date>30, can not modify.');
+                  end;
+                end else
+                begin
+                  showmessage('Already confirmed, can not modify.');
+                end;
+              end;
+            end;
+          end;
+        end;
+      EnDet.next;
+    end;
+  EnDet.active:=false;
+  EnDet.cachedupdates:=false;
+  EnDet.requestlive:=false;
+  EnDet.active:=true;
+  //
+  bdInsert.Enabled:=true;
+  bdDelete.Enabled:=true;
+  bdModify.Enabled:=true;
+  bdSave.Enabled:=false;
+  bdCancel.Enabled:=false;
+  bbtSBBH.Visible:=false;
+  DBGrid2.columns[0].ButtonStyle:=cbsNone;
+  showmessage('Succeed.');
+  except
+    Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+  end;
+end;
+
+procedure TEntryEquipment.bdDeleteClick(Sender: TObject);
+begin
+  if EnMas.RequestLive then
+  begin
+    showmessage('Pls save EntryEquipment data first.');
+    PC1.ActivePage:=TS2;
+    panel2.visible:=true;
+    panel1.visible:=false;
+    abort;
+  end;
+  if ((TSCDQry.recordcount>0) or (EnDetS.RecordCount>0)) then
+  begin
+    showmessage('Pls delete the detail first.');
+    abort;
+  end;
+
+  //
+  with EnDet do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+    fieldbyname('YN').Value:='0';
+  end;
+  bdSave.Enabled:=true;
+  bdCancel.Enabled:=true;
+end;
+
+procedure TEntryEquipment.bdModifyClick(Sender: TObject);
+begin
+  //
+  if EnMas.RequestLive then
+  begin
+    showmessage('Pls save EntryEquipment data first.');
+    PC1.ActivePage:=TS2;
+    panel2.visible:=true;
+    panel1.visible:=false;
+    abort;
+  end;
+  //
+  with EnDet do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+  DBGrid2.columns[0].ButtonStyle:=cbsEllipsis;
+  bbtSBBH.Visible:=true;
+  bdSave.Enabled:=true;
+  bdCancel.Enabled:=true;
+  //
+end;
+
+procedure TEntryEquipment.bbtSBBHClick(Sender: TObject);
+begin
+  //
+  if EnMas.FieldByName('ZSNO').AsString<>'ZZZZZZZZZZ' then
+  begin
+    Equipment_CGZL:=TEquipment_CGZL.Create(self);
+    Equipment_CGZL.Show;
+  end else
+  begin
+    Equipment_SBBH:=TEquipment_SBBH.Create(self);
+    Equipment_SBBH.Show;
+  end;
+  //
+end;
+
+procedure TEntryEquipment.EnMasAfterOpen(DataSet: TDataSet);
+begin
+  bbInsert.Enabled:=true;
+  bbDelete.Enabled:=true;
+  bbModify.Enabled:=true;
+  if EnMas.RecordCount>0 then
+  begin
+    btInsert.Enabled:=true;
+    btDelete.Enabled:=true;
+    btModify.Enabled:=true;
+  end;
+  if ((NDate-EnMas.FieldByName('USERDATE').value)>60)  then
+  begin
+    btInsert.Enabled:=false;
+    btDelete.Enabled:=false;
+    btModify.Enabled:=false;
+  end;
+  if EnMas.FieldByName('USERID').value<>main.edit1.text  then
+  begin
+    btInsert.Enabled:=false;
+    btDelete.Enabled:=false;
+    btModify.Enabled:=false;
+  end;
+  KCPK.Active:=true;
+end;
+
+procedure TEntryEquipment.EnMasAfterScroll(DataSet: TDataSet);
+begin
+  if EnMas.RecordCount>0 then
+  begin
+    btInsert.Enabled:=true;
+    btDelete.Enabled:=true;
+    btModify.Enabled:=true;
+  end;
+  if ((NDate-EnMas.FieldByName('USERDATE').value)>60)  then
+  begin
+    btInsert.Enabled:=false;
+    btDelete.Enabled:=false;
+    btModify.Enabled:=false;
+  end;
+  if EnMas.FieldByName('USERID').value<>main.edit1.text  then
+  begin
+    btInsert.Enabled:=false;
+    btDelete.Enabled:=false;
+    btModify.Enabled:=false;
+  end;
+  KCPK.Active:=true;
+end;
+
+procedure TEntryEquipment.EnDetAfterOpen(DataSet: TDataSet);
+begin
+  bdInsert.Enabled:=true;
+  bdDelete.Enabled:=true;
+  bdModify.Enabled:=true;
+  bdPrint.Enabled:=true;
+  if EnDet.RecordCount = 0 then
+  begin
+    bdDelete.Enabled:=false;
+    bdModify.Enabled:=false;
+  end;
+  if ((NDate-EnMas.FieldByName('USERDATE').value)>30) then
+  begin
+    bdInsert.Enabled:=false;
+    bdDelete.Enabled:=false;
+    bdModify.Enabled:=false;
+  end;
+  if EnMas.FieldByName('CFMID').value<>'NO' then
+  begin
+    bdInsert.Enabled:=false;
+    bdDelete.Enabled:=false;
+    bdModify.Enabled:=false;
+  end;
+  if EnMas.FieldByName('USERID').value<>main.Edit1.text then
+  begin
+    bdInsert.Enabled:=false;
+    bdDelete.Enabled:=false;
+    bdModify.Enabled:=false;;
+  end;
+  if EnMas.cachedupdates then
+  begin
+    bdInsert.Enabled:=false;
+    bdDelete.Enabled:=false;
+    bdModify.Enabled:=false;
+  end;
+end;
+
+procedure TEntryEquipment.EnDetSAfterOpen(DataSet: TDataSet);
+begin
+  btnImport.Enabled:=true;
+  BE1.Enabled:=true;
+  BE2.Enabled:=true;
+  BE3.Enabled:=true;
+  if EnDetS.RecordCount = 0 then
+  begin
+    BE2.Enabled:=false;
+    BE3.Enabled:=false;
+  end;
+  if ((NDate-EnMas.FieldByName('USERDATE').value)>30) then
+  begin
+    btnImport.Enabled:=false;
+    BE1.Enabled:=false;
+    BE2.Enabled:=false;
+    BE3.Enabled:=false;
+  end;
+  if EnMas.FieldByName('CFMID').value<>'NO' then
+  begin
+    btnImport.Enabled:=false;
+    BE1.Enabled:=false;
+    BE2.Enabled:=false;
+    BE3.Enabled:=false;
+  end;
+  if EnMas.FieldByName('USERID').value<>main.Edit1.text then
+  begin
+    btnImport.Enabled:=false;
+    BE1.Enabled:=false;
+    BE2.Enabled:=false;
+    BE3.Enabled:=false;
+  end;
+  if EnMas.cachedupdates then
+  begin
+    btnImport.Enabled:=false;
+    BE1.Enabled:=false;
+    BE2.Enabled:=false;
+    BE3.Enabled:=false;
+  end;
+end;
+
+procedure TEntryEquipment.DBGrid1DblClick(Sender: TObject);
+begin
+  if  EnMas.Active then
+  begin
+    if  (EnMas.recordcount>0) then
+    begin
+      PC1.ActivePage:=TS2;
+      panel1.visible:=false;
+      panel2.visible:=true;
+    end;
+  end;
+end;
+
+procedure TEntryEquipment.DBGrid1EditButtonClick(Sender: TObject);
+begin
+  if (DBGrid1.SelectedField.FieldName='ZSBH') then
+  begin
+    ZSBHBtn.Click;
+  end;
+  if (DBGrid1.SelectedField.FieldName='DepName') then
+  begin
+    DepIDBtn.Click;
+  end;
+end;
+
+procedure TEntryEquipment.DepIDBtnClick(Sender: TObject);
+begin
+    EquipmentDepName:=TEquipmentDepName.Create(self);
+    EquipmentDepName.Show;
+end;
+
+procedure TEntryEquipment.ZSBHBtnClick(Sender: TObject);
+begin
+    EntryEquipmentSupplier:=TEntryEquipmentSupplier.Create(self);
+    EntryEquipmentSupplier.Show;
+end;
+
+procedure TEntryEquipment.EnMasZSNOSetText(Sender: TField;
+  const Text: String);
+begin
+    Sender.Value:=Text;
+    with Qtemp do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('select TSCD_CGZL.DepID,BDepartment.DepName,TSCD_CGZL.ZSBH,TSCD_ZSZL.zsjc_yw  ');
+      SQL.Add('from TSCD_CGZL');
+      SQL.Add('left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD_CGZL.DepID ');
+      SQL.Add('left join TSCD_ZSZL on TSCD_ZSZL.ZSDH=TSCD_CGZL.ZSBH ');
+      SQL.Add('where TSCD_CGZL.CGNO='''+Sender.Value+''' ');
+      //funcObj.WriteErrorLog(sql.Text);
+      Active:=true;
+      if RecordCount>0 then
+      begin
+        EnMas.Edit;
+        EnMas.FieldByName('ZSBH').Value:=Qtemp.FieldByName('ZSBH').Value;
+        EnMas.FieldByName('zsjc_yw').Value:=Qtemp.FieldByName('zsjc_yw').Value;
+        EnMas.FieldByName('DepID').Value:=Qtemp.FieldByName('DepID').Value;
+        EnMas.FieldByName('DepName').Value:=Qtemp.FieldByName('DepName').Value;
+        EnMas.Post;
+      end else
+      begin
+          Sender.Value:='ZZZZZZZZZZ'; //無系統採購單號
+      end;
+      Active:=false;
+    end;
+end;
+
+procedure TEntryEquipment.bdPrintClick(Sender: TObject);
+begin
+  if EnDet.RequestLive then
+  begin
+    showmessage('Pls save Master data first.');
+    Abort;
+  end;
+  EntryEquipment_print:=TEntryEquipment_print.Create(self);
+  EntryEquipment_print.quickrep1.prepare;
+  EntryEquipment_print.QPage1.caption:='共 '+inttostr(EntryEquipment_print.Quickrep1.QRPrinter.pagecount)+' 頁';
+  EntryEquipment_print.quickrep1.preview;
+  EntryEquipment_print.free;
+
+end;
+
+procedure TEntryEquipment.TSCDQryAfterOpen(DataSet: TDataSet);
+begin
+  BO1.Enabled:=true;
+  BO2.Enabled:=true;
+  BO5.Enabled:=true;
+  if TSCDQry.RecordCount = 0 then
+  begin
+    BO2.Enabled:=false;
+    BO5.Enabled:=false;
+  end;
+  if ((NDate-EnMas.FieldByName('USERDATE').value)>30) then
+  begin
+    BO1.Enabled:=false;
+    BO2.Enabled:=false;
+    BO5.Enabled:=false;
+  end;
+  if EnMas.FieldByName('CFMID').value<>'NO' then
+  begin
+    BO1.Enabled:=false;
+    BO2.Enabled:=false;
+    BO5.Enabled:=false;
+  end;
+  if EnMas.FieldByName('USERID').value<>main.Edit1.text then
+  begin
+    BO1.Enabled:=false;
+    BO2.Enabled:=false;
+    BO5.Enabled:=false;;
+  end;
+  if EnMas.cachedupdates then
+  begin
+    BO1.Enabled:=false;
+    BO2.Enabled:=false;
+    BO5.Enabled:=false;
+  end;
+end;
+
+
+procedure TEntryEquipment.InsertTSCD(Qty:double);
+begin
+
+    with Qtemp do    //計算設備單流水號
+    begin
+      active:=false;
+      sql.Clear;
+      sql.Add('select TSID from TSCD where TSID like '''+sYear+sMonth+'%''');
+      sql.add('order by TSID');
+      active:=true;
+      if recordcount >0 then
+      begin
+        last;
+        TSID:=fieldbyname('TSID').AsString;
+        TSID:=copy(TSID,7,5);
+        TSID:=inttostr(strtoint(TSID)+1);
+        while length(TSID)<5 do
+        begin
+          TSID:='0'+TSID;
+        end;
+      end else
+      begin
+        TSID:='00001';
+      end;
+      TSID :=sYear+sMonth+TSID;
+      active:=false;
+    end;
+    TSCDQry.edit;
+    TSCDQry.FieldByName('TSID').Value:=TSID;
+    TSCDQry.fieldbyname('SBBH').Value:=EnDet.fieldbyname('SBBH').Value;
+    TSCDQry.fieldbyname('Qty').Value:=Qty;
+    TSCDQry.FieldByName('Status').AsString:='N';
+    TSCDQry.FieldByName('DepID').AsString:=DepID_CD;
+    TSCDQry.FieldByName('DepName').AsString:=DepName_CD;
+    TSCDQry.FieldByName('DepID_Memo').AsString:='1.NEW';
+    TSCDQry.FieldByName('userID').Value:=main.edit1.text;
+    TSCDQry.FieldByName('userdate').Value:=Ndate;
+    TSCDQry.FieldByName('YN').Value:='1';
+    TSCDQry.FieldByName('CFMID').Value:='NO';
+    TSCDQry.FieldByName('CFMID_RK').Value:='NO';
+    TSCDQry.FieldByName('CFMID_LL').Value:='NO';
+    if RB2.Checked then  TSCDQry.FieldByName('LB').Value:='2' else
+    TSCDQry.FieldByName('LB').Value:='1';
+    TSCDQry.fieldbyname('RKNO').Value:=EnMas.fieldbyname('RKNO').Value;
+    UpdTSCD.Apply(ukinsert);
+end;
+procedure TEntryEquipment.BE1Click(Sender: TObject);
+begin
+  if ENMas.RequestLive then
+  begin
+    showmessage('Pls save Master data first.');
+    PC1.ActivePage:=TS1;
+    panel2.visible:=false;
+    panel1.visible:=true;
+    abort;
+  end;
+  if ENDet.RequestLive then
+  begin
+    showmessage('Pls save Detail data first.');
+    abort;
+  end;
+
+  with ENDetS do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    insert;
+  end;
+  BE2.Enabled:=false;
+  BE3.Enabled:=false;
+  BE4.Enabled:=true;
+  BE5.Enabled:=true;
+  DBGrid4.columns[0].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TEntryEquipment.BE2Click(Sender: TObject);
+begin
+  if ENMas.RequestLive then
+  begin
+    showmessage('Pls save Master data first.');
+    abort;
+  end;
+  if ENDet.RequestLive then
+  begin
+    showmessage('Pls save Detail data first.');
+    abort;
+  end;
+
+  with ENDetS do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+    fieldbyname('YN').Value:='0';
+  end;
+  btnImport.Enabled:=false;
+  BE1.Enabled:=false;
+  BE3.Enabled:=false;
+  BE4.Enabled:=true;
+  BE5.Enabled:=true;
+  DBGrid4.columns[0].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TEntryEquipment.BE3Click(Sender: TObject);
+begin
+  if ENMas.RequestLive then
+  begin
+    showmessage('Pls save Master data first.');
+    abort;
+  end;
+  if ENDet.RequestLive then
+  begin
+    showmessage('Pls save Detail data first.');
+    abort;
+  end;
+
+  with ENDetS do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+  btnImport.Enabled:=false;
+  BE1.Enabled:=false;
+  BE2.Enabled:=false;
+  BE4.Enabled:=true;
+  BE5.Enabled:=true;
+  DBGrid4.columns[0].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TEntryEquipment.BE4Click(Sender: TObject);
+var i:integer;
+begin
+  with EnDetS do
+  begin
+    first;
+    while not EnDetS.Eof do
+    begin
+      if (EnDetS.FieldByName('Qty').IsNull) or (EnDetS.FieldByName('Qty').Value <=0) then
+      begin
+        showmessage('The Qty can not be empty or <=0.');
+        abort;
+      end;
+      Next;
+    end;
+  end;
+//
+  try
+    ENDetS.first;
+    for i:=1 to ENDetS.RecordCount do
+      begin
+        case ENDetS.updatestatus of
+          usinserted:
+          begin
+             ENDetS.edit;
+             ENDetS.fieldbyname('RKNO').Value:=ENDet.fieldbyname('RKNO').value;
+             ENDetS.fieldbyname('SBBH').Value:=ENDet.fieldbyname('SBBH').value;
+             ENDetS.FieldByName('userID').Value:=main.edit1.text;
+             ENDetS.FieldByName('userdate').Value:=Ndate;
+             ENDetS.FieldByName('YN').Value:='1';
+             UpDetS.apply(ukinsert);
+          end;
+          usmodified:
+          begin
+            if EnMas.FieldByName('USERID').value=main.Edit1.Text then
+            begin
+              if ENDetS.fieldbyname('YN').value='0'then
+                begin
+                  UpDetS.apply(ukdelete);
+                end else
+                begin
+                  if (NDate-ENMas.FieldByName('USERDATE').value)<=30  then
+                  begin
+                    ENDetS.edit;
+                    ENDetS.FieldByName('userID').Value:=main.edit1.text;
+                    ENDetS.FieldByName('userdate').Value:=Ndate;
+                    UpDetS.apply(ukmodify);
+                  end else
+                  begin
+                    showmessage('Date>30, can not modify.');
+                  end;
+                end;
+            end else
+            begin
+              showmessage('不是你的，不要亂動。khong phai ban khong duoc tu sua');
+            end;
+          end;
+        end;
+        ENDetS.next;
+      end;
+      ENDetS.active:=false;
+      ENDetS.cachedupdates:=false;
+      ENDetS.requestlive:=false;
+      ENDetS.active:=true;
+      //
+      btnImport.Enabled:=true;
+      BE1.Enabled:=true;
+      BE2.Enabled:=true;
+      BE3.Enabled:=true;
+      BE4.Enabled:=false;
+      BE5.Enabled:=false;
+      DBGrid4.columns[0].ButtonStyle:=cbsNone;
+  except
+    Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+  end;
+end;
+
+procedure TEntryEquipment.BE5Click(Sender: TObject);
+begin
+  with ENDetS do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  btnImport.Enabled:=true;
+  BE1.Enabled:=true;
+  BE2.Enabled:=true;
+  BE3.Enabled:=true;
+  BE4.Enabled:=false;
+  BE5.Enabled:=false;
+  DBGrid4.columns[0].ButtonStyle:=cbsNone;
+end;
+
+procedure TEntryEquipment.BO1Click(Sender: TObject);
+var i:integer;
+begin
+
+  //
+   with Qtemp do
+   begin
+    active:=false;
+    sql.Clear;
+    sql.Add('select year(getdate()) as FY,month(getdate()) as FM,getdate() as NDate ');
+    active:=true;
+    sYear:=fieldbyname('FY').asstring;
+    sMonth:=fieldbyname('FM').asstring;
+    NDate:=fieldbyname('NDate').Value;
+    active:=false;
+   end;
+   if length(sMonth)<2 then
+    sMonth:='0'+sMonth;
+   //
+   if TSCDQry.RecordCount>0 then
+   begin
+     if messagedlg('have data, do you want to insert again?',mtCustom, [mbYes,mbNo], 0)=mrYes then
+     begin
+       with Qtemp do
+       begin
+         Active:=false;
+         SQL.Clear;
+         SQL.Add('Delete from TSCD where RKNO='''+EnDet.FieldByName('RKNO').Value+''' and SBBH='''+EnDet.FieldByName('SBBH').Value+'''');
+         //if RB2.Checked then  SQL.Add(' and LB=1 and CFMID=''NO'' ') else
+         SQL.Add(' and LB=1 and CFMID=''NO'' ');
+         ExecSQL();
+       end;
+       with TSCDQry do
+       begin
+          requestlive:=true;
+          cachedupdates:=true;
+          edit;
+       end;
+       //數量一套一套或是長度消耗品
+       if messagedlg('Equipment unit 1 is 1 set or length unit?',mtCustom, [mbYes,mbNo], 0)=mrYes then
+       begin
+         for i:=1 to EnDet.FieldByName('Qty').Value do
+         begin
+           InsertTSCD(1);
+         end;
+       end else
+       begin
+          InsertTSCD(EnDet.FieldByName('Qty').Value);
+       end;
+       with TSCDQry do
+       begin
+         active:=false;
+         requestlive:=false;
+         cachedupdates:=false;
+         active:=true;
+       end;
+       Showmessage('Success');       
+     end;
+   end else
+   begin
+       with TSCDQry do
+       begin
+          requestlive:=true;
+          cachedupdates:=true;
+          edit;
+       end;
+       //數量一套一套或是長度消耗品
+       if messagedlg('Equipment unit 1 is 1 set or length unit?',mtCustom, [mbYes,mbNo], 0)=mrYes then
+       begin
+         for i:=1 to EnDet.FieldByName('Qty').Value do
+         begin
+           InsertTSCD(1);
+         end;
+       end else
+       begin
+          InsertTSCD(EnDet.FieldByName('Qty').Value);
+       end;
+       with TSCDQry do
+       begin
+         active:=false;
+         requestlive:=false;
+         cachedupdates:=false;
+         active:=true;
+       end;
+       Showmessage('Success');
+   end;
+
+end;
+
+procedure TEntryEquipment.BO5Click(Sender: TObject);
+begin
+  //
+  with TSCDQry do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+  BO3.Enabled:=true;
+  BO4.Enabled:=true;
+  DBGrid3.columns[4].ButtonStyle:=cbsEllipsis;
+  DBGrid3.columns[5].ButtonStyle:=cbsEllipsis;
+  DBGrid3.columns[6].ButtonStyle:=cbsEllipsis;  
+end;
+
+procedure TEntryEquipment.BO4Click(Sender: TObject);
+begin
+  with TSCDQry do
+  begin
+    active:=false;
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=true;
+  end;
+  BO3.Enabled:=false;
+  BO4.Enabled:=false;
+  DBGrid3.columns[4].ButtonStyle:=cbsNone;
+  DBGrid3.columns[5].ButtonStyle:=cbsNone;
+end;
+//檢查財產編號是否存在
+function TEntryEquipment.CheckTSBH_IsExists(TSBH:String;TSID:string):boolean;
+begin
+  //檢查財產編號
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    if TSID='' then
+      sql.Add('select TSID from TSCD where TSBH='''+TSBH+''' and IsNull(TSBH,'''')<>'''' ')
+    else
+      sql.Add('select TSID from TSCD where TSBH='''+TSBH+''' and IsNull(TSBH,'''')<>'''' and TSID<>'''+TSID+''' ');
+    active:=true;
+    if recordcount=0 then
+      result:=false
+    else
+      result:=true;
+    Active:=false;
+  end;
+end;
+procedure TEntryEquipment.BO3Click(Sender: TObject);
+var i:integer;
+begin
+
+  //
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('select year(getdate()) as FY,month(getdate()) as FM,getdate() as NDate ');
+    active:=true;
+    sYear:=fieldbyname('FY').asstring;
+    sMonth:=fieldbyname('FM').asstring;
+    NDate:=fieldbyname('NDate').Value;
+    active:=false;
+  end;
+  if length(sMonth)<2 then
+    sMonth:='0'+sMonth;
+  //
+  try
+    TSCDQry.first;
+    for i:=1 to TSCDQry.RecordCount do
+    begin
+      case TSCDQry.updatestatus of
+        usinserted:
+        begin
+          if EnMas.FieldByName('USERID').value<>main.Edit1.Text then
+          begin
+            showmessage('不是你的，不要亂動。khong phai ban khong duoc tu sua');
+          end else
+          begin
+
+          end;
+        end;
+        usmodified:
+        begin
+          if TSCDQry.FieldByName('USERID').value<>main.Edit1.Text then
+          begin
+            showmessage('不是你，不要亂動。khong phai ban khong duoc tu sua');
+          end else
+          begin
+            if EnMas.fieldbyname('YN').value='0'then
+            begin
+              if TSCDQry.fieldbyname('CFMID').value='NO' then
+              begin
+                with BDelRec do
+                begin
+                  active:=false;
+                  sql.Clear;
+                  sql.add('insert into BDelRec ');
+                  sql.add('(TableName ,TNO,CLBH,OldID,DelID,DelDate)');
+                  sql.add('values (''TSCD_KCRKS'','+''''+EnMas.fieldbyname('RKNO').Value+'''');
+                  sql.add(','+''''+' '+''''+','+''''+EnMas.fieldbyname('USERID').Value+''''+',');
+                  sql.add(''''+main.Edit1.Text+''''+',getdate())');
+                  execsql;
+                  active:=false;
+                end;
+                UpdTSCD.apply(ukdelete);
+              end else
+              begin
+                showmessage('Already confirmed, can not delete.');
+                abort;
+              end;
+              end else
+              begin
+                if (EnMas.FieldByName('CFMID').value='NO') then
+                begin
+                  if (NDate-EnMas.FieldByName('USERDATE').value)<=30 then
+                  begin
+                    if CheckTSBH_IsExists(TSCDQry.FieldByName('TSBH').AsString,TSCDQry.FieldByName('TSID').AsString)=true then
+                    begin
+                      Showmessage('財產編號重複，請檢查，TSBH ma Tai san laplai, khong duoc luu lai');
+                    end else
+                    begin
+                      TSCDQry.edit;
+                      TSCDQry.FieldByName('userID').Value:=main.edit1.text;
+                      TSCDQry.FieldByName('userdate').Value:=Ndate;
+                      UpdTSCD.apply(ukmodify);
+                    end;
+                    //
+                  end else
+                  begin
+                    showmessage('Date>30, can not modify.');
+                  end;
+                end else
+                begin
+                  showmessage('Already confirmed, can not modify.');
+                end;
+              end;
+            end;
+          end;
+        end;
+      TSCDQry.next;
+    end;
+    TSCDQry.active:=false;
+    TSCDQry.cachedupdates:=false;
+    TSCDQry.requestlive:=false;
+    TSCDQry.active:=true;
+    //
+    BO3.Enabled:=false;
+    BO4.Enabled:=false;
+    DBGrid3.columns[4].ButtonStyle:=cbsNone;
+    DBGrid3.columns[5].ButtonStyle:=cbsNone;
+    showmessage('Succeed.');
+  except
+    Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+  end;
+
+end;
+
+procedure TEntryEquipment.DBGrid3EditButtonClick(Sender: TObject);
+  //20171027
+  function IsDate(str: string): Boolean;
+  var
+    dt: TDateTime;
+  begin
+    Result := True;
+    try
+      dt := StrToDate(str);
+    except
+      Result := False;
+    end;
+  end;
+var InputValue:String;
+    i:integer;
+begin
+  //20171027
+  if ((DBGrid3.SelectedField.FieldName='NSX') or (DBGrid3.SelectedField.FieldName='InDATE')) then
+  begin
+    if DBGrid3.SelectedField.FieldName='NSX' then InputValue:=inputbox('Please Input NSX','NSX:','');
+    if DBGrid3.SelectedField.FieldName='InDATE' then InputValue:=inputbox('Please Input InDATE','InDate:','');
+    if InputValue<>'' then
+    begin
+      if not IsDate(InputValue) then
+      begin
+        showmessage ('Pls input datetime');
+        abort;
+      end;
+      with EntryEquipment.TSCDQry do
+      begin
+        //while not Eof do
+        for i:=0 to EntryEquipment.TSCDQry.RecordCount-1 do       //20171125 替換while成for
+        begin
+          Edit;
+            if DBGrid3.SelectedField.FieldName='NSX' then FieldByName('NSX').Value:=InputValue;
+            if DBGrid3.SelectedField.FieldName='InDATE' then FieldByName('InDATE').Value:=InputValue;
+          Post;
+          Next;
+      end;
+    end;
+  end;
+ end;
+
+end;
+
+
+procedure TEntryEquipment.DBGrid4EditButtonClick(Sender: TObject);
+begin
+ if (DBGrid4.SelectedField.FieldName='SBBH1') then
+ begin
+   EntryEquipment_LBChild:=TEntryEquipment_LBChild.create(self);
+   EntryEquipment_LBChild.show;
+ end;
+
+end;
+
+procedure TEntryEquipment.DBGrid4GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if EnDetS.FieldByName('YN').value='0' then
+  begin
+    DBGrid4.canvas.font.color:=clred;
+  end;
+end;
+
+procedure TEntryEquipment.BO2Click(Sender: TObject);
+begin
+   if messagedlg('have data, do you want to Delete again?',mtCustom, [mbYes,mbNo], 0)=mrYes then
+   begin
+     with Qtemp do
+     begin
+      active:=false;
+      sql.Clear;
+      sql.Add('Delete from TSCD where RKNO='''+EnDet.FieldByName('RKNO').AsString+''' and SBBH='''+EnDet.FieldByName('SBBH').AsString+''' and CFMID_RK=''NO''  and LB=''1'' ');
+      ExecSQL();
+     end;
+     TSCDQry.Active:=false;
+     TSCDQry.Active:=true;
+     Showmessage('Success');
+   end;
+end;
+
+end.

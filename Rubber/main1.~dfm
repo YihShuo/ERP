@@ -1,0 +1,381 @@
+object main: Tmain
+  Left = 727
+  Top = 256
+  Width = 800
+  Height = 445
+  Caption = 'main'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIForm
+  Menu = MainMenu1
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Image1: TImage
+    Left = 0
+    Top = 0
+    Width = 784
+    Height = 386
+    Align = alClient
+    AutoSize = True
+    Stretch = True
+  end
+  object Edit1: TEdit
+    Left = 240
+    Top = 176
+    Width = 121
+    Height = 21
+    TabOrder = 0
+    Visible = False
+  end
+  object Edit2: TEdit
+    Left = 240
+    Top = 208
+    Width = 121
+    Height = 21
+    TabOrder = 1
+    Visible = False
+  end
+  object MainMenu1: TMainMenu
+    AutoHotkeys = maManual
+    Left = 104
+    Top = 88
+    object SN1: TMenuItem
+      Caption = 'N1 Basic'
+      object SN11: TMenuItem
+        Caption = 'N11 Staff Data'
+        OnClick = SN11Click
+      end
+      object SN12: TMenuItem
+        Caption = 'N12 Model Data'
+        OnClick = SN12Click
+      end
+      object SN13: TMenuItem
+        Caption = 'N13 RWeight'
+        OnClick = SN13Click
+      end
+      object SN14: TMenuItem
+        Caption = 'N14 Outsole Foxing'
+        OnClick = SN14Click
+      end
+      object SN15: TMenuItem
+        Caption = 'N15 Check Material'
+        OnClick = SN15Click
+      end
+    end
+    object SN2: TMenuItem
+      Caption = 'N2 Data'
+      object SN21: TMenuItem
+        Caption = 'N21 Over Target Data TInput'
+        OnClick = SN21Click
+      end
+      object SN22: TMenuItem
+        Caption = 'N22 Entry Rubber'
+        OnClick = SN22Click
+      end
+      object SN23: TMenuItem
+        Caption = 'N23 HOKA Botton Standard Weight'
+        OnClick = SN23Click
+      end
+    end
+    object SN3: TMenuItem
+      Caption = 'N3 Production'
+      object SN31: TMenuItem
+        Caption = 'N31 BOM'
+        object SN311: TMenuItem
+          Caption = 'N311 BOMM'
+          OnClick = SN311Click
+        end
+        object SN312: TMenuItem
+          Caption = 'N312 VN BOM'
+          OnClick = SN312Click
+        end
+      end
+      object SN32: TMenuItem
+        Caption = 'N32 Order Rubber'
+        OnClick = SN32Click
+      end
+      object SN34: TMenuItem
+        Caption = 'N34 Delivery Rubber'
+        OnClick = SN34Click
+      end
+      object SN35: TMenuItem
+        Caption = 'N35 HOKA Bottom Production Weight'
+        OnClick = SN35Click
+      end
+    end
+    object SN5: TMenuItem
+      Caption = 'N5 Scan'
+      object SN51: TMenuItem
+        Caption = 'N51 Color Setup'
+        OnClick = SN51Click
+      end
+      object SN52: TMenuItem
+        Caption = 'N52 Mode Setup'
+        OnClick = SN52Click
+      end
+      object SN53: TMenuItem
+        Caption = 'N53 Production Plan'
+        OnClick = SN53Click
+      end
+      object SN54: TMenuItem
+        Caption = 'N54 Storage In'
+        object SN541: TMenuItem
+          Caption = 'N541 Key In'
+          OnClick = SN541Click
+        end
+        object SN542: TMenuItem
+          Caption = 'N542 Scan In'
+          OnClick = SN542Click
+        end
+      end
+      object SN55: TMenuItem
+        Caption = 'N55 Storage Out'
+        object SN551: TMenuItem
+          Caption = 'N551 Key Out - Production'
+          OnClick = SN551Click
+        end
+        object SN552: TMenuItem
+          Caption = 'N552 Scan Out - Production'
+          OnClick = SN552Click
+        end
+        object SN553: TMenuItem
+          Caption = 'N553 Scan Out'
+          OnClick = SN553Click
+        end
+      end
+      object SN56: TMenuItem
+        Caption = 'N56 Scan In/Out Moidfy'
+        OnClick = SN56Click
+      end
+      object SN57: TMenuItem
+        Caption = 'N57 Warehouse Month Stock Modify'
+        OnClick = SN57Click
+      end
+      object SN58: TMenuItem
+        Caption = 'N58 EVA Label'
+        object SN581: TMenuItem
+          Caption = 'N581 Create Label'
+          OnClick = SN581Click
+        end
+        object SN582: TMenuItem
+          Caption = 'N582 Scan In'
+          OnClick = SN582Click
+        end
+        object SN583: TMenuItem
+          Caption = 'N583 Scan Out'
+          OnClick = SN583Click
+        end
+        object SN584: TMenuItem
+          Caption = 'N584 Work Report'
+          OnClick = SN584Click
+        end
+        object SN585: TMenuItem
+          Caption = 'N585 Work Report2'
+          OnClick = SN585Click
+        end
+        object N586Report1: TMenuItem
+          Caption = 'N586 Report EVA'
+          OnClick = N586Report1Click
+        end
+      end
+      object SN59: TMenuItem
+        Caption = 'N59 RB Label'
+        object SN591: TMenuItem
+          Caption = 'N591 Create Label'
+          OnClick = SN591Click
+        end
+        object N5921: TMenuItem
+          Caption = 'N592 Scan In'
+          OnClick = N5921Click
+        end
+        object SN93: TMenuItem
+          Caption = 'N593 Scan Out'
+          OnClick = SN93Click
+        end
+        object SN594: TMenuItem
+          Caption = 'N594 Work Report'
+          OnClick = SN594Click
+        end
+        object SN595: TMenuItem
+          Caption = 'N595 Work Report2'
+          OnClick = SN595Click
+        end
+      end
+      object N60LabelInfo: TMenuItem
+        Caption = 'N60 Label Info'
+        object SN601: TMenuItem
+          Caption = 'N601 Lable Compare'
+          OnClick = SN601Click
+        end
+        object SN603: TMenuItem
+          Caption = 'N603 DDHM Report'
+          OnClick = SN603Click
+        end
+      end
+      object SN5A: TMenuItem
+        Caption = 'N5A Rubber Label'
+        object SN5A1: TMenuItem
+          Caption = 'N5A1 Rubber scan out'
+          OnClick = SN5A1Click
+        end
+        object SN5A2: TMenuItem
+          Caption = 'N5A2 Rubber report'
+          OnClick = SN5A2Click
+        end
+      end
+      object N5BColmod1: TMenuItem
+        Caption = 'N5B Colmod'
+        object SN5B1: TMenuItem
+          Caption = 'N5B1 Create QRCODE '#24314#31435#21015#21360'QR'#30908
+          OnClick = SN5B1Click
+        end
+        object SN5B2: TMenuItem
+          Caption = 'N554 Scan Out Warehouse '#25475#25551#20986#24235
+          OnClick = SN5B2Click
+        end
+        object N5B2ScanInQR1: TMenuItem
+          Caption = 'N5B2 Scan In QR '#25475#25551#20837#24235
+          OnClick = N5B2ScanInQR1Click
+        end
+        object N5B3ReportQR1: TMenuItem
+          Caption = 'N5B3 Report QR '#36914#20986#25976#37327#22577#21578
+          OnClick = N5B3ReportQR1Click
+        end
+        object N5BScanCheck1: TMenuItem
+          Caption = 'N5B4 Scan Check '#27298#26597#23566#20837#30340#25475#25551#25976#37327
+          OnClick = N5BScanCheck1Click
+        end
+        object N5B5ScnaCheckOut1: TMenuItem
+          Caption = 'N5B5 ScanCheckOut '#27298#26597#25475#25551#36664#20986#30340#25976#37327
+          OnClick = N5B5ScnaCheckOut1Click
+        end
+        object N5B61: TMenuItem
+          Caption = 'N5B6 Inventory Report '#24235#23384#22577#21578
+          OnClick = N5B61Click
+        end
+      end
+    end
+    object SN6: TMenuItem
+      Caption = 'N6 Report'
+      object SN61: TMenuItem
+        Caption = 'N61 Plan Order Standard Rubber '
+        OnClick = SN61Click
+      end
+      object SN62: TMenuItem
+        Caption = 'N62 Chemical and Rubber'
+        OnClick = SN62Click
+      end
+      object SN63: TMenuItem
+        Caption = 'N63 Over Target Salary'
+        OnClick = SN63Click
+      end
+      object SN64: TMenuItem
+        Caption = 'N64 Stock Report'
+        OnClick = SN64Click
+      end
+      object SN65: TMenuItem
+        Caption = 'N65 Daily Scan In Report(?e!O?!|y2'#65504'FFFFG?q3oai)'
+        OnClick = SN65Click
+      end
+      object SN66: TMenuItem
+        Caption = 'N66 AnyTime Sotck(!!OYRERw|s3oai)'
+        OnClick = SN66Click
+      end
+      object SN67: TMenuItem
+        Caption = 'N67 HOKA Bottom Production Weight Rerpot'
+        OnClick = SN67Click
+      end
+    end
+    object SN7: TMenuItem
+      Caption = 'N7 Outsole'
+      object SN71: TMenuItem
+        Caption = 'N71 Outsole In Warehouse'
+        OnClick = SN71Click
+      end
+      object SN72: TMenuItem
+        Caption = 'N72 Outsole Out Warehouse'
+        OnClick = SN72Click
+      end
+      object SN73: TMenuItem
+        Caption = 'N73 Outsole Monthly Stock Report'
+        OnClick = SN73Click
+      end
+      object SN74: TMenuItem
+        Caption = 'N74 OutsoleInternalFormulaList'
+        OnClick = SN74Click
+      end
+      object SN75: TMenuItem
+        Caption = 'N75 Outsole In && Out Quantity'
+        OnClick = SN75Click
+      end
+      object SN76: TMenuItem
+        Caption = 'N76 Outsole Price'
+        OnClick = SN76Click
+      end
+    end
+    object SN8: TMenuItem
+      Caption = 'N8 Dispatch'
+      object SN81: TMenuItem
+        Caption = 'N81 R_Dispatch'
+        OnClick = SN81Click
+      end
+      object SN82: TMenuItem
+        Caption = 'N82 Dispatch_Report'
+        OnClick = SN82Click
+      end
+    end
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select *'
+      'from BLimits'
+      'where USERID=:userid'
+      'and MKID=:mkid'
+      'and GSBH=:GSBH')
+    Left = 64
+    Top = 88
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'userid'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'mkid'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'GSBH'
+        ParamType = ptUnknown
+      end>
+  end
+  object BLimitHideQry: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select FORMID,YN'
+      'from BLimit'
+      'where BLimit.MKID=:mkid '
+      '')
+    Left = 64
+    Top = 120
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'mkid'
+        ParamType = ptUnknown
+      end>
+  end
+end

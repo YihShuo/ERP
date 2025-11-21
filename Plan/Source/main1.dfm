@@ -1,0 +1,703 @@
+object main: Tmain
+  Left = 304
+  Top = 191
+  Width = 902
+  Height = 496
+  Caption = ' '
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIForm
+  Menu = MainMenu1
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Image1: TImage
+    Left = 0
+    Top = 0
+    Width = 886
+    Height = 401
+    Align = alClient
+    AutoSize = True
+    Stretch = True
+  end
+  object Edit1: TEdit
+    Left = 240
+    Top = 176
+    Width = 121
+    Height = 21
+    TabOrder = 0
+    Text = 'USERID'
+    Visible = False
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 401
+    Width = 886
+    Height = 36
+    Panels = <>
+  end
+  object Edit2: TEdit
+    Left = 240
+    Top = 208
+    Width = 121
+    Height = 21
+    TabOrder = 2
+    Text = 'GSBH'
+    Visible = False
+  end
+  object MainMenu1: TMainMenu
+    AutoHotkeys = maManual
+    Left = 96
+    Top = 40
+    object SN1: TMenuItem
+      Caption = 'N1 Order'
+      object SN11: TMenuItem
+        Caption = 'N11 Order List('#21046#20196#28165#21934')'
+        OnClick = SN11Click
+      end
+      object SN12: TMenuItem
+        Caption = 'N12 Order Spec('#25171#21360#21046#20196#34920')'
+        OnClick = SN12Click
+      end
+      object SN13: TMenuItem
+        Caption = 'N13 Purchase Material Trace('#37319#36092#26448#26009#36861#36452')'
+        OnClick = SN13Click
+      end
+      object SN14: TMenuItem
+        Caption = 'N14 Safe Stock List('#23433#20840#24235#23384#39006#24235#23384')'
+        OnClick = SN14Click
+      end
+      object SN15: TMenuItem
+        Caption = 'N15 Order Material Set('#21046#20196#26448#26009#37197#22871#29376#27841')'
+        OnClick = SN15Click
+      end
+    end
+    object SN2: TMenuItem
+      Caption = 'N2 Production'
+      object SN21: TMenuItem
+        Caption = 'N21 Production Order'
+        OnClick = SN21Click
+      end
+      object SN22: TMenuItem
+        Caption = 'N22 Production Send'
+        OnClick = SN22Click
+      end
+      object SN23: TMenuItem
+        Caption = 'N23 Order Date'
+        OnClick = SN23Click
+      end
+      object SN24: TMenuItem
+        Caption = 'N24 Production Time'
+        OnClick = SN24Click
+      end
+      object SN25: TMenuItem
+        Caption = 'N25 Article Type'
+        OnClick = SN25Click
+      end
+      object SN26: TMenuItem
+        Caption = 'N26 Output Adjust'
+        OnClick = SN26Click
+      end
+      object SN27: TMenuItem
+        Caption = 'N27 Import Order'
+        OnClick = SN27Click
+      end
+      object SN28: TMenuItem
+        Caption = 'N28 Order Material Set'
+        OnClick = SN28Click
+      end
+      object SN29: TMenuItem
+        Caption = 'N29 Plan Day difference'
+        OnClick = SN29Click
+      end
+      object SN2A: TMenuItem
+        Caption = 'N2A Actual Production'
+        object SN2A1: TMenuItem
+          Caption = 'N2A1 Daily Actual Hour'
+          OnClick = SN2A1Click
+        end
+        object SN2A2: TMenuItem
+          Caption = 'N2A2 Daily Actual Workers'
+          OnClick = SN2A2Click
+        end
+        object SN2A3: TMenuItem
+          Caption = 'N2A3 Input Order ABC'
+          OnClick = SN2A3Click
+        end
+        object SN2A4: TMenuItem
+          Caption = 'N2A4 IE Plan Output'
+          OnClick = SN2A4Click
+        end
+      end
+      object SN2B: TMenuItem
+        Caption = 'N2B GB Test'
+        OnClick = SN2BClick
+      end
+    end
+    object SN3: TMenuItem
+      Caption = 'N3 Plan'
+      object SN31: TMenuItem
+        Caption = 'N31 Material Production(R)'
+        OnClick = SN31Click
+      end
+      object SN32: TMenuItem
+        Caption = 'N32 Production Send(R)'
+        OnClick = SN32Click
+      end
+      object SN33: TMenuItem
+        Caption = 'N33 Model'
+        object SN331: TMenuItem
+          Caption = 'N331 Model Capacity'
+          OnClick = SN331Click
+        end
+        object SN332: TMenuItem
+          Caption = 'N332 Model Department'
+          OnClick = SN332Click
+        end
+        object SN333: TMenuItem
+          Caption = 'N333 Model Production'
+          OnClick = SN333Click
+        end
+      end
+      object SN34: TMenuItem
+        Caption = 'N34 Order Labor Hour'
+      end
+      object SN35: TMenuItem
+        Caption = 'N35 Monthly Calendar'
+        OnClick = SN35Click
+      end
+      object SN36: TMenuItem
+        Caption = 'N36 Capacity Person'
+        OnClick = SN36Click
+      end
+      object SN37: TMenuItem
+        Caption = 'N37 Plan OutPut'
+        OnClick = SN37Click
+      end
+      object SN38: TMenuItem
+        Caption = 'N38 Order Produce Plan '
+        OnClick = SN38Click
+      end
+      object SN39: TMenuItem
+        Caption = 'N39 Check Plan of Converse'
+        object SN391: TMenuItem
+          Caption = 'N391 Edit Plan of Converse'
+          OnClick = SN391Click
+        end
+        object SN392: TMenuItem
+          Caption = 'N392 Check Error Plan'
+          OnClick = SN392Click
+        end
+      end
+      object SN3A: TMenuItem
+        Caption = 'N3A Carry-Over Produce Plan'
+        OnClick = SN3AClick
+      end
+      object SN3B: TMenuItem
+        Caption = 'N3B Produce Plan Assistant'
+        OnClick = SN3BClick
+      end
+      object SN3C: TMenuItem
+        Caption = 'N3C Schedule Gantt'
+        OnClick = SN3CClick
+      end
+      object SN3D: TMenuItem
+        Caption = 'N3D Order Produce Plan Revise'
+        object SN3D1: TMenuItem
+          Caption = 'N3D1 Plan Order Schedule Order by'#29983#31649#25490#31243#38918#24207#35519#25972
+          OnClick = SN3D1Click
+        end
+        object SN3D2: TMenuItem
+          Caption = 'N3D2 Order Cycle Run2u'#35330#21934#36650#27425#34920
+          OnClick = SN3D2Click
+        end
+      end
+      object SN3E: TMenuItem
+        Caption = 'N3E Production Plan Setup'
+        OnClick = SN3EClick
+      end
+      object SN3F: TMenuItem
+        Caption = 'N3F Production Plan Tracking'
+        OnClick = SN3FClick
+      end
+      object SN3G: TMenuItem
+        Caption = 'N3G Shoe Upper Inventory'
+        OnClick = SN3GClick
+      end
+      object SN3H: TMenuItem
+        Caption = 'N3H Second Process'
+        object SN3H1: TMenuItem
+          Caption = 'N3H1 Model Setup'
+          OnClick = SN3H1Click
+        end
+        object SN3H2: TMenuItem
+          Caption = 'N3H2 RY Tracking'
+          OnClick = SN3H2Click
+        end
+        object SN3H3: TMenuItem
+          Caption = 'N3H3 Printing - A5'
+          OnClick = SN3H3Click
+        end
+        object SN3H4: TMenuItem
+          Caption = 'N3H4 Printing - C9'
+          OnClick = SN3H4Click
+        end
+        object SN3H5: TMenuItem
+          Caption = 'N3H5 Heat Pressing - A5'
+          OnClick = SN3H5Click
+        end
+        object SN3H6: TMenuItem
+          Caption = 'N3H6 Embroidery'
+          OnClick = SN3H6Click
+        end
+      end
+    end
+    object SN4: TMenuItem
+      Caption = 'N4 Embroider'
+      object SN41: TMenuItem
+        Caption = 'N41 Embroider Report'
+        OnClick = SN41Click
+      end
+      object SN42: TMenuItem
+        Caption = 'N42 Embroider Send'
+        OnClick = SN42Click
+      end
+      object SN43: TMenuItem
+        Caption = 'N43 Embroider Trace'
+        OnClick = SN43Click
+      end
+    end
+    object SN5: TMenuItem
+      Caption = 'N5 Output'
+      object SN51: TMenuItem
+        Caption = 'N51 Calendar Preiew('#29983#29986#35336#21123'&'#23526#38555#24037#26178#27604#23565')'
+        OnClick = SN51Click
+      end
+      object SN52: TMenuItem
+        Caption = 'N52 Ontime Report('#36664#20837#21508#21934#20301#26085#29986#37327')'
+        OnClick = SN52Click
+      end
+      object SN53: TMenuItem
+        Caption = 'N53 Daily Report('#29983#29986#26085#22577#34920')'
+        OnClick = SN53Click
+        object SN531: TMenuItem
+          Caption = 'N531 Plan/Action ('#29983#31649#35336#21123#36948#25104#29376#27841')'
+          OnClick = SN531Click
+        end
+        object SN532: TMenuItem
+          Caption = 'N532 Standard/Action('#27161#20934#35373#20633#36948#25104#29575')'
+          OnClick = SN532Click
+        end
+        object SN533: TMenuItem
+          Caption = 'N533 Efficiency ('#23526#38555#20154#21729#27161#20934#29986#33021#36948#25104#29575')'
+          OnClick = SN533Click
+        end
+        object SN534: TMenuItem
+          Caption = 'N534 Daily Plan/Action('#21508#37096#38272#35336#21123#36948#25104#27604#23565#34920')'
+          OnClick = SN534Click
+        end
+        object SN535: TMenuItem
+          Caption = 'N535 Daily Report Detail('#29983#29986#26085#22577#34920')'
+          OnClick = SN535Click
+        end
+      end
+      object SN54: TMenuItem
+        Caption = 'N54 Monthly Report('#29983#29986#26376#22577#34920')'
+        OnClick = SN54Click
+        object SN541: TMenuItem
+          Caption = 'N541 Factory Daily Report '#21508#38795#24288#29986#37327#26376#21295#32317#34920' '
+          OnClick = SN541Click
+        end
+        object SN542: TMenuItem
+          Caption = 'N542 Department Daily OutPut('#21508#21934#20301#29986#37327#32317#21295#32317#34920
+          OnClick = SN542Click
+        end
+        object SN543: TMenuItem
+          Caption = 'N543 Department Output difference('#21508#21934#20301#29986#37327#24046#30064#34920')'
+          OnClick = SN543Click
+        end
+        object SN544: TMenuItem
+          Caption = 'N544 Converse Production Schedule(Converse'#29983#29986#35336#21123#34920')'
+          Enabled = False
+          OnClick = SN544Click
+        end
+        object SN545: TMenuItem
+          Caption = 'N545 Department Daily POH OutPut('#21508#21934#20301#20154#26178#22343#29986#33021')'
+          OnClick = SN545Click
+        end
+        object SN546: TMenuItem
+          Caption = 'N546  Factory Daily POH OutPut('#20840#24288#20154#22343#26178#29986#33021')'
+          OnClick = SN546Click
+        end
+        object SN547: TMenuItem
+          Caption = 'N547 Department IE POH OutPut('#21508#21934#20301#20154#22343#26178#29986#33021')'
+          OnClick = SN547Click
+        end
+        object SN548: TMenuItem
+          Caption = 'N548 Department Daily Output IE('#21508#21934#20301#29986#37327'+IE'#32317#21295#32317#34920
+          OnClick = SN548Click
+        end
+      end
+      object SN55: TMenuItem
+        Caption = 'N55 Order Check('#35330#21934#29983#29986#26085#21205#24907#34920')'
+        object SN551: TMenuItem
+          Caption = 'N551 order ('#20998#35330#21934#35330#21934')'
+          OnClick = SN551Click
+        end
+        object SN552: TMenuItem
+          Caption = 'N552 SKU#('#20998'SKU#)'
+          OnClick = SN552Click
+        end
+        object SN553: TMenuItem
+          Caption = 'N553 Model('#20998#22411#39636#26028#20992')'
+          OnClick = SN553Click
+        end
+        object SN554: TMenuItem
+          Caption = 'N554 Customer('#20998#23458#20154')'
+          OnClick = SN554Click
+        end
+        object SN555: TMenuItem
+          Caption = 'N555 CSD('#20998'CSD)'
+          OnClick = SN555Click
+        end
+        object SN556: TMenuItem
+          Caption = 'N556 X/F ('#20998#20986#36008#26085')'
+          OnClick = SN556Click
+        end
+      end
+      object SN56: TMenuItem
+        Caption = 'N56 Produce Set('#37197#22871#29376#27841#34920')'
+        object SN561: TMenuItem
+          Caption = 'N561 Produce Set('#37197#22871#29376#27841#34920')'
+          OnClick = SN561Click
+        end
+        object SN562: TMenuItem
+          Caption = 'N562 Matching Form '#38754#26009#24213#26009#37197#22871#34920
+          OnClick = SN562Click
+        end
+      end
+      object SN57: TMenuItem
+        Caption = 'N57 OutPut adjust('#36664#20837#29986#37327#35519#25972')'
+        OnClick = SN57Click
+      end
+      object SN58: TMenuItem
+        Caption = 'N58 Daily production('#21508#24288#21312#29983#29986#32317#39636#29376#27841#34920')'
+        OnClick = SN58Click
+      end
+      object SN59: TMenuItem
+        Caption = 'N59 Barcode Check('#21839#38988#26781#30908')'
+        OnClick = SN59Click
+      end
+      object SN5A: TMenuItem
+        Caption = 'N5A CutDispath ('#35009#26039#22577#34920')'
+        object SN5A1: TMenuItem
+          Caption = 'N5A1 Cutting Material Tracking '#35009#26039#26448#26009#36861#36452#34920
+          OnClick = SN5A1Click
+        end
+        object SN5A2: TMenuItem
+          Caption = 'N5A2 Cutting Dispatch Tracking '#35009#26039#36861#36452#24409#32317#34920
+          OnClick = SN5A2Click
+        end
+        object SN5A3: TMenuItem
+          Caption = 'N5A3 Cutting Dispatch Stitching Send '#35009#26039#37341#36554#30332#26009#34920
+          OnClick = SN5A3Click
+        end
+        object SN5A4: TMenuItem
+          Caption = 'N5A4 Cutting Output Report '#35009#26039#27599#26085#22577#34920
+          OnClick = SN5A4Click
+        end
+        object SN5A5: TMenuItem
+          Caption = 'N5A5 Cutting Processing Tracking Report '#35009#29255#21152#24037#36861#36452#34920
+          OnClick = SN5A5Click
+        end
+        object SN5A6: TMenuItem
+          Caption = 'N5A6 Parts Tracking Report '#37096#20214#36861#36452#34920
+          OnClick = SN5A6Click
+        end
+        object SN5A7: TMenuItem
+          Caption = 'N5A7 Cutting Machine Capacity Loading '#35009#26039#27231#29986#33021#20998#26512
+          OnClick = SN5A7Click
+        end
+        object SN5A8: TMenuItem
+          Caption = 'N5A8 Stitching Assembly Tracking'
+          OnClick = SN5A8Click
+        end
+      end
+    end
+    object SN6: TMenuItem
+      Caption = 'N6 Report'
+      object SN601: TMenuItem
+        Caption = 'N601 Production OutPut  '#21508#24288#37341#36554#25104#22411#29986#33021#29376#27841#34920
+        OnClick = SN601Click
+      end
+      object SN602: TMenuItem
+        Caption = 'N602 Finicial Stock Report '#25104#21697#24235#23384#26085#22577#34920
+        OnClick = SN602Click
+      end
+      object SN603: TMenuItem
+        Caption = 'N603 Plan VS Real '#25490#31243#21450#23526#29986#27604#23565
+        object SN6031: TMenuItem
+          Caption = 'N6031 Plan VS Real '#25490#31243#21450#23526#29986#27604#23565
+          OnClick = SN6031Click
+        end
+        object SN6032: TMenuItem
+          Caption = 'N6032 Plan VS Real(For Concerse)'#25490#31243#21450#23526#29986#27604#23565
+          OnClick = SN6032Click
+        end
+        object SN6033: TMenuItem
+          Caption = 'N6033 Order Produce Plan Report'
+          OnClick = SN6033Click
+        end
+      end
+      object SN604: TMenuItem
+        Caption = 'N604  Production Analysis(Year) '#29983#29986#20998#26512'('#24180')'
+        OnClick = SN604Click
+      end
+      object SN605: TMenuItem
+        Caption = 'N605  Production Analysis(month) '#29983#29986#20998#26512'('#26376')'
+        OnClick = SN605Click
+      end
+      object SN606: TMenuItem
+        Caption = 'N606  Production Analysis(Date) '#29983#29986#20998#26512'('#26085')'
+        OnClick = SN606Click
+      end
+      object SN607: TMenuItem
+        Caption = 'N607 Order Analysis '#35330#21934#20998#26512#34920
+        OnClick = SN607Click
+      end
+      object SN608: TMenuItem
+        Caption = 'N608 Point of Production Compare  '#26410#20986#36008#35330#21934#20043#29983#29986#36914#24230#34920
+        OnClick = SN608Click
+      end
+      object SN609: TMenuItem
+        Caption = 'N609 Rubber Cost Analysis '#27233#33184#24288#25104#26412#34920
+        OnClick = SN609Click
+      end
+      object SN610: TMenuItem
+        Caption = 'N610 Order POH Output  '#35330#21934'POH'#22577#34920' '
+        object SN6101: TMenuItem
+          Caption = 'N6101 BuyNo POH Output Buy'#21029'POH'#22577#34920
+          OnClick = SN6101Click
+        end
+        object SN6102: TMenuItem
+          Caption = 'N6102 Order POH Output  '#29983#29986#35330#21934'POH'#22577#34920' '
+          OnClick = SN6102Click
+        end
+        object SN6103: TMenuItem
+          Caption = 'N6103 In Warehouse POH  '#25104#21697#20837#24235'POH'#22577#34920
+          OnClick = SN6103Click
+        end
+        object SN6104: TMenuItem
+          Caption = 'N6104 Plan POH Weight'#29983#31649#38928#25490'POH'#32026#21029#21152#27402#24179#22343
+          OnClick = SN6104Click
+        end
+        object SN6105: TMenuItem
+          Caption = 'N6105 Semi-Proudction Monthly'#21322#25104#21697#38617#25976
+          OnClick = SN6105Click
+        end
+      end
+      object SN611: TMenuItem
+        Caption = 'N611 Plan 3 Days Production '#19977#26085#27966#24037#21934
+        OnClick = SN611Click
+      end
+      object SN612: TMenuItem
+        Caption = 'N612 Tablet Report '#24179#26495#22577#24037#29986#33021
+        OnClick = SN612Click
+      end
+      object SN613: TMenuItem
+        Caption = 'N613 Produciton Scan InBox Qty '#20740#26149#29986#33021#25475#25551#22577#34920
+        OnClick = SN613Click
+      end
+    end
+    object SN7: TMenuItem
+      Caption = 'N7 Scan'
+      object SN71: TMenuItem
+        Caption = 'N71 Print Barcode'
+        OnClick = SN71Click
+      end
+      object SN72: TMenuItem
+        Caption = 'N72 San Production'
+        Hint = 'SN62'
+        object SN721: TMenuItem
+          Caption = 'N721 Scan Production BarCode'
+          OnClick = SN721Click
+        end
+        object SN722: TMenuItem
+          Caption = 'N722 Scan Production InBox'
+          OnClick = SN722Click
+        end
+        object SN723: TMenuItem
+          Caption = 'N723 Scan Cutting Dispatch '#35009#26039#27966#24037#25475#25551
+          OnClick = SN723Click
+        end
+        object SN724: TMenuItem
+          Caption = 'N724 Scan Cutting Process Dispatch '#35009#29255#21152#24037#25475#25551
+          OnClick = SN724Click
+        end
+        object SN725: TMenuItem
+          Caption = 'N725 Scan Production InBox '#20740#26149#25475#25551#20839#30418
+          OnClick = SN725Click
+        end
+        object SN726: TMenuItem
+          Caption = 'N726 Scan QR In'
+          OnClick = SN726Click
+        end
+        object SN727: TMenuItem
+          Caption = 'N727 Scan QR Out'
+          OnClick = SN727Click
+        end
+        object SN728: TMenuItem
+          Caption = 'N728 Scan Check Total'
+          OnClick = SN728Click
+        end
+        object SN729: TMenuItem
+          Caption = 'N729 QRScanIsHours'
+          OnClick = SN729Click
+        end
+        object SN72A: TMenuItem
+          Caption = 'N72A Print QR'
+          OnClick = SN72AClick
+        end
+        object SN72B: TMenuItem
+          Caption = 'N72B Scan Out De'
+          OnClick = SN72BClick
+        end
+      end
+      object SN73: TMenuItem
+        Caption = 'N73 Adjust Scan'
+        OnClick = SN73Click
+      end
+      object SN74: TMenuItem
+        Caption = 'N74 KeyIn by Hand'
+        OnClick = SN74Click
+      end
+      object SN75: TMenuItem
+        Caption = 'N75 Plan-Action Screen'
+        OnClick = SN75Click
+      end
+      object SN76: TMenuItem
+        Caption = 'N76 Screen DepName'
+        OnClick = SN76Click
+      end
+      object SN77: TMenuItem
+        Caption = 'N77 Scan Check'
+        OnClick = SN77Click
+      end
+      object SN78: TMenuItem
+        Caption = 'N78 Scan Report'
+        object SN7801: TMenuItem
+          Caption = 'N7801  Production Per Hour Output '#29986#33021#26178#27841#34920
+          OnClick = SN7801Click
+        end
+        object SN7802: TMenuItem
+          Caption = 'N7802 Daily Production '#27599#26085#29983#29986#35330#21934#34920
+          OnClick = SN7802Click
+        end
+        object SN7803: TMenuItem
+          Caption = 'N7803 Rubber Stock Report '#22823#24213#22823#36554#24235#23384#22577#34920
+          OnClick = SN7803Click
+        end
+        object SN7804: TMenuItem
+          Caption = 'N7804 Production Hour range Output'#26178#27573#35330#21934#22411#39636'SKU POH'#22577#34920
+          OnClick = SN7804Click
+        end
+        object SN7805: TMenuItem
+          Caption = 'N7805 Production Per Hour Output '#26178#27573' SKU POH'#32113#35336#22577#34920
+          OnClick = SN7805Click
+        end
+        object SN7806: TMenuItem
+          Caption = 'N7806 Production Per Hour Output  SKU '#26178#27573' POH'#32113#35336#22577#34920
+          OnClick = SN7806Click
+        end
+        object SN7807: TMenuItem
+          Caption = 'N7807  IE Production Per Hour Output '#29986#33021#26178#27841#34920
+          OnClick = SN7807Click
+        end
+      end
+    end
+    object SN8: TMenuItem
+      Caption = 'N8 Import'
+      Visible = False
+      object SN81: TMenuItem
+        Caption = 'N81 Import Yesterday Scan Data '
+        Visible = False
+        OnClick = SN81Click
+      end
+    end
+    object SN9: TMenuItem
+      Caption = 'N9 IE_SYSTEM'
+      object SN91: TMenuItem
+        Caption = 'N91 Article_Data'
+        OnClick = SN91Click
+      end
+      object N72SanProduction1: TMenuItem
+        Caption = 'N92 Employee Attendance'
+        Hint = 'SN92'
+        object SN921: TMenuItem
+          Caption = 'N921 Employee Attendance Setting'
+          OnClick = SN921Click
+        end
+        object SN922: TMenuItem
+          Caption = 'N922 Employee Attendance Import'
+          OnClick = SN922Click
+        end
+      end
+      object SN93: TMenuItem
+        Caption = 'N93 Article List'
+        OnClick = SN93Click
+      end
+    end
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select *'
+      'from BLimits'
+      'where USERID=:userid'
+      'and MKID=:mkid'
+      'and GSBH=:GSBH')
+    Left = 56
+    Top = 40
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'userid'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'mkid'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'GSBH'
+        ParamType = ptUnknown
+      end>
+  end
+  object BLimitHideQry: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select FORMID,YN'
+      'from BLimit'
+      'where BLimit.MKID=:mkid '
+      '')
+    Left = 56
+    Top = 72
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'mkid'
+        ParamType = ptUnknown
+      end>
+  end
+end

@@ -1,0 +1,260 @@
+select A.*,B.VNPrice, A.Qty*b.VNPrice as VNACC,b.ZMLB,C.GSBH as CKBH,CLZL.YWPM,CLZL.DWBH,ZSZL.ZSYWJC,KCZLS.CWBH,C.JGLX, CLHG.HGBH,CLHG.UnitC,CLHG.RateC,B.Qty as BL, C.CFMDate1  
+  from JGZLSS A
+       left join JGZLS B on A.JGNO=B.JGNO 
+       left join JGZL C on C.JGNO=A.JGNO 
+       left join CLZL on CLZL.CLDH=B.ZMLB 
+       left join CLHG on CLHG.CLBH=B.ZMLB and Year(B.USERDATE)>=2017 
+       left join ZSZL on ZSZL.ZSDH=C.ZSBH 
+       left join KCZLS on KCZLS.CLBH=B.ZMLB and KCZLS.CKBH=C.CKBH
+       left join KCCK on KCCK.CKBH=C.CKBH 
+ where B.ZMLB like '%'
+       and CLZL.YWPM like '%%'
+       and CLZL.YWPM like '%%'
+       and isnull(KCZLS.CWBH,'') like '%'
+       and B.JGNO like '%'
+       and ZSZL.ZSYWJC like '%%'
+       and C.YN='5'
+       and KCCK.GSBH='VDH'
+order by B.ZMLB ,C.ZSBH,C.JGNO
+select A.*,B.VNPrice, A.Qty*b.VNPrice as VNACC,b.ZMLB,C.GSBH as CKBH,CLZL.YWPM,CLZL.DWBH,ZSZL.ZSYWJC,KCZLS.CWBH,C.JGLX, CLHG.HGBH,CLHG.UnitC,CLHG.RateC,B.Qty as BL, C.CFMDate1  
+  from JGZLSS A
+       left join JGZLS B on A.JGNO=B.JGNO 
+       left join JGZL C on C.JGNO=A.JGNO 
+       left join CLZL on CLZL.CLDH=B.ZMLB 
+       left join CLHG on CLHG.CLBH=B.ZMLB and Year(B.USERDATE)>=2017 
+       left join ZSZL on ZSZL.ZSDH=C.ZSBH 
+       left join KCZLS on KCZLS.CLBH=B.ZMLB and KCZLS.CKBH=C.CKBH
+       left join KCCK on KCCK.CKBH=C.CKBH 
+ where B.ZMLB like '%'
+       and CLZL.YWPM like '%%'
+       and CLZL.YWPM like '%%'
+       and isnull(KCZLS.CWBH,'') like '%'
+       and B.JGNO like '%'
+       and ZSZL.ZSYWJC like '%%'
+       and C.YN='5'
+       and KCCK.GSBH='VDH'
+order by B.ZMLB ,C.ZSBH,C.JGNO
+select A.*,B.VNPrice, A.Qty*b.VNPrice as VNACC,b.ZMLB,C.GSBH as CKBH,CLZL.YWPM,CLZL.DWBH,ZSZL.ZSYWJC,KCZLS.CWBH,C.JGLX, CLHG.HGBH,CLHG.UnitC,CLHG.RateC,B.Qty as BL, C.CFMDate1  
+  from JGZLSS A
+       left join JGZLS B on A.JGNO=B.JGNO 
+       left join JGZL C on C.JGNO=A.JGNO 
+       left join CLZL on CLZL.CLDH=B.ZMLB 
+       left join CLHG on CLHG.CLBH=B.ZMLB and Year(B.USERDATE)>=2017 
+       left join ZSZL on ZSZL.ZSDH=C.ZSBH 
+       left join KCZLS on KCZLS.CLBH=B.ZMLB and KCZLS.CKBH=C.CKBH
+       left join KCCK on KCCK.CKBH=C.CKBH 
+ where B.ZMLB like '%'
+       and CLZL.YWPM like '%%'
+       and CLZL.YWPM like '%%'
+       and isnull(KCZLS.CWBH,'') like '%'
+       and B.JGNO like '%'
+       and ZSZL.ZSYWJC like '%%'
+       and C.YN='5'
+       and KCCK.GSBH='VDH'
+order by B.ZMLB ,C.ZSBH,C.JGNO
+select A.*,B.VNPrice, A.Qty*b.VNPrice as VNACC,b.ZMLB,C.GSBH as CKBH,CLZL.YWPM,CLZL.DWBH,ZSZL.ZSYWJC,KCZLS.CWBH,C.JGLX, CLHG.HGBH,CLHG.UnitC,CLHG.RateC,B.Qty as BL, C.CFMDate1  
+  from JGZLSS A
+       left join JGZLS B on A.JGNO=B.JGNO 
+       left join JGZL C on C.JGNO=A.JGNO 
+       left join CLZL on CLZL.CLDH=B.ZMLB 
+       left join CLHG on CLHG.CLBH=B.ZMLB and Year(B.USERDATE)>=2017 
+       left join ZSZL on ZSZL.ZSDH=C.ZSBH 
+       left join KCZLS on KCZLS.CLBH=B.ZMLB and KCZLS.CKBH=C.CKBH
+       left join KCCK on KCCK.CKBH=C.CKBH 
+ where B.ZMLB like '%'
+       and CLZL.YWPM like '%%'
+       and CLZL.YWPM like '%%'
+       and isnull(KCZLS.CWBH,'') like '%'
+       and B.JGNO like '%'
+       and ZSZL.ZSYWJC like '%%'
+       and C.YN='5'
+       and KCCK.GSBH='VDH'
+order by B.ZMLB ,C.ZSBH,C.JGNO
+select A.*,B.VNPrice, A.Qty*b.VNPrice as VNACC,b.ZMLB,C.GSBH as CKBH,CLZL.YWPM,CLZL.DWBH,ZSZL.ZSYWJC,KCZLS.CWBH,C.JGLX, CLHG.HGBH,CLHG.UnitC,CLHG.RateC,B.Qty as BL, C.CFMDate1  
+  from JGZLSS A
+       left join JGZLS B on A.JGNO=B.JGNO 
+       left join JGZL C on C.JGNO=A.JGNO 
+       left join CLZL on CLZL.CLDH=B.ZMLB 
+       left join CLHG on CLHG.CLBH=B.ZMLB and Year(B.USERDATE)>=2017 
+       left join ZSZL on ZSZL.ZSDH=C.ZSBH 
+       left join KCZLS on KCZLS.CLBH=B.ZMLB and KCZLS.CKBH=C.CKBH
+       left join KCCK on KCCK.CKBH=C.CKBH 
+ where B.ZMLB like '%'
+       and CLZL.YWPM like '%%'
+       and CLZL.YWPM like '%%'
+       and isnull(KCZLS.CWBH,'') like '%'
+       and B.JGNO like '%'
+       and ZSZL.ZSYWJC like '%%'
+       and C.YN='5'
+       and KCCK.GSBH='VDH'
+order by B.ZMLB ,C.ZSBH,C.JGNO
+select A.*,B.VNPrice, A.Qty*b.VNPrice as VNACC,b.ZMLB,C.GSBH as CKBH,CLZL.YWPM,CLZL.DWBH,ZSZL.ZSYWJC,KCZLS.CWBH,C.JGLX, CLHG.HGBH,CLHG.UnitC,CLHG.RateC,B.Qty as BL, C.CFMDate1  
+  from JGZLSS A
+       left join JGZLS B on A.JGNO=B.JGNO 
+       left join JGZL C on C.JGNO=A.JGNO 
+       left join CLZL on CLZL.CLDH=B.ZMLB 
+       left join CLHG on CLHG.CLBH=B.ZMLB and Year(B.USERDATE)>=2017 
+       left join ZSZL on ZSZL.ZSDH=C.ZSBH 
+       left join KCZLS on KCZLS.CLBH=B.ZMLB and KCZLS.CKBH=C.CKBH
+       left join KCCK on KCCK.CKBH=C.CKBH 
+ where B.ZMLB like '%'
+       and CLZL.YWPM like '%%'
+       and CLZL.YWPM like '%%'
+       and isnull(KCZLS.CWBH,'') like '%'
+       and B.JGNO like '%'
+       and ZSZL.ZSYWJC like '%%'
+       and C.YN='5'
+       and KCCK.GSBH='VDH'
+order by B.ZMLB ,C.ZSBH,C.JGNO
+select A.*,B.VNPrice, A.Qty*b.VNPrice as VNACC,b.ZMLB,C.GSBH as CKBH,CLZL.YWPM,CLZL.DWBH,ZSZL.ZSYWJC,KCZLS.CWBH,C.JGLX, CLHG.HGBH,CLHG.UnitC,CLHG.RateC,B.Qty as BL, C.CFMDate1  
+  from JGZLSS A
+       left join JGZLS B on A.JGNO=B.JGNO 
+       left join JGZL C on C.JGNO=A.JGNO 
+       left join CLZL on CLZL.CLDH=B.ZMLB 
+       left join CLHG on CLHG.CLBH=B.ZMLB and Year(B.USERDATE)>=2017 
+       left join ZSZL on ZSZL.ZSDH=C.ZSBH 
+       left join KCZLS on KCZLS.CLBH=B.ZMLB and KCZLS.CKBH=C.CKBH
+       left join KCCK on KCCK.CKBH=C.CKBH 
+ where B.ZMLB like '%'
+       and CLZL.YWPM like '%%'
+       and CLZL.YWPM like '%%'
+       and isnull(KCZLS.CWBH,'') like '%'
+       and B.JGNO like '%'
+       and ZSZL.ZSYWJC like '%%'
+       and C.YN='5'
+       and KCCK.GSBH='VDH'
+order by B.ZMLB ,C.ZSBH,C.JGNO
+select A.*,B.VNPrice, A.Qty*b.VNPrice as VNACC,b.ZMLB,C.GSBH as CKBH,CLZL.YWPM,CLZL.DWBH,ZSZL.ZSYWJC,KCZLS.CWBH,C.JGLX, CLHG.HGBH,CLHG.UnitC,CLHG.RateC,B.Qty as BL, C.CFMDate1  
+  from JGZLSS A
+       left join JGZLS B on A.JGNO=B.JGNO 
+       left join JGZL C on C.JGNO=A.JGNO 
+       left join CLZL on CLZL.CLDH=B.ZMLB 
+       left join CLHG on CLHG.CLBH=B.ZMLB and Year(B.USERDATE)>=2017 
+       left join ZSZL on ZSZL.ZSDH=C.ZSBH 
+       left join KCZLS on KCZLS.CLBH=B.ZMLB and KCZLS.CKBH=C.CKBH
+       left join KCCK on KCCK.CKBH=C.CKBH 
+ where B.ZMLB like '%'
+       and CLZL.YWPM like '%%'
+       and CLZL.YWPM like '%%'
+       and isnull(KCZLS.CWBH,'') like '%'
+       and B.JGNO like '%'
+       and ZSZL.ZSYWJC like '%%'
+       and C.YN='5'
+       and KCCK.GSBH='VDH'
+order by B.ZMLB ,C.ZSBH,C.JGNO
+select A.*,B.VNPrice, A.Qty*b.VNPrice as VNACC,b.ZMLB,C.GSBH as CKBH,CLZL.YWPM,CLZL.DWBH,ZSZL.ZSYWJC,KCZLS.CWBH,C.JGLX, CLHG.HGBH,CLHG.UnitC,CLHG.RateC,B.Qty as BL, C.CFMDate1  
+  from JGZLSS A
+       left join JGZLS B on A.JGNO=B.JGNO 
+       left join JGZL C on C.JGNO=A.JGNO 
+       left join CLZL on CLZL.CLDH=B.ZMLB 
+       left join CLHG on CLHG.CLBH=B.ZMLB and Year(B.USERDATE)>=2017 
+       left join ZSZL on ZSZL.ZSDH=C.ZSBH 
+       left join KCZLS on KCZLS.CLBH=B.ZMLB and KCZLS.CKBH=C.CKBH
+       left join KCCK on KCCK.CKBH=C.CKBH 
+ where B.ZMLB like '%'
+       and CLZL.YWPM like '%%'
+       and CLZL.YWPM like '%%'
+       and isnull(KCZLS.CWBH,'') like '%'
+       and B.JGNO like '%'
+       and ZSZL.ZSYWJC like '%%'
+       and C.YN='5'
+       and KCCK.GSBH='VDH'
+order by B.ZMLB ,C.ZSBH,C.JGNO
+select A.*,B.VNPrice, A.Qty*b.VNPrice as VNACC,b.ZMLB,C.GSBH as CKBH,CLZL.YWPM,CLZL.DWBH,ZSZL.ZSYWJC,KCZLS.CWBH,C.JGLX, CLHG.HGBH,CLHG.UnitC,CLHG.RateC,B.Qty as BL, C.CFMDate1  
+  from JGZLSS A
+       left join JGZLS B on A.JGNO=B.JGNO 
+       left join JGZL C on C.JGNO=A.JGNO 
+       left join CLZL on CLZL.CLDH=B.ZMLB 
+       left join CLHG on CLHG.CLBH=B.ZMLB and Year(B.USERDATE)>=2017 
+       left join ZSZL on ZSZL.ZSDH=C.ZSBH 
+       left join KCZLS on KCZLS.CLBH=B.ZMLB and KCZLS.CKBH=C.CKBH
+       left join KCCK on KCCK.CKBH=C.CKBH 
+ where B.ZMLB like '%'
+       and CLZL.YWPM like '%%'
+       and CLZL.YWPM like '%%'
+       and isnull(KCZLS.CWBH,'') like '%'
+       and B.JGNO like '%'
+       and ZSZL.ZSYWJC like '%%'
+       and C.YN='5'
+       and KCCK.GSBH='VDH'
+order by B.ZMLB ,C.ZSBH,C.JGNO
+select A.*,B.VNPrice, A.Qty*b.VNPrice as VNACC,b.ZMLB,C.GSBH as CKBH,CLZL.YWPM,CLZL.DWBH,ZSZL.ZSYWJC,KCZLS.CWBH,C.JGLX, CLHG.HGBH,CLHG.UnitC,CLHG.RateC,B.Qty as BL, C.CFMDate1  
+  from JGZLSS A
+       left join JGZLS B on A.JGNO=B.JGNO 
+       left join JGZL C on C.JGNO=A.JGNO 
+       left join CLZL on CLZL.CLDH=B.ZMLB 
+       left join CLHG on CLHG.CLBH=B.ZMLB and Year(B.USERDATE)>=2017 
+       left join ZSZL on ZSZL.ZSDH=C.ZSBH 
+       left join KCZLS on KCZLS.CLBH=B.ZMLB and KCZLS.CKBH=C.CKBH
+       left join KCCK on KCCK.CKBH=C.CKBH 
+ where B.ZMLB like '%'
+       and CLZL.YWPM like '%%'
+       and CLZL.YWPM like '%%'
+       and isnull(KCZLS.CWBH,'') like '%'
+       and B.JGNO like '%'
+       and ZSZL.ZSYWJC like '%%'
+       and C.YN='5'
+       and KCCK.GSBH='VDH'
+       and Convert(smalldatetime,convert(varchar,JGZL.CFMDate1,111)) between 
+'2020/01/01' and '2020/01/31'
+order by B.ZMLB ,C.ZSBH,C.JGNO
+select A.*,B.VNPrice, A.Qty*b.VNPrice as VNACC,b.ZMLB,C.GSBH as CKBH,CLZL.YWPM,CLZL.DWBH,ZSZL.ZSYWJC,KCZLS.CWBH,C.JGLX, CLHG.HGBH,CLHG.UnitC,CLHG.RateC,B.Qty as BL, C.CFMDate1  
+  from JGZLSS A
+       left join JGZLS B on A.JGNO=B.JGNO 
+       left join JGZL C on C.JGNO=A.JGNO 
+       left join CLZL on CLZL.CLDH=B.ZMLB 
+       left join CLHG on CLHG.CLBH=B.ZMLB and Year(B.USERDATE)>=2017 
+       left join ZSZL on ZSZL.ZSDH=C.ZSBH 
+       left join KCZLS on KCZLS.CLBH=B.ZMLB and KCZLS.CKBH=C.CKBH
+       left join KCCK on KCCK.CKBH=C.CKBH 
+ where B.ZMLB like '%'
+       and CLZL.YWPM like '%%'
+       and CLZL.YWPM like '%%'
+       and isnull(KCZLS.CWBH,'') like '%'
+       and B.JGNO like '%'
+       and ZSZL.ZSYWJC like '%%'
+       and C.YN='5'
+       and KCCK.GSBH='VDH'
+       and Convert(smalldatetime,convert(varchar,C.CFMDate1,111)) between 
+'2020/01/01' and '2020/01/31'
+order by B.ZMLB ,C.ZSBH,C.JGNO
+select A.*,B.VNPrice, A.Qty*b.VNPrice as VNACC,b.ZMLB,C.GSBH as CKBH,CLZL.YWPM,CLZL.DWBH,ZSZL.ZSYWJC,KCZLS.CWBH,C.JGLX, CLHG.HGBH,CLHG.UnitC,CLHG.RateC,B.Qty as BL, C.CFMDate1  
+  from JGZLSS A
+       left join JGZLS B on A.JGNO=B.JGNO 
+       left join JGZL C on C.JGNO=A.JGNO 
+       left join CLZL on CLZL.CLDH=B.ZMLB 
+       left join CLHG on CLHG.CLBH=B.ZMLB and Year(B.USERDATE)>=2017 
+       left join ZSZL on ZSZL.ZSDH=C.ZSBH 
+       left join KCZLS on KCZLS.CLBH=B.ZMLB and KCZLS.CKBH=C.CKBH
+       left join KCCK on KCCK.CKBH=C.CKBH 
+ where B.ZMLB like '%'
+       and CLZL.YWPM like '%%'
+       and CLZL.YWPM like '%%'
+       and isnull(KCZLS.CWBH,'') like '%'
+       and B.JGNO like '%'
+       and ZSZL.ZSYWJC like '%%'
+       and C.YN='5'
+       and KCCK.GSBH='VDH'
+       and Convert(smalldatetime,convert(varchar,C.CFMDate1,111)) between 
+'2020/01/01' and '2020/01/31'
+order by B.ZMLB ,C.ZSBH,C.JGNO
+select A.*,B.VNPrice, A.Qty*b.VNPrice as VNACC,b.ZMLB,C.GSBH as CKBH,CLZL.YWPM,CLZL.DWBH,ZSZL.ZSYWJC,KCZLS.CWBH,C.JGLX, CLHG.HGBH,CLHG.UnitC,CLHG.RateC,B.Qty as BL, C.CFMDate1  
+  from JGZLSS A
+       left join JGZLS B on A.JGNO=B.JGNO 
+       left join JGZL C on C.JGNO=A.JGNO 
+       left join CLZL on CLZL.CLDH=B.ZMLB 
+       left join CLHG on CLHG.CLBH=B.ZMLB and Year(B.USERDATE)>=2017 
+       left join ZSZL on ZSZL.ZSDH=C.ZSBH 
+       left join KCZLS on KCZLS.CLBH=B.ZMLB and KCZLS.CKBH=C.CKBH
+       left join KCCK on KCCK.CKBH=C.CKBH 
+ where B.ZMLB like '%'
+       and CLZL.YWPM like '%%'
+       and CLZL.YWPM like '%%'
+       and isnull(KCZLS.CWBH,'') like '%'
+       and B.JGNO like '%'
+       and ZSZL.ZSYWJC like '%%'
+       and C.YN='5'
+       and KCCK.GSBH='VDH'
+       and Convert(smalldatetime,convert(varchar,C.CFMDate1,111)) between 
+'2020/01/01' and '2020/01/31'
+order by B.ZMLB ,C.ZSBH,C.JGNO

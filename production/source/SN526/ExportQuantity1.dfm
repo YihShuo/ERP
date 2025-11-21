@@ -1,0 +1,388 @@
+object ExportQuantity: TExportQuantity
+  Left = 397
+  Top = 250
+  Width = 977
+  Height = 563
+  Caption = 'ExportQuantity'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 16
+  object PC1: TPageControl
+    Left = 0
+    Top = 0
+    Width = 969
+    Height = 532
+    ActivePage = TS1
+    Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object TS1: TTabSheet
+      Caption = 'Plan and Actual Export'
+      object Panel1: TPanel
+        Left = 0
+        Top = 0
+        Width = 961
+        Height = 81
+        Align = alTop
+        TabOrder = 0
+        object lbYear: TLabel
+          Left = 59
+          Top = 42
+          Width = 49
+          Height = 20
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'YEAR:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label1: TLabel
+          Left = 206
+          Top = 42
+          Width = 61
+          Height = 20
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'MONTH:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label2: TLabel
+          Left = 46
+          Top = 8
+          Width = 179
+          Height = 25
+          AutoSize = False
+          Caption = #26376#20221#38928#35336#20986#36008#25976#37327':'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Button1: TButton
+          Left = 370
+          Top = 35
+          Width = 89
+          Height = 33
+          Caption = 'Query'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+          OnClick = Button1Click
+        end
+        object cbYear: TComboBox
+          Left = 110
+          Top = 39
+          Width = 81
+          Height = 28
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ItemHeight = 20
+          ParentFont = False
+          TabOrder = 1
+        end
+        object Button2: TButton
+          Left = 471
+          Top = 35
+          Width = 89
+          Height = 33
+          Caption = 'Excel'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
+          OnClick = Button2Click
+        end
+        object cbMonth: TComboBox
+          Left = 270
+          Top = 39
+          Width = 81
+          Height = 28
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ItemHeight = 20
+          ParentFont = False
+          TabOrder = 3
+          Items.Strings = (
+            '1'
+            '2'
+            '3'
+            '4'
+            '5'
+            '6'
+            '7'
+            '8'
+            '9'
+            '10'
+            '11'
+            '12')
+        end
+      end
+      object Panel2: TPanel
+        Left = 0
+        Top = 81
+        Width = 961
+        Height = 420
+        Align = alClient
+        TabOrder = 1
+        object DBGridEh1: TDBGridEh
+          Left = 1
+          Top = 1
+          Width = 959
+          Height = 418
+          Align = alClient
+          DataSource = DS1
+          Flat = False
+          FooterColor = clWindow
+          FooterFont.Charset = DEFAULT_CHARSET
+          FooterFont.Color = clWindowText
+          FooterFont.Height = -13
+          FooterFont.Name = 'MS Sans Serif'
+          FooterFont.Style = []
+          FrozenCols = 2
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -13
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          UseMultiTitle = True
+        end
+      end
+    end
+    object TS2: TTabSheet
+      Caption = 'Import and Export'
+      ImageIndex = 1
+      object Panel3: TPanel
+        Left = 0
+        Top = 0
+        Width = 961
+        Height = 81
+        Align = alTop
+        TabOrder = 0
+        object Label3: TLabel
+          Left = 59
+          Top = 42
+          Width = 49
+          Height = 20
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'YEAR:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label4: TLabel
+          Left = 206
+          Top = 42
+          Width = 61
+          Height = 20
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'MONTH:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label5: TLabel
+          Left = 46
+          Top = 8
+          Width = 179
+          Height = 25
+          AutoSize = False
+          Caption = #25104#21697#20489#26376#22577#34920':'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Button3: TButton
+          Left = 370
+          Top = 35
+          Width = 89
+          Height = 33
+          Caption = 'Query'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+          OnClick = Button3Click
+        end
+        object CB1: TComboBox
+          Left = 110
+          Top = 39
+          Width = 81
+          Height = 28
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ItemHeight = 20
+          ParentFont = False
+          TabOrder = 1
+        end
+        object Button4: TButton
+          Left = 471
+          Top = 35
+          Width = 89
+          Height = 33
+          Caption = 'Excel'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
+          OnClick = Button4Click
+        end
+        object CB2: TComboBox
+          Left = 270
+          Top = 39
+          Width = 81
+          Height = 28
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ItemHeight = 20
+          ParentFont = False
+          TabOrder = 3
+          Items.Strings = (
+            '1'
+            '2'
+            '3'
+            '4'
+            '5'
+            '6'
+            '7'
+            '8'
+            '9'
+            '10'
+            '11'
+            '12')
+        end
+      end
+      object Panel4: TPanel
+        Left = 0
+        Top = 81
+        Width = 961
+        Height = 420
+        Align = alClient
+        TabOrder = 1
+        object DBGridEh2: TDBGridEh
+          Left = 1
+          Top = 1
+          Width = 959
+          Height = 418
+          Align = alClient
+          DataSource = DS2
+          Flat = False
+          FooterColor = clWindow
+          FooterFont.Charset = DEFAULT_CHARSET
+          FooterFont.Color = clWindowText
+          FooterFont.Height = -13
+          FooterFont.Name = 'MS Sans Serif'
+          FooterFont.Style = []
+          FrozenCols = 3
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -13
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          UseMultiTitle = True
+        end
+      end
+    end
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    Left = 151
+    Top = 225
+  end
+  object DS1: TDataSource
+    DataSet = Query1
+    Left = 152
+    Top = 260
+  end
+  object tmpQ: TQuery
+    DatabaseName = 'DB'
+    Left = 183
+    Top = 225
+  end
+  object OpenDialog: TOpenDialog
+    Filter = 'EXCEL|*.xls'
+    Left = 375
+    Top = 216
+  end
+  object Query2: TQuery
+    DatabaseName = 'DB'
+    Left = 503
+    Top = 217
+  end
+  object tmpQ2: TQuery
+    DatabaseName = 'DB'
+    Left = 535
+    Top = 217
+  end
+  object DS2: TDataSource
+    DataSet = Query2
+    Left = 504
+    Top = 252
+  end
+end

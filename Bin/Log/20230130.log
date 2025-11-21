@@ -1,0 +1,36 @@
+select DDZL.BUYNO,DDZL.DDBH,XXZL.XieXing,XXZL.SheHao,XXZL.ARTICLE,DDZL.ShipDate,XXZL.XieMing,XXZL.ARTICLE,DDZL.Pairs,IsNull(EXTRASS.OkQty,0) as OkQty 
+from DDZL 
+Left join XXZL on XXZL.XieXing=DDZL.XieXing and DDZL.SheHao=XXZL.SheHao 
+left join (select ZLBH,SUM(Qty) as OkQty from EXTRASS where CLBH='' 
+           and XieXing='' and SheHao='' Group by ZLBH) EXTRASS on EXTRASS.ZLBH=DDZL.DDBH  
+where  DDZL.XieXing='' and DDZL.SheHao='' 
+     and DDZL.DDLB='N' and DDZL.DDZT='Y' 
+Group by DDZL.BUYNO,DDZL.DDBH,XXZL.XieXing,XXZL.SheHao,XXZL.ARTICLE,DDZL.ShipDate,XXZL.XieMing,XXZL.ARTICLE,DDZL.Pairs,EXTRASS.OkQty  
+having DDZl.Pairs>IsNull(EXTRASS.OkQty,0)
+select DDZL.BUYNO,DDZL.DDBH,XXZL.XieXing,XXZL.SheHao,XXZL.ARTICLE,DDZL.ShipDate,XXZL.XieMing,XXZL.ARTICLE,DDZL.Pairs,IsNull(EXTRASS.OkQty,0) as OkQty 
+from DDZL 
+Left join XXZL on XXZL.XieXing=DDZL.XieXing and DDZL.SheHao=XXZL.SheHao 
+left join (select ZLBH,SUM(Qty) as OkQty from EXTRASS where CLBH='' 
+           and XieXing='' and SheHao='' Group by ZLBH) EXTRASS on EXTRASS.ZLBH=DDZL.DDBH  
+where  DDZL.XieXing='' and DDZL.SheHao='' 
+     and DDZL.DDLB='N' and DDZL.DDZT='Y' 
+Group by DDZL.BUYNO,DDZL.DDBH,XXZL.XieXing,XXZL.SheHao,XXZL.ARTICLE,DDZL.ShipDate,XXZL.XieMing,XXZL.ARTICLE,DDZL.Pairs,EXTRASS.OkQty  
+having DDZl.Pairs>IsNull(EXTRASS.OkQty,0)
+select DDZL.BUYNO,DDZL.DDBH,XXZL.XieXing,XXZL.SheHao,XXZL.ARTICLE,DDZL.ShipDate,XXZL.XieMing,XXZL.ARTICLE,DDZL.Pairs,IsNull(EXTRASS.OkQty,0) as OkQty 
+from DDZL 
+Left join XXZL on XXZL.XieXing=DDZL.XieXing and DDZL.SheHao=XXZL.SheHao 
+left join (select ZLBH,SUM(Qty) as OkQty from EXTRASS where CLBH='' 
+           and XieXing='' and SheHao='' Group by ZLBH) EXTRASS on EXTRASS.ZLBH=DDZL.DDBH  
+where  DDZL.XieXing='' and DDZL.SheHao='' 
+     and DDZL.DDLB='N' and DDZL.DDZT='Y' 
+Group by DDZL.BUYNO,DDZL.DDBH,XXZL.XieXing,XXZL.SheHao,XXZL.ARTICLE,DDZL.ShipDate,XXZL.XieMing,XXZL.ARTICLE,DDZL.Pairs,EXTRASS.OkQty  
+having DDZl.Pairs>IsNull(EXTRASS.OkQty,0)
+select DDZL.BUYNO,DDZL.DDBH,XXZL.XieXing,XXZL.SheHao,XXZL.ARTICLE,DDZL.ShipDate,XXZL.XieMing,XXZL.ARTICLE,DDZL.Pairs,IsNull(EXTRASS.OkQty,0) as OkQty 
+from DDZL 
+Left join XXZL on XXZL.XieXing=DDZL.XieXing and DDZL.SheHao=XXZL.SheHao 
+left join (select ZLBH,SUM(Qty) as OkQty from EXTRASS where CLBH='' 
+           and XieXing='' and SheHao='' Group by ZLBH) EXTRASS on EXTRASS.ZLBH=DDZL.DDBH  
+where  DDZL.XieXing='' and DDZL.SheHao='' 
+     and DDZL.DDLB='N' and DDZL.DDZT='Y' 
+Group by DDZL.BUYNO,DDZL.DDBH,XXZL.XieXing,XXZL.SheHao,XXZL.ARTICLE,DDZL.ShipDate,XXZL.XieMing,XXZL.ARTICLE,DDZL.Pairs,EXTRASS.OkQty  
+having DDZl.Pairs>IsNull(EXTRASS.OkQty,0)

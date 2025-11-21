@@ -1,0 +1,381 @@
+unit WarehouseTrace1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls,dateutils,comobj,
+  Menus;
+
+type
+  TWarehouseTrace = class(TForm)
+    Panel1: TPanel;
+    Label3: TLabel;
+    Label6: TLabel;
+    Label5: TLabel;
+    Label7: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Edit3: TEdit;
+    Edit2: TEdit;
+    Button1: TButton;
+    Edit1: TEdit;
+    Button2: TButton;
+    Edit5: TEdit;
+    DDZL: TQuery;
+    DS1: TDataSource;
+    Label1: TLabel;
+    CBX2: TComboBox;
+    Label8: TLabel;
+    CBX3: TComboBox;
+    Panel2: TPanel;
+    Edit4: TEdit;
+    Edit6: TEdit;
+    DBGrid1: TDBGrid;
+    DBGrid2: TDBGrid;
+    DDCC: TQuery;
+    DS2: TDataSource;
+    DDCCDDBH: TStringField;
+    DDCCXXCC: TStringField;
+    DDCCDDCC: TStringField;
+    DDCCDDQty: TIntegerField;
+    PopupMenu1: TPopupMenu;
+    Details1: TMenuItem;
+    DDZLDDBH: TStringField;
+    DDZLXieXing: TStringField;
+    DDZLSheHao: TStringField;
+    DDZLArticle: TStringField;
+    DDZLDDQty: TIntegerField;
+    DDZLshipdate: TDateTimeField;
+    DDZLDDCC: TStringField;
+    DDZLKHBH: TStringField;
+    DDZLKHPO: TStringField;
+    DDZLXieMing: TStringField;
+    DDZLXXCC: TStringField;
+    DDZLCTok: TIntegerField;
+    DDZLokQty: TFloatField;
+    DDZLCTQty: TIntegerField;
+    DDCCokQty: TFloatField;
+    DDZLQtyLack: TIntegerField;
+    DDZLCTLack: TIntegerField;
+    DDCCLackQty: TIntegerField;
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit3KeyPress(Sender: TObject; var Key: Char);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure DDZLAfterScroll(DataSet: TDataSet);
+    procedure Button2Click(Sender: TObject);
+    procedure Details1Click(Sender: TObject);
+    procedure DBGrid2DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DDZLCalcFields(DataSet: TDataSet);
+    procedure DDCCCalcFields(DataSet: TDataSet);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  a,b,c,d:string;
+  WarehouseTrace: TWarehouseTrace;
+
+implementation
+
+uses WarehouseTrace_Details1;
+
+{$R *.dfm}
+
+procedure TWarehouseTrace.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin 
+if key=#13 then
+edit2.SetFocus;
+end;
+
+procedure TWarehouseTrace.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin   
+if key=#13 then
+edit3.SetFocus;
+end;
+
+procedure TWarehouseTrace.Edit3KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+Button1.SetFocus;
+end;
+
+procedure TWarehouseTrace.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+procedure TWarehouseTrace.Button1Click(Sender: TObject);
+var y,m:word;
+sdate,edate:Tdate;
+begin
+if (CBX2.text='')or (CBX3.text='')  then
+  begin
+    showmessage('You have to select the year and month first.');
+    abort;
+  end;
+y:=strtoint(CBX2.Text);
+m:=strtoint(CBX3.Text);
+if (y>2999) or (y<1900) then
+  begin
+    showmessage('Pls key in right year');
+    abort;
+  end;
+if (m=0) or (m>12) then
+  begin
+    showmessage('Pls key in right month');
+    abort;
+  end;
+sdate:=encodedate(y,m,1);
+edate:=endofthemonth(sdate);
+
+
+with DDZL do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select DDZL.DDBH,DDZL.XieXing,DDZl.SheHao,DDZL.Article,');
+    sql.add('DDZL.Pairs as DDQty,DDZL.shipdate,DDZL.CCGB as DDCC,DDZL.KHBH,');
+    sql.add('DDZL.KHPO,XXZl.XieMing,XXZl.CCGB as XXCC ,SCSMRK.CTok,SCSMRK.okQty,SCZLDate.CTQty');
+    sql.add('from DDZL');
+    sql.add('left join XXZL on XXZl.XieXing=DDZl.XieXing');
+    sql.add(' and XXZL.SheHao=DDZl.SheHao');
+    sql.add('left join ZLZL on ZLZL.ZLBH=DDZL.ZLBH ');
+    sql.add('left join SCZLDate on SCZLDate.ZLBH=ZLZL.ZLBh ');
+
+    sql.add('left join (select SCSMRK.DDBH,count(SCSMRK.CTNO) as CTok,sum(SCSMRK.Qty) as okQty');
+    sql.add('           from SCSMRK ');
+    sql.add('           left join DDZL on SCSMRK.DDBH=DDZL.DDBH ');
+    sql.add('           where  SCSMRK.DDBH like '+''''+edit3.Text+'%'+'''');
+    sql.add('           and Convert(smalldatetime,convert(varchar,DDZL.ShipDate)) between ');
+    sql.add(''''+formatdatetime('yyyy/mm/dd',sdate)+'''');
+    sql.add('        and '+''''+formatdatetime('yyyy/mm/dd',edate)+'''');
+    sql.add('        group by SCSMRK.DDBH ) SCSMRK on SCSMRK.DDBH =DDZL.DDBH ')  ;
+
+
+    sql.add('where  DDZL.DDZT='+''''+'Y'+'''');
+    sql.add('and ZLZL.CQDH='+''''+'LTY'+'''');
+    sql.add('and XXZL.Article like '+''''+edit1.Text+'%'+'''');
+    sql.add('and XXZL.XieMing like '+''''+'%'+edit2.Text+'%'+'''');
+    sql.add('and DDZL.DDBH like '+''''+edit3.Text+'%'+'''');
+    sql.add('and Convert(smalldatetime,convert(varchar,DDZL.ShipDate,111)) between ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',sdate)+'''');
+    sql.add(' and '+''''+formatdatetime('yyyy/MM/dd',edate)+'''');
+    sql.add('order by DDZL.DDBH');
+    active:=true;
+  end;
+
+end;
+
+procedure TWarehouseTrace.DDZLAfterScroll(DataSet: TDataSet);
+begin
+DDCC.Active:=false;
+if DDZL.RecordCount>0 then
+  begin
+    //找出訂單尺寸及斬刀尺寸的對應關係
+    a:=DDZL.fieldbyname('DDCC').value  ;
+    b:=DDZL.fieldbyname('XXCC').value;
+     //找出所有國別尺寸的對應關係
+       //找出訂單鞋型國別尺寸的對應關係
+    if a='K' then
+      begin
+        a:='XXZLS3.UK_Size as DDCC,';
+        c:='XXZLS3.UK_Size';
+      end;
+    if a='J' then
+    begin
+      a:='XXZLS3.JPN_Size as DDCC,';
+      c:='XXZLS3.JPN_Size';
+    end;
+    if a='E' then
+    begin
+      a:='XXZLS3.EUR_Size as DDCC,';
+      c:='XXZLS3.EUR_Size';
+    end;
+    if a='F' then
+    begin
+      a:='XXZLS3.FRN_Size as DDCC,';
+      c:='XXZLS3.FRN_Size';
+    end;
+    if a='M' then
+    begin
+      a:='XXZLS3.MX_Size as DDCC,';
+      c:='XXZLS3.MX_Size';
+    end;
+    if a='U' then
+    begin
+      a:='XXZLS3.US_Size as DDCC,';
+      c:='US_Size';
+    end;
+    if a='O' then
+    begin
+      a:='XXZLS3.OTH_Size as DDCC,';
+      C:='XXZLS3.OTH_Size';
+    end;
+    if b='K' then
+      b:='XXZLS3.UK_Size as XXCC,';
+      d:='XXZLS3.UK_Size';
+    if b='J' then
+    begin
+      b:='XXZLS3.JPN_Size as XXCC,';
+      d:='XXZLS3.JPN_Size';
+    end;
+    if b='E' then
+    begin
+      b:='XXZLS3.EUR_Size as XXCC,';
+      d:='XXZLS3.EUR_Size';
+    end;
+    if b='F' then
+    begin
+      b:='XXZLS3.FRN_Size as XXCC,';
+      d:='XXZLS3.FRN_Size';
+    end;
+    if b='M' then
+    begin
+      b:='XXZLS3.MX_Size as XXCC,';
+      d:='XXZLS3.MX_Size';
+    end;
+    if b='U' then
+    begin
+      b:='XXZLS3.US_Size as XXCC,';
+      d:='XXZLS3.US_Size';
+    end;
+    if b='O' then
+    begin
+      b:=' XXZLS3.OTH_Size as XXCC,';
+      d:='XXZLS3.OTH_Size';
+    end;
+
+      //尺寸明細
+   with DDCC do
+     begin
+       active:=false;
+       sql.Clear;
+       sql.add('select DDZLS.DDBH,DDZLS.CC as DDCC, DDZLS.Quantity as DDQty,'+b+' isnull(sum(SCSMRKS.Qty),0) as okQty');
+       sql.add('from DDZLS ');
+       sql.add('left join DDZL on DDZL.DDBH=DDZLS.DDBH');
+       sql.add('left join XXZLS3 on DDZLS.CC='+c+' and XXZLS3.XieXing=DDZL.XieXing ');
+       sql.add('left join SCSMRKS on SCSMRKS.DDBH=DDZLS.DDBH and SCSMRKS.XXCC='+d);
+       sql.add('where DDZLS.DDBH=:DDBH ');
+       sql.add('and DDZLS.Quantity<>0');
+       sql.add('group by DDZLS.DDBH,DDZLS.CC , DDZLS.Quantity,'+d);
+       sql.add('order by DDZLS.CC ');
+       active:=true;
+     end;
+  end;
+end;
+
+procedure TWarehouseTrace.Button2Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+DDCC.Active:=false;
+if DDZL.Active then
+  begin
+    if DDZL.recordcount=0 then
+      begin
+        showmessage('No record.');
+        abort;
+      end;
+  end
+  else
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+
+try
+  eclApp:=CreateOleObject('Excel.Application');
+  WorkBook:=CreateOleObject('Excel.Sheet');
+except
+  Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+  Exit;
+end;
+
+try
+  WorkBook:=eclApp.workbooks.Add; 
+  eclApp.Cells(1,1):='NO';
+  for   i:=1   to   DDZL.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=DDZL.fields[i-1].FieldName;
+    end;
+  DDZL.First;
+  j:=2;
+  while   not  DDZL.Eof   do
+    begin
+      eclApp.Cells(j,1):=j-1;
+      for   i:=1   to   DDZL.fieldcount   do
+        begin
+          eclApp.Cells(j,i+1):=DDZL.Fields[i-1].Value;
+          eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+        end;
+      DDZL.Next;
+      inc(j);
+    end;
+  eclapp.columns.autofit;
+  showmessage('Succeed.');
+  eclApp.Visible:=True;
+  DDCC.Active:=true;
+except
+  on   F:Exception   do
+    showmessage(F.Message);
+end;
+
+end;
+
+procedure TWarehouseTrace.Details1Click(Sender: TObject);
+begin
+WarehouseTrace_Details:=TWarehouseTrace_Details.create(self);
+WarehouseTrace_Details.show;
+end;
+
+procedure TWarehouseTrace.DBGrid2DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+ if ((DDZL.FieldByName('CTQty').value<=DDZL.FieldByName('CTok').value) and (not DDZL.FieldByName('CTQty').isnull)) then
+  begin
+    dbgrid2.canvas.font.color:=clLime;
+    dbgrid2.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+ if ((DDZL.FieldByName('CTQty').value>DDZL.FieldByName('CTok').value) and (DDZL.FieldByName('CTok').value>0)) then
+  begin
+    dbgrid2.canvas.font.color:=clred;
+    dbgrid2.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+end;
+
+procedure TWarehouseTrace.DDZLCalcFields(DataSet: TDataSet);
+begin
+DDZL.FieldByName('QtyLack').Value:=DDZL.FieldByName('DDQty').Value-DDZL.FieldByName('okQty').Value;
+DDZL.FieldByName('CTLack').Value:=DDZL.FieldByName('CTQty').Value-DDZL.FieldByName('CTok').Value;
+end;
+
+procedure TWarehouseTrace.DDCCCalcFields(DataSet: TDataSet);
+begin
+DDCC.FieldByName('LackQty').Value:=DDCC.FieldByName('DDQty').Value-DDCC.FieldByName('okQty').Value;
+end;
+
+procedure TWarehouseTrace.DBGrid1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+
+ if DDCC.FieldByName('DDQty').value<>DDCC.FieldByName('okQty').value  then
+  begin
+    dbgrid1.canvas.font.color:=clred;
+    dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+end;
+
+end.

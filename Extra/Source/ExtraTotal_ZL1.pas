@@ -1,0 +1,158 @@
+unit ExtraTotal_ZL1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls;
+
+type
+  TExtraTotal_ZL = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Button1: TButton;
+    Edit2: TEdit;
+    EDIT1: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    DBGrid1: TDBGrid;
+    DS1: TDataSource;
+    Query1: TQuery;
+    Query1cldh: TStringField;
+    Query1cllb: TStringField;
+    Query1ywpm: TStringField;
+    Query1dwbh: TStringField;
+    Query1zwpm: TStringField;
+    procedure EDIT1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit3KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit4KeyPress(Sender: TObject; var Key: Char);
+    procedure Button1Click(Sender: TObject);
+    procedure DBGrid1KeyPress(Sender: TObject; var Key: Char);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ExtraTotal_ZL: TExtraTotal_ZL;
+
+implementation
+
+uses ExtraTotal1, main1;
+
+{$R *.dfm}
+
+procedure TExtraTotal_ZL.EDIT1KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+edit2.SetFocus;
+end;
+
+procedure TExtraTotal_ZL.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+edit3.SetFocus;
+end;
+
+procedure TExtraTotal_ZL.Edit3KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+edit4.SetFocus;
+end;
+
+procedure TExtraTotal_ZL.Edit4KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+button1click(nil);
+end;
+
+procedure TExtraTotal_ZL.Button1Click(Sender: TObject);
+begin
+
+with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select CLZL.*  ');
+    sql.add('from clzl');
+    sql.add(' where CLZL.CLDH like');
+    sql.add(''''+edit1.Text+'%'+'''');
+    sql.add('and CLZL.YWPM like ');
+    sql.add(''''+'%'+edit2.Text+'%'+'''');
+    sql.add('and CLZL.YWPM like ');
+    sql.add(''''+'%'+edit3.Text+'%'+''''); 
+    sql.add('and CLZL.YWPM like ');
+    sql.add(''''+'%'+edit4.Text+'%'+'''');   
+    //sql.add('and (CLZL.TYJH is null or CLZL.TYJH='+''''+'N'+''''+')');
+    sql.add('order by CLZL.CLDH');
+    active:=true;
+  end;
+end;
+
+procedure TExtraTotal_ZL.DBGrid1KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+  DBGrid1dblclick(nil);
+end;
+
+procedure TExtraTotal_ZL.DBGrid1DblClick(Sender: TObject);
+begin
+
+if (not query1.Active) then
+  begin
+    abort;
+  end;
+if (Query1.recordcount=0) then
+  begin
+    abort;
+  end;
+  with ExtraTotal.JGDetZ do
+    begin
+      insert;
+      FieldByName('JGNO').value:=ExtraTotal.JGDet.fieldbyname('JGNO').Value ;
+      fieldbyname('CLBH').value:=ExtraTotal.JGDet.fieldbyname('CLBH').value;
+      FieldByName('BJNO').value:=ExtraTotal.JGDet.fieldbyname('BJNO').Value;
+      FieldByName('YQDate').value:=ExtraTotal.JGDet.fieldbyname('YQDate').Value;
+      FieldByName('CFMDate').value:=ExtraTotal.JGDet.fieldbyname('CFMDate').Value; 
+      FieldByName('ZMLB').value:=query1.fieldbyname('CLDH').Value ;
+      fieldbyname('YWPM').value:=query1.fieldbyname('YWPM').value;
+      fieldbyname('ZWPM').value:=query1.fieldbyname('ZWPM').value;
+      fieldbyname('DWBH').value:=query1.fieldbyname('DWBH').value;
+      FieldByName('Qty').value:=1;
+      FieldByName('USERDate').value:=date;
+      FieldByName('USERID').value:=main.Edit1.Text;
+      FieldByName('YN').value:='1';
+      ExtraTotal.UPDetZ.apply(ukinsert);
+    end;
+close;
+end;
+
+procedure TExtraTotal_ZL.FormDestroy(Sender: TObject);
+begin
+ExtraTotal_ZL:=nil;
+end;
+
+procedure TExtraTotal_ZL.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=Cafree;
+end;
+
+procedure TExtraTotal_ZL.FormShow(Sender: TObject);
+begin
+  main.FormLanguage(Pointer(self),self.Name);
+end;
+
+end.

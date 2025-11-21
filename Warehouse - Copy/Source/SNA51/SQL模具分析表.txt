@@ -1,0 +1,20 @@
+select DDZL.*,OutsoleS.DQty,OutsoleS.YWPM,OutsoleS.CLBH,DDZL.Pairs/200/OutsoleS.DQty as ProdDays from (
+select DDMH,GJCC,SUM(DDZL.Quantity) as Pairs,Min(Shipdate) as Shipdate from (
+Select DDZL.DDBH,DDZL.ARTICLE,DDZL.DDZT,DDZLS.CC,XXGJS.GJCC,DDZLS.Quantity,DDZL.ShipDate,XXZL.DDMH from DDZL 
+left join DDZLs on DDZLS.DDBH=DDZL.DDBH
+Left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao
+left join XXGJS on xxgjs.XieXing=DDZL.XieXing and xxgjs.GJLB=101 and xxgjs.XXCC=DDZLs.CC
+Where DDZL.BUYNO like '201801%' ) DDZL
+Group by DDMH,GJCC  ) DDZL
+left join (
+  select OutsoleS.*,IsNull(CLZL.cltd, CLZL.YWPM) as YWPM from (
+  select CLBH,SIZ,Sum(RKQty) as DQty from (
+  select OSRK.CKBH,OSRKSS.CLBH,OSRKSS.SIZ,SUM(OSRKSS.Qty) as RKQty from OSRKSS,OSRK 
+  where OSRKSS.RKNO=OSRK.RKNO  and OSRK.CKBH='VA12' and OSRKSS.ZLBH='NEWL' and convert(smalldatetime,convert(varchar,OSRK.UserDate,111)) between '2020/03/01' and '2020/03/02' 
+  Group by OSRK.CKBH,OSRKSS.CLBH,OSRKSS.SIZ 
+  Union All 
+  select CKBH,CLBH,SIZ,QTY as OutsoleRem from Outsolemonth where CKBH='VA12#L' and KCYEAR='2020' and KCMonth='02' ) as tmpRKTLFL 
+  group by CKBH,CLBH,SIZ ) OutsoleS
+  left join CLZL on CLZL.cldh=OutSoleS.CLBH
+) OutsoleS on OutsoleS.YWPM=DDZL.DDMH and OutsoleS.SIZ=DDZL.GJCC
+order by DDZL.DDMH,DDZL.GJCC

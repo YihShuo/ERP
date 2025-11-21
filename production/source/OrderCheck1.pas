@@ -1,0 +1,283 @@
+unit OrderCheck1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, DB, DBTables, Grids, DBGrids, Menus,OleServer,
+  dateutils,comobj, ExcelXP;
+
+type
+  TOrderCheck = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    CBX1: TComboBox;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Label3: TLabel;
+    Edit2: TEdit;
+    Label6: TLabel;
+    Edit4: TEdit;
+    Button1: TButton;
+    DBGrid1: TDBGrid;
+    CBX3: TComboBox;
+    Label4: TLabel;
+    Query1: TQuery;
+    DataSource1: TDataSource;
+    Edit3: TEdit;
+    Label5: TLabel;
+    Button2: TButton;
+    PopupMenu1: TPopupMenu;
+    NN1: TMenuItem;
+    NN2: TMenuItem;
+    NN3: TMenuItem;
+    Edit5: TEdit;
+    Label7: TLabel;
+    Edit6: TEdit;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Edit7: TEdit;
+    procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button2Click(Sender: TObject);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure NN1Click(Sender: TObject);
+    procedure NN2Click(Sender: TObject);
+    procedure Query1AfterOpen(DataSet: TDataSet);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  OrderCheck: TOrderCheck;
+  var w:integer;
+
+implementation
+
+uses DM3, OrderCheck_Det1;
+
+{$R *.dfm}
+
+procedure TOrderCheck.Button1Click(Sender: TObject);    
+var a,b,c :word;
+sdate,edate:Tdate;
+begin
+if length(edit1.Text)<>7  then
+  begin
+    showmessage('Pls key in right month format.');
+    abort;
+  end;
+a:=strtoint(copy(edit1.Text,0,pos('/',edit1.text)-1));
+b:=strtoint(copy(edit1.text,pos('/',edit1.Text)+1,length(edit1.text)));
+c:=1;
+sdate:=EncodeDate(a,b,c);
+{if b=12 then
+  begin
+    a:=a+1;
+    b:=1;
+  end
+  else
+    begin
+      b:=b+1;
+    end;
+ edate:=EncodeDate(a,b,c);   }
+ edate:=endofthemonth(sdate);
+
+
+with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('  if object_id('+''''+'tempdb..#SCZKZL'+''''+') is not null  ');
+    sql.add('begin   drop table #SCZKZL end   ');
+    sql.add('  if object_id('+''''+'tempdb..#SCZKZL2'+''''+') is not null  ');
+    sql.add('begin   drop table #SCZKZL2 end   ');  
+    sql.add('  if object_id('+''''+'tempdb..#SCZKZL3'+''''+') is not null  ');
+    sql.add('begin   drop table #SCZKZL3 end   ');
+
+    sql.add('select A.SCBH,A.GXLB,B.ZLBH,C.DDBH,C.KHBH ,C.ShipDate,');
+    sql.add('D.XieXing,D.SheHao,D.Article, D.XieMing ,sum(E.Qty) as zlQty into #SCZKZL ');
+    sql.add('from SCZL A  ');
+    sql.add('left join ZLZL B on A.ZLBH=B.ZLBH');
+    sql.add('left join DDZL C on C.DDBH=B.DDBH');
+    sql.add('left join XXZL D on D.XieXing=C.XieXing and D.SheHao=C.SheHao');
+    sql.add('left join  ZLZLS E on E.ZLBH=A.ZLBH');
+    sql.add('where A.SCBH like');
+    sql.add(''''+edit2.Text+'%'+'''');
+    sql.add('and A.SCBH=A.ZLBH')  ;
+    sql.add(' and D.XieMing like ');
+    sql.add(''''+'%'+edit4.text+'%'+'''');
+    sql.add('and D.Article like');
+    sql.add(''''+edit3.Text+'%'+'''');
+    sql.add('and C.ShipDate >=');
+    sql.add(''''+formatdatetime('yyyy/mm/dd',sdate)+'''');
+    sql.add('and C.ShipDate <=');
+    sql.add(''''+formatdatetime('yyyy/mm/dd',edate)+'''');
+    if CBX1.itemindex>0 then
+      begin
+        sql.add('and A.GXLB =');
+        sql.add(''''+CBX1.Text+'''');
+      end;
+    sql.add('Group by  A.SCBH,A.GXLB,B.ZLBH,C.DDBH,C.KHBH,D.XieXing,D.SheHao,D.Article,D.XieMing,C.ShipDate ');
+
+    sql.add('select  m.SCBH,m.GXLB,m.ZLBH,m.DDBH,m.KHBH,m.Article,m.XieXing,m.ShipDate,');
+    sql.add('m.SheHao,m.XieMing,m.zlQty,sum(s.Qty) as okQty into #SCZKZL2 ');
+    sql.add('from #SCZKZL m');
+    sql.add('left join scbbss s on m.SCBH=s.SCBH and m.GXLB=s.GXLB');
+    sql.add('group by m.SCBH,m.GXLB,m.ZLBH,m.DDBH,m.KHBH,m.XieXing,m.SheHao,m.Article,m.XieMing,m.zlQty,m.ShipDate');
+    if CBX3.itemindex=0 then
+      begin
+        sql.add('select SCBH,GXLB,KHBH,Article,XieXing,SheHao as Color,XieMing,ShipDate as ETD,zlQty,isnull(okQty,0) as okQty into #SCZKZL3 ');
+        sql.add('from #SCZKZl2 order by SCBH,GXLB ');
+        sql.add('select *,(zlQty-okQty) as LackQty from #SCZKZL3 order by SCBH,GXLB');
+        active:=true;
+        w:=0;
+      end;
+    if CBX3.itemindex=1 then
+      begin
+        sql.add('select KHBH,GXLB,XieXing,XieMing,sum(zlQty) as zlQty,isnull(sum(okQty),0) as okQty into #SCZKZL3 ');
+        sql.add('from #SCZKZL2 group by GXLB,KHBH,XieXing,XieMing ');
+        sql.add('order by KHBH,XieXing,XieMing ,GXLB');
+        sql.add('select *,(zlQty-okQty) as LackQty from #SCZKZL3 order by XieXing,GXLB');
+        active:=true;
+        w:=1;
+      end;
+    if CBX3.itemindex=2 then
+      begin
+        sql.add('select KHBH,GXLB,XieXing,XieMing ,SheHao as color,sum(zlQty) as zlQty,isnull(sum(okQty),0) as okQty  into #SCZKZL3');
+        sql.add('from #SCZKZL2 group by GXLB,KHBH,XieXing,XieMing, SheHao');
+        sql.add('order by  KHBH,XieXing,XieMing, SheHao,GXLB');
+        sql.add('select *,(zlQty-okQty) as LackQty from #SCZKZL3 order by XieXing,Color,GXLB');
+        active:=true;
+        w:=2;
+      end;
+    if CBX3.itemindex=3 then
+      begin
+        sql.add('select KHBH,GXLB,ShipDate as ETD,sum(zlQty) as zlQty,isnull(sum(okQty),0) as okQty  into #SCZKZL3');
+        sql.add('from #SCZKZL2');
+        sql.add('group by KHBH,GXLB,ShipDate');
+        sql.add('order by KHBH,GXLB,ShipDate');
+        sql.add('select *,(zlQty-okQty) as LackQty from #SCZKZL3 order by ETD,GXLB');
+        active:=true;
+        w:=3;
+      end;
+  end;
+end;
+
+procedure TOrderCheck.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+free;
+end;
+
+procedure TOrderCheck.Button2Click(Sender: TObject);
+var   a:string;
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+ begin
+  if  query1.active  then
+    begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('系统没有安装Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+        WorkBook:=eclApp.workbooks.Add;
+        for   i:=0   to   query1.fieldCount-1   do
+          begin
+              eclApp.Cells(1,i+1):=query1.fields[i].FieldName;
+              eclApp.Cells.item[1,i+1].font.size:='8';
+          end;
+
+        query1.First;
+        j:=2;
+        while   not   query1.Eof   do
+          begin
+            for   i:=0   to   query1.FieldCount-1   do
+            begin
+              eclApp.Cells(j,i+1):=query1.Fields[i].Value;
+              eclApp.Cells.item[j,i+1].font.size:='8';
+            end;
+          query1.Next;
+          inc(j);
+          end;
+     eclapp.columns.autofit;
+      eclApp.Visible:=True;
+      except
+        on   F:Exception   do
+          showmessage(F.Message);
+      end;
+    end;
+
+end;
+
+procedure TOrderCheck.DBGrid1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+if (query1.FieldByName('okQty').value>0) and  (query1.FieldByName('LackQty').value>0)    then
+  begin
+    dbgrid1.canvas.font.color:=clRed;
+    dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+if (query1.FieldByName('okQty').value>0) and  (query1.FieldByName('LackQty').value=0)   then
+  begin  
+    dbgrid1.canvas.font.color:=clLime;
+    dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+
+
+end;
+
+procedure TOrderCheck.NN1Click(Sender: TObject);
+begin
+OrderCheck_Det :=TOrderCheck_Det.create(self);
+OrderCheck_Det.show;
+OrderCheck_Det.edit1.Text:=inttostr(w);
+OrderCheck_Det.button1.Click;
+end;
+
+procedure TOrderCheck.NN2Click(Sender: TObject);
+begin
+Button2Click(nil);
+end;
+
+procedure TOrderCheck.Query1AfterOpen(DataSet: TDataSet);
+var i:integer;
+begin
+for i:=0 to DBGrid1.Columns.Count-1 do
+  begin
+    if DBGrid1.columns[i].fieldname='XieMing' then
+      DBGrid1.columns[i].Width:=160;
+    if DBGrid1.columns[i].fieldname='XieXing' then
+      DBGrid1.columns[i].Width:=80;
+    if DBGrid1.columns[i].fieldname='Color' then
+      DBGrid1.columns[i].Width:=30;  
+    if DBGrid1.columns[i].fieldname='KHBH' then
+      DBGrid1.columns[i].Width:=20; 
+    if DBGrid1.columns[i].fieldname='Article' then
+      DBGrid1.columns[i].Width:=80;
+    if DBGrid1.columns[i].fieldname='ETD' then
+      DBGrid1.columns[i].Width:=70;
+    if DBGrid1.columns[i].fieldname='SCBH' then
+      DBGrid1.columns[i].Width:=90;
+    if DBGrid1.columns[i].fieldname='GXLB' then
+      DBGrid1.columns[i].Width:=20;
+  end;
+end;
+
+procedure TOrderCheck.FormDestroy(Sender: TObject);
+begin
+OrderCheck:=nil;
+end;
+
+end.
+

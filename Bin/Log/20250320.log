@@ -1,0 +1,25 @@
+select TSCD.TSBH,TSCD.Status,TSCD_KCRK.DOCNO,TSCD_KCRK.RKNO,TSCD_KCRK.CFMDATE as RKDate,TSCD_SB.SBBH,TSCD_SB.LSBH,TSCD_SB.YWPM,TSCD_SB.HGPM,
+       TSCD_SB.QUCBH,TSCD_ZSZL.zsjc_yw,BDepartment.DepName as RKDepName,TSCD_KCLL.CFMDATE as LLDate,IsNull(TSCDBdep_JD.DepName, TSCDBdep.DepName) as LLDepName,TSCD.DepID_Memo, 
+       TSCD_KCRKS.USPrice,TSCD_KCRKS.VNPrice,TSCD_KCRKS.VNTax_HG,TSCD_KCRKS.VNACC_Tax,TSCD_KCRKS.MonthS,
+       Substring(convert(varchar, TSCD_KCRK.CFMDATE ,111),1,7) as STYM ,Substring(convert(varchar,  DateAdd(month,MonthS, TSCD_KCRK.CFMDATE ),111),1,7) as EDYM,
+       TSCD_Month.UseVNAcc,TSCD_KCRKS.VNACC_Tax-TSCD_Month.UseVNAcc as RemVNAcc, TSCD_MonthS_Year.UseVNAcc_YearS,TSCD_Month_Year.UseVNAcc_Year, 
+       TSCD.TSID,TSCD.XSBH,TSCD.NSX,TSCD.JDBDATE,TSCD.JDEDATE,TSCD_SB.CQDH,TSCD_KCRKS.CWHL,TSCD_KCRKS.CWHL_HG,TSCD_SB.DWBH,TSCD_KCRKS.Qty
+from TSCD
+left join TSCD_SB on TSCD.SBBH=TSCD_SB.SBBH
+left join TSCD_KCRKS on TSCD_KCRKS.TSID=TSCD.TSID
+left join TSCD_KCRK on TSCD_KCRKS.RKNO=TSCD_KCRK.RKNO
+left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD_KCRK.DepID
+left join TSCD_ZSZL on TSCD_ZSZL.zsdh=TSCD_KCRK.ZSBH
+left join TSCD_BDepartment TSCDBdep on TSCDBdep.ID=TSCD.DepID
+left join TSCD_BDepartment TSCDBdep_JD on TSCDBdep_JD.ID=TSCD.JDTS
+left join TSCD_KCLL on TSCD.LLNO=TSCD_KCLL.LLNO
+left join (select TSID,SUM(VNAcc) as UseVNAcc from TSCD_Month 
+           where KCYEAR+KCMONTH<='202503' 
+           group by TSID ) TSCD_Month on TSCD_Month.TSID=TSCD.TSID
+left join (select TSID,SUM(VNAcc) as UseVNAcc_Year from TSCD_Month 
+           where KCYEAR='2025' and KCMONTH<='03'
+           group by TSID ) TSCD_Month_Year on TSCD_Month_Year.TSID=TSCD.TSID  
+left join (select TSID,SUM(VNAcc) as UseVNAcc_YearS from TSCD_Month 
+           where KCYEAR='2025' 
+           group by TSID ) TSCD_MonthS_Year on TSCD_MonthS_Year.TSID=TSCD.TSID  
+where 1=1

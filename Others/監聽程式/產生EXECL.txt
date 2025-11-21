@@ -1,0 +1,87 @@
+Delphi北Excelよ猭
+
+1 勄Excelゅン
+
+璶Delphiい北Excel碞ゲ収ノOLE凁て刢ノOLE2僑勄OLE喠禜呭縀儶OLE喠禜兒狝冿竟祘叢甧竟祘乆场縀劚碞琌┮塱¨碞縀〃in-place activation
+勄Excelゅン兒勄儶OLE喠禜礛喠禜いミworksheetㄧ囒createExcel┮ボ
+
+function createExcel:variant;
+var
+v:variant;
+sheet:variant;
+begin
+v:=createoleobject('Excel.Application');//勄OLE喠禜
+v.visible:=true;
+v.workbooks.add(-4167); //睰
+v.workbooks[1].sheets[1].name:='test';
+sheet:=v.workbooks[1].sheets['test'];
+Result := v;
+end; 
+
+2 囒誹北
+
+Excel北璶珹囒誹堈э勊じ嬍北蝋诌卄单呭勔Α﹚薄曊蝋诌卄岶眔ぷ僶璶劚囖儶ゅン家狾礛酚喛噐惠璶塺儰勔
+
+1囒誹堈importData
+
+procedure importData;
+var
+I,j:integer;
+v:variant;
+begin
+v:=createExcel; //勄Excelゅンtest
+for I:=0 to maxcolumn do
+begin
+for j:=0 to maxrow do
+v.workbooks[1].sheets[1].cells[I,j]:=I*j; //堈囒誹
+end;
+end; 
+
+2勊じ嬍北lineStylecontrol
+
+勊じ琌塽﹚璖勏薄曊卬︽嬍北巨嬍圗刉琌岶ボㄤよΑ北ラ酚唀祘卬︽
+
+procedure lineStylecontrol;
+var
+v,sheet,range:variant;
+begin
+v:=createExecl;
+sheet:= v.workbooks[1].sheets[1];
+range:=sheet.range[sheet.cells[1,1],sheet.cells[39,30]];//塽﹚
+range.select;
+range.merge; //勊じ
+range.borders.linestyle:=xlcontinuous; //竚嬍圗僋
+range.font.size:=9; //э岪乆ゅセ蔨
+end; 
+3蝋蒓诌卄copyandPaste
+
+procedure copyandPaste;
+var
+v,sheet,range:variant;
+begin
+v:=createExecl;
+sheet:= v.workbooks[1].sheets[1];
+range:=sheet.range[sheet.cells[1,1],sheet.cells[39,30]];
+range.select; //塽﹚璶蝋
+range.copy; //蝋塽﹚
+sheet.range[sheet.cells[40,1],sheet.cells[40,1]].select; //塽堘璶诌卄竚
+sheet.paste //诌卄
+end; 
+
+3 ゅン玂
+
+ゅン玂琌勄ゅン膀娺卬︽唀祘saveFile嘢ゅン玂唀祘い壺咷猔種凈媉
+
+procedure saveFile;
+var
+sheet,v:variant;
+begin
+v:=createExcel;
+if savedialog.execute then
+begin
+v.workbooks[1].saveas(savedialog.FileName);//玂ゅン
+v.workbooks[1].close; //嬜劯
+v.quit; //嬜劯Excel
+v := unassigned;
+end;
+end; 

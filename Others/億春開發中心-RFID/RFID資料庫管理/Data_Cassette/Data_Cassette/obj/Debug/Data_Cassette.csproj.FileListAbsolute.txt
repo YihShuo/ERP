@@ -1,0 +1,112 @@
+D:\01_Design\Sample_Room\Data_Cassette\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe.config
+D:\01_Design\Sample_Room\Data_Cassette\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe
+D:\01_Design\Sample_Room\Data_Cassette\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.pdb
+D:\01_Design\Sample_Room\Data_Cassette\Data_Cassette\Data_Cassette\bin\Debug\EncryptionQRCode.dll
+D:\01_Design\Sample_Room\Data_Cassette\Data_Cassette\Data_Cassette\bin\Debug\MES_SampleRoom.dll
+D:\01_Design\Sample_Room\Data_Cassette\Data_Cassette\Data_Cassette\bin\Debug\zxing.dll
+D:\01_Design\Sample_Room\Data_Cassette\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.Form1.resources
+D:\01_Design\Sample_Room\Data_Cassette\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.Properties.Resources.resources
+D:\01_Design\Sample_Room\Data_Cassette\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.GenerateResource.Cache
+D:\01_Design\Sample_Room\Data_Cassette\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.exe
+D:\01_Design\Sample_Room\Data_Cassette\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.pdb
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe.config
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.exe
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.pdb
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.pdb
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csprojResolveAssemblyReference.cache
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.Properties.Resources.resources
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.GenerateResource.Cache
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.frmLog_Cassette.resources
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette_180131\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe.config
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette_180131\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.exe
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette_180131\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.pdb
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe.config
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.exe
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.pdb
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.pdb
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csprojResolveAssemblyReference.cache
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.frmLog_Cassette.resources
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.Properties.Resources.resources
+G:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.GenerateResource.Cache
+G:\Merlin_Lacty\Job\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe.config
+G:\Merlin_Lacty\Job\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.exe
+G:\Merlin_Lacty\Job\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.pdb
+D:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe.config
+D:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe
+D:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.pdb
+D:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csprojAssemblyReference.cache
+D:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.frmLog_Cassette.resources
+D:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.Properties.Resources.resources
+D:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.GenerateResource.cache
+D:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.CoreCompileInputs.cache
+D:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.CopyComplete
+D:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.exe
+D:\Merlin_Lacty\Future\03_Design\SampleRoom\MES\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.pdb
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\後江-Merlin RFID\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe.config
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\後江-Merlin RFID\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\後江-Merlin RFID\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.pdb
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\後江-Merlin RFID\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csprojAssemblyReference.cache
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\後江-Merlin RFID\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.frmLog_Cassette.resources
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\後江-Merlin RFID\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.Properties.Resources.resources
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\後江-Merlin RFID\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.GenerateResource.cache
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\後江-Merlin RFID\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.CoreCompileInputs.cache
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\後江-Merlin RFID\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.CopyComplete
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\後江-Merlin RFID\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.exe
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\後江-Merlin RFID\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.pdb
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe.config
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.pdb
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csprojAssemblyReference.cache
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.frmLog_Cassette.resources
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.Properties.Resources.resources
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.GenerateResource.cache
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.CoreCompileInputs.cache
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.CopyComplete
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.exe
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.pdb
+D:\Download\RFID資料庫管理\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe.config
+D:\Download\RFID資料庫管理\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe
+D:\Download\RFID資料庫管理\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.pdb
+D:\Download\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csprojAssemblyReference.cache
+D:\Download\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.frmLog_Cassette.resources
+D:\Download\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.Properties.Resources.resources
+D:\Download\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.GenerateResource.cache
+D:\Download\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.CoreCompileInputs.cache
+D:\Download\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.CopyComplete
+D:\Download\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.exe
+D:\Download\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.pdb
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\RFID資料庫管理\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe.config
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\RFID資料庫管理\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\RFID資料庫管理\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.pdb
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csprojAssemblyReference.cache
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.frmLog_Cassette.resources
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.Properties.Resources.resources
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.GenerateResource.cache
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.CoreCompileInputs.cache
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.CopyComplete
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.exe
+E:\Gary\ERP_Xuan_Version\ERP_Xuan\其他專案程式區\億春開發中心-RFID\RFID資料庫管理\RFID資料庫管理\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.pdb
+C:\Users\danny\Desktop\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe.config
+C:\Users\danny\Desktop\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe
+C:\Users\danny\Desktop\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.pdb
+C:\Users\danny\Desktop\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csprojAssemblyReference.cache
+C:\Users\danny\Desktop\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.frmLog_Cassette.resources
+C:\Users\danny\Desktop\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.Properties.Resources.resources
+C:\Users\danny\Desktop\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.GenerateResource.cache
+C:\Users\danny\Desktop\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.CoreCompileInputs.cache
+C:\Users\danny\Desktop\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.CopyComplete
+C:\Users\danny\Desktop\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.exe
+C:\Users\danny\Desktop\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.pdb
+D:\Download\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe.config
+D:\Download\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.exe
+D:\Download\Data_Cassette\Data_Cassette\bin\Debug\Data_Cassette.pdb
+D:\Download\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csprojAssemblyReference.cache
+D:\Download\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.frmLog_Cassette.resources
+D:\Download\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.Properties.Resources.resources
+D:\Download\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.GenerateResource.cache
+D:\Download\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.CoreCompileInputs.cache
+D:\Download\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.csproj.CopyComplete
+D:\Download\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.exe
+D:\Download\Data_Cassette\Data_Cassette\obj\Debug\Data_Cassette.pdb

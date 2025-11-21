@@ -1,0 +1,798 @@
+unit PurTotal_Replenish1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,ShellAPI,
+  DBTables, Menus, DB, Dialogs, ComCtrls, StdCtrls, GridsEh, DBGridEh, DBGridEhImpExp,
+  ExtCtrls,Math,IniFiles,fununit,comobj;
+
+
+type
+  TPurTotal_Replenish = class(TForm)
+    Panel5: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    DTP1: TDateTimePicker;
+    DTP2: TDateTimePicker;
+    SGNOEdit: TEdit;
+    CheckDate: TCheckBox;
+    PC1: TPageControl;
+    TS1: TTabSheet;
+    Panel8: TPanel;
+    Splitter3: TSplitter;
+    Panel7: TPanel;
+    Label13: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Edit_Supplier1: TEdit;
+    Button5: TButton;
+    Edit_MatNo1: TEdit;
+    Edit_MatNM1_A: TEdit;
+    Edit_MatNM1_B: TEdit;
+    SGDH: TQuery;
+    SGDHS: TQuery;
+    UpdateSQL1: TUpdateSQL;
+    UpdateSQL2: TUpdateSQL;
+    DataSource1: TDataSource;
+    DataSource2: TDataSource;
+    Query1: TQuery;
+    SGDH_ToPO: TPopupMenu;
+    M1: TMenuItem;
+    PO1: TMenuItem;
+    Cancel1: TMenuItem;
+    N1: TMenuItem;
+    SGDHS_ToPO: TPopupMenu;
+    E3: TMenuItem;
+    DBGridEh1: TDBGridEh;
+    DBGridEh2: TDBGridEh;
+    SGDHSSGNO: TStringField;
+    SGDHSCLBH: TStringField;
+    SGDHSQty: TFloatField;
+    SGDHSokQty: TCurrencyField;
+    SGDHSDiff: TFloatField;
+    SGDHSYWPM: TStringField;
+    SGDHSZWPM: TStringField;
+    SGDHSDepName: TStringField;
+    SGDHSZSDH: TStringField;
+    SGDHSzsywjc: TStringField;
+    Chk_NoPur1: TCheckBox;
+    SGDHCLBH: TStringField;
+    SGDHYWPM: TStringField;
+    SGDHZWPM: TStringField;
+    SGDHDWBH: TStringField;
+    SGDHQty: TFloatField;
+    SGDHZSDH: TStringField;
+    SGDHZSYWJC: TStringField;
+    SGDHMemo: TStringField;
+    SGDHDiff: TFloatField;
+    E1: TMenuItem;
+    SGDHokQty: TCurrencyField;
+    Splitter1: TSplitter;
+    CheckBox1: TCheckBox;
+    Label4: TLabel;
+    LBCombo: TComboBox;
+    SGDHSLB: TStringField;
+    SGDHSCFMID: TStringField;
+    SGDHSCFMDate: TDateTimeField;
+    SGDHSCFMID1: TStringField;
+    SGDHSCFMDate1: TDateTimeField;
+    SGDHSGSBH: TStringField;
+    Reject1: TMenuItem;
+    BDelRec: TQuery;
+    N2: TMenuItem;
+    Reject2: TMenuItem;
+    SGDHUSERID: TStringField;
+    SGDHSUSERID: TStringField;
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure PO1Click(Sender: TObject);
+    procedure M1Click(Sender: TObject);
+    procedure E3Click(Sender: TObject);
+    procedure Excel1Click(Sender: TObject);
+    procedure DBGridEh1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure Reject1Click(Sender: TObject);
+    procedure Reject2Click(Sender: TObject);
+  private
+    { Private declarations }
+    function CreateCGBJ(ZSBH:string;CLBH:String;CQDH:String):string;
+  public
+    VNPrice_Decimal:Byte;
+    { Public declarations }
+  end;
+
+var
+  PurTotal_Replenish: TPurTotal_Replenish;
+  NDate:TDate;
+  FY,FM:string;
+
+implementation
+
+uses main1, PurOther1, PurTotal1;
+
+{$R *.dfm}
+
+procedure TPurTotal_Replenish.FormCreate(Sender: TObject);
+var i: integer;
+begin
+  with Query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select getdate() as NDate,year(getdate()) as FY,month(getdate()) as FM ');
+    active:=true;
+    NDate:=fieldbyname('NDate').Value;
+    FY:=fieldbyname('FY').Value;
+    FM:=fieldbyname('FM').Value;
+    active:=false;
+    DTP1.date:=NDate-30;
+    DTP2.date:=NDate;
+  end;
+  //Button5.Click;
+end;
+
+procedure TPurTotal_Replenish.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  action:=cafree;
+end;
+
+procedure TPurTotal_Replenish.FormDestroy(Sender: TObject);
+begin
+  PurTotal_Replenish:=nil;
+end;
+
+procedure TPurTotal_Replenish.Button5Click(Sender: TObject);
+begin
+  with SGDH do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select SGDHS.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,sum (SGDHS.qty) as Qty,sum(isnull(CGZLSS.okQty,0)) as okQty,sum (isnull(SGDHS.Qty,0)-isnull(CGZLSS.okQty,0)) as Diff,ZSZL.ZSDH,ZSZL.ZSYWJC,Max(SGDH.Memo) as Memo,SGDHS.USERID ');
+    SQL.Add('from SGDHS ');
+    SQL.Add('left join SGDH on SGDH.SGNO=SGDHS.SGNO');
+    SQL.Add('left join CLZL on CLZL.CLDH = SGDHS.CLBH  ');
+    SQL.Add('Left join CGBJ on CGBJ.BJNO=SGDHS.BJNO  ');
+    SQL.Add('left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH  ');
+    SQL.Add('left join  BDepartment on BDepartment.ID=SGDH.DepID ');
+    SQL.Add('left join (select ZLBH,CLBH,Sum(Qty) as okQty   ');
+    SQL.Add('  		     from CGZLSS where 1=1 Group by ZLBH,CLBH)   ');
+    SQL.Add('           CGZLSS on CGZLSS.CLBH=SGDHS.CLBH and CGZLSS.ZLBH=SGDHS.SGNO  ');
+    SQL.Add('where 1=1 and isnull(SGDH.flowflag,'''') <> ''X''');
+    if CheckBox1.Checked=true then
+    SQL.Add('and SGDH.CFMID1<>''NO'' ');
+    if LBCombo.Text<>'' then
+    SQL.Add('and SGDH.LB='''+LBCombo.Text+''' ');
+    SQL.Add('and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between ');
+    SQL.add(''''+Formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+    SQL.add(' and ');
+    SQL.add(''''+Formatdatetime('yyyy/MM/dd',DTP2.Date) +'''');
+    if SGNOEdit.Text <> '' then
+      SQL.Add('and SGDH.SGNO like '''+SGNOEdit.Text+'%'+''' ');
+    if Edit_MatNo1.Text <> '' then
+      SQL.add('and  SGDHS.CLBH like '''+Edit_MatNo1.Text+'%'+'''');
+    if Edit_Supplier1.Text <> '' then
+      SQL.add('and  ZSZL.ZSDH like '''+Edit_Supplier1.Text+'%'+'''');
+    if Edit_MatNM1_A.Text <> '' then
+      SQL.add('and  CLZL.YWPM like '''+Edit_MatNM1_A.Text+'%'+'''');
+    if Edit_MatNM1_B.Text <> '' then
+      SQL.add('and  CLZL.YWPM like '''+Edit_MatNM1_B.Text+'%'+'''');
+    if Chk_NoPur1.Checked then
+      SQL.add('  and isnull(CGZLSS.okQty,0)<isnull(SGDHS.Qty,0) ');
+    //sql.add('and SGDH.GSBH='+''''+main.Edit2.Text+'''');
+    SQL.Add('Group by SGDHS.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,ZSZL.ZSDH,ZSZL.ZSYWJC,SGDHS.USERID');
+    SQL.Add('order by ZSZL.ZSDH,SGDHS.CLBH ');
+    //funcobj.WriteErrorLog(sql.Text);
+//    showmessage(SQL.Text);
+    Active:=true;
+  end;
+
+  with SGDHS do
+  begin
+     Active:=false;
+     SQL.Clear;
+     SQL.Add('select SGDHS.SGNO,SGDHS.CLBH,SGDHS.Qty,IsNull(CGZLSS.okQty,0) as okQty,isnull(SGDHS.Qty,0)-isnull(CGZLSS.okQty,0) as Diff,');
+     SQL.Add('       CLZL.YWPM,CLZL.ZWPM,BDepartment.DepName,ZSZL.ZSDH,ZSZL.zsywjc,SGDH.LB,SGDH.CFMID,SGDH.CFMDate,SGDH.CFMID1,SGDH.CFMDate1,SGDH.GSBH,SGDH.USERID  ');
+     SQL.Add('from SGDHS ');
+     SQL.Add('left join SGDH on SGDH.SGNO=SGDHS.SGNO  ');
+     SQL.Add('left join CLZL on CLZL.CLDH = SGDHS.CLBH  ');
+     SQL.Add('Left join CGBJ on CGBJ.BJNO=SGDHS.BJNO  ');
+     SQL.Add('left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH  ');
+     SQL.Add('left join (select ZLBH,CLBH,Sum(Qty) as okQty   ');
+     SQL.Add('  		     from CGZLSS where 1=1 Group by ZLBH,CLBH)   ');
+     SQL.Add('           CGZLSS on CGZLSS.CLBH=SGDHS.CLBH and CGZLSS.ZLBH=SGDHS.SGNO  ');
+     SQL.Add('left join BDepartment on BDepartment.ID=SGDH.DepID  ');
+     SQL.add('where 1=1 and  SGDHS.CLBH=:CLBH');
+     SQL.Add('and convert(smalldatetime,convert(varchar,SGDH.SGDate,111)) between ');
+     SQL.add(''''+Formatdatetime('yyyy/MM/dd',DTP1.Date) +'''');
+     SQL.add(' and ');
+     SQL.add(''''+Formatdatetime('yyyy/MM/dd',DTP2.Date) +'''');
+     if SGNOEdit.Text <> '' then
+       SQL.Add('and SGDH.SGNO like '''+SGNOEdit.Text+'%'+''' ');
+     if CheckBox1.Checked=true then
+       SQL.Add('and SGDH.CFMID1<>''NO'' ');
+     if LBCombo.Text<>'' then
+       SQL.Add('and SGDH.LB='''+LBCombo.Text+''' ');
+     if Edit_MatNo1.Text <> '' then
+       SQL.add('and  SGDHS.CLBH like '''+Edit_MatNo1.Text+'%'+'''');
+     if Edit_Supplier1.Text <> '' then
+       SQL.add('and  ZSZL.ZSDH like '''+Edit_Supplier1.Text+'%'+'''');
+     if Edit_MatNM1_A.Text <> '' then
+       SQL.add('and  CLZL.YWPM like '''+Edit_MatNM1_A.Text+'%'+'''');
+     if Edit_MatNM1_B.Text <> '' then
+       SQL.add('and  CLZL.YWPM like '''+Edit_MatNM1_B.Text+'%'+'''');
+     //sql.add('and SGDH.GSBH='+''''+main.Edit2.Text+'''');
+     //funcobj.WriteErrorLog(sql.Text);
+//     showmessage(SQL.Text);
+     Active:=true;
+  end;
+end;
+
+procedure TPurTotal_Replenish.PO1Click(Sender: TObject);
+var bm:Tbookmark;
+    CGNO,BJNO,Supp_ID:string;
+    USPrice,VNPrice:string;
+    QUSPrice,QVNPrice:string;
+    i,j:integer;
+    Qty,VNPrice_Round:real;
+    bookmarklist:tbookmarklistEH;
+    PurcahseForm:TForm;
+begin
+  //
+  if not SGDH.Active then
+     abort;
+  if (SGDH.recordcount<1) then
+     abort;
+  if length(FM)<2 then
+     FM:='0'+FM;
+  Supp_ID:='';
+  SGDH.disablecontrols;
+  bm:=SGDH.getbookmark;
+  bookmarklist:=DBGridEh1.selectedrows;
+  if bookmarklist.count=0 then
+  begin
+    showmessage('Pls choose data first !');
+    abort;
+  end;
+  if SGDH.FieldByName('ZSDH').AsString ='' then
+  begin
+    showmessage('Nha cung ung khong ton tai.');
+    abort;
+  end;
+  if bookmarklist.count>0 then
+  begin
+     try
+       SGDH.gotobookmark(pointer(bookmarklist[0]));
+       Supp_ID:=SGDH.FieldByName('ZSDH').AsString ;
+       if SGDH.FieldByName('diff').AsFloat>0 then
+       begin
+         with query1 do
+         begin
+           active:=false;
+           sql.Clear;
+           sql.Add('select CGNO from CGZL where CGNO like '+''''+FY+FM+'%'+'''');
+           sql.add('order by CGNO');
+           active:=true;
+           if recordcount >0 then
+           begin
+              last;
+              CGNO:=fieldbyname('CGNO').AsString;
+              CGNO:=copy(CGNO,7,5);
+              CGNO:=inttostr(strtoint(CGNO)+1);
+              while length(CGNO)<5 do
+              begin
+                  CGNO:='0'+CGNO;
+              end;
+           end else
+           begin
+             CGNO:='00001';
+           end;
+           CGNO :=FY+FM+CGNO;
+           active:=false;
+         end;
+         with query1 do
+         begin
+           active:=false;
+           sql.Clear;
+           sql.Add('insert CGZL ');
+           sql.Add('(CGNO');
+           sql.Add(',GSBH');
+           sql.Add(',CGLX');
+           sql.Add(',ZSBH');
+           sql.Add(',USERID,USERDATE,CGDate,YN) values (');
+           sql.Add(' '''+CGNO+'''');
+           sql.Add(','''+main.Edit2.text+'''');
+           sql.Add(',''4'' ');
+           sql.Add(','''+Supp_ID+'''');
+           sql.Add(','''+main.edit1.Text+'''');
+           sql.Add(','''+formatdatetime('yyyy/MM/dd',Ndate)+'''');
+           sql.Add(','''+formatdatetime('yyyy/MM/dd',Ndate)+'''');
+           sql.Add(',''1'' )');
+           //funcobj.WriteErrorLog(sql.Text);
+           execsql;
+           active:=false;
+         end;
+         for i:=0 to bookmarklist.count-1 do
+         begin
+           SGDH.gotobookmark(pointer(bookmarklist[i]));
+           SGDHS.Active:=false;
+           SGDHS.Active:=true;
+           if  Supp_ID<>SGDH.FieldByName('ZSDH').AsString then break;//至少會跑第一筆廠商不一樣
+           if SGDH.FieldByName('diff').AsFloat>0 then
+           begin
+             if  SGDH.RecordCount>0 then
+             begin
+                 USPrice:='';
+                 VNPrice:='';
+                 QUSPrice:='';
+                 QVNPrice:='';
+                 VNPrice_Round:=0;
+                 Query1.Active:=false;
+                 Query1.SQL.Clear;
+                 Query1.SQL.Add('select *,');
+                 Query1.SQL.Add('       case when ((USPrice is not null) and (PayVN=1)) then');
+                 Query1.SQL.Add('            case when SuppEx is not null then round(USPrice*DisCount*SuppEx,0) else round(USPrice*DisCount*ErpEx,0) end');
+                 Query1.SQL.Add('       else VNPrice*DisCount end ERPVNPrice,');
+                 Query1.SQL.Add('       USPrice*DisCount as ERPUSPrice');
+                 Query1.SQL.Add('from(Select  top 1 CGBJS.BJNO,CGBJS.CLBH,CGBJS.USPrice,CGBJS.VNPrice,CGBJS.USERDate,CGBJS.DisCount,CGBJS.SuppEx,ZSZL.PayVN,');
+                 Query1.SQL.Add('             IsNull((select top 1 CWHL from CWHLS  where HLYEAR=Year(GetDate()) and HLMONTH=Month(GetDate()) and HLDay=1),0) as ErpEx');
+                 Query1.SQL.Add('     from CGBJS ');
+                 Query1.SQL.Add('left join CGBJ on CGBJ.BJNO=CGBJS.BJNO ');
+                 Query1.SQL.Add('left join ZSZL on ZSZL.ZSDH=CGBJ.ZSBH');
+                 Query1.SQL.Add('where CGBJ.GSBH='''+main.Edit2.Text+'''  and CLBH='''+SGDH.fieldbyname('CLBH').AsString+'''  and CGBJ.ZSBH='''+Supp_ID +''' ');
+                 Query1.SQL.Add('order by CGBJS.BJNO desc,CGBJS.CLBH ) CGBJS');
+                 Query1.Active:=true;
+                 if Query1.RecordCount>0 then
+                 begin
+                    BJNO:=Query1.Fieldbyname('BJNO').AsString;
+                    USPrice:=Query1.Fieldbyname('ERPUSPrice').AsString;
+                    //20200513 round VNPrice allow VNPrice_Decimal
+                    if (( not  Query1.FieldByName('ERPVNPrice').isnull) and  (Query1.FieldByName('ERPVNPrice').AsString<>'')) then
+                    begin
+                      VNPrice_Round:=roundto(Query1.Fieldbyname('ERPVNPrice').value,-VNPrice_Decimal);
+                      VNPrice:=floattostr(VNPrice_Round);
+                    end;
+                    QUSPrice:=Query1.Fieldbyname('USPrice').AsString;
+                    QVNPrice:=Query1.Fieldbyname('VNPrice').AsString;
+                 end else
+                 begin
+                    BJNO:=CreateCGBJ(Supp_ID,SGDH.fieldbyname('CLBH').AsString,SGDH.fieldbyname('ZSDH').AsString);
+                    VNPrice:='0';
+                    USPrice:='0';
+                    QVNPrice:='0';
+                    QUSPrice:='0';
+                 end;
+                 Query1.Active:=false;
+                 with query1 do
+                 begin
+                   active:=false;
+                   sql.Clear;
+                   sql.Add('insert CGZLS ');
+                   sql.Add('(CGNO');
+                   sql.Add(',CLBH');
+                   sql.Add(',XqQty');
+                   sql.Add(',Qty');
+                   if VNPrice<>'' then
+                     sql.Add(',VNPrice')
+                   else
+                     sql.Add(',USPrice');
+                   sql.Add(',BJNO');
+                   sql.Add(',YQDate');
+                   sql.Add(',USERID,USERDATE,YN ');
+                   if QVNPrice<>'' then
+                     sql.Add(',QVNPrice')
+                   else
+                     sql.Add(',QUSPrice');
+                   sql.Add(') values ');
+                   sql.Add('( '''+CGNO+''' ');
+                   sql.Add(','''+SGDH.fieldbyname('CLBH').AsString+''',0,0');
+                   if VNPrice<>'' then
+                     sql.Add(','''+VNPrice+''' ')
+                   else
+                     sql.Add(', '''+USPrice+''' ');
+                   sql.Add(','''+BJNO+''' ');
+                   sql.Add(',GetDate()+14');
+                   sql.Add(','''+main.edit1.Text+'''');
+                   sql.Add(',GetDate()');
+                   sql.Add(',''1''');
+                   if QVNPrice<>'' then
+                     sql.Add(','''+QVNPrice+'''')
+                   else
+                     sql.Add(','''+QUSPrice+'''');
+                   sql.add(') ');
+                   //funcobj.WriteErrorLog(sql.Text);
+                   execsql;
+                   active:=false;
+                 end;
+                 //
+
+                 for j:=1 to SGDHS.RecordCount do
+                 begin
+                   if ((SGDHS.FieldByName('Qty').AsString<>'0') and (SGDHS.FieldByName('Diff').AsFloat>0))  then
+                   begin
+                     with query1 do
+                     begin
+                       active:=false;
+                       sql.Clear;
+                       sql.Add('insert CGZLSS ');
+                       sql.Add('(CGNO');
+                       sql.Add(',CLBH');
+                       sql.Add(',ZLBH');
+                       sql.Add(',XXCC');
+                       sql.Add(',Stage');
+                       sql.Add(',YQDate');
+                       sql.Add(',Qty');
+                       sql.Add(',CLSL');
+                       sql.Add(',USERID,USERDATE,YN) values (');
+                       sql.Add(' '''+CGNO+''' ');
+                       sql.Add(','''+SGDH.fieldbyname('CLBH').AsString+'''');
+                       sql.Add(','''+SGDHS.fieldbyname('SGNO').AsString+'''');
+                       sql.Add(',''ZZZZZZ'' ');
+                       sql.Add(',''TVu'' ');
+                       sql.Add(',GetDate()');
+                       sql.Add(','+floattostr(SGDHS.fieldbyname('Diff').asfloat)+'');
+                       sql.Add(','+floattostr(SGDHS.fieldbyname('Diff').asfloat)+'');
+                       sql.Add(','''+main.edit1.Text+'''');
+                       sql.Add(',GetDate()');
+                       sql.Add(',''1'')');
+                       execsql;
+                       active:=false;
+                     end;
+                 end;
+                 SGDHS.next;
+               end;
+             end;
+           end;
+         end;
+       end;
+   finally
+     begin
+       SGDH.gotobookmark(bm);
+       SGDH.freebookmark(bm);
+       SGDH.enablecontrols;
+     end;
+   end;
+  end;
+
+  with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    SQL.Add('Update CGZLSS Set Qty=CGZLSS.Qty+CGS.Diff');
+    SQL.Add(' from (');
+    SQL.Add('     Select CGS.*,CGSDiff.Diff from');
+    SQL.Add('	 (Select * from (Select  CGNO,ZLBH,XXCC,CLBH,Stage,Qty,ROW_NUMBER() over (PARTITION BY CLBH ORDER BY Qty asc) as Sort from CGZLSS where CGNO='''+CGNO+''') CGS where Sort=1  ) CGS');
+    SQL.Add('	 left join (Select CLBH,ceiling(IsNull(Sum(Qty),0.0))-IsNull(Sum(Qty),0.0) as Diff  from CGZLSS where CGNO='''+CGNO+'''  GROUP BY CLBH ) CGSDiff on CGSDiff.CLBH=CGS.CLBH');
+    SQL.Add('  ) CGS');
+    SQL.Add('  where CGS.CGNO=CGZLSS.CGNO and CGS.ZLBH=CGZLSS.ZLBH and CGS.XXCC=CGZLSS.XXCC and CGS.CLBH=CGZLSS.CLBH and CGS.Stage=CGZLSS.Stage');
+    //funcobj.WriteErrorLog(sql.Text);
+    execsql;
+    close;
+  end;
+
+  //
+  with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('UPDATE CGZLS set QTY=isnull((select isnull(SUM(QTY),0) AS SQTY from CGZLSS WHERE CGZLSS.CGNO=CGZLS.CGNO AND CGZLSS.CLBH=CGZLS.CLBH  ');
+    sql.add('  and CGZLSS.CGNO='''+CGNO+''' GROUP BY CGNO,CLBH),0) ');
+    sql.add(' where CGZLS.CGNO='''+CGNO+''' ');
+    //funcobj.WriteErrorLog(sql.Text);
+    execsql;
+    close;
+  end;
+  showmessage('finish !');
+  if PurTotal<>nil then
+  begin
+    PurTotal.show;
+    PurTotal.windowstate:=wsmaximized;
+  end;
+  if (PurTotal.BB5.Enabled=true) or (PurTotal.BD5.Enabled=true) then
+  begin
+    showmessage('Pls save data first ');
+    abort;
+  end;
+  PurTotal.Edit1.Text:=CGNO;
+  PurTotal.Check.Checked:=false;
+  PurTotal.Button1Click(nil);
+  SGDHS.Active:=true ;
+  E1.Enabled:=true;
+  M1.Enabled:=true;
+  PO1.Enabled:=false;
+  Cancel1.Enabled:=false;
+end;
+
+procedure TPurTotal_Replenish.M1Click(Sender: TObject);
+begin
+  E1.Enabled:=false;
+  M1.Enabled:=false;
+  PO1.Enabled:=true;
+  Cancel1.Enabled:=true;
+end;
+
+function TPurTotal_Replenish.CreateCGBJ(ZSBH:string;CLBH:String;CQDH:String):string;
+var BJNO:string;
+begin
+  //20151022先檢查是否已存在廠商
+  BJNO:='';
+  with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('');
+    sql.Add('Select BJNO from CGBJ where ZSBH='''+ZSBH+'''  and BJNO like '''+FY+'%'' AND GSBH='''+main.Edit2.Text+''' '); //當年度
+    Active:=true;
+    if Recordcount>0  then
+    begin
+      BJNO:=FieldByName('BJNO').AsString;
+    end;
+    active:=false;
+  end;
+  //
+  if BJNO='' then
+  begin
+    with query1 do    //計算領料單流水號
+    begin
+      active:=false;
+      sql.Clear;
+      sql.Add('select BJNO from CGBJ where BJNO like '+''''+FY+FM+'%'+'''');
+      sql.add('order by BJNO');
+      active:=true;
+      if recordcount >0 then
+      begin
+        last;
+        BJNO:=fieldbyname('BJNO').AsString;
+        BJNO:=copy(BJNO,7,5);
+        BJNO:=inttostr(strtoint(BJNO)+1);
+        while length(BJNO)<5 do
+        begin
+          BJNO:='0'+BJNO;
+        end;
+      end
+      else
+      begin
+        BJNO:='00001';
+      end;
+      BJNO :=FY+FM+BJNO;
+      active:=false;
+    end;
+    //主檔報價
+    with Query1 do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQl.Add('Insert CGBJ (BJNO, GSBH, ZSBH, USERID, USERDATE, CFMID,YN) ');
+      SQL.Add('Values ('''+BJNO+''','''+main.Edit2.Text+''','''+ZSBH+''','''+main.Edit1.Text+''',GetDate(),''NO'',''1'') ');
+      ExecSQL();
+    end;
+  end;
+  with Query1 do
+  begin
+    //明細報價
+    Active:=false;
+    SQL.Clear;
+    if CQDH='VN' then
+      SQL.Add('Insert CGBJS (BJNO, CLBH, VNPrice, UserID, UserDate,Discount, BJLX, YN)')
+    else
+      SQL.Add('Insert CGBJS (BJNO, CLBH, USPrice, UserID, UserDate, Discount, BJLX, YN)');
+    SQL.Add('Values ('''+BJNO+''','''+CLBH+''',0,'''+main.Edit1.Text+''',GetDate(),''1'',''1'',''1'') ');
+    ExecSQL();
+  end;
+  result:=BJNO;
+end;
+
+procedure TPurTotal_Replenish.E3Click(Sender: TObject);
+var   a:string;
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+  if  SGDHS.active  then
+    begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+        WorkBook:=eclApp.workbooks.Add;
+        for   i:=0   to   SGDHS.fieldcount-1   do
+        begin
+          eclApp.Cells(1,i+1):=SGDHS.fields[i].FieldName;
+        end;
+
+        SGDHS.First;
+        j:=2;
+        while   not   SGDHS.Eof   do
+        begin
+          for   i:=0   to  SGDHS.fieldcount-1  do
+          begin
+            eclApp.Cells(j,i+1):=SGDHS.Fields[i].Value;
+          end;
+          SGDHS.Next;
+          inc(j);
+        end;
+      eclapp.columns.autofit;
+      showmessage('Succeed');
+       eclApp.Visible:=True;
+    except
+      on   F:Exception   do
+        showmessage(F.Message);
+    end;
+  end;
+end;
+
+procedure TPurTotal_Replenish.Excel1Click(Sender: TObject);
+var   a:string;
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+  if  SGDH.active  then
+    begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+        WorkBook:=eclApp.workbooks.Add;
+        for   i:=0   to   SGDH.fieldcount-1   do
+        begin
+          eclApp.Cells(1,i+1):=SGDH.fields[i].FieldName;
+        end;
+
+        SGDH.First;
+        j:=2;
+        while   not   SGDH.Eof   do
+        begin
+          for   i:=0   to  SGDH.fieldcount-1  do
+          begin
+            eclApp.Cells(j,i+1):=SGDH.Fields[i].Value;
+          end;
+          SGDH.Next;
+          inc(j);
+        end;
+      eclapp.columns.autofit;
+      showmessage('Succeed');
+       eclApp.Visible:=True;
+    except
+      on   F:Exception   do
+        showmessage(F.Message);
+    end;
+  end;
+end;
+
+procedure TPurTotal_Replenish.DBGridEh1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if ((SGDH.FieldByName('okQty').AsCurrency>0) and (SGDH.FieldByName('Diff').AsCurrency>0)) then
+  begin
+    DBGridEh1.canvas.font.color:=clred;
+  end else
+  if SGDH.FieldByName('Diff').Value = 0 then
+  begin
+    DBGridEh1.canvas.font.color:=clBlue;
+  end else
+  if SGDH.FieldByName('Diff').AsCurrency<0 then
+  begin
+    DBGridEh1.canvas.font.color:=clgreen;
+  end;
+end;
+
+procedure TPurTotal_Replenish.Reject1Click(Sender: TObject);
+var bm:Tbookmark;
+    CGNO,BJNO,Supp_ID:string;
+    USPrice,VNPrice:string;
+    QUSPrice,QVNPrice:string;
+    i,j:integer;
+    Qty,VNPrice_Round:real;
+    bookmarklist:tbookmarklistEH;
+    PurcahseForm:TForm;
+begin
+//明細歸零
+  if not SGDH.Active then
+     abort;
+  if (SGDH.recordcount<1) then
+     abort;
+  if messagedlg('Do You Want To Change Qty to 0?',mtinformation,[mbYes,mbNo],0)=mrYes then
+  begin
+    SGDH.disablecontrols;
+    bm:=SGDH.getbookmark;                     
+    bookmarklist:=DBGridEh1.selectedrows;
+    if bookmarklist.count>0 then
+    begin
+      for i:=0 to bookmarklist.count-1 do
+      begin
+        SGDH.gotobookmark(pointer(bookmarklist[i]));
+        with BDelRec do
+        begin
+          active:=false;
+          sql.Clear;
+          sql.add('insert into BDelRec ');
+          sql.add('(TableName ,TNO,CLBH,OldID,DelID,DelDate)');
+          sql.add('values (''SGDHS'','''+SGDHS.fieldbyname('SGNO').Value+'''');
+          sql.add(','''+SGDH.fieldbyname('CLBH').Value+''','''+SGDH.fieldbyname('USERID').Value+''',');
+          sql.add(''''+main.Edit1.Text+''',getdate())');
+          execsql;
+          active:=false;
+        end;
+        with Query1 do begin
+          active:=false;
+          sql.Clear;
+          sql.add('Update SGDHS set Qty = 0 ');
+          sql.add('where SGNO = '''+SGDHS.fieldbyname('SGNO').Value+'''');
+          sql.add('and CLBH = '''+SGDH.fieldbyname('CLBH').Value+'''');
+          execsql;
+        end;
+      end;
+    end
+    else begin
+      with BDelRec do
+      begin
+        active:=false;
+        sql.Clear;
+        sql.add('insert into BDelRec ');
+        sql.add('(TableName ,TNO,CLBH,OldID,DelID,DelDate)');
+        sql.add('values (''SGDHS'','''+SGDHS.fieldbyname('SGNO').Value+'''');
+        sql.add(','''+SGDH.fieldbyname('CLBH').Value+''','''+SGDH.fieldbyname('USERID').Value+''',');
+        sql.add(''''+main.Edit1.Text+''',getdate())');
+        execsql;
+        active:=false;
+      end;
+      with Query1 do begin
+        active:=false;
+        sql.Clear;
+        sql.add('Update SGDHS set Qty = 0 ');
+        sql.add('where SGNO = '''+SGDHS.fieldbyname('SGNO').Value+'''');
+        sql.add('and CLBH = '''+SGDH.fieldbyname('CLBH').Value+'''');
+        execsql;
+      end;
+    end;
+    Button5.Click;
+  end;
+end;
+
+procedure TPurTotal_Replenish.Reject2Click(Sender: TObject);
+begin
+//整張退單
+  if not SGDHS.Active then
+     abort;
+  if (SGDHS.recordcount<1) then
+     abort;
+  if messagedlg('Do You Want To Reject?',mtinformation,[mbYes,mbNo],0)=mrYes then
+  begin
+    with BDelRec do
+    begin
+      active:=false;
+      sql.Clear;
+      sql.add('insert into BDelRec ');
+      sql.add('(TableName ,TNO,CLBH,OldID,DelID,DelDate)');
+      sql.add('values ('+''''+'SGDH'+''''+','+''''+SGDHS.fieldbyname('SGNO').Value+'''');
+      sql.add(','+''''+' '+''''+','+''''+SGDHS.fieldbyname('USERID').Value+''''+',');
+      sql.add(''''+main.Edit1.Text+''''+',getdate())');
+      execsql;
+      active:=false;
+    end;
+    with Query1 do begin
+      active:=false;
+      sql.Clear;
+      sql.add('Update SGDH set flowflag = ''X'' ');
+      sql.add('where SGNO = '''+SGDHS.fieldbyname('SGNO').Value+'''');
+      execsql;
+    end;
+    Button5.Click;
+  end;
+end;
+
+end.

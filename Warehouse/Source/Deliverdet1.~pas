@@ -1,0 +1,298 @@
+unit Deliverdet1;
+
+interface
+
+uses
+ Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, DB, DBTables, StdCtrls, ComCtrls, ExtCtrls, Grids,
+  DBGrids,dateutils, GridsEh, DBGridEh,comobj, PrnDbgeh,IniFiles;
+
+type
+  TDeliverdet = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label6: TLabel;
+    Label5: TLabel;
+    Edit1: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    DTP1: TDateTimePicker;
+    DTP2: TDateTimePicker;
+    DBGrid2: TDBGridEh;
+    KCLL: TQuery;
+    DS2: TDataSource;
+    KCLLLLNO: TStringField;
+    KCLLDepID: TStringField;
+    KCLLCFMDate: TDateTimeField;
+    KCLLCLBH: TStringField;
+    KCLLDFL: TStringField;
+    KCLLQty: TCurrencyField;
+    KCLLCLSL: TCurrencyField;
+    KCLLYYBH: TStringField;
+    KCLLYWPM: TStringField;
+    KCLLDWBH: TStringField;
+    KCLLDepName: TStringField;
+    KCLLSCBH_1: TStringField;
+    KCLLCKBH: TStringField;
+    Label2: TLabel;
+    Edit2: TEdit;
+    KCLLGSBH: TStringField;
+    KCLLYWSM: TStringField;
+    KCLLZWSM: TStringField;
+    Label3: TLabel;
+    CB1: TComboBox;
+    Query1: TQuery;
+    CB2: TCheckBox;
+    Label4: TLabel;
+    DateTimePicker1: TDateTimePicker;
+    Label7: TLabel;
+    DateTimePicker2: TDateTimePicker;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    KCLLSCBH: TStringField;
+    KCLLUSERDATE: TDateTimeField;
+    KCLLUSERID: TStringField;
+    KCLLCFMID: TStringField;
+    KCLLYN: TStringField;
+    KCLLPMARK: TIntegerField;
+    KCLLFORM_TABLE: TStringField;
+    KCLLLLNO_1: TStringField;
+    KCLLTempQty: TCurrencyField;
+    KCLLUSPrice: TCurrencyField;
+    KCLLCostID: TStringField;
+    KCLLUSERDATE_1: TDateTimeField;
+    KCLLUSERID_1: TStringField;
+    KCLLYN_1: TStringField;
+    KCLLMEMO: TStringField;
+    KCLLBLSB: TStringField;
+    KCLLCWSB: TStringField;
+    KCLLR3Qty: TCurrencyField;
+    KCLLCNO: TStringField;
+    Label8: TLabel;
+    Edit3: TEdit;
+    KCLLVNPrice: TCurrencyField;
+    KCLLCWHL: TCurrencyField;
+    KCLLVNACC: TCurrencyField;
+    KCLLHGLB: TStringField;
+    Label9: TLabel;
+    HGLB: TComboBox;
+    KCLLMEMO_1: TStringField;
+    KCLLZWPM: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure DBGrid2GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+  private
+    procedure ReadIni();
+    { Private declarations }
+  public
+    VNPrice_DiplayFormat:string;
+    VNPrice_Decimal:Byte;
+    WH_Decimal:String;
+    WH_DiplayFormat:String;
+    { Public declarations }
+  end;
+
+var
+  Deliverdet: TDeliverdet;
+  NDate:TDate;
+
+implementation
+
+uses FunUnit, main1;
+
+{$R *.dfm}
+
+procedure TDeliverdet.ReadIni();
+var MyIni :Tinifile;
+    AppDir:string;
+begin
+  //
+  VNPrice_DiplayFormat:='#,##0';
+  VNPrice_Decimal:=0;
+  WH_Decimal:='2';
+  WH_DiplayFormat:='#,##0.00';
+  AppDir:=ExtractFilePath(Application.ExeName);
+  if FileExists(AppDir+'\ComName.ini')=true then
+  begin
+    try
+      MyIni := Tinifile.Create(AppDir+'\ComName.ini');
+      VNPrice_DiplayFormat:=MyIni.ReadString('VNPrice','DiplayFormat','#,##0');
+      VNPrice_Decimal:=strtoint(MyIni.ReadString('VNPrice','Decimal','0'));
+      WH_Decimal:=MyIni.ReadString('Warehouse','Decimal','2');
+      WH_DiplayFormat:=MyIni.ReadString('Warehouse','DiplayFormat','#,##0.00');
+    finally
+      MyIni.Free;
+    end;
+  end;
+  TCurrencyField(KCLL.FieldByName('VNPrice')).DisplayFormat:=VNPrice_DiplayFormat;
+  TCurrencyField(KCLL.FieldByName('CWHL')).DisplayFormat:=VNPrice_DiplayFormat;
+  TCurrencyField(KCLL.FieldByName('VNACC')).DisplayFormat:=VNPrice_DiplayFormat;
+  TCurrencyField(KCLL.FieldByName('TempQty')).DisplayFormat:=WH_DiplayFormat;
+  TCurrencyField(KCLL.FieldByName('Qty')).DisplayFormat:=WH_DiplayFormat;
+  TCurrencyField(KCLL.FieldByName('CLSL')).DisplayFormat:=WH_DiplayFormat;
+end;
+
+procedure TDeliverdet.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+procedure TDeliverdet.FormCreate(Sender: TObject);
+begin   
+  with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select getdate() as NDate ');
+    active:=true;
+    NDate:=fieldbyname('NDate').Value;
+    active:=false;
+    sql.Clear;
+    sql.add('select CKBH from KCCK ');
+    sql.add('where GSBH='+''''+main.edit2.text+'''');
+    sql.add('order by CKBH ');
+    active:=true;
+    CB1.items.clear;
+    while not eof do
+    begin
+      CB1.items.add(fieldbyname('CKBH').AsString);
+      next;
+    end;
+    CB1.itemindex:=0;
+    active:=false;
+  end;
+  DTP1.Date:=startofthemonth(Ndate) ;
+  DateTimePicker1.Date:=startofthemonth(Ndate) ;
+  DTP2.Date:=Ndate;
+  DateTimePicker2.Date:=Ndate;
+  ReadIni();
+end;
+
+procedure TDeliverdet.Button1Click(Sender: TObject);
+begin
+  with KCLL do          //出庫數量清單
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select KCLL.*,KCLLS.*,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,BDepartment.DepName,SCBLYY.YWSM,SCBLYY.ZWSM');
+    sql.add('from KCLLS');
+    sql.add('left join KCLL on KCLL.LLNO=KCLLS.LLNO ');
+    sql.add('left join BDepartment on BDepartment.ID=KCLL.DepID ') ;
+    sql.add('left join CLZL on CLZL.CLDH=KCLLS.CLBH ');
+    sql.add('left join KCCK on KCCK.CKBH=KCLL.CKBH ');
+    sql.add('left join SCBLYY on SCBLYY.YYBH=KCLLS.YYBH ');
+    sql.add('where  KCLLS.CLBH like'''+edit1.Text+'%''');
+    sql.add('       and KCLLS.Qty<>0');
+    sql.add('       and BDepartment.DepName like ''%'+edit2.Text+'%''');
+    if CB1.Text<>'' then
+    begin
+       sql.add('       and KCLL.CKBH='''+CB1.Text+'''');
+       sql.add('       and KCCK.GSBH='''+main.edit2.text+'''');
+    end;
+    sql.add('       and KCLLS.SCBH like '''+edit3.Text+'%'' ');
+    if CheckBox1.Checked = true then
+    begin
+      sql.add('       and (convert(smalldatetime,convert(varchar,KCLL.CFMDate,111)) between ');
+      sql.add('       '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''''  );
+      sql.add('            or KCLL.CFMDATE is null)');
+    end;
+    if CheckBox2.Checked = true then
+    begin
+      sql.add('       and convert(smalldatetime,convert(varchar,KCLL.USERDATE,111)) between ');
+      sql.add('       '''+formatdatetime('yyyy/MM/dd',DateTimePicker1.date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DateTimePicker2.date)+'''');
+    end;
+    if CB2.Checked then
+    begin
+      sql.add('       and KCLL.SCBH='+''''+'ZZZZZZZZZZ'+'''');
+    end;
+    if HGLB.ItemIndex>0 then
+    begin
+      sql.Add('and KCLLS.HGLB ='+''''+HGLB.text+'''');
+    end;
+    sql.add('order by KCLL.LLNO,KCLLS.CLBH');
+    //funcObj.WriteErrorLog(sql.Text);
+    active:=true;
+  end;
+  //Tfloatfield(DBGrid2 .Fields[10]).displayformat:='0.00' ;
+end;
+
+procedure TDeliverdet.Button2Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+
+if KCLL.Active then
+  begin
+    if KCLL.recordcount=0 then
+      begin
+        showmessage('No record.');
+        abort;
+      end;
+  end
+  else
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+
+try
+  eclApp:=CreateOleObject('Excel.Application');
+  WorkBook:=CreateOleObject('Excel.Sheet');
+except
+  Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+  Exit;
+end;
+
+try
+  WorkBook:=eclApp.workbooks.Add; 
+  eclApp.Cells(1,1):='NO';
+  for   i:=1   to   KCLL.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=KCLL.fields[i-1].FieldName;
+    end;
+  KCLL.First;
+  j:=2;
+  while   not  KCLL.Eof   do
+    begin
+      eclApp.Cells(j,1):=j-1;
+      for   i:=1   to   KCLL.fieldcount   do
+        begin
+          eclApp.Cells(j,i+1):=KCLL.Fields[i-1].Value;
+          eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+        end;
+      KCLL.Next;
+      inc(j);
+    end;
+  eclapp.columns.autofit;
+  showmessage('Succeed.');
+  eclApp.Visible:=True;
+except
+  on   F:Exception   do
+    showmessage(F.Message);
+end;
+
+
+end;
+
+procedure TDeliverdet.FormDestroy(Sender: TObject);
+begin
+Deliverdet:=nil;
+end;
+
+procedure TDeliverdet.DBGrid2GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if  KCLL.FieldByName('CFMID').value='NO'  then
+  begin
+    DBGrid2.canvas.font.color:=clred;
+  end;
+end;
+
+end.

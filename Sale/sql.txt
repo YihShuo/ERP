@@ -1,0 +1,13 @@
+insert into YWWX2(CLBH,Length,Width,Height,OWeigh,Square,Memo,Capacity,USERDATE,USERID,YN)
+values(
+'U1AC000190',
+'11',
+'11',
+'11',
+convert(money,'11'),
+convert(money,'0.0019'),
+'',
+'15',
+getdate(),
+'21083','1')
+

@@ -1,0 +1,355 @@
+object DelOther_D_CL: TDelOther_D_CL
+  Left = 306
+  Top = 424
+  Width = 1262
+  Height = 481
+  BorderIcons = [biSystemMenu]
+  Caption = 'DelOther_D_CL'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  PixelsPerInch = 106
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 1246
+    Height = 57
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 8
+      Top = 20
+      Width = 75
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'MatNo:'
+    end
+    object Label2: TLabel
+      Left = 208
+      Top = 20
+      Width = 88
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'EngName:'
+    end
+    object Label3: TLabel
+      Left = 416
+      Top = 20
+      Width = 86
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'TWName:'
+    end
+    object Button1: TButton
+      Left = 641
+      Top = 13
+      Width = 81
+      Height = 33
+      Caption = 'Query'
+      TabOrder = 2
+      OnClick = Button1Click
+    end
+    object Edit2: TEdit
+      Left = 296
+      Top = 16
+      Width = 121
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 1
+      OnKeyPress = Edit2KeyPress
+    end
+    object EDIT1: TEdit
+      Left = 88
+      Top = 16
+      Width = 121
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 0
+      OnKeyPress = EDIT1KeyPress
+    end
+    object Edit3: TEdit
+      Left = 504
+      Top = 16
+      Width = 129
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 3
+      OnKeyPress = Edit3KeyPress
+    end
+  end
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 57
+    Width = 1246
+    Height = 384
+    Align = alClient
+    DataSource = DS1
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -12
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    ParentFont = False
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -15
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    OnDblClick = DBGridEh1DblClick
+    OnKeyPress = DBGridEh1KeyPress
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'cldh'
+        Footers = <>
+        Title.Caption = 'MatNo'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 87
+      end
+      item
+        EditButtons = <>
+        FieldName = 'cllb'
+        Footers = <>
+        Title.Caption = 'Class'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 60
+      end
+      item
+        EditButtons = <>
+        FieldName = 'dwbh'
+        Footers = <>
+        Title.Caption = 'Unit'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 49
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ywpm'
+        Footers = <>
+        Title.Caption = ' Mat Name'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 138
+      end
+      item
+        EditButtons = <>
+        FieldName = 'zwpm'
+        Footers = <>
+        Title.Caption = 'Chinese'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 186
+      end
+      item
+        Color = 10921727
+        EditButtons = <>
+        FieldName = 'KCQty'
+        Footers = <>
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+        Width = 76
+      end
+      item
+        EditButtons = <>
+        FieldName = 'NK'
+        Footers = <>
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+      end
+      item
+        EditButtons = <>
+        FieldName = 'TC'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'HD'
+        Footers = <>
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+      end
+      item
+        EditButtons = <>
+        FieldName = 'KD'
+        Footers = <>
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+      end
+      item
+        EditButtons = <>
+        FieldName = 'XT'
+        Footers = <>
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+      end
+      item
+        EditButtons = <>
+        FieldName = 'GC'
+        Footers = <>
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ZZZZ'
+        Footers = <>
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = []
+      end>
+  end
+  object DS1: TDataSource
+    DataSet = Query1
+    Left = 424
+    Top = 128
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      ''
+      
+        'select CLZL.CLDH,CLZL.CLLB,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,KCZLS.K' +
+        'CQty,KCZLS.NK,KCZLS.TC,KCZLS.HD,KCZLS.KD,KCZLS.XT,KCZLS.GC,KCZLS' +
+        '.ZZZZ'
+      'from clzl'
+      'left join KCZLS on KCZLS.CLBH=CLZL.CLDh and KCZLS.CKBH='#39'CDC'#39' '
+      'where CLZL.CLDH like'#39'A%'#39
+      '      and CLZL.YWPM like '#39'%%'#39
+      '      and CLZL.ZWPM like '#39'%%'#39
+      'order by CLZL.CLDH desc')
+    Left = 424
+    Top = 160
+    object Query1cldh: TStringField
+      DisplayWidth = 12
+      FieldName = 'cldh'
+      Origin = 'DB.clzl.cldh'
+      FixedChar = True
+      Size = 10
+    end
+    object Query1cllb: TStringField
+      DisplayWidth = 6
+      FieldName = 'cllb'
+      Origin = 'DB.clzl.cllb'
+      FixedChar = True
+      Size = 3
+    end
+    object Query1ywpm: TStringField
+      DisplayWidth = 229
+      FieldName = 'ywpm'
+      Origin = 'DB.clzl.ywpm'
+      FixedChar = True
+      Size = 200
+    end
+    object Query1zwpm: TStringField
+      FieldName = 'zwpm'
+      Origin = 'DB.clzl.zwpm'
+      FixedChar = True
+      Size = 200
+    end
+    object Query1dwbh: TStringField
+      DisplayWidth = 6
+      FieldName = 'dwbh'
+      Origin = 'DB.clzl.dwbh'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1KCQty: TFloatField
+      FieldName = 'KCQty'
+      DisplayFormat = '##,#0.0'
+    end
+    object Query1NK: TCurrencyField
+      FieldName = 'NK'
+      DisplayFormat = '#,##0.##'
+    end
+    object Query1TC: TCurrencyField
+      FieldName = 'TC'
+      DisplayFormat = '#,##0.##'
+    end
+    object Query1HD: TCurrencyField
+      FieldName = 'HD'
+      DisplayFormat = '#,##0.##'
+    end
+    object Query1KD: TCurrencyField
+      FieldName = 'KD'
+      DisplayFormat = '#,##0.##'
+    end
+    object Query1XT: TCurrencyField
+      FieldName = 'XT'
+      DisplayFormat = '#,##0.##'
+    end
+    object Query1GC: TCurrencyField
+      FieldName = 'GC'
+      DisplayFormat = '#,##0.##'
+    end
+    object Query1ZZZZ: TCurrencyField
+      FieldName = 'ZZZZ'
+      DisplayFormat = '#,##0.##'
+    end
+  end
+end

@@ -1,0 +1,24 @@
+unit SpecPrint_Im1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs;
+
+type
+  TSpecPrint_Im = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  SpecPrint_Im: TSpecPrint_Im;
+
+implementation
+
+{$R *.dfm}
+
+end.

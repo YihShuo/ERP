@@ -1,0 +1,2332 @@
+object EquipmentList: TEquipmentList
+  Left = 69
+  Top = 309
+  ActiveControl = SBBHEdit
+  Caption = 'EquipmentList'
+  ClientHeight = 852
+  ClientWidth = 1486
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDesigned
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 1486
+    Height = 137
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 0
+      Top = 10
+      Width = 94
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'SBBH:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 0
+      Top = 43
+      Width = 94
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'TSBH:'
+    end
+    object Label4: TLabel
+      Left = 184
+      Top = 105
+      Width = 20
+      Height = 16
+      Caption = 'To:'
+    end
+    object Label3: TLabel
+      Left = 215
+      Top = 11
+      Width = 83
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'YWPM:'
+    end
+    object Label5: TLabel
+      Left = 215
+      Top = 76
+      Width = 85
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'ZSYWJC:'
+    end
+    object Label8: TLabel
+      Left = 476
+      Top = 13
+      Width = 86
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'DOCNO:'
+    end
+    object Label7: TLabel
+      Left = 311
+      Top = 104
+      Width = 55
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'LB:'
+    end
+    object Label9: TLabel
+      Left = 692
+      Top = 10
+      Width = 83
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Label:'
+    end
+    object Label10: TLabel
+      Left = 476
+      Top = 42
+      Width = 86
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'DepNM:'
+    end
+    object Label11: TLabel
+      Left = 691
+      Top = 43
+      Width = 86
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'DepID Memo:'
+    end
+    object Label12: TLabel
+      Left = 14
+      Top = 76
+      Width = 76
+      Height = 17
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Memo:'
+    end
+    object Label13: TLabel
+      Left = 224
+      Top = 44
+      Width = 74
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'LSBH:'
+    end
+    object Label6: TLabel
+      Left = 528
+      Top = 75
+      Width = 34
+      Height = 16
+      Caption = 'TSID:'
+    end
+    object Label14: TLabel
+      Left = 696
+      Top = 72
+      Width = 86
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'VNPrice'
+    end
+    object SBBHEdit: TEdit
+      Left = 96
+      Top = 7
+      Width = 113
+      Height = 25
+      AutoSelect = False
+      CharCase = ecUpperCase
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'VNI-Times'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+    end
+    object Button1: TButton
+      Left = 803
+      Top = 98
+      Width = 100
+      Height = 33
+      Caption = 'Query'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      OnClick = Button1Click
+    end
+    object DTP1: TDateTimePicker
+      Left = 80
+      Top = 99
+      Width = 97
+      Height = 24
+      Date = 39255.041666666660000000
+      Format = 'yyyy/MM/dd'
+      Time = 39255.041666666660000000
+      TabOrder = 2
+    end
+    object DTP2: TDateTimePicker
+      Left = 208
+      Top = 100
+      Width = 97
+      Height = 24
+      Date = 39255.958333333340000000
+      Format = 'yyyy/MM/dd'
+      Time = 39255.958333333340000000
+      TabOrder = 3
+    end
+    object TSBHEdit: TEdit
+      Left = 96
+      Top = 40
+      Width = 113
+      Height = 24
+      TabOrder = 4
+    end
+    object InDateCB: TCheckBox
+      Left = 12
+      Top = 104
+      Width = 65
+      Height = 17
+      Caption = 'InDATE:'
+      TabOrder = 5
+    end
+    object YWPMEdit: TEdit
+      Left = 301
+      Top = 8
+      Width = 169
+      Height = 24
+      TabOrder = 6
+    end
+    object ZSYWJCEdit: TEdit
+      Left = 302
+      Top = 70
+      Width = 169
+      Height = 24
+      TabOrder = 7
+    end
+    object Button2: TButton
+      Left = 909
+      Top = 63
+      Width = 100
+      Height = 33
+      Caption = 'Excel'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 8
+      OnClick = Button2Click
+    end
+    object DOCNOEdit: TEdit
+      Left = 565
+      Top = 8
+      Width = 121
+      Height = 24
+      TabOrder = 9
+    end
+    object LabelEdit: TEdit
+      Left = 782
+      Top = 8
+      Width = 123
+      Height = 24
+      TabOrder = 10
+    end
+    object Button3: TButton
+      Left = 909
+      Top = 29
+      Width = 100
+      Height = 33
+      Caption = 'Excel_IT'
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 11
+      OnClick = Button3Click
+    end
+    object MemoEdit: TEdit
+      Left = 96
+      Top = 70
+      Width = 113
+      Height = 24
+      TabOrder = 12
+    end
+    object Button4: TButton
+      Left = 1016
+      Top = 98
+      Width = 96
+      Height = 33
+      Caption = 'Excel_TSCD'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 13
+      OnClick = Button4Click
+    end
+    object DepNMEdit: TComboBox
+      Left = 565
+      Top = 38
+      Width = 120
+      Height = 24
+      TabOrder = 14
+    end
+    object VWPMEdit: TEdit
+      Left = 302
+      Top = 38
+      Width = 168
+      Height = 24
+      TabOrder = 15
+    end
+    object GroupBox2: TGroupBox
+      Left = 372
+      Top = 97
+      Width = 361
+      Height = 33
+      TabOrder = 16
+      object RB2: TRadioButton
+        Left = 152
+        Top = 8
+        Width = 81
+        Height = 17
+        Caption = 'Thiet bi IT'
+        TabOrder = 0
+      end
+      object RB1: TRadioButton
+        Left = 10
+        Top = 7
+        Width = 136
+        Height = 17
+        Caption = 'Thiet bi  may moc'
+        Checked = True
+        TabOrder = 1
+        TabStop = True
+      end
+      object RB3: TRadioButton
+        Left = 239
+        Top = 7
+        Width = 113
+        Height = 17
+        Caption = 'Thiet bi Tong Vu'
+        TabOrder = 2
+      end
+    end
+    object TSIDEdit: TEdit
+      Left = 565
+      Top = 67
+      Width = 121
+      Height = 24
+      TabOrder = 17
+    end
+    object VNPriceComboBox: TComboBox
+      Left = 785
+      Top = 68
+      Width = 120
+      Height = 24
+      TabOrder = 18
+      Text = 'None'
+      Items.Strings = (
+        'None'
+        '>= 30,000,000'
+        '< 30,000,000')
+    end
+    object Button5: TButton
+      Left = 1015
+      Top = 62
+      Width = 97
+      Height = 33
+      Caption = 'Excel_CCDC'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 19
+      OnClick = Button5Click
+    end
+    object Button6: TButton
+      Left = 1015
+      Top = 29
+      Width = 97
+      Height = 33
+      Caption = 'Print IT'
+      Enabled = False
+      TabOrder = 20
+      OnClick = Button6Click
+    end
+    object cbDpmeo: TComboBox
+      Left = 783
+      Top = 38
+      Width = 120
+      Height = 24
+      TabOrder = 21
+    end
+    object cbN: TCheckBox
+      Left = 1123
+      Top = 3
+      Width = 254
+      Height = 17
+      Caption = #25505#36092#20837#24235#23578#26410#38936'  Mua nh'#7853'p kho ch'#432'a l'#227'nh'
+      Checked = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      State = cbChecked
+      TabOrder = 22
+    end
+    object cbY: TCheckBox
+      Left = 1123
+      Top = 19
+      Width = 254
+      Height = 17
+      Caption = #24050#38936#20986#20351#29992' '#272#227' l'#227'nh s'#7917' d'#7909'ng'
+      Checked = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      State = cbChecked
+      TabOrder = 23
+    end
+    object cbB: TCheckBox
+      Left = 1123
+      Top = 35
+      Width = 254
+      Height = 17
+      Caption = #24050#22577#24290' '#272#227' ba'#769'o ph'#234#769
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 24
+    end
+    object cbM: TCheckBox
+      Left = 1123
+      Top = 51
+      Width = 254
+      Height = 17
+      Caption = #24050#20511#20986' '#272#227' cho  m'#432#417#803'n'
+      Checked = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      State = cbChecked
+      TabOrder = 25
+    end
+    object cbH: TCheckBox
+      Left = 1123
+      Top = 67
+      Width = 254
+      Height = 17
+      Caption = #24050#20511#20986#27512#36996' '#272#227' hoa'#768'n tra'#777' cho m'#432#417#803'n'
+      Checked = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      State = cbChecked
+      TabOrder = 26
+    end
+    object cbR: TCheckBox
+      Left = 1123
+      Top = 83
+      Width = 254
+      Height = 17
+      Caption = #24050#36864#24235' '#272#227' tr'#7843' v'#7873' kho'
+      Checked = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      State = cbChecked
+      TabOrder = 27
+    end
+    object cbF: TCheckBox
+      Left = 1123
+      Top = 99
+      Width = 254
+      Height = 17
+      Caption = #24050#20511#26781#20511#20837' '#272#227' m'#432#417#803'n'
+      Checked = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      State = cbChecked
+      TabOrder = 28
+    end
+    object cbT: TCheckBox
+      Left = 1123
+      Top = 115
+      Width = 254
+      Height = 17
+      Caption = #24050#27512#36996'  '#272#227' hoa'#768'n tra'#777
+      Checked = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      State = cbChecked
+      TabOrder = 29
+    end
+    object Button7: TButton
+      Left = 909
+      Top = 98
+      Width = 101
+      Height = 33
+      Caption = 'Excel TV'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 30
+      OnClick = Button7Click
+    end
+    object PDF_export: TCheckBox
+      Left = 913
+      Top = 6
+      Width = 97
+      Height = 17
+      Caption = 'PDF_export'
+      TabOrder = 31
+    end
+    object IT_KK: TButton
+      Left = 1383
+      Top = 95
+      Width = 75
+      Height = 25
+      Caption = 'IT_KK'
+      TabOrder = 32
+      Visible = False
+      OnClick = IT_KKClick
+    end
+    object CK2: TCheckBox
+      Left = 1383
+      Top = 76
+      Width = 97
+      Height = 17
+      Caption = 'IT_TSCD'
+      TabOrder = 33
+    end
+    object CK1: TCheckBox
+      Left = 1383
+      Top = 60
+      Width = 97
+      Height = 17
+      Caption = 'IT_CCDC'
+      TabOrder = 34
+    end
+  end
+  object PC1: TPageControl
+    Left = 0
+    Top = 137
+    Width = 1486
+    Height = 715
+    ActivePage = TabSheet1
+    Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    object TabSheet1: TTabSheet
+      Caption = 'List'
+      object DBGridEh1: TDBGridEh
+        Left = 0
+        Top = 0
+        Width = 1478
+        Height = 680
+        Align = alClient
+        DataSource = DS1
+        DynProps = <>
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        FooterRowCount = 1
+        FooterParams.Color = clWindow
+        ParentFont = False
+        PopupMenu = PopupMenu1
+        SumList.Active = True
+        TabOrder = 0
+        TitleParams.MultiTitle = True
+        OnDrawColumnCell = DBGridEh1DrawColumnCell
+        OnGetCellParams = DBGridEh1GetCellParams
+        Columns = <
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'SBBH'
+            Footers = <>
+            Title.Caption = #39006#21029'ID|SBBH'
+            Width = 81
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'TSBH'
+            Footer.FieldName = 'TSBH'
+            Footer.ValueType = fvtCount
+            Footers = <>
+            Title.Caption = #36001#29986#32232#34399'|TSBH'
+            Width = 105
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'LSBH'
+            Footers = <>
+            Title.Caption = #22411#34399'|LSBH'
+            Width = 132
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'ZWPM'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Arial Unicode MS'
+            Font.Style = []
+            Footers = <>
+            Title.Caption = #35373#20633#21517#31281'('#20013#25991')|ZWPM'
+            Width = 172
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'YWPM'
+            Footers = <>
+            Title.Caption = #35373#20633#21517#31281'('#33521#25991')|YWPM'
+            Width = 160
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DWBH'
+            Footers = <>
+            Title.Caption = #21934#20301'|DWBH'
+            Width = 46
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'AuthCE'
+            Footers = <>
+            Title.Caption = 'CE'#35469#35657'|AuthCE'
+            Width = 52
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'ZSJC_YW'
+            Footers = <>
+            Title.Caption = #35069#36896#24288#21830'|ZSYWJC'
+            Width = 95
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Status'
+            Footers = <>
+            Title.Caption = #29376#24907'|Status'
+            Width = 40
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'QUCBH'
+            Footers = <>
+            Title.Caption = #35215#26684'|QUCBH'
+            Width = 75
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'CycleDay'
+            Footers = <>
+            Title.Caption = #20445#39178#36913#26399'|CycleDay'
+            Width = 66
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'CycleDate'
+            Footers = <>
+            Title.Caption = #19979#27425#20445#39178#26085'|CycleDate'
+            Width = 81
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Machine_Type'
+            Footers = <>
+            Title.Caption = #27231#22120#39006#21029'|Machine_Type'
+            Width = 100
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DepName'
+            Footers = <>
+            Title.Caption = #37096#38272#21517#31281'|DepName'
+            Title.Color = clSkyBlue
+            Width = 79
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DepMemo'
+            Footers = <>
+            Title.Caption = #37096#38272#20633#35387'|DepMemo'
+            Width = 79
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DepID_Memo'
+            Footers = <>
+            Title.Caption = #20489#24235#21029'|Dep ID Memo'
+            Title.Color = clSkyBlue
+            Width = 97
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'JDTSDep'
+            Footers = <>
+            Title.Caption = #20511#20986#24288#22806#36215#35350'|JDTSDep'
+            Width = 69
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'JDBDATE'
+            Footers = <>
+            Title.Caption = #20511#20986#24288#22806#36215#35350'|JDBDATE'
+            Title.Color = clSkyBlue
+            Width = 70
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'JDEDATE'
+            Footers = <>
+            Title.Caption = #20511#20986#24288#22806#36215#35350'|JDEDATE'
+            Title.Color = clSkyBlue
+            Width = 65
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'JRTSDep'
+            Footers = <>
+            Title.Caption = #24288#22806#20511#20837#36215#35350'|JRTSDep'
+            Width = 81
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'JRBDATE'
+            Footers = <>
+            Title.Caption = #24288#22806#20511#20837#36215#35350'|JRBDATE'
+            Width = 74
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'JREDATE'
+            Footers = <>
+            Title.Caption = #24288#22806#20511#20837#36215#35350'|JREDATE'
+            Width = 73
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Qty'
+            Footers = <>
+            Title.Caption = #25976#37327'|Qty'
+            Width = 40
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'VNPrice'
+            Footer.FieldName = 'VNPrice'
+            Footers = <>
+            Title.Caption = #21934#20729'|VND'
+            Width = 67
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'USPrice'
+            Footer.FieldName = 'USPrice'
+            Footers = <>
+            Title.Caption = #21934#20729'|USD'
+            Width = 65
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Memo'
+            Footers = <>
+            Title.Caption = #20633#35387'|Memo'
+            Width = 105
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'VWPM'
+            Footers = <>
+            Title.Caption = #36234#25991#21517#31281'|VWPM'
+            Width = 160
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'CQDH'
+            Footers = <>
+            Title.Caption = #25505#21312'|CQDH'
+            Width = 47
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'XSBH'
+            Footers = <>
+            Title.Caption = #20986#24288#34399#30908'|XSBH'
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'NSX'
+            Footers = <>
+            Title.Caption = #35069#36896#24180#26376'|NSX'
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'InDATE'
+            Footers = <>
+            Title.Caption = #20837#24288#26085#26399'|InDATE'
+            Width = 107
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'AuthCE_Memo'
+            Footers = <>
+            Title.Caption = #21697#29260#35469#35657'|Brand CE'
+            Width = 81
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'HGPM'
+            Footers = <>
+            Title.Caption = #28023#38364#21517#31281'|HGPM'
+            Width = 153
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DOCNO'
+            Footers = <>
+            Title.Caption = #30332#31080#32232#34399'|DOCNO'
+            Width = 80
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DepID'
+            Footers = <>
+            Title.Caption = #21934#20301'ID|DepNo'
+            Width = 70
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'LABEL_Tag'
+            Footers = <>
+            Title.Caption = #27161#31844'|LABEL'
+          end
+          item
+            CellButtons = <>
+            Color = 15987699
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'TSID'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = #35373#20633'ID|TSID'
+            Width = 83
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'CycleDate_M'
+            Footers = <>
+            Title.Caption = #26376#20445#39178#26085'|CycleDate_M'
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'CycleDate_S'
+            Footers = <>
+            Title.Caption = #23395#20445#39178#26085'|CycleDate_S'
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'CycleDate_Y'
+            Footers = <>
+            Title.Caption = #24180#20445#39178#26085'|CycleDate_Y'
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Lean_ID'
+            Footers = <>
+            Title.Caption = 'Lean'#32218'|Lean_ID'
+            Width = 68
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'LeanDep'
+            Footers = <>
+            Title.Caption = 'Lean'#32218'|LeanDep'
+            Width = 78
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'LeanMemo'
+            Footers = <>
+            Title.Caption = 'Lean'#32218'|LeanMemo'
+            Width = 95
+          end>
+        object RowDetailData: TRowDetailPanelControlEh
+        end
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Statistics'
+      ImageIndex = 1
+      object Splitter1: TSplitter
+        Left = 589
+        Top = 0
+        Height = 680
+        ExplicitLeft = 832
+        ExplicitTop = 128
+        ExplicitHeight = 100
+      end
+      object DBGridEh2: TDBGridEh
+        Left = 0
+        Top = 0
+        Width = 589
+        Height = 680
+        Align = alLeft
+        DataSource = DS2
+        DynProps = <>
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        FooterRowCount = 1
+        FooterParams.Color = clWindow
+        ParentFont = False
+        PopupMenu = PopupMenu1
+        SumList.Active = True
+        TabOrder = 0
+        TitleParams.MultiTitle = True
+        OnDrawColumnCell = DBGridEh1DrawColumnCell
+        OnGetCellParams = DBGridEh1GetCellParams
+        Columns = <
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DepName'
+            Footers = <>
+            Title.Caption = #37096#38272'|DepName'
+            Width = 65
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DepMemo'
+            Footers = <>
+            Title.Caption = #37096#38272#20013#25991'|DepMemo'
+            Width = 87
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'SBBH'
+            Footers = <>
+            Title.Caption = #26009#34399'|SBBH'
+            Width = 89
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'YWPM'
+            Footers = <>
+            Title.Caption = #26448#26009#33521#25991'|YWPM'
+            Width = 134
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'ZWPM'
+            Footers = <>
+            Title.Caption = #26448#26009#20013#25991'|ZWPM'
+            Width = 112
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Qty'
+            Footer.FieldName = 'Qty'
+            Footer.ValueType = fvtSum
+            Footers = <>
+            Title.Caption = #25976#37327'|Qty'
+          end>
+        object RowDetailData: TRowDetailPanelControlEh
+        end
+      end
+      object DBGridEh3: TDBGridEh
+        Left = 592
+        Top = 0
+        Width = 886
+        Height = 680
+        Align = alClient
+        DataSource = DS3
+        DynProps = <>
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        FooterRowCount = 1
+        FooterParams.Color = clWindow
+        ParentFont = False
+        PopupMenu = PopupMenu2
+        SumList.Active = True
+        TabOrder = 1
+        TitleParams.MultiTitle = True
+        OnDrawColumnCell = DBGridEh1DrawColumnCell
+        OnGetCellParams = DBGridEh1GetCellParams
+        Columns = <
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'SBBH'
+            Footers = <>
+            Title.Caption = #39006#21029'ID|SBBH'
+            Width = 82
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'TSBH'
+            Footers = <>
+            Title.Caption = #36001#29986#32232#34399'|TSBH'
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Qty'
+            Footer.ValueType = fvtSum
+            Footers = <>
+            Title.Caption = #25976#37327'|Qty'
+            Width = 34
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DepID'
+            Footers = <>
+            Title.Caption = #20301#32622'|DepID'
+            Width = 60
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DepName'
+            Footers = <>
+            Title.Caption = #37096#38272'|DepName'
+            Width = 67
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DepMemo'
+            Footers = <>
+            Title.Caption = #37096#38272'|DepMemo'
+            Width = 72
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DepID_Memo'
+            Footers = <>
+            Title.Caption = #20301#32622#20633#35387'|DepID_Memo'
+            Width = 82
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Status'
+            Footers = <>
+            Title.Caption = #29376#24907'|Status'
+            Width = 41
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'YWPM'
+            Footers = <>
+            Title.Caption = #33521#25991#21517#31281'|YWPM'
+            Width = 70
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'ZWPM'
+            Footers = <>
+            Title.Caption = #20013#25991#21517#31281'|ZWPM'
+            Width = 61
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'QUCBH'
+            Footers = <>
+            Title.Caption = #35215#26684'|QUCBH'
+            Width = 77
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'LSBH'
+            Footers = <>
+            Title.Caption = #22411#34399'|LSBH'
+            Width = 111
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DWBH'
+            Footers = <>
+            Title.Caption = #21934#20301'|DWBH'
+            Width = 41
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'ZSDH'
+            Footers = <>
+            Title.Caption = #24288#21830'ID|ZSDH'
+            Width = 46
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'CQDH'
+            Footers = <>
+            Title.Caption = #25505#21312'|CQDH'
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'MSBBH'
+            Footers = <>
+            Title.Caption = #22823#20998#39006'|MSBBH'
+            Width = 80
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'MYWPM'
+            Footers = <>
+            Title.Caption = #22823#20998#39006'|DYWPM'
+            Width = 102
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'MZWPM'
+            Footers = <>
+            Title.Caption = #22823#20998#39006'|DZWPM'
+            Width = 68
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'JDTS'
+            Footers = <>
+            Title.Caption = #20511#20986#24288#22806#36215#35350'|JDTS'
+            Width = 105
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'Memo'
+            Footers = <>
+            Width = 70
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'JDTSDep'
+            Footers = <>
+            Title.Caption = #20511#20986#24288#22806#36215#35350'|JDTSDep'
+            Width = 68
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'JDBDATE'
+            Footers = <>
+            Title.Caption = #20511#20986#24288#22806#36215#35350'|JDBDATE'
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'JDEDATE'
+            Footers = <>
+            Title.Caption = #20511#20986#24288#22806#36215#35350'|JDEDATE'
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'JRTS'
+            Footers = <>
+            Title.Caption = #24288#22806#20511#20837#36215#35350'|JRTS'
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'JRTSDep'
+            Footers = <>
+            Title.Caption = #24288#22806#20511#20837#36215#35350'|JRTSDep'
+            Width = 51
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'JRBDATE'
+            Footers = <>
+            Title.Caption = #24288#22806#20511#20837#36215#35350'|JRBDATE'
+            Width = 74
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'JREDATE'
+            Footers = <>
+            Title.Caption = #24288#22806#20511#20837#36215#35350'|JREDATE'
+            Width = 73
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'RFID_Tag'
+            Footers = <>
+            Title.Caption = #27161#31844#32232#34399'|RFID_Tag'
+            Width = 111
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'LABEL_Tag'
+            Footers = <>
+            Title.Caption = #27161#31844#32232#34399'|LABEL_Tag'
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'TSID'
+            Footers = <>
+            Title.Caption = #35373#20633'ID|TSID'
+          end>
+        object RowDetailData: TRowDetailPanelControlEh
+        end
+      end
+    end
+  end
+  object TSCDQry: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'Select TSCD.TSID,TSCD.TSBH,TSCD.DepID,TSCD_BDepartment.DepName,T' +
+        'SCD.DepID_Memo,TSCD.JDTS,JDTS_Dep.DepName as JDTSDep,TSCD.JDBDAT' +
+        'E,TSCD.JDEDATE,TSCD.JRTS,JRTS_Dep.DepName as JRTSDep,TSCD.JRBDAT' +
+        'E,TSCD.JREDATE,TSCD.STATUS,TSCD.LLNO,TSCD.CFMDATE_LL,TSCD.CFMID_' +
+        'LL'
+      
+        '       ,CAST(dbo.fSignsToNoSigns(TSCD_LB.YWSM) AS VARCHAR(200)) ' +
+        'as YWSM,TSCD_LB.ZWSM,TSCD.CycleDate_M,TSCD.Machine_Type,TSCD.Cyc' +
+        'leDate_S,TSCD.CycleDate_Y,TSCD.Lean_ID,Lean_DEP.Depname as LeanD' +
+        'ep,Lean_Dep.Depmemo as LeanMemo,TSCD.Machine_Status,'#39#39' as Unit_N' +
+        'ame'
+      'from TSCD_History TSCD'
+      
+        'left join TSCD_KCLLS on TSCD.TSID=TSCD_KCLLS.TSID and TSCD.LLNO=' +
+        'TSCD_KCLLS.LLNO'
+      'Left join TSCD_KCLL on TSCD_KCLL.LLNO=TSCD_KCLLS.LLNO'
+      'Left join TSCD_LB on TSCD_LB.LB=TSCD_KCLL.LB'
+      'Left join TSCD_BDepartment on TSCD_BDepartment.ID=TSCD.DepID'
+      'left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS'
+      'left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS'
+      'left join TSCD_BDepartment Lean_Dep on Lean_Dep.ID=TSCD.Lean_ID'
+      'where TSCD.TSID='#39'20220900028'#39
+      'Union all'
+      
+        'Select TSCD.TSID,TSCD.TSBH,TSCD.DepID,TSCD_BDepartment.DepName,T' +
+        'SCD.DepID_Memo,TSCD.JDTS,JDTS_Dep.DepName as JDTSDep,TSCD.JDBDAT' +
+        'E,TSCD.JDEDATE,TSCD.JRTS,JRTS_Dep.DepName as JRTSDep,TSCD.JRBDAT' +
+        'E,TSCD.JREDATE,TSCD.STATUS,TSCD.LLNO,TSCD.CFMDATE_LL,TSCD.CFMID_' +
+        'LL'
+      
+        '       ,CAST(dbo.fSignsToNoSigns(TSCD_LB.YWSM) AS VARCHAR(200)) ' +
+        'as YWSM,TSCD_LB.ZWSM,TSCD.CycleDate_M,TSCD.Machine_Type,TSCD.Cyc' +
+        'leDate_S,TSCD.CycleDate_Y,TSCD.Lean_ID,Lean_DEP.Depname as LeanD' +
+        'ep,Lean_Dep.Depmemo as LeanMemo,TSCD.Machine_Status,TSCD.Unit_Na' +
+        'me'
+      'from TSCD'
+      
+        'left join TSCD_KCLLS on TSCD.TSID=TSCD_KCLLS.TSID and TSCD.LLNO=' +
+        'TSCD_KCLLS.LLNO'
+      'Left join TSCD_KCLL on TSCD_KCLL.LLNO=TSCD_KCLLS.LLNO'
+      'Left join TSCD_LB on TSCD_LB.LB=TSCD_KCLL.LB'
+      'Left join TSCD_BDepartment on TSCD_BDepartment.ID=TSCD.DepID'
+      'left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS'
+      'left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS'
+      'left join TSCD_BDepartment Lean_Dep on Lean_Dep.ID=TSCD.Lean_ID'
+      'where TSCD.TSID='#39'20220900028'#39)
+    Left = 428
+    Top = 412
+    object TSCDQryTSID: TStringField
+      FieldName = 'TSID'
+      FixedChar = True
+      Size = 11
+    end
+    object TSCDQrySBBH: TStringField
+      FieldName = 'SBBH'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDQryTSBH: TStringField
+      FieldName = 'TSBH'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDQryLSBH: TStringField
+      FieldName = 'LSBH'
+      FixedChar = True
+      Size = 30
+    end
+    object TSCDQryYWPM: TStringField
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object TSCDQryZWPM: TStringField
+      FieldName = 'ZWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object TSCDQryVWPM: TStringField
+      FieldName = 'VWPM'
+      Size = 200
+    end
+    object TSCDQryDWBH: TStringField
+      FieldName = 'DWBH'
+      FixedChar = True
+      Size = 4
+    end
+    object TSCDQryZSJC_YW: TStringField
+      FieldName = 'ZSJC_YW'
+      FixedChar = True
+    end
+    object TSCDQryZSJC_ZW: TStringField
+      FieldName = 'ZSJC_ZW'
+      FixedChar = True
+    end
+    object TSCDQryXSBH: TStringField
+      FieldName = 'XSBH'
+      FixedChar = True
+      Size = 15
+    end
+    object TSCDQryNSX: TStringField
+      FieldName = 'NSX'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDQryInDATE: TDateTimeField
+      FieldName = 'InDATE'
+    end
+    object TSCDQryDepID: TStringField
+      FieldName = 'DepID'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDQryDepID_Memo: TStringField
+      FieldName = 'DepID_Memo'
+      FixedChar = True
+    end
+    object TSCDQryJDTS: TStringField
+      FieldName = 'JDTS'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDQryJDTSDep: TStringField
+      FieldName = 'JDTSDep'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDQryJDBDATE: TStringField
+      FieldName = 'JDBDATE'
+      FixedChar = True
+      Size = 12
+    end
+    object TSCDQryJDEDATE: TStringField
+      FieldName = 'JDEDATE'
+      FixedChar = True
+      Size = 12
+    end
+    object TSCDQryJRTS: TStringField
+      FieldName = 'JRTS'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDQryJRTSDep: TStringField
+      FieldName = 'JRTSDep'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDQryJRBDATE: TStringField
+      FieldName = 'JRBDATE'
+      FixedChar = True
+      Size = 12
+    end
+    object TSCDQryJREDATE: TStringField
+      FieldName = 'JREDATE'
+      FixedChar = True
+      Size = 12
+    end
+    object TSCDQryStatus: TStringField
+      FieldName = 'Status'
+      FixedChar = True
+      Size = 2
+    end
+    object TSCDQryUSERID: TStringField
+      FieldName = 'USERID'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDQryUSERDATE: TDateTimeField
+      FieldName = 'USERDATE'
+    end
+    object TSCDQryYN: TStringField
+      FieldName = 'YN'
+      FixedChar = True
+      Size = 1
+    end
+    object TSCDQryCFMID_LL: TStringField
+      FieldName = 'CFMID_LL'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDQryCFMDATE_LL: TDateTimeField
+      FieldName = 'CFMDATE_LL'
+    end
+    object TSCDQryLLNO: TStringField
+      FieldName = 'LLNO'
+      FixedChar = True
+      Size = 11
+    end
+    object TSCDQryCFMID_RK: TStringField
+      FieldName = 'CFMID_RK'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDQryCFMDATE_RK: TDateTimeField
+      FieldName = 'CFMDATE_RK'
+    end
+    object TSCDQryRKNO: TStringField
+      FieldName = 'RKNO'
+      FixedChar = True
+      Size = 11
+    end
+    object TSCDQryHGPM: TStringField
+      FieldName = 'HGPM'
+      FixedChar = True
+      Size = 200
+    end
+    object TSCDQryQUCBH: TStringField
+      FieldName = 'QUCBH'
+      FixedChar = True
+      Size = 30
+    end
+    object TSCDQryZSDH: TStringField
+      FieldName = 'ZSDH'
+      FixedChar = True
+      Size = 6
+    end
+    object TSCDQryCQDH: TStringField
+      FieldName = 'CQDH'
+      FixedChar = True
+      Size = 4
+    end
+    object TSCDQryAuthCE: TBooleanField
+      FieldName = 'AuthCE'
+    end
+    object TSCDQryMemo: TStringField
+      FieldName = 'Memo'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDQryfpdz: TStringField
+      FieldName = 'fpdz'
+      FixedChar = True
+      Size = 120
+    end
+    object TSCDQrydh: TStringField
+      FieldName = 'dh'
+      FixedChar = True
+    end
+    object TSCDQrycz: TStringField
+      FieldName = 'cz'
+      FixedChar = True
+    end
+    object TSCDQryfzr: TStringField
+      FieldName = 'fzr'
+      FixedChar = True
+    end
+    object TSCDQryllr: TStringField
+      FieldName = 'llr'
+      FixedChar = True
+    end
+    object TSCDQryLB1_Memo: TStringField
+      FieldName = 'LB1_Memo'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDQryLB2_Memo: TStringField
+      FieldName = 'LB2_Memo'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDQryLB3_Memo: TStringField
+      FieldName = 'LB3_Memo'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDQryZSZL_AuthCE: TBooleanField
+      FieldName = 'ZSZL_AuthCE'
+    end
+    object TSCDQryAuthCE_Memo: TStringField
+      FieldName = 'AuthCE_Memo'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDQryAuthZSDH_Memo: TStringField
+      FieldName = 'AuthZSDH_Memo'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDQryIsZSDH: TBooleanField
+      FieldName = 'IsZSDH'
+    end
+    object TSCDQryZSZL_Memo: TStringField
+      FieldName = 'ZSZL_Memo'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDQryDepName: TStringField
+      FieldName = 'DepName'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDQryDepMemo: TStringField
+      DisplayWidth = 50
+      FieldName = 'DepMemo'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDQryQty: TFloatField
+      FieldName = 'Qty'
+    end
+    object TSCDQryVNPrice: TCurrencyField
+      FieldName = 'VNPrice'
+      DisplayFormat = '#,##0'
+    end
+    object TSCDQryUSPrice: TFloatField
+      FieldName = 'USPrice'
+    end
+    object TSCDQryDOCNO: TStringField
+      FieldName = 'DOCNO'
+      FixedChar = True
+    end
+    object TSCDQryAuthCompany: TBooleanField
+      FieldName = 'AuthCompany'
+    end
+    object TSCDQryAuthZSDH: TBooleanField
+      FieldName = 'AuthZSDH'
+    end
+    object TSCDQryRFID_Tag: TStringField
+      DisplayWidth = 24
+      FieldName = 'RFID_Tag'
+      FixedChar = True
+      Size = 24
+    end
+    object TSCDQryLABEL_Tag: TStringField
+      FieldName = 'LABEL_Tag'
+      FixedChar = True
+      Size = 15
+    end
+    object TSCDQryLB: TStringField
+      FieldName = 'LB'
+      FixedChar = True
+      Size = 1
+    end
+    object TSCDQryMachine_Type: TStringField
+      FieldName = 'Machine_Type'
+      FixedChar = True
+    end
+    object TSCDQryCycleDate_M: TDateTimeField
+      FieldName = 'CycleDate_M'
+    end
+    object TSCDQryCycleDate_S: TDateTimeField
+      FieldName = 'CycleDate_S'
+    end
+    object TSCDQryCycleDate_Y: TDateTimeField
+      FieldName = 'CycleDate_Y'
+    end
+    object TSCDQryLeanDep: TStringField
+      FieldName = 'LeanDep'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDQryLeanMemo: TStringField
+      FieldName = 'LeanMemo'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDQryLean_ID: TStringField
+      FieldName = 'Lean_ID'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDQrySTT: TFloatField
+      FieldName = 'STT'
+    end
+    object TSCDQryMachine_Status: TStringField
+      FieldName = 'Machine_Status'
+      FixedChar = True
+      Size = 2
+    end
+  end
+  object DS1: TDataSource
+    DataSet = TSCDQry
+    Left = 428
+    Top = 468
+  end
+  object Qtemp: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      '')
+    Left = 424
+    Top = 364
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 429
+    Top = 523
+    object Detail1: TMenuItem
+      Caption = 'Detail'
+      OnClick = Detail1Click
+    end
+  end
+  object TSCDDepQry: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'Select * from ( '
+      
+        'Select SFL,ID,DepName,DepMemo,SBBH,YWPM,ZWPM,Count(LABEL_Tag) as' +
+        ' Qty from ( '
+      
+        'Select SFL,ID,DepName,DepMemo,IsNull(MSBBH,SBBH) as SBBH,IsNull(' +
+        'MYWPM,YWPM) as YWPM,IsNull(MZWPM, ZWPM) as ZWPM, LABEL_Tag from ' +
+        '( '
+      'Select TSCD.*'
+      
+        '       ,TSCD_SB.YWPM,TSCD_SB.VWPM,TSCD_SB.ZWPM,TSCD_SB.HGPM,TSCD' +
+        '_SB.QUCBH,TSCD_SB.LSBH,TSCD_SB.DWBH,TSCD_SB.ZSDH,TSCD_SB.CQDH,TS' +
+        'CD_SB.AuthCompany,TSCD_SB.AuthCE,TSCD_SB.Memo as SB_Memo '
+      
+        '       ,TSCD_ZSZL.ZSJC_YW,TSCD_ZSZL.ZSJC_ZW,TSCD_ZSZL.fpdz,TSCD_' +
+        'ZSZL.dh,TSCD_ZSZL.cz,TSCD_ZSZL.fzr,TSCD_ZSZL.llr '
+      
+        '       ,TSCD_ZSZL.LB1_Memo,TSCD_ZSZL.LB2_Memo,TSCD_ZSZL.LB3_Memo' +
+        ',TSCD_ZSZL.AuthCE as ZSZL_AuthCE,TSCD_ZSZL.AuthCE_Memo,TSCD_ZSZL' +
+        '.AuthZSDH,TSCD_ZSZL.AuthZSDH_Memo,TSCD_ZSZL.IsZSDH,TSCD_ZSZL.Mem' +
+        'o as ZSZL_Memo '
+      
+        '       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,Is' +
+        'Null(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo   '
+      
+        '       ,TSCD_KCRKS.USPrice,TSCD_KCRKS.VNPrice,TSCD_KCRK.DOCNO,JD' +
+        'TS_Dep.DepName as JDTSDep,JRTS_Dep.DepName as JRTSDep,MTSCD_SB.Y' +
+        'WPM as MYWPM,MTSCD_SB.ZWPM as MZWPM,BDepartment.ID,BDepartment.S' +
+        'FL '
+      'from TSCD'
+      'left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH'
+      
+        'left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS' +
+        '.SBBH=TSCD.SBBH  '
+      'left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO '
+      
+        'left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.De' +
+        'pID'
+      'left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS '
+      'left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS '
+      'left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH'
+      'left join TSCD_BDepartment JDBDep on JDBDep.ID=TSCD.JDTS '
+      'left join TSCD_SB  MTSCD_SB on MTSCD_SB.SBBH = TSCD.MSBBH '
+      'where TSCD.LB=1 '
+      'Union all '
+      'Select TSCD.*'
+      
+        '       ,CLZL.YWPM,NULL as VWPM,CLZL.zwpm,null as HGPM,null as QU' +
+        'CBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompa' +
+        'ny,null as AuthCE,null as SB_Memo'
+      
+        '       ,ZSZL.zsjc,zszl.zsywjc,zszl.fpdz,zszl.dh,zszl.cz,zszl.fzr' +
+        ',zszl.llr'
+      
+        '       ,null as LB1_Memo,null as LB2_Memo,null LB3_Memo,null as ' +
+        'ZSZL_AuthCE,null as AuthCE_Memo,null as AuthZSDH,null as AuthZSD' +
+        'H_Memo,null as IsZSDH,null as ZSZL_Memo'
+      
+        '       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,Is' +
+        'Null(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  '
+      
+        '       ,KCRKS.USPrice,KCRKS.VNPrice,KCRKS.DOCNO,null as JRTS_Dep' +
+        ',null as JRTSDep,MCLZL.YWPM as MYWPM,MCLZL.ZWPM as MZWPM,BDepart' +
+        'ment.ID,BDepartment.SFL '
+      'from TSCD'
+      'left join CLZL on CLZL.CLDH = TSCD.SBBH'
+      'left join KCRK  on KCRK.RKNO=TSCD.RKNO '
+      
+        'left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH' +
+        ' '
+      
+        'left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.De' +
+        'pID'
+      'left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH'
+      'left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS '
+      'left join CLZL MCLZL on MCLZL.CLDH = TSCD.MSBBH '
+      'where TSCD.LB=2'
+      ') TSCD where 1=1 '
+      ' and TSCD.Status in ('#39'N'#39','#39'Y'#39','#39'B'#39','#39'M'#39','#39'H'#39','#39'R'#39','#39'F'#39','#39'T'#39') '
+      'and TSCD.LB=2 '
+      'and Label_Tag like '#39'A%'#39' '
+      
+        'Group by SFL,ID,DepName,DepMemo,IsNull(MSBBH,SBBH),IsNull(MYWPM,' +
+        'YWPM) ,IsNull(MZWPM, ZWPM), LABEL_Tag )  TSCD where 1=1 '
+      'Group by SFL,ID,DepName,DepMemo,SBBH,YWPM,ZWPM ) TSCD '
+      'order by SFL,ID,DepName,DepMemo,YWPM,ZWPM')
+    Left = 492
+    Top = 412
+    object TSCDDepQrySFL: TStringField
+      FieldName = 'SFL'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDDepQryID: TStringField
+      FieldName = 'ID'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDDepQryDepName: TStringField
+      DisplayWidth = 9
+      FieldName = 'DepName'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDDepQryDepMemo: TStringField
+      DisplayWidth = 10
+      FieldName = 'DepMemo'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDDepQrySBBH: TStringField
+      DisplayWidth = 14
+      FieldName = 'SBBH'
+      FixedChar = True
+      Size = 15
+    end
+    object TSCDDepQryYWPM: TStringField
+      DisplayWidth = 13
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object TSCDDepQryZWPM: TStringField
+      DisplayWidth = 15
+      FieldName = 'ZWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object TSCDDepQryQty: TIntegerField
+      DisplayWidth = 8
+      FieldName = 'Qty'
+    end
+  end
+  object DS2: TDataSource
+    DataSet = TSCDDepQry
+    Left = 492
+    Top = 468
+  end
+  object TSCDDetQry: TQuery
+    DatabaseName = 'DB'
+    DataSource = DS2
+    SQL.Strings = (
+      
+        'Select SUBSTRING(TSCD.DepID_Memo, CHARINDEX('#39'-'#39', TSCD.DepID_Memo' +
+        ') + 1, LEN(TSCD.DepID_Memo) - CHARINDEX('#39'-'#39', TSCD.DepID_Memo)) A' +
+        'S result,* from ('
+      'Select TSCD.*'
+      
+        '       ,TSCD_SB.YWPM,TSCD_SB.VWPM,TSCD_SB.ZWPM,TSCD_SB.HGPM,TSCD' +
+        '_SB.QUCBH,TSCD_SB.LSBH,TSCD_SB.DWBH,TSCD_SB.ZSDH,TSCD_SB.CQDH,TS' +
+        'CD_SB.AuthCompany,TSCD_SB.AuthCE'
+      
+        '       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,Is' +
+        'Null(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo   '
+      
+        '       ,JDTS_Dep.DepName as JDTSDep,JRTS_Dep.DepName as JRTSDep,' +
+        'IsNull(MTSCD_SB.YWPM,TSCD_SB.YWPM) as MYWPM,IsNull(MTSCD_SB.ZWPM' +
+        ',TSCD_SB.ZWPM) as MZWPM,lbzls.zwsm as ZDWBH,lbzls.ywsm as YDWBH'
+      'from TSCD'
+      'left join TSCD_SB on TSCD_SB.SBBH = TSCD.SBBH'
+      
+        'left join TSCD_KCRKS on TSCD_KCRKS.RKNO=TSCD.RKNO and TSCD_KCRKS' +
+        '.SBBH=TSCD.SBBH  '
+      'left join TSCD_KCRK  on TSCD_KCRK.RKNO=TSCD_KCRKS.RKNO '
+      
+        'left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.De' +
+        'pID'
+      'left join TSCD_BDepartment JDTS_Dep on JDTS_Dep.ID=TSCD.JDTS '
+      'left join TSCD_BDepartment JRTS_Dep on JRTS_Dep.ID=TSCD.JRTS '
+      'left join TSCD_ZSZL on TSCD_SB.ZSDH=TSCD_ZSZL.ZSDH'
+      'left join TSCD_BDepartment JDBDep on JDBDep.ID=TSCD.JDTS '
+      'left join TSCD_SB  MTSCD_SB on MTSCD_SB.SBBH = TSCD.MSBBH '
+      'left join lbzls on lbzls.lb='#39'02'#39' and lbzls.lbdh=TSCD_SB.dwbh'
+      'where TSCD.LB=1 '
+      'Union all '
+      'Select TSCD.*'
+      
+        '       ,CLZL.YWPM,NULL as VWPM,CLZL.ZWPM,null as HGPM,null as QU' +
+        'CBH,null as LSBH,CLZL.dwbh,KCRK.ZSBH,CLZL.cqdh,null as AuthCompa' +
+        'ny,null as AuthCE'
+      
+        '       ,IsNull(JDBDep.DepName,BDepartment.DepName) as DepName,Is' +
+        'Null(JDBDep.DepMemo,BDepartment.DepMemo) as DepMemo  '
+      
+        '       ,null as JRTS_Dep,null as JRTSDep,IsNull(MCLZL.YWPM,CLZL.' +
+        'YWPM) as MYWPM,IsNull(MCLZL.ZWPM,CLZL.ZWPM) as MZWPM,lbzls.zwsm ' +
+        'as ZDWBH,lbzls.ywsm as YDWBH'
+      'from TSCD'
+      'left join CLZL on CLZL.CLDH = TSCD.SBBH'
+      'left join KCRK  on KCRK.RKNO=TSCD.RKNO '
+      
+        'left join KCRKS on KCRKS.RKNO=KCRK.RKNO and KCRKS.CLBH=TSCD.SBBH' +
+        ' '
+      
+        'left join TSCD_BDepartment BDepartment on BDepartment.ID=TSCD.De' +
+        'pID'
+      'left join ZSZL on ZSZL.ZSDH=KCRK.ZSBH'
+      'left join BDepartment JDBDep on JDBDep.ID=TSCD.JDTS '
+      'left join CLZL MCLZL on MCLZL.CLDH = TSCD.MSBBH '
+      'left join lbzls on lbzls.lb='#39'02'#39' and lbzls.lbdh=CLZL.dwbh'
+      'where TSCD.LB=2'
+      ') TSCD where 1=1 '
+      
+        ' and TSCD.Status in ('#39'N'#39','#39'Y'#39','#39'B'#39','#39'M'#39','#39'H'#39','#39'R'#39','#39'F'#39','#39'T'#39','#39'N'#39','#39'Y'#39','#39'B'#39 +
+        ','#39'M'#39','#39'H'#39','#39'R'#39','#39'F'#39','#39'T'#39') '
+      'and TSCD.LB=2 '
+      'and Label_Tag like '#39'A%'#39' '
+      ' and TSCD.DepName='#39'A_CD'#39' and IsNull(MSBBH,SBBH)='#39'Z207000005'#39' '
+      ' order by result,Label_Tag')
+    Left = 556
+    Top = 412
+    object TSCDDetQryTSID: TStringField
+      DisplayWidth = 14
+      FieldName = 'TSID'
+      FixedChar = True
+      Size = 11
+    end
+    object TSCDDetQryTSBH: TStringField
+      DisplayWidth = 9
+      FieldName = 'TSBH'
+      FixedChar = True
+      Size = 15
+    end
+    object TSCDDetQrySBBH: TStringField
+      DisplayWidth = 15
+      FieldName = 'SBBH'
+      FixedChar = True
+      Size = 15
+    end
+    object TSCDDetQryQty: TFloatField
+      DisplayWidth = 10
+      FieldName = 'Qty'
+    end
+    object TSCDDetQryXSBH: TStringField
+      DisplayWidth = 30
+      FieldName = 'XSBH'
+      FixedChar = True
+      Size = 30
+    end
+    object TSCDDetQryNSX: TStringField
+      DisplayWidth = 10
+      FieldName = 'NSX'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDDetQryInDATE: TDateTimeField
+      DisplayWidth = 18
+      FieldName = 'InDATE'
+    end
+    object TSCDDetQryDepID: TStringField
+      DisplayWidth = 10
+      FieldName = 'DepID'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDDetQryDepID_Memo: TStringField
+      DisplayWidth = 20
+      FieldName = 'DepID_Memo'
+      FixedChar = True
+    end
+    object TSCDDetQryJDTS: TStringField
+      DisplayWidth = 10
+      FieldName = 'JDTS'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDDetQryJDBDATE: TStringField
+      DisplayWidth = 12
+      FieldName = 'JDBDATE'
+      FixedChar = True
+      Size = 12
+    end
+    object TSCDDetQryJDEDATE: TStringField
+      DisplayWidth = 12
+      FieldName = 'JDEDATE'
+      FixedChar = True
+      Size = 12
+    end
+    object TSCDDetQryJRTS: TStringField
+      DisplayWidth = 10
+      FieldName = 'JRTS'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDDetQryJRBDATE: TStringField
+      DisplayWidth = 12
+      FieldName = 'JRBDATE'
+      FixedChar = True
+      Size = 12
+    end
+    object TSCDDetQryJREDATE: TStringField
+      DisplayWidth = 12
+      FieldName = 'JREDATE'
+      FixedChar = True
+      Size = 12
+    end
+    object TSCDDetQryStatus: TStringField
+      DisplayWidth = 2
+      FieldName = 'Status'
+      FixedChar = True
+      Size = 2
+    end
+    object TSCDDetQryUSERID: TStringField
+      DisplayWidth = 10
+      FieldName = 'USERID'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDDetQryUSERDATE: TDateTimeField
+      DisplayWidth = 18
+      FieldName = 'USERDATE'
+    end
+    object TSCDDetQryCFMID: TStringField
+      DisplayWidth = 10
+      FieldName = 'CFMID'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDDetQryCFMDATE: TDateTimeField
+      DisplayWidth = 18
+      FieldName = 'CFMDATE'
+    end
+    object TSCDDetQryYN: TStringField
+      DisplayWidth = 1
+      FieldName = 'YN'
+      FixedChar = True
+      Size = 1
+    end
+    object TSCDDetQryCFMID_LL: TStringField
+      DisplayWidth = 10
+      FieldName = 'CFMID_LL'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDDetQryCFMDATE_LL: TDateTimeField
+      DisplayWidth = 18
+      FieldName = 'CFMDATE_LL'
+    end
+    object TSCDDetQryLLNO: TStringField
+      DisplayWidth = 11
+      FieldName = 'LLNO'
+      FixedChar = True
+      Size = 11
+    end
+    object TSCDDetQryCFMID_RK: TStringField
+      DisplayWidth = 10
+      FieldName = 'CFMID_RK'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDDetQryCFMDATE_RK: TDateTimeField
+      DisplayWidth = 18
+      FieldName = 'CFMDATE_RK'
+    end
+    object TSCDDetQryRKNO: TStringField
+      DisplayWidth = 11
+      FieldName = 'RKNO'
+      FixedChar = True
+      Size = 11
+    end
+    object TSCDDetQryLB: TStringField
+      DisplayWidth = 1
+      FieldName = 'LB'
+      FixedChar = True
+      Size = 1
+    end
+    object TSCDDetQryRFID_Tag: TStringField
+      DisplayWidth = 24
+      FieldName = 'RFID_Tag'
+      FixedChar = True
+      Size = 24
+    end
+    object TSCDDetQryLABEL_Tag: TStringField
+      DisplayWidth = 15
+      FieldName = 'LABEL_Tag'
+      FixedChar = True
+      Size = 15
+    end
+    object TSCDDetQryUSERID_Tag: TStringField
+      DisplayWidth = 10
+      FieldName = 'USERID_Tag'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDDetQryUSERDATE_Tag: TDateTimeField
+      DisplayWidth = 18
+      FieldName = 'USERDATE_Tag'
+    end
+    object TSCDDetQryMemo: TStringField
+      DisplayWidth = 100
+      FieldName = 'Memo'
+      FixedChar = True
+      Size = 100
+    end
+    object TSCDDetQryMSBBH: TStringField
+      DisplayWidth = 15
+      FieldName = 'MSBBH'
+      FixedChar = True
+      Size = 15
+    end
+    object TSCDDetQryYWPM: TStringField
+      DisplayWidth = 200
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object TSCDDetQryVWPM: TStringField
+      DisplayWidth = 255
+      FieldName = 'VWPM'
+      FixedChar = True
+      Size = 255
+    end
+    object TSCDDetQryZWPM: TStringField
+      DisplayWidth = 200
+      FieldName = 'ZWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object TSCDDetQryHGPM: TStringField
+      DisplayWidth = 200
+      FieldName = 'HGPM'
+      FixedChar = True
+      Size = 200
+    end
+    object TSCDDetQryQUCBH: TStringField
+      DisplayWidth = 30
+      FieldName = 'QUCBH'
+      FixedChar = True
+      Size = 30
+    end
+    object TSCDDetQryLSBH: TStringField
+      DisplayWidth = 50
+      FieldName = 'LSBH'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDDetQryDWBH: TStringField
+      DisplayWidth = 10
+      FieldName = 'DWBH'
+      FixedChar = True
+      Size = 10
+    end
+    object TSCDDetQryZSDH: TStringField
+      DisplayWidth = 20
+      FieldName = 'ZSDH'
+      FixedChar = True
+    end
+    object TSCDDetQryCQDH: TStringField
+      DisplayWidth = 4
+      FieldName = 'CQDH'
+      FixedChar = True
+      Size = 4
+    end
+    object TSCDDetQryAuthCompany: TBooleanField
+      DisplayWidth = 5
+      FieldName = 'AuthCompany'
+    end
+    object TSCDDetQryAuthCE: TBooleanField
+      DisplayWidth = 5
+      FieldName = 'AuthCE'
+    end
+    object TSCDDetQryDepName: TStringField
+      DisplayWidth = 50
+      FieldName = 'DepName'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDDetQryDepMemo: TStringField
+      DisplayWidth = 50
+      FieldName = 'DepMemo'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDDetQryJDTSDep: TStringField
+      DisplayWidth = 50
+      FieldName = 'JDTSDep'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDDetQryJRTSDep: TStringField
+      DisplayWidth = 50
+      FieldName = 'JRTSDep'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDDetQryMYWPM: TStringField
+      DisplayWidth = 200
+      FieldName = 'MYWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object TSCDDetQryMZWPM: TStringField
+      DisplayWidth = 200
+      FieldName = 'MZWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object TSCDDetQryZDWBH: TStringField
+      FieldName = 'ZDWBH'
+      FixedChar = True
+      Size = 50
+    end
+    object TSCDDetQryYDWBH: TStringField
+      FieldName = 'YDWBH'
+      FixedChar = True
+      Size = 50
+    end
+  end
+  object DS3: TDataSource
+    DataSet = TSCDDetQry
+    Left = 556
+    Top = 468
+  end
+  object PopupMenu2: TPopupMenu
+    Left = 557
+    Top = 523
+    object MenuItem1: TMenuItem
+      Caption = 'Excel'
+      OnClick = MenuItem1Click
+    end
+  end
+  object QueryUser: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'Select USERID,PWD,Report from Busers')
+    Left = 313
+    Top = 410
+  end
+end

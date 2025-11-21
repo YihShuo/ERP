@@ -1,0 +1,202 @@
+unit ShippingRep1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls,dateutils,
+  ComCtrls,comobj;
+
+type
+  TShippingRep = class(TForm)
+    Panel1: TPanel;
+    Label3: TLabel;
+    Label6: TLabel;
+    Label5: TLabel;
+    Label1: TLabel;
+    Label8: TLabel;
+    Edit3: TEdit;
+    Edit2: TEdit;
+    Button1: TButton;
+    Edit1: TEdit;
+    Button2: TButton;
+    DTP1: TDateTimePicker;
+    DTP2: TDateTimePicker;
+    DBGrid1: TDBGrid;
+    SCSMCH: TQuery;
+    DS1: TDataSource;
+    SCSMCHDDBH: TStringField;
+    SCSMCHCTQty: TIntegerField;
+    SCSMCHQty: TFloatField;
+    SCSMCHXieXing: TStringField;
+    SCSMCHShehao: TStringField;
+    SCSMCHArticle: TStringField;
+    SCSMCHXieMing: TStringField;
+    SCSMCHDDQty: TIntegerField;
+    SCSMCHshipdate: TDateTimeField;
+    SCSMCHCTDD: TIntegerField;
+    PopupMenu1: TPopupMenu;
+    Detail1: TMenuItem;
+    SCSMCHQtyLack: TIntegerField;
+    SCSMCHCTLack: TIntegerField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit3KeyPress(Sender: TObject; var Key: Char);
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Detail1Click(Sender: TObject);
+    procedure SCSMCHCalcFields(DataSet: TDataSet);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ShippingRep: TShippingRep;
+
+implementation
+
+uses ShippingRep_Det1;
+
+{$R *.dfm}
+
+procedure TShippingRep.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+procedure TShippingRep.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+edit2.SetFocus;
+end;
+
+procedure TShippingRep.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+edit3.SetFocus;
+end;
+
+procedure TShippingRep.Edit3KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+Button1.SetFocus;
+end;
+
+procedure TShippingRep.Button1Click(Sender: TObject);
+begin
+with SCSMCH do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select SCSMCH.DDBH,count(SCSMCH.CTNO) as CTQty,isnull(sum(SCSMRK.Qty),0) as Qty,XXZL.XieXing,XXZL.Shehao,XXZL.Article,');
+    sql.add('XXZL.XieMing,DDZL.Pairs as DDQty,DDZL.shipdate,SCZLDate.CTQty as CTDD');
+    sql.add('from SCSMCH ');
+    sql.add('left join SCSMRK on SCSMCH.DDBH=SCSMRK.DDBH and SCSMCH.CTNO=SCSMRK.CTNO ');
+    sql.add('left join DDZL on SCSMCH.DDBH=DDZL.DDBH ');
+    sql.add('left join XXZl on XXZL.XieXing=DDZl.XieXing and XXZL.SheHao=DDZL.SheHao ');
+    sql.add('left join SCZLDate on SCZLDate.ZLBH=DDZL.ZLBH ');
+    sql.add('where SCSMCH.DDBH like '+''''+edit3.text+'%'+'''');
+    sql.add(' and XXZL.Article like '+''''+edit1.Text+'%'+'''');
+    sql.add(' and XXZL.XieMing like '+''''+'%'+edit2.Text+'%'+''''); 
+    sql.add('and SCSMCH.DDBH like '+''''+'%'+edit3.Text+'%'+'''');
+    sql.add(' and Convert(smalldatetime,convert(varchar,SCSMCH.USERDate,111)) between ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',DTP1.date)+'''');
+    sql.add(' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+'''');
+    sql.add('group by  SCSMCH.DDBH,XXZL.XieXing,XXZL.Shehao,XXZL.Article,XXZL.XieMing,DDZL.Pairs,DDZL.shipdate,SCZLDATE.CTQty');
+    sql.add('order by SCSMCH.DDBH ');
+    active:=true;
+  end
+end;
+
+procedure TShippingRep.FormCreate(Sender: TObject);
+begin
+
+DTP1.Date:=Date-6;
+DTP2.Date:=date;
+end;
+
+procedure TShippingRep.Button2Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+if SCSMCH.Active then
+  begin
+    if SCSMCH.recordcount=0 then
+      begin
+        showmessage('No record.');
+        abort;
+      end;
+  end
+  else
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+
+try
+  eclApp:=CreateOleObject('Excel.Application');
+  WorkBook:=CreateOleObject('Excel.Sheet');
+except
+  Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+  Exit;
+end;
+
+try
+  WorkBook:=eclApp.workbooks.Add; 
+  eclApp.Cells(1,1):='NO';
+  for   i:=1   to   SCSMCH.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=SCSMCH.fields[i-1].FieldName;
+    end;
+  SCSMCH.First;
+  j:=2;
+  while   not  SCSMCH.Eof   do
+    begin
+      eclApp.Cells(j,1):=j-1;
+      for   i:=1   to   SCSMCH.fieldcount   do
+        begin
+          eclApp.Cells(j,i+1):=SCSMCH.Fields[i-1].Value;
+          eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+        end;
+      SCSMCH.Next;
+      inc(j);
+    end;
+  eclapp.columns.autofit;
+  showmessage('Succeed.');
+  eclApp.Visible:=True;
+except
+  on   F:Exception   do
+    showmessage(F.Message);
+end;
+
+end;
+
+procedure TShippingRep.Detail1Click(Sender: TObject);
+begin
+ShippingRep_Det:=TShippingRep_Det.create(self);
+ShippingRep_Det.show;
+end;
+
+procedure TShippingRep.SCSMCHCalcFields(DataSet: TDataSet);
+begin
+SCSMCH.FieldByName('QtyLack').Value:=SCSMCH.FieldByName('DDQty').Value-SCSMCH.FieldByName('Qty').Value;
+SCSMCH.FieldByName('CTLack').Value:=SCSMCH.FieldByName('CTDD').Value-SCSMCH.FieldByName('CTQty').Value;
+
+end;
+
+procedure TShippingRep.FormDestroy(Sender: TObject);
+begin
+ShippingRep:=nil;
+end;
+
+end.

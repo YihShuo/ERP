@@ -1,0 +1,237 @@
+object AccountRep: TAccountRep
+  Left = 317
+  Top = 208
+  Width = 870
+  Height = 500
+  Caption = 'AccountRep'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 862
+    Height = 49
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 16
+      Top = 24
+      Width = 34
+      Height = 16
+      Caption = 'From:'
+    end
+    object Label8: TLabel
+      Left = 168
+      Top = 21
+      Width = 20
+      Height = 16
+      Caption = 'To:'
+    end
+    object Button1: TButton
+      Left = 336
+      Top = 8
+      Width = 73
+      Height = 33
+      Caption = 'Query'
+      TabOrder = 0
+      OnClick = Button1Click
+    end
+    object Button2: TButton
+      Left = 440
+      Top = 8
+      Width = 73
+      Height = 33
+      Caption = 'EXCEL'
+      TabOrder = 1
+      OnClick = Button2Click
+    end
+    object DTP1: TDateTimePicker
+      Left = 56
+      Top = 16
+      Width = 105
+      Height = 24
+      Date = 39477.775883784720000000
+      Format = 'yyyy/MM/dd'
+      Time = 39477.775883784720000000
+      TabOrder = 2
+    end
+    object DTP2: TDateTimePicker
+      Left = 200
+      Top = 16
+      Width = 105
+      Height = 24
+      Date = 39477.776384722220000000
+      Format = 'yyyy/MM/dd'
+      Time = 39477.776384722220000000
+      TabOrder = 3
+    end
+  end
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 49
+    Width = 862
+    Height = 417
+    Align = alClient
+    DataSource = DataSource1
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -11
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    ParentFont = False
+    SumList.Active = True
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    OnGetCellParams = DBGridEh1GetCellParams
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'DDBH'
+        Footers = <>
+        Width = 91
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Article'
+        Footers = <
+          item
+            Value = 'Total:'
+            ValueType = fvtStaticText
+          end>
+        Width = 118
+      end
+      item
+        EditButtons = <>
+        FieldName = 'XieMing'
+        Footers = <
+          item
+            FieldName = 'XieMing'
+            ValueType = fvtCount
+          end>
+        Width = 216
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Pairs'
+        Footers = <>
+        Width = 63
+      end
+      item
+        EditButtons = <>
+        FieldName = 'okQty'
+        Footers = <>
+        Width = 66
+      end
+      item
+        Color = 14155775
+        EditButtons = <>
+        FieldName = 'Qty'
+        Footers = <
+          item
+            FieldName = 'Qty'
+            ValueType = fvtSum
+          end>
+        Width = 72
+      end
+      item
+        EditButtons = <>
+        FieldName = 'LackQty'
+        Footers = <>
+        Width = 62
+      end>
+  end
+  object Query1: TQuery
+    OnCalcFields = Query1CalcFields
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'select SCSMRK.DDBH,XXZL.Article, XXZL.XieMing,DDZL.Pairs,okDD.ok' +
+        'Qty,sum(SCSMRK.Qty) as Qty'
+      'from SCSMRK'
+      'left join DDZL on DDZl.DDBH=SCSMRK.DDBH '
+      
+        'left join XXZL on DDZL.XieXing=XXZL.XieXing and DDZL.SheHao=XXZL' +
+        '.SheHao '
+      
+        'left join (select DDBH,sum(Qty) as okQty from SCSMRK group by DD' +
+        'BH) okDD '
+      '            on okDD.DDBh=SCSMRK.DDBH'
+      
+        'where convert(smalldatetime,convert(varchar,SCSMRK.USERDate,111)' +
+        ') between '
+      #39'2008/07/01'#39' and '#39'2008/07/31'#39
+      
+        'group by SCSMRK.DDBH,XXZL.Article, XXZL.XieMing,okDD.okQty,DDZL.' +
+        'Pairs')
+    Left = 312
+    Top = 168
+    object Query1DDBH: TStringField
+      FieldName = 'DDBH'
+      FixedChar = True
+      Size = 15
+    end
+    object Query1Article: TStringField
+      FieldName = 'Article'
+      FixedChar = True
+    end
+    object Query1XieMing: TStringField
+      FieldName = 'XieMing'
+      FixedChar = True
+      Size = 50
+    end
+    object Query1Pairs: TIntegerField
+      FieldName = 'Pairs'
+      DisplayFormat = '##,#0'
+    end
+    object Query1okQty: TFloatField
+      FieldName = 'okQty'
+      DisplayFormat = '##,#0'
+    end
+    object Query1Qty: TFloatField
+      FieldName = 'Qty'
+      DisplayFormat = '##,#0'
+    end
+    object Query1LackQty: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'LackQty'
+      Calculated = True
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = Query1
+    Left = 344
+    Top = 168
+  end
+end

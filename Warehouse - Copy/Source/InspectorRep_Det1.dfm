@@ -1,0 +1,220 @@
+object InspectorRep_Det: TInspectorRep_Det
+  Left = 358
+  Top = 199
+  Width = 513
+  Height = 450
+  BorderIcons = [biSystemMenu]
+  Caption = 'InspectorRep_Det'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 0
+    Width = 265
+    Height = 416
+    Align = alLeft
+    DataSource = DS1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+    PopupMenu = PopupMenu1
+    TabOrder = 0
+    TitleFont.Charset = ANSI_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'Arial'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'CTNO'
+        Width = 65
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'Qty'
+        Width = 51
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'USERDate'
+        Title.Caption = 'DATE'
+        Width = 70
+        Visible = True
+      end>
+  end
+  object Panel1: TPanel
+    Left = 265
+    Top = 0
+    Width = 240
+    Height = 416
+    Align = alClient
+    TabOrder = 1
+    object DBGrid2: TDBGrid
+      Left = 11
+      Top = 1
+      Width = 228
+      Height = 414
+      Align = alRight
+      DataSource = DS2
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'XXCC'
+          Visible = True
+        end
+        item
+          Color = 10944511
+          Expanded = False
+          FieldName = 'Qty'
+          Width = 34
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'LHLabel'
+          Width = 114
+          Visible = True
+        end>
+    end
+  end
+  object SCSMYW: TQuery
+    DatabaseName = 'DB'
+    DataSource = InspectorRep.DS1
+    SQL.Strings = (
+      'select SCSMYW.*,SCSMRK.Qty'
+      'from SCSMYW'
+      
+        'left join SCSMRK on SCSMRK.DDBH=SCSMYW.DDBH and SCSMRK.CTNO=SCSM' +
+        'YW.CTNO'
+      'where SCSMYW.DDBH=:DDBH'
+      'order by SCSMYW.CTNO')
+    Left = 8
+    Top = 24
+    ParamData = <
+      item
+        DataType = ftFixedChar
+        Name = 'DDBH'
+        ParamType = ptUnknown
+        Size = 16
+      end>
+    object SCSMYWDDBH: TStringField
+      FieldName = 'DDBH'
+      Origin = 'DB.SCSMCH.DDBH'
+      FixedChar = True
+      Size = 15
+    end
+    object SCSMYWCTNO: TStringField
+      FieldName = 'CTNO'
+      Origin = 'DB.SCSMCH.CTNO'
+      FixedChar = True
+      Size = 5
+    end
+    object SCSMYWQty: TFloatField
+      FieldName = 'Qty'
+      Origin = 'DB.SCSMRK.Qty'
+    end
+    object SCSMYWUSERDate: TDateTimeField
+      FieldName = 'USERDate'
+      Origin = 'DB.SCSMCH.USERDate'
+      DisplayFormat = 'yyyy/MM/dd'
+    end
+  end
+  object DS1: TDataSource
+    DataSet = SCSMYW
+    Left = 40
+    Top = 24
+  end
+  object SCSMRKS: TQuery
+    DatabaseName = 'DB'
+    DataSource = DS1
+    SQL.Strings = (
+      'select *'
+      'from SCSMRKS'
+      'where DDBH=:DDBH'
+      'and CTNO=:CTNO'
+      'order by XXCC')
+    Left = 313
+    Top = 40
+    ParamData = <
+      item
+        DataType = ftFixedChar
+        Name = 'DDBH'
+        ParamType = ptUnknown
+        Size = 16
+      end
+      item
+        DataType = ftFixedChar
+        Name = 'CTNO'
+        ParamType = ptUnknown
+        Size = 6
+      end>
+    object SCSMRKSDDBH: TStringField
+      FieldName = 'DDBH'
+      Origin = 'DB.SCSMRKS.DDBH'
+      FixedChar = True
+      Size = 15
+    end
+    object SCSMRKSCTNO: TStringField
+      FieldName = 'CTNO'
+      Origin = 'DB.SCSMRKS.CTNO'
+      FixedChar = True
+      Size = 5
+    end
+    object SCSMRKSXXCC: TStringField
+      FieldName = 'XXCC'
+      Origin = 'DB.SCSMRKS.XXCC'
+      FixedChar = True
+      Size = 6
+    end
+    object SCSMRKSLHLabel: TStringField
+      FieldName = 'LHLabel'
+      Origin = 'DB.SCSMRKS.LHLabel'
+      FixedChar = True
+      Size = 25
+    end
+    object SCSMRKSQty: TFloatField
+      FieldName = 'Qty'
+      Origin = 'DB.SCSMRKS.Qty'
+    end
+  end
+  object DS2: TDataSource
+    DataSet = SCSMRKS
+    Left = 337
+    Top = 40
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 168
+    Top = 136
+    object Excel1: TMenuItem
+      Caption = 'Excel'
+      OnClick = Excel1Click
+    end
+  end
+end

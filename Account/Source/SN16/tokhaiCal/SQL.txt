@@ -1,0 +1,34 @@
+Select * 
+from KCCLMONTH_HG 
+where KCYEAR='2022' and KCMONTH='11'  and HGLB in ('HD','NK','KD') and CKBH in ('CDC','CDT','BYC','BYT','CBY','SDC','SDT','SRC','VA12','VTXW')
+
+Select Distinct CKBH
+from KCCLMONTH_HG 
+where KCYEAR='2022' and KCMONTH='11' 
+--------------------------
+
+Select KCRKS.RKNO,KCRKS.CLBH,Sum(Qty) as Qty,KCRK.UserDate 
+from KCRK
+Left join KCRKS on KCRK.RKNO=KCRKS.RKNO
+where  KCRK.CKBH='BYC' and  HGLB='NK' and convert(smalldatetime,convert(varchar,KCRK.USERDATE,111))<='2022/11/30'  
+      and KCRKS.CLBH='A010009233'
+Group by KCRKS.RKNO,KCRKS.CLBH,KCRK.UserDate
+order by KCRK.USERDATE desc
+
+
+
+-------------------------------
+
+
+
+Select * from (
+Select *
+From KCCLMONTH_HG 
+Where KCYEAR='2022' and KCMONTH='11'  and HGLB in ('HD','NK','KD')  
+and CKBH in ('CDC','CDT','BYC','BYT','CBY','SDC','SDT','SRC','VA12','VTXW') )  A
+Left join (
+Select KCRK.CKBH,KCRK.HGLB,KCPKRK1.CLBH,Sum(Qty) as Qty 
+from KCPKRK1
+left join KCRK on KCRK.RKNO=KCPKRK1.RKNO
+Group by  KCRK.CKBH,KCRK.HGLB,KCPKRK1.CLBH  )  B  on A.CKBH=B.CKBH and A.CLBH=B.CLBH and A.HGLB=B.HGLB
+where (A.Qty<>B.Qty) or B.Qty is null

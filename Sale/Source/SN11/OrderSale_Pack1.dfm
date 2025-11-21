@@ -1,0 +1,292 @@
+object OrderSale_Pack: TOrderSale_Pack
+  Left = 608
+  Top = 329
+  Width = 757
+  Height = 459
+  Caption = 'OrderSale_Pack'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 16
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 749
+    Height = 49
+    Align = alTop
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 2
+      Top = 16
+      Width = 54
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'DDBH'
+    end
+    object DDBHEdit: TEdit
+      Left = 57
+      Top = 13
+      Width = 121
+      Height = 24
+      TabOrder = 0
+    end
+    object BB5: TBitBtn
+      Left = 296
+      Top = 0
+      Width = 49
+      Height = 49
+      Hint = 'Save Current'
+      Caption = 'Save'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      OnClick = BB5Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+        555555555555555555555555555555555555555555FF55555555555559055555
+        55555555577FF5555555555599905555555555557777F5555555555599905555
+        555555557777FF5555555559999905555555555777777F555555559999990555
+        5555557777777FF5555557990599905555555777757777F55555790555599055
+        55557775555777FF5555555555599905555555555557777F5555555555559905
+        555555555555777FF5555555555559905555555555555777FF55555555555579
+        05555555555555777FF5555555555557905555555555555777FF555555555555
+        5990555555555555577755555555555555555555555555555555}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BB1: TBitBtn
+      Left = 184
+      Top = 0
+      Width = 49
+      Height = 49
+      Caption = 'Query'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      OnClick = BB1Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        333333333333333FF3FF3333333333CC30003333333333773777333333333C33
+        3000333FF33337F33777339933333C3333333377F33337F3333F339933333C33
+        33003377333337F33377333333333C333300333F333337F33377339333333C33
+        3333337FF3333733333F33993333C33333003377FF33733333773339933C3333
+        330033377FF73F33337733339933C33333333FF377F373F3333F993399333C33
+        330077F377F337F33377993399333C33330077FF773337F33377399993333C33
+        33333777733337F333FF333333333C33300033333333373FF7773333333333CC
+        3000333333333377377733333333333333333333333333333333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BB6: TBitBtn
+      Left = 350
+      Top = 0
+      Width = 49
+      Height = 49
+      Hint = 'Modify Current'
+      Caption = 'Excel'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      OnClick = BB6Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033333333B333
+        333B33FF33337F3333F73BB3777BB7777BB3377FFFF77FFFF77333B000000000
+        0B3333777777777777333330FFFFFFFF07333337F33333337F333330FFFFFFFF
+        07333337F3FF3FFF7F333330F00F000F07333337F77377737F333330FFFFFFFF
+        07333FF7F3FFFF3F7FFFBBB0F0000F0F0BB37777F7777373777F3BB0FFFFFFFF
+        0BBB3777F3FF3FFF77773330F00F000003333337F773777773333330FFFF0FF0
+        33333337F3FF7F37F3333330F08F0F0B33333337F7737F77FF333330FFFF003B
+        B3333337FFFF77377FF333B000000333BB33337777777F3377FF3BB3333BB333
+        3BB33773333773333773B333333B3333333B7333333733333337}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+    end
+    object BB7: TBitBtn
+      Left = 238
+      Top = 0
+      Width = 49
+      Height = 49
+      Hint = 'Insert one New Record'
+      Caption = 'Paste'
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+      OnClick = BB7Click
+      Glyph.Data = {
+        36030000424D3603000000000000360000002800000010000000100000000100
+        18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF666666A5A5A5A0A0A0A0A0A0A3A3
+        A37C7C7CE1E1E1FFFFFFFFFFFFFFFFFFA6A6A69D9D9D9D9D9D9D9D9D9B9B9BBD
+        BDBDA3A3A3FFFFFFFFFFFFFFFFFFFFFFFFE0E0E0CACACAFFFFFFFFFFFFD3D3D3
+        696969D3D3D3CACACACACACAC9C9C9E1E1E1A3A3A36B6B6B6C6C6C6C6C6C6565
+        65B9B9B9CFCFCFFFFFFFFFFFFFD1D1D19A9A9AFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFF9B9B9B9D9D9D9C9C9C9D9D9D999999C0C0C0CECECEFFFFFFFFFFFFD1D1D1
+        969696FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9A9A9AFAFAFAF2F2F2F2F2F2F4F4
+        F4D5D5D5CCCCCCFFFFFFFFFFFFD1D1D1969696FFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFF9E9E9E636363646464656565606060B9B9B9CFCFCFFFFFFFFFFFFFD1D1D1
+        969696FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF969696FFFFFFFFFFFFFFFFFFFFFF
+        FFC8C8C8C9C9C9FFFFFFFFFFFFD1D1D1969696FFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFF969696FFFFFFFFFFFFFFFFFF6A6A6A3E3E3EFFFFFFFFFFFFFFFFFFD1D1D1
+        969696FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8B8B8B9696969696969999998080
+        80FFFFFFFFFFFFFFFFFFFFFFFFD1D1D1969696FFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFB1B1B1BEBEBEFFFFFFFFFFFFFFFFFFFFFFFFD1D1D1
+        969696FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFAFAFB9B9
+        B9FFFFFFFFFFFFFFFFFFFFFFFFD1D1D1969696FFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFAFAFAFB9B9B9FFFFFFFFFFFFFFFFFFFFFFFFD1D1D1
+        979797FFFFFF6363637070707171717171717070705E5E5EFFFFFFB1B1B1B9B9
+        B9FFFFFFFFFFFFFFFFFFFFFFFFD0D0D0A7A7A7DDDDDD6969693939393F3F3F3F
+        3F3F393939727272C0C0C0C3C3C3B7B7B7FFFFFFFFFFFFFFFFFFFFFFFFE8E8E8
+        2B2B2B505050434343000000000000000000000000424242434343373737D1D1
+        D1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF36363621
+        2121FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      Layout = blGlyphTop
+    end
+  end
+  object DBGrid1: TDBGridEh
+    Left = 0
+    Top = 49
+    Width = 749
+    Height = 379
+    Align = alClient
+    DataSource = DS1
+    Flat = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = #26032#32048#26126#39636
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -11
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind]
+    ParentFont = False
+    SumList.Active = True
+    TabOrder = 1
+    TitleFont.Charset = ANSI_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -16
+    TitleFont.Name = #26032#32048#26126#39636
+    TitleFont.Style = []
+    OnGetCellParams = DBGrid1GetCellParams
+  end
+  object YWDD: TQuery
+    CachedUpdates = True
+    DatabaseName = 'DB'
+    RequestLive = True
+    SQL.Strings = (
+      
+        'select DDZL.*,YWDD.DDBH,YWDD.GSBH,YWDD.YSBH,YWDD.ETD,YWDD.Qty,YW' +
+        'DD.KHDDBH1,YWDD.KHDDBH2,YWDD.USERDATE,YWDD.USERID,YWDD.YN from ('
+      'Select DDBHRY,ShipDate,Pairs,'
+      '       MAX(case when CC='#39'03.0'#39' then 0 end) as '#39'03.0'#39','
+      '       MAX(case when CC='#39'03.5'#39' then 0 end) as '#39'03.5'#39','
+      '       MAX(case when CC='#39'03.5'#39' then 0 end) as '#39'04.0'#39
+      'from ('
+      'select DDZL.DDBH as DDBHRY,DDZL.ShipDate,DDZLS.CC,DDZL.Pairs'
+      'from DDZL'
+      'left join DDZLS on DDZL.DDBH=DDZLS.DDBH'
+      'where DDZL.DDBH ='#39'Y1804-0124'#39' ) DDZL'
+      'Group by DDBHRY,ShipDate,Pairs ) DDZL'
+      'left join YWDD on YWDD.YSBH=DDZL.DDBHRY')
+    UpdateObject = UpYWDD
+    Left = 424
+    Top = 160
+  end
+  object UpYWDD: TUpdateSQL
+    ModifySQL.Strings = (
+      'update YWDD'
+      'set'
+      '  ETD = :ETD,'
+      '  Qty = :Qty,'
+      '  KHDDBH1 = :KHDDBH1,'
+      '  KHDDBH2 = :KHDDBH2,'
+      '  GSBH = :GSBH,'
+      '  UserDate=:UserDate,'
+      '  UserID=:UserID'
+      'where'
+      '  DDBH = :OLD_DDBH'
+      ''
+      'update DDZL'
+      'set '
+      '  ShipDate=:ShipDate,'
+      '  UserDate=:UserDate,'
+      '  UserID=:UserID'
+      'where'
+      '  DDBH = :OLD_DDBH')
+    InsertSQL.Strings = (
+      'insert into YWDD'
+      
+        '  (DDBH,GSBH, YSBH, ETD, Qty, KHDDBH1, KHDDBH2, USERDATE, USERID' +
+        ', YN)'
+      'values'
+      
+        '  (:DDBH, :GSBH, :YSBH, :ETD, :Qty, :KHDDBH1, :KHDDBH2, :USERDAT' +
+        'E, :USERID, :YN)')
+    DeleteSQL.Strings = (
+      'delete from YWDD'
+      'where'
+      '  DDBH = :OLD_DDBH')
+    Left = 426
+    Top = 193
+  end
+  object DS1: TDataSource
+    DataSet = YWDD
+    Left = 460
+    Top = 164
+  end
+  object tmpQry: TQuery
+    DatabaseName = 'DB'
+    Left = 392
+    Top = 160
+  end
+  object ExeQry: TQuery
+    DatabaseName = 'DB'
+    Left = 360
+    Top = 160
+  end
+end

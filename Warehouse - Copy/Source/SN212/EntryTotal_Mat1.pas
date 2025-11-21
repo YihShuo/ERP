@@ -1,0 +1,157 @@
+unit EntryTotal_Mat1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls;
+
+type
+  TEntryTotal_Mat = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Button1: TButton;
+    Edit2: TEdit;
+    EDIT1: TEdit;
+    Edit4: TEdit;
+    DBGrid1: TDBGrid;
+    DS1: TDataSource;
+    Query1: TQuery;
+    Query1cldh: TStringField;
+    Query1cllb: TStringField;
+    Query1ywpm: TStringField;
+    Query1dwbh: TStringField;
+    Query1CKBH: TStringField;
+    Query1KCBH: TStringField;
+    Query1KCMC: TStringField;
+    Label3: TLabel;
+    Query1zwpm: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure EDIT1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    procedure Button1Click(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure DBGrid1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit4KeyPress(Sender: TObject; var Key: Char);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  EntryTotal_Mat: TEntryTotal_Mat;
+
+implementation
+
+uses main1, MaterialArea1, EntryTotal1;
+
+{$R *.dfm}
+
+procedure TEntryTotal_Mat.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin 
+query1.active:=false;
+//action:=Cafree;
+end;
+
+procedure TEntryTotal_Mat.EDIT1KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+edit2.SetFocus;
+end;
+
+procedure TEntryTotal_Mat.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+edit4.SetFocus;
+end;
+
+procedure TEntryTotal_Mat.Button1Click(Sender: TObject);
+begin
+
+with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select CLZL.*,KCZLS.CKBH,KCZLS.KCBH,KCZL.KCMC  ');
+    sql.add('from clzl');
+    sql.add('left join (select KCZLS.* from KCZLS ');
+    sql.add('           where KCZLS.CKBH='+''''+EntryTotal.ENMas.fieldbyname('CKBH').value+'''');
+    sql.add('           )KCZLS on KCZLS.CLBH=CLZL.CLDH  ');
+    sql.add('left join KCZL on KCZL.CKBH=KCZLS.CKBH and KCZL.KCBH=KCZLS.KCBH');
+    sql.add(' where CLZL.CLDH like');
+    sql.add(''''+edit1.Text+'%'+'''');
+    sql.add('and CLZL.YWPM like ');
+    sql.add(''''+'%'+edit2.Text+'%'+'''');
+    {sql.add('and CLZL.YWPM like ');
+    sql.add(''''+'%'+edit3.Text+'%'+'''');  }
+    sql.add('and CLZL.ZWPM like ');
+    sql.add(''''+'%'+edit4.Text+'%'+'''');
+    sql.add('and CLZL.YN='+''''+'2'+''''); 
+    sql.add('and (CLZL.TYJH is null or CLZL.TYJH='+''''+'N'+''''+')');
+    sql.add('order by CLZL.CLDH');
+    active:=true;
+  end;
+end;
+
+procedure TEntryTotal_Mat.DBGrid1DblClick(Sender: TObject);
+begin
+
+if (not query1.Active) then
+  begin
+    abort;
+  end;
+if (Query1.recordcount<1) then
+  begin
+    abort;
+  end;
+if Query1.FieldByName('KCBH').IsNull then       //如果沒有確定位置則重新確定先
+  begin
+    MaterialArea:=TMaterialArea.create(self);
+    MaterialArea.Edit1.Text:=Query1.fieldbyname('CLDH').AsString; 
+    MaterialArea.CBX1.Text:=EntryTotal.EnMas.fieldbyname('CKBH').AsString;
+    MaterialArea.button1click(nil);
+    MaterialArea.show;
+    query1.Active:=false;
+    close;
+    abort;
+  end;  
+with EntryTotal.ENDet do
+  begin
+    insert;
+    fieldbyname('CGBH').value:='ZZZZZZZZZZ'; 
+    fieldbyname('RKSB').value:='QT';
+    fieldbyname('CLBH').value:=query1.fieldbyname('CLDH').value;
+    fieldbyname('YWPM').value:=query1.fieldbyname('YWPM').value;
+    fieldbyname('ZWPM').value:=query1.fieldbyname('ZWPM').value;
+    fieldbyname('DWBH').value:=query1.fieldbyname('DWBH').value;
+    post;
+  end;
+showmessage('Succeed.');
+end;
+
+procedure TEntryTotal_Mat.DBGrid1KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+   DBGrid1DblClick(nil);
+end;
+
+procedure TEntryTotal_Mat.Edit4KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+button1Click(nil);
+end;
+
+procedure TEntryTotal_Mat.FormDestroy(Sender: TObject);
+begin
+EntryTotal_Mat:=nil;
+end;
+
+end.

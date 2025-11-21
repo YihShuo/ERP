@@ -1,0 +1,36 @@
+update SCBBS 
+set BZLB=(select  SCXXCL.BZLB 
+          from (select max(SCXXCL.BZLB) as BZLB,SCBBS.SCBH,SCXXCL.GXLB 
+                from  SCBBS  
+                inner join DDZL on DDZL.DDBH=SCBBS.SCBH  and DDZL.GSBH='VA12' --and DDZL.ShipDate>GetDate()-360
+                left join SCXXCL on SCXXCL.XieXing=DDZL.XieXIng 
+                where   exists(select SCBB.ProNo from SCBB where SCBB.ProNo=SCBBS.ProNo
+        and convert(varchar,SCBB.SCDate,111) between 
+        (convert(smalldatetime,convert(varchar,GETDATE(),111))-1) and (convert(smalldatetime,convert(varchar,GETDATE(),111))-1))
+                group by SCBBS.SCBH ,SCXXCL.GXLB) SCXXCL where SCXXCL.SCBH=SCBBS.SCBH and SCXXCL.GXLB=SCBBS.GXLB )
+ where BZLB is null
+       and exists(select SCBB.ProNo from SCBB where SCBB.ProNo=SCBBS.ProNo
+        and convert(varchar,SCBB.SCDate,111) between 
+        (convert(smalldatetime,convert(varchar,GETDATE(),111))-1) and (convert(smalldatetime,convert(varchar,GETDATE(),111))-1))
+        
+select SCDate as '生產日',DepName as '部門名稱',Qty as '實際產量',bzQty as '計畫產能',Qty-BzQty as '計畫產能欠數',case when IsNull(BzQty,0)=0 then '100%' else  Convert(varchar,FLOOR(Qty/BzQty*100))+'%' end as '計畫達成率' ,SCGS as '計畫上班時數' from (
+select convert(varchar,SCBB.SCDate,111) as SCDate ,SCBB.DepNo,BDepartment.DepName,BDepartment.DepName as DepName2,
+       isnull(sum(SCBBS.Qty),0) as Qty,isnull(SCBZCL.Qty,0) as bzQty,SCRL.SCGS,RSCQ.SDGS 
+from SCBB 
+left join SCBBS on  SCBB.ProNo=SCBBS.ProNo
+left join BDepartment on BDepartment.ID=SCBB.DepNo  
+left join SCBZCL on SCBZCL.BZDate=SCBB.SCDate and SCBZCL.DepNo=SCBB.DepNo
+left join DDZL on DDZl.DDBH=SCBBS.SCBH 
+left join SCXXCL on SCXXCL.XieXing=DDZL.XieXing and SCXXCL.GXLB=SCBBS.GXLB and SCXXCL.BZLB=SCBBS.BZLB
+left join SCRL on convert(varchar,convert(smalldatetime,SCRL.SCYEAR+'/'+SCRL.SCMONTH+'/'+SCRL.SCDay))
+                         =convert(varchar,SCBB.SCDate)  
+                  and SCRL.DepNO=SCBB.DepNO 
+left join  RSCQ on convert(varchar,RSCQ.RSDate,111)=convert(varchar,SCBB.SCDate,111) and RSCQ.DepNo=SCBB.DepNo
+where  convert(smalldatetime,convert(varchar,SCBB.SCDate,111)) between 
+       (convert(smalldatetime,convert(varchar,GETDATE(),111))-1) and (convert(smalldatetime,convert(varchar,GETDATE(),111))-1)
+       and BDepartment.DepName like '%_G%'
+       and SCBB.GSBH =:GSBH
+       and (SCBBS.GXLB='C' or SCBBS.GXLB='S' or SCBBS.GXLB='A')
+Group by convert(varchar,SCBB.SCDate,111) ,SCBB.DepNo,BDepartment.DepName ,SCBZCL.Qty,RSCQ.SDGS,SCRL.SCGS
+) SCBB
+Order by  SCBB.DepNo,SCBB.DepName,SCBB.SCDate,SCBB.Qty

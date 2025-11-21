@@ -1,0 +1,109 @@
+object MatConsumption_Detail: TMatConsumption_Detail
+  Left = 418
+  Top = 228
+  Width = 434
+  Height = 412
+  BorderIcons = [biSystemMenu]
+  Caption = 'MatConsumption_Detail'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 0
+    Width = 426
+    Height = 378
+    Align = alClient
+    DataSource = DataSource1
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ZLBH'
+        Width = 102
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'XieMing'
+        Width = 169
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CLSL'
+        Width = 82
+        Visible = True
+      end>
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    DataSource = DeliverAccount.DataSource1
+    SQL.Strings = (
+      'select ZLZLS2.ZLBH,sum(ZLZLS2.CLSL) as CLSL,XXZL.XieMing '
+      'from ZLZLS2'
+      'left join DDZL on DDZl.ZLBH=ZLZLS2.ZLBH '
+      
+        'left join XXZl on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL' +
+        '.SheHao '
+      
+        'where convert(smalldatetime,convert(varchar,DDZL.ShipDate,111)) ' +
+        'between'
+      #39'2008/03/01'#39
+      'and '#39'2008/03/31'#39
+      'and XXZL.XieXing like '#39'%%'#39
+      'and XXZL.SheHao like '#39'%%'#39
+      'and XXZL.XieMing like '#39'%%'#39
+      'and XXZl.Article like '#39'%%'#39
+      'and ZLZLS2.ZLBH like '#39'%y%'#39
+      'and MJBH='#39'ZZZZZZZZZZ'#39
+      'and ZLZLS2.CLBH='#39'AFG0000004'#39
+      'group by ZLZLS2.ZLBH ,XXZL.XieMing'
+      'order by ZLZLS2.ZLBH ')
+    Left = 96
+    Top = 32
+    object Query1ZLBH: TStringField
+      FieldName = 'ZLBH'
+      Origin = 'DB.ZLZLS2.ZLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object Query1XieMing: TStringField
+      FieldName = 'XieMing'
+      FixedChar = True
+      Size = 50
+    end
+    object Query1CLSL: TFloatField
+      FieldName = 'CLSL'
+      Origin = 'DB.ZLZLS2.CLSL'
+      DisplayFormat = '##,#0.0'
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = Query1
+    Left = 136
+    Top = 32
+  end
+end

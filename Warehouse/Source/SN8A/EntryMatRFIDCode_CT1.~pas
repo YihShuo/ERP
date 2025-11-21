@@ -1,0 +1,146 @@
+unit EntryMatRFIDCode_CT1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, GridsEh, DBGridEh, StdCtrls, ExtCtrls;
+
+type
+  TEntryMatRFIDCode_CT = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Button1: TButton;
+    MemoEdit: TEdit;
+    INVEdit: TEdit;
+    DBGridEh1: TDBGridEh;
+    DS1: TDataSource;
+    Query1: TQuery;
+    Query1CLBH: TStringField;
+    Query1YWPM: TStringField;
+    Query1Qty: TCurrencyField;
+    Query1ZSJC: TStringField;
+    Query1DOCNO: TStringField;
+    Query1MEMO: TStringField;
+    Button2: TButton;
+    procedure FormDestroy(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure DBGridEh1DblClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  EntryMatRFIDCode_CT: TEntryMatRFIDCode_CT;
+
+implementation
+  uses EntryMatRFIDCode1,main1,FunUnit;
+{$R *.dfm}
+
+procedure TEntryMatRFIDCode_CT.FormDestroy(Sender: TObject);
+begin
+  EntryMatRFIDCode_CT:=nil;
+end;
+
+procedure TEntryMatRFIDCode_CT.Button1Click(Sender: TObject);
+begin
+  //
+  with query1 do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('select KCRKS.CLBH,CLZL.YWPM,Sum(KCRKS.Qty) as Qty,ZSZL.ZSJC,KCRK.DOCNO,KCRK.MEMO');
+    SQL.Add('from KCRKS ');
+    SQL.Add('left join KCRK on KCRK.RKNO=KCRKS.RKNO');
+    SQL.Add('left join CLZL on CLZL.CLDH=KCRKS.CLBH');
+    SQL.Add('left join ZSZL on KCRK.ZSBH=ZSZL.ZSDH');
+    SQL.Add('where 1=1 ');
+    if INVEdit.Text<>'' then
+    SQL.Add('   and KCRK.DOCNO like '''+INVEdit.Text+'%'' ');
+    if MemoEdit.Text<>'' then
+    SQl.Add('   and KCRK.MEMO like '''+MemoEdit.Text+'%'' ');
+    SQL.Add('   and KCRK.GSBH='''+main.Edit2.Text+''' ');
+    SQL.Add('Group by KCRKS.CLBH,CLZL.YWPM,ZSZL.ZSJC,KCRK.DOCNO,KCRK.MEMO');
+    SQL.Add('order by KCRKS.CLBH ');
+    //funcObj.WriteErrorLog(sql.Text);
+    Active:=true;
+  end;
+  //
+end;
+
+procedure TEntryMatRFIDCode_CT.Button2Click(Sender: TObject);
+var bm:Tbookmark;
+  i:integer;
+  Qty:real;
+  bookmarklist:tbookmarklistEh;
+begin
+  if messagedlg('Do you really want to copy these record?',mtconfirmation,[mbYes,mbNo],0)=mrYes then
+  begin
+    if (not query1.Active) then
+    begin
+     abort;
+    end;
+    if (Query1.recordcount<1) then
+    begin
+      abort;
+    end;
+    query1.disablecontrols;
+    bm:=query1.getbookmark;
+    bookmarklist:=DBGridEh1.selectedrows;
+    if bookmarklist.count>0 then
+    begin
+      try
+       for i:=0 to bookmarklist.count-1 do
+        begin
+         query1.gotobookmark(pointer(bookmarklist[i]));
+         //
+          with EntryMatRFIDCode.KCRKRFS do
+            begin
+              edit;
+              fieldbyname('CLBH').value:=query1.fieldbyname('CLBH').value;
+              fieldbyname('YWPM').value:=query1.fieldbyname('YWPM').value;
+              fieldbyname('Qty').value:=query1.fieldbyname('Qty').value;
+              fieldbyname('PackQty').value:=100.0;
+              insert;
+            end;
+          end;  
+           //
+        finally
+        begin
+          query1.gotobookmark(bm);
+          query1.freebookmark(bm);
+          query1.enablecontrols;
+          showmessage('You have finish copy!');
+        end;
+    end;
+   end;
+  end;
+end;
+
+procedure TEntryMatRFIDCode_CT.DBGridEh1DblClick(Sender: TObject);
+begin
+  if (not query1.Active) then
+  begin
+    abort;
+  end;
+  if (Query1.recordcount<1) then
+  begin
+    abort;
+  end;
+  with EntryMatRFIDCode.KCRKRFS do
+  begin
+    insert;
+    fieldbyname('CLBH').value:=query1.fieldbyname('CLBH').value;
+    fieldbyname('YWPM').value:=query1.fieldbyname('YWPM').value;
+    fieldbyname('Qty').value:=0.0;
+    fieldbyname('PackQty').value:=100.0;
+    post;
+  end;
+  showmessage('Succeed.');
+end;
+
+end.

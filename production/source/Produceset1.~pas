@@ -1,0 +1,394 @@
+unit Produceset1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls,OleServer,comobj;
+
+type
+  TProduceset = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label6: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label7: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit4: TEdit;
+    Button1: TButton;
+    CBX1: TComboBox;
+    Edit3: TEdit;
+    Button2: TButton;
+    Edit5: TEdit;
+    DBGrid1: TDBGrid;
+    Query1: TQuery;
+    DataSource1: TDataSource;
+    PopupMenu1: TPopupMenu;
+    NN1: TMenuItem;
+    NN2: TMenuItem;
+    NN3: TMenuItem;
+    Edit6: TEdit;
+    Edit7: TEdit;
+    Query1SCBH: TStringField;
+    Query1ZLBH: TStringField;
+    Query1XieXing: TStringField;
+    Query1Shehao: TStringField;
+    Query1XieMing: TStringField;
+    Query1Qty: TFloatField;
+    Query1ShipDate: TDateTimeField;
+    Query1Article: TStringField;
+    Query1Pairs: TIntegerField;
+    Query1CusName: TStringField;
+    Query1KHPO: TStringField;
+    Query1CDate: TDateTimeField;
+    Query1SDate: TDateTimeField;
+    Query1ODate: TDateTimeField;
+    Query1ADate: TDateTimeField;
+    Query1ETC: TDateTimeField;
+    Query1INSP: TDateTimeField;
+    Query1EXF: TDateTimeField;
+    Query1ETD: TDateTimeField;
+    Query1CSD: TDateTimeField;
+    Query1S_Fin: TFloatField;
+    Query1O_Fin: TFloatField;
+    Query1C_Fin: TFloatField;
+    Query1A_Fin: TFloatField;
+    Query1S_Bal: TFloatField;
+    Query1O_Bal: TFloatField;
+    Query1C_Bal: TFloatField;
+    Query1A_Bal: TFloatField;
+    Query1Y_Fin: TFloatField;
+    Query1Z_Fin: TFloatField;
+    Query1Y_Bal: TFloatField;
+    Query1Z_Bal: TFloatField;
+    Query1Assemble: TStringField;
+    Query1Stitching: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure NN2Click(Sender: TObject);
+    procedure NN1Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Produceset: TProduceset;
+  sdate,edate:Tdate;
+
+implementation
+
+uses Produceset_size1;
+
+{$R *.dfm}
+
+procedure TProduceset.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+free;
+end;
+
+procedure TProduceset.Button1Click(Sender: TObject);
+var a,b,c:word;
+begin
+if length(edit1.Text)<>7  then
+  begin
+    showmessage('Pls key in right month format.');
+    abort;
+  end;
+a:=strtoint(copy(edit1.Text,0,pos('/',edit1.text)-1));
+b:=strtoint(copy(edit1.text,pos('/',edit1.Text)+1,length(edit1.text)));
+c:=1;
+sdate:=EncodeDate(a,b,c);
+if b=12 then
+  begin
+    a:=a+1;
+    b:=1;
+  end
+  else
+    begin
+      b:=b+1;
+    end;
+ edate:=EncodeDate(a,b,c);
+ edate:=edate-1;
+
+
+with Query1 do
+  begin
+    active:=false;
+    sql.Clear;   //  耞羬琌,玥埃
+    sql.add('  if object_id('+''''+'tempdb..#SCSET'+''''+') is not null  ');
+    sql.add('begin   drop table #SCSET end   ');  
+    sql.add('  if object_id('+''''+'tempdb..#SCReport'+''''+') is not null  ');
+    sql.add('begin   drop table #SCReport end   ');
+    sql.add('select SCBBSS.SCBH,SCBBSS.GXLB,SCBBSS.XXCC,sum(SCBBSS.Qty) as Qty');
+    sql.add('into #SCSET from SCBBSS');
+    sql.add('left join SCZL on SCZL.SCBH=SCBBSS.SCBH and SCZL.GXLB=SCBBSS.GXLB');
+    sql.add('left join ZLZL on ZLZL.ZLBH=SCZL.ZLBH');
+    sql.add('left join DDZL on DDZL.DDBH=ZLZL.DDBH');
+    sql.add('left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao');
+    sql.add('where (SCBBSS.GXLB='+''''+'S'+''''+'or SCBBSS.GXLB='+''''+'O'+'''');
+    sql.add(') and SCZL.SCBH like ');
+    sql.add(''''+edit2.Text+'%'+'''');
+    sql.add('and SCZL.SCBH=SCZL.ZLBH');
+    sql.add(' and DDZL.ShipDate>=');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',sdate)+'''');
+    sql.add('and DDZL.ShipDate<=');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',edate)+'''');  
+    sql.add('and DDZL.DDZT='+''''+'Y'+'''');
+    sql.add('and XXZL.Article like ');
+    sql.add(''''+edit3.Text+'%'+'''');
+    sql.add('and XXZL.XieMing like ');
+    sql.add(''''+'%'+edit4.text+'%'+'''');
+    sql.add('group by SCBBSS.SCBH,SCBBSS.GXLB,SCBBSS.XXCC   ');
+
+
+    sql.add('select  SCZL.SCBH,ZLZL.ZLBH,DDZL.XieXing,DDZL.Shehao,DDZL.ShipDate,XXZL.XieMing,DDZL.Pairs,');
+    sql.add('XXZL.Article,isnull(SCBB.Qty,0) as Qty ,isnull(SCBBS.s_Qty,0) as S_Fin,LBZLS.YWSM as CusName,DDZL.KHPO,');
+    sql.add('isnull(SCBBO.o_Qty,0) as O_Fin,isnull(SCBBC.c_Qty,0) as C_Fin,');
+    sql.add('isnull(SCBBA.a_Qty,0) as A_Fin,isnull(SCBBY.Y_Qty,0) as Y_Fin,isnull(SCBBZ.Z_Qty,0) as Z_Fin ');
+    sql.add(',SCZLDate.CDate,SCZLDate.SDate,SCZLDate.ODate,');
+    sql.add('SCZLDate.ADate,SCZLDate.ETC,SCZLDate.INSP,SCZLDate.EXF,SCZLDate.ETD,');
+    sql.add('SCZLDate.CSD,SCZLDate.Assemble,SCZLDate.Stitching');
+    sql.add('into #SCReport from SCZL ');
+    sql.add('left join ZLZL on ZLZL.ZLBH=SCZL.ZLBH');
+    sql.add('left join SCZLDate on SCZLDate.ZLBH=ZLZL.ZLBH ');
+    sql.add('left join DDZL on DDZL.DDBH=ZLZL.DDBH');
+    sql.add('left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao');
+    sql.add('left join LBZLS on lbzls.lb='+''''+'13'+''''+' and lbzls.lbdh=DDZL.Dest');
+             // /*材糷*/     ');
+    sql.add('left join (select SCBBS.SCBH,sum(SCBBS.Qty)  as Qty from          /*材糷*/');
+    sql.add('(select  #SCSET.SCBH, #SCSET.XXCC,min( #SCSET.Qty) as Qty  from  /* 材糷*/');
+    sql.add(' #SCSET') ;
+    sql.add('group by  #SCSET.SCBH, #SCSET.XXCC having count(*)>1) SCBBS');
+    sql.add('group by SCBBS.SCBH)   SCBB     /*材糷挡*/');
+    sql.add('on SCBB.SCBH=SCZL.SCBH');
+
+    sql.add('left join (select SCBBSS.SCBH,sum(SCBBSS.Qty) as s_Qty  ')   ;
+    sql.add('from SCBBSS left join SCZL on SCZL.SCBH=SCBBSS.SCBH  and SCZL.GXLB=SCBBSS.GXLB');
+    sql.add('left join  ZLZL on ZLZL.ZLBH=SCZL.ZLBH');
+    sql.add('left join DDZL on DDZL.DDBH=ZLZL.DDBH');
+    sql.add('left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao');
+    sql.add(' where SCBBSS.GXLB='+''''+'S'+'''' );
+    sql.add('and SCZL.SCBH like ');
+    sql.add(''''+edit2.Text+'%'+'''');
+    sql.add(' and DDZL.ShipDate>=');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',sdate)+'''');
+    sql.add('and DDZL.ShipDate<=');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',edate)+'''');
+    sql.add('and XXZL.Article like ');
+    sql.add(''''+edit3.Text+'%'+'''');
+    sql.add('and XXZL.XieMing like ');
+    sql.add(''''+'%'+edit4.text+'%'+'''');
+    sql.add('group by SCBBSS.SCBH) SCBBS');
+    sql.add('on SCBBS.SCBH=SCZL.SCBH');
+
+    sql.add('left join (select SCBBSS.SCBH,sum(SCBBSS.Qty) as o_Qty  ')  ;
+    sql.add('from SCBBSS left join SCZL on SCZL.SCBH=SCBBSS.SCBH  and SCZL.GXLB=SCBBSS.GXLB');
+    sql.add('left join  ZLZL on ZLZL.ZLBH=SCZL.ZLBH');
+    sql.add('left join DDZL on DDZL.DDBH=ZLZL.DDBH');
+    sql.add('left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao');
+    sql.add(' where SCBBSS.GXLB='+''''+'O'+'''' );
+    sql.add('and SCZL.SCBH like ');
+    sql.add(''''+edit2.Text+'%'+'''');
+    sql.add(' and DDZL.ShipDate>=');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',sdate)+'''');
+    sql.add('and DDZL.ShipDate<=');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',edate)+'''');
+    sql.add('and XXZL.Article like ');
+    sql.add(''''+edit3.Text+'%'+'''');
+    sql.add('and XXZL.XieMing like ');
+    sql.add(''''+'%'+edit4.text+'%'+'''');
+    sql.add('group by SCBBSS.SCBH) SCBBO');
+    sql.add('on SCBBO.SCBH=SCZL.SCBH');
+
+    sql.add('left join (select SCBBSS.SCBH,sum(SCBBSS.Qty) as c_Qty  ')  ;
+    sql.add('from SCBBSS left join SCZL on SCZL.SCBH=SCBBSS.SCBH  and SCZL.GXLB=SCBBSS.GXLB');
+    sql.add('left join  ZLZL on ZLZL.ZLBH=SCZL.ZLBH');
+    sql.add('left join DDZL on DDZL.DDBH=ZLZL.DDBH');
+    sql.add('left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao');
+    sql.add(' where SCBBSS.GXLB='+''''+'C'+'''' );
+    sql.add('and SCZL.SCBH like ');
+    sql.add(''''+edit2.Text+'%'+'''');
+    sql.add(' and DDZL.ShipDate>=');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',sdate)+'''');
+    sql.add('and DDZL.ShipDate<=');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',edate)+'''');
+    sql.add('and XXZL.Article like ');
+    sql.add(''''+edit3.Text+'%'+'''');
+    sql.add('and XXZL.XieMing like ');
+    sql.add(''''+'%'+edit4.text+'%'+'''');
+    sql.add('group by SCBBSS.SCBH) SCBBC');
+    sql.add('on SCBBC.SCBH=SCZL.SCBH');  
+
+    sql.add('left join (select SCBBSS.SCBH,sum(SCBBSS.Qty) as a_Qty  ')  ;
+    sql.add('from SCBBSS left join SCZL on SCZL.SCBH=SCBBSS.SCBH  and SCZL.GXLB=SCBBSS.GXLB');
+    sql.add('left join  ZLZL on ZLZL.ZLBH=SCZL.ZLBH');
+    sql.add('left join DDZL on DDZL.DDBH=ZLZL.DDBH');
+    sql.add('left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao');
+    sql.add(' where SCBBSS.GXLB='+''''+'A'+'''' );
+    sql.add('and SCZL.SCBH like ');
+    sql.add(''''+edit2.Text+'%'+'''');
+    sql.add(' and DDZL.ShipDate>=');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',sdate)+'''');
+    sql.add('and DDZL.ShipDate<=');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',edate)+'''');
+    sql.add('and XXZL.Article like ');
+    sql.add(''''+edit3.Text+'%'+'''');
+    sql.add('and XXZL.XieMing like ');
+    sql.add(''''+'%'+edit4.text+'%'+'''');
+    sql.add('group by SCBBSS.SCBH) SCBBA');
+    sql.add('on SCBBA.SCBH=SCZL.SCBH');
+                              
+    sql.add('left join (select SCBBSS.SCBH,sum(SCBBSS.Qty) as y_Qty  ')  ;
+    sql.add('from SCBBSS left join SCZL on SCZL.SCBH=SCBBSS.SCBH  and SCZL.GXLB=SCBBSS.GXLB');
+    sql.add('left join  ZLZL on ZLZL.ZLBH=SCZL.ZLBH');
+    sql.add('left join DDZL on DDZL.DDBH=ZLZL.DDBH');
+    sql.add('left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao');
+    sql.add(' where SCBBSS.GXLB='+''''+'Y'+'''' );
+    sql.add('and SCZL.SCBH like ');
+    sql.add(''''+edit2.Text+'%'+'''');
+    sql.add(' and DDZL.ShipDate>=');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',sdate)+'''');
+    sql.add('and DDZL.ShipDate<=');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',edate)+'''');
+    sql.add('and XXZL.Article like ');
+    sql.add(''''+edit3.Text+'%'+'''');
+    sql.add('and XXZL.XieMing like ');
+    sql.add(''''+'%'+edit4.text+'%'+'''');
+    sql.add('group by SCBBSS.SCBH) SCBBY');
+    sql.add('on SCBBY.SCBH=SCZL.SCBH');
+
+    
+    sql.add('left join (select SCBBSS.SCBH,sum(SCBBSS.Qty) as Z_Qty  ')  ;
+    sql.add('from SCBBSS left join SCZL on SCZL.SCBH=SCBBSS.SCBH  and SCZL.GXLB=SCBBSS.GXLB');
+    sql.add('left join  ZLZL on ZLZL.ZLBH=SCZL.ZLBH');
+    sql.add('left join DDZL on DDZL.DDBH=ZLZL.DDBH');
+    sql.add('left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao');
+    sql.add(' where SCBBSS.GXLB='+''''+'Z'+'''' );
+    sql.add('and SCZL.SCBH like ');
+    sql.add(''''+edit2.Text+'%'+'''');
+    sql.add(' and DDZL.ShipDate>=');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',sdate)+'''');
+    sql.add('and DDZL.ShipDate<=');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',edate)+'''');
+    sql.add('and XXZL.Article like ');
+    sql.add(''''+edit3.Text+'%'+'''');
+    sql.add('and XXZL.XieMing like ');
+    sql.add(''''+'%'+edit4.text+'%'+'''');
+    sql.add('group by SCBBSS.SCBH) SCBBZ');
+    sql.add('on SCBBZ.SCBH=SCZL.SCBH');
+
+
+    sql.add('where SCZL.GXLB=');
+    sql.add(''''+'A'+'''');
+    sql.add('and SCZL.SCBH=SCZL.ZLBH');
+    sql.add('and SCZL.SCBH like ');
+    sql.add(''''+edit2.Text+'%'+'''');
+    sql.add(' and DDZL.ShipDate>=');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',sdate)+'''');
+    sql.add('and DDZL.ShipDate<=');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',edate)+'''');
+    sql.add('and XXZL.Article like ');
+    sql.add(''''+edit3.Text+'%'+'''');
+    sql.add('and XXZL.XieMing like ');
+    sql.add(''''+'%'+edit4.text+'%'+'''');
+    sql.Add('and SCZL.DDLB<>');
+    sql.add(''''+'Part'+'''');
+
+    sql.add('select #SCReport.*,');
+    sql.add('Pairs-S_Fin as S_Bal,Pairs-O_Fin as O_Bal,Pairs-C_Fin as C_Bal,');
+    sql.add('Pairs-A_Fin as A_Bal,Pairs-Y_Fin as Y_Bal,Pairs-Z_Fin as Z_Bal');
+    sql.add(' from #SCReport');
+    if CBX1.ItemIndex=0 then
+    sql.add('order by SCBH');
+    if CBX1.ItemIndex=1 then
+    sql.add('order by Article,SCBH');
+    if CBX1.ItemIndex=2 then
+    sql.add('order by ShipDate,SCBH');
+    active:=true;
+  end;
+
+end;
+
+procedure TProduceset.Button2Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+ begin
+  if  query1.active  then
+    begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('系统没有安装Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+        WorkBook:=eclApp.workbooks.Add;
+        for   i:=0   to   query1.FieldCount-1   do
+          begin
+              eclApp.Cells(4,i+1):=query1.fields[i].FieldName;
+              eclApp.Cells.item[1,i+1].font.size:='8';
+          end;
+
+        query1.First;
+        j:=2;
+        while   not   query1.Eof   do
+          begin
+            for   i:=0   to   query1.FieldCount-1   do
+            begin
+              eclApp.Cells(j+3,i+1):=query1.Fields[i].Value;
+              eclApp.Cells.item[j,i+1].font.size:='8';
+            end;
+          query1.Next;
+          inc(j);
+          end;
+     eclapp.columns.autofit;
+   {  if SaveDialog1.execute then
+      begin
+        a:=SaveDialog1.FileName;
+      end
+      else
+        begin
+          a:='Unit List';
+        end;
+      WorkBook.SaveAS(a);
+      //WorkBook.close;  }
+      eclApp.Visible:=True;
+      showmessage('Succeed');
+      except
+        on   F:Exception   do
+          showmessage(F.Message);
+      end;
+    end;
+
+end;
+
+procedure TProduceset.NN2Click(Sender: TObject);
+begin
+Button2click(nil);
+end;
+
+procedure TProduceset.NN1Click(Sender: TObject);
+begin
+Produceset_size:=TProduceset_size.create(self);
+Produceset_size.show;
+end;
+
+procedure TProduceset.FormDestroy(Sender: TObject);
+begin
+Produceset:=nil;
+end;
+
+end.

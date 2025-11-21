@@ -1,0 +1,21 @@
+object MaterialTrace_JG: TMaterialTrace_JG
+  Left = 383
+  Top = 219
+  Width = 498
+  Height = 422
+  BorderIcons = [biSystemMenu]
+  Caption = 'MaterialTrace_JG'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+end

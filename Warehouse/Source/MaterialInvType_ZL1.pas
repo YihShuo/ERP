@@ -1,0 +1,49 @@
+unit MaterialInvType_ZL1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, GridsEh, DBGridEh;
+
+type
+  TMaterialInvType_ZL = class(TForm)
+    DBGridEh1: TDBGridEh;
+    Query1: TQuery;
+    DataSource1: TDataSource;
+    Query1CLBH: TStringField;
+    Query1DDBH: TStringField;
+    Query1Shipdate: TDateTimeField;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MaterialInvType_ZL: TMaterialInvType_ZL;
+
+implementation
+
+{$R *.dfm}
+
+procedure TMaterialInvType_ZL.FormDestroy(Sender: TObject);
+begin
+MaterialInvType_ZL:=nil;
+end;
+
+procedure TMaterialInvType_ZL.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+query1.active:=false;
+end;
+
+procedure TMaterialInvType_ZL.FormCreate(Sender: TObject);
+begin
+query1.Active:=true;
+end;
+
+end.

@@ -1,0 +1,728 @@
+object PurTotal_Replenish: TPurTotal_Replenish
+  Left = 154
+  Top = 194
+  Width = 1631
+  Height = 711
+  Caption = 'PurTotal_Replenish'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel5: TPanel
+    Left = 0
+    Top = 0
+    Width = 1623
+    Height = 39
+    Align = alTop
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 31
+      Top = 12
+      Width = 34
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Date:'
+    end
+    object Label2: TLabel
+      Left = 159
+      Top = 12
+      Width = 29
+      Height = 16
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'To'
+    end
+    object Label3: TLabel
+      Left = 443
+      Top = 12
+      Width = 52
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'SGNO:'
+    end
+    object Label4: TLabel
+      Left = 296
+      Top = 12
+      Width = 16
+      Height = 16
+      Caption = 'LB'
+    end
+    object DTP1: TDateTimePicker
+      Left = 68
+      Top = 9
+      Width = 89
+      Height = 24
+      Date = 39783.568310717590000000
+      Format = 'yyyy/MM/dd'
+      Time = 39783.568310717590000000
+      TabOrder = 0
+    end
+    object DTP2: TDateTimePicker
+      Left = 185
+      Top = 9
+      Width = 89
+      Height = 24
+      Date = 39783.569282222220000000
+      Format = 'yyyy/MM/dd'
+      Time = 39783.569282222220000000
+      TabOrder = 1
+    end
+    object SGNOEdit: TEdit
+      Left = 499
+      Top = 9
+      Width = 105
+      Height = 24
+      AutoSelect = False
+      CharCase = ecUpperCase
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'VNI-Times'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+    end
+    object CheckDate: TCheckBox
+      Left = 11
+      Top = 12
+      Width = 17
+      Height = 17
+      Checked = True
+      State = cbChecked
+      TabOrder = 3
+    end
+    object CheckBox1: TCheckBox
+      Left = 619
+      Top = 12
+      Width = 150
+      Height = 17
+      Caption = 'Already Confirm'
+      Checked = True
+      State = cbChecked
+      TabOrder = 4
+    end
+    object LBCombo: TComboBox
+      Left = 318
+      Top = 7
+      Width = 73
+      Height = 24
+      ItemHeight = 16
+      TabOrder = 5
+      Items.Strings = (
+        '01'
+        '02'
+        '03')
+    end
+  end
+  object PC1: TPageControl
+    Left = 0
+    Top = 39
+    Width = 1623
+    Height = 641
+    ActivePage = TS1
+    Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    object TS1: TTabSheet
+      Caption = 'Apply Total'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      object Panel8: TPanel
+        Left = 0
+        Top = 0
+        Width = 1615
+        Height = 610
+        Align = alClient
+        TabOrder = 0
+        object Splitter3: TSplitter
+          Left = 1612
+          Top = 33
+          Width = 2
+          Height = 576
+          Align = alRight
+          Color = clSkyBlue
+          ParentColor = False
+        end
+        object Splitter1: TSplitter
+          Left = 1049
+          Top = 33
+          Height = 576
+        end
+        object Panel7: TPanel
+          Left = 1
+          Top = 1
+          Width = 1613
+          Height = 32
+          Align = alTop
+          Color = clMoneyGreen
+          TabOrder = 0
+          object Label13: TLabel
+            Left = 124
+            Top = 9
+            Width = 57
+            Height = 16
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Supplier'
+          end
+          object Label11: TLabel
+            Left = 299
+            Top = 9
+            Width = 69
+            Height = 16
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Mat ID'
+          end
+          object Label12: TLabel
+            Left = 462
+            Top = 9
+            Width = 77
+            Height = 16
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Mat Name'
+          end
+          object Edit_Supplier1: TEdit
+            Left = 183
+            Top = 5
+            Width = 112
+            Height = 24
+            ImeName = #20013#25991' ('#32321#39636') - '#27880#38899
+            TabOrder = 0
+          end
+          object Button5: TButton
+            Left = 797
+            Top = 5
+            Width = 73
+            Height = 24
+            Caption = 'Query'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 4
+            OnClick = Button5Click
+          end
+          object Edit_MatNo1: TEdit
+            Left = 370
+            Top = 5
+            Width = 91
+            Height = 24
+            ImeName = #20013#25991' ('#32321#39636') - '#27880#38899
+            TabOrder = 1
+          end
+          object Edit_MatNM1_A: TEdit
+            Left = 541
+            Top = 5
+            Width = 109
+            Height = 24
+            ImeName = #20013#25991' ('#32321#39636') - '#27880#38899
+            TabOrder = 2
+          end
+          object Edit_MatNM1_B: TEdit
+            Left = 650
+            Top = 5
+            Width = 108
+            Height = 24
+            ImeName = #20013#25991' ('#32321#39636') - '#27880#38899
+            TabOrder = 3
+          end
+          object Chk_NoPur1: TCheckBox
+            Left = 15
+            Top = 9
+            Width = 99
+            Height = 17
+            Caption = 'Show No Pur'
+            Checked = True
+            State = cbChecked
+            TabOrder = 5
+          end
+        end
+        object DBGridEh1: TDBGridEh
+          Left = 1
+          Top = 33
+          Width = 1048
+          Height = 576
+          Align = alLeft
+          DataSource = DataSource1
+          Flat = False
+          FooterColor = clWindow
+          FooterFont.Charset = DEFAULT_CHARSET
+          FooterFont.Color = clWindowText
+          FooterFont.Height = -13
+          FooterFont.Name = 'MS Sans Serif'
+          FooterFont.Style = []
+          FooterRowCount = 1
+          Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind]
+          PopupMenu = SGDH_ToPO
+          SumList.Active = True
+          TabOrder = 1
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -13
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          OnGetCellParams = DBGridEh1GetCellParams
+          Columns = <
+            item
+              EditButtons = <>
+              FieldName = 'CLBH'
+              Footers = <>
+              Width = 86
+            end
+            item
+              EditButtons = <>
+              FieldName = 'YWPM'
+              Footers = <>
+              Width = 262
+            end
+            item
+              EditButtons = <>
+              FieldName = 'ZWPM'
+              Footers = <>
+              Width = 228
+            end
+            item
+              EditButtons = <>
+              FieldName = 'DWBH'
+              Footers = <>
+              Width = 48
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Qty'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Width = 36
+            end
+            item
+              EditButtons = <>
+              FieldName = 'okQty'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Width = 48
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Diff'
+              Footers = <>
+              Width = 33
+            end
+            item
+              EditButtons = <>
+              FieldName = 'ZSDH'
+              Footers = <>
+              Width = 43
+            end
+            item
+              EditButtons = <>
+              FieldName = 'ZSYWJC'
+              Footers = <>
+              Width = 128
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Memo'
+              Footers = <>
+              Width = 84
+            end>
+        end
+        object DBGridEh2: TDBGridEh
+          Left = 1052
+          Top = 33
+          Width = 560
+          Height = 576
+          Align = alClient
+          DataSource = DataSource2
+          Flat = False
+          FooterColor = clWindow
+          FooterFont.Charset = DEFAULT_CHARSET
+          FooterFont.Color = clWindowText
+          FooterFont.Height = -13
+          FooterFont.Name = 'MS Sans Serif'
+          FooterFont.Style = []
+          FooterRowCount = 1
+          PopupMenu = SGDHS_ToPO
+          SumList.Active = True
+          TabOrder = 2
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -13
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          Columns = <
+            item
+              EditButtons = <>
+              FieldName = 'SGNO'
+              Footers = <>
+            end
+            item
+              EditButtons = <>
+              FieldName = 'CLBH'
+              Footers = <>
+              Width = 95
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Qty'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Width = 37
+            end
+            item
+              EditButtons = <>
+              FieldName = 'okQty'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Width = 42
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Diff'
+              Footers = <>
+              Width = 39
+            end
+            item
+              EditButtons = <>
+              FieldName = 'DepName'
+              Footers = <>
+              Width = 95
+            end
+            item
+              EditButtons = <>
+              FieldName = 'LB'
+              Footers = <>
+              Width = 25
+            end
+            item
+              EditButtons = <>
+              FieldName = 'CFMID'
+              Footers = <>
+              Width = 52
+            end
+            item
+              EditButtons = <>
+              FieldName = 'CFMDate'
+              Footers = <>
+              Width = 72
+            end
+            item
+              EditButtons = <>
+              FieldName = 'CFMID1'
+              Footers = <>
+              Width = 49
+            end
+            item
+              EditButtons = <>
+              FieldName = 'CFMDate1'
+              Footers = <>
+              Width = 76
+            end
+            item
+              EditButtons = <>
+              FieldName = 'GSBH'
+              Footers = <>
+              Width = 50
+            end>
+        end
+      end
+    end
+  end
+  object SGDH: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'select SGDHS.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,sum (SGDHS.qty) ' +
+        'as Qty,sum(isnull(CGZLSS.okQty,0)) as okQty,sum (isnull(SGDHS.Qt' +
+        'y,0)-isnull(CGZLSS.okQty,0)) as Diff,ZSZL.ZSDH,ZSZL.ZSYWJC,SGDH.' +
+        'GSBH,SGDH.Memo,SGDHS.USERID'
+      'from SGDHS left join SGDH on SGDH.SGNO=SGDHS.SGNO'
+      'left join CLZL on CLZL.CLDH = SGDHS.CLBH  '
+      'Left join CGBJ on CGBJ.BJNO=SGDHS.BJNO  '
+      'left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH  '
+      'left join  BDepartment on BDepartment.ID=SGDH.DepID '
+      'left join (select ZLBH,CLBH,Sum(Qty) as okQty   '
+      '  '#9#9'     from CGZLSS where 1=1 Group by ZLBH,CLBH)   '
+      
+        '           CGZLSS on CGZLSS.CLBH=SGDHS.CLBH and CGZLSS.ZLBH=SGDH' +
+        'S.SGNO  '
+      'where 1=1'
+      
+        'and convert(smalldatetime,convert(varchar,SGDH.USERDATE,111)) be' +
+        'tween '
+      #39'2022/07/28'#39
+      ' and '
+      #39'2022/08/27'#39
+      '  and isnull(CGZLSS.okQty,0)<isnull(SGDHS.Qty,0) '
+      'and SGDH.GSBH='#39'VTX'#39
+      
+        'group by SGDHS.CLBH,CLZL.YWPM,CLZL.ZWPM,CLZL.DWBH,ZSZL.ZSDH,ZSZL' +
+        '.ZSYWJC,SGDH.GSBH,SGDH.Memo,SGDHS.USERID')
+    Left = 276
+    Top = 274
+    object SGDHCLBH: TStringField
+      FieldName = 'CLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object SGDHYWPM: TStringField
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object SGDHZWPM: TStringField
+      FieldName = 'ZWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object SGDHDWBH: TStringField
+      FieldName = 'DWBH'
+      FixedChar = True
+      Size = 4
+    end
+    object SGDHQty: TFloatField
+      FieldName = 'Qty'
+      DisplayFormat = '#,##0.0'
+    end
+    object SGDHokQty: TCurrencyField
+      FieldName = 'okQty'
+      DisplayFormat = '#,##0.0'
+    end
+    object SGDHDiff: TFloatField
+      FieldName = 'Diff'
+      DisplayFormat = '#,##0.0'
+    end
+    object SGDHZSDH: TStringField
+      FieldName = 'ZSDH'
+      FixedChar = True
+      Size = 6
+    end
+    object SGDHZSYWJC: TStringField
+      FieldName = 'ZSYWJC'
+      FixedChar = True
+    end
+    object SGDHMemo: TStringField
+      FieldName = 'Memo'
+      FixedChar = True
+      Size = 50
+    end
+    object SGDHUSERID: TStringField
+      FieldName = 'USERID'
+      FixedChar = True
+      Size = 15
+    end
+  end
+  object SGDHS: TQuery
+    DatabaseName = 'DB'
+    DataSource = DataSource1
+    SQL.Strings = (
+      
+        'select SGDHS.SGNO,SGDHS.CLBH,SGDHS.Qty,IsNull(CGZLSS.okQty,0) as' +
+        ' okQty,isnull(SGDHS.Qty,0)-isnull(CGZLSS.okQty,0) as Diff'
+      
+        '      ,CLZL.YWPM,CLZL.ZWPM,BDepartment.DepName,ZSZL.ZSDH,ZSZL.zs' +
+        'ywjc,SGDH.LB,SGDH.CFMID,SGDH.CFMDate,SGDH.CFMID1,SGDH.CFMDate1 ,' +
+        'SGDH.GSBH,SGDH.USERID   '
+      'from SGDHS '
+      'left join SGDH on SGDH.SGNO=SGDHS.SGNO  '
+      'left join CLZL on CLZL.CLDH = SGDHS.CLBH  '
+      'Left join CGBJ on CGBJ.BJNO=SGDHS.BJNO  '
+      'left join ZSZL on ZSZL.ZSDH = CGBJ.ZSBH  '
+      'left join (select ZLBH,CLBH,Sum(Qty) as okQty   '
+      '  '#9#9'     from CGZLSS where 1=1 Group by ZLBH,CLBH)   '
+      
+        '           CGZLSS on CGZLSS.CLBH=SGDHS.CLBH and CGZLSS.ZLBH=SGDH' +
+        'S.SGNO  '
+      'left join BDepartment on BDepartment.ID=SGDH.DepID  '
+      'where 1=1 and  SGDHS.CLBH='#39'X214000097'#39
+      'and SGDH.CFMID<>'#39'NO'#39
+      '')
+    Left = 916
+    Top = 274
+    object SGDHSSGNO: TStringField
+      FieldName = 'SGNO'
+      FixedChar = True
+      Size = 11
+    end
+    object SGDHSCLBH: TStringField
+      FieldName = 'CLBH'
+      FixedChar = True
+      Size = 15
+    end
+    object SGDHSQty: TFloatField
+      FieldName = 'Qty'
+      DisplayFormat = '#,##0.0'
+    end
+    object SGDHSokQty: TCurrencyField
+      FieldName = 'okQty'
+      DisplayFormat = '#,##0.0'
+    end
+    object SGDHSDiff: TFloatField
+      FieldName = 'Diff'
+      DisplayFormat = '#,##0.0'
+    end
+    object SGDHSYWPM: TStringField
+      FieldName = 'YWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object SGDHSZWPM: TStringField
+      FieldName = 'ZWPM'
+      FixedChar = True
+      Size = 200
+    end
+    object SGDHSDepName: TStringField
+      FieldName = 'DepName'
+      FixedChar = True
+      Size = 50
+    end
+    object SGDHSZSDH: TStringField
+      FieldName = 'ZSDH'
+      FixedChar = True
+      Size = 6
+    end
+    object SGDHSzsywjc: TStringField
+      FieldName = 'zsywjc'
+      FixedChar = True
+    end
+    object SGDHSLB: TStringField
+      FieldName = 'LB'
+      FixedChar = True
+      Size = 2
+    end
+    object SGDHSCFMID: TStringField
+      FieldName = 'CFMID'
+      FixedChar = True
+      Size = 15
+    end
+    object SGDHSCFMDate: TDateTimeField
+      FieldName = 'CFMDate'
+      DisplayFormat = 'YYYY/MM/DD'
+    end
+    object SGDHSCFMID1: TStringField
+      FieldName = 'CFMID1'
+      FixedChar = True
+      Size = 15
+    end
+    object SGDHSCFMDate1: TDateTimeField
+      FieldName = 'CFMDate1'
+      DisplayFormat = 'YYYY/MM/DD'
+    end
+    object SGDHSGSBH: TStringField
+      FieldName = 'GSBH'
+      FixedChar = True
+      Size = 4
+    end
+    object SGDHSUSERID: TStringField
+      FieldName = 'USERID'
+      FixedChar = True
+      Size = 15
+    end
+  end
+  object UpdateSQL1: TUpdateSQL
+    Left = 276
+    Top = 306
+  end
+  object UpdateSQL2: TUpdateSQL
+    Left = 916
+    Top = 308
+  end
+  object DataSource1: TDataSource
+    DataSet = SGDH
+    Left = 236
+    Top = 274
+  end
+  object DataSource2: TDataSource
+    DataSet = SGDHS
+    Left = 876
+    Top = 274
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    Left = 356
+    Top = 274
+  end
+  object SGDH_ToPO: TPopupMenu
+    AutoHotkeys = maManual
+    Left = 276
+    Top = 337
+    object E1: TMenuItem
+      Caption = 'Excel'
+      OnClick = Excel1Click
+    end
+    object M1: TMenuItem
+      Caption = 'Modify'
+      OnClick = M1Click
+    end
+    object PO1: TMenuItem
+      Caption = 'Transfer to PO'
+      Enabled = False
+      OnClick = PO1Click
+    end
+    object Cancel1: TMenuItem
+      Caption = 'Cancel'
+      Enabled = False
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object Reject1: TMenuItem
+      Caption = 'Reject'
+      OnClick = Reject1Click
+    end
+  end
+  object SGDHS_ToPO: TPopupMenu
+    AutoHotkeys = maManual
+    Left = 917
+    Top = 340
+    object E3: TMenuItem
+      Caption = 'Excel'
+      OnClick = E3Click
+    end
+    object N2: TMenuItem
+      Caption = '-'
+    end
+    object Reject2: TMenuItem
+      Caption = 'Reject'
+      OnClick = Reject2Click
+    end
+  end
+  object BDelRec: TQuery
+    DatabaseName = 'DB'
+    Left = 376
+    Top = 408
+  end
+end

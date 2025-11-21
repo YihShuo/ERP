@@ -1,0 +1,613 @@
+unit ScanShip1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DBTables, DB, StdCtrls, Buttons, ExtCtrls, Grids, DBGrids,
+  GridsEh, DBGridEh, OleCtrls, MSCommLib_TLB, ComCtrls, StrUtils;
+
+type
+  TScanShip = class(TForm)
+    DBGrid1: TDBGridEh;
+    Panel3: TPanel;
+    DBGrid2: TDBGridEh;
+    ScanData: TQuery;
+    ScanDataCARTONBAR: TStringField;
+    ScanDataDDBH: TStringField;
+    ScanDataXH: TStringField;
+    ScanDataQty: TIntegerField;
+    ScanDataSB: TStringField;
+    ScanDataINSPECTCS: TIntegerField;
+    ScanDataINSPECTDATE: TDateTimeField;
+    ScanDataMEMO: TStringField;
+    DS1: TDataSource;
+    UpScan: TUpdateSQL;
+    YWBZPOS: TQuery;
+    YWBZPOSDDBH: TStringField;
+    YWBZPOSArticle: TStringField;
+    YWBZPOSXieMing: TStringField;
+    YWBZPOSXH: TStringField;
+    YWBZPOSDDCC: TStringField;
+    YWBZPOSXXCC: TStringField;
+    YWBZPOSQty: TIntegerField;
+    YWBZPOSCTS: TIntegerField;
+    YWBZPOSMEMO: TStringField;
+    YWBZPOSCTQ: TIntegerField;
+    YWBZPOSCTZ: TIntegerField;
+    YWBZPOSUSERDATE: TDateTimeField;
+    YWBZPOSUSERID: TStringField;
+    YWBZPOSYN: TStringField;
+    DS2: TDataSource;
+    OpenDialog1: TOpenDialog;
+    Qtemp: TQuery;
+    YWCP: TQuery;
+    BB1: TBitBtn;
+    BB2: TBitBtn;
+    BB3: TBitBtn;
+    BB4: TBitBtn;
+    BitBtn1: TBitBtn;
+    Panel1: TPanel;
+    Edit1: TEdit;
+    Button1: TButton;
+    CBX1: TCheckBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit2: TEdit;
+    Button2: TButton;
+    ScanDatargw: TFloatField;
+    MSComm1: TMSComm;
+    Label3: TLabel;
+    Edit3: TEdit;
+    ScanDatasgw: TFloatField;
+    rwin: TMemo;
+    Label4: TLabel;
+    spdate: TDateTimePicker;
+    chdate: TDateTimePicker;
+    Edit4: TEdit;
+    ScanDataogw: TFloatField;
+    ScanDataLPNBarCode: TStringField;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure BB3Click(Sender: TObject);
+    procedure BB1Click(Sender: TObject);
+    procedure BB4Click(Sender: TObject);
+    procedure BB2Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure FormCreate(Sender: TObject);
+    procedure CBX1Click(Sender: TObject);
+    procedure ScanDataAfterInsert(DataSet: TDataSet);
+    procedure ScanDataAfterDelete(DataSet: TDataSet);
+    procedure Button2Click(Sender: TObject);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ScanShip: TScanShip;
+  NDate:TDate;
+  Filepath:string;
+  Myfile:Textfile;
+  
+implementation
+
+uses ScanShip_hand1;
+
+{$R *.dfm}
+
+procedure TScanShip.FormDestroy(Sender: TObject);
+begin
+ScanShip:=nil;
+end;
+
+procedure TScanShip.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+if ScanData.recordcount>0 then
+  begin
+    if messagedlg('Still have date not upload to server,discard?',mtinformation,[mbYes,mbNo],0)=mrYes then
+      begin
+        YWBZPOS.Active:=false;
+        YWCP.Active:=false;
+        ScanData.Active:=false;
+        action:=cafree;
+      end
+      else
+        abort;
+  end
+  else
+    begin
+      YWBZPOS.Active:=false;
+      YWCP.Active:=false;
+      ScanData.Active:=false;
+      action:=cafree;
+    end;
+end;
+
+procedure TScanShip.BB3Click(Sender: TObject);
+begin
+
+ScanData.delete;
+
+end;
+
+procedure TScanShip.BB1Click(Sender: TObject);
+var i:integer;
+    s:string;
+begin
+if edit2.text='' then
+  begin
+    showmessage('Pls key in Container NO first.');
+    abort;
+  end;
+if messagedlg('You want import form TXT or key in by hand?',mtinformation,[mbyes,mbNo],0)=mrYes then
+  begin
+    if opendialog1.Execute then
+      begin
+        filepath:=opendialog1.FileName;
+      end;
+    if trim(filepath)='' then
+      begin
+        exit;
+      end;
+    assignfile(Myfile,filepath);
+
+    try
+      reset(myfile);
+    except
+      showmessage('Have wrong.');
+    end;
+
+    try
+    YWBZPOS.Active:=false;
+    YWCP.Active:=true;
+    ScanData.Active:=true;
+    i:=0;
+    while not seekeof(myfile) do
+      begin
+        readln(myfile,s);
+        s:=trim(s);
+        if trim(s)<>'' then
+          begin
+            with ScanData do
+              begin
+                s:=trim(copy(s,0,pos(',',s)-1));
+                if YWCP.locate('CARTONBAR',s,[]) then
+                  begin
+                    append;
+                    fieldbyname('CARTONBAR').Value:=s;
+                    fieldbyname('DDBH').Value:=trim(copy(s,0,pos(' ',s)-1));
+                    fieldbyname('XH').Value:=YWCP.fieldbyname('XH').value;
+                    fieldbyname('Qty').Value:=YWCP.fieldbyname('Qty').Value;
+                    fieldbyname('Sgw').Value:=0;
+                    fieldbyname('rgw').Value:=0;
+                    fieldbyname('ogw').Value:=0;
+                    post;
+                    label1.Caption:=inttostr(Scandata.RecordCount);
+                  end
+                  else
+                    begin
+                      windows.beep(1500,500);
+                      windows.beep(1500,500);
+                      windows.beep(1500,500);
+                      showmessage('Wrong CartonBar. Pls check -----'+s);
+                    end;
+                post;
+              end;
+          end;
+        inc(i);
+      end;
+    closefile(myfile);
+    BB2.Enabled:=true;
+    BB3.Enabled:=true;
+    if CBX1.checked then
+      begin
+        YWBZPOS.Active:=true;
+      end
+      else
+        begin
+          YWBZPOS.Active:=false;
+        end;
+    except
+      showmessage('Have wrong.');
+    end;
+  end
+  else
+    begin
+      ScanShip_hand:= TScanShip_hand.create(self);
+      ScanShip_hand.show;
+    end;
+
+end;
+
+procedure TScanShip.BB4Click(Sender: TObject);
+begin
+
+close;
+end;
+
+procedure TScanShip.BB2Click(Sender: TObject);
+var i:integer;
+CARTONBAR,Con_NO:string;
+begin
+{
+Con_NO:=inputbox('Key in Container.','Con_NO:','');
+if Con_NO='' then
+  begin
+    showmessage('Pls key in Container NO.');
+    abort;
+  end;   }
+if not Scandata.Active then
+  begin
+    abort;
+  end;
+if Scandata.recordcount=0 then
+  begin
+    abort;
+  end;
+YWBZPOS.active:=false;
+
+try
+    Scandata.first;
+    while not Scandata.Eof do
+      begin
+        case Scandata.updatestatus of
+          usinserted:
+            begin
+              CARTONBAR:=Scandata.fieldbyname('CARTONBAR').value;
+              with Qtemp do
+                begin
+                  active:=false;
+                  sql.Clear;
+                  sql.add('update YWCP');
+                  sql.add('set EXEDATE='+''''+FormatDatetime('YYYY-MM-DD ',spdate.Date)+' '+FormatDateTime('HH:NN:SS',Time())+''''); //20140422修改紀錄時間
+                  sql.add('    ,SB='+''''+'3'+'''');
+                  sql.add('    ,CON_NO='+''''+edit2.Text+'''');
+                  sql.add('    ,ogw='+floattostr(Scandata.fieldbyname('ogw').value));
+                  sql.add('where CARTONBAR='+''''+CARTONBAR+'''');
+                  execsql;
+                end;
+            end;
+        end;
+        Scandata.delete;
+        Scandata.first;
+      end;
+    Scandata.active:=true;
+    BB2.Enabled:=false;
+    BB3.Enabled:=false;
+    spdate.Enabled:=true;
+    if messagedlg('Keep to TXT files?',mtinformation,[mbYes,mbNo],0)=mrYes then
+      begin
+        if trim(filepath)<>'' then
+          begin
+            assignfile(Myfile,filepath);
+            append(myfile);
+            write(myfile,'Already write to database and keep.');
+            closefile(myfile);
+          end;
+      end;
+
+    showmessage('Succeed');
+    label1.Caption:='0';
+except
+  Messagedlg('Have wrong, can not save!',mtwarning,[mbyes],0);
+end;
+if CBX1.checked then
+  begin
+    YWBZPOS.Active:=true;
+  end
+  else
+    begin
+      YWBZPOS.Active:=false;
+    end; 
+end;
+
+procedure TScanShip.BitBtn1Click(Sender: TObject);
+begin  
+panel1.Visible:= true;
+YWCP.Active:=true;
+SCANDATA.active:=true;
+if CBX1.checked then
+  begin
+    YWBZPOS.Active:=true;
+  end
+  else
+    begin
+      YWBZPOS.Active:=false;
+    end;
+edit1.SetFocus;
+end;
+
+procedure TScanShip.Button1Click(Sender: TObject);
+begin
+
+Panel1.Visible:=false;
+end;
+
+procedure TScanShip.Edit1KeyPress(Sender: TObject; var Key: Char);
+var s,rg:string;
+    ogw:real;
+begin
+
+if key=#13 then
+  begin
+    if edit2.text='' then
+      begin
+        showmessage('Pls key in Container NO first.');
+        abort;
+      end;
+    //
+     //20171110 UCC標 weston修改
+    if YWCP.Locate('LPNBarcode',RightStr(edit1.Text,15),[]) then
+    begin
+      s:=YWCP.fieldByName('CARTONBAR').AsString;
+    end else
+    begin
+      s:=trim(edit1.Text);
+    end;
+    //
+    edit4.Text:=edit1.Text;
+    //s:=trim(edit1.Text);
+    if s='' then
+      begin
+        showmessage('Have wrong.');
+        abort;
+      end;
+    try
+      if not ScanData.Locate('CARTONBAR',s,[]) then
+        begin
+          if (YWCP.Locate('CARTONBAR',s,[]))  then
+            begin
+            { 加入判定是不是同一張RY
+              提出警示，可以更換RY不更換則清空重掃
+              edit by BillWeng 2012/11/18
+            }
+            if edit3.Text='' then
+            begin
+              edit3.Text:=ywcp.fieldbyname('ddbh').Value;
+            end
+            else
+            begin
+              if ywcp.fieldbyname('ddbh').Value <> edit3.text then
+              begin
+                windows.beep(1500,500);
+                windows.beep(1500,500);
+                windows.beep(1500,500);
+                if (int(spdate.Date)=int(chdate.Date)) then
+                begin
+                  if messagedlg('Cheng Shiping RYNO',mtinformation,[mbYes,mbNo],0)=mrYes then
+                  begin
+                    edit3.Text:=ywcp.fieldbyname('ddbh').Value;
+                  end
+                  else
+                  begin
+                    abort;
+                  end;
+                end
+                else
+                begin
+                  abort;
+                end;
+
+              end;
+            end;
+            {end edit by billweng 2012/11/19}
+            {加入重量判定............
+             edit by BillWeng 2012/6/14
+             判斷是不是要稱重
+            }
+              if MSComm1.Enabled then  //檢查RS-232 Port是否開啟
+              begin
+              {如果要稱重時取重量和電子稱的結果比對}
+                //if not mscomm1.portopen then
+                //mscomm1.Output:='P';
+                rwin.Text:=MSComm1.Input;
+                //showmessage(rwin.text);
+                //rg := trim( copy(rwin.text,10,7) );
+                rg:=trim(copy(rwin.Lines.ValueFromIndex[2],10,7));
+                //showmessage(rg);
+                ogw := StrToFloat(rg);
+                if ywcp.FieldByName('rgw').Value = 0 then  //如果沒有出貨秤重記錄
+                begin
+                  {showmessage('Khong co trong luong nhap kho, so sanh voi trong luong tieu chuan'); //無入庫重量記錄，將與標準重量比較
+                  windows.beep(1500,500);
+                  windows.beep(1500,500);
+                  windows.beep(1500,500);}
+                  if abs(ywcp.fieldbyname('sgw').Value-ogw) > 0.5  then
+                  begin
+                    if messagedlg('Trong luong vuot qua gioi han, huy bo Scan hay khong',mtinformation,[mbYes,mbNo],0)=mrYes then  //重量超過限制，是否取消掃描
+                    begin
+                      windows.beep(1500,500);
+                      windows.beep(1500,500);
+                      windows.beep(1500,500);
+                      edit1.text:='';
+                      abort;
+                    end;
+                  end;
+                end
+                else
+                begin;
+                  if abs(ywcp.fieldbyname('rgw').Value-ogw) > 0.05 then
+                  begin
+                    if messagedlg('Trong luong vuot qua gioi han, huy bo Scan hay khong',mtinformation,[mbYes,mbNo],0)=mrYes then  //重量超過限制，是否取消掃描
+                    begin
+                      windows.beep(1500,500);
+                      windows.beep(1500,500);
+                      windows.beep(1500,500);
+                      edit1.text:='';
+                      abort;
+                    end;
+                  end;
+                end;
+                Scandata.last;
+                Scandata.append;
+                Scandata.fieldbyname('CARTONBAR').Value:=s;
+                Scandata.fieldbyname('DDBH').Value:=ywcp.fieldbyname('DDBH').Value;
+                Scandata.fieldbyname('XH').Value:=YWCP.fieldbyname('XH').value;
+                Scandata.fieldbyname('Qty').Value:=YWCP.fieldbyname('Qty').Value;
+                scandata.fieldbyname('rgw').Value:=ywcp.fieldbyname('rgw').Value;
+                Scandata.fieldbyname('ogw').Value:=ogw;
+                scandata.fieldbyname('LPNBarCode').Value:=ywcp.fieldbyname('LPNBarCode').Value;
+                Scandata.post;
+                edit1.Text:='';
+                label1.Caption:=inttostr(Scandata.RecordCount);
+                BB2.Enabled:=true;
+                BB3.Enabled:=true;
+                spdate.Enabled:=false;
+                //EDIT END
+
+                {稱重改為大於0.5KG 由操作人員判定是否要存檔
+                 edit by billweng at 2013/2019
+                if abs(ywcp.fieldbyname('sgw').Value-rgw) < 0.5 then
+                begin
+                  Scandata.last;
+                  Scandata.append;
+                  Scandata.fieldbyname('CARTONBAR').Value:=s;
+                  Scandata.fieldbyname('DDBH').Value:=trim(copy(s,0,pos(' ',s)-1));
+                  Scandata.fieldbyname('XH').Value:=YWCP.fieldbyname('XH').value;
+                  Scandata.fieldbyname('Qty').Value:=YWCP.fieldbyname('Qty').Value;
+                  scandata.fieldbyname('sgw').Value:=ywcp.fieldbyname('sgw').Value;
+                  Scandata.fieldbyname('rgw').Value:=rgw;
+                  Scandata.post;
+                  edit1.Text:='';
+                  label1.Caption:=inttostr(Scandata.RecordCount);
+                  BB2.Enabled:=true;
+                  BB3.Enabled:=true;
+                end
+                else
+                begin
+                  windows.beep(1500,500);
+                  windows.beep(1500,500);
+                  windows.beep(1500,500);
+                  showmessage('Have Error at Weight Sg='+floattostr(ywcp.fieldbyname('sgw').Value)+'KG Rg='+RG);
+                  edit1.text:='';
+                end;}
+              end
+              else  //如果RS-232 Port沒有開啟
+              begin
+                Scandata.last;
+                Scandata.append;
+                Scandata.fieldbyname('CARTONBAR').Value:=s;
+                Scandata.fieldbyname('DDBH').Value:=trim(copy(s,0,pos(' ',s)-1));
+                Scandata.fieldbyname('XH').Value:=YWCP.fieldbyname('XH').value;
+                Scandata.fieldbyname('Qty').Value:=YWCP.fieldbyname('Qty').Value;
+                scandata.fieldbyname('sgw').Value:=0;    //如果標準重量沒有設定, 則帶0進去
+                Scandata.fieldbyname('rgw').Value:=0;
+                Scandata.fieldbyname('ogw').Value:=0;
+                scandata.fieldbyname('LPNBarCode').Value:=ywcp.fieldbyname('LPNBarCode').Value;
+                Scandata.post;
+                edit1.Text:='';
+                label1.Caption:=inttostr(Scandata.RecordCount);
+                BB2.Enabled:=true;
+                BB3.Enabled:=true;
+                spdate.Enabled:=false;
+              end;
+            end
+            else
+              begin
+                windows.beep(1500,500);
+                windows.beep(1500,500);
+                windows.beep(1500,500);
+                edit1.text:='';
+              end;
+        end
+        else
+          begin
+            windows.beep(1500,500);
+            windows.beep(1500,500);
+            windows.beep(1500,500);
+            edit1.text:='';
+          end;
+    except
+      windows.beep(1500,500);
+      windows.beep(1500,500);
+      windows.beep(1500,500);
+      edit1.text:='';
+    end;
+  end;
+
+end;
+
+procedure TScanShip.FormCreate(Sender: TObject);
+var NDate:TDateTime;
+begin
+  YWCP.Active:=true;
+  SCANDATA.active:=true;
+  if mscomm1.PortOpen then
+    MSComm1.PortOpen:=false;
+  if mscomm1.Enabled then
+    mscomm1.Enabled:=false;
+  //20140529 避免出庫時間跳掉會有問題
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select getdate() as NDate ');
+    active:=true;
+    NDate:=fieldbyname('NDate').value;
+    active:=false;
+  end;
+  //
+  chdate.Date:=NDate;
+  spdate.Date:=chdate.Date;
+  spdate.MinDate:=int(chdate.Date);
+
+end;
+
+procedure TScanShip.CBX1Click(Sender: TObject);
+begin
+if CBX1.checked then
+  begin
+    YWBZPOS.Active:=true;
+  end
+  else
+    begin
+      YWBZPOS.Active:=false;
+    end;
+end;
+
+procedure TScanShip.ScanDataAfterInsert(DataSet: TDataSet);
+begin
+//label1.Caption:=inttostr(Scandata.RecordCount);
+end;
+
+procedure TScanShip.ScanDataAfterDelete(DataSet: TDataSet);
+begin
+
+label1.Caption:=inttostr(Scandata.RecordCount);
+end;
+
+procedure TScanShip.Button2Click(Sender: TObject);
+begin
+  if button2.Caption='W N' then
+  begin
+    button2.Caption:='W Y';
+    mscomm1.Enabled:=true;
+    MSComm1.PortOpen := true;
+  end
+  else
+  begin
+    button2.Caption:='W N';
+    MSComm1.PortOpen:=false;
+    mscomm1.Enabled:=false;
+
+  end;
+end;
+
+procedure TScanShip.DBGrid1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+  if  abs(scandata.FieldByName('rgw').value-scandata.FieldByName('ogw').value)>0.05 then
+  begin
+    dbgrid1.canvas.font.color:=clred;  
+    dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+end;
+
+end.

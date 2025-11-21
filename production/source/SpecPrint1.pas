@@ -1,0 +1,1620 @@
+unit SpecPrint1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DBTables, DB, Grids, DBGrids, Buttons, ExtCtrls,comobj,
+  QuickRpt, Menus,dateutils, ComCtrls, GridsEh, DBGridEh,ehlibBDE,iniFiles;
+
+type
+  TSpecPrint = class(TForm)    
+    Panel1: TPanel;
+    BB2: TBitBtn;
+    BB3: TBitBtn;
+    BB4: TBitBtn;
+    BB5: TBitBtn;
+    BB6: TBitBtn;
+    BB7: TBitBtn;
+    BB1: TBitBtn;
+    bbt5: TBitBtn;
+    bbt6: TBitBtn;
+    Panel3: TPanel;
+    Label1: TLabel;
+    Edit1: TEdit;
+    Button1: TButton;
+    DBGrid1: TDBGridEh;
+    DS1: TDataSource;
+    SpecMas: TQuery;
+    UpSpecMas: TUpdateSQL;
+    Label2: TLabel;
+    Panel2: TPanel;
+    Panel4: TPanel;
+    DBGrid2: TDBGridEh;
+    Panel5: TPanel;
+    DBGrid3: TDBGridEh;
+    DS2: TDataSource;
+    OrdSize: TQuery;
+    DS3: TDataSource;
+    Query1: TQuery;
+    SpecMasZLBH: TStringField;
+    SpecMasDDBH: TStringField;
+    SpecMasXieXing: TStringField;
+    SpecMasSheHao: TStringField;
+    SpecMasArticle: TStringField;
+    SpecMasXieMing: TStringField;
+    SpecMasShipDate: TDateTimeField;
+    SpecMasQty: TIntegerField;
+    SaveDialog1: TSaveDialog;
+    QPrint: TQuery;
+    BBT7: TBitBtn;
+    VNSpec: TQuery;
+    Label5: TLabel;
+    Edit2: TEdit;
+    POP1: TPopupMenu;
+    N1: TMenuItem;
+    SpecMasDDZT: TStringField;
+    SCorder: TQuery;
+    SCorderSCBH: TStringField;
+    SCorderGXLB: TStringField;
+    SCorderQty: TFloatField;
+    SpecMasDDCC: TStringField;
+    SpecMasXXCC: TStringField;
+    Edit3: TEdit;
+    SpecMasKFJC: TStringField;
+    SpecMasVNBOM: TStringField;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    SpecMasSCBH: TStringField;
+    OrdSizeDDBH: TStringField;
+    OrdSizeDDCC: TStringField;
+    OrdSizeXXCC: TStringField;
+    OrdSizeQty: TIntegerField;
+    N4: TMenuItem;
+    Qtemp: TQuery;
+    DTP1: TDateTimePicker;
+    Label15: TLabel;
+    DTP2: TDateTimePicker;
+    bbt8: TBitBtn;
+    QrySCZL: TQuery;
+    QrySCZLS: TQuery;
+    QrySCZLDate: TQuery;
+    QrySCPTCL: TQuery;
+    QryTemp: TQuery;
+    Label3: TLabel;
+    editPass: TEdit;
+    Label4: TLabel;
+    bbt9: TBitBtn;
+    N51: TMenuItem;
+    N6: TMenuItem;
+    BuyNoEdit: TEdit;
+    RB1: TRadioButton;
+    RB2: TRadioButton;
+    N7: TMenuItem;
+    BitBtn1: TBitBtn;
+    BBTCHI: TBitBtn;
+    BBTKEO: TBitBtn;
+    N5: TMenuItem;
+    N8: TMenuItem;
+    SpecMasZLBH_Thread: TStringField;
+    SpecMasZLBH_Chemical: TStringField;
+    VNSpecAll: TBitBtn;
+    chkFG: TCheckBox;
+    chkM: TCheckBox;
+    chkW: TCheckBox;
+    Label6: TLabel;
+    Edit4: TEdit;
+    SpecMasCountry: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure BB1Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure BB7Click(Sender: TObject);
+    procedure DBGrid1TitleClick(Column: TColumn);
+    procedure bbt6Click(Sender: TObject);
+    procedure SpecMasAfterOpen(DataSet: TDataSet);
+    procedure bbt5Click(Sender: TObject);
+    procedure BBT7Click(Sender: TObject);
+    procedure N1Click(Sender: TObject);
+    procedure SCorderAfterOpen(DataSet: TDataSet);
+    procedure SpecMasAfterScroll(DataSet: TDataSet);
+    procedure N2Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure N3Click(Sender: TObject);
+    procedure DBGrid1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure N4Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure bbt8Click(Sender: TObject);
+    procedure editPassChange(Sender: TObject);
+    procedure Label4DblClick(Sender: TObject);
+    procedure bbt9Click(Sender: TObject);
+    procedure N6Click(Sender: TObject);
+    procedure N7Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure DBGrid1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure DBGrid1MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure BBTCHIClick(Sender: TObject);
+    procedure BBTKEOClick(Sender: TObject);
+    procedure N8Click(Sender: TObject);
+    procedure VNSpecAllClick(Sender: TObject);
+    procedure chkFGClick(Sender: TObject);
+    procedure Edit1KeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+  private
+    IsQuering:boolean;
+    Close_OrdSize:boolean;
+    RYEditSubSQL: String;
+    procedure ShowOrdSize();
+    { Private declarations }
+    function CalculateCuttingDispath(ZLBH:String;IsDelete:boolean):boolean;
+    procedure Edit1Paste();
+    function GetMutiRYSubSQL(Str:String):String;
+
+  public
+    ShoePicPath:String;
+    { Public declarations }
+    procedure ReadIni();
+  end;
+
+var
+  SpecPrint: TSpecPrint;
+  sdate,edate,NDate:Tdate;
+
+implementation
+
+uses   PSpecPrintss1, main1, PSpecPrintssTW1, SpecPrint_Temp1,
+  SpecPrint_VNBOM1, SpecPrint_Change1, BShoeZLZL1,
+  PSPecPrintss_SP1, CutDispatchZL1, CutDispatchZL_GC1, Fununit,
+  Set_Pur_Delivery1,untClipboard;
+
+{$R *.dfm}
+procedure TSpecPrint.ReadIni();
+var MyIni :Tinifile;
+    AppDir:string;
+begin
+  ShoePicPath := '\\192.168.23.11\A_DataCenter\CDC\Sales\BOM';
+  AppDir:=ExtractFilePath(Application.ExeName);
+  if FileExists(AppDir+'\ComName.ini')=true then
+  begin
+    try
+      MyIni := Tinifile.Create(AppDir+'\ComName.ini');
+      ShoePicPath:=MyIni.ReadString('ShoePic','Bom_N31_shoePic','');
+    finally
+      MyIni.Free;
+    end;
+  end;
+end;
+procedure TSpecPrint.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  if SpecMas.requestlive  then
+  begin
+    messagedlg('You have to save data  first.',mtwarning,[mbyes],0);
+    action:=canone;
+  end else
+    action:=cafree;
+end;
+
+procedure TSpecPrint.BB1Click(Sender: TObject);
+begin
+  panel3.Visible:=true;
+  edit1.SetFocus;
+end;
+
+procedure TSpecPrint.Button1Click(Sender: TObject);
+begin
+  IsQuering:=true;
+  sdate:=DTP1.Date;
+  edate:=DTP2.Date;
+  Close_OrdSize:=true;
+  SCOrder.active:=false;
+  OrdSize.Active:=false;
+
+  RYEditSubSQL:=GetMutiRYSubSQL(Edit1.Text);
+  with SpecMas do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select  m.ZLBH,m.DDBH,d.Pairs as Qty,d.XieXing,d.SheHao,d.Article,');
+      if Copy(edit1.Text, 1, 1) = 'J' then
+      begin
+      sql.add('lbzls.ywsm as Country,');
+      end else
+      begin
+      sql.add(''''' as Country,');
+      end;
+    sql.add('d.ShipDate,b.CCGB as XXCC,b.XieMing,d.DDZT,d.CCGB as DDCC ,KFZL.KFJC,XXZLSVN.VNBOM,SCZL.SCBH,ZLZLS2_M.ZLBH as ZLBH_Thread,ZLZLS2_W.ZLBH as ZLBH_Chemical');
+    sql.add('from zlzl m left join DDZL d on m.ZLBH=d.DDBH');
+    sql.add('left join XXZL b on d.XieXing=b.XieXing and d.SheHao=b.SheHao');
+    sql.add('left join kfzl on KFZl.KFDH=d.KHBH');
+    sql.Add('left join ddzl on ddzl.DDBH=m.ZLBH');
+      if Copy(edit1.Text, 1, 1) = 'J' then
+      begin
+      sql.add('left join LBZLS on LBZLS.LB=''13'' and LBZLS.LBDH=d.Dest ');
+      end;
+    sql.add('left join (select distinct  XieXing ,SheHao, XieXing as VNBOM from XXZLSVN ) XXZLSVN ');
+    sql.add('            on XXZLSVN.XieXing=b.XieXing and XXZLSVN.SheHao=b.SheHao ');
+    sql.add('left join (select distinct SCBH from SCZL ) SCZL on SCZL.SCBH=m.ZLBH ');
+    sql.Add('left join (select distinct ZLBH  from ZLZLS2 where (xh =''VN'') and (CLBH like ''M%'')) ZLZLS2_M on ZLZLS2_M.ZLBH=m.ZLBH');
+    sql.Add('left join (select distinct ZLBH  from ZLZLS2 where (xh =''VN'') and (CLBH like ''W%'')) ZLZLS2_W on ZLZLS2_W.ZLBH=m.ZLBH');
+    SQL.Add('where m.ZLBH '+RYEditSubSQL+'  ');
+    sql.add('and KFZL.KFJC like');
+    sql.add(''''+'%'+edit3.Text+'%'+'''');
+    sql.add('and b.Article like ');
+    sql.add(''''+'%'+edit2.text+'%'+'''');
+     if Copy(edit1.Text, 1, 1) = 'J' then
+      begin
+    sql.add('and lbzls.ywsm like ''%'+edit4.text+'%''');
+      end;
+    if RB1.Checked=true then
+    begin
+      sql.add('and convert(smalldatetime,convert(varchar,d.ShipDate,111)) between ');
+      sql.add(''''+formatdatetime('yyyy/MM/dd',sdate)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',edate)+'''');
+    end;
+    if RB2.Checked=true then
+    begin
+      sql.add('and d.BUYNO like ''%'+BuyNoEdit.Text+'%'' ');
+    end;
+    if chkFG.Checked then
+    begin
+      sql.add('and d.YN = ''1'' ');
+    end;
+    if chkM.Checked then
+    begin
+      sql.Add('and ZLZLS2_M.ZLBH is NULL ');
+    end;
+    if chkW.Checked then
+    begin
+      sql.Add('and ZLZLS2_W.ZLBH is NULL ');
+    end;
+    sql.add('and d.GSBH='+''''+main.Edit2.Text+'''');
+    sql.add('order by m.ZLBH');
+    //funcobj.WriteErrorLog(sql.Text);
+    active:=true;
+  end;
+  SCOrder.active:=true;
+  OrdSize.Active:=true;
+  panel3.Visible:=false;
+  bbt6.Enabled:=true;
+  BitBtn1.Enabled:=true;
+  IsQuering:=false;
+  ShowOrdSize();
+end;
+
+procedure TSpecPrint.BB7Click(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TSpecPrint.DBGrid1TitleClick(Column: TColumn);
+var
+ temp: string;
+ las:integer;
+begin
+  if (not SpecMas.Active) or SpecMas.RequestLive then
+  begin
+    abort;
+  end;
+  temp := Column.FieldName;
+  if temp='XieMing' then
+   begin
+     SpecMas.Close;
+     las:=pos('order by',SpecMas.SQL.Text);
+     SpecMas.SQL.text:=copy(SpecMas.SQL.text,1,las-1)+'order by b.XieMing';
+     SpecMas.Active:=true;
+   end;
+   if temp='Article' then
+   begin
+     SpecMas.Close;
+     las:=pos('order by',SpecMas.SQL.Text);
+     SpecMas.SQL.text:=copy(SpecMas.SQL.text,1,las-1)+'order by d.Article';
+     SpecMas.Active:=true;
+   end;
+   if temp='ZLBH' then
+   begin
+     SpecMas.Close;
+     las:=pos('order by',SpecMas.SQL.Text);
+     SpecMas.SQL.text:=copy(SpecMas.SQL.text,1,las-1)+'order by m.zlbh';
+     SpecMas.Active:=true;
+   end;
+   if temp='XieXing' then
+   begin
+     SpecMas.Close;
+     las:=pos('order by',SpecMas.SQL.Text);
+     SpecMas.SQL.text:=copy(SpecMas.SQL.text,1,las-1)+'order by d.XieXing';
+     SpecMas.Active:=true;
+   end;
+   if temp='pairs' then
+   begin
+     SpecMas.Close;
+     las:=pos('order by',SpecMas.SQL.Text);
+     SpecMas.SQL.text:=copy(SpecMas.SQL.text,1,las-1)+'order by d.pairs';
+     SpecMas.Active:=true;
+   end;
+end;
+
+procedure TSpecPrint.bbt6Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+      i,j:integer;
+ begin
+  if SpecMas.requestlive then
+  begin
+    showmessage('Pls save data first.');
+    abort;
+  end;
+
+  
+  with Query1 do
+  begin
+    Active:=false;
+    SQL.Clear;
+    sql.add('select distinct DDZLS.CC from DDZLS ');
+    sql.add('left join ZLZL on ZLZL.DDBH=DDZLS.DDBH ');
+    sql.add('left join DDZL on DDZL.DDBH=DDZLS.DDBH ');
+    sql.add('left join kfzl on KFZl.KFDH=DDZL.KHBH');
+    sql.add('where ZLZL.ZLBH like'+''''+edit1.Text+'%'+'''' );
+    sql.add('      and KFZL.KFJC like'+''''+'%'+edit3.Text+'%'+'''');
+    sql.add('      and DDZL.Article like '+''''+edit2.Text+'%'+'''');
+    sql.add('      and DDZL.GSBH='+''''+main.Edit2.Text+'''');
+    sql.add('      and convert(smalldatetime,convert(varchar,DDZL.ShipDate,111)) between ');
+    sql.add('          '''+formatdatetime('yyyy/MM/dd',sdate)+''''+'and '+''''+formatdatetime('yyyy/MM/dd',edate)+'''');
+    sql.add('order by DDZLS.CC');
+    active:=true;
+  end;
+
+  with  QPrint do
+  begin
+    active:=false;
+    sql.clear;
+    sql.add('select DDZLS.DDBH,DDZL.DDBH,DDZL.XieXing,DDZL.Shehao,KFZL.KFJC,');
+    sql.add('XXZL.XieMing,DDZL.ShipDate,DDZL.CCGB,DDZL.Pairs');
+    while not Query1.eof do
+    begin
+        sql.add(',max(case when DDZLS.CC='+''''+Query1.fieldbyname('CC').asstring+'''');
+        sql.add(' then DDZLS.Quantity end ) as '+''''+Query1.fieldbyname('CC').asstring+'''');
+        Query1.Next;
+    end;
+    sql.add('from DDZLS');  
+    sql.add('left join ZLZL on ZLZL.DDBH=DDZLS.DDBH ');
+    sql.add('left join DDZL on DDZL.DDBH=DDZLS.DDBH ');
+    sql.Add('left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao ');
+    sql.add('left join kfzl on KFZl.KFDH=DDZL.KHBH');
+    sql.add('where  ZLZL.ZLBH like'+''''+edit1.Text+'%'+'''' );
+    sql.add('       and KFZL.KFJC like'+''''+'%'+edit3.Text+'%'+'''');
+    sql.add('       and DDZL.Article like '+''''+edit2.Text+'%'+'''');
+    sql.add('       and DDZL.GSBH='+''''+main.Edit2.Text+'''');
+    sql.add('       and convert(smalldatetime,convert(varchar,DDZL.ShipDate,111)) between ');
+    sql.add('           '''+datetostr(sdate)+''''+'and '+''''+datetostr(edate)+'''');
+    sql.add('group by DDZLS.DDBH,DDZL.DDBH,DDZL.XieXing,DDZL.Shehao,KFZL.KFJC,');
+    sql.add('         XXZL.XieMing,DDZL.ShipDate,DDZL.CCGB,DDZL.Pairs');
+    active:=true;
+  end;
+
+
+  if  QPrint.active  then
+  begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('炵苀羶衄假蚾Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+        WorkBook:=eclApp.workbooks.Add;
+        for   i:=0   to   QPrint.fieldCount-1   do
+          begin
+              eclApp.Cells(1,i+1):=QPrint.fields[i].FieldName;
+          end;
+
+        QPrint.First;
+        j:=2;
+        while   not   QPrint.Eof   do
+        begin
+          for   i:=0   to   QPrint.FieldCount-1   do
+          begin
+              eclApp.Cells(j,i+1):=QPrint.Fields[i].Value;
+          end;
+          QPrint.Next;
+          inc(j);
+        end;
+      eclapp.columns.autofit;
+      eclApp.Visible:=True;
+      except
+        on   F:Exception   do
+          showmessage(F.Message);
+      end;
+    end;
+
+end;
+
+procedure TSpecPrint.SpecMasAfterOpen(DataSet: TDataSet);
+begin
+  if SpecMas.RecordCount>0 then
+  begin
+    bbt5.Enabled:=true;
+    bbt7.Enabled:=true;
+    bbt9.Enabled:=true;
+    BBTCHI.Enabled:=true;
+    BBTKEO.Enabled:=true;
+  end;
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    SQL.add('select *');
+    SQL.add('from DDZL ');
+    SQL.add('where DDBH = '''+SpecMas.fieldbyname('ZLBH').AsString+'''');
+    sql.Add('and DDZL.YN<>1 ');
+    active:=true;
+  end;
+  if Qtemp.RecordCount>0 then
+  begin
+    bbt7.Enabled:=false;
+    BBTCHI.Enabled:=false;
+    BBTKEO.Enabled:=false;
+  end else
+  begin
+    bbt7.Enabled:=true;
+    BBTCHI.Enabled:=true;
+    BBTKEO.Enabled:=true;
+  end;
+end;
+
+procedure TSpecPrint.bbt5Click(Sender: TObject);
+var shoePic:string;
+    i:integer;
+begin
+{if sczl.recordcount=0 then
+  begin
+    showmessage('Pls setup production order first.');
+    abort;
+  end; }
+  with qrySCZL do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.Add('select * from sczl where SCBH='''+SpecMas.fieldbyname('DDBH').AsString+'''');
+    active:=true;
+    if qrySCZL.RecordCount=0 then
+    begin
+      showmessage('Pls setup production order first.');
+      abort;
+      active:=false;
+    end;
+  end;
+  with VNSpec do    //判斷是否越南材料有展算，是否繼續列印
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select * from (select * from zlzls2 union all select * from zlzls2_2014)ZLZLS2 where ZLBH=:ZLBH and XH='+''''+'VN'+'''');
+    active:=true;
+    if recordcount=0 then
+      begin
+        if messagedlg('No VN BOM material. Continue?',mtconfirmation,[mbYes,mbNo],0)=mryes then
+          begin
+          end
+            else
+              begin
+                abort;
+              end;
+      end;
+  end;
+  if messagedlg('English version?',mtinformation,[mbYes,mbNo],0)=mrYes then
+  begin
+    if messagedlg('Not show Child materail?',mtinformation,[mbYes,mbNo],0)=mrYes then
+      begin
+        PSpecPrintss:=TPSpecPrintss.create(nil);
+        //20150617修改共用Plan N11
+        PSpecPrintss.MemoTemp.DataSource:=DS1;
+        PSpecPrintss.Titlememo.DataSource:=DS1;
+        PSpecPrintss.MemoOth.DataSource:=DS1;
+        PSpecPrintss.QMatList.DataSource:=DS1;
+        PSpecPrintss.TitleMemo.Active:=true;
+        //
+        PSpecPrintss.QRCompositeReport1.prepare;
+        i:=PSpecPrintss.QuickRep2.QRPrinter.pagecount ;
+        PSpecPrintss.PageN1.Caption:='/  '+inttostr(i);
+        PSpecPrintss.PageN2.Caption:='/  '+inttostr(i);
+        PSpecPrintss.PageN3.Caption:='/  '+inttostr(i);
+        PSpecPrintss.Fac1.Caption:=PSpecPrintss.Fac1.Caption+main.Edit2.Text;
+        PSpecPrintss.Fac2.Caption:=PSpecPrintss.Fac2.Caption+main.Edit2.Text;
+        PSpecPrintss.Fac3.Caption:=PSpecPrintss.Fac3.Caption+main.Edit2.Text;
+        try
+          // 圖片加載不論是否成功都要打印
+          shoePic:=PSpecPrintss.TitleMemo.fieldbyname('IMGName').AsString  ;
+          if FileExists(shoePic)=true then
+          begin
+            PSpecPrintss.QRImage1.Picture.LoadFromFile(shoePic);
+            PSpecPrintss.QRImage2.Picture.LoadFromFile(shoePic);
+            PSpecPrintss.QRImage3.Picture.LoadFromFile(shoePic);
+          end else
+          begin
+            shoePic:=StringReplace(shoePic,'H:',ShoePicPath, [rfReplaceAll, rfIgnoreCase]);
+            if FileExists(shoePic)=true then
+            begin
+              PSpecPrintss.QRImage1.Picture.LoadFromFile(shoePic);
+              PSpecPrintss.QRImage2.Picture.LoadFromFile(shoePic);
+              PSpecPrintss.QRImage3.Picture.LoadFromFile(shoePic);
+            end;
+          end;
+          //
+          PSpecPrintss.QRCompositeReport1.Preview;
+        except
+          showmessage('No picture of article.');
+          PSpecPrintss.QRCompositeReport1.Preview;
+        end ;
+      end
+    else
+      begin
+        PSPecPrintss_SP:=TPSpecPrintss_SP.create(nil);
+        //20150617修改共用Plan N11
+        PSPecPrintss_SP.MemoTemp.DataSource:=DS1;
+        PSPecPrintss_SP.Titlememo.DataSource:=DS1;
+        PSPecPrintss_SP.MemoOth.DataSource:=DS1;
+        PSPecPrintss_SP.QMatList.DataSource:=DS1;
+        PSPecPrintss_SP.TitleMemo.Active:=true;
+        //
+        PSpecPrintss_SP.QRCompositeReport1.prepare;
+        i:=PSpecPrintss_SP.QuickRep2.QRPrinter.pagecount ;
+        PSpecPrintss_SP.PageN1.Caption:='/  '+inttostr(i);
+        PSpecPrintss_SP.PageN2.Caption:='/  '+inttostr(i);
+        PSpecPrintss_SP.PageN3.Caption:='/  '+inttostr(i);
+        PSpecPrintss_SP.Fac1.Caption:=PSpecPrintss_SP.Fac1.Caption+main.Edit2.Text;
+        PSpecPrintss_SP.Fac2.Caption:=PSpecPrintss_SP.Fac2.Caption+main.Edit2.Text;
+        PSpecPrintss_SP.Fac3.Caption:=PSpecPrintss_SP.Fac3.Caption+main.Edit2.Text;
+        try
+          // 圖片加載不論是否成功都要打印
+          shoePic:=PSpecPrintss_SP.TitleMemo.fieldbyname('IMGName').AsString  ;
+          if FileExists(shoePic)=true then
+          begin
+            PSpecPrintss_SP.QRImage1.Picture.LoadFromFile(shoePic);
+            PSpecPrintss_SP.QRImage2.Picture.LoadFromFile(shoePic);
+            PSpecPrintss_SP.QRImage3.Picture.LoadFromFile(shoePic);
+          end else
+          begin
+            shoePic:=StringReplace(shoePic,'H:',ShoePicPath, [rfReplaceAll, rfIgnoreCase]);
+            if FileExists(shoePic)=true then
+            begin
+              PSpecPrintss_SP.QRImage1.Picture.LoadFromFile(shoePic);
+              PSpecPrintss_SP.QRImage2.Picture.LoadFromFile(shoePic);
+              PSpecPrintss_SP.QRImage3.Picture.LoadFromFile(shoePic);
+            end;
+          end;
+          //
+          PSpecPrintss_SP.QRCompositeReport1.Preview;
+        except
+          showmessage('No picture of article.');
+          PSpecPrintss_SP.QRCompositeReport1.Preview;
+         end ;
+      end;
+   end
+  else
+    begin
+      //showmessage('A');
+      PSpecPrintssTW:=TPSpecPrintssTW.create(nil);
+      //20150617修改共用Plan N11
+      PSpecPrintssTW.MemoTemp.DataSource:=DS1;
+      PSpecPrintssTW.Titlememo.DataSource:=DS1;
+      PSpecPrintssTW.MemoOth.DataSource:=DS1;
+      PSpecPrintssTW.QMatList.DataSource:=DS1;
+      PSpecPrintssTW.TitleMemo.Active:=true;
+      //
+      PSpecPrintssTW.QRCompositeReport1.prepare;
+      i:=PSpecPrintssTW.QuickRep2.QRPrinter.pagecount ;
+      PSpecPrintssTW.PageN1.Caption:='/  '+inttostr(i);
+      PSpecPrintssTW.PageN2.Caption:='/  '+inttostr(i);
+      PSpecPrintssTW.PageN3.Caption:='/  '+inttostr(i);
+      PSpecPrintssTW.Fac1.Caption:=PSpecPrintssTW.Fac1.Caption+main.Edit2.Text;
+      PSpecPrintssTW.Fac2.Caption:=PSpecPrintssTW.Fac2.Caption+main.Edit2.Text;
+      PSpecPrintssTW.Fac3.Caption:=PSpecPrintssTW.Fac3.Caption+main.Edit2.Text;
+      try
+        // 圖片加載不論是否成功都要打印
+        shoePic:=PSpecPrintssTW.TitleMemo.fieldbyname('IMGName').AsString  ;
+        if FileExists(shoePic)=true then
+        begin
+          PSpecPrintssTW.QRImage1.Picture.LoadFromFile(shoePic);
+          PSpecPrintssTW.QRImage2.Picture.LoadFromFile(shoePic);
+          PSpecPrintssTW.QRImage3.Picture.LoadFromFile(shoePic);
+        end else
+        begin
+          shoePic:=StringReplace(shoePic,'H:',ShoePicPath, [rfReplaceAll, rfIgnoreCase]);
+          if FileExists(shoePic)=true then
+          begin
+            PSpecPrintssTW.QRImage1.Picture.LoadFromFile(shoePic);
+            PSpecPrintssTW.QRImage2.Picture.LoadFromFile(shoePic);
+            PSpecPrintssTW.QRImage3.Picture.LoadFromFile(shoePic);
+          end;
+        end;
+        PSpecPrintssTW.QRCompositeReport1.Preview;
+      except
+        showmessage('No picture of article.');
+        PSpecPrintssTW.QRCompositeReport1.Preview;
+      end;
+  end;
+end;
+
+procedure TSpecPrint.BBT7Click(Sender: TObject);
+begin
+  try
+    with VNSpec do
+    begin
+      active:=false;    //是否有建立越南工廠BOM
+      sql.Clear;
+      sql.add('select * from XXZLSVN where XieXing=:XieXing and SheHao=:SheHao');
+      active:=true;
+      if VNSpec.RecordCount=0 then
+      begin
+          showmessage('No VN BOM. Pls setup VN BOM first.');
+          abort;
+      end;
+      active:=false;   //ZLZLS2是否有資料，決定是否重新展算
+      sql.Clear;
+      sql.add('select * from ZLZLS2 where ZLBH=:ZLBH and XH='+''''+'VN'+''' and left(CLBH,1) <> ''U''');
+      active:=true;
+      if recordcount>0 then
+      begin
+        if messagedlg('You want to recalucate the usage again?',mtconfirmation,[mbYes,MbNo],0)=mrYes then
+        begin
+          active:=false;
+          sql.Clear;
+          sql.add('delete ZLZLS2 where ZLBH=:ZLBH and XH='+''''+'VN'+''' and left(CLBH,1) <> ''U''');
+          execsql;
+        end else
+        begin
+          abort;
+        end;
+      end;
+      active:=false;      //將該訂單越南BOM資料展算
+      sql.clear;
+      sql.add('delete ZLZLS2 where XH=''VN'' and ZLBH=:ZLBH and left(CLBH,1) <> ''U''');
+      sql.add('insert ZLZLS2 ');
+      sql.add('select  ZLZL.ZLBH,''VN'' as XH,XXZLSVN.BWBH,XXZLSVN.CSBH,');
+      sql.add('''ZZZZZZZZZZ'' as MJBH,XXZLSVN.CLBH,CLZL.CLZMLB as ZMLB,');
+      sql.add('''ZZZZZZ'' as SIZE,case when LEFT(XXZLSVN.CLBH,1)=''W'' then round(DDZL.Pairs*XXZLSVN.CLSL+0.00499,2) else round(DDZL.Pairs*XXZLSVN.CLSL+0.0499,1) end as CLSL,XXZLSVN.CLSL as  USAGE ,');  //20190713 weston修改W%膠水用量到小數2位
+      sql.add(''''+main.edit1.text+'''  as USERID,');
+      sql.add(''''+formatdatetime('yyyy/MM/dd hh:mm:ss',now)+''''+' as USERDATE,');
+      sql.add('''2'' as YN');
+      sql.add('from XXZLSVN');
+      sql.add('left join ZLZL on ZLZL.ZLBH=:ZLBH');
+      sql.add('left join DDZL on DDZL.DDBH=ZLZL.DDBH');
+      sql.add('left join CLZL on CLZL.CLDH=XXZLSVN.CLBH');
+      sql.add('where XXZLSVN.XieXing=:XieXing and XXZLSVN.SheHao=:SheHao');
+      sql.add('and (XXZLSVN.LYCC is null or XXZLSVN.LYCC<>''Y'')');
+      //funcObj.WriteErrorLog(sql.Text);
+      execsql;
+    end;
+    showmessage('Calculate finished.');
+  except
+     showmessage('Have wrong.');
+  end;
+end;
+
+procedure TSpecPrint.N1Click(Sender: TObject);
+begin
+  if messagedlg('Do you want to rebuild the production order?',mtconfirmation,[mbYes,mbNo],0)=mrYes then
+  begin
+    with query1 do
+      begin
+        active:=false;
+        sql.Clear;
+        sql.add('delete SCZLS where SCBH='+''''+specMas.fieldbyname('ZLBH').Value+'''');
+        if messagedlg('Do you want to delete Plan Date?生產是否要重排程?點YES就要通知生管？',mtconfirmation,[mbYes,mbNo],0)=mrYes then
+          begin
+            sql.Add('delete SCZLDate where ZLBH='+''''+specMas.fieldbyname('ZLBH').Value+'''');
+            sql.Add('delete SCPTCL where ZLBH='+''''+specMas.fieldbyname('ZLBH').Value+'''');
+          end;
+        sql.add('delete SCZL where SCBH='+''''+specMas.fieldbyname('ZLBH').Value+'''');
+        execsql;
+        close;
+        showmessage('OK,  delete already.');
+      end;
+    Scorder.active:=false;
+    Scorder.Active:=true;
+  end;
+end;
+
+procedure TSpecPrint.SCorderAfterOpen(DataSet: TDataSet);
+var a:string;
+begin
+  if SpecMas.Active then
+  begin
+  OrdSize.active:=false;
+  OrdSize.active:=true;
+  if SpecMas.recordcount>0 then
+  begin
+    if ScOrder.recordcount=0 then
+      begin
+        if messagedlg('No production order. Pls setup order for department.'+#39+'沒有下生產訂單，要下嗎？',mtconfirmation,[mbyes,mbno],0)=mryes then
+          begin
+            a:=SpecMas.fieldbyname('ZLBH').Value;
+                begin
+                  //20150907 insert SCZL, SCZLS, SCZLDate, SCPTCL table
+                  with qrySCZL do
+                  begin
+                    active:=false;
+                    sql.Clear;
+                    sql.Add('Insert into SCZL');
+                    sql.Add('(SCBH,GXLB,ZLBH,DDLB,ZLDW,Qty,UserID,UserDate,YN) values');
+                    sql.Add('('''+a+''',''S'','''+a+''',''N'',''B'','''+SpecMas.fieldbyname('Qty').AsString+''','''+main.Edit1.Text+''','''+Datetostr(NDate)+''',1)');
+                    execsql;
+                  end;
+                  //
+                  with qrySCZLS do
+                  begin
+                   OrdSize.first;
+                      while not OrdSize.eof do
+                        begin
+                          if OrdSize.fieldbyname('Qty').value>0 then
+                            begin
+                              qrySCZLS.Active:=false;
+                              sql.Clear;
+                              sql.Add('Insert into SCZLS');
+                              sql.Add('(SCBH,XXCC,Qty,UserID,UserDate,YN) values');
+                              sql.Add('('''+a+''','''+OrdSize.fieldbyname('XXCC').AsString+''','''+OrdSize.fieldbyname('Qty').AsString+''','''+main.Edit1.Text+''','''+Datetostr(NDate)+''',1)');
+                              execsql;
+                            end;
+                          OrdSize.next;
+                       end;
+                  end;
+                  //
+                  with qrySCZLDate do
+                  begin
+                    with QryTemp do
+                    begin
+                      active:=false;
+                      sql.Clear;
+                      sql.Add('Select * from SCZLDate where ZLBH='''+a+'''');
+                      active:=true;
+                    end;
+                    if QryTemp.RecordCount=0 then
+                    begin
+                       qrySCZLDate.Active:=false;
+                       sql.Clear;
+                       sql.Add('Insert Into SCZLDate(ZLBH,YN) values('''+a+''',1)');
+                       execsql;
+                    end;
+                  end;
+                  //
+                  with qrySCPTCL do
+                  begin
+                    with QryTemp do
+                    begin
+                      active:=false;
+                      sql.Clear;
+                      sql.Add('Select * from SCPTCL where ZLBH='''+a+'''');
+                      active:=true;
+                    end;
+                    if QryTemp.RecordCount=0 then
+                    begin
+                       qrySCPTCL.Active:=false;
+                       sql.Clear;
+                       sql.Add('Insert Into SCPTCL(ZLBH,YN) values('''+a+''',1)');
+                       execsql;
+                    end;
+                  end;
+                  //裁斷製令表
+                  CalculateCuttingDispath(a,false);
+               end;
+              ScOrder.active:=false;
+              ScOrder.Active:=true;
+          end;
+      end;
+  end;
+end;
+end;
+
+procedure TSpecPrint.ShowOrdSize();
+var a,b,c,d:string;
+begin
+  if SpecMas.RecordCount>0 then
+  begin
+    //找出訂單尺寸及斬刀尺寸的對應關係
+    a:=SpecMas.fieldbyname('DDCC').value  ;
+    b:=SpecMas.fieldbyname('XXCC').value;
+     //找出所有國別尺寸的對應關係
+       //找出訂單鞋型國別尺寸的對應關係
+    if a='K' then
+    begin
+      a:='XXZLS3.UK_Size as DDCC,';
+      c:='XXZLS3.UK_Size';
+    end;
+    if a='J' then
+    begin
+      a:='XXZLS3.JPN_Size as DDCC,';
+      c:='XXZLS3.JPN_Size';
+    end;
+    if a='E' then
+    begin
+      a:='XXZLS3.EUR_Size as DDCC,';
+      c:='XXZLS3.EUR_Size';
+    end;
+    if a='F' then
+    begin
+      a:='XXZLS3.FRN_Size as DDCC,';
+      c:='XXZLS3.FRN_Size';
+    end;
+    if a='M' then
+    begin
+      a:='XXZLS3.MX_Size as DDCC,';
+      c:='XXZLS3.MX_Size';
+    end;
+    if a='U' then
+    begin
+      a:='XXZLS3.US_Size as DDCC,';
+      c:='XXZLS3.US_Size';
+    end;
+    if a='O' then
+    begin
+      a:='XXZLS3.OTH_Size as DDCC,';
+      C:='XXZLS3.OTH_Size';
+    end;
+    if b='K' then
+      b:='XXZLS3.UK_Size as XXCC,';
+      d:='XXZLS3.UK_Size';
+    if b='J' then
+    begin
+      b:='XXZLS3.JPN_Size as XXCC,';
+      d:='XXZLS3.JPN_Size';
+    end;
+    if b='E' then
+    begin
+      b:='XXZLS3.EUR_Size as XXCC,';
+      d:='XXZLS3.EUR_Size';
+    end;
+    if b='F' then
+    begin
+      b:='XXZLS3.FRN_Size as XXCC,';
+      d:='XXZLS3.FRN_Size';
+    end;
+    if b='M' then
+    begin
+      b:='XXZLS3.MX_Size as XXCC,';
+      d:='XXZLS3.MX_Size';
+    end;
+    if b='U' then
+    begin
+      b:='XXZLS3.US_Size as XXCC,';
+      d:='XXZLS3.US_Size';
+    end;
+    if b='O' then
+    begin
+      b:=' XXZLS3.OTH_Size as XXCC,';
+      d:='XXZLS3.OTH_Size';
+    end;
+    //showmessage(c);
+       //尺寸明細
+   with OrdSize do
+   begin
+       active:=false;
+       sql.Clear;
+       //訂單及工具尺寸
+       sql.add('select DDZLs.DDBH,'+a+b+'DDZLs.Quantity as Qty ');
+       sql.add('from DDZLs ');
+       sql.add('left join XXZLS3  on  XXZLS3.XieXing=:XieXing and DDZLS.CC='+c);
+       sql.add('where DDZLs.DDBH=:DDBH');
+       sql.add('and DDZLs.Quantity<>0  ');
+       active:=true;
+   end;
+  end;
+end;
+
+procedure TSpecPrint.SpecMasAfterScroll(DataSet: TDataSet);
+var a,b,c,d:string;
+begin
+  if SpecMas.fieldbyname('VNBOM').isnull then
+  begin
+    if IsQuering=false then
+    showmessage('Pls contect with develop department to set up VN BOM first.');
+  end;
+  if Close_OrdSize=false then
+  begin
+    ShowOrdSize();
+  end;
+  with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    SQL.add('select *');
+    SQL.add('from DDZL ');
+    SQL.add('where DDBH = '''+SpecMas.fieldbyname('ZLBH').AsString+'''');
+    sql.Add('and DDZL.YN<>1 ');
+    active:=true;
+  end;
+  if Qtemp.RecordCount>0 then
+  begin
+    bbt7.Enabled:=false;
+    BBTCHI.Enabled:=false;
+    BBTKEO.Enabled:=false;
+    Label4.Caption:='UL';
+  end else
+  begin
+    bbt7.Enabled:=true;
+    BBTCHI.Enabled:=true;
+    BBTKEO.Enabled:=true;
+    Label4.Caption:='';
+  end;
+end;
+
+procedure TSpecPrint.N2Click(Sender: TObject);
+begin
+  DTP1.Date:=sdate;
+  DTP2.Date:=edate;
+  SpecPrint_Temp:=TSpecPrint_Temp.create(self);
+  SpecPrint_Temp.show;
+end;
+
+procedure TSpecPrint.FormDestroy(Sender: TObject);
+begin
+  SpecPrint:=nil;
+end;
+
+procedure TSpecPrint.N3Click(Sender: TObject);
+begin
+  SpecPrint_VNBOM:=TSpecPrint_VNBOM.create(self);
+  SpecPrint_VNBOM.show;
+end;
+
+procedure TSpecPrint.DBGrid1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+
+ if SpecMas.FieldByName('DDZT').value='C' then
+  begin
+    dbgrid1.canvas.font.color:=clred;
+   // dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+ if SpecMas.FieldByName('VNBOM').isnull then
+  begin
+    dbgrid1.canvas.font.color:=clBlue;
+   // dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+
+ if SpecMas.FieldByName('SCBH').isnull then
+  begin
+    dbgrid1.canvas.font.color:=clYellow;
+   // dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+end;
+
+procedure TSpecPrint.N4Click(Sender: TObject);
+begin
+  SpecPrint_Change:=TSpecPrint_Change.create(self);
+  SpecPrint_Change.show;
+end;
+
+procedure TSpecPrint.FormCreate(Sender: TObject);
+begin
+  with query1 do
+  begin
+      active:=false;
+      sql.Clear;
+      sql.add('select getdate() as NDate');
+      active:=true;
+      NDate:=fieldbyname('NDate').Value;
+      active:=false;
+  end;
+  DTP1.date:=startofthemonth(NDate)+5;
+  DTP2.date:=startofthemonth(incmonth(NDate,1))+4;
+  //
+  IsQuering:=false;
+  BuyNoEdit.Text:=FormatDateTime('YYYYMM',Date());
+end;
+
+procedure TSpecPrint.bbt8Click(Sender: TObject);
+begin
+  if SpecMas.Active=true then
+  begin
+    BShoeZLZL:=TBShoeZLZL.Create(self);
+    BShoeZLZL.ShowModal();
+    BShoeZLZL.Free;
+  end;
+end;
+
+procedure TSpecPrint.editPassChange(Sender: TObject);
+begin
+  if editPass.Text='270809' then
+  begin
+    BBT7.Enabled:=true;
+    BBTCHI.Enabled:=true;
+    BBTKEO.Enabled:=true;
+  end;
+
+end;
+
+procedure TSpecPrint.Label4DblClick(Sender: TObject);
+begin
+  editPass.Visible:=editPass.Visible xor true;
+  editPass.Clear;
+end;
+
+procedure TSpecPrint.bbt9Click(Sender: TObject);
+begin
+  CalculateCuttingDispath(SpecMas.FieldByName('ZLBH').AsString,true);
+  Showmessage('Calculate finished.');
+end;
+
+//計算裁斷製令表
+function TSpecPrint.CalculateCuttingDispath(ZLBH:String;IsDelete:boolean):boolean;
+begin
+  //
+  if IsDelete=true then
+  begin
+    //裁斷派工展算
+    with Qtemp do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('Delete from CutDispatchZL where ZLBH='''+ZLBH+''' ');
+      SQL.Add('insert into CutDispatchZL');
+      SQL.Add('select ZLBH,BWBH,CLBH,CC as SIZE,Qty,XXCC,Sum(Qty)*piece as PieceS,');
+      SQL.Add('case when joinnum>0 then CEILING(Sum(Qty)*piece/convert(float,layer)*joinnum) else 0 end as CutNum,Piece,Layer,joinnum,'''+main.Edit1.Text+''' as USERID,GETDATE() as USERDATE,1 as YN from (');
+      SQL.Add('  Select ZLZLS2.ZLBH,ZLZLS2.BWBH,ZLZLS2.CLBH,DDZLS.CC,Max(DDZLS.Quantity) as Qty,KT_SOPCutS.XXCC,KT_SOPCut.Piece,KT_SOPCut.Layer,KT_SOPCut.joinnum  from ZLZLS2');
+      SQL.Add('  inner join DDZL on DDZL.DDBH=ZLZLS2.ZLBH');
+      SQL.Add('  inner join DDZLS on DDZL.DDBH=DDZLS.DDBH AND (DDZLS.CC = ZLZLS2.SIZE OR ''ZZZZZZ'' = ZLZLS2.SIZE)');
+      SQL.Add('  inner join KT_SOPCut on KT_SOPCut.XieXing=DDZL.XieXing and KT_SOPCut.SheHao=DDZL.SheHao  and KT_SOPCut.BWBH=ZLZLS2.BWBH');
+      SQL.Add('  inner join KT_SOPCutS on KT_SOPCutS.XieXing=KT_SOPCut.XieXing and KT_SOPCutS.SheHao=KT_SOPCut.SheHao  and KT_SOPCutS.BWBH=KT_SOPCut.BWBH and DDZLS.CC=KT_SOPCutS.SIZE');
+      SQL.Add('  inner join XXZLS on XXZLS.XieXing=KT_SOPCut.XieXing and XXZLS.Shehao=KT_SOPCut.SheHao and XXZLS.BWBH=KT_SOPCut.BWBH and XXZLS.CCQQ<=DDZLS.CC and XXZLS.CCQZ>=DDZLS.CC ');
+      SQL.Add('  where ZLZLS2.MJBH=''ZZZZZZZZZZ'' and  ZLZLS2.ZLBH = '''+ZLBH+''' ');
+      SQL.Add('  Group by ZLZLS2.ZLBH,ZLZLS2.BWBH,ZLZLS2.CLBH,KT_SOPCut.piece,KT_SOPCut.layer,KT_SOPCut.joinnum,DDZLS.CC,KT_SOPCutS.XXCC');
+      SQL.Add(') ZLZLCut');
+      SQL.Add('where 1=1');
+      SQL.Add('Group by ZLBH,BWBH,CLBH,CC,Qty,XXCC,Piece,Layer,joinnum ');
+      SQL.Add('Union all ');  //無分段尺碼XXZLS.CCQQ is null
+      SQL.Add('select ZLBH,BWBH,CLBH,CC as SIZE,Qty,XXCC,Sum(Qty)*piece as PieceS,');
+      SQL.Add('case when joinnum>0 then CEILING(Sum(Qty)*piece/convert(float,layer)*joinnum) else 0 end as CutNum,Piece,Layer,joinnum,'''+main.Edit1.Text+''' as USERID,GETDATE() as USERDATE,1 as YN from (');
+      SQL.Add('  Select ZLZLS2.ZLBH,ZLZLS2.BWBH,ZLZLS2.CLBH,DDZLS.CC,Max(DDZLS.Quantity) as Qty,KT_SOPCutS.XXCC,KT_SOPCut.Piece,KT_SOPCut.Layer,KT_SOPCut.joinnum  from ZLZLS2');
+      SQL.Add('  inner join DDZL on DDZL.DDBH=ZLZLS2.ZLBH');
+      SQL.Add('  inner join DDZLS on DDZL.DDBH=DDZLS.DDBH AND (DDZLS.CC = ZLZLS2.SIZE OR ''ZZZZZZ'' = ZLZLS2.SIZE)');
+      SQL.Add('  inner join KT_SOPCut on KT_SOPCut.XieXing=DDZL.XieXing and KT_SOPCut.SheHao=DDZL.SheHao  and KT_SOPCut.BWBH=ZLZLS2.BWBH');
+      SQL.Add('  inner join KT_SOPCutS on KT_SOPCutS.XieXing=KT_SOPCut.XieXing and KT_SOPCutS.SheHao=KT_SOPCut.SheHao  and KT_SOPCutS.BWBH=KT_SOPCut.BWBH and DDZLS.CC=KT_SOPCutS.SIZE');
+      SQL.Add('  inner join XXZLS on XXZLS.XieXing=KT_SOPCut.XieXing and XXZLS.Shehao=KT_SOPCut.SheHao and XXZLS.BWBH=KT_SOPCut.BWBH and IsNull(XXZLS.CCQQ,'''')='''' and IsNull(XXZLS.CCQZ,'''')=''''  ');
+      SQL.Add('  where ZLZLS2.MJBH=''ZZZZZZZZZZ'' and  ZLZLS2.ZLBH = '''+ZLBH+''' ');
+      SQL.Add('  Group by ZLZLS2.ZLBH,ZLZLS2.BWBH,ZLZLS2.CLBH,KT_SOPCut.piece,KT_SOPCut.layer,KT_SOPCut.joinnum,DDZLS.CC,KT_SOPCutS.XXCC');
+      SQL.Add(') ZLZLCut');
+      SQL.Add('where 1=1');
+      SQL.Add('Group by ZLBH,BWBH,CLBH,CC,Qty,XXCC,Piece,Layer,joinnum ');
+      SQL.Add('Union all ');  //不在XXZLS.BWBH
+      SQL.Add('select ZLBH,BWBH,CLBH,CC as SIZE,Qty,XXCC,Sum(Qty)*piece as PieceS,');
+      SQL.Add('case when joinnum>0 then CEILING(Sum(Qty)*piece/convert(float,layer)*joinnum) else 0 end as CutNum,Piece,Layer,joinnum,'''+main.Edit1.Text+''' as USERID,GETDATE() as USERDATE,1 as YN from (');
+      SQL.Add('  Select ZLZLS2.ZLBH,ZLZLS2.BWBH,ZLZLS2.CLBH,DDZLS.CC,Max(DDZLS.Quantity) as Qty,KT_SOPCutS.XXCC,KT_SOPCut.Piece,KT_SOPCut.Layer,KT_SOPCut.joinnum  from ZLZLS2');
+      SQL.Add('  inner join DDZL on DDZL.DDBH=ZLZLS2.ZLBH');
+      SQL.Add('  inner join DDZLS on DDZL.DDBH=DDZLS.DDBH AND (DDZLS.CC = ZLZLS2.SIZE OR ''ZZZZZZ'' = ZLZLS2.SIZE)');
+      SQL.Add('  inner join KT_SOPCut on KT_SOPCut.XieXing=DDZL.XieXing and KT_SOPCut.SheHao=DDZL.SheHao  and KT_SOPCut.BWBH=ZLZLS2.BWBH');
+      SQL.Add('  inner join KT_SOPCutS on KT_SOPCutS.XieXing=KT_SOPCut.XieXing and KT_SOPCutS.SheHao=KT_SOPCut.SheHao  and KT_SOPCutS.BWBH=KT_SOPCut.BWBH and DDZLS.CC=KT_SOPCutS.SIZE');
+      SQL.Add('  where ZLZLS2.MJBH=''ZZZZZZZZZZ'' and  ZLZLS2.ZLBH = '''+ZLBH+''' and not exists (Select BWBH from XXZLS where XXZLS.BWBH=KT_SOPcut.BWBH and XXZLS.XieXing=KT_SOPcut.XieXing and XXZLS.SheHao=KT_SOPcut.SheHao)  ');
+      SQL.Add('  Group by ZLZLS2.ZLBH,ZLZLS2.BWBH,ZLZLS2.CLBH,KT_SOPCut.piece,KT_SOPCut.layer,KT_SOPCut.joinnum,DDZLS.CC,KT_SOPCutS.XXCC');
+      SQL.Add(') ZLZLCut');
+      SQL.Add('where 1=1');
+      SQL.Add('Group by ZLBH,BWBH,CLBH,CC,Qty,XXCC,Piece,Layer,joinnum ');
+      //funcObj.WriteErrorLog(sql.Text);
+      ExecSQL();
+      result:=true;
+    end;
+    //加工部件展算
+    with Qtemp do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('delete from CutDispatchZL_GC where ZLBH='''+ZLBH+'''');
+      SQL.Add('Insert into CutDispatchZL_GC');
+      SQL.Add('Select ZLZLS2_GC.*,null as PDay,null as EaryDay,null as PDays,'''+main.Edit1.Text+''' as USERID,GetDate(),''1'' as YN  from (');
+      SQL.Add('Select ZLZLS2.ZLBH,ZLZLS2.BWBH,ZLZLS2.CLBH,DDZLS.CC,Sum(DDZLS.Quantity) as Qty,KT_SOPCutS_GC.levels,KT_SOPCutS_GC.gcbwdh   from ZLZLS2');
+      SQL.Add('inner join DDZL on DDZL.DDBH=ZLZLS2.ZLBH');
+      SQL.Add('inner join DDZLS on DDZL.DDBH=DDZLS.DDBH AND (DDZLS.CC = ZLZLS2.SIZE OR ''ZZZZZZ'' = ZLZLS2.SIZE)');
+      SQL.Add('inner join KT_SOPCut on KT_SOPCut.XieXing=DDZL.XieXing and KT_SOPCut.SheHao=DDZL.SheHao  and KT_SOPCut.BWBH=ZLZLS2.BWBH');
+      SQL.Add('inner join KT_SOPCutS on KT_SOPCutS.XieXing=KT_SOPCut.XieXing and KT_SOPCutS.SheHao=KT_SOPCut.SheHao  and KT_SOPCutS.BWBH=KT_SOPCut.BWBH and DDZLS.CC=KT_SOPCutS.SIZE');
+      SQL.Add('Left join (');
+      SQL.Add('	select KT_SOPCutS_GC.XieXing,KT_SOPCutS_GC.SheHao,KT_SOPCutS_GC.levels,KT_SOPCutS_GCS.gcbwdh,KT_SOPCutS_GCS.bwdh ');
+      SQL.Add('	from KT_SOPCutS_GCS');
+      SQL.Add('	left join KT_SOPCutS_GC on  KT_SOPCutS_GC.XieXing=KT_SOPCutS_GCS.XieXing and KT_SOPCutS_GC.SheHao=KT_SOPCutS_GCS.SheHao and KT_SOPCutS_GC.gcbwdh=KT_SOPCutS_GCS.gcbwdh');
+      SQL.Add('	where KT_SOPCutS_GCS.bwdh not like ''0G%'' ');
+      SQL.Add(' ) KT_SOPCutS_GC on KT_SOPCutS_GC.XieXing=DDZL.XieXing and KT_SOPCutS_GC.SheHao=DDZL.SheHao and KT_SOPCutS_GC.bwdh=ZLZLS2.BWBH');
+      SQL.Add('where ZLZLS2.MJBH=''ZZZZZZZZZZ'' and  ZLZLS2.ZLBH = '''+ZLBH+''' and  KT_SOPCutS_GC.bwdh is not null');
+      SQL.Add('Group by ZLZLS2.ZLBH,ZLZLS2.BWBH,ZLZLS2.CLBH,DDZLS.CC,KT_SOPCutS_GC.levels,KT_SOPCutS_GC.gcbwdh');
+      SQL.Add('union all');
+      SQL.Add('Select DDZL.DDBH as ZLBH,KT_SOPCutS_GCS.bwdh,''ZZZZZZZZZZ'' as CLBH,DDZLS.CC,Sum(DDZLS.Quantity) as Qty,KT_SOPCutS_GC.levels,KT_SOPCutS_GC.gcbwdh');
+      SQL.Add('from DDZL');
+      SQL.Add('inner join DDZLS on DDZL.DDBH=DDZLS.DDBH');
+      SQL.Add('inner join KT_SOPCutS_GC on  KT_SOPCutS_GC.XieXing=DDZL.XieXing and KT_SOPCutS_GC.SheHao=DDZL.SheHao ');
+      SQL.Add('inner join KT_SOPCutS_GCS on  KT_SOPCutS_GC.XieXing=KT_SOPCutS_GCS.XieXing and KT_SOPCutS_GC.SheHao=KT_SOPCutS_GCS.SheHao and KT_SOPCutS_GC.gcbwdh=KT_SOPCutS_GCS.gcbwdh');
+      SQL.Add('where DDZL.DDBH = '''+ZLBH+''' and KT_SOPCutS_GCS.bwdh like ''0G%''');
+      SQL.Add('Group by DDZL.DDBH,KT_SOPCutS_GCS.bwdh,DDZLS.CC,KT_SOPCutS_GC.levels,KT_SOPCutS_GC.gcbwdh ) ZLZLS2_GC');
+      SQL.Add('');
+      SQL.Add('update CutDispatchZL_GC set PDay=ZLDay_GC.PDay,EarlyDay=ZLDay_GC.EarlyDay,PDays=ZLDay_GC.PDays');
+      SQL.Add('from (');
+      SQL.Add('   Select ZL_GC.*, ');
+      SQL.Add('		(Select Round(SUM(IsNull(PDay,EarlyDay))+0.49,0) as PDays from (');
+      SQL.Add('			Select CutDispatchZL_GC.Levels, Sum(Round(CutDispatchZL_GC.Qty/KT_SOPCutS_GCBWD.Qty1Day,2)) as PDay,Max(KT_SOPCutS_GCBWD.EarlyDay) as EarlyDay from CutDispatchZL_GC ');
+      SQL.Add('			Left join KT_SOPCutS_GCBWD on KT_SOPCutS_GCBWD.gcbwdh=CutDispatchZL_GC.GCBWBH ');
+      SQL.Add('			Where  ZLBH=ZL_GC.ZLBH ');
+      SQL.Add('			Group by CutDispatchZL_GC.Levels');
+      SQL.Add('		 ) CutDispatchZL_GC');
+      SQL.Add('		where 1=1 ');
+      SQL.Add('			  and ( Levels=Substring(ZL_GC.Levels ,1,1) or Levels=Substring(ZL_GC.Levels ,1,2) or Levels=Substring(ZL_GC.Levels ,1,3) or Levels=Substring(ZL_GC.Levels ,1,4)');
+      SQL.Add('				 or Levels=Substring(ZL_GC.Levels ,1,5) or Levels=Substring(ZL_GC.Levels ,1,6) or Levels=Substring(ZL_GC.Levels ,1,7) or Levels=Substring(ZL_GC.Levels ,1,8))        ');
+      SQL.Add('		 ) as  PDays       ');
+      SQL.Add('	from (');
+      SQL.Add('	Select ZLBH,Levels,GCBWBH,Round(SUM(PDay),2) as PDay,MAX(EarlyDay) as EarlyDay ');
+      SQL.Add('	from (');
+      SQL.Add('	Select CutDispatchZL_GC.ZLBH,CutDispatchZL_GC.GCBWBH,CutDispatchZL_GC.Levels, Round(CutDispatchZL_GC.Qty/KT_SOPCutS_GCBWD.Qty1Day,2) as PDay,KT_SOPCutS_GCBWD.EarlyDay from CutDispatchZL_GC ');
+      SQL.Add('	Left join KT_SOPCutS_GCBWD on KT_SOPCutS_GCBWD.gcbwdh=CutDispatchZL_GC.GCBWBH ');
+      SQL.Add('	Where ZLBH ='''+ZLBH+''' ) CutDispatchZL_GC');
+      SQL.Add('	Group by ZLBH,Levels,GCBWBH ) ZL_GC ) ZLDay_GC where ZLDay_GC.ZLBH=CutDispatchZL_GC.ZLBH and ZLDay_GC.GCBWBH=CutDispatchZL_GC.GCBWBH and ZLDay_GC.Levels=CutDispatchZL_GC.Levels');
+      ExecSQL();
+    end;
+  end else
+  begin
+    with Qtemp do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('insert into CutDispatchZL');
+      SQL.Add('select * from (');
+      SQL.Add('select ZLBH,BWBH,CLBH,CC as SIZE,Qty,XXCC,Sum(Qty)*piece as PieceS,');
+      SQL.Add('    case when joinnum>0 then CEILING(Sum(Qty)*piece/convert(float,layer)*joinnum) else 0 end as CutNum,Piece,Layer,joinnum,'''+main.Edit1.Text+''' as USERID,GETDATE() as USERDATE,1 as YN from (');
+      SQL.Add('Select ZLZLS2.ZLBH,ZLZLS2.BWBH,ZLZLS2.CLBH,DDZLS.CC,Sum(DDZLS.Quantity) as Qty,KT_SOPCutS.XXCC,KT_SOPCut.Piece,KT_SOPCut.Layer,KT_SOPCut.joinnum  from ZLZLS2');
+      SQL.Add('inner join DDZL on DDZL.DDBH=ZLZLS2.ZLBH');
+      SQL.Add('inner join DDZLS on DDZL.DDBH=DDZLS.DDBH');
+      SQL.Add('inner join KT_SOPCut on KT_SOPCut.XieXing=DDZL.XieXing and KT_SOPCut.SheHao=DDZL.SheHao  and KT_SOPCut.BWBH=ZLZLS2.BWBH');
+      SQL.Add('inner join KT_SOPCutS on KT_SOPCutS.XieXing=KT_SOPCut.XieXing and KT_SOPCutS.SheHao=KT_SOPCut.SheHao  and KT_SOPCutS.BWBH=KT_SOPCut.BWBH and DDZLS.CC=KT_SOPCutS.SIZE');
+      SQL.Add('inner join XXZLS on XXZLS.XieXing=KT_SOPCut.XieXing and XXZLS.Shehao=KT_SOPCut.SheHao and XXZLS.BWBH=KT_SOPCut.BWBH and XXZLS.CCQQ<=DDZLS.CC and XXZLS.CCQZ>=DDZLS.CC ');
+      SQL.Add('where ZLZLS2.MJBH=''ZZZZZZZZZZ'' and  ZLZLS2.ZLBH = '''+ZLBH+''' ');
+      SQL.Add('Group by ZLZLS2.ZLBH,ZLZLS2.BWBH,ZLZLS2.CLBH,KT_SOPCut.piece,KT_SOPCut.layer,KT_SOPCut.joinnum,DDZLS.CC,KT_SOPCutS.XXCC   ) ZLZLCut');
+      SQL.Add('where 1=1 ');
+      SQL.Add('Group by ZLBH,BWBH,CLBH,CC,Qty,XXCC,Piece,Layer,joinnum ) CutDispatchZL');
+      SQL.Add('where not exists (select ZLBH from CutDispatchZL A where A.ZLBH=CutDispatchZL.ZLBH and A.BWBH=CutDispatchZL.BWBH and A.CLBH=CutDispatchZL.CLBH and A.SIZE=CutDispatchZL.SIZE) ');
+      SQL.Add('Union all '); //無分段尺碼XXZLS.CCQQ is null
+      SQL.Add('select * from (');
+      SQL.Add('select ZLBH,BWBH,CLBH,CC as SIZE,Qty,XXCC,Sum(Qty)*piece as PieceS,');
+      SQL.Add('    case when joinnum>0 then CEILING(Sum(Qty)*piece/convert(float,layer)*joinnum) else 0 end as CutNum,Piece,Layer,joinnum,'''+main.Edit1.Text+''' as USERID,GETDATE() as USERDATE,1 as YN from (');
+      SQL.Add('Select ZLZLS2.ZLBH,ZLZLS2.BWBH,ZLZLS2.CLBH,DDZLS.CC,Sum(DDZLS.Quantity) as Qty,KT_SOPCutS.XXCC,KT_SOPCut.Piece,KT_SOPCut.Layer,KT_SOPCut.joinnum  from ZLZLS2');
+      SQL.Add('inner join DDZL on DDZL.DDBH=ZLZLS2.ZLBH');
+      SQL.Add('inner join DDZLS on DDZL.DDBH=DDZLS.DDBH');
+      SQL.Add('inner join KT_SOPCut on KT_SOPCut.XieXing=DDZL.XieXing and KT_SOPCut.SheHao=DDZL.SheHao  and KT_SOPCut.BWBH=ZLZLS2.BWBH');
+      SQL.Add('inner join KT_SOPCutS on KT_SOPCutS.XieXing=KT_SOPCut.XieXing and KT_SOPCutS.SheHao=KT_SOPCut.SheHao  and KT_SOPCutS.BWBH=KT_SOPCut.BWBH and DDZLS.CC=KT_SOPCutS.SIZE');
+      SQL.Add('inner join XXZLS on XXZLS.XieXing=KT_SOPCut.XieXing and XXZLS.Shehao=KT_SOPCut.SheHao and XXZLS.BWBH=KT_SOPCut.BWBH and IsNull(XXZLS.CCQQ,'''')='''' and IsNull(XXZLS.CCQZ,'''')=''''  ');
+      SQL.Add('where ZLZLS2.MJBH=''ZZZZZZZZZZ'' and  ZLZLS2.ZLBH = '''+ZLBH+''' ');
+      SQL.Add('Group by ZLZLS2.ZLBH,ZLZLS2.BWBH,ZLZLS2.CLBH,KT_SOPCut.piece,KT_SOPCut.layer,KT_SOPCut.joinnum,DDZLS.CC,KT_SOPCutS.XXCC   ) ZLZLCut');
+      SQL.Add('where 1=1 ');
+      SQL.Add('Group by ZLBH,BWBH,CLBH,CC,Qty,XXCC,Piece,Layer,joinnum ) CutDispatchZL');
+      SQL.Add('where not exists (select ZLBH from CutDispatchZL A where A.ZLBH=CutDispatchZL.ZLBH and A.BWBH=CutDispatchZL.BWBH and A.CLBH=CutDispatchZL.CLBH and A.SIZE=CutDispatchZL.SIZE) ');
+      SQL.Add('Union all '); //不在XXZLS.BWBH
+      SQL.Add('select * from (');
+      SQL.Add('select ZLBH,BWBH,CLBH,CC as SIZE,Qty,XXCC,Sum(Qty)*piece as PieceS,');
+      SQL.Add('    case when joinnum>0 then CEILING(Sum(Qty)*piece/convert(float,layer)*joinnum) else 0 end as CutNum,Piece,Layer,joinnum,'''+main.Edit1.Text+''' as USERID,GETDATE() as USERDATE,1 as YN from (');
+      SQL.Add('Select ZLZLS2.ZLBH,ZLZLS2.BWBH,ZLZLS2.CLBH,DDZLS.CC,Sum(DDZLS.Quantity) as Qty,KT_SOPCutS.XXCC,KT_SOPCut.Piece,KT_SOPCut.Layer,KT_SOPCut.joinnum  from ZLZLS2');
+      SQL.Add('inner join DDZL on DDZL.DDBH=ZLZLS2.ZLBH');
+      SQL.Add('inner join DDZLS on DDZL.DDBH=DDZLS.DDBH');
+      SQL.Add('inner join KT_SOPCut on KT_SOPCut.XieXing=DDZL.XieXing and KT_SOPCut.SheHao=DDZL.SheHao  and KT_SOPCut.BWBH=ZLZLS2.BWBH');
+      SQL.Add('inner join KT_SOPCutS on KT_SOPCutS.XieXing=KT_SOPCut.XieXing and KT_SOPCutS.SheHao=KT_SOPCut.SheHao  and KT_SOPCutS.BWBH=KT_SOPCut.BWBH and DDZLS.CC=KT_SOPCutS.SIZE');
+      SQL.Add('where ZLZLS2.MJBH=''ZZZZZZZZZZ'' and  ZLZLS2.ZLBH = '''+ZLBH+'''  and not exists (Select BWBH from XXZLS where XXZLS.BWBH=KT_SOPcut.BWBH and XXZLS.XieXing=KT_SOPcut.XieXing and XXZLS.SheHao=KT_SOPcut.SheHao)  ');
+      SQL.Add('Group by ZLZLS2.ZLBH,ZLZLS2.BWBH,ZLZLS2.CLBH,KT_SOPCut.piece,KT_SOPCut.layer,KT_SOPCut.joinnum,DDZLS.CC,KT_SOPCutS.XXCC   ) ZLZLCut');
+      SQL.Add('where 1=1 ');
+      SQL.Add('Group by ZLBH,BWBH,CLBH,CC,Qty,XXCC,Piece,Layer,joinnum ) CutDispatchZL');
+      SQL.Add('where not exists (select ZLBH from CutDispatchZL A where A.ZLBH=CutDispatchZL.ZLBH and A.BWBH=CutDispatchZL.BWBH and A.CLBH=CutDispatchZL.CLBH and A.SIZE=CutDispatchZL.SIZE) ');
+      //funcObj.WriteErrorLog(sql.Text);
+      ExecSQL();
+      result:=true;
+    end;
+    //加工部件展算
+    with Qtemp do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('Insert into CutDispatchZL_GC');
+      SQL.Add('Select ZLZLS2_GC.*,null as PDay,null as EaryDay,null as PDays,'''+main.Edit1.Text+''' as USERID,GetDate(),''1'' as YN  from (');
+      SQL.Add('Select ZLZLS2.ZLBH,ZLZLS2.BWBH,ZLZLS2.CLBH,DDZLS.CC,Sum(DDZLS.Quantity) as Qty,KT_SOPCutS_GC.levels,KT_SOPCutS_GC.gcbwdh   from ZLZLS2');
+      SQL.Add('inner join DDZL on DDZL.DDBH=ZLZLS2.ZLBH');
+      SQL.Add('inner join DDZLS on DDZL.DDBH=DDZLS.DDBH');
+      SQL.Add('inner join KT_SOPCut on KT_SOPCut.XieXing=DDZL.XieXing and KT_SOPCut.SheHao=DDZL.SheHao  and KT_SOPCut.BWBH=ZLZLS2.BWBH');
+      SQL.Add('inner join KT_SOPCutS on KT_SOPCutS.XieXing=KT_SOPCut.XieXing and KT_SOPCutS.SheHao=KT_SOPCut.SheHao  and KT_SOPCutS.BWBH=KT_SOPCut.BWBH and DDZLS.CC=KT_SOPCutS.SIZE');
+      SQL.Add('Left join (');
+      SQL.Add('	select KT_SOPCutS_GC.XieXing,KT_SOPCutS_GC.SheHao,KT_SOPCutS_GC.levels,KT_SOPCutS_GCS.gcbwdh,KT_SOPCutS_GCS.bwdh ');
+      SQL.Add('	from KT_SOPCutS_GCS');
+      SQL.Add('	left join KT_SOPCutS_GC on  KT_SOPCutS_GC.XieXing=KT_SOPCutS_GCS.XieXing and KT_SOPCutS_GC.SheHao=KT_SOPCutS_GCS.SheHao and KT_SOPCutS_GC.gcbwdh=KT_SOPCutS_GCS.gcbwdh');
+      SQL.Add('	where KT_SOPCutS_GCS.bwdh not like ''0G%'' ');
+      SQL.Add(' ) KT_SOPCutS_GC on KT_SOPCutS_GC.XieXing=DDZL.XieXing and KT_SOPCutS_GC.SheHao=DDZL.SheHao and KT_SOPCutS_GC.bwdh=ZLZLS2.BWBH');
+      SQL.Add('where ZLZLS2.MJBH=''ZZZZZZZZZZ'' and  ZLZLS2.ZLBH = '''+ZLBH+''' and  KT_SOPCutS_GC.bwdh is not null');
+      SQL.Add('Group by ZLZLS2.ZLBH,ZLZLS2.BWBH,ZLZLS2.CLBH,DDZLS.CC,KT_SOPCutS_GC.levels,KT_SOPCutS_GC.gcbwdh');
+      SQL.Add('union all');
+      SQL.Add('Select DDZL.DDBH as ZLBH,KT_SOPCutS_GCS.bwdh,''ZZZZZZZZZZ'' as CLBH,DDZLS.CC,Sum(DDZLS.Quantity) as Qty,KT_SOPCutS_GC.levels,KT_SOPCutS_GC.gcbwdh');
+      SQL.Add('from DDZL');
+      SQL.Add('inner join DDZLS on DDZL.DDBH=DDZLS.DDBH');
+      SQL.Add('inner join KT_SOPCutS_GC on  KT_SOPCutS_GC.XieXing=DDZL.XieXing and KT_SOPCutS_GC.SheHao=DDZL.SheHao ');
+      SQL.Add('inner join KT_SOPCutS_GCS on  KT_SOPCutS_GC.XieXing=KT_SOPCutS_GCS.XieXing and KT_SOPCutS_GC.SheHao=KT_SOPCutS_GCS.SheHao and KT_SOPCutS_GC.gcbwdh=KT_SOPCutS_GCS.gcbwdh');
+      SQL.Add('where DDZL.DDBH = '''+ZLBH+''' and KT_SOPCutS_GCS.bwdh like ''0G%''');
+      SQL.Add('Group by DDZL.DDBH,KT_SOPCutS_GCS.bwdh,DDZLS.CC,KT_SOPCutS_GC.levels,KT_SOPCutS_GC.gcbwdh ) ZLZLS2_GC');
+      SQL.Add('');
+      SQL.Add('update CutDispatchZL_GC set PDay=ZLDay_GC.PDay,EarlyDay=ZLDay_GC.EarlyDay,PDays=ZLDay_GC.PDays');
+      SQL.Add('from (');
+      SQL.Add('   Select ZL_GC.*, ');
+      SQL.Add('		(Select Round(SUM(IsNull(PDay,EarlyDay))+0.49,0) as PDays from (');
+      SQL.Add('			Select CutDispatchZL_GC.Levels, Sum(Round(CutDispatchZL_GC.Qty/KT_SOPCutS_GCBWD.Qty1Day,2)) as PDay,Max(KT_SOPCutS_GCBWD.EarlyDay) as EarlyDay from CutDispatchZL_GC ');
+      SQL.Add('			Left join KT_SOPCutS_GCBWD on KT_SOPCutS_GCBWD.gcbwdh=CutDispatchZL_GC.GCBWBH ');
+      SQL.Add('			Where  ZLBH=ZL_GC.ZLBH ');
+      SQL.Add('			Group by CutDispatchZL_GC.Levels');
+      SQL.Add('		 ) CutDispatchZL_GC');
+      SQL.Add('		where 1=1 ');
+      SQL.Add('			  and ( Levels=Substring(ZL_GC.Levels ,1,1) or Levels=Substring(ZL_GC.Levels ,1,2) or Levels=Substring(ZL_GC.Levels ,1,3) or Levels=Substring(ZL_GC.Levels ,1,4)');
+      SQL.Add('				 or Levels=Substring(ZL_GC.Levels ,1,5) or Levels=Substring(ZL_GC.Levels ,1,6) or Levels=Substring(ZL_GC.Levels ,1,7) or Levels=Substring(ZL_GC.Levels ,1,8))        ');
+      SQL.Add('		 ) as  PDays       ');
+      SQL.Add('	from (');
+      SQL.Add('	Select ZLBH,Levels,GCBWBH,Round(SUM(PDay),2) as PDay,MAX(EarlyDay) as EarlyDay ');
+      SQL.Add('	from (');
+      SQL.Add('	Select CutDispatchZL_GC.ZLBH,CutDispatchZL_GC.GCBWBH,CutDispatchZL_GC.Levels, Round(CutDispatchZL_GC.Qty/KT_SOPCutS_GCBWD.Qty1Day,2) as PDay,KT_SOPCutS_GCBWD.EarlyDay from CutDispatchZL_GC ');
+      SQL.Add('	Left join KT_SOPCutS_GCBWD on KT_SOPCutS_GCBWD.gcbwdh=CutDispatchZL_GC.GCBWBH ');
+      SQL.Add('	Where ZLBH ='''+ZLBH+''' ) CutDispatchZL_GC');
+      SQL.Add('	Group by ZLBH,Levels,GCBWBH ) ZL_GC ) ZLDay_GC where ZLDay_GC.ZLBH=CutDispatchZL_GC.ZLBH and ZLDay_GC.GCBWBH=CutDispatchZL_GC.GCBWBH and ZLDay_GC.Levels=CutDispatchZL_GC.Levels');
+      ExecSQL();
+    end;
+  end;
+  //
+end;
+//
+procedure TSpecPrint.N6Click(Sender: TObject);
+begin
+   CutDispatchZL:=TCutDispatchZL.Create(self);
+   CutDispatchZL.Show;
+end;
+
+procedure TSpecPrint.N7Click(Sender: TObject);
+begin
+   CutDispatchZL_GC:=TCutDispatchZL_GC.Create(self);
+   CutDispatchZL_GC.Show;
+end;
+
+procedure TSpecPrint.BitBtn1Click(Sender: TObject);
+begin
+  Set_Pur_Delivery:=TSet_Pur_Delivery.create(self);
+  Set_Pur_Delivery.Edit1.Text:=SpecMas.FieldByName('ZLBH').AsString;
+  Set_Pur_Delivery.show;
+end;
+
+procedure TSpecPrint.DBGrid1MouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  Close_OrdSize:=true;
+end;
+
+procedure TSpecPrint.DBGrid1MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  Close_OrdSize:=false;
+end;
+
+procedure TSpecPrint.BBTCHIClick(Sender: TObject);
+begin
+  try
+    with VNSpec do
+    begin
+      active:=false;    //是否有建立越南工廠BOM
+      sql.Clear;
+      sql.add('select * from XXZLSVN where XieXing=:XieXing and SheHao=:SheHao');
+      active:=true;
+      if VNSpec.RecordCount=0 then
+      begin
+          showmessage('No VN BOM. Pls setup VN BOM first.');
+          abort;
+      end;
+      active:=false;   //ZLZLS2是否有資料，決定是否重新展算
+      sql.Clear;
+      sql.add('select * from ZLZLS2 where ZLBH=:ZLBH and XH='+''''+'VN'+''' and left(CLBH,1)=''M''');
+      active:=true;
+      if recordcount>0 then
+      begin
+        if messagedlg('You want to recalucate the usage thread again?',mtconfirmation,[mbYes,MbNo],0)=mrYes then
+        begin
+          active:=false;
+          sql.Clear;
+          sql.add('delete ZLZLS2 where ZLBH=:ZLBH and XH='+''''+'VN'+''' and left(CLBH,1) =''M''');
+          //funcObj.WriteErrorLog(sql.Text);
+          execsql;
+        end else
+        begin
+          abort;
+        end;
+      end;
+      active:=false;      //將該訂單越南BOM資料展算
+      sql.clear;
+      sql.add('delete ZLZLS2 where XH=''VN'' and ZLBH=:ZLBH and left(CLBH,1) =''M''');
+      sql.add('insert ZLZLS2 ');
+      sql.add('select  ZLZL.ZLBH,''VN'' as XH,XXZLSVN.BWBH,XXZLSVN.CSBH,');
+      sql.add('''ZZZZZZZZZZ'' as MJBH,XXZLSVN.CLBH,CLZL.CLZMLB as ZMLB,');
+      sql.add('''ZZZZZZ'' as SIZE,case when LEFT(XXZLSVN.CLBH,1)=''W'' then round(DDZL.Pairs*XXZLSVN.CLSL+0.00499,2) else round(DDZL.Pairs*XXZLSVN.CLSL+0.0499,1) end as CLSL,XXZLSVN.CLSL as  USAGE ,');  //20190713 weston修改W%膠水用量到小數2位
+      sql.add(''''+main.edit1.text+'''  as USERID,');
+      sql.add(''''+formatdatetime('yyyy/MM/dd hh:mm:ss',now)+''''+' as USERDATE,');
+      sql.add('''2'' as YN');
+      sql.add('from XXZLSVN');
+      sql.add('left join ZLZL on ZLZL.ZLBH=:ZLBH');
+      sql.add('left join DDZL on DDZL.DDBH=ZLZL.DDBH');
+      sql.add('left join CLZL on CLZL.CLDH=XXZLSVN.CLBH');
+      sql.add('where XXZLSVN.XieXing=:XieXing and XXZLSVN.SheHao=:SheHao and LEFT(XXZLSVN.CLBH,1)=''M''');
+      sql.add('and (XXZLSVN.LYCC is null or XXZLSVN.LYCC<>''Y'')');
+      //funcObj.WriteErrorLog(sql.Text);
+      execsql;
+    end;
+    showmessage('Calculate finished.');
+  except
+     showmessage('Have wrong.');
+  end;
+end;
+
+procedure TSpecPrint.BBTKEOClick(Sender: TObject);
+begin
+  try
+    with VNSpec do
+    begin
+      active:=false;    //是否有建立越南工廠BOM
+      sql.Clear;
+      sql.add('select * from XXZLSVN where XieXing=:XieXing and SheHao=:SheHao');
+      active:=true;
+      if VNSpec.RecordCount=0 then
+      begin
+          showmessage('No VN BOM. Pls setup VN BOM first.');
+          abort;
+      end;
+      active:=false;   //ZLZLS2是否有資料，決定是否重新展算
+      sql.Clear;
+      sql.add('select * from ZLZLS2 where ZLBH=:ZLBH and XH='+''''+'VN'+''' and left(CLBH,1)=''W''');
+      active:=true;
+      if recordcount>0 then
+      begin
+        if messagedlg('You want to recalucate the usage chemical again?',mtconfirmation,[mbYes,MbNo],0)=mrYes then
+        begin
+          active:=false;
+          sql.Clear;
+          sql.add('delete ZLZLS2 where ZLBH=:ZLBH and XH='+''''+'VN'+''' and left(CLBH,1)=''W''');
+          //funcObj.WriteErrorLog(sql.Text);
+          execsql;
+        end else
+        begin
+          abort;
+        end;
+      end;
+      active:=false;      //將該訂單越南BOM資料展算
+      sql.clear;
+      sql.add('delete ZLZLS2 where XH=''VN'' and ZLBH=:ZLBH and left(CLBH,1)=''W''');
+      sql.add('insert ZLZLS2 ');
+      sql.add('select  ZLZL.ZLBH,''VN'' as XH,XXZLSVN.BWBH,XXZLSVN.CSBH,');
+      sql.add('''ZZZZZZZZZZ'' as MJBH,XXZLSVN.CLBH,CLZL.CLZMLB as ZMLB,');
+      sql.add('''ZZZZZZ'' as SIZE,case when LEFT(XXZLSVN.CLBH,1)=''W'' then round(DDZL.Pairs*XXZLSVN.CLSL+0.00499,2) else round(DDZL.Pairs*XXZLSVN.CLSL+0.0499,1) end as CLSL,XXZLSVN.CLSL as  USAGE ,');  //20190713 weston修改W%膠水用量到小數2位
+      sql.add(''''+main.edit1.text+'''  as USERID,');
+      sql.add(''''+formatdatetime('yyyy/MM/dd hh:mm:ss',now)+''''+' as USERDATE,');
+      sql.add('''2'' as YN');
+      sql.add('from XXZLSVN');
+      sql.add('left join ZLZL on ZLZL.ZLBH=:ZLBH');
+      sql.add('left join DDZL on DDZL.DDBH=ZLZL.DDBH');
+      sql.add('left join CLZL on CLZL.CLDH=XXZLSVN.CLBH');
+      sql.add('where XXZLSVN.XieXing=:XieXing and XXZLSVN.SheHao=:SheHao and LEFT(XXZLSVN.CLBH,1)=''W''');
+      sql.add('and (XXZLSVN.LYCC is null or XXZLSVN.LYCC<>''Y'')');
+      //funcObj.WriteErrorLog(sql.Text);
+      execsql;
+    end;
+    showmessage('Calculate finished.');
+  except
+     showmessage('Have wrong.');
+  end;
+end;
+
+procedure TSpecPrint.N8Click(Sender: TObject);
+var   a:string;
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+  if  SpecMas.active  then
+  begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('No Mcrosoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+        WorkBook:=eclApp.workbooks.Add;
+        for   i:=0   to   SpecMas.fieldCount-1   do
+        begin
+            eclApp.Cells(1,i+1):=SpecMas.fields[i].FieldName;
+        end;
+        SpecMas.First;
+        j:=2;
+        while   not   SpecMas.Eof   do
+        begin
+          for   i:=0   to   SpecMas.FieldCount-1   do
+          begin
+            eclApp.Cells(j,i+1):=SpecMas.Fields[i].Value;
+          end;
+          SpecMas.Next;
+          inc(j);
+        end;
+      eclapp.columns.autofit;
+      showmessage('Succeed');
+      eclApp.Visible:=True;
+      except
+        on   F:Exception   do
+          showmessage(F.Message);
+      end;
+    end;
+end;
+procedure TSpecPrint.VNSpecAllClick(Sender: TObject);
+label lRestart;
+begin
+  if not chkFG.Checked then
+  begin
+    showmessage('Pls check Not Yet Finish !') ;
+    abort;
+  end;
+  try
+    SpecMas.First;
+    with SpecMas do
+    begin
+      while not eof do
+      begin
+        with VNSpec do
+        begin
+          active:=false;    //是否有建立越南工廠BOM
+          sql.Clear;
+          sql.add('select * from XXZLSVN where XieXing=:XieXing and SheHao=:SheHao');
+          active:=true;
+          if VNSpec.RecordCount=0 then
+          begin
+              showmessage('No VN BOM. Pls setup VN BOM first.');
+              goto lRestart;
+          end;
+          active:=false;   //ZLZLS2是否有資料，決定是否重新展算
+          sql.Clear;
+          sql.add('select * from ZLZLS2 where ZLBH=:ZLBH and XH='+''''+'VN'+''' and left(CLBH,1) <> ''U''');
+          active:=true;
+          if recordcount>0 then
+          begin
+            if messagedlg('You want to recalucate the usage again?',mtconfirmation,[mbYes,MbNo],0)=mrYes then
+            begin
+              active:=false;
+              sql.Clear;
+              sql.add('delete ZLZLS2 where ZLBH=:ZLBH and XH='+''''+'VN'+''' and left(CLBH,1) <> ''U''');
+              execsql;
+            end else
+            begin
+              goto lRestart;
+            end;
+          end;
+          active:=false;      //將該訂單越南BOM資料展算
+          sql.clear;
+          sql.add('delete ZLZLS2 where XH=''VN'' and ZLBH=:ZLBH and left(CLBH,1) <> ''U''');
+          sql.add('insert ZLZLS2 ');
+          sql.add('select  ZLZL.ZLBH,''VN'' as XH,XXZLSVN.BWBH,XXZLSVN.CSBH,');
+          sql.add('''ZZZZZZZZZZ'' as MJBH,XXZLSVN.CLBH,CLZL.CLZMLB as ZMLB,');
+          sql.add('''ZZZZZZ'' as SIZE,case when LEFT(XXZLSVN.CLBH,1)=''W'' then round(DDZL.Pairs*XXZLSVN.CLSL+0.00499,2) else round(DDZL.Pairs*XXZLSVN.CLSL+0.0499,1) end as CLSL,XXZLSVN.CLSL as  USAGE ,');  //20190713 weston修改W%膠水用量到小數2位
+          sql.add(''''+main.edit1.text+'''  as USERID,');
+          sql.add(''''+formatdatetime('yyyy/MM/dd hh:mm:ss',now)+''''+' as USERDATE,');
+          sql.add('''2'' as YN');
+          sql.add('from XXZLSVN');
+          sql.add('left join ZLZL on ZLZL.ZLBH=:ZLBH');
+          sql.add('left join DDZL on DDZL.DDBH=ZLZL.DDBH');
+          sql.add('left join CLZL on CLZL.CLDH=XXZLSVN.CLBH');
+          sql.add('where XXZLSVN.XieXing=:XieXing and XXZLSVN.SheHao=:SheHao');
+          sql.add('and (XXZLSVN.LYCC is null or XXZLSVN.LYCC<>''Y'')');
+          //funcObj.WriteErrorLog(sql.Text);
+          execsql;
+          lRestart:
+        end;
+      SpecMas.Next;
+     end; 
+    end;
+    showmessage('Calculate finished.');
+  except
+     showmessage('Have wrong.');
+  end;
+end;
+
+procedure TSpecPrint.chkFGClick(Sender: TObject);
+begin
+  if chkFG.Checked then
+  begin
+    VNSpecAll.Enabled:=true;
+  end else
+  begin
+    VNSpecAll.Enabled:=false;
+  end;
+  button1.Click;
+end;
+
+procedure TSpecPrint.Edit1Paste();
+var
+  CbBuf: PChar;
+  BufSize: Integer;
+  Handle: THandle;
+  Text:WideString;
+  i:integer;
+  rowList:TStringlist;
+  TotalZLBH:String;
+begin
+ try
+   Text:='';
+   if Clipboard.HasFormat(CF_TEXT) then
+   begin
+    Handle := ClipBoard.GetAsHandle(CF_TEXT);
+    BufSize := GlobalSize(Handle);
+    GetMem(CbBuf, BufSize);
+    Text:=Clipboard.AsUnicodeText;
+    //
+    rowList:=TStringlist.Create;
+    rowList.Text:=Text;
+    TotalZLBH:='';
+    for i:=0 to rowList.Count-1 do
+    begin
+      TotalZLBH:=TotalZLBH+rowList.Strings[i]+',';
+    end;
+    rowList.Free;
+    if length(TotalZLBH)>0 then
+    begin
+      Edit1.Text:=Copy(TotalZLBH,1,length(TotalZLBH)-1);
+    end;
+   end;
+ except
+   on E:Exception do
+    Showmessage(E.Message);
+ end;
+end;
+
+procedure TSpecPrint.Edit1KeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (ssCtrl in Shift) and (key = 86) then
+  begin
+    Edit1Paste();
+  end;
+end;
+
+function TSpecPrint.GetMutiRYSubSQL(Str:String):String;
+var tmpList:TStringlist;
+   i:integer;
+   tmResult,TotalStr:String;
+begin
+ if Pos(',',Str)>0 then
+ begin
+   tmpList:=TStringlist.Create;
+   tmpList:=FuncObj.SplitString(Str,',');
+   TotalStr:='';
+   for i:=0 to tmpList.Count-1 do
+   begin
+     TotalStr:=TotalStr+''''+tmpList.Strings[i]+''',';
+   end;
+   tmResult:=' in ('+Copy(TotalStr,1,length(TotalStr)-1)+')';
+   //BDE TQuery 不能太長所以改用暫存
+   if ((tmpList.Count>=20) and (tmpList.Count<=50)) then
+   begin
+     with Qtemp do
+     begin
+       Active:=false;
+       SQL.Clear;
+       SQL.add('if object_id(''tempdb..#RYList'') is not null    ');
+       SQL.add('begin drop table #RYList end                 ');
+       SQL.Add('select ZLBH into #RYList from ZLZL');
+       SQL.Add('where  ZLBH '+tmResult);
+       //funcobj.WriteErrorLog(sql.Text);
+       ExecSQL();
+       Result:=' in (select ZLBH from #RYList) ';
+     end;
+   end else if (tmpList.Count>=50) then
+   begin
+      showmessage('Vui long khong nhap nhieu hon 50 RY#');
+      abort;
+   end else
+   begin
+      Result:=tmResult;
+   end;
+   tmpList.Free;
+ end else
+ begin
+   Result:=' like '''+Str+'%'' ';
+ end;
+end;
+
+
+end.

@@ -1,0 +1,526 @@
+unit OutsoleBorrow_RY1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, Grids, DBGrids, DB, DBTables, StdCtrls, Buttons,
+  GridsEh, DBGridEh, Spin, Menus,comobj;
+
+type
+  TOutsoleBorrow_RY = class(TForm)
+    Panel1: TPanel;
+    DS1: TDataSource;
+    RYQuery: TQuery;
+    Panel2: TPanel;
+    DS2: TDataSource;
+    LastQuery: TQuery;
+    BB5: TBitBtn;
+    BB7: TBitBtn;
+    Splitter1: TSplitter;
+    BB4: TBitBtn;
+    RYQueryDDBH: TStringField;
+    RYQueryCLDH: TStringField;
+    UpdateSQL1: TUpdateSQL;
+    TmpQry: TQuery;
+    Label1: TLabel;
+    TuaSpinEdit: TSpinEdit;
+    Panel3: TPanel;
+    DBGridEh1: TDBGridEh;
+    DBGrid2: TDBGridEh;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    Label2: TLabel;
+    SMDDSGridEh: TDBGridEh;
+    DS3: TDataSource;
+    XXGJSQry: TQuery;
+    Splitter2: TSplitter;
+    Splitter3: TSplitter;
+    UpdateSQL2: TUpdateSQL;
+    RYQueryT1: TIntegerField;
+    RYQueryT2: TIntegerField;
+    PopupMenu1: TPopupMenu;
+    Excel1: TMenuItem;
+    RYQueryDDMH: TStringField;
+    procedure FormCreate(Sender: TObject);
+    procedure RYQueryAfterPost(DataSet: TDataSet);
+    procedure DBGridEh1KeyPress(Sender: TObject; var Key: Char);
+    procedure DBGridEh1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure BB4Click(Sender: TObject);
+    procedure BB7Click(Sender: TObject);
+    procedure BB5Click(Sender: TObject);
+    procedure LastQueryAfterOpen(DataSet: TDataSet);
+    procedure RYQueryAfterScroll(DataSet: TDataSet);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure Excel1Click(Sender: TObject);
+  private
+    IsGetLastInfo:boolean;
+    IsCalculate:boolean;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  OutsoleBorrow_RY: TOutsoleBorrow_RY;
+
+implementation
+  uses Outsoleborrow1,FunUnit, main1;
+{$R *.dfm}
+
+procedure TOutsoleBorrow_RY.FormCreate(Sender: TObject);
+begin
+  RYQuery.Active:=true;
+end;
+
+procedure TOutsoleBorrow_RY.RYQueryAfterPost(DataSet: TDataSet);
+begin
+  if IsGetLastInfo=false then
+  begin
+    IsGetLastInfo:=true;
+    with TmpQry do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('Select DDZL.DDBH,XXZL.DDMH,CLZL.CLDH from DDZL ');
+      SQL.Add('left join XXZL on DDZL.XieXing=XXZL.XieXing and DDZL.SheHao=XXZL.SheHao ');
+      SQL.Add('left join CLZL on CLZL.YWPM=XXZL.DDMH and CLDH like ''VF%'' ');
+      SQL.Add('where DDBH='''+RYQuery.FieldByName('DDBH').AsString+''' ');
+      Active:=true;
+      if RecordCount>0  then
+      begin
+        RYQuery.Edit;
+        RYQuery.FieldByName('DDMH').AsString:=TmpQry.FieldByName('DDMH').AsString;
+        RYQuery.FieldByName('CLDH').AsString:=TmpQry.FieldByName('CLDH').AsString;
+        RYQuery.Post;
+      end else
+      begin
+        RYQuery.Edit;
+        RYQuery.FieldByName('DDMH').AsString:='';
+        RYQuery.FieldByName('CLDH').AsString:='';
+        RYQuery.Post;
+      end;
+      Active:=false;
+    end;
+    IsGetLastInfo:=false;
+  end;
+end;
+
+procedure TOutsoleBorrow_RY.DBGridEh1KeyPress(Sender: TObject; var Key: Char);
+begin
+    if ((key=#46) and (RYQuery.RecordCount>1)) then
+    RYQuery.Delete;
+end;
+
+procedure TOutsoleBorrow_RY.DBGridEh1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+  if  RYQuery.FieldByName('CLDH').AsString='' then
+  begin
+    DBGridEh1.canvas.font.color:=clred;
+  end;
+end;
+
+procedure TOutsoleBorrow_RY.BB4Click(Sender: TObject);
+var i,count:integer;
+    SubSQL:array of String;
+    TotalSuSQL,DDBHSQL:String;
+    T1,T2:string;
+begin
+  IsCalculate:=true;
+  //
+  Count:=0;
+  for i:=0 to RYQuery.RecordCount-1 do
+  begin
+    if RYQuery.FieldByName('CLDH').AsString<>'' then
+    begin
+      Count:=Count+1;
+    end;
+  end;
+  //
+  setlength(SubSQL,Count);
+  RYQuery.First;
+  Count:=0;
+  for i:=0 to RYQuery.RecordCount-1 do
+  begin
+    if RYQuery.FieldByName('CLDH').AsString<>'' then
+    begin
+      //
+      if RYQuery.FieldByName('T2').AsString<>'' then
+      begin
+        if RYQuery.FieldByName('T1').AsString<>'' then
+        begin
+          if length(RYQuery.FieldByName('T1').AsString)=1 then T1:='-00'+RYQuery.FieldByName('T1').AsString;
+          if length(RYQuery.FieldByName('T1').AsString)=2 then T1:='-0'+RYQuery.FieldByName('T1').AsString;
+          if length(RYQuery.FieldByName('T1').AsString)=3 then T1:='-'+RYQuery.FieldByName('T1').AsString;
+          if length(RYQuery.FieldByName('T2').AsString)=1 then T2:='-00'+RYQuery.FieldByName('T2').AsString;
+          if length(RYQuery.FieldByName('T2').AsString)=2 then T2:='-0'+RYQuery.FieldByName('T2').AsString;
+          if length(RYQuery.FieldByName('T2').AsString)=3 then T2:='-'+RYQuery.FieldByName('T2').AsString;
+          DDBHSQL:=' (SMDDS.DDBH like '''+RYQuery.FieldByName('DDBH').AsString+'%'' and SMDDS.DDBH >= '''+RYQuery.FieldByName('DDBH').AsString+T1+''' and SMDDS.DDBH <= '''+RYQuery.FieldByName('DDBH').AsString+T2+''' )';
+        end else
+        begin
+           DDBHSQL:=' SMDDS.DDBH like '''+RYQuery.FieldByName('DDBH').AsString+'%'' ';
+        end;
+      end else
+      begin
+        if RYQuery.FieldByName('T1').AsString<>'' then
+        begin
+          if length(RYQuery.FieldByName('T1').AsString)=1 then T1:='-00'+RYQuery.FieldByName('T1').AsString;
+          if length(RYQuery.FieldByName('T1').AsString)=2 then T1:='-0'+RYQuery.FieldByName('T1').AsString;
+          if length(RYQuery.FieldByName('T1').AsString)=3 then T1:='-'+RYQuery.FieldByName('T1').AsString;
+          DDBHSQL:=' SMDDS.DDBH = '''+RYQuery.FieldByName('DDBH').AsString+T1+''' ';
+        end else
+        begin
+          DDBHSQL:=' SMDDS.DDBH like '''+RYQuery.FieldByName('DDBH').AsString+'%'' ';
+        end;
+      end;
+      //
+      TotalSuSQL:=TotalSuSQL+'('+DDBHSQL+') or ';
+      SubSQL[count]:=' and ('+DDBHSQL+')  ';
+      Count:=Count+1;
+      //
+    end;
+    RYQuery.Next;
+  end;
+  //
+  if length(TotalSuSQL)>0 then TotalSuSQL:='and ('+Copy(TotalSuSQL,1,length(TotalSuSQL)-4)+')';
+
+  //顯示SQL
+  if count>0 then
+  if (length(SubSQL[0])>0)  then
+  begin
+    with TmpQry do
+    begin
+      Active:=true;
+      SQL.Clear;
+      SQL.Add('Select XXGJS.GJCC as XXCC from SMDDS');
+      SQL.Add('left join SMDD on SMDD.DDBH=SMDDS.DDBH and SMDD.GXLB=''A'' ');
+      SQL.Add('left join DDZL on DDZL.DDBH=SMDD.YSBH ');
+      SQL.Add('left join XXGJS on xxgjs.XieXing=DDZL.XieXing and xxgjs.GJLB=101 and xxgjs.XXCC=SMDDS.XXCC ');
+      SQL.Add('where 1=1 '+TotalSuSQL+'  group by XXGJS.GJCC order by XXGJS.GJCC');
+      Active:=true;
+    end;
+    //
+    with LastQuery do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('select  AA.CLDH,AA.Outsole as OutSoleName');
+      //
+      TmpQry.First;
+      for i:=0 to TmpQry.RecordCount-1 do
+      begin
+        SQL.Add('                ,max(case AA.[SizeLast] when '''+TmpQry.FieldByName('XXCC').AsString+''' then AA.[Qty]  end) as ['+TmpQry.FieldByName('XXCC').AsString+'] ');
+        TmpQry.Next;
+      end;
+      //
+      SQL.Add('FROM( ');
+      for count:=0 to High(SubSQL)  do
+      begin
+        SQL.Add('SELECT A.SizeLast,A.Outsole,A.CLDH,A.DDBH,Max(ISNULL(A.Qty,0)');
+        for i:=1 to TuaSpinEdit.Value do
+        begin
+          SQL.Add('+IsNull(A'+inttostr(i)+'.Qty,0)');
+        end;
+        SQL.Add(') Qty');
+        SQL.Add('FROM( ');
+        SQL.Add('  Select SMDD.YSBH,SMDDS.DDBH,XXGJS.GJCC as SizeLast,CLZL.CLDH,CLZL.YWPM as Outsole,');
+        SQL.Add('  case when Charindex(''-'',SMDDS.DDBH,len(SMDDS.DDBH)-3) >0 then Convert(int,Substring(SMDDS.DDBH, Charindex(''-'',SMDDS.DDBH,len(SMDDS.DDBH)-3)+1,3 )) else 0 end as Seq,SMDDS.Qty from SMDDS ');
+        SQL.Add('  left join SMDD on SMDD.DDBH=SMDDS.DDBH and SMDD.GXLB=''A''  ');
+        SQL.Add('  left join DDZL on DDZL.DDBH=SMDD.YSBH');
+        SQL.Add('  left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.Shehao=DDZL.SheHao');
+        SQL.Add('  left join XXGJS on xxgjs.XieXing=DDZL.XieXing and xxgjs.GJLB=101 and xxgjs.XXCC=SMDDS.XXCC ');
+        SQL.Add('  left join CLZL on CLZL.YWPM=XXZL.DDMH and CLDH like ''VF%'' ');
+        SQL.Add('  where 1=1 '+SubSQL[count]+' ) A');
+        for i:=1 to TuaSpinEdit.Value do
+        begin
+          SQL.Add('LEFT JOIN (  ');
+          SQL.Add('  select * from (');
+          SQL.Add('  Select SMDD.YSBH,SMDDS.DDBH,XXGJS.GJCC as SizeLast,CLZL.CLDH,CLZL.YWPM as Outsole,');
+          SQL.Add('  case when Charindex(''-'',SMDDS.DDBH,len(SMDDS.DDBH)-3) >0 then Convert(int,Substring(SMDDS.DDBH, Charindex(''-'',SMDDS.DDBH,len(SMDDS.DDBH)-3)+1,3 ))-'+inttostr(i)+' else 0 end as Seq,SMDDS.Qty from SMDDS ');
+          SQL.Add('  left join SMDD on SMDD.DDBH=SMDDS.DDBH and SMDD.GXLB=''A''  ');
+          SQL.Add('  left join DDZL on DDZL.DDBH=SMDD.YSBH');
+          SQL.Add('  left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.Shehao=DDZL.SheHao');
+          SQL.Add('  left join XXGJS on xxgjs.XieXing=DDZL.XieXing and xxgjs.GJLB=101 and xxgjs.XXCC=SMDDS.XXCC ');
+          SQL.Add('  left join CLZL on CLZL.YWPM=XXZL.DDMH and CLDH like ''VF%'' ');
+          SQL.Add('  where 1=1 '+SubSQL[count]+'  ) SMDDS where Seq>0 ) A'+inttostr(i)+'  on A'+inttostr(i)+'.YSBH=A.YSBH and A'+inttostr(i)+'.SizeLast=A.SizeLast and A'+inttostr(i)+'.Seq=A.Seq');
+        end;
+        SQL.Add('  GROUP BY A.SizeLast,A.Outsole,A.DDBH,A.CLDH');
+        if count<>High(SubSQL) then SQL.Add('Union all');
+      end;
+      SQL.Add('     )AA');
+      SQL.Add('GROUP BY AA.CLDH,AA.Outsole');
+      Active:=true;
+    end;
+    TmpQry.Active:=false;
+    //
+    DBGrid2.Columns[0].Width:=80;
+    DBGrid2.Columns[0].Title.Font.Size:=10;
+    DBGrid2.Columns[0].ReadOnly:=true;
+    DBGrid2.Columns[1].Width:=80;
+    DBGrid2.Columns[1].Title.Font.Size:=10;
+    DBGrid2.Columns[1].ReadOnly:=true;
+    for i:=2 to LastQuery.FieldCount-1 do
+    begin
+      DBGrid2.Columns[i].Width:=40;
+      DBGrid2.Columns[i].Title.Font.Size:=10;
+    end;
+  end;
+  //
+  IsCalculate:=false;
+end;
+
+procedure TOutsoleBorrow_RY.BB7Click(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TOutsoleBorrow_RY.BB5Click(Sender: TObject);
+var i,j:integer;
+begin
+  //
+  if messagedlg('Phom giay so luong la OK?',mtinformation,[mbYes,mbNo],0)=mrYes then
+  begin
+    for i:=0 to  LastQuery.RecordCount-1 do
+    begin
+      //
+      Outsoleborrow.DelDet.edit;
+      Outsoleborrow.DelDet.fieldbyname('LLNO').Value:=Outsoleborrow.DelMas.fieldbyname('LLNO').Value;
+      Outsoleborrow.DelDet.fieldbyname('CLBH').Value:=LastQuery.fieldbyname('CLDH').Value;
+      Outsoleborrow.DelDet.fieldbyname('LLQTY').Value:='0';
+      Outsoleborrow.DelDet.fieldbyname('RKQTY').Value:='0';
+      Outsoleborrow.DelDet.FieldByName('userID').Value:=main.edit1.text;
+      Outsoleborrow.DelDet.FieldByName('userdate').Value:=Ndate;
+      Outsoleborrow.DelDet.FieldByName('YN').Value:='1';
+      Outsoleborrow.upDet.apply(ukinsert);
+      //
+      with TmpQry do       //先刪除SS檔,再新增
+      begin
+        active:=false;
+        sql.Clear;
+        sql.add('DELETE OSLLSS   ');
+        sql.add('where OSLLSS.LLNO='+''''+Outsoleborrow.DelMas.fieldbyname('LLNO').AsString+'''');
+        sql.add('       and OSLLSS.CLBH='+''''+LastQuery.fieldbyname('CLDH').AsString+'''');
+        execsql;
+        for j:=2 to  LastQuery.FieldCount-1 do
+        begin
+          //楦頭尺碼數量
+          if ((LastQuery.Fields[j].AsString<>'0') and (LastQuery.Fields[j].AsString<>'')) then
+          begin
+            active:=false;
+            sql.Clear;
+            sql.add('Select CLBH from #CLZLKC_Outsole ');
+            sql.add('where #CLZLKC_Outsole.CLBH='''+LastQuery.fieldbyname('CLDH').AsString+''' and #CLZLKC_Outsole.SIZ='''+LastQuery.Fields[j].FieldName+''' ');
+            active:=true;
+            if RecordCount>0  then
+            begin
+              //
+              active:=false;
+              sql.Clear;
+              sql.add('INSERT into OSLLSS   ');
+              sql.add('select '''+Outsoleborrow.DelMas.fieldbyname('LLNo').AsString+''',CLBH,''Outsole'' ,SIZ,'''+LastQuery.Fields[j].AsString+''','''+LastQuery.Fields[j].AsString+''',Qty');
+              sql.add('       ,getdate() '  );
+              sql.add('       ,'''+main.edit1.text+''''  );
+              sql.add('       ,''1'' '  );
+              sql.add('       ,''VN''  ');
+              sql.add(' from #CLZLKC_Outsole   ');
+              sql.add(' where #CLZLKC_Outsole.CLBH='+''''+LastQuery.fieldbyname('CLDH').AsString+''' and #CLZLKC_Outsole.SIZ='''+LastQuery.Fields[j].FieldName+''' ');
+              execsql;
+            end else
+            begin
+              active:=false;
+              sql.Clear;
+              sql.add('INSERT into OSLLSS   ');
+              sql.add('Values ('''+Outsoleborrow.DelMas.fieldbyname('LLNo').AsString+''','''+LastQuery.fieldbyname('CLDH').AsString+''',''Outsole'' ,'''+LastQuery.Fields[j].FieldName+''','''+LastQuery.Fields[j].AsString+''','''+LastQuery.Fields[j].AsString+''',0 ');
+              sql.add('       ,getdate() '  );
+              sql.add('       ,'''+main.edit1.text+''''  );
+              sql.add('       ,''1'' '  );
+              sql.add('       ,''VN'')  ');
+              execsql;
+            end;
+          end;
+          //
+        end;
+      end;
+      //
+      LastQuery.Next;
+    end;
+    //
+    with TmpQry do
+    begin
+      active:=false;
+      sql.Clear;
+      sql.add('UPDATE OSLLS ');
+      sql.add('set LLQTY=isnull((select isnull(SUM(QTY),0) AS SQTY ');
+      sql.add('                  from OSLLSS ');
+      sql.add('                  WHERE 1=1');
+      sql.add('                        and OSLLSS.LLNo='+''''+Outsoleborrow.DelDet.FieldByName('LLNO').Value+''''+' and OSLLSS.CLBH='+''''+Outsoleborrow.DelDet.FieldByName('CLBH').Value+'''' );
+      sql.add('                  GROUP BY LLNo,CLBH),0) ');
+      sql.add(' where OSLLS.LLNo='+''''+Outsoleborrow.DelDet.FieldByName('LLNo').Value+''''+ ' and OSLLS.CLBH='+''''+Outsoleborrow.DelDet.FieldByName('CLBH').Value+'''' );
+      execsql;
+      close;
+    end;
+    //
+    Outsoleborrow.DelDet.active:=false;
+    Outsoleborrow.DelDet.cachedupdates:=false;
+    Outsoleborrow.DelDet.requestlive:=false;
+    Outsoleborrow.DelDet.active:=true;
+    //
+    Showmessage('Success');
+    Close;
+  end;
+end;
+
+procedure TOutsoleBorrow_RY.LastQueryAfterOpen(DataSet: TDataSet);
+begin
+  if LastQuery.RecordCount>0 then
+    BB5.Enabled:=true
+  else
+    BB5.Enabled:=false;
+end;
+
+procedure TOutsoleBorrow_RY.RYQueryAfterScroll(DataSet: TDataSet);
+var i:integer;
+    DDBHSQL,T1,T2:string;
+begin
+  //
+  if IsGetLastInfo=false then
+  begin
+    if RYQuery.FieldByName('CLDH').AsString<>'' then
+    begin
+      //
+      if RYQuery.FieldByName('T2').AsString<>'' then
+      begin
+        if RYQuery.FieldByName('T1').AsString<>'' then
+        begin
+          if length(RYQuery.FieldByName('T1').AsString)=1 then T1:='-00'+RYQuery.FieldByName('T1').AsString;
+          if length(RYQuery.FieldByName('T1').AsString)=2 then T1:='-0'+RYQuery.FieldByName('T1').AsString;
+          if length(RYQuery.FieldByName('T1').AsString)=3 then T1:='-'+RYQuery.FieldByName('T1').AsString;
+          if length(RYQuery.FieldByName('T2').AsString)=1 then T2:='-00'+RYQuery.FieldByName('T2').AsString;
+          if length(RYQuery.FieldByName('T2').AsString)=2 then T2:='-0'+RYQuery.FieldByName('T2').AsString;
+          if length(RYQuery.FieldByName('T2').AsString)=3 then T2:='-'+RYQuery.FieldByName('T2').AsString;
+          DDBHSQL:=' (SMDDS.DDBH like '''+RYQuery.FieldByName('DDBH').AsString+'%'' and SMDDS.DDBH >= '''+RYQuery.FieldByName('DDBH').AsString+T1+''' and SMDDS.DDBH <= '''+RYQuery.FieldByName('DDBH').AsString+T2+''' )';
+        end else
+        begin
+           DDBHSQL:=' SMDDS.DDBH like '''+RYQuery.FieldByName('DDBH').AsString+'%'' ';
+        end;
+      end else
+      begin
+        if RYQuery.FieldByName('T1').AsString<>'' then
+        begin
+          if length(RYQuery.FieldByName('T1').AsString)=1 then T1:='-00'+RYQuery.FieldByName('T1').AsString;
+          if length(RYQuery.FieldByName('T1').AsString)=2 then T1:='-0'+RYQuery.FieldByName('T1').AsString;
+          if length(RYQuery.FieldByName('T1').AsString)=3 then T1:='-'+RYQuery.FieldByName('T1').AsString;
+          DDBHSQL:=' SMDDS.DDBH = '''+RYQuery.FieldByName('DDBH').AsString+T1+''' ';
+        end else
+        begin
+          DDBHSQL:=' SMDDS.DDBH like '''+RYQuery.FieldByName('DDBH').AsString+'%'' ';
+        end;
+      end;
+      //
+      with TmpQry do
+      begin
+        Active:=false;
+        SQL.Clear;
+        SQL.Add('select SMDDS.XXCC,XXGJS.GJCC from SMDDS');
+        SQL.Add('Left join SMDD on SMDDS.DDBH=SMDD.DDBH and SMDD.GXLB=''A'' ');
+        SQL.Add('Left join DDZL on SMDD.YSBH=DDZL.DDBH ');
+        SQL.Add('Left join XXGJS on xxgjs.XieXing=DDZL.XieXing and xxgjs.GJLB=100 and xxgjs.XXCC=SMDDS.XXCC ');
+        SQL.Add('where  '+DDBHSQL+' ');
+        SQL.Add('Group by SMDDS.XXCC,XXGJS.GJCC ');
+        Active:=true;
+      end;
+      with XXGJSQry do
+      begin
+        Active:=false;
+        SQL.Clear;
+        SQL.Add('select SMDDS.DDBH,Null as ''RY|Outsole'' ');
+        while not TmpQry.Eof do
+        begin
+          SQL.Add('       ,MAX(Case when XXGJS.GJCC='''+TmpQry.FieldByName('GJCC').AsString+''' then SMDDS.Qty end) as '''+TmpQry.FieldByName('XXCC').AsString+'|'+TmpQry.FieldByName('GJCC').AsString+''' ');
+          TmpQry.Next;
+        end;
+        TmpQry.Active:=false;
+        SQL.Add(',Sum(SMDDS.Qty) as Total ');
+        SQL.Add('from SMDDS ');
+        SQL.Add('Left join SMDD on SMDDS.DDBH=SMDD.DDBH and SMDD.GXLB=''A'' ');
+        SQL.Add('Left join DDZL on SMDD.YSBH=DDZL.DDBH ');
+        SQL.Add('Left join XXGJS on XXGJS.XieXing=DDZL.XieXing and XXGJS.GJLB=100 and xxgjs.XXCC=SMDDS.XXCC ');
+        SQL.Add('where  '+DDBHSQL+' ');
+        SQL.Add('Group by SMDDS.DDBH ');
+        Active:=true;
+      end;
+      //
+      SMDDSGridEh.columns[0].width:=125;
+      SMDDSGridEh.columns[0].title.caption:='RY#';
+      SMDDSGridEh.columns[1].width:=45;
+      SMDDSGridEh.columns[1].title.caption:='Size|Outsole';
+      for i:=2 to XXGJSQry.fieldcount-1 do
+      begin
+        SMDDSGridEh.columns[i].width:=45;
+        SMDDSGridEh.columns[i].Footer.FieldName:=XXGJSQry.Fields[i].FieldName;
+        SMDDSGridEh.columns[i].Footer.ValueType:=fvtSum;
+      end;
+      for i:=0 to  XXGJSQry.fieldcount-1 do
+        SMDDSGridEh.columns[i].Title.Font.Size:=10;
+    end;
+  end;
+end;
+
+procedure TOutsoleBorrow_RY.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+   Action:=caFree;
+end;
+
+procedure TOutsoleBorrow_RY.FormDestroy(Sender: TObject);
+begin
+  OutsoleBorrow_RY:=nil;
+end;
+
+procedure TOutsoleBorrow_RY.Excel1Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+      i,j:integer;
+  begin
+  if  XXGJSQry.active  then
+    begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('No Mcrosoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+        WorkBook:=eclApp.workbooks.Add;
+        for   i:=0   to   XXGJSQry.fieldCount-1   do
+          begin
+              eclApp.Cells(1,i+1):=XXGJSQry.fields[i].FieldName;
+          end;
+        XXGJSQry.First;
+        j:=2;
+        while   not   XXGJSQry.Eof   do
+          begin
+            for   i:=0   to   XXGJSQry.FieldCount-1   do
+              begin
+                eclApp.Cells(j,i+1):=XXGJSQry.Fields[i].Value;
+              end;
+            XXGJSQry.Next;
+            inc(j);
+          end;
+      eclapp.columns.autofit;
+      showmessage('Succeed');
+      eclApp.Visible:=True;
+      except
+        on   F:Exception   do
+          showmessage(F.Message);
+      end;
+    end;
+end;
+
+
+end.

@@ -1,0 +1,206 @@
+object DelMat_Byhand_Mat: TDelMat_Byhand_Mat
+  Left = 344
+  Top = 282
+  Width = 753
+  Height = 415
+  Caption = 'DelMat_Byhand_Mat'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 737
+    Height = 49
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 8
+      Top = 14
+      Width = 78
+      Height = 20
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'MatNo:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 208
+      Top = 12
+      Width = 101
+      Height = 20
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'MatName:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Button1: TButton
+      Left = 592
+      Top = 8
+      Width = 89
+      Height = 33
+      Caption = 'Query'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      OnClick = Button1Click
+    end
+    object Edit2: TEdit
+      Left = 312
+      Top = 11
+      Width = 129
+      Height = 28
+      CharCase = ecUpperCase
+      TabOrder = 1
+    end
+    object EDIT1: TEdit
+      Left = 88
+      Top = 11
+      Width = 121
+      Height = 28
+      CharCase = ecUpperCase
+      TabOrder = 0
+    end
+    object Edit3: TEdit
+      Left = 456
+      Top = 11
+      Width = 129
+      Height = 28
+      CharCase = ecUpperCase
+      TabOrder = 3
+    end
+  end
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 49
+    Width = 737
+    Height = 327
+    Align = alClient
+    DataSource = DS1
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -12
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    ParentFont = False
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -15
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    OnDblClick = DBGridEh1DblClick
+    OnKeyPress = DBGridEh1KeyPress
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'cldh'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'cllb'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ywpm'
+        Footers = <>
+        Width = 365
+      end
+      item
+        EditButtons = <>
+        FieldName = 'dwbh'
+        Footers = <>
+        Width = 71
+      end
+      item
+        Color = 10921727
+        EditButtons = <>
+        FieldName = 'KCQty'
+        Footers = <>
+      end>
+  end
+  object DS1: TDataSource
+    DataSet = Query1
+    Left = 424
+    Top = 128
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select *'
+      'from clzl'
+      'order by CLDH')
+    Left = 424
+    Top = 160
+    object Query1cldh: TStringField
+      DisplayWidth = 12
+      FieldName = 'cldh'
+      Origin = 'DB.clzl.cldh'
+      FixedChar = True
+      Size = 10
+    end
+    object Query1cllb: TStringField
+      DisplayWidth = 6
+      FieldName = 'cllb'
+      Origin = 'DB.clzl.cllb'
+      FixedChar = True
+      Size = 3
+    end
+    object Query1ywpm: TStringField
+      DisplayWidth = 229
+      FieldName = 'ywpm'
+      Origin = 'DB.clzl.ywpm'
+      FixedChar = True
+      Size = 200
+    end
+    object Query1dwbh: TStringField
+      DisplayWidth = 6
+      FieldName = 'dwbh'
+      Origin = 'DB.clzl.dwbh'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1KCQty: TFloatField
+      FieldName = 'KCQty'
+      DisplayFormat = '##,#0.0'
+    end
+  end
+end

@@ -1,0 +1,56 @@
+USE [NHU_LIY_ERP]
+GO
+
+/****** Object:  Table [dbo].[Lab_Materialtest]    Script Date: 02/03/2021 14:05:48 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Lab_Materialtest](
+	[ReportID] [varchar](14) NOT NULL,
+	[GSBH] [varchar](4) NULL,
+	[ReqDate] [smalldatetime] NULL,
+	[Factory] [varchar](10) NULL,
+	[Department] [varchar](10) NULL,
+	[Result] [varchar](10) NULL,
+	[Material0] [varchar](15) NULL,
+	[Material1] [varchar](15) NULL,
+	[Material2] [varchar](15) NULL,
+	[Material3] [varchar](15) NULL,
+	[Material4] [varchar](15) NULL,
+	[Color] [varchar](15) NULL,
+	[Component] [varchar](30) NULL,
+	[MaterialType] [varchar](30) NULL,
+	[Treatment] [varchar](30) NULL,
+	[SupplierCode] [varchar](15) NULL,
+	[Category] [varchar](20) NULL,
+	[Season] [varchar](15) NULL,
+	[SamplingFor] [varchar](15) NULL,
+	[SKU] [varchar](20) NULL,
+	[SR] [varchar](20) NULL,
+	[TestedBy] [varchar](30) NULL,
+	[Approvalby] [varchar](30) NULL,
+	[AcceptedDate] [smalldatetime] NULL,
+	[CompleteDate] [smalldatetime] NULL,
+	[Comment] [varchar](50) NULL,
+	[FailReason] [varchar](50) NULL,
+	[UserID] [varchar](10) NULL,
+	[UserDate] [smalldatetime] NULL,
+	[YN] [varchar](1) NULL,
+ CONSTRAINT [PK_Lab_MaterialTest] PRIMARY KEY CLUSTERED 
+(
+	[ReportID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+

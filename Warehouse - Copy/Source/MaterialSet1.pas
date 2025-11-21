@@ -1,0 +1,277 @@
+unit MaterialSet1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls,dateutils,
+  comobj, ComCtrls, GridsEh, DBGridEh;
+
+type
+  TMaterialSet = class(TForm)
+    Panel1: TPanel;
+    Label3: TLabel;
+    Label5: TLabel;
+    Label7: TLabel;
+    Button1: TButton;
+    Edit3: TEdit;
+    Edit1: TEdit;
+    Edit5: TEdit;
+    Button2: TButton;
+    DBGrid1: TDBGridEh;
+    DataSource1: TDataSource;
+    Query1: TQuery;
+    Label2: TLabel;
+    Edit2: TEdit;
+    Query1ZLBH: TStringField;
+    Query1CLBH: TStringField;
+    Query1Usage: TFloatField;
+    Query1CLSL: TFloatField;
+    Query1DFL: TStringField;
+    Query1YWPM: TStringField;
+    Query1DWBH: TStringField;
+    Query1LYCC: TStringField;
+    Query1Article: TStringField;
+    Query1XieMing: TStringField;
+    Query1okQty: TCurrencyField;
+    CBX1: TCheckBox;
+    Query1DelQty: TCurrencyField;
+    DTP1: TDateTimePicker;
+    Label4: TLabel;
+    Label6: TLabel;
+    DTP2: TDateTimePicker;
+    Qtemp: TQuery;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure DBGrid1TitleClick(Column: TColumn);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure DBGrid1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MaterialSet: TMaterialSet;  
+  NDate:TDate;
+
+implementation
+
+uses main1;
+
+{$R *.dfm}
+
+procedure TMaterialSet.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+procedure TMaterialSet.Button1Click(Sender: TObject);
+var y,m:word;
+sdate,edate:Tdate;
+begin {
+if (CBX2.text='')or (CBX3.text='')  then
+  begin
+    showmessage('You have to select the year and month first.');
+    abort;
+  end;
+y:=strtoint(CBX2.Text);
+m:=strtoint(CBX3.Text);
+if (y>2999) or (y<1900) then
+  begin
+    showmessage('Pls key in right year');
+    abort;
+  end;
+if (m=0) or (m>12) then
+  begin
+    showmessage('Pls key in right month');
+    abort;
+  end;   }
+sdate:=DTP1.Date;
+edate:=DTP2.Date;
+
+with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('declare @p decimal(18,4)  ');
+    sql.add('set @p=(select Delperson from BasData where GSBH='+''''+main.edit2.text+''''+')');
+    sql.add('select OrdCL1.ZLBH,OrdCL1.CLBH,sum(OrdCL1.Usage) as Usage,');
+    sql.add('        round((sum(OrdCL1.CLSL)+0.0499),1) as CLSL,OrdCL1.DFL,OrdCL1.YWPM,OrdCL1.DWBH,OrdCL1.LYCC,');
+    sql.add('        OrdCL1.Article,OrdCL1.XieMing,OrdCL1.XieXing,OrdCL1.SheHao,KCSMCL.okQty,KCSMCLok.DelQty ');
+    sql.add('  from ');
+    sql.add('      ( select  ZLBH,CLBH,sum(USAGE) as USAGE,case when CLTX='+''''+'3'+'''');
+    sql.add(' then sum(CLSL)*@p/100  else sum(CLSL) end as CLSL ,DFL,YWPM, ');
+    sql.add('          DWBH,LYCC,Article,XieMing,XieXing,SheHao,CLTX');
+    sql.add('     from (select ZLZLS2.ZLBH,ZLZLS2.CLBH,max(ZLZLS2.USAGE) as USAGE,');
+    sql.add('             sum(ZLZLS2.CLSL)   CLSL,isnull(XXBWFLS.DFL,'+''''+'N'+''''+') as DFL');
+    sql.add('             ,CLZL.YWPM,CLZL.DWBH,CLZL.LYCC,DDZL.XieXing,DDZL.SheHao,XXZL.Article,XXZL.XieMing,isnull(XXZLS.CLTX,1) as CLTX');
+    sql.add('             from ZLZLS2');
+    sql.add('             left join CLZL on ZLZLS2.CLBH=CLZL.CLDH');
+    sql.add('             left join ZLZL on ZLZL.ZLBH=ZLZLS2.ZLBH');
+    sql.add('             left join DDZL on DDZL.DDBH=ZLZL.DDBH');
+    sql.add('             left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZL.SheHao=DDZL.SheHao');
+    sql.add('             left join XXBWFL on ZLZLS2.BWBH=XXBWFL.BWBH and XXZL.XieXing=XXBWFL.XieXing');
+    sql.add('             left join XXBWFLS on XXBWFL.FLBH=XXBWFLS.FLBH');
+    sql.add('             left join XXZLS on XXZLS.XieXing=XXZL.XieXing and XXZLS.SheHao=XXZL.SheHao and XXZLS.BWBH=ZLZLS2.BWBH');
+    sql.add('            where ZLZLS2.ZLBH like '+''''+edit5.Text+'%'+'''');
+    sql.add('                   and MJBH='+''''+'ZZZZZZZZZZ'+'''');
+    sql.add('                   and XXZL.XieMing like '+''''+'%'+edit2.Text+'%'+'''');
+    sql.add('                   and XXZL.Article like '+''''+edit1.Text+'%'+'''');
+    sql.add('                   and ZLZLS2.CLBH like '+''''+edit3.Text+'%'+'''');
+    sql.add('                   and ZLZLS2.ZLBH like '+''''+edit5.Text+'%'+'''');
+    sql.add('                   and ZLZLS2.CLBH not like '+''''+'PPP%'+'''');
+    sql.add('                   and DDZL.GSBH='+''''+main.Edit2.Text+'''');
+    sql.add('                   and convert(smalldatetime,convert(varchar,DDZL.ShipDate,111)) between ');
+    sql.add('                       '''+formatdatetime('yyyy/MM/dd',sdate)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',edate)+'''');
+    sql.add('            group by ZLZLS2.ZLBH,ZLZLS2.CLBH,XXBWFLS.DFL,CLZL.YWPM,CLZL.DWBH,CLZL.LYCC,');
+    sql.add('                 DDZL.XieXing,DDZL.SheHao,XXZL.Article,XXZL.XieMing,XXZLS.CLTX ) as OrdCL');
+    if CBX1.Checked then
+      begin
+        sql.add('     where  OrdCL.DFL='+''''+'C'+'''');
+      end;
+    sql.add('      group by ZLBH,CLBH,DFL,YWPM,DWBH,LYCC,Article,XieMing,XieXing,SheHao,CLTX) OrdCL1');
+    sql.add('left join (select ZLBH,CLBH,DFL,sum(Qty) as okQty from KCSMCL group by ZLBH,CLBH,DFL) KCSMCL');
+    sql.add('             on KCSMCL.ZLBH=OrdCL1.ZLBH and KCSMCL.CLBH=OrdCL1.CLBH and KCSMCL.DFL=OrdCL1.DFL');
+    sql.add('left join (select ZLBH,CLBH,DFL,sum(Qty) as DelQty from KCSMCL where YN<>'+''''+'1'+''''+' group by ZLBH,CLBH,DFL) KCSMCLok');
+    sql.add('             on KCSMCLok.ZLBH=OrdCL1.ZLBH and KCSMCLok.CLBH=OrdCL1.CLBH and KCSMCLok.DFL=OrdCL1.DFL');
+    sql.add('group by OrdCL1.ZLBH,OrdCL1.CLBH,OrdCL1.DFL,OrdCL1.YWPM,OrdCL1.DWBH,');
+    sql.add('              OrdCL1.LYCC,OrdCL1.Article,OrdCL1.XieMing,OrdCL1.XieXing,OrdCL1.SheHao,KCSMCL.okQty,KCSMCLok.DelQty');
+    sql.add('order by OrdCL1.CLBH,OrdCL1.DFL,OrdCL1.ZLBH');
+    active:=true;
+  end;
+
+end;
+
+procedure TMaterialSet.Button2Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+
+if query1.Active then
+  begin
+    if query1.recordcount=0 then
+      begin
+        showmessage('No record.');
+        abort;
+      end;
+  end
+  else
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+
+try
+  eclApp:=CreateOleObject('Excel.Application');
+  WorkBook:=CreateOleObject('Excel.Sheet');
+except
+  Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+  Exit;
+end;
+
+try
+  WorkBook:=eclApp.workbooks.Add;
+  eclApp.Cells(1,1):='NO';
+  for   i:=1   to   query1.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=query1.fields[i-1].FieldName;
+    end;
+  query1.First;
+  j:=2;
+  while   not  query1.Eof   do
+    begin
+      eclApp.Cells(j,1):=j-1;
+      for   i:=1   to   query1.fieldcount   do
+        begin
+          eclApp.Cells(j,i+1):=query1.Fields[i-1].Value;
+          eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+        end;
+      query1.Next;
+      inc(j);
+    end;
+  eclapp.columns.autofit;
+  showmessage('Succeed.');
+  eclApp.Visible:=True;
+except
+  on   F:Exception   do
+    showmessage(F.Message);
+end;
+
+
+
+end;
+
+procedure TMaterialSet.DBGrid1TitleClick(Column: TColumn);
+var
+ temp, title: string;
+ las:integer;
+begin
+if (not Query1.Active) or Query1.RequestLive then
+  begin
+    abort;
+  end;
+ temp := Column.FieldName;
+ if temp='CLBH' then
+   begin
+     Query1.Close;
+     las:=pos('order ',Query1.SQL.Text);
+     Query1.SQL.text:=copy(Query1.SQL.text,1,las-1) +' order by OrdCL1.CLBH,OrdCL1.ZLBH,OrdCL1.DFL' ;
+     Query1.Active:=true;
+   end;    
+ if temp='ZLBH' then
+   begin
+     Query1.Close;
+     las:=pos('order ',Query1.SQL.Text);
+     Query1.SQL.text:=copy(Query1.SQL.text,1,las-1) +'  order by OrdCL1.ZLBH,OrdCL1.DFL,OrdCL1.CLBH' ;
+     Query1.Active:=true;
+   end;
+
+end;
+
+procedure TMaterialSet.FormDestroy(Sender: TObject);
+begin
+MaterialSet:=nil;
+end;
+
+procedure TMaterialSet.FormCreate(Sender: TObject);
+begin
+with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select getdate() as NDate ');
+    active:=true;
+    NDate:=fieldbyname('NDate').value;
+    active:=false;
+  end;
+
+DTP1.date:=startofthemonth(NDate)+5;
+DTP2.date:=startofthemonth(incmonth(NDate,1))+4;
+end;
+
+procedure TMaterialSet.DBGrid1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+
+ if query1.FieldByName('CLSL').value>query1.FieldByName('okQty').value then
+  begin
+    dbgrid1.canvas.font.color:=clred;
+    //dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+ if query1.FieldByName('CLSL').value<=query1.FieldByName('okQty').value then
+  begin
+    dbgrid1.canvas.font.color:=clLime;
+    //dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+end;
+
+end.

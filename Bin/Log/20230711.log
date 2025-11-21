@@ -1,0 +1,38 @@
+select * from ( 
+select  XXZL.XieXing,XXZL.SheHao,XXZL.Article,XXZL.DAOMH,XXZL.XieMing,KFZL.KFJC,XXZLCC.XXCC,
+        YWCPLH.InBoxBar,YWCPLH.GBBH,LBZLS.YWSM,Convert(float,XXZLCC.XXCC) as iXXCC 
+from (select distinct DDZL.XieXing,DDZL.SheHao,ZLZLS.XXCC from DDZL 
+           left join DDZLS on DDZL.DDBH=DDZLS.DDBH 
+           left join ZLZLS on ZLZLS.ZLBH=DDZL.ZLBH and ZLZLS.ZLCC=DDZLS.CC 
+           where DDZL.ShipDate>'2009/04/01') XXZLCC
+left join XXZL on XXZl.XieXing=XXZLCC.XieXing and XXZLCC.SheHao=XXZL.SheHao
+left join KFZL on KFZL.KFDH=XXZL.KHDH 
+left join YWCPLH on YWCPLH.XieXing=XXZLCC.XieXing and YWCPLH.SheHao=XXZLCC.SheHao and YWCPLH.XXCC=XXZLCC.XXCC
+left join LBZLS on LBZLS.LB='06' and LBZLS.LBDH=YWCPLH.GBBH
+where XXZL.XieXing like '%'
+      and XXZL.XieMing like '%%'
+      and KFZL.KFJC like '%'
+      and XXZL.Article like '%'
+      and XXZLCC.XXCC is not null 
+    and YWCPLH.InboxBar is null 
+) YWCPLH 
+order by  YWCPLH.XieXing,YWCPLH.SheHao,YWCPLH.XXCC
+select * from ( 
+select  XXZL.XieXing,XXZL.SheHao,XXZL.Article,XXZL.DAOMH,XXZL.XieMing,KFZL.KFJC,XXZLCC.XXCC,
+        YWCPLH.InBoxBar,YWCPLH.GBBH,LBZLS.YWSM,Convert(float,XXZLCC.XXCC) as iXXCC 
+from (select distinct DDZL.XieXing,DDZL.SheHao,ZLZLS.XXCC from DDZL 
+           left join DDZLS on DDZL.DDBH=DDZLS.DDBH 
+           left join ZLZLS on ZLZLS.ZLBH=DDZL.ZLBH and ZLZLS.ZLCC=DDZLS.CC 
+           where DDZL.ShipDate>'2009/04/01') XXZLCC
+left join XXZL on XXZl.XieXing=XXZLCC.XieXing and XXZLCC.SheHao=XXZL.SheHao
+left join KFZL on KFZL.KFDH=XXZL.KHDH 
+left join YWCPLH on YWCPLH.XieXing=XXZLCC.XieXing and YWCPLH.SheHao=XXZLCC.SheHao and YWCPLH.XXCC=XXZLCC.XXCC
+left join LBZLS on LBZLS.LB='06' and LBZLS.LBDH=YWCPLH.GBBH
+where XXZL.XieXing like '%'
+      and XXZL.XieMing like '%%'
+      and KFZL.KFJC like '%'
+      and XXZL.Article like '%'
+      and XXZLCC.XXCC is not null 
+    and YWCPLH.InboxBar is null 
+) YWCPLH 
+order by  YWCPLH.XieXing,YWCPLH.SheHao,YWCPLH.XXCC

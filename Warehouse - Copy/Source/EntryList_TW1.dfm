@@ -1,0 +1,277 @@
+object EntryList_TW: TEntryList_TW
+  Left = 371
+  Top = 245
+  Width = 870
+  Height = 500
+  BorderIcons = [biSystemMenu]
+  Caption = 'EntryList_TW'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 854
+    Height = 73
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 25
+      Top = 27
+      Width = 97
+      Height = 20
+      Caption = 'Container No:'
+    end
+    object Button1: TButton
+      Left = 456
+      Top = 24
+      Width = 89
+      Height = 33
+      Caption = 'Query'
+      TabOrder = 1
+      OnClick = Button1Click
+    end
+    object EDIT1: TEdit
+      Left = 128
+      Top = 24
+      Width = 281
+      Height = 28
+      CharCase = ecUpperCase
+      Color = 12320767
+      TabOrder = 0
+      OnKeyPress = EDIT1KeyPress
+    end
+  end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 73
+    Width = 854
+    Height = 389
+    Align = alClient
+    DataSource = DS1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'VNI-Times'
+    Font.Style = []
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -16
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    OnDrawColumnCell = DBGrid1DrawColumnCell
+    OnDblClick = DBGrid1DblClick
+    OnKeyPress = DBGrid1KeyPress
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'xh'
+        Width = 34
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'cldh'
+        Width = 94
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ywpm'
+        Width = 421
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'cldwbh'
+        Title.Caption = 'Unit'
+        Width = 38
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TotQty'
+        Title.Caption = 'Qty'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'okQty'
+        Width = 63
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'KCBH'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'memo'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'clpm'
+        Width = 514
+        Visible = True
+      end>
+  end
+  object DS1: TDataSource
+    DataSet = Query1
+    Left = 424
+    Top = 128
+  end
+  object Query1: TQuery
+    OnCalcFields = Query1CalcFields
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'SELECT  exzls.cldh,  clzl.ywpm,  clzl.dwbh AS cldwbh,  hgzls.*, ' +
+        'KCZLS.KCBH,isnull(KCRKS.okQty,0) as okQty'
+      'FROM  hgzls '
+      'LEFT OUTER JOIN  (SELECT   exzl.exlb,exzls.*'
+      '                                  FROM     exzls '
+      
+        '                                  LEFT JOIN exzl ON exzl.exno =e' +
+        'xzls.exno'
+      
+        '                                  WHERE   exzl.exlb = '#39'B'#39') exzls' +
+        ' ON   hgzls.clbh = exzls.exno + exzls.xh '
+      'LEFT OUTER JOIN    clzl ON exzls.cldh = clzl.cldh'
+      'left join (select KCZLS.* from KCZLS '
+      '                                     where KCZLS.CKBH=:CKBH'
+      
+        '                                      )KCZLS on KCZLS.CLBH=exzls' +
+        '.cldh  collate Chinese_PRC_CI_AI_WS'
+      
+        'left join (select (case when KCRK.ZSNO<>'#39'ZZZZZZZZZZ'#39' then KCRK.Z' +
+        'SNO else kcrk.docno end) as ZSNO,KCRKS.CLBH,KCRKS.CGBH,sum(KCRKS' +
+        '.Qty) as okQty'
+      '             from KCRKS'
+      '             left join KCRK  on KCRKS.RKNO=KCRk.RKNO '
+      '             where (KCRK.ZSNO=:con_no or KCRK.DOCNO=:con_no)'
+      
+        '             group by  KCRK.ZSNO,kcrk.docno,KCRKS.CLBH,KCRKS.CGB' +
+        'H ) KCRKS'
+      
+        '                    on KCRKS.ZSNO=hgzls.con_no and KCRKS.CLBH=ex' +
+        'zls.cldh and KCRKS.CGBH=hgzls.xh'
+      'where hgzls.con_no=:con_no '
+      '         and exzls.cldh is not null'
+      'order by HGZLS.con_no,hgzls.xh')
+    Left = 424
+    Top = 160
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CKBH'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'con_no'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'con_no'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'con_no'
+        ParamType = ptUnknown
+      end>
+    object Query1con_no: TStringField
+      DisplayWidth = 28
+      FieldName = 'con_no'
+      FixedChar = True
+    end
+    object Query1xh: TStringField
+      DisplayWidth = 6
+      FieldName = 'xh'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1cldh: TStringField
+      DisplayWidth = 280
+      FieldName = 'cldh'
+      FixedChar = True
+      Size = 200
+    end
+    object Query1ywpm: TStringField
+      DisplayWidth = 280
+      FieldName = 'ywpm'
+      FixedChar = True
+      Size = 200
+    end
+    object Query1cldwbh: TStringField
+      DisplayWidth = 10
+      FieldName = 'cldwbh'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1py_dj: TFloatField
+      DisplayWidth = 14
+      FieldName = 'py_dj'
+      DisplayFormat = '##,#0.0000'
+    end
+    object Query1ck_qty: TFloatField
+      DisplayWidth = 14
+      FieldName = 'ck_qty'
+      DisplayFormat = '##,#0.0'
+    end
+    object Query1ctn: TSmallintField
+      FieldName = 'ctn'
+      DisplayFormat = '#,##0'
+    end
+    object Query1TotQty: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'TotQty'
+      DisplayFormat = '##,#0.00'
+      Calculated = True
+    end
+    object Query1memo: TStringField
+      DisplayWidth = 40
+      FieldName = 'memo'
+      FixedChar = True
+      Size = 100
+    end
+    object Query1clpm: TStringField
+      DisplayWidth = 140
+      FieldName = 'clpm'
+      FixedChar = True
+      Size = 100
+    end
+    object Query1KCBH: TStringField
+      FieldName = 'KCBH'
+      FixedChar = True
+      Size = 6
+    end
+    object Query1okQty: TCurrencyField
+      FieldName = 'okQty'
+      DisplayFormat = '##,#0.0'
+    end
+  end
+end

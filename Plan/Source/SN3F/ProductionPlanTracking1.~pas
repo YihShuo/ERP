@@ -1,0 +1,2814 @@
+unit ProductionPlanTracking1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, StdCtrls, ComCtrls, jpeg, ExtCtrls, DB, DBTables, DateUtils,
+  IniFiles, Math, GridsEh, DBGridEh, Menus, ComObj, Buttons;
+
+type
+  TProductionPlanTracking = class(TForm)
+    Panel1: TPanel;
+    Label19: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    DTP1: TDateTimePicker;
+    CB_Building: TComboBox;
+    CB_Lean: TComboBox;
+    Button1: TButton;
+    Button2: TButton;
+    QTemp: TQuery;
+    ImageBox: TPanel;
+    ShoeImage: TImage;
+    LB_Left: TLabel;
+    LB_Right: TLabel;
+    Label1: TLabel;
+    CB_Mode: TComboBox;
+    Button3: TButton;
+    Panel2: TPanel;
+    StringGrid1: TStringGrid;
+    Q_Cutting: TQuery;
+    DS_Cutting: TDataSource;
+    Q_Cuttingschedule_date: TDateTimeField;
+    Q_CuttingARTICLE: TStringField;
+    Q_CuttingCLBH: TStringField;
+    Q_CuttingYWPM: TStringField;
+    Q_CuttingArrivalDate: TDateTimeField;
+    Q_CuttingDayDiff: TIntegerField;
+    Q_CuttingDDBH: TStringField;
+    Q_CuttingUsage: TFloatField;
+    Q_CuttingUnit: TStringField;
+    Panel4: TPanel;
+    Splitter1: TSplitter;
+    Splitter2: TSplitter;
+    Splitter3: TSplitter;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Panel7: TPanel;
+    Panel8: TPanel;
+    Panel9: TPanel;
+    Q_CuttingSupplier: TStringField;
+    LB_Stitching: TLabel;
+    DBGridEh2: TDBGridEh;
+    LB_Assembly: TLabel;
+    DBGridEh3: TDBGridEh;
+    LB_Bottom: TLabel;
+    DBGridEh4: TDBGridEh;
+    DS_Stitching: TDataSource;
+    Q_Stitching: TQuery;
+    DateTimeField1: TDateTimeField;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    StringField4: TStringField;
+    DateTimeField2: TDateTimeField;
+    IntegerField1: TIntegerField;
+    FloatField1: TFloatField;
+    StringField5: TStringField;
+    StringField6: TStringField;
+    DS_Assembly: TDataSource;
+    Q_Assembly: TQuery;
+    DateTimeField3: TDateTimeField;
+    StringField7: TStringField;
+    StringField8: TStringField;
+    StringField9: TStringField;
+    StringField10: TStringField;
+    DateTimeField4: TDateTimeField;
+    IntegerField2: TIntegerField;
+    FloatField2: TFloatField;
+    StringField11: TStringField;
+    StringField12: TStringField;
+    DS_Bottom: TDataSource;
+    Q_Bottom: TQuery;
+    DateTimeField5: TDateTimeField;
+    StringField13: TStringField;
+    StringField14: TStringField;
+    StringField15: TStringField;
+    StringField16: TStringField;
+    DateTimeField6: TDateTimeField;
+    IntegerField3: TIntegerField;
+    FloatField3: TFloatField;
+    StringField17: TStringField;
+    StringField18: TStringField;
+    Label6: TLabel;
+    ED_RY: TEdit;
+    Label7: TLabel;
+    ED_SKU: TEdit;
+    Label8: TLabel;
+    ED_PlanDate: TEdit;
+    PopupMenu1: TPopupMenu;
+    ShowMaterial: TMenuItem;
+    ShowImage: TMenuItem;
+    Splitter4: TSplitter;
+    Q_CuttingSupID: TStringField;
+    Q_StitchingSupID: TStringField;
+    Q_AssemblySupID: TStringField;
+    Q_BottomSupID: TStringField;
+    IMG_DOT: TImage;
+    Q_CuttingUpdateTime: TDateTimeField;
+    Q_StitchingUpdateTime: TDateTimeField;
+    Q_AssemblyUpdateTime: TDateTimeField;
+    Q_BottomUpdateTime: TDateTimeField;
+    Q_AssemblyIndicator: TStringField;
+    Q_CuttingIndicator: TStringField;
+    Q_StitchingIndicator: TStringField;
+    Q_BottomIndicator: TStringField;
+    Q_CuttingSeq: TIntegerField;
+    Q_StitchingSeq: TIntegerField;
+    Q_AssemblySeq: TIntegerField;
+    Q_BottomSeq: TIntegerField;
+    Panel11: TPanel;
+    PB_Stitching: TPaintBox;
+    Max_Stitching: TImage;
+    LB_Cutting: TLabel;
+    Min_Cutting: TImage;
+    DBGridEh1: TDBGridEh;
+    Min_Stitching: TImage;
+    Panel10: TPanel;
+    PB_Cutting: TPaintBox;
+    Max_Cutting: TImage;
+    Panel12: TPanel;
+    PB_Assembly: TPaintBox;
+    Max_Assembly: TImage;
+    Min_Assembly: TImage;
+    Min_Bottom: TImage;
+    Panel13: TPanel;
+    PB_Bottom: TPaintBox;
+    Max_Bottom: TImage;
+    Dot_Cutting: TImage;
+    Dot_Stitching: TImage;
+    Dot_Assembly: TImage;
+    Dot_Bottom: TImage;
+    ShowGreen: TMenuItem;
+    Q_CuttingCQDH: TStringField;
+    Q_StitchingCQDH: TStringField;
+    Q_AssemblyCQDH: TStringField;
+    Q_BottomCQDH: TStringField;
+    GB1: TGroupBox;
+    Label2: TLabel;
+    ED_Days: TEdit;
+    Shape1: TShape;
+    Label3: TLabel;
+    Shape2: TShape;
+    Label4: TLabel;
+    Shape3: TShape;
+    Label5: TLabel;
+    Label9: TLabel;
+    DTP2: TDateTimePicker;
+    DTP3: TDateTimePicker;
+    ExporttoExcel1: TMenuItem;
+    PopSplitter1: TMenuItem;
+    PC1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    Panel3: TPanel;
+    Label10: TLabel;
+    DTP4: TDateTimePicker;
+    Button4: TButton;
+    DBGridEh5: TDBGridEh;
+    Q_Shortage: TQuery;
+    DS_Shortage: TDataSource;
+    Q_ShortageBuilding: TStringField;
+    Q_ShortageLean: TStringField;
+    Q_ShortagePlanDate: TDateTimeField;
+    Q_ShortageDAOMH: TStringField;
+    Q_ShortageARTICLE: TStringField;
+    Q_ShortageDDBH: TStringField;
+    Q_ShortageShipDate: TDateTimeField;
+    Q_ShortageShortage: TIntegerField;
+    Q_ShortagePairs: TIntegerField;
+    Button5: TButton;
+    Q_ShortageCountry: TStringField;
+    Q_ShortageSPDate: TDateTimeField;
+    Q_ShortageSBDate: TDateTimeField;
+    CB_Short: TCheckBox;
+    Filter_Building: TBitBtn;
+    Filter_Lean: TBitBtn;
+    Q_ShortageBuyNo: TStringField;
+    Label11: TLabel;
+    CB_Width: TComboBox;
+    Button6: TButton;
+    Panel14: TPanel;
+    PB_Process: TPaintBox;
+    Max_Process: TImage;
+    Panel15: TPanel;
+    LB_Process: TLabel;
+    Min_Process: TImage;
+    Dot_Process: TImage;
+    DBGridEh6: TDBGridEh;
+    Splitter5: TSplitter;
+    DS_Process: TDataSource;
+    Q_Process: TQuery;
+    DateTimeField7: TDateTimeField;
+    StringField19: TStringField;
+    StringField20: TStringField;
+    StringField21: TStringField;
+    StringField22: TStringField;
+    DateTimeField8: TDateTimeField;
+    IntegerField4: TIntegerField;
+    FloatField4: TFloatField;
+    StringField23: TStringField;
+    StringField24: TStringField;
+    StringField25: TStringField;
+    DateTimeField9: TDateTimeField;
+    StringField26: TStringField;
+    IntegerField5: TIntegerField;
+    StringField27: TStringField;
+    Q_ProcessMatStatus: TDateTimeField;
+    Q_CuttingMatStatus: TDateTimeField;
+    Q_StitchingMatStatus: TDateTimeField;
+    Q_AssemblyMatStatus: TDateTimeField;
+    Q_BottomMatStatus: TDateTimeField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure DTP1Change(Sender: TObject);
+    procedure CB_BuildingChange(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure StringGrid1SelectCell(Sender: TObject; ACol, ARow: Integer;
+      var CanSelect: Boolean);
+    procedure StringGrid1MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure StringGrid1Exit(Sender: TObject);
+    procedure StringGrid1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+    procedure ShoeImageClick(Sender: TObject);
+    procedure LB_RightClick(Sender: TObject);
+    procedure LB_LeftClick(Sender: TObject);
+    procedure CB_ModeChange(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure ED_DaysExit(Sender: TObject);
+    procedure StringGrid1MouseWheelDown(Sender: TObject;
+      Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+    procedure StringGrid1MouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure MatDBGridEhDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure ShowMaterialClick(Sender: TObject);
+    procedure ShowImageClick(Sender: TObject);
+    procedure Splitter4Moved(Sender: TObject);
+    procedure DBGridEh1Columns3EditButtonClick(Sender: TObject;
+      var Handled: Boolean);
+    procedure DBGridEh2Columns3EditButtonClick(Sender: TObject;
+      var Handled: Boolean);
+    procedure DBGridEh3Columns3EditButtonClick(Sender: TObject;
+      var Handled: Boolean);
+    procedure DBGridEh4Columns3EditButtonClick(Sender: TObject;
+      var Handled: Boolean);
+    procedure DBGridEhColEnter(Sender: TObject);
+    procedure Q_CuttingAfterOpen(DataSet: TDataSet);
+    procedure Q_CuttingAfterScroll(DataSet: TDataSet);
+    procedure Q_StitchingAfterOpen(DataSet: TDataSet);
+    procedure Q_StitchingAfterScroll(DataSet: TDataSet);
+    procedure Q_AssemblyAfterOpen(DataSet: TDataSet);
+    procedure Q_AssemblyAfterScroll(DataSet: TDataSet);
+    procedure Q_BottomAfterOpen(DataSet: TDataSet);
+    procedure Q_BottomAfterScroll(DataSet: TDataSet);
+    procedure DTP2Change(Sender: TObject);
+    procedure DTP3Change(Sender: TObject);
+    procedure Min_CuttingClick(Sender: TObject);
+    procedure Max_StitchingClick(Sender: TObject);
+    procedure PB_StitchingPaint(Sender: TObject);
+    procedure Min_StitchingClick(Sender: TObject);
+    procedure PB_CuttingPaint(Sender: TObject);
+    procedure Max_CuttingClick(Sender: TObject);
+    procedure Min_AssemblyClick(Sender: TObject);
+    procedure Max_AssemblyClick(Sender: TObject);
+    procedure PB_AssemblyPaint(Sender: TObject);
+    procedure Min_BottomClick(Sender: TObject);
+    procedure Max_BottomClick(Sender: TObject);
+    procedure PB_BottomPaint(Sender: TObject);
+    procedure Splitter1CanResize(Sender: TObject; var NewSize: Integer;
+      var Accept: Boolean);
+    procedure Splitter2CanResize(Sender: TObject; var NewSize: Integer;
+      var Accept: Boolean);
+    procedure Splitter3CanResize(Sender: TObject; var NewSize: Integer;
+      var Accept: Boolean);
+    procedure ShowGreenClick(Sender: TObject);
+    procedure ExporttoExcel1Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure DBGridEh5DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure CB_ShortClick(Sender: TObject);
+    procedure DBGridEh5ColWidthsChanged(Sender: TObject);
+    procedure DBGridEh5ColumnMoved(Sender: TObject; FromIndex,
+      ToIndex: Integer);
+    procedure Filter_BuildingClick(Sender: TObject);
+    procedure Filter_LeanClick(Sender: TObject);
+    procedure Q_ShortageFilterRecord(DataSet: TDataSet;
+      var Accept: Boolean);
+    procedure Button6Click(Sender: TObject);
+    procedure PB_ProcessPaint(Sender: TObject);
+    procedure Splitter5CanResize(Sender: TObject; var NewSize: Integer;
+      var Accept: Boolean);
+    procedure Max_ProcessClick(Sender: TObject);
+    procedure Min_ProcessClick(Sender: TObject);
+    procedure DBGridEh6Columns6EditButtonClick(Sender: TObject;
+      var Handled: Boolean);
+  private
+    InSearch: boolean;
+    SRow_Cutting, SRow_Stitching, SRow_Assembly, SRow_Bottom: integer;
+    Building, Lean, f_Building, f_Lean: string;
+    SearchDate: TDate;
+    sKeyword, ShoePicPath, ImageAlign, ShoePicSKU, MatInfoRY: string;
+    HolidayList: Array of boolean;
+    TargetList: Array of integer;
+    RYMatUpdateTime: Array of TDateTime;
+    ModelList, SKUList, RYList, MatDayList, MatArrivalFlag: TStringList;
+    MatGridVisible: array[0..4] of boolean;
+    function GetMaxFontSize(Text: string; MaxWidth: Integer): Integer;
+    function GetTextWidth(const Text: String; Font: TFont): Integer;
+    procedure SetMatGridWidth;
+    { Private declarations }
+  public
+    procedure SearchByKeyword(Keyword: string);
+    procedure ReloadBuilding(ComboBox: TComboBox; DTP_Start, DTP_End: TDateTimePicker);
+    procedure ReloadLean(ComboBox, SourceBox: TComboBox; DTP_Start, DTP_End: TDateTimePicker);
+    { Public declarations }
+  end;
+
+  {TRunThread = class(TThread)
+  protected
+    procedure Execute; override;
+  private
+    Building, Lean, RY, SKU: string;
+    PlanDate: TDate;
+  public
+    constructor Create(pBuilding, pLean, pRY, pSKU: string; pPlanDate: TDate);
+  end;}
+
+var
+  ProductionPlanTracking: TProductionPlanTracking;
+
+const
+  BGColors: array[0..19] of TColor = (
+    $FFD700,
+    $87CEFA,
+    $FFB6C1,
+    $98FB98,
+    $FFA07A,
+    $E0FFFF,
+    $F5DEB3,
+    $DDA0DD,
+    $FAFAD2,
+    $ADD8E6,
+    $F08080,
+    $E6E6FA,
+    $FFFFE0,
+    $B0E0E6,
+    $FF69B4,
+    $90EE90,
+    $FFDAB9,
+    $40E0D0,
+    $FAEBD7,
+    $8A2BE2
+  );
+
+implementation
+
+uses
+  main1, FindDlg1, MatchedLeanSelection1, MaterialStatus1, MaterialHistory1;
+
+{$R *.dfm}
+
+function TProductionPlanTracking.GetMaxFontSize(Text: string; MaxWidth: Integer): Integer;
+var
+  MinFontSize, MaxFontSize, MidFontSize: Integer;
+  LBmp: TBitmap;
+begin
+  LBmp := TBitmap.Create;
+  LBmp.Canvas.Font := StringGrid1.Font;
+  MinFontSize := 1;
+  MaxFontSize := 8;
+
+  while MinFontSize <= MaxFontSize do
+  begin
+    MidFontSize := (MinFontSize + MaxFontSize) DIV 2;
+    LBmp.Canvas.Font.Size := MidFontSize;
+
+    if (LBmp.Canvas.TextWidth(Text) > MaxWidth) then
+      MaxFontSize := MidFontSize - 1
+    else
+      MinFontSize := MidFontSize + 1;
+  end;
+
+  Result := MaxFontSize;
+end;
+
+function TProductionPlanTracking.GetTextWidth(const Text: String; Font: TFont): Integer;
+var
+  LBmp: TBitmap;
+begin
+  LBmp := TBitmap.Create;
+  try
+    LBmp.Canvas.Font := Font;
+    Result := LBmp.Canvas.TextWidth(Text);
+  finally
+    LBmp.Free;
+  end;
+end;
+
+procedure TProductionPlanTracking.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  ModelList.Free;
+  SKUList.Free;
+  RYList.Free;
+  MatDayList.Free;
+  MatArrivalFlag.Free;
+  Action := caFree;
+end;
+
+procedure TProductionPlanTracking.FormDestroy(Sender: TObject);
+begin
+  ProductionPlanTracking := Nil;
+end;
+
+procedure TProductionPlanTracking.ReloadBuilding(ComboBox: TComboBox; DTP_Start, DTP_End: TDateTimePicker);
+var
+  Building: string;
+  i: integer;
+begin
+  with QTemp do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT DISTINCT building_no FROM schedule_crawler');
+    SQL.Add('WHERE schedule_date BETWEEN ''' + FormatDateTime('yyyy/MM/dd', StartOfTheMonth(DTP_Start.Date)) + ''' AND ''' + FormatDateTime('yyyy/MM/dd', EndOfTheMonth(DTP_Start.Date)) + '''');
+    SQL.Add('AND GSBH = ''' + main.Edit2.Text + '''');
+    SQL.Add('ORDER BY building_no');
+    Active := true;
+
+    i := 0;
+    Building := ComboBox.Text;
+    ComboBox.Clear;
+
+    while not Eof do
+    begin
+      ComboBox.Items.Add(FieldByName('building_no').AsString);
+      if (FieldByName('building_no').AsString = Building) then
+        ComboBox.ItemIndex := i;
+      Inc(i);
+      Next;
+    end;
+    if (ComboBox.ItemIndex < 0) then
+      ComboBox.ItemIndex := 0;
+    ComboBox.DropDownCount := RecordCount + 1;
+  end;
+end;
+
+procedure TProductionPlanTracking.ReloadLean(ComboBox, SourceBox: TComboBox; DTP_Start, DTP_End: TDateTimePicker);
+var
+  Lean: string;
+  i: integer;
+begin
+  with QTemp do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT SC.lean_no + CASE WHEN SF.Lean_TX IS NOT NULL THEN '' [VL]'' ELSE '''' END AS lean_no FROM (');
+    SQL.Add('  SELECT DISTINCT UPPER(lean_no) AS lean_no FROM schedule_crawler');
+    SQL.Add('  WHERE schedule_date BETWEEN ''' + FormatDateTime('yyyy/MM/dd', StartOfTheMonth(DTP_Start.Date)) + ''' AND ''' + FormatDateTime('yyyy/MM/dd', EndOfTheMonth(DTP_Start.Date)) + '''');
+    SQL.Add('  AND building_no = ''' + SourceBox.Text + '''');
+    SQL.Add('  AND GSBH = ''' + main.Edit2.Text + '''');
+    SQL.Add(') AS SC');
+    SQL.Add('LEFT JOIN (');
+    SQL.Add('  SELECT Lean_TX FROM schedule_factorylink');
+    SQL.Add('  WHERE CONVERT(SmallDateTime, Year + ''/'' + Month + ''/01'') BETWEEN ''' + FormatDateTime('yyyy/MM/dd', StartOfTheMonth(DTP_Start.Date)) + ''' AND ''' + FormatDateTime('yyyy/MM/dd', EndOfTheMonth(DTP_Start.Date)) + ''' AND Building_TX = ''' + SourceBox.Text + '''');
+    SQL.Add(') AS SF ON SF.Lean_TX = SC.lean_no');
+    SQL.Add('ORDER BY CAST(SUBSTRING(SC.lean_no, CHARINDEX('' '', SC.lean_no) + 1, LEN(SC.lean_no) - CHARINDEX('' '', SC.lean_no)) AS INT)');
+    Active := true;
+
+    i := 0;
+    Lean := ComboBox.Text;
+    ComboBox.Clear;
+
+    while not Eof do
+    begin
+      ComboBox.Items.Add(FieldByName('lean_no').AsString);
+      if (FieldByName('lean_no').AsString = Lean) then
+        ComboBox.ItemIndex := i;
+      Inc(i);
+      Next;
+    end;
+    if (ComboBox.ItemIndex < 0) then
+      ComboBox.ItemIndex := 0;
+    ComboBox.DropDownCount := RecordCount + 1;
+  end;
+end;
+
+procedure TProductionPlanTracking.FormCreate(Sender: TObject);
+var
+  MyIni: TIniFile;
+  AppDir: string;
+  i: integer;
+begin
+  ShoePicPath := '\\192.168.23.11\A_DataCenter\CDC\Sales\BOM';
+  AppDir := ExtractFilePath(Application.ExeName);
+  if (FileExists(AppDir + '\ComName.ini')) then
+  begin
+    try
+      MyIni := TIniFile.Create(AppDir + '\ComName.ini');
+      ShoePicPath := MyIni.ReadString('ShoePic', 'Bom_N31_shoePic', '');
+    finally
+      MyIni.Free;
+    end;
+  end;
+
+  PC1.ActivePageIndex := 0;
+  DTP1.Date := StartOfTheMonth(main.Today);
+  DTP2.Date := main.Today;  
+  DTP3.Date := main.Today;
+  DTP4.MinDate := main.Today;
+  DTP4.Date := main.Today + 3;
+  ReloadBuilding(CB_Building, DTP1, DTP1);
+  ReloadLean(CB_Lean, CB_Building, DTP1, DTP1);
+  InSearch := false;
+
+  StringGrid1.Cells[0, 0] := 'Date';
+  StringGrid1.Cells[0, 1] := 'Date';
+  StringGrid1.Cells[0, 2] := 'WH'; 
+  StringGrid1.Cells[0, 3] := '1';
+  StringGrid1.ColWidths[0] := 40;
+  StringGrid1.RowHeights[0] := 20;
+  StringGrid1.RowHeights[1] := 20;
+  StringGrid1.RowHeights[2] := 20;  
+  StringGrid1.RowHeights[3] := StringGrid1.DefaultRowHeight * 8 + 7;
+  StringGrid1.DoubleBuffered := true;
+
+  ImageBox.DoubleBuffered := true;
+  ImageAlign := 'BottomRight';
+
+  ModelList := TStringList.Create;
+  SKUList := TStringList.Create;
+  RYList := TStringList.Create;
+  MatDayList := TStringList.Create;
+  MatArrivalFlag := TStringList.Create;
+  for i := Low(MatGridVisible) to High(MatGridVisible) do
+  begin
+    if (i >= 1) AND (i <= 3) then
+      MatGridVisible[i] := true
+    else
+      MatGridVisible[i] := false;
+  end;
+  SetMatGridWidth;
+end;
+
+procedure TProductionPlanTracking.DTP1Change(Sender: TObject);
+begin
+  ReloadBuilding(CB_Building, DTP1, DTP1);
+  ReloadLean(CB_Lean, CB_Building, DTP1, DTP1);
+end;
+
+procedure TProductionPlanTracking.CB_BuildingChange(Sender: TObject);
+begin
+  ReloadLean(CB_Lean, CB_Building, DTP1, DTP1);
+end;
+   
+procedure TProductionPlanTracking.FormShow(Sender: TObject);
+begin
+  DTP1.SetFocus;
+  SendMessage(DTP1.Handle, WM_KEYDOWN, VK_RIGHT, 0);
+  StringGrid1.SetFocus;
+end;
+
+procedure TProductionPlanTracking.Button2Click(Sender: TObject);
+var
+  i: integer;
+begin
+  ImageBox.Visible := false;
+  for i := 1 to StringGrid1.RowCount - 1 do
+  begin
+    StringGrid1.Rows[i].Clear;
+  end;
+  SetLength(HolidayList, 0);
+  SetLength(TargetList, 0);
+
+  StringGrid1.RowCount := 4;
+  StringGrid1.ColCount := 2;
+  StringGrid1.Cells[0, 0] := 'Date';
+  StringGrid1.Cells[0, 1] := 'Date';
+  StringGrid1.Cells[0, 2] := 'WH';
+  StringGrid1.Cells[0, 3] := '1';
+  StringGrid1.Cols[1].Clear;
+  StringGrid1.ColWidths[1] := 170;
+  StringGrid1.RowHeights[3] := StringGrid1.DefaultRowHeight * 8 + 7;
+
+  ModelList.Clear;
+  SKUList.Clear;
+  RYList.Clear;
+  MatDayList.Clear;
+  MatArrivalFlag.Clear;
+  SetLength(RYMatUpdateTime, 0);
+end;
+
+procedure TProductionPlanTracking.Button1Click(Sender: TObject);
+var
+  SDate: TDate;
+  SubSeq, WeekDay, WorkingHours: string;
+  i, WD, HolidayDays: integer;
+  CanSelect: Boolean;
+begin
+  ImageBox.Visible := false;
+  SearchDate := DTP1.Date;
+  Building := CB_Building.Text;
+  Lean := Copy(CB_Lean.Text, 1, 8);
+
+  for i := 1 to StringGrid1.RowCount - 1 do
+  begin
+    StringGrid1.Rows[i].Clear;
+  end;
+  SetLength(HolidayList, 0);
+  SetLength(TargetList, 0);
+
+  StringGrid1.RowCount := 4;
+  StringGrid1.ColCount := 2;
+  StringGrid1.Cells[1, 0] := '';  
+  StringGrid1.Cells[0, 0] := 'Date';
+  StringGrid1.Cells[0, 1] := 'Date';
+  StringGrid1.Cells[0, 2] := 'WH';
+  StringGrid1.Cells[0, 3] := '';
+  StringGrid1.ColWidths[1] := 170;
+  StringGrid1.Repaint;
+  StringGrid1.ColCount := DaysBetween(StartOfTheMonth(DTP1.Date), EndOfTheMonth(DTP1.Date)) + 2;
+  StringGrid1.TopRow := 3;
+  StringGrid1.LeftCol := 1;
+                 
+  SetLength(TargetList, DaysBetween(StartOfTheMonth(DTP1.Date), EndOfTheMonth(DTP1.Date)) + 1);
+  SetLength(HolidayList, DaysBetween(StartOfTheMonth(DTP1.Date), EndOfTheMonth(DTP1.Date)) + 1);
+
+  with QTemp do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT BDepartment.DepName, BZDate, Qty FROM SCBZCL');
+    SQL.Add('LEFT JOIN BDepartment ON BDepartment.ID = SCBZCL.DepNo');
+    SQL.Add('WHERE BDepartment.DepName = ''' + CB_Building.Text + '_G-' + Lean + ''' AND SCBZCL.GSBH = ''' + main.Edit2.Text + ''' AND SCBZCL.BZDate BETWEEN ''' + FormatDateTime('yyyy/MM/dd', StartOfTheMonth(DTP1.Date)) + ''' AND ''' + FormatDateTime('yyyy/MM/dd', EndOfTheMonth(DTP1.Date)) + '''');
+    Active := true;
+
+    while not Eof do
+    begin
+      TargetList[DaysBetween(FieldByName('BZDate').AsDateTime, StartOfTheMonth(DTP1.Date))] := FieldByName('Qty').AsInteger;
+      Next;
+    end;
+  end;
+
+  with QTemp do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT CONVERT(VARCHAR, CONVERT(SmallDateTime, SCRL.SCYEAR + ''/'' + SCRL.SCMONTH + ''/'' + SCRL.SCDay), 111) AS Date, SCRL.SCGS AS WorkingHours FROM SCRL');
+    SQL.Add('LEFT JOIN BDepartment ON BDepartment.ID = SCRL.DepNO');
+    SQL.Add('WHERE SCRL.SCYEAR = ''' + FormatDateTime('yyyy', DTP1.Date) + ''' AND SCRL.SCMONTH = ''' + FormatDateTime('M', DTP1.Date) + ''' AND BDepartment.DepName = ''' + CB_Building.Text + '_G-' + Lean + '''');
+    SQL.Add('ORDER BY CONVERT(SmallDateTime, SCRL.SCYEAR + ''/'' + SCRL.SCMONTH + ''/'' + SCRL.SCDay)');
+    Active := true;
+  end;
+
+  SDate := StartOfTheMonth(DTP1.Date);
+  HolidayDays := 0;
+  for i := 1 to DaysBetween(StartOfTheMonth(DTP1.Date), EndOfTheMonth(DTP1.Date)) + 1 do
+  begin
+    WD := DayOfTheWeek(SDate);
+    if (WD = 1) then
+      WeekDay := '一'
+    else if (WD = 2) then
+      WeekDay := '二'
+    else if (WD = 3) then
+      WeekDay := '三'
+    else if (WD = 4) then
+      WeekDay := '四'
+    else if (WD = 5) then
+      WeekDay := '五'
+    else if (WD = 6) then
+      WeekDay := '六'
+    else if (WD = 7) then
+      WeekDay := '日';
+
+    if (QTemp.Locate('Date', FormatDateTime('yyyy/MM/dd', SDate), [])) then
+      WorkingHours := FloatToStr(QTemp.FieldByName('WorkingHours').AsFloat)
+    else if (QTemp.RecordCount = 0) AND (WD <> 7) then
+      WorkingHours := '8'
+    else begin
+      WorkingHours := '';
+      HolidayList[i-1] := true;
+      Inc(HolidayDays);
+    end;
+
+    StringGrid1.Cells[i, 0] := FormatDateTime('MM/dd', SDate);
+    StringGrid1.Cells[i, 1] := WeekDay;
+    StringGrid1.Cells[i, 2] := WorkingHours;
+    SDate := IncDay(SDate);
+  end;
+
+  StringGrid1.DefaultColWidth := (StringGrid1.Width - StringGrid1.ColWidths[0] - 30 - HolidayDays * 32 - StringGrid1.ColCount) DIV (Length(HolidayList) - HolidayDays);
+  for i := 1 to Length(HolidayList) do
+  begin
+    if (HolidayList[i-1]) then
+      StringGrid1.ColWidths[i] := 32
+    else
+      StringGrid1.ColWidths[i] := StringGrid1.DefaultColWidth;
+  end;
+  StringGrid1.RowHeights[3] := StringGrid1.DefaultRowHeight;
+
+  with QTemp do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('IF OBJECT_ID(''tempdb..#TempSC'') IS NOT NULL');
+    SQL.Add('BEGIN DROP TABLE #TempSC END;');
+    ExecSQL;
+
+    SQL.Add('SELECT SC.building_no, SC.lean_no, SC.schedule_date, CASE WHEN SC.MaxCycle IS NULL AND ISNUMERIC(RIGHT(SC.DDBH, 1)) = 0 THEN 1 ELSE 0 END AS Separated,');
+    SQL.Add('CASE WHEN SC.MaxCycle IS NULL AND ISNUMERIC(RIGHT(SC.DDBH, 1)) = 0 THEN SUBSTRING(SC.DDBH, 1, LEN(SC.DDBH)-1) ELSE SC.DDBH END AS DDBH, SC.RYPairs,');
+    SQL.Add('CASE WHEN SC.MaxCycle IS NULL AND ISNUMERIC(RIGHT(SC.DDBH, 1)) = 0 THEN RIGHT(SC.DDBH, 1) + '' '' ELSE SC.SubSeq END AS SubSeq, SC.ry_index, SC.Pairs,');
+    SQL.Add('CASE WHEN SC.MinCycle IS NOT NULL THEN SC.MinCycle ELSE MAX(CASE WHEN SMDD.DDBH = SC.DDBH THEN 1 ELSE CAST(RIGHT(SMDD.DDBH, 3) AS INT) END) END AS MinCycle,');
+    SQL.Add('CASE WHEN SC.MaxCycle IS NOT NULL THEN SC.MaxCycle ELSE MAX(CASE WHEN SMDD.DDBH = SC.DDBH THEN 1 ELSE CAST(RIGHT(SMDD.DDBH, 3) AS INT) END) END AS MaxCycle INTO #TempSC FROM (');
+    SQL.Add('  SELECT SC.building_no, SC.lean_no, SC.schedule_date, SC.DDBH, SC.RYPairs, SC.SubSeq, SC.ry_index, SC.Pairs,');
+    SQL.Add('  ISNULL(CASE WHEN ISNUMERIC(SUBSTRING(Cycles, CHARINDEX(''-'', Cycles)+1, 10)) = 1 AND ISNUMERIC(SUBSTRING(Cycles, 1, CHARINDEX(''-'', Cycles)-1)) = 1 THEN');
+    SQL.Add('  CAST(SUBSTRING(Cycles, 1, CHARINDEX(''-'', Cycles)-1) AS INT) END, 1) AS MinCycle,');
+    SQL.Add('  ISNULL(CASE WHEN ISNUMERIC(SUBSTRING(Cycles, CHARINDEX(''-'', Cycles)+1, 10)) = 1 AND ISNUMERIC(SUBSTRING(Cycles, 1, CHARINDEX(''-'', Cycles)-1)) = 1 THEN');
+    SQL.Add('  CAST(SUBSTRING(Cycles, CHARINDEX(''-'', Cycles)+1, 10) AS INT) END, MAX(CASE WHEN SMDD.DDBH = SC.DDBH THEN 1 ELSE CAST(RIGHT(SMDD.DDBH, 3) AS INT) END)) AS MaxCycle FROM (');
+    SQL.Add('    SELECT SC.building_no, SC.lean_no, SC.schedule_date, DDZL.DDBH, DDZL.Pairs AS RYPairs, SC.ry_index, CAST(SC.sl AS INT) AS Pairs,');
+    SQL.Add('    CASE WHEN RIGHT(SC.ry, 3) LIKE ''%-%'' THEN SUBSTRING(RIGHT(SC.ry, 3), CHARINDEX(''-'', RIGHT(SC.ry, 3)) + 1, LEN(RIGHT(SC.ry, 3)) - CHARINDEX(''-'', RIGHT(SC.ry, 3))) END AS SubSeq,');
+    SQL.Add('    CASE WHEN REPLACE(SC.stitching, '' '', '''') LIKE ''T%'' THEN REPLACE(REPLACE(REPLACE(SC.stitching, '' '', ''''), ''~'', ''-''), ''T'', '''') ELSE NULL END AS Cycles FROM schedule_crawler AS SC');
+    SQL.Add('    LEFT JOIN DDZL ON DDZL.DDBH = CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, ''-'', '''')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX(''-'', REVERSE(SC.ry))) END');
+    SQL.Add('    WHERE SC.building_no = ''' + CB_Building.Text + ''' AND SC.lean_no = ''' + Lean + ''' AND SC.schedule_date BETWEEN ''' + FormatDateTime('yyyy/MM/dd', StartOfTheMonth(DTP1.Date)) + ''' AND ''' + FormatDateTime('yyyy/MM/dd', EndOfTheMonth(DTP1.Date)) + '''');
+    SQL.Add('    AND SC.GSBH = ''' + main.Edit2.Text + '''');
+    SQL.Add('  ) AS SC');
+    SQL.Add('  LEFT JOIN SMDD ON SMDD.YSBH = SC.DDBH AND SMDD.GXLB = ''A''');
+    SQL.Add('  GROUP BY SC.building_no, SC.lean_no, SC.schedule_date, SC.DDBH, SC.RYPairs, SC.SubSeq, SC.ry_index, SC.Pairs, SC.Cycles');
+    SQL.Add(') AS SC');
+    SQL.Add('LEFT JOIN SMDD ON SMDD.YSBH = SUBSTRING(SC.DDBH, 1, LEN(SC.DDBH)-1) AND SMDD.GXLB = ''A''');
+    SQL.Add('GROUP BY SC.building_no, SC.lean_no, SC.schedule_date, SC.DDBH, SC.RYPairs, SC.SubSeq, SC.ry_index, SC.Pairs, SC.MinCycle, SC.MaxCycle');
+
+    SQL.Add('SELECT SC.schedule_date, DATEDIFF(DAY, ''' + FormatDateTime('yyyy/MM/dd', StartOfTheMonth(DTP1.Date)) + ''', SC.schedule_date) AS Seq, SC.ry_index, SC.Separated, SC.DDBH, SC.SubSeq, SC.Pairs, XXZL.XieXing, XXZL.SheHao, XXZL.DAOMH, XXZL.XTMH, XXZL.ARTICLE, DDZL.BUYNO as BUY,');
+    SQL.Add('CASE WHEN SB.SBDate IS NOT NULL THEN ''★ '' + ');
+    SQL.Add('CASE WHEN SB.SBDate = DDZL.ShipDate THEN SUBSTRING(CONVERT(VARCHAR, SB.SBDate, 111), 6, 5) ELSE SUBSTRING(CONVERT(VARCHAR, SB.SBDate, 111), 6, 5) + '' ('' + SUBSTRING(CONVERT(VARCHAR, DDZL.ShipDate, 111), 6, 5) + '')'' END ELSE');
+    SQL.Add('CASE WHEN SP.SPDate IS NOT NULL THEN ''☆ '' + ');
+    SQL.Add('CASE WHEN SP.SPDate = DDZL.ShipDate THEN SUBSTRING(CONVERT(VARCHAR, SP.SPDate, 111), 6, 5) ELSE SUBSTRING(CONVERT(VARCHAR, SP.SPDate, 111), 6, 5) + '' ('' + SUBSTRING(CONVERT(VARCHAR, DDZL.ShipDate, 111), 6, 5) + '')'' END ELSE');
+    SQL.Add('SUBSTRING(CONVERT(VARCHAR, DDZL.ShipDate, 111), 6, 5) END END AS ShipDate, LBZLS.YWSM AS Country,');
+    SQL.Add('MAX(SM.ArrivalDate) AS MatArrivalDate, MAX(SM.UserDate) AS UpdateDate, ISNULL(DATEDIFF(DAY, MAX(SM.ArrivalDate), SC.schedule_date), 30) AS DayDiff FROM #TempSC AS SC');
+    SQL.Add('LEFT JOIN DDZL ON DDZL.DDBH = SC.DDBH');
+    SQL.Add('LEFT JOIN (');
+    SQL.Add('  SELECT RY, MIN(Date) AS SPDate FROM ShippingPlan');
+    SQL.Add('  WHERE RY IN (SELECT DDBH FROM #TempSC)');
+    SQL.Add('  GROUP BY RY');
+    SQL.Add(') AS SP ON SP.RY = DDZL.DDBH');
+    SQL.Add('LEFT JOIN (');
+    SQL.Add('  SELECT INVOICE_D.RYNO, SB.ExFty_Date AS SBDate FROM INVOICE_D');
+    SQL.Add('  LEFT JOIN Ship_Booking AS SB ON SB.INV_NO = INVOICE_D.INV_NO');
+    SQL.Add('  WHERE INVOICE_D.RYNO IN (SELECT DDBH FROM #TempSC) AND SB.INV_NO IS NOT NULL');
+    SQL.Add(') AS SB ON SB.RYNO = DDZL.DDBH');
+    SQL.Add('LEFT JOIN XXZL ON XXZL.XieXing = DDZL.XieXing AND XXZL.SheHao = DDZL.SheHao');
+    SQL.Add('LEFT JOIN LBZLS ON LBZLS.LBDH = DDZL.DDGB AND LBZLS.LB = ''06''');
+    SQL.Add('LEFT JOIN (');
+    SQL.Add('  SELECT ZLZLS2.DDBH, ZLZLS2.CLBH, CASE WHEN (LEFT(ZLZLS2.CLBH, 1) IN (''A'', ''C'', ''F'', ''K'', ''B'') OR (LEFT(ZLZLS2.CLBH, 3) = ''P21'' AND CLZL.DWBH <> ''PRS'') OR (ZLZLS2.CSBH = ''M251'' AND CLZL.DWBH = ''YRD'')) OR');
+    SQL.Add('  (((LEFT(ZLZLS2.CLBH, 1) IN (''E'', ''G'', ''L'', ''M'', ''N'') OR LEFT(ZLZLS2.CLBH, 3) IN (''D01'', ''D02'', ''D11'')) AND CASE WHEN LEFT(ZLZLS2.CLBH, 3) = ''G01'' THEN CLZL.DWBH ELSE ''X'' END <> ''PRS'') OR ZLZLS2.CSBH = ''A390'') OR');
+    SQL.Add('  ((LEFT(ZLZLS2.CLBH, 1) IN (''D'', ''H'', ''I'', ''O'') AND LEFT(ZLZLS2.CLBH, 3) NOT IN (''D01'', ''D02'', ''D11'')) OR (LEFT(ZLZLS2.CLBH, 3) = ''G01'' AND CLZL.DWBH = ''PRS'') OR');
+    SQL.Add('  (ZLZLS2.CSBH = ''V204'' AND LEFT(ZLZLS2.CLBH, 1) = ''L'') OR (ZLZLS2.CSBH = ''M251'' AND CLZL.DWBH = ''PRS'') OR ZLZLS2.CSBH IN (''P144'', ''V214''))');
+    SQL.Add('  THEN CASE WHEN ISNULL(KCRK.RKQty, 0) + ISNULL(CGKCUSE.Qty, 0) >= SUM(ZLZLS2.CLSL) THEN CASE WHEN ISNULL(CGKCUSE.UserDate, ''2000/01/01'') > ISNULL(KCRK.CFMDate, ''2000/01/01'') THEN CGKCUSE.UserDate ELSE KCRK.CFMDate END');
+    SQL.Add('  ELSE ISNULL(SM.ArrivalDate, ''2079/01/01'') END END AS ArrivalDate,');
+    SQL.Add('  CASE WHEN ISNULL(KCRK.RKQty, 0) + ISNULL(CGKCUSE.Qty, 0) >= SUM(ZLZLS2.CLSL) THEN CASE WHEN ISNULL(CGKCUSE.UserDate, ''2000/01/01'') > ISNULL(KCRK.CFMDate, ''2000/01/01'') THEN CGKCUSE.UserDate ELSE KCRK.CFMDate END ELSE SM.UserDate END AS UserDate FROM (');
+    SQL.Add('    SELECT ZLZLS2.ZLBH AS DDBH, ZLZLS2.CSBH, ZLZLS2.CLBH, SUM(ZLZLS2.CLSL) AS CLSL FROM ZLZLS2');
+    SQL.Add('    LEFT JOIN schedule_materials_no_need AS NoNeedMat ON ZLZLS2.CLBH LIKE NoNeedMat.CLBH + ''%'' AND NoNeedMat.CSBH = ZLZLS2.CSBH');
+    SQL.Add('    WHERE ZLZLS2.ZLBH IN (SELECT DDBH FROM #TempSC) AND ZLZLS2.CSBH <> '''' AND ZLZLS2.CLBH NOT LIKE ''W%'' AND ZLZLS2.ZMLB = ''N'' AND ZLZLS2.CLSL > 0 AND NoNeedMat.CLBH IS NULL');
+    SQL.Add('    GROUP BY ZLZLS2.ZLBH, ZLZLS2.CSBH, ZLZLS2.CLBH');
+    SQL.Add('  ) AS ZLZLS2');
+    SQL.Add('  LEFT JOIN (');
+    SQL.Add('    SELECT DDBH, CSBH, CLBH, ArrivalDate, UserDate FROM (');
+    SQL.Add('      SELECT BUY, DDBH, CSBH, CLBH, ArrivalDate, UserDate, ROW_NUMBER() OVER(PARTITION BY DDBH, CLBH ORDER BY UserDate DESC) AS Seq FROM (');
+    SQL.Add('        SELECT BUY, DDBH, CSBH, CLBH, ArrivalDate, UserDate FROM schedule_materials');
+    SQL.Add('        WHERE DDBH IN (SELECT DDBH FROM #TempSC)');
+    SQL.Add('        UNION ALL');
+    SQL.Add('        SELECT '''' AS BUY, ZLBH, ''Stock'' AS CSBH, CLBH, UserDate, UserDate FROM CGKCUSE WITH (NOLOCK)');
+    SQL.Add('        WHERE ZLBH IN (SELECT DDBH FROM #TempSC) AND GSBH = ''' + main.Edit2.Text + '''');
+    SQL.Add('      ) AS SM');
+    SQL.Add('    ) AS SM');
+    SQL.Add('    WHERE Seq = 1');
+    SQL.Add('  ) AS SM ON SM.DDBH = ZLZLS2.DDBH AND SM.CLBH = ZLZLS2.CLBH');
+    SQL.Add('  LEFT JOIN CLZL ON CLZL.CLDH = ZLZLS2.CLBH');
+    SQL.Add('  LEFT JOIN (');
+    SQL.Add('    SELECT KCRKS.CGBH, KCRKS.CLBH, MAX(KCRK.CFMDate) AS CFMDate, SUM(KCRKS.Qty) AS RKQty FROM KCRKS');
+    SQL.Add('    LEFT JOIN KCRK ON KCRK.RKNO = KCRKS.RKNO');
+    SQL.Add('    WHERE KCRKS.CGBH IN (SELECT DDBH FROM #TempSC) AND KCRK.CFMDate IS NOT NULL');
+    SQL.Add('    GROUP BY KCRKS.CGBH, KCRKS.CLBH');
+    SQL.Add('  ) AS KCRK ON KCRK.CGBH = ZLZLS2.DDBH AND KCRK.CLBH = ZLZLS2.CLBH');
+    SQL.Add('  LEFT JOIN (');
+    SQL.Add('    SELECT ZLBH, CLBH, Qty, UserDate FROM CGKCUSE WITH (NOLOCK)');
+    SQL.Add('    WHERE ZLBH IN (SELECT DDBH FROM #TempSC) AND GSBH = ''' + main.Edit2.Text + '''');
+    SQL.Add('  ) AS CGKCUSE ON CGKCUSE.ZLBH = ZLZLS2.DDBH AND CGKCUSE.CLBH = ZLZLS2.CLBH');
+    SQL.Add('  WHERE CLZL.YWPM NOT LIKE ''%QC%LABEL%''');
+    SQL.Add('  GROUP BY ZLZLS2.DDBH, ZLZLS2.CLBH, CLZL.DWBH, ZLZLS2.CSBH, KCRK.RKQty, CGKCUSE.Qty, KCRK.CFMDate, CGKCUSE.UserDate, SM.ArrivalDate, SM.UserDate');
+    SQL.Add(') AS SM ON SM.DDBH = SC.DDBH');
+    SQL.Add('GROUP BY SC.schedule_date, SC.ry_index, SC.Separated, SC.DDBH, SC.SubSeq, SC.Pairs, XXZL.XieXing, XXZL.SheHao, XXZL.DAOMH, XXZL.XTMH, XXZL.ARTICLE, DDZL.BUYNO, DDZL.ShipDate, SP.SPDate, SB.SBDate, LBZLS.YWSM');
+    SQL.Add('ORDER BY SC.schedule_date, SC.ry_index');
+    Active := true;
+
+    ModelList.Clear;
+    SKUList.Clear;
+    RYList.Clear;
+    MatDayList.Clear;
+    MatArrivalFlag.Clear;
+    SetLength(RYMatUpdateTime, 0);  
+    SetLength(RYMatUpdateTime, RecordCount);
+    i := 0;
+    while not Eof do
+    begin
+      if (ModelList.IndexOf(StringReplace(FieldByName('DAOMH').AsString, 'LY-', '', [rfReplaceAll])) < 0) then
+        ModelList.Add(StringReplace(FieldByName('DAOMH').AsString, 'LY-', '', [rfReplaceAll]));
+
+      if (SKUList.IndexOf(FieldByName('ARTICLE').AsString) < 0) then
+        SKUList.Add(FieldByName('ARTICLE').AsString);
+
+      if (StringGrid1.RowCount < FieldByName('ry_index').AsInteger * 8 + 3) then
+      begin
+        StringGrid1.RowCount := FieldByName('ry_index').AsInteger * 8 + 3;
+        StringGrid1.Cells[0, (FieldByName('ry_index').AsInteger - 1) * 8 + 6] := IntToStr(FieldByName('ry_index').AsInteger);
+      end;
+
+      if (FieldByName('SubSeq').IsNull = false) then
+        SubSeq := '-' + FieldByName('SubSeq').AsString
+      else
+        SubSeq := '';
+
+      StringGrid1.Cells[FieldByName('Seq').AsInteger + 1, (FieldByName('ry_index').AsInteger - 1) * 8 + 3] := StringReplace(FieldByName('DAOMH').AsString, 'LY-', '', [rfReplaceAll]);
+      if (FieldByName('Separated').AsInteger = 0) then
+        StringGrid1.Cells[FieldByName('Seq').AsInteger + 1, (FieldByName('ry_index').AsInteger - 1) * 8 + 4] := FieldByName('DDBH').AsString + SubSeq
+      else
+        StringGrid1.Cells[FieldByName('Seq').AsInteger + 1, (FieldByName('ry_index').AsInteger - 1) * 8 + 4] := FieldByName('DDBH').AsString + SubSeq + ' ';
+      StringGrid1.Cells[FieldByName('Seq').AsInteger + 1, (FieldByName('ry_index').AsInteger - 1) * 8 + 5] := FieldByName('XTMH').AsString;
+      StringGrid1.Cells[FieldByName('Seq').AsInteger + 1, (FieldByName('ry_index').AsInteger - 1) * 8 + 6] := FieldByName('BUY').AsString + ' BUY';
+      StringGrid1.Cells[FieldByName('Seq').AsInteger + 1, (FieldByName('ry_index').AsInteger - 1) * 8 + 7] := FieldByName('ARTICLE').AsString;
+      StringGrid1.Cells[FieldByName('Seq').AsInteger + 1, (FieldByName('ry_index').AsInteger - 1) * 8 + 8] := FormatFloat('###,##0', FieldByName('Pairs').AsInteger);
+      StringGrid1.Cells[FieldByName('Seq').AsInteger + 1, (FieldByName('ry_index').AsInteger - 1) * 8 + 9] := FieldByName('ShipDate').AsString;
+      StringGrid1.Cells[FieldByName('Seq').AsInteger + 1, (FieldByName('ry_index').AsInteger - 1) * 8 + 10] := FieldByName('Country').AsString;
+      StringGrid1.ColWidths[FieldByName('Seq').AsInteger + 1] := StringGrid1.DefaultColWidth;
+      RYList.Add(FieldByName('DDBH').AsString);
+      MatDayList.Add(FieldByName('DayDiff').AsString);
+      if (FieldByName('MatArrivalDate').IsNull = false) AND (FieldByName('MatArrivalDate').AsDateTime <= main.Today) then
+        MatArrivalFlag.Add('1')
+      else
+        MatArrivalFlag.Add('0');
+      RYMatUpdateTime[i] := FieldByName('UpdateDate').AsDateTime;
+      Inc(i);
+      Next;
+    end;
+
+    StringGrid1.ColWidths[0] := 40;
+    StringGrid1.RowHeights[0] := 20;
+    StringGrid1.RowHeights[1] := 20;
+    StringGrid1.RowHeights[2] := 20;
+  end;
+
+  ShoePicSKU := '';
+  FormResize(Nil);
+  CanSelect := true;
+  StringGrid1SelectCell(Nil, 1, 3, CanSelect);
+  if (ShowImage.Checked) then
+    ImageBox.Visible := (StringGrid1.Cells[StringGrid1.Col, StringGrid1.Row] <> '');
+  StringGrid1.SetFocus;
+end;
+
+procedure TProductionPlanTracking.FormResize(Sender: TObject);
+begin
+  Label6.Left := (Panel4.Width - (ED_PlanDate.Left + ED_PlanDate.Width - Label6.Left)) DIV 2;
+  ED_RY.Left := Label6.Left + 22;
+  Label7.Left := ED_RY.Left + 154;
+  ED_SKU.Left := Label7.Left + 32;
+  Label8.Left := ED_SKU.Left + 154;
+  ED_PlanDate.Left := Label8.Left + 67;
+
+  SetMatGridWidth;
+  Dot_Cutting.Left := (LB_Cutting.Width - GetTextWidth(LB_Cutting.Caption, LB_Cutting.Font)) DIV 2 - Dot_Cutting.Width;
+  Dot_Stitching.Left := (LB_Stitching.Width - GetTextWidth(LB_Stitching.Caption, LB_Stitching.Font)) DIV 2 - Dot_Stitching.Width;
+  Dot_Assembly.Left := (LB_Assembly.Width - GetTextWidth(LB_Assembly.Caption, LB_Assembly.Font)) DIV 2 - Dot_Assembly.Width;
+  Dot_Bottom.Left := (LB_Bottom.Width - GetTextWidth(LB_Bottom.Caption, LB_Bottom.Font)) DIV 2 - Dot_Bottom.Width;
+
+  if (ImageAlign = 'BottomRight') then
+  begin
+    ImageBox.Left := StringGrid1.Width - ImageBox.Width - 10;
+    ImageBox.Top := StringGrid1.Height - ImageBox.Height - 10;
+    LB_Right.Visible := false;
+    LB_Left.Visible := true;
+  end
+  else if (ImageAlign = 'BottomLeft') then
+  begin
+    ImageBox.Left := 50;
+    ImageBox.Top := StringGrid1.Height - ImageBox.Height - 10;
+    LB_Right.Visible := true;
+    LB_Left.Visible := false;
+  end;
+end;
+
+procedure TProductionPlanTracking.StringGrid1SelectCell(Sender: TObject;
+  ACol, ARow: Integer; var CanSelect: Boolean);
+var
+  RY, SKU, Image: string;
+  PlanDate, MaxArrivalDate: TDate;
+  UpdateTime, MarkTime: TDateTime;
+  Separated: boolean;
+begin
+  Separated := false;
+  if (ACol > 0) AND (ARow > 2) AND (StringGrid1.Cells[ACol, ARow] <> '') then
+  begin
+    PlanDate := EncodeDate(StrToInt(FormatDateTime('yyyy', SearchDate)), StrToInt(Copy(StringGrid1.Cells[ACol, 0], 1, 2)), StrToInt(Copy(StringGrid1.Cells[ACol, 0], 4, 2)));
+    SKU := StringGrid1.Cells[ACol, (ARow - 2) DIV 8 * 8 + 7];
+    RY := StringGrid1.Cells[ACol, (ARow - 2) DIV 8 * 8 + 4];
+    if (Pos(' ', RY) > 0) then
+    begin
+      RY := Copy(RY, 1, Length(RY)-1);
+      Separated := true;
+    end;
+    if (Pos('-', Copy(RY, Length(RY)-2, 3)) > 0) then
+      RY := Copy(RY, 1, LastDelimiter('-', RY) - 1);
+
+    if (ShowMaterial.Checked) AND (CB_Mode.Text = 'MATERIAL STATUS') then
+    begin
+      if (RY <> MatInfoRY) then
+      begin
+        MatInfoRY := RY;
+        MarkTime := EncodeDateTime(YearOf(DTP2.Date), MonthOf(DTP2.Date), DayOf(DTP2.Date), HourOf(DTP3.DateTime), MinuteOf(DTP3.DateTime), 0, 0);
+        with Q_Process do
+        begin
+          Active := false;
+          SQL.Clear;
+          SQL.Add('IF OBJECT_ID(''tempdb..#MS'') IS NOT NULL');
+          SQL.Add('BEGIN DROP TABLE #MS END;');
+
+          SQL.Add('SELECT schedule_date, ARTICLE, DDBH, SupID, Supplier, CLBH, YWPM, Usage, Unit, CQDH, CASE WHEN ArrivalDate < ''2079/01/01'' THEN ArrivalDate END AS ArrivalDate, ArrivalDate AS MatStatus, UpdateTime, DayDiff INTO #MS FROM (');
+          SQL.Add('  SELECT SC.schedule_date, DDZL.ARTICLE, DDZL.DDBH, ZLZLS2.CSBH AS SupID, ''['' + ZLZLS2.CSBH + ''] '' + ZSZL.ZSYWJC AS Supplier, ZLZLS2.CLBH, CLZL.YWPM, SUM(ZLZLS2.CLSL) AS Usage, CLZL.DWBH AS Unit, CLZL.CQDH,');
+          SQL.Add('  CASE WHEN ISNULL(KCRK.RKQty, 0) + ISNULL(CGKCUSE.Qty, 0) >= SUM(ZLZLS2.CLSL) THEN CASE WHEN ISNULL(CGKCUSE.UserDate, ''2000/01/01'') > ISNULL(KCRK.CFMDate, ''2000/01/01'') THEN CGKCUSE.UserDate ELSE KCRK.CFMDate END');
+          SQL.Add('  ELSE ISNULL(SM.ArrivalDate, ''2079/01/01'') END AS ArrivalDate,');
+          SQL.Add('  CASE WHEN ISNULL(KCRK.RKQty, 0) + ISNULL(CGKCUSE.Qty, 0) >= SUM(ZLZLS2.CLSL) THEN CASE WHEN ISNULL(CGKCUSE.UserDate, ''2000/01/01'') > ISNULL(KCRK.CFMDate, ''2000/01/01'') THEN CGKCUSE.UserDate ELSE KCRK.CFMDate END ELSE SM.UserDate END AS UpdateTime,');
+          SQL.Add('  DATEDIFF(DAY, CASE WHEN ISNULL(KCRK.RKQty, 0) + ISNULL(CGKCUSE.Qty, 0) >= SUM(ZLZLS2.CLSL) THEN CASE WHEN ISNULL(CGKCUSE.UserDate, ''2000/01/01'') > ISNULL(KCRK.CFMDate, ''2000/01/01'') THEN CGKCUSE.UserDate ELSE KCRK.CFMDate END');
+          SQL.Add('  ELSE SM.ArrivalDate END, SC.schedule_date) AS DayDiff FROM schedule_crawler AS SC');
+          if (Separated = false) then
+            SQL.Add('  LEFT JOIN DDZL ON DDZL.DDBH = CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, ''-'', '''')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX(''-'', REVERSE(SC.ry))) END')
+          else
+            SQL.Add('  LEFT JOIN DDZL ON CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, ''-'', '''')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX(''-'', REVERSE(SC.ry))) END LIKE DDZL.DDBH + ''%''');
+          SQL.Add('  LEFT JOIN (');
+          SQL.Add('    SELECT ZLZLS2.ZLBH, ZLZLS2.CSBH, ZLZLS2.CLBH, SUM(ZLZLS2.CLSL) AS CLSL FROM ZLZLS2');
+          SQL.Add('    LEFT JOIN schedule_materials_no_need AS NoNeedMat ON ZLZLS2.CLBH LIKE NoNeedMat.CLBH + ''%'' AND NoNeedMat.CSBH = ZLZLS2.CSBH');
+          SQL.Add('    WHERE ZLZLS2.ZLBH = ''' + RY + ''' AND ZLZLS2.CSBH <> '''' AND ZLZLS2.CLBH NOT LIKE ''W%'' AND ZLZLS2.ZMLB = ''N'' AND ZLZLS2.CLSL > 0 AND NoNeedMat.CLBH IS NULL');
+          SQL.Add('    GROUP BY ZLZLS2.ZLBH, ZLZLS2.CSBH, ZLZLS2.CLBH');
+          SQL.Add('  ) AS ZLZLS2 ON ZLZLS2.ZLBH = DDZL.DDBH');
+          SQL.Add('  LEFT JOIN (');
+          SQL.Add('    SELECT BUY, DDBH, CSBH, CLBH, ArrivalDate, UserDate FROM (');
+          SQL.Add('      SELECT BUY, DDBH, CSBH, CLBH, ArrivalDate, UserDate, ROW_NUMBER() OVER(PARTITION BY DDBH, CLBH ORDER BY UserDate DESC) AS Seq FROM (');
+          SQL.Add('        SELECT BUY, DDBH, CSBH, CLBH, ArrivalDate, UserDate FROM schedule_materials');
+          SQL.Add('        WHERE DDBH = ''' + RY + '''');
+          SQL.Add('        UNION ALL');
+          SQL.Add('        SELECT '''' AS BUY, ZLBH, ''Stock'', CLBH, UserDate, UserDate FROM CGKCUSE');
+          SQL.Add('        WHERE ZLBH = ''' + RY + ''' AND GSBH = ''' + main.Edit2.Text + '''');
+          SQL.Add('      ) AS SM');
+          SQL.Add('    ) AS SM');
+          SQL.Add('    WHERE Seq = 1');
+          SQL.Add('  ) AS SM ON SM.DDBH = DDZL.DDBH AND SM.CLBH = ZLZLS2.CLBH');
+          SQL.Add('  LEFT JOIN (');
+          SQL.Add('    SELECT KCRKS.CGBH, KCRKS.CLBH, MAX(KCRK.CFMDate) AS CFMDate, SUM(KCRKS.Qty) AS RKQty FROM KCRKS');
+          SQL.Add('    LEFT JOIN KCRK ON KCRK.RKNO = KCRKS.RKNO');
+          SQL.Add('    WHERE KCRKS.CGBH = ''' + RY + ''' AND KCRK.CFMDate IS NOT NULL');
+          SQL.Add('    GROUP BY KCRKS.CGBH, KCRKS.CLBH');
+          SQL.Add('  ) AS KCRK ON KCRK.CGBH = ZLZLS2.ZLBH AND KCRK.CLBH = ZLZLS2.CLBH');
+          SQL.Add('  LEFT JOIN CGKCUSE ON CGKCUSE.ZLBH = ZLZLS2.ZLBH AND CGKCUSE.CLBH = ZLZLS2.CLBH AND CGKCUSE.GSBH = ''' + main.Edit2.Text + '''');
+          SQL.Add('  LEFT JOIN ZSZL ON ZSZL.ZSDH = ZLZLS2.CSBH');
+          SQL.Add('  LEFT JOIN CLZL ON CLZL.CLDH = ZLZLS2.CLBH');
+          SQL.Add('  LEFT JOIN KCSAFE ON KCSAFE.CLBH = ZLZLS2.CLBH');
+          SQL.Add('  WHERE SC.building_no = ''' + Building + ''' AND SC.lean_no = ''' + Lean + ''' AND SC.schedule_date = ''' + FormatDateTime('yyyy/MM/dd', PlanDate) + ''' AND DDZL.DDBH = ''' + RY + ''' AND KCSAFE.CLBH IS NULL AND CLZL.YWPM NOT LIKE ''%QC%LABEL%''');
+          SQL.Add('  GROUP BY SC.schedule_date, DDZL.ARTICLE, DDZL.DDBH, ZLZLS2.CSBH, ZSZL.ZSYWJC, ZLZLS2.CLBH, ZLZLS2.CLSL, CLZL.YWPM, CLZL.DWBH, CLZL.CQDH, KCRK.RKQty, CGKCUSE.Qty, CGKCUSE.UserDate, KCRK.CFMDate, SM.ArrivalDate, SM.UserDate');
+          SQL.Add(') AS MS');
+          ShowMessage(SQL.Text);
+
+          SQL.Add('SELECT '''' AS Indicator, MS.*, CAST(ROW_NUMBER() OVER(ORDER BY CASE WHEN DayDiff IS NOT NULL THEN DayDiff ELSE -100 END, MS.Supplier, MS.CLBH) AS INT) AS Seq FROM (');
+          SQL.Add('  SELECT MSP.DDBH, ISNULL(CLZHZL.CLDH1, MSP.CLBH) AS CLBH, MAX(MSP.LeadTime) + 3 AS LeadTime FROM (');
+          SQL.Add('    SELECT DDZL.DDBH, MSP.Process, MSP.LeadTime, ISNULL(CLZHZL.CLDH1, MSPS.CLBH) AS CLBH FROM DDZL');
+          SQL.Add('    LEFT JOIN ModelSecondProcess AS MSP ON MSP.XieXing = DDZL.XieXing AND MSP.SheHao = DDZL.SheHao');
+          SQL.Add('    LEFT JOIN ModelSecondProcessS AS MSPS ON MSPS.XieXing = MSP.XieXing AND MSPS.SheHao = MSP.SheHao AND MSPS.Part = MSP.Part AND MSPS.Process = MSP.Process');
+          SQL.Add('    LEFT JOIN CLZHZL ON CLZHZL.CLDH = MSPS.CLBH');
+          SQL.Add('    WHERE DDZL.DDBH = ''' + RY + '''');
+          SQL.Add('  ) AS MSP');
+          SQL.Add('  LEFT JOIN CLZHZL ON CLZHZL.CLDH = MSP.CLBH');
+          SQL.Add('  GROUP BY MSP.DDBH, MSP.CLBH, CLZHZL.CLDH1');
+          SQL.Add(') AS MSP');
+          SQL.Add('LEFT JOIN #MS AS MS ON MS.DDBH = MSP.DDBH AND MS.CLBH = MSP.CLBH');
+          SQL.Add('WHERE MS.DDBH IS NOT NULL');
+          Active := true;
+
+          MaxArrivalDate := EncodeDate(2000, 1, 1);
+          UpdateTime := EncodeDateTime(2000, 1, 1, 0, 0, 0, 0);
+          DBGridEh6.DataSource := Nil;
+          while not Eof do
+          begin
+            if (FieldByName('MatStatus').IsNull = false) AND (FieldByName('MatStatus').AsDateTime > MaxArrivalDate) then
+              MaxArrivalDate := FieldByName('MatStatus').AsDateTime;
+            if (FieldByName('UpdateTime').IsNull = false) AND (FieldByName('UpdateTime').AsDateTime > UpdateTime) then
+              UpdateTime := FieldByName('UpdateTime').AsDateTime;
+            Next;
+          end;
+
+          if (UpdateTime >= MarkTime) then
+            Dot_Process.Visible := true
+          else
+            Dot_Process.Visible := false;
+
+          if (MaxArrivalDate = EncodeDate(2000, 1, 1)) then
+          begin
+            LB_Process.Caption := '[Second Process: No data found]';
+            LB_Process.Font.Color := clBlack;
+            LB_Process.Color := clBtnface;
+          end
+          else if (MaxArrivalDate = EncodeDate(2079, 1, 1)) then
+          begin
+            LB_Process.Caption := '[Second Process: Missing ETA information]';
+            LB_Process.Font.Color := clBlack;
+            LB_Process.Color := clYellow;
+          end
+          else begin
+            LB_Process.Caption := '[Second Process: ' + FormatDateTime('yyyy/MM/dd', MaxArrivalDate) + ']';
+            LB_Process.Font.Color := clBlack;
+            if (ShowGreen.Checked) AND (MaxArrivalDate <= main.Today) then
+            begin
+              LB_Process.Caption := LB_Process.Caption + ' - Arrived';
+              LB_Process.Color := clLime;
+            end
+            else if (Trunc(PlanDate) - Trunc(MaxArrivalDate) >= 12) then
+            begin
+              LB_Process.Caption := LB_Process.Caption + ' - On schedule';
+              LB_Process.Color := clWhite;
+            end
+            else if (Trunc(PlanDate) - Trunc(MaxArrivalDate) >= 8) then
+            begin
+              LB_Process.Caption := LB_Cutting.Caption + ' - ' + IntToStr(Trunc(PlanDate) - Trunc(MaxArrivalDate)) + ' days in advance';
+              LB_Process.Color := $00AAAAFF;
+            end
+            else begin
+              if (Trunc(PlanDate) - Trunc(MaxArrivalDate) >= 0) then
+                LB_Process.Caption := LB_Process.Caption + ' - ' + IntToStr(Trunc(PlanDate) - Trunc(MaxArrivalDate)) + ' days in advance'
+              else
+                LB_Process.Caption := LB_Process.Caption + ' - Delayed by ' + IntToStr(Trunc(PlanDate) - Trunc(MaxArrivalDate)) + ' days';
+              LB_Process.Font.Color := clWhite;
+              LB_Process.Color := clRed;
+            end;
+          end;
+
+          First;      
+          DBGridEh6.DataSource := DS_Process;
+          DBGridEh6.SelectedIndex := 1;
+        end;
+
+        with Q_Cutting do
+        begin
+          Active := false;
+          SQL.Clear;
+          SQL.Add('SELECT '''' AS Indicator, MS.*, CAST(ROW_NUMBER() OVER(ORDER BY CASE WHEN DayDiff IS NOT NULL THEN DayDiff ELSE -100 END, Supplier, CLBH) AS INT) AS Seq FROM #MS AS MS');
+          SQL.Add('WHERE LEFT(CLBH, 1) IN (''A'', ''C'', ''F'', ''K'', ''B'') OR (LEFT(CLBH, 3) IN (''P21'', ''P31'') AND Unit <> ''PRS'') OR (SupID = ''M251'' AND Unit = ''YRD'')');
+          Active := true;
+
+          MaxArrivalDate := EncodeDate(2000, 1, 1);
+          UpdateTime := EncodeDateTime(2000, 1, 1, 0, 0, 0, 0);
+          DBGridEh1.DataSource := Nil;
+          while not Eof do
+          begin
+            if (FieldByName('MatStatus').IsNull = false) AND (FieldByName('MatStatus').AsDateTime > MaxArrivalDate) then
+              MaxArrivalDate := FieldByName('MatStatus').AsDateTime;
+            if (FieldByName('UpdateTime').IsNull = false) AND (FieldByName('UpdateTime').AsDateTime > UpdateTime) then
+              UpdateTime := FieldByName('UpdateTime').AsDateTime;
+            Next;
+          end;
+
+          if (UpdateTime >= MarkTime) then
+            Dot_Cutting.Visible := true
+          else
+            Dot_Cutting.Visible := false;
+
+          if (MaxArrivalDate = EncodeDate(2000, 1, 1)) then
+          begin
+            LB_Cutting.Caption := '[Cutting: No data found]';
+            LB_Cutting.Font.Color := clBlack;
+            LB_Cutting.Color := clBtnface;
+          end
+          else if (MaxArrivalDate = EncodeDate(2079, 1, 1)) then
+          begin
+            LB_Cutting.Caption := '[Cutting: Missing ETA information]';
+            LB_Cutting.Font.Color := clBlack;
+            LB_Cutting.Color := clYellow;
+          end
+          else begin
+            LB_Cutting.Caption := '[Cutting: ' + FormatDateTime('yyyy/MM/dd', MaxArrivalDate) + ']';
+            LB_Cutting.Font.Color := clBlack;
+            if (ShowGreen.Checked) AND (MaxArrivalDate <= main.Today) then
+            begin
+              LB_Cutting.Caption := LB_Cutting.Caption + ' - Arrived';
+              LB_Cutting.Color := clLime;
+            end
+            else if (Trunc(PlanDate) - Trunc(MaxArrivalDate) >= 12) then
+            begin
+              LB_Cutting.Caption := LB_Cutting.Caption + ' - On schedule';
+              LB_Cutting.Color := clWhite;
+            end
+            else if (Trunc(PlanDate) - Trunc(MaxArrivalDate) >= 8) then
+            begin
+              LB_Cutting.Caption := LB_Cutting.Caption + ' - ' + IntToStr(Trunc(PlanDate) - Trunc(MaxArrivalDate)) + ' days in advance';
+              LB_Cutting.Color := $00AAAAFF;
+            end
+            else begin
+              if (Trunc(PlanDate) - Trunc(MaxArrivalDate) >= 0) then
+                LB_Cutting.Caption := LB_Cutting.Caption + ' - ' + IntToStr(Trunc(PlanDate) - Trunc(MaxArrivalDate)) + ' days in advance'
+              else
+                LB_Cutting.Caption := LB_Cutting.Caption + ' - Delayed by ' + IntToStr(Trunc(PlanDate) - Trunc(MaxArrivalDate)) + ' days';
+              LB_Cutting.Font.Color := clWhite;
+              LB_Cutting.Color := clRed;
+            end;
+          end;
+
+          First;      
+          DBGridEh1.DataSource := DS_Cutting;
+          DBGridEh1.SelectedIndex := 1;
+        end;
+
+        with Q_Stitching do
+        begin
+          Active := false;
+          SQL.Clear;
+          SQL.Add('SELECT '''' AS Indicator, MS.*, CAST(ROW_NUMBER() OVER(ORDER BY CASE WHEN DayDiff IS NOT NULL THEN DayDiff ELSE -100 END, Supplier, CLBH) AS INT) AS Seq FROM #MS AS MS');
+          SQL.Add('WHERE ((LEFT(CLBH, 1) IN (''E'', ''G'', ''L'', ''M'', ''N'') OR LEFT(CLBH, 3) IN (''D01'', ''D02'', ''D11'')) AND CASE WHEN LEFT(CLBH, 3) = ''G01'' THEN Unit ELSE ''X'' END <> ''PRS'') OR SupID = ''A390''');
+          Active := true;
+
+          MaxArrivalDate := EncodeDate(2000, 1, 1);
+          UpdateTime := EncodeDateTime(2000, 1, 1, 0, 0, 0, 0);
+          DBGridEh2.DataSource := Nil;
+          while not Eof do
+          begin
+            if (FieldByName('MatStatus').IsNull = false) AND (FieldByName('MatStatus').AsDateTime > MaxArrivalDate) then
+              MaxArrivalDate := FieldByName('MatStatus').AsDateTime;
+            if (FieldByName('UpdateTime').IsNull = false) AND (FieldByName('UpdateTime').AsDateTime > UpdateTime) then
+              UpdateTime := FieldByName('UpdateTime').AsDateTime;
+            Next;
+          end;
+
+          if (UpdateTime >= MarkTime) then
+            Dot_Stitching.Visible := true
+          else
+            Dot_Stitching.Visible := false;
+
+          if (MaxArrivalDate = EncodeDate(2000, 1, 1)) then
+          begin
+            LB_Stitching.Caption := '[Stitching: No data found]';
+            LB_Stitching.Font.Color := clBlack;
+            LB_Stitching.Color := clBtnface;
+          end
+          else if (MaxArrivalDate = EncodeDate(2079, 1, 1)) then
+          begin
+            LB_Stitching.Caption := '[Stitching: Missing ETA information]';
+            LB_Stitching.Font.Color := clBlack;
+            LB_Stitching.Color := clYellow;
+          end
+          else begin
+            LB_Stitching.Caption := '[Stitching: ' + FormatDateTime('yyyy/MM/dd', MaxArrivalDate) + ']';
+            LB_Stitching.Font.Color := clBlack;
+            if (ShowGreen.Checked) AND (MaxArrivalDate <= main.Today) then
+            begin
+              LB_Stitching.Caption := LB_Stitching.Caption + ' - Arrived';
+              LB_Stitching.Color := clLime;
+            end
+            else if (Trunc(PlanDate) - Trunc(MaxArrivalDate) >= 12) then
+            begin
+              LB_Stitching.Caption := LB_Stitching.Caption + ' - On schedule';
+              LB_Stitching.Color := clWhite;
+            end
+            else if (Trunc(PlanDate) - Trunc(MaxArrivalDate) >= 8) then
+            begin
+              LB_Stitching.Caption := LB_Stitching.Caption + ' - ' + IntToStr(Trunc(PlanDate) - Trunc(MaxArrivalDate)) + ' days in advance';
+              LB_Stitching.Color := $00AAAAFF;
+            end
+            else begin
+              if (Trunc(PlanDate) - Trunc(MaxArrivalDate) >= 0) then
+                LB_Stitching.Caption := LB_Stitching.Caption + ' - ' + IntToStr(Trunc(PlanDate) - Trunc(MaxArrivalDate)) + ' days in advance'
+              else
+                LB_Stitching.Caption := LB_Stitching.Caption + ' - Delayed by ' + IntToStr(Trunc(PlanDate) - Trunc(MaxArrivalDate)) + ' days';
+              LB_Stitching.Font.Color := clWhite;
+              LB_Stitching.Color := clRed;
+            end;
+          end;
+
+          First;      
+          DBGridEh2.DataSource := DS_Stitching;
+          DBGridEh2.SelectedIndex := 1;
+        end;
+
+        with Q_Assembly do
+        begin
+          Active := false;
+          SQL.Clear;
+          SQL.Add('SELECT '''' AS Indicator, MS.*, CAST(ROW_NUMBER() OVER(ORDER BY CASE WHEN DayDiff IS NOT NULL THEN DayDiff ELSE -100 END, Supplier, CLBH) AS INT) AS Seq FROM #MS AS MS');
+          SQL.Add('WHERE (LEFT(CLBH, 1) IN (''D'', ''H'', ''I'', ''O'') AND LEFT(CLBH, 3) NOT IN (''D01'', ''D02'', ''D11'')) OR (LEFT(CLBH, 3) = ''G01'' AND Unit = ''PRS'')');
+          SQL.Add('OR (SupID = ''V204'' AND LEFT(CLBH, 1) = ''L'') OR (SupID = ''M251'' AND Unit = ''PRS'') OR SupID IN (''P144'', ''V214'')');
+          Active := true;
+
+          MaxArrivalDate := EncodeDate(2000, 1, 1);
+          UpdateTime := EncodeDateTime(2000, 1, 1, 0, 0, 0, 0);
+          DBGridEh3.DataSource := Nil;
+          while not Eof do
+          begin
+            if (FieldByName('MatStatus').IsNull = false) AND (FieldByName('MatStatus').AsDateTime > MaxArrivalDate) then
+              MaxArrivalDate := FieldByName('MatStatus').AsDateTime;
+            if (FieldByName('UpdateTime').IsNull = false) AND (FieldByName('UpdateTime').AsDateTime > UpdateTime) then
+              UpdateTime := FieldByName('UpdateTime').AsDateTime;
+            Next;
+          end;
+
+          if (UpdateTime >= MarkTime) then
+            Dot_Assembly.Visible := true
+          else
+            Dot_Assembly.Visible := false;
+
+          if (MaxArrivalDate = EncodeDate(2000, 1, 1)) then
+          begin
+            LB_Assembly.Caption := '[Assembly: No data found]';
+            LB_Assembly.Font.Color := clBlack;
+            LB_Assembly.Color := clBtnface;
+          end
+          else if (MaxArrivalDate = EncodeDate(2079, 1, 1)) then
+          begin
+            LB_Assembly.Caption := '[Assembly: Missing ETA information]';
+            LB_Assembly.Font.Color := clBlack;
+            LB_Assembly.Color := clYellow;
+          end
+          else begin
+            LB_Assembly.Caption := '[Assembly: ' + FormatDateTime('yyyy/MM/dd', MaxArrivalDate) + ']';
+            LB_Assembly.Font.Color := clBlack;
+            if (ShowGreen.Checked) AND (MaxArrivalDate <= main.Today) then
+            begin
+              LB_Assembly.Caption := LB_Assembly.Caption + ' - Arrived';
+              LB_Assembly.Color := clLime;
+            end
+            else if (Trunc(PlanDate) - Trunc(MaxArrivalDate) >= 12) then
+            begin
+              LB_Assembly.Caption := LB_Assembly.Caption + ' - On schedule';
+              LB_Assembly.Color := clWhite;
+            end
+            else if (Trunc(PlanDate) - Trunc(MaxArrivalDate) >= 8) then
+            begin
+              LB_Assembly.Caption := LB_Assembly.Caption + ' - ' + IntToStr(Trunc(PlanDate) - Trunc(MaxArrivalDate)) + ' days in advance';
+              LB_Assembly.Color := $00AAAAFF;
+            end
+            else begin
+              if (Trunc(PlanDate) - Trunc(MaxArrivalDate) >= 0) then
+                LB_Assembly.Caption := LB_Assembly.Caption + ' - ' + IntToStr(Trunc(PlanDate) - Trunc(MaxArrivalDate)) + ' days in advance'
+              else
+                LB_Assembly.Caption := LB_Assembly.Caption + ' - Delayed by ' + IntToStr(Trunc(PlanDate) - Trunc(MaxArrivalDate)) + ' days';
+              LB_Assembly.Font.Color := clWhite;
+              LB_Assembly.Color := clRed;
+            end;
+          end;
+
+          First;      
+          DBGridEh3.DataSource := DS_Assembly; 
+          DBGridEh3.SelectedIndex := 1;
+        end;
+
+        with Q_Bottom do
+        begin
+          Active := false;
+          SQL.Clear;
+          SQL.Add('SELECT '''' AS Indicator, MS.*, CAST(ROW_NUMBER() OVER(ORDER BY CASE WHEN DayDiff IS NOT NULL THEN DayDiff ELSE -100 END, Supplier, CLBH) AS INT) AS Seq FROM #MS AS MS');
+          SQL.Add('WHERE (LEFT(CLBH, 1) IN (''J'', ''P'') AND LEFT(CLBH, 3) NOT IN (''P21'')) OR SupID = ''V097''');
+          Active := true;
+
+          MaxArrivalDate := EncodeDate(2000, 1, 1);
+          UpdateTime := EncodeDateTime(2000, 1, 1, 0, 0, 0, 0);
+          DBGridEh4.DataSource := Nil;
+          while not Eof do
+          begin
+            if (FieldByName('MatStatus').IsNull = false) AND (FieldByName('MatStatus').AsDateTime > MaxArrivalDate) then
+              MaxArrivalDate := FieldByName('MatStatus').AsDateTime;
+            if (FieldByName('UpdateTime').IsNull = false) AND (FieldByName('UpdateTime').AsDateTime > UpdateTime) then
+              UpdateTime := FieldByName('UpdateTime').AsDateTime;
+            Next;
+          end;
+
+          if (UpdateTime >= MarkTime) then
+            Dot_Bottom.Visible := true
+          else
+            Dot_Bottom.Visible := false;
+
+          if (MaxArrivalDate = EncodeDate(2000, 1, 1)) then
+          begin
+            LB_Bottom.Caption := '[Bottom: No data found]';
+            LB_Bottom.Font.Color := clBlack;
+            LB_Bottom.Color := clBtnface;
+          end
+          else if (MaxArrivalDate = EncodeDate(2079, 1, 1)) then
+          begin
+            LB_Bottom.Caption := '[Bottom: Missing ETA information]';
+            LB_Bottom.Font.Color := clBlack;
+            LB_Bottom.Color := clYellow;
+          end
+          else begin
+            LB_Bottom.Caption := '[Bottom: ' + FormatDateTime('yyyy/MM/dd', MaxArrivalDate) + ']';
+            LB_Bottom.Font.Color := clBlack;
+            if (ShowGreen.Checked) AND (MaxArrivalDate <= main.Today) then
+            begin
+              LB_Bottom.Caption := LB_Bottom.Caption + ' - Arrived';
+              LB_Bottom.Color := clLime;
+            end
+            else if (Trunc(PlanDate) - Trunc(MaxArrivalDate) >= 12) then
+            begin
+              LB_Bottom.Caption := LB_Bottom.Caption + ' - On schedule';
+              LB_Bottom.Color := clWhite;
+            end
+            else if (Trunc(PlanDate) - Trunc(MaxArrivalDate) >= 8) then
+            begin
+              LB_Bottom.Caption := LB_Bottom.Caption + ' - ' + IntToStr(Trunc(PlanDate) - Trunc(MaxArrivalDate)) + ' days in advance';
+              LB_Bottom.Color := $00AAAAFF;
+            end
+            else begin
+              if (Trunc(PlanDate) - Trunc(MaxArrivalDate) >= 0) then
+                LB_Bottom.Caption := LB_Bottom.Caption + ' - ' + IntToStr(Trunc(PlanDate) - Trunc(MaxArrivalDate)) + ' days in advance'
+              else
+                LB_Bottom.Caption := LB_Bottom.Caption + ' - Delayed by ' + IntToStr(Trunc(PlanDate) - Trunc(MaxArrivalDate)) + ' days';
+              LB_Bottom.Font.Color := clWhite;
+              LB_Bottom.Color := clRed;
+            end;
+          end;
+
+          First;      
+          DBGridEh4.DataSource := DS_Bottom; 
+          DBGridEh4.SelectedIndex := 1;
+        end;
+
+        ED_RY.Text := RY;
+        ED_SKU.Text := SKU;
+        ED_PlanDate.Text := FormatDateTime('yyyy/MM/dd', PlanDate);
+        Panel4.Top := 2000;
+        Panel4.Visible := true;
+        FormResize(Nil);
+      end;
+    end
+    else begin
+      MatInfoRY := '';
+      Panel4.Visible := false;
+    end;
+
+    if (ShowImage.Checked) AND (SKU <> ShoePicSKU) then
+    begin
+      with QTemp do
+      begin
+        Active := false;
+        SQL.Clear;
+        SQL.Add('SELECT XXZL.IMGName FROM DDZL');
+        SQL.Add('LEFT JOIN XXZL ON XXZL.XieXing = DDZL.XieXing AND XXZL.SheHao = DDZL.SheHao');
+        SQL.Add('WHERE DDZL.DDBH = ''' + RY + '''');
+        Active := true;
+
+        if (RecordCount > 0) then
+        begin
+          Image := StringReplace(FieldByName('IMGName').Asstring, 'Y:', '\\192.168.71.7\BOM', [rfReplaceAll, rfIgnoreCase]);
+          if (FileExists(Image)) then
+          begin
+            ShoeImage.Picture.LoadFromFile(Image);
+            if (ShoeImage.Picture.Height > 0) then
+            begin
+              ImageBox.Width := (ShoeImage.Picture.Width * ImageBox.Height) DIV ShoeImage.Picture.Height + 20;
+              FormResize(Nil);
+              ImageBox.Visible := true;
+            end;
+          end
+          else begin
+            ShoeImage.Picture.Bitmap := Nil; 
+            ImageBox.Visible := false;
+          end;
+        end
+        else begin
+          ShoeImage.Picture.Bitmap := Nil;
+          ImageBox.Visible := false;
+        end;
+      end;
+      ShoePicSKU := SKU;
+    end
+    else if (ShowImage.Checked = false) then
+    begin
+      ShoeImage.Picture.Bitmap := Nil;
+      ImageBox.Visible := false;
+      ShoePicSKU := '';
+    end;
+  end
+  else begin
+    Panel4.Visible := false;
+    ShoeImage.Picture.Bitmap := Nil;
+    ImageBox.Visible := false;
+    ShoePicSKU := '';
+    MatInfoRY := '';
+  end;
+
+  StringGrid1.Invalidate;
+end;
+
+{constructor TRunThread.Create(pBuilding, pLean, pRY, pSKU: string; pPlanDate: TDate);
+begin
+  inherited Create(false);
+  FreeOnTerminate := true;
+  Building := pBuilding;
+  Lean := pLean;
+  RY := pRY;
+  SKU := pSKU;
+end;
+
+procedure TRunThread.Execute;
+var
+  MaxArrivalDate: TDate;
+begin
+  try
+
+  except on E: Exception do
+    ShowMessage('Error: ' + E.Message);
+  end;
+end;}
+
+procedure TProductionPlanTracking.StringGrid1MouseMove(Sender: TObject;
+  Shift: TShiftState; X, Y: Integer);
+var
+  Col, Row: integer;
+begin
+  StringGrid1.MouseToCell(X, Y, Col, Row);
+
+  if (Col > 0) AND (Row > 2) AND (Pos(#13#10, StringGrid1.Cells[Col, Row]) > 0) then
+    StringGrid1.Cursor := crHandPoint
+  else
+    StringGrid1.Cursor := crDefault;
+end;
+
+procedure TProductionPlanTracking.StringGrid1Exit(Sender: TObject);
+begin
+  StringGrid1.Cursor := crDefault;
+end;
+
+procedure TProductionPlanTracking.StringGrid1KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Ord('F')) and (ssCtrl in Shift) then
+  begin
+    FindDlg := TFindDlg.Create(Self);
+    FindDlg.ED_RY.Text := sKeyword;
+    FindDlg.ShowModal;
+  end
+  else if (Key = VK_UP) then
+  begin
+    try
+      if (StringGrid1.Row - 8 >= 3) then
+        StringGrid1.Row := StringGrid1.Row - 8;
+    except
+    end;
+  end
+  else if (Key = VK_DOWN) then
+  begin
+    try
+      if (StringGrid1.Row + 8 <= StringGrid1.RowCount) then
+        StringGrid1.Row := StringGrid1.Row + 8;
+    except
+    end;
+  end
+end;
+
+procedure TProductionPlanTracking.SearchByKeyword(Keyword: string);
+var
+  Col, Row, i: integer;
+  CanSelect: boolean;
+begin
+  sKeyword := Keyword;
+
+  for Col := 1 to StringGrid1.ColCount - 1 do
+  begin
+    Row := 4;
+    while Row <= StringGrid1.RowCount - 1 do
+    begin
+      if (StringGrid1.Cells[Col, Row] <> '') AND (Pos(Keyword, StringGrid1.Cells[Col, Row]) > 0) then
+      begin
+        StringGrid1.Selection := Grids.TGridRect(Rect(Col, Row, Col, Row));
+        if (Col < StringGrid1.LeftCol) then
+          StringGrid1.LeftCol := Col
+        else if (Col > StringGrid1.LeftCol + StringGrid1.VisibleColCount - 1) then
+          StringGrid1.LeftCol := StringGrid1.LeftCol + (Col - StringGrid1.LeftCol - StringGrid1.VisibleColCount) + 2;
+
+        if (Row < StringGrid1.TopRow) then
+          StringGrid1.TopRow := Row
+        else if (Row > StringGrid1.TopRow + StringGrid1.VisibleRowCount - 1) then
+          StringGrid1.TopRow := StringGrid1.TopRow + (Row - StringGrid1.TopRow - StringGrid1.VisibleRowCount) + 1;
+
+        FindDlg.Close;
+        CanSelect := true;
+        StringGrid1SelectCell(Nil, Col, Row, CanSelect);
+        InSearch := false;
+        Exit;
+      end;
+      Inc(Row, 8);
+    end;
+  end;
+
+  if (InSearch = false) then
+  begin
+    InSearch := true;
+    MatchedLeanSelection := TMatchedLeanSelection.Create(Self);
+    with MatchedLeanSelection.Query1 do
+    begin
+      Active := false;
+      SQL.Clear;
+      SQL.Add('SELECT SC.building_no, SC.lean_no + CASE WHEN SF.Lean_TX IS NOT NULL THEN '' [VL]'' ELSE '''' END AS lean_no, SC.Date, SC.DDBH FROM (');
+      SQL.Add('  SELECT SC.building_no, UPPER(SC.lean_no) AS lean_no, SUBSTRING(CONVERT(VARCHAR, MAX(SC.schedule_date), 111), 1, 7) AS Month, MAX(SC.schedule_date) AS Date, DDZL.DDBH FROM schedule_crawler AS SC');
+      SQL.Add('  LEFT JOIN DDZL ON DDZL.DDBH = CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, ''-'', '''')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX(''-'', REVERSE(SC.ry))) END');
+      SQL.Add('  WHERE DDZL.DDBH LIKE ''' + Keyword + '%''');
+      SQL.Add('  GROUP BY SC.building_no, SC.lean_no, DDZL.DDBH');
+      SQL.Add(') AS SC');
+      SQL.Add('LEFT JOIN schedule_factorylink AS SF ON SF.Year + ''/'' + SF.Month = SUBSTRING(CONVERT(VARCHAR, SC.Date, 111), 1, 7) AND SF.Building_TX = SC.building_no AND SF.Lean_TX = SC.lean_no');
+      SQL.Add('ORDER BY SC.building_no, SC.lean_no, SC.Date DESC');
+      Active := true;
+
+      if (RecordCount = 1) then
+      begin
+        DTP1.Date := FieldByName('Date').AsDateTime;
+        ReloadBuilding(CB_Building, DTP1, DTP1);
+        for i := 0 to CB_Building.Items.Count - 1 do
+        begin
+          if (CB_Building.Items[i] = FieldByName('building_no').AsString) then
+          begin
+            CB_Building.ItemIndex := i;
+            Break;
+          end;
+        end;
+        ReloadLean(CB_Lean, CB_Building, DTP1, DTP1);
+
+        for i := 0 to CB_Lean.Items.Count - 1 do
+        begin
+          if (CB_Lean.Items[i] = FieldByName('lean_no').AsString) then
+          begin
+            CB_Lean.ItemIndex := i;
+            Break;
+          end;
+        end;
+        Button1Click(Nil);
+        MatchedLeanSelection.Close;
+        SearchByKeyword(Keyword);
+      end
+      else if (RecordCount > 1) then
+      begin
+        if (MatchedLeanSelection.ShowModal = mrOk) then
+        begin
+          Button1Click(Nil);
+          SearchByKeyword(Keyword);
+        end;
+      end
+      else begin
+        MatchedLeanSelection.Close;
+        ShowMessage('The RY [' + Keyword + '] does not exist in schedule.');
+      end;
+    end;
+  end
+  else begin                 
+    InSearch := false;
+    ShowMessage('An error occurred while searching RY [' + Keyword + '].');
+  end;
+end;
+
+procedure TProductionPlanTracking.StringGrid1DrawCell(Sender: TObject;
+  ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
+var
+  MarkTime: TDateTime;
+  CellText, RY: string;
+  BGColor: TColor;
+  S_Col, S_Row1, S_Row2, LeadDays: integer;
+begin
+  with StringGrid1 do
+  begin
+    S_Col := Col;
+    if (RowCount < 10) then
+    begin
+      S_Row1 := 3;
+      S_Row2 := 3;
+    end
+    else begin
+      S_Row1 := (Row - 3) DIV 8 * 8 + 3;
+      S_Row2 := S_Row1 + 7;
+    end;
+
+    Canvas.Font := Font;
+    CellText := Cells[ACol, ARow];
+
+    if (ARow <= 2) then
+    begin
+      Canvas.Font.Size := 12;
+      Canvas.Brush.Color := clWhite;
+
+      if (ACol = 0) AND (ARow = 0) then
+        Rect.Bottom := CellRect(0, 1).Bottom
+      else if (ACol = 0) AND (ARow = 1) then
+        Rect.Top := CellRect(0, 0).Top;
+
+      Canvas.FillRect(Rect);
+      DrawText(Canvas.Handle, PChar(CellText), Length(CellText), Rect, DT_CENTER or DT_SINGLELINE or DT_VCENTER);
+    end
+    else if (ACol = 0) AND (ARow > 2) then
+    begin
+      Canvas.Font.Size := 12;
+      Canvas.Brush.Color := clWhite;
+      
+      Canvas.FillRect(Rect);
+      DrawText(Canvas.Handle, PChar(CellText), Length(CellText), Rect, DT_CENTER or DT_SINGLELINE or DT_VCENTER);
+
+      if (RowCount > 10) then
+      begin
+        Canvas.Pen.Width := 1;
+        Canvas.Pen.Color := clWhite;
+
+        if ((ARow - 2) MOD 8 <> 0) then
+        begin
+          Canvas.MoveTo(Rect.Left, Rect.Bottom);
+          Canvas.LineTo(Rect.Right, Rect.Bottom);
+        end;
+
+        if ((ARow - 2) MOD 8 <> 1) then
+        begin
+          Canvas.MoveTo(Rect.Left, Rect.Top);
+          Canvas.LineTo(Rect.Right, Rect.Top);
+        end;
+      end;
+    end
+    else if (CellText <> '') then
+    begin   
+      Canvas.Font.Color := clBlack;
+      Canvas.Font.Size := GetMaxFontSize(CellText, ColWidths[ACol] - 4);
+
+      if (CB_Mode.Text = 'NONE') then
+        BGColor := clWhite
+      else if (CB_Mode.Text = 'CUTTING DIE') then
+        BGColor := BGColors[ModelList.IndexOf(Cells[ACol, (ARow - 3) DIV 8 * 8 + 3])]
+      else if (CB_Mode.Text = 'SKU') then
+        BGColor := BGColors[SKUList.IndexOf(Cells[ACol, (ARow - 3) DIV 8 * 8 + 7])]
+      else if (CB_Mode.Text = 'MATERIAL STATUS') then
+      begin
+        RY := Cells[ACol, (ARow - 3) DIV 8 * 8 + 4];
+        if (Pos('-', Copy(RY, Length(RY)-2, 3)) > 0) then
+          RY := Copy(RY, 1, LastDelimiter('-', RY) - 1);
+        LeadDays := StrToInt(MatDayList[RYList.IndexOf(RY)]);
+        if (ShowGreen.Checked) AND (MatArrivalFlag[RYList.IndexOf(RY)] = '1') then
+        begin
+          BGColor := clLime;
+          Canvas.Font.Color := clBlack;
+        end
+        else if (LeadDays <= -10000) then
+        begin
+          BGColor := clYellow;
+          Canvas.Font.Color := clBlack;
+        end
+        else if (LeadDays >= StrToInt(ED_Days.Text)) then
+        begin
+          BGColor := RGB(255, 255, 255);
+          Canvas.Font.Color := clBlack;
+        end
+        else if (LeadDays >= StrToInt(ED_Days.Text) - 10) then
+        begin
+          BGColor := RGB(255, 170, 170);
+          Canvas.Font.Color := clBlack;
+        end
+        else begin
+          BGColor := RGB(255, 0, 0);
+          Canvas.Font.Color := clWhite;
+        end;
+      end;
+
+      Canvas.Brush.Color := BGColor;
+      Canvas.FillRect(Rect);
+      DrawText(Canvas.Handle, PChar(CellText), Length(CellText), Rect, DT_CENTER or DT_SINGLELINE or DT_VCENTER);
+
+      Canvas.Pen.Width := 1;
+      if ((ARow - 2) MOD 8 > 0) then
+      begin
+        Canvas.Pen.Color := BGColor;
+        Canvas.MoveTo(Rect.Left, Rect.Bottom);
+        Canvas.LineTo(Rect.Right, Rect.Bottom);
+      end
+      else begin
+        Canvas.Pen.Color := clSilver;
+        Canvas.MoveTo(Rect.Left, Rect.Bottom);
+        Canvas.LineTo(Rect.Right, Rect.Bottom);
+      end;
+    end
+    else begin
+      Canvas.Pen.Color := clBtnFace;
+      Canvas.Pen.Width := 1;
+      Canvas.Brush.Color := clBtnFace;
+      Canvas.FillRect(Rect);
+               
+      Canvas.MoveTo(Rect.Left, Rect.Bottom);
+      Canvas.LineTo(Rect.Right, Rect.Bottom);
+
+      if (Cells[ACol - 1, ARow] = '') then
+      begin
+        Canvas.MoveTo(Rect.Left, Rect.Top);
+        Canvas.LineTo(Rect.Left, Rect.Bottom+1);
+      end;
+
+      if (Cells[ACol + 1, ARow] = '') then
+      begin
+        Canvas.MoveTo(Rect.Right, Rect.Top);
+        Canvas.LineTo(Rect.Right, Rect.Bottom+1);
+      end;
+    end;
+
+    if (ACol > 0) AND (ARow <= 2) AND (Length(HolidayList) > 0) AND (HolidayList[ACol - 1]) then
+    begin
+      Canvas.Font.Size := 8;
+      Canvas.Brush.Color := clYellow;
+      Canvas.FillRect(Rect);
+      DrawText(Canvas.Handle, PChar(CellText), Length(CellText), Rect, DT_CENTER or DT_SINGLELINE or DT_VCENTER);
+    end;
+
+    MarkTime := EncodeDateTime(YearOf(DTP2.Date), MonthOf(DTP2.Date), DayOf(DTP2.Date), HourOf(DTP3.DateTime), MinuteOf(DTP3.DateTime), 0, 0);
+    if (ACol >= 1) AND (ARow >= 3) AND ((ARow - 2) MOD 8 = 0) AND (RYMatUpdateTime[RYList.IndexOf(RY)] >= MarkTime) then
+      Canvas.Draw(Rect.Right - IMG_DOT.Width, Rect.Bottom - IMG_DOT.Height, IMG_DOT.Picture.Graphic);
+
+    if (RowCount < 10) AND (ACol = S_Col) AND (ARow = S_Row1) then
+    begin
+      Canvas.Pen.Color := $00467321;
+      Canvas.Pen.Width := 1;
+
+      Canvas.MoveTo(Rect.Left, Rect.Top);
+      Canvas.LineTo(Rect.Right-1, Rect.Top);
+      Canvas.LineTo(Rect.Right-1, Rect.Bottom-1);
+      Canvas.LineTo(Rect.Left, Rect.Bottom-1);
+      Canvas.LineTo(Rect.Left, Rect.Top);
+
+      Canvas.MoveTo(Rect.Left+1, Rect.Top+1);
+      Canvas.LineTo(Rect.Right-2, Rect.Top+1);
+      Canvas.LineTo(Rect.Right-2, Rect.Bottom-2);
+      Canvas.LineTo(Rect.Left+1, Rect.Bottom-2);
+      Canvas.LineTo(Rect.Left+1, Rect.Top+1);
+
+      Canvas.MoveTo(Rect.Left+2, Rect.Top+2);
+      Canvas.LineTo(Rect.Right-3, Rect.Top+2);
+      Canvas.LineTo(Rect.Right-3, Rect.Bottom-3);
+      Canvas.LineTo(Rect.Left+2, Rect.Bottom-3);
+      Canvas.LineTo(Rect.Left+2, Rect.Top+2);
+    end
+    else if (ACol = S_Col) AND (ARow >= S_Row1) AND (ARow <= S_Row2) then
+    begin
+      Canvas.Pen.Color := $00467321;
+      Canvas.Pen.Width := 1;
+
+      if (ARow = S_Row1) then
+      begin
+        Canvas.MoveTo(Rect.Left, Rect.Top);
+        Canvas.LineTo(Rect.Right-1, Rect.Top);
+        Canvas.LineTo(Rect.Right-1, Rect.Bottom);
+        Canvas.MoveTo(Rect.Left, Rect.Bottom);
+        Canvas.LineTo(Rect.Left, Rect.Top);
+
+        Canvas.MoveTo(Rect.Left+1, Rect.Top+1);
+        Canvas.LineTo(Rect.Right-2, Rect.Top+1);
+        Canvas.LineTo(Rect.Right-2, Rect.Bottom);
+        Canvas.MoveTo(Rect.Left+1, Rect.Bottom);
+        Canvas.LineTo(Rect.Left+1, Rect.Top+1);
+
+        Canvas.MoveTo(Rect.Left+2, Rect.Top+2);
+        Canvas.LineTo(Rect.Right-3, Rect.Top+2);
+        Canvas.LineTo(Rect.Right-3, Rect.Bottom);
+        Canvas.MoveTo(Rect.Left+2, Rect.Bottom);
+        Canvas.LineTo(Rect.Left+2, Rect.Top+2);
+      end
+      else if (ARow = S_Row2) then
+      begin
+        Canvas.MoveTo(Rect.Right-1, Rect.Top-1);
+        Canvas.LineTo(Rect.Right-1, Rect.Bottom-1);
+        Canvas.LineTo(Rect.Left, Rect.Bottom-1);
+        Canvas.LineTo(Rect.Left, Rect.Top-1);
+
+        Canvas.MoveTo(Rect.Right-2, Rect.Top-1);
+        Canvas.LineTo(Rect.Right-2, Rect.Bottom-2);
+        Canvas.LineTo(Rect.Left+1, Rect.Bottom-2);
+        Canvas.LineTo(Rect.Left+1, Rect.Top-1);
+
+        Canvas.MoveTo(Rect.Right-3, Rect.Top-1);
+        Canvas.LineTo(Rect.Right-3, Rect.Bottom-3);
+        Canvas.LineTo(Rect.Left+2, Rect.Bottom-3);
+        Canvas.LineTo(Rect.Left+2, Rect.Top-1);
+      end
+      else begin
+        Canvas.MoveTo(Rect.Right-1, Rect.Top-1);
+        Canvas.LineTo(Rect.Right-1, Rect.Bottom);
+        Canvas.MoveTo(Rect.Left, Rect.Bottom);
+        Canvas.LineTo(Rect.Left, Rect.Top-1);
+
+        Canvas.MoveTo(Rect.Right-2, Rect.Top-1);
+        Canvas.LineTo(Rect.Right-2, Rect.Bottom);
+        Canvas.MoveTo(Rect.Left+1, Rect.Bottom);
+        Canvas.LineTo(Rect.Left+1, Rect.Top-1);
+
+        Canvas.MoveTo(Rect.Right-3, Rect.Top-1);
+        Canvas.LineTo(Rect.Right-3, Rect.Bottom);
+        Canvas.MoveTo(Rect.Left+2, Rect.Bottom);
+        Canvas.LineTo(Rect.Left+2, Rect.Top-1);
+      end;
+    end;
+  end;
+end;
+
+procedure TProductionPlanTracking.ShoeImageClick(Sender: TObject);
+begin
+  if (ImageBox.Height = 120) then
+  begin
+    ImageBox.Height := ImageBox.Height * 3;
+    ImageBox.Width := (ImageBox.Width - 20) * 3 + 20;
+    if (ImageAlign = 'BottomRight') then
+    begin
+      ImageBox.Left := StringGrid1.Width - ImageBox.Width - 10;
+      ImageBox.Top := StringGrid1.Height - ImageBox.Height - 10;
+    end
+    else if (ImageAlign = 'BottomLeft') then
+    begin
+      ImageBox.Left := 50;
+      ImageBox.Top := StringGrid1.Height - ImageBox.Height - 10;
+    end;
+  end
+  else begin
+    ImageBox.Height := 120;
+    ImageBox.Width := (ShoeImage.Picture.Width * ImageBox.Height) DIV ShoeImage.Picture.Height + 20;
+    if (ImageAlign = 'BottomRight') then
+    begin
+      ImageBox.Left := StringGrid1.Width - ImageBox.Width - 10;
+      ImageBox.Top := StringGrid1.Height - ImageBox.Height - 10;
+    end
+    else if (ImageAlign = 'BottomLeft') then
+    begin
+      ImageBox.Left := 50;
+      ImageBox.Top := StringGrid1.Height - ImageBox.Height - 10;
+    end;
+  end;
+end;
+      
+procedure TProductionPlanTracking.LB_LeftClick(Sender: TObject);
+begin
+  ImageAlign := 'BottomLeft';
+  FormResize(Nil);
+end;
+
+procedure TProductionPlanTracking.LB_RightClick(Sender: TObject);
+begin
+  ImageAlign := 'BottomRight';
+  FormResize(Nil);
+end;
+
+procedure TProductionPlanTracking.CB_ModeChange(Sender: TObject);
+begin
+  if (CB_Mode.Text <> 'MATERIAL STATUS') then
+  begin
+    Panel1.Height := 35;
+    GB1.Visible := false;
+    Panel4.Visible := false;
+  end
+  else begin
+    Panel1.Height := 68;
+    GB1.Visible := true;
+  end;
+
+  StringGrid1.Repaint;
+  FormResize(Nil);
+end;
+
+procedure TProductionPlanTracking.Button3Click(Sender: TObject);
+begin
+  MaterialStatus := TMaterialStatus.Create(Self);
+  MaterialStatus.ShowModal;
+end;
+
+procedure TProductionPlanTracking.ED_DaysExit(Sender: TObject);
+var
+  TempValue: integer;
+begin
+  if (TryStrToInt(ED_Days.Text, TempValue) = false) then
+  begin
+    ShowMessage('Please enter a valid number of lead days');
+    ED_Days.Text := '21';
+    Label3.Caption := '>= 21 Days';
+    Label4.Caption := '11 - 20 Days';
+    Label5.Caption := '<= 10 Days';
+  end
+  else begin
+    Label3.Caption := '>= ' + ED_Days.Text + ' Days';
+    Label4.Caption := IntToStr(StrToInt(ED_Days.Text) * 2 DIV 3) + ' - ' + IntToStr(StrToInt(ED_Days.Text) - 1) + ' Days';
+    Label5.Caption := '<= ' + IntToStr(StrToInt(ED_Days.Text) DIV 3 - 2) + ' Days';
+  end;
+end;
+
+procedure TProductionPlanTracking.StringGrid1MouseWheelDown(
+  Sender: TObject; Shift: TShiftState; MousePos: TPoint;
+  var Handled: Boolean);
+begin
+  try
+    if (StringGrid1.TopRow + 8 <= StringGrid1.RowCount) then
+      StringGrid1.TopRow := StringGrid1.TopRow + 8;
+    Handled := true;
+  except
+  end;
+end;
+
+procedure TProductionPlanTracking.StringGrid1MouseWheelUp(Sender: TObject;
+  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+begin
+  try
+    if (StringGrid1.TopRow - 8 >= 3) then
+      StringGrid1.TopRow := StringGrid1.TopRow - 8;
+    Handled := true;
+  except
+  end;
+end;
+
+procedure TProductionPlanTracking.MatDBGridEhDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+var
+  MarkTime: TDateTime;
+  Query: TDataSet;
+  DotDiameter, DotLeft, DotTop, TriangleHeight, TriangleWidth, TriangleLeft, TriangleTop: integer;
+begin
+  Query := TDBGridEh(Sender).DataSource.DataSet;
+
+  if (DataCol > 0) then
+  begin
+    if (ShowGreen.Checked) AND (Query.FieldByName('ArrivalDate').IsNull = false) AND (Query.FieldByName('ArrivalDate').AsDateTime <= main.Today) then
+    begin
+      TDBGridEh(Sender).Canvas.Brush.Color := clLime;
+      TDBGridEh(Sender).Canvas.Font.Color := clBlack;
+    end
+    else if (Query.FieldByName('DayDiff').AsInteger >= 21) then
+    begin
+      TDBGridEh(Sender).Canvas.Brush.Color := clWhite;
+      TDBGridEh(Sender).Canvas.Font.Color := clBlack;
+    end
+    else if (Query.FieldByName('DayDiff').AsInteger >= 11) then
+    begin
+      TDBGridEh(Sender).Canvas.Brush.Color := $00AAAAFF;
+      TDBGridEh(Sender).Canvas.Font.Color := clBlack;
+    end
+    else if (Query.FieldByName('DayDiff').IsNull) then
+    begin
+      if (DataCol IN [6, 7]) then
+        TDBGridEh(Sender).Canvas.Brush.Color := clYellow
+      else
+        TDBGridEh(Sender).Canvas.Brush.Color := clWhite;
+      TDBGridEh(Sender).Canvas.Font.Color := clBlack;
+    end
+    else begin
+      TDBGridEh(Sender).Canvas.Brush.Color := clRed;
+      TDBGridEh(Sender).Canvas.Font.Color := clWhite;
+    end;
+
+    if (gdFocused in State) OR (gdSelected in State) then
+    begin
+      TDBGridEh(Sender).Canvas.Font.Color := clWhite;
+      TDBGridEh(Sender).Canvas.Brush.Color := clHighlight;
+    end;
+    
+    TDBGridEh(Sender).DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  end
+  else begin
+    MarkTime := EncodeDateTime(YearOf(DTP2.Date), MonthOf(DTP2.Date), DayOf(DTP2.Date), HourOf(DTP3.DateTime), MinuteOf(DTP3.DateTime), 0, 0);
+    TDBGridEh(Sender).Canvas.Brush.Color := TDBGridEh(Sender).FixedColor;
+    TDBGridEh(Sender).Canvas.FillRect(Rect);
+
+    if (Query.FieldByName('UpdateTime').AsDateTime >= MarkTime) then
+    begin
+      DotDiameter := 5;
+      DotLeft := Rect.Left + (Rect.Right - Rect.Left - DotDiameter) DIV 2;
+      DotTop := Rect.Top + (Rect.Bottom - Rect.Top - DotDiameter) DIV 2;
+
+      TDBGridEh(Sender).Canvas.Pen.Color := clRed;
+      TDBGridEh(Sender).Canvas.Brush.Color := clRed;
+      TDBGridEh(Sender).Canvas.Ellipse(DotLeft, DotTop, DotLeft + DotDiameter, DotTop + DotDiameter);
+    end;
+
+    if ((TDBGridEh(Sender).Name = 'DBGridEh1') AND (TDBGridEh(Sender).FieldColumns['Seq'].Field.Value = SRow_Cutting)) OR
+    ((TDBGridEh(Sender).Name = 'DBGridEh2') AND (TDBGridEh(Sender).FieldColumns['Seq'].Field.Value = SRow_Stitching)) OR
+    ((TDBGridEh(Sender).Name = 'DBGridEh3') AND (TDBGridEh(Sender).FieldColumns['Seq'].Field.Value = SRow_Assembly)) OR
+    ((TDBGridEh(Sender).Name = 'DBGridEh4') AND (TDBGridEh(Sender).FieldColumns['Seq'].Field.Value = SRow_Bottom)) then
+    begin
+      TriangleWidth := 5;
+      TriangleHeight := 10;
+      TriangleLeft := Rect.Left + (Rect.Right - Rect.Left - TriangleWidth) DIV 2;
+      TriangleTop := Rect.Top + (Rect.Bottom - Rect.Top - TriangleHeight) DIV 2;
+
+      if (Query.FieldByName('UpdateTime').AsDateTime >= MarkTime) then
+      begin
+        TDBGridEh(Sender).Canvas.Pen.Color := clRed;
+        TDBGridEh(Sender).Canvas.Brush.Color := clRed;
+      end
+      else begin
+        TDBGridEh(Sender).Canvas.Pen.Color := clBlack;
+        TDBGridEh(Sender).Canvas.Brush.Color := clBlack;
+      end;
+      TDBGridEh(Sender).Canvas.Polygon([Point(TriangleLeft, TriangleTop), Point(TriangleLeft, TriangleTop + TriangleHeight), Point(TriangleLeft + TriangleWidth, TriangleTop + TriangleHeight DIV 2)]);
+    end;
+
+    TDBGridEh(Sender).Canvas.Pen.Color := clBlack;
+    TDBGridEh(Sender).Canvas.MoveTo(Rect.Right, Rect.Top);
+    TDBGridEh(Sender).Canvas.LineTo(Rect.Right, Rect.Bottom);
+    TDBGridEh(Sender).Canvas.LineTo(Rect.Left - 1, Rect.Bottom);
+
+    TDBGridEh(Sender).Canvas.Pen.Color := RGB(160, 160, 160);
+    TDBGridEh(Sender).Canvas.MoveTo(Rect.Right - 1, Rect.Top);
+    TDBGridEh(Sender).Canvas.LineTo(Rect.Right - 1, Rect.Bottom - 1);
+    TDBGridEh(Sender).Canvas.LineTo(Rect.Left - 1, Rect.Bottom - 1);
+  end;
+end;
+
+procedure TProductionPlanTracking.ShowMaterialClick(Sender: TObject);
+var
+  CanSelect: boolean;
+begin
+  ShowMaterial.Checked := NOT ShowMaterial.Checked;
+  StringGrid1SelectCell(Nil, StringGrid1.Col, StringGrid1.Row, CanSelect);
+end;
+
+procedure TProductionPlanTracking.ShowImageClick(Sender: TObject);
+var
+  CanSelect: boolean;
+begin
+  ShowImage.Checked := NOT ShowImage.Checked;
+  StringGrid1SelectCell(Nil, StringGrid1.Col, StringGrid1.Row, CanSelect);
+end;
+    
+procedure TProductionPlanTracking.ShowGreenClick(Sender: TObject);
+begin
+  ShowGreen.Checked := NOT ShowGreen.Checked;
+  StringGrid1.Invalidate;
+  DBGridEh1.Invalidate;  
+  DBGridEh2.Invalidate;
+  DBGridEh3.Invalidate;
+  DBGridEh4.Invalidate;
+end;
+
+procedure TProductionPlanTracking.Splitter4Moved(Sender: TObject);
+begin
+  FormResize(Nil);
+end;
+   
+procedure TProductionPlanTracking.DBGridEh6Columns6EditButtonClick(
+  Sender: TObject; var Handled: Boolean);
+begin
+  MaterialHistory := TMaterialHistory.Create(Self);
+  MaterialHistory.LoadData(Q_Process.FieldByName('DDBH').AsString, Q_Process.FieldByName('SupID').AsString, Q_Process.FieldByName('CLBH').AsString);
+  MaterialHistory.ShowModal;
+end;
+
+procedure TProductionPlanTracking.DBGridEh1Columns3EditButtonClick(
+  Sender: TObject; var Handled: Boolean);
+begin
+  MaterialHistory := TMaterialHistory.Create(Self);
+  MaterialHistory.LoadData(Q_Cutting.FieldByName('DDBH').AsString, Q_Cutting.FieldByName('SupID').AsString, Q_Cutting.FieldByName('CLBH').AsString);
+  MaterialHistory.ShowModal;
+end;
+
+procedure TProductionPlanTracking.DBGridEh2Columns3EditButtonClick(
+  Sender: TObject; var Handled: Boolean);
+begin
+  MaterialHistory := TMaterialHistory.Create(Self);
+  MaterialHistory.LoadData(Q_Stitching.FieldByName('DDBH').AsString, Q_Stitching.FieldByName('SupID').AsString, Q_Stitching.FieldByName('CLBH').AsString);
+  MaterialHistory.ShowModal;
+end;
+
+procedure TProductionPlanTracking.DBGridEh3Columns3EditButtonClick(
+  Sender: TObject; var Handled: Boolean);
+begin
+  MaterialHistory := TMaterialHistory.Create(Self);
+  MaterialHistory.LoadData(Q_Assembly.FieldByName('DDBH').AsString, Q_Assembly.FieldByName('SupID').AsString, Q_Assembly.FieldByName('CLBH').AsString);
+  MaterialHistory.ShowModal;
+end;
+
+procedure TProductionPlanTracking.DBGridEh4Columns3EditButtonClick(
+  Sender: TObject; var Handled: Boolean);
+begin
+  MaterialHistory := TMaterialHistory.Create(Self);
+  MaterialHistory.LoadData(Q_Bottom.FieldByName('DDBH').AsString, Q_Bottom.FieldByName('SupID').AsString, Q_Bottom.FieldByName('CLBH').AsString);
+  MaterialHistory.ShowModal;
+end;
+
+procedure TProductionPlanTracking.DBGridEhColEnter(Sender: TObject);
+begin
+  if (TDBGridEh(Sender).SelectedIndex = 0) then
+    TDBGridEh(Sender).SelectedIndex := 1;
+end;
+
+procedure TProductionPlanTracking.Q_CuttingAfterOpen(DataSet: TDataSet);
+begin
+  SRow_Cutting := Q_Cutting.FieldByName('Seq').AsInteger;
+  DBGridEh1.Invalidate;
+end;
+
+procedure TProductionPlanTracking.Q_CuttingAfterScroll(DataSet: TDataSet);
+begin
+  SRow_Cutting := Q_Cutting.FieldByName('Seq').AsInteger;
+  DBGridEh1.Invalidate;
+end;
+
+procedure TProductionPlanTracking.Q_StitchingAfterOpen(DataSet: TDataSet);
+begin
+  SRow_Stitching := Q_Stitching.FieldByName('Seq').AsInteger;
+  DBGridEh2.Invalidate;
+end;
+
+procedure TProductionPlanTracking.Q_StitchingAfterScroll(
+  DataSet: TDataSet);
+begin
+  SRow_Stitching := Q_Stitching.FieldByName('Seq').AsInteger;
+  DBGridEh2.Invalidate;
+end;
+
+procedure TProductionPlanTracking.Q_AssemblyAfterOpen(DataSet: TDataSet);
+begin
+  SRow_Assembly := Q_Assembly.FieldByName('Seq').AsInteger; 
+  DBGridEh3.Invalidate;
+end;
+
+procedure TProductionPlanTracking.Q_AssemblyAfterScroll(DataSet: TDataSet);
+begin
+  SRow_Assembly := Q_Assembly.FieldByName('Seq').AsInteger;
+  DBGridEh3.Invalidate;
+end;
+
+procedure TProductionPlanTracking.Q_BottomAfterOpen(DataSet: TDataSet);
+begin
+  SRow_Bottom := Q_Bottom.FieldByName('Seq').AsInteger; 
+  DBGridEh4.Invalidate;
+end;
+
+procedure TProductionPlanTracking.Q_BottomAfterScroll(DataSet: TDataSet);
+begin
+  SRow_Bottom := Q_Bottom.FieldByName('Seq').AsInteger;
+  DBGridEh4.Invalidate;
+end;
+
+procedure TProductionPlanTracking.DTP2Change(Sender: TObject);
+begin
+  StringGrid1.Invalidate;
+end;
+
+procedure TProductionPlanTracking.DTP3Change(Sender: TObject);
+begin
+  StringGrid1.Invalidate;
+end;
+
+procedure TProductionPlanTracking.SetMatGridWidth;
+var
+  VisibleGrid, GridWidth, Margin, i: integer;
+begin
+  VisibleGrid := 0;
+  Margin := 0;
+
+  for i := Low(MatGridVisible) to High(MatGridVisible) do
+  begin
+    if (MatGridVisible[i]) then
+    begin
+      Inc(VisibleGrid);
+      Inc(Margin, 1);
+    end
+    else begin
+      Inc(Margin, 23);
+    end;
+  end;
+
+  if (VisibleGrid > 0) then
+    GridWidth := (Panel4.Width - Splitter5.Width - Splitter1.Width - Splitter2.Width - Splitter3.Width - Margin) DIV VisibleGrid
+  else
+    GridWidth := 1;
+
+  if (MatGridVisible[0]) then
+  begin
+    LB_Process.Visible := true;
+    DBGridEh6.Visible := true;
+    Panel15.Width := GridWidth;
+    Panel14.Width := 1;
+  end
+  else begin
+    LB_Process.Visible := false;
+    DBGridEh6.Visible := false;
+    Panel15.Width := 1;
+    Panel14.Width := 22;
+  end;
+  if (MatGridVisible[1]) then
+  begin
+    LB_Cutting.Visible := true;
+    DBGridEh1.Visible := true;
+    Panel5.Width := GridWidth;
+    Panel10.Width := 1;
+  end
+  else begin
+    LB_Cutting.Visible := false;
+    DBGridEh1.Visible := false;
+    Panel5.Width := 1;
+    Panel10.Width := 22;
+  end;
+  if (MatGridVisible[2]) then
+  begin
+    LB_Stitching.Visible := true;
+    DBGridEh2.Visible := true;
+    Panel6.Width := GridWidth;
+    Panel11.Width := 1;
+  end
+  else begin          
+    LB_Stitching.Visible := false;
+    DBGridEh2.Visible := false;
+    Panel6.Width := 1;
+    Panel11.Width := 22;
+  end;
+  if (MatGridVisible[3]) then
+  begin
+    LB_Assembly.Visible := true;
+    DBGridEh3.Visible := true;
+    Panel7.Width := GridWidth;
+    Panel12.Width := 1;
+  end
+  else begin
+    LB_Assembly.Visible := false;
+    DBGridEh3.Visible := false;
+    Panel7.Width := 1;
+    Panel12.Width := 22;
+  end;
+  if (MatGridVisible[4]) then
+  begin
+    LB_Bottom.Visible := true;
+    DBGridEh4.Visible := true;
+    Panel8.Width := GridWidth;
+    Panel13.Width := 1;
+  end
+  else begin        
+    LB_Bottom.Visible := false;
+    DBGridEh4.Visible := false;
+    Panel8.Width := 1;
+    Panel13.Width := 22;
+  end;
+end;
+   
+procedure TProductionPlanTracking.Min_ProcessClick(Sender: TObject);
+begin
+  MatGridVisible[0] := false;
+  SetMatGridWidth;
+end;
+
+procedure TProductionPlanTracking.Max_ProcessClick(Sender: TObject);
+begin
+  MatGridVisible[0] := true;
+  SetMatGridWidth;
+end;
+
+procedure TProductionPlanTracking.PB_ProcessPaint(Sender: TObject);
+var
+  lf: LOGFONT;
+begin
+  with PB_Process.Canvas do
+  begin
+    if (MatGridVisible[0] = false) then
+    begin
+      Font.Color := LB_Process.Font.Color;
+      Brush.Color := LB_Process.Color;
+    end
+    else begin
+      Font.Color := clBtnFace;
+      Brush.Color := clBtnFace;
+    end;
+    FillRect(ClientRect);
+
+    Brush.Style := bsClear;
+    FillChar(lf, SizeOf(lf), Byte(0));
+    lf.lfHeight := -MulDiv(10, GetDeviceCaps(Handle, LOGPIXELSY), 72);
+    lf.lfEscapement := 10 * 90;
+    lf.lfOrientation := 10 * 90;
+    lf.lfCharSet := DEFAULT_CHARSET;
+    StrCopy(lf.lfFaceName, 'Arial');
+
+    Font.Handle := CreateFontIndirect(lf);
+    TextOut((18 - TextHeight('[Second Process]')) DIV 2, (PB_Cutting.Height - TextWidth('[Second Process]')) DIV 2 + TextWidth('[Second Process]'), '[Second Process]');
+  end;
+end;
+         
+procedure TProductionPlanTracking.Min_CuttingClick(Sender: TObject);
+begin
+  MatGridVisible[1] := false;
+  SetMatGridWidth;
+end;
+
+procedure TProductionPlanTracking.Max_CuttingClick(Sender: TObject);
+begin
+  MatGridVisible[1] := true;
+  SetMatGridWidth;
+end;
+
+procedure TProductionPlanTracking.PB_CuttingPaint(Sender: TObject);
+var
+  lf: LOGFONT;
+begin
+  with PB_Cutting.Canvas do
+  begin
+    if (MatGridVisible[1] = false) then
+    begin
+      Font.Color := LB_Cutting.Font.Color;
+      Brush.Color := LB_Cutting.Color;
+    end
+    else begin
+      Font.Color := clBtnFace;
+      Brush.Color := clBtnFace;
+    end;
+    FillRect(ClientRect);
+
+    Brush.Style := bsClear;
+    FillChar(lf, SizeOf(lf), Byte(0));
+    lf.lfHeight := -MulDiv(10, GetDeviceCaps(Handle, LOGPIXELSY), 72);
+    lf.lfEscapement := 10 * 90;
+    lf.lfOrientation := 10 * 90;
+    lf.lfCharSet := DEFAULT_CHARSET;
+    StrCopy(lf.lfFaceName, 'Arial');
+
+    Font.Handle := CreateFontIndirect(lf);
+    TextOut((18 - TextHeight('[Cutting]')) DIV 2, (PB_Cutting.Height - TextWidth('[Cutting]')) DIV 2 + TextWidth('[Cutting]'), '[Cutting]');
+  end;
+end;
+
+procedure TProductionPlanTracking.Min_StitchingClick(Sender: TObject);
+begin
+  MatGridVisible[2] := false;
+  SetMatGridWidth;
+end;
+     
+procedure TProductionPlanTracking.Max_StitchingClick(Sender: TObject);
+begin
+  MatGridVisible[2] := true;
+  SetMatGridWidth;
+end;
+
+procedure TProductionPlanTracking.PB_StitchingPaint(Sender: TObject);
+var
+  lf: LOGFONT;
+begin
+  with PB_Stitching.Canvas do
+  begin
+    if (MatGridVisible[2] = false) then
+    begin
+      Font.Color := LB_Stitching.Font.Color;
+      Brush.Color := LB_Stitching.Color;
+    end
+    else begin
+      Font.Color := clBtnFace;
+      Brush.Color := clBtnFace;
+    end;
+    FillRect(ClientRect);
+
+    Brush.Style := bsClear;
+    FillChar(lf, SizeOf(lf), Byte(0));
+    lf.lfHeight := -MulDiv(10, GetDeviceCaps(Handle, LOGPIXELSY), 72);
+    lf.lfEscapement := 10 * 90;
+    lf.lfOrientation := 10 * 90;
+    lf.lfCharSet := DEFAULT_CHARSET;
+    StrCopy(lf.lfFaceName, 'Arial');
+
+    Font.Handle := CreateFontIndirect(lf);
+    TextOut((18 - TextHeight('[Stitching]')) DIV 2, (PB_Stitching.Height - TextWidth('[Stitching]')) DIV 2 + TextWidth('[Stitching]'), '[Stitching]');
+  end;
+end;
+
+procedure TProductionPlanTracking.Min_AssemblyClick(Sender: TObject);
+begin
+  MatGridVisible[3] := false;
+  SetMatGridWidth;
+end;
+
+procedure TProductionPlanTracking.Max_AssemblyClick(Sender: TObject);
+begin
+  MatGridVisible[3] := true;
+  SetMatGridWidth;
+end;
+
+procedure TProductionPlanTracking.PB_AssemblyPaint(Sender: TObject);
+var
+  lf: LOGFONT;
+begin
+  with PB_Assembly.Canvas do
+  begin
+    if (MatGridVisible[3] = false) then
+    begin
+      Font.Color := LB_Assembly.Font.Color;
+      Brush.Color := LB_Assembly.Color;
+    end
+    else begin
+      Font.Color := clBtnFace;
+      Brush.Color := clBtnFace;
+    end;
+    FillRect(ClientRect);
+
+    Brush.Style := bsClear;
+    FillChar(lf, SizeOf(lf), Byte(0));
+    lf.lfHeight := -MulDiv(10, GetDeviceCaps(Handle, LOGPIXELSY), 72);
+    lf.lfEscapement := 10 * 90;
+    lf.lfOrientation := 10 * 90;
+    lf.lfCharSet := DEFAULT_CHARSET;
+    StrCopy(lf.lfFaceName, 'Arial');
+
+    Font.Handle := CreateFontIndirect(lf);
+    TextOut((18 - TextHeight('[Assembly]')) DIV 2, (PB_Assembly.Height - TextWidth('[Assembly]')) DIV 2 + TextWidth('[Assembly]'), '[Assembly]');
+  end;
+end;
+
+procedure TProductionPlanTracking.Min_BottomClick(Sender: TObject);
+begin
+  MatGridVisible[4] := false;
+  SetMatGridWidth;
+end;
+
+procedure TProductionPlanTracking.Max_BottomClick(Sender: TObject);
+begin
+  MatGridVisible[4] := true;
+  SetMatGridWidth;
+end;
+
+procedure TProductionPlanTracking.PB_BottomPaint(Sender: TObject);
+var
+  lf: LOGFONT;
+begin
+  with PB_Bottom.Canvas do
+  begin
+    if (MatGridVisible[4] = false) then
+    begin
+      Font.Color := LB_Bottom.Font.Color;
+      Brush.Color := LB_Bottom.Color;
+    end
+    else begin
+      Font.Color := clBtnFace;
+      Brush.Color := clBtnFace;
+    end;
+    FillRect(ClientRect);
+
+    Brush.Style := bsClear;
+    FillChar(lf, SizeOf(lf), Byte(0));
+    lf.lfHeight := -MulDiv(10, GetDeviceCaps(Handle, LOGPIXELSY), 72);
+    lf.lfEscapement := 10 * 90;
+    lf.lfOrientation := 10 * 90;
+    lf.lfCharSet := DEFAULT_CHARSET;
+    StrCopy(lf.lfFaceName, 'Arial');
+
+    Font.Handle := CreateFontIndirect(lf);
+    TextOut((18 - TextHeight('[Bottom]')) DIV 2, (PB_Bottom.Height - TextWidth('[Bottom]')) DIV 2 + TextWidth('[Bottom]'), '[Bottom]');
+  end;
+end;
+    
+procedure TProductionPlanTracking.Splitter5CanResize(Sender: TObject;
+  var NewSize: Integer; var Accept: Boolean);
+begin
+  Accept := MatGridVisible[0];
+end;
+
+procedure TProductionPlanTracking.Splitter1CanResize(Sender: TObject;
+  var NewSize: Integer; var Accept: Boolean);
+begin
+  Accept := MatGridVisible[1];
+end;
+
+procedure TProductionPlanTracking.Splitter2CanResize(Sender: TObject;
+  var NewSize: Integer; var Accept: Boolean);
+begin
+  Accept := MatGridVisible[2];
+end;
+
+procedure TProductionPlanTracking.Splitter3CanResize(Sender: TObject;
+  var NewSize: Integer; var Accept: Boolean);
+begin
+  Accept := MatGridVisible[3];
+end;
+
+procedure TProductionPlanTracking.ExporttoExcel1Click(Sender: TObject);
+var
+  eclApp, WorkBook, WorkSheet: OleVariant;
+  Col, Row: integer;
+begin
+  if (StringGrid1.RowCount >= 5) then
+  begin
+    Screen.Cursor := crHourGlass;
+    try
+      eclApp := CreateOleObject('Excel.Application');
+      WorkBook := CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('Failed to create excel file', 'Error', MB_OK + MB_ICONWARNING);
+      Exit;
+    end;
+
+    try
+      WorkBook := eclApp.Workbooks.Add;
+      WorkSheet := Workbook.Worksheets[1];
+
+      WorkSheet.Cells.Borders.Color := clWhite;
+      eclapp.Columns.HorizontalAlignment := -4108;
+      eclapp.Columns.ShrinkToFit := true;
+      eclapp.Columns.ColumnWidth := 7;
+      eclapp.Columns[1].ColumnWidth := 5;
+
+      eclApp.Cells[1, 1] := Lean;
+      eclApp.Cells[1, 1].Font.Size := 24;
+      eclApp.Range[eclApp.Cells[1, 1], eclApp.Cells[1, StringGrid1.ColCount]].MergeCells := True;
+      eclApp.Cells[2, 1] := 'Date';
+      eclApp.Range[eclApp.Cells[2, 1], eclApp.Cells[3, 1]].MergeCells := True;
+      eclApp.Cells[4, 1] := 'WH';
+
+      Row := 5;
+      while Row + 7 <= StringGrid1.RowCount + 1 do
+      begin
+        eclApp.Cells[Row,     1] := 'LY';
+        eclApp.Cells[Row + 1, 1] := 'RY';
+        eclApp.Cells[Row + 2, 1] := 'SKU';
+        eclApp.Cells[Row + 3, 1] := 'BUY';
+        eclApp.Cells[Row + 4, 1] := 'Last#';
+        eclApp.Cells[Row + 5, 1] := '數量/SL';
+        eclApp.Cells[Row + 6, 1] := 'CSD';
+        eclApp.Cells[Row + 7, 1] := '國家/N';
+        Inc(Row, 8);
+      end;
+
+
+      for Col := 1 to StringGrid1.ColCount - 1 do
+      begin
+        for Row := 1 to StringGrid1.RowCount do
+        begin
+          eclApp.Cells[Row+1, Col+1] := StringGrid1.Cells[Col, Row-1];
+          if (Row = 1) OR ((Row - 3) MOD 8 = 7) then
+            eclApp.Cells[Row+1, Col+1].NumberFormat := 'mm/dd';
+
+          if (Row > 3) AND (StringGrid1.Cells[Col, (Row-4) DIV 8 * 8 + 4] <> '') then
+          begin
+            if ((Row - 3) MOD 8 = 1) then
+            begin
+              eclApp.Cells[Row+1, Col+1].Borders.Item[7].Color := RGB(208, 215, 229);
+              eclApp.Cells[Row+1, Col+1].Borders.Item[8].Color := RGB(208, 215, 229);
+              eclApp.Cells[Row+1, Col+1].Borders.Item[10].Color := RGB(208, 215, 229);
+            end
+            else if ((Row - 3) MOD 8 = 0) then
+            begin
+              eclApp.Cells[Row+1, Col+1].Borders.Item[7].Color := RGB(208, 215, 229);
+              eclApp.Cells[Row+1, Col+1].Borders.Item[9].Color := RGB(208, 215, 229);
+              eclApp.Cells[Row+1, Col+1].Borders.Item[10].Color := RGB(208, 215, 229);
+            end
+            else begin
+              eclApp.Cells[Row+1, Col+1].Borders.Item[7].Color := RGB(208, 215, 229);
+              eclApp.Cells[Row+1, Col+1].Borders.Item[10].Color := RGB(208, 215, 229);
+            end;
+          end;
+        end;
+      end;
+
+      eclApp.Cells[StringGrid1.RowCount+2, 1].Borders.Color := RGB(208, 215, 229);
+      for Col := 1 to StringGrid1.ColCount - 1 do
+      begin
+        eclApp.Cells[StringGrid1.RowCount+2, Col+1] := TargetList[Col-1];
+        eclApp.Cells[StringGrid1.RowCount+2, Col+1].Borders.Color := clBlack;
+
+        for Row := 1 to 3 do
+        begin
+          eclApp.Cells[Row+1, Col+1].Borders.Color := clBlack;
+        end;
+
+        if (StringGrid1.Cells[Col, 2] = '') then
+        begin
+          eclapp.Columns[Col+1].ColumnWidth := 3;
+          eclapp.Range[eclApp.Cells[1, Col+1], eclApp.Cells[3, Col+1]].Interior.Color := clYellow;
+        end;
+      end;
+
+      Row := 4;
+        while Row <= StringGrid1.RowCount + 1 do
+          begin
+            eclApp.Cells[Row, 1].Borders[4].Color := clBlack;
+            Row := Row + 8;
+          end;
+
+
+      eclApp.Cells[5, 2].Select;
+      eclApp.ActiveWindow.FreezePanes := True;
+      ShowMessage('Successful');
+      eclApp.Visible := True;
+    except on F:Exception do
+      ShowMessage(F.Message);
+    end;
+
+    Screen.Cursor := crDefault;
+  end;
+end;
+
+procedure TProductionPlanTracking.Button4Click(Sender: TObject);
+begin
+  with Q_Shortage do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('IF OBJECT_ID(''tempdb..#SC'') IS NOT NULL');
+    SQL.Add('BEGIN DROP TABLE #SC END;');
+
+    SQL.Add('SELECT RY INTO #SC FROM (');
+    SQL.Add('  SELECT DISTINCT INVOICE_D.RYNO AS RY FROM Ship_Booking AS SB');
+    SQL.Add('  LEFT JOIN INVOICE_D ON INVOICE_D.INV_NO = SB.INV_NO');
+    SQL.Add('  LEFT JOIN schedule_crawler AS SC ON CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, ''-'', '''')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX(''-'', REVERSE(SC.ry))) END = INVOICE_D.RYNO');
+    SQL.Add('  WHERE SB.ExFty_Date >= CONVERT(VARCHAR, GETDATE(), 111) AND SC.building_no IS NOT NULL');
+    SQL.Add('  UNION');
+    SQL.Add('  SELECT DISTINCT SP.RY FROM ShippingPlan AS SP');
+    SQL.Add('  LEFT JOIN INVOICE_D ON INVOICE_D.RYNO = SP.RY');
+    SQL.Add('  LEFT JOIN Ship_Booking AS SB ON SB.INV_NO = INVOICE_D.INV_NO');
+    SQL.Add('  LEFT JOIN schedule_crawler AS SC ON CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, ''-'', '''')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX(''-'', REVERSE(SC.ry))) END = SP.RY');
+    SQL.Add('  WHERE SP.Date <= ''' + FormatDateTime('yyyy/MM/dd', DTP4.Date) + ''' AND SB.ExFty_Date IS NULL AND SC.building_no IS NOT NULL');
+    SQL.Add(') AS SC');
+
+    SQL.Add('SELECT SP.Building, SP.Lean, SP.PlanDate, SP.DAOMH, SP.ARTICLE, SP.Country, SP.BuyNo, SP.RY AS DDBH,');
+    SQL.Add('SP.Pairs, SP.ShipDate, SP.SPDate, SP.SBDate, ISNULL(SUM(YWCP.Qty), 0) - SP.Pairs AS Shortage FROM (');
+    SQL.Add('  SELECT SC.building_no AS Building, UPPER(SC.lean_no) AS Lean, MAX(SC.schedule_date) AS PlanDate, XXZL.DAOMH, DDZL.ARTICLE, LBZLS.YWSM AS Country,');
+    SQL.Add('  CAST(CAST(SUBSTRING(DDZL.BUYNO, 5, 2) AS INT) AS VARCHAR) + '' BUY'' AS BuyNo, SP.RY, DDZL.Pairs, DDZL.ShipDate, SP.SPDate, SP.SBDate FROM (');
+    SQL.Add('    SELECT SC.RY, SC.SPDate, MAX(SB.ExFty_Date) AS SBDate FROM (');
+    SQL.Add('      SELECT SC.RY, MAX(SP.Date) AS SPDate FROM #SC AS SC');
+    SQL.Add('      LEFT JOIN ShippingPlan AS SP ON SP.RY = SC.RY');
+    SQL.Add('      GROUP BY SC.RY');
+    SQL.Add('    ) AS SC');
+    SQL.Add('    LEFT JOIN INVOICE_D ON INVOICE_D.RYNO = SC.RY');
+    SQL.Add('    LEFT JOIN Ship_Booking AS SB ON SB.INV_NO = INVOICE_D.INV_NO');
+    SQL.Add('    GROUP BY SC.RY, SC.SPDate');
+    SQL.Add('  ) AS SP');
+    SQL.Add('  LEFT JOIN DDZL ON DDZL.DDBH = SP.RY');
+    SQL.Add('  LEFT JOIN schedule_crawler AS SC ON CASE WHEN LEN(SC.ry) - LEN(REPLACE(SC.ry, ''-'', '''')) < 2 THEN SC.ry ELSE SUBSTRING(SC.ry, 1, LEN(SC.ry) - CHARINDEX(''-'', REVERSE(SC.ry))) END = DDZL.DDBH');
+    SQL.Add('  LEFT JOIN XXZL ON XXZL.XieXing = DDZL.XieXing AND XXZL.SheHao = DDZL.SheHao');
+    SQL.Add('  LEFT JOIN LBZLS ON LBZLS.LBDH = DDZL.DDGB AND LBZLS.LB = ''06''');
+    SQL.Add('  WHERE SC.building_no IS NOT NULL AND XXZL.DAOMH NOT LIKE ''LY_CBY%''');
+    SQL.Add('  GROUP BY SC.building_no, SC.lean_no, XXZL.DAOMH, DDZL.ARTICLE, LBZLS.YWSM, DDZL.BUYNO, SP.RY, DDZL.Pairs, DDZL.ShipDate, SP.SPDate, SP.SBDate');
+    SQL.Add(') AS SP');
+    SQL.Add('LEFT JOIN (');
+    SQL.Add('  SELECT CARTONBAR, DDBH, Qty FROM YWCP');
+    SQL.Add('  WHERE DDBH IN (SELECT RY FROM #SC) AND INDATE IS NOT NULL');
+    SQL.Add('  UNION');
+    SQL.Add('  SELECT CARTONBAR, DDBH, Qty FROM YWCPOld');
+    SQL.Add('  WHERE DDBH IN (SELECT RY FROM #SC) AND INDATE IS NOT NULL');
+    SQL.Add(') AS YWCP ON YWCP.DDBH = SP.RY');
+    SQL.Add('GROUP BY SP.Building, SP.Lean, SP.PlanDate, SP.DAOMH, SP.ARTICLE, SP.Country, SP.BuyNo, SP.RY, SP.Pairs, SP.ShipDate, SP.SPDate, SP.SBDate');
+    SQL.Add('ORDER BY SP.SBDate, SP.SPDate, SP.Building, SP.Lean, SP.PlanDate, SP.RY');
+    Active := true;
+  end;
+end;
+
+procedure TProductionPlanTracking.Button5Click(Sender: TObject);
+var
+  eclApp, WorkBook: OleVariant;
+  Col, Row: integer;
+begin
+  if (Q_Shortage.Active) then
+  begin
+    try
+      eclApp := CreateOleObject('Excel.Application');
+      WorkBook := CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('Failed to create excel file', 'Error', MB_OK + MB_ICONWarning);
+      Exit;
+    end;
+
+    try
+      WorkBook := eclApp.Workbooks.Add;
+      for Col := 0 to DBGridEh5.Columns.Count - 1 do
+      begin
+        eclApp.Cells[1, Col+1] := DBGridEh5.Columns[Col].Title.Caption;
+      end;
+
+      Q_Shortage.First;
+      Row := 2;
+      while not Q_Shortage.Eof do
+      begin
+        for Col := 0 to DBGridEh5.Columns.Count - 1 do
+        begin
+          eclApp.Cells[Row, Col+1] := Q_Shortage.FieldByName(DBGridEh5.Columns[Col].FieldName).Value;
+        end;
+        Q_Shortage.Next;
+        Inc(Row);
+      end;
+
+      eclapp.Columns.Autofit;  
+      ShowMessage('Successful');
+      eclApp.Visible := True;
+    except on F:Exception do
+      ShowMessage(F.Message);
+    end;
+  end;
+end;
+
+procedure TProductionPlanTracking.DBGridEh5DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+var
+  ShippingDate: TDate;
+begin
+  if (Q_Shortage.FieldByName('Shortage').AsInteger < 0) then
+  begin
+    if (Q_Shortage.FieldByName('SBDate').IsNull = false) then
+      ShippingDate := Q_Shortage.FieldByName('SBDate').AsDateTime
+    else if (Q_Shortage.FieldByName('SPDate').IsNull = false) then
+      ShippingDate := Q_Shortage.FieldByName('SPDate').AsDateTime
+    else
+      ShippingDate := Q_Shortage.FieldByName('ShipDate').AsDateTime;
+
+    if (ShippingDate <= main.Today) OR (DaysBetween(main.Today, ShippingDate) <= 2) then
+    begin
+      DBGridEh5.Canvas.Brush.Color := clRed;
+      DBGridEh5.Canvas.Font.Color := clWhite;
+    end
+    else if (DaysBetween(main.Today, ShippingDate) <= 6) then
+    begin
+      DBGridEh5.Canvas.Brush.Color := $00D2D2FF;
+    end;
+  end
+  else begin
+    DBGridEh5.Canvas.Brush.Color := clLime;
+  end;
+
+  if (gdFocused in State) OR (gdSelected in State) then
+  begin
+    DBGridEh5.Canvas.Font.Color := clWhite;
+    DBGridEh5.Canvas.Brush.Color := clHighlight;
+  end;
+
+  DBGridEh5.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
+procedure TProductionPlanTracking.CB_ShortClick(Sender: TObject);
+begin
+  Q_Shortage.Filtered := true;
+end;
+
+procedure TProductionPlanTracking.DBGridEh5ColumnMoved(Sender: TObject;
+  FromIndex, ToIndex: Integer);
+begin
+  DBGridEh5.Columns[ToIndex].Index := FromIndex;
+end;
+
+procedure TProductionPlanTracking.DBGridEh5ColWidthsChanged(
+  Sender: TObject);
+begin
+  Filter_Building.Left := 14 + DBGridEh5.Columns[0].Width - Filter_Building.Width;
+  Filter_Lean.Left := 15 + DBGridEh5.Columns[0].Width + DBGridEh5.Columns[1].Width - Filter_Lean.Width;
+end;
+
+procedure TProductionPlanTracking.Filter_BuildingClick(Sender: TObject);
+begin
+  f_Building := InputBox('Filter', 'Building', f_Building);
+  Q_Shortage.Filtered := true;
+end;
+
+procedure TProductionPlanTracking.Filter_LeanClick(Sender: TObject);
+begin
+  f_Lean := InputBox('Filter', 'Lean', f_Lean);
+  Q_Shortage.Filtered := true;
+end;
+
+procedure TProductionPlanTracking.Q_ShortageFilterRecord(DataSet: TDataSet;
+  var Accept: Boolean);
+var
+  Result: boolean;
+begin
+  try
+    Result := true;
+
+    if (Result) AND (f_Building <> '') then
+      Result := Pos(f_Building, DataSet.FieldByName('Building').AsString) > 0;
+
+    if (Result) AND (f_Lean <> '') then
+      Result := Pos(f_Lean, DataSet.FieldByName('Lean').AsString) > 0;
+
+    if (Result) AND (CB_Short.Checked) then
+      Result := DataSet.FieldByName('Shortage').AsInteger < 0;
+
+    Accept := Result;
+  Except
+    Accept := false;
+  end;
+end;
+
+procedure TProductionPlanTracking.Button6Click(Sender: TObject);
+var
+  ColWidth, i: integer;
+begin
+  if (CB_Width.Text <> 'FIT SCREEN') AND (TryStrToInt(CB_Width.Text, ColWidth)) then
+  begin
+    for i := 1 to StringGrid1.ColCount - 1 do
+    begin
+      StringGrid1.ColWidths[i] := ColWidth;
+    end;
+  end
+  else begin
+    CB_Width.ItemIndex := 0;
+    for i := 1 to StringGrid1.ColCount - 1 do
+    begin
+      StringGrid1.ColWidths[i] := StringGrid1.DefaultColWidth;
+    end;
+  end;
+end;
+
+end.

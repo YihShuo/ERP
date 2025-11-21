@@ -1,0 +1,15 @@
+﻿2018/7/21 下午 03:37:51 Login
+2018/7/21 下午 03:37:51 ID:21191
+2018/7/21 下午 03:37:51 PW:5152
+2018/7/21 下午 03:37:51 EPCMat:{"EPC":["18074582J010015889250552.00"]}
+2018/7/21 下午 03:37:51 select KCRKS.RKNO, KCRKS.CLBH, CLZL.YWPM , KCZLS.KCQty, KCZLS.KCBH,
+       cast((select B.DDBH+',' from KCRKS A,DDZL B where B.DDBH=A.CGBH and A.RKNO=KCRKS.RKNO and A.CLBH=KCRKS.CLBH group by B.DDBH for XML Path ('') ) as varchar(max)) as DDBH, 
+       cast((select B.Article+',' from KCRKS A,DDZL B where B.DDBH=A.CGBH and A.RKNO=KCRKS.RKNO and A.CLBH=KCRKS.CLBH group by B.Article for XML Path ('') ) as varchar(max)) as Article,
+       cast((select B.BUYNO+',' from KCRKS A,DDZL B where B.DDBH=A.CGBH and A.RKNO=KCRKS.RKNO and A.CLBH=KCRKS.CLBH group by B.BUYNO for XML Path ('') ) as varchar(max)) as BUYNO 
+from KCRKS 
+left join CLZL on CLZL.CLDH=KCRKS.CLBH 
+left join KCRK on KCRK.RKNO=KCRKS.RKNO 
+left join KCZLS on KCRK.CKBH=KCZLS.CKBH and KCRKS.CLBH=KCZLS.CLBH 
+left join DDZL on KCRKS.CGBH=DDZL.DDBH 
+where KCRKS.RKNO='20180704582' and KCRKS.CLBH='J010015889'
+Group by KCRKS.RKNO, KCRKS.CLBH, CLZL.YWPM, KCZLS.KCQty,KCZLS.KCBH , DDZL.Article,DDZL.BUYNO

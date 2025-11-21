@@ -1,0 +1,222 @@
+D:\Project\Luo\R2000Project\UHFDemo\UHFDemo\bin\Debug\UHFDemo.exe
+D:\Project\Luo\R2000Project\UHFDemo\UHFDemo\bin\Debug\UHFDemo.pdb
+D:\Project\Luo\R2000Project\UHFDemo\UHFDemo\bin\Debug\CustomControl.dll
+D:\Project\Luo\R2000Project\UHFDemo\UHFDemo\bin\Debug\CustomControl.pdb
+D:\Project\Luo\R2000Project\UHFDemo\UHFDemo\obj\Debug\ResolveAssemblyReference.cache
+D:\Project\Luo\R2000Project\UHFDemo\UHFDemo\obj\Debug\UHFDemo.R2000UartDemo.resources
+D:\Project\Luo\R2000Project\UHFDemo\UHFDemo\obj\Debug\UHFDemo.Properties.Resources.resources
+D:\Project\Luo\R2000Project\UHFDemo\UHFDemo\obj\Debug\UHFDemo.csproj.GenerateResource.Cache
+D:\Project\Luo\R2000Project\UHFDemo\UHFDemo\obj\Debug\UHFDemo.exe
+D:\Project\Luo\R2000Project\UHFDemo\UHFDemo\obj\Debug\UHFDemo.pdb
+D:\Project\Luo\R2000Project\UHFDemo\UHFDemo\bin\Debug\Reader.dll
+D:\Project\Luo\R2000Project\UHFDemo\UHFDemo\bin\Debug\Reader.pdb
+D:\Project\Luo\R2000Project\UHFDemo\UHFDemo\obj\Debug\UHFDemo.Form1.resources
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\obj\Debug\UHFDemo.exe
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\obj\Debug\UHFDemo.pdb
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\bin\Debug\UHFDemo.exe
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\bin\Debug\UHFDemo.pdb
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\bin\Debug\CustomControl.dll
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\bin\Debug\Reader.dll
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\bin\Debug\CustomControl.pdb
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\bin\Debug\Reader.pdb
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\obj\Debug\ResolveAssemblyReference.cache
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\obj\Debug\UHFDemo.Form1.resources
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\obj\Debug\UHFDemo.R2000UartDemo.resources
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\obj\Debug\UHFDemo.Properties.Resources.resources
+G:\Chrome Downloads\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\obj\Debug\UHFDemo.csproj.GenerateResource.Cache
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\obj\Debug\UHFDemo.exe
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\obj\Debug\UHFDemo.pdb
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\bin\Debug\UHFDemo.exe
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\bin\Debug\UHFDemo.pdb
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\bin\Debug\CustomControl.dll
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\bin\Debug\Reader.dll
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\bin\Debug\CustomControl.pdb
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\bin\Debug\Reader.pdb
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\obj\Debug\ResolveAssemblyReference.cache
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\obj\Debug\UHFDemo.Form1.resources
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\obj\Debug\UHFDemo.R2000UartDemo.resources
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\obj\Debug\UHFDemo.Properties.Resources.resources
+D:\UHFDemo_v3.65_CHN_SDK\UHFDemo_v3.65\UHFDemo\obj\Debug\UHFDemo.csproj.GenerateResource.Cache
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\UHFDemo.exe
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\UHFDemo.pdb
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\CustomControl.dll
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\Reader.dll
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\CustomControl.pdb
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\Reader.pdb
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.csprojAssemblyReference.cache
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.Form1.resources
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.R2000UartDemo.resources
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.Properties.Resources.resources
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.csproj.GenerateResource.cache
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.csproj.CoreCompileInputs.cache
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.csproj.CopyComplete
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.exe
+D:\Download\RFID\RK800\SDK\八通道读写器\8 Ant Demo\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.pdb
+D:\Download\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\UHFDemo.exe
+D:\Download\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\UHFDemo.pdb
+D:\Download\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\CustomControl.dll
+D:\Download\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\Reader.dll
+D:\Download\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\CustomControl.pdb
+D:\Download\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\Reader.pdb
+D:\Download\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.csprojAssemblyReference.cache
+D:\Download\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.Form1.resources
+D:\Download\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.R2000UartDemo.resources
+D:\Download\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.Properties.Resources.resources
+D:\Download\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.csproj.GenerateResource.cache
+D:\Download\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.csproj.CoreCompileInputs.cache
+D:\Download\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.csproj.CopyComplete
+D:\Download\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.exe
+D:\Download\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.pdb
+Z:\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.exe
+Z:\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.pdb
+Z:\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\UHFDemo.exe
+Z:\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\UHFDemo.pdb
+Z:\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\CustomControl.dll
+Z:\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\Reader.dll
+Z:\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\CustomControl.pdb
+Z:\UHFDemo_v3.65_8ANT\UHFDemo\bin\Debug\Reader.pdb
+Z:\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.csprojResolveAssemblyReference.cache
+Z:\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.Form1.resources
+Z:\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.R2000UartDemo.resources
+Z:\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.Properties.Resources.resources
+Z:\UHFDemo_v3.65_8ANT\UHFDemo\obj\Debug\UHFDemo.csproj.GenerateResource.Cache
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\UHFDemo\bin\Debug\UHFDemo.exe
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\UHFDemo\bin\Debug\UHFDemo.pdb
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\UHFDemo\bin\Debug\CustomControl.dll
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\UHFDemo\bin\Debug\Reader.dll
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\UHFDemo\bin\Debug\CustomControl.pdb
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\UHFDemo\bin\Debug\Reader.pdb
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\UHFDemo\obj\Debug\UHFDemo.csproj.AssemblyReference.cache
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\UHFDemo\obj\Debug\UHFDemo.Form1.resources
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\UHFDemo\obj\Debug\UHFDemo.R2000UartDemo.resources
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\UHFDemo\obj\Debug\UHFDemo.Properties.Resources.resources
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\UHFDemo\obj\Debug\UHFDemo.csproj.GenerateResource.cache
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\UHFDemo\obj\Debug\UHFDemo.csproj.CoreCompileInputs.cache
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\UHFDemo\obj\Debug\UHFDemo.csproj.CopyComplete
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\UHFDemo\obj\Debug\UHFDemo.exe
+D:\Delphi&Component元件\Source code\ERP_Xuan\其他專案程式區\億春開發中心-RFID\開發RFID\UHFDemo\obj\Debug\UHFDemo.pdb
+D:\開發RFID\UHFDemo\bin\Debug\UHFDemo.exe
+D:\開發RFID\UHFDemo\bin\Debug\UHFDemo.pdb
+D:\開發RFID\UHFDemo\bin\Debug\CustomControl.dll
+D:\開發RFID\UHFDemo\bin\Debug\Reader.dll
+D:\開發RFID\UHFDemo\bin\Debug\CustomControl.pdb
+D:\開發RFID\UHFDemo\bin\Debug\Reader.pdb
+D:\開發RFID\UHFDemo\obj\Debug\UHFDemo.csproj.AssemblyReference.cache
+D:\開發RFID\UHFDemo\obj\Debug\UHFDemo.Form1.resources
+D:\開發RFID\UHFDemo\obj\Debug\UHFDemo.R2000UartDemo.resources
+D:\開發RFID\UHFDemo\obj\Debug\UHFDemo.Properties.Resources.resources
+D:\開發RFID\UHFDemo\obj\Debug\UHFDemo.csproj.GenerateResource.cache
+D:\開發RFID\UHFDemo\obj\Debug\UHFDemo.csproj.CoreCompileInputs.cache
+D:\開發RFID\UHFDemo\obj\Debug\UHFDemo.csproj.CopyComplete
+D:\開發RFID\UHFDemo\obj\Debug\UHFDemo.exe
+D:\開發RFID\UHFDemo\obj\Debug\UHFDemo.pdb
+D:\LeeN_Temp\prototype\開發RFID\UHFDemo\bin\Debug\UHFDemo.exe
+D:\LeeN_Temp\prototype\開發RFID\UHFDemo\bin\Debug\UHFDemo.pdb
+D:\LeeN_Temp\prototype\開發RFID\UHFDemo\bin\Debug\CustomControl.dll
+D:\LeeN_Temp\prototype\開發RFID\UHFDemo\bin\Debug\Reader.dll
+D:\LeeN_Temp\prototype\開發RFID\UHFDemo\bin\Debug\CustomControl.pdb
+D:\LeeN_Temp\prototype\開發RFID\UHFDemo\bin\Debug\Reader.pdb
+D:\LeeN_Temp\prototype\開發RFID\UHFDemo\obj\Debug\UHFDemo.csproj.AssemblyReference.cache
+D:\LeeN_Temp\prototype\開發RFID\UHFDemo\obj\Debug\UHFDemo.Form1.resources
+D:\LeeN_Temp\prototype\開發RFID\UHFDemo\obj\Debug\UHFDemo.R2000UartDemo.resources
+D:\LeeN_Temp\prototype\開發RFID\UHFDemo\obj\Debug\UHFDemo.Properties.Resources.resources
+D:\LeeN_Temp\prototype\開發RFID\UHFDemo\obj\Debug\UHFDemo.csproj.GenerateResource.cache
+D:\LeeN_Temp\prototype\開發RFID\UHFDemo\obj\Debug\UHFDemo.csproj.CoreCompileInputs.cache
+D:\LeeN_Temp\prototype\開發RFID\UHFDemo\obj\Debug\UHFDemo.csproj.CopyComplete
+D:\LeeN_Temp\prototype\開發RFID\UHFDemo\obj\Debug\UHFDemo.exe
+D:\LeeN_Temp\prototype\開發RFID\UHFDemo\obj\Debug\UHFDemo.pdb
+D:\LeeN_Temp\prototype\開發RFID\UHFDemo\obj\Debug\UHFDemo.csproj.ResolveComReference.cache
+D:\LeeN_Temp\prototype\開發RFID_DOOR\UHFDemo\bin\Debug\UHFDemo.exe
+D:\LeeN_Temp\prototype\開發RFID_DOOR\UHFDemo\bin\Debug\UHFDemo.pdb
+D:\LeeN_Temp\prototype\開發RFID_DOOR\UHFDemo\bin\Debug\CustomControl.dll
+D:\LeeN_Temp\prototype\開發RFID_DOOR\UHFDemo\bin\Debug\Reader.dll
+D:\LeeN_Temp\prototype\開發RFID_DOOR\UHFDemo\bin\Debug\CustomControl.pdb
+D:\LeeN_Temp\prototype\開發RFID_DOOR\UHFDemo\bin\Debug\Reader.pdb
+D:\LeeN_Temp\prototype\開發RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.AssemblyReference.cache
+D:\LeeN_Temp\prototype\開發RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.ResolveComReference.cache
+D:\LeeN_Temp\prototype\開發RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.Form1.resources
+D:\LeeN_Temp\prototype\開發RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.R2000UartDemo.resources
+D:\LeeN_Temp\prototype\開發RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.Properties.Resources.resources
+D:\LeeN_Temp\prototype\開發RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.GenerateResource.cache
+D:\LeeN_Temp\prototype\開發RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.CoreCompileInputs.cache
+D:\LeeN_Temp\prototype\開發RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.CopyComplete
+D:\LeeN_Temp\prototype\開發RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.exe
+D:\LeeN_Temp\prototype\開發RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.pdb
+D:\LeeN_Temp\prototype\RFID_DOOR\UHFDemo\bin\Debug\UHFDemo.exe
+D:\LeeN_Temp\prototype\RFID_DOOR\UHFDemo\bin\Debug\UHFDemo.pdb
+D:\LeeN_Temp\prototype\RFID_DOOR\UHFDemo\bin\Debug\CustomControl.dll
+D:\LeeN_Temp\prototype\RFID_DOOR\UHFDemo\bin\Debug\Reader.dll
+D:\LeeN_Temp\prototype\RFID_DOOR\UHFDemo\bin\Debug\CustomControl.pdb
+D:\LeeN_Temp\prototype\RFID_DOOR\UHFDemo\bin\Debug\Reader.pdb
+D:\LeeN_Temp\prototype\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.AssemblyReference.cache
+D:\LeeN_Temp\prototype\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.ResolveComReference.cache
+D:\LeeN_Temp\prototype\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.Form1.resources
+D:\LeeN_Temp\prototype\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.R2000UartDemo.resources
+D:\LeeN_Temp\prototype\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.Properties.Resources.resources
+D:\LeeN_Temp\prototype\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.GenerateResource.cache
+D:\LeeN_Temp\prototype\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.CoreCompileInputs.cache
+D:\LeeN_Temp\prototype\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.CopyComplete
+D:\LeeN_Temp\prototype\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.exe
+D:\LeeN_Temp\prototype\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.pdb
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\UHFDemo\bin\Debug\UHFDemo.exe
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\UHFDemo\bin\Debug\UHFDemo.pdb
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\UHFDemo\bin\Debug\CustomControl.dll
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\UHFDemo\bin\Debug\Reader.dll
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\UHFDemo\bin\Debug\CustomControl.pdb
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\UHFDemo\bin\Debug\Reader.pdb
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.AssemblyReference.cache
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.ResolveComReference.cache
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.Form1.resources
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.R2000UartDemo.resources
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.Properties.Resources.resources
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.GenerateResource.cache
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.CoreCompileInputs.cache
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.CopyComplete
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.exe
+D:\LeeN_Temp\prototype\其他專案程式區\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.pdb
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.ResolveComReference.cache
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.exe
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.pdb
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csprojResolveAssemblyReference.cache
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.Form1.resources
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.R2000UartDemo.resources
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.Properties.Resources.resources
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.GenerateResource.Cache
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\bin\Debug\UHFDemo.exe
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\bin\Debug\UHFDemo.pdb
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\bin\Debug\CustomControl.dll
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\bin\Debug\Reader.dll
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\bin\Debug\CustomControl.pdb
+D:\LeeN_Project\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\bin\Debug\Reader.pdb
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\bin\Debug\UHFDemo.exe
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\bin\Debug\UHFDemo.pdb
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\bin\Debug\CustomControl.dll
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\bin\Debug\Reader.dll
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\bin\Debug\CustomControl.pdb
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\bin\Debug\Reader.pdb
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.AssemblyReference.cache
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.ResolveComReference.cache
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.Form1.resources
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.R2000UartDemo.resources
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.Properties.Resources.resources
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.GenerateResource.cache
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.CoreCompileInputs.cache
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.Up2Date
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.exe
+D:\ERP_Xuan\Others\Develop-RFID-Warehouse\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.pdb
+C:\Users\PC\Desktop\RFID\RFID_DOOR\UHFDemo\bin\Debug\UHFDemo.exe
+C:\Users\PC\Desktop\RFID\RFID_DOOR\UHFDemo\bin\Debug\UHFDemo.pdb
+C:\Users\PC\Desktop\RFID\RFID_DOOR\UHFDemo\bin\Debug\CustomControl.dll
+C:\Users\PC\Desktop\RFID\RFID_DOOR\UHFDemo\bin\Debug\Reader.dll
+C:\Users\PC\Desktop\RFID\RFID_DOOR\UHFDemo\bin\Debug\CustomControl.pdb
+C:\Users\PC\Desktop\RFID\RFID_DOOR\UHFDemo\bin\Debug\Reader.pdb
+C:\Users\PC\Desktop\RFID\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.AssemblyReference.cache
+C:\Users\PC\Desktop\RFID\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.ResolveComReference.cache
+C:\Users\PC\Desktop\RFID\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.Form1.resources
+C:\Users\PC\Desktop\RFID\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.R2000UartDemo.resources
+C:\Users\PC\Desktop\RFID\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.Properties.Resources.resources
+C:\Users\PC\Desktop\RFID\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.GenerateResource.cache
+C:\Users\PC\Desktop\RFID\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\RFID\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.csproj.Up2Date
+C:\Users\PC\Desktop\RFID\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.exe
+C:\Users\PC\Desktop\RFID\RFID_DOOR\UHFDemo\obj\Debug\UHFDemo.pdb

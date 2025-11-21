@@ -1,0 +1,333 @@
+unit Planoutput1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, StdCtrls, ExtCtrls, Grids,comobj,OleServer,DateUtils,
+  DBGrids;
+
+type
+  TPlanoutput = class(TForm)
+    StringGrid1: TStringGrid;
+    Panel1: TPanel;
+    Label2: TLabel;
+    Button1: TButton;
+    Button2: TButton;
+    Edit1: TEdit;
+    Button3: TButton;
+    QDep: TQuery;
+    QDepID: TStringField;
+    QDepDepName: TStringField;
+    QDepRecNum: TStringField;
+    UpdateSQL1: TUpdateSQL;
+    DataSource1: TDataSource;
+    TSCBZCL: TTable;
+    Qold: TQuery;
+    SaveDialog1: TSaveDialog;
+    DepTot: TQuery;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure StringGrid1KeyPress(Sender: TObject; var Key: Char);
+    procedure Button2Click(Sender: TObject);
+    procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Planoutput: TPlanoutput;
+  sdate,edate:Tdate;
+
+implementation
+
+uses main1;
+
+{$R *.dfm}
+
+procedure TPlanoutput.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+free;
+end;
+
+procedure TPlanoutput.Button1Click(Sender: TObject);
+var a,b,c :word;
+i,j,d:integer;
+g:string;
+begin
+if length(edit1.Text)<>7  then
+  begin
+    showmessage('Pls key in right month format.');
+    abort;
+  end;
+a:=strtoint(copy(edit1.Text,0,pos('/',edit1.text)-1));
+b:=strtoint(copy(edit1.text,pos('/',edit1.Text)+1,length(edit1.text)));
+c:=1;
+sdate:=EncodeDate(a,b,c);
+ edate:=endofthemonth(sdate);
+ d:=DaysBetween(sdate,edate);
+
+
+QDep.Active:=true;
+with StringGrid1 do
+  begin
+    colcount:=d+3;
+    rowcount:=QDep.RecordCount+1;
+    for i:=1 to d+1 do
+      begin
+        cells[i,0]:=inttostr(i);
+        colwidths[i]:=35;
+      end;
+    cells[d+2,0]:='Total';
+    QDep.First;
+    QDep.cachedupdates:=true;
+    QDep.RequestLive:=true;
+    for j:=1 to QDep.RecordCount do
+      begin
+        QDep.Edit;
+        QDep.FieldByName('RecNum').Value:=inttostr(j);
+        cells[0,j]:=QDep.fieldbyname('DepName').asstring;
+        QDep.next;
+      end;
+  end;
+
+
+TSCBZCL.Active:=false;
+TSCBZCL.Filtered:=false;
+TSCBZCL.Filter:=' BZDate2 = '+QuotedStr(edit1.Text+'*');
+TSCBZCL.Filtered:=true;
+TSCBZCL.active:=true;
+
+
+for i:=1 to stringgrid1.colCount-1 do      //清空
+  begin
+    for j:=1 to stringgrid1.rowcount-1 do
+      begin
+        stringgrid1.cells[i,j]:=''
+      end;
+  end;
+
+
+ with DepTot do
+   begin
+     active:=false;
+     sql.clear;
+     sql.add('select  isnull(sum(Qty),0) as Qty,DepNo  from SCBZCL ');
+     sql.add('where  BZDate >=');
+     sql.add(''''+formatdatetime('yyyy/mm/dd',sdate)+'''');
+     sql.add('and BZDate <=');
+     sql.add(''''+formatdatetime('yyyy/mm/dd',edate)+'''');
+     sql.add('group by DepNo');
+     active:=true;
+     while not DepTot.eof do
+       begin
+         if QDep.locate('ID',fieldbyname('DepNo').asstring,[]) then
+           begin
+             j:=strtoint(QDep.fieldbyname('RecNum').Value);
+             stringgrid1.cells[d+2,j]:=fieldbyname('qty').asstring;
+           end;
+         next;
+       end;
+   end;
+
+TSCBZCL.First;
+for i:=1 to TSCBZCL.RecordCount do
+  begin
+    decodedate(TSCBZCL.fieldbyname('BZDate').value,a,b,c);
+    if QDep.locate('ID',TSCBZCL.fieldbyname('DepNo').asstring,[]) then
+      begin
+        j:=strtoint(QDep.fieldbyname('RecNum').Value);
+      end;
+    with StringGrid1 do
+      begin
+        cells[c,j]:=TSCBZCL.fieldbyname('Qty').AsString;
+      end;
+    TSCBZCL.next;
+  end;
+
+
+
+end;
+
+procedure TPlanoutput.Button3Click(Sender: TObject);
+var i,j:integer;
+a:string;
+bdate:TDate;
+y,m,d:word;
+begin
+try
+y:=strtoint(copy(edit1.Text,0,pos('/',edit1.text)-1));
+m:=strtoint(copy(edit1.text,pos('/',edit1.Text)+1,2));
+for j:=1 to QDep.RecordCount do
+  begin
+    if QDep.Locate('RecNum',inttostr(j),[]) then
+      begin
+        a:=QDep.fieldbyname('ID').AsString;
+      end;
+    for i:=1 to stringgrid1.ColCount-2 do
+      begin
+        d:=i;
+        bDate:=Encodedate(y,m,d);
+        if TSCBZCL.Locate('DepNo;BZDate2',vararrayof([a,formatdatetime('yyyy/MM/dd',bDate)]),[]) then
+          begin 
+            TSCBZCL.Edit;
+            if bDate>=date then
+              begin
+                if stringGrid1.Cells[i,j]='' then
+                  begin
+                    TSCBZCL.FieldByName('Qty').Value:=0;
+                    TSCBZCL.FieldByName('userid').Value:=main.edit1.Text;
+                    TSCBZCL.FieldByName('USERDATE').Value:=date;
+                  end
+                  else
+                    begin
+                      if  TSCBZCL.FieldByName('Qty').Value<>strtoint(stringGrid1.Cells[i,j])  then
+                        begin
+                          TSCBZCL.FieldByName('Qty').Value:=strtoint(stringGrid1.Cells[i,j]);
+                          TSCBZCL.FieldByName('userid').Value:=main.edit1.Text;
+                          TSCBZCL.FieldByName('USERDATE').Value:=date;
+                        end;
+                    end;
+              end
+              else
+                begin
+                  if  TSCBZCL.FieldByName('Qty').Value<>strtoint(stringGrid1.Cells[i,j])  then
+                    begin
+                      showmessage('Date is pass, can not modify.');
+                    end;
+                end;
+
+          end
+          else
+            begin
+              if stringgrid1.cells[i,j]<>'' then
+                begin
+                  TSCBZCL.Insert;
+                  TSCBZCL.fieldbyname('DepNO').Value:=a;
+                  TSCBZCL.FieldByName('BZDate').Value:=bDate;
+                  TSCBZCL.FieldByName('BZDate2').Value:=formatdatetime('yyyy/MM/dd',bDate);
+                  TSCBZCL.FieldByName('Qty').Value:=strtoint(stringGrid1.Cells[i,j]);
+                  TSCBZCL.FieldByName('userid').Value:=main.edit1.Text;
+                  TSCBZCL.FieldByName('USERDATE').Value:=date;
+                  TSCBZCL.FieldByName('YN').Value:='1';
+                  TSCBZCL.Post;
+                end
+                else
+                  begin
+                    TSCBZCL.Insert;
+                    TSCBZCL.fieldbyname('DepNO').Value:=a;
+                    TSCBZCL.FieldByName('BZDate').Value:=bDate;
+                    TSCBZCL.FieldByName('BZDate2').Value:=formatdatetime('yyyy/MM/dd',bDate);
+                    TSCBZCL.FieldByName('Qty').Value:=0;
+                    TSCBZCL.FieldByName('userid').Value:=main.edit1.Text;
+                    TSCBZCL.FieldByName('USERDATE').Value:=date;
+                    TSCBZCL.FieldByName('YN').Value:='1';
+                    TSCBZCL.Post;
+                  end;
+            end;
+      end;
+  end;
+showmessage('Succeed.');
+except
+showmessage('Have wrong.');
+end;
+
+end;
+
+procedure TPlanoutput.StringGrid1KeyPress(Sender: TObject; var Key: Char);
+begin
+if  not (Key in ['0'..'9',#8,#46,#13]) then  Key := #0;
+end;
+
+procedure TPlanoutput.Button2Click(Sender: TObject);
+var   a:string;
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+  begin                           
+  if  TSCBZCL.active  then
+    begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('沒有安裝Mcrosoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+      WorkBook:=eclApp.workbooks.Add;
+      {  for   j:=1   to  stringgrid1.RowCount-1  do
+            begin
+              eclApp.Cells(j+3,1):=stringgrid1.cells[0,j];
+            end;
+        for i:=1 to 31 do
+          begin
+            eclApp.Cells(3,i+1):=stringgrid1.cells[i,0];
+          end;   }
+        for i:=1 to stringgrid1.RowCount do
+          begin
+            for j:=1 to stringgrid1.colcount do
+              begin
+                eclApp.Cells(i+3,j):=stringgrid1.cells[j-1,i-1]; 
+                eclApp.Cells.item[i+3,j].font.size:='8';
+              end;
+          end;
+     eclapp.columns.autofit;
+   { if SaveDialog1.execute then
+      begin
+        a:=SaveDialog1.FileName;
+      end
+      else
+        begin
+          a:='Unit List';
+        end;
+      WorkBook.SaveAS(a);
+      //WorkBook.close;  }
+      eclApp.Visible:=True;
+      except
+        on   F:Exception   do
+          showmessage(F.Message);
+      end;
+    end;
+
+end;
+
+procedure TPlanoutput.StringGrid1DrawCell(Sender: TObject; ACol,
+  ARow: Integer; Rect: TRect; State: TGridDrawState);
+var y,m,d:word;
+i,e:integer;
+begin
+    decodedate(sdate,y,m,d);
+    for i:=1 to 7 do
+      begin
+        if dayoftheweek(encodedate(y,m,i))=7 then
+          begin
+            e:=i
+          end;
+      end;
+    if (ACol-e)mod 7=0 then
+      begin
+        with   StringGrid1.Canvas   do
+          begin
+            Font.Color:=clRed;
+          //  Font.Size:=8;
+            Font.Style:=[fsbold,fsitalic];
+            StringGrid1.Canvas.TextRect(Rect,Rect.right-Canvas.TextWidth(stringgrid1.Cells[ACol,ARow])-8, Rect.Top+2, stringgrid1.Cells[ACol,ARow] );
+           // TextOut(Rect.Left+2,   Rect.Top+3,   StringGrid1.Cells[ACol,   ARow]);
+          end;
+      end
+      else
+        StringGrid1.Canvas.TextRect(Rect,Rect.right-Canvas.TextWidth(stringgrid1.Cells[ACol,ARow])-2, Rect.Top+2, stringgrid1.Cells[ACol,ARow] );
+end;
+
+procedure TPlanoutput.FormDestroy(Sender: TObject);
+begin
+Planoutput:=nil;
+end;
+
+end.

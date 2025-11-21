@@ -1,0 +1,758 @@
+object ScanExport: TScanExport
+  Left = 353
+  Top = 431
+  Width = 1374
+  Height = 527
+  Caption = 'ScanExport'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 1358
+    Height = 73
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object lbOrderNo: TLabel
+      Left = 0
+      Top = 44
+      Width = 89
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'OrderNO:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbConNo: TLabel
+      Left = 192
+      Top = 44
+      Width = 62
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Con_NO:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbCKBH: TLabel
+      Left = 368
+      Top = 43
+      Width = 47
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'CKBH:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbTitle: TLabel
+      Left = 16
+      Top = 8
+      Width = 185
+      Height = 19
+      AutoSize = False
+      Caption = #25104#21697#20489#20986#36008#29376#27841#34920':'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = #26032#32048#26126#39636
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbFrom: TLabel
+      Left = 488
+      Top = 43
+      Width = 47
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'From'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbTo: TLabel
+      Left = 624
+      Top = 44
+      Width = 23
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'To'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object edOrderNo: TEdit
+      Left = 88
+      Top = 40
+      Width = 105
+      Height = 24
+      CharCase = ecUpperCase
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+    end
+    object edConNo: TEdit
+      Left = 256
+      Top = 40
+      Width = 113
+      Height = 24
+      CharCase = ecUpperCase
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+    end
+    object bnQuery: TButton
+      Left = 872
+      Top = 31
+      Width = 73
+      Height = 33
+      Caption = 'Query'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      OnClick = bnQueryClick
+    end
+    object dtpFrom: TDateTimePicker
+      Left = 536
+      Top = 40
+      Width = 89
+      Height = 24
+      Date = 39255.000000000000000000
+      Format = 'yyyy/MM/dd'
+      Time = 39255.000000000000000000
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+    end
+    object dtpTo: TDateTimePicker
+      Left = 648
+      Top = 40
+      Width = 89
+      Height = 24
+      Date = 39255.000000000000000000
+      Format = 'yyyy/MM/dd'
+      Time = 39255.000000000000000000
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+    end
+    object cbCKBH: TComboBox
+      Left = 416
+      Top = 40
+      Width = 73
+      Height = 24
+      Style = csDropDownList
+      CharCase = ecUpperCase
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ItemHeight = 16
+      ParentFont = False
+      TabOrder = 5
+      Items.Strings = (
+        'ALL')
+    end
+    object CB1: TCheckBox
+      Left = 747
+      Top = 41
+      Width = 123
+      Height = 17
+      Caption = #39023#31034#27511#21490#36039#26009
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 6
+    end
+    object GroupBox1: TGroupBox
+      Left = 496
+      Top = 0
+      Width = 201
+      Height = 33
+      TabOrder = 7
+      object RB2: TRadioButton
+        Left = 105
+        Top = 11
+        Width = 88
+        Height = 17
+        Caption = 'ShipDate'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+      end
+      object RB1: TRadioButton
+        Left = 11
+        Top = 10
+        Width = 94
+        Height = 17
+        Caption = 'ExeDate'
+        Checked = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        TabStop = True
+      end
+    end
+    object Cbox1: TCheckBox
+      Left = 710
+      Top = 9
+      Width = 107
+      Height = 17
+      Caption = 'No Cancel'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 8
+    end
+    object Button1: TButton
+      Left = 992
+      Top = 32
+      Width = 75
+      Height = 33
+      Caption = 'OLD'
+      TabOrder = 9
+      OnClick = Button1Click
+    end
+  end
+  object gdMain: TDBGridEh
+    Left = 0
+    Top = 73
+    Width = 1358
+    Height = 415
+    Align = alClient
+    DataSource = dsMain
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -11
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    FrozenCols = 1
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind]
+    ParentFont = False
+    PopupMenu = pmMain
+    SumList.Active = True
+    TabOrder = 1
+    TitleFont.Charset = ANSI_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = #26032#32048#26126#39636
+    TitleFont.Style = []
+    UseMultiTitle = True
+    OnGetCellParams = gdMainGetCellParams
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'DDBH'
+        Footers = <
+          item
+            FieldName = 'DDBH'
+            ValueType = fvtCount
+          end>
+        Title.Caption = #35330#21934#32232#34399'|DDBH'
+        Title.TitleButton = True
+        Width = 77
+      end
+      item
+        EditButtons = <>
+        FieldName = 'KHPO'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #23458#25142#32232#34399'|KHPO'
+        Width = 70
+      end
+      item
+        EditButtons = <>
+        FieldName = 'YSBH'
+        Footers = <>
+        Title.Caption = #21046#20196#32232#34399'|YSBH'
+        Title.TitleButton = True
+        Width = 77
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Article'
+        Footers = <>
+        Title.Caption = 'SKU#|Article'
+        Title.TitleButton = True
+        Width = 108
+      end
+      item
+        EditButtons = <>
+        FieldName = 'XieMing'
+        Footers = <>
+        Title.Caption = #38795#22411#21517#31281'|XieMing'
+        Title.TitleButton = True
+        Width = 141
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ETD'
+        Footers = <>
+        Title.Caption = #20986#36008#26085'|ETD'
+        Title.TitleButton = True
+        Width = 85
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Country'
+        Footers = <>
+        Title.Caption = #20986#36008#22283#23478'|Country'
+        Title.TitleButton = True
+        Width = 106
+      end
+      item
+        EditButtons = <>
+        FieldName = 'KFJC'
+        Footers = <>
+        Title.Caption = #23458#25142#31777#31281'|KFJC'
+        Title.TitleButton = True
+        Width = 85
+      end
+      item
+        Color = 11599792
+        EditButtons = <>
+        FieldName = 'Qty'
+        Footers = <
+          item
+            FieldName = 'Qty'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #35330#21934#38617#25976'|Qty'
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = #26032#32048#26126#39636
+        Title.Font.Style = []
+        Title.TitleButton = True
+        Width = 60
+      end
+      item
+        Color = 11599792
+        EditButtons = <>
+        FieldName = 'okQty'
+        Footers = <
+          item
+            FieldName = 'okQty'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #32047#35336#20986#36008#38617'|okQty'
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = #26032#32048#26126#39636
+        Title.Font.Style = []
+        Title.TitleButton = True
+        Width = 73
+      end
+      item
+        Color = 11599792
+        EditButtons = <>
+        FieldName = 'NowQty'
+        Footers = <
+          item
+            FieldName = 'NowQty'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #30070#26399#20986#36008#38617'|NowQty'
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = #26032#32048#26126#39636
+        Title.Font.Style = []
+        Title.TitleButton = True
+        Width = 70
+      end
+      item
+        Color = 11599792
+        EditButtons = <>
+        FieldName = 'VarianceQty'
+        Footers = <>
+        Title.Caption = #24046#30064#25976'|VarianceQty'
+        Width = 75
+      end
+      item
+        Color = 16759225
+        EditButtons = <>
+        FieldName = 'CTS'
+        Footers = <
+          item
+            FieldName = 'CTS'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #35330#21934#31665#25976'|CTS'
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = #26032#32048#26126#39636
+        Title.Font.Style = []
+        Title.TitleButton = True
+        Width = 60
+      end
+      item
+        Color = 16759225
+        EditButtons = <>
+        FieldName = 'okCTS'
+        Footers = <
+          item
+            FieldName = 'okCTS'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #32047#35336#20986#36008#31665'|okCTS'
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = #26032#32048#26126#39636
+        Title.Font.Style = []
+        Title.TitleButton = True
+        Width = 71
+      end
+      item
+        Color = 16759225
+        EditButtons = <>
+        FieldName = 'NowCTS'
+        Footers = <
+          item
+            FieldName = 'NowCTS'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #30070#26399#20837#31665#25976'|NowCTS'
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = #26032#32048#26126#39636
+        Title.Font.Style = []
+        Title.TitleButton = True
+        Width = 78
+      end
+      item
+        Color = 16759225
+        EditButtons = <>
+        FieldName = 'VarianceCTS'
+        Footers = <>
+        Title.Caption = #24046#30064#31665#25976'|VarianceCTS'
+        Width = 73
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ExeDate'
+        Footers = <>
+        Title.Caption = #20986#36008#26085#26399'|ExeDate'
+        Width = 69
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Con_No'
+        Footers = <>
+        Title.Caption = #36008#27331#32232#34399'|Con_No'
+        Width = 81
+      end
+      item
+        EditButtons = <>
+        FieldName = 'rgwt'
+        Footer.FieldName = 'rgwt'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #20837#24235#32317#37325#37327'|TotRGW'
+        Width = 76
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ogwt'
+        Footer.FieldName = 'ogwt'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #20986#36008#32317#37325#37327'|TotOGW'
+        Width = 75
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DZQty'
+        Footers = <>
+        Title.Caption = #30701#35037#25976#37327'|DZQty'
+        Width = 59
+      end>
+  end
+  object ptMain: TPrintDBGridEh
+    DBGridEh = gdMain
+    Options = []
+    Page.BottomMargin = 0.200000000000000000
+    Page.LeftMargin = 0.200000000000000000
+    Page.RightMargin = 0.200000000000000000
+    Page.TopMargin = 0.200000000000000000
+    PageFooter.Font.Charset = ANSI_CHARSET
+    PageFooter.Font.Color = clWindowText
+    PageFooter.Font.Height = -13
+    PageFooter.Font.Name = #26032#32048#26126#39636
+    PageFooter.Font.Style = []
+    PageFooter.RightText.Strings = (
+      #31532'  &[Page]'#38913'  /   '#20849'  &[Pages]'#38913)
+    PageHeader.CenterText.Strings = (
+      #25104#21697#20489#20986#36008#29376#27841#34920
+      '')
+    PageHeader.Font.Charset = ANSI_CHARSET
+    PageHeader.Font.Color = clWindowText
+    PageHeader.Font.Height = -21
+    PageHeader.Font.Name = #26032#32048#26126#39636
+    PageHeader.Font.Style = []
+    Units = MM
+    OnBeforePrint = ptMainBeforePrint
+    Left = 8
+    Top = 152
+    BeforeGridText_Data = {
+      7B5C727466315C616E73695C616E73696370673935305C64656666305C646566
+      6C616E67313033335C6465666C616E676665313032387B5C666F6E7474626C7B
+      5C66305C666E696C5C6663686172736574313336204D532053616E7320536572
+      69663B7D7D0D0A5C766965776B696E64345C7563315C706172645C6C616E6731
+      3032385C66305C6673313620255B54446174655D0D0A5C706172207D0D0A00}
+  end
+  object qrMain: TQuery
+    DatabaseName = 'dB'
+    DataSource = ScanStockBrand.DS1
+    SQL.Strings = (
+      
+        'select YWCP.DDBH,DDZL.KHPO,YWDD.YSBH,XXZL.Article,XXZL.XieMing,Y' +
+        'WDD.ETD,LBZLS.YWSM as Country,KFZL.KFJC,'
+      
+        '       YWDD.Qty,okYWCP.okQty,sum(YWCP.Qty) as NowQty,(YWDD.Qty-s' +
+        'um(YWCP.Qty)) as VarianceQty,YWBZPO.CTS,okYWCP.okCTS,'
+      
+        '       count(YWCP.DDBH) as NowCTS,(YWBZPO.CTS-count(YWCP.DDBH)) ' +
+        'as VarianceCTS,sum(YWDDSDZ.Qty) as DZQty,'
+      
+        '       MAX(YWCP.EXEDATE) as ExeDate,MAX(con_no) as Con_No,Sum(YW' +
+        'CP.rgw) as rgwt,Sum(YWCP.ogw) as ogwt'
+      'from YWCP with (nolock) '
+      'left join YWDD  with (nolock) on YWDD.DDBH=YWCP.DDBH '
+      'left join DDZL  with (nolock) on YWDD.YSBH=DDZl.DDBH '
+      'left join (select CartonBar,sum(Qty) as Qty from YWDDSDZ '
+      
+        '           group by CartonBar ) YWDDSDZ on YWDDSDZ.CartonBar=YWC' +
+        'P.CartonBar '
+      
+        'left join XXZL  with (nolock) on DDZl.XieXing=XXZl.XieXing and D' +
+        'DZL.SheHao=XXZL.Shehao '
+      
+        'left join LBZLS  with (nolock) on LBZLS.LB='#39'06'#39' and LBZLS.LBDH=D' +
+        'DZL.DDGB'
+      'left join KFZL  with (nolock) on KFZL.KFDH=DDZL.KHBH '
+      
+        'left join BDepartment  with (nolock) on BDepartment.ID=YWCP.DepN' +
+        'o '
+      'left join (select YWBZPO.DDBH,sum(YWBZPO.CTS) as CTS '
+      
+        '           from (select distinct YWBZPOS.DDBH,YWBZPOS.XH,YWBZPOS' +
+        '.CTS from YWBZPOS  with (nolock) ) YWBZPO  '
+      
+        '           group by YWBZPO.DDBH) YWBZPO on YWCP.DDBH=YWBZPO.DDBH' +
+        ' '
+      'left join (select DDBH,count(DDBH) as okCTS,sum(Qty) as okQty'
+      '         from YWCP with (nolock) '
+      '           where ExeDate is not null '
+      '           group by DDBH ) okYWCP on okYWCP.DDBH=YWDD.DDBH '
+      'where DDZL.DDBH like '#39'%'#39' '
+      '      and isnull(YWCP.CON_NO,'#39#39') like '#39'%%'#39' '
+      '      and DDZL.GSBH='#39'VA12'#39' '
+      '      and convert(varchar,YWCP.Exedate,111) between '
+      '      '#39'2023/02/25'#39' and '#39'2023/03/03'#39
+      
+        'group by YWCP.DDBH,DDZL.KHPO,YWDD.YSBH,XXZL.Article,XXZL.XieMing' +
+        ',YWDD.ETD,LBZLS.YWSM,KFZL.KFJC,'
+      '         YWDD.Qty,okYWCP.okQty,YWBZPO.CTS,okYWCP.okCTS'
+      'order by YWCP.DDBH')
+    Left = 72
+    Top = 152
+    object qrMainDDBH: TStringField
+      FieldName = 'DDBH'
+      FixedChar = True
+      Size = 15
+    end
+    object qrMainKHPO: TStringField
+      FieldName = 'KHPO'
+    end
+    object qrMainYSBH: TStringField
+      FieldName = 'YSBH'
+      FixedChar = True
+      Size = 15
+    end
+    object qrMainArticle: TStringField
+      FieldName = 'Article'
+      FixedChar = True
+    end
+    object qrMainXieMing: TStringField
+      FieldName = 'XieMing'
+      FixedChar = True
+      Size = 50
+    end
+    object qrMainCountry: TStringField
+      FieldName = 'Country'
+      FixedChar = True
+      Size = 50
+    end
+    object qrMainKFJC: TStringField
+      FieldName = 'KFJC'
+      FixedChar = True
+    end
+    object qrMainQty: TFloatField
+      FieldName = 'Qty'
+      DisplayFormat = '##,#0'
+    end
+    object qrMainokQty: TIntegerField
+      FieldName = 'okQty'
+      DisplayFormat = '##,#0'
+    end
+    object qrMainNowQty: TIntegerField
+      FieldName = 'NowQty'
+      DisplayFormat = '##,#0'
+    end
+    object qrMainVarianceQty: TFloatField
+      FieldName = 'VarianceQty'
+    end
+    object qrMainCTS: TIntegerField
+      FieldName = 'CTS'
+      DisplayFormat = '##,#0'
+    end
+    object qrMainokCTS: TIntegerField
+      FieldName = 'okCTS'
+      DisplayFormat = '##,#0'
+    end
+    object qrMainNowCTS: TIntegerField
+      FieldName = 'NowCTS'
+      DisplayFormat = '##,#0'
+    end
+    object qrMainETD: TDateTimeField
+      FieldName = 'ETD'
+      DisplayFormat = 'yyyy/MM/dd'
+    end
+    object qrMainVarianceCTS: TIntegerField
+      FieldName = 'VarianceCTS'
+    end
+    object qrMainExeDate: TDateTimeField
+      FieldName = 'ExeDate'
+      DisplayFormat = 'yyyy/MM/dd'
+    end
+    object qrMainCon_No: TStringField
+      FieldName = 'Con_No'
+      FixedChar = True
+    end
+    object qrMainrgwt: TFloatField
+      FieldName = 'rgwt'
+    end
+    object qrMainogwt: TFloatField
+      FieldName = 'ogwt'
+    end
+    object qrMainDZQty: TIntegerField
+      FieldName = 'DZQty'
+      DisplayFormat = '##,#0'
+    end
+  end
+  object dsMain: TDataSource
+    DataSet = qrMain
+    Left = 104
+    Top = 152
+  end
+  object pmMain: TPopupMenu
+    Left = 40
+    Top = 152
+    object Excel1: TMenuItem
+      Caption = 'Excel'
+      OnClick = Excel1Click
+    end
+    object Print1: TMenuItem
+      Caption = 'Print'
+      OnClick = Print1Click
+    end
+    object Detail1: TMenuItem
+      Caption = 'Detail'
+      OnClick = Detail1Click
+    end
+  end
+  object qrTemp: TQuery
+    DatabaseName = 'DB'
+    Left = 72
+    Top = 184
+  end
+end

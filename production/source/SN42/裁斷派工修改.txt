@@ -1,0 +1,83 @@
+
+
+select DLNO,CLDH,YWPM,BWZL,Layer,case when BWBH='A002' then 1 else 2 end as LB from (
+select CD1.DLNO,CD1.CLBH ,cast((select IsNull(BWZLVN.VWSM,BWZL.YWSM) + '('+BWZL.BWDH+'),' from CutDispatchS CS2,BWZL left join BWZLVN on BWZL.BWDH=BWZLVN.BWDH where CS2.BWBH=BWZL.bwdh and CS2.DLNO='20190500001' and CS2.CLBH=CD1.CLBH  group by BWZL.BWDH,BWZL.YWSM,BWZLVN.VWSM for XML Path ('')) as varchar(max))as BWZL,CutDispatchZL.Layer,CD1.BWBH  
+from CutDispatchS   as CD1
+left join CutDispatchZL on CD1.ZLBH=CutDispatchZL.ZLBH and CD1.SIZE=CutDispatchZL.SIZE and CD1.BWBH=CutDispatchZL.BWBH 
+where DLNO='20190500001' ) CutDispatchS 
+Left join CLZL on CLZL.cldh=CutDispatchS.CLBH 
+Group by DLNO,CLDH,YWPM,BWZL,Layer,case when BWBH='A002' then 1 else 2 end
+
+--
+Select Distinct SIZE, XXCC from CutDispatchS where DLNO='20190500001' and CLBH='C060002388' and (case when BWBH='A002' then 1 else 2 end)=3 order by SIZE desc
+
+---------------------------
+顯示楦頭
+
+Select Distinct XXCC  from CutDispatchS where DLNO='20190500001' order by XXCC desc
+
+Select Distinct SIZE  from CutDispatchS where DLNO='20190500001' order by SIZE desc
+
+
+select 'Size So Dao chat(斬刀)' as ZLBH,YWSM,0 as lb 
+,Max(Case when SIZE='09.0' then Convert(varchar,XXCC) else null end) as '09.0' 
+,Max(Case when SIZE='08.5' then Convert(varchar,XXCC) else null end) as '08.5' 
+,Max(Case when SIZE='08.0' then Convert(varchar,XXCC) else null end) as '08.0' 
+,Max(Case when SIZE='07.5' then Convert(varchar,XXCC) else null end) as '07.5' 
+,Max(Case when SIZE='07.0' then Convert(varchar,XXCC) else null end) as '07.0' 
+,Max(Case when SIZE='06.5' then Convert(varchar,XXCC) else null end) as '06.5' 
+,Max(Case when SIZE='06.0' then Convert(varchar,XXCC) else null end) as '06.0' 
+,Max(Case when SIZE='05.5' then Convert(varchar,XXCC) else null end) as '05.5' 
+from ( 
+select CutDispatchS.ZLBH,
+       case when CutDispatchS.ZLBH <> MAX(CutDispatchSS.DDBH) then ('T'+MIN(right(CutDispatchSS.DDBH,3))) else 'T0' end as MinDDBH, 
+       case when CutDispatchS.ZLBH <> MAX(CutDispatchSS.DDBH) then ('T'+Max(right(CutDispatchSS.DDBH,3))) else 'T0' end as MaxDDBH, 
+       IsNull(BWZLVN.VWSM,BWZL.YWSM) as YWSM,CutDispatchS.SIZE,CutDispatchS.XXCC  from CutDispatchS 
+left join BWZL on CutDispatchS.BWBH=BWZL.BWDH 
+Left join BWZLVN on CutDispatchS.BWBH=BWZLVN.BWDH 
+left join CutDispatchSS on CutDispatchSS.DLNO=CutDispatchS.DLNO and CutDispatchSS.ZLBH=CutDispatchS.ZLBH and CutDispatchSS.BWBH=CutDispatchS.BWBH and CutDispatchSS.SIZE=CutDispatchS.SIZE and CutDispatchSS.CLBH=CutDispatchS.CLBH 
+where CutDispatchS.DLNO='20190500001' and CutDispatchS.CLBH='C060002388' 
+Group by CutDispatchS.ZLBH,BWZL.YWSM,BWZLVN.VWSM,CutDispatchS.SIZE,CutDispatchS.XXCC   ) CutDispatchS 
+Group by ZLBH,YWSM 
+---------
+Union all
+---------
+select * from ( 
+
+select ZLBH+'('+Min(MinDDBH)+'-'+MAX(MaxDDBH)+')' as ZLBH,YWSM,1 as lb 
+,Max(Case when SIZE='09.0' then Convert(varchar,Qty) else null end) as '09.0' 
+,Max(Case when SIZE='08.5' then Convert(varchar,Qty) else null end) as '08.5' 
+,Max(Case when SIZE='08.0' then Convert(varchar,Qty) else null end) as '08.0' 
+,Max(Case when SIZE='07.5' then Convert(varchar,Qty) else null end) as '07.5' 
+,Max(Case when SIZE='07.0' then Convert(varchar,Qty) else null end) as '07.0' 
+,Max(Case when SIZE='06.5' then Convert(varchar,Qty) else null end) as '06.5' 
+,Max(Case when SIZE='06.0' then Convert(varchar,Qty) else null end) as '06.0' 
+,Max(Case when SIZE='05.5' then Convert(varchar,Qty) else null end) as '05.5' 
+from ( 
+select CutDispatchS.ZLBH,
+       case when CutDispatchS.ZLBH <> MAX(CutDispatchSS.DDBH) then ('T'+MIN(right(CutDispatchSS.DDBH,3))) else 'T0' end as MinDDBH, 
+       case when CutDispatchS.ZLBH <> MAX(CutDispatchSS.DDBH) then ('T'+Max(right(CutDispatchSS.DDBH,3))) else 'T0' end as MaxDDBH, 
+       IsNull(BWZLVN.VWSM,BWZL.YWSM) as YWSM,CutDispatchS.SIZE,CutDispatchS.Qty  from CutDispatchS 
+left join BWZL on CutDispatchS.BWBH=BWZL.BWDH 
+Left join BWZLVN on CutDispatchS.BWBH=BWZLVN.BWDH 
+left join CutDispatchSS on CutDispatchSS.DLNO=CutDispatchS.DLNO and CutDispatchSS.ZLBH=CutDispatchS.ZLBH and CutDispatchSS.BWBH=CutDispatchS.BWBH and CutDispatchSS.SIZE=CutDispatchS.SIZE and CutDispatchSS.CLBH=CutDispatchS.CLBH 
+where CutDispatchS.DLNO='20190500001' and CutDispatchS.CLBH='C060002388' 
+Group by CutDispatchS.ZLBH,BWZL.YWSM,BWZLVN.VWSM,CutDispatchS.SIZE,CutDispatchS.Qty   ) CutDispatchS 
+Group by ZLBH,YWSM 
+Union all 
+select ZLBH,YWSM,3 as lb 
+,Max(Case when SIZE='09.0' then Convert(varchar,Qty) else null end) as '09.0' 
+,Max(Case when SIZE='08.5' then Convert(varchar,Qty) else null end) as '08.5' 
+,Max(Case when SIZE='08.0' then Convert(varchar,Qty) else null end) as '08.0' 
+,Max(Case when SIZE='07.5' then Convert(varchar,Qty) else null end) as '07.5' 
+,Max(Case when SIZE='07.0' then Convert(varchar,Qty) else null end) as '07.0' 
+,Max(Case when SIZE='06.5' then Convert(varchar,Qty) else null end) as '06.5' 
+,Max(Case when SIZE='06.0' then Convert(varchar,Qty) else null end) as '06.0' 
+,Max(Case when SIZE='05.5' then Convert(varchar,Qty) else null end) as '05.5' 
+from ( 
+select 'So  luong  Dao  Chat(刀數)' as ZLBH,'zTotal' as YWSM,SIZE,Sum(CutNum) as Qty from CutDispatchS  
+where DLNO='20190500001' and CLBH='C060002388' 
+Group by SIZE  ) CutDispatchS 
+Group by ZLBH,YWSM 
+
+) CutDispatchS order by YWSM,lb

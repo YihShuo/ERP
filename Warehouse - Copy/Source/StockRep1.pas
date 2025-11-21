@@ -1,0 +1,390 @@
+unit StockRep1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls,comobj,
+  GridsEh, DBGridEh;
+
+type
+  TStockRep = class(TForm)
+    Panel1: TPanel;
+    Label3: TLabel;
+    Label6: TLabel;
+    Label5: TLabel;
+    Edit3: TEdit;
+    Edit2: TEdit;
+    Button1: TButton;
+    Edit1: TEdit;
+    Button2: TButton;
+    Panel2: TPanel;
+    DBGrid1: TDBGridEh;
+    DBGrid2: TDBGridEh;
+    DDZL: TQuery;
+    DS1: TDataSource;
+    CTDet: TQuery;
+    DS2: TDataSource;
+    PopupMenu1: TPopupMenu;
+    Details1: TMenuItem;
+    DDZLDDBH: TStringField;
+    DDZLCTQty: TIntegerField;
+    DDZLokQty: TFloatField;
+    DDZLXieXing: TStringField;
+    DDZLSheHao: TStringField;
+    DDZLArticle: TStringField;
+    DDZLXieMing: TStringField;
+    DDZLShipDate: TDateTimeField;
+    DDZLDDQty: TIntegerField;
+    DDZLDDCT: TIntegerField;
+    DDZLQtyLack: TIntegerField;
+    DDZLCTLack: TIntegerField;
+    DDZLDDCC: TStringField;
+    DDZLXXCC: TStringField;
+    CTDetDDBH: TStringField;
+    CTDetDDCC: TStringField;
+    CTDetDDQty: TIntegerField;
+    CTDetXXCC: TStringField;
+    CTDetokQty: TFloatField;
+    DDZLCTCH: TIntegerField;
+    CB1: TCheckBox;
+    DDZLLastDate: TDateTimeField;
+    DDZLCTCK: TIntegerField;
+    DDZLCTYH: TIntegerField;
+    DDZLCTKC: TIntegerField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit3KeyPress(Sender: TObject; var Key: Char);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Details1Click(Sender: TObject);
+    procedure DDZLCalcFields(DataSet: TDataSet);
+    procedure DDZLAfterScroll(DataSet: TDataSet);
+    procedure DBGrid2GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure DBGrid1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  StockRep: TStockRep;
+
+implementation
+
+uses StockRep_Det1;
+
+{$R *.dfm}
+
+procedure TStockRep.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+procedure TStockRep.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+edit2.SetFocus;
+end;
+
+procedure TStockRep.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+edit3.SetFocus;
+end;
+
+procedure TStockRep.Edit3KeyPress(Sender: TObject; var Key: Char);
+begin
+
+if key=#13 then
+Button1.SetFocus;
+end;
+
+procedure TStockRep.Button1Click(Sender: TObject);
+begin
+with DDZL do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select SCSMRK.DDBH,count(SCSMRK.CTNO) as CTQty,sum(SCSMRK.Qty) as okQty,');
+    sql.add('XXZL.XieXing,XXZl.SheHao,XXZl.Article,XXZL.XieMing,DDZL.ShipDate,');
+    sql.add('DDZL.Pairs as DDQty,SCZLDate.CTQty as DDCT,DDZL.CCGB as DDCC,XXZl.CCGB as XXCC ,');
+    sql.add('max(SCSMRK.USERDATE) as LastDate ,isnull(SCSMCH.CTCH,0) as CTCH');
+    sql.add(',isnull(SCSMCK.CTCK,0) as CTCK,isnull(SCSMYH.CTYH,0) as CTYH,isnull(SCSMKC.CTKC,0) as CTKC   ');
+    sql.add('from SCSMRK ');
+    sql.add('left join DDZL on SCSMRK.DDBH=DDZL.DDBH ');
+    sql.add('left join XXZL on XXZL.XieXing=DDZL.XieXing and XXZl.SheHao=DDZl.SheHao ');
+    sql.add('left join SCZLDate on SCZLDate.ZLBH=DDZL.ZLBH ');
+
+    sql.add('left join (select SCSMRK.DDBH,count(SCSMRK.CTNO) as CTCH from SCSMRK ');
+    sql.add('           where SCSMRK.YN='+''''+'3'+'''');
+    sql.add('           group by SCSMRK.DDBH) SCSMCH');
+    sql.add('           on SCSMCH.DDBH=SCSMRK.DDBH ');
+    
+    sql.add('left join (select SCSMRK.DDBH,count(SCSMRK.CTNO) as CTCK from SCSMRK ');
+    sql.add('           where SCSMRK.YN='+''''+'2'+'''');
+    sql.add('           group by SCSMRK.DDBH) SCSMCK');
+    sql.add('           on SCSMCK.DDBH=SCSMRK.DDBH ');
+    
+    sql.add('left join (select SCSMRK.DDBH,count(SCSMRK.CTNO) as CTYH from SCSMRK ');
+    sql.add('           where SCSMRK.YN='+''''+'4'+'''');
+    sql.add('           group by SCSMRK.DDBH) SCSMYH');
+    sql.add('           on SCSMYH.DDBH=SCSMRK.DDBH ');
+
+    sql.add('left join (select SCSMRK.DDBH,count(SCSMRK.CTNO) as CTKC from SCSMRK ');
+    sql.add('           where SCSMRK.YN='+''''+'1'+'''');
+    sql.add('           group by SCSMRK.DDBH) SCSMKC');
+    sql.add('           on SCSMKC.DDBH=SCSMRK.DDBH ');
+
+    sql.add('left join (select distinct SCSMRK.DDBH from SCSMRK ');
+    sql.add('           where SCSMRK.YN='+''''+'1'+'''');
+    sql.add('            ) SCSMZK on SCSMZK.DDBH=SCSMRK.DDBH');        
+
+    sql.add('where XXZL.Article like '+''''+edit1.Text+'%'+'''');
+    sql.add('and  SCSMKC.DDBH is not null ');
+    sql.add('and XXZL.XieMing like '+''''+'%'+edit2.text+'%'+'''');
+    sql.add('and SCSMRK.DDBH like '+''''+edit3.Text+'%'+'''');
+    sql.add('group by SCSMRK.DDBH,XXZL.XieXing,XXZl.SheHao,XXZl.Article,XXZL.XieMing,');
+    sql.add('DDZL.ShipDate,DDZL.Pairs,SCZLDate.CTQty,DDZL.CCGB,XXZL.CCGB,');
+    sql.add('SCSMCH.CTCH,SCSMCK.CTCK,SCSMYH.CTYH,SCSMKC.CTKC');
+    if  CB1.Checked then
+      begin
+        sql.add('having  count(SCSMRK.CTNO)>=SCZLDate.CTQty ');
+      end;
+    sql.add('order by SCSMRK.DDBH');
+    active:=true;
+  end;
+  CTDet.active:=true;
+end;
+
+procedure TStockRep.Button2Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+CTDet.Active:=false;
+if DDZL.Active then
+  begin
+    if DDZL.recordcount=0 then
+      begin
+        showmessage('No record.');
+        abort;
+      end;
+  end
+  else
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+
+try
+  eclApp:=CreateOleObject('Excel.Application');
+  WorkBook:=CreateOleObject('Excel.Sheet');
+except
+  Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+  Exit;
+end;
+
+try
+  WorkBook:=eclApp.workbooks.Add;
+  eclApp.Cells(1,1):='NO';
+  for   i:=1   to   DDZL.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=DDZL.fields[i-1].FieldName;
+    end;
+  DDZL.First;
+  j:=2;
+  while   not  DDZL.Eof   do
+    begin
+      eclApp.Cells(j,1):=j-1;
+      for   i:=1   to   DDZL.fieldcount   do
+        begin
+          eclApp.Cells(j,i+1):=DDZL.Fields[i-1].Value;
+          eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+        end;
+      DDZL.Next;
+      inc(j);
+    end;
+  eclapp.columns.autofit;
+  showmessage('Succeed.');
+  eclApp.Visible:=True;
+  CTDet.Active:=true;
+except
+  on   F:Exception   do
+    showmessage(F.Message);
+end;
+
+end;
+
+procedure TStockRep.Details1Click(Sender: TObject);
+begin
+StockRep_Det:=TStockRep_Det.create(self);
+StockRep_Det.show;
+end;
+
+procedure TStockRep.DDZLCalcFields(DataSet: TDataSet);
+begin
+DDZL.FieldByName('QtyLack').Value:=DDZL.FieldByName('DDQty').Value-DDZL.FieldByName('okQty').Value;
+DDZL.FieldByName('CTLack').Value:=DDZL.FieldByName('DDCT').Value-DDZL.FieldByName('CTQty').Value;
+
+end;
+
+procedure TStockRep.DDZLAfterScroll(DataSet: TDataSet);
+var a,b,c,d:string;
+begin
+CTDet.Active:=false;
+if DDZL.RecordCount>0 then
+  begin
+    //找出訂單尺寸及斬刀尺寸的對應關係
+    a:=DDZL.fieldbyname('DDCC').value  ;
+    b:=DDZL.fieldbyname('XXCC').value;
+     //找出所有國別尺寸的對應關係
+       //找出訂單鞋型國別尺寸的對應關係
+    if a='K' then
+      begin
+        a:='XXZLS3.UK_Size as DDCC,';
+        c:='XXZLS3.UK_Size';
+      end;
+    if a='J' then
+    begin
+      a:='XXZLS3.JPN_Size as DDCC,';
+      c:='XXZLS3.JPN_Size';
+    end;
+    if a='E' then
+    begin
+      a:='XXZLS3.EUR_Size as DDCC,';
+      c:='XXZLS3.EUR_Size';
+    end;
+    if a='F' then
+    begin
+      a:='XXZLS3.FRN_Size as DDCC,';
+      c:='XXZLS3.FRN_Size';
+    end;
+    if a='M' then
+    begin
+      a:='XXZLS3.MX_Size as DDCC,';
+      c:='XXZLS3.MX_Size';
+    end;
+    if a='U' then
+    begin
+      a:='XXZLS3.US_Size as DDCC,';
+      c:='US_Size';
+    end;
+    if a='O' then
+    begin
+      a:='XXZLS3.OTH_Size as DDCC,';
+      C:='XXZLS3.OTH_Size';
+    end;
+    if b='K' then
+      b:='XXZLS3.UK_Size as XXCC,';
+      d:='XXZLS3.UK_Size';
+    if b='J' then
+    begin
+      b:='XXZLS3.JPN_Size as XXCC,';
+      d:='XXZLS3.JPN_Size';
+    end;
+    if b='E' then
+    begin
+      b:='XXZLS3.EUR_Size as XXCC,';
+      d:='XXZLS3.EUR_Size';
+    end;
+    if b='F' then
+    begin
+      b:='XXZLS3.FRN_Size as XXCC,';
+      d:='XXZLS3.FRN_Size';
+    end;
+    if b='M' then
+    begin
+      b:='XXZLS3.MX_Size as XXCC,';
+      d:='XXZLS3.MX_Size';
+    end;
+    if b='U' then
+    begin
+      b:='XXZLS3.US_Size as XXCC,';
+      d:='XXZLS3.US_Size';
+    end;
+    if b='O' then
+    begin
+      b:=' XXZLS3.OTH_Size as XXCC,';
+      d:='XXZLS3.OTH_Size';
+    end;
+
+      //尺寸明細
+   with CTDet do
+     begin
+       active:=false;
+       sql.Clear;
+       sql.add('select DDZLS.DDBH,DDZLS.CC as DDCC, DDZLS.Quantity as DDQty,'+b+' isnull(sum(SCSMRKS.Qty),0) as okQty');
+       sql.add('from DDZLS ');
+       sql.add('left join DDZL on DDZL.DDBH=DDZLS.DDBH');
+       sql.add('left join XXZLS3 on DDZLS.CC='+c+' and XXZLS3.XieXing=DDZL.XieXing ');
+       sql.add('left join SCSMRKS on SCSMRKS.DDBH=DDZLS.DDBH and SCSMRKS.XXCC='+d);
+       sql.add('left join SCSMRK on SCSMRk.DDBH=SCSMRKS.DDBH and SCSMRK.CTNO=SCSMRKS.CTNO ');
+       sql.add('where DDZLS.DDBH=:DDBH ');
+       sql.add('and DDZLS.Quantity<>0');
+       sql.add('and SCSMRK.YN='+''''+'1'+'''') ;
+       sql.add('group by DDZLS.DDBH,DDZLS.CC , DDZLS.Quantity,'+d);
+       sql.add('order by DDZLS.CC ');
+
+      { sql.add('select SCSMRKS.XXCC,Sum(SCSMRKS.Qty) as Qty
+from SCSMRKs
+left join SCSMRK on SCSMRK.DDBH=SCSMRKS.DDBH and SCSMRK.CTNO=SCSMRKS.CTNO
+where SCSMRKS.DDBH=:DDBH
+and SCSMRK.YN='1'
+group by SCSMRKS.XXCC
+order by SCSMRKS.XXCC   }
+
+       active:=true;
+     end;
+  end; 
+end;
+
+procedure TStockRep.DBGrid2GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+
+
+ if DDZL.FieldByName('DDCT').value>DDZL.FieldByName('CTQty').value  then
+  begin
+    dbgrid2.canvas.font.color:=clred;
+   // dbgrid2.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+ if DDZL.FieldByName('DDCT').value=DDZL.FieldByName('CTQty').value  then
+  begin
+    dbgrid2.canvas.font.color:=clLime;
+   // dbgrid2.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+ if (DDZL.FieldByName('CTCH').value>0) or (DDZL.FieldByName('CTCK').value>0) or (DDZL.FieldByName('CTYH').value>0)  then
+  begin
+    dbgrid2.canvas.font.color:=clNone;
+   // dbgrid2.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+end;
+
+procedure TStockRep.DBGrid1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+
+ if CTDet.FieldByName('DDQty').value<>CTDet.FieldByName('okQty').value  then
+  begin
+    dbgrid1.canvas.font.color:=clred;
+   // dbgrid1.defaultdrawcolumncell(rect,datacol,column,state);
+  end;
+end;
+
+procedure TStockRep.FormDestroy(Sender: TObject);
+begin
+StockRep:=nil;
+end;
+
+end.

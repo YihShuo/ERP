@@ -1,0 +1,387 @@
+object ScanStockBrand: TScanStockBrand
+  Left = 154
+  Top = 183
+  Width = 870
+  Height = 500
+  Caption = 'ScanStockBrand'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 16
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 862
+    Height = 73
+    Align = alTop
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 0
+      Top = 44
+      Width = 86
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'OrderNO:'
+    end
+    object Label2: TLabel
+      Left = 192
+      Top = 43
+      Width = 62
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Location:'
+    end
+    object Label3: TLabel
+      Left = 320
+      Top = 43
+      Width = 69
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Customer:'
+    end
+    object Label4: TLabel
+      Left = 480
+      Top = 44
+      Width = 62
+      Height = 16
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Country:'
+    end
+    object Label5: TLabel
+      Left = 8
+      Top = 8
+      Width = 177
+      Height = 16
+      Caption = #25104#21697#20489#24235#23384#29376#27841#34920':'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = #26032#32048#26126#39636
+      Font.Style = []
+      ParentFont = False
+    end
+    object Edit1: TEdit
+      Left = 88
+      Top = 40
+      Width = 105
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 0
+    end
+    object Edit2: TEdit
+      Left = 256
+      Top = 40
+      Width = 65
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 1
+    end
+    object Edit3: TEdit
+      Left = 392
+      Top = 40
+      Width = 89
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 2
+    end
+    object Edit4: TEdit
+      Left = 544
+      Top = 40
+      Width = 89
+      Height = 24
+      CharCase = ecUpperCase
+      TabOrder = 3
+    end
+    object Button1: TButton
+      Left = 638
+      Top = 34
+      Width = 73
+      Height = 33
+      Caption = 'Query'
+      TabOrder = 4
+      OnClick = Button1Click
+    end
+  end
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 73
+    Width = 862
+    Height = 396
+    Align = alClient
+    DataSource = DS1
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -13
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind]
+    ParentFont = False
+    PopupMenu = PopupMenu1
+    SumList.Active = True
+    TabOrder = 1
+    TitleFont.Charset = ANSI_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = #26032#32048#26126#39636
+    TitleFont.Style = []
+    UseMultiTitle = True
+    OnGetCellParams = DBGridEh1GetCellParams
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'KFJC'
+        Footers = <
+          item
+            FieldName = 'KFJC'
+            ValueType = fvtCount
+          end>
+        Title.Caption = #23458#25142#31777#31281'|KFJC'
+        Title.TitleButton = True
+        Width = 130
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Country'
+        Footers = <>
+        Title.Caption = #20986#36008#22283#23478'|Country'
+        Title.TitleButton = True
+        Width = 136
+      end
+      item
+        Color = 11796403
+        EditButtons = <>
+        FieldName = 'Qty'
+        Footers = <
+          item
+            FieldName = 'Qty'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #35330#21934#38617#25976'|Qty'
+        Title.TitleButton = True
+        Width = 80
+      end
+      item
+        Color = 11796403
+        EditButtons = <>
+        FieldName = 'okQty'
+        Footers = <
+          item
+            FieldName = 'okQty'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #20837#24235#38617#25976'|okQty'
+        Title.TitleButton = True
+        Width = 80
+      end
+      item
+        Color = 11796403
+        EditButtons = <>
+        FieldName = 'LackQty'
+        Footers = <
+          item
+            FieldName = 'LackQty'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #23578#27424#38617#25976'|LackQty'
+        Title.TitleButton = True
+        Width = 80
+      end
+      item
+        Color = 16767449
+        EditButtons = <>
+        FieldName = 'CTS'
+        Footers = <
+          item
+            FieldName = 'CTS'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #35330#21934#31665#25976'|CTS'
+        Title.TitleButton = True
+        Width = 65
+      end
+      item
+        Color = 16767449
+        EditButtons = <>
+        FieldName = 'okCTS'
+        Footers = <
+          item
+            FieldName = 'okCTS'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #24050#35037#31665#25976'|okCTS'
+        Title.TitleButton = True
+        Width = 65
+      end
+      item
+        Color = 16767449
+        EditButtons = <>
+        FieldName = 'LackCTS'
+        Footers = <
+          item
+            FieldName = 'LackCTS'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #23578#27424#31665#25976'|LackCTS'
+        Title.TitleButton = True
+        Width = 65
+      end>
+  end
+  object Query1: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'select YWCP.KHBH,YWCP.KFJC,YWCP.DDGB,YWCP.Country,isnull(sum(YWC' +
+        'P.Qty),0) as Qty,'
+      
+        '       isnull(sum(YWCP.okQty),0) as okQty,isnull(sum(YWCP.Qty),0' +
+        ')-isnull(sum(YWCP.okQty),0) as LackQty,'
+      
+        '       isnull(sum(YWBZPO.CTS),0) as CTS, isnull(sum(YWCP.okCTS),' +
+        '0) as okCTS '
+      
+        '       ,isnull(sum(YWBZPO.CTS),0)-isnull(sum(YWCP.okCTS),0) as L' +
+        'ackCTS '
+      
+        'from (select YWCP.DDBH,count(YWCP.DDBH) as okCTS,sum(YWCP.Qty) a' +
+        's okQty,'
+      
+        '             DDZL.DDGB,LBZLS.YWSM as Country,YWDD.Qty,DDZL.KHBH,' +
+        'KFZL.KFJC'
+      '      from YWCP'
+      '      left join YWDD on YWDD.DDBH=YWCP.DDBH '
+      '      left join DDZL on YWDD.YSBH=DDZl.DDBH '
+      '      left join LBZLS on LBZLS.LB='#39'06'#39' and LBZLS.LBDH=DDZL.DDGB'
+      '      left join KFZL on KFZL.KFDH=DDZL.KHBH '
+      '      where DDZL.DDBH like '#39'%'#39
+      '            and YWCP.KCBH like '#39'%'#39
+      '            and KFZL.KFJC like '#39'%%'#39
+      '            and LBZLS.YWSM like '#39'%%'#39
+      '            and YWCP.SB='#39'1'#39
+      
+        '       group by YWCP.DDBH,YWDD.Qty,DDZL.DDGB,LBZLS.YWSM,DDZL.KHB' +
+        'H,KFZL.KFJC) YWCP'
+      'left join (select YWBZPO.DDBH,sum(YWBZPO.CTS) as CTS '
+      
+        '           from (select distinct YWBZPOS.DDBH,YWBZPOS.XH,YWBZPOS' +
+        '.CTS from YWBZPOS ) YWBZPO  '
+      
+        '           group by YWBZPO.DDBH) YWBZPO on YWCP.DDBH=YWBZPO.DDBH' +
+        ' '
+      'group by  YWCP.KHBH,YWCP.KFJC,YWCP.DDGB,YWCP.Country '
+      'order by  YWCP.KHBH,YWCP.KFJC,YWCP.DDGB,YWCP.Country')
+    Left = 168
+    Top = 120
+    object Query1KFJC: TStringField
+      FieldName = 'KFJC'
+      FixedChar = True
+    end
+    object Query1KHBH: TStringField
+      FieldName = 'KHBH'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1Country: TStringField
+      FieldName = 'Country'
+      FixedChar = True
+      Size = 50
+    end
+    object Query1DDGB: TStringField
+      FieldName = 'DDGB'
+      FixedChar = True
+      Size = 4
+    end
+    object Query1Qty: TFloatField
+      FieldName = 'Qty'
+      DisplayFormat = '##,#0'
+    end
+    object Query1okQty: TIntegerField
+      FieldName = 'okQty'
+      DisplayFormat = '##,#0'
+    end
+    object Query1LackQty: TFloatField
+      FieldName = 'LackQty'
+      DisplayFormat = '##,#0'
+    end
+    object Query1CTS: TIntegerField
+      FieldName = 'CTS'
+      DisplayFormat = '##,#0'
+    end
+    object Query1okCTS: TIntegerField
+      FieldName = 'okCTS'
+      DisplayFormat = '##,#0'
+    end
+    object Query1LackCTS: TIntegerField
+      FieldName = 'LackCTS'
+      DisplayFormat = '##,#0'
+    end
+  end
+  object DS1: TDataSource
+    DataSet = Query1
+    Left = 208
+    Top = 120
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 296
+    Top = 160
+    object Excel1: TMenuItem
+      Caption = 'Excel'
+      OnClick = Excel1Click
+    end
+    object Print1: TMenuItem
+      Caption = 'Print'
+      OnClick = Print1Click
+    end
+    object Detail1: TMenuItem
+      Caption = 'Detail'
+      OnClick = Detail1Click
+    end
+  end
+  object PrintDBGridEh1: TPrintDBGridEh
+    DBGridEh = DBGridEh1
+    Options = []
+    Page.BottomMargin = 0.400000000000000000
+    Page.LeftMargin = 0.400000000000000000
+    Page.RightMargin = 0.400000000000000000
+    Page.TopMargin = 0.400000000000000000
+    PageFooter.Font.Charset = DEFAULT_CHARSET
+    PageFooter.Font.Color = clWindowText
+    PageFooter.Font.Height = -24
+    PageFooter.Font.Name = 'MS Sans Serif'
+    PageFooter.Font.Style = []
+    PageHeader.CenterText.Strings = (
+      #25104#21697#20489#24235#23384#34920
+      '('#20998#23458#20154'&'#22283#23478')'
+      '')
+    PageHeader.Font.Charset = ANSI_CHARSET
+    PageHeader.Font.Color = clWindowText
+    PageHeader.Font.Height = -21
+    PageHeader.Font.Name = #26032#32048#26126#39636
+    PageHeader.Font.Style = [fsBold]
+    Units = MM
+    Left = 168
+    Top = 152
+  end
+end

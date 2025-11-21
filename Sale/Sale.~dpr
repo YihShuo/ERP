@@ -1,0 +1,116 @@
+program Sale;
+
+uses
+  Forms,
+  windows,
+  main1 in 'source\main1.pas' {main},
+  ulogin in 'source\ulogin.pas' {LOGIN},
+  DM3 in 'source\DM3.pas' {DM2: TDataModule},
+  OrderList1 in 'source\SN12\OrderList1.pas' {OrderList},
+  OrderPO1 in 'source\SN12\OrderPO1.pas' {OrderPO},
+  CarttonModel1 in 'source\CarttonModel1.pas' {CarttonModel},
+  OrderSale1 in 'source\OrderSale1.pas' {OrderSale},
+  OrderSale_DD1 in 'source\OrderSale_DD1.pas' {OrderSale_DD},
+  ModelBasic1 in 'source\ModelBasic1.pas' {ModelBasic},
+  ModelBasic_CL1 in 'source\ModelBasic_CL1.pas' {ModelBasic_CL},
+  CartonMark1 in 'source\CartonMark1.pas' {CartonMark},
+  OrderMark1 in 'source\SN12\OrderMark1.pas' {OrderMark},
+  OrderMark_Mt1 in 'source\OrderMark_Mt1.pas' {OrderMark_Mt},
+  CartonOrder1 in 'source\SN23\CartonOrder1.pas' {CartonOrder},
+  CartonOrder_CT1 in 'source\SN23\CartonOrder_CT1.pas' {CartonOrder_CT},
+  CartonOrder_Me1 in 'source\SN23\CartonOrder_Me1.pas' {CartonOrder_Me},
+  CartonOrder_Print1 in 'Source\SN23\CartonOrder_Print1.pas' {CartonOrder_Print},
+  OrderMark_Mt21 in 'Source\OrderMark_Mt21.pas' {OrderMark_Mt2},
+  OrderMark_Mt31 in 'Source\OrderMark_Mt31.pas' {OrderMark_Mt3},
+  OrderMark_Mt41 in 'Source\OrderMark_Mt41.pas' {OrderMark_Mt4},
+  OrderpackMemo1 in 'Source\SN12\OrderpackMemo1.pas' {OrderpackMemo},
+  MaterialNew1 in 'Source\MaterialNew1.pas' {MaterialNew},
+  MaterialNew_LB1 in 'Source\MaterialNew_LB1.pas' {MaterialNew_LB},
+  OrderMark_Im1 in 'Source\OrderMark_Im1.pas' {OrderMark_Im},
+  CartonMark_KH1 in 'Source\CartonMark_KH1.pas' {CartonMark_KH},
+  MemoNew1 in 'Source\MemoNew1.pas' {MemoNew},
+  MemoNew_KH1 in 'Source\MemoNew_KH1.pas' {MemoNew_KH},
+  OrderpackMemo_BZ1 in 'Source\OrderpackMemo_BZ1.pas' {OrderpackMemo_BZ},
+  OrderpackMemo_Im1 in 'Source\OrderpackMemo_Im1.pas' {OrderpackMemo_Im},
+  OrderPack_Print1 in 'Source\SN23\OrderPack_Print1.pas' {OrderPack_Print},
+  MaterialNew_ZS1 in 'Source\MaterialNew_ZS1.pas' {MaterialNew_ZS},
+  BarPrint1 in 'Source\BarPrint1.pas' {BarPrint},
+  CartonOrderNW1 in 'Source\SN23\CartonOrderNW1.pas' {CartonOrderNW},
+  CartonOrder_ZS1 in 'Source\SN23\CartonOrder_ZS1.pas' {CartonOrder_ZS},
+  Orderpack_TP1 in 'Source\SN12\Orderpack_TP1.pas' {Orderpack_TP},
+  PackShip1 in 'Source\PackShip1.pas' {PackShip},
+  ExecInvoice1 in 'Source\ExecInvoice1.pas' {ExecInvoice},
+  CartonOrder_Memo1 in 'Source\SN23\CartonOrder_Memo1.pas' {CartonOrder_Memo},
+  ExecShort1 in 'Source\ExecShort1.pas' {ExecShort},
+  ExecShort_Car1 in 'Source\ExecShort_Car1.pas' {ExecShort_Car},
+  Orderpack_Label1 in 'Source\SN12\Orderpack_Label1.pas' {Orderpack_Label},
+  OrderSale_NoPrice1 in 'Source\OrderSale_NoPrice1.pas' {OrderSale_NoPrice},
+  SaleReport in 'Source\SaleReport.pas' {salereportf},
+  Customscomfirmp in 'Source\SN16\Customscomfirmp.pas' {CustomsComfirm},
+  TraceCarton1 in 'Source\TraceCarton1.pas' {TraceCarton},
+  OrderAnalysisp in '..\QC\Source\OrderAnalysisp.pas' {OrderAnalysis},
+  uAutoComplete in 'Source\uAutoComplete.pas',
+  ModelTolerP in 'Source\SN25\ModelTolerP.pas' {ModelToler},
+  CopyModelTolerP in 'Source\SN26\CopyModelTolerP.pas' {CopyModelToler},
+  ModelToler_DDZL in 'Source\SN25\ModelToler_DDZL.pas' {ModelToler_DDZLForm},
+  ExcelImportp in 'Source\SN17\ExcelImportp.pas' {ExcelImport},
+  DDZLXXCCp in 'Source\SN17\DDZLXXCCp.pas' {DDZLXXCC},
+  ExcelUploadp in 'Source\SN18\ExcelUploadp.pas' {ExcelUpload},
+  forecastorder1 in 'Source\SN521\forecastorder1.pas' {forecastorder},
+  ExcelBuylist1 in 'Source\SN53\ExcelBuylist1.pas' {ExcelBuylist},
+  ScanOutbox1 in 'Source\SN43\ScanOutbox1.pas' {ScanOutbox},
+  SKUMOQ1 in 'Source\SN54\SKUMOQ1.pas' {SKUMOQ},
+  OrderPack_CartonPrint1 in 'Source\SN12\OrderPack_CartonPrint1.pas' {OrderPack_CartonPrint},
+  OrderPack_CartonPChoice1 in 'Source\SN12\OrderPack_CartonPChoice1.pas' {OrderPack_CartonPChoice},
+  OrderPack_CartonPrintS1 in 'Source\SN12\OrderPack_CartonPrintS1.pas' {OrderPack_CartonPrintS},
+  OrderPack_CartonPrintD1 in 'Source\SN12\OrderPack_CartonPrintD1.pas' {OrderPack_CartonPrintD},
+  OrderPack_CartonPrintH1 in 'Source\SN12\OrderPack_CartonPrintH1.pas' {OrderPack_CartonPrintH},
+  OrderSale_Pack1 in 'Source\SN11\OrderSale_Pack1.pas' {OrderSale_Pack},
+  untClipboard in 'Source\SN11\untClipboard.pas',
+  CartonOrder_PrintDet1 in 'Source\SN23\CartonOrder_PrintDet1.pas' {CartonOrder_PrintDet},
+  forecastpurchase1 in 'Source\SN522\forecastpurchase1.pas' {forecastpurchase},
+  CartonXXZL1 in 'Source\SN27\CartonXXZL1.pas' {CartonXXZL},
+  CartonXXZL_CLZL1 in 'Source\SN27\CartonXXZL_CLZL1.pas' {CartonXXZL_CLZL},
+  MaterialNew_ZSZL1 in 'Source\SN14\MaterialNew_ZSZL1.pas' {MaterialNew_ZSZL},
+  DetailSideMark_PackingMemo1 in 'Source\SN28\DetailSideMark_PackingMemo1.pas' {DetailSideMark_PackingMemo},
+  YWXXBox1 in 'Source\SN29\YWXXBox1.pas' {YWXXBox},
+  OrderInformation1 in 'Source\SN19\OrderInformation1.pas' {OrderInformation},
+  BW_CL_CS1 in 'Source\SN34\BW_CL_CS1.pas' {BW_CL_CS},
+  Cond1 in 'Source\SN34\Cond1.pas' {Cond},
+  Copy1 in 'Source\SN34\Copy1.pas' {Copy},
+  Dest_BW_CL_CS1 in 'Source\SN34\Dest_BW_CL_CS1.pas' {Dest_BW_CL_CS},
+  DestinationPackingBox_Label1 in 'Source\SN34\DestinationPackingBox_Label1.pas' {DestinationPackingBox_Label},
+  Detail1 in 'Source\SN35\Detail1.pas' {Detail},
+  OrderCalculateSpecialBOM1 in 'Source\SN35\OrderCalculateSpecialBOM1.pas' {OrderCalculateSpecialBOM},
+  RTOVData1 in 'Source\SN1A\RTOVData1.pas' {RTOVData},
+  RTOV_Detail1 in 'Source\SN1A\RTOV_Detail1.pas' {RTOV_Detail},
+  Import_Label_Usage1 in 'Source\SN1B\Import_Label_Usage1.pas' {Import_Label_Usage},
+  UccLabel1 in 'Source\SN44\UccLabel1.pas' {UccLabel};
+
+{$R *.res}
+
+var   MutexHandle:Thandle;
+begin
+  Mutexhandle:=windows.CreateMutex(nil,true,'Sale.exe');
+  if   Mutexhandle<>0   then
+  begin
+      if   getlasterror=windows.ERROR_ALREADY_EXISTS   then
+      begin
+          closehandle(Mutexhandle);
+          halt;
+      end;
+  end;
+  Application.Initialize;
+  login:=tlogin.create(application);
+  login.Show;
+  login.Update;
+  //  Application.CreateForm(TLOGIN, LOGIN);
+  Application.Title := 'Lai Yih ERP system----Sale';
+  Application.CreateForm(TDM2, DM2);
+  Application.CreateForm(Tmain, main);
+  Application.CreateForm(TUccLabel, UccLabel);
+  login.hide;
+  login.free;
+  Application.Run;
+
+end.

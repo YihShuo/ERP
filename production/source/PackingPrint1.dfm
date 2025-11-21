@@ -1,0 +1,365 @@
+object PackingPrint: TPackingPrint
+  Left = 270
+  Top = 201
+  Width = 870
+  Height = 500
+  Caption = 'PackingPrint'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBGrid1: TDBGridEh
+    Left = 0
+    Top = 64
+    Width = 862
+    Height = 402
+    Align = alClient
+    DataSource = DS1
+    Flat = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'VNI-Times'
+    Font.Style = []
+    FooterColor = 16762052
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -11
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    ParentFont = False
+    SumList.Active = True
+    TabOrder = 0
+    TitleFont.Charset = ANSI_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'Arial'
+    TitleFont.Style = []
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'YWDD'
+        Footers = <>
+        Width = 91
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DDBH'
+        Footers = <>
+        Width = 99
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Article'
+        Footers = <>
+        ReadOnly = True
+        Width = 103
+      end
+      item
+        EditButtons = <>
+        FieldName = 'XieMing'
+        Footers = <>
+        ReadOnly = True
+        Width = 144
+      end
+      item
+        DisplayFormat = '##,#0'
+        EditButtons = <>
+        FieldName = 'Pairs'
+        Footers = <
+          item
+            DisplayFormat = '##,#0'
+            FieldName = 'Pairs'
+            ValueType = fvtSum
+          end>
+        ReadOnly = True
+        Width = 54
+      end
+      item
+        DisplayFormat = 'yyyy/MM/dd'
+        EditButtons = <>
+        FieldName = 'ShipDate'
+        Footers = <>
+        ReadOnly = True
+        Width = 72
+      end
+      item
+        EditButtons = <>
+        FieldName = 'KHPO'
+        Footers = <>
+        ReadOnly = True
+        Width = 102
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DDGB'
+        Footers = <>
+        ReadOnly = True
+        Width = 94
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CCGB'
+        Footers = <>
+        ReadOnly = True
+        Width = 22
+      end
+      item
+        EditButtons = <>
+        FieldName = 'KFJC'
+        Footers = <>
+        ReadOnly = True
+        Width = 87
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DDZT'
+        Footers = <>
+        ReadOnly = True
+        Width = 25
+      end
+      item
+        EditButtons = <>
+        FieldName = 'GSBH'
+        Footers = <>
+        ReadOnly = True
+        Width = 40
+      end>
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 0
+    Width = 862
+    Height = 64
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    object Label4: TLabel
+      Left = 16
+      Top = 24
+      Width = 38
+      Height = 20
+      Caption = 'Year:'
+    end
+    object Label5: TLabel
+      Left = 144
+      Top = 24
+      Width = 49
+      Height = 20
+      Caption = 'Month:'
+    end
+    object Label1: TLabel
+      Left = 288
+      Top = 24
+      Width = 50
+      Height = 20
+      Caption = 'OrdNo:'
+    end
+    object Label2: TLabel
+      Left = 472
+      Top = 24
+      Width = 59
+      Height = 20
+      Caption = 'XieXing:'
+    end
+    object CBX1: TComboBox
+      Left = 64
+      Top = 16
+      Width = 65
+      Height = 28
+      Style = csDropDownList
+      ItemHeight = 20
+      ItemIndex = 2
+      TabOrder = 0
+      Text = '2008'
+      Items.Strings = (
+        '2006'
+        '2007'
+        '2008'
+        '2009'
+        '2010'
+        '2011'
+        '2012'
+        '2013'
+        '2014'
+        '2015'
+        '2016'
+        '2017'
+        '2018'
+        '2019'
+        '2020')
+    end
+    object CBX2: TComboBox
+      Left = 208
+      Top = 16
+      Width = 49
+      Height = 28
+      Style = csDropDownList
+      DropDownCount = 12
+      ItemHeight = 20
+      ItemIndex = 0
+      TabOrder = 1
+      Text = '01'
+      Items.Strings = (
+        '01'
+        '02'
+        '03'
+        '04'
+        '05'
+        '06'
+        '07'
+        '08'
+        '09'
+        '10'
+        '11'
+        '12')
+    end
+    object Edit1: TEdit
+      Left = 344
+      Top = 16
+      Width = 113
+      Height = 28
+      CharCase = ecUpperCase
+      TabOrder = 2
+    end
+    object Button1: TButton
+      Left = 672
+      Top = 16
+      Width = 81
+      Height = 33
+      Caption = 'Query'
+      TabOrder = 3
+      OnClick = Button1Click
+    end
+    object Edit2: TEdit
+      Left = 536
+      Top = 16
+      Width = 121
+      Height = 28
+      CharCase = ecUpperCase
+      TabOrder = 4
+    end
+    object Button2: TButton
+      Left = 760
+      Top = 16
+      Width = 81
+      Height = 33
+      Caption = 'Print'
+      TabOrder = 5
+      OnClick = Button2Click
+    end
+  end
+  object DDZL: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      
+        'select  (case when OrderSplit.ZDBH is null then DDZL.DDBH else O' +
+        'rderSplit.ZDBH end) as YWDD,'
+      
+        'DDZL.DDBH,DDZL.Article,DDZL.ShipDate,DDZL.KHPO,DDZL.CCGB,DDZL.DD' +
+        'ZT,DDZL.GSBH,'
+      'XXZl.XieMing,KFZL.KFJC,lbzls.YWSM as DDGB, '
+      
+        '(case when OrderSplit.Pairs is null then DDZL.Pairs else OrderSp' +
+        'lit.Pairs end) as Pairs ,XXZL.IMGName'
+      'from DDZL '
+      'left join OrderSplit on OrderSplit.DDBH=DDZL.DDBH'
+      
+        'left join XXZL on DDZl.XieXing=XXZl.XieXing and DDZl.SheHao=XXZl' +
+        '.SheHao '
+      'left join kfzl on KFZl.KFDH=DDZL.KHBH'
+      'left join LBZLS on lbzls.lb='#39'06'#39
+      '                  and lbzls.lbdh=DDZL.DDGB '
+      'where DDZL.DDBH like '#39'%%'#39
+      
+        'and Convert(smalldatetime,convert(varchar,DDZL.Shipdate,111)) be' +
+        'tween '
+      #39'2008/12/01'#39' and '#39'2008/12/31'#39
+      'and XXZL.XieMing like '#39'%%'#39
+      'and DDZL.GSBH='#39'VR1'#39
+      'order by DDZL.DDBH,ordersplit.ZDBH ')
+    Left = 128
+    Top = 208
+    object DDZLYWDD: TStringField
+      FieldName = 'YWDD'
+      FixedChar = True
+      Size = 15
+    end
+    object DDZLDDBH: TStringField
+      FieldName = 'DDBH'
+      FixedChar = True
+      Size = 15
+    end
+    object DDZLArticle: TStringField
+      FieldName = 'Article'
+      FixedChar = True
+    end
+    object DDZLShipDate: TDateTimeField
+      FieldName = 'ShipDate'
+    end
+    object DDZLCCGB: TStringField
+      FieldName = 'CCGB'
+      FixedChar = True
+      Size = 1
+    end
+    object DDZLDDZT: TStringField
+      FieldName = 'DDZT'
+      FixedChar = True
+      Size = 1
+    end
+    object DDZLGSBH: TStringField
+      FieldName = 'GSBH'
+      FixedChar = True
+      Size = 4
+    end
+    object DDZLXieMing: TStringField
+      FieldName = 'XieMing'
+      FixedChar = True
+      Size = 50
+    end
+    object DDZLKFJC: TStringField
+      FieldName = 'KFJC'
+      FixedChar = True
+    end
+    object DDZLPairs: TIntegerField
+      FieldName = 'Pairs'
+    end
+    object DDZLKHPO: TStringField
+      FieldName = 'KHPO'
+      FixedChar = True
+      Size = 25
+    end
+    object DDZLDDGB: TStringField
+      FieldName = 'DDGB'
+      FixedChar = True
+      Size = 50
+    end
+    object DDZLIMGName: TStringField
+      FieldName = 'IMGName'
+      FixedChar = True
+      Size = 60
+    end
+  end
+  object DS1: TDataSource
+    DataSet = DDZL
+    Left = 160
+    Top = 208
+  end
+end

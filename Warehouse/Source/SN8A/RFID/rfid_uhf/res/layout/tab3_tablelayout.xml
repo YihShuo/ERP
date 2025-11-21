@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tab3_inv"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+  <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" > 
+  <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >   
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView_matid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tab3_layout_textView_MatID" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+	    <EditText
+	        android:id="@+id/edData_matid"
+	        android:editable="false" 
+	        android:layout_width="0dp"
+	        android:layout_height="match_parent"
+	        android:layout_weight="0.7" >
+	        <requestFocus />
+	    </EditText>
+	    <EditText
+	        android:id="@+id/edData_dwbh"
+	        android:editable="false" 
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.3" >
+	        <requestFocus />
+	    </EditText>
+    </LinearLayout>  
+      
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView_matnm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tab3_layout_textView_MatNM" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edData_matnm"
+        android:editable="false" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <requestFocus />
+    </EditText>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <TextView
+            android:id="@+id/textView_matpack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tab3_layout_textView_MatPack" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/edData_matpack"
+            android:editable="false" 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" 
+            android:layout_weight="0.3">
+
+            <requestFocus />
+        </EditText>
+        <EditText
+            android:id="@+id/edData_matpackqty"
+            android:editable="false" 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7" >
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <TextView
+            android:id="@+id/textView_mattotalqty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tab3_layout_textView_MatTotalQty" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <EditText
+            android:id="@+id/edData_mattotalqty"
+            android:editable="false" 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" 
+            android:layout_weight="0.7">
+
+            <requestFocus />
+        </EditText>
+        <EditText
+            android:id="@+id/edData_matkcbh"
+            android:editable="false" 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3" >
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <TextView
+            android:id="@+id/textView_matmemo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tab3_layout_textView_MatMemo" />
+    </LinearLayout>
+        <EditText
+        android:id="@+id/edData_matmemo"
+        android:editable="false" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <requestFocus />
+    </EditText>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <TextView
+            android:id="@+id/textView_docno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tab3_layout_textView_Docno" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <EditText
+        android:id="@+id/edData_docno"
+        android:editable="false" 
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" 
+        android:layout_weight="0.6" >
+        <requestFocus />
+    </EditText>    
+        <EditText
+        android:id="@+id/edData_userdate"
+        android:editable="false" 
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.4" >
+        <requestFocus />
+    </EditText>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <TextView
+            android:id="@+id/textView_zsno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tab3_layout_textView_Zsno" />
+    </LinearLayout>
+        <EditText
+        android:id="@+id/edData_zsno"
+        android:editable="false" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <requestFocus />
+    </EditText>    
+   </LinearLayout>   
+  </ScrollView>  
+</LinearLayout>

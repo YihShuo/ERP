@@ -1,0 +1,770 @@
+unit main1;
+
+interface      
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, jpeg, ExtCtrls, StdCtrls, ComCtrls, DB, DBTables,DBGridS,DBGridEh;
+  {  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls;}
+
+type
+  Tmain = class(TForm)
+    MainMenu1: TMainMenu;
+    SN1: TMenuItem;
+    SN3: TMenuItem;
+    SN4: TMenuItem;
+    SN5: TMenuItem;
+    SN6: TMenuItem;
+    SN10: TMenuItem;
+    N1: TMenuItem;
+    SN31: TMenuItem;
+    SN41: TMenuItem;
+    SN51: TMenuItem;
+    SN11: TMenuItem;
+    Image1: TImage;
+    SN42: TMenuItem;
+    Edit1: TEdit;
+    SN2: TMenuItem;
+    SN12: TMenuItem;
+    SN22: TMenuItem;
+    SN121: TMenuItem;
+    SN122: TMenuItem;
+    SN123: TMenuItem;
+    StatusBar1: TStatusBar;
+    SN32: TMenuItem;
+    SN33: TMenuItem;
+    Query1: TQuery;
+    SN34: TMenuItem;
+    SN43: TMenuItem;
+    SN44: TMenuItem;
+    SN45: TMenuItem;
+    SN46: TMenuItem;
+    SN47: TMenuItem;
+    SN48: TMenuItem;
+    SN35: TMenuItem;
+    SN52: TMenuItem;
+    SN13: TMenuItem;
+    SN14: TMenuItem;
+    SN49: TMenuItem;
+    Edit2: TEdit;
+    SN4A: TMenuItem;
+    SN53: TMenuItem;
+    SN36: TMenuItem;
+    SN54: TMenuItem;
+    SN471: TMenuItem;
+    SN472: TMenuItem;
+    SN37: TMenuItem;
+    SN321: TMenuItem;
+    SN322: TMenuItem;
+    SN38: TMenuItem;
+    SN55: TMenuItem;
+    SN381: TMenuItem;
+    SN382: TMenuItem;
+    SN383: TMenuItem;
+    SN384: TMenuItem;
+    SN15: TMenuItem;
+    SN23: TMenuItem;
+    SN24: TMenuItem;
+    SN39: TMenuItem;
+    BLimitHideQry: TQuery;
+    SN323: TMenuItem;
+    SN3A: TMenuItem;
+    SN7: TMenuItem;
+    SN61: TMenuItem;
+    SN62: TMenuItem;
+    SN63: TMenuItem;
+    SN64: TMenuItem;
+    SN65: TMenuItem;
+    SN66: TMenuItem;
+    SN25: TMenuItem;
+    SN3B: TMenuItem;
+    SN3C: TMenuItem;
+    SN385: TMenuItem;
+    SN21: TMenuItem;
+    SN386: TMenuItem;
+    SN387: TMenuItem;
+    N71: TMenuItem;
+    SN71: TMenuItem;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure SN10Click(Sender: TObject);
+    procedure SN31Click(Sender: TObject);
+    procedure SN33Click(Sender: TObject);
+    procedure SN41Click(Sender: TObject);
+    procedure SN42Click(Sender: TObject);
+    procedure SN51Click(Sender: TObject);
+    procedure SN34Click(Sender: TObject);
+    procedure SN43Click(Sender: TObject);
+    procedure SN44Click(Sender: TObject);
+    procedure SN45Click(Sender: TObject);
+    procedure SN46Click(Sender: TObject);
+    procedure SN48Click(Sender: TObject);
+    procedure SN35Click(Sender: TObject);
+    procedure SN52Click(Sender: TObject);
+    procedure SN13Click(Sender: TObject);
+    procedure SN14Click(Sender: TObject);
+    procedure SN49Click(Sender: TObject);
+    procedure SN4AClick(Sender: TObject);
+    procedure SN53Click(Sender: TObject);
+    procedure SN36Click(Sender: TObject);
+    procedure SN54Click(Sender: TObject);
+    procedure SN472Click(Sender: TObject);
+    procedure SN471Click(Sender: TObject);
+    procedure SN37Click(Sender: TObject);
+    procedure SN322Click(Sender: TObject);
+    procedure SN321Click(Sender: TObject);
+    procedure SN55Click(Sender: TObject);
+    procedure SN381Click(Sender: TObject);
+    procedure SN382Click(Sender: TObject);
+    procedure SN22Click(Sender: TObject);
+    procedure SN383Click(Sender: TObject);
+    procedure SN384Click(Sender: TObject);
+    procedure SN15Click(Sender: TObject);
+    procedure SN23Click(Sender: TObject);
+    procedure SN24Click(Sender: TObject);
+    procedure SN39Click(Sender: TObject);
+    procedure SN323Click(Sender: TObject);
+    procedure SN3AClick(Sender: TObject);
+    procedure SN61Click(Sender: TObject);
+    procedure SN62Click(Sender: TObject);
+    procedure SN63Click(Sender: TObject);
+    procedure SN64Click(Sender: TObject);
+    procedure SN65Click(Sender: TObject);
+    procedure SN66Click(Sender: TObject);
+    procedure SN25Click(Sender: TObject);
+    procedure SN3BClick(Sender: TObject);
+    procedure SN3CClick(Sender: TObject);
+    procedure SN385Click(Sender: TObject);
+    procedure SN21Click(Sender: TObject);
+    procedure SN386Click(Sender: TObject);
+    procedure SN387Click(Sender: TObject);
+  private
+     MKID:String;
+     LanguageID:String;
+    { Private declarations }
+     //---20150817 Projoe 補上由 Nick 所提供的function log 程式
+    //用法: SaveProLog(GetMKID(),TMenuItem(Sender).Name,GetUserID());
+    procedure SaveProLog(AMKID: string; AFORMID: string; AUSERID: string);
+    //---20150817 Projoe 修改 Menu 上面的按鈕呼叫方式
+    procedure showFm(var fm: Pointer; parentClass: TPersistentClass; miname: string);
+  public
+    ServerIP:string;
+    { Public declarations }
+    LIY_DD,LIY_ERP:String;
+    procedure Language();
+    procedure FormLanguage(var formObj:Pointer;mainForm:string);
+    procedure FormDBGridLanguage(var formObj:Pointer ;mainForm:string);
+    procedure EnableFORMID();
+  end;
+
+var
+  main: Tmain;
+  suser,spwd:string;
+
+implementation
+
+uses DM3,BOMM1, BOMVN1, PartType1, MaterialNew1, PARTNEW1, ProdRate1,
+  Nosearch1, PartClass1, MaterialList1, MaterialTools1, MaterialRSL1, SETRSL1, RSLCFM1,
+  RSLBOMP, ShipbomP, SPRSP, SKUMSP,FunUnit, RSLChemical1 ,materialCompany1,
+  DDZL_BOMM1, BOMUsage1, ReviseUsage1, SetRSLList1, BOMInformation1,
+  INKVN1, DevQuota1, InkReviseUsage1, SOPDocu1, DevQuoatTW1,
+  DevQuotaPrice1, BOM_Audit_Check1, SOPProcess1, SOPProcessFlow1, ModelStatus1,
+  ImportVNBOM1, VD3SpecialBOM1, OrderKhuonIn1, OrderDetailKhuonIn1,
+  KhuonInInWarehouse1, KhuonInOutWarehouse1, KhuonInStockMonth1,
+  KhuonInDeliver1, SOPProcessCapcity1, SKU_Price_BUYNO1, BOM_OrderList1,
+  CostingPriceList1,SKU_SA_CODE1,CostingCBD1, BOM_N385_LYS;
+
+{$R *.dfm}
+//
+procedure Tmain.showFm(var fm: Pointer; parentClass: TPersistentClass; miname: string);  //
+begin
+   //Create Form and Show Form
+   if parentClass<>nil then
+   begin
+     if fm <> nil then
+     begin
+        TForm(fm).show;
+        TForm(fm).windowstate := wsmaximized;
+     end else
+     begin
+        fm := TControlClass(parentClass).create(self);
+        SaveProLog(MKID, miname, main.Edit1.Text);
+        TForm(fm).show;
+        main.FormLanguage(fm,TForm(fm).Name);
+     end;
+   end;
+end;
+
+procedure Tmain.SaveProLog(AMKID: string; AFORMID: string; AUSERID: string);
+//---20150817 Projoe 補上由 Nick 所提供之追蹤function log 的程式
+//用法: SaveProLog(GetMKID(),TMenuItem(Sender).Name,GetUserID());
+var
+  MyQuery: TQuery;
+begin
+  try
+    with MyQuery do
+      begin
+        MyQuery := TQuery.Create(application);
+        DatabaseName := 'DB';
+
+        Close;
+        SQL.Clear;
+        SQL.Add('insert into PROGLOG (MKID,FORMID,USERID,USERDATE)');
+        SQL.Add('values (:MKID,:FORMID,:USERID,:USERDATE)');
+        ParamByName('MKID').Value := AMKID;
+        ParamByName('FORMID').Value := AFORMID;
+        ParamByName('USERID').Value := AUSERID;
+        ParamByName('USERDATE').Value := now;
+        if not Prepared then
+          Prepare;
+        ExecSQL;
+      end;
+  finally
+    FreeAndNil(MyQuery);
+  end;
+end;
+
+procedure Tmain.FormClose(Sender: TObject; var Action: TCloseAction);
+var sline:string;
+    textvar:textfile;
+begin
+  if main.ActiveMDIChild<>nil  then
+  begin
+    Messagedlg('Pls close all child form first.',mtwarning,[mbOK],0);
+    action:=canone;
+  end
+    else
+      begin  
+        with query1 do
+          begin
+            active:=false;
+            sql.Clear;
+            sql.Add('update Busers set LASTDATETIME=getdate()' ) ;       
+            sql.add('where USERID='+''''+edit1.Text+'''' );
+            execsql;
+          end;
+        action:=cafree;
+       { assignfile(textvar,extractfilepath(application.ExeName)+'user.txt');
+        rewrite(textvar);
+        closefile(textvar);   }
+        FuncObj.Free;
+      end;
+end;
+//20211009 功能選單啟用或停用
+procedure Tmain.EnableFORMID();
+var i:integer;
+    MenuName:String;
+    tmpMenuItem:TMenuItem;
+begin
+  try
+   for i:=0 to  main.ComponentCount-1 do
+   begin
+     if main.Components[i] is TMenuItem then
+     begin
+        MenuName:=TMenuItem(main.Components[i]).Name;
+        MenuName:=trim(Copy(MenuName,1,6));
+        tmpMenuItem:=TMenuItem(FindComponent(MenuName));
+        if (tmpMenuItem<>nil)  then
+        begin
+          if BLimitHideQry.Locate('FORMID', MenuName, []) then
+          begin
+             tmpMenuItem.enabled:=Query1.Locate('FORMID', MenuName, []);
+             if BLimitHideQry.FieldByName('YN').AsString='2' then //Hide
+             tmpMenuItem.visible:=false;
+          end;
+        end;
+     end;
+   end;
+  except
+    on E:Exception do
+    begin
+      Showmessage(E.Message+' '+MenuName);
+    end;
+  end;
+end;
+
+procedure Tmain.Language();
+var i:integer;
+    FieldLangeuage:String;
+    tmpMenuItem:TMenuItem;
+begin
+  if trim(LanguageID)<>'' then
+  begin
+    FieldLangeuage:='VCLName_'+LanguageID;
+    with Query1 do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('Select ForMID,'+FieldLangeuage+' as Langeuage from BLimit WHERE  MKID = '''+MKID+'''  ');
+      Active:=true;
+    end;
+    for i:=0 to Query1.RecordCount-1 do
+    begin
+      tmpMenuItem:=TMenuItem(FindComponent(Query1.FieldByName('ForMID').AsString));
+      if tmpMenuItem<>nil then
+      begin
+        if Query1.FieldByName('Langeuage').AsString<>'' then
+        tmpMenuItem.Caption:=Query1.FieldByName('Langeuage').AsString;
+      end;
+      Query1.Next;
+    end;
+  end;
+end;
+
+procedure Tmain.FormLanguage(var formObj:Pointer ;mainForm:string);
+var i:integer;
+    FieldLangeuage:String;
+    //
+    tmpLabel:TLabel;
+    tmpButton:TButton;
+    tmpMenuItem:TMenuItem;
+    tmpCheckBox:TCheckBox;
+    tmpRadioButton:TRadioButton;
+    tmpTabSheet:TTabSheet;
+    tmpGroupBox:TGroupBox;
+    Obj:TObject;
+begin
+  if trim(LanguageID)<>'' then
+  begin
+    FieldLangeuage:='VCLName_'+LanguageID;
+    with Query1 do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('Select VCLID,'+FieldLangeuage+' as Langeuage from BLanguage WHERE  MKID = '''+MKID+''' and mainForm='''+mainForm+''' ');
+      Active:=true;
+    end;
+    for i:=0 to Query1.RecordCount-1 do
+    begin
+      if Query1.FieldByName('Langeuage').AsString<>'' then
+      begin
+        Obj:=TForm(formObj).FindComponent(Query1.FieldByName('VCLID').AsString);
+        if Obj<>nil then
+        begin
+          if Obj is TLabel then
+          begin
+             tmpLabel := (Obj as TLabel);
+             tmpLabel.Caption:=Query1.FieldByName('Langeuage').AsString;
+          end;
+          if Obj is TButton then
+          begin
+             tmpButton := (Obj as TButton);
+             tmpButton.Caption:=Query1.FieldByName('Langeuage').AsString;
+          end;
+          if Obj is TMenuItem then
+          begin
+            tmpMenuItem := (Obj as TMenuItem);
+            tmpMenuItem.Caption:=Query1.FieldByName('Langeuage').AsString;
+          end;
+          if Obj is TCheckBox then
+          begin
+            tmpCheckBox := (Obj as TCheckBox);
+            tmpCheckBox.Caption:=Query1.FieldByName('Langeuage').AsString;
+          end;
+          if Obj is TRadioButton then
+          begin
+            tmpRadioButton := (Obj as TRadioButton);
+            tmpRadioButton.Caption:=Query1.FieldByName('Langeuage').AsString;
+          end;
+          if Obj is TTabSheet then
+          begin
+            tmpTabSheet := (Obj as TTabSheet);
+            tmpTabSheet.Caption:=Query1.FieldByName('Langeuage').AsString;
+          end;
+          if Obj is TGroupBox then
+          begin
+            tmpGroupBox := (Obj as TGroupBox);
+            tmpGroupBox.Caption:=Query1.FieldByName('Langeuage').AsString;
+          end;
+        end;
+      end;
+      Query1.Next;
+    end;
+    //
+    Query1.Active:=false;
+    FormDBGridLanguage(formObj,mainForm);
+  end;
+end;
+
+procedure Tmain.FormDBGridLanguage(var formObj:Pointer ;mainForm:string);
+var i,j:integer;
+    FieldLangeuage:String;
+    //
+    tmpDBGrid:TDBGrid;
+    tmpDBridEh:TDBGridEh;
+    Obj:TObject;
+begin
+  if trim(LanguageID)<>'' then
+  begin
+    FieldLangeuage:='VCLName_'+LanguageID;
+    with Query1 do
+    begin
+      Active:=false;
+      SQL.Clear;
+      SQL.Add('Select VCLID,FieldName,'+FieldLangeuage+' as Langeuage from BLanguage_DBGrid WHERE  MKID = '''+MKID+''' and mainForm='''+mainForm+''' order by VCLID ');
+      Active:=true;
+    end;
+    for i:=0 to Query1.RecordCount-1 do
+    begin
+      if Query1.FieldByName('Langeuage').AsString<>'' then
+      begin
+        Obj:=TForm(formObj).FindComponent(Query1.FieldByName('VCLID').AsString);
+        if Obj<>nil then
+        begin
+          if Obj is TDBGrid then
+          begin
+             tmpDBGrid := (Obj as TDBGrid);
+             for j:=0 to tmpDBGrid.Columns.Count-1 do
+             begin
+               if tmpDBGrid.Columns[j].FieldName=Query1.FieldByName('FieldName').AsString then
+               begin
+                  tmpDBGrid.Columns[j].Title.Caption:=Query1.FieldByName('Langeuage').AsString;
+                  break;
+               end;
+             end;
+          end;
+          if Obj is TDBGridEh then
+          begin
+             tmpDBridEh := (Obj as TDBGridEh);
+             for j:=0 to tmpDBridEh.Columns.Count-1 do
+             begin
+               if tmpDBridEh.Columns[j].FieldName=Query1.FieldByName('FieldName').AsString then
+               begin
+                  tmpDBridEh.Columns[j].Title.Caption:=Query1.FieldByName('Langeuage').AsString;
+                  break;
+               end;
+             end;
+          end;
+        end;
+      end;
+      Query1.Next;
+    end;
+    //
+    Query1.Active:=false;
+  end;
+end;
+
+procedure Tmain.FormCreate(Sender: TObject);
+var y,m,d:word;
+sline:string;
+textvar:textfile;
+begin
+  //20140106
+  FuncObj:=TFuncObj.Create;
+  FuncObj.setParameter(true,ExtractFilePath(Application.ExeName));
+  ServerIP:=FuncObj.GetBDE_SERVERIP(DM2.DBBOM.AliasName);
+  FuncObj.GetBDE_DATABASENAME(DM2.DBBOM.AliasName,LIY_ERP,LIY_DD);
+  //
+  shortdateformat:='yyyy/MM/dd';
+  {decodedate(date,y,m,d);
+  if y>2020 then
+  begin
+    showmessage('Wrong!!!!!Contact with computer designer');
+    application.terminate;
+  end;}
+
+   //指定BDE路徑
+  Session.NetFileDir := ExtractFileDir(Application.ExeName);
+  assignfile(textvar,extractfilepath(application.ExeName)+'user.txt');
+  reset(textvar);
+  readln(textvar,sline);
+
+  if length(sline)<2 then
+  begin
+    showmessage('Wrong program. Pls run the main program first.');
+    closefile(textvar);
+    application.Terminate;
+  end
+  else
+    begin
+      suser:=copy(sline,0,pos('=',sline)-1);
+      spwd:=copy(sline,pos('=',sline)+1,maxint);
+      image1.Picture.LoadFromFile(extractfilepath(application.ExeName)+'factory.jpg');
+    end;
+  closefile(textvar);
+  edit1.Text:=suser;
+  //showmessage(sline);
+
+  assignfile(textvar,extractfilepath(application.ExeName)+'Company.txt');
+  reset(textvar);
+  readln(textvar,sline);
+  edit2.Text:=sline;
+  readln(textvar,sline);//20200424第二行語言
+  LanguageID:=sline;
+  closefile(textvar);
+
+    with Query1 do
+    begin
+      //---20150817 Projoe 將Params 改為 ParamByName 來增加可讀性
+      ParamByName('userid').Value := suser;
+      ParamByName('mkid').Value := '02';  MKID:='02';
+      ParamByName('GSBH').Value := edit2.text;
+      Active := true;
+      //
+      BLimitHideQry.ParamByName('mkid').Value := '02';
+      BLimitHideQry.Active:=true;
+      EnableFORMID();    //20211009 功能選單
+      BLimitHideQry.Active:=false;
+      //
+      Active := false;
+    end;
+    Language();
+end;
+
+procedure Tmain.SN10Click(Sender: TObject);
+begin
+  close;
+end;
+
+procedure Tmain.SN31Click(Sender: TObject);
+begin
+  showFm(Pointer(BOMM), TBOMM, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN33Click(Sender: TObject);
+begin
+  showFm(Pointer(PartType), TPartType, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN41Click(Sender: TObject);
+begin
+  showFm(Pointer(MaterialNew), TMaterialNew, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN42Click(Sender: TObject);
+begin
+  showFm(Pointer(PARTNEW), TPARTNEW, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN51Click(Sender: TObject);
+begin
+  showFm(Pointer(ProdRate), TProdRate, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN34Click(Sender: TObject);
+begin
+  showFm(Pointer(Nosearch), TNosearch, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN43Click(Sender: TObject);
+begin
+  showFm(Pointer(PartClass), TPartClass, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN44Click(Sender: TObject);
+begin
+  showFm(Pointer(MaterialList), TMaterialList, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN45Click(Sender: TObject);
+begin
+   showFm(Pointer(MaterialTools), TMaterialTools, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN46Click(Sender: TObject);
+begin
+   showFm(Pointer(MaterialRSL), TMaterialRSL, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN48Click(Sender: TObject);
+begin
+   showFm(Pointer(RSLCFM), TRSLCFM, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN35Click(Sender: TObject);
+begin
+   showFm(Pointer(RSLBOM), TRSLBOM, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN52Click(Sender: TObject);
+begin
+   showFm(Pointer(shipbom), Tshipbom, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN13Click(Sender: TObject);
+begin
+   showFm(Pointer(SPRS), TSPRS, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN14Click(Sender: TObject);
+begin
+   showFm(Pointer(SKUMS), TSKUMS, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN49Click(Sender: TObject);
+begin
+   showFm(Pointer(RSLChemical), TRSLChemical, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN4AClick(Sender: TObject);
+begin
+   showFm(Pointer(MaterialCompany), TMaterialCompany, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN53Click(Sender: TObject);
+begin
+   showFm(Pointer(DDZL_BOMM), TDDZL_BOMM, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN36Click(Sender: TObject);
+begin
+   showFm(Pointer(BOMUsage), TBOMUsage, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN54Click(Sender: TObject);
+begin
+   showFm(Pointer(ReviseUsage), TReviseUsage, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN472Click(Sender: TObject);
+begin
+   showFm(Pointer(SETRSL), TSETRSL, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN471Click(Sender: TObject);
+begin
+   showFm(Pointer(SetRSLList), TSetRSLList , TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN37Click(Sender: TObject);
+begin
+  showFm(Pointer(BOMInformation), TBOMInformation , TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN322Click(Sender: TObject);
+begin
+   showFm(Pointer(INKVN), TINKVN , TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN321Click(Sender: TObject);
+begin
+  showFm(Pointer(BOMVN), TBOMVN, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN55Click(Sender: TObject);
+begin
+  showFm(Pointer(InkReviseUsage), TInkReviseUsage, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN381Click(Sender: TObject);
+begin
+    showFm(Pointer(DevQuota), TDevQuota, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN382Click(Sender: TObject);
+begin
+    showFm(Pointer(DevQuota), TDevQuota, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN22Click(Sender: TObject);
+begin
+  showFm(Pointer(SOPDocu), TSOPDocu, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN383Click(Sender: TObject);
+begin
+  showFm(Pointer(DevQuoatTW), TDevQuoatTW, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN384Click(Sender: TObject);
+begin
+  showFm(Pointer(DevQuotaPrice), TDevQuotaPrice, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN15Click(Sender: TObject);
+begin
+  showFm(Pointer(BOM_Audit_Check), TBOM_Audit_Check, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN23Click(Sender: TObject);
+begin
+  showFm(Pointer(SOPProcess), TSOPProcess, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN24Click(Sender: TObject);
+begin
+  showFm(Pointer(SOPProcessFlow), TSOPProcessFlow, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN39Click(Sender: TObject);
+begin
+  showFm(Pointer(ModelStatus), TModelStatus, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN323Click(Sender: TObject);
+begin
+  showFm(Pointer(ImportVNBOM), TImportVNBOM, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN3AClick(Sender: TObject);
+begin
+  showFm(Pointer(VD3SpecialBOM), TVD3SpecialBOM, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN61Click(Sender: TObject);
+begin
+  showFm(Pointer(OrderKhuonIn), TOrderKhuonIn, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN62Click(Sender: TObject);
+begin
+  showFm(Pointer(OrderDetailKhuonIn), TOrderDetailKhuonIn, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN63Click(Sender: TObject);
+begin
+  showFm(Pointer(KhuonInInWarehouse), TKhuonInInWarehouse, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN64Click(Sender: TObject);
+begin
+  showFm(Pointer(KhuonInOutWarehouse), TKhuonInOutWarehouse, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN65Click(Sender: TObject);
+begin
+  showFm(Pointer(KhuonInStockMonth), TKhuonInStockMonth, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN66Click(Sender: TObject);
+begin
+  showFm(Pointer(KhuonInDeliver), TKhuonInDeliver, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN25Click(Sender: TObject);
+begin
+  showFm(Pointer(SOPProcessCapcity), TSOPProcessCapcity, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN3BClick(Sender: TObject);
+begin
+  showFm(Pointer(SKU_Price_BUYNO), TSKU_Price_BUYNO, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN3CClick(Sender: TObject);
+begin
+  showFm(Pointer(BOM_OrderList), TBOM_OrderList, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN385Click(Sender: TObject);
+begin
+    showFm(Pointer(CostingPriceList), TCostingPriceList, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN21Click(Sender: TObject);
+begin
+    showFm(Pointer(SKU_SA_CODE), TSKU_SA_CODE, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN386Click(Sender: TObject);
+begin
+    showFm(Pointer(CostingCBD), TCostingCBD, TMenuItem(Sender).Name);
+end;
+
+procedure Tmain.SN387Click(Sender: TObject);
+begin
+    showFm(Pointer(CostingPriceList_LYS), TCostingPriceList_LYS, TMenuItem(Sender).Name);
+end;
+
+end.

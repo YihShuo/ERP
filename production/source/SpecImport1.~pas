@@ -1,0 +1,522 @@
+unit SpecImport1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, DBTables, DB, Buttons, StdCtrls, Grids, DBGrids, ExtCtrls,
+  dateutils, GridsEh, DBGridEh, ComCtrls,comobj;
+
+type
+  TSpecImport = class(TForm)
+    Panel2: TPanel;
+    DBGrid1: TDBGridEh;
+    Panel3: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Panel1: TPanel;
+    BB2: TBitBtn;
+    BB3: TBitBtn;
+    BB4: TBitBtn;
+    BB5: TBitBtn;
+    BB6: TBitBtn;
+    BB7: TBitBtn;
+    BB1: TBitBtn;
+    BBT1: TBitBtn;
+    BBT2: TBitBtn;
+    BBT3: TBitBtn;
+    BBT4: TBitBtn;
+    bbt5: TBitBtn;
+    bbt6: TBitBtn;
+    DDZL: TQuery;
+    DS1: TDataSource;
+    UpSQL1: TUpdateSQL;
+    DDZLDDBH: TStringField;
+    DDZLGSBH: TStringField;
+    DDZLXieXing: TStringField;
+    DDZLSheHao: TStringField;
+    DDZLARTICLE: TStringField;
+    DDZLCCGB: TStringField;
+    DDZLKHPO: TStringField;
+    DDZLDDZT: TStringField;
+    DDZLShipDate: TDateTimeField;
+    DDZLPairs: TIntegerField;
+    DDZLXieMing: TStringField;
+    DDZLDDGB_1: TStringField;
+    DDZLKFJC: TStringField;
+    DTP1: TDateTimePicker;
+    DTP2: TDateTimePicker;
+    DDZLKHBH: TStringField;
+    DDZLBB: TStringField;
+    DDZLVersion: TSmallintField;
+    DDZLTrader: TStringField;
+    DDZLTraderPO: TStringField;
+    DDZLDDLB: TStringField;
+    DDZLCPLB: TStringField;
+    DDZLBZFS: TStringField;
+    DDZLDest: TStringField;
+    DDZLDDGB: TStringField;
+    DDZLDDRQ: TDateTimeField;
+    DDZLJYTJ: TStringField;
+    DDZLFKTJ: TStringField;
+    DDZLTotals: TFloatField;
+    DDZLZLBH: TStringField;
+    DDZLGSDH: TStringField;
+    DDZLCFNO: TStringField;
+    DDZLUSERID: TStringField;
+    DDZLUSERDATE: TDateTimeField;
+    DDZLDDCZ: TStringField;
+    DDZLDDPACKSM: TStringField;
+    DDZLLABELCHARGE: TFloatField;
+    DDZLGender: TStringField;
+    DDZLYN: TStringField;
+    Query1: TQuery;
+    DDZLYSSM: TStringField;
+    DDZLBZCC: TStringField;
+    DDZLXTMH: TStringField;
+    DDZLDDMH: TStringField;
+    DDZLDAOMH: TStringField;
+    PopupMenu1: TPopupMenu;
+    CheckTWOrder1: TMenuItem;
+    Label3: TLabel;
+    DTP3: TDateTimePicker;
+    Label4: TLabel;
+    DTP4: TDateTimePicker;
+    Qtemp: TQuery;
+    DDZLordermode: TStringField;
+    DDZLBUYNO: TStringField;
+    Label5: TLabel;
+    Edit3: TEdit;
+    Button2: TButton;
+    Label6: TLabel;
+    Edit4: TEdit;
+    Button1: TButton;
+    Memo1: TMemo;
+    procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure BB1Click(Sender: TObject);
+    procedure BB2Click(Sender: TObject);
+    procedure BB7Click(Sender: TObject);
+    procedure BB3Click(Sender: TObject);
+    procedure BB4Click(Sender: TObject);
+    procedure DBGrid1EditButtonClick(Sender: TObject);
+    procedure BB6Click(Sender: TObject);
+    procedure BB5Click(Sender: TObject);
+    procedure DBGrid1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure BBT1Click(Sender: TObject);
+    procedure BBT2Click(Sender: TObject);
+    procedure BBT3Click(Sender: TObject);
+    procedure BBT4Click(Sender: TObject);
+    procedure bbt6Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure CheckTWOrder1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  SpecImport: TSpecImport;
+  sdate,edate,NDate:Tdate;
+
+implementation
+
+uses main1, SpecimportTW1, SpecimportCheck1;
+
+{$R *.dfm}
+
+procedure TSpecImport.Button1Click(Sender: TObject);
+//var y,m:word;
+begin
+{if (CBX1.text='')or (CBX2.text='')  then
+  begin
+    showmessage('You have to select the year and month first.');
+    abort;
+  end;
+y:=strtoint(CBX1.Text);
+m:=strtoint(CBX2.Text);
+if (y>2999) or (y<1900) then
+  begin
+    showmessage('Pls key in right year');
+    abort;
+  end;
+if (m=0) or (m>12) then
+  begin
+    showmessage('Pls key in right month');
+    abort;
+  end;
+sdate:=encodedate(y,m,1);
+edate:=endofthemonth(sdate);  }
+sdate:=DTP3.Date;
+edate:=DTP4.Date;
+
+
+with DDZL do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select DDZL.*,XXZl.XieMing,KFZL.KFJC,lbzls.YWSM as DDGB ');
+    sql.add('       ,XXZL.YSSM,XXZL.BZCC,XXZL.XTMH,XXZL.DDMH,XXZL.DAOMH,ddzl.buyno');
+    sql.add('from DDZL ');
+   // sql.add('left join DDZLTW on DDZLTW.ZLBH=DDZL.DDBH ');
+    sql.add('left join XXZL on DDZl.XieXing=XXZl.XieXing and DDZl.SheHao=' +
+                                                               'XXZl.SheHao ');
+    sql.add('left join kfzl on KFZl.KFDH=DDZL.KHBH');
+    sql.add('left join LBZLS on lbzls.lb='+''''+'06'+'''');
+    sql.add('                  and lbzls.lbdh=DDZL.DDGB ');
+    sql.add('where DDZL.DDBH like '+''''+'%'+edit1.Text+'%'+'''');
+    sql.add('and Convert(smalldatetime,convert(varchar,DDZL.Shipdate,111)) between ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',sdate)+''''+' and ' +''''+
+                            formatdatetime('yyyy/MM/dd',edate)+'''');
+    sql.add('and XXZL.Xiexing like '+''''+'%'+edit2.Text+'%'+'''');
+    sql.add('and kfzl.kfjc like '+''''+'%'+edit4.Text+'%'+'''');
+    if length(edit3.Text) > 1 then
+      sql.add('and ddzl.buyno like '+ ''''+edit3.Text+'%'+'''');
+    sql.add('and DDZL.GSBH='+''''+main.edit2.Text+'''');
+    sql.add('order by DDZL.DDBH ');
+    memo1.Text:=sql.Text;
+    active:=true;
+  end;
+
+bb2.enabled:=true;
+bb3.enabled:=true;
+bb4.enabled:=true;
+bb5.enabled:=false;
+bb6.enabled:=false;
+bb7.enabled:=true;
+bbt1.enabled:=true;
+bbt2.enabled:=true;
+bbt3.enabled:=true;
+bbt4.enabled:=true;
+bbt5.enabled:=true;
+bbt6.enabled:=true;
+end;
+
+procedure TSpecImport.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+if BB5.enabled  then
+  begin
+    messagedlg('You have to save data Record of report first.',mtwarning,[ mbyes],0);
+    action:=canone;
+  end
+  else
+    begin
+      action:=Cafree;
+    end;
+end;
+
+procedure TSpecImport.BB1Click(Sender: TObject);
+begin
+panel3.Visible:=true;
+end;
+
+procedure TSpecImport.BB2Click(Sender: TObject);
+begin
+with DDZL do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    insert;   //增加一筆空白資料
+  end;
+BB5.Enabled:=true;
+BB6.Enabled:=true;
+dbgrid1.columns[0].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TSpecImport.BB7Click(Sender: TObject);
+begin
+close;
+end;
+
+procedure TSpecImport.BB3Click(Sender: TObject);
+begin
+if messagedlg('All the detail will be deleted too!',mtconfirmation,[mbYes,mbNo],0)=mrYes then
+  begin
+    if DDZL.recordcount>0 then
+      begin
+        with DDZL do
+          begin
+            requestlive:=true;
+            cachedupdates:=true;
+            edit;
+            fieldbyname('YN').Value:='0';
+          end;
+      end;
+  end;
+BB5.Enabled:=true;
+BB6.Enabled:=true;
+dbgrid1.columns[0].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TSpecImport.BB4Click(Sender: TObject);
+begin
+with DDZL do
+  begin
+    requestlive:=true;
+    cachedupdates:=true;
+    edit;
+  end;
+BB5.Enabled:=true;
+BB6.Enabled:=true;
+dbgrid1.columns[0].ButtonStyle:=cbsEllipsis;
+end;
+
+procedure TSpecImport.DBGrid1EditButtonClick(Sender: TObject);
+begin
+SpecimportTW:=TSpecimportTW.create(self);
+SpecimportTW.show;
+DTP1.Date:=sdate;
+DTP2.Date:=edate;
+enabled:=false;
+end;
+
+procedure TSpecImport.BB6Click(Sender: TObject);
+begin
+with DDZl do
+  begin
+    requestlive:=false;
+    cachedupdates:=false;
+    active:=false;
+    active:=true;
+  end;
+BB5.Enabled:=false;
+BB6.Enabled:=false;
+DBGrid1.Columns[0].ButtonStyle:=cbsNone;
+end;
+
+procedure TSpecImport.BB5Click(Sender: TObject);
+var i:integer;
+begin
+DDZL.First;
+while not DDZL.Eof do
+  begin
+    if (DDZL.FieldByName('Pairs').IsNull or DDZL.FieldByName('ShipDate').IsNull) then
+      begin
+        showmessage('Pls key order Qty and CSD first.');
+        abort;
+      end;
+    DDZL.Next;
+  end;
+
+try
+    DDZL.first;
+    for i:=1 to DDZL.RecordCount do
+      begin
+        case DDZL.updatestatus of
+          usinserted:
+            begin
+              if DDZL.fieldbyname('DDBH').isnull then   //刪除多餘的新增列
+                begin
+                  DDZL.delete;
+                end
+                 else
+                   begin
+                     upSQL1.apply(ukinsert);
+                   end;
+            end;
+          usmodified:
+             begin
+              if DDZL.fieldbyname('YN').value='0'then
+                begin
+                  with query1 do
+                    begin
+                      active:=false;
+                      sql.Clear;
+                      sql.add('select YWDD.DDBH from YWDD ');
+                      sql.add('where YWDD.YSBH='+''''+DDZL.fieldbyname('DDBH').Value+'''');
+                      active:=true;
+                      if recordcount=0  then
+                        begin
+                          active:=false;
+                          sql.Clear;
+                          sql.add('delete SCZL where SCBH='+''''+DDZL.fieldbyname('DDBH').Value+'''');
+                          sql.add('delete SCZLS where SCBH='+''''+DDZL.fieldbyname('DDBH').Value+'''');
+                          sql.add('delete SCZLDate where ZLBH='+''''+DDZL.fieldbyname('DDBH').Value+'''');
+                          execsql;
+                          upSQL1.apply(ukdelete);
+                        end
+                        else
+                          begin
+                            showmessage('Pls delete Sale order first.'+#13+DDZL.fieldbyname('DDBH').Value);
+                          end;
+                      active:=false;
+                    end;
+                end
+                else
+                  begin
+                    upSQL1.apply(ukmodify);
+                  end;
+             end;
+        end;
+       DDZL.next;
+      end;
+DDZL.active:=false;
+DDZL.cachedupdates:=false;
+DDZL.requestlive:=false;
+DDZL.active:=true;
+bb5.enabled:=false;
+bb6.enabled:=false;
+dbgrid1.columns[0].ButtonStyle:=cbsnone;
+except
+  Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+end;
+
+end;
+
+procedure TSpecImport.DBGrid1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+
+if (DDZL.FieldByName('DDZT').value<>'Y') then
+  begin
+    if (DDZL.FieldByName('DDZT').value<>'S') then
+      dbgrid1.canvas.font.color:=clred;
+//    else
+//      dbgrid1.canvas.font.color:=clYellow;
+  end;
+if DDZL.FieldByName('YN').value='0' then
+  begin
+    dbgrid1.canvas.font.color:=clYellow;
+  end;
+end;
+
+procedure TSpecImport.BBT1Click(Sender: TObject);
+begin
+DDZL.First;
+end;
+
+procedure TSpecImport.BBT2Click(Sender: TObject);
+begin
+DDZL.prior;
+end;
+
+procedure TSpecImport.BBT3Click(Sender: TObject);
+begin
+DDZL.next;
+end;
+
+procedure TSpecImport.BBT4Click(Sender: TObject);
+begin
+DDZL.last;
+end;
+
+procedure TSpecImport.bbt6Click(Sender: TObject);
+var   a:string;
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+  begin
+  if  DDZL.active  then
+    begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('No Mcrosoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+        WorkBook:=eclApp.workbooks.Add;
+        for   i:=0   to   DDZL.fieldCount-1   do
+          begin
+              eclApp.Cells(1,i+1):=DDZL.fields[i].FieldName;
+          end;
+        DDZL.First;
+        j:=2;
+        while   not   DDZL.Eof   do
+          begin
+            for   i:=0   to   DDZL.FieldCount-1   do
+              begin
+                eclApp.Cells(j,i+1):=DDZL.Fields[i].Value;
+              end;
+            DDZL.Next;
+            inc(j);
+          end;
+      eclapp.columns.autofit;
+      showmessage('Succeed');
+      eclApp.Visible:=True;
+      except
+        on   F:Exception   do
+          showmessage(F.Message);
+      end;
+    end;
+end;
+
+procedure TSpecImport.FormDestroy(Sender: TObject);
+begin
+SpecImport:=nil;
+end;
+
+procedure TSpecImport.CheckTWOrder1Click(Sender: TObject);
+begin  
+SpecimportCheck:=TSpecimportCheck.create(self);
+SpecimportCheck.show;
+end;
+
+procedure TSpecImport.FormCreate(Sender: TObject);
+begin
+
+with Qtemp do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select getdate() as NDate ');
+    active:=true;
+    NDate:=fieldbyname('NDate').Value;
+    active:=false;
+  end; 
+DTP3.date:=startofthemonth(incmonth(NDate,2))+5;
+DTP4.date:=startofthemonth(incmonth(NDate,3))+4;
+end;
+
+procedure TSpecImport.Button2Click(Sender: TObject);
+begin
+sdate:=DTP3.Date;
+edate:=DTP4.Date;
+
+
+with DDZL do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select DDZL.*,XXZl.XieMing,KFZL.KFJC,lbzls.YWSM as DDGB ');
+    sql.add('       ,XXZL.YSSM,XXZL.BZCC,XXZL.XTMH,XXZL.DDMH,XXZL.DAOMH,ddzl.buyno');
+    sql.add('from DDZL ');
+    sql.add('left join XXZL on DDZl.XieXing=XXZl.XieXing and DDZl.SheHao=' +
+                                                               'XXZl.SheHao ');
+    sql.add('left join kfzl on KFZl.KFDH=DDZL.KHBH');
+    sql.add('left join LBZLS on lbzls.lb='+''''+'06'+'''');
+    sql.add('                  and lbzls.lbdh=DDZL.DDGB ');
+    sql.add('where xxzl.xieming is null');
+    sql.add('and Convert(smalldatetime,convert(varchar,DDZL.Shipdate,111)) between ');
+    sql.add(''''+formatdatetime('yyyy/MM/dd',sdate)+''''+' and ' +''''+
+                            formatdatetime('yyyy/MM/dd',edate)+'''');
+    sql.add('and DDZL.GSBH='+''''+main.edit2.Text+'''');
+
+    sql.add('order by DDZL.DDBH ');
+    //memo1.Text:=sql.Text;
+    active:=true;
+  end;
+
+bb2.enabled:=false;
+bb3.enabled:=true;
+bb4.enabled:=false;
+bb5.enabled:=false;
+bb6.enabled:=false;
+bb7.enabled:=true;
+bbt1.enabled:=true;
+bbt2.enabled:=true;
+bbt3.enabled:=true;
+bbt4.enabled:=true;
+bbt5.enabled:=true;
+bbt6.enabled:=true;
+end;
+
+end.

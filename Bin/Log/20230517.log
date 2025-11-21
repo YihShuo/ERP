@@ -1,0 +1,24 @@
+select * from BDepartment
+where ID like 'VDH0506%'
+      and Depname like '%_G%'
+      and ProYN='1'
+      and IsNull(GXLB,'')<>'' 
+      and gxlb not in ('C','S')
+      and GSBH='VDH'
+order by ID
+select * from BDepartment
+where ID like 'VDH0506%'
+      and Depname like '%_G%'
+      and ProYN='1'
+      and IsNull(GXLB,'')<>'' 
+      and gxlb not in ('C','S')
+      and GSBH='VDH'
+order by ID
+select * from BDepartment
+where ID like '%'
+      and Depname like '%_G%'
+      and ProYN='1'
+      and IsNull(GXLB,'')<>'' 
+      and gxlb not in ('C','S')
+      and GSBH='VDH'
+order by ID

@@ -1,0 +1,355 @@
+unit ScanBanDo1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, ComCtrls,commctrl, Gauges, StdCtrls, DB, DBTables,
+  Menus;
+
+type
+  TProgressBarWithText = class(TProgressBar)
+    WLabel:TLabel;
+  private
+    FProgressText: string;
+  protected
+    procedure WMPaint(var Message: TWMPaint); message WM_PAINT;
+  published
+    property ProgressText: string read FProgressText write FProgressText;
+  end;
+
+type
+  TScanBanDo = class(TForm)
+    Image: TImage;
+    YWCP: TQuery;
+    PopupMenu: TPopupMenu;
+    N1OrderNo1: TMenuItem;
+    ChangeKCBH1: TMenuItem;
+    FreTimer: TTimer;
+    KhoPanel: TPanel;
+    KHO: TLabel;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure ProgressBar1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure FormShow(Sender: TObject);
+    procedure FormPaint(Sender: TObject);
+    procedure N1OrderNo1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure ChangeKCBH1Click(Sender: TObject);
+    procedure FreTimerTimer(Sender: TObject);
+  private
+    KCBH:String;
+    AreaW:array [0..75] of TProgressBarWithText;
+    { Private declarations }
+    procedure ShowAreaW();
+    procedure ResizeArea();
+    procedure FreeArea();
+  public
+    { Public declarations }
+    procedure GetYWCPDate();
+  end;
+
+const
+  ImageWid=1009;
+  ImageHei=545;
+var
+  ScanBanDo: TScanBanDo;
+implementation
+  uses ScanBanDo_RY1,FunUnit;
+  
+{$R *.dfm}
+procedure TProgressBarWithText.WMPaint(var Message: TWMPaint);
+var
+  DC: HDC;
+  prevfont: HGDIOBJ;
+  prevbkmode: Integer;
+  R: TRect;
+  FontInfo: TLogFont;
+begin
+  inherited;
+  if ProgressText <> '' then
+  begin
+    R := ClientRect;
+    DC := GetWindowDC(Handle);
+    prevbkmode := SetBkMode(DC, TRANSPARENT);
+    Font.Style:=[fsBold];
+    prevfont := SelectObject(DC, Font.Handle);
+    SetTextColor(DC, ColorToRGB(clRed));
+    DrawText(DC, PChar(ProgressText), Length(ProgressText),
+      R, DT_SINGLELINE or DT_CENTER or DT_VCENTER);
+    SelectObject(DC, prevfont);
+    SetBkMode(DC, prevbkmode);
+    ReleaseDC(Handle, DC);
+  end;
+end;
+//
+procedure TScanBanDo.ShowAreaW();
+var i,j:integer;
+    STop,SLeft,AWid,AHei:integer;
+begin
+  //上排A
+  AWid:=Round(self.Width/((High(AreaW)+1) div 2))-2-1;
+  AHei:=Round(250*(self.Height/600));
+  STop:=8;
+  SLeft:=self.Width-AWid-12-20;
+  //
+  for i:=0 to ((High(AreaW)+1) div 2)-1 do
+  begin
+    AreaW[i]:=TProgressBarWithText.Create(self);
+    AreaW[i].Name:='ProgressBarA'+Format('%.2d',[i+1]);
+    AreaW[i].ProgressText:='0';
+    AreaW[i].Parent:=self;
+    AreaW[i].Left:=SLeft-i*(AWid+2);
+    AreaW[i].Top:=STop;
+    AreaW[i].Width:=AWid;
+    AreaW[i].Height:=AHei;
+    AreaW[i].Min:=0;
+    AreaW[i].Max:=5832;
+    AreaW[i].Orientation:=pbVertical;
+    AreaW[i].Smooth:=True;
+    AreaW[i].OnMouseDown:=ProgressBar1MouseDown;
+    //
+    AreaW[i].WLabel:=TLabel.Create(self);
+    AreaW[i].WLabel.Name:='LabelA'+Format('%.2d',[i+1]);
+    AreaW[i].WLabel.Parent:=self;
+    AreaW[i].WLabel.Caption:='A'+Format('%.2d',[i+1]);
+    AreaW[i].WLabel.Width:=AWid;
+    AreaW[i].WLabel.Height:=13;
+    AreaW[i].WLabel.Color:=clYellow;
+    AreaW[i].WLabel.Font.Style:=[fsBold];
+    AreaW[i].WLabel.Font.Size:=7;
+    AreaW[i].WLabel.Top:=AreaW[i].Top+AreaW[i].Height;
+    AreaW[i].WLabel.Left:=AreaW[i].Left;
+    //
+    AreaW[i].Position:=0;
+    AreaW[i].Brush.Color := clBtnFace;
+    SendMessage(AreaW[i].Handle, PBM_SETBARCOLOR, 0, clBlue);
+  end;
+
+  //下排
+  AWid:=Round(self.Width/((High(AreaW)+1) div 2))-2-1;
+  AHei:=Round(250*(self.Height/600));
+  STop:=Round(296*(self.Height/600));
+  SLeft:=self.Width-AWid-12-20;
+  //
+  for i:=((High(AreaW)+1) div 2) to High(AreaW) do
+  begin
+    AreaW[i]:=TProgressBarWithText.Create(self);
+    AreaW[i].Name:='ProgressBarB'+Format('%.2d',[i-((High(AreaW)+1) div 2)+1]);
+    AreaW[i].ProgressText:='0';
+    AreaW[i].Parent:=self;
+    AreaW[i].Left:=SLeft-(i-((High(AreaW)+1) div 2))*(AWid+2);
+    AreaW[i].Top:=STop;
+    AreaW[i].Width:=AWid;
+    AreaW[i].Height:=AHei;
+    AreaW[i].Min:=0;
+    AreaW[i].Max:=5832;
+    AreaW[i].Orientation:=pbVertical;
+    AreaW[i].Smooth:=True;
+    AreaW[i].OnMouseDown:=ProgressBar1MouseDown;
+    //
+    AreaW[i].WLabel:=TLabel.Create(self);
+    AreaW[i].WLabel.Name:='LabelB'+Format('%.2d',[i-((High(AreaW)+1) div 2)+1]);
+    AreaW[i].WLabel.Parent:=self;
+    AreaW[i].WLabel.Caption:='B'+Format('%.2d',[i-((High(AreaW)+1) div 2)+1]);
+    AreaW[i].WLabel.Width:=AWid;
+    AreaW[i].WLabel.Height:=13;
+    AreaW[i].WLabel.Color:=clYellow;
+    AreaW[i].WLabel.Font.Style:=[fsBold];
+    AreaW[i].WLabel.Font.Size:=7;
+    AreaW[i].WLabel.Top:=AreaW[i].Top-AreaW[i].WLabel.Height;
+    AreaW[i].WLabel.Left:=AreaW[i].Left;
+    //
+    AreaW[i].Position:=0;
+    AreaW[i].Brush.Color := clBtnFace;
+    SendMessage(AreaW[i].Handle, PBM_SETBARCOLOR, 0, clGreen);
+  end;
+end;
+//
+procedure TScanBanDo.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action:=caFree;
+end;
+
+procedure TScanBanDo.FormDestroy(Sender: TObject);
+begin
+  FreeArea();
+  ScanBanDo:=nil;
+end;
+
+procedure TScanBanDo.ProgressBar1MouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+ //
+ if Button=mbLeft then
+ begin
+   if TProgressBarWithText(Sender).Position>0 then
+   begin
+     ScanBanDo_RY:=TScanBanDo_RY.Create(self);
+     ScanBanDo_RY.KCBH:=KCBH;
+     ScanBanDo_RY.KVBHEdit.Text:=Copy(TProgressBarWithText(Sender).Name,length(TProgressBarWithText(Sender).Name)-2,3);
+     ScanBanDo_RY.QryBtn.Click;
+     ScanBanDo_RY.ShowModal();
+     ScanBanDo_RY.Free;
+   end;
+ end;
+ //
+end;
+procedure TScanBanDo.FreeArea();
+var i:integer;
+begin
+  for i:=0 to (High(AreaW) div 2)-1 do
+  begin
+    if AreaW[i]<>nil then
+    begin
+      if AreaW[i].WLabel<>nil then
+      begin
+        AreaW[i].WLabel.free;
+      end;
+      AreaW[i].free;
+    end;
+  end;
+end;
+//
+procedure TScanBanDo.ResizeArea();
+var i:integer;
+    STop,SLeft,AWid,AHei:integer;
+begin
+  //上排
+  AWid:=Round(self.Width/((High(AreaW)+1) div 2))-2-1;
+  AHei:=Round(250*(self.Height/600));
+  STop:=8;
+  SLeft:=self.Width-AWid-12-20;
+  for i:=0 to ((High(AreaW)+1) div 2)-1 do
+  begin
+    if AreaW[i]<>nil then
+    begin
+      AreaW[i].Left:=SLeft-i*(AWid+2);
+      AreaW[i].Top:=STop;
+      AreaW[i].Width:=AWid;
+      AreaW[i].Height:=AHei;
+      //
+      if AreaW[i].WLabel<>nil then
+      begin
+        AreaW[i].WLabel.Width:=AWid;
+        AreaW[i].WLabel.Height:=13;
+        AreaW[i].WLabel.Top:=AreaW[i].Top+AreaW[i].Height;
+        AreaW[i].WLabel.Left:=AreaW[i].Left;
+      end;
+    end;
+  end;
+  //下排
+  AWid:=Round(self.Width/((High(AreaW)+1) div 2))-2-1;
+  AHei:=Round(250*(self.Height/600));
+  STop:=Round(296*(self.Height/600));
+  SLeft:=self.Width-AWid-12-20;
+  for i:=((High(AreaW)+1) div 2) to High(AreaW) do
+  begin
+    if AreaW[i]<>nil then
+    begin
+      AreaW[i].Left:=SLeft-(i-((High(AreaW)+1) div 2))*(AWid+2);
+      AreaW[i].Top:=STop;
+      AreaW[i].Width:=AWid;
+      AreaW[i].Height:=AHei;
+      //
+      if AreaW[i].WLabel<>nil then
+      begin
+        AreaW[i].WLabel.Width:=AWid;
+        AreaW[i].WLabel.Height:=13;
+        AreaW[i].WLabel.Top:=AreaW[i].Top-AreaW[i].WLabel.Height;
+        AreaW[i].WLabel.Left:=AreaW[i].Left;
+      end;
+    end;
+  end;
+  //
+end;
+procedure TScanBanDo.FormShow(Sender: TObject);
+begin
+  ShowAreaW();
+  GetYWCPDate();
+  KhoPanel.BringToFront;
+end;
+
+procedure TScanBanDo.FormPaint(Sender: TObject);
+begin
+  ResizeArea();
+end;
+//
+procedure TScanBanDo.GetYWCPDate();
+var SQLStr:string;
+    i:integer;
+    Obj:TProgressBarWithText;
+begin
+  //
+  with YWCP do
+  begin
+    Active:=false;
+    SQL.Clear;
+    SQL.Add('Select KVBH,SUM(Qty) as Pairs from YWCP  where KCBH='''+KCBH+''' and SB=1 Group by KVBH');
+    Active:=true;
+  end;
+  //
+  if YWCP.RecordCount>0 then
+  begin
+    for i:=0 to High(AreaW) do
+    begin
+      if AreaW[i]<>nil  then
+      begin
+        AreaW[i].Position:=0;
+        AreaW[i].ProgressText:='';
+        AreaW[i].Repaint;
+      end;
+    end;
+    for i:=0 to YWCP.RecordCount-1 do
+    begin
+      Obj:=TProgressBarWithText( FindComponent('ProgressBar'+YWCP.FieldByName('KVBH').AsString) );
+      if Obj<>nil then
+      begin
+        Obj.Position:=YWCP.FieldByName('Pairs').AsInteger;
+        Obj.ProgressText:=YWCP.FieldByName('Pairs').AsString;
+        Obj.Repaint;
+      end;
+      YWCP.Next;
+    end;
+  end;
+  //
+end;
+//
+procedure TScanBanDo.N1OrderNo1Click(Sender: TObject);
+begin
+   ScanBanDo_RY:=TScanBanDo_RY.Create(self);
+   ScanBanDo_RY.KCBH:=KCBH;
+   ScanBanDo_RY.ShowModal();
+   ScanBanDo_RY.Free;
+end;
+
+procedure TScanBanDo.FormCreate(Sender: TObject);
+begin
+  KCBH:='A7';
+  KHO.Caption:=KCBH;
+  FreTimer.Enabled:=true;
+end;
+
+procedure TScanBanDo.ChangeKCBH1Click(Sender: TObject);
+var value:string;
+begin
+  value := inputbox('KCBH', 'Ton kho', 'A7');
+  if Value<>'' then
+  begin
+    KCBH:=Value;
+    KHO.Caption:=KCBH;
+    GetYWCPDate();
+    KhoPanel.BringToFront;
+  end;
+
+end;
+
+procedure TScanBanDo.FreTimerTimer(Sender: TObject);
+begin
+  FreTimer.Enabled:=false;
+  GetYWCPDate();
+  FreTimer.Enabled:=true;
+end;
+
+end.

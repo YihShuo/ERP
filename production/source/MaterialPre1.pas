@@ -1,0 +1,128 @@
+unit MaterialPre1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls,comobj,
+  GridsEh, DBGridEh;
+
+type
+  TMaterialPre = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Button1: TButton;
+    Edit2: TEdit;
+    EDIT1: TEdit;
+    Edit3: TEdit;
+    Query1: TQuery;
+    Query1cldh: TStringField;
+    Query1ywpm: TStringField;
+    Query1zwpm: TStringField;
+    Query1dwbh: TStringField;
+    DS1: TDataSource;
+    Label3: TLabel;
+    Edit4: TEdit;
+    Edit5: TEdit;
+    Query1lycc: TStringField;
+    Query1gjlb: TStringField;
+    Query1cllb: TStringField;
+    Button2: TButton;
+    DBGridEh1: TDBGridEh;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MaterialPre: TMaterialPre;
+
+implementation
+
+{$R *.dfm}
+
+procedure TMaterialPre.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+procedure TMaterialPre.Button1Click(Sender: TObject);
+begin
+
+with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select CLDH,CLLB,YWPM,ZWPM,DWBH,LYCC,GJLB from CLZL where CLDH like');
+    sql.add(''''+edit1.Text+'%'+'''');
+    sql.add('and YWPM like ');
+    sql.add(''''+'%'+edit2.Text+'%'+'''');    
+    sql.add('and YWPM like ');
+    sql.add(''''+'%'+edit3.Text+'%'+'''');
+    sql.add('and ZWPM like '+''''+'%'+edit4.Text+'%'+'''');
+    sql.add('and ZWPM like '+''''+'%'+edit5.Text+'%'+'''');
+    sql.add('and (TYJH is null or TYJH='+''''+'N'+''''+')');
+   // sql.add('and YN<>'+''''+'2'+'''');
+    sql.add('order by CLDH');
+    active:=true;
+  end;
+end;
+
+procedure TMaterialPre.Button2Click(Sender: TObject);
+var   a:string;
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+ begin
+  if  query1.active  then
+    begin
+    try
+      eclApp:=CreateOleObject('Excel.Application');
+      WorkBook:=CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('No Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+      Exit;
+    end;
+    try
+        WorkBook:=eclApp.workbooks.Add;
+        for   i:=0   to   query1.fieldcount-1   do
+          begin
+              eclApp.Cells(1,i+1):=query1.fields[i].FieldName;
+          end;
+
+        query1.First;
+        j:=2;
+        while   not   query1.Eof   do
+          begin
+            for   i:=0   to  query1.fieldcount-1  do
+            begin
+              eclApp.Cells(j,i+1):=query1.Fields[i].Value;
+            end;
+          query1.Next;
+          inc(j);
+          end;
+      eclapp.columns.autofit;
+       eclApp.Visible:=True;  
+       showmessage('Succeed');
+      except
+        on   F:Exception   do
+          showmessage(F.Message);
+      end;
+    end;
+
+
+end;
+
+procedure TMaterialPre.FormDestroy(Sender: TObject);
+begin
+MaterialPre:=nil;
+end;
+
+end.

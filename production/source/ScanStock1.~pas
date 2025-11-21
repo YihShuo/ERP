@@ -1,0 +1,89 @@
+unit ScanStock1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, DB, DBTables, GridsEh, DBGridEh, StdCtrls, ExtCtrls;
+
+type
+  TScanStock = class(TForm)
+    Panel1: TPanel;
+    Label3: TLabel;
+    Label6: TLabel;
+    Label5: TLabel;
+    Edit3: TEdit;
+    Edit2: TEdit;
+    Button1: TButton;
+    Edit1: TEdit;
+    Button2: TButton;
+    CB1: TCheckBox;
+    DBGridEh1: TDBGridEh;
+    Query1: TQuery;
+    DataSource1: TDataSource;
+    Query2: TQuery;
+    DataSource2: TDataSource;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ScanStock: TScanStock;
+
+implementation
+
+{$R *.dfm}
+
+procedure TScanStock.FormDestroy(Sender: TObject);
+begin
+ScanStock:=nil;
+end;
+
+procedure TScanStock.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+action:=cafree;
+end;
+
+procedure TScanStock.Button1Click(Sender: TObject);
+begin
+with query1 do
+  begin
+    active:=false;
+    sql.clear;
+    sql.add('select DDBH,XH,sum(Qty) as Qty,CTQ,CTZ   from YWBZPOS');
+    sql.add('where not exists(select DDBH from YWCP where YWCP.DDBH=YWBZPOS.DDBH ');
+    sql.add('                 and XH is not null)' );
+    sql.add('group by DDBh,XH,CTQ,CTZ');
+    sql.add('order by DDBH,XH');
+    active:=true;
+  end;
+end;
+
+procedure TScanStock.Button2Click(Sender: TObject);
+begin
+while not query1.Eof do
+  begin
+    with query2 do
+      begin
+        active:=false;
+        sql.Clear;
+        sql.add('update YWCP ');
+        sql.add('set XH='+''''+query1.fieldbyname('XH').asstring+'''');
+        sql.add(',  Qty='+''''+query1.fieldbyname('Qty').asstring +'''');
+        sql.add('where DDBH=:DDBH ');
+        sql.add('      and CartonNO>='+query1.fieldbyname('CTQ').asstring);
+        sql.add('      and CartonNO<='+query1.fieldbyname('CTZ').asstring);
+        sql.add('      and XH is null ');
+        execsql;
+      end;
+    query1.Next;
+  end;
+end;
+
+end.

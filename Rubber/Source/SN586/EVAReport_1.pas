@@ -1,0 +1,160 @@
+unit EVAReport_1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBTables, GridsEh, DBGridEh, StdCtrls, ExtCtrls;
+
+type
+  TEVAReport = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Button1: TButton;
+    DBGridEh1: TDBGridEh;
+    DS1: TDataSource;
+    Query1: TQuery;
+    Query1BUYNO: TStringField;
+    Query1DDBH: TStringField;
+    Query1Article: TStringField;
+    Query1Pairs: TIntegerField;
+    Query1COLOR: TStringField;
+    Query1Field02: TIntegerField;
+    Query1Field025: TIntegerField;
+    Query1Field03: TIntegerField;
+    Query1Field035: TIntegerField;
+    Query1Field04: TIntegerField;
+    Query1Field045: TIntegerField;
+    Query1Field05: TIntegerField;
+    Query1Field055: TIntegerField;
+    Query1Field06: TIntegerField;
+    Query1Field065: TIntegerField;
+    Query1Field07: TIntegerField;
+    Query1Field075: TIntegerField;
+    Query1Field08: TIntegerField;
+    Query1Field085: TIntegerField;
+    Query1Field09: TIntegerField;
+    Query1Field095: TIntegerField;
+    Query1Field10: TIntegerField;
+    Query1Field105: TIntegerField;
+    Query1Field11: TIntegerField;
+    Query1Field115: TIntegerField;
+    Query1Field12: TIntegerField;
+    Query1Field125: TIntegerField;
+    Query1Field13: TIntegerField;
+    Query1Field135: TIntegerField;
+    Query1Field14: TIntegerField;
+    Query1Field145: TIntegerField;
+    Query1Field15: TIntegerField;
+    Query1Field155: TIntegerField;
+    Query1Field16: TIntegerField;
+    GroupBox1: TGroupBox;
+    Label19: TLabel;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
+    CheckBox5: TCheckBox;
+    procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure CheckBox1Click(Sender: TObject);
+    procedure CheckBox2Click(Sender: TObject);
+    procedure CheckBox3Click(Sender: TObject);
+    procedure CheckBox4Click(Sender: TObject);
+    procedure CheckBox5Click(Sender: TObject);
+  private
+    { Private declarations }
+    procedure ApplyFilter;
+  public
+    { Public declarations }
+  end;
+
+var
+  EVAReport: TEVAReport;
+
+implementation
+
+{$R *.dfm}
+
+procedure TEVAReport.Button1Click(Sender: TObject);
+begin
+    try
+    Query1.Close;
+    Query1.SQL.Clear;
+    Query1.SQL.Add('EXEC TB_DD.dbo.S_Report_SKU :BUYNO, :COLOR, :ARTICLE ');
+    Query1.ParamByName('BUYNO').AsString := Edit3.Text+'%';
+    Query1.ParamByName('COLOR').AsString := Edit2.Text+'%';
+    Query1.ParamByName('ARTICLE').AsString :=Edit1.Text+'%';
+    Query1.Open;
+    ApplyFilter;
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Loi khi goi procedure: ' + E.Message);
+    end;
+  end;
+end;
+
+procedure TEVAReport.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action:=CaFree;
+  EVAReport:=nil;
+end;
+
+procedure TEVAReport.ApplyFilter;
+var
+  FilterStr: string;
+begin
+  FilterStr := 'NOT (Article = ''TOTAL'' AND Article = ''Out Qty'' AND Article = ''In Qty'' AND Article = ''LastInQty'' AND Article = ''LastOutQty'')';
+ // luôn gi? dòng chi ti?t
+
+  // Thêm di?u ki?n n?u các checkbox du?c ch?n
+  if CheckBox1.Checked then
+    FilterStr := FilterStr + ' OR (Article = ''TOTAL'')';
+  if CheckBox4.Checked then
+    FilterStr := FilterStr + ' OR (Article = ''Out Qty'')';
+  if CheckBox2.Checked then
+    FilterStr := FilterStr + ' OR (Article = ''In Qty'')';
+  if CheckBox3.Checked then
+    FilterStr := FilterStr + ' OR (Article = ''LastInQty'')';
+  if CheckBox5.Checked then
+    FilterStr := FilterStr + ' OR (Article = ''LastOutQty'')';
+
+  // Gán filter
+  Query1.Filter := FilterStr;
+  Query1.Filtered := True;
+end;
+
+
+
+procedure TEVAReport.CheckBox1Click(Sender: TObject);
+begin
+ ApplyFilter;
+end;
+
+procedure TEVAReport.CheckBox2Click(Sender: TObject);
+begin
+ ApplyFilter;
+end;
+
+procedure TEVAReport.CheckBox3Click(Sender: TObject);
+begin
+ ApplyFilter;
+end;
+
+procedure TEVAReport.CheckBox4Click(Sender: TObject);
+begin
+ ApplyFilter;
+end;
+
+procedure TEVAReport.CheckBox5Click(Sender: TObject);
+begin
+ ApplyFilter;
+end;
+
+end.

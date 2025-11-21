@@ -1,0 +1,502 @@
+unit MaterialStatus1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, GridsEh, DBGridEh, ExtCtrls, DB, DBTables, StdCtrls, ComCtrls,
+  DateUtils, ComObj, IdBaseComponent, IdComponent, IdTCPConnection,
+  IdTCPClient, IdHTTP;
+
+type
+  TMaterialStatus = class(TForm)
+    Panel1: TPanel;
+    DBGridEh1: TDBGridEh;
+    Label1: TLabel;
+    DTP_BUY: TDateTimePicker;
+    Label2: TLabel;
+    ED_SupID: TEdit;
+    ED_MatID: TEdit;
+    Label3: TLabel;
+    Button1: TButton;
+    Button2: TButton;
+    Query1: TQuery;
+    DS1: TDataSource;
+    Query1BUY: TStringField;
+    Query1CSBH: TStringField;
+    Query1CLBH: TStringField;
+    Query1DDBH: TStringField;
+    Query1ArrivalDate: TDateTimeField;
+    Query1NewArrivalDate: TDateTimeField;
+    Query1UserID: TStringField;
+    Query1UserDate: TDateTimeField;
+    Query1YN: TStringField;
+    Query1YWPM: TStringField;
+    Query1ZSYWJC: TStringField;
+    Label4: TLabel;
+    ED_SupName: TEdit;
+    Label5: TLabel;
+    ED_MatName: TEdit;
+    Label6: TLabel;
+    Panel2: TPanel;
+    Button3: TButton;
+    Button4: TButton;
+    OpenDialog1: TOpenDialog;
+    UpdateSQL1: TUpdateSQL;
+    QTemp: TQuery;
+    IdHTTP1: TIdHTTP;
+    Button5: TButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+  private
+    procedure BubbleSort(var A: array of string);
+    { Private declarations }
+  public
+    SheetName: string;
+    { Public declarations }
+  end;
+
+var
+  MaterialStatus: TMaterialStatus;
+
+implementation
+
+uses
+  main1, ExcelSheetSelection1;
+
+{$R *.dfm}
+
+procedure TMaterialStatus.BubbleSort(var A: array of string);
+var
+  i, j: Integer;
+  Temp: string;
+begin
+  for i := High(A) downto Low(A) do
+  begin
+    for j := Low(A) to i - 1 do
+    begin
+      if A[j] > A[j + 1] then
+      begin
+        Temp := A[j];
+        A[j] := A[j + 1];
+        A[j + 1] := Temp;
+      end;
+    end;
+  end;
+end;
+
+procedure TMaterialStatus.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+procedure TMaterialStatus.FormDestroy(Sender: TObject);
+begin
+  MaterialStatus := Nil;
+end;
+    
+procedure TMaterialStatus.FormCreate(Sender: TObject);
+begin
+  DTP_BUY.Date := StartOfTheMonth(IncMonth(Date, -1));
+end;
+      
+procedure TMaterialStatus.FormShow(Sender: TObject);
+begin
+  Panel1.SetFocus;
+end;
+
+procedure TMaterialStatus.Button1Click(Sender: TObject);
+begin
+  with Query1 do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT BUY, DDBH, CSBH, ZSYWJC, CLBH, YWPM, ArrivalDate, NewArrivalDate, UserID, UserDate, YN FROM (');
+    SQL.Add('  SELECT SM.BUY, SM.DDBH, SM.CSBH, ZSZL.ZSYWJC, SM.CLBH, CLZL.YWPM, SM.ArrivalDate, CAST(NULL AS SmallDateTime) AS NewArrivalDate,');
+    SQL.Add('  SM.UserID, SM.UserDate, SM.YN, ROW_NUMBER() OVER(PARTITION BY BUY, DDBH, CSBH, CLBH ORDER BY SM.UserDate DESC) AS Seq FROM schedule_materials AS SM');
+    SQL.Add('  LEFT JOIN CLZL ON CLZL.CLDH = SM.CLBH');
+    SQL.Add('  LEFT JOIN ZSZL ON ZSZL.ZSDH = SM.CSBH');
+    SQL.Add('  WHERE SM.BUY = ''' + FormatDateTime('yyyyMM', DTP_BUY.Date) + '''');
+    SQL.Add('  AND SM.CSBH LIKE ''' + ED_SupID.Text + '%'' AND ZSZL.ZSYWJC LIKE ''%' + ED_SupName.Text + '%''');
+    SQL.Add('  AND SM.CLBH LIKE ''' + ED_MatID.Text + '%'' AND CLZL.YWPM LIKE ''%' + ED_MatName.Text + '%''');
+    SQL.Add(') AS SM');
+    SQL.Add('WHERE Seq = 1');
+    SQL.Add('ORDER BY CSBH, ArrivalDate, CLBH, DDBH');
+    Active := true;
+  end;
+end;
+
+procedure TMaterialStatus.Button2Click(Sender: TObject);
+var
+  eclApp, Sheet: OleVariant;
+  i, Col, Row, id_Buy, id_RY, id_SupID, id_MatID, id_Date: integer;
+begin
+  if (OpenDialog1.Execute) then
+  begin
+    try
+      eclApp := CreateOleObject('Excel.Application');
+      eclApp.Workbooks.Open(OpenDialog1.FileName);
+
+      SheetName := '';
+      ExcelSheetSelection := TExcelSheetSelection.Create(Self);
+      ExcelSheetSelection.PageBox.Clear;
+      for i := 1 to eclApp.WorkSheets.Count do
+      begin
+        if (eclApp.WorkSheets[i].Visible) then
+          ExcelSheetSelection.PageBox.Items.Add(eclApp.WorkSheets[i].Name);
+      end;
+
+      if (ExcelSheetSelection.ShowModal = mrOK) then
+      begin
+        Sheet := eclApp.WorkSheets[SheetName];
+        eclapp.Columns.Autofit;
+
+        Row := 1;
+        Col := 1;
+        while (Col <= 100) do
+        begin
+          if (UpperCase(Sheet.Cells[Row, Col]) = 'BUY') then
+            id_Buy := Col
+          else if (UpperCase(Sheet.Cells[Row, Col]) = 'RY') then
+            id_RY := Col
+          else if (UpperCase(Sheet.Cells[Row, Col]) = 'SUPPLIER ID') then
+            id_SupID := Col
+          else if (UpperCase(Sheet.Cells[Row, Col]) = 'MATERIAL ID') then
+            id_MatID := Col
+          else if (UpperCase(Sheet.Cells[Row, Col]) = 'ARRIVAL DATE') then
+            id_Date := Col;
+
+          Inc(Col);
+          if (id_Buy > 0) AND (id_RY > 0) AND (id_SupID > 0) AND (id_MatID > 0) AND (id_Date > 0) then
+            Break;
+        end;
+
+        if (id_Buy > 0) AND (id_RY > 0) AND (id_SupID > 0) AND (id_MatID > 0) AND (id_Date > 0) then
+        begin
+          with Query1 do
+          begin
+            Active := false;
+            SQL.Clear;
+            SQL.Add('SELECT SM.BUY, SM.DDBH, SM.CSBH, ZSZL.ZSYWJC, SM.CLBH, CLZL.YWPM, SM.ArrivalDate, CAST(NULL AS SmallDateTime) AS NewArrivalDate, SM.UserID, SM.UserDate, SM.YN FROM schedule_materials AS SM');
+            SQL.Add('LEFT JOIN CLZL ON CLZL.CLDH = SM.CLBH');
+            SQL.Add('LEFT JOIN ZSZL ON ZSZL.ZSDH = SM.CSBH');
+            SQL.Add('WHERE 1 = 0');
+          
+            RequestLive := true;
+            CachedUpdates := true; 
+            Active := true;
+          end;
+
+          Row := 2;
+          while (Sheet.Cells[Row, id_Buy].Text <> '') do
+          begin
+            with QTemp do
+            begin
+              Active := false;
+              SQL.Clear;
+              SQL.Add('SELECT BUY, DDBH, CSBH, ZSYWJC, CLBH, YWPM, ArrivalDate, UserID, UserDate, YN FROM (');
+              SQL.Add('  SELECT SM.BUY, SM.DDBH, SM.CSBH, ZSZL.ZSYWJC, SM.CLBH, CLZL.YWPM, SM.ArrivalDate, SM.UserID, SM.UserDate, SM.YN,');
+              SQL.Add('  ROW_NUMBER() OVER(PARTITION BY SM.BUY, SM.DDBH, SM.CSBH, SM.CLBH ORDER BY SM.UserDate DESC) AS Seq FROM schedule_materials AS SM');
+              SQL.Add('  LEFT JOIN CLZL ON CLZL.CLDH = SM.CLBH');
+              SQL.Add('  LEFT JOIN ZSZL ON ZSZL.ZSDH = SM.CSBH');
+              SQL.Add('  WHERE SM.BUY = ''' + Copy(Sheet.Cells[Row, id_Buy].Text, 1, 6) + ''' AND SM.DDBH = ''' + Sheet.Cells[Row, id_RY].Text + ''' AND SM.CSBH = ''' + Sheet.Cells[Row, id_SupID].Text + ''' AND SM.CLBH = ''' + Sheet.Cells[Row, id_MatID].Text + '''');
+              SQL.Add(') AS SM');
+              SQL.Add('WHERE Seq = 1');
+              Active := true;
+            end;
+
+            with Query1 do
+            begin
+              Append;
+              FieldByName('BUY').Value := Copy(Sheet.Cells[Row, id_Buy].Text, 1, 6);
+              FieldByName('DDBH').Value := Sheet.Cells[Row, id_RY].Text;
+              FieldByName('CSBH').Value := Sheet.Cells[Row, id_SupID].Text;
+              FieldByName('CLBH').Value := Sheet.Cells[Row, id_MatID].Text;
+              
+              try
+                if (QTemp.RecordCount > 0) AND (DateOf(QTemp.FieldByName('ArrivalDate').AsDateTime) = DateOf(Sheet.Cells[Row, id_Date])) then
+                  FieldByName('NewArrivalDate').Value := Null
+                else
+                  FieldByName('NewArrivalDate').Value := DateOf(Sheet.Cells[Row, id_Date]);
+              except on F:Exception do
+                FieldByName('NewArrivalDate').Value := Null;
+              end;
+
+              if (QTemp.RecordCount > 0) then
+              begin
+                FieldByName('ZSYWJC').Value := QTemp.FieldByName('ZSYWJC').AsString;
+                FieldByName('YWPM').Value := QTemp.FieldByName('YWPM').AsString;
+                FieldByName('ArrivalDate').Value := DateOf(QTemp.FieldByName('ArrivalDate').AsDateTime);
+                FieldByName('UserID').Value := QTemp.FieldByName('UserID').AsString;
+                FieldByName('UserDate').Value := QTemp.FieldByName('UserDate').AsDateTime;
+              end;
+            end;
+
+            Inc(Row);
+          end;
+          
+          Query1.First;
+        end
+        else begin
+          Panel2.Visible := false;
+          eclApp.DisplayAlerts := false;
+          eclApp.WorkBooks.Close;
+          eclApp.Quit;
+          ShowMessage('Unacceptable Excel Format.');
+          Exit;
+        end;
+               
+        Panel2.Visible := true;
+        eclApp.DisplayAlerts := false;
+        eclApp.WorkBooks.Close;
+        eclApp.Quit;
+        ShowMessage('Completed');
+      end;
+    except on F:Exception do
+      begin
+        Panel2.Visible := false;
+        eclApp.DisplayAlerts := false;
+        eclApp.WorkBooks.Close;
+        eclApp.Quit;
+        ShowMessage(F.Message);
+        Exit;
+      end;
+    end;
+  end;
+end;
+
+procedure TMaterialStatus.Button3Click(Sender: TObject);
+const
+  URL = 'http://192.168.23.12:80/api/ERP/sendTelegramMessage';
+var
+  Sup_Index, Buy_Index, Lean_Index: integer;
+  isExist: boolean;
+  SupID, SupName: array of string;
+  SupBuy, SupLean: array of array of string;
+  Response, BuyText, LeanText, Building: string;
+  JsonBody: TStringStream;
+begin
+  try
+    SetLength(SupID, 0);
+    SetLength(SupName, 0);
+    SetLength(SupBuy, 0);  
+    SetLength(SupLean, 0);
+    Query1.First;
+    while not Query1.Eof do
+    begin
+      if (Query1.FieldByName('NewArrivalDate').IsNull = false) then
+      begin
+        isExist := false;
+        for Sup_Index := Low(SupID) to High(SupID) do
+        begin
+          if (SupID[Sup_Index] = Query1.FieldByName('CSBH').AsString) then
+          begin
+            isExist := true;
+            Break;
+          end;
+        end;
+        if (isExist = false) then
+        begin
+          SetLength(SupID, Length(SupID) + 1);
+          SetLength(SupName, Length(SupID) + 1);
+          Sup_Index := High(SupID);
+          SupID[Sup_Index] := Query1.FieldByName('CSBH').AsString;
+          with QTemp do
+          begin
+            Active := false;
+            SQL.Clear;
+            SQL.Add('SELECT ZSYWJC FROM ZSZL WHERE ZSDH = ''' + Query1.FieldByName('CSBH').AsString + '''');
+            Active := true;
+          end;
+          SupName[Sup_Index] := QTemp.FieldByName('ZSYWJC').AsString;
+
+          if (Length(SupBuy) < Length(SupID)) then
+            SetLength(SupBuy, Length(SupID));
+
+          if (Length(SupLean) < Length(SupID)) then
+            SetLength(SupLean, Length(SupID));
+        end;
+
+        isExist := false;
+        for Buy_Index := Low(SupBuy[Sup_Index]) to High(SupBuy[Sup_Index]) do
+        begin
+          if (SupBuy[Sup_Index][Buy_Index] = Query1.FieldByName('BUY').AsString) then
+          begin
+            isExist := true;
+            Break;
+          end;
+        end;
+        if (isExist = false) then
+        begin
+          SetLength(SupBuy[Sup_Index], Length(SupBuy[Sup_Index]) + 1);
+          Buy_Index := High(SupBuy[Sup_Index]);
+          SupBuy[Sup_Index][Buy_Index] := Query1.FieldByName('BUY').AsString;
+        end;
+
+        with QTemp do
+        begin
+          Active := false;
+          SQL.Clear;
+          SQL.Add('SELECT building_no + SUBSTRING(REPLACE(lean_no, ''Lean'', ''L''), 1, 3) AS Lean FROM schedule_crawler AS SC');
+          SQL.Add('WHERE ry LIKE ''' + Query1.FieldByName('DDBH').AsString + '%''');
+          Active := true;
+
+          while not Eof do
+          begin
+            isExist := false;
+            for Lean_Index := Low(SupLean[Sup_Index]) to High(SupLean[Sup_Index]) do
+            begin
+              if (SupLean[Sup_Index][Lean_Index] = FieldByName('Lean').AsString) then
+              begin
+                isExist := true;
+                Break;
+              end;
+            end;
+            if (isExist = false) then
+            begin
+              SetLength(SupLean[Sup_Index], Length(SupLean[Sup_Index]) + 1);
+              Lean_Index := High(SupLean[Sup_Index]);
+              SupLean[Sup_Index][Lean_Index] := FieldByName('Lean').AsString;
+            end;
+            
+            Next;
+          end;
+        end;
+
+        Query1.Edit;
+        Query1.FieldByName('UserID').Value := main.Edit1.Text;
+        UpdateSQL1.Apply(ukInsert);
+
+        with QTemp do
+        begin
+          Active := false;
+          SQL.Clear;
+          SQL.Add('UPDATE CGZLSS SET CFMDate = ''' + FormatDateTime('yyyy/MM/dd', Query1.FieldByName('NewArrivalDate').AsDateTime) + '''');
+          SQL.Add('WHERE ZLBH = ''' + Query1.FieldByName('DDBH').AsString + ''' AND CLBH = ''' + Query1.FieldByName('CLBH').AsString + '''');
+          ExecSQL;
+        end;
+      end;
+      Query1.Next;
+    end;
+
+    Query1.Active := false;
+    Query1.CachedUpdates := false;
+    Query1.RequestLive := false;
+    Query1.Active := true;
+    Panel2.Visible := false;
+
+    {for Sup_Index := Low(SupID) to High(SupID) do
+    begin
+      BuyText := '';
+      for Buy_Index := Low(SupBuy[Sup_Index]) to High(SupBuy[Sup_Index]) do
+      begin
+        if (BuyText <> '') then
+          BuyText := BuyText + ', ' + SupBuy[Sup_Index][Buy_Index]
+        else
+          BuyText := SupBuy[Sup_Index][Buy_Index];
+      end;
+
+      LeanText := '';
+      BubbleSort(SupLean[Sup_Index]);
+      Building := '';
+      for Lean_Index := Low(SupLean[Sup_Index]) to High(SupLean[Sup_Index]) do
+      begin
+        if (Copy(SupLean[Sup_Index][Lean_Index], 1, 3) <> Building) then
+        begin
+          Building := Copy(SupLean[Sup_Index][Lean_Index], 1, 3);
+          if (LeanText <> '') then
+            LeanText := LeanText + ']\n  <b>&#8226;</b> ' + Building + ' - ['
+          else
+            LeanText := LeanText + '  <b>&#8226;</b> ' + Building + ' - [';
+        end
+        else begin
+          LeanText := LeanText + ', ';
+        end;
+
+        LeanText := LeanText + Copy(SupLean[Sup_Index][Lean_Index], 4, 3);
+      end;
+      if (LeanText <> '') then
+        LeanText := LeanText + ']\n';}
+        
+      //try
+      //  JsonBody := TStringStream.Create('{"ChatID":"-4689485184","ParseMode":"HTML","Text":"<blockquote>Supplier: [' + SupID[Sup_Index] + '] ' + SupName[Sup_Index] + '\nBUY: ' + BuyText + '\nMaterial arrival status has been updated</blockquote>Affected:\n' + LeanText + '"}');
+      //  idHTTP1.Request.ContentType := 'application/json';
+      //  Response := idHTTP1.Post(URL, JsonBody);
+      //except on E: Exception do
+        //
+      //end;
+    //end;
+
+    ShowMessage('Completed');
+  except
+    MessageDlg('Failed to save the data!', mtWarning, [mbyes], 0);
+  end;
+end;
+
+procedure TMaterialStatus.Button4Click(Sender: TObject);
+begin
+  with Query1 do
+  begin
+    Active := false;
+    SQL.Clear;
+    SQL.Add('SELECT SM.BUY, SM.DDBH, SM.CSBH, ZSZL.ZSYWJC, SM.CLBH, CLZL.YWPM, SM.ArrivalDate, CAST(NULL AS SmallDateTime) AS NewArrivalDate, SM.UserID, SM.UserDate, SM.YN FROM schedule_materials AS SM');
+    SQL.Add('LEFT JOIN CLZL ON CLZL.CLDH = SM.CLBH');
+    SQL.Add('LEFT JOIN ZSZL ON ZSZL.ZSDH = SM.CSBH');
+    SQL.Add('WHERE 1 = 0');
+    Active := true;
+  end;
+  Panel2.Visible := false;
+end;
+
+procedure TMaterialStatus.Button5Click(Sender: TObject);
+var
+  eclApp, WorkBook: OleVariant;
+  Col, Row: integer;
+begin
+  if (Query1.Active) then
+  begin
+    try
+      eclApp := CreateOleObject('Excel.Application');
+      WorkBook := CreateOleObject('Excel.Sheet');
+    except
+      Application.MessageBox('Failed to create excel file', 'Error', MB_OK + MB_ICONWarning);
+      Exit;
+    end;
+
+    try
+      WorkBook := eclApp.Workbooks.Add;
+      for Col := 0 to DBGridEh1.Columns.Count - 1 do
+      begin
+        eclApp.Cells[1, Col+1] := DBGridEh1.Columns[Col].Title.Caption;
+      end;
+
+      Query1.First;
+      Row := 2;
+      while not Query1.Eof do
+      begin
+        for Col := 0 to DBGridEh1.Columns.Count - 1 do
+        begin
+          eclApp.Cells[Row, Col+1] := Query1.FieldByName(DBGridEh1.Columns[Col].FieldName).Value;
+        end;
+        Query1.Next;
+        Inc(Row);
+      end;
+
+      eclapp.Columns.Autofit;  
+      ShowMessage('Successful');
+      eclApp.Visible := True;
+    except on F:Exception do
+      ShowMessage(F.Message);
+    end;
+  end;
+end;
+
+end.

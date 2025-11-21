@@ -1,0 +1,357 @@
+object QRScanOut: TQRScanOut
+  Left = 42
+  Top = 128
+  Width = 1682
+  Height = 675
+  Caption = 'QR Scan Out'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBGrid1: TDBGridEh
+    Left = 0
+    Top = 72
+    Width = 1666
+    Height = 564
+    Align = alClient
+    DataSource = DS1
+    Flat = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -11
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    ParentFont = False
+    ReadOnly = True
+    SumList.Active = True
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'DDBH'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'SIZE'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Qty'
+        Footer.ValueType = fvtSum
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DepID'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ScanInQty'
+        Footer.ValueType = fvtSum
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ScanOutQty'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 84
+      end>
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 0
+    Width = 1666
+    Height = 72
+    Align = alTop
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    object Label1: TLabel
+      Left = 1504
+      Top = 21
+      Width = 105
+      Height = 29
+      AutoSize = False
+      Caption = 'Scan Out'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clRed
+      Font.Height = -24
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 1168
+      Top = 32
+      Width = 70
+      Height = 18
+      Caption = 'Don Hang'
+    end
+    object Label3: TLabel
+      Left = 8
+      Top = 24
+      Width = 116
+      Height = 24
+      Caption = 'Quet ma QR'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -21
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label5: TLabel
+      Left = 395
+      Top = 11
+      Width = 91
+      Height = 24
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'DepName:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label6: TLabel
+      Left = 395
+      Top = 35
+      Width = 91
+      Height = 24
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'DepID:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label7: TLabel
+      Left = 891
+      Top = 27
+      Width = 91
+      Height = 24
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'DepID:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Panel1: TPanel
+      Left = 136
+      Top = 8
+      Width = 241
+      Height = 57
+      Caption = 'Panel1'
+      TabOrder = 0
+      object Edit1: TEdit
+        Left = 8
+        Top = 8
+        Width = 225
+        Height = 45
+        AutoSize = False
+        CharCase = ecUpperCase
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -27
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnKeyPress = Edit1KeyPress
+      end
+    end
+    object Button2: TButton
+      Left = 1424
+      Top = 16
+      Width = 75
+      Height = 41
+      Caption = 'Query'
+      TabOrder = 1
+      OnClick = Button2Click
+    end
+    object Edit3: TEdit
+      Left = 1248
+      Top = 24
+      Width = 169
+      Height = 26
+      TabOrder = 2
+    end
+    object Button4: TButton
+      Left = 674
+      Top = 23
+      Width = 135
+      Height = 32
+      Caption = 'Don Vi Xuat'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      OnClick = Button4Click
+    end
+    object Edit2: TEdit
+      Left = 504
+      Top = 8
+      Width = 153
+      Height = 26
+      ReadOnly = True
+      TabOrder = 4
+    end
+    object Edit4: TEdit
+      Left = 504
+      Top = 40
+      Width = 153
+      Height = 26
+      ReadOnly = True
+      TabOrder = 5
+    end
+    object Edit6: TEdit
+      Left = 992
+      Top = 24
+      Width = 153
+      Height = 26
+      TabOrder = 6
+    end
+  end
+  object ScanData: TQuery
+    CachedUpdates = True
+    DatabaseName = 'DB'
+    RequestLive = True
+    SQL.Strings = (
+      'select * from CutDispatchSSS where DDBH='#39'JHS2412'#39)
+    Left = 168
+    Top = 152
+    object ScanDataDDBH: TStringField
+      FieldName = 'DDBH'
+      Origin = 'DB.CutDispatchSSS.DDBH'
+      FixedChar = True
+      Size = 15
+    end
+    object ScanDataSIZE: TStringField
+      FieldName = 'SIZE'
+      Origin = 'DB.CutDispatchSSS.SIZE'
+      FixedChar = True
+      Size = 6
+    end
+    object ScanDataQty: TIntegerField
+      FieldName = 'Qty'
+      Origin = 'DB.CutDispatchSSS.Qty'
+    end
+    object ScanDataDepID: TStringField
+      FieldName = 'DepID'
+      Origin = 'DB.CutDispatchSSS.DepID'
+      FixedChar = True
+      Size = 10
+    end
+    object ScanDataScanInQty: TIntegerField
+      FieldName = 'ScanInQty'
+      Origin = 'DB.CutDispatchSSS.ScanInQty'
+    end
+    object ScanDataScanOutQty: TIntegerField
+      FieldName = 'ScanOutQty'
+      Origin = 'DB.CutDispatchSSS.ScanOutQty'
+    end
+    object ScanDataUSERID: TStringField
+      FieldName = 'USERID'
+      Origin = 'DB.CutDispatchSSS.USERID'
+      FixedChar = True
+      Size = 10
+    end
+    object ScanDataUSERDATE: TDateTimeField
+      FieldName = 'USERDATE'
+      Origin = 'DB.CutDispatchSSS.USERDATE'
+    end
+  end
+  object DS1: TDataSource
+    DataSet = ScanData
+    Left = 200
+    Top = 152
+  end
+  object Qtemp: TQuery
+    DatabaseName = 'DB'
+    Left = 336
+    Top = 152
+  end
+  object DepNo: TQuery
+    DatabaseName = 'DB'
+    SQL.Strings = (
+      'select *'
+      'from BDepartment'
+      'where ProYN=1'
+      'order by ID')
+    Left = 776
+    Top = 80
+    object DepNoID: TStringField
+      FieldName = 'ID'
+      Origin = 'DB.BDepartment.ID'
+      FixedChar = True
+      Size = 10
+    end
+    object DepNoGSBH: TStringField
+      FieldName = 'GSBH'
+      Origin = 'DB.BDepartment.GSBH'
+      FixedChar = True
+      Size = 4
+    end
+    object DepNoDepName: TStringField
+      FieldName = 'DepName'
+      Origin = 'DB.BDepartment.DepName'
+      FixedChar = True
+      Size = 50
+    end
+    object DepNoDepMemo: TStringField
+      FieldName = 'DepMemo'
+      Origin = 'DB.BDepartment.DepMemo'
+      FixedChar = True
+      Size = 50
+    end
+    object DepNoGXLB: TStringField
+      FieldName = 'GXLB'
+      Origin = 'DB.BDepartment.GXLB'
+      FixedChar = True
+      Size = 10
+    end
+  end
+end

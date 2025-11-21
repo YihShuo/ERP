@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\ERP_Xuan\\Others\\Develop-RFID-Warehouse\\RFID_DCWH_STAR\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{10F3A65D-35FD-438F-B35B-1F0B070E292D}|UHF\\UHF.csproj|D:\\ERP_Xuan\\Others\\Develop-RFID-Warehouse\\RFID_DCWH_STAR\\uhf\\r2000uartdemo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{10F3A65D-35FD-438F-B35B-1F0B070E292D}|UHF\\UHF.csproj|solutionrelative:uhf\\r2000uartdemo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10F3A65D-35FD-438F-B35B-1F0B070E292D}|UHF\\UHF.csproj|d:\\erp_xuan\\others\\develop-rfid-warehouse\\rfid_dcwh_star\\uhf\\r2000uartdemo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10F3A65D-35FD-438F-B35B-1F0B070E292D}|UHF\\UHF.csproj|solutionrelative:uhf\\r2000uartdemo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 89,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "R2000UartDemo.cs",
+              "DocumentMoniker": "D:\\ERP_Xuan\\Others\\Develop-RFID-Warehouse\\RFID_DCWH_STAR\\UHF\\R2000UartDemo.cs",
+              "RelativeDocumentMoniker": "UHF\\R2000UartDemo.cs",
+              "ToolTip": "D:\\ERP_Xuan\\Others\\Develop-RFID-Warehouse\\RFID_DCWH_STAR\\UHF\\R2000UartDemo.cs*",
+              "RelativeToolTip": "UHF\\R2000UartDemo.cs*",
+              "ViewState": "AQIAAGINAAAAAAAAAAApwGYNAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-17T08:05:38.181Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "R2000UartDemo.cs [Design]",
+              "DocumentMoniker": "D:\\ERP_Xuan\\Others\\Develop-RFID-Warehouse\\RFID_DCWH_STAR\\UHF\\R2000UartDemo.cs",
+              "RelativeDocumentMoniker": "UHF\\R2000UartDemo.cs",
+              "ToolTip": "D:\\ERP_Xuan\\Others\\Develop-RFID-Warehouse\\RFID_DCWH_STAR\\UHF\\R2000UartDemo.cs [Design]*",
+              "RelativeToolTip": "UHF\\R2000UartDemo.cs [Design]*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-17T08:05:31.008Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

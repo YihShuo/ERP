@@ -1,0 +1,186 @@
+unit ScanStockBrand_Det1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, DB, DBTables, PrnDbgeh, GridsEh, DBGridEh,comobj;
+
+type
+  TScanStockBrand_Det = class(TForm)
+    DBGridEh1: TDBGridEh;
+    PrintDBGridEh1: TPrintDBGridEh;
+    Query1: TQuery;
+    DS1: TDataSource;
+    PopupMenu1: TPopupMenu;
+    Excel1: TMenuItem;
+    Print1: TMenuItem;
+    Query1DDBH: TStringField;
+    Query1YSBH: TStringField;
+    Query1Article: TStringField;
+    Query1XieMing: TStringField;
+    Query1Country: TStringField;
+    Query1KFJC: TStringField;
+    Query1Qty: TFloatField;
+    Query1okQty: TIntegerField;
+    Query1LackQty: TFloatField;
+    Query1CTS: TIntegerField;
+    Query1okCTS: TIntegerField;
+    Query1LackCTS: TIntegerField;
+    Query1ETD: TDateTimeField;
+    Query1LastInDate: TDateTimeField;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Excel1Click(Sender: TObject);
+    procedure Print1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure DBGridEh1GetCellParams(Sender: TObject; Column: TColumnEh;
+      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure PrintDBGridEh1BeforePrint(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ScanStockBrand_Det: TScanStockBrand_Det;
+
+implementation
+
+uses ScanStockBrand1, main1;
+
+{$R *.dfm}
+
+procedure TScanStockBrand_Det.FormDestroy(Sender: TObject);
+begin
+ScanStockBrand_Det:=nil;
+end;
+
+procedure TScanStockBrand_Det.FormCreate(Sender: TObject);
+begin
+with query1 do
+  begin
+    active:=false;
+    sql.Clear;
+    sql.add('select YWCP.DDBH,YWDD.YSBH,XXZL.Article,XXZL.XieMing,YWDD.ETD,LBZLS.YWSM as Country,KFZL.KFJC,');
+    sql.add('       YWDD.Qty,sum(YWCP.Qty) as okQty,YWDD.Qty-isnull(sum(YWCP.Qty),0) as LackQty,');
+    sql.add('       YWBZPO.CTS,count(YWCP.DDBH) as okCTS,YWBZPO.CTS-count(YWCP.DDBH) as LackCTS,max(YWCP.LastInDate) as LastInDate');
+    sql.add('from YWCP  with (nolock)');
+    sql.add('left join YWDD  with (nolock) on YWDD.DDBH=YWCP.DDBH ');
+    sql.add('left join DDZL  with (nolock) on YWDD.YSBH=DDZl.DDBH ');
+    sql.add('left join XXZL  with (nolock) on DDZl.XieXing=XXZl.XieXing and DDZL.SheHao=XXZL.Shehao ');
+    sql.add('left join LBZLS  with (nolock) on LBZLS.LB='+''''+'06'+''''+' and LBZLS.LBDH=DDZL.DDGB');
+    sql.add('left join KFZL  with (nolock) on KFZL.KFDH=DDZL.KHBH ');
+    sql.add('left join (select YWBZPO.DDBH,sum(YWBZPO.CTS) as CTS ');
+    sql.add('           from (select distinct YWBZPOS.DDBH,YWBZPOS.XH,YWBZPOS.CTS from YWBZPOS  with (nolock) ) YWBZPO  ');
+    sql.add('           group by YWBZPO.DDBH) YWBZPO on YWCP.DDBH=YWBZPO.DDBH ');
+    sql.Add('where DDZL.DDBH like '+''''+ScanStockBrand.edit1.Text+'%'+'''');
+    sql.add('      and YWCP.KCBH like '+''''+ScanStockBrand.edit2.Text+'%'+'''');
+    sql.add('      and isnull(KFZL.KFJC,'+''''+''+''''+') like '+''''+'%'+ScanStockBrand.edit3.text+'%'+'''');
+    sql.add('      and isnull(LBZLS.YWSM,'+''''+''+''''+') like '+''''+'%'+ScanStockBrand.edit4.text+'%'+'''');
+    sql.add('      and DDZL.GSBH='+''''+main.edit2.text+'''');
+    sql.add('      and YWCP.SB='+''''+'1'+'''');
+    sql.add('      and DDZL.KHBH=:KHBH ');
+    sql.add('      and DDZL.DDGB=:DDGB ');
+    sql.add('group by YWCP.DDBH,YWDD.YSBH,XXZL.Article,XXZL.XieMing,YWDD.ETD,LBZLS.YWSM,KFZL.KFJC,YWDD.Qty,YWBZPO.CTS');
+    sql.add('order by YWCP.DDBH ');
+    active:=true;
+  end;
+end;
+
+procedure TScanStockBrand_Det.Excel1Click(Sender: TObject);
+var
+      eclApp,WorkBook:olevariant;
+ //     xlsFileName:string;
+      i,j:integer;
+begin
+
+if query1.Active then
+  begin
+    if query1.recordcount=0 then
+      begin
+        showmessage('No record.');
+        abort;
+      end;
+  end
+  else
+    begin
+      showmessage('No record.');
+      abort;
+    end;
+
+try
+  eclApp:=CreateOleObject('Excel.Application');
+  WorkBook:=CreateOleObject('Excel.Sheet');
+except
+  Application.MessageBox('NO Microsoft   Excel','Microsoft   Excel',MB_OK+MB_ICONWarning);
+  Exit;
+end;
+
+try
+  WorkBook:=eclApp.workbooks.Add; 
+  eclApp.Cells(1,1):='NO';
+  for   i:=1   to   query1.fieldcount   do
+    begin
+      eclApp.Cells(1,i+1):=query1.fields[i-1].FieldName;
+    end;
+  query1.First;
+  j:=2;
+  while   not  query1.Eof   do
+    begin
+      eclApp.Cells(j,1):=j-1;
+      for   i:=1   to   query1.fieldcount   do
+        begin
+          eclApp.Cells(j,i+1):=query1.Fields[i-1].Value;
+          eclApp.Cells.Cells.item[j,i+1].font.size:='8';
+        end;
+      query1.Next;
+      inc(j);
+    end;
+  eclapp.columns.autofit;
+  showmessage('Succeed.');
+  eclApp.Visible:=True;
+except
+  on   F:Exception   do
+    showmessage(F.Message);
+end;
+
+
+end;
+
+procedure TScanStockBrand_Det.Print1Click(Sender: TObject);
+begin
+PrintDBGrideh1.Preview;
+end;
+
+procedure TScanStockBrand_Det.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+query1.Active:=false;
+end;
+
+procedure TScanStockBrand_Det.DBGridEh1GetCellParams(Sender: TObject;
+  Column: TColumnEh; AFont: TFont; var Background: TColor;
+  State: TGridDrawState);
+begin
+
+if query1.FieldByName('LackQty').value=0 then
+  begin
+    dbgrideh1.canvas.font.color:=clBlue;
+  end;
+end;
+
+procedure TScanStockBrand_Det.PrintDBGridEh1BeforePrint(Sender: TObject);
+begin
+
+//PrintDBGridEh1.SetSubstitutes(['%[Country]',ScanStockBrand.query1.FieldByName('Country').value,'%[Customer]',ScanStockBrand.Query1.FieldByName('KFJC').value]);
+end;
+
+procedure TScanStockBrand_Det.FormShow(Sender: TObject);
+begin
+  main.FormLanguage(Pointer(self),self.Name);
+end;
+
+end.

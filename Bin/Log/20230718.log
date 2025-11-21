@@ -1,0 +1,91 @@
+Select VCLID,VCLName_VN as Langeuage from BLanguage WHERE  MKID = '00' and mainForm='main'
+Select  TSCD.TSID,TSCD.TSBH, TSCD.SBBH , TSCD.Qty, TSCD.XSBH, TSCD.NSX, TSCD.Status,TSCD.Label_Tag,TSCD.RFID_Tag,
+        TSCD.USERID_Tag, TSCD.USERDATE_Tag,TSCD.RKNO, TSCD.LLNO, 
+        CLZL.ywpm,CLZL.zwpm,BDepartment.DepName 
+from TSCD 
+Left join CLZL on CLZL.cldh=TSCD.SBBH 
+Left join BDepartment on BDepartment.ID=TSCD.DepID 
+where LLNO in ('202306') and LB=2 
+and SBBH like '%' 
+Order by TSCD.Label_Tag,CLZL.YWPM
+Select  TSCD.TSID,TSCD.TSBH, TSCD.SBBH , TSCD.Qty, TSCD.XSBH, TSCD.NSX, TSCD.Status,TSCD.Label_Tag,TSCD.RFID_Tag,
+        TSCD.USERID_Tag, TSCD.USERDATE_Tag,TSCD.RKNO, TSCD.LLNO, 
+        CLZL.ywpm,CLZL.zwpm,BDepartment.DepName 
+from TSCD 
+Left join CLZL on CLZL.cldh=TSCD.SBBH 
+Left join BDepartment on BDepartment.ID=TSCD.DepID 
+where LLNO in ('202306') and LB=2 
+and SBBH like '%' 
+Order by TSCD.Label_Tag,CLZL.YWPM
+Select  TSCD.TSID,TSCD.TSBH, TSCD.SBBH , TSCD.Qty, TSCD.XSBH, TSCD.NSX, TSCD.Status,TSCD.Label_Tag,TSCD.RFID_Tag,
+        TSCD.USERID_Tag, TSCD.USERDATE_Tag,TSCD.RKNO, TSCD.LLNO, 
+        CLZL.ywpm,CLZL.zwpm,BDepartment.DepName 
+from TSCD 
+Left join CLZL on CLZL.cldh=TSCD.SBBH 
+Left join BDepartment on BDepartment.ID=TSCD.DepID 
+where LLNO in ('202306') and LB=2 
+and SBBH like '%' 
+Order by TSCD.Label_Tag,CLZL.YWPM
+Select  TSCD.TSID,TSCD.TSBH, TSCD.SBBH , TSCD.Qty, TSCD.XSBH, TSCD.NSX, TSCD.Status,TSCD.Label_Tag,TSCD.RFID_Tag,
+        TSCD.USERID_Tag, TSCD.USERDATE_Tag,TSCD.RKNO, TSCD.LLNO, 
+        CLZL.ywpm,CLZL.zwpm,BDepartment.DepName 
+from TSCD 
+Left join CLZL on CLZL.cldh=TSCD.SBBH 
+Left join BDepartment on BDepartment.ID=TSCD.DepID 
+where LLNO in ('202306') and LB=2 
+and SBBH like '%' 
+Order by TSCD.Label_Tag,CLZL.YWPM
+Select  TSCD.TSID,TSCD.TSBH, TSCD.SBBH , TSCD.Qty, TSCD.XSBH, TSCD.NSX, TSCD.Status,TSCD.Label_Tag,TSCD.RFID_Tag,
+        TSCD.USERID_Tag, TSCD.USERDATE_Tag,TSCD.RKNO, TSCD.LLNO, 
+        CLZL.ywpm,CLZL.zwpm,BDepartment.DepName 
+from TSCD 
+Left join CLZL on CLZL.cldh=TSCD.SBBH 
+Left join BDepartment on BDepartment.ID=TSCD.DepID 
+where LLNO in ('202306') and LB=2 
+and SBBH like '%' 
+Order by TSCD.Label_Tag,CLZL.YWPM
+Select  TSCD.TSID,TSCD.TSBH, TSCD.SBBH , TSCD.Qty, TSCD.XSBH, TSCD.NSX, TSCD.Status,TSCD.Label_Tag,TSCD.RFID_Tag,
+        TSCD.USERID_Tag, TSCD.USERDATE_Tag,TSCD.RKNO, TSCD.LLNO, 
+        CLZL.ywpm,CLZL.zwpm,BDepartment.DepName 
+from TSCD 
+Left join CLZL on CLZL.cldh=TSCD.SBBH 
+Left join BDepartment on BDepartment.ID=TSCD.DepID 
+where LLNO in ('202306') and LB=2 
+and SBBH like '%' 
+Order by TSCD.Label_Tag,CLZL.YWPM
+Select  TSCD.TSID,TSCD.TSBH, TSCD.SBBH , TSCD.Qty, TSCD.XSBH, TSCD.NSX, TSCD.Status,TSCD.Label_Tag,TSCD.RFID_Tag,
+        TSCD.USERID_Tag, TSCD.USERDATE_Tag,TSCD.RKNO, TSCD.LLNO, 
+        CLZL.ywpm,CLZL.zwpm,BDepartment.DepName 
+from TSCD 
+Left join CLZL on CLZL.cldh=TSCD.SBBH 
+Left join BDepartment on BDepartment.ID=TSCD.DepID 
+where LLNO in ('202306') and LB=2 
+and SBBH like '%' 
+Order by TSCD.Label_Tag,CLZL.YWPM
+Select  TSCD.TSID,TSCD.TSBH, TSCD.SBBH , TSCD.Qty, TSCD.XSBH, TSCD.NSX, TSCD.Status,TSCD.Label_Tag,TSCD.RFID_Tag,
+        TSCD.USERID_Tag, TSCD.USERDATE_Tag,TSCD.RKNO, TSCD.LLNO, 
+        CLZL.ywpm,CLZL.zwpm,BDepartment.DepName 
+from TSCD 
+Left join CLZL on CLZL.cldh=TSCD.SBBH 
+Left join BDepartment on BDepartment.ID=TSCD.DepID 
+where LLNO in ('202306') and LB=2 
+and SBBH like '%' 
+Order by TSCD.Label_Tag,CLZL.YWPM
+Select  TSCD.TSID,TSCD.TSBH, TSCD.SBBH , TSCD.Qty, TSCD.XSBH, TSCD.NSX, TSCD.Status,TSCD.Label_Tag,TSCD.RFID_Tag,
+        TSCD.USERID_Tag, TSCD.USERDATE_Tag,TSCD.RKNO, TSCD.LLNO, 
+        CLZL.ywpm,CLZL.zwpm,BDepartment.DepName 
+from TSCD 
+Left join CLZL on CLZL.cldh=TSCD.SBBH 
+Left join BDepartment on BDepartment.ID=TSCD.DepID 
+where LLNO in ('202306') and LB=2 
+and SBBH like '%' 
+Order by TSCD.Label_Tag,CLZL.YWPM
+Select  TSCD.TSID,TSCD.TSBH, TSCD.SBBH , TSCD.Qty, TSCD.XSBH, TSCD.NSX, TSCD.Status,TSCD.Label_Tag,TSCD.RFID_Tag,
+        TSCD.USERID_Tag, TSCD.USERDATE_Tag,TSCD.RKNO, TSCD.LLNO, 
+        CLZL.ywpm,CLZL.zwpm,BDepartment.DepName 
+from TSCD 
+Left join CLZL on CLZL.cldh=TSCD.SBBH 
+Left join BDepartment on BDepartment.ID=TSCD.DepID 
+where LLNO in ('202306') and LB=2 
+and SBBH like '%' 
+Order by TSCD.Label_Tag,CLZL.YWPM
