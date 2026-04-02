@@ -301,9 +301,6 @@ begin
     ShowMessage('Copy file that bai');
 
   DuongDanFile := ExtractFilePath(ParamStr(0)) + 'A-QIP-WS009-01D.xlsx';
-  SaveDialog := TSaveDialog.Create(nil);
-
-  DuongDanFile := ExtractFilePath(ParamStr(0)) + 'A-QIP-WS009-01D.xlsx';
 
   StartRow := 6;
 
@@ -694,6 +691,7 @@ begin
     begin
       Query1.Edit;
       Query1.FieldByName('SCFID').AsString := main.Edit1.Text;
+      Query1.FieldByName('SCFDate').Value := FormatDateTime('yyyy-mm-dd', Now);
       Query1.Post;
     end;
 
@@ -701,6 +699,7 @@ begin
     begin
       Query1.Edit;
       Query1.FieldByName('LCFID').AsString := main.Edit1.Text;
+      Query1.FieldByName('LCFDate').Value := FormatDateTime('yyyy-mm-dd', Now);
       Query1.Post;
     end;
 

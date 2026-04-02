@@ -691,6 +691,7 @@ begin
     begin
       Query1.Edit;
       Query1.FieldByName('SCFID').AsString := main.Edit1.Text;
+      Query1.FieldByName('SCFDate').Value := FormatDateTime('yyyy-mm-dd', Now);
       Query1.Post;
     end;
 
@@ -698,6 +699,15 @@ begin
     begin
       Query1.Edit;
       Query1.FieldByName('LCFID').AsString := main.Edit1.Text;
+      Query1.FieldByName('LCFDate').Value := FormatDateTime('yyyy-mm-dd', Now);
+      Query1.Post;
+    end;
+
+    if (DBGrid1.SelectedField.FieldName = 'DepUID') and (MenuCode.Text = 'N922') and Query1.CachedUpdates then
+    begin
+      Query1.Edit;
+      Query1.FieldByName('DepUID').AsString := main.Edit1.Text;
+      Query1.FieldByName('DepInputDate').Value := FormatDateTime('yyyy-mm-dd', Now);
       Query1.Post;
     end;
 

@@ -539,6 +539,7 @@ object IncomeMatMidInSole: TIncomeMatMidInSole
       Width = 75
       Height = 49
       Caption = 'Confirm'
+      Enabled = False
       TabOrder = 27
       OnClick = btnCfmClick
     end

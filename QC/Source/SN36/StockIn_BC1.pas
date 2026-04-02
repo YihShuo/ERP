@@ -806,14 +806,14 @@ begin
         usInserted:
         begin
           if (QKCRKS.FieldByName('Grade').AsString <> '') AND (QKCRKS.FieldByName('DDBH').AsString <> '') AND (QKCRKS.FieldByName('Size').AsString <> '')
-                AND (QKCRKS.FieldByName('DefectID').AsString <> '') AND (QKCRKS.FieldByName('Carton_No').AsString <> '') AND (QKCRKS.FieldByName('KCBH').AsString <> '')then
+                AND (QKCRKS.FieldByName('DefectID').AsString <> '') AND (QKCRKS.FieldByName('Carton_No').AsString <> '') AND (QKCRKS.FieldByName('KCBH').AsString <> '') AND (QKCRKS.FieldByName('RorL').AsString <> '') then
           begin            
             QKCRKS.Edit;
             QKCRKS.FieldByName('UserID').Value := main.Edit1.Text;
             UP_KCRKS.Apply(ukInsert);
           end
           else begin
-            showmessage('Grade/DDBH/Size/DefectID/KCBH/Carton_No Need to fill');
+            showmessage('Grade/DDBH/Size/DefectID/KCBH/Carton_No/RorL Need to fill');
             Exit;
             //QKCRKS.Delete;
           end

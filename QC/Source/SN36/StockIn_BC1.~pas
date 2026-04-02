@@ -153,6 +153,9 @@ type
     Qry_rupdateQty: TFloatField;
     Qry_rupdateRemainQty: TFloatField;
     Qry_rupdateCFMDate: TDateTimeField;
+    QryPendingVNSM: TStringField;
+    Label12: TLabel;
+    ddbh: TEdit;
     procedure BB1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure BB2Click(Sender: TObject);
@@ -282,11 +285,12 @@ begin
 
     Active := false;
     SQL.Clear;
-    if (main.ServerIP = '192.168.27.9') then
-      SQL.Add('SELECT YYBH, YWSM AS ZWSM FROM QCBLYY')
+    if (main.ServerIP = '192.168.71.7') then
+      SQL.Add('SELECT YYBH, VNSM AS ZWSM FROM QCBLYY')
     else
       SQL.Add('SELECT YYBH, ZWSM FROM QCBLYY');
-    SQL.Add('WHERE GSBH = ''' + main.Edit2.Text + ''' AND DFL = ''AR'' AND YN = ''4''');
+    SQL.Add('WHERE GSBH = ''' + main.Edit2.Text + '''');
+    //SQL.Add('WHERE GSBH = ''' + main.Edit2.Text + ''' AND DFL = ''AR'' AND YN = ''4''');
     SQL.Add('ORDER BY YYBH');
     Active := true;
 
@@ -802,14 +806,14 @@ begin
         usInserted:
         begin
           if (QKCRKS.FieldByName('Grade').AsString <> '') AND (QKCRKS.FieldByName('DDBH').AsString <> '') AND (QKCRKS.FieldByName('Size').AsString <> '')
-                AND (QKCRKS.FieldByName('DefectID').AsString <> '') AND (QKCRKS.FieldByName('Carton_No').AsString <> '') AND (QKCRKS.FieldByName('KCBH').AsString <> '')then
+                AND (QKCRKS.FieldByName('DefectID').AsString <> '') AND (QKCRKS.FieldByName('Carton_No').AsString <> '') AND (QKCRKS.FieldByName('KCBH').AsString <> '') AND (QKCRKS.FieldByName('RorL').AsString <> '') then
           begin            
             QKCRKS.Edit;
             QKCRKS.FieldByName('UserID').Value := main.Edit1.Text;
             UP_KCRKS.Apply(ukInsert);
           end
           else begin
-            showmessage('Grade/DDBH/Size/DefectID/KCBH/Carton_No Need to fill');
+            showmessage('Grade/DDBH/Size/DefectID/KCBH/Carton_No/RorL Need to fill');
             Exit;
             //QKCRKS.Delete;
           end
@@ -1125,7 +1129,7 @@ begin
     sql.add('    ,BDepartment.DepName');
     sql.add('    ,SUM(qcrd.Qty) AS Qty');
     sql.add('    ,SUM(qcrd.Qty)-ISNULL(RK_BC.Qty,0) as RemainQty');
-    sql.add('	   , case when SUM(qcrd.Qty)-ISNULL(RK_BC.Qty,0)>0 then 0 else 1 end as YN');
+    sql.add('	   , case when SUM(qcrd.Qty)-ISNULL(RK_BC.Qty,0)>0 then 0 else 1 end as YN,QCBLYY.VNSM');
     sql.add('FROM (select DISTINCT SCBH,GSBH from qcr where 1=1');
     sql.add('    AND qcr.GSBH = ''' + main.Edit2.Text + '''');
     sql.add('    AND qcr.USERDATE >= ''' + FormatDateTime('yyyy/MM/dd', DTP3.Date) + '''');
@@ -1140,12 +1144,13 @@ begin
     sql.add('		left join KCRK_BC on KCRKS_BC.RKNO=KCRK_BC.RKNO group by  DDBH,DepID,GSBH,DefectID,Grade');
     sql.add('   )RK_BC on RK_BC.DDBH=qcr.SCBH and RK_BC.DepID=qcr.DepNO and RK_BC.GSBH=qcr.GSBH ');
     sql.add('             and RK_BC.DefectID=LEFT(qcrd.YYBH,4) and RK_BC.Grade=right(qcrd.YYBH,1) ');
-    sql.add('WHERE 1=1');
+    sql.Add('inner join QCBLYY on QCBLYY.YYBH=QCRD.YYBH ');
+    sql.add('WHERE 1=1 and qcr.SCBH like''%'+ddbh.Text+'%''');
     sql.add('GROUP BY ');
     sql.add('    qcr.SCBH');
     sql.add('    ,qcr.DepNO,BDepartment.DepName ');
     sql.add('    ,qcr.GSBH');
-    sql.add('    ,qcrd.YYBH,RK_BC.Qty');
+    sql.add('    ,qcrd.YYBH,RK_BC.Qty,QCBLYY.VNSM');
     sql.add('Order by DepNO');
 
     //showmessage(SQL.Text);

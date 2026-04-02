@@ -1,8 +1,8 @@
 object StockOut_BC: TStockOut_BC
-  Left = 381
-  Top = 251
+  Left = 304
+  Top = 164
   Width = 1386
-  Height = 628
+  Height = 796
   Caption = 'StockOut_BC'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -314,7 +314,7 @@ object StockOut_BC: TStockOut_BC
     Left = 0
     Top = 189
     Width = 1370
-    Height = 400
+    Height = 568
     ActivePage = TabSheet2
     Align = alClient
     TabOrder = 1
@@ -442,7 +442,7 @@ object StockOut_BC: TStockOut_BC
         Left = 0
         Top = 0
         Width = 1362
-        Height = 369
+        Height = 204
         Align = alClient
         DataSource = DS2
         Flat = False
@@ -488,7 +488,7 @@ object StockOut_BC: TStockOut_BC
             FieldName = 'DDBH'
             Footers = <>
             Title.Caption = #35330#21934#32232#34399'|Order'
-            Width = 80
+            Width = 119
             OnEditButtonClick = DBGridEh2Columns2EditButtonClick
           end
           item
@@ -690,6 +690,12 @@ object StockOut_BC: TStockOut_BC
           end
           item
             EditButtons = <>
+            FieldName = 'RorL'
+            Footers = <>
+            ReadOnly = True
+          end
+          item
+            EditButtons = <>
             FieldName = 'KCBH'
             Footers = <>
             Width = 60
@@ -714,10 +720,10 @@ object StockOut_BC: TStockOut_BC
       end
       object dbgrdh1: TDBGridEh
         Left = 0
-        Top = 0
+        Top = 204
         Width = 1362
-        Height = 369
-        Align = alClient
+        Height = 333
+        Align = alBottom
         DataSource = ds3
         Flat = False
         FooterColor = clWindow
@@ -756,7 +762,7 @@ object StockOut_BC: TStockOut_BC
             EditButtons = <>
             FieldName = 'Grade'
             Footers = <>
-            Width = 23
+            Width = 125
           end
           item
             EditButtons = <>
@@ -767,25 +773,35 @@ object StockOut_BC: TStockOut_BC
             EditButtons = <>
             FieldName = 'Size'
             Footers = <>
+            Width = 52
           end
           item
             EditButtons = <>
             FieldName = 'DefectID'
             Footers = <>
+            Width = 70
           end
           item
             EditButtons = <>
             FieldName = 'KCBH'
             Footers = <>
+            Width = 87
           end
           item
             EditButtons = <>
             FieldName = 'Carton_No'
             Footers = <>
+            Width = 83
           end
           item
             EditButtons = <>
             FieldName = 'CFMDate'
+            Footers = <>
+            Width = 168
+          end
+          item
+            EditButtons = <>
+            FieldName = 'RorL'
             Footers = <>
           end>
       end
@@ -1456,7 +1472,7 @@ object StockOut_BC: TStockOut_BC
         'E, XXZL.XieMing, XXZL.YSSM, XXZL.JiJie, XXZL.DDMH, '
       
         'KCLLS_BC.Size, KCLLS_BC.Qty, KCLLS_BC.UserID, KCLLS_BC.UserDate,' +
-        ' KCLLS_BC.YN,KCBH,Carton_No,RKNO,DefectID'
+        ' KCLLS_BC.YN,KCBH,Carton_No,RKNO,DefectID,RorL'
       ' FROM KCLLS_BC'
       'LEFT JOIN DDZL ON DDZL.DDBH = KCLLS_BC.DDBH'
       
@@ -1543,6 +1559,11 @@ object StockOut_BC: TStockOut_BC
       FixedChar = True
       Size = 15
     end
+    object QKCLLSRorL: TStringField
+      FieldName = 'RorL'
+      FixedChar = True
+      Size = 5
+    end
   end
   object DS2: TDataSource
     DataSet = QKCLLS
@@ -1564,7 +1585,8 @@ object StockOut_BC: TStockOut_BC
       '  KCBH = :KCBH,'
       '  Carton_No = :Carton_No,'
       '  RKNO = :RKNO,'
-      '  DefectID = :DefectID'
+      '  DefectID = :DefectID,'
+      '  RorL = :RorL'
       'where'
       '  LLNO = :OLD_LLNO and'
       '  Grade = :OLD_Grade and'
@@ -1573,18 +1595,19 @@ object StockOut_BC: TStockOut_BC
       '  KCBH = :OLD_KCBH and'
       '  Carton_No = :OLD_Carton_No and'
       '  RKNO = :OLD_RKNO and'
-      '  DefectID = :OLD_DefectID')
+      '  DefectID = :OLD_DefectID and'
+      '  RorL = :OLD_RorL')
     InsertSQL.Strings = (
       'insert into KCLLS_BC'
       
         '  (LLNO, Grade, DDBH, Size, Qty, UserID, UserDate, YN, KCBH, Car' +
         'ton_No, '
-      '   RKNO, DefectID)'
+      '   RKNO, DefectID, RorL)'
       'values'
       
         '  (:LLNO, :Grade, :DDBH, :Size, :Qty, :UserID, GetDate(), :YN, :' +
         'KCBH, :Carton_No, '
-      '   :RKNO, :DefectID)')
+      '   :RKNO, :DefectID, :RorL)')
     DeleteSQL.Strings = (
       'delete from KCLLS_BC'
       'where'
@@ -1621,9 +1644,8 @@ object StockOut_BC: TStockOut_BC
       '  Size = :Size and'
       '  DefectID = :DefectID and'
       '  KCBH = :KCBH and'
-      '  Carton_No = :Carton_No and'
-      '  DefectID= :DefectID and'
-      '  RKNO = :RKNO')
+      '  Carton_No = :Carton_No and '
+      '  RorL = :RorL')
     InsertSQL.Strings = (
       'insert into KCRKS_BC'
       '  (RemainQty)'
@@ -1647,31 +1669,26 @@ object StockOut_BC: TStockOut_BC
     DataSource = DS2
     SQL.Strings = (
       'select KCRKS_BC.RKNO,Grade,DDBH,Size,DefectID,KCBH,Carton_No'
-      ',Qty,ISNULL(RemainQty, Qty)-:Qty as RemainQty,KCRK_BC.CFMDate'
+      ',Qty,ISNULL(RemainQty, Qty) as RemainQty,KCRK_BC.CFMDate, RorL'
       'from KCRKS_BC'
       'left join KCRK_BC on KCRK_BC.RKNO=KCRKS_BC.RKNO'
       'where KCRK_BC.CFMDate is not null'
       
         'and (KCRK_BC.flowflag not in ('#39'X'#39') or (KCRK_BC.flowflag is null)' +
         ')'
-      'and ISNULL(RemainQty, Qty)>0'
+      '--and ISNULL(RemainQty, Qty)>0'
       'and DDBH=:DDBH'
       'and Grade=:Grade'
       'and Size=:Size'
       'and KCBH=:KCBH '
       'and Carton_No=:Carton_No'
       'and DefectID=:DefectID'
-      'and KCRKS_BC.RKNO=:RKNO')
+      'and KCRKS_BC.RKNO=:RKNO'
+      'and RorL = :RorL')
     UpdateObject = updtsql2
     Left = 194
     Top = 328
     ParamData = <
-      item
-        DataType = ftFloat
-        Name = 'Qty'
-        ParamType = ptUnknown
-        Size = 8
-      end
       item
         DataType = ftString
         Name = 'DDBH'
@@ -1713,6 +1730,11 @@ object StockOut_BC: TStockOut_BC
         Name = 'RKNO'
         ParamType = ptUnknown
         Size = 16
+      end
+      item
+        DataType = ftUnknown
+        Name = 'RorL'
+        ParamType = ptUnknown
       end>
     object Qry_rupdateRKNO: TStringField
       FieldName = 'RKNO'
@@ -1756,10 +1778,20 @@ object StockOut_BC: TStockOut_BC
     object Qry_rupdateCFMDate: TDateTimeField
       FieldName = 'CFMDate'
     end
+    object Qry_rupdateRorL: TStringField
+      FieldName = 'RorL'
+      FixedChar = True
+      Size = 5
+    end
   end
   object ds3: TDataSource
     DataSet = Qry_rupdate
     Left = 193
+    Top = 296
+  end
+  object QryCheck: TQuery
+    DatabaseName = 'DB'
+    Left = 236
     Top = 296
   end
 end

@@ -76,6 +76,7 @@ type
     DBGridEh1: TDBGridEh;
     DBGridEh2: TDBGridEh;
     Query2oldQty: TFloatField;
+    Query2RorL: TStringField;
     procedure Button1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
@@ -231,13 +232,13 @@ begin
     Active := false;
     SQL.Clear;
     SQL.Add('SELECT CAST(0 AS BIT) AS Selected, KCRKS_BC.Grade, KCRKS_BC.DDBH, DDZL.Article, XXZL.XieMing, XXZL.YSSM, XXZL.JiJie, XXZL.DDMH, KCRKS_BC.Size');
-    SQL.Add('       , KCRKS_BC.Qty, ''1'' AS YN,KCBH,Carton_No,DefectID,RKNO,CFMDate,Qty as oldQty FROM (');
+    SQL.Add('       , KCRKS_BC.Qty, ''1'' AS YN,KCBH,Carton_No,DefectID,RKNO,CFMDate,Qty as oldQty, RorL FROM (');
     //·í¤ë¤J®w
-    SQL.Add('  SELECT KCRKS_BC.Grade, KCRKS_BC.DDBH, KCRKS_BC.Size, ISNULL(RemainQty, Qty) as Qty,KCBH,Carton_No,DefectID,KCRKS_BC.RKNO,CFMDate FROM KCRKS_BC');
+    SQL.Add('  SELECT KCRKS_BC.Grade, KCRKS_BC.DDBH, KCRKS_BC.Size, ISNULL(RemainQty, Qty) as Qty,KCBH,Carton_No,DefectID,KCRKS_BC.RKNO,CFMDate, RorL FROM KCRKS_BC');
     SQL.Add('  LEFT JOIN KCRK_BC ON KCRK_BC.RKNO = KCRKS_BC.RKNO');
     SQL.Add('  WHERE DDBH LIKE ''' + EDIT3.Text + '%'' AND KCRKS_BC.Grade = ''' + CB2.Text + '''');
     SQL.Add('  AND KCBH LIKE ''' + Edit5.Text + '%'' AND Carton_No LIKE ''' + Edit6.Text + '%''');
-    SQL.Add('  AND KCBH LIKE ''' + CB3.Text + '%''' );         
+    SQL.Add('  AND RorL LIKE ''' + CB3.Text + '%''' );
     SQL.Add('  and (KCRK_BC.flowflag not in (''X'') or (KCRK_BC.flowflag is null))');
     SQL.Add('  and KCRK_BC.CFMDate is not null');
     SQL.Add('  and ISNULL(RemainQty, Qty)>0');
@@ -316,6 +317,7 @@ begin
         StockOut_BC.QKCLLS.FieldByName('Qty').Value := Query2.FieldByName('Qty').AsString;
         StockOut_BC.QKCLLS.FieldByName('RKNO').Value := Query2.FieldByName('RKNO').AsString;
         StockOut_BC.QKCLLS.FieldByName('DefectID').Value := Query2.FieldByName('DefectID').AsString;
+        StockOut_BC.QKCLLS.FieldByName('RorL').Value := Query2.FieldByName('RorL').AsString;
         StockOut_BC.QKCLLS.Post;
         StockOut_BC.QKCLLS.First;
         StockOut_BC.QKCLLS.Insert;

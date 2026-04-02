@@ -576,7 +576,12 @@ begin
     Worksheet.Cells[InsertRow, 5].Value := Query2.FieldByName('TotalQty').AsString;
     Worksheet.Cells[InsertRow, 6].Value := Query2.FieldByName('DeQty').AsString;
     Worksheet.Cells[InsertRow, 7].Value := Query2.FieldByName('DeRate').AsString + '%';
-    Worksheet.Cells[InsertRow, 8].Value := Query2.FieldByName('Defects').AsString;
+
+    if Query2.FieldByName('DefectName').IsNull then
+      Worksheet.Cells[InsertRow, 8].Value := Query2.FieldByName('Defects').AsString
+    else
+      Worksheet.Cells[InsertRow, 8].Value := Query2.FieldByName('DefectName').AsString;
+
     Worksheet.Cells[InsertRow, 9].Value := Query2.FieldByName('Inspector').AsString;
     Worksheet.Cells[InsertRow, 10].Value := Query2.FieldByName('Remark').AsString;
     Worksheet.Cells[InsertRow, 11].Value := Query2.FieldByName('OKNG').AsString;

@@ -1873,11 +1873,13 @@ object StockIn_BC: TStockIn_BC
       '  RKNO = :OLD_RKNO')
     InsertSQL.Strings = (
       'INSERT INTO KCRK_BC'
-      '  (RKNO, GSBH, Building, DepID, flowflag, UserID, UserDate, YN)'
+      
+        '  (RKNO, GSBH, Building, DepID, flowflag, UserID, UserDate, CFMD' +
+        'ate , YN)'
       'VALUES'
       
-        '  (:RKNO, :GSBH, :Building, :DepID, NULL, :UserID, GetDate(), '#39'1' +
-        #39')')
+        '  (:RKNO, :GSBH, :Building, :DepID, NULL, :UserID, GetDate(), Ge' +
+        'tDate(), '#39'1'#39')')
     DeleteSQL.Strings = (
       'DELETE FROM KCRK_BC'
       'WHERE'

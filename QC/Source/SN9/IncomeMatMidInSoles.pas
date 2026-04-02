@@ -188,6 +188,7 @@ if MenuCode.Text = 'N941' then
     DBGrid1.FieldColumns['MSCFDate'].ReadOnly := True;
     DBGrid1.FieldColumns['USERID'].ReadOnly := True;
     DBGrid1.FieldColumns['USERDate'].ReadOnly := True;
+    btnCfm.Enabled := true;
   end else if MenuCode.Text = 'N943' then
   begin
     DBGrid1.FieldColumns['ReportID'].ReadOnly := True;
@@ -230,7 +231,7 @@ if MenuCode.Text = 'N941' then
     DBGrid1.FieldColumns['MSCFDate'].ReadOnly := True;
     DBGrid1.FieldColumns['USERID'].ReadOnly := True;
     DBGrid1.FieldColumns['USERDate'].ReadOnly := True;
-
+    btnCfm.Enabled := true;
   end else if MenuCode.Text = 'N944' then
   begin
     DBGrid1.FieldColumns['ReportID'].ReadOnly := True;
@@ -273,6 +274,7 @@ if MenuCode.Text = 'N941' then
     DBGrid1.FieldColumns['MSCFDate'].ReadOnly := True;
     DBGrid1.FieldColumns['USERID'].ReadOnly := True;
     DBGrid1.FieldColumns['USERDate'].ReadOnly := True;
+    btnCfm.Enabled := true;
   end else if MenuCode.Text = 'N945' then
   begin
     DBGrid1.FieldColumns['ReportID'].ReadOnly := True;
@@ -315,6 +317,7 @@ if MenuCode.Text = 'N941' then
     DBGrid1.FieldColumns['MSCFDate'].ReadOnly := True;
     DBGrid1.FieldColumns['USERID'].ReadOnly := True;
     DBGrid1.FieldColumns['USERDate'].ReadOnly := True;
+    btnCfm.Enabled := true;
   end;
 end;
 
@@ -376,7 +379,7 @@ begin
   begin
     Active:= false;
     SQL.Clear;
-    SQL.Add('select  ReportID, InspecDate, CLBH, clzl.ywpm as MatName, TempRoom, Supplier, Mold, XieMing, DDBH, TOderQty, RQty, Article, Size, TArrQty, IQty, ALeftHard, BLeftHard,');
+    SQL.Add('select ReportID, InspecDate, CLBH, clzl.ywpm as MatName, TempRoom, Supplier, Mold, XieMing, DDBH, TOderQty, RQty, Article, Size, TArrQty, IQty, ALeftHard, BLeftHard,');
     SQL.Add(' ARightHard, BRightHard, SHard, LWeight, RWeight, SWeight, Issues, DeQty, WPLLen, WPRLen, WPLSize, WPRSize, SendDate, LabID, LabResult, ');
     SQL.Add('Reject, SCFID, SCFDate, LCFID, LCFDate, MSCFID, MSCFDate, QC_MidInSole.YN, QC_MidInSole.USERID, QC_MidInSole.USERDate, LabUID, LabChgDate, ');
     SQL.Add('CAST(ROUND((DeQty * 100.0) / IQty, 1) AS DECIMAL(10,1)) as DeRate, PreparedID, PreparedDate ');
@@ -401,7 +404,7 @@ begin
       SQL.Add('and XieMing like ''%'+edtStyle.Text+'%'' ');
     if edtSize.Text <> '' then
       SQL.Add('and Size = '''+edtSize.Text+''' ');
-    SQL.Add(' order by ReportID ');
+    SQL.Add(' order by ReportID');
     Active := true;
   end;
 end;

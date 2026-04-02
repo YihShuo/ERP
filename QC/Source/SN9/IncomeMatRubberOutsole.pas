@@ -358,10 +358,10 @@ begin
   else
   begin
     LastID := QGetID.FieldByName('ReportID').AsString;
-    Seq := StrToInt(Copy(LastID, 5, 4)) + 1;
+    Seq := StrToInt(Copy(LastID, 5, 5)) + 1;
   end;
 
-  Result := Prefix + FormatFloat('0000', Seq);
+  Result := Prefix + FormatFloat('00000', Seq);
 end;
 
 procedure TIncomeMatRubberOutsoles.Button1Click(Sender: TObject);
@@ -398,7 +398,7 @@ begin
       SQL.Add('and XieMing like ''%'+edtStyle.Text+'%'' ');
     if edtSize.Text <> '' then
       SQL.Add('and Size = '''+edtSize.Text+''' ');
-    SQL.Add(' order by ReportID ');
+    SQL.Add(' order by ReportID');
     Active := true;
   end;
 end;

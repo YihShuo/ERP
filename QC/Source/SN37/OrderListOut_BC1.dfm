@@ -1,7 +1,7 @@
 object OrderListOut_BC: TOrderListOut_BC
-  Left = 557
-  Top = 233
-  Width = 1146
+  Left = 383
+  Top = 243
+  Width = 1245
   Height = 504
   Caption = 'OrderListOut_BC'
   Color = clBtnFace
@@ -19,7 +19,7 @@ object OrderListOut_BC: TOrderListOut_BC
   object PC1: TPageControl
     Left = 0
     Top = 0
-    Width = 1130
+    Width = 1229
     Height = 465
     ActivePage = TabSheet2
     Align = alClient
@@ -29,7 +29,7 @@ object OrderListOut_BC: TOrderListOut_BC
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1122
+        Width = 1221
         Height = 41
         Align = alTop
         TabOrder = 0
@@ -95,7 +95,7 @@ object OrderListOut_BC: TOrderListOut_BC
       object Panel2: TPanel
         Left = 0
         Top = 393
-        Width = 1122
+        Width = 1221
         Height = 41
         Align = alBottom
         TabOrder = 1
@@ -113,7 +113,7 @@ object OrderListOut_BC: TOrderListOut_BC
       object DBGridEh2: TDBGridEh
         Left = 0
         Top = 41
-        Width = 1122
+        Width = 1221
         Height = 352
         Align = alClient
         DataSource = DS1
@@ -229,7 +229,7 @@ object OrderListOut_BC: TOrderListOut_BC
       object Panel3: TPanel
         Left = 0
         Top = 0
-        Width = 1122
+        Width = 1221
         Height = 41
         Align = alTop
         TabOrder = 0
@@ -248,7 +248,7 @@ object OrderListOut_BC: TOrderListOut_BC
           Caption = 'SKU'
         end
         object Label8: TLabel
-          Left = 680
+          Left = 688
           Top = 12
           Width = 38
           Height = 16
@@ -262,14 +262,14 @@ object OrderListOut_BC: TOrderListOut_BC
           Caption = 'KCBH'
         end
         object Label10: TLabel
-          Left = 448
+          Left = 456
           Top = 12
           Width = 39
           Height = 16
           Caption = 'Carton'
         end
         object Label4: TLabel
-          Left = 592
+          Left = 600
           Top = 12
           Width = 21
           Height = 16
@@ -299,7 +299,7 @@ object OrderListOut_BC: TOrderListOut_BC
           TabOrder = 2
         end
         object CB2: TComboBox
-          Left = 731
+          Left = 739
           Top = 8
           Width = 46
           Height = 24
@@ -313,21 +313,21 @@ object OrderListOut_BC: TOrderListOut_BC
             'C')
         end
         object Edit5: TEdit
-          Left = 352
+          Left = 360
           Top = 8
           Width = 89
           Height = 24
           TabOrder = 4
         end
         object Edit6: TEdit
-          Left = 496
+          Left = 504
           Top = 8
           Width = 89
           Height = 24
           TabOrder = 5
         end
         object cb3: TComboBox
-          Left = 627
+          Left = 635
           Top = 8
           Width = 46
           Height = 24
@@ -343,22 +343,22 @@ object OrderListOut_BC: TOrderListOut_BC
       object Panel4: TPanel
         Left = 0
         Top = 393
-        Width = 1122
+        Width = 1221
         Height = 41
         Align = alBottom
         TabOrder = 1
         object Label6: TLabel
           Left = 264
           Top = 12
-          Width = 121
+          Width = 30
           Height = 16
           Caption = 'Qty:0'
         end
         object Button4: TButton
-          Left = 393
-          Top = 16
-          Width = 75
-          Height = 17
+          Left = 537
+          Top = 8
+          Width = 88
+          Height = 25
           Caption = 'Confirm'
           TabOrder = 0
           OnClick = Button4Click
@@ -367,7 +367,7 @@ object OrderListOut_BC: TOrderListOut_BC
       object DBGridEh1: TDBGridEh
         Left = 0
         Top = 41
-        Width = 1122
+        Width = 1221
         Height = 352
         Align = alClient
         DataSource = DataSource1
@@ -470,17 +470,22 @@ object OrderListOut_BC: TOrderListOut_BC
             EditButtons = <>
             FieldName = 'CFMDate'
             Footers = <>
-            Width = 88
+            Width = 103
           end
           item
             EditButtons = <>
             FieldName = 'DefectID'
             Footers = <>
-            Width = 47
+            Width = 61
           end
           item
             EditButtons = <>
             FieldName = 'RKNO'
+            Footers = <>
+          end
+          item
+            EditButtons = <>
+            FieldName = 'RorL'
             Footers = <>
           end>
       end
@@ -606,11 +611,11 @@ object OrderListOut_BC: TOrderListOut_BC
         'KCRKS_BC.Size'
       
         '       , KCRKS_BC.Qty, '#39'1'#39' AS YN,KCBH,Carton_No,DefectID,RKNO,CF' +
-        'MDate,Qty as oldQty  FROM ('
+        'MDate,Qty as oldQty, RorL  FROM ('
       
         '  SELECT KCRKS_BC.Grade, KCRKS_BC.DDBH, KCRKS_BC.Size, ISNULL(Re' +
         'mainQty, Qty) as Qty,KCBH,Carton_No,DefectID,KCRKS_BC.RKNO,CFMDa' +
-        'te FROM KCRKS_BC'
+        'te, RorL FROM KCRKS_BC'
       '  LEFT JOIN KCRK_BC ON KCRK_BC.RKNO = KCRKS_BC.RKNO'
       '  WHERE DDBH LIKE '#39'%'#39' AND KCRKS_BC.Grade = '#39'B'#39
       '  AND KCBH LIKE '#39'%'#39' AND Carton_No LIKE '#39'%'#39
@@ -699,6 +704,11 @@ object OrderListOut_BC: TOrderListOut_BC
     end
     object Query2oldQty: TFloatField
       FieldName = 'oldQty'
+    end
+    object Query2RorL: TStringField
+      FieldName = 'RorL'
+      FixedChar = True
+      Size = 5
     end
   end
   object UpdateSQL1: TUpdateSQL

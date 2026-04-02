@@ -105,6 +105,9 @@ type
     dbgrdh1: TDBGridEh;
     QKCLLSDefectID: TStringField;
     QKCLLSRKNO: TStringField;
+    Qry_rupdateRorL: TStringField;
+    QKCLLSRorL: TStringField;
+    QryCheck: TQuery;
     procedure BB1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure BB2Click(Sender: TObject);
@@ -601,8 +604,8 @@ begin
       if (QKCLL.RecordCount > 0) then
       begin
         BD2.Enabled := true;
-        BD3.Enabled := true;
-        BD4.Enabled := true;
+        //BD3.Enabled := true;
+        //BD4.Enabled := true;
       end
       else
       begin
@@ -700,11 +703,16 @@ procedure TStockOut_BC.BD5Click(Sender: TObject);
 var
   i: integer;
   StockQty: Double;
+  ReQtyIn: Double;
+  ReQtyUp: Double;
+  ReQtyUpCheck: Double;
 begin
   try
     QKCLLS.First;
     for i := 1 to QKCLLS.RecordCount do
     begin
+      ReQtyIn := 0;
+      ReQtyUp := 0;
       case QKCLLS.UpdateStatus of
         usInserted:
           begin
@@ -713,7 +721,9 @@ begin
                (not QKCLLS.FieldByName('DDBH').IsNull) and
                (Trim(QKCLLS.FieldByName('DDBH').AsString) <> '') and
                (not QKCLLS.FieldByName('Size').IsNull) and
-               (Trim(QKCLLS.FieldByName('Size').AsString) <> '') then
+               (Trim(QKCLLS.FieldByName('Size').AsString) <> '') and
+               (not QKCLLS.FieldByName('RorL').IsNull) and
+               (Trim(QKCLLS.FieldByName('RorL').AsString) <> '') then
             begin
               {StockQty := CheckBCStock(QKCLLS.FieldByName('Grade').AsString, QKCLLS.FieldByName('DDBH').AsString,
                     QKCLLS.FieldByName('Size').AsString,QKCLLS.FieldByName('KCBH').AsString,QKCLLS.FieldByName('Carton_No').AsString);   }
@@ -727,12 +737,49 @@ begin
                 QKCLLS.FieldByName('Qty').Value := StockQty;    }
               end;
 
-                ShowMessage('1111!');
-              updtsql2.Apply(ukModify);
-                ShowMessage('222!');
-              QKCLLS.Edit;
-              QKCLLS.FieldByName('UserID').Value := main.Edit1.Text;
-              UP_KCLLS.Apply(ukInsert);
+              QryCheck.Close;
+              QryCheck.SQL.Clear;
+              QryCheck.SQL.Add('SELECT COUNT(1)');
+              QryCheck.SQL.Add('FROM KCLLS_BC');
+              QryCheck.SQL.Add('WHERE LLNO = :ListNo');
+              QryCheck.SQL.Add('  AND DDBH = :DDBH');
+              QryCheck.SQL.Add('  AND Grade = :Grade');
+              QryCheck.SQL.Add('  AND Size = :Size');
+              QryCheck.SQL.Add('  AND RorL = :RorL');
+              QryCheck.SQL.Add('  AND DefectID = :DefectID');
+              QryCheck.SQL.Add('  AND RKNO = :RKNO');
+
+              QryCheck.ParamByName('ListNo').Value := QKCLLS.FieldByName('LLNO').Value;
+              QryCheck.ParamByName('DDBH').Value  := QKCLLS.FieldByName('DDBH').Value;
+              QryCheck.ParamByName('Grade').Value := QKCLLS.FieldByName('Grade').Value;
+              QryCheck.ParamByName('Size').Value  := QKCLLS.FieldByName('Size').Value;
+              QryCheck.ParamByName('RorL').Value  := QKCLLS.FieldByName('RorL').Value;
+              QryCheck.ParamByName('DefectID').Value  := QKCLLS.FieldByName('DefectID').Value;
+              QryCheck.ParamByName('RKNO').Value  := QKCLLS.FieldByName('RKNO').Value;
+
+              QryCheck.Open;
+
+              if QryCheck.Fields[0].AsInteger = 0 then
+              begin
+                ReQtyIn := Qry_rupdate.FieldByName('RemainQty').Value - QKCLLS.FieldByName('Qty').Value;
+                if ReQtyIn >= 0 then
+                begin
+                  Qry_rupdate.Edit;
+                  Qry_rupdate.FieldByName('RemainQty').value := ReQtyIn;
+                  updtsql2.Apply(ukModify);
+                end
+                else
+                begin
+                  ShowMessage('There is not enough stock!');
+                  Exit;
+                end;
+
+                QKCLLS.Edit;
+                QKCLLS.FieldByName('UserID').Value := main.Edit1.Text;
+                UP_KCLLS.Apply(ukInsert);
+              end
+              else
+                QKCLLS.Delete;
             end
             else
             begin
@@ -769,19 +816,22 @@ begin
               SQL.Add(' and DefectID = ''' + QKCLLS.FieldByName('DefectID').AsString + '''');
               Active := true;
 
-              if (QKCLLS.FieldByName('YN').Value = 0) then
+              ReQtyUpCheck := Qry_rupdate.FieldByName('RemainQty').value + QKCLLS.FieldByName('Qty').value;
+              ReQtyUp := Qry_rupdate.FieldByName('Qty').value - QKCLLS.FieldByName('Qty').value;
+
+              if (QKCLLS.FieldByName('YN').Value = 0) and (ReQtyUpCheck <= Qry_rupdate.FieldByName('Qty').value) then
               begin
                 Qry_rupdate.Edit;
-                Qry_rupdate.FieldByName('RemainQty').value:=Qry_rupdate.FieldByName('RemainQty').value+FieldByName('Qty').value;
+                Qry_rupdate.FieldByName('RemainQty').value := ReQtyUp;
                 UP_KCLLS.Apply(ukDelete);
               end
               else if (QKCLLS.FieldByName('Grade').AsString <> '') and (QKCLLS.FieldByName('DDBH').AsString <> '') and
-                (QKCLLS.FieldByName('Size').AsString <> '') then
+                (QKCLLS.FieldByName('Size').AsString <> '')  and (ReQtyUpCheck <= Qry_rupdate.FieldByName('Qty').value) then
               begin
 
                 Qry_rupdate.Edit;
                 //補回原本修改 按新領料量
-                Qry_rupdate.FieldByName('RemainQty').value:=Qry_rupdate.FieldByName('RemainQty').value+QKCLLS.FieldByName('Qty').value+FieldByName('Qty').value;
+                Qry_rupdate.FieldByName('RemainQty').value := ReQtyUp;
 
                 //StockQty := CheckBCStock(QKCLLS.FieldByName('Grade').AsString, QKCLLS.FieldByName('DDBH').AsString,
                 //  QKCLLS.FieldByName('Size').AsString,QKCLLS.FieldByName('KCBH').AsString,QKCLLS.FieldByName('Carton_No').AsString);
@@ -1189,16 +1239,17 @@ begin
       SQL.Clear;
       SQL.Add('Insert into KCRK_BC (RKNO, GSBH, CFMDate, flowflag, UserID, UserDate, YN)');
       SQL.Add('Values (''' + RKNO + ''', ''' + main.Edit2.Text + ''', ''' + formatdatetime('YYYY/MM/DD HH:MM:SS', NDate) +
-        ''', ''Z'', ''' + main.Edit1.Text + ''', ''' + formatdatetime('YYYY/MM/DD HH:MM:SS', NDate) + ''', ''1''');
+        ''', ''Z'', ''' + main.Edit1.Text + ''', ''' + formatdatetime('YYYY/MM/DD HH:MM:SS', NDate) + ''', ''1'')');
 
       QKCLLS.First;
       while not QKCLLS.Eof do
       begin
-        SQL.Add('Insert into KCRKS_BC (RKNO, Grade, DDBH, Size, Qty, CheckDate, UserID, UserDate, YN, DefectID,Carton_No,KCBH,RemainQty)');
+        SQL.Add('Insertinto KCRKS_BC (RKNO, Grade, DDBH, Size, Qty, CheckDate, UserID, UserDate, YN, DefectID,Carton_No,KCBH,RemainQty,RorL)');
         SQL.Add('Values (''' + RKNO + ''', ''C'', ''' + QKCLLS.FieldByName('DDBH').AsString + ''', ''' +
           QKCLLS.FieldByName('Size').AsString + ''', ' + QKCLLS.FieldByName('Qty').AsString + ', ''' +
           formatdatetime('YYYY/MM/DD HH:MM:SS', NDate) + ''', ''' + main.Edit1.Text + ''', ''' +
-          formatdatetime('YYYY/MM/DD HH:MM:SS', NDate) + ''', ''1'',''BtoC'', ''0'', ''Non'',0');
+          formatdatetime('YYYY/MM/DD HH:MM:SS', NDate) + ''', ''1'',''' + QKCLLS.FieldByName('DefectID').AsString + ''', ''' +
+          QKCLLS.FieldByName('Carton_No').AsString + ''', ''' + QKCLLS.FieldByName('KCBH').AsString + ''',''' + Qry_rupdate.FieldByName('RemainQty').AsString + ''', '''+QKCLLS.FieldByName('RorL').AsString+''' )');
         QKCLLS.Next;
       end;
       //再新增一筆C級別的出庫單
