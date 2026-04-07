@@ -750,12 +750,12 @@ begin
               QryCheck.SQL.Add('  AND RKNO = :RKNO');
 
               QryCheck.ParamByName('ListNo').Value := QKCLLS.FieldByName('LLNO').Value;
-              QryCheck.ParamByName('DDBH').Value  := QKCLLS.FieldByName('DDBH').Value;
+              QryCheck.ParamByName('DDBH').Value := QKCLLS.FieldByName('DDBH').Value;
               QryCheck.ParamByName('Grade').Value := QKCLLS.FieldByName('Grade').Value;
-              QryCheck.ParamByName('Size').Value  := QKCLLS.FieldByName('Size').Value;
-              QryCheck.ParamByName('RorL').Value  := QKCLLS.FieldByName('RorL').Value;
-              QryCheck.ParamByName('DefectID').Value  := QKCLLS.FieldByName('DefectID').Value;
-              QryCheck.ParamByName('RKNO').Value  := QKCLLS.FieldByName('RKNO').Value;
+              QryCheck.ParamByName('Size').Value := QKCLLS.FieldByName('Size').Value;
+              QryCheck.ParamByName('RorL').Value := QKCLLS.FieldByName('RorL').Value;
+              QryCheck.ParamByName('DefectID').Value := QKCLLS.FieldByName('DefectID').Value;
+              QryCheck.ParamByName('RKNO').Value := QKCLLS.FieldByName('RKNO').Value;
 
               QryCheck.Open;
 

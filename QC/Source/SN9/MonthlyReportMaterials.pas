@@ -79,7 +79,6 @@ type
     Label3: TLabel;
     Label4: TLabel;
     edtCLBH: TEdit;
-    Query2DeRate: TFloatField;
     Query2LotQty: TStringField;
     Query2TotalQty: TStringField;
     Query2DefectName: TStringField;
@@ -87,6 +86,7 @@ type
     Label1: TLabel;
     edtDefects: TEdit;
     Label2: TLabel;
+    Query2DeRate: TStringField;
     procedure BB1Click(Sender: TObject);
     procedure BB2Click(Sender: TObject);
     procedure BB4Click(Sender: TObject);

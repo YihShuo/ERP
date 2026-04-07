@@ -77,7 +77,6 @@ object MonthlyReportMaterial: TMonthlyReportMaterial
         EditButtons = <>
         FieldName = 'SCFDate'
         Footers = <>
-        ReadOnly = True
       end
       item
         EditButtons = <>
@@ -88,7 +87,6 @@ object MonthlyReportMaterial: TMonthlyReportMaterial
         EditButtons = <>
         FieldName = 'MSCFDate'
         Footers = <>
-        ReadOnly = True
       end
       item
         EditButtons = <>
@@ -99,7 +97,6 @@ object MonthlyReportMaterial: TMonthlyReportMaterial
         EditButtons = <>
         FieldName = 'LCFDate'
         Footers = <>
-        ReadOnly = True
       end
       item
         EditButtons = <>
@@ -193,7 +190,6 @@ object MonthlyReportMaterial: TMonthlyReportMaterial
         item
           EditButtons = <>
           FieldName = 'TotalQty'
-          Footer.ValueType = fvtSum
           Footers = <>
           Width = 60
         end
@@ -1161,9 +1157,6 @@ object MonthlyReportMaterial: TMonthlyReportMaterial
     object Query2YN: TSmallintField
       FieldName = 'YN'
     end
-    object Query2DeRate: TFloatField
-      FieldName = 'DeRate'
-    end
     object Query2LotQty: TStringField
       FieldName = 'LotQty'
       FixedChar = True
@@ -1178,6 +1171,11 @@ object MonthlyReportMaterial: TMonthlyReportMaterial
       FieldName = 'DefectName'
       FixedChar = True
       Size = 255
+    end
+    object Query2DeRate: TStringField
+      FieldName = 'DeRate'
+      FixedChar = True
+      Size = 50
     end
   end
   object UpSQLDetail: TUpdateSQL

@@ -10,7 +10,13 @@ object NonConformingMaterial: TNonConformingMaterial
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  FormStyle = fsMDIChild
   OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -34,14 +40,14 @@ object NonConformingMaterial: TNonConformingMaterial
       Caption = 'DDBH:'
     end
     object Label2: TLabel
-      Left = 456
+      Left = 472
       Top = 8
       Width = 62
       Height = 20
       Caption = 'Supplier:'
     end
     object Label3: TLabel
-      Left = 456
+      Left = 472
       Top = 40
       Width = 70
       Height = 20
@@ -57,9 +63,9 @@ object NonConformingMaterial: TNonConformingMaterial
     object Label7: TLabel
       Left = 272
       Top = 40
-      Width = 48
+      Width = 68
       Height = 20
-      Caption = 'MatID:'
+      Caption = 'MatSpec:'
     end
     object BB1: TBitBtn
       Left = 0
@@ -294,7 +300,7 @@ object NonConformingMaterial: TNonConformingMaterial
       NumGlyphs = 2
     end
     object edtDDBH: TEdit
-      Left = 328
+      Left = 344
       Top = 72
       Width = 121
       Height = 28
@@ -372,7 +378,7 @@ object NonConformingMaterial: TNonConformingMaterial
       TabOrder = 11
     end
     object edtZSBH: TEdit
-      Left = 536
+      Left = 552
       Top = 8
       Width = 121
       Height = 28
@@ -407,13 +413,13 @@ object NonConformingMaterial: TNonConformingMaterial
       Visible = False
     end
     object edtRID: TEdit
-      Left = 536
+      Left = 552
       Top = 40
       Width = 121
       Height = 28
       TabOrder = 16
     end
-    object dtpInsDate: TDateTimePicker
+    object dtpInDate: TDateTimePicker
       Left = 152
       Top = 40
       Width = 113
@@ -424,14 +430,14 @@ object NonConformingMaterial: TNonConformingMaterial
       TabOrder = 17
     end
     object edtSKU: TEdit
-      Left = 328
+      Left = 344
       Top = 8
       Width = 121
       Height = 28
       TabOrder = 18
     end
     object edtMatID: TEdit
-      Left = 328
+      Left = 344
       Top = 40
       Width = 121
       Height = 28
@@ -446,12 +452,12 @@ object NonConformingMaterial: TNonConformingMaterial
       TabOrder = 20
       Visible = False
     end
-    object ckInsDate: TCheckBox
+    object ckInDate: TCheckBox
       Left = 8
       Top = 40
       Width = 137
       Height = 17
-      Caption = 'Inspection date:'
+      Caption = 'InDate:'
       TabOrder = 21
     end
   end
@@ -499,6 +505,7 @@ object NonConformingMaterial: TNonConformingMaterial
         EditButtons = <>
         FieldName = 'ZSBH'
         Footers = <>
+        Title.Caption = 'Supplier/NCU'
         Width = 200
       end
       item
@@ -515,45 +522,56 @@ object NonConformingMaterial: TNonConformingMaterial
         EditButtons = <>
         FieldName = 'DDBH'
         Footers = <>
+        Title.Caption = 'DDBH/Lenh'
         Width = 200
       end
       item
         EditButtons = <>
         FieldName = 'SKU'
         Footers = <>
+        Title.Caption = 'Ten giay, SKU'
       end
       item
         EditButtons = <>
         FieldName = 'MaterialSpec'
         Footers = <>
+        Title.Caption = 'MaterialSpec/Ten qui cach vat lieu'
         Width = 200
       end
       item
         EditButtons = <>
         FieldName = 'Issue'
         Footers = <>
+        Title.Caption = 'Issue/Van de'
         Width = 300
       end
       item
         EditButtons = <>
         FieldName = 'RandomQty'
         Footers = <>
-        Width = 75
+        Title.Caption = 'RandomQty/SL rut kiem'
+        Width = 115
       end
       item
         EditButtons = <>
         FieldName = 'DeQty'
         Footers = <>
+        Title.Caption = 'DeQty/SL khong dat'
+        Width = 96
       end
       item
         EditButtons = <>
         FieldName = 'DeRate'
         Footers = <>
+        ReadOnly = True
+        Title.Caption = 'DeRate/Ti le khong dat'
+        Width = 107
       end
       item
         EditButtons = <>
         FieldName = 'Result'
         Footers = <>
+        Title.Caption = 'Result/KQ xu ly'
         Width = 200
       end
       item
@@ -619,8 +637,14 @@ object NonConformingMaterial: TNonConformingMaterial
     AfterOpen = Query1AfterOpen
     DatabaseName = 'DB'
     SQL.Strings = (
-      'select * from QC_NonConformingMaterial'
-      'where 1=3')
+      
+        'SELECT ReportID, ZSBH, InDate, Qty, DDBH, SKU, MaterialSpec, Iss' +
+        'ue, RandomQty, DeQty, ROUND(RandomQty * 100.0 / NULLIF(DeQty, 0)' +
+        ', 2) as DeRate,'
+      'Result, SCFID, SCFDate, LCFID, LCFDate, PreparedID, DepUID, '
+      'DepCFDate, YN, USERID, USERDATE'
+      'FROM QC_NonConformingMaterial'
+      'WHERE 1=2')
     UpdateObject = UpSQL1
     Left = 448
     Top = 400
@@ -664,9 +688,6 @@ object NonConformingMaterial: TNonConformingMaterial
     object Query1DeQty: TIntegerField
       FieldName = 'DeQty'
     end
-    object Query1DeRate: TFloatField
-      FieldName = 'DeRate'
-    end
     object Query1Result: TStringField
       FieldName = 'Result'
       FixedChar = True
@@ -708,6 +729,9 @@ object NonConformingMaterial: TNonConformingMaterial
     object Query1USERDATE: TDateTimeField
       FieldName = 'USERDATE'
     end
+    object Query1DeRate: TFloatField
+      FieldName = 'DeRate'
+    end
   end
   object DS1: TDataSource
     DataSet = Query1
@@ -728,7 +752,6 @@ object NonConformingMaterial: TNonConformingMaterial
       '  Issue = :Issue,'
       '  RandomQty = :RandomQty,'
       '  DeQty = :DeQty,'
-      '  DeRate = :DeRate,'
       '  Result = :Result,'
       '  SCFID = :SCFID,'
       '  SCFDate = :SCFDate,'
@@ -751,7 +774,6 @@ object NonConformingMaterial: TNonConformingMaterial
       '  Issue = :OLD_Issue and'
       '  RandomQty = :OLD_RandomQty and'
       '  DeQty = :OLD_DeQty and'
-      '  DeRate = :OLD_DeRate and'
       '  Result = :OLD_Result and'
       '  SCFID = :OLD_SCFID and'
       '  SCFDate = :OLD_SCFDate and'
@@ -769,16 +791,16 @@ object NonConformingMaterial: TNonConformingMaterial
         '  (ReportID, ZSBH, InDate, Qty, DDBH, SKU, MaterialSpec, Issue, ' +
         'RandomQty, '
       
-        '   DeQty, DeRate, Result, SCFID, SCFDate, LCFID, LCFDate, Prepar' +
-        'edID, DepUID, '
+        '   DeQty, Result, SCFID, SCFDate, LCFID, LCFDate, PreparedID, De' +
+        'pUID, '
       '   DepCFDate, YN, USERID, USERDATE)'
       'values'
       
         '  (:ReportID, :ZSBH, :InDate, :Qty, :DDBH, :SKU, :MaterialSpec, ' +
         ':Issue, '
       
-        '   :RandomQty, :DeQty, :DeRate, :Result, :SCFID, :SCFDate, :LCFI' +
-        'D, :LCFDate, '
+        '   :RandomQty, :DeQty, :Result, :SCFID, :SCFDate, :LCFID, :LCFDa' +
+        'te,'
       '   :PreparedID, :DepUID, :DepCFDate, :YN, :USERID, :USERDATE)')
     DeleteSQL.Strings = (
       'delete from QC_NonConformingMaterial'
@@ -793,7 +815,6 @@ object NonConformingMaterial: TNonConformingMaterial
       '  Issue = :OLD_Issue and'
       '  RandomQty = :OLD_RandomQty and'
       '  DeQty = :OLD_DeQty and'
-      '  DeRate = :OLD_DeRate and'
       '  Result = :OLD_Result and'
       '  SCFID = :OLD_SCFID and'
       '  SCFDate = :OLD_SCFDate and'

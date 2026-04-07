@@ -32,11 +32,11 @@ type
     dtpUSERDate: TDateTimePicker;
     MenuCode: TEdit;
     edtRID: TEdit;
-    dtpInsDate: TDateTimePicker;
+    dtpInDate: TDateTimePicker;
     edtSKU: TEdit;
     edtMatID: TEdit;
     btClear: TButton;
-    ckInsDate: TCheckBox;
+    ckInDate: TCheckBox;
     DBGrid1: TDBGridEh;
     Query1: TQuery;
     DS1: TDataSource;
@@ -57,7 +57,6 @@ type
     Query1Issue: TStringField;
     Query1RandomQty: TIntegerField;
     Query1DeQty: TIntegerField;
-    Query1DeRate: TFloatField;
     Query1Result: TStringField;
     Query1SCFID: TStringField;
     Query1SCFDate: TDateTimeField;
@@ -69,6 +68,7 @@ type
     Query1YN: TIntegerField;
     Query1USERID: TStringField;
     Query1USERDATE: TDateTimeField;
+    Query1DeRate: TFloatField;
     procedure BB4Click(Sender: TObject);
     procedure BB1Click(Sender: TObject);
     procedure BB2Click(Sender: TObject);
@@ -400,7 +400,7 @@ begin
   v[6] := Query1.FieldByName('Issue').AsString;
   v[7] := Query1.FieldByName('RandomQty').AsString;
   v[8] := Query1.FieldByName('DeQty').AsString;
-  v[9] := Query1.FieldByName('DeRate').AsString;
+  v[9] := Query1.FieldByName('DeRate').AsString + '%';
   v[10]:= Query1.FieldByName('Result').AsString;
 
   for i := 0 to 10 do
@@ -446,11 +446,16 @@ begin
   begin
     Active := false;
     SQL.Clear;
-    SQL.Add('select * from QC_NonConformingMaterial ');
+    SQL.Add('SELECT ReportID, ZSBH, InDate, Qty, DDBH, SKU, MaterialSpec, Issue, RandomQty, DeQty, ROUND(DeQty * 100.0 / NULLIF(RandomQty, 0), 1) as DeRate, ');
+    SQL.Add('Result, SCFID, SCFDate, LCFID, LCFDate, PreparedID, DepUID, ');
+    SQL.Add('DepCFDate, YN, USERID, USERDATE ');
+    SQL.Add('FROM QC_NonConformingMaterial ');
     SQL.Add('where ReportID like ''' +edtRID.Text+ '%''');
 
     if ckUSERDate.Checked then
       SQL.Add('and CAST(USERDate as DATE) = ''' + FormatDateTime('yyyy-mm-dd', dtpUSERDate.Date) + ''' ');
+    if ckInDate.Checked then
+      SQL.Add('and CAST(InDate as DATE) = ''' + FormatDateTime('yyyy-mm-dd', dtpInDate.Date) + ''' ');
     if edtZSBH.Text <> '' then
       SQL.Add('and ZSBH = '''+edtZSBH.Text+''' ');
     if edtDDBH.Text <> '' then

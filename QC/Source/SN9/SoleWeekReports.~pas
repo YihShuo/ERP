@@ -433,9 +433,6 @@ begin
     ShowMessage('Copy file that bai');
 
   DuongDanFile := ExtractFilePath(ParamStr(0)) + 'RejectedMaterial.xlsx';
-  SaveDialog := TSaveDialog.Create(nil);
-
-  DuongDanFile := ExtractFilePath(ParamStr(0)) + 'RejectedMaterial.xlsx';
 
   StartRow := 3;
 

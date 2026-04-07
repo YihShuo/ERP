@@ -7,7 +7,6 @@ object DM2: TDM2
   Width = 309
   object DBshipping: TDatabase
     AliasName = 'LYS_ERP'
-    Connected = True
     DatabaseName = 'DB'
     LoginPrompt = False
     Params.Strings = (

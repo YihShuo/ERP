@@ -1,12 +1,12 @@
 object DM2: TDM2
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 65528
-  Top = 65528
-  Height = 1056
-  Width = 1936
+  Left = 663
+  Top = 300
+  Height = 249
+  Width = 309
   object DBshipping: TDatabase
-    AliasName = 'LYS_ERP'
+    AliasName = 'IT-0528'
     Connected = True
     DatabaseName = 'DB'
     LoginPrompt = False

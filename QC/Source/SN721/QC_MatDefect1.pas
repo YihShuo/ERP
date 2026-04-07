@@ -60,7 +60,7 @@ var
 implementation
 
 uses Main1, DailyReport1, LeatherSummary1, {RubberChemical1, (N17) } MatQcCheck1,
-  MonthlyReportMaterials, SoleWeekReports;
+  MonthlyReportMaterials, SoleWeekReports, NGMaterials;
 
 {$R *.dfm}
 
@@ -162,6 +162,20 @@ begin
         begin
             edit;
             fieldbyname('DeReason').AsString:=qry1.fieldbyname('CodeID').AsString + ',' + fieldbyname('DeReason').AsString;
+            fieldbyname('DefectName').AsString:=qry1.fieldbyname('DefectName').AsString + ',' + fieldbyname('DefectName').AsString;
+        end;
+        qry1.Delete;
+      end ;
+    end;
+
+    if assigned(NGMaterial) then
+    begin
+      if NGMaterial.Query1.RequestLive then
+      begin
+        with NGMaterial.Query1 do
+        begin
+            edit;
+            fieldbyname('Issue').AsString:=qry1.fieldbyname('CodeID').AsString + ',' + fieldbyname('Issue').AsString;
             fieldbyname('DefectName').AsString:=qry1.fieldbyname('DefectName').AsString + ',' + fieldbyname('DefectName').AsString;
         end;
         qry1.Delete;

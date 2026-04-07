@@ -280,6 +280,7 @@ object OrderListOut_BC: TOrderListOut_BC
           Top = 8
           Width = 129
           Height = 24
+          CharCase = ecUpperCase
           TabOrder = 0
         end
         object Button3: TButton
@@ -296,6 +297,7 @@ object OrderListOut_BC: TOrderListOut_BC
           Top = 8
           Width = 89
           Height = 24
+          CharCase = ecUpperCase
           TabOrder = 2
         end
         object CB2: TComboBox
@@ -317,6 +319,7 @@ object OrderListOut_BC: TOrderListOut_BC
           Top = 8
           Width = 89
           Height = 24
+          CharCase = ecUpperCase
           TabOrder = 4
         end
         object Edit6: TEdit

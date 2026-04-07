@@ -470,13 +470,13 @@ object OrderListOut_BC: TOrderListOut_BC
             EditButtons = <>
             FieldName = 'CFMDate'
             Footers = <>
-            Width = 88
+            Width = 103
           end
           item
             EditButtons = <>
             FieldName = 'DefectID'
             Footers = <>
-            Width = 47
+            Width = 61
           end
           item
             EditButtons = <>

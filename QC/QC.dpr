@@ -161,7 +161,8 @@ uses
   HumidityChecks in 'Source\SN9\HumidityChecks.pas' {HumidityCheck},
   SoleWeekReports in 'Source\SN9\SoleWeekReports.pas' {RejectedMaterial},
   MonthlyReportMaterials in 'Source\SN9\MonthlyReportMaterials.pas' {MonthlyReportMaterial},
-  NonConformingMaterials in 'Source\SN9\NonConformingMaterials.pas' {NonConformingMaterial};
+  NonConformingMaterials in 'Source\SN9\NonConformingMaterials.pas' {NonConformingMaterial},
+  NGMaterials in 'Source\SN9\NGMaterials.pas' {NGMaterial};
 
 {$R *.res}
 
