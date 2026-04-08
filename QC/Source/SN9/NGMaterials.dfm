@@ -520,6 +520,7 @@ object NGMaterial: TNGMaterial
         FieldName = 'ReportID'
         Footer.ValueType = fvtCount
         Footers = <>
+        ReadOnly = True
       end
       item
         EditButtons = <>
@@ -610,6 +611,7 @@ object NGMaterial: TNGMaterial
         EditButtons = <>
         FieldName = 'USERID'
         Footers = <>
+        ReadOnly = True
         Width = 100
       end
       item

@@ -395,6 +395,11 @@ begin
   v[1] := FormatDateTime('dd/mm/yyyy', Query1.FieldByName('InDate').AsDateTime);
   v[2] := Query1.FieldByName('Qty').AsString;
   v[3] := Query1.FieldByName('DDBH').AsString;
+
+  s := StringReplace(v[3], '_', Chr(10), [rfReplaceAll]);
+  Worksheet.Cells[3, 2].WrapText := True;
+  Worksheet.Cells[3, 2].Value := s;
+
   v[4] := Query1.FieldByName('SKU').AsString;
   v[5] := Query1.FieldByName('MaterialSpec').AsString;
   v[6] := Query1.FieldByName('Issue').AsString;
@@ -446,7 +451,7 @@ begin
   begin
     Active := false;
     SQL.Clear;
-    SQL.Add('SELECT ReportID, ZSBH, InDate, Qty, DDBH, SKU, MaterialSpec, Issue, RandomQty, DeQty, ROUND(RandomQty * 100.0 / NULLIF(DeQty, 0), 1) as DeRate, ');
+    SQL.Add('SELECT ReportID, ZSBH, InDate, Qty, DDBH, SKU, MaterialSpec, Issue, RandomQty, DeQty, ROUND(DeQty * 100.0 / NULLIF(RandomQty, 0), 1) as DeRate, ');
     SQL.Add('Result, SCFID, SCFDate, LCFID, LCFDate, PreparedID, DepUID, ');
     SQL.Add('DepCFDate, YN, USERID, USERDATE ');
     SQL.Add('FROM QC_NonConformingMaterial ');
