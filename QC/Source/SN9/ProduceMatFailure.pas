@@ -320,11 +320,8 @@ begin
     DBGrid1.FieldColumns['VisualCheck'].ReadOnly  := True;
     DBGrid1.FieldColumns['PhysCheck'].ReadOnly    := True;
     DBGrid1.FieldColumns['SCFID'].ReadOnly        := True;
-    DBGrid1.FieldColumns['SCFDate'].ReadOnly      := True;
     DBGrid1.FieldColumns['LCFID'].ReadOnly        := True;
-    DBGrid1.FieldColumns['LCFDate'].ReadOnly      := True;
     DBGrid1.FieldColumns['WMSCFID'].ReadOnly      := True;
-    DBGrid1.FieldColumns['WMSCFDate'].ReadOnly    := True;
     DBGrid1.FieldColumns['USERID'].ReadOnly       := True;
     DBGrid1.FieldColumns['USERDate'].ReadOnly     := True;
     DBGrid1.FieldColumns['YN'].ReadOnly           := True;
@@ -348,10 +345,8 @@ begin
     DBGrid1.FieldColumns['LCFID'].ReadOnly        := True;
     DBGrid1.FieldColumns['LCFDate'].ReadOnly      := True;
     DBGrid1.FieldColumns['WMSCFID'].ReadOnly      := True;
-    DBGrid1.FieldColumns['WMSCFDate'].ReadOnly    := True;
     DBGrid1.FieldColumns['RefStand'].ReadOnly     := True;
     DBGrid1.FieldColumns['USERID'].ReadOnly       := True;
-    DBGrid1.FieldColumns['USERDate'].ReadOnly     := True;
     DBGrid1.FieldColumns['YN'].ReadOnly           := True;
     DBGrid1.FieldColumns['InspecID'].ReadOnly     := True;
   end;
@@ -370,9 +365,6 @@ begin
     DBGrid1.FieldColumns['VisualCheck'].ReadOnly  := True;
     DBGrid1.FieldColumns['PhysCheck'].ReadOnly    := True;
     DBGrid1.FieldColumns['SCFID'].ReadOnly        := True;
-    DBGrid1.FieldColumns['SCFDate'].ReadOnly      := True;
-    DBGrid1.FieldColumns['LCFDate'].ReadOnly      := True;
-    DBGrid1.FieldColumns['WMSCFDate'].ReadOnly    := True;
     DBGrid1.FieldColumns['RefStand'].ReadOnly     := True;
     DBGrid1.FieldColumns['USERID'].ReadOnly       := True;
     DBGrid1.FieldColumns['USERDate'].ReadOnly     := True;
@@ -394,11 +386,8 @@ begin
     DBGrid1.FieldColumns['VisualCheck'].ReadOnly  := True;
     DBGrid1.FieldColumns['PhysCheck'].ReadOnly    := True;
     DBGrid1.FieldColumns['SCFID'].ReadOnly        := True;
-    DBGrid1.FieldColumns['SCFDate'].ReadOnly      := True;
     DBGrid1.FieldColumns['LCFID'].ReadOnly        := True;
-    DBGrid1.FieldColumns['LCFDate'].ReadOnly      := True;
     DBGrid1.FieldColumns['WMSCFID'].ReadOnly      := True;
-    DBGrid1.FieldColumns['WMSCFDate'].ReadOnly    := True;
     DBGrid1.FieldColumns['RefStand'].ReadOnly     := True;
     DBGrid1.FieldColumns['USERID'].ReadOnly       := True;
     DBGrid1.FieldColumns['USERDate'].ReadOnly     := True;

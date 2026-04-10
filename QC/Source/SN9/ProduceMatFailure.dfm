@@ -667,7 +667,6 @@ object ProducMatFailure: TProducMatFailure
         EditButtons = <>
         FieldName = 'SCFDate'
         Footers = <>
-        ReadOnly = True
       end
       item
         EditButtons = <>
@@ -678,7 +677,6 @@ object ProducMatFailure: TProducMatFailure
         EditButtons = <>
         FieldName = 'LCFDate'
         Footers = <>
-        ReadOnly = True
       end
       item
         EditButtons = <>
@@ -689,7 +687,6 @@ object ProducMatFailure: TProducMatFailure
         EditButtons = <>
         FieldName = 'WMSCFDate'
         Footers = <>
-        ReadOnly = True
       end
       item
         EditButtons = <>

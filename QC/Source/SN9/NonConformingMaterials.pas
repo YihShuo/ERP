@@ -394,11 +394,9 @@ begin
   v[0] := Query1.FieldByName('ZSBH').AsString;
   v[1] := FormatDateTime('dd/mm/yyyy', Query1.FieldByName('InDate').AsDateTime);
   v[2] := Query1.FieldByName('Qty').AsString;
-  //v[3] := Query1.FieldByName('DDBH').AsString;
-
-  s := StringReplace(Query1.FieldByName('DDBH').AsString, '_', Chr(10), [rfReplaceAll]);
-  Worksheet.Cells[3, 2].WrapText := True;
-  Worksheet.Cells[3, 2].Value := s;
+  
+  v[3] := Query1.FieldByName('DDBH').AsString;
+  v[3] := StringReplace(v[3], '_', Chr(10), [rfReplaceAll]);
 
   v[4] := Query1.FieldByName('SKU').AsString;
   v[5] := Query1.FieldByName('MaterialSpec').AsString;
