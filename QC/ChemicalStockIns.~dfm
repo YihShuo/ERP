@@ -1,9 +1,9 @@
-object NonConformingMaterial: TNonConformingMaterial
-  Left = 197
-  Top = 206
+object ChemicalStockIn: TChemicalStockIn
+  Left = 300
+  Top = 162
   Width = 1305
   Height = 675
-  Caption = 'Non Conforming Material'
+  Caption = 'ChemicalStockIn'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,6 +16,7 @@ object NonConformingMaterial: TNonConformingMaterial
   Visible = True
   WindowState = wsMaximized
   OnClose = FormClose
+  OnCreate = FormCreate
   OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
@@ -23,7 +24,7 @@ object NonConformingMaterial: TNonConformingMaterial
     Left = 0
     Top = 0
     Width = 1289
-    Height = 200
+    Height = 161
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -32,44 +33,30 @@ object NonConformingMaterial: TNonConformingMaterial
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    object Label1: TLabel
-      Left = 272
-      Top = 72
-      Width = 51
-      Height = 20
-      Caption = 'DDBH:'
-    end
-    object Label2: TLabel
-      Left = 472
-      Top = 8
-      Width = 62
-      Height = 20
-      Caption = 'Supplier:'
-    end
     object Label3: TLabel
-      Left = 472
+      Left = 272
       Top = 40
-      Width = 70
+      Width = 49
       Height = 20
-      Caption = 'ReportID:'
+      Caption = 'RKNO:'
     end
     object Label5: TLabel
       Left = 272
       Top = 8
-      Width = 37
+      Width = 47
       Height = 20
-      Caption = 'SKU:'
+      Caption = 'CLBH:'
     end
-    object Label7: TLabel
-      Left = 272
+    object Label1: TLabel
+      Left = 8
       Top = 40
-      Width = 68
+      Width = 28
       Height = 20
-      Caption = 'MatSpec:'
+      Caption = 'Qty:'
     end
     object BB1: TBitBtn
       Left = 0
-      Top = 144
+      Top = 88
       Width = 49
       Height = 49
       Hint = 'Insert one New Record'
@@ -101,7 +88,7 @@ object NonConformingMaterial: TNonConformingMaterial
     end
     object BB2: TBitBtn
       Left = 48
-      Top = 144
+      Top = 88
       Width = 49
       Height = 49
       Hint = 'Delete one Record'
@@ -133,7 +120,7 @@ object NonConformingMaterial: TNonConformingMaterial
     end
     object BB3: TBitBtn
       Left = 96
-      Top = 144
+      Top = 88
       Width = 49
       Height = 49
       Hint = 'Modify Current'
@@ -165,7 +152,7 @@ object NonConformingMaterial: TNonConformingMaterial
     end
     object BB4: TBitBtn
       Left = 144
-      Top = 144
+      Top = 88
       Width = 49
       Height = 49
       Hint = 'Save Current'
@@ -197,7 +184,7 @@ object NonConformingMaterial: TNonConformingMaterial
     end
     object BB5: TBitBtn
       Left = 192
-      Top = 144
+      Top = 88
       Width = 49
       Height = 49
       Hint = 'Cancel'
@@ -229,7 +216,7 @@ object NonConformingMaterial: TNonConformingMaterial
     end
     object BB6: TBitBtn
       Left = 240
-      Top = 144
+      Top = 88
       Width = 49
       Height = 49
       Hint = 'Exit Current Form'
@@ -259,8 +246,8 @@ object NonConformingMaterial: TNonConformingMaterial
       NumGlyphs = 2
     end
     object Button1: TButton
-      Left = 683
-      Top = 57
+      Left = 507
+      Top = 9
       Width = 81
       Height = 33
       Caption = 'Search'
@@ -269,7 +256,7 @@ object NonConformingMaterial: TNonConformingMaterial
     end
     object bbt6: TBitBtn
       Left = 440
-      Top = 144
+      Top = 88
       Width = 81
       Height = 49
       Hint = 'Modify Current'
@@ -299,16 +286,9 @@ object NonConformingMaterial: TNonConformingMaterial
       Layout = blGlyphTop
       NumGlyphs = 2
     end
-    object edtDDBH: TEdit
-      Left = 344
-      Top = 72
-      Width = 121
-      Height = 28
-      TabOrder = 8
-    end
     object bExcel: TBitBtn
       Left = 520
-      Top = 144
+      Top = 88
       Width = 57
       Height = 49
       Hint = 'Modify Current'
@@ -320,7 +300,8 @@ object NonConformingMaterial: TNonConformingMaterial
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      TabOrder = 9
+      TabOrder = 8
+      OnClick = bExcelClick
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
         04000000000000010000130B0000130B00001000000000000000000000000000
@@ -339,7 +320,7 @@ object NonConformingMaterial: TNonConformingMaterial
     end
     object bExF: TBitBtn
       Left = 576
-      Top = 144
+      Top = 88
       Width = 113
       Height = 49
       Hint = 'Modify Current'
@@ -351,8 +332,8 @@ object NonConformingMaterial: TNonConformingMaterial
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      TabOrder = 10
-      OnClick = bExFClick
+      TabOrder = 9
+      Visible = False
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
         04000000000000010000130B0000130B00001000000000000000000000000000
@@ -371,18 +352,12 @@ object NonConformingMaterial: TNonConformingMaterial
     end
     object cbPDF: TCheckBox
       Left = 704
-      Top = 144
+      Top = 88
       Width = 57
       Height = 17
       Caption = 'PDF'
-      TabOrder = 11
-    end
-    object edtZSBH: TEdit
-      Left = 552
-      Top = 8
-      Width = 121
-      Height = 28
-      TabOrder = 12
+      TabOrder = 10
+      Visible = False
     end
     object ckUSERDate: TCheckBox
       Left = 8
@@ -390,7 +365,7 @@ object NonConformingMaterial: TNonConformingMaterial
       Width = 105
       Height = 17
       Caption = 'USERDate:'
-      TabOrder = 13
+      TabOrder = 11
     end
     object dtpUSERDate: TDateTimePicker
       Left = 152
@@ -400,72 +375,55 @@ object NonConformingMaterial: TNonConformingMaterial
       Date = 45973.457989131940000000
       Format = 'dd/MM/yyyy'
       Time = 45973.457989131940000000
-      TabOrder = 14
+      TabOrder = 12
     end
     object MenuCode: TEdit
       Left = 696
-      Top = 168
+      Top = 112
       Width = 121
       Height = 28
       ReadOnly = True
-      TabOrder = 15
+      TabOrder = 13
       Text = 'MenuCode'
       Visible = False
     end
-    object edtRID: TEdit
-      Left = 552
+    object edtRKNO: TEdit
+      Left = 344
       Top = 40
       Width = 121
       Height = 28
-      TabOrder = 16
+      TabOrder = 14
     end
-    object dtpInDate: TDateTimePicker
-      Left = 152
-      Top = 40
-      Width = 113
-      Height = 28
-      Date = 45981.575782071760000000
-      Format = 'dd/MM/yyyy'
-      Time = 45981.575782071760000000
-      TabOrder = 17
-    end
-    object edtSKU: TEdit
+    object edtCLBH: TEdit
       Left = 344
       Top = 8
       Width = 121
       Height = 28
-      TabOrder = 18
+      TabOrder = 15
     end
-    object edtMatID: TEdit
-      Left = 344
-      Top = 40
-      Width = 121
-      Height = 28
-      TabOrder = 19
-    end
-    object btClear: TButton
-      Left = 683
-      Top = 16
+    object btQR: TButton
+      Left = 507
+      Top = 48
       Width = 81
       Height = 33
-      Caption = 'Clear'
-      TabOrder = 20
-      Visible = False
+      Caption = 'Print QR'
+      TabOrder = 16
+      OnClick = btQRClick
     end
-    object ckInDate: TCheckBox
-      Left = 8
+    object edtCARNO: TEdit
+      Left = 48
       Top = 40
-      Width = 137
-      Height = 17
-      Caption = 'InDate:'
-      TabOrder = 21
+      Width = 217
+      Height = 28
+      TabOrder = 17
+      OnKeyPress = edtCARNOKeyPress
     end
   end
   object DBGrid1: TDBGridEh
     Left = 0
-    Top = 200
+    Top = 161
     Width = 1289
-    Height = 436
+    Height = 475
     Align = alClient
     DataSource = DS1
     Flat = False
@@ -496,226 +454,90 @@ object NonConformingMaterial: TNonConformingMaterial
     Columns = <
       item
         EditButtons = <>
-        FieldName = 'ReportID'
+        FieldName = 'RKNO'
+        Footer.ValueType = fvtCount
         Footers = <>
         ReadOnly = True
-        Width = 75
+        Width = 100
       end
       item
         EditButtons = <>
-        FieldName = 'ZSBH'
+        FieldName = 'CLBH'
         Footers = <>
-        Title.Caption = 'Supplier/NCU'
-        Width = 200
+        Width = 150
+        OnEditButtonClick = DBGrid1Columns1EditButtonClick
       end
       item
         EditButtons = <>
-        FieldName = 'InDate'
+        FieldName = 'YWPM'
         Footers = <>
-      end
-      item
-        EditButtons = <>
-        FieldName = 'Qty'
-        Footers = <>
-      end
-      item
-        EditButtons = <>
-        FieldName = 'DDBH'
-        Footers = <>
-        Title.Caption = 'DDBH/Lenh'
-        Width = 200
-      end
-      item
-        EditButtons = <>
-        FieldName = 'SKU'
-        Footers = <>
-        Title.Caption = 'Ten giay, SKU'
-      end
-      item
-        EditButtons = <>
-        FieldName = 'MaterialSpec'
-        Footers = <>
-        Title.Caption = 'MaterialSpec/Ten qui cach vat lieu'
-        Width = 200
-      end
-      item
-        EditButtons = <>
-        FieldName = 'Issue'
-        Footers = <>
-        Title.Caption = 'Issue/Van de'
+        ReadOnly = True
         Width = 300
       end
       item
         EditButtons = <>
-        FieldName = 'RandomQty'
-        Footers = <>
-        Title.Caption = 'RandomQty/SL rut kiem'
-        Width = 115
-      end
-      item
-        EditButtons = <>
-        FieldName = 'DeQty'
-        Footers = <>
-        Title.Caption = 'DeQty/SL khong dat'
-        Width = 96
-      end
-      item
-        EditButtons = <>
-        FieldName = 'DeRate'
-        Footers = <>
-        ReadOnly = True
-        Title.Caption = 'DeRate/Ti le khong dat'
-        Width = 107
-      end
-      item
-        EditButtons = <>
-        FieldName = 'Result'
-        Footers = <>
-        Title.Caption = 'Result/KQ xu ly'
-        Width = 200
-      end
-      item
-        EditButtons = <>
-        FieldName = 'SCFID'
-        Footers = <>
-        Width = 75
-      end
-      item
-        EditButtons = <>
-        FieldName = 'SCFDate'
-        Footers = <>
-      end
-      item
-        EditButtons = <>
-        FieldName = 'LCFID'
-        Footers = <>
-        Width = 75
-      end
-      item
-        EditButtons = <>
-        FieldName = 'LCFDate'
-        Footers = <>
-      end
-      item
-        EditButtons = <>
-        FieldName = 'PreparedID'
-        Footers = <>
-        Width = 150
-      end
-      item
-        EditButtons = <>
-        FieldName = 'DepUID'
-        Footers = <>
-        Width = 75
-      end
-      item
-        EditButtons = <>
-        FieldName = 'DepCFDate'
-        Footers = <>
-      end
-      item
-        EditButtons = <>
-        FieldName = 'YN'
+        FieldName = 'CARTONNO'
         Footers = <>
         Visible = False
+        Width = 100
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ExpirationDate'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Weight'
+        Footers = <>
       end
       item
         EditButtons = <>
         FieldName = 'USERID'
         Footers = <>
         ReadOnly = True
-        Width = 75
       end
       item
         EditButtons = <>
         FieldName = 'USERDATE'
         Footers = <>
         ReadOnly = True
+      end
+      item
+        EditButtons = <>
+        FieldName = 'YN'
+        Footers = <>
+        Visible = False
       end>
   end
   object Query1: TQuery
     AfterOpen = Query1AfterOpen
     DatabaseName = 'DB'
     SQL.Strings = (
-      
-        'SELECT ReportID, ZSBH, InDate, Qty, DDBH, SKU, MaterialSpec, Iss' +
-        'ue, RandomQty, DeQty, ROUND(RandomQty * 100.0 / NULLIF(DeQty, 0)' +
-        ', 2) as DeRate,'
-      'Result, SCFID, SCFDate, LCFID, LCFDate, PreparedID, DepUID, '
-      'DepCFDate, YN, USERID, USERDATE'
-      'FROM QC_NonConformingMaterial'
-      'WHERE 1=2')
+      'SELECT KCRK_HC.*, CLZL.YWPM FROM KCRK_HC'
+      'LEFT JOIN CLZL ON CLZL.CLDH = KCRK_HC.CLBH'
+      'where 1=1')
     UpdateObject = UpSQL1
     Left = 448
     Top = 400
-    object Query1ReportID: TIntegerField
-      FieldName = 'ReportID'
-    end
-    object Query1ZSBH: TStringField
-      FieldName = 'ZSBH'
+    object Query1RKNO: TStringField
+      FieldName = 'RKNO'
       FixedChar = True
       Size = 50
     end
-    object Query1InDate: TDateTimeField
-      FieldName = 'InDate'
-    end
-    object Query1Qty: TIntegerField
-      FieldName = 'Qty'
-    end
-    object Query1SKU: TStringField
-      FieldName = 'SKU'
+    object Query1CLBH: TStringField
+      FieldName = 'CLBH'
       FixedChar = True
       Size = 50
     end
-    object Query1MaterialSpec: TStringField
-      FieldName = 'MaterialSpec'
-      FixedChar = True
-      Size = 50
+    object Query1CARTONNO: TIntegerField
+      FieldName = 'CARTONNO'
     end
-    object Query1Issue: TStringField
-      FieldName = 'Issue'
-      FixedChar = True
-      Size = 255
+    object Query1ExpirationDate: TDateTimeField
+      FieldName = 'ExpirationDate'
     end
-    object Query1RandomQty: TIntegerField
-      FieldName = 'RandomQty'
-    end
-    object Query1DeQty: TIntegerField
-      FieldName = 'DeQty'
-    end
-    object Query1Result: TStringField
-      FieldName = 'Result'
-      FixedChar = True
-      Size = 50
-    end
-    object Query1SCFID: TStringField
-      FieldName = 'SCFID'
-      FixedChar = True
-    end
-    object Query1SCFDate: TDateTimeField
-      FieldName = 'SCFDate'
-    end
-    object Query1LCFID: TStringField
-      FieldName = 'LCFID'
-      FixedChar = True
-    end
-    object Query1LCFDate: TDateTimeField
-      FieldName = 'LCFDate'
-    end
-    object Query1PreparedID: TStringField
-      FieldName = 'PreparedID'
-      FixedChar = True
-      Size = 50
-    end
-    object Query1DepUID: TStringField
-      FieldName = 'DepUID'
-      FixedChar = True
-    end
-    object Query1DepCFDate: TDateTimeField
-      FieldName = 'DepCFDate'
-    end
-    object Query1YN: TIntegerField
-      FieldName = 'YN'
+    object Query1Weight: TIntegerField
+      FieldName = 'Weight'
     end
     object Query1USERID: TStringField
       FieldName = 'USERID'
@@ -724,13 +546,13 @@ object NonConformingMaterial: TNonConformingMaterial
     object Query1USERDATE: TDateTimeField
       FieldName = 'USERDATE'
     end
-    object Query1DeRate: TFloatField
-      FieldName = 'DeRate'
+    object Query1YN: TIntegerField
+      FieldName = 'YN'
     end
-    object Query1DDBH: TStringField
-      FieldName = 'DDBH'
+    object Query1YWPM: TStringField
+      FieldName = 'YWPM'
       FixedChar = True
-      Size = 255
+      Size = 200
     end
   end
   object DS1: TDataSource
@@ -740,92 +562,30 @@ object NonConformingMaterial: TNonConformingMaterial
   end
   object UpSQL1: TUpdateSQL
     ModifySQL.Strings = (
-      'update QC_NonConformingMaterial'
+      'update KCRK_HC'
       'set'
-      '  ReportID = :ReportID,'
-      '  ZSBH = :ZSBH,'
-      '  InDate = :InDate,'
-      '  Qty = :Qty,'
-      '  DDBH = :DDBH,'
-      '  SKU = :SKU,'
-      '  MaterialSpec = :MaterialSpec,'
-      '  Issue = :Issue,'
-      '  RandomQty = :RandomQty,'
-      '  DeQty = :DeQty,'
-      '  Result = :Result,'
-      '  SCFID = :SCFID,'
-      '  SCFDate = :SCFDate,'
-      '  LCFID = :LCFID,'
-      '  LCFDate = :LCFDate,'
-      '  PreparedID = :PreparedID,'
-      '  DepUID = :DepUID,'
-      '  DepCFDate = :DepCFDate,'
-      '  YN = :YN,'
+      '  RKNO = :RKNO,'
+      '  CLBH = :CLBH,'
+      '  CARTONNO = :CARTONNO,'
+      '  ExpirationDate = :ExpirationDate,'
+      '  Weight = :Weight,'
       '  USERID = :USERID,'
       '  USERDATE = :USERDATE'
       'where'
-      '  ReportID = :OLD_ReportID and'
-      '  ZSBH = :OLD_ZSBH and'
-      '  InDate = :OLD_InDate and'
-      '  Qty = :OLD_Qty and'
-      '  DDBH = :OLD_DDBH and'
-      '  SKU = :OLD_SKU and'
-      '  MaterialSpec = :OLD_MaterialSpec and'
-      '  Issue = :OLD_Issue and'
-      '  RandomQty = :OLD_RandomQty and'
-      '  DeQty = :OLD_DeQty and'
-      '  Result = :OLD_Result and'
-      '  SCFID = :OLD_SCFID and'
-      '  SCFDate = :OLD_SCFDate and'
-      '  LCFID = :OLD_LCFID and'
-      '  LCFDate = :OLD_LCFDate and'
-      '  PreparedID = :OLD_PreparedID and'
-      '  DepUID = :OLD_DepUID and'
-      '  DepCFDate = :OLD_DepCFDate and'
-      '  YN = :OLD_YN and'
-      '  USERID = :OLD_USERID and'
-      '  USERDATE = :OLD_USERDATE')
+      '  RKNO = :OLD_RKNO')
     InsertSQL.Strings = (
-      'insert into QC_NonConformingMaterial'
+      'insert into KCRK_HC'
       
-        '  (ReportID, ZSBH, InDate, Qty, DDBH, SKU, MaterialSpec, Issue, ' +
-        'RandomQty, '
-      
-        '   DeQty, Result, SCFID, SCFDate, LCFID, LCFDate, PreparedID, De' +
-        'pUID, '
-      '   DepCFDate, YN, USERID, USERDATE)'
+        '  (RKNO, CLBH, CARTONNO, ExpirationDate, Weight, USERID, USERDAT' +
+        'E, YN)'
       'values'
       
-        '  (:ReportID, :ZSBH, :InDate, :Qty, :DDBH, :SKU, :MaterialSpec, ' +
-        ':Issue, '
-      
-        '   :RandomQty, :DeQty, :Result, :SCFID, :SCFDate, :LCFID, :LCFDa' +
-        'te,'
-      '   :PreparedID, :DepUID, :DepCFDate, :YN, :USERID, :USERDATE)')
+        '  (:RKNO, :CLBH, :CARTONNO, :ExpirationDate, :Weight, :USERID, :' +
+        'USERDATE, :YN)')
     DeleteSQL.Strings = (
-      'delete from QC_NonConformingMaterial'
+      'delete from KCRK_HC'
       'where'
-      '  ReportID = :OLD_ReportID and'
-      '  ZSBH = :OLD_ZSBH and'
-      '  InDate = :OLD_InDate and'
-      '  Qty = :OLD_Qty and'
-      '  DDBH = :OLD_DDBH and'
-      '  SKU = :OLD_SKU and'
-      '  MaterialSpec = :OLD_MaterialSpec and'
-      '  Issue = :OLD_Issue and'
-      '  RandomQty = :OLD_RandomQty and'
-      '  DeQty = :OLD_DeQty and'
-      '  Result = :OLD_Result and'
-      '  SCFID = :OLD_SCFID and'
-      '  SCFDate = :OLD_SCFDate and'
-      '  LCFID = :OLD_LCFID and'
-      '  LCFDate = :OLD_LCFDate and'
-      '  PreparedID = :OLD_PreparedID and'
-      '  DepUID = :OLD_DepUID and'
-      '  DepCFDate = :OLD_DepCFDate and'
-      '  YN = :OLD_YN and'
-      '  USERID = :OLD_USERID and'
-      '  USERDATE = :OLD_USERDATE')
+      '  RKNO = :OLD_RKNO')
     Left = 528
     Top = 400
   end
@@ -835,25 +595,20 @@ object NonConformingMaterial: TNonConformingMaterial
     Top = 400
   end
   object OpenDialog1: TOpenDialog
-    Left = 368
-    Top = 144
+    Left = 376
+    Top = 104
   end
   object SaveDialog: TSaveDialog
-    Left = 328
-    Top = 152
+    Left = 344
+    Top = 96
   end
   object QGetID: TQuery
     DatabaseName = 'DB'
     Left = 368
     Top = 400
   end
-  object QSig: TQuery
-    DatabaseName = 'DB'
-    Left = 336
-    Top = 400
-  end
   object OpenPictureDialog1: TOpenDialog
-    Left = 312
-    Top = 112
+    Left = 304
+    Top = 96
   end
 end

@@ -1613,9 +1613,7 @@ object MatLabCheck: TMatLabCheck
     Top = 281
   end
   object OpenDialog1: TOpenDialog
-    Filter = 
-      '*.xlsx;*.xls;*.pdf|*.xlsx;*.xls;*.pdf|*.pdf|*.pdf|*.xlsx;*.xls|*' +
-      '.xlsx;*.xls'
+    Filter = '*.xlsx;*.xls|*.xlsx;*.xls|*.pdf|*.pdf'
     Left = 668
     Top = 242
   end

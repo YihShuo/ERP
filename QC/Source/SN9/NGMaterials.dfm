@@ -483,6 +483,16 @@ object NGMaterial: TNGMaterial
       ScrollBars = ssVertical
       TabOrder = 20
     end
+    object ckHideEx: TCheckBox
+      Left = 576
+      Top = 48
+      Width = 113
+      Height = 17
+      Caption = 'Hide Expired'
+      Checked = True
+      State = cbChecked
+      TabOrder = 21
+    end
   end
   object DBGrid1: TDBGridEh
     Left = 0
@@ -532,25 +542,31 @@ object NGMaterial: TNGMaterial
         EditButtons = <>
         FieldName = 'Supplier'
         Footers = <>
-        Width = 200
+        Width = 166
       end
       item
         EditButtons = <>
         FieldName = 'DDBH'
         Footers = <>
-        Width = 200
+        Width = 135
       end
       item
         EditButtons = <>
         FieldName = 'CLBH'
         Footers = <>
-        Width = 200
+        Width = 155
       end
       item
         EditButtons = <>
         FieldName = 'XieMing'
         Footers = <>
-        Width = 200
+        Width = 172
+      end
+      item
+        EditButtons = <>
+        FieldName = 'IsExpired'
+        Footers = <>
+        Width = 75
       end
       item
         EditButtons = <>
@@ -603,6 +619,12 @@ object NGMaterial: TNGMaterial
       end
       item
         EditButtons = <>
+        FieldName = 'Remark'
+        Footers = <>
+        Width = 150
+      end
+      item
+        EditButtons = <>
         FieldName = 'PreparedID'
         Footers = <>
         Width = 100
@@ -632,7 +654,7 @@ object NGMaterial: TNGMaterial
     DatabaseName = 'DB'
     SQL.Strings = (
       'select * from QC_NGMaterial'
-      'where 1=3'
+      'where 1=2'
       '')
     UpdateObject = UpSQL1
     Left = 512
@@ -736,6 +758,14 @@ object NGMaterial: TNGMaterial
       FieldName = 'YN'
       Origin = 'DB.QC_NGMaterial.ReportID'
     end
+    object Query1IsExpired: TBooleanField
+      FieldName = 'IsExpired'
+    end
+    object Query1Remark: TStringField
+      FieldName = 'Remark'
+      FixedChar = True
+      Size = 150
+    end
   end
   object DS1: TDataSource
     DataSet = Query1
@@ -764,36 +794,21 @@ object NGMaterial: TNGMaterial
       '  PreparedID = :PreparedID,'
       '  USERID = :USERID,'
       '  USERDate = :USERDate,'
-      '  YN = :YN'
+      '  YN = :YN,'
+      '  IsExpired = :IsExpired,'
+      '  Remark = :Remark'
       'where'
-      '  ReportID = :OLD_ReportID and'
-      '  RackLocation = :OLD_RackLocation and'
-      '  Supplier = :OLD_Supplier and'
-      '  DDBH = :OLD_DDBH and'
-      '  CLBH = :OLD_CLBH and'
-      '  XieMing = :OLD_XieMing and'
-      '  SKU = :OLD_SKU and'
-      '  RDate = :OLD_RDate and'
-      '  InspecDate = :OLD_InspecDate and'
-      '  Qty = :OLD_Qty and'
-      '  DQty = :OLD_DQty and'
-      '  Issue = :OLD_Issue and'
-      '  DefectName = :OLD_DefectName and'
-      '  Brand = :OLD_Brand and'
-      '  Result = :OLD_Result and'
-      '  PreparedID = :OLD_PreparedID and'
-      '  USERID = :OLD_USERID and'
-      '  USERDate = :OLD_USERDate and'
-      '  YN = :OLD_YN')
+      '  ReportID = :OLD_ReportID')
     InsertSQL.Strings = (
       'insert into QC_NGMaterial'
       
         '  (ReportID, RackLocation, Supplier, DDBH, CLBH, XieMing, SKU, R' +
-        'Date, InspecDate, '
+        'Date, '
+      'InspecDate, '
       
         '   Qty, DQty, Issue, DefectName, Brand, Result, PreparedID, USER' +
         'ID, USERDate, '
-      '   YN)'
+      '   YN, IsExpired, Remark)'
       'values'
       
         '  (:ReportID, :RackLocation, :Supplier, :DDBH, :CLBH, :XieMing, ' +
@@ -801,29 +816,11 @@ object NGMaterial: TNGMaterial
       
         '   :InspecDate, :Qty, :DQty, :Issue, :DefectName, :Brand, :Resul' +
         't, :PreparedID, '
-      '   :USERID, :USERDate, :YN)')
+      '   :USERID, :USERDate, :YN, :IsExpired, :Remark)')
     DeleteSQL.Strings = (
       'delete from QC_NGMaterial'
       'where'
-      '  ReportID = :OLD_ReportID and'
-      '  RackLocation = :OLD_RackLocation and'
-      '  Supplier = :OLD_Supplier and'
-      '  DDBH = :OLD_DDBH and'
-      '  CLBH = :OLD_CLBH and'
-      '  XieMing = :OLD_XieMing and'
-      '  SKU = :OLD_SKU and'
-      '  RDate = :OLD_RDate and'
-      '  InspecDate = :OLD_InspecDate and'
-      '  Qty = :OLD_Qty and'
-      '  DQty = :OLD_DQty and'
-      '  Issue = :OLD_Issue and'
-      '  DefectName = :OLD_DefectName and'
-      '  Brand = :OLD_Brand and'
-      '  Result = :OLD_Result and'
-      '  PreparedID = :OLD_PreparedID and'
-      '  USERID = :OLD_USERID and'
-      '  USERDate = :OLD_USERDate and'
-      '  YN = :OLD_YN')
+      '  ReportID = :OLD_ReportID')
     Left = 608
     Top = 216
   end

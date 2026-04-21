@@ -366,7 +366,7 @@ begin
       SQL.Add('and KCRKS_BC.DDBH like '''+Ed_OrderNo.Text+'%''');
     if EdSKU.Text <> '' then
       SQL.Add('and ddzl.article like '''+EdSKU.Text+'%''');
-    SQL.Add('  AND CONVERT(VARCHAR, KCRK_BC.UserDate, 111) BETWEEN ''' + FormatDateTime('yyyy/MM/dd', DTP1.Date) + ''' AND ''' + FormatDateTime('yyyy/MM/dd', DTP2.Date) + '''');
+    SQL.Add('  AND CAST(KCRK_BC.UserDate AS DATE) BETWEEN ''' + FormatDateTime('yyyy/MM/dd', DTP1.Date) + ''' AND ''' + FormatDateTime('yyyy/MM/dd', DTP2.Date) + '''');
     SQL.Add(') AS KCRK_BC');
     SQL.Add('WHERE 1 = 1');
     if (ED_RKNO.Text <> '') then

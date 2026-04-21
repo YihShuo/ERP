@@ -65,6 +65,9 @@ type
     Query1USERID: TStringField;
     Query1USERDate: TDateTimeField;
     Query1YN: TIntegerField;
+    Query1IsExpired: TBooleanField;
+    Query1Remark: TStringField;
+    ckHideEx: TCheckBox;
     procedure Button1Click(Sender: TObject);
     procedure BB1Click(Sender: TObject);
     procedure BB2Click(Sender: TObject);
@@ -187,8 +190,10 @@ begin
     Active := false;
     SQL.Clear;
     SQL.Add('select * from QC_NGMaterial ');
-    SQL.Add('where ReportID like ''' +edtRID.Text+ '%''');
+    SQL.Add('where ReportID like ''' +edtRID.Text+ '%'' ');
 
+    if ckHideEx.Checked then
+      SQL.Add('or IsExpired = 0 ');
     if ckUSERDate.Checked then
       SQL.Add('and CAST(USERDate as DATE) = ''' + FormatDateTime('yyyy-mm-dd', dtpUSERDate.Date) + ''' ');
     if ckInspecDate.Checked then

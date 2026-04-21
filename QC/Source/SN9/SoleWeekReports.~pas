@@ -120,6 +120,7 @@ procedure TRejectedMaterial.PrintSign(
   const AIDField, ADateField: string;
   ACol: Integer;
   UseUserName: Boolean
+  s: String;
 );
 begin
   // neu field trong hoac null thi khong in
@@ -128,6 +129,11 @@ begin
     Exit;
 
   AWorksheet.Cells[AInsertRow + 2, ACol].WrapText := True;
+
+  s := AQuery.FieldByName(AIDField).AsString;
+
+  // thay '_' thanh xuong dong
+  s := StringReplace(s, '_', Chr(10), [rfReplaceAll]);
 
   if UseUserName then
     AWorksheet.Cells[AInsertRow + 2, ACol].Value :=
@@ -207,7 +213,7 @@ begin
     if edtDDBH.Text <> '' then
       SQL.Add('and DDBH = '''+edtDDBH.Text+''' ');
     if edtSup.Text <> '' then
-      SQL.Add('and Supplier = '''+edtDDBH.Text+''' ');
+      SQL.Add('and Supplier = '''+edtSup.Text+''' ');
     if edtReason.Text <> '' then
       SQL.Add('and DeReason like ''%'+edtReason.Text+'%'' ');
     Active := true;
@@ -483,7 +489,10 @@ begin
     Worksheet.Cells[InsertRow, 4].Value := Query1.FieldByName('Brand').AsString;
     Worksheet.Cells[InsertRow, 5].Value := Query1.FieldByName('MatName').AsString;
     Worksheet.Cells[InsertRow, 6].Value := Query1.FieldByName('Supplier').AsString;
-    Worksheet.Cells[InsertRow, 7].Value := Query1.FieldByName('DeReason').AsString;
+    if Query1.FieldByName('DefectName').IsNull then
+      Worksheet.Cells[InsertRow, 7].Value := Query1.FieldByName('DeReason').AsString
+    else
+      Worksheet.Cells[InsertRow, 7].Value := Query1.FieldByName('DefectName').AsString;
     Worksheet.Cells[InsertRow, 8].Value := Query1.FieldByName('DeQty').AsString;
     Worksheet.Cells[InsertRow, 9].Value := Query1.FieldByName('ShoePO').AsString;
     Worksheet.Cells[InsertRow, 10].Value := FormatDateTime('dd/mm/yyyy', Query1.FieldByName('XFDate').AsDateTime);

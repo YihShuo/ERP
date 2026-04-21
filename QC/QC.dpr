@@ -162,7 +162,10 @@ uses
   SoleWeekReports in 'Source\SN9\SoleWeekReports.pas' {RejectedMaterial},
   MonthlyReportMaterials in 'Source\SN9\MonthlyReportMaterials.pas' {MonthlyReportMaterial},
   NonConformingMaterials in 'Source\SN9\NonConformingMaterials.pas' {NonConformingMaterial},
-  NGMaterials in 'Source\SN9\NGMaterials.pas' {NGMaterial};
+  NGMaterials in 'Source\SN9\NGMaterials.pas' {NGMaterial},
+  ChemicalStockIns in 'ChemicalStockIns.pas' {ChemicalStockIn},
+  ChemicalSearch in 'ChemicalSearch.pas' {ChemicalSearchs},
+  ChemicalStockOuts in 'ChemicalStockOuts.pas' {ChemicalStockOut};
 
 {$R *.res}
 
@@ -187,6 +190,9 @@ begin
   Application.Title := 'Lai Yih ERP system----QC';
   Application.CreateForm(TDM2, DM2);
   Application.CreateForm(Tmain, main);
+  //Application.CreateForm(TChemicalStockIn, ChemicalStockIn);
+  //Application.CreateForm(TChemicalSearchs, ChemicalSearchs);
+  //Application.CreateForm(TChemicalStockOut, ChemicalStockOut);
   QCFlowChart := TQCFlowChart.Create(main);
   login.Hide;
   login.Free;

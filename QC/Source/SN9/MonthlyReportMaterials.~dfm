@@ -77,7 +77,6 @@ object MonthlyReportMaterial: TMonthlyReportMaterial
         EditButtons = <>
         FieldName = 'SCFDate'
         Footers = <>
-        ReadOnly = True
       end
       item
         EditButtons = <>
@@ -88,7 +87,6 @@ object MonthlyReportMaterial: TMonthlyReportMaterial
         EditButtons = <>
         FieldName = 'MSCFDate'
         Footers = <>
-        ReadOnly = True
       end
       item
         EditButtons = <>
@@ -99,7 +97,6 @@ object MonthlyReportMaterial: TMonthlyReportMaterial
         EditButtons = <>
         FieldName = 'LCFDate'
         Footers = <>
-        ReadOnly = True
       end
       item
         EditButtons = <>
@@ -183,12 +180,14 @@ object MonthlyReportMaterial: TMonthlyReportMaterial
           FieldName = 'LotQty'
           Footer.ValueType = fvtSum
           Footers = <>
+          Width = 95
         end
         item
           EditButtons = <>
           FieldName = 'DeLotQty'
           Footer.ValueType = fvtSum
           Footers = <>
+          Width = 65
         end
         item
           EditButtons = <>
@@ -206,13 +205,14 @@ object MonthlyReportMaterial: TMonthlyReportMaterial
           EditButtons = <>
           FieldName = 'DeRate'
           Footers = <>
+          Width = 50
         end
         item
           ButtonStyle = cbsNone
           EditButtons = <>
           FieldName = 'Defects'
           Footers = <>
-          Width = 200
+          Width = 264
           OnEditButtonClick = DBGridEh1Columns8EditButtonClick
         end
         item
@@ -1100,8 +1100,8 @@ object MonthlyReportMaterial: TMonthlyReportMaterial
       'FROM QC_MonthlyMaterialDetail'
       'WHERE ReportID = :ReportID and 2=2')
     UpdateObject = UpSQLDetail
-    Left = 304
-    Top = 544
+    Left = 288
+    Top = 656
     ParamData = <
       item
         DataType = ftInteger
@@ -1251,12 +1251,12 @@ object MonthlyReportMaterial: TMonthlyReportMaterial
       '  USERDate = :OLD_USERDate and'
       '  USERID = :OLD_USERID and'
       '  YN = :OLD_YN')
-    Left = 344
-    Top = 544
+    Left = 376
+    Top = 648
   end
   object DS2: TDataSource
     DataSet = Query2
-    Left = 272
-    Top = 544
+    Left = 248
+    Top = 640
   end
 end

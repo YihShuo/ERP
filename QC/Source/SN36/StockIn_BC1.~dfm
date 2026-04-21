@@ -757,7 +757,7 @@ object StockIn_BC: TStockIn_BC
             FieldName = 'RorL'
             Footers = <>
             PickList.Strings = (
-              ''
+              'L+R'
               'R'
               'L')
           end>

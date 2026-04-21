@@ -51,7 +51,6 @@ type
     Query1ZSBH: TStringField;
     Query1InDate: TDateTimeField;
     Query1Qty: TIntegerField;
-    Query1DDBH: TStringField;
     Query1SKU: TStringField;
     Query1MaterialSpec: TStringField;
     Query1Issue: TStringField;
@@ -69,6 +68,7 @@ type
     Query1USERID: TStringField;
     Query1USERDATE: TDateTimeField;
     Query1DeRate: TFloatField;
+    Query1DDBH: TStringField;
     procedure BB4Click(Sender: TObject);
     procedure BB1Click(Sender: TObject);
     procedure BB2Click(Sender: TObject);

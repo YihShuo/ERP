@@ -324,7 +324,7 @@ begin
       SQL.Add('and KCLLS_BC.DDBH = '''+EdOrder_No.Text+'''');
     if EdSKU.Text <> '' then
     SQL.Add('  and ddzl.article like '''+EdSKU.Text+'%''');
-    SQL.Add('  AND CONVERT(VARCHAR, KCLL_BC.UserDate, 111) BETWEEN ''' + FormatDateTime('yyyy/MM/dd', DTP1.Date) + ''' AND ''' +
+    SQL.Add('  AND CAST(KCLL_BC.UserDate AS DATE) BETWEEN ''' + FormatDateTime('yyyy/MM/dd', DTP1.Date) + ''' AND ''' +
       FormatDateTime('yyyy/MM/dd', DTP2.Date) + '''');
     SQL.Add(') AS KCLL_BC');
     SQL.Add('WHERE 1 = 1');
