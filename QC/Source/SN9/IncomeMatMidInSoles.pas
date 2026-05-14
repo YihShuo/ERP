@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DBTables, DB, GridsEh, DBGridEh, StdCtrls, Mask, DBCtrls,
-  Buttons, ExtCtrls, ComObj, ShellAPI, ComCtrls, DBCtrlsEh;
+  Buttons, ExtCtrls, ComObj, ShellAPI, ComCtrls, DBCtrlsEh, Menus;
 
 type
   TIncomeMatMidInSole = class(TForm)
@@ -98,6 +98,16 @@ type
     Query1LabResult: TStringField;
     Label10: TLabel;
     edtSize: TEdit;
+    PopupMenu1: TPopupMenu;
+    mnu4: TMenuItem;
+    mnu1: TMenuItem;
+    upmnu1: TMenuItem;
+    upmnu2: TMenuItem;
+    mnu2: TMenuItem;
+    mnu3: TMenuItem;
+    Query1RpFile: TStringField;
+    QUp: TQuery;
+    SaveDialog1: TSaveDialog;
     procedure Button1Click(Sender: TObject);
     function NewID: string;
     function GetUsernameByID(const AID: string): string;
@@ -121,6 +131,11 @@ type
       AFont: TFont; var Background: TColor; State: TGridDrawState);
     procedure btCopyClick(Sender: TObject);
     procedure btnCfmClick(Sender: TObject);
+    procedure mnu3Click(Sender: TObject);
+    procedure mnu2Click(Sender: TObject);
+    procedure mnu4Click(Sender: TObject);
+    procedure upmnu1Click(Sender: TObject);
+    procedure upmnu2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -382,7 +397,7 @@ begin
     SQL.Add('select ReportID, InspecDate, CLBH, clzl.ywpm as MatName, TempRoom, Supplier, Mold, XieMing, DDBH, TOderQty, RQty, Article, Size, TArrQty, IQty, ALeftHard, BLeftHard,');
     SQL.Add(' ARightHard, BRightHard, SHard, LWeight, RWeight, SWeight, Issues, DeQty, WPLLen, WPRLen, WPLSize, WPRSize, SendDate, LabID, LabResult, ');
     SQL.Add('Reject, SCFID, SCFDate, LCFID, LCFDate, MSCFID, MSCFDate, QC_MidInSole.YN, QC_MidInSole.USERID, QC_MidInSole.USERDate, LabUID, LabChgDate, ');
-    SQL.Add('CAST(ROUND((DeQty * 100.0) / IQty, 1) AS DECIMAL(10,1)) as DeRate, PreparedID, PreparedDate ');
+    SQL.Add('CAST(ROUND((DeQty * 100.0) / IQty, 1) AS DECIMAL(10,1)) as DeRate, PreparedID, PreparedDate, RpFile ');
     SQL.Add('from QC_MidInSole ');
     SQL.Add('left join clzl on clzl.cldh = QC_MidInSole.CLBH ');
     SQL.Add('where DDBH like '''+edtDDBH.Text+'%'' and QC_MidInSole.YN <> 0 ');
@@ -643,6 +658,13 @@ begin
     btCopy.Visible := true;
   {if (MenuCode.Text = 'N943') or (MenuCode.Text = 'N944') or (MenuCode.Text = 'N945') then
     btnCfm.Visible := true;}
+  if Query1.Active then
+    begin
+       mnu1.Enabled:=true;
+       mnu2.Enabled:=true;
+       mnu3.Enabled:=true;
+       mnu4.Enabled:=true;
+    end;
 end;
 
 procedure TIncomeMatMidInSole.bExcelClick(Sender: TObject);
@@ -1165,5 +1187,215 @@ begin
     Query1.EnableControls;
   end;
 end;
+
+procedure TIncomeMatMidInSole.mnu3Click(Sender: TObject);
+var
+  FileName, BasePath, FullPath: string;
+begin
+  // kiem tra co file trong database khong
+  if Query1.FieldByName('RpFile').IsNull then Exit;
+  if Query1.FieldByName('RpFile').AsString = '' then Exit;
+
+  // hoi nguoi dung co muon xoa file khong
+  if MessageDlg('You want to delete guarantee letter?', mtConfirmation, [mbYes, mbNo], 0) <> mrYes then Exit;
+
+  FileName := Query1.FieldByName('RpFile').AsString;
+
+  // duong dan server share
+  BasePath := '\\192.168.71.11\upload-QC\' + main.Edit2.Text + '\N94\';
+  FullPath := BasePath + FileName;
+
+  try
+    // kiem tra file ton tai tren server
+    if FileExists(FullPath) then
+    begin
+      // xoa file tren network share
+      DeleteFile(FullPath);
+    end;
+
+    // update database set null
+    with QUp do
+    begin
+      Active := False;
+      SQL.Clear;
+      SQL.Add('UPDATE QC_MidInSole SET RpFile = NULL');
+      SQL.Add('WHERE ReportID = ' + Query1.FieldByName('ReportID').AsString);
+      ExecSQL;
+    end;
+
+    ShowMessage('Delete OK');
+
+    // refresh data
+    Query1.Active := False;
+    Query1.Active := True;
+
+  except
+    on E: Exception do
+      ShowMessage('Delete fail: ' + E.Message);
+  end;
+end;
+
+procedure TIncomeMatMidInSole.mnu2Click(Sender: TObject);
+var
+  SourceFile, DestFile, FileName: string;
+begin
+  if Query1.FieldByName('RpFile').IsNull then Exit;
+
+  FileName := Query1.FieldByName('RpFile').AsString;
+
+  SaveDialog1.FileName := FileName;
+
+  if not SaveDialog1.Execute then Exit;
+
+  SourceFile := '\\192.168.71.11\upload-QC\' + main.Edit2.Text + '\N94\' + FileName;
+
+  DestFile := SaveDialog1.FileName;
+
+  // kiem tra file nguon
+  if not FileExists(SourceFile) then
+  begin
+    ShowMessage('Khong tim thay file tren server');
+    Exit;
+  end;
+
+  // kiem tra file dich
+  if FileExists(DestFile) then
+  begin
+    if MessageDlg('File da ton tai. Ghi de?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      Exit;
+  end;
+
+  // copy file
+  if CopyFile(PChar(SourceFile), PChar(DestFile), False) then
+    ShowMessage('Download file OK')
+  else
+    ShowMessage('Download file error');
+end;
+
+procedure TIncomeMatMidInSole.mnu4Click(Sender: TObject);
+var
+  SourceFile, FileName: string;
+begin
+  if Query1.FieldByName('RpFile').IsNull then Exit;
+
+  FileName := Query1.FieldByName('RpFile').AsString;
+
+  SourceFile := '\\192.168.71.11\upload-QC\' + main.Edit2.Text + '\N94\' + FileName;
+
+  // kiem tra file nguon
+  if not FileExists(SourceFile) then
+  begin
+    ShowMessage('Khong tim thay file tren server');
+    Exit;
+  end;
+
+  // mo file truc tiep
+  ShellExecute(0, 'open', PChar(SourceFile), nil, nil, SW_SHOWNORMAL);
+end;
+
+procedure TIncomeMatMidInSole.upmnu1Click(Sender: TObject);
+var
+  SaveFN, BasePath, DestFile: string;
+  CopyResult: Boolean;
+begin
+  if Query1.Active = False then Exit;
+
+  if not OpenDialog1.Execute then Exit;
+  if OpenDialog1.FileName = '' then Exit;
+
+  BasePath := '\\192.168.71.11\upload-QC\' + main.Edit2.Text + '\N94\';
+  SaveFN := ExtractFileName(OpenDialog1.FileName);
+  DestFile := BasePath + SaveFN;
+
+  // check file ton tai
+  if FileExists(DestFile) then
+  begin
+    if MessageDlg('File da ton tai, Ghi de?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      Exit;
+  end;
+
+  try
+    // copy file len server
+    CopyResult := CopyFile(PChar(OpenDialog1.FileName), PChar(DestFile), False);
+
+    if not CopyResult then
+    begin
+      ShowMessage('Upload fail: ' + SysErrorMessage(GetLastError) + ' ');
+      Exit;
+    end;
+
+    // update DB
+    with QUp do
+    begin
+      Active := False;
+      SQL.Clear;
+      SQL.Add('UPDATE QC_MidInSole');
+      SQL.Add('SET RpFile = ''' + SaveFN + '''');
+      SQL.Add('WHERE ReportID = ' + Query1.FieldByName('ReportID').AsString);
+      ExecSQL;
+    end;
+
+    Query1.Active := False;
+    Query1.Active := True;
+
+    ShowMessage('Upload OK');
+  except
+    on E: Exception do
+      ShowMessage('Upload fail: ' + E.Message);
+  end;
+end;
+
+procedure TIncomeMatMidInSole.upmnu2Click(Sender: TObject);
+var
+  SaveFN, BasePath, DestFile: string;
+  CopyResult: Boolean;
+begin
+  if Query1.Active = False then Exit;
+  if Query1.FieldByName('LabID').IsNull then Exit;
+  if not OpenDialog1.Execute then Exit;
+  if OpenDialog1.FileName = '' then Exit;
+
+  BasePath := '\\192.168.71.11\upload-QC\' + main.Edit2.Text + '\N94\';
+  SaveFN := ExtractFileName(OpenDialog1.FileName);
+  DestFile := BasePath + SaveFN;
+
+  // check file ton tai
+  if FileExists(DestFile) then
+  begin
+    if MessageDlg('File da ton tai, Ghi de?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      Exit;
+  end;
+
+  try
+    // copy file len server
+    CopyResult := CopyFile(PChar(OpenDialog1.FileName), PChar(DestFile), False);
+
+    if not CopyResult then
+    begin
+      ShowMessage('Upload fail: ' + SysErrorMessage(GetLastError) + ' ');
+      Exit;
+    end;
+
+    // update DB
+    with QUp do
+    begin
+      Active := False;
+      SQL.Clear;
+      SQL.Add('UPDATE QC_MidInSole');
+      SQL.Add('SET RpFile = ''' + SaveFN + '''');
+      SQL.Add('WHERE LabID = ''' + Query1.FieldByName('LabID').AsString + ''' ');
+      ExecSQL;
+    end;
+
+    Query1.Active := False;
+    Query1.Active := True;
+
+    ShowMessage('Upload OK');
+  except
+    on E: Exception do
+      ShowMessage('Upload fail: ' + E.Message);
+  end;
+end;
+
 
 end.

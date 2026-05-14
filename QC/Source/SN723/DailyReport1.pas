@@ -104,6 +104,9 @@ type
     Label11: TLabel;
     edtDefects: TEdit;
     ckSettle: TCheckBox;
+    OpenReportLab1: TMenuItem;
+    qry_DRFile_Name_Lab: TStringField;
+    DownloadReportLab1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -123,6 +126,8 @@ type
     procedure DeleteReportGL1Click(Sender: TObject);
     procedure btnFeedBackClick(Sender: TObject);
     procedure qry_DRAfterOpen(DataSet: TDataSet);
+    procedure OpenReportLab1Click(Sender: TObject);
+    procedure DownloadReportLab1Click(Sender: TObject);
   private
     QCN723_ISO:String;
     { Private declarations }
@@ -201,7 +206,7 @@ begin
         sql.Clear;
         sql.Add('select mc.CLBH,DateInput,ZSBH,CGNO,mc.No_ID,QTY,clzl.YWPM as MaterialName,ZSZL.ZSYWJC as SupplierName,clzl.DWBH,Remark,RY,Article,CustPO ');
         sql.Add('		,QC_Check,QC_Reason,DefectName,S.RandomQty,DefectQty,convert(numeric(18,2),isnull(DefectQty,0)/isnull(S.RandomQty,1)*100) as Per_Defect');
-        sql.Add('   ,QC_Date,QC_UserID,Lab_Check,SampleSent,Tracking,QC_FinishDate,[File_Name],mc.USERDATE,Settlement,ZSYWJC,YWPM,Hours,Final_Status,mc.RKNO');
+        sql.Add('   ,QC_Date,QC_UserID,Lab_Check,SampleSent,Tracking,QC_FinishDate,[File_Name],mc.File_Name_Lab,mc.USERDATE,Settlement,ZSYWJC,YWPM,Hours,Final_Status,mc.RKNO');
         sql.Add('from MaterialQCcheck mc ');
         sql.add('left join clzl on clzl.CLDH = mc.CLBH');
         sql.Add('left Join ZSZL on ZSZL.ZSDH =mc.ZSBH');
@@ -233,7 +238,7 @@ begin
         sql.Add('where mc.GSBH = '''+main.Edit2.Text+''' and  left(mc.CLBH,1) not in (''F'',''W'')  ');
         if chkStore.Checked then
         begin
-            sql.Add('       and CONVERT(varchar(10),DateInput,111) between');
+            sql.Add('       and CAST(DateInput AS DATE) between');
             sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP3.date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP4.date)+''' ');
         end;
 
@@ -597,7 +602,7 @@ begin
   // kiem tra file nguon
   if not FileExists(SourceFile) then
   begin
-    ShowMessage('Khong tim thay file tren server');
+    ShowMessage('Khong tim thay file tren server' + SourceFile);
     Exit;
   end;
 
@@ -738,6 +743,63 @@ begin
         btnEGrading.Enabled:=true;
         btnFeedBack.Enabled:=true;
     end;
+end;
+
+procedure TDailyReport.OpenReportLab1Click(Sender: TObject);
+var
+  SourceFile, FileName: string;
+begin
+  if qry_DR.FieldByName('File_Name_Lab').IsNull then Exit;
+
+  FileName := qry_DR.FieldByName('File_Name_Lab').AsString;
+
+  SourceFile := '\\192.168.71.11\upload-QC\' + main.Edit2.Text + '\N724\Lab\' + FileName;
+
+  // kiem tra file nguon
+  if not FileExists(SourceFile) then
+  begin
+    ShowMessage('Khong tim thay file tren server');
+    Exit;
+  end;
+
+  // mo file truc tiep
+  ShellExecute(0, 'open', PChar(SourceFile), nil, nil, SW_SHOWNORMAL);
+end;
+
+procedure TDailyReport.DownloadReportLab1Click(Sender: TObject);
+var
+  SourceFile, DestFile: string;
+begin
+  if qry_DR.FieldByName('File_Name_Lab').IsNull then Exit;
+
+  SaveDialog1.FileName := qry_DR.FieldByName('File_Name_Lab').AsString;
+
+  if not SaveDialog1.Execute then Exit;
+
+  SourceFile := '\\192.168.71.11\upload-QC\' + main.Edit2.Text + '\N724\Lab\' +
+                qry_DR.FieldByName('File_Name_Lab').AsString;
+
+  DestFile := SaveDialog1.FileName;
+
+  // kiem tra file nguon
+  if not FileExists(SourceFile) then
+  begin
+    ShowMessage('Khong tim thay file tren server' + SourceFile);
+    Exit;
+  end;
+
+  // kiem tra file dich
+  if FileExists(DestFile) then
+  begin
+    if MessageDlg('File da ton tai. Ghi de?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      Exit;
+  end;
+
+  // copy file
+  if CopyFile(PChar(SourceFile), PChar(DestFile), False) then
+    ShowMessage('Download file OK')
+  else
+    ShowMessage('Download file error');
 end;
 
 end.

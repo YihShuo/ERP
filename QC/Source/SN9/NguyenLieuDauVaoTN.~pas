@@ -235,7 +235,7 @@ begin
     Active := false;
     SQL.Clear;
     SQL.Add('select * from MaterialIncomTest ');
-    SQL.Add('where DDBH like ''' +edtDDBH.Text+ '%'' ');
+    SQL.Add('where DDBH like ''' +edtDDBH.Text+ '%'' and YN <> 0 ');
 
     if edtRID.Text <> '' then
       SQL.Add('and ReportID like '''+edtRID.Text+'%'' ');

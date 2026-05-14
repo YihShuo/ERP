@@ -555,6 +555,7 @@ object ProducMatFailure: TProducMatFailure
     FooterFont.Style = []
     FooterRowCount = 1
     ParentFont = False
+    PopupMenu = PopupMenu1
     SumList.Active = True
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
@@ -614,6 +615,12 @@ object ProducMatFailure: TProducMatFailure
       end
       item
         EditButtons = <>
+        FieldName = 'Parts'
+        Footers = <>
+        Width = 200
+      end
+      item
+        EditButtons = <>
         FieldName = 'XieMing'
         Footers = <>
         Title.Caption = ' Style No./Name'
@@ -667,7 +674,6 @@ object ProducMatFailure: TProducMatFailure
         EditButtons = <>
         FieldName = 'SCFDate'
         Footers = <>
-        ReadOnly = True
       end
       item
         EditButtons = <>
@@ -678,7 +684,6 @@ object ProducMatFailure: TProducMatFailure
         EditButtons = <>
         FieldName = 'LCFDate'
         Footers = <>
-        ReadOnly = True
       end
       item
         EditButtons = <>
@@ -689,7 +694,6 @@ object ProducMatFailure: TProducMatFailure
         EditButtons = <>
         FieldName = 'WMSCFDate'
         Footers = <>
-        ReadOnly = True
       end
       item
         EditButtons = <>
@@ -842,6 +846,11 @@ object ProducMatFailure: TProducMatFailure
       FixedChar = True
       Size = 200
     end
+    object Query1Parts: TStringField
+      FieldName = 'Parts'
+      FixedChar = True
+      Size = 255
+    end
   end
   object DS1: TDataSource
     DataSet = Query1
@@ -859,6 +868,7 @@ object ProducMatFailure: TProducMatFailure
       '  XFDate = :XFDate,'
       '  MatID = :MatID,'
       '  MatName = :MatName,'
+      '  Parts = :Parts, '
       '  XieMing = :XieMing,'
       '  Qty = :Qty,'
       '  DDBH = :DDBH,'
@@ -884,7 +894,7 @@ object ProducMatFailure: TProducMatFailure
       'insert into QC_ProMatFail'
       
         '  (ReportID, ArrDate, InspecDate, Supplier, XFDate, MatID, MatNa' +
-        'me, XieMing, Qty,'
+        'me, Parts, XieMing, Qty,'
       
         '   DDBH, VisualCheck, PhysCheck, SCFID, SCFDate, LCFID, LCFDate,' +
         ' WMSCFID, '
@@ -894,7 +904,7 @@ object ProducMatFailure: TProducMatFailure
       'values'
       
         '  (:ReportID, :ArrDate, :InspecDate, :Supplier, :XFDate, :MatID,' +
-        ' :MatName, :XieMing, '
+        ' :MatName, :Parts, :XieMing, '
       
         '   :Qty, :DDBH, :VisualCheck, :PhysCheck, :SCFID, :SCFDate, :LCF' +
         'ID, :LCFDate,'
@@ -919,8 +929,8 @@ object ProducMatFailure: TProducMatFailure
     Top = 144
   end
   object SaveDialog: TSaveDialog
-    Left = 328
-    Top = 152
+    Left = 312
+    Top = 144
   end
   object QGetID: TQuery
     DatabaseName = 'DB'
@@ -934,6 +944,32 @@ object ProducMatFailure: TProducMatFailure
   end
   object OpenPictureDialog1: TOpenDialog
     Left = 312
+    Top = 112
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 672
+    Top = 352
+    object UpImage1: TMenuItem
+      Caption = 'Upload Image'
+      ShortCut = 45
+      OnClick = UpImage1Click
+    end
+    object OpenImage1: TMenuItem
+      Caption = 'Open Image'
+      OnClick = OpenImage1Click
+    end
+    object DownloadImage1: TMenuItem
+      Caption = 'Download Image'
+      OnClick = DownloadImage1Click
+    end
+  end
+  object QUpImage: TQuery
+    DatabaseName = 'DB'
+    Left = 712
+    Top = 352
+  end
+  object SaveDialog1: TSaveDialog
+    Left = 368
     Top = 112
   end
 end

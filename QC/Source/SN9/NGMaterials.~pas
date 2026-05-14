@@ -46,7 +46,6 @@ type
     SaveDialog: TSaveDialog;
     QGetID: TQuery;
     QSig: TQuery;
-    Query1RackLocation: TIntegerField;
     Query1Supplier: TStringField;
     Query1DDBH: TStringField;
     Query1CLBH: TStringField;
@@ -68,6 +67,9 @@ type
     Query1IsExpired: TBooleanField;
     Query1Remark: TStringField;
     ckHideEx: TCheckBox;
+    Query1RackLocation: TStringField;
+    Label5: TLabel;
+    edtCLBH: TEdit;
     procedure Button1Click(Sender: TObject);
     procedure BB1Click(Sender: TObject);
     procedure BB2Click(Sender: TObject);
@@ -193,7 +195,7 @@ begin
     SQL.Add('where ReportID like ''' +edtRID.Text+ '%'' ');
 
     if ckHideEx.Checked then
-      SQL.Add('or IsExpired = 0 ');
+      SQL.Add('and IsExpired = 0 ');
     if ckUSERDate.Checked then
       SQL.Add('and CAST(USERDate as DATE) = ''' + FormatDateTime('yyyy-mm-dd', dtpUSERDate.Date) + ''' ');
     if ckInspecDate.Checked then
@@ -204,6 +206,10 @@ begin
       SQL.Add('and Supplier = '''+edtSup.Text+''' ');
     if edtIssue.Text <> '' then
       SQL.Add('and Issue like ''%'+edtIssue.Text+'%'' ');
+    if edtCLBH.Text <> '' then
+      SQL.Add('and CLBH like '''+edtCLBH.Text+'%'' ');
+    SQL.Add('order by RIGHT(''000'' + RackLocation, 3)');
+
     Active := true;
   end;
 end;

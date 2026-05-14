@@ -149,6 +149,9 @@ type
     FinishDT: TDateTimePicker;
     BBUFoler: TBitBtn;
     BBUpload: TBitBtn;
+    mnu4: TMenuItem;
+    upmnu1: TMenuItem;
+    upmnu2: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -188,6 +191,9 @@ type
     procedure BtnRejectClick(Sender: TObject);
     procedure BBUFolerClick(Sender: TObject);
     procedure BBUploadClick(Sender: TObject);
+    procedure mnu4Click(Sender: TObject);
+    procedure upmnu1Click(Sender: TObject);
+    procedure upmnu2Click(Sender: TObject);
   private
     AppDir:string;
     SFL:string;
@@ -334,7 +340,7 @@ begin
     begin
         active:=false;
         sql.Clear;
-        sql.Add('SELECT a.Matching,b.NotMatching,a.Matching + b.NotMatching AS Total,ROUND((a.Matching*1.0/(a.Matching + b.NotMatching))*100,2) AS RateMat');
+        sql.Add('SELECT a.Matching,b.NotMatching,a.Matching + b.NotMatching AS Total,ROUND((a.Matching*1.0/NULLIF(a.Matching + b.NotMatching, 0))*100,2) AS RateMat');
         sql.Add('FROM (');
         sql.Add('        select 1 as ID,count(*) AS Matching');
         sql.Add('        from #Material');
@@ -700,48 +706,8 @@ begin
 end;
 
 procedure TMatLabCheck.mnu1Click(Sender: TObject);
-var
-  SaveFN, BasePath, DestFile: string;
 begin
-  if qry_Qc.Active = False then Exit;
 
-  if not OpenDialog1.Execute then Exit;
-  if OpenDialog1.FileName = '' then Exit;
-
-  BasePath := '\\192.168.71.11\upload-QC\' + main.Edit2.Text + '\N724\Lab\';
-  SaveFN := ExtractFileName(OpenDialog1.FileName);
-  DestFile := BasePath + SaveFN;
-
-  // check file ton tai
-  if FileExists(DestFile) then
-  begin
-    if MessageDlg('File da ton tai, Ghi de?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
-      Exit;
-  end;
-
-  try
-    // copy file len server
-    CopyFile(PChar(OpenDialog1.FileName), PChar(DestFile), False);
-
-    // update DB
-    with qry1 do
-    begin
-      Active := False;
-      SQL.Clear;
-      SQL.Add('UPDATE MaterialQCCheck');
-      SQL.Add('SET File_Name_Lab = ''' + SaveFN + '''');
-      SQL.Add('WHERE No_ID = ' + qry_Qc.FieldByName('NO_ID').AsString);
-      ExecSQL;
-    end;
-
-    qry_Qc.Active := False;
-    qry_Qc.Active := True;
-
-    ShowMessage('Upload OK');
-  except
-    on E: Exception do
-      ShowMessage('Upload fail: ' + E.Message);
-  end;
 end;
 {var
    UploadObj: TFileTransClient;
@@ -1190,6 +1156,7 @@ begin
        mnu1.Enabled:=true;
        mnu2.Enabled:=true;
        mnu3.Enabled:=true;
+       mnu4.Enabled:=true;
     end;
 end;
 
@@ -1571,7 +1538,7 @@ end;
 
 procedure TMatLabCheck.BBUClick(Sender: TObject);
 begin
-  mnu1.Click;
+  upmnu1.Click;
 end;
 
 procedure TMatLabCheck.BBDClick(Sender: TObject);
@@ -1672,6 +1639,131 @@ begin
         end;
       end;
     end;
+  end;
+end;
+
+procedure TMatLabCheck.mnu4Click(Sender: TObject);
+var
+  SourceFile, FileName: string;
+begin
+  if qry_Qc.FieldByName('File_Name_Lab').IsNull then Exit;
+
+  FileName := qry_Qc.FieldByName('File_Name_Lab').AsString;
+
+  SourceFile := '\\192.168.71.11\upload-QC\' + main.Edit2.Text + '\N724\Lab\' + FileName;
+
+  // kiem tra file nguon
+  if not FileExists(SourceFile) then
+  begin
+    ShowMessage('Khong tim thay file tren server');
+    Exit;
+  end;
+
+  // mo file truc tiep
+  ShellExecute(0, 'open', PChar(SourceFile), nil, nil, SW_SHOWNORMAL);
+end;
+
+procedure TMatLabCheck.upmnu1Click(Sender: TObject);
+var
+  SaveFN, BasePath, DestFile: string;
+  CopyResult: Boolean;
+begin
+  if qry_Qc.Active = False then Exit;
+
+  if not OpenDialog1.Execute then Exit;
+  if OpenDialog1.FileName = '' then Exit;
+
+  BasePath := '\\192.168.71.11\upload-QC\' + main.Edit2.Text + '\N724\Lab\';
+  SaveFN := ExtractFileName(OpenDialog1.FileName);
+  DestFile := BasePath + SaveFN;
+
+  // check file ton tai
+  if FileExists(DestFile) then
+  begin
+    if MessageDlg('File da ton tai, Ghi de?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      Exit;
+  end;
+
+  try
+    // copy file len server
+    CopyResult := CopyFile(PChar(OpenDialog1.FileName), PChar(DestFile), False);
+
+    if not CopyResult then
+    begin
+      ShowMessage('Upload fail: ' + SysErrorMessage(GetLastError) + ' ');
+      Exit;
+    end;
+
+    // update DB
+    with qry1 do
+    begin
+      Active := False;
+      SQL.Clear;
+      SQL.Add('UPDATE MaterialQCCheck');
+      SQL.Add('SET File_Name_Lab = ''' + SaveFN + '''');
+      SQL.Add('WHERE No_ID = ' + qry_Qc.FieldByName('NO_ID').AsString);
+      ExecSQL;
+    end;
+
+    qry_Qc.Active := False;
+    qry_Qc.Active := True;
+
+    ShowMessage('Upload OK');
+  except
+    on E: Exception do
+      ShowMessage('Upload fail: ' + E.Message);
+  end;
+end;
+
+procedure TMatLabCheck.upmnu2Click(Sender: TObject);
+var
+  SaveFN, BasePath, DestFile: string;
+  CopyResult: Boolean;
+begin
+  if qry_Qc.Active = False then Exit;
+  if qry_Qc.FieldByName('Lab_PDM_ID').IsNull then Exit;
+  if not OpenDialog1.Execute then Exit;
+  if OpenDialog1.FileName = '' then Exit;
+
+  BasePath := '\\192.168.71.11\upload-QC\' + main.Edit2.Text + '\N724\Lab\';
+  SaveFN := ExtractFileName(OpenDialog1.FileName);
+  DestFile := BasePath + SaveFN;
+
+  // check file ton tai
+  if FileExists(DestFile) then
+  begin
+    if MessageDlg('File da ton tai, Ghi de?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      Exit;
+  end;
+
+  try
+    // copy file len server
+    CopyResult := CopyFile(PChar(OpenDialog1.FileName), PChar(DestFile), False);
+
+    if not CopyResult then
+    begin
+      ShowMessage('Upload fail: ' + SysErrorMessage(GetLastError) + ' ');
+      Exit;
+    end;
+
+    // update DB
+    with qry1 do
+    begin
+      Active := False;
+      SQL.Clear;
+      SQL.Add('UPDATE MaterialQCCheck');
+      SQL.Add('SET File_Name_Lab = ''' + SaveFN + '''');
+      SQL.Add('WHERE Lab_PDM_ID = ''' + qry_Qc.FieldByName('Lab_PDM_ID').AsString + ''' ');
+      ExecSQL;
+    end;
+
+    qry_Qc.Active := False;
+    qry_Qc.Active := True;
+
+    ShowMessage('Upload OK');
+  except
+    on E: Exception do
+      ShowMessage('Upload fail: ' + E.Message);
   end;
 end;
 

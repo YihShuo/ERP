@@ -24,7 +24,6 @@ type
     bExF: TBitBtn;
     cbPDF: TCheckBox;
     ckUSERDate: TCheckBox;
-    dtpUSERDate: TDateTimePicker;
     MenuCode: TEdit;
     edtRKNO: TEdit;
     edtCLBH: TEdit;
@@ -49,6 +48,15 @@ type
     Query1YWPM: TStringField;
     edtCARNO: TEdit;
     Label1: TLabel;
+    ckExpDate: TCheckBox;
+    dtpExpDate: TDateTimePicker;
+    ckTK: TCheckBox;
+    ckDX: TCheckBox;
+    edtYWPM: TEdit;
+    Label2: TLabel;
+    dtpUSERDate: TDateTimePicker;
+    dtpExpDate1: TDateTimePicker;
+    Label4: TLabel;
     procedure Query1AfterOpen(DataSet: TDataSet);
     procedure BB1Click(Sender: TObject);
     procedure BB2Click(Sender: TObject);
@@ -117,7 +125,7 @@ end;
 procedure TChemicalStockIn.Query1AfterOpen(DataSet: TDataSet);
 begin
   BB1.Enabled:=true;
-  //BB2.Enabled:=true;
+  BB2.Enabled:=true;
   BB3.Enabled:=true;
   bbt6.Enabled:=true;
   bExcel.Enabled := true;
@@ -272,15 +280,26 @@ begin
   begin
     Active := false;
     SQL.Clear;
-    SQL.Add('SELECT KCRK_HC.*, CLZL.YWPM FROM KCRK_HC ');
+    SQL.Add('SELECT TOP 10000 KCRK_HC.*, CLZL.YWPM FROM KCRK_HC ');
     SQL.Add('LEFT JOIN CLZL ON CLZL.CLDH = KCRK_HC.CLBH ');
     SQL.Add('where RKNO like ''' +edtRKNO.Text+ '%'' ');
 
     if ckUSERDate.Checked then
-      SQL.Add('and CAST(USERDate as DATE) = ''' + FormatDateTime('yyyy-mm-dd', dtpUSERDate.Date) + ''' ');
+      SQL.Add('and CAST(KCRK_HC.USERDate as DATE) = ''' + FormatDateTime('yyyy-mm-dd', dtpUSERDate.Date) + ''' ');
     if edtCLBH.Text <> '' then
       SQL.Add('and CLBH like '''+edtCLBH.Text+'%'' ');
-    SQL.Add('order by RKNO ');
+    if edtYWPM.Text <> '' then
+      SQL.Add('and YWPM like '''+edtYWPM.Text+'%'' ');
+    if ckExpDate.Checked then
+    begin
+      SQL.Add('and CAST(ExpirationDate as DATE) BETWEEN ''' + FormatDateTime('yyyy-mm-dd', dtpExpDate.Date) + ''' ');
+      SQL.Add('AND ''' + FormatDateTime('yyyy-mm-dd', dtpExpDate1.Date) + ''' ');
+    end;
+    if ckTK.Checked then
+      SQL.Add('and KCRK_HC.YN = ''1'' ');
+    if ckDX.Checked then
+      SQL.Add('and KCRK_HC.YN = ''2'' ');
+    SQL.Add('order by RKNO desc');
     Active := true;
   end;
 end;
@@ -356,8 +375,7 @@ procedure TChemicalStockIn.btQRClick(Sender: TObject);
 var
   eclApp, WorkBook: OleVariant;
   j: Integer;
-  RKNO, CLBH: string;
-  CARTONNO: Integer;
+  RKNO, CLBH, ExpirationDate: string;
   AppDir: string;
 begin
   AppDir := IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName));
@@ -376,7 +394,7 @@ begin
       eclApp.Cells[1, 1] := 'QR';
       eclApp.Cells[1, 2] := 'RKNO';
       eclApp.Cells[1, 3] := 'CLBH';
-      eclApp.Cells[1, 4] := 'CARTONNO';
+      eclApp.Cells[1, 4] := 'ExpirationDate';
 
       Query1.First;
       j := 2;
@@ -385,18 +403,17 @@ begin
       begin
         RKNO := VarToStr(Query1.Fields[0].Value);
         CLBH := VarToStr(Query1.Fields[1].Value);
-        CARTONNO := Query1.Fields[2].AsInteger;
+        ExpirationDate := Query1.Fields[3].AsString;
 
         // Cot QR
         eclApp.Cells[j, 1] := RKNO;
 
-        // C?t riêng l?
         eclApp.Cells[j, 2] := RKNO;
 
         eclApp.Cells[j, 3].NumberFormat := '@';
         eclApp.Cells[j, 3] := '''' + CLBH;
 
-        eclApp.Cells[j, 4] := CARTONNO;
+        eclApp.Cells[j, 4] := ExpirationDate;
 
         Inc(j);
         Query1.Next;
@@ -440,8 +457,12 @@ procedure TChemicalStockIn.DBGrid1GetCellParams(Sender: TObject;
   Column: TColumnEh; AFont: TFont; var Background: TColor;
   State: TGridDrawState);
 begin
-  if Query1.FieldByName('YN').Value = '0' then
+  if (Query1.FieldByName('YN').Value = '2') and (Query1.FieldByName('ExpirationDate').AsDateTime >= Date) then
+    DBGrid1.Canvas.Font.Color := clLime;
+  if Query1.FieldByName('ExpirationDate').AsDateTime < Date then
     DBGrid1.Canvas.Font.Color := clRed;
+  if (Query1.FieldByName('YN').Value = '0') and Query1.CachedUpdates then
+    DBGrid1.Canvas.Font.Color := clAqua;
 end;
 
 procedure TChemicalStockIn.bExcelClick(Sender: TObject);
@@ -473,6 +494,8 @@ end;
 procedure TChemicalStockIn.FormCreate(Sender: TObject);
 begin
   dtpUSERDate.Date := Now;
+  dtpExpDate.Date := Now - 30;
+  dtpExpDate1.Date := Now;
 end;
 
 end.

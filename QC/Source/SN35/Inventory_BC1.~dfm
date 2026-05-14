@@ -143,6 +143,7 @@ object Inventory_BC: TInventory_BC
       Top = 12
       Width = 89
       Height = 24
+      CharCase = ecUpperCase
       TabOrder = 7
     end
     object Ed_KCBH: TEdit
@@ -183,7 +184,7 @@ object Inventory_BC: TInventory_BC
     Top = 81
     Width = 1142
     Height = 507
-    ActivePage = ts1
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
     OnChanging = PC1Changing
@@ -233,6 +234,7 @@ object Inventory_BC: TInventory_BC
           item
             EditButtons = <>
             FieldName = 'DDBH'
+            Footer.ValueType = fvtCount
             Footers = <>
             Width = 89
           end

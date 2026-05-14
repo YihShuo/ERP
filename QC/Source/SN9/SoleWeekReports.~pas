@@ -120,8 +120,8 @@ procedure TRejectedMaterial.PrintSign(
   const AIDField, ADateField: string;
   ACol: Integer;
   UseUserName: Boolean
-  s: String;
 );
+var s: String;
 begin
   // neu field trong hoac null thi khong in
   if AQuery.FieldByName(AIDField).IsNull
@@ -144,8 +144,8 @@ begin
           AQuery.FieldByName(ADateField).AsDateTime
         )
   else
-    AWorksheet.Cells[AInsertRow + 2, ACol].Value :=
-      AQuery.FieldByName(AIDField).AsString;
+    AWorksheet.Cells[AInsertRow + 2, ACol].Value := s;
+      //AQuery.FieldByName(AIDField).AsString;
 end;
 
 function TRejectedMaterial.GetUsernameByID(const AID: string): string;

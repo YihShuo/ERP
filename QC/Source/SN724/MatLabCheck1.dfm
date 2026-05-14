@@ -1513,7 +1513,7 @@ object MatLabCheck: TMatLabCheck
     object qry_QcFile_Name_Lab: TStringField
       FieldName = 'File_Name_Lab'
       FixedChar = True
-      Size = 50
+      Size = 100
     end
     object qry_QcLab_FinishDate: TDateTimeField
       FieldName = 'Lab_FinishDate'
@@ -1626,7 +1626,7 @@ object MatLabCheck: TMatLabCheck
   end
   object PopupMenu1: TPopupMenu
     Left = 635
-    Top = 245
+    Top = 248
     object MultirowsFinisheddate1: TMenuItem
       Caption = 'Multi Rows Finished date'
       OnClick = MultirowsFinisheddate1Click
@@ -1638,10 +1638,23 @@ object MatLabCheck: TMatLabCheck
     object N2: TMenuItem
       Caption = '-'
     end
+    object mnu4: TMenuItem
+      Caption = 'Open Guarantee letter'
+      Enabled = False
+      OnClick = mnu4Click
+    end
     object mnu1: TMenuItem
       Caption = 'Upload Guarantee letter'
       Enabled = False
       OnClick = mnu1Click
+      object upmnu1: TMenuItem
+        Caption = 'Upload Normal'
+        OnClick = upmnu1Click
+      end
+      object upmnu2: TMenuItem
+        Caption = 'Upload like Report ID'
+        OnClick = upmnu2Click
+      end
     end
     object mnu2: TMenuItem
       Caption = 'Download Guarantee letter'

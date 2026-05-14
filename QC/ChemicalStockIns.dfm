@@ -24,7 +24,7 @@ object ChemicalStockIn: TChemicalStockIn
     Left = 0
     Top = 0
     Width = 1289
-    Height = 161
+    Height = 185
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -34,29 +34,49 @@ object ChemicalStockIn: TChemicalStockIn
     ParentFont = False
     TabOrder = 0
     object Label3: TLabel
-      Left = 272
+      Left = 472
       Top = 40
       Width = 49
       Height = 20
       Caption = 'RKNO:'
     end
     object Label5: TLabel
-      Left = 272
+      Left = 472
       Top = 8
       Width = 47
       Height = 20
       Caption = 'CLBH:'
     end
     object Label1: TLabel
-      Left = 8
-      Top = 40
+      Left = 272
+      Top = 8
       Width = 28
       Height = 20
       Caption = 'Qty:'
     end
+    object Label2: TLabel
+      Left = 272
+      Top = 40
+      Width = 53
+      Height = 20
+      Caption = 'YWPM:'
+    end
+    object Label4: TLabel
+      Left = 192
+      Top = 66
+      Width = 16
+      Height = 32
+      Caption = '~'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -27
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
     object BB1: TBitBtn
-      Left = 0
-      Top = 88
+      Left = 8
+      Top = 120
       Width = 49
       Height = 49
       Hint = 'Insert one New Record'
@@ -87,8 +107,8 @@ object ChemicalStockIn: TChemicalStockIn
       NumGlyphs = 2
     end
     object BB2: TBitBtn
-      Left = 48
-      Top = 88
+      Left = 56
+      Top = 120
       Width = 49
       Height = 49
       Hint = 'Delete one Record'
@@ -119,8 +139,8 @@ object ChemicalStockIn: TChemicalStockIn
       NumGlyphs = 2
     end
     object BB3: TBitBtn
-      Left = 96
-      Top = 88
+      Left = 104
+      Top = 120
       Width = 49
       Height = 49
       Hint = 'Modify Current'
@@ -151,8 +171,8 @@ object ChemicalStockIn: TChemicalStockIn
       NumGlyphs = 2
     end
     object BB4: TBitBtn
-      Left = 144
-      Top = 88
+      Left = 152
+      Top = 120
       Width = 49
       Height = 49
       Hint = 'Save Current'
@@ -183,8 +203,8 @@ object ChemicalStockIn: TChemicalStockIn
       NumGlyphs = 2
     end
     object BB5: TBitBtn
-      Left = 192
-      Top = 88
+      Left = 200
+      Top = 120
       Width = 49
       Height = 49
       Hint = 'Cancel'
@@ -215,8 +235,8 @@ object ChemicalStockIn: TChemicalStockIn
       NumGlyphs = 2
     end
     object BB6: TBitBtn
-      Left = 240
-      Top = 88
+      Left = 248
+      Top = 120
       Width = 49
       Height = 49
       Hint = 'Exit Current Form'
@@ -246,7 +266,7 @@ object ChemicalStockIn: TChemicalStockIn
       NumGlyphs = 2
     end
     object Button1: TButton
-      Left = 507
+      Left = 683
       Top = 9
       Width = 81
       Height = 33
@@ -255,8 +275,8 @@ object ChemicalStockIn: TChemicalStockIn
       OnClick = Button1Click
     end
     object bbt6: TBitBtn
-      Left = 440
-      Top = 88
+      Left = 448
+      Top = 120
       Width = 81
       Height = 49
       Hint = 'Modify Current'
@@ -287,8 +307,8 @@ object ChemicalStockIn: TChemicalStockIn
       NumGlyphs = 2
     end
     object bExcel: TBitBtn
-      Left = 520
-      Top = 88
+      Left = 528
+      Top = 120
       Width = 57
       Height = 49
       Hint = 'Modify Current'
@@ -319,8 +339,8 @@ object ChemicalStockIn: TChemicalStockIn
       NumGlyphs = 2
     end
     object bExF: TBitBtn
-      Left = 576
-      Top = 88
+      Left = 584
+      Top = 120
       Width = 113
       Height = 49
       Hint = 'Modify Current'
@@ -351,8 +371,8 @@ object ChemicalStockIn: TChemicalStockIn
       NumGlyphs = 2
     end
     object cbPDF: TCheckBox
-      Left = 704
-      Top = 88
+      Left = 712
+      Top = 120
       Width = 57
       Height = 17
       Caption = 'PDF'
@@ -367,63 +387,113 @@ object ChemicalStockIn: TChemicalStockIn
       Caption = 'USERDate:'
       TabOrder = 11
     end
-    object dtpUSERDate: TDateTimePicker
-      Left = 152
-      Top = 8
-      Width = 113
-      Height = 28
-      Date = 45973.457989131940000000
-      Format = 'dd/MM/yyyy'
-      Time = 45973.457989131940000000
-      TabOrder = 12
-    end
     object MenuCode: TEdit
-      Left = 696
-      Top = 112
+      Left = 704
+      Top = 144
       Width = 121
       Height = 28
       ReadOnly = True
-      TabOrder = 13
+      TabOrder = 12
       Text = 'MenuCode'
       Visible = False
     end
     object edtRKNO: TEdit
-      Left = 344
+      Left = 544
       Top = 40
+      Width = 121
+      Height = 28
+      TabOrder = 13
+    end
+    object edtCLBH: TEdit
+      Left = 544
+      Top = 8
       Width = 121
       Height = 28
       TabOrder = 14
     end
-    object edtCLBH: TEdit
-      Left = 344
-      Top = 8
-      Width = 121
-      Height = 28
-      TabOrder = 15
-    end
     object btQR: TButton
-      Left = 507
+      Left = 683
       Top = 48
       Width = 81
       Height = 33
       Caption = 'Print QR'
-      TabOrder = 16
+      TabOrder = 15
       OnClick = btQRClick
     end
     object edtCARNO: TEdit
-      Left = 48
-      Top = 40
-      Width = 217
+      Left = 328
+      Top = 8
+      Width = 129
       Height = 28
-      TabOrder = 17
+      TabOrder = 16
       OnKeyPress = edtCARNOKeyPress
+    end
+    object ckExpDate: TCheckBox
+      Left = 8
+      Top = 48
+      Width = 137
+      Height = 17
+      Caption = 'ExpirationDate:'
+      TabOrder = 17
+    end
+    object dtpExpDate: TDateTimePicker
+      Left = 144
+      Top = 48
+      Width = 121
+      Height = 28
+      Date = 46146.610601759260000000
+      Time = 46146.610601759260000000
+      TabOrder = 18
+    end
+    object ckTK: TCheckBox
+      Left = 856
+      Top = 16
+      Width = 97
+      Height = 17
+      Caption = 'Ton kho'
+      Checked = True
+      State = cbChecked
+      TabOrder = 19
+    end
+    object ckDX: TCheckBox
+      Left = 856
+      Top = 40
+      Width = 89
+      Height = 17
+      Caption = 'Da xuat'
+      TabOrder = 20
+    end
+    object edtYWPM: TEdit
+      Left = 328
+      Top = 40
+      Width = 129
+      Height = 28
+      TabOrder = 21
+    end
+    object dtpUSERDate: TDateTimePicker
+      Left = 120
+      Top = 8
+      Width = 145
+      Height = 28
+      Date = 46146.624564143520000000
+      Time = 46146.624564143520000000
+      TabOrder = 22
+    end
+    object dtpExpDate1: TDateTimePicker
+      Left = 144
+      Top = 88
+      Width = 121
+      Height = 28
+      Date = 46147.331645243060000000
+      Time = 46147.331645243060000000
+      TabOrder = 23
     end
   end
   object DBGrid1: TDBGridEh
     Left = 0
-    Top = 161
+    Top = 185
     Width = 1289
-    Height = 475
+    Height = 451
     Align = alClient
     DataSource = DS1
     Flat = False
@@ -455,6 +525,7 @@ object ChemicalStockIn: TChemicalStockIn
       item
         EditButtons = <>
         FieldName = 'RKNO'
+        Footer.Color = clYellow
         Footer.ValueType = fvtCount
         Footers = <>
         ReadOnly = True
@@ -507,7 +578,8 @@ object ChemicalStockIn: TChemicalStockIn
         EditButtons = <>
         FieldName = 'YN'
         Footers = <>
-        Visible = False
+        ReadOnly = True
+        Width = 34
       end>
   end
   object Query1: TQuery
@@ -595,12 +667,12 @@ object ChemicalStockIn: TChemicalStockIn
     Top = 400
   end
   object OpenDialog1: TOpenDialog
-    Left = 376
-    Top = 104
+    Left = 384
+    Top = 128
   end
   object SaveDialog: TSaveDialog
     Left = 344
-    Top = 96
+    Top = 128
   end
   object QGetID: TQuery
     DatabaseName = 'DB'
@@ -609,6 +681,6 @@ object ChemicalStockIn: TChemicalStockIn
   end
   object OpenPictureDialog1: TOpenDialog
     Left = 304
-    Top = 96
+    Top = 128
   end
 end

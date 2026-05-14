@@ -1,7 +1,7 @@
 object NGMaterial: TNGMaterial
   Left = 257
   Top = 177
-  Width = 1305
+  Width = 1624
   Height = 675
   Caption = 'NGMaterial'
   Color = clBtnFace
@@ -53,7 +53,7 @@ object NGMaterial: TNGMaterial
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1289
+    Width = 1608
     Height = 161
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
@@ -92,14 +92,21 @@ object NGMaterial: TNGMaterial
       Caption = 'DDBH:'
     end
     object Label6: TLabel
-      Left = 760
-      Top = 80
+      Left = 960
+      Top = 88
       Width = 94
       Height = 20
       Caption = 'DefectName:'
     end
+    object Label5: TLabel
+      Left = 600
+      Top = 72
+      Width = 47
+      Height = 20
+      Caption = 'CLBH:'
+    end
     object Button1: TButton
-      Left = 635
+      Left = 835
       Top = 89
       Width = 81
       Height = 33
@@ -471,10 +478,11 @@ object NGMaterial: TNGMaterial
       Top = 72
       Width = 121
       Height = 28
+      CharCase = ecUpperCase
       TabOrder = 19
     end
     object DBMemo1: TDBMemo
-      Left = 856
+      Left = 1056
       Top = 48
       Width = 409
       Height = 97
@@ -493,11 +501,19 @@ object NGMaterial: TNGMaterial
       State = cbChecked
       TabOrder = 21
     end
+    object edtCLBH: TEdit
+      Left = 648
+      Top = 72
+      Width = 161
+      Height = 28
+      CharCase = ecUpperCase
+      TabOrder = 22
+    end
   end
   object DBGrid1: TDBGridEh
     Left = 0
     Top = 161
-    Width = 1289
+    Width = 1608
     Height = 475
     Align = alClient
     DataSource = DS1
@@ -663,10 +679,6 @@ object NGMaterial: TNGMaterial
       FieldName = 'ReportID'
       Origin = 'DB.QC_NGMaterial.ReportID'
     end
-    object Query1RackLocation: TIntegerField
-      FieldName = 'RackLocation'
-      Origin = 'DB.QC_NGMaterial.RackLocation'
-    end
     object Query1Supplier: TStringField
       FieldName = 'Supplier'
       Origin = 'DB.QC_NGMaterial.Supplier'
@@ -765,6 +777,11 @@ object NGMaterial: TNGMaterial
       FieldName = 'Remark'
       FixedChar = True
       Size = 150
+    end
+    object Query1RackLocation: TStringField
+      FieldName = 'RackLocation'
+      FixedChar = True
+      Size = 10
     end
   end
   object DS1: TDataSource

@@ -533,7 +533,7 @@ begin
       if (ED_SKU1.Text <> '') then
         SQL.Add('  AND DDZL.Article LIKE ''' + ED_SKU1.Text + '%''');
       if (ED_Order.Text <> '') then
-        SQL.Add('  AND DDZL.DDBH LIKE ''' + ED_Order.Text + '%''');       
+        SQL.Add('  AND DDZL.DDBH LIKE ''' + ED_Order.Text + '%''');
       if (ED_KCBH.Text <> '') then
         SQL.Add('  AND KCBH LIKE ''' + ED_KCBH.Text + '%''');
       if (ED_Carton.Text <> '') then
@@ -552,6 +552,109 @@ begin
       SQL.Add('GROUP BY kfjc,Grade, KCRKS_BC.DDBH, KCRKS_BC.ARTICLE,KCBH,Carton_No');
       SQL.Add('ORDER BY MAX(STT),kfjc,Grade, KCRKS_BC.ARTICLE, KCRKS_BC.DDBH');
       //showmessage(SQL.Text);
+
+      {SQL.Add('SELECT');
+      SQL.Add('    null AS STT,');
+      SQL.Add('    kfjc,');
+      SQL.Add('    T.Grade,');
+      SQL.Add('    T.DDBH,');
+      SQL.Add('    T.Article,');
+
+      // Pivot size section
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''01.0'' THEN Qty END), 0) AS [01.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''01.5'' THEN Qty END), 0) AS [01.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''02.0'' THEN Qty END), 0) AS [02.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''02.5'' THEN Qty END), 0) AS [02.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''03.0'' THEN Qty END), 0) AS [03.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''03.5'' THEN Qty END), 0) AS [03.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''04.0'' THEN Qty END), 0) AS [04.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''04.5'' THEN Qty END), 0) AS [04.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''05.0'' THEN Qty END), 0) AS [05.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''05.5'' THEN Qty END), 0) AS [05.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''06.0'' THEN Qty END), 0) AS [06.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''06.5'' THEN Qty END), 0) AS [06.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''07.0'' THEN Qty END), 0) AS [07.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''07.5'' THEN Qty END), 0) AS [07.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''08.0'' THEN Qty END), 0) AS [08.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''08.5'' THEN Qty END), 0) AS [08.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''09.0'' THEN Qty END), 0) AS [09.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''09.5'' THEN Qty END), 0) AS [09.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''10.0'' THEN Qty END), 0) AS [10.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''10.5'' THEN Qty END), 0) AS [10.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''11.0'' THEN Qty END), 0) AS [11.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''11.5'' THEN Qty END), 0) AS [11.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''12.0'' THEN Qty END), 0) AS [12.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''12.5'' THEN Qty END), 0) AS [12.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''13.0'' THEN Qty END), 0) AS [13.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''13.5'' THEN Qty END), 0) AS [13.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''14.0'' THEN Qty END), 0) AS [14.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''14.5'' THEN Qty END), 0) AS [14.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''15.0'' THEN Qty END), 0) AS [15.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''15.5'' THEN Qty END), 0) AS [15.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''16.0'' THEN Qty END), 0) AS [16.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''16.5'' THEN Qty END), 0) AS [16.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''17.0'' THEN Qty END), 0) AS [17.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''17.5'' THEN Qty END), 0) AS [17.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''18.0'' THEN Qty END), 0) AS [18.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''18.5'' THEN Qty END), 0) AS [18.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''19.0'' THEN Qty END), 0) AS [19.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''19.5'' THEN Qty END), 0) AS [19.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''20.0'' THEN Qty END), 0) AS [20.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''20.5'' THEN Qty END), 0) AS [20.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''21.0'' THEN Qty END), 0) AS [21.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''21.5'' THEN Qty END), 0) AS [21.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''22.0'' THEN Qty END), 0) AS [22.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''22.5'' THEN Qty END), 0) AS [22.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''23.0'' THEN Qty END), 0) AS [23.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''23.5'' THEN Qty END), 0) AS [23.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''24.0'' THEN Qty END), 0) AS [24.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''24.5'' THEN Qty END), 0) AS [24.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''25.0'' THEN Qty END), 0) AS [25.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''25.5'' THEN Qty END), 0) AS [25.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''26.0'' THEN Qty END), 0) AS [26.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''26.5'' THEN Qty END), 0) AS [26.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''27.0'' THEN Qty END), 0) AS [27.0],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''27.5'' THEN Qty END), 0) AS [27.5],');
+      SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''28.0'' THEN Qty END), 0) AS [28.0],');
+
+      SQL.Add('    SUM(Qty) AS TotalQty');
+      SQL.Add('FROM (');
+
+      // Sub-query: Nhap kho
+      SQL.Add('    SELECT');
+      SQL.Add('        KCRKS_BC.Grade, KCRKS_BC.DDBH, DDZL.Article, KCRKS_BC.Size, KCRKS_BC.Qty');
+      SQL.Add('    FROM KCRKS_BC');
+      SQL.Add('    INNER JOIN KCRK_BC ON KCRK_BC.RKNO = KCRKS_BC.RKNO');
+      SQL.Add('    LEFT JOIN DDZL ON DDZL.DDBH = KCRKS_BC.DDBH');
+      SQL.Add('    WHERE (KCRK_BC.flowflag <> ''X'' OR KCRK_BC.flowflag IS NULL)');
+      SQL.Add('      AND KCRK_BC.GSBH = ''' + main.Edit2.Text + ''' ');
+      if (CB1.ItemIndex > 0) then
+        SQL.Add('      AND KCRKS_BC.Grade = ''' + CB1.Text + '''');
+      SQL.Add('      AND DDZL.DDBH LIKE ''' + ED_Order.Text + '%'' ');
+      SQL.Add('      AND KCRK_BC.CFMDate <= ''' + FormatDateTime('yyyy/MM/dd HH:mm:ss', DTP5.Date) + ''' ');
+
+      SQL.Add('    UNION ALL');
+
+      // Sub-query: Xuat kho
+      SQL.Add('    SELECT');
+      SQL.Add('        KCLLS_BC.Grade, KCLLS_BC.DDBH, DDZL.Article, KCLLS_BC.Size, KCLLS_BC.Qty * -1');
+      SQL.Add('    FROM KCLLS_BC');
+      SQL.Add('    INNER JOIN KCLL_BC ON KCLL_BC.LLNO = KCLLS_BC.LLNO');
+      SQL.Add('    LEFT JOIN DDZL ON DDZL.DDBH = KCLLS_BC.DDBH');
+      SQL.Add('    WHERE (KCLL_BC.flowflag <> ''X'' OR KCLL_BC.flowflag IS NULL)');
+      SQL.Add('      AND KCLL_BC.GSBH = ''' + main.Edit2.Text + ''' ');
+      if (CB1.ItemIndex > 0) then
+        SQL.Add('      AND KCLLS_BC.Grade = ''' + CB1.Text + '''');
+      SQL.Add('      AND DDZL.DDBH LIKE ''' + ED_Order.Text + '%'' ');
+      SQL.Add('      AND KCLL_BC.CFMDate <= ''' + FormatDateTime('yyyy/MM/dd HH:mm:ss', DTP5.Date) + ''' ');
+
+      SQL.Add(') T');
+      SQL.Add('LEFT JOIN DDZL ON DDZL.DDBH = T.DDBH');
+      SQL.Add('LEFT JOIN KFZL ON KFZL.KFDH = DDZL.KHBH');
+
+      SQL.Add('GROUP BY kfjc, T.Grade, T.DDBH, T.Article');
+      SQL.Add('HAVING SUM(Qty) > 0');
+      SQL.Add('ORDER BY kfjc, T.Grade, T.Article, T.DDBH');}
       Active := true;
     end
   end
@@ -560,7 +663,7 @@ begin
   begin
     Active := false;
     SQL.Clear;
-    SQL.Add('SELECT MAX(STT) AS STT,kfjc,Grade, KCRKS_BC.DDBH, KCRKS_BC.ARTICLE');
+    {SQL.Add('SELECT MAX(STT) AS STT,kfjc,Grade, KCRKS_BC.DDBH, KCRKS_BC.ARTICLE');
     SQL.Add(', MAX(CASE WHEN Size = ''01.0'' THEN Qty END) AS ''01.0''');
     SQL.Add(', MAX(CASE WHEN Size = ''01.5'' THEN Qty END) AS ''01.5''');
     SQL.Add(', MAX(CASE WHEN Size = ''02.0'' THEN Qty END) AS ''02.0''');
@@ -724,8 +827,114 @@ begin
     SQL.Add('left join kfzl on kfzl.kfdh=ddzl.KHBH');
     SQL.Add('  WHERE 1 = 1 and KCRKS_BC.Qty > 0');
     SQL.Add('GROUP BY kfjc,Grade, KCRKS_BC.DDBH, KCRKS_BC.ARTICLE');
-    SQL.Add('ORDER BY MAX(STT),kfjc,Grade, KCRKS_BC.ARTICLE, KCRKS_BC.DDBH');
+    SQL.Add('ORDER BY MAX(STT),kfjc,Grade, KCRKS_BC.ARTICLE, KCRKS_BC.DDBH');}
     //showmessage(SQL.Text);
+
+    //2026/04/23
+    SQL.Add('SELECT');
+    SQL.Add('    null AS STT,');
+    SQL.Add('    kfjc,');
+    SQL.Add('    T.Grade,');
+    SQL.Add('    T.DDBH,');
+    SQL.Add('    T.Article,');
+
+    // Pivot size section
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''01.0'' THEN Qty END), 0) AS [01.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''01.5'' THEN Qty END), 0) AS [01.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''02.0'' THEN Qty END), 0) AS [02.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''02.5'' THEN Qty END), 0) AS [02.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''03.0'' THEN Qty END), 0) AS [03.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''03.5'' THEN Qty END), 0) AS [03.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''04.0'' THEN Qty END), 0) AS [04.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''04.5'' THEN Qty END), 0) AS [04.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''05.0'' THEN Qty END), 0) AS [05.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''05.5'' THEN Qty END), 0) AS [05.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''06.0'' THEN Qty END), 0) AS [06.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''06.5'' THEN Qty END), 0) AS [06.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''07.0'' THEN Qty END), 0) AS [07.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''07.5'' THEN Qty END), 0) AS [07.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''08.0'' THEN Qty END), 0) AS [08.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''08.5'' THEN Qty END), 0) AS [08.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''09.0'' THEN Qty END), 0) AS [09.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''09.5'' THEN Qty END), 0) AS [09.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''10.0'' THEN Qty END), 0) AS [10.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''10.5'' THEN Qty END), 0) AS [10.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''11.0'' THEN Qty END), 0) AS [11.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''11.5'' THEN Qty END), 0) AS [11.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''12.0'' THEN Qty END), 0) AS [12.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''12.5'' THEN Qty END), 0) AS [12.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''13.0'' THEN Qty END), 0) AS [13.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''13.5'' THEN Qty END), 0) AS [13.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''14.0'' THEN Qty END), 0) AS [14.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''14.5'' THEN Qty END), 0) AS [14.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''15.0'' THEN Qty END), 0) AS [15.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''15.5'' THEN Qty END), 0) AS [15.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''16.0'' THEN Qty END), 0) AS [16.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''16.5'' THEN Qty END), 0) AS [16.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''17.0'' THEN Qty END), 0) AS [17.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''17.5'' THEN Qty END), 0) AS [17.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''18.0'' THEN Qty END), 0) AS [18.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''18.5'' THEN Qty END), 0) AS [18.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''19.0'' THEN Qty END), 0) AS [19.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''19.5'' THEN Qty END), 0) AS [19.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''20.0'' THEN Qty END), 0) AS [20.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''20.5'' THEN Qty END), 0) AS [20.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''21.0'' THEN Qty END), 0) AS [21.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''21.5'' THEN Qty END), 0) AS [21.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''22.0'' THEN Qty END), 0) AS [22.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''22.5'' THEN Qty END), 0) AS [22.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''23.0'' THEN Qty END), 0) AS [23.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''23.5'' THEN Qty END), 0) AS [23.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''24.0'' THEN Qty END), 0) AS [24.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''24.5'' THEN Qty END), 0) AS [24.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''25.0'' THEN Qty END), 0) AS [25.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''25.5'' THEN Qty END), 0) AS [25.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''26.0'' THEN Qty END), 0) AS [26.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''26.5'' THEN Qty END), 0) AS [26.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''27.0'' THEN Qty END), 0) AS [27.0],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''27.5'' THEN Qty END), 0) AS [27.5],');
+    SQL.Add('    NULLIF(SUM(CASE WHEN Size = ''28.0'' THEN Qty END), 0) AS [28.0],');
+
+    SQL.Add('    SUM(Qty) AS TotalQty');
+    SQL.Add('FROM (');
+
+    // Sub-query: Nhap kho
+    SQL.Add('    SELECT');
+    SQL.Add('        KCRKS_BC.Grade, KCRKS_BC.DDBH, DDZL.Article, KCRKS_BC.Size, KCRKS_BC.Qty');
+    SQL.Add('    FROM KCRKS_BC');
+    SQL.Add('    INNER JOIN KCRK_BC ON KCRK_BC.RKNO = KCRKS_BC.RKNO');
+    SQL.Add('    LEFT JOIN DDZL ON DDZL.DDBH = KCRKS_BC.DDBH');
+    SQL.Add('    WHERE (KCRK_BC.flowflag <> ''X'' OR KCRK_BC.flowflag IS NULL)');
+    SQL.Add('      AND KCRK_BC.GSBH = ''' + main.Edit2.Text + ''' ');
+    if (CB1.ItemIndex > 0) then
+      SQL.Add('      AND KCRKS_BC.Grade = ''' + CB1.Text + '''');
+    SQL.Add('      AND DDZL.DDBH LIKE ''' + ED_Order.Text + '%'' ');
+    SQL.Add('  AND DDZL.Article LIKE ''' + ED_SKU1.Text + '%''');
+    SQL.Add('      AND KCRK_BC.CFMDate < ''' + FormatDateTime('yyyy/MM/dd', DTP5.Date + 1) + '''');
+
+    SQL.Add('    UNION ALL');
+
+    // Sub-query: Xuat kho
+    SQL.Add('    SELECT');
+    SQL.Add('        KCLLS_BC.Grade, KCLLS_BC.DDBH, DDZL.Article, KCLLS_BC.Size, KCLLS_BC.Qty * -1');
+    SQL.Add('    FROM KCLLS_BC');
+    SQL.Add('    INNER JOIN KCLL_BC ON KCLL_BC.LLNO = KCLLS_BC.LLNO');
+    SQL.Add('    LEFT JOIN DDZL ON DDZL.DDBH = KCLLS_BC.DDBH');
+    SQL.Add('    WHERE (KCLL_BC.flowflag <> ''X'' OR KCLL_BC.flowflag IS NULL)');
+    SQL.Add('      AND KCLL_BC.GSBH = ''' + main.Edit2.Text + ''' ');
+    if (CB1.ItemIndex > 0) then
+      SQL.Add('      AND KCLLS_BC.Grade = ''' + CB1.Text + '''');
+    SQL.Add('      AND DDZL.DDBH LIKE ''' + ED_Order.Text + '%'' ');
+    SQL.Add('  AND DDZL.Article LIKE ''' + ED_SKU1.Text + '%''');
+    SQL.Add('      AND KCLL_BC.CFMDate < ''' + FormatDateTime('yyyy/MM/dd', DTP5.Date + 1) + '''');
+
+    SQL.Add(') T');
+    SQL.Add('LEFT JOIN DDZL ON DDZL.DDBH = T.DDBH');
+    SQL.Add('LEFT JOIN KFZL ON KFZL.KFDH = DDZL.KHBH');
+
+    SQL.Add('GROUP BY kfjc, T.Grade, T.DDBH, T.Article');
+    SQL.Add('HAVING SUM(Qty) > 0');
+    SQL.Add('ORDER BY kfjc, T.Grade, T.Article, T.DDBH');
     Active := true;
   end;
 end;

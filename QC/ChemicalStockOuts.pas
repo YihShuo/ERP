@@ -267,7 +267,7 @@ begin
     Query1.SQL.Clear;
     Query1.SQL.Add('select KCLL_HC.*, CLZL.YWPM from KCLL_HC ');
     Query1.SQL.Add('left join CLZL on CLZL.CLDH = KCLL_HC.CLBH ');
-    Query1.SQL.Add('where CLBH = ''' +edtCLBH.Text+ ''' and DepName = ''' +cbDep.Text+ ''' ');
+    Query1.SQL.Add('where CLBH like ''' +edtCLBH.Text+ '%'' and DepName like ''' +cbDep.Text+ '%'' ');
     Query1.Open;
 end;
 

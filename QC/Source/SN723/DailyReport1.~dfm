@@ -258,6 +258,13 @@ object DailyReport: TDailyReport
           end
           item
             EditButtons = <>
+            FieldName = 'File_Name_Lab'
+            Footers = <>
+            Title.Caption = 'Lab Report'
+            Width = 87
+          end
+          item
+            EditButtons = <>
             FieldName = 'Lab_Check'
             Footers = <>
             ReadOnly = True
@@ -7681,16 +7688,16 @@ object DailyReport: TDailyReport
         'efect'
       
         '   ,QC_Date,QC_UserID,Lab_Check,SampleSent,Tracking,QC_FinishDat' +
-        'e,[File_Name],mc.USERDATE,Settlement,ZSYWJC,YWPM,Hours,Final_Sta' +
-        'tus,mc.RKNO'
+        'e,[File_Name],mc.File_Name_Lab,mc.USERDATE,Settlement,ZSYWJC,YWP' +
+        'M,Hours,Final_Status,mc.RKNO'
       'from MaterialQCcheck mc '
       'left join clzl on clzl.CLDH = mc.CLBH'
       'left Join ZSZL on ZSZL.ZSDH =mc.ZSBH'
       
         'where mc.GSBH='#39'VA12'#39' and  left(CLBH,1) not in ('#39'F'#39','#39'W'#39') and CGNO' +
-        ' <> '#39'ZZZZZZZZZZ'#39' '
+        ' <> '#39'ZZZZZZZZZZ'#39
       '       and CONVERT(varchar(10),DateInput,111) between'
-      '           '#39'2019/04/08'#39' and '#39'2019/04/08'#39' '
+      '           '#39'2019/04/08'#39' and '#39'2019/04/08'#39
       '       and CGNO like '#39'%%'#39)
     UpdateObject = Upd_DR
     Left = 280
@@ -7788,7 +7795,7 @@ object DailyReport: TDailyReport
     object qry_DRFile_Name: TStringField
       FieldName = 'File_Name'
       FixedChar = True
-      Size = 50
+      Size = 100
     end
     object qry_DRUSERDATE: TDateTimeField
       FieldName = 'USERDATE'
@@ -7833,6 +7840,11 @@ object DailyReport: TDailyReport
       FixedChar = True
       Size = 255
     end
+    object qry_DRFile_Name_Lab: TStringField
+      FieldName = 'File_Name_Lab'
+      FixedChar = True
+      Size = 100
+    end
   end
   object DS_DR: TDataSource
     DataSet = qry_DR
@@ -7863,15 +7875,26 @@ object DailyReport: TDailyReport
     Top = 376
     object UploadReportGL1: TMenuItem
       Caption = 'Upload Report G/L'
+      Enabled = False
       OnClick = UploadReportGL1Click
     end
     object DownloadReportGL1: TMenuItem
       Caption = 'Download Report G/L'
+      Enabled = False
       OnClick = DownloadReportGL1Click
     end
     object DeleteReportGL1: TMenuItem
       Caption = 'Delete Report G/L'
+      Enabled = False
       OnClick = DeleteReportGL1Click
+    end
+    object OpenReportLab1: TMenuItem
+      Caption = 'Open Report Lab'
+      OnClick = OpenReportLab1Click
+    end
+    object DownloadReportLab1: TMenuItem
+      Caption = 'Download Report Lab'
+      OnClick = DownloadReportLab1Click
     end
   end
   object SaveDialog1: TSaveDialog

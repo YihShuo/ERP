@@ -710,7 +710,7 @@ object IncomingMatTest: TIncomingMatTest
     object Query1DDBH: TStringField
       FieldName = 'DDBH'
       FixedChar = True
-      Size = 50
+      Size = 500
     end
     object Query1RQty: TIntegerField
       FieldName = 'RQty'

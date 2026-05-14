@@ -749,6 +749,7 @@ object StockOut_BC: TStockOut_BC
             Footers = <>
           end
           item
+            Color = clYellow
             EditButtons = <>
             FieldName = 'RemainQty'
             Footers = <>

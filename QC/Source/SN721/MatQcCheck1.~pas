@@ -172,6 +172,7 @@ type
     qry_QcDefectQty: TCurrencyField;
     Label5: TLabel;
     edtDefects: TEdit;
+    OpenLabGL1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -220,6 +221,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure qry_QcManagerCheckChange(Sender: TField);
     procedure edtDefectsKeyPress(Sender: TObject; var Key: Char);
+    procedure OpenLabGL1Click(Sender: TObject);
   private
     AppDir:string;
     { Private declarations }
@@ -746,6 +748,41 @@ end;
 
 procedure TMatQcCheck.mnu4Click(Sender: TObject);
 var
+  SourceFile, DestFile, FileName: string;
+begin
+  if qry_Qc.FieldByName('File_Name_Lab').IsNull then Exit;
+
+  FileName := qry_Qc.FieldByName('File_Name_Lab').AsString;
+
+  SaveDialog1.FileName := FileName;
+
+  if not SaveDialog1.Execute then Exit;
+
+  SourceFile := '\\192.168.71.11\upload-QC\' + main.Edit2.Text + '\N724\Lab\' + FileName;
+
+  DestFile := SaveDialog1.FileName;
+
+  // kiem tra file nguon
+  if not FileExists(SourceFile) then
+  begin
+    ShowMessage('Khong tim thay file tren server');
+    Exit;
+  end;
+
+  // kiem tra file dich
+  if FileExists(DestFile) then
+  begin
+    if MessageDlg('File da ton tai. Ghi de?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      Exit;
+  end;
+
+  // copy file
+  if CopyFile(PChar(SourceFile), PChar(DestFile), False) then
+    ShowMessage('Download file OK')
+  else
+    ShowMessage('Download file error');
+end;
+{var
    UploadObj: TFileTransClient;
    ms: TMemoryStream;
 begin
@@ -768,7 +805,7 @@ begin
         ms.Free;
     end;
   end;
-end;
+end;}
 
 procedure TMatQcCheck.DBGridDetailColumns13EditButtonClick(Sender: TObject;
   var Handled: Boolean);
@@ -975,9 +1012,9 @@ begin
   if qry_Qc.RecordCount > 0 then
     begin
       //btnexcel.Enabled:=true;
-      mnu2.Enabled := true;
+      //mnu2.Enabled := true;
       mnu4.Enabled := true;
-      mnu5.Enabled := true;
+      //mnu5.Enabled := true;
     end;
     
   qry_App.ParamByName('GSBH').AsString:=main.Edit2.Text;
@@ -1408,6 +1445,27 @@ end;
 procedure TMatQcCheck.edtDefectsKeyPress(Sender: TObject; var Key: Char);
 begin
   Key := UpCase(Key);
+end;
+
+procedure TMatQcCheck.OpenLabGL1Click(Sender: TObject);
+var
+  SourceFile, FileName: string;
+begin
+  if qry_DR.FieldByName('File_Name_Lab').IsNull then Exit;
+
+  FileName := qry_DR.FieldByName('File_Name_Lab').AsString;
+
+  SourceFile := '\\192.168.71.11\upload-QC\' + main.Edit2.Text + '\N724\Lab\' + FileName;
+
+  // kiem tra file nguon
+  if not FileExists(SourceFile) then
+  begin
+    ShowMessage('Khong tim thay file tren server');
+    Exit;
+  end;
+
+  // mo file truc tiep
+  ShellExecute(0, 'open', PChar(SourceFile), nil, nil, SW_SHOWNORMAL);
 end;
 
 end.

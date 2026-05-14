@@ -496,6 +496,7 @@ object IncomeMatEvaPainting: TIncomeMatEvaPainting
     FooterFont.Style = []
     FooterRowCount = 1
     ParentFont = False
+    PopupMenu = PopupMenu1
     SumList.Active = True
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
@@ -549,6 +550,27 @@ object IncomeMatEvaPainting: TIncomeMatEvaPainting
         FieldName = 'DDBH'
         Footers = <>
         Width = 216
+      end
+      item
+        EditButtons = <>
+        FieldName = 'LabID'
+        Footers = <>
+        Title.Caption = 'Lab Test|LabID'
+        Width = 144
+      end
+      item
+        EditButtons = <>
+        FieldName = 'RpFile'
+        Footers = <>
+        Title.Caption = 'Lab Test|RpFile'
+        Width = 144
+      end
+      item
+        EditButtons = <>
+        FieldName = 'LabTestResult'
+        Footers = <>
+        Title.Caption = 'Lab Test|LabTestResult'
+        Width = 144
       end
       item
         EditButtons = <>
@@ -1000,6 +1022,21 @@ object IncomeMatEvaPainting: TIncomeMatEvaPainting
       FixedChar = True
       Size = 1000
     end
+    object Query1LabID: TStringField
+      FieldName = 'LabID'
+      FixedChar = True
+      Size = 50
+    end
+    object Query1LabTestResult: TStringField
+      FieldName = 'LabTestResult'
+      FixedChar = True
+      Size = 50
+    end
+    object Query1RpFile: TStringField
+      FieldName = 'RpFile'
+      FixedChar = True
+      Size = 100
+    end
   end
   object DS1: TDataSource
     DataSet = Query1
@@ -1027,26 +1064,11 @@ object IncomeMatEvaPainting: TIncomeMatEvaPainting
       '  PreparedID = :PreparedID,'
       '  PreparedDate = :PreparedDate,'
       '  SKU = :SKU,'
-      '  StyleName = :StyleName'
+      '  StyleName = :StyleName,'
+      '  LabID = :LabID,'
+      '  LabTestResult = :LabTestResult'
       'where'
-      '  ReportID = :OLD_ReportID and'
-      '  InspecDate = :OLD_InspecDate and'
-      '  CLBH = :OLD_CLBH and'
-      '  Supplier = :OLD_Supplier and'
-      '  DDBH = :OLD_DDBH and'
-      '  SCFID = :OLD_SCFID and'
-      '  SCFDate = :OLD_SCFDate and'
-      '  LCFID = :OLD_LCFID and'
-      '  LCFDate = :OLD_LCFDate and'
-      '  MSCFID = :OLD_MSCFID and'
-      '  MSCFDate = :OLD_MSCFDate and'
-      '  USERID = :OLD_USERID and'
-      '  USERDate = :OLD_USERDate and'
-      '  YN = :OLD_YN and'
-      '  PreparedID = :OLD_PreparedID and'
-      '  PreparedDate = :OLD_PreparedDate and'
-      '  SKU = :OLD_SKU and'
-      '  StyleName = :OLD_StyleName')
+      '  ReportID = :OLD_ReportID')
     InsertSQL.Strings = (
       'insert into QC_EvaPainting'
       
@@ -1055,7 +1077,7 @@ object IncomeMatEvaPainting: TIncomeMatEvaPainting
       
         '   MSCFID, MSCFDate, USERID, USERDate, YN, PreparedID, PreparedD' +
         'ate, SKU, '
-      '   StyleName)'
+      '   StyleName, LabID, LabTestResult)'
       'values'
       
         '  (:ReportID, :InspecDate, :CLBH, :Supplier, :DDBH, :SCFID, :SCF' +
@@ -1063,7 +1085,7 @@ object IncomeMatEvaPainting: TIncomeMatEvaPainting
       
         '   :LCFDate, :MSCFID, :MSCFDate, :USERID, :USERDate, :YN, :Prepa' +
         'redID, '
-      '   :PreparedDate, :SKU, :StyleName)')
+      '   :PreparedDate, :SKU, :StyleName, :LabID, :LabTestResult)')
     DeleteSQL.Strings = (
       'delete from QC_EvaPainting'
       'where'
@@ -1235,5 +1257,45 @@ object IncomeMatEvaPainting: TIncomeMatEvaPainting
     DatabaseName = 'DB'
     Left = 464
     Top = 240
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 523
+    Top = 256
+    object mnu4: TMenuItem
+      Caption = 'Open Guarantee letter'
+      Enabled = False
+      OnClick = mnu4Click
+    end
+    object mnu1: TMenuItem
+      Caption = 'Upload Guarantee letter'
+      Enabled = False
+      object upmnu1: TMenuItem
+        Caption = 'Upload Normal'
+        OnClick = upmnu1Click
+      end
+      object upmnu2: TMenuItem
+        Caption = 'Upload like Report ID'
+        OnClick = upmnu2Click
+      end
+    end
+    object mnu2: TMenuItem
+      Caption = 'Download Guarantee letter'
+      Enabled = False
+      OnClick = mnu2Click
+    end
+    object mnu3: TMenuItem
+      Caption = 'Delete Guarantee letter'
+      Enabled = False
+      OnClick = mnu3Click
+    end
+  end
+  object SaveDialog1: TSaveDialog
+    Left = 552
+    Top = 256
+  end
+  object QUp: TQuery
+    DatabaseName = 'DB'
+    Left = 664
+    Top = 264
   end
 end

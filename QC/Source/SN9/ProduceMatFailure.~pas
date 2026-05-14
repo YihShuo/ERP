@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DBTables, DB, GridsEh, DBGridEh, StdCtrls, Mask, DBCtrls,
-  Buttons, ExtCtrls, ComObj, ShellAPI, ComCtrls, DBCtrlsEh;
+  Buttons, ExtCtrls, ComObj, ShellAPI, ComCtrls, DBCtrlsEh, Menus;
 
 type
   TProducMatFailure = class(TForm)
@@ -82,6 +82,13 @@ type
     Label6: TLabel;
     Label8: TLabel;
     Query1Image: TStringField;
+    Query1Parts: TStringField;
+    PopupMenu1: TPopupMenu;
+    UpImage1: TMenuItem;
+    QUpImage: TQuery;
+    OpenImage1: TMenuItem;
+    DownloadImage1: TMenuItem;
+    SaveDialog1: TSaveDialog;
     procedure bExFClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure DBGrid1CellClick(Column: TColumnEh);
@@ -105,6 +112,9 @@ type
     procedure InsertImageToExcel(Worksheet: OleVariant; Query: TQuery;
   const FieldName: string; Row, Column: Integer);
     procedure BB2Click(Sender: TObject);
+    procedure UpImage1Click(Sender: TObject);
+    procedure OpenImage1Click(Sender: TObject);
+    procedure DownloadImage1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -341,7 +351,6 @@ begin
     DBGrid1.FieldColumns['DDBH'].ReadOnly         := True;
     DBGrid1.FieldColumns['VisualCheck'].ReadOnly  := True;
     DBGrid1.FieldColumns['PhysCheck'].ReadOnly    := True;
-    DBGrid1.FieldColumns['SCFDate'].ReadOnly      := True;
     DBGrid1.FieldColumns['LCFID'].ReadOnly        := True;
     DBGrid1.FieldColumns['LCFDate'].ReadOnly      := True;
     DBGrid1.FieldColumns['WMSCFID'].ReadOnly      := True;
@@ -414,26 +423,26 @@ begin
   if not DirectoryExists(AppDir) then
     ForceDirectories(AppDir);
 
-  SrcFile := '\\192.168.71.4\erp\lys_erp\A-QIP-WS001-07C.xlsx';
-  DstFile := IncludeTrailingPathDelimiter(AppDir) + 'A-QIP-WS001-07C.xlsx';
+  SrcFile := '\\192.168.71.4\erp\lys_erp\A-QIP-WS001-07D.xlsx';
+  DstFile := IncludeTrailingPathDelimiter(AppDir) + 'A-QIP-WS001-07D.xlsx';
 
   if not CopyFile(PChar(SrcFile), PChar(DstFile), False) then
     ShowMessage('Copy file that bai');
 
-  DuongDanFile := ExtractFilePath(ParamStr(0)) + 'A-QIP-WS001-07C.xlsx';
+  DuongDanFile := ExtractFilePath(ParamStr(0)) + 'A-QIP-WS001-07D.xlsx';
   SaveDialog := TSaveDialog.Create(nil);
   try
     if not cbPDF.Checked then
     begin
       SaveDialog.Filter := 'Excel Files (*.xlsx)|*.xlsx';
       SaveDialog.DefaultExt := 'xlsx';
-      SaveDialog.FileName := 'A-QIP-WS001-07C_' + FormatDateTime('yyyy-mm-dd_hh-nn-ss', Now) + '.xlsx';
+      SaveDialog.FileName := 'A-QIP-WS001-07D_' + FormatDateTime('yyyy-mm-dd_hh-nn-ss', Now) + '.xlsx';
       SaveDialog.Title := 'Chon noi luu file Excel moi';
     end else
     begin
       SaveDialog.Filter := 'PDF (*.pdf)|*.pdf';
       SaveDialog.DefaultExt := 'pdf';
-      SaveDialog.FileName := 'A-QIP-WS001-07C_' + FormatDateTime('yyyy-mm-dd_hh-nn-ss', Now) + '.pdf';
+      SaveDialog.FileName := 'A-QIP-WS001-07D_' + FormatDateTime('yyyy-mm-dd_hh-nn-ss', Now) + '.pdf';
       SaveDialog.Title := 'Chon noi luu file PDF moi';
     end;
 
@@ -450,7 +459,7 @@ begin
   Workbook := ExcelApp.Workbooks.Open(DuongDanFile);
   Worksheet := Workbook.WorkSheets[1];
 
-  r[0]:=7;  c[0]:=3;
+  r[0]:=2;  c[0]:=2;
   r[1]:=3;  c[1]:=3;
   r[2]:=3;  c[2]:=7;
   r[3]:=4;  c[3]:=3;
@@ -459,9 +468,9 @@ begin
   r[6]:=5;  c[6]:=7;
   r[7]:=6;  c[7]:=3;
   r[8]:=6;  c[8]:=7;
-  r[9]:=11; c[9]:=1;
-  r[10]:=11; c[10]:=6;
-  r[11]:=20; c[11]:=6;
+  r[9]:=7; c[9]:=3;
+  r[10]:=12; c[10]:=6;
+  r[11]:=21; c[11]:=6;
   if Query1.RecordCount = 0 then Exit;
 
   v[1] := FormatDateTime('dd/mm/yyyy', dtpArrDate.Date);
@@ -472,17 +481,17 @@ begin
   v[6] := Query1.FieldByName('XieMing').AsString;
   v[7] := Query1.FieldByName('MatName').AsString;
   v[8] := Query1.FieldByName('Qty').AsString;
-  //v[9] := Query1.FieldByName('VisualCheck').AsString;
+  v[9] := Query1.FieldByName('Parts').AsString;
   v[10]:= Query1.FieldByName('PhysCheck').AsString;
   v[11]:= edtRefStand.Text;
 
   for i := 0 to 11 do
   begin
     //chen hinh Visual Inspection
-    if i = 9 then
+    if i = 0 then
       begin
         if (Query1.FieldByName('Image').Value <> '') or not Query1.FieldByName('Image').IsNull then
-          InsertImageToExcel(Worksheet, Query1, 'Image', 11, 1);
+          InsertImageToExcel(Worksheet, Query1, 'Image', 12, 1);
 
         //ghi noi dung textbox
         TB := Worksheet.Shapes.Item('TextBox 3');
@@ -501,8 +510,8 @@ begin
   begin
     s := edtDDBH.Text;
     s := StringReplace(s, '_', Chr(10), [rfReplaceAll]);
-    Worksheet.Cells[7, 3].WrapText := True;
-    Worksheet.Cells[7, 3].Value := s;
+    Worksheet.Cells[8, 3].WrapText := True;
+    Worksheet.Cells[8, 3].Value := s;
   end;
 
 
@@ -520,8 +529,8 @@ begin
 
   if SigS = false then
   begin
-    Worksheet.Cells[16, 5].WrapText := True;
-    Worksheet.Cells[16, 5].Value := GetUsernameByID(Query1.FieldByName('SCFID').AsString)
+    Worksheet.Cells[17, 5].WrapText := True;
+    Worksheet.Cells[17, 5].Value := GetUsernameByID(Query1.FieldByName('SCFID').AsString)
     + Chr(10) + FormatDateTime('dd-mm-yyyy', Query1.FieldByName('SCFDate').AsDateTime);
   end;
 
@@ -537,8 +546,8 @@ begin
 
   if SigWMS = false then
   begin
-    Worksheet.Cells[16, 1].WrapText := True;
-    Worksheet.Cells[16, 1].Value := GetUsernameByID(Query1.FieldByName('WMSCFID').AsString)
+    Worksheet.Cells[17, 1].WrapText := True;
+    Worksheet.Cells[17, 1].Value := GetUsernameByID(Query1.FieldByName('WMSCFID').AsString)
     + Chr(10) + FormatDateTime('dd-mm-yyyy', Query1.FieldByName('WMSCFDate').AsDateTime);
   end;
 
@@ -554,8 +563,8 @@ begin
 
   if SigL = false then
   begin
-    Worksheet.Cells[16, 6].WrapText := True;
-    Worksheet.Cells[16, 6].Value := GetUsernameByID(Query1.FieldByName('LCFID').AsString)
+    Worksheet.Cells[17, 6].WrapText := True;
+    Worksheet.Cells[17, 6].Value := GetUsernameByID(Query1.FieldByName('LCFID').AsString)
     + Chr(10) + FormatDateTime('dd-mm-yyyy', Query1.FieldByName('LCFDate').AsDateTime);
   end;
 
@@ -571,8 +580,8 @@ begin
 
   if SigI = false then
   begin
-    Worksheet.Cells[16, 8].WrapText := True;
-    Worksheet.Cells[16, 8].Value := Query1.FieldByName('InspecID').AsString;
+    Worksheet.Cells[17, 8].WrapText := True;
+    Worksheet.Cells[17, 8].Value := Query1.FieldByName('InspecID').AsString;
   end;
 
 
@@ -666,14 +675,15 @@ if (Query1.RecordCount > 0)  and not Query1.CachedUpdates then
     edtZSBH.Text := Query1.FieldByName('Supplier').AsString;
     dtpUSERDate.Date := Query1.FieldByName('USERDate').AsDateTime;
     dtpArrDate.Date := Query1.FieldByName('ArrDate').AsDateTime;
-    edtImagePath.Text := Query1.FieldByName('Image').AsString;
-      if FileExists(edtImagePath.Text) then
+    edtImagePath.Text := Trim(Query1.FieldByName('Image').AsString);
+      if FileExists('\\192.168.71.11\FileServer\QC-QIP\KHO IMQC\HINHNG\' + edtImagePath.Text) then
       begin
-        Image1.Picture.LoadFromFile(edtImagePath.Text);
+        //Image1.Picture.LoadFromFile(edtImagePath.Text);
+        Image1.Picture.LoadFromFile('\\192.168.71.11\FileServer\QC-QIP\KHO IMQC\HINHNG\' + edtImagePath.Text)
       end
       else
       begin
-        Image1.Picture := nil;        // neu khong co file thi xoa anh
+        Image1.Picture := nil; // neu khong co file thi xoa anh
       end;
   end;
 end;
@@ -689,6 +699,7 @@ begin
     begin
       Query1.Edit;
       Query1.FieldByName('SCFID').AsString := main.Edit1.Text;
+      Query1.FieldByName('SCFDate').AsString := FormatDateTime('yyyy-mm-dd', Now);
       Query1.Post;
     end;
 
@@ -696,12 +707,14 @@ begin
     begin
       Query1.Edit;
       Query1.FieldByName('LCFID').AsString := main.Edit1.Text;
+      Query1.FieldByName('LCFDate').AsString := FormatDateTime('yyyy-mm-dd', Now);
       Query1.Post;
     end;
     if (DBGrid1.SelectedField.FieldName = 'WMSCFID') and (MenuCode.Text = 'N965') and Query1.CachedUpdates then
     begin
       Query1.Edit;
       Query1.FieldByName('WMSCFID').AsString := main.Edit1.Text;
+      Query1.FieldByName('WMSCFDate').AsString := FormatDateTime('yyyy-mm-dd', Now);
       Query1.Post;
     end;
 
@@ -813,15 +826,15 @@ begin
                     end;
                   if MenuCode.Text = 'N963' then
                     begin
-                      Query1.FieldByName('SCFDate').Value := FormatDateTime('yyyy-mm-dd', Now);
+                      Query1.FieldByName('SCFDate').Value := FormatDateTime('yyyy-mm-dd', Query1.FieldByName('SCFDate').Value);
                     end;
                   if MenuCode.Text = 'N964' then
                     begin
-                      Query1.FieldByName('LCFDate').Value := FormatDateTime('yyyy-mm-dd', Now);
+                      Query1.FieldByName('LCFDate').Value := FormatDateTime('yyyy-mm-dd', Query1.FieldByName('LCFDate').Value);
                     end;
                   if MenuCode.Text = 'N965' then
                     begin
-                      Query1.FieldByName('WMSCFDate').Value := FormatDateTime('yyyy-mm-dd', Now);
+                      Query1.FieldByName('WMSCFDate').Value := FormatDateTime('yyyy-mm-dd', Query1.FieldByName('WMSCFDate').Value);
                     end;
                   upsql1.apply(ukmodify);
                  end;
@@ -945,10 +958,10 @@ begin
       CopyFile(PChar(SourceFile), PChar(DestFile), False);
 
       // Update TEdit va TImage
-      edtImagePath.Text := DestFile;
-      Image1.Picture.LoadFromFile(SourceFile);
+      edtImagePath.Text := ExtractFileName(SourceFile);
+      Image1.Picture.LoadFromFile(DestFile);
 
-      ShowMessage('Upload thanh cong: ' + DestFile);
+      ShowMessage('Upload thanh cong: ' + ExtractFileName(SourceFile));
     except
       on E: Exception do
         ShowMessage('Loi khi upload: ' + E.Message);
@@ -971,6 +984,123 @@ with query1 do
   end;
 bb4.enabled:=true;
 bb5.enabled:=true;
+end;
+
+procedure TProducMatFailure.UpImage1Click(Sender: TObject);
+var
+  SaveFN, BasePath, DestFile: string;
+  CopyResult: Boolean;
+begin
+   OpenPictureDialog1.Filter :=
+    'JPEG Images (*.jpg;*.jpeg)|*.jpg;*.jpeg|' +
+    'PNG Images (*.png)|*.png|' +
+    'Bitmap Images (*.bmp)|*.bmp|' +
+    'GIF Images (*.gif)|*.gif|' +
+    'All Pictures (*.jpg;*.jpeg;*.png;*.bmp;*.gif)|*.jpg;*.jpeg;*.png;*.bmp;*.gif';
+    
+  if Query1.Active = False then Exit;
+
+  if not OpenPictureDialog1.Execute then Exit;
+  if OpenPictureDialog1.FileName = '' then Exit;
+
+  BasePath := '\\192.168.71.11\FileServer\QC-QIP\KHO IMQC\HINHNG\';
+  SaveFN := Trim(ExtractFileName(OpenPictureDialog1.FileName));
+  DestFile := BasePath + SaveFN;
+
+  // check file ton tai
+  if FileExists(DestFile) then
+  begin
+    if MessageDlg('File da ton tai, Ghi de?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      Exit;
+  end;
+
+  try
+    // copy file len server
+    CopyResult := CopyFile(PChar(OpenPictureDialog1.FileName), PChar(DestFile), False);
+
+    if not CopyResult then
+    begin
+      ShowMessage('Upload fail: ' + SysErrorMessage(GetLastError) + ' ');
+      Exit;
+    end;
+
+    // update DB
+    with QUpImage do
+    begin
+      Active := False;
+      SQL.Clear;
+      SQL.Add('UPDATE QC_ProMatFail ');
+      SQL.Add('SET Image = ''' + SaveFN + ''' ');
+      SQL.Add('WHERE ReportID = ' + Query1.FieldByName('ReportID').AsString);
+      ExecSQL;
+    end;
+
+    Query1.Active := False;
+    Query1.Active := True;
+
+    ShowMessage('Upload OK');
+  except
+    on E: Exception do
+      ShowMessage('Upload fail: ' + E.Message);
+  end;
+end;
+
+procedure TProducMatFailure.OpenImage1Click(Sender: TObject);
+var
+  SourceFile, FileName: string;
+begin
+  if Query1.FieldByName('Image').IsNull then Exit;
+
+  FileName := Query1.FieldByName('Image').AsString;
+
+  SourceFile := '\\192.168.71.11\FileServer\QC-QIP\KHO IMQC\HINHNG\' + FileName;
+
+  // kiem tra file nguon
+  if not FileExists(SourceFile) then
+  begin
+    ShowMessage('Khong tim thay file tren server');
+    Exit;
+  end;
+
+  // mo file truc tiep
+  ShellExecute(0, 'open', PChar(SourceFile), nil, nil, SW_SHOWNORMAL);
+end;
+
+procedure TProducMatFailure.DownloadImage1Click(Sender: TObject);
+var
+  SourceFile, DestFile, FileName: string;
+begin
+  if Query1.FieldByName('Image').IsNull then Exit;
+
+  FileName := Query1.FieldByName('Image').AsString;
+
+  SaveDialog1.FileName := FileName;
+
+  if not SaveDialog1.Execute then Exit;
+
+  SourceFile := '\\192.168.71.11\FileServer\QC-QIP\KHO IMQC\HINHNG\' + FileName;
+
+  DestFile := SaveDialog1.FileName;
+
+  // kiem tra file nguon
+  if not FileExists(SourceFile) then
+  begin
+    ShowMessage('Khong tim thay file tren server');
+    Exit;
+  end;
+
+  // kiem tra file dich
+  if FileExists(DestFile) then
+  begin
+    if MessageDlg('File da ton tai. Ghi de?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      Exit;
+  end;
+
+  // copy file
+  if CopyFile(PChar(SourceFile), PChar(DestFile), False) then
+    ShowMessage('Download file OK')
+  else
+    ShowMessage('Download file error');
 end;
 
 end.

@@ -2040,6 +2040,10 @@ object MatQcCheck: TMatQcCheck
       Enabled = False
       OnClick = mnu5Click
     end
+    object OpenLabGL1: TMenuItem
+      Caption = 'Open Lab GL'
+      OnClick = OpenLabGL1Click
+    end
   end
   object OpenDialog1: TOpenDialog
     Filter = '*.*'

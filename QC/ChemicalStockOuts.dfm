@@ -123,11 +123,12 @@ object ChemicalStockOut: TChemicalStockOut
       Width = 537
       Height = 89
       AutoSize = False
+      CharCase = ecUpperCase
       Color = clYellow
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -53
-      Font.Name = 'MS Sans Serif'
+      Font.Height = -80
+      Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
       TabOrder = 1
@@ -142,6 +143,7 @@ object ChemicalStockOut: TChemicalStockOut
       TabOrder = 2
       OnKeyPress = cbDepKeyPress
       Items.Strings = (
+        ''
         'DT_GCN-3F-LINE 1'
         'DT_GCN-3F-LINE 2'
         'DT_GCN-3F-LINE 3'
@@ -181,6 +183,7 @@ object ChemicalStockOut: TChemicalStockOut
       Top = 136
       Width = 169
       Height = 28
+      CharCase = ecUpperCase
       TabOrder = 3
     end
     object btSearch: TButton
@@ -233,6 +236,8 @@ object ChemicalStockOut: TChemicalStockOut
       item
         EditButtons = <>
         FieldName = 'LLNO'
+        Footer.Color = clYellow
+        Footer.ValueType = fvtCount
         Footers = <>
         Width = 120
       end
@@ -272,8 +277,6 @@ object ChemicalStockOut: TChemicalStockOut
       item
         EditButtons = <>
         FieldName = 'Weight'
-        Footer.Color = clYellow
-        Footer.ValueType = fvtSum
         Footers = <>
       end
       item

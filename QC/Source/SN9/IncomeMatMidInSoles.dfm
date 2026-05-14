@@ -572,6 +572,7 @@ object IncomeMatMidInSole: TIncomeMatMidInSole
     FooterFont.Style = []
     FooterRowCount = 1
     ParentFont = False
+    PopupMenu = PopupMenu1
     SumList.Active = True
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
@@ -793,6 +794,13 @@ object IncomeMatMidInSole: TIncomeMatMidInSole
         Footers = <>
         Title.Caption = 'LabTest '#29289#24615#27298#28204'|LabID'
         Width = 200
+      end
+      item
+        EditButtons = <>
+        FieldName = 'RpFile'
+        Footers = <>
+        Title.Caption = 'LabTest '#29289#24615#27298#28204'|Report File'
+        Width = 144
       end
       item
         EditButtons = <>
@@ -1048,6 +1056,11 @@ object IncomeMatMidInSole: TIncomeMatMidInSole
       FixedChar = True
       Size = 200
     end
+    object Query1RpFile: TStringField
+      FieldName = 'RpFile'
+      FixedChar = True
+      Size = 100
+    end
   end
   object DS1: TDataSource
     DataSet = Query1
@@ -1175,5 +1188,45 @@ object IncomeMatMidInSole: TIncomeMatMidInSole
     DatabaseName = 'DB'
     Left = 328
     Top = 400
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 291
+    Top = 400
+    object mnu4: TMenuItem
+      Caption = 'Open Guarantee letter'
+      Enabled = False
+      OnClick = mnu4Click
+    end
+    object mnu1: TMenuItem
+      Caption = 'Upload Guarantee letter'
+      Enabled = False
+      object upmnu1: TMenuItem
+        Caption = 'Upload Normal'
+        OnClick = upmnu1Click
+      end
+      object upmnu2: TMenuItem
+        Caption = 'Upload like Report ID'
+        OnClick = upmnu2Click
+      end
+    end
+    object mnu2: TMenuItem
+      Caption = 'Download Guarantee letter'
+      Enabled = False
+      OnClick = mnu2Click
+    end
+    object mnu3: TMenuItem
+      Caption = 'Delete Guarantee letter'
+      Enabled = False
+      OnClick = mnu3Click
+    end
+  end
+  object QUp: TQuery
+    DatabaseName = 'DB'
+    Left = 288
+    Top = 440
+  end
+  object SaveDialog1: TSaveDialog
+    Left = 936
+    Top = 112
   end
 end
