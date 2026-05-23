@@ -235,11 +235,12 @@ begin
         SQL.Add('        END) AS RandomQty');
         SQL.Add('    FROM MaterialQCcheck');
         SQL.Add(') AS S ON S.CLBH = mc.CLBH and S.No_ID = mc.No_ID');
-        sql.Add('where mc.GSBH = '''+main.Edit2.Text+''' and  left(mc.CLBH,1) not in (''F'',''W'')  ');
+        //sql.Add('where mc.GSBH = '''+main.Edit2.Text+''' and  left(mc.CLBH,1) not in (''F'',''W'')  ');
+        sql.Add(' where mc.GSBH = '''+main.Edit2.Text+''' and  ((mc.ZSBH = ''VA97'' and left(mc.CLBH,1) <> ''W'') or (mc.ZSBH <> ''VA97'' and left(mc.CLBH,1) not in (''F'',''W'')))  ');
         if chkStore.Checked then
         begin
-            sql.Add('       and CAST(DateInput AS DATE) between');
-            sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP3.date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP4.date)+''' ');
+            sql.Add(' and CAST(DateInput AS DATE) between');
+            sql.add(' '''+formatdatetime('yyyy/MM/dd',DTP3.date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP4.date)+''' ');
         end;
 
         if edtDefects.Text <> '' then

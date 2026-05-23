@@ -1099,6 +1099,15 @@ object MatLabCheck: TMatLabCheck
         TabOrder = 1
         OnClick = btnMatReportClick
       end
+      object btnEx1: TButton
+        Left = 464
+        Top = 6
+        Width = 75
+        Height = 30
+        Caption = 'Excel'
+        TabOrder = 2
+        OnClick = btnEx1Click
+      end
     end
   end
   object Panel2: TPanel

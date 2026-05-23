@@ -96,7 +96,6 @@ type
     QRDBText1: TQRDBText;
     QRDBText2: TQRDBText;
     QRDBText3: TQRDBText;
-    QRLabel60: TQRLabel;
     PageN: TQRLabel;
     QRDBText4: TQRDBText;
     SummaryBand1: TQRBand;
@@ -114,6 +113,7 @@ type
     QRLabel59: TQRLabel;
     PageFooterBand1: TQRBand;
     QRLabel69: TQRLabel;
+    QRDBText5: TQRDBText;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -144,7 +144,7 @@ begin
     try
       MyIni := Tinifile.Create(AppDir+'\ComName.ini');
       ComNameCH:=MyIni.ReadString('ERP','ComNameCH','億春責任有限公司');
-      ComName:=MyIni.ReadString('ERP','ComName1','CONG TY TNHH TY XUAN');
+      ComName:=MyIni.ReadString('ERP','ComName','CONG TY TNHH TY XUAN');
     finally
       MyIni.Free;
     end;
@@ -190,5 +190,6 @@ begin
 
   QRLabel6.Caption := 'Ngay日 ' + sDay + ' thang月 ' + sMonth + ' nam年 ' + sYear;
 end;
+
 
 end.

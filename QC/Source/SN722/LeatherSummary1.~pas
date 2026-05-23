@@ -1239,18 +1239,22 @@ begin
         sql.Add('   ,clzl.YWPM as MaterialName,ZSZL.ZSYWJC as SupplierName');
         sql.Add('   ,case when isnumeric(substring(clzl.YWPM,5,3)) = 1 then left(clzl.YWPM,7) ELSE left(clzl.YWPM,3) + ''-'' + left(clzl.YWPM,3) end as Standard_Thickness');
         sql.Add('from Leather_QC lqc left join clzl on clzl.CLDH = lqc.CLBH');
-        sql.Add('         					 left Join ZSZL on ZSZL.ZSDH =lqc.ZSBH');
+        sql.Add('         					 left Join ZSZL on ZSZL.ZSDH =lqc.ZSBH and ZSZL.zsdh <> ''VA97'' ');
         sql.Add('                     LEFT JOIN MaterialQCcheck mq ON mq.No_ID = lqc.ReportID');
         sql.Add('where lqc.GSBH='''+main.Edit2.Text+''' ');
         if chkStore.Checked then
         begin
-            sql.Add('       and CONVERT(varchar(10),lqc.DateInput,111) between');
-            sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP3.date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP4.date)+''' ');
+            {sql.Add('       and CONVERT(varchar(10),lqc.DateInput,111) between');
+            sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP3.date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP4.date)+''' ');}
+            sql.Add(' and CAST(lqc.DateInput as date) >= ' + QuotedStr(FormatDateTime('yyyy-MM-dd', DTP3.Date)));
+            sql.Add(' and CAST(lqc.DateInput as date) <= ' + QuotedStr(FormatDateTime('yyyy-MM-dd', DTP4.Date)));
         end;
         if chkDateCreate.Checked then
         begin
-            sql.Add('       and CONVERT(varchar(10),lqc.DateCreate,111) between');
-            sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''' ');
+            {sql.Add('       and CONVERT(varchar(10),lqc.DateCreate,111) between');
+            sql.add('           '''+formatdatetime('yyyy/MM/dd',DTP1.date)+''''+' and '+''''+formatdatetime('yyyy/MM/dd',DTP2.date)+''' ');}
+            sql.Add(' and CAST(lqc.DateCreate as date) between ' + QuotedStr(FormatDateTime('yyyy-MM-dd', DTP1.Date)));
+            sql.Add(' and ' + QuotedStr(FormatDateTime('yyyy-MM-dd', DTP2.Date)));
         end;
         sql.Add('       and lqc.CLBH like '''+edtMatID.Text+'%'' ');
         sql.Add('       and ZSZL.ZSYWJC like '''+edtSupp.Text+'%'' ');

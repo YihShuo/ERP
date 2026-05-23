@@ -152,6 +152,7 @@ type
     mnu4: TMenuItem;
     upmnu1: TMenuItem;
     upmnu2: TMenuItem;
+    btnEx1: TButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -194,6 +195,7 @@ type
     procedure mnu4Click(Sender: TObject);
     procedure upmnu1Click(Sender: TObject);
     procedure upmnu2Click(Sender: TObject);
+    procedure btnEx1Click(Sender: TObject);
   private
     AppDir:string;
     SFL:string;
@@ -1765,6 +1767,32 @@ begin
     on E: Exception do
       ShowMessage('Upload fail: ' + E.Message);
   end;
+end;
+
+procedure TMatLabCheck.btnEx1Click(Sender: TObject);
+var
+  ExcelApp, Workbook, Worksheet: OleVariant;
+  Row, Col: Integer;
+begin
+  ExcelApp := CreateOleObject('Excel.Application');
+  ExcelApp.Visible := True;
+
+  Workbook := ExcelApp.Workbooks.Add;
+  Worksheet := Workbook.Worksheets[1];
+
+  for Col := 0 to qry_RY.FieldCount - 1 do
+    Worksheet.Cells[1, Col + 1] := qry_RY.Fields[Col].FieldName;
+
+  Row := 2;
+  qry_RY.First;
+  while not qry_RY.Eof do
+  begin
+    for Col := 0 to qry_RY.FieldCount - 1 do
+      Worksheet.Cells[Row, Col + 1] := qry_RY.Fields[Col].AsString;
+    Inc(Row);
+    qry_RY.Next;
+  end;
+  Worksheet.Columns.AutoFit;
 end;
 
 end.

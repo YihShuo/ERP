@@ -758,7 +758,6 @@ begin
   DBGrid1.FieldColumns['DDBH'].ReadOnly := True;
   DBGrid1.FieldColumns['SKU'].ReadOnly := True;
   DBGrid1.FieldColumns['StyleName'].ReadOnly := True;
-  DBGrid1.FieldColumns['SCFDate'].ReadOnly := True;
   DBGrid1.FieldColumns['LCFID'].ReadOnly := True;
   DBGrid1.FieldColumns['LCFDate'].ReadOnly := True;
   DBGrid1.FieldColumns['MSCFID'].ReadOnly := True;
@@ -778,7 +777,6 @@ begin
   DBGrid1.FieldColumns['StyleName'].ReadOnly := True;
   DBGrid1.FieldColumns['SCFID'].ReadOnly := True;
   DBGrid1.FieldColumns['SCFDate'].ReadOnly := True;
-  DBGrid1.FieldColumns['LCFDate'].ReadOnly := True;
   DBGrid1.FieldColumns['MSCFID'].ReadOnly := True;
   DBGrid1.FieldColumns['MSCFDate'].ReadOnly := True;
   DBGrid1.FieldColumns['USERID'].ReadOnly := True;
@@ -798,7 +796,6 @@ begin
   DBGrid1.FieldColumns['SCFDate'].ReadOnly := True;
   DBGrid1.FieldColumns['LCFID'].ReadOnly := True;
   DBGrid1.FieldColumns['LCFDate'].ReadOnly := True;
-  DBGrid1.FieldColumns['MSCFDate'].ReadOnly := True;
   DBGrid1.FieldColumns['USERID'].ReadOnly := True;
   DBGrid1.FieldColumns['USERDate'].ReadOnly := True;
   DBGrid1.FieldColumns['YN'].ReadOnly := True;
@@ -852,15 +849,51 @@ begin
                     end;
                   if MenuCode.Text = 'N952' then
                     begin
-                      Query1.FieldByName('SCFDate').Value := FormatDateTime('yyyy-mm-dd', Now);
+                         with Qtemp do
+                         begin
+                            Close;
+                            SQL.Clear;
+                            SQL.Add('INSERT INTO BDelRec VALUES (');
+                            SQL.Add('''N952'',');
+                            SQL.Add(QuotedStr(Query1.FieldByName('ReportID').AsString) + ',');
+                            SQL.Add(QuotedStr(FormatDateTime('yyyy-mm-dd', Query1.FieldByName('SCFDate').AsDateTime)) + ',');
+                            SQL.Add(QuotedStr(Query1.FieldByName('USERID').AsString) + ',');
+                            SQL.Add(QuotedStr(main.Edit1.Text) + ',');
+                            SQL.Add('GETDATE())');
+                            ExecSQL;
+                         end;
                     end;
                   if MenuCode.Text = 'N953' then
                     begin
-                      Query1.FieldByName('LCFDate').Value := FormatDateTime('yyyy-mm-dd', Now);
+                         with Qtemp do
+                         begin
+                            Close;
+                            SQL.Clear;
+                            SQL.Add('INSERT INTO BDelRec VALUES (');
+                            SQL.Add('''N953'',');
+                            SQL.Add(QuotedStr(Query1.FieldByName('ReportID').AsString) + ',');
+                            SQL.Add(QuotedStr(FormatDateTime('yyyy-mm-dd', Query1.FieldByName('LCFDate').AsDateTime)) + ',');
+                            SQL.Add(QuotedStr(Query1.FieldByName('USERID').AsString) + ',');
+                            SQL.Add(QuotedStr(main.Edit1.Text) + ',');
+                            SQL.Add('GETDATE())');
+                            ExecSQL;
+                         end;
                     end;
                   if MenuCode.Text = 'N954' then
                     begin
-                      Query1.FieldByName('MSCFDate').Value := FormatDateTime('yyyy-mm-dd', Now);
+                         with Qtemp do
+                         begin
+                            Close;
+                            SQL.Clear;
+                            SQL.Add('INSERT INTO BDelRec VALUES (');
+                            SQL.Add('''N954'',');
+                            SQL.Add(QuotedStr(Query1.FieldByName('ReportID').AsString) + ',');
+                            SQL.Add(QuotedStr(FormatDateTime('yyyy-mm-dd', Query1.FieldByName('MSCFDate').AsDateTime)) + ',');
+                            SQL.Add(QuotedStr(Query1.FieldByName('USERID').AsString) + ',');
+                            SQL.Add(QuotedStr(main.Edit1.Text) + ',');
+                            SQL.Add('GETDATE())');
+                            ExecSQL;
+                         end;
                     end;
                   upsql1.apply(ukmodify);
                  end;
@@ -891,6 +924,7 @@ begin
     begin
       Query1.Edit;
       Query1.FieldByName('SCFID').AsString := main.Edit1.Text;
+      Query1.FieldByName('SCFDate').Value := FormatDateTime('yyyy-mm-dd', Now);
       Query1.Post;
     end;
 
@@ -898,12 +932,14 @@ begin
     begin
       Query1.Edit;
       Query1.FieldByName('LCFID').AsString := main.Edit1.Text;
+      Query1.FieldByName('LCFDate').Value := FormatDateTime('yyyy-mm-dd', Now);
       Query1.Post;
     end;
     if (DBGrid1.SelectedField.FieldName = 'MSCFID') and (MenuCode.Text = 'N954') and Query1.CachedUpdates then
     begin
       Query1.Edit;
       Query1.FieldByName('MSCFID').AsString := main.Edit1.Text;
+      Query1.FieldByName('MSCFDate').Value := FormatDateTime('yyyy-mm-dd', Now);
       Query1.Post;
     end;
 

@@ -295,7 +295,8 @@ begin
       sql.Add('where mc.GSBH='''+main.Edit2.Text+''' ');
       if chk1.Checked then
       begin
-          sql.Add('and CONVERT(varchar(10),mc.DateInput,111) between');
+          //sql.Add('and CONVERT(varchar(10),mc.DateInput,111) between');
+          sql.Add('and CAST(mc.DateInput as date) between ');
           sql.add('''' + formatdatetime('yyyy/MM/dd', DTP1.date) + ''' and ''' + formatdatetime('yyyy/MM/dd', DTP2.date) + '''');
       end;
       sql.Add('and CGNO like ''' + edt1.Text + '%''');

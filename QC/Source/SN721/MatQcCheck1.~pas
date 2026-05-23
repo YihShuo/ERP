@@ -1451,9 +1451,9 @@ procedure TMatQcCheck.OpenLabGL1Click(Sender: TObject);
 var
   SourceFile, FileName: string;
 begin
-  if qry_DR.FieldByName('File_Name_Lab').IsNull then Exit;
+  if qry_Qc.FieldByName('File_Name_Lab').IsNull then Exit;
 
-  FileName := qry_DR.FieldByName('File_Name_Lab').AsString;
+  FileName := qry_Qc.FieldByName('File_Name_Lab').AsString;
 
   SourceFile := '\\192.168.71.11\upload-QC\' + main.Edit2.Text + '\N724\Lab\' + FileName;
 

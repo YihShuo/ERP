@@ -106,7 +106,6 @@ type
     QryPendingGSBH: TStringField;
     QryPendingDefectID: TStringField;
     QryPendingGrade: TStringField;
-    QryPendingQty: TIntegerField;
     QryPendingYN: TIntegerField;
     QryPendingDepName: TStringField;
     QryPendingRemainQty: TFloatField;
@@ -156,6 +155,9 @@ type
     QryPendingVNSM: TStringField;
     Label12: TLabel;
     ddbh: TEdit;
+    QryPendingSize: TStringField;
+    QryPendingRorL: TStringField;
+    QryPendingQty: TFloatField;
     procedure BB1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure BB2Click(Sender: TObject);
@@ -286,6 +288,7 @@ begin
     Active := false;
     SQL.Clear;
     if (main.ServerIP = '192.168.71.7') then
+      //SQL.Add('SELECT YYBH, CAST(dbo.fn_BoDauTiengViet(QCBLYY.VNSM) AS VARCHAR(1000)) AS ZWSM FROM QCBLYY')
       SQL.Add('SELECT YYBH, VNSM AS ZWSM FROM QCBLYY')
     else
       SQL.Add('SELECT YYBH, ZWSM FROM QCBLYY');
@@ -309,7 +312,7 @@ begin
   DTP1.Date := Date - 3;
   DTP2.Date := Date;
   DTP3.Date := Date - 7;
-  DTP4.Date := Date;
+  DTP4.Date := Date + 1;
   PC1.ActivePageIndex := 0;
   BB1Click(Nil);
 end;
@@ -1126,10 +1129,12 @@ begin
     sql.add('    qcr.DepNO as DepID,');
     sql.add('    qcr.GSBH,');
     sql.add('     LEFT(qcrd.YYBH,4) as DefectID,right(qcrd.YYBH,1) as Grade');
-    sql.add('    ,BDepartment.DepName');
-    sql.add('    ,SUM(qcrd.Qty) AS Qty');
+    sql.add('    ,BDepartment.DepName, case when charindex(''.'',qcrd.CC) = 0 then qcrd.CC+''.0'' else qcrd.CC end as Size ');
+    sql.add('    ,case when right(qcrd.YYBH,1) = ''B'' then ''L+R'' when is_right = 1 then ''R'' else ''L'' end as RorL ');
+    sql.add('    ,case when right(qcrd.YYBH,1) = ''C'' then (SUM(CONVERT(numeric(18,1),qcrd.Qty))/2) else (SUM(CONVERT(numeric(18,1),qcrd.Qty))) end AS Qty ');
     sql.add('    ,SUM(qcrd.Qty)-ISNULL(RK_BC.Qty,0) as RemainQty');
-    sql.add('	   , case when SUM(qcrd.Qty)-ISNULL(RK_BC.Qty,0)>0 then 0 else 1 end as YN,QCBLYY.VNSM');
+    //sql.add('	   , case when SUM(qcrd.Qty)-ISNULL(RK_BC.Qty,0)>0 then 0 else 1 end as YN, CAST(dbo.fn_BoDauTiengViet(QCBLYY.VNSM) AS VARCHAR(1000)) VNSM ');
+    sql.add('	   , case when SUM(qcrd.Qty)-ISNULL(RK_BC.Qty,0)>0 then 0 else 1 end as YN, QCBLYY.VNSM ');
     sql.add('FROM (select DISTINCT SCBH,GSBH from qcr where 1=1');
     sql.add('    AND qcr.GSBH = ''' + main.Edit2.Text + '''');
     sql.add('    AND qcr.USERDATE >= ''' + FormatDateTime('yyyy/MM/dd', DTP3.Date) + '''');
@@ -1146,11 +1151,13 @@ begin
     sql.add('             and RK_BC.DefectID=LEFT(qcrd.YYBH,4) and RK_BC.Grade=right(qcrd.YYBH,1) ');
     sql.Add('inner join QCBLYY on QCBLYY.YYBH=QCRD.YYBH ');
     sql.add('WHERE 1=1 and qcr.SCBH like''%'+ddbh.Text+'%''');
+    if Edit1.Text <> '' then
+      sql.add('and QCRD.CC = '''+Trim(Edit1.Text)+''' ');
     sql.add('GROUP BY ');
     sql.add('    qcr.SCBH');
     sql.add('    ,qcr.DepNO,BDepartment.DepName ');
     sql.add('    ,qcr.GSBH');
-    sql.add('    ,qcrd.YYBH,RK_BC.Qty,QCBLYY.VNSM');
+    sql.add('    ,qcrd.YYBH,RK_BC.Qty,QCBLYY.VNSM, qcrd.CC, is_right ');
     sql.add('Order by DepNO');
 
     //showmessage(SQL.Text);
@@ -1206,6 +1213,8 @@ begin
     QKCRKS.FieldByName('Grade').Value := QryPending.FieldByName('Grade').AsString;
     QKCRKS.FieldByName('DDBH').Value := QryPending.FieldByName('SCBH').AsString;
     QKCRKS.FieldByName('Qty').Value := QryPending.FieldByName('Qty').AsString;
+    QKCRKS.FieldByName('Size').Value := QryPending.FieldByName('Size').AsString;
+    QKCRKS.FieldByName('RorL').Value := QryPending.FieldByName('RorL').AsString;
     //add
     if DBGridEh2.Columns[11].KeyList.IndexOf(QryPending.FieldByName('DefectID').AsString) = -1 then
     begin

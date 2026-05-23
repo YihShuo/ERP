@@ -340,7 +340,7 @@ begin
     begin
         active:=false;
         sql.Clear;
-        sql.Add('SELECT a.Matching,b.NotMatching,a.Matching + b.NotMatching AS Total,ROUND((a.Matching*1.0/(a.Matching + b.NotMatching))*100,2) AS RateMat');
+        sql.Add('SELECT a.Matching,b.NotMatching,a.Matching + b.NotMatching AS Total,ROUND((a.Matching*1.0/NULLIF(a.Matching + b.NotMatching, 0))*100,2) AS RateMat');
         sql.Add('FROM (');
         sql.Add('        select 1 as ID,count(*) AS Matching');
         sql.Add('        from #Material');

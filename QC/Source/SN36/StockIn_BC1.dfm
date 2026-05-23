@@ -315,7 +315,7 @@ object StockIn_BC: TStockIn_BC
     Top = 193
     Width = 1521
     Height = 337
-    ActivePage = TabSheet2
+    ActivePage = TabSheet3
     Align = alClient
     TabOrder = 1
     OnChange = PC1Change
@@ -825,6 +825,17 @@ object StockIn_BC: TStockIn_BC
           item
             EditButtons = <>
             FieldName = 'Grade'
+            Footers = <>
+            Width = 40
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Size'
+            Footers = <>
+          end
+          item
+            EditButtons = <>
+            FieldName = 'RorL'
             Footers = <>
             Width = 40
           end
@@ -2069,22 +2080,29 @@ object StockIn_BC: TStockIn_BC
   object QryPending: TQuery
     DatabaseName = 'DB'
     SQL.Strings = (
-      '---------------------------'
       'SELECT qcr.SCBH,'
       '    qcr.DepNO as DepID,'
       '    qcr.GSBH,'
       '     LEFT(qcrd.YYBH,4) as DefectID,right(qcrd.YYBH,1) as Grade'
-      '    ,BDepartment.DepName'
-      '    ,SUM(qcrd.Qty) AS Qty'
-      #9'--,ISNULL(RK_BC.Qty,0) as aa'
+      
+        '    ,BDepartment.DepName, case when charindex('#39'.'#39',qcrd.CC) = 0 t' +
+        'hen qcrd.CC+'#39'.0'#39' else qcrd.CC end as Size,'
+      
+        #9'case when right(qcrd.YYBH,1) = '#39'B'#39' then '#39'L+R'#39' when is_right = 1' +
+        ' then '#39'R'#39' else '#39'L'#39' end as RorL'
+      
+        '    ,case when right(qcrd.YYBH,1) = '#39'C'#39' then (SUM(CONVERT(numeri' +
+        'c(18,1),qcrd.Qty))/2) else (SUM(CONVERT(numeric(18,1),qcrd.Qty))' +
+        ') end AS Qty'
+      #9'--,SUM(qcrd.Qty) AS Qty'
       '    ,SUM(qcrd.Qty)-ISNULL(RK_BC.Qty,0) as RemainQty'
       
-        #9'   , case when SUM(qcrd.Qty)-SUM(ISNULL(RK_BC.Qty,0))>0 then 0 ' +
-        'else 1 end as YN,'#39#39' as VNSM'
+        #9'   , case when SUM(qcrd.Qty)-ISNULL(RK_BC.Qty,0)>0 then 0 else ' +
+        '1 end as YN, QCBLYY.VNSM '
       'FROM (select DISTINCT SCBH,GSBH from qcr where 1=1'
-      '    AND qcr.GSBH = '#39'HBA'#39
-      '    AND qcr.USERDATE >= '#39'2026/01/06'#39
-      '    AND qcr.USERDATE < '#39'2026/01/13'#39
+      '    AND qcr.GSBH = '#39'VDH'#39
+      '    AND qcr.USERDATE >= '#39'2026-05-14'#39
+      '    AND qcr.USERDATE < '#39'2026-05-22'#39
       '    AND qcr.SCBH IS NOT NULL'
       'and GXLB='#39'A'#39
       ') A'
@@ -2107,15 +2125,14 @@ object StockIn_BC: TStockIn_BC
       
         '             and RK_BC.DefectID=LEFT(qcrd.YYBH,4) and RK_BC.Grad' +
         'e=right(qcrd.YYBH,1) '
-      'WHERE 1=1'
+      'inner join QCBLYY on QCBLYY.YYBH=QCRD.YYBH '
+      'WHERE 1=1 and qcr.SCBH like'#39'%%'#39
       'GROUP BY '
       '    qcr.SCBH'
       '    ,qcr.DepNO,BDepartment.DepName '
       '    ,qcr.GSBH'
-      '    ,qcrd.YYBH'
-      #9',RK_BC.Qty'
-      'Order by DepNO'
-      '')
+      '    ,qcrd.YYBH,RK_BC.Qty,QCBLYY.VNSM, qcrd.CC, is_right'
+      'Order by DepNO')
     UpdateObject = updtsql1
     Left = 193
     Top = 392
@@ -2149,9 +2166,6 @@ object StockIn_BC: TStockIn_BC
       FixedChar = True
       Size = 2
     end
-    object QryPendingQty: TIntegerField
-      FieldName = 'Qty'
-    end
     object QryPendingRemainQty: TFloatField
       FieldName = 'RemainQty'
     end
@@ -2162,6 +2176,19 @@ object StockIn_BC: TStockIn_BC
       FieldName = 'VNSM'
       FixedChar = True
       Size = 1
+    end
+    object QryPendingSize: TStringField
+      FieldName = 'Size'
+      FixedChar = True
+      Size = 6
+    end
+    object QryPendingRorL: TStringField
+      FieldName = 'RorL'
+      FixedChar = True
+      Size = 1
+    end
+    object QryPendingQty: TFloatField
+      FieldName = 'Qty'
     end
   end
   object ds3: TDataSource
