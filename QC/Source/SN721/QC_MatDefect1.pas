@@ -107,9 +107,14 @@ begin
       begin
           with LeatherSummary.qry_GradeP do
           begin
+          First;
+            while not Eof do
+            begin
             edit;
             fieldbyname('DeCode').AsString:=qry1.fieldbyname('CodeID').AsString + ',' + fieldbyname('DeCode').AsString;
             fieldbyname('Defects').AsString:=qry1.fieldbyname('DefectName').AsString + ',' + fieldbyname('Defects').AsString;
+            Next;
+            end
           end;
           qry1.Delete;
       end;

@@ -65,7 +65,6 @@ type
     Query2ReportID: TIntegerField;
     Query2Supplier: TStringField;
     Query2CLBH: TStringField;
-    Query2DeLotQty: TIntegerField;
     Query2DeQty: TStringField;
     Query2Defects: TStringField;
     Query2Inspector: TStringField;
@@ -87,6 +86,7 @@ type
     edtDefects: TEdit;
     Label2: TLabel;
     Query2DeRate: TStringField;
+    Query2DeLotQty: TFloatField;
     procedure BB1Click(Sender: TObject);
     procedure BB2Click(Sender: TObject);
     procedure BB4Click(Sender: TObject);

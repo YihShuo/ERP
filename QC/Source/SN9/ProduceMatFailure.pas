@@ -194,7 +194,7 @@ var
   ImagePath: string;
 begin
   // Duong anh trong field
-  ImagePath := Trim(Query.FieldByName(FieldName).AsString);
+  ImagePath := Trim('\\192.168.71.11\FileServer\QC-QIP\KHO IMQC\HINHNG\'+ Query.FieldByName(FieldName).AsString);
 
   // Neu rong thi khong lam gi
   if ImagePath = '' then

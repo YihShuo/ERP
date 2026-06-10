@@ -180,7 +180,7 @@ object MonthlyReportMaterial: TMonthlyReportMaterial
           FieldName = 'LotQty'
           Footer.ValueType = fvtSum
           Footers = <>
-          Width = 95
+          Width = 60
         end
         item
           EditButtons = <>

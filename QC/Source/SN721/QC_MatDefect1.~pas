@@ -60,7 +60,7 @@ var
 implementation
 
 uses Main1, DailyReport1, LeatherSummary1, {RubberChemical1, (N17) } MatQcCheck1,
-  MonthlyReportMaterials, SoleWeekReports;
+  MonthlyReportMaterials, SoleWeekReports, NGMaterials;
 
 {$R *.dfm}
 
@@ -118,9 +118,15 @@ begin
       begin
           with LeatherSummary.qry_GradePspe do
           begin
+            First;
+            while not Eof do
+            begin
             edit;
             fieldbyname('DeCode').AsString:=qry1.fieldbyname('CodeID').AsString + ',' + fieldbyname('DeCode').AsString;
             fieldbyname('Defects').AsString:=qry1.fieldbyname('DefectName').AsString + ',' + fieldbyname('Defects').AsString;
+            Post;
+            Next;
+            end;
           end;
           qry1.Delete;
       end;
