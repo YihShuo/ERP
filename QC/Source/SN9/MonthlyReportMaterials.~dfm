@@ -1122,9 +1122,6 @@ object MonthlyReportMaterial: TMonthlyReportMaterial
       FixedChar = True
       Size = 100
     end
-    object Query2DeLotQty: TIntegerField
-      FieldName = 'DeLotQty'
-    end
     object Query2DeQty: TStringField
       FieldName = 'DeQty'
       FixedChar = True
@@ -1179,6 +1176,9 @@ object MonthlyReportMaterial: TMonthlyReportMaterial
       FieldName = 'DeRate'
       FixedChar = True
       Size = 50
+    end
+    object Query2DeLotQty: TFloatField
+      FieldName = 'DeLotQty'
     end
   end
   object UpSQLDetail: TUpdateSQL

@@ -510,13 +510,13 @@ begin
   if not DirectoryExists(AppDir) then
     ForceDirectories(AppDir);
 
-  SrcFile := '\\192.168.71.4\erp\lys_erp\A-QIP-WS001-06B.xlsx';
-  DstFile := IncludeTrailingPathDelimiter(AppDir) + 'A-QIP-WS001-06B.xlsx';
+  SrcFile := '\\192.168.71.4\erp\lys_erp\A-QIP-WS001-06C.xlsx';
+  DstFile := IncludeTrailingPathDelimiter(AppDir) + 'A-QIP-WS001-06C.xlsx';
 
   if not CopyFile(PChar(SrcFile), PChar(DstFile), False) then
     ShowMessage('Copy file that bai');
 
-  DuongDanFile := ExtractFilePath(ParamStr(0)) + 'A-QIP-WS001-06B.xlsx';
+  DuongDanFile := ExtractFilePath(ParamStr(0)) + 'A-QIP-WS001-06C.xlsx';
 
   StartRow := 4;
 
@@ -526,13 +526,13 @@ begin
     begin
       SaveDialog.Filter := 'Excel Files (*.xlsx)|*.xlsx';
       SaveDialog.DefaultExt := 'xlsx';
-      SaveDialog.FileName := 'A-QIP-WS001-06B_' + FormatDateTime('yyyy-mm-dd_hh-nn-ss', Now) + '.xlsx';
+      SaveDialog.FileName := 'A-QIP-WS001-06C_' + FormatDateTime('yyyy-mm-dd_hh-nn-ss', Now) + '.xlsx';
       SaveDialog.Title := 'Chon noi luu file Excel moi';
     end else
     begin
       SaveDialog.Filter := 'PDF (*.pdf)|*.pdf';
       SaveDialog.DefaultExt := 'pdf';
-      SaveDialog.FileName := 'A-QIP-WS001-06B_' + FormatDateTime('yyyy-mm-dd_hh-nn-ss', Now) + '.pdf';
+      SaveDialog.FileName := 'A-QIP-WS001-06C_' + FormatDateTime('yyyy-mm-dd_hh-nn-ss', Now) + '.pdf';
       SaveDialog.Title := 'Chon noi luu file PDF moi';
     end;
 

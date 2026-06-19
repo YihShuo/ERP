@@ -533,6 +533,21 @@ object MatLabCheck: TMatLabCheck
       Layout = blGlyphTop
       NumGlyphs = 2
     end
+    object Button4: TButton
+      Left = 1200
+      Top = 4
+      Width = 129
+      Height = 39
+      Caption = 'Receive Test Items'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 12
+      OnClick = Button4Click
+    end
   end
   object DBGridDetail: TDBGridEh
     Left = 0
@@ -596,9 +611,9 @@ object MatLabCheck: TMatLabCheck
             ValueType = fvtCount
           end>
         ReadOnly = True
-        Title.Caption = 'Date'
+        Title.Caption = 'Received Date'
         Title.TitleButton = True
-        Width = 60
+        Width = 70
       end
       item
         EditButtons = <>
@@ -686,6 +701,11 @@ object MatLabCheck: TMatLabCheck
         FieldName = 'DWBH'
         Footers = <>
         Title.Caption = 'Unit'
+      end
+      item
+        EditButtons = <>
+        FieldName = 'MaterialTestDate'
+        Footers = <>
       end
       item
         ButtonStyle = cbsNone
@@ -1393,6 +1413,61 @@ object MatLabCheck: TMatLabCheck
       Color = cl3DLight
       TabOrder = 18
     end
+    object GroupBox2: TGroupBox
+      Left = 987
+      Top = -12
+      Width = 118
+      Height = 101
+      TabOrder = 19
+      object chkInspection: TCheckBox
+        Left = 8
+        Top = 26
+        Width = 81
+        Height = 17
+        Caption = 'Inspection'
+        Color = clAqua
+        ParentColor = False
+        TabOrder = 0
+      end
+      object chkNotesting: TCheckBox
+        Left = 8
+        Top = 10
+        Width = 85
+        Height = 17
+        Caption = 'No Testing'
+        Color = clBtnFace
+        ParentColor = False
+        TabOrder = 1
+      end
+      object chkpass: TCheckBox
+        Left = 8
+        Top = 46
+        Width = 81
+        Height = 17
+        Caption = 'Pass'
+        Color = clLime
+        ParentColor = False
+        TabOrder = 2
+      end
+      object chkFail: TCheckBox
+        Left = 8
+        Top = 64
+        Width = 81
+        Height = 17
+        Caption = 'Fail'
+        Color = clRed
+        ParentColor = False
+        TabOrder = 3
+      end
+      object ckSettle: TCheckBox
+        Left = 8
+        Top = 80
+        Width = 105
+        Height = 17
+        Caption = 'NoSettlement'
+        TabOrder = 4
+      end
+    end
   end
   object qry_Qc: TQuery
     AfterOpen = qry_QcAfterOpen
@@ -1410,7 +1485,8 @@ object MatLabCheck: TMatLabCheck
         'Date, mc.Lab_PDM_ID, mc.T2Test_Result'
       
         '   ,mc.Comparision, mc.Lab_PDM_IDT2, mc.Receducing_TLSP, mc.Lab_' +
-        'ConfirmDate,mc.Lab_DateRemark, mc.RKNO,mc.PDM_File_Name'
+        'ConfirmDate,mc.Lab_DateRemark, mc.RKNO,mc.PDM_File_Name, mc.Mate' +
+        'rialTestDate'
       
         #9'  ,clzl.YWPM as MaterialName,ZSZL.ZSYWJC as SupplierName,clzl.D' +
         'WBH'
@@ -1590,6 +1666,9 @@ object MatLabCheck: TMatLabCheck
       FixedChar = True
       Size = 255
     end
+    object qry_QcMaterialTestDate: TDateTimeField
+      FieldName = 'MaterialTestDate'
+    end
   end
   object DS_Qc: TDataSource
     DataSet = qry_Qc
@@ -1599,21 +1678,22 @@ object MatLabCheck: TMatLabCheck
   object Upd_QC: TUpdateSQL
     ModifySQL.Strings = (
       'update MaterialQCcheck set '#9
-      #9#9'Lab_Check=:Lab_Check,'
-      #9#9'Lab_Reason=:Lab_Reason,'
-      #9#9'Lab_Result=:Lab_Result,'
-      #9#9'Lab_Date=getdate(),'
-      #9#9'Lab_UserID=:Lab_UserID,'
-      #9#9'Lab_Num=:Lab_Num,'
-      '                                Lab_FinishDate=:Lab_FinishDate,'
-      '                                Lab_PDM_ID=:Lab_PDM_ID,'
-      'T2Test_Result=:T2Test_Result,'
-      'Comparision=:Comparision,'
-      'Lab_PDM_IDT2=:Lab_PDM_IDT2,'
-      'Receducing_TLSP=:Receducing_TLSP,'
-      'Lab_ConfirmDate=:Lab_ConfirmDate,'
-      'Lab_DateRemark=:Lab_DateRemark,'
-      'Remark=:Remark'
+      '        Lab_Check=:Lab_Check,'
+      '        Lab_Reason=:Lab_Reason,'
+      '        Lab_Result=:Lab_Result,'
+      '        Lab_Date=getdate(),'
+      '        Lab_UserID=:Lab_UserID,'
+      '        Lab_Num=:Lab_Num,'
+      '        Lab_FinishDate=:Lab_FinishDate,'
+      '        Lab_PDM_ID=:Lab_PDM_ID,'
+      '        T2Test_Result=:T2Test_Result,'
+      '        Comparision=:Comparision,'
+      '        Lab_PDM_IDT2=:Lab_PDM_IDT2,'
+      '        Receducing_TLSP=:Receducing_TLSP,'
+      '        Lab_ConfirmDate=:Lab_ConfirmDate,'
+      '        Lab_DateRemark=:Lab_DateRemark,'
+      '        Remark=:Remark,'
+      '        MaterialTestDate=:MaterialTestDate'
       'where No_ID=:No_ID'
       '')
     DeleteSQL.Strings = (

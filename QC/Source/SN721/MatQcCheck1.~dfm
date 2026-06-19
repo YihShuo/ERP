@@ -946,14 +946,14 @@ object MatQcCheck: TMatQcCheck
             Footers = <
               item
               end>
-            Title.Caption = 'Date'
+            Title.Caption = 'Received Date'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -15
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
             Title.TitleButton = True
-            Width = 62
+            Width = 65
           end
           item
             Color = cl3DLight
@@ -1207,6 +1207,15 @@ object MatQcCheck: TMatQcCheck
           item
             Color = clMoneyGreen
             EditButtons = <>
+            FieldName = 'QC_Method'
+            Footers = <>
+            Title.Caption = 'QC Inspection|Method'
+            Title.Color = clMoneyGreen
+            Width = 75
+          end
+          item
+            Color = clMoneyGreen
+            EditButtons = <>
             FieldName = 'File_Name'
             Footers = <>
             ReadOnly = True
@@ -1249,6 +1258,12 @@ object MatQcCheck: TMatQcCheck
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
             Width = 46
+          end
+          item
+            EditButtons = <>
+            FieldName = 'MaterialTestDate'
+            Footers = <>
+            Width = 110
           end
           item
             ButtonStyle = cbsNone
@@ -2079,7 +2094,7 @@ object MatQcCheck: TMatQcCheck
         'N,      '
       
         '       clzl.YWPM as MaterialName,ZSZL.ZSYWJC as SupplierName,clz' +
-        'l.DWBH,ZSZL.ZSYWJC'
+        'l.DWBH,ZSZL.ZSYWJC, mc.MaterialTestDate, mc.QC_Method'
       'from MaterialQCcheck mc'
       'left join clzl on clzl.CLDH = mc.CLBH'
       'left Join ZSZL on ZSZL.ZSDH =mc.ZSBH'
@@ -2331,6 +2346,14 @@ object MatQcCheck: TMatQcCheck
       FieldName = 'RKNO'
       FixedChar = True
       Size = 255
+    end
+    object qry_QcMaterialTestDate: TDateTimeField
+      FieldName = 'MaterialTestDate'
+    end
+    object qry_QcQC_Method: TStringField
+      FieldName = 'QC_Method'
+      FixedChar = True
+      Size = 200
     end
   end
   object qry_App: TQuery

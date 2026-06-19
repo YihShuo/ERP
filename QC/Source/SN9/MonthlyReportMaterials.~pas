@@ -65,7 +65,6 @@ type
     Query2ReportID: TIntegerField;
     Query2Supplier: TStringField;
     Query2CLBH: TStringField;
-    Query2DeLotQty: TIntegerField;
     Query2DeQty: TStringField;
     Query2Defects: TStringField;
     Query2Inspector: TStringField;
@@ -87,6 +86,7 @@ type
     edtDefects: TEdit;
     Label2: TLabel;
     Query2DeRate: TStringField;
+    Query2DeLotQty: TFloatField;
     procedure BB1Click(Sender: TObject);
     procedure BB2Click(Sender: TObject);
     procedure BB4Click(Sender: TObject);
@@ -510,13 +510,13 @@ begin
   if not DirectoryExists(AppDir) then
     ForceDirectories(AppDir);
 
-  SrcFile := '\\192.168.71.4\erp\lys_erp\A-QIP-WS001-06B.xlsx';
-  DstFile := IncludeTrailingPathDelimiter(AppDir) + 'A-QIP-WS001-06B.xlsx';
+  SrcFile := '\\192.168.71.4\erp\lys_erp\A-QIP-WS001-06C.xlsx';
+  DstFile := IncludeTrailingPathDelimiter(AppDir) + 'A-QIP-WS001-06C.xlsx';
 
   if not CopyFile(PChar(SrcFile), PChar(DstFile), False) then
     ShowMessage('Copy file that bai');
 
-  DuongDanFile := ExtractFilePath(ParamStr(0)) + 'A-QIP-WS001-06B.xlsx';
+  DuongDanFile := ExtractFilePath(ParamStr(0)) + 'A-QIP-WS001-06C.xlsx';
 
   StartRow := 4;
 
@@ -526,13 +526,13 @@ begin
     begin
       SaveDialog.Filter := 'Excel Files (*.xlsx)|*.xlsx';
       SaveDialog.DefaultExt := 'xlsx';
-      SaveDialog.FileName := 'A-QIP-WS001-06B_' + FormatDateTime('yyyy-mm-dd_hh-nn-ss', Now) + '.xlsx';
+      SaveDialog.FileName := 'A-QIP-WS001-06C_' + FormatDateTime('yyyy-mm-dd_hh-nn-ss', Now) + '.xlsx';
       SaveDialog.Title := 'Chon noi luu file Excel moi';
     end else
     begin
       SaveDialog.Filter := 'PDF (*.pdf)|*.pdf';
       SaveDialog.DefaultExt := 'pdf';
-      SaveDialog.FileName := 'A-QIP-WS001-06B_' + FormatDateTime('yyyy-mm-dd_hh-nn-ss', Now) + '.pdf';
+      SaveDialog.FileName := 'A-QIP-WS001-06C_' + FormatDateTime('yyyy-mm-dd_hh-nn-ss', Now) + '.pdf';
       SaveDialog.Title := 'Chon noi luu file PDF moi';
     end;
 

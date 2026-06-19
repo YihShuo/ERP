@@ -153,6 +153,14 @@ type
     upmnu1: TMenuItem;
     upmnu2: TMenuItem;
     btnEx1: TButton;
+    qry_QcMaterialTestDate: TDateTimeField;
+    Button4: TButton;
+    GroupBox2: TGroupBox;
+    chkInspection: TCheckBox;
+    chkNotesting: TCheckBox;
+    chkpass: TCheckBox;
+    chkFail: TCheckBox;
+    ckSettle: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -196,6 +204,7 @@ type
     procedure upmnu1Click(Sender: TObject);
     procedure upmnu2Click(Sender: TObject);
     procedure btnEx1Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
   private
     AppDir:string;
     SFL:string;
@@ -287,7 +296,7 @@ begin
         sql.Add('begin drop table #Material end');
         sql.Add('select mc.No_ID, mc.CLBH, mc.CGNO, mc.DateInput, mc.LB, mc.ZSBH,mc.RY,mc.Article,mc.CustPO, mc.Qty,mc.Tracking, mc.Lab_Check, mc.Lab_Reason, mc.Lab_Result, mc.Lab_Date');
         sql.Add('   ,mc.Lab_UserID, mc.Lab_Num, mc.Final_Status, mc.Final_Remark, mc.UserDate,mc.UserID,mc.Remark,mc.File_Name_Lab, mc.Lab_FinishDate, mc.Lab_PDM_ID, mc.T2Test_Result');
-        sql.Add('   ,mc.Comparision, mc.Lab_PDM_IDT2, mc.Receducing_TLSP, mc.Lab_ConfirmDate,mc.Lab_DateRemark, mc.RKNO,mc.PDM_File_Name');
+        sql.Add('   ,mc.Comparision, mc.Lab_PDM_IDT2, mc.Receducing_TLSP, mc.Lab_ConfirmDate,mc.Lab_DateRemark, mc.RKNO,mc.PDM_File_Name, mc.MaterialTestDate');
         sql.Add('	  ,clzl.YWPM as MaterialName,ZSZL.ZSYWJC as SupplierName,clzl.DWBH');
         sql.Add('into #Material');
         sql.Add('from MaterialQCcheck mc');
@@ -305,6 +314,22 @@ begin
         sql.Add('       and mc.CGNO like '''+edt1.Text+'%'' ');
         sql.Add('       and mc.CLBH like '''+edt2.Text+'%'' ');
         sql.Add('       and ZSZL.ZSYWJC like '''+edt3.Text+'%'' ');
+
+        if chkNotesting.Checked then
+            sql.Add('   and isnull(Lab_Check,'''') = '''' ');
+        if ckSettle.Checked then
+            SQL.Add('and mc.Settlement is null ');
+        if chkInspection.Checked or chkpass.Checked or chkFail.Checked then
+        begin
+            sql.Add('   and (1=2');
+            if chkInspection.Checked then
+               sql.Add('   or isnull(Final_Status,'''') ='''' ');
+            if chkpass.Checked then
+               sql.Add('   or Final_Status=''Pass'' ');
+            if chkFail.Checked then
+               sql.Add('   or Final_Status=''Fail'' ');
+            sql.Add(')');
+        end;
 
         if FlexID.Text <> '' then
             SQL.add('and clzl_flex.cldhflex like '''+FlexID.Text+'%'' ');
@@ -1793,6 +1818,17 @@ begin
     qry_RY.Next;
   end;
   Worksheet.Columns.AutoFit;
+end;
+
+procedure TMatLabCheck.Button4Click(Sender: TObject);
+begin
+  if qry_Qc.RecordCount = 0 then Exit;
+  btnsave.Enabled := true;
+  btncancel.Enabled := true;
+  qry_Qc.CachedUpdates := true;
+  qry_Qc.Edit;
+  qry_Qc.FieldByName('MaterialTestDate').Value := FormatDateTime('yyyy-mm-dd', Date);
+  qry_Qc.Post;
 end;
 
 end.
