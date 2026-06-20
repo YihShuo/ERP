@@ -662,11 +662,6 @@ object NonConformingMaterial: TNonConformingMaterial
     object Query1Qty: TIntegerField
       FieldName = 'Qty'
     end
-    object Query1DDBH: TStringField
-      FieldName = 'DDBH'
-      FixedChar = True
-      Size = 50
-    end
     object Query1SKU: TStringField
       FieldName = 'SKU'
       FixedChar = True
@@ -731,6 +726,11 @@ object NonConformingMaterial: TNonConformingMaterial
     end
     object Query1DeRate: TFloatField
       FieldName = 'DeRate'
+    end
+    object Query1DDBH: TStringField
+      FieldName = 'DDBH'
+      FixedChar = True
+      Size = 255
     end
   end
   object DS1: TDataSource

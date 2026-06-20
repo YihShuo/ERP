@@ -135,6 +135,14 @@ type
     procedure mnu4Click(Sender: TObject);
     procedure upmnu1Click(Sender: TObject);
     procedure upmnu2Click(Sender: TObject);
+    procedure PrintSign(
+                AWorksheet: OleVariant;
+                AQuery: TQuery;
+                AInsertRow: Integer;
+                const AIDField, ADateField: string;
+                ACol: Integer;
+                UseUserName: Boolean
+              );
   private
     { Private declarations }
   public
@@ -149,6 +157,76 @@ implementation
 uses main1;
 
 {$R *.dfm}
+
+procedure TIncomeMatRubberOutsoles.PrintSign(
+  AWorksheet: OleVariant;
+  AQuery: TQuery;
+  AInsertRow: Integer;
+  const AIDField, ADateField: string;
+  ACol: Integer;
+  UseUserName: Boolean
+);
+var
+  s, SignFile: string;
+  Cell, MergeCell: OleVariant;
+  CellLeft, CellTop, CellWidth, CellHeight: Double;
+  PicWidth, PicHeight: Double;
+begin
+  if AQuery.FieldByName(AIDField).IsNull
+     or (Trim(AQuery.FieldByName(AIDField).AsString) = '') then
+    Exit;
+
+  Cell := AWorksheet.Cells[AInsertRow + 1, ACol];
+  MergeCell := Cell.MergeArea;
+
+  MergeCell.WrapText := True;
+  MergeCell.HorizontalAlignment := -4108; // xlCenter
+  MergeCell.VerticalAlignment := -4108;   // xlCenter
+
+  s := AQuery.FieldByName(AIDField).AsString;
+  s := StringReplace(s, '_', Chr(10), [rfReplaceAll]);
+
+  if UseUserName then
+  begin
+    Cell.Value :=
+      Chr(10) + Chr(10) + Chr(10) +
+      GetUsernameByID(AQuery.FieldByName(AIDField).AsString)
+      + Chr(10)
+      + FormatDateTime(
+          'dd-mm-yyyy',
+          AQuery.FieldByName(ADateField).AsDateTime
+        );
+
+    SignFile := ExtractFilePath(Application.ExeName) +
+                'Signatures\' +
+                Trim(AQuery.FieldByName(AIDField).AsString) +
+                '.bmp';
+
+    if FileExists(SignFile) then
+    begin
+      CellLeft   := MergeCell.Left;
+      CellTop    := MergeCell.Top;
+      CellWidth  := MergeCell.Width;
+      CellHeight := MergeCell.Height;
+
+      PicWidth  := CellWidth * 0.4;
+      PicHeight := CellHeight * 0.45;
+
+      AWorksheet.Shapes.AddPicture(
+        SignFile,
+        False,
+        True,
+        CellLeft + (CellWidth - PicWidth) / 2, // can giua ngang
+        CellTop + (CellHeight * 0.1),          // phia tren
+        PicWidth,
+        PicHeight
+      );
+    end;
+  end
+  else
+    Cell.Value := s;
+end;
+
 function TIncomeMatRubberOutsoles.SheetExists(WB: Variant; SheetName: string): Boolean;
 var
   i: Integer;
@@ -816,8 +894,13 @@ begin
 
   Worksheet.Rows[Format('%d:%d', [InsertRow, InsertRow])].Delete;
 
+  PrintSign(Worksheet, Query1, InsertRow, 'MSCFID', 'MSCFDate', 1, True);
+  PrintSign(Worksheet, Query1, InsertRow, 'SCFID',  'SCFDate',  7, True);
+  PrintSign(Worksheet, Query1, InsertRow, 'LCFID',  'LCFDate',  11, True);
+  PrintSign(Worksheet, Query1, InsertRow, 'PreparedID', '', 17, False);
+
   //Kiem tra ky KCS Super
-  Query1.First;
+  {Query1.First;
   SigS := false;
   while not Query1.Eof do
   begin
@@ -882,7 +965,7 @@ begin
     Worksheet.Cells[InsertRow + 1, 17].WrapText := True;
     Worksheet.Cells[InsertRow + 1, 17].Value := Query1.FieldByName('PreparedID').AsString
     + Chr(10) + FormatDateTime('dd-mm-yyyy', Query1.FieldByName('PreparedDate').AsDateTime);
-  end;
+  end;}
 
   if cbPDF.Checked then
   begin

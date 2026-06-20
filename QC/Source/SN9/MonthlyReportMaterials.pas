@@ -138,7 +138,7 @@ uses main1, QC_MatDefect1;
 {$R *.dfm}
 
 // Ham kiem tra va in chu ky
-procedure TMonthlyReportMaterial.PrintSign(
+{procedure TMonthlyReportMaterial.PrintSign(
   AWorksheet: OleVariant;
   AQuery: TQuery;
   AInsertRow: Integer;
@@ -165,6 +165,74 @@ begin
   else
     AWorksheet.Cells[AInsertRow + 2, ACol].Value :=
       AQuery.FieldByName(AIDField).AsString;
+end;}
+procedure TMonthlyReportMaterial.PrintSign(
+  AWorksheet: OleVariant;
+  AQuery: TQuery;
+  AInsertRow: Integer;
+  const AIDField, ADateField: string;
+  ACol: Integer;
+  UseUserName: Boolean
+);
+var
+  s, SignFile: string;
+  Cell, MergeCell: OleVariant;
+  CellLeft, CellTop, CellWidth, CellHeight: Double;
+  PicWidth, PicHeight: Double;
+begin
+  if AQuery.FieldByName(AIDField).IsNull
+     or (Trim(AQuery.FieldByName(AIDField).AsString) = '') then
+    Exit;
+
+  Cell := AWorksheet.Cells[AInsertRow + 2, ACol];
+  MergeCell := Cell.MergeArea;
+
+  MergeCell.WrapText := True;
+  MergeCell.HorizontalAlignment := -4108; // xlCenter
+  MergeCell.VerticalAlignment := -4108;   // xlCenter
+
+  s := AQuery.FieldByName(AIDField).AsString;
+  s := StringReplace(s, '_', Chr(10), [rfReplaceAll]);
+
+  if UseUserName then
+  begin
+    Cell.Value :=
+      Chr(10) + Chr(10) + Chr(10) +
+      GetUsernameByID(AQuery.FieldByName(AIDField).AsString)
+      + Chr(10)
+      + FormatDateTime(
+          'dd-mm-yyyy',
+          AQuery.FieldByName(ADateField).AsDateTime
+        );
+
+    SignFile := ExtractFilePath(Application.ExeName) +
+                'Signatures\' +
+                Trim(AQuery.FieldByName(AIDField).AsString) +
+                '.bmp';
+
+    if FileExists(SignFile) then
+    begin
+      CellLeft   := MergeCell.Left;
+      CellTop    := MergeCell.Top;
+      CellWidth  := MergeCell.Width;
+      CellHeight := MergeCell.Height;
+
+      PicWidth  := CellWidth * 0.4;
+      PicHeight := CellHeight * 0.45;
+
+      AWorksheet.Shapes.AddPicture(
+        SignFile,
+        False,
+        True,
+        CellLeft + (CellWidth - PicWidth) / 2, // can giua ngang
+        CellTop + (CellHeight * 0.1),          // phia tren
+        PicWidth,
+        PicHeight
+      );
+    end;
+  end
+  else
+    Cell.Value := s;
 end;
 
 function TMonthlyReportMaterial.GetUsernameByID(const AID: string): string;

@@ -669,7 +669,7 @@ object RejectedMaterial: TRejectedMaterial
     object Query1DDBH: TStringField
       FieldName = 'DDBH'
       FixedChar = True
-      Size = 50
+      Size = 1000
     end
     object Query1InsDate: TDateTimeField
       FieldName = 'InsDate'

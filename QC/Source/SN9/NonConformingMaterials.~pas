@@ -51,7 +51,6 @@ type
     Query1ZSBH: TStringField;
     Query1InDate: TDateTimeField;
     Query1Qty: TIntegerField;
-    Query1DDBH: TStringField;
     Query1SKU: TStringField;
     Query1MaterialSpec: TStringField;
     Query1Issue: TStringField;
@@ -69,6 +68,7 @@ type
     Query1USERID: TStringField;
     Query1USERDATE: TDateTimeField;
     Query1DeRate: TFloatField;
+    Query1DDBH: TStringField;
     procedure BB4Click(Sender: TObject);
     procedure BB1Click(Sender: TObject);
     procedure BB2Click(Sender: TObject);
@@ -108,7 +108,7 @@ uses main1;
 
 {$R *.dfm}
 // Ham kiem tra va in chu ky
-procedure TNonConformingMaterial.PrintSign(
+{procedure TNonConformingMaterial.PrintSign(
   AWorksheet: OleVariant;
   AQuery: TQuery;
   AInsertRow: Integer;
@@ -135,6 +135,74 @@ begin
   else
     AWorksheet.Cells[11, ACol].Value :=
       AQuery.FieldByName(AIDField).AsString;
+end;}
+procedure TNonConformingMaterial.PrintSign(
+  AWorksheet: OleVariant;
+  AQuery: TQuery;
+  AInsertRow: Integer;
+  const AIDField, ADateField: string;
+  ACol: Integer;
+  UseUserName: Boolean
+);
+var
+  s, SignFile: string;
+  Cell, MergeCell: OleVariant;
+  CellLeft, CellTop, CellWidth, CellHeight: Double;
+  PicWidth, PicHeight: Double;
+begin
+  if AQuery.FieldByName(AIDField).IsNull
+     or (Trim(AQuery.FieldByName(AIDField).AsString) = '') then
+    Exit;
+
+  Cell := AWorksheet.Cells[AInsertRow + 2, ACol];
+  MergeCell := Cell.MergeArea;
+
+  MergeCell.WrapText := True;
+  MergeCell.HorizontalAlignment := -4108; // xlCenter
+  MergeCell.VerticalAlignment := -4108;   // xlCenter
+
+  s := AQuery.FieldByName(AIDField).AsString;
+  s := StringReplace(s, '_', Chr(10), [rfReplaceAll]);
+
+  if UseUserName then
+  begin
+    Cell.Value :=
+      Chr(10) + Chr(10) + Chr(10) +
+      GetUsernameByID(AQuery.FieldByName(AIDField).AsString)
+      + Chr(10)
+      + FormatDateTime(
+          'dd-mm-yyyy',
+          AQuery.FieldByName(ADateField).AsDateTime
+        );
+
+    SignFile := ExtractFilePath(Application.ExeName) +
+                'Signatures\' +
+                Trim(AQuery.FieldByName(AIDField).AsString) +
+                '.bmp';
+
+    if FileExists(SignFile) then
+    begin
+      CellLeft   := MergeCell.Left;
+      CellTop    := MergeCell.Top;
+      CellWidth  := MergeCell.Width;
+      CellHeight := MergeCell.Height;
+
+      PicWidth  := CellWidth * 0.4;
+      PicHeight := CellHeight * 0.45;
+
+      AWorksheet.Shapes.AddPicture(
+        SignFile,
+        False,
+        True,
+        CellLeft + (CellWidth - PicWidth) / 2, // can giua ngang
+        CellTop + (CellHeight * 0.1),          // phia tren
+        PicWidth,
+        PicHeight
+      );
+    end;
+  end
+  else
+    Cell.Value := s;
 end;
 
 function TNonConformingMaterial.GetUsernameByID(const AID: string): string;

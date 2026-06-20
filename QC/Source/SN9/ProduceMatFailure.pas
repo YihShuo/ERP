@@ -115,6 +115,14 @@ type
     procedure UpImage1Click(Sender: TObject);
     procedure OpenImage1Click(Sender: TObject);
     procedure DownloadImage1Click(Sender: TObject);
+    procedure PrintSign(
+                AWorksheet: OleVariant;
+                AQuery: TQuery;
+                AInsertRow: Integer;
+                const AIDField, ADateField: string;
+                ACol: Integer;
+                UseUserName: Boolean
+              );
   private
     { Private declarations }
   public
@@ -129,60 +137,6 @@ implementation
 uses main1;
 
 {$R *.dfm}
-
-
-{procedure TProducMatFailure.InsertImageToExcel(Worksheet: OleVariant; Query: TQuery;
-  const FieldName: string; Row, Column: Integer);
-var
-  Pic: OleVariant;
-  Rg: OleVariant;
-  CellLeft, CellTop, CellWidth, CellHeight: Double;
-  origW, origH, newW, newH: Double;
-  ImagePath: string;
-begin
-  // Duong anh trong field
-  ImagePath := Trim(Query.FieldByName(FieldName).AsString);
-
-  // Neu rong thi khong lam gi het
-  if (ImagePath = '') then
-    Exit;
-
-  // Neu file khong ton tai thi cung exit nhe
-  if not FileExists(ImagePath) then
-    Exit;
-
-  // Chen anh tu duong dan trong field
-  Pic := Worksheet.Pictures.Insert(ImagePath);
-
-  // Lay vung merge cua o Row, Column
-  Rg := Worksheet.Cells[Row, Column].MergeArea;
-
-  CellLeft := Rg.Left;
-  CellTop := Rg.Top;
-  CellWidth := Rg.Width;
-  CellHeight := Rg.Height;
-
-  // Lay kich thuoc goc cua anh
-  origW := Pic.Width;
-  origH := Pic.Height;
-
-  // Scale theo chieu ngang
-  newW := CellWidth * 0.95;
-  newH := newW * (origH / origW);
-
-  if newH > CellHeight * 0.95 then
-  begin
-    newH := CellHeight * 0.95;
-    newW := newH * (origW / origH);
-  end;
-
-  Pic.Width := newW;
-  Pic.Height := newH;
-
-  // Can duoi
-  Pic.Left := CellLeft + (CellWidth - Pic.Width) / 2;
-  Pic.Top  := CellTop + (CellHeight * 0.03);
-end;}
 
 procedure TProducMatFailure.InsertImageToExcel(Worksheet: OleVariant; Query: TQuery;
   const FieldName: string; Row, Column: Integer);
@@ -246,8 +200,74 @@ begin
   Pic.Top := CellTop + ((CellHeight / 2) - Pic.Height) / 2;
 end;
 
+procedure TProducMatFailure.PrintSign(
+  AWorksheet: OleVariant;
+  AQuery: TQuery;
+  AInsertRow: Integer;
+  const AIDField, ADateField: string;
+  ACol: Integer;
+  UseUserName: Boolean
+);
+var
+  s, SignFile: string;
+  Cell, MergeCell: OleVariant;
+  CellLeft, CellTop, CellWidth, CellHeight: Double;
+  PicWidth, PicHeight: Double;
+begin
+  if AQuery.FieldByName(AIDField).IsNull
+     or (Trim(AQuery.FieldByName(AIDField).AsString) = '') then
+    Exit;
 
+  Cell := AWorksheet.Cells[17, ACol];
+  MergeCell := Cell.MergeArea;
 
+  MergeCell.WrapText := True;
+  MergeCell.HorizontalAlignment := -4108; // xlCenter
+  MergeCell.VerticalAlignment := -4108;   // xlCenter
+
+  s := AQuery.FieldByName(AIDField).AsString;
+  s := StringReplace(s, '_', Chr(10), [rfReplaceAll]);
+
+  if UseUserName then
+  begin
+    Cell.Value :=
+      Chr(10) + Chr(10) + Chr(10) +
+      GetUsernameByID(AQuery.FieldByName(AIDField).AsString)
+      + Chr(10)
+      + FormatDateTime(
+          'dd-mm-yyyy',
+          AQuery.FieldByName(ADateField).AsDateTime
+        );
+
+    SignFile := ExtractFilePath(Application.ExeName) +
+                'Signatures\' +
+                Trim(AQuery.FieldByName(AIDField).AsString) +
+                '.bmp';
+
+    if FileExists(SignFile) then
+    begin
+      CellLeft   := MergeCell.Left;
+      CellTop    := MergeCell.Top;
+      CellWidth  := MergeCell.Width;
+      CellHeight := MergeCell.Height;
+
+      PicWidth  := CellWidth * 0.4;
+      PicHeight := CellHeight * 0.45;
+
+      AWorksheet.Shapes.AddPicture(
+        SignFile,
+        False,
+        True,
+        CellLeft + (CellWidth - PicWidth) / 2, // can giua ngang
+        CellTop + (CellHeight * 0.1),          // phia tren
+        PicWidth,
+        PicHeight
+      );
+    end;
+  end
+  else
+    Cell.Value := s;
+end;
 
 function TProducMatFailure.GetUsernameByID(const AID: string): string;
 begin
@@ -515,10 +535,13 @@ begin
   end;
 
 
-
+  PrintSign(Worksheet, Query1, InsertRow, 'SCFID', 'SCFDate', 5, True);
+  PrintSign(Worksheet, Query1, InsertRow, 'WMSCFID', 'WMSCFDate', 1, True);
+  PrintSign(Worksheet, Query1, InsertRow, 'LCFID', 'LCFDate', 6, True);
+  PrintSign(Worksheet, Query1, InsertRow, 'InspecID', '', 8, False);
 
   //Kiem tra ky KCS Super
-  Query1.First;
+  {Query1.First;
   SigS := false;
   while not Query1.Eof do
   begin
@@ -582,32 +605,7 @@ begin
   begin
     Worksheet.Cells[17, 8].WrapText := True;
     Worksheet.Cells[17, 8].Value := Query1.FieldByName('InspecID').AsString;
-  end;
-
-
-
-    //chu ky
-    {Pic := Worksheet.Pictures.Insert('C:\Users\Admin\Downloads\ck.jpg');
-    g := 16;
-    k := 6;
-
-    CellLeft := Worksheet.Cells[g, k].Left;
-    CellTop := Worksheet.Cells[g, k].Top;
-    CellWidth := Worksheet.Cells[g, k].Width;
-    CellHeight := Worksheet.Cells[g, k].Height;
-
-    Side := CellWidth;
-    if CellHeight < Side then
-      Side := CellHeight;
-
-    MarginScale := 0.9;
-    Side := Side * MarginScale;
-
-    Pic.Width := Side;
-    Pic.Height := Side;
-
-    Pic.Left := CellLeft + (CellWidth - Side) / 2;
-    Pic.Top := CellTop + (CellHeight - Side) / 2;}
+  end;}
     
   //dinh dang header
   if cbPDF.Checked then

@@ -130,60 +130,6 @@ uses main1;
 
 {$R *.dfm}
 
-
-{procedure TProducMatFailure.InsertImageToExcel(Worksheet: OleVariant; Query: TQuery;
-  const FieldName: string; Row, Column: Integer);
-var
-  Pic: OleVariant;
-  Rg: OleVariant;
-  CellLeft, CellTop, CellWidth, CellHeight: Double;
-  origW, origH, newW, newH: Double;
-  ImagePath: string;
-begin
-  // Duong anh trong field
-  ImagePath := Trim(Query.FieldByName(FieldName).AsString);
-
-  // Neu rong thi khong lam gi het
-  if (ImagePath = '') then
-    Exit;
-
-  // Neu file khong ton tai thi cung exit nhe
-  if not FileExists(ImagePath) then
-    Exit;
-
-  // Chen anh tu duong dan trong field
-  Pic := Worksheet.Pictures.Insert(ImagePath);
-
-  // Lay vung merge cua o Row, Column
-  Rg := Worksheet.Cells[Row, Column].MergeArea;
-
-  CellLeft := Rg.Left;
-  CellTop := Rg.Top;
-  CellWidth := Rg.Width;
-  CellHeight := Rg.Height;
-
-  // Lay kich thuoc goc cua anh
-  origW := Pic.Width;
-  origH := Pic.Height;
-
-  // Scale theo chieu ngang
-  newW := CellWidth * 0.95;
-  newH := newW * (origH / origW);
-
-  if newH > CellHeight * 0.95 then
-  begin
-    newH := CellHeight * 0.95;
-    newW := newH * (origW / origH);
-  end;
-
-  Pic.Width := newW;
-  Pic.Height := newH;
-
-  // Can duoi
-  Pic.Left := CellLeft + (CellWidth - Pic.Width) / 2;
-  Pic.Top  := CellTop + (CellHeight * 0.03);
-end;}
-
 procedure TProducMatFailure.InsertImageToExcel(Worksheet: OleVariant; Query: TQuery;
   const FieldName: string; Row, Column: Integer);
 var
@@ -583,31 +529,6 @@ begin
     Worksheet.Cells[17, 8].WrapText := True;
     Worksheet.Cells[17, 8].Value := Query1.FieldByName('InspecID').AsString;
   end;
-
-
-
-    //chu ky
-    {Pic := Worksheet.Pictures.Insert('C:\Users\Admin\Downloads\ck.jpg');
-    g := 16;
-    k := 6;
-
-    CellLeft := Worksheet.Cells[g, k].Left;
-    CellTop := Worksheet.Cells[g, k].Top;
-    CellWidth := Worksheet.Cells[g, k].Width;
-    CellHeight := Worksheet.Cells[g, k].Height;
-
-    Side := CellWidth;
-    if CellHeight < Side then
-      Side := CellHeight;
-
-    MarginScale := 0.9;
-    Side := Side * MarginScale;
-
-    Pic.Width := Side;
-    Pic.Height := Side;
-
-    Pic.Left := CellLeft + (CellWidth - Side) / 2;
-    Pic.Top := CellTop + (CellHeight - Side) / 2;}
     
   //dinh dang header
   if cbPDF.Checked then
