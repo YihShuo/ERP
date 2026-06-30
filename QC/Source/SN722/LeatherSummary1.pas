@@ -255,13 +255,6 @@ type
     Upd_RD: TUpdateSQL;
     DS_RD: TDataSource;
     Panel16: TPanel;
-    Panel9: TPanel;
-    insert4: TBitBtn;
-    modify4: TBitBtn;
-    delete4: TBitBtn;
-    save4: TBitBtn;
-    cancel4: TBitBtn;
-    btnthick: TBitBtn;
     DBGrid_thick: TDBGridEh;
     Splitter5: TSplitter;
     Panel17: TPanel;
@@ -605,6 +598,35 @@ type
     edtDefects: TEdit;
     Label37: TLabel;
     qry_GradePLevelMat: TStringField;
+    qry_dim: TQuery;
+    Upd_Dim: TUpdateSQL;
+    DS_Dim: TDataSource;
+    qry_dimNo_ID: TIntegerField;
+    qry_dimSequence: TIntegerField;
+    qry_dimIncoming: TCurrencyField;
+    qry_dimActual: TCurrencyField;
+    qry_dimResult: TStringField;
+    qry_dimYN: TStringField;
+    qry_dimUserID: TStringField;
+    qry_dimUserDate: TDateTimeField;
+    qry_dimInspector: TStringField;
+    qry_dimDiff: TCurrencyField;
+    TabSheet23: TTabSheet;
+    Panel9: TPanel;
+    insert4: TBitBtn;
+    modify4: TBitBtn;
+    delete4: TBitBtn;
+    save4: TBitBtn;
+    cancel4: TBitBtn;
+    btnthick: TBitBtn;
+    Panel3: TPanel;
+    InsertD: TBitBtn;
+    ModD: TBitBtn;
+    DeleteD: TBitBtn;
+    SaveD: TBitBtn;
+    CancelD: TBitBtn;
+    BitBtn14: TBitBtn;
+    DBGrid_Dim: TDBGridEh;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -787,6 +809,11 @@ type
     procedure Delete2Click(Sender: TObject);
     procedure PageControl5Change(Sender: TObject);
     procedure DBGrid_GradePKeyPress(Sender: TObject; var Key: Char);
+    procedure InsertDClick(Sender: TObject);
+    procedure ModDClick(Sender: TObject);
+    procedure DeleteDClick(Sender: TObject);
+    procedure SaveDClick(Sender: TObject);
+    procedure CancelDClick(Sender: TObject);
   private
     QCN722_ISO:String;
     { Private declarations }
@@ -875,6 +902,7 @@ begin
       DBGrid_Soft.FieldColumns['Inspector'].PickList.Clear;
       DBGrid_thick.FieldColumns['Inspector'].PickList.Clear;
       DBGrid_Dimen.FieldColumns['Inspector'].PickList.Clear;
+      DBGrid_Dim.FieldColumns['Inspector'].PickList.Clear;
       DBGridEh2.FieldColumns['Inspector'].PickList.Clear;
       while not eof do
       begin
@@ -882,6 +910,7 @@ begin
           DBGrid_Soft.FieldColumns['Inspector'].PickList.Add((qry1.fieldbyName('FullName').AsString));
           DBGrid_thick.FieldColumns['Inspector'].PickList.Add((qry1.fieldbyName('FullName').AsString));
           DBGrid_Dimen.FieldColumns['Inspector'].PickList.Add((qry1.fieldbyName('FullName').AsString));
+          DBGrid_Dim.FieldColumns['Inspector'].PickList.Add((qry1.fieldbyName('FullName').AsString));
           DBGridEh2.FieldColumns['Inspector'].PickList.Add((qry1.fieldbyName('FullName').AsString));
           next;
       end;
@@ -889,6 +918,7 @@ begin
       DBGrid_Soft.FieldColumns['Inspector'].PickList.Insert(0,'');
       DBGrid_thick.FieldColumns['Inspector'].PickList.Insert(0,'');
       DBGrid_Dimen.FieldColumns['Inspector'].PickList.Insert(0,'');
+      DBGrid_Dim.FieldColumns['Inspector'].PickList.Insert(0,'');
       DBGridEh2.FieldColumns['Inspector'].PickList.Insert(0,'');
    end;
    ReadIni();
@@ -1291,7 +1321,7 @@ begin
         if chkMine.Checked then
            sql.Add('   and lqc.UserID = '''+main.Edit1.Text+''' ');
         sql.Add('   and mq.RKNO like ''%'+EdRKNO.Text+'%'' ');
-        sql.Add('   and lqc.ReportID like ''%'+EdSID.Text+'%'' ');
+        sql.Add('   and lqc.No_ID like ''%'+EdSID.Text+'%'' ');
         //FuncObj.WriteErrorLog(SQL.Text);
         active:=true;
     end;
@@ -1310,6 +1340,7 @@ begin
      qry_soft.Active:=true;
      qry_Thick.Active:=true;
      qry_dimen.Active:=true;
+     qry_dim.Active:=true;
 
      brnQPacClick(nil);
      
@@ -1412,6 +1443,7 @@ begin
     qry_soft.Active:=false;
     qry_Thick.Active:=false;
     qry_dimen.Active:=false;
+    qry_dim.Active:=false;
 
     qry_RS.Active:=false;
     qry_RD.Active:=false;
@@ -1608,6 +1640,7 @@ begin
   qry_soft.Active:=true;
   qry_Thick.Active:=true;
   qry_dimen.Active:=true;
+  qry_dim.Active:=true;
 
   qry_RS.Active:=true;
   qry_RD.Active:=true;
@@ -3026,6 +3059,19 @@ begin
       FreeMem(Buffer);
       DestStream.Free;
    end;
+end;
+
+procedure TLeatherSummary.CancelDClick(Sender: TObject);
+begin
+    with qry_Dim do
+    begin
+        active:=false;
+        RequestLive:=false;
+        CachedUpdates:=false;
+        active:=true;
+    end;
+    saveD.Enabled:=false;
+    cancelD.Enabled:=false;
 end;
 
 procedure TLeatherSummary.UploadReportGL1Click(Sender: TObject);
@@ -5719,6 +5765,11 @@ begin
     modifyRT.Enabled:=false;
     deleteRT.Enabled:=false;
 
+    //material dimension
+    insertD.Enabled:=false;
+    modD.Enabled:=false;
+    deleteD.Enabled:=false;
+
     //dimension
     insert5.Enabled:=false;
     modify5.Enabled:=false;
@@ -5769,6 +5820,11 @@ begin
                 insert5.Enabled:=true;
                 modify5.Enabled:=true;
                 delete5.Enabled:=true;
+
+                insertD.Enabled:=true;
+                modD.Enabled:=true;
+                deleteD.Enabled:=true;
+
                 insertRD.Enabled:=true;
                 modifyRD.Enabled:=true;
                 deleteRD.Enabled:=true;
@@ -6164,6 +6220,124 @@ procedure TLeatherSummary.DBGrid_GradePKeyPress(Sender: TObject;
 begin
   if (DBGrid_GradeP.SelectedField.FieldName = 'LevelMat') then
     Key := #0;
+end;
+
+procedure TLeatherSummary.InsertDClick(Sender: TObject);
+begin
+  if (qry_All.FieldByName('InspecQty_Other').IsNull) or (qry_All.FieldByName('InspecQty_Other').AsString= '') then
+  begin
+      showmessage('Inspected qty can not empty.!!!');
+      abort;
+  end;
+    with qry_Dim do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        insert;
+    end;
+    SaveD.Enabled:=true;
+    CancelD.Enabled:=true;
+end;
+
+procedure TLeatherSummary.ModDClick(Sender: TObject);
+begin
+    with qry_Dim do
+    begin
+        RequestLive:=true;
+        CachedUpdates:=true;
+        edit;
+    end;
+    saveD.Enabled:=true;
+    cancelD.Enabled:=true;
+end;
+
+procedure TLeatherSummary.DeleteDClick(Sender: TObject);
+begin
+    if (qry_Dim.FieldByName('USERID').Value <> main.edit1.Text) then
+    begin
+      Messagedlg('It is not yours,can not delete!!!',mtwarning,[mbyes],0);
+      abort;
+    end;
+
+   if qry_Dim.FieldByName('USERDATE').Value + 30 < date then
+   begin
+      Messagedlg('You can not delete after 30 days!!!',mtwarning,[mbyes],0);
+      abort;
+   end;
+
+   if messagedlg('Do you really want to delete this record?',mtconfirmation,[mbYes,Mbno],0)=mrYes then
+   begin
+      with qry_Dim do
+      begin
+        requestlive:=true;
+        cachedupdates:=true;
+        edit;
+        fieldbyname('YN').Value:='0';
+      end;
+      saveD.Enabled:=true;
+      cancelD.Enabled:=true;
+   end;
+end;
+
+procedure TLeatherSummary.SaveDClick(Sender: TObject);
+var i,a1:integer;
+begin
+  try
+    qry_Dim.first;
+    for i:=1 to qry_Dim.RecordCount do
+      begin
+        case qry_Dim.updatestatus of
+          usinserted:
+            begin
+                with qry1 do
+                begin
+                    active:=false;
+                    sql.Clear;
+                    sql.Add('select max(sequence)sequence from Leather_Dimension ');
+                    sql.Add('where No_ID=''' +qry_All.fieldbyname('No_ID').AsString +''' ' );
+                    sql.Add('group by No_ID');
+                    active:=true;
+                    if qry1.FieldByName('sequence').IsNull then
+                        a1:= 1
+                    else
+                        a1:= qry1.FieldByName('sequence').Value + 1;
+                end;
+
+                qry_Dim.edit;
+                qry_Dim.fieldbyname('No_ID').Value:=qry_All.fieldbyname('No_ID').Value;
+                qry_Dim.fieldbyname('sequence').Value:= a1;
+                qry_Dim.fieldbyname('YN').Value:='1';
+                qry_Dim.fieldbyname('USERID').Value:=main.edit1.text;
+                Upd_Dim.Apply(ukInsert);
+            end;
+          usmodified:
+          begin
+             if qry_Dim.fieldbyname('YN').value='0' then
+             begin
+                Upd_Dim.apply(ukdelete);
+
+                MakeSequence('Leather_Dimension',qry_All.fieldbyname('No_ID').AsString);
+             end
+             else
+             begin
+                Upd_Dim.apply(ukmodify);
+             end;
+          end;
+        end;
+        qry_Dim.next;
+      end;
+
+    qry_Dim.active:=false;
+    qry_Dim.cachedupdates:=false;
+    qry_Dim.requestlive:=false;
+    qry_Dim.active:=true;
+
+  except
+      Messagedlg('Have wrong, can not save data!',mtwarning,[mbyes],0);
+      Abort;
+  end;
+  saveD.Enabled:=false;
+  cancelD.Enabled:=false;
 end;
 
 end.

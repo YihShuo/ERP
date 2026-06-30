@@ -152,7 +152,7 @@ object InventoryBC_Print: TInventoryBC_Print
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
-        Caption = 'Xuong '#24288#21029': A7'
+        Caption = 'Xuong '#24288#21029': A'
         Color = clWhite
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -513,7 +513,7 @@ object InventoryBC_Print: TInventoryBC_Print
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
-        Caption = 'So khu '#21312#22495#34399#30908' : K01'
+        Caption = 'So khu '#21312#22495#34399#30908' : J01'
         Color = clWhite
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText

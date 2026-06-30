@@ -453,7 +453,7 @@ object LeatherSummary: TLeatherSummary
     Top = 324
     Width = 1245
     Height = 279
-    ActivePage = TabSheet4
+    ActivePage = TabSheet6
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 1
@@ -2436,13 +2436,133 @@ object LeatherSummary: TLeatherSummary
         Align = alLeft
         Caption = 'Panel16'
         TabOrder = 0
+        object DBGrid_thick: TDBGridEh
+          Left = 1
+          Top = 48
+          Width = 879
+          Height = 196
+          Align = alClient
+          DataSource = DS_thick
+          Flat = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          FooterColor = clWindow
+          FooterFont.Charset = DEFAULT_CHARSET
+          FooterFont.Color = clWindowText
+          FooterFont.Height = -13
+          FooterFont.Name = 'MS Sans Serif'
+          FooterFont.Style = []
+          FooterRowCount = 1
+          ParentFont = False
+          SumList.Active = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -13
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          UseMultiTitle = True
+          VTitleMargin = 0
+          OnDrawColumnCell = DBGrid_thickDrawColumnCell
+          OnGetCellParams = DBGrid_thickGetCellParams
+          Columns = <
+            item
+              Color = cl3DLight
+              EditButtons = <>
+              FieldName = 'Sequence'
+              Footer.FieldName = 'Sequence'
+              Footer.ValueType = fvtCount
+              Footers = <>
+              ReadOnly = True
+              Title.Caption = 'Seq'
+              Width = 30
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Neck'
+              Footer.FieldName = 'Neck'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = 'Phan co Neck'
+              Width = 70
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Back'
+              Footer.FieldName = 'Back'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = 'Phan lung Back'
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Belly'
+              Footer.FieldName = 'Belly'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = 'Phan bung Belly'
+              Width = 70
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Butt'
+              Footer.FieldName = 'Butt'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = 'Phan mong Butt'
+            end
+            item
+              Color = 16756479
+              EditButtons = <>
+              FieldName = 'Average'
+              Footers = <>
+              ReadOnly = True
+            end
+            item
+              ButtonStyle = cbsNone
+              EditButtons = <>
+              FieldName = 'Result'
+              Footers = <>
+              PickList.Strings = (
+                ''
+                'Pass'
+                'Fail')
+              ReadOnly = True
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Inspector'
+              Footers = <>
+              Width = 150
+            end
+            item
+              ButtonStyle = cbsNone
+              Color = cl3DLight
+              EditButtons = <>
+              FieldName = 'UserDate'
+              Footers = <>
+              Title.Caption = 'User Date'
+              Width = 145
+            end
+            item
+              Color = cl3DLight
+              EditButtons = <>
+              FieldName = 'UserID'
+              Footers = <>
+              ReadOnly = True
+              Width = 50
+            end>
+        end
         object Panel9: TPanel
           Left = 1
           Top = 1
           Width = 879
           Height = 47
           Align = alTop
-          TabOrder = 0
+          TabOrder = 1
           object insert4: TBitBtn
             Left = 5
             Top = 0
@@ -2636,126 +2756,6 @@ object LeatherSummary: TLeatherSummary
             Layout = blGlyphTop
             NumGlyphs = 2
           end
-        end
-        object DBGrid_thick: TDBGridEh
-          Left = 1
-          Top = 48
-          Width = 879
-          Height = 196
-          Align = alClient
-          DataSource = DS_thick
-          Flat = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'MS Sans Serif'
-          Font.Style = []
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -13
-          FooterFont.Name = 'MS Sans Serif'
-          FooterFont.Style = []
-          FooterRowCount = 1
-          ParentFont = False
-          SumList.Active = True
-          TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -13
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
-          UseMultiTitle = True
-          VTitleMargin = 0
-          OnDrawColumnCell = DBGrid_thickDrawColumnCell
-          OnGetCellParams = DBGrid_thickGetCellParams
-          Columns = <
-            item
-              Color = cl3DLight
-              EditButtons = <>
-              FieldName = 'Sequence'
-              Footer.FieldName = 'Sequence'
-              Footer.ValueType = fvtCount
-              Footers = <>
-              ReadOnly = True
-              Title.Caption = 'Seq'
-              Width = 30
-            end
-            item
-              EditButtons = <>
-              FieldName = 'Neck'
-              Footer.FieldName = 'Neck'
-              Footer.ValueType = fvtSum
-              Footers = <>
-              Title.Caption = 'Phan co Neck'
-              Width = 70
-            end
-            item
-              EditButtons = <>
-              FieldName = 'Back'
-              Footer.FieldName = 'Back'
-              Footer.ValueType = fvtSum
-              Footers = <>
-              Title.Caption = 'Phan lung Back'
-            end
-            item
-              EditButtons = <>
-              FieldName = 'Belly'
-              Footer.FieldName = 'Belly'
-              Footer.ValueType = fvtSum
-              Footers = <>
-              Title.Caption = 'Phan bung Belly'
-              Width = 70
-            end
-            item
-              EditButtons = <>
-              FieldName = 'Butt'
-              Footer.FieldName = 'Butt'
-              Footer.ValueType = fvtSum
-              Footers = <>
-              Title.Caption = 'Phan mong Butt'
-            end
-            item
-              Color = 16756479
-              EditButtons = <>
-              FieldName = 'Average'
-              Footers = <>
-              ReadOnly = True
-            end
-            item
-              ButtonStyle = cbsNone
-              EditButtons = <>
-              FieldName = 'Result'
-              Footers = <>
-              PickList.Strings = (
-                ''
-                'Pass'
-                'Fail')
-              ReadOnly = True
-            end
-            item
-              EditButtons = <>
-              FieldName = 'Inspector'
-              Footers = <>
-              Width = 150
-            end
-            item
-              ButtonStyle = cbsNone
-              Color = cl3DLight
-              EditButtons = <>
-              FieldName = 'UserDate'
-              Footers = <>
-              Title.Caption = 'User Date'
-              Width = 145
-            end
-            item
-              Color = cl3DLight
-              EditButtons = <>
-              FieldName = 'UserID'
-              Footers = <>
-              ReadOnly = True
-              Width = 50
-            end>
         end
       end
       object Panel17: TPanel
@@ -3004,6 +3004,307 @@ object LeatherSummary: TLeatherSummary
               Width = 50
             end>
         end
+      end
+    end
+    object TabSheet23: TTabSheet
+      Caption = 'Material Dimensions'
+      ImageIndex = 7
+      object Panel3: TPanel
+        Left = 0
+        Top = 0
+        Width = 1237
+        Height = 47
+        Align = alTop
+        TabOrder = 0
+        object InsertD: TBitBtn
+          Left = 5
+          Top = 0
+          Width = 44
+          Height = 44
+          Hint = 'Insert one New Record'
+          Caption = 'Insert'
+          Enabled = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          OnClick = InsertDClick
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000130B0000130B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+            33333333FF33333333FF333993333333300033377F3333333777333993333333
+            300033F77FFF3333377739999993333333333777777F3333333F399999933333
+            33003777777333333377333993333333330033377F3333333377333993333333
+            3333333773333333333F333333333333330033333333F33333773333333C3333
+            330033333337FF3333773333333CC333333333FFFFF77FFF3FF33CCCCCCCCCC3
+            993337777777777F77F33CCCCCCCCCC3993337777777777377333333333CC333
+            333333333337733333FF3333333C333330003333333733333777333333333333
+            3000333333333333377733333333333333333333333333333333}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+        end
+        object ModD: TBitBtn
+          Left = 48
+          Top = 0
+          Width = 44
+          Height = 44
+          Hint = 'Modify Current'
+          Caption = 'Modify'
+          Enabled = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          OnClick = ModDClick
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000120B0000120B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00500005000555
+            555557777F777555F55500000000555055557777777755F75555005500055055
+            555577F5777F57555555005550055555555577FF577F5FF55555500550050055
+            5555577FF77577FF555555005050110555555577F757777FF555555505099910
+            555555FF75777777FF555005550999910555577F5F77777775F5500505509990
+            3055577F75F77777575F55005055090B030555775755777575755555555550B0
+            B03055555F555757575755550555550B0B335555755555757555555555555550
+            BBB35555F55555575F555550555555550BBB55575555555575F5555555555555
+            50BB555555555555575F555555555555550B5555555555555575}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+        end
+        object DeleteD: TBitBtn
+          Left = 91
+          Top = 0
+          Width = 44
+          Height = 44
+          Hint = 'Delete one Record'
+          Caption = 'Delete'
+          Enabled = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
+          OnClick = DeleteDClick
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000130B0000130B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+            333333333333333333FF33333333333330003333333333333777333333333333
+            300033FFFFFF3333377739999993333333333777777F3333333F399999933333
+            3300377777733333337733333333333333003333333333333377333333333333
+            3333333333333333333F333333333333330033333F33333333773333C3333333
+            330033337F3333333377333CC3333333333333F77FFFFFFF3FF33CCCCCCCCCC3
+            993337777777777F77F33CCCCCCCCCC399333777777777737733333CC3333333
+            333333377F33333333FF3333C333333330003333733333333777333333333333
+            3000333333333333377733333333333333333333333333333333}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+        end
+        object SaveD: TBitBtn
+          Left = 134
+          Top = 0
+          Width = 44
+          Height = 44
+          Hint = 'Save Current'
+          Caption = 'Save'
+          Enabled = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 3
+          OnClick = SaveDClick
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000120B0000120B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+            555555555555555555555555555555555555555555FF55555555555559055555
+            55555555577FF5555555555599905555555555557777F5555555555599905555
+            555555557777FF5555555559999905555555555777777F555555559999990555
+            5555557777777FF5555557990599905555555777757777F55555790555599055
+            55557775555777FF5555555555599905555555555557777F5555555555559905
+            555555555555777FF5555555555559905555555555555777FF55555555555579
+            05555555555555777FF5555555555557905555555555555777FF555555555555
+            5990555555555555577755555555555555555555555555555555}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+        end
+        object CancelD: TBitBtn
+          Left = 177
+          Top = 0
+          Width = 44
+          Height = 44
+          Hint = 'Cancel'
+          Caption = 'Cancel'
+          Enabled = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 4
+          OnClick = CancelDClick
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000130B0000130B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+            333333333333333333333333333333333333333FFF33FF333FFF339993370733
+            999333777FF37FF377733339993000399933333777F777F77733333399970799
+            93333333777F7377733333333999399933333333377737773333333333990993
+            3333333333737F73333333333331013333333333333777FF3333333333910193
+            333333333337773FF3333333399000993333333337377737FF33333399900099
+            93333333773777377FF333399930003999333337773777F777FF339993370733
+            9993337773337333777333333333333333333333333333333333333333333333
+            3333333333333333333333333333333333333333333333333333}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+        end
+        object BitBtn14: TBitBtn
+          Left = 292
+          Top = 0
+          Width = 109
+          Height = 44
+          Hint = 'Modify Current'
+          Caption = 'Thickness Report'
+          Enabled = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 5
+          Visible = False
+          WordWrap = True
+          OnClick = btnthickClick
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000130B0000130B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033333333B333
+            333B33FF33337F3333F73BB3777BB7777BB3377FFFF77FFFF77333B000000000
+            0B3333777777777777333330FFFFFFFF07333337F33333337F333330FFFFFFFF
+            07333337F3FF3FFF7F333330F00F000F07333337F77377737F333330FFFFFFFF
+            07333FF7F3FFFF3F7FFFBBB0F0000F0F0BB37777F7777373777F3BB0FFFFFFFF
+            0BBB3777F3FF3FFF77773330F00F000003333337F773777773333330FFFF0FF0
+            33333337F3FF7F37F3333330F08F0F0B33333337F7737F77FF333330FFFF003B
+            B3333337FFFF77377FF333B000000333BB33337777777F3377FF3BB3333BB333
+            3BB33773333773333773B333333B3333333B7333333733333337}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+        end
+      end
+      object DBGrid_Dim: TDBGridEh
+        Left = 0
+        Top = 47
+        Width = 1237
+        Height = 198
+        Align = alClient
+        DataSource = DS_Dim
+        Flat = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        FooterColor = clWindow
+        FooterFont.Charset = DEFAULT_CHARSET
+        FooterFont.Color = clWindowText
+        FooterFont.Height = -13
+        FooterFont.Name = 'MS Sans Serif'
+        FooterFont.Style = []
+        FooterRowCount = 1
+        ParentFont = False
+        SumList.Active = True
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -13
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        UseMultiTitle = True
+        VTitleMargin = 0
+        OnDrawColumnCell = DBGrid_thickDrawColumnCell
+        OnGetCellParams = DBGrid_thickGetCellParams
+        Columns = <
+          item
+            Color = cl3DLight
+            EditButtons = <>
+            FieldName = 'Sequence'
+            Footer.FieldName = 'Sequence'
+            Footer.ValueType = fvtCount
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'Seq'
+            Width = 30
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Incoming'
+            Footers = <>
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Actual'
+            Footers = <>
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Diff'
+            Footers = <>
+          end
+          item
+            ButtonStyle = cbsNone
+            EditButtons = <>
+            FieldName = 'Result'
+            Footers = <>
+            PickList.Strings = (
+              ''
+              'Pass'
+              'Fail')
+            ReadOnly = True
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Inspector'
+            Footers = <>
+            Width = 150
+          end
+          item
+            ButtonStyle = cbsNone
+            Color = cl3DLight
+            EditButtons = <>
+            FieldName = 'UserDate'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = 'User Date'
+            Width = 145
+          end
+          item
+            Color = cl3DLight
+            EditButtons = <>
+            FieldName = 'UserID'
+            Footers = <>
+            ReadOnly = True
+            Width = 50
+          end>
       end
     end
     object TabSheet7: TTabSheet
@@ -20387,7 +20688,7 @@ object LeatherSummary: TLeatherSummary
           object Splitter7: TSplitter
             Left = 0
             Top = 47
-            Width = 1237
+            Width = 1229
             Height = 3
             Cursor = crVSplit
             Align = alTop
@@ -20397,7 +20698,7 @@ object LeatherSummary: TLeatherSummary
           object Panel25: TPanel
             Left = 0
             Top = 0
-            Width = 1237
+            Width = 1229
             Height = 47
             Align = alTop
             TabOrder = 0
@@ -20660,8 +20961,8 @@ object LeatherSummary: TLeatherSummary
           object DBGridEh3: TDBGridEh
             Left = 0
             Top = 50
-            Width = 1237
-            Height = 169
+            Width = 1229
+            Height = 161
             Align = alClient
             DataSource = DS_Gradespe
             Flat = False
@@ -23076,12 +23377,12 @@ object LeatherSummary: TLeatherSummary
   object qry_GradePs: TQuery
     DatabaseName = 'DB'
     Left = 695
-    Top = 333
+    Top = 357
   end
   object qry_GradePss: TQuery
     DatabaseName = 'DB'
     Left = 727
-    Top = 333
+    Top = 357
   end
   object qry_RS: TQuery
     DatabaseName = 'DB'
@@ -23328,8 +23629,8 @@ object LeatherSummary: TLeatherSummary
   end
   object qry_GradePa: TQuery
     DatabaseName = 'DB'
-    Left = 663
-    Top = 334
+    Left = 655
+    Top = 358
   end
   object qry_SD: TQuery
     AfterOpen = qry_SDAfterOpen
@@ -24226,5 +24527,101 @@ object LeatherSummary: TLeatherSummary
     DataSource = DS_All
     Left = 97
     Top = 422
+  end
+  object qry_dim: TQuery
+    DatabaseName = 'DB'
+    DataSource = DS_All
+    SQL.Strings = (
+      'select *, Incoming - Actual as Diff from Leather_Dimension'
+      'where No_ID = :No_ID')
+    UpdateObject = Upd_Dim
+    Left = 532
+    Top = 434
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'No_ID'
+        ParamType = ptUnknown
+        Size = 4
+      end>
+    object qry_dimNo_ID: TIntegerField
+      FieldName = 'No_ID'
+    end
+    object qry_dimSequence: TIntegerField
+      FieldName = 'Sequence'
+    end
+    object qry_dimIncoming: TCurrencyField
+      FieldName = 'Incoming'
+      currency = False
+    end
+    object qry_dimActual: TCurrencyField
+      FieldName = 'Actual'
+      currency = False
+    end
+    object qry_dimResult: TStringField
+      FieldName = 'Result'
+      FixedChar = True
+      Size = 10
+    end
+    object qry_dimYN: TStringField
+      FieldName = 'YN'
+      FixedChar = True
+      Size = 1
+    end
+    object qry_dimUserID: TStringField
+      FieldName = 'UserID'
+      FixedChar = True
+      Size = 10
+    end
+    object qry_dimUserDate: TDateTimeField
+      FieldName = 'UserDate'
+    end
+    object qry_dimInspector: TStringField
+      FieldName = 'Inspector'
+      FixedChar = True
+      Size = 50
+    end
+    object qry_dimDiff: TCurrencyField
+      FieldName = 'Diff'
+    end
+  end
+  object Upd_Dim: TUpdateSQL
+    ModifySQL.Strings = (
+      'update Leather_Dimension'
+      'set'
+      '  No_ID = :No_ID,'
+      '  Sequence = :Sequence,'
+      '  Incoming = :Incoming,'
+      '  Actual = :Actual,'
+      '  Result = :Result,'
+      '  YN = :YN,'
+      '  UserID = :UserID,'
+      '  UserDate = :UserDate,'
+      '  Inspector = :Inspector'
+      'where'
+      '  No_ID = :OLD_No_ID and'
+      '  Sequence = :OLD_Sequence')
+    InsertSQL.Strings = (
+      'insert into Leather_Dimension'
+      
+        '  (No_ID, Sequence, Incoming, Actual, Result, YN, UserID, UserDa' +
+        'te, Inspector)'
+      'values'
+      
+        '  (:No_ID, :Sequence, :Incoming, :Actual, :Result, :YN, :UserID,' +
+        ' :UserDate, '
+      '   :Inspector)')
+    DeleteSQL.Strings = (
+      'delete from Leather_Dimension'
+      'where'
+      '  No_ID = :OLD_No_ID and'
+      '  Sequence = :OLD_Sequence')
+    Left = 532
+    Top = 466
+  end
+  object DS_Dim: TDataSource
+    DataSet = qry_dim
+    Left = 532
+    Top = 498
   end
 end

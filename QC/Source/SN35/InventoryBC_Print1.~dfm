@@ -1,6 +1,6 @@
 object InventoryBC_Print: TInventoryBC_Print
-  Left = 139
-  Top = 136
+  Left = 296
+  Top = 141
   Width = 1278
   Height = 599
   Caption = 'InventoryBC_Print'
@@ -2834,9 +2834,9 @@ object InventoryBC_Print: TInventoryBC_Print
       KeepOnOnePage = False
       BandType = rbPageFooter
       object QRLabel69: TQRLabel
-        Left = 983
+        Left = 988
         Top = 4
-        Width = 73
+        Width = 62
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -2845,14 +2845,14 @@ object InventoryBC_Print: TInventoryBC_Print
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          2600.854166666667000000
+          2614.083333333333000000
           10.583333333333330000
-          193.145833333333300000)
+          164.041666666666700000)
         Alignment = taCenter
         AlignToBand = False
         AutoSize = True
         AutoStretch = False
-        Caption = 'T-DCC-032C'
+        Caption = 'T-KT-004D'
         Color = clWhite
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
